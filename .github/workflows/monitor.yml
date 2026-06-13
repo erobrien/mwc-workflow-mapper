@@ -1,0 +1,65 @@
+name: revenue-integrity-monitor
+
+on:
+  schedule:
+    - cron: "0 12 * * *"   # daily 12:00 UTC = 8:00 AM ET
+  workflow_dispatch: {}     # manual runs from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check 3-week window (ends 2026-07-03)
+        id: window
+        run: |
+          if [[ "$(date -u +%Y-%m-%d)" > "2026-07-03" && "${{ github.event_name }}" == "schedule" ]]; then
+            echo "active=false" >> "$GITHUB_OUTPUT"
+            echo "Past end date — skipping scheduled run (manual runs still work)."
+          else
+            echo "active=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.window.outputs.active == 'true'
+
+      - name: Restore history from monitor-data branch
+        if: steps.window.outputs.active == 'true'
+        run: |
+          mkdir -p monitor/data monitor/reports
+          if git fetch origin monitor-data 2>/dev/null; then
+            git show origin/monitor-data:history.jsonl > monitor/data/history.jsonl 2>/dev/null || true
+          fi
+          wc -l monitor/data/history.jsonl 2>/dev/null || echo "no prior history"
+
+      - name: Collect daily snapshot (read-only)
+        if: steps.window.outputs.active == 'true'
+        env:
+          GHL_TOKEN: ${{ secrets.GHL_TOKEN }}
+          PYTHONIOENCODING: utf-8
+        run: python monitor/collect.py
+
+      - name: Publish report to job summary
+        if: steps.window.outputs.active == 'true'
+        run: cat monitor/reports/latest.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Persist history + report to monitor-data branch
+        if: steps.window.outputs.active == 'true'
+        run: |
+          set -e
+          git config user.name "mwc-monitor[bot]"
+          git config user.email "monitor@noreply.local"
+          git checkout --orphan _tmp 2>/dev/null || git checkout _tmp
+          git rm -rf --cached . >/dev/null 2>&1 || true
+          mkdir -p /tmp/md
+          cp monitor/data/history.jsonl /tmp/md/history.jsonl
+          cp monitor/reports/latest.md /tmp/md/latest.md
+          git fetch origin monitor-data 2>/dev/null && git checkout monitor-data || git checkout --orphan monitor-data
+          git rm -rf . >/dev/null 2>&1 || true
+          cp /tmp/md/history.jsonl history.jsonl
+          cp /tmp/md/latest.md latest.md
+          git add history.jsonl latest.md
+          git commit -m "monitor snapshot $(date -u +%Y-%m-%dT%H:%M)" || echo "nothing to commit"
+          git push origin monitor-data

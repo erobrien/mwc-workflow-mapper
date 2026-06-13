@@ -23,6 +23,8 @@ import json, sys, os, time, urllib.request, urllib.error, datetime
 HERE = os.path.dirname(os.path.abspath(__file__))
 CFG = json.load(open(os.path.join(HERE, "config.json"), encoding="utf-8"))
 if not CFG.get("token"):
+    CFG["token"] = os.environ.get("GHL_TOKEN")
+if not CFG.get("token"):
     _sec = json.load(open(os.path.join(HERE, "..", "secrets.json"), encoding="utf-8"))
     CFG["token"] = _sec["ghl_token"]
 HIST = os.path.join(HERE, "data", "history.jsonl")

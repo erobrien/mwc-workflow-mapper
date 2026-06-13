@@ -383,7 +383,7 @@
 <header><div class="wrap">
   <div class="eyebrow">Men's Wellness Centers — GoHighLevel sub-account</div>
   <h1><span class="strike">135 workflows</span><br>rebuilt to <span class="to">16</span></h1>
-  <p class="sub">A side-by-side of the GHL account as it is today versus the simplified target — built from a live, read-only crawl of the production location. Published assets only.</p>
+  <p class="sub">A side-by-side comparison of the production GHL account against the simplified target architecture, built from a live, read-only audit of the production location. Published assets only.</p>
   <div class="meta">
     <span>Location Ghstz8eIsHWLeXek47dk</span>
     <span>6,775 opportunities</span>
@@ -397,19 +397,19 @@
 <!-- THE PROBLEM -->
 <section id="problem"><div class="wrap">
   <div class="kicker">The core defect</div>
-  <h2>Half of every "won" deal is fake</h2>
-  <p class="lead">The published workflow <b style="color:var(--txt)">05. Clinic Appt Outcome</b> creates a <i>Won</i> opportunity in the <b style="color:var(--txt)">A&amp;D</b> ("Approved &amp; Declined") pipeline for every patient who simply <b style="color:var(--txt)">shows up</b> — sale or no sale. The result: win-rate and revenue reporting are meaningless.</p>
+  <h2>Approximately half of recorded wins are not sales</h2>
+  <p class="lead">The published workflow <b style="color:var(--txt)">05. Clinic Appt Outcome</b> creates a <i>Won</i> opportunity in the <b style="color:var(--txt)">A&amp;D</b> ("Approved &amp; Declined") pipeline for every member who <b style="color:var(--txt)">attends a consultation</b>, independent of purchase outcome. As a result, win-rate and revenue reporting materially overstate performance.</p>
 
   <div class="chart">
     <div id="bars"></div>
-    <div class="foot">A&amp;D holds <b>939 won / 0 lost</b> — about <b>50% of all 1,864 "won" opportunities</b> account-wide. Across sampled won deals, <b>57–99% carry $0 monetary value</b>: revenue lives in <i>contact</i> fields that are mostly empty, and GHL has <b>zero payment transactions</b>.</div>
+    <div class="foot">A&amp;D holds <b>939 won / 0 lost</b> — approximately <b>50% of all 1,864 recorded wins</b> account-wide. Across sampled won deals, <b>57–99% carry $0 monetary value</b>: revenue lives in <i>contact</i> fields that are mostly empty, and GHL has <b>zero payment transactions</b>.</div>
   </div>
 </div></section>
 
 <!-- BEFORE / AFTER -->
 <section id="arch"><div class="wrap">
   <div class="kicker">Object inventory</div>
-  <h2>Current sprawl → governed target</h2>
+  <h2>Current state → governed target architecture</h2>
   <p class="lead">Every count below is from the live API. The target collapses location-duplicated structure into single, field-driven objects.</p>
 
   <div class="ba">
@@ -443,7 +443,7 @@
 <!-- EVIDENCE -->
 <section id="evidence"><div class="wrap">
   <div class="kicker">Node-level evidence</div>
-  <h2>The exact action that poisons the data</h2>
+  <h2>Root cause: the configuration generating misclassified wins</h2>
   <p class="lead">Captured from the GHL workflow builder. This is one <i>Create Opportunity</i> action inside the SHOWED branch of <b style="color:var(--txt)">05. Clinic Appt Outcome</b>.</p>
 
   <div class="evidence">
@@ -459,10 +459,10 @@
       </div>
     </div>
     <div class="explain">
-      <h4>⚠ Why this breaks everything</h4>
-      <p>The trigger is <b style="color:var(--txt)">SHOWED</b> — attendance, not purchase. So every patient who walks in gets a <i>Won</i> opportunity, regardless of whether they bought.</p>
-      <p>The value reads from the <i>contact</i> field <code>total_program_amount</code>, which is empty for most contacts — so most of these "wins" are worth <code>$0</code>.</p>
-      <div class="punch">Win rate, revenue, and by-location performance are all computed on top of this. Fixing it will roughly <b>halve the reported win rate</b> — that is the data becoming honest, not performance dropping.</div>
+      <h4>⚠ Why this corrupts reporting</h4>
+      <p>The trigger is <b style="color:var(--txt)">SHOWED</b> — attendance, not purchase. Every member who attends a consultation is recorded as a <i>Won</i> opportunity, regardless of purchase outcome.</p>
+      <p>The value reads from the <i>contact</i> field <code>total_program_amount</code>, which is empty for most contacts — so the majority of these records carry a <code>$0</code> value.</p>
+      <div class="punch">Win rate, revenue, and by-location performance are all computed on top of this. Correcting this will reduce the reported win rate by approximately half. This restatement reflects accurate measurement of historical performance, not a decline in actual performance.</div>
     </div>
   </div>
 
@@ -481,14 +481,14 @@
 <section id="workflows"><div class="wrap">
   <div class="kicker">Workflow build book</div>
   <h2>38 published workflows → 16 consolidated workflows</h2>
-  <p class="lead">Every one of today's 38 published workflows is absorbed into exactly one of the 16 below — each new workflow "owns" one lifecycle event, so no two flows ever compete for the same job. Named <b>NN. Title</b> with leading zeros so the GHL list sorts in lifecycle order. Click any workflow for the published flows it combines, the browser click-through build plan, and every member-facing SMS and email. <b>Drafts are excluded entirely</b> — only published workflows appear as sources; the 97 drafts get bulk-archived, never merged.</p>
+  <p class="lead">Every one of today's 38 published workflows is absorbed into exactly one of the 16 below — each new workflow has sole ownership of one lifecycle event, eliminating overlapping automation. Named <b>NN. Title</b> with leading zeros so the GHL list sorts in lifecycle order. Click any workflow for the published flows it combines, the browser click-through build plan, and every member-facing SMS and email. <b>Drafts are excluded entirely</b> — only published workflows appear as sources; the 97 drafts will be archived, not merged.</p>
 
   <div class="buildmethod">
     <h4>How each workflow gets built — browser method</h4>
     <ol>
       <li><b>Fresh browser session per workflow</b> — the GHL builder is heavy; one workflow per tab, builder opened from the Workflows list (direct URLs hang).</li>
       <li><b>Open the source workflows in a second tab</b> — copy trigger filters, tag names, and message bodies verbatim where they're being kept; the engine's existing tag IDs are reused, never recreated.</li>
-      <li><b>Build the new workflow as a Draft</b> — drafts fire nothing in GHL, so production is untouched until Publish.</li>
+      <li><b>Build the new workflow as a Draft</b> — draft workflows do not execute in GHL, so production is unaffected until Publish.</li>
       <li><b>Verify against this spec</b> — every trigger, branch, wait, and message below is checked off on the canvas before the workflow is marked build-complete.</li>
       <li><b>Test contact end-to-end</b> — drive a test contact through the draft (Test Workflow), assert tags, fields, opportunity moves, and message rendering.</li>
       <li><b>Cutover behind the canary</b> — publish the new workflow, <i>pause</i> (never delete) the sources it absorbs, watch 48h, then widen.</li>
@@ -522,7 +522,7 @@
 <section id="plans"><div class="wrap">
   <div class="kicker">Three plans, compared</div>
   <h2>Migration map vs. this audit vs. the human sprint proposal</h2>
-  <p class="lead">Three documents describe the cleanup. They agree on the sprawl and disagree on the method — and only one targets the revenue defect.</p>
+  <p class="lead">Three documents describe the cleanup. They agree on the scale of duplication, differ on method — and only one addresses the revenue-recognition defect.</p>
 
   <div class="tabs" id="tabs">
     <div class="tab on" data-k="targets">Targets</div>
@@ -532,7 +532,7 @@
   <div class="cmp" id="cmp"></div>
 
   <div class="phases">
-    <div class="phase p0"><div class="pn">PRIORITY 0 — missing from the proposal</div><h4>Revenue track</h4><p>Fix 05's A&amp;D-Won, stand up opportunity-level revenue fields, backfill ~6,772 opps, restate win rate. The actual reason for the engagement.</p></div>
+    <div class="phase p0"><div class="pn">PRIORITY 0 — missing from the proposal</div><h4>Revenue track</h4><p>Fix 05's A&amp;D-Won, stand up opportunity-level revenue fields, backfill ~6,772 opps, restate win rate. The primary objective of the engagement.</p></div>
     <div class="phase"><div class="pn">ADOPT — from the proposal</div><h4>Engine-aware audit</h4><p>Bot-dependency flag on every published workflow, DND/TCPA gap analysis, brand-voice rules, canary gate, engine-owner sign-off before touching engine-triggered flows.</p></div>
     <div class="phase"><div class="pn">REJECT — from the proposal</div><h4>Sub-account migration</h4><p>GHL won't cleanly move 6,775 opps + history + the live engine binding across sub-accounts. Build/test in staging, but remediate <i>in place</i> behind the canary.</p></div>
   </div>
@@ -541,8 +541,8 @@
 <!-- EXECUTION WITH CLAUDE -->
 <section id="execution"><div class="wrap">
   <div class="kicker">Execution playbook</div>
-  <h2>How Claude (Fable 5) executes this</h2>
-  <p class="lead">GHL exposes a full API for data objects but <b style="color:var(--txt)">no API for authoring workflows</b> — so the data layer is scripted, and the workflow builds run through the browser: <b style="color:var(--txt)">you prompt, Fable executes</b> — no outside builders. The AI engine integration (BotFanatics/Sniper) is installed but <b style="color:var(--txt)">not live</b>, so no third-party gate exists; its tags are kept frozen so it could re-attach later. Everything lands in production behind dry-runs and a canary.</p>
+  <h2>Execution model: AI-executed, owner-approved</h2>
+  <p class="lead">GHL exposes a full API for data objects but <b style="color:var(--txt)">no API for authoring workflows</b> — so the data layer is scripted, and workflow builds are executed in the browser by Claude under your direction — <b style="color:var(--txt)">no third-party builders</b>. The AI engine integration (BotFanatics/Sniper) is installed but <b style="color:var(--txt)">not live</b>, so no third-party gate exists; its tags are kept frozen so it could re-attach later. Everything lands in production behind dry-runs and a canary.</p>
 
   <div class="owners">
     <div class="owner ai">
@@ -557,11 +557,11 @@
       </ul>
     </div>
     <div class="owner">
-      <div class="who"><div class="ic">⚒</div><div><h4>You — prompt &amp; approve</h4><div class="role">the only human in the loop</div></div></div>
+      <div class="who"><div class="ic">⚒</div><div><h4>Owner — direction &amp; approval</h4><div class="role">sole human authority</div></div></div>
       <ul>
-        <li>Prompts each step from the guide; watches Fable drive the GHL builder for the 16 workflows <span class="ui">UI</span></li>
+        <li>Directs each step from the guide; supervises Claude operating the GHL builder for the 16 workflows <span class="ui">UI</span></li>
         <li>Approves each dry-run CSV before any write lands</li>
-        <li>Owns the go/no-go at every canary gate</li>
+        <li>Holds go/no-go authority at every canary gate</li>
         <li>Final check on member-facing message copy before publish</li>
       </ul>
     </div>
@@ -579,7 +579,7 @@
     <div class="step gate">
       <div class="shead"><span class="sn">STEP 0</span><h5>Snapshot, freeze &amp; write-scope check</h5><span class="where local">CLAUDE · LOCAL</span></div>
       <p>Full export of every object to versioned files (rollback baseline). Verify the PIT token's <b>write scopes</b> — all work so far has been read-only. Change freeze: no new workflows/tags/pipelines without sign-off.</p>
-      <div class="gatebar"><b>GATE:</b> stakeholder approves scope + confirms freeze.</div>
+      <div class="gatebar"><b>GATE:</b> owner approves scope and confirms the change freeze.</div>
     </div>
     <div class="step">
       <div class="shead"><span class="sn">STEP 1</span><h5>Foundation objects</h5><span class="where prod">PROD · API</span></div>
@@ -592,7 +592,7 @@
     </div>
     <div class="step">
       <div class="shead"><span class="sn">STEP 3</span><h5>Workflows built as drafts</h5><span class="where prod">PROD · UI</span></div>
-      <p>Human builds the 16 target workflows from Claude's build-specs <b>in production, unpublished</b>. Drafts fire nothing in GHL — this is the safe sandbox, with the real tag/field IDs the engine depends on (a staging snapshot would re-map those IDs and silently sever the bot).</p>
+      <p>Human builds the 16 target workflows from Claude's build-specs <b>in production, unpublished</b>. Draft workflows do not execute — this is the safe sandbox, with the real tag/field IDs the engine depends on (a staging snapshot would re-map those IDs and silently sever the bot).</p>
     </div>
     <div class="step">
       <div class="shead"><span class="sn">STEP 4</span><h5>Dormant-engine check</h5><span class="where local">CLAUDE · API</span></div>
@@ -601,7 +601,7 @@
     <div class="step gate">
       <div class="shead"><span class="sn">STEP 5</span><h5>Canary cutover</h5><span class="where prod">PROD</span></div>
       <p>Publish the 16, pause (don't delete) the old 38. For 48h, only <code>src:bf-web</code> / test-cohort contacts run the new path while Claude monitors execution logs, opportunity movement, and the won-with-$0 counter (target: 0).</p>
-      <div class="gatebar"><b>GATE:</b> 48h clean canary + your go/no-go → widen to all traffic.</div>
+      <div class="gatebar"><b>GATE:</b> 48-hour clean canary + owner approval → expand to all traffic.</div>
     </div>
     <div class="step">
       <div class="shead"><span class="sn">STEP 6</span><h5>Cleanup + standing watch</h5><span class="where prod">PROD · API</span></div>
@@ -645,8 +645,8 @@ const DATA = {
     {name:"05. Virtual",val:0}
   ],
   now:[
-    {n:"135",d:"<b>workflows</b> — 38 published, 97 draft graveyard. Five location-form copies that have diverged (01A is a 3-node stub; 01B is a 40-node tree)."},
-    {n:"18",d:"<b>pipelines</b>, 113 stages — location clones, an A&D pipeline auto-marking Won, a 17-stage mega-pipeline, plus 733 opps parked in a 1-stage \"Non Booked\"."},
+    {n:"135",d:"<b>workflows</b> — 38 published, 97 inactive drafts. Five location-specific variants that have diverged structurally (01A contains 3 nodes; 01B contains approximately 40)."},
+    {n:"18",d:"<b>pipelines</b>, 113 stages — location clones, an A&D pipeline auto-marking records as Won, a 17-stage legacy pipeline, plus 733 opportunities held in a single-stage \"Non Booked\" pipeline."},
     {n:"305",d:"<b>tags</b> — mixed conventions: 236 underscore, 54 hyphen, 19 with spaces, 28 colon-prefixed. Many duplicate what should be fields."},
     {n:"26",d:"<b>forms</b> — ~8 near-duplicate consultation/lead forms plus explicit <i>vendor-test</i> forms still live."},
     {n:"135",d:"<b>custom fields — all contact-level.</b> Zero opportunity fields, so revenue can't attach to a deal."},
@@ -678,7 +678,7 @@ const DATA = {
     {n:"Lead capture",d:"Form submit → contact created, <code>location_*</code> + <code>source_*</code> set, opp lands in Sales · New Lead",m:"auto"},
     {n:"Booking",d:"Appointment booked → opp advances to Booked, confirmation cascade enrolls (T-24h/T-4h/T-1h)",m:"auto"},
     {n:"Won outcome",d:"Outcome = Sold → opp Won, <code>monetaryValue = Total Program Amount &gt; 0</code> asserted, post-visit Won flow enrolls",m:"auto"},
-    {n:"No-sale outcome",d:"Outcome = A&D → opp <b>Lost + lostReason</b> (never Won), objection nurture enrolls — the regression test for the 939",m:"auto"},
+    {n:"No-sale outcome",d:"Outcome = A&D → opp <b>Lost + lostReason</b> (never Won), objection nurture enrolls — regression guard for the 939 misclassified wins",m:"auto"},
     {n:"No-show / cancel",d:"Status change → correct exit status (not a pipeline move), recovery sequence enrolls",m:"auto"},
     {n:"Revenue reconciliation",d:"Σ won monetaryValue before backfill = after; every changed opp diffed against the approved CSV",m:"auto"},
     {n:"Idempotency",d:"Backfill script run twice → second run reports 0 changes",m:"auto"},

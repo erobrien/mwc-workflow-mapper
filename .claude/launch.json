@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "diff-site",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "4173", "--directory", "diff-site"],
+      "port": 4173
+    },
+    {
+      "name": "mwcbrand",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "C:\\Users\\eric_\\Webdev\\mwcbrand", "run", "dev"],
+      "port": 8080
+    }
+  ]
+}

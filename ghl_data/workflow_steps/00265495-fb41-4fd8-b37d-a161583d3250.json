@@ -1,0 +1,21 @@
+{
+  "id": "00265495-fb41-4fd8-b37d-a161583d3250",
+  "name": "01B. Richmond Form and Source with Click ID",
+  "folder": "01. WP Lead Capture",
+  "status": "published",
+  "version": 18,
+  "extracted_at": "2026-05-29T03:00:19Z",
+  "extraction_method": "backend_jwt",
+  "triggers": [],
+  "steps": [],
+  "messages_referenced": [],
+  "stats": {
+    "total_steps": 0,
+    "send_sms_count": 0,
+    "send_email_count": 0,
+    "wait_count": 0,
+    "if_else_count": 0,
+    "terminal_paths": 0
+  },
+  "notes": ""
+}

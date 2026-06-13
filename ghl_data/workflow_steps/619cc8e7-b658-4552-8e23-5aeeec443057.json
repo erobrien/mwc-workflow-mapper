@@ -1,0 +1,21 @@
+{
+  "id": "619cc8e7-b658-4552-8e23-5aeeec443057",
+  "name": "02. NON BOOKED NEWLEADS",
+  "folder": "02. Appointments & Visit Journey",
+  "status": "published",
+  "version": 145,
+  "extracted_at": "2026-05-29T03:00:23Z",
+  "extraction_method": "backend_jwt",
+  "triggers": [],
+  "steps": [],
+  "messages_referenced": [],
+  "stats": {
+    "total_steps": 0,
+    "send_sms_count": 0,
+    "send_email_count": 0,
+    "wait_count": 0,
+    "if_else_count": 0,
+    "terminal_paths": 0
+  },
+  "notes": ""
+}

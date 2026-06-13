@@ -1,0 +1,181 @@
+===== PAGE 1 =====
+GHL Cleanup & Appointment Show-Rate
+Optimization Sprint
+Men's Wellness Centers · Richmond, Virginia Beach, Newport News
+Objective
+Rebuild and standardize the GoHighLevel CRM architecture for all three center locations, creating a
+clean, documented, and scalable system that improves operational visibility and reduces
+appointment no-shows.
+The goal of this sprint is to establish a clean operating framework that allows the team to confidently
+manage, maintain, and optimize the CRM moving forward.
+Rather than modifying the live system directly, workflows will be audited, rebuilt, and tested in a
+dedicated staging environment before migration into production.
+Engine context: An AI engine is already live on top of GHL, handling webchat, SMS replies,
+appointment booking, and dormant lead reactivation (Sniper). All GHL cleanup work must remain
+compatible with the engine. Protected tags, custom fields, and pipeline stages are documented in
+Phase 1 deliverables.
+Sprint Duration
+● Estimated duration: 4-5 weeks
+● Consultant availability (Rosy Azpeitia, GHL Expert): 4 hours per day
+● Client stakeholder (Eric O'Brien, COO): available during Week 1 for clarification, approvals, and
+key decisions
+1
+===== PAGE 2 =====
+Phase 1 — Discovery, Audit & Planning (Week 1)
+Goal
+Gain a complete, engine-aware understanding of the current CRM architecture before making any
+changes. Every audit decision in this phase is made with the live AI engine in mind — preserving
+what it depends on while identifying what can be cleaned, merged, or removed.
+Deliverable 1 — System Inventory
+Document all active CRM assets across all three locations:
+● Workflows (all 133, not just the 24 published)
+● Pipelines and opportunity stages
+● Calendars
+● Forms and surveys
+● Tags (full taxonomy)
+● Custom fields
+● Triggers
+● SMS and email templates
+● Integrations
+Deliverable 2 — Workflow Audit with Bot-Dependency Flag
+For each of the 133 workflows, document:
+● Purpose
+● Trigger (tag / stage / contact / appointment)
+● Actions and wait steps
+● Status: Keep / Merge / Remove / Rebuild
+● Bot-dependent: Yes / No / Unknown
+The bot-dependency flag is the most critical column in this audit. The engine changes GHL state —
+adding tags, moving pipeline stages, creating contacts, booking appointments — and those state
+changes fire workflows. A workflow that looks redundant in isolation may be load-bearing for the
+engine. Any workflow flagged Bot-dependent: Yes must be reviewed with Jean before it is modified
+or removed.
+Protected tags (do not rename or delete): src:bf-web · bf_test · chatbot_lead · concern_trt ·
+concern_ed · concern_weight_loss · payment_insurance · payment_cash · location_rva ·
+location_vba · location_npn · funnel_entry · funnel_consultation_booked · appt_confirmed ·
+unconfirmed_appt · patient/sold · voice_inbound
+2
+===== PAGE 3 =====
+Deliverable 3 — Pipeline Stage Comparison & Canonical Taxonomy
+Produce a side-by-side comparison of pipeline stage names across Richmond, Virginia Beach, and
+Newport News. Identify any naming inconsistencies across locations, then propose a single
+canonical stage taxonomy to be standardized in Phase 2.
+This matters because the engine's stage-detection logic is location-agnostic. If Richmond and
+Newport News use different names for the same stage, the bot misreads contacts that span
+locations.
+Deliverable 4 — TCPA / DND Gap Analysis
+Audit the current opt-out and DND handling across all workflows:
+● Which workflows check for DND or STOP status before sending
+● Which workflows do not check (compliance risk)
+● Whether the engine's STOP-reply handling (which halts the bot automatically) is consistent with
+what GHL workflows do
+● Gaps between bot behavior and GHL workflow behavior on opt-out
+Deliverable 5 — Findings Report
+Synthesize the audit into an actionable findings report covering:
+Standard findings
+● Duplicate workflows
+● Conflicting automations
+● Naming convention violations
+● Messaging gaps
+● Opportunity pipeline inconsistencies
+Engine-split no-show risk points
+No-show risks are categorized into two buckets to prevent rebuilding what the engine already
+handles:
+● Engine-owned: Already handled by engine — do not rebuild:
+● Dormant lead reactivation (Sniper engine, live in production)
+● Immediate no-show SMS via Sniper cohort scoring
+● Workflow-owned: Require GHL workflow coverage — build in Phase 2:
+● Booking confirmation cascade (T-24h, T-4h, T-1h)
+● Unconfirmed appointment follow-up
+● Intake-not-completed nudge sequence
+● Same-day and next-day no-show recovery
+● Missed call recovery (auto-SMS within 15 sec)
+3
+===== PAGE 4 =====
+Phase 2 — Staging Environment Build (Week 2)
+Goal
+Build a clean, engine-compatible system in a dedicated staging subaccount without disrupting live
+operations.
+Deliverables
+● Naming convention standards — workflows, tags, calendars, pipelines, templates, notifications
+● Staging subaccount — dedicated testing environment
+● Rebuilt core assets — pipelines (canonical taxonomy from Phase 1), calendars, tags, custom
+fields, opportunity logic, internal notifications
+● Workflow reconstruction — Lead Intake, Lead Routing, Appointment Booking, Intake
+Completion, Appointment Confirmation, Appointment Reminders, No-Show Recovery
+(workflow-owned only)
+● Master architecture map — Lead Flow, Messaging Flow, Opportunity Flow, Appointment Flow,
+Location Routing Logic
+Staging + engine QA: The engine can be pointed at the staging subaccount via a single env var
+swap (GHL_LOCATION_ID). Coordinate with Jean before Phase 4 testing to run the bot against
+staging for a validation day.
+Phase 3 — Messaging & Show-Rate Optimization (Week 3)
+Goal
+Implement the member communication strategy. All templates must pass the engine's brand voice
+rules.
+Brand voice rules (enforced by engine on every outbound message)
+● No "free" — use "no-cost"
+● No "patient" — use "member"
+● No "clinic" — use "center"
+● No em-dashes — use commas or periods
+● No "Hey buddy" / "Hey guys" — use first name
+● Plain URLs only — no markdown links (they don't render in SMS)
+● No urgency theatre — no "limited time," "tonight only," "ASAP," or "hurry"
+● Required in every substantive SMS: Men's Wellness + main line 866-344-4955
+Deliverables
+● SMS library — Booking Confirmation, Intake Requests, Intake Follow-Up, Appointment
+Reminders, Reschedule Requests, No-Show Recovery (workflow-owned tier only)
+● Email library — supporting sequences
+● Two-way communication logic — reply-based automation where appropriate
+4
+===== PAGE 5 =====
+● Intake completion flow — commitment-based process to drive form completion before
+consultation
+Phase 4 — QA & Scenario Testing (Week 4)
+Goal
+Verify all automations with the engine as an active actor before deployment.
+End-to-end test scenarios
+● New Lead (bot creates contact → GHL workflow fires → tags and custom fields present)
+● New Appointment (bot books → appointment workflow fires → confirmation cascade triggers)
+● Intake Completed
+● Intake Not Completed
+● Appointment Confirmed
+● Appointment Rescheduled
+● Appointment Canceled
+● Appointment No-Show
+● Member replies STOP → DND tag added → bot halts → workflow halts
+● Dormant lead replied to Sniper SMS → bot offers slots → books via API
+Workflow validation checklist
+● Correct triggers
+● Correct tagging
+● Correct opportunity movement
+● Correct notifications
+● Correct messaging
+Phase 5 — Production Migration & Launch (Week 5)
+Goal
+Deploy approved assets into the live CRM with a canary-gated rollout.
+Deliverables
+● Production deployment — migrate approved workflows and assets
+● Canary gate — bf_test filter kept active for first 48 hours so engine-created contacts run the full
+new path before wider release
+● Legacy cleanup — disable or archive redundant workflows, obsolete templates, duplicate tags,
+unused assets
+● Launch verification — monitor workflow execution, appointment creation, opportunity movement,
+SMS and email delivery
+5
+===== PAGE 6 =====
+● Documentation and handoff — Workflow Map, Naming Convention Guide, Messaging Library,
+Maintenance Recommendations
+Go-live coordination: Sniper (dormant lead reactivation) remains off until the new workflow
+architecture is confirmed firing correctly. Joint go-live checklist with Jean before any production flip.
+Expected Outcomes
+Upon completion, the CRM will provide:
+● Clear and documented automation architecture, engine-compatible
+● Consistent naming conventions across all assets and all three locations
+● Reduced workflow duplication (133 → clean published set)
+● Synchronized calendars, opportunities, and messaging
+● Improved appointment preparation and intake completion rates
+● Improved show rates through stronger member engagement
+● Easier long-term maintenance and future optimization
+● A clean foundation for Sprint 2 engine features (AI teaser selection, threshold triggers,
+promo-aware timing)
+6

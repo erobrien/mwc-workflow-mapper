@@ -1,0 +1,62 @@
+=== FORMS (26)
+   Ambassador Application — In-Center
+   PCC Consultation Form
+   Funnel LP Form Global - Hammad
+   New Patient Intake (MWC) – v2
+   New Patient Intake (MWC) – v1 Live
+   Clinic Appt Form
+   Interactive Location Form
+   MWC - Form - Hammad -Test
+   New Funnel LP Form
+   MWC Funnel Page 2 — Qualification Form 
+   Newport News Consultation
+   New Funnel LP Form - 02
+   Contact Center - Lead Form
+   MWC Funnel Page 4 — Redirect Medical Intake Form
+   MWC Funnel Page 1 — Lead Capture Form
+   MHWC  Website Page 01  — Lead Capture Form
+   Social Call Back
+   Virginia Beach Consultation 
+   Richmond Consultation 
+   Cancellation Feedback
+   MWC Consultation Request - bookmwc.com
+   MWC - Website Form
+   Men's Wellness Clinic
+   Virtual Consultation
+   MWC - GHL WEB FORM
+   MWC Consultation Request
+
+=== TAGS: 305 total | hyphenated:54 underscored:236 spaces:19 colon-prefixed:28
+
+=== CUSTOM FIELDS (135)
+by model: {'contact': 135}
+  [contact] May we contact your primary care provider regarding your care? (SINGLE_OPTIONS)
+  [contact] UTM Term (TEXT)
+  [contact]  Price – Item 3 (MONETORY)
+  [contact] I authorize Men’s Wellness Centers and its licensed medical providers to evaluate, diagnose, and treat me, including laboratory testing when medically appropriate. (CHECKBOX)
+  [contact] Term Length – Item 2 (SINGLE_OPTIONS)
+  [contact] Sale Type (SINGLE_OPTIONS)
+  [contact] Do you currently smoke or use tobacco products? (SINGLE_OPTIONS)
+  [contact] Survey — Open Feedback (LARGE_TEXT)
+  [contact] Product Sold – Item 2 (SINGLE_OPTIONS)
+  [contact] Primary Care Provider Name (TEXT)
+  [contact] Provider Making Recommendation (SINGLE_OPTIONS)
+  [contact] Survery Feedback Score (NUMERICAL)
+  [contact] Sale Outcome (SINGLE_OPTIONS)
+  [contact] Total Program Amount (MONETORY)
+  [contact] Term Length – Item 3 (SINGLE_OPTIONS)
+  [contact] Product Sold – Item 3 (SINGLE_OPTIONS)
+  [contact] Patient Advisor (SINGLE_OPTIONS)
+  [contact] Consultation Fee (MONETORY)
+  [contact]  Product Sold - Item 1 (SINGLE_OPTIONS)
+  [contact] Term Length – Item 1 (SINGLE_OPTIONS)
+  [contact]  Price – Item 2 (MONETORY)
+  [contact]  Price – Item 1 (MONETORY)
+
+=== CALENDARS (3)
+   Book in Richmond | active: True
+   Book in Virginia Beach | active: True
+   Book in Newport News | active: True
+
+=== PRODUCTS: ['Initial Consultation', 'Initial Appointment']
+=== SURVEYS: ['02. Medical Intake - Onboarding', '02. Medical Intake - Onboarding - EOB', '03. MWC\xa0Post Appointment Feedback', '01. Qualification Onboarding']

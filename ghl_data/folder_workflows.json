@@ -1,0 +1,32 @@
+{
+  "01. WP Lead Capture": [
+    "2151c14e-0d7c-4511-b759-b2785ec5bf49",
+    "ecf363a4-501c-40bb-b7a5-fa9c7b4fc878",
+    "97c037d6-ecf8-4237-881c-12f07086a226",
+    "063460e9-68d9-458d-85e0-cb45df4952a2",
+    "00265495-fb41-4fd8-b37d-a161583d3250",
+    "d85f5e6d-e6d3-42d4-a673-ed444673c546",
+    "043af881-5ba4-4097-9a1b-f5b0b24759ac",
+    "b401f884-66d4-4e37-94d5-08be7041a137"
+  ],
+  "02. Appointments & Visit Journey": [
+    "8f6fa2f2-4f8c-4300-b814-742778ea97d2",
+    "619cc8e7-b658-4552-8e23-5aeeec443057",
+    "dc87597e-33ff-40b2-a2e4-f54cac759704"
+  ],
+  "03. Call Routing & Dispositions": [
+    "7ac17ae7-c894-4c6e-be0e-7b77057c7231",
+    "9c286710-dd0b-4095-875a-5dc0cfdf4944",
+    "010e8e60-926d-4d43-be33-4c2619c92662",
+    "ae22c901-8a23-42ae-8ca3-66fcd49c2820",
+    "956f9032-359e-4dc9-bd4a-551f64d24639",
+    "b9135812-c31a-41fe-b22f-dd47b2623697",
+    "9ae9b45c-1f79-46cc-9ef1-eb61a9bcbdd8",
+    "860ae134-9ed2-4144-a19b-6aae8a0937a3"
+  ],
+  "04. System Admin & Error Handling": [
+    "8befd554-6f9b-42ad-b228-58d8013df67c",
+    "09dfdfe0-cb78-440c-b35f-decbb9add3c6",
+    "5cb8eb01-d14f-464c-ac9e-bbc2a1a26bed"
+  ]
+}

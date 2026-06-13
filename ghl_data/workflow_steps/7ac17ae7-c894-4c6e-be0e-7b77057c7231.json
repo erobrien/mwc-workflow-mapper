@@ -1,0 +1,21 @@
+{
+  "id": "7ac17ae7-c894-4c6e-be0e-7b77057c7231",
+  "name": "03. Appointment Booked",
+  "folder": "03. Call Routing & Dispositions",
+  "status": "published",
+  "version": 121,
+  "extracted_at": "2026-05-29T03:00:25Z",
+  "extraction_method": "backend_jwt",
+  "triggers": [],
+  "steps": [],
+  "messages_referenced": [],
+  "stats": {
+    "total_steps": 0,
+    "send_sms_count": 0,
+    "send_email_count": 0,
+    "wait_count": 0,
+    "if_else_count": 0,
+    "terminal_paths": 0
+  },
+  "notes": ""
+}

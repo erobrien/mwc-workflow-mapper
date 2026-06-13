@@ -1,0 +1,21 @@
+{
+  "id": "ecf363a4-501c-40bb-b7a5-fa9c7b4fc878",
+  "name": "01. NON BOOKED NEWLEADS+MHWC  Website Page 01+MWC Funnel Page 1 \u2014 Lead Capture Form+JJNo Book Paid \u2014 48 Hour Recovery",
+  "folder": "01. WP Lead Capture",
+  "status": "draft",
+  "version": 24,
+  "extracted_at": "2026-05-29T03:00:16Z",
+  "extraction_method": "backend_jwt",
+  "triggers": [],
+  "steps": [],
+  "messages_referenced": [],
+  "stats": {
+    "total_steps": 0,
+    "send_sms_count": 0,
+    "send_email_count": 0,
+    "wait_count": 0,
+    "if_else_count": 0,
+    "terminal_paths": 0
+  },
+  "notes": ""
+}

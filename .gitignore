@@ -1,0 +1,21 @@
+# secrets — never commit; copy secrets.json between machines manually
+secrets.json
+audit/.token
+
+# dependencies / build output
+node_modules/
+mwc-asis/dist/
+
+# machine-local runtime output (regenerated; keep history per-machine)
+monitor/data/
+monitor/reports/
+audit/daily/
+audit/snapshots/
+
+# vercel local link metadata
+.vercel/
+diff-site/.vercel/
+
+# misc
+*.pyc
+__pycache__/

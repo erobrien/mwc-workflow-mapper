@@ -1,0 +1,21 @@
+{
+  "id": "9ae9b45c-1f79-46cc-9ef1-eb61a9bcbdd8",
+  "name": "03c. Unconfirmed Reply Handler",
+  "folder": "03. Call Routing & Dispositions",
+  "status": "published",
+  "version": 9,
+  "extracted_at": "2026-05-29T03:00:31Z",
+  "extraction_method": "backend_jwt",
+  "triggers": [],
+  "steps": [],
+  "messages_referenced": [],
+  "stats": {
+    "total_steps": 0,
+    "send_sms_count": 0,
+    "send_email_count": 0,
+    "wait_count": 0,
+    "if_else_count": 0,
+    "terminal_paths": 0
+  },
+  "notes": ""
+}

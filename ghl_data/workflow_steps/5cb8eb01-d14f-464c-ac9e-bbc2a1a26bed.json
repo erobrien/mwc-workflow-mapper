@@ -1,0 +1,21 @@
+{
+  "id": "5cb8eb01-d14f-464c-ac9e-bbc2a1a26bed",
+  "name": "04b. Typeform Intake Form Response",
+  "folder": "04. System Admin & Error Handling",
+  "status": "draft",
+  "version": 2,
+  "extracted_at": "2026-05-29T03:00:34Z",
+  "extraction_method": "backend_jwt",
+  "triggers": [],
+  "steps": [],
+  "messages_referenced": [],
+  "stats": {
+    "total_steps": 0,
+    "send_sms_count": 0,
+    "send_email_count": 0,
+    "wait_count": 0,
+    "if_else_count": 0,
+    "terminal_paths": 0
+  },
+  "notes": ""
+}

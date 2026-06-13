@@ -1,0 +1,21 @@
+{
+  "id": "860ae134-9ed2-4144-a19b-6aae8a0937a3",
+  "name": "03d. Update Appointment Status",
+  "folder": "03. Call Routing & Dispositions",
+  "status": "published",
+  "version": 15,
+  "extracted_at": "2026-05-29T03:00:32Z",
+  "extraction_method": "backend_jwt",
+  "triggers": [],
+  "steps": [],
+  "messages_referenced": [],
+  "stats": {
+    "total_steps": 0,
+    "send_sms_count": 0,
+    "send_email_count": 0,
+    "wait_count": 0,
+    "if_else_count": 0,
+    "terminal_paths": 0
+  },
+  "notes": ""
+}

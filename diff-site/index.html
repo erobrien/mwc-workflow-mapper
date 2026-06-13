@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MWC GHL — Current vs. Target Architecture</title>
+<style>
+  :root{
+    --bg:#f6f7f9; --panel:#ffffff; --panel2:#fbfcfd;
+    --ink:#0e1726; --txt:#1e2937; --mut:#52607a; --dim:#8392ab;
+    --line:#dfe4ec; --line2:#c9d2e0;
+    --navy:#0c1b33; --navy2:#10243f;
+    --red:#d72638; --redbg:#fdeef0; --redline:#f3c2c9;
+    --amber:#b45309; --amberbg:#fdf3e3; --amberline:#ecd3ae;
+    --green:#0e8a4d; --greenbg:#e9f7ef; --greenline:#bfe5cf;
+    --blue:#1d5bd8; --bluebg:#ebf1fd; --blueline:#c3d4f5;
+    --cyan:#0b7285; --cyanbg:#e7f5f8; --cyanline:#b8dde5;
+    --violet:#6633cc; --violetbg:#f1ecfb; --violetline:#d5c8f0;
+    --radius:14px; --mono:"SFMono-Regular",ui-monospace,Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif;
+    --shadow:0 1px 2px rgba(14,23,38,.05),0 4px 16px rgba(14,23,38,.06);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--txt);font-family:var(--sans);line-height:1.55;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+  .mono{font-family:var(--mono)}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);
+    background:rgba(255,255,255,.85);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;gap:24px;height:60px}
+  .brand{font-weight:800;letter-spacing:-.3px;font-size:15px;white-space:nowrap;color:var(--ink)}
+  .brand b{color:var(--blue)}
+  .navlinks{display:flex;gap:22px;margin-left:auto;font-size:13.5px;color:var(--mut);font-weight:600}
+  .navlinks a{text-decoration:none;transition:color .15s}
+  .navlinks a:hover{color:var(--blue)}
+  @media(max-width:780px){.navlinks{display:none}}
+
+  /* hero — deep navy band */
+  header{padding:84px 0 60px;text-align:center;color:#eef3fa;
+    background:linear-gradient(160deg,var(--navy) 0%,var(--navy2) 55%,#0d2c52 100%);
+    border-bottom:1px solid var(--line)}
+  .eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:2px;text-transform:uppercase;
+    color:#7fb1ff;margin-bottom:18px}
+  h1{font-size:clamp(34px,5.4vw,60px);line-height:1.04;letter-spacing:-1.6px;font-weight:800;color:#fff}
+  h1 .strike{color:#6e7f99;text-decoration:line-through;text-decoration-color:#ef6a78;
+    text-decoration-thickness:3px}
+  h1 .to{color:#4ade80}
+  .sub{max-width:660px;margin:22px auto 0;color:#b9c6da;font-size:17px}
+  .meta{margin-top:26px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;
+    font-family:var(--mono);font-size:11.5px;color:#93a5c0}
+  .meta span{border:1px solid #2c4368;border-radius:999px;padding:5px 12px;background:rgba(255,255,255,.04)}
+
+  /* headline delta strip — light cards overlapping hero */
+  .deltas{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin:50px 0 -96px;position:relative;z-index:2}
+  @media(max-width:880px){.deltas{grid-template-columns:repeat(2,1fr);margin-bottom:-360px}}
+  @media(max-width:480px){.deltas{grid-template-columns:1fr;margin-bottom:-760px}}
+  .delta{background:var(--panel);border:1px solid var(--line);
+    border-radius:var(--radius);padding:18px 18px 16px;position:relative;overflow:hidden;
+    box-shadow:var(--shadow);text-align:left}
+  .delta .k{font-size:11.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.7px;font-weight:700;padding-right:58px}
+  .delta .row{display:flex;align-items:baseline;gap:9px;margin-top:10px}
+  .delta .from{font-size:30px;font-weight:800;color:var(--dim);font-family:var(--mono)}
+  .delta .arr{color:var(--dim);font-size:15px}
+  .delta .to{font-size:30px;font-weight:800;color:var(--green);font-family:var(--mono)}
+  .delta .cut{position:absolute;top:14px;right:14px;font-family:var(--mono);font-size:11px;
+    color:var(--red);background:var(--redbg);border:1px solid var(--redline);border-radius:6px;padding:2px 7px}
+  header{padding-bottom:140px}
+  @media(max-width:880px){header{padding-bottom:420px}}
+  @media(max-width:480px){header{padding-bottom:820px}}
+
+  section{padding:64px 0 54px;border-top:1px solid var(--line);background:var(--bg)}
+  section:nth-of-type(even){background:#fff}
+  #problem{padding-top:130px}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:1.6px;text-transform:uppercase;color:var(--violet);font-weight:700}
+  h2{font-size:clamp(24px,3.4vw,34px);letter-spacing:-.8px;margin:10px 0 8px;font-weight:800;color:var(--ink)}
+  .lead{color:var(--mut);font-size:16px;max-width:760px}
+  .lead b,.lead i{color:var(--ink)}
+
+  /* problem chart */
+  .chart{margin-top:30px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:26px 26px 20px;box-shadow:var(--shadow)}
+  .bar{display:grid;grid-template-columns:170px 1fr 150px;align-items:center;gap:14px;margin:9px 0}
+  .bar .name{font-size:13.5px;color:var(--mut);text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600}
+  .bar .track{height:26px;background:#eef1f6;border-radius:7px;overflow:hidden;position:relative}
+  .bar .fill{height:100%;border-radius:7px;display:flex;align-items:center;
+    transition:width 1.1s cubic-bezier(.2,.8,.2,1)}
+  .bar .val{font-family:var(--mono);font-size:13px;color:var(--ink);font-weight:600}
+  .bar.bad .fill{background:linear-gradient(90deg,#a31226,var(--red))}
+  .bar .fill.norm{background:linear-gradient(90deg,#15439e,var(--blue))}
+  .bar .tag{font-family:var(--mono);font-size:11px;padding:2px 7px;border-radius:5px;margin-left:9px}
+  .tag.poison{background:var(--redbg);color:var(--red);border:1px solid var(--redline);font-weight:700}
+  .chart .foot{margin-top:16px;font-size:13px;color:var(--mut);border-top:1px solid var(--line);padding-top:14px}
+  .chart .foot b{color:var(--red)}
+
+  /* before after grid */
+  .ba{display:grid;grid-template-columns:1fr 56px 1fr;gap:0;margin-top:30px;align-items:stretch}
+  @media(max-width:820px){.ba{grid-template-columns:1fr;gap:14px}.ba .mid{display:none}}
+  .col{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--panel);box-shadow:var(--shadow)}
+  .col.now{border-top:4px solid var(--red)}
+  .col.next{border-top:4px solid var(--green)}
+  .col h3{font-size:13px;padding:14px 18px;border-bottom:1px solid var(--line);
+    display:flex;align-items:center;gap:9px;letter-spacing:1px;text-transform:uppercase;font-weight:800}
+  .col.now h3{color:var(--red);background:var(--redbg)}
+  .col.next h3{color:var(--green);background:var(--greenbg)}
+  .dot{width:8px;height:8px;border-radius:50%}
+  .col.now .dot{background:var(--red)}
+  .col.next .dot{background:var(--green)}
+  .col ul{list-style:none;padding:8px 0}
+  .col li{padding:11px 18px;font-size:14px;display:flex;gap:11px;align-items:flex-start;
+    border-bottom:1px solid #eef1f6}
+  .col li:last-child{border-bottom:0}
+  .col li .n{font-family:var(--mono);font-weight:800;font-size:15px;flex-shrink:0;width:64px}
+  .col.now .n{color:var(--red)}.col.next .n{color:var(--green)}
+  .col li .d{color:var(--mut);font-size:13px}
+  .col li .d b{color:var(--ink);font-weight:700}
+  .mid{display:flex;align-items:center;justify-content:center}
+  .mid .arrow{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);
+    background:var(--panel);display:flex;align-items:center;justify-content:center;color:var(--blue);
+    box-shadow:var(--shadow);font-weight:700}
+
+  /* pipeline map */
+  .pipes{margin-top:28px;display:grid;grid-template-columns:1.3fr 50px 1fr;gap:0;align-items:center}
+  @media(max-width:820px){.pipes{grid-template-columns:1fr}.pipes .mid{display:none;}}
+  .plist{display:flex;flex-wrap:wrap;gap:7px}
+  .chip{font-size:12px;padding:6px 10px;border-radius:8px;border:1px solid var(--blueline);
+    background:var(--bluebg);color:var(--blue);font-family:var(--mono);font-weight:600}
+  .chip.kill{border-color:var(--redline);background:var(--redbg);color:#b3344a;
+    text-decoration:line-through;text-decoration-color:#d7263880;font-weight:500}
+  .target3{display:flex;flex-direction:column;gap:12px}
+  .pcard{border:1px solid var(--greenline);border-radius:12px;padding:14px 16px;background:var(--greenbg);box-shadow:var(--shadow)}
+  .pcard .t{font-weight:800;color:var(--green);font-size:14px;margin-bottom:7px;display:flex;gap:8px;align-items:center}
+  .pcard .stages{display:flex;flex-wrap:wrap;gap:5px}
+  .pcard .st{font-size:11px;font-family:var(--mono);color:var(--ink);background:#fff;
+    border:1px solid var(--greenline);border-radius:6px;padding:3px 7px;font-weight:600}
+  .pcard .st.exit{color:var(--amber);border-color:var(--amberline);background:var(--amberbg)}
+
+  /* node evidence */
+  .evidence{margin-top:28px;display:grid;grid-template-columns:1.1fr .9fr;gap:20px}
+  @media(max-width:820px){.evidence{grid-template-columns:1fr}}
+  .nodecard{background:var(--panel);border:1px solid var(--violetline);border-radius:var(--radius);
+    overflow:hidden;box-shadow:var(--shadow)}
+  .nodecard .hd{padding:13px 16px;border-bottom:1px solid var(--violetline);font-family:var(--mono);font-size:12px;
+    color:var(--violet);display:flex;align-items:center;gap:9px;background:var(--violetbg);font-weight:700}
+  .nodecard .body{padding:6px 16px 14px}
+  .field{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #eef1f6;font-size:13px}
+  .field:last-child{border-bottom:0}
+  .field .fk{color:var(--mut);font-weight:600}
+  .field .fv{font-family:var(--mono);color:var(--ink);text-align:right;font-weight:600}
+  .field .fv.danger{color:var(--red)}
+  .field .fv.won{color:#fff;background:var(--red);border-radius:5px;padding:1px 8px}
+  .explain{font-size:14px;color:var(--mut)}
+  .explain h4{color:var(--red);font-size:15px;margin-bottom:10px;display:flex;gap:8px;align-items:center;font-weight:800}
+  .explain p{margin-bottom:12px}
+  .explain p b{color:var(--ink)}
+  .explain code{font-family:var(--mono);font-size:12.5px;background:var(--amberbg);color:var(--amber);
+    padding:1px 6px;border-radius:5px;border:1px solid var(--amberline);font-weight:600}
+  .explain .punch{border-left:3px solid var(--red);padding:10px 14px;background:var(--redbg);
+    border-radius:0 8px 8px 0;color:var(--ink);font-size:13.5px}
+  .explain .punch b{color:var(--red)}
+
+  /* engine callout */
+  .engine{margin-top:26px;background:linear-gradient(120deg,var(--navy),#103154);border:1px solid #1c3a52;
+    border-radius:var(--radius);padding:24px 26px;display:grid;grid-template-columns:auto 1fr;gap:22px;
+    align-items:center;box-shadow:var(--shadow)}
+  @media(max-width:680px){.engine{grid-template-columns:1fr}}
+  .engine .big{font-family:var(--mono);font-size:13px;color:#5fd4e3;font-weight:700}
+  .engine h4{color:#7fe3f0;font-size:16px;margin-bottom:7px}
+  .engine p{color:#b9c6da;font-size:14px}
+  .engine p i{color:#e8eef7}
+  .taglist{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+  .taglist .pt{font-family:var(--mono);font-size:11px;color:#7fe3f0;border:1px solid #2a5a74;
+    background:rgba(95,212,227,.08);border-radius:6px;padding:3px 8px}
+
+  /* workflow consolidation table */
+  .wftable{margin-top:26px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+    background:var(--panel);box-shadow:var(--shadow)}
+  .wfrow{display:grid;grid-template-columns:40px 1fr 1.4fr;gap:0;border-bottom:1px solid var(--line);font-size:13.5px}
+  .wfrow:last-child{border-bottom:0}
+  .wfrow.head{background:var(--navy);font-family:var(--mono);font-size:11px;letter-spacing:.5px;
+    text-transform:uppercase;color:#9fb4d4}
+  .wfrow>div{padding:11px 14px}
+  .wfrow .num{font-family:var(--mono);color:var(--green);font-weight:800}
+  .wfrow .keep{font-weight:700;color:var(--ink)}
+  .wfrow .absorb{color:var(--mut);font-size:12.5px;border-left:1px solid var(--line)}
+  .wfrow:not(.head):nth-child(odd){background:var(--panel2)}
+  .wfrow:not(.head):hover{background:var(--bluebg)}
+
+  /* plan comparison */
+  .tabs{display:flex;gap:8px;margin-top:24px;flex-wrap:wrap}
+  .tab{font-size:13px;padding:9px 16px;border-radius:9px;border:1px solid var(--line);background:var(--panel);
+    color:var(--mut);cursor:pointer;transition:.15s;font-family:var(--mono);font-weight:600}
+  .tab:hover{border-color:var(--blueline);color:var(--blue)}
+  .tab.on{background:var(--blue);color:#fff;border-color:var(--blue);font-weight:700}
+  .cmp{margin-top:18px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+    background:var(--panel);box-shadow:var(--shadow)}
+  .crow{display:grid;grid-template-columns:200px 1fr 1fr 1fr;border-bottom:1px solid var(--line);font-size:13px}
+  @media(max-width:820px){.crow{grid-template-columns:120px 1fr 1fr 1fr;font-size:12px}}
+  .crow:last-child{border-bottom:0}
+  .crow.head>div{background:var(--navy);font-weight:700;font-size:12px;color:#dce6f5}
+  .crow>div{padding:12px 14px;border-right:1px solid var(--line);color:var(--txt)}
+  .crow>div:last-child{border-right:0}
+  .crow .rk{color:var(--mut);font-family:var(--mono);font-size:12px;font-weight:600}
+  .col-mine{background:var(--greenbg)}
+  .badge{font-size:10.5px;font-family:var(--mono);padding:2px 7px;border-radius:5px;margin-left:6px;font-weight:700}
+  .b-win{background:var(--greenbg);color:var(--green);border:1px solid var(--greenline)}
+  .b-gap{background:var(--redbg);color:var(--red);border:1px solid var(--redline)}
+  .b-mid{background:var(--amberbg);color:var(--amber);border:1px solid var(--amberline)}
+
+  /* phases */
+  .phases{margin-top:26px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:820px){.phases{grid-template-columns:1fr}}
+  .phase{border:1px solid var(--line);border-radius:12px;padding:18px;background:var(--panel);box-shadow:var(--shadow)}
+  .phase .pn{font-family:var(--mono);font-size:11px;color:var(--blue);letter-spacing:1px;font-weight:700}
+  .phase h4{font-size:15px;margin:6px 0 9px;color:var(--ink)}
+  .phase p{font-size:13px;color:var(--mut)}
+  .phase.p0{border-color:var(--redline);background:var(--redbg)}
+  .phase.p0 .pn{color:var(--red)}
+
+  /* execution section */
+  .owners{margin-top:28px;display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:14px}
+  @media(max-width:880px){.owners{grid-template-columns:1fr}}
+  .owner{border:1px solid var(--line);border-radius:var(--radius);padding:20px;background:var(--panel);
+    position:relative;box-shadow:var(--shadow)}
+  .owner.ai{border-color:var(--blueline);background:linear-gradient(180deg,var(--bluebg),#fff 60%)}
+  .owner .who{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+  .owner .who .ic{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;
+    font-size:16px;background:var(--panel2);border:1px solid var(--line)}
+  .owner.ai .who .ic{border-color:var(--blueline);color:var(--blue);background:#fff}
+  .owner h4{font-size:15px;color:var(--ink)}
+  .owner .role{font-family:var(--mono);font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--dim);font-weight:700}
+  .owner.ai .role{color:var(--blue)}
+  .owner ul{list-style:none;margin-top:12px}
+  .owner li{font-size:13px;color:var(--mut);padding:6px 0 6px 20px;position:relative;border-bottom:1px solid #eef1f6}
+  .owner li:last-child{border-bottom:0}
+  .owner li::before{content:"·";position:absolute;left:6px;color:var(--dim)}
+  .owner.ai li::before{content:"▸";color:var(--blue);font-size:10px;top:9px}
+  .owner li b{color:var(--ink);font-weight:700}
+  .owner li .api{font-family:var(--mono);font-size:10.5px;color:var(--cyan);background:var(--cyanbg);
+    border:1px solid var(--cyanline);border-radius:5px;padding:1px 6px;margin-left:6px;white-space:nowrap;font-weight:700}
+  .owner li .ui{font-family:var(--mono);font-size:10.5px;color:var(--amber);background:var(--amberbg);
+    border:1px solid var(--amberline);border-radius:5px;padding:1px 6px;margin-left:6px;white-space:nowrap;font-weight:700}
+
+  .runway{margin-top:34px;position:relative;padding-left:26px}
+  .runway::before{content:"";position:absolute;left:8px;top:8px;bottom:8px;width:2px;
+    background:linear-gradient(180deg,var(--red),var(--blue) 30%,var(--green))}
+  .step{position:relative;margin-bottom:18px;border:1px solid var(--line);border-radius:12px;
+    background:var(--panel);padding:16px 18px;box-shadow:var(--shadow)}
+  .step::before{content:"";position:absolute;left:-23px;top:22px;width:12px;height:12px;border-radius:50%;
+    background:#fff;border:2px solid var(--blue)}
+  .step.gate::before{border-color:var(--amber);background:var(--amber)}
+  .step .shead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .step .sn{font-family:var(--mono);font-size:11px;color:var(--blue);letter-spacing:1px;font-weight:700}
+  .step h5{font-size:14.5px;color:var(--ink)}
+  .step .where{margin-left:auto;font-family:var(--mono);font-size:10.5px;padding:2px 8px;border-radius:5px;font-weight:700}
+  .where.prod{background:var(--greenbg);color:var(--green);border:1px solid var(--greenline)}
+  .where.stage{background:var(--violetbg);color:var(--violet);border:1px solid var(--violetline)}
+  .where.local{background:var(--cyanbg);color:var(--cyan);border:1px solid var(--cyanline)}
+  .step p{font-size:13px;color:var(--mut);margin-top:7px}
+  .step p b{color:var(--ink)}
+  .step p code{font-family:var(--mono);font-size:11.5px;background:var(--cyanbg);color:var(--cyan);
+    padding:1px 6px;border-radius:5px;border:1px solid var(--cyanline);font-weight:600}
+  .step .gatebar{margin-top:10px;font-size:12px;color:var(--amber);border-left:3px solid var(--amber);
+    background:var(--amberbg);padding:7px 12px;border-radius:0 7px 7px 0;font-weight:600}
+  .step .gatebar b{color:var(--amber)}
+
+  .testgrid{margin-top:26px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+    background:var(--panel);box-shadow:var(--shadow)}
+  .trow{display:grid;grid-template-columns:190px 1fr 140px;border-bottom:1px solid var(--line);font-size:13px}
+  @media(max-width:720px){.trow{grid-template-columns:120px 1fr 90px;font-size:12px}}
+  .trow:last-child{border-bottom:0}
+  .trow.head>div{background:var(--navy);font-family:var(--mono);font-size:11px;text-transform:uppercase;
+    letter-spacing:.5px;color:#9fb4d4}
+  .trow>div{padding:11px 14px;border-right:1px solid var(--line)}
+  .trow>div:last-child{border-right:0}
+  .trow:not(.head):nth-child(odd){background:var(--panel2)}
+  .trow .tname{color:var(--ink);font-weight:700}
+  .trow .tdesc{color:var(--mut)}
+  .trow .tdesc b{color:var(--ink)}
+  .trow .tdesc code{font-family:var(--mono);font-size:11px;color:var(--cyan);background:var(--cyanbg);
+    border-radius:4px;padding:0 4px}
+  .trow .tmode{font-family:var(--mono);font-size:11px;font-weight:700}
+  .tmode.auto{color:var(--green)}.tmode.semi{color:var(--amber)}
+
+  /* workflow build book (accordion) */
+  .buildmethod{margin-top:24px;background:var(--bluebg);border:1px solid var(--blueline);border-radius:var(--radius);
+    padding:20px 22px;box-shadow:var(--shadow)}
+  .buildmethod h4{color:var(--blue);font-size:15px;margin-bottom:10px}
+  .buildmethod ol{margin-left:20px;font-size:13.5px;color:var(--mut)}
+  .buildmethod li{margin:5px 0}
+  .buildmethod li b{color:var(--ink)}
+  .wfacc{margin-top:22px;display:flex;flex-direction:column;gap:10px}
+  .wfacc details{border:1px solid var(--line);border-radius:12px;background:var(--panel);box-shadow:var(--shadow);overflow:hidden}
+  .wfacc details[open]{border-color:var(--blueline)}
+  .wfacc summary{display:flex;align-items:center;gap:14px;padding:14px 18px;cursor:pointer;list-style:none;user-select:none}
+  .wfacc summary::-webkit-details-marker{display:none}
+  .wfacc summary:hover{background:var(--bluebg)}
+  .wfacc .wnum{font-family:var(--mono);font-weight:800;font-size:16px;color:var(--green);flex-shrink:0;width:34px}
+  .wfacc .wfull{font-weight:700;color:var(--ink);font-size:14.5px}
+  .wfacc .wsub{margin-left:auto;font-size:11.5px;color:var(--dim);font-family:var(--mono);white-space:nowrap}
+  .wfacc .chev{color:var(--dim);transition:transform .2s;flex-shrink:0}
+  .wfacc details[open] .chev{transform:rotate(90deg)}
+  .wbody{border-top:1px solid var(--line);padding:18px;display:grid;grid-template-columns:1fr 1fr;gap:18px;background:var(--panel2)}
+  @media(max-width:880px){.wbody{grid-template-columns:1fr}}
+  .wblock h6{font-family:var(--mono);font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;
+    color:var(--violet);margin-bottom:9px;font-weight:700}
+  .wblock.srcs h6{color:var(--red)}
+  .wblock.bld h6{color:var(--blue)}
+  .wblock ul.srclist{list-style:none}
+  .wblock ul.srclist li{font-size:12.5px;color:var(--mut);padding:5px 0 5px 18px;position:relative;border-bottom:1px solid #eef1f6}
+  .wblock ul.srclist li::before{content:"⇣";position:absolute;left:2px;color:var(--red);font-size:11px}
+  .wblock ul.srclist li b{color:var(--ink);font-weight:600}
+  .wblock ul.srclist li .st{font-family:var(--mono);font-size:9.5px;padding:1px 6px;border-radius:4px;margin-left:6px;font-weight:700}
+  .st.retire{background:var(--redbg);color:var(--red);border:1px solid var(--redline)}
+  .st.merge{background:var(--amberbg);color:var(--amber);border:1px solid var(--amberline)}
+  .st.keep{background:var(--greenbg);color:var(--green);border:1px solid var(--greenline)}
+  .st.newb{background:var(--bluebg);color:var(--blue);border:1px solid var(--blueline)}
+  .wblock ol.clicks{margin-left:18px;font-size:12.5px;color:var(--mut)}
+  .wblock ol.clicks li{margin:5px 0;padding-left:2px}
+  .wblock ol.clicks li b{color:var(--ink)}
+  .wblock ol.clicks li code{font-family:var(--mono);font-size:11px;background:var(--cyanbg);color:var(--cyan);
+    padding:0 5px;border-radius:4px;border:1px solid var(--cyanline)}
+  .msgs{grid-column:1 / -1}
+  .msgs h6{font-family:var(--mono);font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--green);margin-bottom:9px;font-weight:700}
+  .msggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:10px}
+  .msg{border:1px solid var(--line);border-radius:10px;background:#fff;padding:11px 13px}
+  .msg .mh{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+  .msg .ch{font-family:var(--mono);font-size:9.5px;font-weight:800;padding:2px 7px;border-radius:4px;letter-spacing:.5px}
+  .ch.sms{background:var(--greenbg);color:var(--green);border:1px solid var(--greenline)}
+  .ch.eml{background:var(--violetbg);color:var(--violet);border:1px solid var(--violetline)}
+  .msg .mt{font-family:var(--mono);font-size:10.5px;color:var(--dim)}
+  .msg .ms{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:4px}
+  .msg .mb{font-size:12px;color:var(--mut);line-height:1.5;white-space:pre-wrap}
+  .msg .mb .v{color:var(--blue);font-family:var(--mono);font-size:11px}
+  .nomsg{font-size:12.5px;color:var(--dim);font-style:italic}
+
+  .guard{margin-top:24px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  @media(max-width:880px){.guard{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:480px){.guard{grid-template-columns:1fr}}
+  .gcard{border:1px solid var(--redline);border-radius:11px;padding:14px;background:var(--redbg)}
+  .gcard .gt{font-size:12.5px;font-weight:800;color:var(--red);margin-bottom:5px}
+  .gcard p{font-size:12px;color:#7c4a52}
+
+  /* machine view — light, same theme as the site */
+  .mlegend{display:flex;flex-wrap:wrap;gap:16px;margin-top:18px;font-size:12px;color:var(--mut);font-family:var(--mono);font-weight:600}
+  .mlegend span{display:flex;align-items:center;gap:6px}
+  .mlegend i{width:22px;border-top-width:3px;border-top-style:solid;display:inline-block}
+  .mlegend i.dash{border-top-style:dashed}
+  .mlegend b.sw{width:13px;height:13px;border-radius:3px;display:inline-block;border:1.5px solid;background:#fff}
+  .mcanvas{margin-top:20px;border:1px solid var(--line);border-radius:var(--radius);overflow-x:auto;
+    background:#fff;box-shadow:var(--shadow)}
+  .mcanvas svg{display:block;min-width:1480px;width:100%;height:auto}
+  .mnote{margin-top:14px;font-size:12.5px;color:var(--dim);font-family:var(--mono)}
+
+  footer{padding:48px 0 70px;border-top:1px solid var(--line);text-align:center;color:var(--dim);
+    font-size:13px;background:var(--navy)}
+  footer>div>div:first-child{color:#9fb4d4}
+  footer .mono{font-size:11.5px;margin-top:10px;color:#536b8f}
+  .disc{max-width:760px;margin:18px auto 0;font-size:12px;color:#8aa0bf;
+    border:1px dashed #2c4368;border-radius:10px;padding:14px 18px}
+  .disc code{color:#7fb1ff}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <div class="brand">MWC · <b>GHL Architecture Diff</b></div>
+  <div class="navlinks">
+    <a href="#problem">The Problem</a>
+    <a href="#arch">Before / After</a>
+    <a href="#pipelines">Pipelines</a>
+    <a href="#evidence">Evidence</a>
+    <a href="#workflows">Workflows</a>
+    <a href="#machine">Machine View</a>
+    <a href="#plans">Plans</a>
+    <a href="#execution">Execution</a>
+  </div>
+</div></nav>
+
+<header><div class="wrap">
+  <div class="eyebrow">Men's Wellness Centers — GoHighLevel sub-account</div>
+  <h1><span class="strike">135 workflows</span><br>rebuilt to <span class="to">16</span></h1>
+  <p class="sub">A side-by-side of the GHL account as it is today versus the simplified target — built from a live, read-only crawl of the production location. Published assets only.</p>
+  <div class="meta">
+    <span>Location Ghstz8eIsHWLeXek47dk</span>
+    <span>6,775 opportunities</span>
+    <span>3 centers: Richmond · VA Beach · Newport News</span>
+    <span>Crawled 2026-06-12</span>
+  </div>
+
+  <div class="deltas" id="deltas"></div>
+</div></header>
+
+<!-- THE PROBLEM -->
+<section id="problem"><div class="wrap">
+  <div class="kicker">The core defect</div>
+  <h2>Half of every "won" deal is fake</h2>
+  <p class="lead">The published workflow <b style="color:var(--txt)">05. Clinic Appt Outcome</b> creates a <i>Won</i> opportunity in the <b style="color:var(--txt)">A&amp;D</b> ("Approved &amp; Declined") pipeline for every patient who simply <b style="color:var(--txt)">shows up</b> — sale or no sale. The result: win-rate and revenue reporting are meaningless.</p>
+
+  <div class="chart">
+    <div id="bars"></div>
+    <div class="foot">A&amp;D holds <b>939 won / 0 lost</b> — about <b>50% of all 1,864 "won" opportunities</b> account-wide. Across sampled won deals, <b>57–99% carry $0 monetary value</b>: revenue lives in <i>contact</i> fields that are mostly empty, and GHL has <b>zero payment transactions</b>.</div>
+  </div>
+</div></section>
+
+<!-- BEFORE / AFTER -->
+<section id="arch"><div class="wrap">
+  <div class="kicker">Object inventory</div>
+  <h2>Current sprawl → governed target</h2>
+  <p class="lead">Every count below is from the live API. The target collapses location-duplicated structure into single, field-driven objects.</p>
+
+  <div class="ba">
+    <div class="col now">
+      <h3><span class="dot"></span> AS IS — today</h3>
+      <ul id="nowlist"></ul>
+    </div>
+    <div class="mid"><div class="arrow">→</div></div>
+    <div class="col next">
+      <h3><span class="dot"></span> TARGET — governed</h3>
+      <ul id="nextlist"></ul>
+    </div>
+  </div>
+</div></section>
+
+<!-- PIPELINES -->
+<section id="pipelines"><div class="wrap">
+  <div class="kicker">Pipeline consolidation</div>
+  <h2>18 pipelines → 3</h2>
+  <p class="lead">Nine of the eighteen are location clones, status-as-pipeline, or disposition logs holding stray opportunities. Location, outcome, and no-show become <b style="color:var(--txt)">fields and statuses</b>, not separate pipelines.</p>
+
+  <div class="pipes">
+    <div>
+      <div class="plist" id="oldpipes"></div>
+    </div>
+    <div class="mid"><div class="arrow">→</div></div>
+    <div class="target3" id="newpipes"></div>
+  </div>
+</div></section>
+
+<!-- EVIDENCE -->
+<section id="evidence"><div class="wrap">
+  <div class="kicker">Node-level evidence</div>
+  <h2>The exact action that poisons the data</h2>
+  <p class="lead">Captured from the GHL workflow builder. This is one <i>Create Opportunity</i> action inside the SHOWED branch of <b style="color:var(--txt)">05. Clinic Appt Outcome</b>.</p>
+
+  <div class="evidence">
+    <div class="nodecard">
+      <div class="hd">⚙︎ Create Opportunity — action config</div>
+      <div class="body">
+        <div class="field"><span class="fk">Action name</span><span class="fv danger">A&amp;D pipeline: Closed, status: WON</span></div>
+        <div class="field"><span class="fk">In pipeline</span><span class="fv">07. A &amp; D</span></div>
+        <div class="field"><span class="fk">In stage</span><span class="fv">Closed</span></div>
+        <div class="field"><span class="fk">Opportunity name</span><span class="fv">{{contact.name}} SHOWED</span></div>
+        <div class="field"><span class="fk">Opportunity value</span><span class="fv">{{contact.total_program_amount}}</span></div>
+        <div class="field"><span class="fk">Status</span><span class="fv won">WON</span></div>
+      </div>
+    </div>
+    <div class="explain">
+      <h4>⚠ Why this breaks everything</h4>
+      <p>The trigger is <b style="color:var(--txt)">SHOWED</b> — attendance, not purchase. So every patient who walks in gets a <i>Won</i> opportunity, regardless of whether they bought.</p>
+      <p>The value reads from the <i>contact</i> field <code>total_program_amount</code>, which is empty for most contacts — so most of these "wins" are worth <code>$0</code>.</p>
+      <div class="punch">Win rate, revenue, and by-location performance are all computed on top of this. Fixing it will roughly <b>halve the reported win rate</b> — that is the data becoming honest, not performance dropping.</div>
+    </div>
+  </div>
+
+  <!-- ENGINE CONSTRAINT -->
+  <div class="engine">
+    <div class="big">🤖 LIVE<br>ENGINE</div>
+    <div>
+      <h4>The AI engine integration: installed, not live — tags frozen</h4>
+      <p>A BotFanatics chat + "Sniper" reactivation integration exists in this account and its tags are present in the data. The engine is <i>not currently running</i>, so it does not gate this migration — but its tag surface is treated as frozen (never renamed or deleted) so the integration can be switched back on later without rewiring.</p>
+      <div class="taglist" id="engtags"></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- WORKFLOWS -->
+<section id="workflows"><div class="wrap">
+  <div class="kicker">Workflow build book</div>
+  <h2>38 published workflows → 16 consolidated workflows</h2>
+  <p class="lead">Every one of today's 38 published workflows is absorbed into exactly one of the 16 below — each new workflow "owns" one lifecycle event, so no two flows ever compete for the same job. Named <b>NN. Title</b> with leading zeros so the GHL list sorts in lifecycle order. Click any workflow for the published flows it combines, the browser click-through build plan, and every member-facing SMS and email. <b>Drafts are excluded entirely</b> — only published workflows appear as sources; the 97 drafts get bulk-archived, never merged.</p>
+
+  <div class="buildmethod">
+    <h4>How each workflow gets built — browser method</h4>
+    <ol>
+      <li><b>Fresh browser session per workflow</b> — the GHL builder is heavy; one workflow per tab, builder opened from the Workflows list (direct URLs hang).</li>
+      <li><b>Open the source workflows in a second tab</b> — copy trigger filters, tag names, and message bodies verbatim where they're being kept; the engine's existing tag IDs are reused, never recreated.</li>
+      <li><b>Build the new workflow as a Draft</b> — drafts fire nothing in GHL, so production is untouched until Publish.</li>
+      <li><b>Verify against this spec</b> — every trigger, branch, wait, and message below is checked off on the canvas before the workflow is marked build-complete.</li>
+      <li><b>Test contact end-to-end</b> — drive a test contact through the draft (Test Workflow), assert tags, fields, opportunity moves, and message rendering.</li>
+      <li><b>Cutover behind the canary</b> — publish the new workflow, <i>pause</i> (never delete) the sources it absorbs, watch 48h, then widen.</li>
+      <li><b>Published-only accounting</b> — 36 of the 38 published workflows map into the 16 below; the remaining 2: <code>06. Price Calculator</code> stays standalone, and <code>New Workflow : 1780243709697</code> (unnamed but published) gets inspected, then deleted.</li>
+    </ol>
+  </div>
+
+  <div class="wfacc" id="wfacc"></div>
+</div></section>
+
+<!-- MACHINE VIEW -->
+<section id="machine"><div class="wrap">
+  <div class="kicker">Machine view</div>
+  <h2>The entire system as one flow</h2>
+  <p class="lead">Every published-scope moving part on one canvas: the dormant AI engine integration on top, lead sources in, the 16 workflows wired in lifecycle order, the single Sales pipeline spine they write to, the opportunity data layer, and the compliance net underneath. <b>Solid blue = member flow, dashed teal = engine writes, dashed amber = loop-back, red = exit.</b></p>
+  <div class="mlegend">
+    <span><i style="border-color:#1d5bd8"></i> member flow</span>
+    <span><i class="dash" style="border-color:#0b7285"></i> engine writes (dormant)</span>
+    <span><i class="dash" style="border-color:#b45309"></i> loop-back</span>
+    <span><i style="border-color:#d72638"></i> exit / no-sale</span>
+    <span><b class="sw" style="border-color:#1d5bd8"></b> capture/booking</span>
+    <span><b class="sw" style="border-color:#6633cc"></b> visit/outcome</span>
+    <span><b class="sw" style="border-color:#0e8a4d"></b> won</span>
+    <span><b class="sw" style="border-color:#d72638"></b> no-sale/no-show</span>
+  </div>
+  <div class="mcanvas"><svg id="machinesvg" viewBox="0 0 1700 1000" xmlns="http://www.w3.org/2000/svg"></svg></div>
+  <div class="mnote">Scroll horizontally on small screens. Numbers match the build book above; only published-scope workflows are shown.</div>
+</div></section>
+
+<!-- PLANS -->
+<section id="plans"><div class="wrap">
+  <div class="kicker">Three plans, compared</div>
+  <h2>Migration map vs. this audit vs. the human sprint proposal</h2>
+  <p class="lead">Three documents describe the cleanup. They agree on the sprawl and disagree on the method — and only one targets the revenue defect.</p>
+
+  <div class="tabs" id="tabs">
+    <div class="tab on" data-k="targets">Targets</div>
+    <div class="tab" data-k="method">Method &amp; risk</div>
+    <div class="tab" data-k="gaps">Coverage</div>
+  </div>
+  <div class="cmp" id="cmp"></div>
+
+  <div class="phases">
+    <div class="phase p0"><div class="pn">PRIORITY 0 — missing from the proposal</div><h4>Revenue track</h4><p>Fix 05's A&amp;D-Won, stand up opportunity-level revenue fields, backfill ~6,772 opps, restate win rate. The actual reason for the engagement.</p></div>
+    <div class="phase"><div class="pn">ADOPT — from the proposal</div><h4>Engine-aware audit</h4><p>Bot-dependency flag on every published workflow, DND/TCPA gap analysis, brand-voice rules, canary gate, engine-owner sign-off before touching engine-triggered flows.</p></div>
+    <div class="phase"><div class="pn">REJECT — from the proposal</div><h4>Sub-account migration</h4><p>GHL won't cleanly move 6,775 opps + history + the live engine binding across sub-accounts. Build/test in staging, but remediate <i>in place</i> behind the canary.</p></div>
+  </div>
+</div></section>
+
+<!-- EXECUTION WITH CLAUDE -->
+<section id="execution"><div class="wrap">
+  <div class="kicker">Execution playbook</div>
+  <h2>How Claude (Fable 5) executes this</h2>
+  <p class="lead">GHL exposes a full API for data objects but <b style="color:var(--txt)">no API for authoring workflows</b> — so the data layer is scripted, and the workflow builds run through the browser: <b style="color:var(--txt)">you prompt, Fable executes</b> — no outside builders. The AI engine integration (BotFanatics/Sniper) is installed but <b style="color:var(--txt)">not live</b>, so no third-party gate exists; its tags are kept frozen so it could re-attach later. Everything lands in production behind dry-runs and a canary.</p>
+
+  <div class="owners">
+    <div class="owner ai">
+      <div class="who"><div class="ic">◆</div><div><h4>Claude — data layer, end to end</h4><div class="role">scripted · idempotent · dry-run first</div></div></div>
+      <ul>
+        <li><b>Snapshot &amp; freeze</b> — export all 6,775 opps + contacts + fields to versioned JSON/CSV <span class="api">API</span></li>
+        <li><b>Create</b> the 3 pipelines, 14 opportunity fields, lost-reason set, tag registry <span class="api">API</span></li>
+        <li><b>Revenue backfill</b> — split the 939 A&amp;D "wins" by evidence, copy contact→opportunity revenue fields, set monetaryValue <span class="api">API</span></li>
+        <li><b>Workflow build-specs</b> — exact trigger/branch/action spec per target workflow, with the engine's tag IDs preserved</li>
+        <li><b>Verification</b> — every test in the matrix below, plus the weekly data-quality report <span class="api">API</span></li>
+        <li><b>Reconciliation</b> — Σ revenue before = Σ revenue after, or the run aborts <span class="api">API</span></li>
+      </ul>
+    </div>
+    <div class="owner">
+      <div class="who"><div class="ic">⚒</div><div><h4>You — prompt &amp; approve</h4><div class="role">the only human in the loop</div></div></div>
+      <ul>
+        <li>Prompts each step from the guide; watches Fable drive the GHL builder for the 16 workflows <span class="ui">UI</span></li>
+        <li>Approves each dry-run CSV before any write lands</li>
+        <li>Owns the go/no-go at every canary gate</li>
+        <li>Final check on member-facing message copy before publish</li>
+      </ul>
+    </div>
+    <div class="owner">
+      <div class="who"><div class="ic">🤖</div><div><h4>AI engine — dormant</h4><div class="role">installed, not live · tags frozen</div></div></div>
+      <ul>
+        <li>BotFanatics/Sniper integration exists but is <b>not running</b> — no live dependency gates this migration</li>
+        <li>Its tag surface (<span class="mono" style="font-size:11px">chatbot_lead, src:bf-web, sniper_*</span>) is preserved untouched so the engine can re-attach later</li>
+        <li>If it is ever switched on, re-run the bot-dependency audit first</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="runway">
+    <div class="step gate">
+      <div class="shead"><span class="sn">STEP 0</span><h5>Snapshot, freeze &amp; write-scope check</h5><span class="where local">CLAUDE · LOCAL</span></div>
+      <p>Full export of every object to versioned files (rollback baseline). Verify the PIT token's <b>write scopes</b> — all work so far has been read-only. Change freeze: no new workflows/tags/pipelines without sign-off.</p>
+      <div class="gatebar"><b>GATE:</b> stakeholder approves scope + confirms freeze.</div>
+    </div>
+    <div class="step">
+      <div class="shead"><span class="sn">STEP 1</span><h5>Foundation objects</h5><span class="where prod">PROD · API</span></div>
+      <p>Create the 3 pipelines, 14 opportunity-level revenue fields, lost reasons, and tag registry. Purely additive — nothing existing is modified, so the live system can't notice.</p>
+    </div>
+    <div class="step gate">
+      <div class="shead"><span class="sn">STEP 2</span><h5>Revenue backfill — dry-run first</h5><span class="where prod">PROD · API</span></div>
+      <p>The script maps all <code>6,775</code> opps old→new (pipeline, stage, status), splits A&amp;D wins by evidence (<code>monetaryValue &gt; 0</code> or contact <code>Sale Outcome = Sold</code> → real Won; else Lost + reason), and copies contact→opportunity revenue fields. <b style="color:var(--txt)">Run 1 writes nothing</b> — it emits a CSV of every proposed change + before/after revenue reconciliation.</p>
+      <div class="gatebar"><b>GATE:</b> human reviews the CSV; only then does the same script run in write mode. Idempotent — safe to re-run.</div>
+    </div>
+    <div class="step">
+      <div class="shead"><span class="sn">STEP 3</span><h5>Workflows built as drafts</h5><span class="where prod">PROD · UI</span></div>
+      <p>Human builds the 16 target workflows from Claude's build-specs <b>in production, unpublished</b>. Drafts fire nothing in GHL — this is the safe sandbox, with the real tag/field IDs the engine depends on (a staging snapshot would re-map those IDs and silently sever the bot).</p>
+    </div>
+    <div class="step">
+      <div class="shead"><span class="sn">STEP 4</span><h5>Dormant-engine check</h5><span class="where local">CLAUDE · API</span></div>
+      <p>The AI engine is installed but not live, so there is no rehearsal day and no third-party gate. The check is simple: confirm the integration stays off during cutover, and verify the frozen tag surface (<code>chatbot_lead</code>, <code>src:bf-web</code>, <code>sniper_*</code>, <code>funnel_entry_*</code>) is never renamed or deleted — preserved wiring for a future re-activation.</p>
+    </div>
+    <div class="step gate">
+      <div class="shead"><span class="sn">STEP 5</span><h5>Canary cutover</h5><span class="where prod">PROD</span></div>
+      <p>Publish the 16, pause (don't delete) the old 38. For 48h, only <code>src:bf-web</code> / test-cohort contacts run the new path while Claude monitors execution logs, opportunity movement, and the won-with-$0 counter (target: 0).</p>
+      <div class="gatebar"><b>GATE:</b> 48h clean canary + your go/no-go → widen to all traffic.</div>
+    </div>
+    <div class="step">
+      <div class="shead"><span class="sn">STEP 6</span><h5>Cleanup + standing watch</h5><span class="where prod">PROD · API</span></div>
+      <p>After two clean weeks: retire old workflows/forms, execute tag renames from the corrected CSV, archive empty pipelines (never delete a pipeline holding opps — GHL deletes them with it). Claude keeps emitting the weekly data-quality report.</p>
+    </div>
+  </div>
+
+  <h2 style="margin-top:46px;font-size:24px">The test matrix</h2>
+  <p class="lead">Every scenario asserted via API by Claude — create the test contact, drive the event, assert the resulting state. Engine scenarios run on rehearsal day.</p>
+  <div class="testgrid" id="testgrid"></div>
+
+  <div class="guard">
+    <div class="gcard"><div class="gt">Never: workflow-moves opps</div><p>Cross-pipeline moves via workflow wipe opportunity custom fields. All migration is API-side.</p></div>
+    <div class="gcard"><div class="gt">Never: delete before empty</div><p>Deleting a GHL pipeline deletes its opportunities. Archive only after count = 0.</p></div>
+    <div class="gcard"><div class="gt">Never: delete engine tags</div><p>The dormant engine tag surface stays frozen — never renamed or deleted — so it can re-attach later.</p></div>
+    <div class="gcard"><div class="gt">Never: write without a dry-run</div><p>Every mutating script runs read-only first and emits a reviewable diff. No exceptions.</p></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div>Built from a live read-only crawl of the MWC GoHighLevel production location.</div>
+  <div class="mono">135 workflows · 18 pipelines · 305 tags · 26 forms · 135 contact fields · 6,775 opportunities · 3 calendars</div>
+  <div class="disc">Scope: published assets only. Counts reflect the API at crawl time (2026-06-12) and drift daily. The A&amp;D win-rate finding and the <code style="font-family:var(--mono)">05. Clinic Appt Outcome</code> node config were verified directly in the GHL builder; remaining workflows are mapped at the name/trigger level.</div>
+</div></footer>
+
+<script>
+const DATA = {
+  deltas:[
+    {k:"Workflows",from:"135",to:"16",cut:"−88%"},
+    {k:"Pipelines",from:"18",to:"3",cut:"−83%"},
+    {k:"Tags",from:"305",to:"~120",cut:"−61%"},
+    {k:"Forms",from:"26",to:"~9",cut:"−65%"},
+    {k:"Revenue fields",from:"0",to:"14",cut:"opp-level"}
+  ],
+  bars:[
+    {name:"07. A & D",val:939,bad:true,tag:"auto-Won"},
+    {name:"03. Richmond",val:318},
+    {name:"01. Sales Production",val:451},
+    {name:"02. Newport News",val:110},
+    {name:"04. Virginia Beach",val:1},
+    {name:"05. Virtual",val:0}
+  ],
+  now:[
+    {n:"135",d:"<b>workflows</b> — 38 published, 97 draft graveyard. Five location-form copies that have diverged (01A is a 3-node stub; 01B is a 40-node tree)."},
+    {n:"18",d:"<b>pipelines</b>, 113 stages — location clones, an A&D pipeline auto-marking Won, a 17-stage mega-pipeline, plus 733 opps parked in a 1-stage \"Non Booked\"."},
+    {n:"305",d:"<b>tags</b> — mixed conventions: 236 underscore, 54 hyphen, 19 with spaces, 28 colon-prefixed. Many duplicate what should be fields."},
+    {n:"26",d:"<b>forms</b> — ~8 near-duplicate consultation/lead forms plus explicit <i>vendor-test</i> forms still live."},
+    {n:"135",d:"<b>custom fields — all contact-level.</b> Zero opportunity fields, so revenue can't attach to a deal."},
+    {n:"6,775",d:"<b>opportunities</b> — 57–99% of \"won\" carry $0; revenue recognition effectively broken."}
+  ],
+  next:[
+    {n:"16",d:"<b>workflows</b>, zero drafts — one owner per lifecycle event. 05 is the <i>only</i> flow that sets Sale Outcome."},
+    {n:"3",d:"<b>pipelines</b> — Sales (Lead→Close), Retention/Renewals, Referrals. No-show/cancel/A&D become statuses + lost-reasons."},
+    {n:"~120",d:"<b>tags</b> under a namespaced snake_case registry: <span class='mono'>source_* location_* funnel_* status_* objection_*</span>."},
+    {n:"~9",d:"<b>forms</b> — one lead-capture (location as a field), one qualification, one intake v2, plus the functional rest. Test forms retired."},
+    {n:"14",d:"<b>opportunity-level fields</b> — Product/Price/Term ×3, Total Program Amount → monetaryValue. Won requires value &gt; 0."},
+    {n:"6,775",d:"<b>opportunities backfilled</b> via API — A&D \"wins\" split into real sales vs $0 no-sales by evidence."}
+  ],
+  oldpipes:[
+    {t:"01. MWC Sales Production",kill:1},{t:"02. Newport News",kill:1},{t:"03. Richmond",kill:1},
+    {t:"04. Virginia Beach",kill:1},{t:"05. Virtual",kill:1},{t:"06. Renewals",kill:1},
+    {t:"07. A & D",kill:1},{t:"MWC Lead Pipeline (17 stages)",kill:1},{t:"Lost / Dead",kill:1},
+    {t:"No Show / Cancel",kill:1},{t:"Non Booked (733 opps)",kill:1},{t:"z Call Disposition",kill:1},
+    {t:"Instagram DM",kill:1},{t:"JJ Funnel",kill:1},{t:"Ambassador Referrals",kill:0},
+    {t:"PCC Referrals",kill:0},{t:"Referral Rewards",kill:0},{t:"Retention Pipeline",kill:0}
+  ],
+  newpipes:[
+    {t:"Sales — Lead to Close",stages:["New Lead","Engaged","Booked","Confirmed","Showed","Won"],exits:["No-Show","Cancelled","No-Sale (lost)","MUT","Disqualified"]},
+    {t:"Retention & Renewals",stages:["Onboarding","Active","Renewal Due","Renewed"],exits:["Churned"]},
+    {t:"Referrals (Ambassador + PCC)",stages:["Submitted","Qualified","Booked","Showed","Rewarded"],exits:["Invalid"]}
+  ],
+  engtags:["chatbot_lead","src:bf-web","sniper_unconfirmed","sniper_failed_no_response","funnel_entry_*","concern_trt","concern_ed","appt_confirmed","patient/sold"],
+  tests:[
+    {n:"Lead capture",d:"Form submit → contact created, <code>location_*</code> + <code>source_*</code> set, opp lands in Sales · New Lead",m:"auto"},
+    {n:"Booking",d:"Appointment booked → opp advances to Booked, confirmation cascade enrolls (T-24h/T-4h/T-1h)",m:"auto"},
+    {n:"Won outcome",d:"Outcome = Sold → opp Won, <code>monetaryValue = Total Program Amount &gt; 0</code> asserted, post-visit Won flow enrolls",m:"auto"},
+    {n:"No-sale outcome",d:"Outcome = A&D → opp <b>Lost + lostReason</b> (never Won), objection nurture enrolls — the regression test for the 939",m:"auto"},
+    {n:"No-show / cancel",d:"Status change → correct exit status (not a pipeline move), recovery sequence enrolls",m:"auto"},
+    {n:"Revenue reconciliation",d:"Σ won monetaryValue before backfill = after; every changed opp diffed against the approved CSV",m:"auto"},
+    {n:"Idempotency",d:"Backfill script run twice → second run reports 0 changes",m:"auto"},
+    {n:"STOP / DND",d:"Reply STOP → DND tag set → all workflow sends halt (TCPA)",m:"auto"},
+    {n:"Bot creates lead",d:"Deferred — engine not live. Re-test if the integration is ever switched on",m:"deferred"},
+    {n:"Bot books appointment",d:"Deferred — engine not live. Re-test if the integration is ever switched on",m:"deferred"},
+    {n:"CAPI / Google Ads",d:"Booked-call conversion event reaches Meta/Google with correct click ID",m:"semi"},
+    {n:"Canary watch",d:"48h: execution-log error rate, won-with-$0 = 0, opp stage-flow sanity on test cohort",m:"auto"}
+  ],
+  wf:[
+   {n:"01",full:"01. Lead Capture & Attribution",trig:"Form submit / inbound lead",
+    srcs:[["01A. Home Form and Source with Click ID","merge"],["01B. Richmond Form and Source with Click ID","merge"],["01C. VA Beach Form and Source with Click ID","merge"],["01D. NPN Form and Source with Click ID","merge"],["01E. Consultation Form and Source with Click ID","merge"],["Form Submission — Internal Notification","merge"]],
+    clicks:["Workflows list → <b>Create Workflow → Start from Scratch</b>; rename <code>01. Lead Capture & Attribution</code>.","Trigger <b>Form Submitted</b> — add every surviving lead form as one trigger with OR filters (copy filters from the 01A–01E sources in a 2nd tab).","Action <b>Create/Update Contact</b>; map UTM + Click ID fields from the form payload (copy the Click ID step from 01A verbatim).","Action <b>Add Tag</b> <code>source_{utm_source}</code> + <code>location_{location}</code> — reuse the engine's existing <code>funnel_entry_*</code> tag names, don't recreate.","If/Else on <code>location</code> → owner / round-robin per center (the 5 location copies collapse into these branches).","Action <b>Create Opportunity</b> → Sales — Lead to Close · New Lead. Save as Draft."],
+    msgs:[]},
+   {n:"02",full:"02. Non-Booked Recovery",trig:"Lead created, no appointment within 1h",
+    srcs:[["02. NON BOOKED NEWLEADS","merge"]],
+    clicks:["Create Workflow → rename <code>02. Non-Booked Recovery</code>.","Trigger: opportunity in <b>New Lead</b> with no appointment.","Wait 1h → If/Else <b>appointment exists</b> → remove from workflow.","SMS 1 → wait 4h → SMS 2 → wait 1d → Email → wait 2d → final SMS (copy bodies below).","Goal: <b>Appointment Booked</b> → remove from workflow."],
+    msgs:[
+      {ch:"sms",t:"T+1h",b:"Hi {{contact.first_name}}, it's Men's Wellness. You started booking a consultation but didn't finish. Grab a time here: bookmwc.com — Men's Wellness, 866-344-4955"},
+      {ch:"sms",t:"T+4h",b:"{{contact.first_name}}, still want to get scheduled? Same-week times are open at your nearest center: bookmwc.com — Men's Wellness, 866-344-4955"},
+      {ch:"eml",t:"T+1d",s:"Your consultation isn't booked yet",b:"Hi {{contact.first_name}},\n\nYou're one step away. Pick a time that works and we'll take care of the rest.\n\nbookmwc.com\n\nMen's Wellness, 866-344-4955"},
+      {ch:"sms",t:"T+3d",b:"Last note from us, {{contact.first_name}} — your nearest center still has openings this week: bookmwc.com — Men's Wellness, 866-344-4955"}
+    ]},
+   {n:"03",full:"03. Appointment Reminders",trig:"Appointment booked (all 3 calendars)",
+    srcs:[["03. Appointment Booked","merge"],["3a. Auto Confirm","retire"],["03b. Unconfirmed Appointment – Confirmation Required","retire"],["03c. Unconfirmed Reply Handler","retire"],["03d. Update Appointment Status","retire"]],
+    clicks:["Create Workflow → rename <code>03. Appointment Reminders</code>.","Trigger <b>Appointment Booked</b> — calendars now auto-confirm, so NO confirmation chase (retire 03b/03c/03d).","If/Else <b>active appointment already exists</b> → exit (absorbs Block Duplicate Appointment).","Reminder cascade off appointment time: <code>T-24h</code> / <code>T-4h</code> / <code>T-1h</code> SMS.","Remove all 'please confirm' copy — appointments arrive Confirmed."],
+    msgs:[
+      {ch:"sms",t:"T-24h",b:"Hi {{contact.first_name}}, reminder of your Men's Wellness visit tomorrow at {{appointment.time}}, {{appointment.location}}. Reply if you need to reschedule. Men's Wellness, 866-344-4955"},
+      {ch:"sms",t:"T-4h",b:"See you today at {{appointment.time}}, {{contact.first_name}}. {{appointment.location}}. Men's Wellness, 866-344-4955"},
+      {ch:"sms",t:"T-1h",b:"Your visit is in about an hour, {{contact.first_name}}. We're at {{appointment.address}}. Men's Wellness, 866-344-4955"}
+    ]},
+   {n:"04",full:"04. Medical Intake Chase",trig:"Appointment booked · stops on intake submit",
+    srcs:[["04a. Intake Form Response","merge"]],
+    clicks:["Create Workflow → rename <code>04. Medical Intake Chase</code>.","Trigger <b>Appointment Booked</b>.","Workflow Settings → <b>Removal: Form Submitted = Medical Intake</b> so completers stop being chased.","Add <b>DND/STOP check</b> before every send.","SMS now → wait 1d → SMS → wait 2d → Email → morning-of SMS (all link <code>bookmwc.com/intake</code>)."],
+    msgs:[
+      {ch:"sms",t:"On booking",b:"Hi {{contact.first_name}}, thanks for booking with Men's Wellness. Please complete your medical intake before your visit so we can prepare: bookmwc.com/intake — Men's Wellness, 866-344-4955"},
+      {ch:"sms",t:"T+1d",b:"{{contact.first_name}}, your intake isn't finished yet. It takes about 5 minutes and helps your provider get ready: bookmwc.com/intake — Men's Wellness, 866-344-4955"},
+      {ch:"eml",t:"T+2d",s:"Finish your medical intake before your visit",b:"Hi {{contact.first_name}},\n\nYour provider prepares from your intake answers, so please complete it before you arrive. It takes about 5 minutes.\n\nbookmwc.com/intake\n\nMen's Wellness, 866-344-4955"},
+      {ch:"sms",t:"Morning of",b:"See you today, {{contact.first_name}}. Please finish your intake before you arrive: bookmwc.com/intake — Men's Wellness, 866-344-4955"}
+    ]},
+   {n:"05",full:"05. Appointment Outcome Router",trig:"Outcome reported (showed / no-show / cancel)",
+    srcs:[["05. Clinic Appt Outcome","keep"]],
+    clicks:["Open <code>05. Clinic Appt Outcome</code> (kept, not rebuilt) → edit on the canvas.","<b>DELETE the Create-Opportunity action 'A&D pipeline: Closed, status: WON'</b> — this is the defect.","Add <b>Set Opportunity Field · Sale Outcome</b> (Sold / No-Sale / MUT) — the ONLY workflow that sets it.","Sold → opp <b>Won</b>, <code>monetaryValue = Total Program Amount</code> (must be &gt; 0).","No-Sale → opp <b>Lost</b> + lostReason → route to 07.","Showed → route to 06."],
+    msgs:[]},
+   {n:"06",full:"06. Post-Visit Won — Onboarding & Review",trig:"Sale Outcome = Sold",
+    srcs:[["07. POST-VISIT - SHOWED Opportunities and For Review/Referral","merge"]],
+    clicks:["Create Workflow → rename <code>06. Post-Visit Won — Onboarding & Review</code>.","Trigger: opportunity <b>Won</b> (handed off from 05).","Onboarding SMS + Email; enroll in Retention pipeline · Onboarding.","Wait 2d → review request; if positive → referral ask.","Tag <code>patient/sold</code> (engine-protected — reuse, don't recreate)."],
+    msgs:[
+      {ch:"sms",t:"Day 0",b:"Welcome to Men's Wellness, {{contact.first_name}}! Your care team is set. Anything you need before you start, just reply. Men's Wellness, 866-344-4955"},
+      {ch:"eml",t:"Day 0",s:"Welcome to Men's Wellness",b:"Hi {{contact.first_name}},\n\nWelcome aboard. Here's what to expect next and how to reach your care team.\n\nMen's Wellness, 866-344-4955"},
+      {ch:"sms",t:"Day 2",b:"{{contact.first_name}}, how was your experience with Men's Wellness? A quick rating helps us a lot: {{review_link}} — Men's Wellness, 866-344-4955"}
+    ]},
+   {n:"07",full:"07. Post-Visit No-Sale Nurture",trig:"Sale Outcome = No-Sale (lostReason)",
+    srcs:[["No published source — net-new build (objection drafts excluded)","newb"]],
+    clicks:["Create Workflow → rename <code>07. Post-Visit No-Sale Nurture</code>.","Trigger: opportunity <b>Lost</b> with a lostReason (from 05).","Single <b>If/Else on lostReason</b> — replaces 10 near-identical objection workflows.","Per-branch nurture cadence (cost / fear / partner / timing / decision).","Goal: re-books → exit to Sales pipeline."],
+    msgs:[
+      {ch:"sms",t:"Cost",b:"{{contact.first_name}}, we hear you on cost. There are flexible options most members don't realize — want me to walk you through them? Men's Wellness, 866-344-4955"},
+      {ch:"sms",t:"Timing",b:"No rush, {{contact.first_name}}. When you're ready to revisit your plan, we're here. Men's Wellness, 866-344-4955"},
+      {ch:"sms",t:"Partner",b:"{{contact.first_name}}, happy to share info you can review with your partner — just reply and I'll send it. Men's Wellness, 866-344-4955"}
+    ]},
+   {n:"08",full:"08. No-Show & Cancellation Recovery",trig:"Appointment no-show or cancelled",
+    srcs:[["Cancelled Appointments","merge"],["Nurture: Missed Clinic Appointment","merge"]],
+    clicks:["Create Workflow → rename <code>08. No-Show & Cancellation Recovery</code>.","Trigger: appointment status = <b>No-Show OR Cancelled</b>.","Location via field branch — replaces the 6 per-location copies.","Same-day rebook SMS → next-day SMS → Email.","Goal: rebooked → exit."],
+    msgs:[
+      {ch:"sms",t:"No-show +1h",b:"{{contact.first_name}}, we missed you today at Men's Wellness. Let's get you rescheduled — pick a new time: bookmwc.com — Men's Wellness, 866-344-4955"},
+      {ch:"sms",t:"Cancel +0",b:"No problem, {{contact.first_name}}. When you're ready, rebooking takes a minute: bookmwc.com — Men's Wellness, 866-344-4955"},
+      {ch:"eml",t:"+1d",s:"Let's get you rescheduled",b:"Hi {{contact.first_name}},\n\nWe'd still love to see you. Here's the link to grab a new time at your nearest center.\n\nbookmwc.com\n\nMen's Wellness, 866-344-4955"}
+    ]},
+   {n:"09",full:"09. Long-Term Nurture",trig:"Tag status_nurture_longterm",
+    srcs:[["No published source — net-new build (nurture drafts excluded)","newb"]],
+    clicks:["Create Workflow → rename <code>09. Long-Term Nurture</code>.","Trigger: tag <code>status_nurture_longterm</code> added.","Single <b>If/Else on temperature tag</b> (hot / warm / cold) — replaces 6 copies.","Drip cadence per temperature; goal: books → exit."],
+    msgs:[
+      {ch:"sms",t:"Hot",b:"{{contact.first_name}}, ready when you are — your nearest Men's Wellness center has openings this week: bookmwc.com — 866-344-4955"},
+      {ch:"eml",t:"Warm",s:"Still thinking it over?",b:"Hi {{contact.first_name}},\n\nWhenever the timing's right, we're here to help. Here's what membership looks like.\n\nMen's Wellness, 866-344-4955"}
+    ]},
+   {n:"10",full:"10. Feedback Survey",trig:"Post-visit",
+    srcs:[["After Appointment Feedback Survey Send","merge"]],
+    clicks:["Create Workflow → rename <code>10. Feedback Survey</code>.","Trigger: post-visit (showed).","Send survey SMS; on <b>Survey Submitted</b>, branch on score.","Low score → internal alert; high score → review ask."],
+    msgs:[
+      {ch:"sms",t:"Post-visit",b:"Thanks for visiting Men's Wellness, {{contact.first_name}}. One quick question on how we did: {{survey_link}} — Men's Wellness, 866-344-4955"}
+    ]},
+   {n:"11",full:"11. Compliance & Errors",trig:"STOP / DND / bounce / MUT",
+    srcs:[["2. DNC/wrong number/SMS & Call Errors","merge"],["3. Email Bounce","merge"],["08. MUT (Medically Untreatable)","merge"]],
+    clicks:["Create Workflow → rename <code>11. Compliance & Errors</code>.","Triggers: STOP reply, DND active, email bounce, tag <code>system_mut</code>.","Each path: set DND/suppression → remove from all active workflows.","Single STOP/DND authority for the account (TCPA); engine integration dormant."],
+    msgs:[
+      {ch:"sms",t:"STOP",b:"You're unsubscribed and won't get further texts from Men's Wellness. Reply START to resume. (Auto-handled — no marketing copy.)"}
+    ]},
+   {n:"12",full:"12. Call Disposition Handler",trig:"Softphone call disposition",
+    srcs:[["4a. Softphone Call Disposition – Workflow","merge"],["4b. Disposition – Workflow (active)","merge"],["Contact Center - Tag Assign","merge"]],
+    clicks:["Create Workflow → rename <code>12. Call Disposition Handler</code>.","Trigger: call disposition set on contact.","Map disposition → tag / stage. <b>No opportunities created</b> — disposition is call data.","'Requested appointment' → route to booking path."],
+    msgs:[]},
+   {n:"13",full:"13. Ad-Platform Conversions",trig:"Stage → Booked / Won",
+    srcs:[["CAPI - Send Booked Call Data Back to Meta","merge"],["Facebook CAPI - Send Booked Call Data Back to Meta","merge"],["GHL Form Submitted - Google Ads","merge"],["GHL Phone Call - Google Ads","merge"],["GHL Website Chat - Google Ads","merge"]],
+    clicks:["Create Workflow → rename <code>13. Ad-Platform Conversions</code>.","Trigger: opportunity reaches <b>Booked</b> (and Won).","Fire <b>Meta CAPI</b> conversion with click ID + event value.","Fire <b>Google Ads</b> conversion (form / call / chat).","One conversions workflow replaces five."],
+    msgs:[]},
+   {n:"14",full:"14. Ambassador Program",trig:"Ambassador signup",
+    srcs:[["Ambassador Onboarding (Slug + Welcome)","merge"],["Ambassador Patient Routing","merge"],["Ambassador Reward Notification","merge"],["Ambassador — In-Center Signup","merge"]],
+    clicks:["Create Workflow → rename <code>14. Ambassador Program</code>.","Trigger: ambassador application / in-center signup.","Onboarding + slug assignment; route referred members to Sales (source=referral).","Reward notification on qualified referral."],
+    msgs:[
+      {ch:"sms",t:"Welcome",b:"Welcome to the Men's Wellness Ambassador program, {{contact.first_name}}! Your referral link: {{ambassador_link}} — 866-344-4955"}
+    ]},
+   {n:"15",full:"15. PCC Referral Routing",trig:"PCC referral lead",
+    srcs:[["PCC Referral Lead Routing","keep"]],
+    clicks:["Kept as-is — standalone referral pathway, no rebuild.","Confirm referred member enters Sales pipeline with source=PCC."],
+    msgs:[]},
+   {n:"16",full:"16. Comms Edge",trig:"IVR / chat / inbound",
+    srcs:[["1. IVR - simultaneous","merge"],["Chat Widget Out of Office Hours","merge"]],
+    clicks:["Create Workflow → rename <code>16. Comms Edge</code>.","Triggers: inbound call (IVR), missed call, chat OOO, ManyChat/BF webhook.","Missed-call text-back within 15s.","Chat OOO auto-reply; route inbound to the engine.","<b>Touches the frozen engine tag surface — reuse tags, never recreate.</b>"],
+    msgs:[
+      {ch:"sms",t:"Missed call",b:"Sorry we missed your call! This is Men's Wellness — how can we help? Reply here and we'll get right back to you. 866-344-4955"}
+    ]}
+  ],
+  cmp:{
+    cols:["","Migration map (v2)","This audit","Human sprint proposal"],
+    targets:[
+      ["Workflows","135 → 18","135 → 16","\"clean published set\" (no number)"],
+      ["Pipelines","14 → 5","18 → 3","standardize stages, no count"],
+      ["Tags","305 → rule-based","305 → ~120 registry","canonical taxonomy"],
+      ["Forms","26 → 24","26 → ~9","rebuild core forms"],
+      ["Object count accuracy","misses 4 pipelines","matches live API","says 24 published (API: 38)"]
+    ],
+    method:[
+      ["Approach","redesign doc","fix in place + backfill","staging rebuild → migrate"],
+      ["Live AI engine","not addressed","constraint, bot-dep flag","core insight ✓"],
+      ["Migration risk","manual moves","API backfill, in-place","cross-subaccount move ⚠"],
+      ["Compliance / DND","not covered","adopt from proposal","TCPA gap analysis ✓"],
+      ["Timeline","none","phased, in-place","4–5 wks @ 4h/day"]
+    ],
+    gaps:[
+      ["A&D auto-Won fix","mentions symptom","root-caused at node","not mentioned"],
+      ["Contact→opp fields","yes","yes","not mentioned"],
+      ["~6,772 revenue backfill","yes","yes, evidence-split","not mentioned"],
+      ["Win-rate restatement","implied","explicit, +comms","not mentioned"],
+      ["Show-rate / messaging","light","light","strong ✓"]
+    ],
+    badges:{ // per row index per col (2/3/4): win/gap/mid
+      targets:[[null,null,null],[null,null,null],[null,null,null],[null,"gap",null],["gap","win","gap"]],
+      method:[[null,null,null],["gap","mid","win"],["mid","win","gap"],["gap","mid","win"],["gap","win","mid"]],
+      gaps:[["mid","win","gap"],["win","win","gap"],["win","win","gap"],["mid","win","gap"],["gap","gap","win"]]
+    }
+  }
+};
+
+// deltas
+document.getElementById('deltas').innerHTML = DATA.deltas.map(d=>`
+  <div class="delta"><div class="cut">${d.cut}</div>
+    <div class="k">${d.k}</div>
+    <div class="row"><span class="from">${d.from}</span><span class="arr">→</span><span class="to">${d.to}</span></div>
+  </div>`).join('');
+
+// bars
+const max = Math.max(...DATA.bars.map(b=>b.val));
+document.getElementById('bars').innerHTML = DATA.bars.map(b=>{
+  const w = b.val===0?2:Math.max(6,(b.val/max)*100);
+  return `<div class="bar ${b.bad?'bad':''}">
+    <div class="name">${b.name}</div>
+    <div class="track"><div class="fill ${b.bad?'':'norm'}" style="width:0" data-w="${w}"></div></div>
+    <div><span class="val">${b.val} won</span>${b.tag?`<span class="tag poison">${b.tag}</span>`:''}</div>
+  </div>`;
+}).join('');
+
+// before/after
+const li = (x,cls)=>`<li><span class="n">${x.n}</span><span class="d">${x.d}</span></li>`;
+document.getElementById('nowlist').innerHTML = DATA.now.map(x=>li(x)).join('');
+document.getElementById('nextlist').innerHTML = DATA.next.map(x=>li(x)).join('');
+
+// pipelines
+document.getElementById('oldpipes').innerHTML = DATA.oldpipes.map(p=>
+  `<span class="chip ${p.kill?'kill':''}">${p.t}</span>`).join('');
+document.getElementById('newpipes').innerHTML = DATA.newpipes.map(p=>`
+  <div class="pcard"><div class="t">▸ ${p.t}</div>
+    <div class="stages">${p.stages.map(s=>`<span class="st">${s}</span>`).join('')}
+      ${p.exits.map(s=>`<span class="st exit">⤳ ${s}</span>`).join('')}</div>
+  </div>`).join('');
+
+// engine tags
+document.getElementById('engtags').innerHTML = DATA.engtags.map(t=>`<span class="pt">${t}</span>`).join('');
+
+// workflow build book (accordion)
+const stLabel={retire:'retire',merge:'merge',keep:'keep',newb:'new'};
+document.getElementById('wfacc').innerHTML = DATA.wf.map(w=>{
+  const nSrc=w.srcs.length, nMsg=w.msgs.length;
+  const srcHtml=w.srcs.map(s=>`<li><b>${s[0]}</b><span class="st ${s[1]}">${stLabel[s[1]]||s[1]}</span></li>`).join('');
+  const clickHtml=w.clicks.map(c=>`<li>${c}</li>`).join('');
+  const msgHtml = nMsg? w.msgs.map(m=>`
+      <div class="msg">
+        <div class="mh"><span class="ch ${m.ch}">${m.ch==='sms'?'SMS':'EMAIL'}</span><span class="mt">${m.t}</span></div>
+        ${m.s?`<div class="ms">${m.s}</div>`:''}
+        <div class="mb">${m.b.replace(/\{\{[^}]+\}\}/g,x=>`<span class="v">${x}</span>`)}</div>
+      </div>`).join('') : `<div class="nomsg">No member-facing messages — this workflow only sets tags, fields, opportunities, or conversions.</div>`;
+  return `<details>
+    <summary>
+      <span class="wnum">${w.n}</span>
+      <span class="wfull">${w.full}</span>
+      <span class="wsub">${nSrc} source${nSrc>1?'s':''} · ${nMsg} msg${nMsg!==1?'s':''}</span>
+      <span class="chev">▸</span>
+    </summary>
+    <div class="wbody">
+      <div class="wblock srcs"><h6>Combines / replaces — trigger: ${w.trig}</h6><ul class="srclist">${srcHtml}</ul></div>
+      <div class="wblock bld"><h6>Browser click-through build</h6><ol class="clicks">${clickHtml}</ol></div>
+      <div class="wblock msgs"><h6>Messages (${nMsg})</h6><div class="msggrid">${msgHtml}</div></div>
+    </div>
+  </details>`;
+}).join('');
+
+// machine view — render the whole-system flow as SVG (light theme)
+(function(){
+  const KIND={
+    util:   {bd:'#8392ab', ac:'#52607a'},
+    capture:{bd:'#1d5bd8', ac:'#1d5bd8'},
+    booking:{bd:'#0b7285', ac:'#0b7285'},
+    visit:  {bd:'#6633cc', ac:'#6633cc'},
+    won:    {bd:'#0e8a4d', ac:'#0e8a4d'},
+    nosale: {bd:'#d72638', ac:'#b3344a'},
+    nurture:{bd:'#b45309', ac:'#b45309'},
+    data:   {bd:'#0b7285', ac:'#0b7285'}
+  };
+  const N={
+    SRC:[40,250,176,58,'Lead Sources','util','Ad · Web · Referral · Inbound'],
+    W16:[40,150,176,52,'16. Comms Edge','util','IVR · chat · missed-call'],
+    W12:[40,360,176,52,'12. Call Disposition','util','call → tag / stage'],
+    W14:[40,470,176,52,'14·15 Referral Intake','util','Ambassador · PCC'],
+    W01:[300,248,182,60,'01. Lead Capture','capture','+ source attribution'],
+    W02:[300,390,182,56,'02. Non-Booked Recovery','nurture','no booking in 1h'],
+    W03:[564,168,182,56,'03. Appointment Reminders','booking','T-24h / T-4h / T-1h'],
+    W04:[564,300,182,56,'04. Medical Intake Chase','booking','→ bookmwc.com/intake'],
+    W05:[828,246,182,64,'05. Outcome Router','visit','sets Sale Outcome'],
+    W13:[828,430,182,52,'13. Ad Conversions','booking','Meta CAPI · Google Ads'],
+    W06:[1092,120,182,56,'06. Post-Visit Won','won','onboarding · review'],
+    W10:[1092,250,182,52,'10. Feedback Survey','visit','score → route'],
+    W07:[1092,372,182,56,'07. No-Sale Nurture','nosale','branch on lostReason'],
+    W08:[1092,500,182,56,'08. No-Show / Cancel','nosale','rebook recovery'],
+    RET:[1360,120,182,56,'Retention pipeline','data','onboarding → renewed'],
+    W09:[1360,430,182,56,'09. Long-Term Nurture','nurture','hot / warm / cold']
+  };
+  const cx=n=>N[n][0]+N[n][2]/2, cy=n=>N[n][1]+N[n][3]/2;
+  function anchor(n,side){const[x,y,w,h]=N[n];return side==='r'?[x+w,y+h/2]:side==='l'?[x,y+h/2]:side==='t'?[x+w/2,y]:[x+w/2,y+h];}
+  function sides(a,b){const dx=cx(b)-cx(a),dy=cy(b)-cy(a);return Math.abs(dx)>=Math.abs(dy)?[dx>0?'r':'l',dx>0?'l':'r']:[dy>0?'b':'t',dy>0?'t':'b'];}
+  const E=[
+    ['W16','SRC','flow','',0],
+    ['SRC','W01','flow','',0],
+    ['W14','W01','flow','referral',0,'r','l'],
+    ['W12','W02','flow','follow-up',0,'r','l'],
+    ['W01','W02','loop','no booking',0,'b','t'],
+    ['W02','W03','flow','books',0,'r','l'],
+    ['W01','W03','flow','booked',0,'r','l'],
+    ['W01','W04','flow','',0,'r','l'],
+    ['W03','W05','flow','',0,'r','l'],
+    ['W04','W05','flow','',0,'r','l'],
+    ['W05','W06','won','Sold',0,'r','l'],
+    ['W05','W10','flow','showed',0,'r','l'],
+    ['W05','W07','nosale','No-Sale',0,'r','l'],
+    ['W05','W08','loop','No-Show / Cancel',0,'b','l'],
+    ['W06','RET','flow','',0,'r','l'],
+    ['W07','W09','flow','',0,'r','l'],
+    ['W08','W09','flow','',0,'r','l'],
+    ['W08','W03','loop','rebook',1,'t','b'],
+    ['W03','W13','engine','',1,'b','t'],
+    ['W06','W13','engine','won',1,'l','r']
+  ];
+  const ENGW=[['W01','t'],['W16','t'],['W05','t']];
+  const ECOL={flow:'#1d5bd8',won:'#0e8a4d',nosale:'#d72638',loop:'#b45309',engine:'#0b7285'};
+
+  const S=[];
+  S.push(`<defs>`);
+  for(const k in ECOL) S.push(`<marker id="m-${k}" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="${ECOL[k]}"/></marker>`);
+  S.push(`<pattern id="grid" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#e7ebf2"/></pattern>`);
+  S.push(`</defs>`);
+  S.push(`<rect x="0" y="0" width="1700" height="1000" fill="url(#grid)"/>`);
+
+  // ENGINE band — navy, matching the site's engine callout
+  S.push(`<rect x="40" y="22" width="1620" height="64" rx="12" fill="#0c1b33" stroke="#1c3a52"/>`);
+  S.push(`<circle cx="74" cy="54" r="11" fill="#10243f" stroke="#5fd4e3"/><text x="74" y="58" text-anchor="middle" font-size="13" fill="#5fd4e3">AI</text>`);
+  S.push(`<text x="98" y="48" font-size="15" font-weight="700" fill="#7fe3f0">AI ENGINE — INSTALLED, NOT LIVE</text>`);
+  S.push(`<text x="98" y="68" font-size="12" fill="#9fc6d4" font-family="monospace">BotFanatics chat · Sniper reactivation — dormant; tag surface frozen for future re-attachment</text>`);
+  ['chatbot_lead','src:bf-web','sniper_unconfirmed','funnel_entry_*','appt_confirmed'].forEach((t,i)=>{
+    S.push(`<rect x="${950+i*140}" y="40" width="130" height="28" rx="6" fill="rgba(95,212,227,.08)" stroke="#2a5a74"/><text x="${950+i*140+65}" y="58" text-anchor="middle" font-size="10.5" fill="#7fe3f0" font-family="monospace">${t}</text>`);
+  });
+
+  function path(a,b,fs,ts){const p0=anchor(a,fs),p1=anchor(b,ts);let c0,c1;const off=Math.max(40,Math.abs((fs==='r'||fs==='l'?p1[0]-p0[0]:p1[1]-p0[1]))*0.45);
+    if(fs==='r'||fs==='l'){const d=fs==='r'?1:-1;c0=[p0[0]+d*off,p0[1]];} else {const d=fs==='b'?1:-1;c0=[p0[0],p0[1]+d*off];}
+    if(ts==='r'||ts==='l'){const d=ts==='r'?1:-1;c1=[p1[0]+d*off,p1[1]];} else {const d=ts==='b'?1:-1;c1=[p1[0],p1[1]+d*off];}
+    return `M${p0[0]},${p0[1]} C${c0[0]},${c0[1]} ${c1[0]},${c1[1]} ${p1[0]},${p1[1]}`;}
+  E.forEach(e=>{
+    const[a,b,k,lbl,dash,ff,ft]=e; let fs,ts;
+    if(ff&&ft){fs=ff;ts=ft;} else {[fs,ts]=sides(a,b);}
+    const col=ECOL[k]||'#1d5bd8'; const da=(dash||k==='engine'||k==='loop')?'stroke-dasharray="6 5"':'';
+    S.push(`<path d="${path(a,b,fs,ts)}" fill="none" stroke="${col}" stroke-width="2" ${da} marker-end="url(#m-${k})" opacity="0.9"/>`);
+    if(lbl){const p0=anchor(a,fs),p1=anchor(b,ts);const mx=(p0[0]+p1[0])/2,my=(p0[1]+p1[1])/2;
+      S.push(`<rect x="${mx-lbl.length*3.2-5}" y="${my-9}" width="${lbl.length*6.4+10}" height="16" rx="4" fill="#ffffff" stroke="${col}" stroke-opacity=".45"/><text x="${mx}" y="${my+3}" text-anchor="middle" font-size="10.5" fill="${col}" font-family="monospace" font-weight="600">${lbl}</text>`);}
+  });
+  ENGW.forEach(([n,s])=>{const p1=anchor(n,s);const p0=[p1[0],86];
+    S.push(`<path d="M${p0[0]},${p0[1]} C${p0[0]},${p0[1]+30} ${p1[0]},${p1[1]-30} ${p1[0]},${p1[1]}" fill="none" stroke="#0b7285" stroke-width="1.6" stroke-dasharray="4 5" marker-end="url(#m-engine)" opacity="0.65"/>`);});
+
+  for(const id in N){const[x,y,w,h,lbl,kind,sub]=N[id];const c=KIND[kind];
+    S.push(`<g>`);
+    S.push(`<rect x="${x+2}" y="${y+3}" width="${w}" height="${h}" rx="10" fill="#0e1726" opacity="0.06"/>`);
+    S.push(`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="10" fill="#ffffff" stroke="${c.bd}" stroke-width="1.6"/>`);
+    S.push(`<rect x="${x}" y="${y}" width="5" height="${h}" rx="2.5" fill="${c.bd}"/>`);
+    S.push(`<text x="${x+16}" y="${y+(sub?22:h/2+5)}" font-size="13.5" font-weight="700" fill="#0e1726">${lbl}</text>`);
+    if(sub) S.push(`<text x="${x+16}" y="${y+40}" font-size="11" fill="${c.ac}" font-family="monospace">${sub}</text>`);
+    S.push(`</g>`);
+  }
+
+  // PIPELINE SPINE band — light panel, navy header strip
+  S.push(`<rect x="40" y="616" width="1620" height="158" rx="12" fill="#fbfcfd" stroke="#dfe4ec"/>`);
+  S.push(`<path d="M52,616 h1596 a12,12 0 0 1 12,12 v22 h-1620 v-22 a12,12 0 0 1 12,-12 z" fill="#0c1b33"/>`);
+  S.push(`<text x="60" y="638" font-size="12" font-weight="700" fill="#dce6f5" font-family="monospace">SALES PIPELINE — LEAD TO CLOSE (single pipeline, written by 05)</text>`);
+  const stages=['New Lead','Engaged','Booked','Confirmed','Showed','Won'];
+  const sx=70, sw=232, sgap=20;
+  stages.forEach((s,i)=>{const x=sx+i*(sw+sgap);const won=i===5;
+    S.push(`<rect x="${x}" y="664" width="${sw}" height="40" rx="8" fill="${won?'#e9f7ef':'#ebf1fd'}" stroke="${won?'#0e8a4d':'#c3d4f5'}"/>`);
+    S.push(`<text x="${x+sw/2}" y="689" text-anchor="middle" font-size="13" font-weight="${won?800:600}" fill="${won?'#0e8a4d':'#1e2937'}">${s}</text>`);
+    if(i<5) S.push(`<text x="${x+sw+sgap/2}" y="689" text-anchor="middle" font-size="14" fill="#8392ab">›</text>`);
+  });
+  S.push(`<text x="60" y="734" font-size="11" fill="#52607a" font-family="monospace" font-weight="700">EXIT STATUSES (not stages):</text>`);
+  const exits=['No-Show','Cancelled','No-Sale → Lost + reason','MUT','Disqualified'];
+  exits.forEach((s,i)=>{const x=270+i*255;
+    S.push(`<rect x="${x}" y="722" width="240" height="26" rx="6" fill="#fdeef0" stroke="#f3c2c9"/><text x="${x+120}" y="739" text-anchor="middle" font-size="11" fill="#d72638" font-family="monospace" font-weight="600">${s}</text>`);
+  });
+  function guide(n, stageIdx){const p=anchor(n,'b');const tx=sx+stageIdx*(sw+sgap)+sw/2;
+    S.push(`<path d="M${p[0]},${p[1]} C${p[0]},${p[1]+40} ${tx},${616-40} ${tx},616" fill="none" stroke="#c9d2e0" stroke-width="1.2" stroke-dasharray="2 5"/>`);}
+  guide('W01',0); guide('W03',2); guide('W05',4); guide('W06',5);
+
+  // DATA band
+  S.push(`<rect x="40" y="790" width="1620" height="56" rx="10" fill="#e7f5f8" stroke="#b8dde5"/>`);
+  S.push(`<text x="60" y="814" font-size="12" font-weight="700" fill="#0b7285" font-family="monospace">OPPORTUNITY DATA (written by 05, opportunity-level)</text>`);
+  const fields=['Sale Outcome','Product ×3','Price ×3','Term ×3','Total Program Amount → monetaryValue','Location','Patient Advisor'];
+  let fxx=560;
+  fields.forEach(f=>{const w=f.length*6.6+18;S.push(`<rect x="${fxx}" y="800" width="${w}" height="26" rx="6" fill="#ffffff" stroke="#b8dde5"/><text x="${fxx+w/2}" y="817" text-anchor="middle" font-size="10.5" fill="#0b7285" font-family="monospace" font-weight="600">${f}</text>`);fxx+=w+10;});
+
+  // COMPLIANCE band
+  S.push(`<rect x="40" y="862" width="1620" height="46" rx="10" fill="#fdeef0" stroke="#f3c2c9" stroke-dasharray="7 5"/>`);
+  S.push(`<text x="60" y="882" font-size="12.5" font-weight="800" fill="#d72638">11. Compliance &amp; Errors</text>`);
+  S.push(`<text x="60" y="899" font-size="11.5" fill="#7c4a52" font-family="monospace">STOP · DND · email bounce · system_mut  →  removes the contact from every workflow above (mirrors the engine's own STOP→halt)</text>`);
+
+  document.getElementById('machinesvg').innerHTML=S.join('');
+})();
+// test matrix
+document.getElementById('testgrid').innerHTML =
+  `<div class="trow head"><div>Scenario</div><div>Assertion</div><div>Mode</div></div>`+
+  DATA.tests.map(t=>{
+    const cls = t.m==='auto'?'auto':'semi';
+    const label = t.m==='auto'?'✓ scripted':(t.m==='deferred'?'deferred':'semi-auto');
+    return `<div class="trow"><div class="tname">${t.n}</div><div class="tdesc">${t.d}</div><div class="tmode ${cls}">${label}</div></div>`;
+  }).join('');
+
+// plan comparison
+function renderCmp(k){
+  const c = DATA.cmp;
+  const badgeMap={win:['b-win','✓ best'],gap:['b-gap','✗ gap'],mid:['b-mid','~ ok']};
+  let html = `<div class="crow head"><div>${c.cols[0]||'Dimension'}</div><div>${c.cols[1]}</div><div>${c.cols[2]}</div><div>${c.cols[3]}</div></div>`;
+  c[k].forEach((row,ri)=>{
+    const b = c.badges[k][ri];
+    html += `<div class="crow">
+      <div class="rk">${row[0]}</div>
+      ${[1,2,3].map(ci=>{
+        const bd = b[ci-1]; const bdg = bd?`<span class="badge ${badgeMap[bd][0]}">${badgeMap[bd][1]}</span>`:'';
+        return `<div class="${ci===2?'col-mine':''}">${row[ci]}${bdg}</div>`;
+      }).join('')}
+    </div>`;
+  });
+  document.getElementById('cmp').innerHTML = html;
+}
+renderCmp('targets');
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+  t.classList.add('on'); renderCmp(t.dataset.k);
+}));
+
+// animate bars on view
+const io = new IntersectionObserver((es)=>{
+  es.forEach(e=>{ if(e.isIntersecting){
+    e.target.querySelectorAll('.fill').forEach(f=>{ f.style.width=f.dataset.w+'%'; });
+    io.unobserve(e.target);
+  }});
+},{threshold:.3});
+io.observe(document.getElementById('bars'));
+</script>
+</body>
+</html>

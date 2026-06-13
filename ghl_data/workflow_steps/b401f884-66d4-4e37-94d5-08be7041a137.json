@@ -1,0 +1,21 @@
+{
+  "id": "b401f884-66d4-4e37-94d5-08be7041a137",
+  "name": "01E. Consultation Form and Source with Click ID",
+  "folder": "01. WP Lead Capture",
+  "status": "published",
+  "version": 26,
+  "extracted_at": "2026-05-29T03:00:22Z",
+  "extraction_method": "backend_jwt",
+  "triggers": [],
+  "steps": [],
+  "messages_referenced": [],
+  "stats": {
+    "total_steps": 0,
+    "send_sms_count": 0,
+    "send_email_count": 0,
+    "wait_count": 0,
+    "if_else_count": 0,
+    "terminal_paths": 0
+  },
+  "notes": ""
+}

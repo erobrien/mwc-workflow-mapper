@@ -1,0 +1,21 @@
+{
+  "id": "ae22c901-8a23-42ae-8ca3-66fcd49c2820",
+  "name": "03B. Unconfirmed Appointment \u2013 Trigger link",
+  "folder": "03. Call Routing & Dispositions",
+  "status": "draft",
+  "version": 32,
+  "extracted_at": "2026-05-29T03:00:28Z",
+  "extraction_method": "backend_jwt",
+  "triggers": [],
+  "steps": [],
+  "messages_referenced": [],
+  "stats": {
+    "total_steps": 0,
+    "send_sms_count": 0,
+    "send_email_count": 0,
+    "wait_count": 0,
+    "if_else_count": 0,
+    "terminal_paths": 0
+  },
+  "notes": ""
+}

@@ -1,0 +1,135 @@
+draf  01. MWC Missed Call Text-Back latest
+draf  01. NON BOOKED NEWLEADS+MHWC  Website Page 01+MWC Funnel Page 1 — Lead Capture Form+JJNo Book Paid — 48 Hour Recovery
+draf  01. WP Lead Capture
+draf  02. Missed Call Text Back Force Stop (Mau)
+draf  02. Qualification Form
+draf  03. Round Robin Masterfile
+draf  03A. Unconfirmed Appointment
+draf  03B. Unconfirmed Appointment – Trigger link
+draf  03C. Appointment Booked+JJFunnel Page 4 — Booking Confirmation
+draf  04. Intake Form Response+JJMWC Funnel Page 5  Medical Intake (7-Step Survey)
+draf  04b. Typeform Intake Form Response
+draf  05. Clinic Appt Outcome
+draf  06A. POST-VISIT - SHOWED Opportunities and For Review/Referral
+draf  06B. MU
+draf  06C. Funnel Page 4 — No-Show Recovery
+draf  07. After Appointment Feedback Survey SMS
+draf  08. MWC Post Appointment Feedback Survey Submitted
+draf  09 - Referral Activation
+draf  1.0 MWC Funnel Page 1 — Lead Capture Form
+draf  1.1 MWC Funnel Page 5 — Medical Intake (7-Step Survey)
+draf  1.2 MHWC  Website Page 01  — Lead Capture Form
+draf  4b. Disposition – Workflow (inactive)
+draf  4b. Update Last Disposition
+draf  8AM Appt Reminder
+draf  A&D Cost | Tag added → objection_cost
+draf  A&D Fear | Tag added → objection_fear
+draf  A&D Partner | Tag added → objection_partner
+draf  A&D Timing | Tag added → objection_timing
+draf  Appointment Confirmation Request
+draf  BF - Chatbot Inbound
+draf  BF - Inbound SMS → AI Agent
+draf  Block Duplicate Appointment
+draf  Call Dispo
+draf  Cancelled Appointment - Follow Up
+draf  Clicked Calendar but Did Not Book
+draf  Clinic Appointment Outcome
+draf  Consultation Page
+draf  Copy - Long-Term Nurture — COLD
+draf  Copy - Long-Term Nurture — HOT
+draf  Copy - Long-Term Nurture — WARM
+draf  Customer Replied "Stop" → Remove all workflows
+draf  DND Active → Remove all workflows
+draf  Decision Support | Tag added → objection_decision
+draf  Dispositions Relevant Tag Add (Agent Selection After Consultation)
+draf  Facebook comments
+draf  Follow-ups for no-shows
+draf  Home Form and Source
+draf  IG comments
+draf  IVR RR
+draf  JJ A&D Cost | Tag added → objection_cost
+draf  JJ A&D Fear | Tag added → objection_fear
+draf  JJ A&D Partner | Tag added → objection_partner
+draf  JJ A&D Timing | Tag added → objection_timing
+draf  JJ Decision Support | Tag added → objection_decision
+draf  JJ Dispositions Relevant Tag Add (Agent Selection After Consultation)
+draf  Location Opportunity - Duplicate
+draf  Location-based Web Lead Form
+draf  Long-Term Nurture — COLD
+draf  Long-Term Nurture — HOT
+draf  Long-Term Nurture — WARM
+draf  MWC Funnel Page 2 — Qualification Survey
+draf  MWC Funnel Page 4 — Booking Confirmation
+draf  MWC Funnel Page 4 — No-Show Recovery
+draf  MWC Missed Call Text-Back
+draf  MWC Post Appointment Feedback Survey Submitted
+draf  ManyChat -> GHL Inbound Webhook
+draf  New Appointment to Confirmed Appointment
+draf  Newport News - Cancelled
+draf  Newport News - No Show
+draf  Newport News Location Form and Source
+draf  No Book Paid — 48 Hour Recovery
+draf  Patient Confirmation – Appointment
+draf  Referral Activation
+draf  Referral Qualification (Referrer)
+draf  Retention & Renewal → Follow Ups
+draf  Reviews - Negative (For Sales)
+draf  Reviews - Positive  (for CS)
+draf  Richmond  Location Form and Source
+draf  Richmond - Cancelled
+draf  Richmond - No Show
+draf  Round Robin
+draf  Sniper - Unconfirmed Reactivation
+draf  Tag Added "status_nurture_longterm" → Long Term Follow Up
+draf  Tag Added "system_mut" → Remove all Workflows
+draf  Virginia Beach - Cancelled
+draf  Virginia Beach - No Show
+draf  Virginia Beach Location Form and Source
+draf  z Contact Call Disposition – Workflow
+draf  z Post-visit A&D
+draf  z Post-visit messaging
+draf  z Post-visit review request
+draf  z Product Sold 2 and 3 are blank
+draf  z Referral tracking and rewards (Referral)
+draf  z SOLD LEADS
+draf  z STOP
+draf  zzx Double opt-in logic for SMS 1 (Not Needed)
+draf  zzx Store IP timestamp and source for consent (Not Needed)
+publ  01A. Home Form and Source with Click ID
+publ  01B. Richmond Form and Source with Click ID
+publ  01C. VA Beach Form and Source with Click ID
+publ  01D. NPN Form and Source with Click ID
+publ  01E. Consultation Form and Source with Click ID
+publ  02. NON BOOKED NEWLEADS
+publ  03. Appointment Booked
+publ  03b. Unconfirmed Appointment – Confirmation Required
+publ  03c. Unconfirmed Reply Handler
+publ  03d. Update Appointment Status
+publ  04a. Intake Form Response
+publ  05. Clinic Appt Outcome
+publ  06. Price Calculator
+publ  07. POST-VISIT - SHOWED Opportunities and For Review/Referral
+publ  08. MUT (Medically Untreatable)
+publ  1. IVR - simultaneous
+publ  2. DNC/wrong number/SMS & Call Errors
+publ  3. Email Bounce
+publ  3a. Auto Confirm
+publ  4a. Softphone Call Disposition – Workflow
+publ  4b. Disposition – Workflow (active)
+publ  After Appointment Feedback Survey Send
+publ  Ambassador Onboarding (Slug + Welcome)
+publ  Ambassador Patient Routing
+publ  Ambassador Reward Notification
+publ  Ambassador — In-Center Signup
+publ  CAPI - Send Booked Call Data Back to Meta (Leads Moved To Booked Call)
+publ  Cancelled Appointments
+publ  Chat Widget Out of Office Hours
+publ  Contact Center - Tag Assign
+publ  Facebook CAPI - Send Booked Call Data Back to Meta
+publ  Form Submission — Internal Notification
+publ  GHL Form Submitted - Google Ads
+publ  GHL Phone Call - Google Ads
+publ  GHL Website Chat - Google Ads
+publ  New Workflow : 1780243709697
+publ  Nurture: Missed Clinic Appointment
+publ  PCC Referral Lead Routing

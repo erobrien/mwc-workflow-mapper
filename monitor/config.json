@@ -1,0 +1,24 @@
+{
+  "_comment": "Read-only revenue-integrity monitor for MWC GHL. Token now lives in ../secrets.json (gitignored).",
+  "api_base": "https://services.leadconnectorhq.com",
+  "location_id": "Ghstz8eIsHWLeXek47dk",
+  "token": null,
+  "version_calendars": "2021-04-15",
+  "version_default": "2021-07-28",
+  "calendars": {
+    "Richmond": "1Cfy5JnO2A4ggiZlMVvX",
+    "Virginia Beach": "4xmnBGMWJ6TVUKcAPpPb",
+    "Newport News": "lBaRbjUpEmesxEloFBME"
+  },
+  "sales_pipelines": {
+    "01. MWC Sales Production": "uUm5DInIjq6uYlg9HDwU",
+    "02. Newport News": "9AZEt2Sw6Zv0nnJJmkE0",
+    "03. Richmond": "jRqb0pvexu04zSACPXmd",
+    "04. Virginia Beach": "rspsjkBMNYGldN3R71ji",
+    "05. Virtual": "egwukvpj425enQbEpQKI",
+    "07. A & D": "7WMjJykajYpvAXys4m0z"
+  },
+  "baseline_window_days": 7,
+  "alert_drift_pct": 10,
+  "show_rate_alert_drop_points": 5
+}

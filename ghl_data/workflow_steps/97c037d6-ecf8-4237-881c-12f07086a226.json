@@ -1,0 +1,21 @@
+{
+  "id": "97c037d6-ecf8-4237-881c-12f07086a226",
+  "name": "01. WP Lead Capture",
+  "folder": "01. WP Lead Capture",
+  "status": "draft",
+  "version": 8,
+  "extracted_at": "2026-05-29T03:00:17Z",
+  "extraction_method": "backend_jwt",
+  "triggers": [],
+  "steps": [],
+  "messages_referenced": [],
+  "stats": {
+    "total_steps": 0,
+    "send_sms_count": 0,
+    "send_email_count": 0,
+    "wait_count": 0,
+    "if_else_count": 0,
+    "terminal_paths": 0
+  },
+  "notes": ""
+}

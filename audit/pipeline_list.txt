@@ -1,0 +1,37 @@
+18 pipelines
+--- 01. MWC Sales Production | stages: 8 | id: uUm5DInIjq6uYlg9HDwU
+    Pending New Arrival / Pending Renewal Arrival / New Sale / Renewal Sale / A&D / No Sale / No-Show / Rescheduled / Cancelled
+--- 02. Newport News, Virginia Pipeline | stages: 8 | id: 9AZEt2Sw6Zv0nnJJmkE0
+    New Lead / Booked / Sold / A&D / No Show / Cancel / Renewal Opportunity / MUT / Lost/Dead
+--- 03. Richmond, Virginia Pipelines | stages: 8 | id: jRqb0pvexu04zSACPXmd
+    New Lead / Booked / A&D / MUT / Sold / Renewal Opportunity / No Show / Cancel / Lost / Dead
+--- 04. Virginia Beach, VA Pipeline | stages: 8 | id: rspsjkBMNYGldN3R71ji
+    New Lead / Booked / A&D / MUT / Sold / Renewal Opportunity / No Show / Cancel / Lost/Dead
+--- 05. Virtual Pipeline | stages: 7 | id: egwukvpj425enQbEpQKI
+    New Lead / Booked / A&D / MUT / Sold / No Show / Cancel / Lost / Dead
+--- 06. Renewals | stages: 4 | id: ndzetWLpdh8D7Wcp2Lfu
+    New Opportunity / Contacted / Proposal Sent / Closed
+--- 07. A & D | stages: 5 | id: 7WMjJykajYpvAXys4m0z
+    New Opportunity / Contacted / Proposal Sent / Closed / A & D
+--- Ambassador Referrals | stages: 5 | id: Qm2YHz0dHk1gXNS2UfZw
+    New Lead / Booked / Showed Up / Paid / Lost
+--- Instagram DM Pipeline | stages: 7 | id: 4rCLq8ZLIsvHR7J6vd69
+    New Lead / In manychat automation / Manual Follow Ups / Triage Call Offered / Triage Call Booked / Triage Call Taken / Transferred to Sales Pipeline
+--- JJ Funnel | stages: 4 | id: GshoDdpIsrlCrMC2WVYx
+    Lead Capture / Page 2 - Qualification Page / Page 3 - Appointment Booked / Page 4
+--- Lost / Dead Pipeline | stages: 5 | id: GTwmWC8TwPIH7PONUtuw
+    Not Interested / No Response / Price Objection / Duplicate / Test Lead / Not Qualified
+--- MWC Lead Pipeline | stages: 17 | id: Sa0OFNaNT6oEvFth46ks
+    New Lead / Qualification Survey Completed / No Book Paid / Call Booked / Call Confirmed / Show / No Show / Call Cancelled / Post Visit Sold / A&D Cost / A&D Fear / A&D Partner / A&D Timing / Decision Support / Retention & Renewal / Long Term Nurture / Disqualified
+--- No Show / Cancel Pipeline | stages: 8 | id: 2sZ3Tnyv2Fik4QGGgVEP
+    Missed / Canceled / Attempted Rebook / Rebooked Consult Scheduled / Sold / No Show Final / Follow Up Needed / Lost or Dead
+--- Non Booked | stages: 1 | id: gcRMq1iCj2tGmdWpimGS
+    Non Booked
+--- PCC Referrals | stages: 4 | id: u5rD2kbnu2oxcvLPMNBj
+    New Lead / Contacted / Consultation Booked / Closed
+--- Referral Rewards | stages: 5 | id: lmbWuzZiwWX2yHcx8OCN
+    Submitted / Confirmed / Qualified / Rewarded / Invalid
+--- Retention Pipeline | stages: 5 | id: ooPR0UjEdVJ1ZrINTHiY
+    Onboarding / Active / Renewal Due / Renewed / Churned
+--- z Call Disposition | stages: 4 | id: GeT92kRjikpLMRu3EgKT
+    Completed / Requested Appointment / No Answer / Voicemail / For Follow Up / Hung up / Incorrect / Wrong Number

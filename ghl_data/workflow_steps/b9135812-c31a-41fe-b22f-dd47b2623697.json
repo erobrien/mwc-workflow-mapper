@@ -1,0 +1,21 @@
+{
+  "id": "b9135812-c31a-41fe-b22f-dd47b2623697",
+  "name": "03b. Unconfirmed Appointment \u2013 Confirmation Required",
+  "folder": "03. Call Routing & Dispositions",
+  "status": "published",
+  "version": 72,
+  "extracted_at": "2026-05-29T03:00:30Z",
+  "extraction_method": "backend_jwt",
+  "triggers": [],
+  "steps": [],
+  "messages_referenced": [],
+  "stats": {
+    "total_steps": 0,
+    "send_sms_count": 0,
+    "send_email_count": 0,
+    "wait_count": 0,
+    "if_else_count": 0,
+    "terminal_paths": 0
+  },
+  "notes": ""
+}

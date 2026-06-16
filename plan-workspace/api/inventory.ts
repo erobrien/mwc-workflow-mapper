@@ -2,6 +2,8 @@
 // The PIT token lives in the GHL_TOKEN env var (server-side only; never shipped
 // to the browser). Returns the full workflow list (published + draft) so the
 // Inventory page reflects the live account instead of a static snapshot.
+declare const process: { env: Record<string, string | undefined> };
+
 export default async function handler(_req: any, res: any) {
   const token = process.env.GHL_TOKEN;
   const loc = process.env.GHL_LOCATION_ID || "Ghstz8eIsHWLeXek47dk";

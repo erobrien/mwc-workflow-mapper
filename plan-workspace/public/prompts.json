@@ -1,0 +1,201 @@
+[
+ {
+  "id": "p0-rev-rec-blockers",
+  "step": "P0 - Revenue recognition blockers",
+  "title": "Move Sales + UTM fields to their proper objects (additive first, dual-write, then cut over)",
+  "status": "P0 - go first",
+  "goal": "Unblock revenue recognition. Today there are 0 sale fields on the Opportunity and 0 contacts with click IDs - so revenue cannot be recognized per transaction and channel attribution does not exist. Fix capture immediately so all NEW data flows to the right object; backfill historical separately.",
+  "inputs": [
+   "PIT token at ~/.ghl_pit",
+   "JWT at ~/.ghl_jwt",
+   "Field destination plan from /to-be Field placement",
+   "Workflow 01 (Lead Capture) - currently 5 location variants 01A–01E"
+  ],
+  "prompt": "Goal: Stop the revenue-recognition bleed. New data starts flowing to the correct objects TODAY.\n\nTwo structural problems:\n  RR-1: Sale Outcome + Product/Term/Price ×3 + Total Program Amount + Consultation Fee + Pay Type + nosale_reason all live on the Contact (1 per person). Per-deal revenue recognition impossible.\n  RR-2: UTM ×5 + gclid + fbclid + source_url live on the Contact. Each new touch overwrites. Worse: gclid/fbclid are non-null on 0 of 11,077 contacts - capture is broken.\n\nThis is ADDITIVE-FIRST and DUAL-WRITE. Contact fields keep working; opportunity fields receive parallel writes. Cutover happens later.\n\nPhase A - Create the 14 opportunity-level fields (additive)\nPhase B - Copy the latest UTM + click IDs onto the Opportunity at create (attribution also stays on the Contact; no separate object)\nPhase C - Fix click ID capture in workflows 01A–E (currently silently dropped)\nPhase D - Dual-write: workflows 01 + 05 write to both Contact AND new destinations\nPhase E - Drift validation: assert opp.sale_outcome count == contact.sale_outcome count after 7 days\n\nDO NOT: delete contact fields (Step 6 does that), backfill historical opps (Step 2), or change workflow 05's auto-Won defect (separate P0).",
+  "validates": [
+   "Opportunity has sale_outcome + monetaryValue set on new data",
+   "gclid/fbclid captured on a test ad click",
+   "No data loss on existing contact field reads",
+   "Drift check passes after 7 days"
+  ],
+  "outputs": [
+   "14 opp fields created",
+   "Attribution copied onto the Opportunity",
+   "Fixed click-ID capture",
+   "Dual-write across WFs 01 + 05"
+  ]
+ },
+ {
+  "id": "s1c-add-opp-fields",
+  "step": "S1c - Schema build (modify OOTB object)",
+  "title": "Add 30 new fields to the Opportunity object (sale outcome, products, prices, attribution copy + EMR FK)",
+  "status": "Ready",
+  "goal": "Make the Opportunity the single source of truth for deals - outcome, money, location, attribution. Adds 30 new opportunity-level custom fields per the spec. Includes a copy of the lead's attribution (UTM + click IDs) on the Opportunity for revenue-to-campaign reporting, and the FK slot for EMR Visit. Renames patient_advisor to patient_care_consultant_id and ad_reason to nosale_reason as part of the same pass.",
+  "inputs": [
+   "~/.ghl_pit",
+   "Spec: pm-site-v2/public/data-spec.json -> objects[name=\"Opportunity\"]",
+   "Prerequisite: S1a-create-lead-source done (need lead_source.id to reference as FK target)",
+   "Note: opportunity.monetary_value, .contact_id, .pipeline_id, .pipeline_stage_id, .status are GHL built-in - do NOT recreate"
+  ],
+  "prompt": "Goal: Add 30 new custom fields to the Opportunity object so it can hold sale outcome, revenue, location, attribution, and the EMR back-reference. All additive - no existing field is changed in this prompt. Renames happen in a separate prompt (s1e-renames).\n\nPre-flight:\n  1. GET /customfields?model=opportunity. Snapshot current state to audit/opp-fields-before.json. Confirm none of the new keys below already exist.\n\nStep 1 - Add the 30 new opp fields. For each, POST /customfields with model=opportunity. Use the EXACT key, name, dataType, and (for SINGLE_OPTIONS) values from data-spec.json objects[name=\"Opportunity\"].fields[]. Categories:\n\n  Attribution FKs (1):\n\n  Location & routing (1):\n    opportunity.location (SINGLE_OPTIONS required) - values: [location_richmond, location_va_beach, location_npn, location_telehealth]\n\n  Outcome & sale type (2):\n    opportunity.sale_outcome (SINGLE_OPTIONS) - values: [sold, no_sale, mut, undecided]. WF 05 sole writer.\n    opportunity.sale_type (SINGLE_OPTIONS) - values: [new, renewal, upsell, reactivation]\n\n  Ownership FKs (2):\n    opportunity.patient_care_consultant_id (TEXT) - FK user.id. NEW key; legacy patient_advisor is renamed in s1e.\n    opportunity.provider_making_recommendation_id (TEXT) - FK user.id.\n\n  Products / Terms / Prices (9):\n    opportunity.product_sold_1, product_sold_2, product_sold_3 (SINGLE_OPTIONS) - values: [trt, ed, weight_mgmt, peptides, supplements, labs, other]\n    opportunity.term_length_1, term_length_2, term_length_3 (SINGLE_OPTIONS) - values: [1mo, 3mo, 6mo, 12mo, 24mo]\n    opportunity.price_1, price_2, price_3 (MONETARY)\n\n  Revenue (3):\n    opportunity.total_program_amount (MONETARY) - WF 05 copies into monetary_value on Won.\n    opportunity.consultation_fee (MONETARY)\n    opportunity.pay_type (SINGLE_OPTIONS) - values: [financing, cash, card, ach, hsa, fsa, insurance, other]\n\n  No-sale (renamed; NEW keys here, legacy retired in Step 6):\n    opportunity.nosale_reason (SINGLE_OPTIONS) - values: [nosale_cost, nosale_fear, nosale_partner, nosale_timing, nosale_decision, nosale_medical, nosale_other]\n    opportunity.nosale_reason_other (LARGE_TEXT)\n\n  Cancellation / no-show (2):\n    opportunity.cancellation_reason (SINGLE_OPTIONS) - values: [scheduling_conflict, health_issue, no_longer_interested, found_alternative, other]\n    opportunity.no_show_reason (SINGLE_OPTIONS) - values: [forgot, scheduling_conflict, transportation, no_longer_interested, unreachable, other]\n\n  Qualification (5):\n    opportunity.primary_concern (SINGLE_OPTIONS) - values: [ed, trt, weight, sleep, fatigue, performance, general_wellness, other]\n    opportunity.age_range (SINGLE_OPTIONS) - values: [under_30, 30_39, 40_49, 50_59, 60_69, 70_plus]\n    opportunity.health_goal (LARGE_TEXT)\n    opportunity.service_interested_in (MULTIPLE_OPTIONS)\n    opportunity.preferred_appointment_date (DATE)\n\n  Dispositions (3):\n    opportunity.preferred_appointment_time (SINGLE_OPTIONS) - values: [morning, midday, afternoon, evening]\n    opportunity.call_disposition (SINGLE_OPTIONS) - values: [connected, voicemail, no_answer, wrong_number, callback_requested, dnc, other]\n    opportunity.consult_disposition (SINGLE_OPTIONS) - values: [showed, no_show, cancelled, rescheduled]\n\n  Notes & feedback (4):\n    opportunity.lead_notes (LARGE_TEXT)\n    opportunity.visit_feedback_score (NUMERICAL) - 1-10 NPS/CSAT.\n    opportunity.visit_feedback_text (LARGE_TEXT)\n    opportunity.review_status (SINGLE_OPTIONS) - values: [not_asked, asked, posted, declined]\n    opportunity.review_link (TEXT)\n\n  EMR back-reference (1):\n    opportunity.emr_visit_id (TEXT) - FK external.emr.visit_id; one per visit.\n\nStep 2 - Validation:\n  a. GET /customfields?model=opportunity. Snapshot to audit/opp-fields-after.json. Assert all 30 new keys present.\n  b. Diff before vs after: assert exactly 30 additions, 0 modifications, 0 deletions.\n  c. Test record: pick a test opportunity, PATCH each new field with a sample value. Assert all writes succeed.\n  d. Idempotency: 2nd run reports 0 changes.\n\nHARD rules:\n  - DO NOT modify opportunity.monetary_value, .contact_id, .pipeline_id, .pipeline_stage_id, .status (built-in).\n  - DO NOT delete or rename any existing custom field here. Renames (ad_* -> nosale_*, patient_advisor -> patient_care_consultant) happen in s1e.\n  - DO NOT touch workflow 05 here. Wiring it to write opportunity.sale_outcome is part of the existing P0 fix-bleed prompt + s4-wire-outcome.\n\nOutputs:\n  - migration/s1c-opp-fields.json (field_ids for the 30 new fields)\n  - audit/opp-fields-before.json + audit/opp-fields-after.json (diff baseline)\n  - migration/s1c-opp-fields.log",
+  "validates": [
+   "30 new opportunity-level fields exist with exact spec keys + types",
+   "opportunity.emr_visit_id slot ready for EMR sync",
+   "No existing opp field modified",
+   "Test PATCH succeeds for each new field",
+   "Script is idempotent"
+  ],
+  "outputs": [
+   "30 new opportunity custom fields",
+   "Diff snapshots: opp-fields-before / -after",
+   "Field IDs file for downstream prompts"
+  ]
+ },
+ {
+  "id": "s1e-renames",
+  "step": "S1e - Schema build (rename + dual-write)",
+  "title": "Rename ad_* -> nosale_*, patient_advisor -> patient_care_consultant (dual-write, do NOT delete)",
+  "status": "Ready",
+  "goal": "Rename two fields that cause confusion. \"A&D\" looks like \"advertising\" but means Advise and Decline (a no-sale outcome) - if a future engineer keys off ad_* in WF 13 they would send real no-sales to Meta/Google as fake conversions. \"PA\" looks like Physician's Assistant but means Patient Care Consultant (PCC) (the sales role). Both renames write to the new field while keeping the old one live; the old fields are deleted in Step 6 after all readers migrate.",
+  "inputs": [
+   "~/.ghl_pit",
+   "S1c-add-opp-fields completed (opportunity.nosale_reason, .nosale_reason_other, .patient_care_consultant_id exist as targets)",
+   "Snapshot of current contact.ad_reason, contact.ad_other_explanation, contact.patient_advisor values (back up before any change)"
+  ],
+  "prompt": "Goal: Two rename operations, both additive + dual-write. The new fields on Opportunity already exist (added in S1c). This prompt copies values from the legacy Contact fields to the new Opportunity fields for the OPEN opportunity set, and stands up dual-write triggers so going forward both old and new locations stay in sync until Step 6 retires the old.\n\nRename 1: contact.ad_reason -> opportunity.nosale_reason\nRename 2: contact.ad_other_explanation -> opportunity.nosale_reason_other\nRename 3: contact.patient_advisor -> opportunity.patient_care_consultant_id\n\nWhy these matter:\n  - WF 13 (Ad-Platform Conversions) fires Meta CAPI / Google Ads. If anyone keys off ad_* on a contact, they wire NO-SALES into AD CONVERSIONS - the worst possible signal-to-platform mistake. The rename eliminates the namespace collision.\n  - In a healthcare context, \"PA\" = Physician's Assistant. The patient_advisor field is the sales role (Patient Care Consultant / PCC). Same character string, different professions. Rename for clarity.\n\nPre-flight:\n  1. Confirm s1c-add-opp-fields.json exists; load opportunity.nosale_reason, nosale_reason_other, patient_care_consultant_id field_ids.\n  2. Snapshot all three legacy Contact field values into audit/legacy-rename-snapshot.json (one row per contact that has any value set). This is the BACKUP - do not lose it.\n  3. Inventory which workflows currently READ the legacy fields:\n       grep -l \"ad_reason\\|ad_other_explanation\\|patient_advisor\" ghl_data/workflow_steps/*.json\n     Write the result to migration/s1e-legacy-readers.txt. Each of these must be updated to read the new keys before Step 6 retires the old.\n\nStep 1 - Copy legacy values forward (one-time backfill, OPEN opps only).\n  For each Contact with a value in any of the three legacy fields:\n    a. Find the most recent OPEN opportunity for that contact (status = open).\n    b. If no open opp exists, skip and log to migration/s1e-orphans.json (no destination opp).\n    c. PATCH the opp with:\n         - opportunity.nosale_reason = mapped_value(contact.ad_reason)\n         - opportunity.nosale_reason_other = contact.ad_other_explanation\n         - opportunity.patient_care_consultant_id = contact.patient_advisor\n    d. Mapping for nosale_reason values: see data-spec.json for the new value list. If the legacy value doesn't map, set to nosale_other and put the original value in nosale_reason_other.\n\n  This is DRY-RUN first: emit a CSV (exports/s1e-rename-dryrun.csv) of every proposed PATCH. Owner reviews before write mode runs. Same gate as Step 2 backfill.\n\nStep 2 - Dual-write going forward (no workflow changes here yet; this prompt only SETS UP the rule).\n  Document in migration/s1e-dualwrite-spec.md exactly which workflow steps need updating in a follow-up prompt (s4-wire-renames):\n    - WF 05 currently writes contact.ad_reason. Needs to ALSO write opportunity.nosale_reason on the related opp. Until Step 6, both writes happen.\n    - Wherever contact.patient_advisor is currently set (likely WF 12 disposition, the 4a/4b dispositions), also write opportunity.patient_care_consultant_id on the related opp.\n  Do NOT modify workflows here. Producing the spec doc is enough for s4-wire-renames to consume.\n\nStep 3 - Validation:\n  a. Re-read 100 random rows from the dry-run CSV; spot-check the contact values match what was proposed.\n  b. Apply CSV to OPEN opps. Re-pull and assert opp values match CSV.\n  c. Assert legacy Contact fields are still present + unchanged (we DID NOT delete them).\n  d. Idempotent: 2nd run finds 0 contacts to backfill (all open opps already updated).\n\nHARD rules:\n  - DO NOT delete contact.ad_reason, contact.ad_other_explanation, contact.patient_advisor in this prompt. Step 6 Cleanup only, after readers migrate.\n  - DO NOT touch CLOSED opportunities here. The historical Won/Lost backfill (Step 2) handles closed opps and rewrites them as part of the broader revenue restatement. This prompt only handles OPEN opps.\n  - DO NOT trigger workflow enrollment via these PATCHes. Use non-triggering API endpoints (set fields directly). Verify execution-log count == 0 during the write window.\n\nOutputs:\n  - exports/s1e-rename-dryrun.csv (every proposed PATCH for human review)\n  - exports/s1e-rename-applied.csv (after write mode confirms each)\n  - audit/legacy-rename-snapshot.json (backup of every legacy value)\n  - migration/s1e-orphans.json (contacts with legacy values but no open opp)\n  - migration/s1e-legacy-readers.txt (workflow files that still read legacy fields - input for s4-wire-renames)\n  - migration/s1e-dualwrite-spec.md (workflow change spec for s4-wire-renames)",
+  "validates": [
+   "All OPEN opportunities have new opp-level values copied from legacy Contact fields",
+   "Legacy Contact fields untouched (Step 6 Cleanup deletes)",
+   "Dry-run CSV reviewed before write mode",
+   "Zero workflow enrollments triggered during PATCH window",
+   "100% of legacy readers identified for s4-wire-renames",
+   "Idempotent: 2nd run = 0 changes"
+  ],
+  "outputs": [
+   "Open opps updated with renamed field values",
+   "Backup snapshot + dry-run CSV",
+   "Legacy-reader inventory for the workflow-rewire prompt"
+  ]
+ },
+ {
+  "id": "p0-fix-bleed",
+  "step": "P0 - Stop the bleed",
+  "title": "Remove the auto-Won action from workflow 05",
+  "status": "P0 - go first",
+  "goal": "Stop creating false Won opportunities on attendance. New data is clean from day one even before the historical backfill runs.",
+  "inputs": [
+   "JWT in ~/.ghl_jwt",
+   "Workflow 05 ID from inventory"
+  ],
+  "prompt": "Goal: Remove the auto-Won defect from workflow 05 (Clinic Appt Outcome). Do not touch any other workflow.\n\nSteps:\n1. Read ghl_data/workflow_steps/{wf05_id}.json. Confirm the offending step exists.\n2. Open workflow 05 in GHL UI via deeplink.\n3. DELETE the single create_opportunity action named \"A&D pipeline: Closed, status: WON - hide from a&D opportunity\".\n4. Add Update Opportunity Field action: Sale Outcome = (Sold | No-Sale | MUT) based on branch.\n5. Save as DRAFT.\n\nValidation: re-extract; assert exactly one create_opportunity removed. Drive test contact through SHOWED - assert no new opp in A&D.",
+  "validates": [
+   "A&D pipeline no longer receives new opps from WF 05",
+   "Sale Outcome is single source of truth"
+  ],
+  "outputs": [
+   "Modified workflow 05 (draft)",
+   "Diff report"
+  ]
+ },
+ {
+  "id": "p1-foundation",
+  "step": "Step 1 - Foundation objects",
+  "title": "Create target pipelines, opportunity fields, lost reasons, tags",
+  "status": "Ready",
+  "goal": "Stand up the additive structures the rest of the migration writes into. Nothing existing is modified - purely net-new objects.",
+  "inputs": [
+   "PIT token at ~/.ghl_pit",
+   "Field destination plan"
+  ],
+  "prompt": "Goal: Create the additive foundation: 3 new pipelines, 14 opportunity-level fields, lost reasons, tag registry. Instagram DM pipeline already exists (4th, kept).\n\nPipelines: Sales - Lead to Close · Retention & Renewals · Referrals\nOpportunity fields (14): sale_outcome, sale_type, patient_care_consultant, provider_making_recommendation, product_sold_1..3, term_length_1..3, price_1..3, total_program_amount, consultation_fee, nosale_reason, nosale_reason_other\nTag registry: source_*, location_*, funnel_entry_*, status_*, objection_*\n\nValidation: re-pull pipelines + customfields. Assert 3 pipelines + 14 opp fields exist. Idempotent - second run = 0 changes.",
+  "validates": [
+   "4 target pipelines exist",
+   "14 opp fields with correct types",
+   "Idempotent"
+  ],
+  "outputs": [
+   "Run log + refreshed audit snapshots"
+  ]
+ },
+ {
+  "id": "p2-backfill-dryrun",
+  "step": "Step 2 - Revenue backfill (dry-run)",
+  "title": "Generate the proposed reclassification CSV",
+  "status": "Blocked",
+  "goal": "Produce a reviewable CSV that proposes: keep / split / reclassify for every Won opp. Writes nothing.",
+  "inputs": [],
+  "prompt": "Goal: Dry-run the revenue restatement. Produce a CSV; write nothing.\n\n\nFor each Won opp in A&D:\n- Classify: clear-Won / clear-Lost / ambiguous\n- Propose move (clear-Won → Sales · Won), Lost + lostReason for clear-Lost\n- Ambiguous → human review queue, never auto-classified\n\nValidation: Σ proposed monetaryValue reconciles against the opportunity values. count(Won)+count(Lost)+count(ambiguous) == count(A&D Won).",
+  "validates": [
+   "Every Won opp classified",
+   "Ambiguous surfaced for human review",
+   "Sanity invariants hold"
+  ],
+  "outputs": [
+   "Reviewable CSV",
+   "Summary JSON"
+  ]
+ },
+ {
+  "id": "p3-build-drafts",
+  "step": "Step 3 - Build target workflows as drafts",
+  "title": "Build the 16 target workflows in the GHL UI (drafts only)",
+  "status": "Sequenced",
+  "goal": "Construct each of the 16 target workflows as a draft in production.",
+  "inputs": [
+   "To-Be workflow list (16) from /to-be",
+   "Messaging copy (74 bodies)"
+  ],
+  "prompt": "Build all 16 target workflows as drafts. Do not publish.\n\nFor each: open the Workflows list, create from scratch, rename per target name, copy triggers/tags/bodies from source workflows. Reuse engine tag IDs.\n\nSpecial cases: WF 03 absorbs 03/3a/03b/03c/03d with G1 cadence + telehealth branch. WF 05 edit in place. WF 13 trigger on Booked OR Won-with-monetaryValue>0; explicit EXCLUDE for A&D / No-Sale / Lost.\n\nPer-workflow validation: triggers fire on test contact, messages send in test mode, no accidental enrollment of production contacts.",
+  "validates": [
+   "16 drafts exist and pass test-contact runs",
+   "No production enrollment during build"
+  ],
+  "outputs": [
+   "16 drafts in GHL",
+   "Build checklist"
+  ]
+ },
+ {
+  "id": "p4-canary",
+  "step": "Step 5 - Canary cutover",
+  "title": "48h canary on src:bf-web cohort, then widen",
+  "status": "Sequenced",
+  "goal": "Publish 16 drafts; pause 38 sources. 48h watch on test cohort.",
+  "inputs": [
+   "16 drafts ready",
+   "P0 fixes in place",
+   "WF 11 confirmed live"
+  ],
+  "prompt": "Publish 16 drafts smallest-first; pause 38 source workflows. Add canary tag gate (src:bf-web).\n\nMonitor 48h: execution-log error rate < 0.1%, won-with-$0 = 0, stage-flow sanity, SMS counts, STOP/DND replies.\n\nGate at 48h: clean → widen; issues → hold + document.",
+  "validates": [
+   "48h canary clean",
+   "Won-with-$0 stays 0",
+   "No double-execution"
+  ],
+  "outputs": [
+   "Monitor log",
+   "Widen/hold decision"
+  ]
+ },
+ {
+  "id": "p5-cleanup",
+  "step": "Step 6 - Cleanup",
+  "title": "Retire old workflows/fields/pipelines after 2 clean weeks",
+  "status": "Sequenced",
+  "goal": "Make the new world the only world. Order by irreversibility.",
+  "inputs": [
+   "2 clean weeks since cutover",
+   "No alerts on weekly QA"
+  ],
+  "prompt": "Phase A: archive paused workflows (low risk).\nPhase B: confirm no reads of ad_*, patient_advisor, or the 33 never-populated fields → DELETE them (irreversible - last).\nPhase C: confirm pipeline opp counts == 0 → DELETE retired pipelines.\n\nNEVER delete engine tag surface (chatbot_lead, src:bf-web, sniper_*, funnel_entry_*).",
+  "validates": [
+   "No reads of retired fields",
+   "No opps in retired pipelines",
+   "Engine tags intact"
+  ],
+  "outputs": [
+   "Cleanup log",
+   "Final audit snapshot"
+  ]
+ }
+]

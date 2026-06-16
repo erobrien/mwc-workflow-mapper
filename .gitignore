@@ -5,6 +5,7 @@ audit/.token
 # dependencies / build output
 node_modules/
 mwc-asis/dist/
+plan-workspace/dist/
 
 # machine-local runtime output (regenerated; keep history per-machine)
 monitor/data/

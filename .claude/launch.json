@@ -8,6 +8,12 @@
       "port": 4173
     },
     {
+      "name": "plan-workspace",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "C:\\Users\\eric_\\Webdev\\mwc-workflow-mapper\\plan-workspace", "run", "dev", "--", "--port", "4178", "--strictPort"],
+      "port": 4178
+    },
+    {
       "name": "mwcbrand",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["--prefix", "C:\\Users\\eric_\\Webdev\\mwcbrand", "run", "dev"],

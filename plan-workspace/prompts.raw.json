@@ -1,0 +1,306 @@
+[
+  {
+    "id": "p0-rev-rec-blockers",
+    "step": "P0 - Revenue recognition blockers",
+    "title": "Move Sales + UTM fields to their proper objects (additive first, dual-write, then cut over)",
+    "status": "P0 - go first",
+    "goal": "Unblock revenue recognition. Today there are 0 sale fields on the Opportunity and 0 contacts with click IDs - so revenue cannot be recognized per transaction and channel attribution does not exist. Fix capture immediately so all NEW data flows to the right object; backfill historical separately.",
+    "inputs": [
+      "PIT token at ~/.ghl_pit",
+      "JWT at ~/.ghl_jwt",
+      "Field destination plan from /to-be Field placement",
+      "Workflow 01 (Lead Capture) - currently 5 location variants 01A–01E"
+    ],
+    "prompt": "Goal: Stop the revenue-recognition bleed. New data starts flowing to the correct objects TODAY.\n\nTwo structural problems:\n  RR-1: Sale Outcome + Product/Term/Price ×3 + Total Program Amount + Consultation Fee + Pay Type + nosale_reason all live on the Contact (1 per person). Per-deal revenue recognition impossible.\n  RR-2: UTM ×5 + gclid + fbclid + source_url live on the Contact. Each new touch overwrites. Worse: gclid/fbclid are non-null on 0 of 11,077 contacts - capture is broken.\n\nThis is ADDITIVE-FIRST and DUAL-WRITE. Contact fields keep working; opportunity / lead-source fields receive parallel writes. Cutover happens later.\n\nPhase A - Create the 14 opportunity-level fields (additive)\nPhase B - Create the Lead Source custom object (or denorm to opp fields if spike failed)\nPhase C - Fix click ID capture in workflows 01A–E (currently silently dropped)\nPhase D - Dual-write: workflows 01 + 05 write to both Contact AND new destinations\nPhase E - Drift validation: assert opp.sale_outcome count == contact.sale_outcome count after 7 days\n\nDO NOT: delete contact fields (Step 6 does that), backfill historical opps (Step 2), or change workflow 05's auto-Won defect (separate P0).",
+    "validates": [
+      "Opportunity has sale_outcome + monetaryValue set on new data",
+      "gclid/fbclid captured on a test ad click",
+      "No data loss on existing contact field reads",
+      "Drift check passes after 7 days"
+    ],
+    "outputs": [
+      "14 opp fields created",
+      "Lead Source object or denorm fields",
+      "Fixed click-ID capture",
+      "Dual-write across WFs 01 + 05"
+    ]
+  },
+  {
+    "id": "s1a-create-lead-source",
+    "step": "S1a - Schema build (create custom object)",
+    "title": "Create the lead_source custom object with all 32 fields and FK to Contact",
+    "status": "Ready",
+    "goal": "Stand up the lead_source custom object in GHL. Parent FK to Contact (required, many-to-one). Adds the denormalized cache field contact.latest_lead_source_id on Contact so workflows can read current attribution without querying the child. This is the destination for the broken UTM + click-ID + how-heard data captured today.",
+    "inputs": [
+      "~/.ghl_jwt for builder access (capture via scripts/capture_jwt.py if missing)",
+      "~/.ghl_pit for services API round-trip",
+      "Spec: pm-site-v2/public/data-spec.json -> objects[name=\"Lead Source\"]",
+      "Pre-check: Custom Objects beta enabled on location Ghstz8eIsHWLeXek47dk"
+    ],
+    "prompt": "Goal: Create the lead_source custom object with all 32 fields, the parent FK to Contact, and the back-reference FK slot for Opportunity. Use pm-site-v2/public/data-spec.json (objects[name=\"Lead Source\"]) as the single source of truth - do not invent fields, do not abbreviate names, do not skip any.\n\nPre-flight (HARD - abort if any fails):\n  1. GET /custom-objects/?locationId=Ghstz8eIsHWLeXek47dk via services API. 200 + array = on. 404/403 = request access from GHL Support and stop.\n  2. Confirm no existing object with key \"lead_source\".\n  3. Note whether contact.latest_lead_source_id already exists (added last; skip if present).\n\nStep 1 - Create the object skeleton.\n  POST /custom-objects/:\n    {\n      \"locationId\": \"Ghstz8eIsHWLeXek47dk\",\n      \"key\": \"lead_source\",\n      \"labels\": { \"singular\": \"Lead Source\", \"plural\": \"Lead Sources\" },\n      \"description\": \"1 per inbound touch. Multi-touch marketing attribution. Parent: Contact. Owned by workflows 01, 14, 15, 16.\",\n      \"primaryDisplayPropertyDetails\": { \"key\": \"lead_source.touched_at\", \"name\": \"Touched At\", \"dataType\": \"DATE\" },\n      \"secondaryDisplayPropertyDetails\": [\n        { \"key\": \"lead_source.touch_type\",   \"name\": \"Touch Type\",   \"dataType\": \"SINGLE_OPTIONS\" },\n        { \"key\": \"lead_source.utm_campaign\", \"name\": \"UTM Campaign\", \"dataType\": \"TEXT\" }\n      ]\n    }\n  Save returned object_id to migration/s1a-lead-source-create.json.\n\nStep 2 - Add parent relationship to Contact.\n  POST /custom-objects/{object_id}/relationships:\n    {\n      \"fromObjectKey\": \"lead_source\",\n      \"toObjectKey\":   \"contact\",\n      \"relationshipType\": \"many-to-one\",\n      \"isRequired\":   true,\n      \"fromFieldKey\":  \"lead_source.contact_id\",\n      \"fromFieldName\": \"Contact ID\",\n      \"cascadeDelete\": false\n    }\n\nStep 3 - Add all 32 fields from the spec. Iterate data-spec.json objects[name=\"Lead Source\"].fields[]. For each field, POST /custom-objects/{object_id}/fields with key, name, dataType, required, and (for SINGLE_OPTIONS) the exact values array.\n  Field categories (32 total, see spec for exact list):\n    Identity/FK (4):   id, contact_id, opportunity_id, touch_workflow_id\n    Touch event (2):   touched_at, touch_type [form_submit, chat_message, inbound_call, missed_call, ambassador_click, ivr_call, page_view, referral_submit, engine_handoff]\n    UTM (5):           utm_source, utm_medium, utm_campaign, utm_content, utm_term\n    URLs (2):          referrer_url, landing_url\n    Click IDs (7):     gclid, fbclid, gbraid, wbraid, msclkid, ttclid, li_fat_id\n    Declared (3):      how_heard [15 values], how_heard_detail, location_interest [5 values]\n    Channels (5):      form_id, chatbot_session_id, chatbot_intent, ambassador_slug, pcc_user_id\n    Forensics (3):     ip_address, user_agent, device_type [mobile, tablet, desktop, unknown]\n    Consent linkage (1): consent_log_id\n\nStep 4 - Add denorm cache field on Contact (skip if exists from pre-flight).\n  POST /customfields with model=contact:\n    { \"name\": \"Latest Lead Source ID\", \"fieldKey\": \"contact.latest_lead_source_id\", \"dataType\": \"TEXT\", \"model\": \"contact\" }\n  Treat as DENORMALIZED CACHE - Lead Source record is canonical, Contact field is a mirror updated by WF 01 on every touch.\n\nStep 5 - Round-trip validation.\n  a. GET /custom-objects/?locationId=... assert lead_source exists.\n  b. GET /custom-objects/{id}/fields assert all 32 spec keys present (set equality).\n  c. GET /custom-objects/{id}/relationships assert parent FK to contact, isRequired=true.\n  d. GET /customfields?model=contact assert contact.latest_lead_source_id exists.\n  e. Create TEST record: contact_id=known test contact, touched_at=now(), touch_type=form_submit, utm_source=spike-test, gclid=TEST_GCLID_DELETE_ME. Assert 200. Then DELETE the test record.\n  f. Idempotency: re-run script; report 0 changes.\n\nStep 6 - Spike test (gates whether Consent Log can also be a custom object).\n  SPIKE-TRIGGER: in builder, create a temp workflow with trigger \"Custom Object Record Created\" on lead_source. Drive test record. Assert workflow enrolls the parent Contact.\n  SPIKE-MERGE: from a temp SMS workflow, send a test SMS referencing {{custom_object.lead_source.utm_campaign}}. Assert merge resolves to \"spike-test\".\n  If BOTH pass: log SPIKE_PASS in migration/s1a-spike-result.md; proceed with S1b (Consent Log) as a custom object.\n  If EITHER fails: log SPIKE_FAIL. Stop. Switch to opp-denorm fallback (see fallback prompt s1a-fallback).\n\nHARD rules:\n  - DO NOT delete contact.utm_*, contact.gclid_value, contact.fbclid_value, contact.source_url, or any other legacy attribution field. That's Step 6 Cleanup.\n  - DO NOT modify workflows 01, 14, 15, 16. Wiring them to write to Lead Source is a separate prompt (s4-wire-attribution).\n  - DO NOT backfill historical Lead Source records here.\n\nOutputs:\n  - migration/s1a-lead-source-create.json (object_id, all 32 field_ids)\n  - migration/s1a-lead-source-create.log (verbose API trace)\n  - migration/s1a-spike-result.md (PASS or FAIL with evidence)\n  - Refreshed audit/customfields.json\n  - Decision log entry: \"Custom-object spike: PASS\" or \"FAIL - falling back to opp denorm\"",
+    "validates": [
+      "lead_source object exists with key \"lead_source\"",
+      "All 32 fields exist with exact keys, names, and types from spec",
+      "Parent FK to Contact exists, isRequired=true",
+      "contact.latest_lead_source_id denorm cache field exists",
+      "Test record round-trips via API (create + delete)",
+      "Spike trigger + merge fields both work",
+      "Script is idempotent: 2nd run = 0 changes"
+    ],
+    "outputs": [
+      "lead_source object + 32 fields in GHL",
+      "Contact parent FK relationship",
+      "contact.latest_lead_source_id on Contact",
+      "Spike pass/fail verdict (gates S1b)"
+    ]
+  },
+  {
+    "id": "s1b-create-consent-log",
+    "step": "S1b - Schema build (create custom object)",
+    "title": "Create the consent_log custom object (append-only TCPA evidence) with all 15 fields and FK to Contact",
+    "status": "Ready",
+    "goal": "Stand up the consent_log custom object for TCPA evidence. Append-only - every opt-in, opt-out, START, STOP, double-opt-in confirmation produces a new record. Required for compliance audits and to enable workflow 11 as the single STOP/DND authority.",
+    "inputs": [
+      "~/.ghl_pit",
+      "~/.ghl_jwt",
+      "Spec: pm-site-v2/public/data-spec.json -> objects[name=\"Consent Log\"]",
+      "Prerequisite: S1a-create-lead-source completed (we add FK lead_source_id pointing back to Lead Source)",
+      "Spike result: SPIKE_PASS from S1a (otherwise use fallback)"
+    ],
+    "prompt": "Goal: Create the consent_log custom object with all 15 fields. APPEND-ONLY semantics: never edit or delete existing records, only add new ones. Parent FK to Contact (required). Cross-FK to Lead Source (consent_log_id <-> lead_source.consent_log_id) so a single form submit that includes consent links its Consent Log record to its Lead Source record.\n\nPre-flight:\n  1. Confirm S1a-create-lead-source produced SPIKE_PASS. If FAIL, stop and use the fallback (consent becomes append-only contact notes + tags).\n  2. Confirm no existing object with key \"consent_log\".\n  3. Note whether contact.sms_consent_status and contact.sms_consent_updated_at exist as denorm mirrors.\n\nStep 1 - Create the object.\n  POST /custom-objects/:\n    {\n      \"locationId\": \"Ghstz8eIsHWLeXek47dk\",\n      \"key\": \"consent_log\",\n      \"labels\": { \"singular\": \"Consent Log\", \"plural\": \"Consent Log Entries\" },\n      \"description\": \"TCPA evidence. 1 per opt-in or opt-out event. APPEND-ONLY: never edit, never delete. Owned by workflows 01 (form opt-ins) and 11 (STOP/DND/unsubscribe).\",\n      \"primaryDisplayPropertyDetails\": { \"key\": \"consent_log.recorded_at\", \"name\": \"Recorded At\", \"dataType\": \"DATE\" },\n      \"secondaryDisplayPropertyDetails\": [\n        { \"key\": \"consent_log.consent_type\",  \"name\": \"Consent Type\",  \"dataType\": \"SINGLE_OPTIONS\" },\n        { \"key\": \"consent_log.consent_state\", \"name\": \"Consent State\", \"dataType\": \"SINGLE_OPTIONS\" }\n      ]\n    }\n\nStep 2 - Parent relationship to Contact.\n  POST /custom-objects/{object_id}/relationships:\n    {\n      \"fromObjectKey\": \"consent_log\",\n      \"toObjectKey\":   \"contact\",\n      \"relationshipType\": \"many-to-one\",\n      \"isRequired\":   true,\n      \"fromFieldKey\":  \"consent_log.contact_id\",\n      \"fromFieldName\": \"Contact ID\",\n      \"cascadeDelete\": false\n    }\n  CRITICAL: cascadeDelete=false even if Contact is deleted. TCPA retention requirements mean we ARCHIVE consent records, not delete.\n\nStep 3 - Add all 15 fields per spec (data-spec.json objects[name=\"Consent Log\"].fields[]):\n  id, contact_id (FK), recorded_at,\n  consent_type [sms_marketing, sms_transactional, email_marketing, email_transactional, call, voicemail],\n  consent_state [opt_in, opt_out, double_opt_in_pending, double_opt_in_confirmed],\n  consent_source [form, sms_reply_yes, sms_reply_start, sms_reply_stop, sms_reply_unsubscribe, web_widget, phone_call, in_center, manual_admin, import],\n  source_form_id (FK form.id), source_workflow_id (FK workflow.id),\n  lead_source_id (FK lead_source.id) - cross-references the Lead Source record produced by the same form submit when consent was given as part of an inbound touch,\n  ip_address, user_agent,\n  consent_method [checkbox, signature, sms_reply, verbal_attested, recorded_call, double_opt_in_confirmation],\n  consent_text (LARGE_TEXT - verbatim consent copy shown to user),\n  evidence_url, proof_token\n\nStep 4 - Add Contact denorm cache fields (mirror latest consent state).\n  POST /customfields with model=contact:\n    a. { \"name\": \"SMS Consent Status (current)\", \"fieldKey\": \"contact.sms_consent_status\", \"dataType\": \"SINGLE_OPTIONS\", \"values\": [\"opted_in\", \"opted_out\", \"never_asked\"], \"model\": \"contact\" }\n    b. { \"name\": \"SMS Consent Last Updated\", \"fieldKey\": \"contact.sms_consent_updated_at\", \"dataType\": \"DATE\", \"model\": \"contact\" }\n    c. { \"name\": \"DND State\", \"fieldKey\": \"contact.dnd_state\", \"dataType\": \"SINGLE_OPTIONS\", \"values\": [\"active\", \"suppressed_sms\", \"suppressed_email\", \"suppressed_all\"], \"model\": \"contact\" }\n  All managed exclusively by workflow 11.\n\nStep 5 - Validation:\n  a. Round-trip same as S1a steps 5a-d.\n  b. Create TEST record: contact_id=test, recorded_at=now(), consent_type=sms_marketing, consent_state=opt_in, consent_source=form, consent_method=checkbox, consent_text=\"(test)\". Assert 200 + id returned.\n  c. APPEND-ONLY test: attempt to PATCH/DELETE the test record. Either GHL refuses, or document the response so we can enforce append-only via workflow rule. Then delete via admin route ONLY (not via the standard API).\n  d. Idempotency: 2nd run = 0 changes.\n\nStep 6 - Spike test (Consent Log specific):\n  SPIKE-CROSS-FK: create a Lead Source record AND a Consent Log record for the same Contact, set consent_log.lead_source_id and lead_source.consent_log_id to point at each other. Confirm both lookups resolve (GHL bidirectional FK support).\n  If FAIL: log it. The cross-FK is nice-to-have; absence breaks audit cross-reference but not core function.\n\nHARD rules:\n  - DO NOT delete contact.sms_optin_date, contact.sms_optin_source, contact.consent__*, or the other legacy consent fields. Step 6 Cleanup.\n  - DO NOT modify workflow 11 here. Wiring it to write Consent Log records is in s4-wire-consent.\n  - DO NOT backfill historical consent. We have 0 stored consents anyway (per the 90-day scan), so the historical baseline is \"never_asked\" for everyone.\n\nOutputs:\n  - migration/s1b-consent-log-create.json\n  - migration/s1b-consent-log-create.log\n  - 3 new Contact denorm fields visible in GHL UI\n  - Verified consent_log custom object with parent FK + cross-FK to Lead Source",
+    "validates": [
+      "consent_log object exists with 15 fields per spec",
+      "Parent FK to Contact, isRequired=true, cascadeDelete=false (TCPA retention)",
+      "Cross-FK to Lead Source bidirectional lookup works",
+      "3 Contact denorm fields (sms_consent_status, sms_consent_updated_at, dnd_state) exist",
+      "Append-only behavior documented (or enforced via workflow rule)"
+    ],
+    "outputs": [
+      "consent_log object + 15 fields",
+      "Cross-FK to Lead Source",
+      "3 Contact denorm fields for current consent state"
+    ]
+  },
+  {
+    "id": "s1c-add-opp-fields",
+    "step": "S1c - Schema build (modify OOTB object)",
+    "title": "Add 30 new fields to the Opportunity object (sale outcome, products, prices, FK to Lead Source + EMR)",
+    "status": "Ready",
+    "goal": "Make the Opportunity the single source of truth for deals - outcome, money, location, attribution. Adds 30 new opportunity-level custom fields per the spec. Includes the FK to Lead Source (for revenue-to-campaign attribution) and the FK slot for EMR Visit. Renames patient_advisor to patient_care_consultant_id and ad_reason to nosale_reason as part of the same pass.",
+    "inputs": [
+      "~/.ghl_pit",
+      "Spec: pm-site-v2/public/data-spec.json -> objects[name=\"Opportunity\"]",
+      "Prerequisite: S1a-create-lead-source done (need lead_source.id to reference as FK target)",
+      "Note: opportunity.monetary_value, .contact_id, .pipeline_id, .pipeline_stage_id, .status are GHL built-in - do NOT recreate"
+    ],
+    "prompt": "Goal: Add 30 new custom fields to the Opportunity object so it can hold sale outcome, revenue, location, attribution, and the EMR back-reference. All additive - no existing field is changed in this prompt. Renames happen in a separate prompt (s1e-renames).\n\nPre-flight:\n  1. GET /customfields?model=opportunity. Snapshot current state to audit/opp-fields-before.json. Confirm none of the new keys below already exist.\n  2. Confirm lead_source object_id is in migration/s1a-lead-source-create.json (we reference it as the FK target).\n\nStep 1 - Add the 30 new opp fields. For each, POST /customfields with model=opportunity. Use the EXACT key, name, dataType, and (for SINGLE_OPTIONS) values from data-spec.json objects[name=\"Opportunity\"].fields[]. Categories:\n\n  Attribution FKs (1):\n    opportunity.lead_source_id (TEXT) - FK lead_source.id; set at opp create by WF 01.\n\n  Location & routing (1):\n    opportunity.location (SINGLE_OPTIONS required) - values: [location_richmond, location_va_beach, location_npn, location_telehealth]\n\n  Outcome & sale type (2):\n    opportunity.sale_outcome (SINGLE_OPTIONS) - values: [sold, no_sale, mut, undecided]. WF 05 sole writer.\n    opportunity.sale_type (SINGLE_OPTIONS) - values: [new, renewal, upsell, reactivation]\n\n  Ownership FKs (2):\n    opportunity.patient_care_consultant_id (TEXT) - FK user.id. NEW key; legacy patient_advisor is renamed in s1e.\n    opportunity.provider_making_recommendation_id (TEXT) - FK user.id.\n\n  Products / Terms / Prices (9):\n    opportunity.product_sold_1, product_sold_2, product_sold_3 (SINGLE_OPTIONS) - values: [trt, ed, weight_mgmt, peptides, supplements, labs, other]\n    opportunity.term_length_1, term_length_2, term_length_3 (SINGLE_OPTIONS) - values: [1mo, 3mo, 6mo, 12mo, 24mo]\n    opportunity.price_1, price_2, price_3 (MONETARY)\n\n  Revenue (3):\n    opportunity.total_program_amount (MONETARY) - WF 05 copies into monetary_value on Won.\n    opportunity.consultation_fee (MONETARY)\n    opportunity.pay_type (SINGLE_OPTIONS) - values: [financing, cash, card, ach, hsa, fsa, insurance, other]\n\n  No-sale (renamed; NEW keys here, legacy retired in Step 6):\n    opportunity.nosale_reason (SINGLE_OPTIONS) - values: [nosale_cost, nosale_fear, nosale_partner, nosale_timing, nosale_decision, nosale_medical, nosale_other]\n    opportunity.nosale_reason_other (LARGE_TEXT)\n\n  Cancellation / no-show (2):\n    opportunity.cancellation_reason (SINGLE_OPTIONS) - values: [scheduling_conflict, health_issue, no_longer_interested, found_alternative, other]\n    opportunity.no_show_reason (SINGLE_OPTIONS) - values: [forgot, scheduling_conflict, transportation, no_longer_interested, unreachable, other]\n\n  Qualification (5):\n    opportunity.primary_concern (SINGLE_OPTIONS) - values: [ed, trt, weight, sleep, fatigue, performance, general_wellness, other]\n    opportunity.age_range (SINGLE_OPTIONS) - values: [under_30, 30_39, 40_49, 50_59, 60_69, 70_plus]\n    opportunity.health_goal (LARGE_TEXT)\n    opportunity.service_interested_in (MULTIPLE_OPTIONS)\n    opportunity.preferred_appointment_date (DATE)\n\n  Dispositions (3):\n    opportunity.preferred_appointment_time (SINGLE_OPTIONS) - values: [morning, midday, afternoon, evening]\n    opportunity.call_disposition (SINGLE_OPTIONS) - values: [connected, voicemail, no_answer, wrong_number, callback_requested, dnc, other]\n    opportunity.consult_disposition (SINGLE_OPTIONS) - values: [showed, no_show, cancelled, rescheduled]\n\n  Notes & feedback (4):\n    opportunity.lead_notes (LARGE_TEXT)\n    opportunity.visit_feedback_score (NUMERICAL) - 1-10 NPS/CSAT.\n    opportunity.visit_feedback_text (LARGE_TEXT)\n    opportunity.review_status (SINGLE_OPTIONS) - values: [not_asked, asked, posted, declined]\n    opportunity.review_link (TEXT)\n\n  EMR back-reference (1):\n    opportunity.emr_visit_id (TEXT) - FK external.emr.visit_id; one per visit.\n\nStep 2 - Validation:\n  a. GET /customfields?model=opportunity. Snapshot to audit/opp-fields-after.json. Assert all 30 new keys present.\n  b. Diff before vs after: assert exactly 30 additions, 0 modifications, 0 deletions.\n  c. Test record: pick a test opportunity, PATCH each new field with a sample value. Assert all writes succeed.\n  d. Idempotency: 2nd run reports 0 changes.\n\nHARD rules:\n  - DO NOT modify opportunity.monetary_value, .contact_id, .pipeline_id, .pipeline_stage_id, .status (built-in).\n  - DO NOT delete or rename any existing custom field here. Renames (ad_* -> nosale_*, patient_advisor -> patient_care_consultant) happen in s1e.\n  - DO NOT touch workflow 05 here. Wiring it to write opportunity.sale_outcome is part of the existing P0 fix-bleed prompt + s4-wire-outcome.\n\nOutputs:\n  - migration/s1c-opp-fields.json (field_ids for the 30 new fields)\n  - audit/opp-fields-before.json + audit/opp-fields-after.json (diff baseline)\n  - migration/s1c-opp-fields.log",
+    "validates": [
+      "30 new opportunity-level fields exist with exact spec keys + types",
+      "opportunity.lead_source_id FK references lead_source.id",
+      "opportunity.emr_visit_id slot ready for EMR sync",
+      "No existing opp field modified",
+      "Test PATCH succeeds for each new field",
+      "Script is idempotent"
+    ],
+    "outputs": [
+      "30 new opportunity custom fields",
+      "Diff snapshots: opp-fields-before / -after",
+      "Field IDs file for downstream prompts"
+    ]
+  },
+  {
+    "id": "s1d-add-contact-cache-fields",
+    "step": "S1d - Schema build (modify OOTB object)",
+    "title": "Add denormalized cache fields on Contact (5 fields for current state mirrors + EMR FK)",
+    "status": "Ready",
+    "goal": "Add the 5 Contact-level fields that act as denormalized caches of state owned by the new custom objects + EMR. These let workflows read \"what is the current consent state\" or \"where is this patient in the EMR\" without querying child objects on every step. Pure additive.",
+    "inputs": [
+      "~/.ghl_pit",
+      "Spec: pm-site-v2/public/data-spec.json -> objects[name=\"Contact\"]",
+      "Prerequisite: S1a-create-lead-source + S1b-create-consent-log done",
+      "Note: some fields may have been added already by S1a (latest_lead_source_id) or S1b (sms_consent_*). Detect and skip if present."
+    ],
+    "prompt": "Goal: Add 5 denormalized cache fields on Contact. They mirror state owned by Lead Source, Consent Log, and the external EMR so workflows can branch on current state without a child-object query. Idempotent - skips any field that already exists from a prior prompt.\n\nPre-flight:\n  1. GET /customfields?model=contact. Snapshot to audit/contact-fields-before.json.\n  2. For each of the 5 fields below, check existence first; skip if present (S1a and S1b may have already added some).\n\nStep 1 - Add the 5 denorm cache fields. POST /customfields with model=contact per the spec data-spec.json objects[name=\"Contact\"].fields[]:\n\n  1. contact.latest_lead_source_id (TEXT)\n     - FK: lead_source.id\n     - Notes: Most recent Lead Source record. Updated by WF 01 on every touch. DENORMALIZED CACHE: Lead Source records are canonical; this is a mirror.\n     - SKIP if added by S1a.\n\n  2. contact.sms_consent_status (SINGLE_OPTIONS)\n     - Values: [opted_in, opted_out, never_asked]\n     - Notes: MIRROR of latest Consent Log record where consent_type=sms_marketing. Written by WF 11. Never edited directly.\n     - SKIP if added by S1b.\n\n  3. contact.sms_consent_updated_at (DATE)\n     - Notes: MIRROR of the most recent Consent Log record's recorded_at. Updated by WF 11.\n     - SKIP if added by S1b.\n\n  4. contact.dnd_state (SINGLE_OPTIONS)\n     - Values: [active, suppressed_sms, suppressed_email, suppressed_all]\n     - Notes: Managed exclusively by WF 11 (single STOP/DND authority).\n     - SKIP if added by S1b.\n\n  5. contact.emr_patient_id (TEXT)\n     - FK: external.emr.patient_id\n     - Notes: Sync key for EMR <-> GHL integration. Set on first EMR enrollment. The ONE clinical link GHL holds; everything else clinical lives in EMR.\n     - Always net-new here.\n\nAlso rationalize communication_preference if needed:\n  - Inspect existing contact.communication_preference. If it's missing the multi-select shape, recreate as MULTIPLE_OPTIONS with values [sms, email, phone, none]. Otherwise leave alone.\n\nStep 2 - Validation:\n  a. GET /customfields?model=contact. Snapshot to audit/contact-fields-after.json. Assert all 5 keys present.\n  b. Diff: assert net additions = (5 - skipped), 0 modifications.\n  c. Test: set each on a test contact via PATCH. Assert writes succeed.\n  d. Idempotency: 2nd run = 0 changes.\n\nHARD rules:\n  - DO NOT delete legacy contact-level sale/UTM/consent fields. Step 6 Cleanup only.\n  - DO NOT set up dual-write workflows here. That's the existing P0 rev-rec prompt + s4-wire-*.\n  - DO NOT backfill emr_patient_id from any source. Set only on actual EMR enrollment.\n\nOutputs:\n  - migration/s1d-contact-cache-fields.json (field_ids of the 5)\n  - audit/contact-fields-before.json + after.json\n  - migration/s1d-contact-cache-fields.log",
+    "validates": [
+      "5 Contact denorm cache fields exist with spec keys + types",
+      "FK keys point at the right targets (lead_source.id, external.emr.patient_id)",
+      "Field types match spec (SINGLE_OPTIONS values exactly as listed)",
+      "No existing field modified except optional communication_preference rationalization",
+      "Idempotent across re-runs"
+    ],
+    "outputs": [
+      "5 new Contact denorm cache fields",
+      "Field IDs for the cache row used by workflows 01 and 11"
+    ]
+  },
+  {
+    "id": "s1e-renames",
+    "step": "S1e - Schema build (rename + dual-write)",
+    "title": "Rename ad_* -> nosale_*, patient_advisor -> patient_care_consultant (dual-write, do NOT delete)",
+    "status": "Ready",
+    "goal": "Rename two fields that cause confusion. \"A&D\" looks like \"advertising\" but means Advise and Decline (a no-sale outcome) - if a future engineer keys off ad_* in WF 13 they would send real no-sales to Meta/Google as fake conversions. \"PA\" looks like Physician's Assistant but means Patient Care Consultant (PCC) (the sales role). Both renames write to the new field while keeping the old one live; the old fields are deleted in Step 6 after all readers migrate.",
+    "inputs": [
+      "~/.ghl_pit",
+      "S1c-add-opp-fields completed (opportunity.nosale_reason, .nosale_reason_other, .patient_care_consultant_id exist as targets)",
+      "Snapshot of current contact.ad_reason, contact.ad_other_explanation, contact.patient_advisor values (back up before any change)"
+    ],
+    "prompt": "Goal: Two rename operations, both additive + dual-write. The new fields on Opportunity already exist (added in S1c). This prompt copies values from the legacy Contact fields to the new Opportunity fields for the OPEN opportunity set, and stands up dual-write triggers so going forward both old and new locations stay in sync until Step 6 retires the old.\n\nRename 1: contact.ad_reason -> opportunity.nosale_reason\nRename 2: contact.ad_other_explanation -> opportunity.nosale_reason_other\nRename 3: contact.patient_advisor -> opportunity.patient_care_consultant_id\n\nWhy these matter:\n  - WF 13 (Ad-Platform Conversions) fires Meta CAPI / Google Ads. If anyone keys off ad_* on a contact, they wire NO-SALES into AD CONVERSIONS - the worst possible signal-to-platform mistake. The rename eliminates the namespace collision.\n  - In a healthcare context, \"PA\" = Physician's Assistant. The patient_advisor field is the sales role (Patient Care Consultant / PCC). Same character string, different professions. Rename for clarity.\n\nPre-flight:\n  1. Confirm s1c-add-opp-fields.json exists; load opportunity.nosale_reason, nosale_reason_other, patient_care_consultant_id field_ids.\n  2. Snapshot all three legacy Contact field values into audit/legacy-rename-snapshot.json (one row per contact that has any value set). This is the BACKUP - do not lose it.\n  3. Inventory which workflows currently READ the legacy fields:\n       grep -l \"ad_reason\\|ad_other_explanation\\|patient_advisor\" ghl_data/workflow_steps/*.json\n     Write the result to migration/s1e-legacy-readers.txt. Each of these must be updated to read the new keys before Step 6 retires the old.\n\nStep 1 - Copy legacy values forward (one-time backfill, OPEN opps only).\n  For each Contact with a value in any of the three legacy fields:\n    a. Find the most recent OPEN opportunity for that contact (status = open).\n    b. If no open opp exists, skip and log to migration/s1e-orphans.json (no destination opp).\n    c. PATCH the opp with:\n         - opportunity.nosale_reason = mapped_value(contact.ad_reason)\n         - opportunity.nosale_reason_other = contact.ad_other_explanation\n         - opportunity.patient_care_consultant_id = contact.patient_advisor\n    d. Mapping for nosale_reason values: see data-spec.json for the new value list. If the legacy value doesn't map, set to nosale_other and put the original value in nosale_reason_other.\n\n  This is DRY-RUN first: emit a CSV (exports/s1e-rename-dryrun.csv) of every proposed PATCH. Owner reviews before write mode runs. Same gate as Step 2 backfill.\n\nStep 2 - Dual-write going forward (no workflow changes here yet; this prompt only SETS UP the rule).\n  Document in migration/s1e-dualwrite-spec.md exactly which workflow steps need updating in a follow-up prompt (s4-wire-renames):\n    - WF 05 currently writes contact.ad_reason. Needs to ALSO write opportunity.nosale_reason on the related opp. Until Step 6, both writes happen.\n    - Wherever contact.patient_advisor is currently set (likely WF 12 disposition, the 4a/4b dispositions), also write opportunity.patient_care_consultant_id on the related opp.\n  Do NOT modify workflows here. Producing the spec doc is enough for s4-wire-renames to consume.\n\nStep 3 - Validation:\n  a. Re-read 100 random rows from the dry-run CSV; spot-check the contact values match what was proposed.\n  b. Apply CSV to OPEN opps. Re-pull and assert opp values match CSV.\n  c. Assert legacy Contact fields are still present + unchanged (we DID NOT delete them).\n  d. Idempotent: 2nd run finds 0 contacts to backfill (all open opps already updated).\n\nHARD rules:\n  - DO NOT delete contact.ad_reason, contact.ad_other_explanation, contact.patient_advisor in this prompt. Step 6 Cleanup only, after readers migrate.\n  - DO NOT touch CLOSED opportunities here. The historical Won/Lost backfill (Step 2) handles closed opps and rewrites them as part of the broader revenue restatement. This prompt only handles OPEN opps.\n  - DO NOT trigger workflow enrollment via these PATCHes. Use non-triggering API endpoints (set fields directly). Verify execution-log count == 0 during the write window.\n\nOutputs:\n  - exports/s1e-rename-dryrun.csv (every proposed PATCH for human review)\n  - exports/s1e-rename-applied.csv (after write mode confirms each)\n  - audit/legacy-rename-snapshot.json (backup of every legacy value)\n  - migration/s1e-orphans.json (contacts with legacy values but no open opp)\n  - migration/s1e-legacy-readers.txt (workflow files that still read legacy fields - input for s4-wire-renames)\n  - migration/s1e-dualwrite-spec.md (workflow change spec for s4-wire-renames)",
+    "validates": [
+      "All OPEN opportunities have new opp-level values copied from legacy Contact fields",
+      "Legacy Contact fields untouched (Step 6 Cleanup deletes)",
+      "Dry-run CSV reviewed before write mode",
+      "Zero workflow enrollments triggered during PATCH window",
+      "100% of legacy readers identified for s4-wire-renames",
+      "Idempotent: 2nd run = 0 changes"
+    ],
+    "outputs": [
+      "Open opps updated with renamed field values",
+      "Backup snapshot + dry-run CSV",
+      "Legacy-reader inventory for the workflow-rewire prompt"
+    ]
+  },
+  {
+    "id": "p0-fix-bleed",
+    "step": "P0 - Stop the bleed",
+    "title": "Remove the auto-Won action from workflow 05",
+    "status": "P0 - go first",
+    "goal": "Stop creating false Won opportunities on attendance. New data is clean from day one even before the historical backfill runs.",
+    "inputs": [
+      "JWT in ~/.ghl_jwt",
+      "Workflow 05 ID from inventory"
+    ],
+    "prompt": "Goal: Remove the auto-Won defect from workflow 05 (Clinic Appt Outcome). Do not touch any other workflow.\n\nSteps:\n1. Read ghl_data/workflow_steps/{wf05_id}.json. Confirm the offending step exists.\n2. Open workflow 05 in GHL UI via deeplink.\n3. DELETE the single create_opportunity action named \"A&D pipeline: Closed, status: WON - hide from a&D opportunity\".\n4. Add Update Opportunity Field action: Sale Outcome = (Sold | No-Sale | MUT) based on branch.\n5. Save as DRAFT.\n\nValidation: re-extract; assert exactly one create_opportunity removed. Drive test contact through SHOWED - assert no new opp in A&D.",
+    "validates": [
+      "A&D pipeline no longer receives new opps from WF 05",
+      "Sale Outcome is single source of truth"
+    ],
+    "outputs": [
+      "Modified workflow 05 (draft)",
+      "Diff report"
+    ]
+  },
+  {
+    "id": "p1-foundation",
+    "step": "Step 1 - Foundation objects",
+    "title": "Create target pipelines, opportunity fields, lost reasons, tags",
+    "status": "Ready",
+    "goal": "Stand up the additive structures the rest of the migration writes into. Nothing existing is modified - purely net-new objects.",
+    "inputs": [
+      "PIT token at ~/.ghl_pit",
+      "Field destination plan"
+    ],
+    "prompt": "Goal: Create the additive foundation: 3 new pipelines, 14 opportunity-level fields, lost reasons, tag registry. Instagram DM pipeline already exists (4th, kept).\n\nPipelines: Sales - Lead to Close · Retention & Renewals · Referrals\nOpportunity fields (14): sale_outcome, sale_type, patient_care_consultant, provider_making_recommendation, product_sold_1..3, term_length_1..3, price_1..3, total_program_amount, consultation_fee, nosale_reason, nosale_reason_other\nTag registry: source_*, location_*, funnel_entry_*, status_*, objection_*\n\nValidation: re-pull pipelines + customfields. Assert 3 pipelines + 14 opp fields exist. Idempotent - second run = 0 changes.",
+    "validates": [
+      "4 target pipelines exist",
+      "14 opp fields with correct types",
+      "Idempotent"
+    ],
+    "outputs": [
+      "Run log + refreshed audit snapshots"
+    ]
+  },
+  {
+    "id": "p2-backfill-dryrun",
+    "step": "Step 2 - Revenue backfill (dry-run)",
+    "title": "Generate the proposed reclassification CSV",
+    "status": "Blocked",
+    "goal": "Produce a reviewable CSV that proposes: keep / split / reclassify for every Won opp. Writes nothing.",
+    "inputs": [
+      "Decision #5: Billing system identity (OPEN - finance must name source)"
+    ],
+    "prompt": "Goal: Dry-run the revenue restatement. Produce a CSV; write nothing.\n\nBLOCKED until Decision #5 lands.\n\nFor each Won opp in A&D:\n- Look up billing record (system named by Decision #5)\n- Classify: clear-Won / clear-Lost / ambiguous\n- Propose move (clear-Won → Sales · Won), Lost + lostReason for clear-Lost\n- Ambiguous → human review queue, never auto-classified\n\nValidation: Σ proposed monetaryValue ≤ Σ billing. count(Won)+count(Lost)+count(ambiguous) == count(A&D Won).",
+    "validates": [
+      "Every Won opp classified",
+      "Ambiguous surfaced for human review",
+      "Sanity invariants hold"
+    ],
+    "outputs": [
+      "Reviewable CSV",
+      "Summary JSON"
+    ]
+  },
+  {
+    "id": "p0c-spike",
+    "step": "Step 0c - Custom-object spike",
+    "title": "Prove Lead Source + Consent Log work as objects in GHL",
+    "status": "Ready",
+    "goal": "Validate GHL custom objects can be triggered, merge into messages, report. If they fail, fall back to opp denormalization.",
+    "inputs": [
+      "PIT token",
+      "Custom-objects beta enabled"
+    ],
+    "prompt": "Three hard requirements (all MUST pass for go-decision):\n1. TRIGGER: workflow fires on \"Lead Source created\"\n2. MERGE: SMS resolves {{lead_source.utm_campaign}}\n3. REPORT: /reports surfaces Lead Source records\n\nIf any fails: fallback to opp denormalization (latest click ID + UTM on Opportunity).",
+    "validates": [
+      "Triggers fire",
+      "Merge fields resolve",
+      "Reports surface data"
+    ],
+    "outputs": [
+      "Spike result doc",
+      "Go/Fallback decision"
+    ]
+  },
+  {
+    "id": "p3-build-drafts",
+    "step": "Step 3 - Build target workflows as drafts",
+    "title": "Build the 16 target workflows in the GHL UI (drafts only)",
+    "status": "Sequenced",
+    "goal": "Construct each of the 16 target workflows as a draft in production.",
+    "inputs": [
+      "To-Be workflow list (16) from /to-be",
+      "Messaging copy (74 bodies)"
+    ],
+    "prompt": "Build all 16 target workflows as drafts. Do not publish.\n\nFor each: open the Workflows list, create from scratch, rename per target name, copy triggers/tags/bodies from source workflows. Reuse engine tag IDs.\n\nSpecial cases: WF 03 absorbs 03/3a/03b/03c/03d with G1 cadence + telehealth branch. WF 05 edit in place. WF 13 trigger on Booked OR Won-with-monetaryValue>0; explicit EXCLUDE for A&D / No-Sale / Lost.\n\nPer-workflow validation: triggers fire on test contact, messages send in test mode, no accidental enrollment of production contacts.",
+    "validates": [
+      "16 drafts exist and pass test-contact runs",
+      "No production enrollment during build"
+    ],
+    "outputs": [
+      "16 drafts in GHL",
+      "Build checklist"
+    ]
+  },
+  {
+    "id": "p4-canary",
+    "step": "Step 5 - Canary cutover",
+    "title": "48h canary on src:bf-web cohort, then widen",
+    "status": "Sequenced",
+    "goal": "Publish 16 drafts; pause 38 sources. 48h watch on test cohort.",
+    "inputs": [
+      "16 drafts ready",
+      "P0 fixes in place",
+      "WF 11 confirmed live"
+    ],
+    "prompt": "Publish 16 drafts smallest-first; pause 38 source workflows. Add canary tag gate (src:bf-web).\n\nMonitor 48h: execution-log error rate < 0.1%, won-with-$0 = 0, stage-flow sanity, SMS counts, STOP/DND replies.\n\nGate at 48h: clean → widen; issues → hold + document.",
+    "validates": [
+      "48h canary clean",
+      "Won-with-$0 stays 0",
+      "No double-execution"
+    ],
+    "outputs": [
+      "Monitor log",
+      "Widen/hold decision"
+    ]
+  },
+  {
+    "id": "p5-cleanup",
+    "step": "Step 6 - Cleanup",
+    "title": "Retire old workflows/fields/pipelines after 2 clean weeks",
+    "status": "Sequenced",
+    "goal": "Make the new world the only world. Order by irreversibility.",
+    "inputs": [
+      "2 clean weeks since cutover",
+      "No alerts on weekly QA"
+    ],
+    "prompt": "Phase A: archive paused workflows (low risk).\nPhase B: confirm no reads of ad_*, patient_advisor, or the 33 never-populated fields → DELETE them (irreversible - last).\nPhase C: confirm pipeline opp counts == 0 → DELETE retired pipelines.\n\nNEVER delete engine tag surface (chatbot_lead, src:bf-web, sniper_*, funnel_entry_*).",
+    "validates": [
+      "No reads of retired fields",
+      "No opps in retired pipelines",
+      "Engine tags intact"
+    ],
+    "outputs": [
+      "Cleanup log",
+      "Final audit snapshot"
+    ]
+  }
+]

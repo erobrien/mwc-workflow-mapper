@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { PageShell } from "../components/Shell";
-import { Card, CardContent, Tabs, TabPanel, Table, TH, TD, Badge, Loading, toneFor } from "../components/ui";
+import { Card, CardContent, Table, TH, TD, Badge, Loading, toneFor } from "../components/ui";
+import { RoutedTabs, RoutedTabPanel } from "../components/RoutedTabs";
 import { useData } from "../lib/data";
 import { ShieldCheck, Terminal, ArrowRight } from "lucide-react";
 
@@ -49,13 +50,13 @@ export default function Plan() {
         </Link>
       }
     >
-      <Tabs tabs={[
+      <RoutedTabs base="/plan" tabs={[
         { value: "timeline", label: "Timeline" },
-        { value: "guards", label: "Guardrails" },
+        { value: "guardrails", label: "Guardrails" },
         { value: "tests", label: "Test matrix" },
         { value: "scope", label: "Scope manifest" },
       ]}>
-        <TabPanel value="timeline" className="space-y-3">
+        <RoutedTabPanel value="timeline" className="space-y-3">
           {steps.map((s) => (
             <Card key={s.n} className={s.status === "Blocked" ? "border-amber-300 dark:border-amber-900" : ""}>
               <CardContent className="p-4">
@@ -72,9 +73,9 @@ export default function Plan() {
               </CardContent>
             </Card>
           ))}
-        </TabPanel>
+        </RoutedTabPanel>
 
-        <TabPanel value="guards" className="space-y-2">
+        <RoutedTabPanel value="guardrails" className="space-y-2">
           {data.guardrails.map((g, i) => (
             <Card key={i}><CardContent className="flex items-baseline gap-3 p-4">
               <ShieldCheck className="h-4 w-4 shrink-0 text-emerald-600" />
@@ -82,9 +83,9 @@ export default function Plan() {
               <span className="font-medium">{g}</span>
             </CardContent></Card>
           ))}
-        </TabPanel>
+        </RoutedTabPanel>
 
-        <TabPanel value="tests">
+        <RoutedTabPanel value="tests">
           <Card><CardContent className="p-0">
             <Table>
               <thead><tr><TH>Scenario</TH><TH>Assertion</TH><TH className="w-20">Mode</TH></tr></thead>
@@ -99,16 +100,16 @@ export default function Plan() {
               </tbody>
             </Table>
           </CardContent></Card>
-        </TabPanel>
+        </RoutedTabPanel>
 
-        <TabPanel value="scope">
+        <RoutedTabPanel value="scope">
           <Card><CardContent className="p-6">
             <ol className="list-decimal space-y-2 ps-6 text-sm leading-relaxed">
               {SCOPE.map((s, i) => <li key={i} dangerouslySetInnerHTML={{ __html: s }} />)}
             </ol>
           </CardContent></Card>
-        </TabPanel>
-      </Tabs>
+        </RoutedTabPanel>
+      </RoutedTabs>
     </PageShell>
   );
 }

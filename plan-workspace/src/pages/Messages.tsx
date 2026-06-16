@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { PageShell } from "../components/Shell";
-import { Card, CardContent, Tabs, TabPanel, Badge, Loading } from "../components/ui";
+import { Card, CardContent, Badge, Loading } from "../components/ui";
+import { RoutedTabs, RoutedTabPanel } from "../components/RoutedTabs";
 import { useData } from "../lib/data";
 
 function chanTone(c: string) {
@@ -26,8 +27,8 @@ export default function Messages() {
       <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search message text…"
         className="mb-4 w-full max-w-md rounded-md border bg-background px-3 py-1.5 text-sm outline-none focus:ring-2 focus:ring-ring" />
 
-      <Tabs tabs={[{ value: "tobe", label: `Target (${tobe.length})` }, { value: "asis", label: `Legacy (${asis.length})` }]}>
-        <TabPanel value="tobe" className="space-y-2">
+      <RoutedTabs base="/messages" tabs={[{ value: "target", label: `Target (${tobe.length})` }, { value: "legacy", label: `Legacy (${asis.length})` }]}>
+        <RoutedTabPanel value="target" className="space-y-2">
           {tobe.map((m, i) => (
             <Card key={i}><CardContent className="p-4">
               <div className="mb-1.5 flex flex-wrap items-center gap-2">
@@ -39,8 +40,8 @@ export default function Messages() {
               <pre className="whitespace-pre-wrap font-sans text-sm text-foreground/90">{m.message}</pre>
             </CardContent></Card>
           ))}
-        </TabPanel>
-        <TabPanel value="asis" className="space-y-2">
+        </RoutedTabPanel>
+        <RoutedTabPanel value="legacy" className="space-y-2">
           {asis.map((m, i) => (
             <Card key={i}><CardContent className="p-4">
               <div className="mb-1.5 flex flex-wrap items-center gap-2">
@@ -53,8 +54,8 @@ export default function Messages() {
               <pre className="whitespace-pre-wrap font-sans text-sm text-foreground/90">{m.message}</pre>
             </CardContent></Card>
           ))}
-        </TabPanel>
-      </Tabs>
+        </RoutedTabPanel>
+      </RoutedTabs>
     </PageShell>
   );
 }

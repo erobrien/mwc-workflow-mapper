@@ -1,0 +1,698 @@
+[
+ {
+  "name": "Lead Source",
+  "key": "opportunity.lead_source",
+  "type": "SINGLE_OPTIONS",
+  "options": [
+   "Facebook Email",
+   "Online Appointment",
+   "Incoming Call",
+   "Free Consult",
+   "Meta paid Ad",
+   "Google paid Ad",
+   "Bing paid Ad",
+   "Meta utm",
+   "Google utm",
+   "Bing utm"
+  ],
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 400,
+  "added": "2025-11-27",
+  "standard": false,
+  "id": "erNYds93RsIn9mEyplyY"
+ },
+ {
+  "name": "Appointment Date",
+  "key": "opportunity.appointment_date",
+  "type": "DATE",
+  "options": null,
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 550,
+  "added": "2025-11-27",
+  "standard": false,
+  "id": "v5q9r6zx3MvBhmVBjlDH"
+ },
+ {
+  "name": "Promo Code",
+  "key": "opportunity.promo_code",
+  "type": "TEXT",
+  "options": null,
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 650,
+  "added": "2025-11-27",
+  "standard": false,
+  "id": "XDfg6A0OEqWrp1tyXCei"
+ },
+ {
+  "name": "Today's Date",
+  "key": "opportunity.todays_date",
+  "type": "DATE",
+  "options": null,
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 700,
+  "added": "2025-12-07",
+  "standard": false,
+  "id": "9KWlc4YWLuEzy4U87q1j"
+ },
+ {
+  "name": "Location",
+  "key": "opportunity.location",
+  "type": "SINGLE_OPTIONS",
+  "options": [
+   "RVA",
+   "Not Sure",
+   "NPN",
+   "Contact Center",
+   "VBA"
+  ],
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 750,
+  "added": "2025-12-07",
+  "standard": false,
+  "id": "t7rRH874DfIXTvwvgHas"
+ },
+ {
+  "name": "Patient's Birthday",
+  "key": "opportunity.patients_birthday",
+  "type": "DATE",
+  "options": null,
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 800,
+  "added": "2025-12-07",
+  "standard": false,
+  "id": "91SMX3poD1pgDGT4fWf1"
+ },
+ {
+  "name": "Insurance Provider",
+  "key": "opportunity.insurance_provider",
+  "type": "SINGLE_OPTIONS",
+  "options": [
+   "Yes",
+   "No",
+   "Unknown"
+  ],
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 900,
+  "added": "2025-12-07",
+  "standard": false,
+  "id": "NAukSEfOhsrRD9BOuo1I"
+ },
+ {
+  "name": "Treatment Stage",
+  "key": "opportunity.treatment_stage",
+  "type": "SINGLE_OPTIONS",
+  "options": [
+   "Consultation Scheduled",
+   "Treatment Started",
+   "Mid-Treatment",
+   "Treatment Completed"
+  ],
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 950,
+  "added": "2025-12-07",
+  "standard": false,
+  "id": "Kx4C0JuD0rSl7d11tDf2"
+ },
+ {
+  "name": "Consultation Date",
+  "key": "opportunity.consultation_date",
+  "type": "DATE",
+  "options": null,
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 1000,
+  "added": "2025-12-07",
+  "standard": false,
+  "id": "mmNBzhV1Rvb6yWh9eFxm"
+ },
+ {
+  "name": "Deductible Met",
+  "key": "opportunity.deductible_met",
+  "type": "SINGLE_OPTIONS",
+  "options": [
+   "Yes",
+   "No"
+  ],
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 1050,
+  "added": "2025-12-07",
+  "standard": false,
+  "id": "GPMxlOPzuf3x4oEX5DQP"
+ },
+ {
+  "name": "Lead Source ID",
+  "key": "opportunity.lead_source_id",
+  "type": "TEXT",
+  "options": null,
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 1100,
+  "added": "2026-06-14",
+  "standard": false,
+  "id": "QGNNadDeR9OIharpshpl"
+ },
+ {
+  "name": "Patient Care Consultant (PCC)",
+  "key": "opportunity.patient_care_consultant_pcc",
+  "type": "TEXT",
+  "options": null,
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 1150,
+  "added": "2026-06-14",
+  "standard": false,
+  "id": "3FCLpWbeguLJaIdLYc7i"
+ },
+ {
+  "name": "Provider Making Recommendation",
+  "key": "opportunity.provider_making_recommendation",
+  "type": "TEXT",
+  "options": null,
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 1200,
+  "added": "2026-06-14",
+  "standard": false,
+  "id": "zM25RGviRMe9EZLxNyrs"
+ },
+ {
+  "name": "No-Sale Reason - Other Explanation",
+  "key": "opportunity.nosale_reason__other_explanation",
+  "type": "LARGE_TEXT",
+  "options": null,
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 1250,
+  "added": "2026-06-14",
+  "standard": false,
+  "id": "AEZBHNkeKaYbgKGX3C14"
+ },
+ {
+  "name": "Health Goal",
+  "key": "opportunity.health_goal",
+  "type": "LARGE_TEXT",
+  "options": null,
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 1300,
+  "added": "2026-06-14",
+  "standard": false,
+  "id": "HB724FmWwqN083uu9YTm"
+ },
+ {
+  "name": "Preferred Appointment Date",
+  "key": "opportunity.preferred_appointment_date",
+  "type": "DATE",
+  "options": null,
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 1350,
+  "added": "2026-06-14",
+  "standard": false,
+  "id": "kZycujWPmG99b8KLBpZT"
+ },
+ {
+  "name": "Lead Notes",
+  "key": "opportunity.lead_notes",
+  "type": "LARGE_TEXT",
+  "options": null,
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 1400,
+  "added": "2026-06-14",
+  "standard": false,
+  "id": "8vK62jLsB2tlnKXd3dVq"
+ },
+ {
+  "name": "Visit Feedback Score",
+  "key": "opportunity.visit_feedback_score",
+  "type": "NUMERICAL",
+  "options": null,
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 1450,
+  "added": "2026-06-14",
+  "standard": false,
+  "id": "MUfLqOQ5S0uhIGhc5Kvc"
+ },
+ {
+  "name": "Visit Feedback Text",
+  "key": "opportunity.visit_feedback_text",
+  "type": "LARGE_TEXT",
+  "options": null,
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 1500,
+  "added": "2026-06-14",
+  "standard": false,
+  "id": "KLomddkzMZhVyBIw9QvG"
+ },
+ {
+  "name": "Review Link",
+  "key": "opportunity.review_link",
+  "type": "TEXT",
+  "options": null,
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 1550,
+  "added": "2026-06-14",
+  "standard": false,
+  "id": "FNlbVTk6iAS2WIDkYAwd"
+ },
+ {
+  "name": "EMR Visit ID",
+  "key": "opportunity.emr_visit_id",
+  "type": "TEXT",
+  "options": null,
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 1600,
+  "added": "2026-06-14",
+  "standard": false,
+  "id": "Mp7mKCpyuR41PqGVXggd"
+ },
+ {
+  "name": "Sale Outcome",
+  "key": "opportunity.sale_outcome",
+  "type": "SINGLE_OPTIONS",
+  "options": [
+   "sold",
+   "no_sale",
+   "mut",
+   "undecided"
+  ],
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 1650,
+  "added": "2026-06-14",
+  "standard": false,
+  "id": "acS1ZKCFsCNQwYfKl8yH"
+ },
+ {
+  "name": "Sale Type",
+  "key": "opportunity.sale_type",
+  "type": "SINGLE_OPTIONS",
+  "options": [
+   "new",
+   "renewal",
+   "upsell",
+   "reactivation"
+  ],
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 1700,
+  "added": "2026-06-14",
+  "standard": false,
+  "id": "r0qmmoJV6sBstL4BYco0"
+ },
+ {
+  "name": "Product Sold - Item 1",
+  "key": "opportunity.product_sold__item_1",
+  "type": "SINGLE_OPTIONS",
+  "options": [
+   "trt",
+   "ed",
+   "weight_mgmt",
+   "peptides",
+   "supplements",
+   "labs",
+   "other"
+  ],
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 1750,
+  "added": "2026-06-14",
+  "standard": false,
+  "id": "AieooJF4n2OaViyiN9LX"
+ },
+ {
+  "name": "Term Length - Item 1",
+  "key": "opportunity.term_length__item_1",
+  "type": "SINGLE_OPTIONS",
+  "options": [
+   "1mo",
+   "3mo",
+   "6mo",
+   "12mo",
+   "24mo"
+  ],
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 1800,
+  "added": "2026-06-14",
+  "standard": false,
+  "id": "u4nAZWV4nISzfl4ME3sI"
+ },
+ {
+  "name": "Price - Item 1",
+  "key": "opportunity.price__item_1",
+  "type": "MONETORY",
+  "options": null,
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 1850,
+  "added": "2026-06-14",
+  "standard": false,
+  "id": "pgkhGlPYANLrYupBq0Rl"
+ },
+ {
+  "name": "Price - Item 2",
+  "key": "opportunity.price__item_2",
+  "type": "MONETORY",
+  "options": null,
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 1900,
+  "added": "2026-06-14",
+  "standard": false,
+  "id": "RqH54p6TQALe3KRo7I55"
+ },
+ {
+  "name": "Price - Item 3",
+  "key": "opportunity.price__item_3",
+  "type": "MONETORY",
+  "options": null,
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 1950,
+  "added": "2026-06-14",
+  "standard": false,
+  "id": "TwK3tynEPynFjzd2q5D6"
+ },
+ {
+  "name": "Total Program Amount",
+  "key": "opportunity.total_program_amount",
+  "type": "MONETORY",
+  "options": null,
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 2000,
+  "added": "2026-06-14",
+  "standard": false,
+  "id": "MZpiEoqfEkg49RYkXxm2"
+ },
+ {
+  "name": "Consultation Fee",
+  "key": "opportunity.consultation_fee",
+  "type": "MONETORY",
+  "options": null,
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 2050,
+  "added": "2026-06-14",
+  "standard": false,
+  "id": "xG4iHAufbTy48EVHbzQJ"
+ },
+ {
+  "name": "Pay Type",
+  "key": "opportunity.pay_type",
+  "type": "SINGLE_OPTIONS",
+  "options": [
+   "financing",
+   "cash",
+   "card",
+   "ach",
+   "hsa",
+   "fsa",
+   "insurance",
+   "other"
+  ],
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 2100,
+  "added": "2026-06-14",
+  "standard": false,
+  "id": "47oUC1qzBdIjS5VtV79u"
+ },
+ {
+  "name": "No-Sale Reason",
+  "key": "opportunity.nosale_reason",
+  "type": "SINGLE_OPTIONS",
+  "options": [
+   "nosale_cost",
+   "nosale_fear",
+   "nosale_partner",
+   "nosale_timing",
+   "nosale_decision",
+   "nosale_medical",
+   "nosale_other"
+  ],
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 2150,
+  "added": "2026-06-14",
+  "standard": false,
+  "id": "o9RMgwwBl7cfTXmZeuhq"
+ },
+ {
+  "name": "Cancellation Reason",
+  "key": "opportunity.cancellation_reason",
+  "type": "SINGLE_OPTIONS",
+  "options": [
+   "scheduling_conflict",
+   "health_issue",
+   "no_longer_interested",
+   "found_alternative",
+   "other"
+  ],
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 2200,
+  "added": "2026-06-14",
+  "standard": false,
+  "id": "Cf9dCdXGezmraKaws4O1"
+ },
+ {
+  "name": "No-Show Reason",
+  "key": "opportunity.noshow_reason",
+  "type": "SINGLE_OPTIONS",
+  "options": [
+   "forgot",
+   "scheduling_conflict",
+   "transportation",
+   "no_longer_interested",
+   "unreachable",
+   "other"
+  ],
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 2250,
+  "added": "2026-06-14",
+  "standard": false,
+  "id": "flhvXpYmTyzSD5b5zTec"
+ },
+ {
+  "name": "Primary Concern",
+  "key": "opportunity.primary_concern",
+  "type": "SINGLE_OPTIONS",
+  "options": [
+   "ed",
+   "trt",
+   "weight",
+   "sleep",
+   "fatigue",
+   "performance",
+   "general_wellness",
+   "other"
+  ],
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 2300,
+  "added": "2026-06-14",
+  "standard": false,
+  "id": "bn6aJe5eatltyoR2D15u"
+ },
+ {
+  "name": "Age Range",
+  "key": "opportunity.age_range",
+  "type": "SINGLE_OPTIONS",
+  "options": [
+   "under_30",
+   "30_39",
+   "40_49",
+   "50_59",
+   "60_69",
+   "70_plus"
+  ],
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 2350,
+  "added": "2026-06-14",
+  "standard": false,
+  "id": "hwegeTvpCjVnM1Q6iaah"
+ },
+ {
+  "name": "Preferred Appointment Time",
+  "key": "opportunity.preferred_appointment_time",
+  "type": "SINGLE_OPTIONS",
+  "options": [
+   "morning",
+   "midday",
+   "afternoon",
+   "evening"
+  ],
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 2400,
+  "added": "2026-06-14",
+  "standard": false,
+  "id": "a5lTGyxgyBtz2zyifckC"
+ },
+ {
+  "name": "Call Disposition",
+  "key": "opportunity.call_disposition",
+  "type": "SINGLE_OPTIONS",
+  "options": [
+   "connected",
+   "voicemail",
+   "no_answer",
+   "wrong_number",
+   "callback_requested",
+   "dnc",
+   "other"
+  ],
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 2450,
+  "added": "2026-06-14",
+  "standard": false,
+  "id": "h89PBu5tpSDIPkHyFXej"
+ },
+ {
+  "name": "Consult Disposition",
+  "key": "opportunity.consult_disposition",
+  "type": "SINGLE_OPTIONS",
+  "options": [
+   "showed",
+   "no_show",
+   "cancelled",
+   "rescheduled"
+  ],
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 2500,
+  "added": "2026-06-14",
+  "standard": false,
+  "id": "ovKFgqQ4a2JRukEPm5XJ"
+ },
+ {
+  "name": "Review Status",
+  "key": "opportunity.review_status",
+  "type": "SINGLE_OPTIONS",
+  "options": [
+   "not_asked",
+   "asked",
+   "posted",
+   "declined"
+  ],
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 2550,
+  "added": "2026-06-14",
+  "standard": false,
+  "id": "Ej4zPxGbTHMu5uD7DDxu"
+ },
+ {
+  "name": "Product Sold - Item 2",
+  "key": "opportunity.product_sold__item_2",
+  "type": "SINGLE_OPTIONS",
+  "options": [
+   "trt",
+   "ed",
+   "weight_mgmt",
+   "peptides",
+   "supplements",
+   "labs",
+   "other"
+  ],
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 2600,
+  "added": "2026-06-14",
+  "standard": false,
+  "id": "V2Sxy0DrRNIbaCfChciv"
+ },
+ {
+  "name": "Product Sold - Item 3",
+  "key": "opportunity.product_sold__item_3",
+  "type": "SINGLE_OPTIONS",
+  "options": [
+   "trt",
+   "ed",
+   "weight_mgmt",
+   "peptides",
+   "supplements",
+   "labs",
+   "other"
+  ],
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 2650,
+  "added": "2026-06-14",
+  "standard": false,
+  "id": "ObuutEdcw6DqRGfVlu42"
+ },
+ {
+  "name": "Term Length - Item 2",
+  "key": "opportunity.term_length__item_2",
+  "type": "SINGLE_OPTIONS",
+  "options": [
+   "1mo",
+   "3mo",
+   "6mo",
+   "12mo",
+   "24mo"
+  ],
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 2700,
+  "added": "2026-06-14",
+  "standard": false,
+  "id": "4dLKM5RCN901OADHhvVY"
+ },
+ {
+  "name": "Term Length - Item 3",
+  "key": "opportunity.term_length__item_3",
+  "type": "SINGLE_OPTIONS",
+  "options": [
+   "1mo",
+   "3mo",
+   "6mo",
+   "12mo",
+   "24mo"
+  ],
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 2750,
+  "added": "2026-06-14",
+  "standard": false,
+  "id": "ri0yWXd84MRbDgvvK0Ut"
+ },
+ {
+  "name": "Service Interested In",
+  "key": "opportunity.service_interested_in",
+  "type": "MULTIPLE_OPTIONS",
+  "options": [
+   "trt",
+   "ed",
+   "weight_mgmt",
+   "peptides",
+   "general_wellness"
+  ],
+  "placeholder": null,
+  "folder": "Z99jmzcGc7Sdw8ehKiMA",
+  "position": 2800,
+  "added": "2026-06-14",
+  "standard": false,
+  "id": "09kPeSDUYNNqI1PbZOYy"
+ }
+]

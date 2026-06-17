@@ -1,0 +1,22 @@
+{
+ "scanned": 7160,
+ "standard": {
+  "name": 7093,
+  "source": 6420,
+  "assignedTo (Owner)": 5890,
+  "status": 7160,
+  "lostReason": 1321,
+  "monetaryValue (Lead value)": 613
+ },
+ "custom": {},
+ "custom_zero": [
+  "Patient's Birthday",
+  "Today's Date",
+  "Treatment Stage",
+  "Promo Code",
+  "Lead Source",
+  "Consultation Date",
+  "Location",
+  "Appointment Date"
+ ]
+}

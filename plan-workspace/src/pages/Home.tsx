@@ -51,6 +51,33 @@ export default function Home() {
         </>
       }
     >
+      {/* The two problems */}
+      <section>
+        <h2 className="mb-3 text-base font-semibold">The two problems this fixes</h2>
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+          <div className="rounded-md border border-l-4 border-l-destructive bg-card p-5">
+            <div className="mb-2 flex items-center gap-2.5">
+              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-destructive text-sm font-semibold text-destructive-foreground">1</span>
+              <h3 className="font-semibold leading-tight">Deals are dispositioned on the contact, not the opportunity</h3>
+            </div>
+            <p className="text-sm leading-relaxed text-foreground/90">
+              PCCs record the sale outcome and amount on the <b>contact</b> (or a workflow does), so every new consultation <b>overwrites the last</b> and the <b>opportunity</b> — the only record GHL recognizes revenue on — stays empty. Revenue can't be reported per deal, per location, or per rep.
+            </p>
+            <div className="mt-3 inline-flex rounded-md bg-red-50 px-2.5 py-1 text-xs font-medium text-red-700 dark:bg-red-950 dark:text-red-300">Only ~9% of opportunities carry a dollar value</div>
+          </div>
+          <div className="rounded-md border border-l-4 border-l-destructive bg-card p-5">
+            <div className="mb-2 flex items-center gap-2.5">
+              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-destructive text-sm font-semibold text-destructive-foreground">2</span>
+              <h3 className="font-semibold leading-tight">Marketing attribution isn't carried through to win/loss</h3>
+            </div>
+            <p className="text-sm leading-relaxed text-foreground/90">
+              The lead source, UTM, and click IDs that drove each deal are never <b>carried onto the opportunity at win or loss</b> — so you can't connect <b>ad spend to Won revenue</b>, or see which campaigns produce sales versus no-shows and no-sales. What attribution exists sits on the contact and overwrites with each new touch.
+            </p>
+            <div className="mt-3 inline-flex rounded-md bg-red-50 px-2.5 py-1 text-xs font-medium text-red-700 dark:bg-red-950 dark:text-red-300">Click IDs captured on 0 of 11,000+ contacts</div>
+          </div>
+        </div>
+      </section>
+
       {/* Problem statement */}
       <section className="rounded-md border bg-card p-5">
         <div className="mb-3 flex flex-wrap items-baseline justify-between gap-3">
@@ -85,24 +112,6 @@ export default function Home() {
         <Tile icon={AlertTriangle} label="Critical findings" value={`${crit.length} Critical / ${data.defects.length} total`} note="All evidence-backed by API capture" tone="warning" />
         <Tile icon={ListChecks} label="Execution" value={`${ready} ready · ${blocked} blocked`} note="2 P0 prompts — go first" tone="neutral" />
       </div>
-
-      {/* RR blockers */}
-      <section>
-        <div className="mb-2 flex items-baseline justify-between">
-          <h2 className="font-mono text-[11px] font-semibold uppercase tracking-wider text-destructive">Revenue recognition blockers — must change before backfill</h2>
-          <Link to="/prompts" className="text-xs text-muted-foreground hover:text-foreground">See P0 prompts →</Link>
-        </div>
-        <div className="space-y-3">
-          <div className="rounded-md border border-l-4 border-l-destructive bg-card p-4">
-            <div className="mb-1 flex flex-wrap items-center gap-2 font-semibold"><Badge tone="red">RR-1</Badge> Sales data is stored on the Contact, not the Opportunity</div>
-            <p className="text-sm text-foreground/90">Sale Outcome, Product / Term / Price ×3, Total Program Amount, Consultation Fee, Pay Type, and the no-sale reason all sit on the <b>Contact</b> — <b>zero</b> opportunity-level financial fields today (target: 14). When the same person consults again, the prior sale is <b>overwritten and lost</b>. GAAP / ASC 606 requires revenue tied to a specific transaction; a Contact-level aggregate cannot recognize per-deal revenue. <b>Fix:</b> move all sale fields to the Opportunity. Workflow <code>05. Clinic Appt Outcome</code> becomes the single writer of Sale Outcome; real Won requires <code>monetaryValue &gt; 0</code>.</p>
-          </div>
-          <div className="rounded-md border border-l-4 border-l-destructive bg-card p-4">
-            <div className="mb-1 flex flex-wrap items-center gap-2 font-semibold"><Badge tone="red">RR-2</Badge> UTM + click IDs are stored on the Contact (and never captured)</div>
-            <p className="text-sm text-foreground/90">UTM Source / Medium / Campaign / Content / Term, Source URL, <code>gclid_value</code>, and <code>fbclid_value</code> live on the Contact, so the latest touch overwrites the previous. Worse — the 90-day scan shows <code>gclid_value</code> and <code>fbclid_value</code> are non-null on <b>0 of {fmt(k.contacts_scanned)} contacts</b>. Attribution is broken at <b>collection</b>, not just storage. <b>Fix:</b> (a) capture click IDs in workflows 01A–E; (b) keep attribution on the Contact and copy the latest UTM + click ID onto the Opportunity when it is created (no custom object needed).</p>
-          </div>
-        </div>
-      </section>
 
       {/* Scope */}
       <section>

@@ -1,0 +1,667 @@
+{
+ "scanned": 11508,
+ "recent_contacts_30d": 3157,
+ "cutoff": "2026-05-18T02:36:54",
+ "fields": [
+  {
+   "name": "Emergency Contact Relationship",
+   "all_time": 0,
+   "last_30d": 0
+  },
+  {
+   "name": "Referred By",
+   "all_time": 0,
+   "last_30d": 0
+  },
+  {
+   "name": " Price – Item 3",
+   "all_time": 0,
+   "last_30d": 0
+  },
+  {
+   "name": "Survey Steps Completed",
+   "all_time": 0,
+   "last_30d": 0
+  },
+  {
+   "name": "Select Office",
+   "all_time": 0,
+   "last_30d": 0
+  },
+  {
+   "name": "SMS Opt-In Date",
+   "all_time": 0,
+   "last_30d": 0
+  },
+  {
+   "name": "gclid_value",
+   "all_time": 0,
+   "last_30d": 0
+  },
+  {
+   "name": "Referral Status",
+   "all_time": 0,
+   "last_30d": 0
+  },
+  {
+   "name": "Electronic Signature (Type Full Legal Name)",
+   "all_time": 0,
+   "last_30d": 0
+  },
+  {
+   "name": "chatbot_session_id",
+   "all_time": 0,
+   "last_30d": 0
+  },
+  {
+   "name": "Service",
+   "all_time": 0,
+   "last_30d": 0
+  },
+  {
+   "name": "SMS Consent Updated At",
+   "all_time": 0,
+   "last_30d": 0
+  },
+  {
+   "name": "SMS Consent Status",
+   "all_time": 0,
+   "last_30d": 0
+  },
+  {
+   "name": "Lab Date",
+   "all_time": 0,
+   "last_30d": 0
+  },
+  {
+   "name": "Latest Lead Source ID",
+   "all_time": 0,
+   "last_30d": 0
+  },
+  {
+   "name": "Other",
+   "all_time": 0,
+   "last_30d": 0
+  },
+  {
+   "name": "chatbot_intent",
+   "all_time": 0,
+   "last_30d": 0
+  },
+  {
+   "name": "Lead Location ",
+   "all_time": 0,
+   "last_30d": 0
+  },
+  {
+   "name": "DND State",
+   "all_time": 0,
+   "last_30d": 0
+  },
+  {
+   "name": "Survery Feedback Score",
+   "all_time": 0,
+   "last_30d": 0
+  },
+  {
+   "name": "Requested Callback Time",
+   "all_time": 0,
+   "last_30d": 0
+  },
+  {
+   "name": "Term Length – Item 3",
+   "all_time": 0,
+   "last_30d": 0
+  },
+  {
+   "name": "SMS Opt-In Source",
+   "all_time": 0,
+   "last_30d": 0
+  },
+  {
+   "name": "Product Sold – Item 3",
+   "all_time": 0,
+   "last_30d": 0
+  },
+  {
+   "name": "Fatigue Frequency",
+   "all_time": 0,
+   "last_30d": 0
+  },
+  {
+   "name": "EMR Patient ID",
+   "all_time": 0,
+   "last_30d": 0
+  },
+  {
+   "name": "Reason",
+   "all_time": 0,
+   "last_30d": 0
+  },
+  {
+   "name": "How did you hear about us? Message",
+   "all_time": 0,
+   "last_30d": 0
+  },
+  {
+   "name": "fbclid_value",
+   "all_time": 0,
+   "last_30d": 0
+  },
+  {
+   "name": "Consultation Disposition",
+   "all_time": 1,
+   "last_30d": 0
+  },
+  {
+   "name": "Renewal Date",
+   "all_time": 1,
+   "last_30d": 0
+  },
+  {
+   "name": "Referral Source Detail",
+   "all_time": 1,
+   "last_30d": 0
+  },
+  {
+   "name": "Consent – IP Address",
+   "all_time": 1,
+   "last_30d": 0
+  },
+  {
+   "name": "Have you ever been diagnosed with any of the following? (Check all that apply) (copy)",
+   "all_time": 1,
+   "last_30d": 0
+  },
+  {
+   "name": "Other Cancellation Reason",
+   "all_time": 2,
+   "last_30d": 0
+  },
+  {
+   "name": "Radio Location",
+   "all_time": 2,
+   "last_30d": 0
+  },
+  {
+   "name": "Which Location Are You Interested In?",
+   "all_time": 3,
+   "last_30d": 0
+  },
+  {
+   "name": "Service interested in?",
+   "all_time": 4,
+   "last_30d": 0
+  },
+  {
+   "name": "Preferred Appointment Time",
+   "all_time": 4,
+   "last_30d": 0
+  },
+  {
+   "name": "Past Surgery",
+   "all_time": 6,
+   "last_30d": 0
+  },
+  {
+   "name": "Preferred Appointment Location",
+   "all_time": 7,
+   "last_30d": 0
+  },
+  {
+   "name": "Multi Line 71uz",
+   "all_time": 8,
+   "last_30d": 0
+  },
+  {
+   "name": "Preferred Appointment Date",
+   "all_time": 8,
+   "last_30d": 0
+  },
+  {
+   "name": "Cancellation Reason",
+   "all_time": 9,
+   "last_30d": 0
+  },
+  {
+   "name": " Price – Item 2",
+   "all_time": 9,
+   "last_30d": 0
+  },
+  {
+   "name": "Survey — Open Feedback",
+   "all_time": 11,
+   "last_30d": 0
+  },
+  {
+   "name": "How did you hear about Men's Wellness Centers?",
+   "all_time": 19,
+   "last_30d": 0
+  },
+  {
+   "name": "How Long Has This Been Going On?",
+   "all_time": 26,
+   "last_30d": 0
+  },
+  {
+   "name": "Tried other treatments?",
+   "all_time": 26,
+   "last_30d": 0
+  },
+  {
+   "name": "Sale Type",
+   "all_time": 35,
+   "last_30d": 0
+  },
+  {
+   "name": "Primary Concern",
+   "all_time": 35,
+   "last_30d": 0
+  },
+  {
+   "name": "Consent Source",
+   "all_time": 44,
+   "last_30d": 0
+  },
+  {
+   "name": "Consent Method",
+   "all_time": 45,
+   "last_30d": 0
+  },
+  {
+   "name": "Status",
+   "all_time": 45,
+   "last_30d": 0
+  },
+  {
+   "name": "Consent Time",
+   "all_time": 45,
+   "last_30d": 0
+  },
+  {
+   "name": "Consent Date",
+   "all_time": 46,
+   "last_30d": 0
+  },
+  {
+   "name": "Communication Preference",
+   "all_time": 3224,
+   "last_30d": 0
+  },
+  {
+   "name": "Saturday Date EOW",
+   "all_time": 3230,
+   "last_30d": 0
+  },
+  {
+   "name": "Original Lead Date",
+   "all_time": 3233,
+   "last_30d": 0
+  },
+  {
+   "name": "Referred by Ambassador",
+   "all_time": 1,
+   "last_30d": 1
+  },
+  {
+   "name": "Print & Local",
+   "all_time": 12,
+   "last_30d": 1
+  },
+  {
+   "name": "Term Length – Item 2",
+   "all_time": 16,
+   "last_30d": 1
+  },
+  {
+   "name": "Referrer's Email Address",
+   "all_time": 8,
+   "last_30d": 2
+  },
+  {
+   "name": "Product Sold – Item 2",
+   "all_time": 30,
+   "last_30d": 2
+  },
+  {
+   "name": "Richmond Stations",
+   "all_time": 29,
+   "last_30d": 4
+  },
+  {
+   "name": "Referrals & Returning",
+   "all_time": 39,
+   "last_30d": 4
+  },
+  {
+   "name": "Ambassador Slug",
+   "all_time": 5,
+   "last_30d": 5
+  },
+  {
+   "name": "Who referred you? (Referrer's name)",
+   "all_time": 24,
+   "last_30d": 5
+  },
+  {
+   "name": "Norfolk / Virginia Beach Stations",
+   "all_time": 41,
+   "last_30d": 5
+  },
+  {
+   "name": "Please Specify",
+   "all_time": 92,
+   "last_30d": 12
+  },
+  {
+   "name": "Channel",
+   "all_time": 85,
+   "last_30d": 13
+  },
+  {
+   "name": "If yes, please describe (optional)",
+   "all_time": 130,
+   "last_30d": 20
+  },
+  {
+   "name": "Social Media",
+   "all_time": 192,
+   "last_30d": 24
+  },
+  {
+   "name": "If yes, please provide brief details (optional)",
+   "all_time": 233,
+   "last_30d": 30
+  },
+  {
+   "name": "Would you recommend us to a friend or family member?",
+   "all_time": 111,
+   "last_30d": 62
+  },
+  {
+   "name": "How would you rate your interaction with our staff?",
+   "all_time": 115,
+   "last_30d": 62
+  },
+  {
+   "name": "Clinic Name",
+   "all_time": 70,
+   "last_30d": 63
+  },
+  {
+   "name": "How would you rate your overall experience today?",
+   "all_time": 117,
+   "last_30d": 63
+  },
+  {
+   "name": "A&D Other Explanation",
+   "all_time": 88,
+   "last_30d": 77
+  },
+  {
+   "name": "May we contact them about your care",
+   "all_time": 99,
+   "last_30d": 90
+  },
+  {
+   "name": "Emergency Contact Name",
+   "all_time": 715,
+   "last_30d": 91
+  },
+  {
+   "name": "Relationship",
+   "all_time": 744,
+   "last_30d": 97
+  },
+  {
+   "name": " Product Sold - Item 1",
+   "all_time": 561,
+   "last_30d": 101
+  },
+  {
+   "name": "Pay Type",
+   "all_time": 577,
+   "last_30d": 101
+  },
+  {
+   "name": "Term Length – Item 1",
+   "all_time": 579,
+   "last_30d": 101
+  },
+  {
+   "name": " Price – Item 1",
+   "all_time": 582,
+   "last_30d": 101
+  },
+  {
+   "name": "Primary Care Provider Name",
+   "all_time": 430,
+   "last_30d": 104
+  },
+  {
+   "name": "A&D Reason",
+   "all_time": 426,
+   "last_30d": 110
+  },
+  {
+   "name": "I confirm the information I provided is accurate to the best of my knowledge.",
+   "all_time": 874,
+   "last_30d": 115
+  },
+  {
+   "name": "I authorize Men’s Wellness Centers and its licensed medical providers to evaluate, diagnose, and treat me, including laboratory testing when medically appropriate.",
+   "all_time": 868,
+   "last_30d": 116
+  },
+  {
+   "name": "May we contact your primary care provider regarding your care?",
+   "all_time": 884,
+   "last_30d": 116
+  },
+  {
+   "name": "Date",
+   "all_time": 884,
+   "last_30d": 116
+  },
+  {
+   "name": "Do you consume alcohol?",
+   "all_time": 884,
+   "last_30d": 116
+  },
+  {
+   "name": "Do you currently smoke or use tobacco products?",
+   "all_time": 884,
+   "last_30d": 116
+  },
+  {
+   "name": "I understand that my care may be provided in person and, when clinically appropriate, via telemedicine.",
+   "all_time": 884,
+   "last_30d": 116
+  },
+  {
+   "name": "Have you ever used testosterone or other hormone therapy?",
+   "all_time": 884,
+   "last_30d": 116
+  },
+  {
+   "name": "I acknowledge that I have received and understand the Notice of Privacy Practices.\n\n",
+   "all_time": 884,
+   "last_30d": 116
+  },
+  {
+   "name": "How long have these symptoms been present?",
+   "all_time": 887,
+   "last_30d": 116
+  },
+  {
+   "name": "Name as Signature",
+   "all_time": 125,
+   "last_30d": 117
+  },
+  {
+   "name": "DOB",
+   "all_time": 131,
+   "last_30d": 118
+  },
+  {
+   "name": "Have you ever used testosterone or other hormone therapy?",
+   "all_time": 133,
+   "last_30d": 118
+  },
+  {
+   "name": "Do you drink alcohol?",
+   "all_time": 133,
+   "last_30d": 118
+  },
+  {
+   "name": "Do you smoke or use tobacco?",
+   "all_time": 133,
+   "last_30d": 118
+  },
+  {
+   "name": "What's the main reason you booked today?",
+   "all_time": 133,
+   "last_30d": 118
+  },
+  {
+   "name": "Consultation Fee",
+   "all_time": 505,
+   "last_30d": 121
+  },
+  {
+   "name": "Emergency Contact Phone",
+   "all_time": 727,
+   "last_30d": 121
+  },
+  {
+   "name": "What is the primary reason for today’s visit?\n\n\n",
+   "all_time": 929,
+   "last_30d": 123
+  },
+  {
+   "name": "CONTACT DISPOSITION",
+   "all_time": 723,
+   "last_30d": 125
+  },
+  {
+   "name": "Current medications (include name, dose, and how often you take them)",
+   "all_time": 662,
+   "last_30d": 150
+  },
+  {
+   "name": "\n\n\n\n\n\n\n\nDo you have any known allergies (medications, foods, latex, or environmental)?",
+   "all_time": 742,
+   "last_30d": 151
+  },
+  {
+   "name": "Psychologic",
+   "all_time": 757,
+   "last_30d": 196
+  },
+  {
+   "name": "Sexual",
+   "all_time": 764,
+   "last_30d": 199
+  },
+  {
+   "name": "How did you hear about Men’s Wellness Centers?\n",
+   "all_time": 913,
+   "last_30d": 205
+  },
+  {
+   "name": "Physical",
+   "all_time": 808,
+   "last_30d": 206
+  },
+  {
+   "name": "Total Program Amount",
+   "all_time": 1033,
+   "last_30d": 219
+  },
+  {
+   "name": "Provider Making Recommendation",
+   "all_time": 1046,
+   "last_30d": 219
+  },
+  {
+   "name": "Sale Outcome",
+   "all_time": 1049,
+   "last_30d": 219
+  },
+  {
+   "name": "Patient Advisor",
+   "all_time": 4237,
+   "last_30d": 219
+  },
+  {
+   "name": "Occupation",
+   "all_time": 896,
+   "last_30d": 220
+  },
+  {
+   "name": "Have you ever been diagnosed with any of the following? (Check all that apply)",
+   "all_time": 1004,
+   "last_30d": 229
+  },
+  {
+   "name": "_atid",
+   "all_time": 357,
+   "last_30d": 355
+  },
+  {
+   "name": "UTM Term",
+   "all_time": 958,
+   "last_30d": 626
+  },
+  {
+   "name": "UTM Source",
+   "all_time": 964,
+   "last_30d": 629
+  },
+  {
+   "name": "UTM Content",
+   "all_time": 971,
+   "last_30d": 630
+  },
+  {
+   "name": "UTM Medium",
+   "all_time": 973,
+   "last_30d": 630
+  },
+  {
+   "name": "UTM Campaign",
+   "all_time": 976,
+   "last_30d": 632
+  },
+  {
+   "name": "Last disposition / Channel",
+   "all_time": 3863,
+   "last_30d": 646
+  },
+  {
+   "name": "Last Disposition Date",
+   "all_time": 3546,
+   "last_30d": 648
+  },
+  {
+   "name": "Location",
+   "all_time": 5898,
+   "last_30d": 659
+  },
+  {
+   "name": "IP Address",
+   "all_time": 2540,
+   "last_30d": 850
+  },
+  {
+   "name": "SOURCE URL",
+   "all_time": 2432,
+   "last_30d": 863
+  },
+  {
+   "name": "Preferred Location",
+   "all_time": 4973,
+   "last_30d": 1865
+  }
+ ]
+}

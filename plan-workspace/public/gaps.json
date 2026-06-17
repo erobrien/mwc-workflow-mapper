@@ -4,8 +4,9 @@
   "live_counts": {
     "contacts": 11491,
     "opportunities": 7153,
-    "custom_fields": 141,
-    "custom_fields_on_opportunity": 0,
+    "custom_fields_contact": 141,
+    "custom_fields_opportunity": 49,
+    "opportunity_fields_populated_pct": 0,
     "tags": 318,
     "pipelines": 18,
     "workflows": 135,
@@ -26,6 +27,12 @@
       "evidence": "custom_objects.consent_log exists in production with 1 field (Recorded At) and 0 records; not referenced by any workflow. Debris from the original plan's abandoned custom-object spike. (Lead Source object was never created.)",
       "recommendation": "Delete the empty Consent Log object so the schema matches the no-custom-objects decision. Safe: zero records, zero dependencies.",
       "status": "Open"
+    },
+    {
+      "id": "G1b", "severity": "Critical", "area": "Opportunity revenue fields already exist but are unused",
+      "evidence": "The Opportunity object already has 49 custom fields (Sale Outcome, Sale Amount, Total Program Amount, Pay Type, Patient Care Consultant, No-Sale Reason, Product/Price/Term x3, Location, EMR Visit ID, etc.) - the earlier 'zero opportunity fields' finding was wrong (the API defaults to contact-model). But they are 0% populated: even won deals ($1,500 / $5,200) have no field data, and only ~8% of opps carry a monetaryValue. Reps track sales in a manual spreadsheet, not GHL. There are also duplicate fields: Sale Amount vs Total Program Amount, Pay Type vs Payment Type, Patient Advisor vs Patient Care Consultant, Location vs Clinic Type.",
+      "recommendation": "Nothing to create - the schema is ready. Pick ONE canonical field per concept, retire the duplicates, set monetaryValue = the recognized sale amount, and have reps enter outcome + amount + pay type + PCC on the Opportunity per appointment (run parallel with the spreadsheet until trusted). Then fix workflow 05 so SHOWED stops creating $0 A&D wins.",
+      "status": "Ready"
     },
     {
       "id": "G2", "severity": "Critical", "area": "TCPA / consent has no single source of truth",

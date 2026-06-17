@@ -1,0 +1,85 @@
+{
+  "crawled_at": "2026-06-16",
+  "method": "Read-only live GHL API sweep across ~25 object types + full contact field-usage scan (11,491 contacts).",
+  "live_counts": {
+    "contacts": 11491,
+    "opportunities": 7153,
+    "custom_fields": 141,
+    "custom_fields_on_opportunity": 0,
+    "tags": 318,
+    "pipelines": 18,
+    "workflows": 135,
+    "forms": 26,
+    "surveys": 4,
+    "users": 37,
+    "admins": 6,
+    "custom_objects": 1,
+    "custom_values_in_use": 1,
+    "saved_templates": 0,
+    "trigger_links": 18,
+    "funnels": 9,
+    "products": 2
+  },
+  "findings": [
+    {
+      "id": "G1", "severity": "Critical", "area": "Orphan Consent Log custom object",
+      "evidence": "custom_objects.consent_log exists in production with 1 field (Recorded At) and 0 records; not referenced by any workflow. Debris from the original plan's abandoned custom-object spike. (Lead Source object was never created.)",
+      "recommendation": "Delete the empty Consent Log object so the schema matches the no-custom-objects decision. Safe: zero records, zero dependencies.",
+      "status": "Open"
+    },
+    {
+      "id": "G2", "severity": "Critical", "area": "TCPA / consent has no single source of truth",
+      "evidence": "9 consent fields on the Contact across two parallel half-built schemas (consent_source vs consent__source, consent_date / consent_time / consent__timestamp, sms_optin_date / sms_consent_updated_at / sms_double_optin / sms_optin_source). Opt-in proof populated on ~0 contacts; the proposed Consent Log fix sits empty.",
+      "recommendation": "Pick ONE consent schema, map the fragments into it, fix capture at the form/survey, and store DND/STOP authority in WF 11. Legal exposure at $1.5M/mo SMS, not just hygiene.",
+      "status": "Open"
+    },
+    {
+      "id": "G3", "severity": "High", "area": "Empty-field cleanup (dry-run complete)",
+      "evidence": "Full scan of 11,491 contacts: 38 of 141 custom fields have 0 population. Of those, 7 are clearly safe (junk/duplicate/rejected), 10 are empty-but-critical (attribution gclid/fbclid, consent, EMR, engine chatbot_*) and must be kept, 21 need a per-field workflow check.",
+      "recommendation": "Delete the 7 safe fields (see audit/field_usage.json); protect the 10 critical; triage the 21 against the workflow build. Sequence in Phase 5 cleanup unless done sooner with sign-off.",
+      "status": "Ready"
+    },
+    {
+      "id": "G4", "severity": "High", "area": "Governance is the root cause and is unaddressed",
+      "evidence": "37 users (6 admins) with broad write access; no naming gate or creation control. This is why 6 months of workflow/field/tag sprawl accumulated.",
+      "recommendation": "Reduce admin count, add a 'tag vs field vs object' creation rule, and stand up the weekly data-quality report as a standing gate. Fixes the cause, not just the symptom.",
+      "status": "Open"
+    },
+    {
+      "id": "G5", "severity": "Medium", "area": "Custom Values effectively unused",
+      "evidence": "Only 1 custom value exists (a junk 'test=hell'). Booking URLs, phone, footer, and hours are hardcoded across 135 workflows.",
+      "recommendation": "Centralize shared constants as Custom Values so copy is edited once, not per-workflow. Removes a major source of duplicated/brittle message copy.",
+      "status": "Open"
+    },
+    {
+      "id": "G6", "severity": "Medium", "area": "No saved message templates",
+      "evidence": "0 saved SMS/email templates (snippets). All message copy lives only inside workflows.",
+      "recommendation": "Preserve all copy before pausing any workflow. The message database (db/mwc.db) is the canonical external copy of every message.",
+      "status": "Mitigated"
+    },
+    {
+      "id": "G7", "severity": "Medium", "area": "Surveys are an uncovered capture surface",
+      "evidence": "4 surveys exist (Medical Intake - Onboarding, Intake EOB, Post-Appointment Feedback, Qualification Onboarding). Medical Intake is a SURVEY, not a form.",
+      "recommendation": "Verify 04. Medical Intake Chase stops on the survey submission (not a form), or the chase will never terminate. Fold surveys into the consolidation scope.",
+      "status": "Open"
+    },
+    {
+      "id": "G8", "severity": "Medium", "area": "Stale baseline",
+      "evidence": "Live counts exceed the audit snapshot: 141 fields (was 135), 318 tags (was 305), 11,491 contacts, 7,153 opportunities (was 6,775). The account is actively growing.",
+      "recommendation": "Re-snapshot immediately before the revenue backfill so reconciliation math uses current data.",
+      "status": "Open"
+    },
+    {
+      "id": "G9", "severity": "Low", "area": "Uncovered surfaces (acknowledge or scope)",
+      "evidence": "18 trigger links, 9 funnels/websites, 2 products are not addressed by the plan. Trigger links and funnels feed attribution and checkout.",
+      "recommendation": "Explicitly mark out of scope, but note the attribution dependency so the lead-capture work accounts for them.",
+      "status": "Acknowledged"
+    },
+    {
+      "id": "G10", "severity": "Low", "area": "Token scope gaps",
+      "evidence": "The PIT token returns 401 for custom-menus and snapshots; 404/422 for some media/phone endpoints. Create+delete on custom fields IS authorized (verified).",
+      "recommendation": "Broaden the PIT token's scopes if fully automated execution needs custom-menus or snapshot access.",
+      "status": "Open"
+    }
+  ]
+}

@@ -1,0 +1,1275 @@
+{
+ "scanned_contacts": 11491,
+ "total_fields": 141,
+ "fields": [
+  {
+   "id": "19XJmI5jt821mtwArzIn",
+   "name": "Emergency Contact Relationship",
+   "key": "contact.emergency_contact_relationship",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "1ucb7Ej09gDUbNshZZ9B",
+   "name": "Physical (copy)",
+   "key": "contact.contactphysical_9uo_copy",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "2YdEIz3vcYp7PRD8OQkV",
+   "name": "Referred By",
+   "key": "contact.referred_by",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "4JA84LseQigK05tULmYX",
+   "name": " Price – Item 3",
+   "key": "contact.price__item_3",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "8PR0ObbfZJwhLlrI2Kpn",
+   "name": "Review Link",
+   "key": "contact.review_link",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "9r8G977C0le5CcqcG9pl",
+   "name": "Survey Steps Completed",
+   "key": "contact.survey_steps_completed",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "D5NiJ9D5oocePFDhMDOh",
+   "name": "Select Office",
+   "key": "contact.select_office",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "IvSIj7bS64TN9qKeOh47",
+   "name": "SMS Opt-In Date",
+   "key": "contact.sms_optin_date",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "JL9361YdcdliYZn1d0xy",
+   "name": "gclid_value",
+   "key": "contact.gclid_value",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "JcKc10GzCfsGnJgzFTSj",
+   "name": "Referral Status",
+   "key": "contact.referral_status",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "JfKExo0tee4Yai1eKrGn",
+   "name": "Electronic Signature (Type Full Legal Name)",
+   "key": "contact.electronic_signature_type_full_legal_name",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "LKjA09mL4YHxBf5nDmh0",
+   "name": "chatbot_session_id",
+   "key": "contact.chatbot_session_id",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "LalBwTRZqUczSlfoYzT9",
+   "name": "Service",
+   "key": "contact.service",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "Lv99n9cWRtD18EjrZPGu",
+   "name": "SMS Consent Updated At",
+   "key": "contact.sms_consent_updated_at",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "NSZ66shmon0vmUhN4Eya",
+   "name": "SMS Consent Status",
+   "key": "contact.sms_double_optin",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "NqS0FAa0Ag1j0lj9cAHX",
+   "name": "Consent – Source",
+   "key": "contact.consent__source",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "ONOVqUwZtkG99WkLa7k2",
+   "name": "Lab Date",
+   "key": "contact.lab_date",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "PXMzJn96ffbpvtD4fPw3",
+   "name": "Lead Notes",
+   "key": "contact.lead_notes",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "PzPqwYUJX8tzq6NjFCjF",
+   "name": "Age Range",
+   "key": "contact.age_range",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "RAp2DaIJlO4TAAI5RMAf",
+   "name": "Latest Lead Source ID",
+   "key": "contact.latest_lead_source_id",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "RQqL2Zwl8vAND9m3pllJ",
+   "name": "Other",
+   "key": "contact.other",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "S7APIMzwysSMzHAY2ZSN",
+   "name": "chatbot_intent",
+   "key": "contact.chatbot_intent",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "Vel4USEjEMJ6mnTsdAUQ",
+   "name": "Lead Location ",
+   "key": "contact.lead_location",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "VvKA5ipq8kIx9fOaEnFa",
+   "name": "DND State",
+   "key": "contact.dnd_state",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "aeustWf9VHF6SE5LZnn5",
+   "name": "Review Status",
+   "key": "contact.review_status",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "bhthDvk8eAmfQ5ngsMBm",
+   "name": "Survery Feedback Score",
+   "key": "contact.survery_feedback_score",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "fK2RmkwN4OPfPlTfatSv",
+   "name": "Consent – Timestamp",
+   "key": "contact.consent__timestamp",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "fZpIIWbRAMcMO17oBOKA",
+   "name": "Requested Callback Time",
+   "key": "contact.requested_callback_time",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "fpDkdTHSkJfp4VneyH0z",
+   "name": "Term Length – Item 3",
+   "key": "contact.term_length__item_3",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "k8Jlp3XQ8ef2Y7KBQ0yL",
+   "name": "SMS Opt-In Source",
+   "key": "contact.sms_optin_source",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "k9F9gV4Slj8rpPjpV1nw",
+   "name": "Product Sold – Item 3",
+   "key": "contact.product_sold__item_3",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "lD39Q0oN0FNVly0LTHPQ",
+   "name": "Fatigue Frequency",
+   "key": "contact.fatigue_frequency",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "ouInEG5THeOsHxiSLOwl",
+   "name": "EMR Patient ID",
+   "key": "contact.emr_patient_id",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "raSo8IGdBK1iuM6i5KZW",
+   "name": "Reason",
+   "key": "contact.reason",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "uwErjBh8y7cMgG3qIABy",
+   "name": "Health Goal",
+   "key": "contact.health_goal",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "vL41iv9LaD4TCRSIOURj",
+   "name": "How Long Has This Been Going On? (copy)",
+   "key": "contact.contacthow_long_experiencing_aw9_copy",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "xF7VjjKizNuhMeWn4HZM",
+   "name": "How did you hear about us? Message",
+   "key": "contact.how_did_you_hear_about_us_message",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "xPXd7sYvBI3uYoqMqVzN",
+   "name": "fbclid_value",
+   "key": "contact.fbclid_value",
+   "model": "contact",
+   "used": 0,
+   "pct": 0.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "5BInebKOFEazgyxc2QNy",
+   "name": "Consultation Disposition",
+   "key": "contact.consultation_disposition",
+   "model": "contact",
+   "used": 1,
+   "pct": 0.01,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "YAYRgdLvZrtRUXJbpedr",
+   "name": "Renewal Date",
+   "key": "contact.renewal_date",
+   "model": "contact",
+   "used": 1,
+   "pct": 0.01,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "c2cMqnLGR1rsnqH81DNn",
+   "name": "Referred by Ambassador",
+   "key": "contact.referred_by_ambassador",
+   "model": "contact",
+   "used": 1,
+   "pct": 0.01,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "iayEUXTFcguKAGjsQWTe",
+   "name": "Referral Source Detail",
+   "key": "contact.referral_source_detail",
+   "model": "contact",
+   "used": 1,
+   "pct": 0.01,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "qEeJTkIyz1GMVOfhIuhp",
+   "name": "Consent – IP Address",
+   "key": "contact.consent__ip_address",
+   "model": "contact",
+   "used": 1,
+   "pct": 0.01,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "rLVcUb4VJwJ44bnfRZUm",
+   "name": "Have you ever been diagnosed with any of the following? (Check all that apply) (copy)",
+   "key": "contact.contacthave_you_ever_been_diagnosed_with_any_of_the_following_check_all_that_apply_1i4_copy",
+   "model": "contact",
+   "used": 1,
+   "pct": 0.01,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "kZiA6zKqOiLGEWBtQ6eT",
+   "name": "Other Cancellation Reason",
+   "key": "contact.other_cancellation_reason",
+   "model": "contact",
+   "used": 2,
+   "pct": 0.02,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "vinZ86t0PAB2ZvcUQr2w",
+   "name": "Radio Location",
+   "key": "contact.radio_location",
+   "model": "contact",
+   "used": 2,
+   "pct": 0.02,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "aFYKp3PzDg1dEwDC1G50",
+   "name": "Which Location Are You Interested In?",
+   "key": "contact.fwhich_location_are_you_interested_in",
+   "model": "contact",
+   "used": 3,
+   "pct": 0.03,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "YwzkHjz7NKKQrzJODEp8",
+   "name": "Service interested in?",
+   "key": "contact.service_interested_in",
+   "model": "contact",
+   "used": 4,
+   "pct": 0.03,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "b8tdwNkOnkSGedX9SoCo",
+   "name": "Preferred Appointment Time",
+   "key": "contact.preferred_appointment_time",
+   "model": "contact",
+   "used": 4,
+   "pct": 0.03,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "eVnkU7zM2tkhq42uuBqK",
+   "name": "Ambassador Slug",
+   "key": "contact.ambassador_slug",
+   "model": "contact",
+   "used": 5,
+   "pct": 0.04,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "eTLp3D1ArBsWYhOKouxQ",
+   "name": "Past Surgery",
+   "key": "contact.past_surgery",
+   "model": "contact",
+   "used": 6,
+   "pct": 0.05,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "V3UAgca5lxoPdkCCs4HI",
+   "name": "Preferred Appointment Location",
+   "key": "contact.preferred_appointment_location",
+   "model": "contact",
+   "used": 7,
+   "pct": 0.06,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "Aa6woKZ6GEn5Jdy4GcMb",
+   "name": "Referrer's Email Address",
+   "key": "contact.referrers_email_address",
+   "model": "contact",
+   "used": 8,
+   "pct": 0.07,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "yEQMg5Ikzj0Qtjb1Rhna",
+   "name": "Multi Line 71uz",
+   "key": "contact.multi_line_71uz",
+   "model": "contact",
+   "used": 8,
+   "pct": 0.07,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "yZFhZGLJtQPD8eP1moWf",
+   "name": "Preferred Appointment Date",
+   "key": "contact.preferred_appointment_date",
+   "model": "contact",
+   "used": 8,
+   "pct": 0.07,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "jTIu3VYYtwUnqx5TIZHq",
+   "name": "Cancellation Reason",
+   "key": "contact.cancellation_reason",
+   "model": "contact",
+   "used": 9,
+   "pct": 0.08,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "yuYX7ICV7F4uEyNTEFTw",
+   "name": " Price – Item 2",
+   "key": "contact.price__item_2",
+   "model": "contact",
+   "used": 9,
+   "pct": 0.08,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "U3sxmOm1VcdWPBodUbGT",
+   "name": "Survey — Open Feedback",
+   "key": "contact.survey__open_feedback",
+   "model": "contact",
+   "used": 11,
+   "pct": 0.1,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "txMJhzO1OTPoUjth2xRA",
+   "name": "Print & Local",
+   "key": "contact.print__local",
+   "model": "contact",
+   "used": 12,
+   "pct": 0.1,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "Gtq1EIpcHHGHuejROqan",
+   "name": "Term Length – Item 2",
+   "key": "contact.term_length__item_2",
+   "model": "contact",
+   "used": 16,
+   "pct": 0.14,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "7yI0doCpgY1Inyl7kzfa",
+   "name": "How did you hear about Men's Wellness Centers?",
+   "key": "contact.how_did_you_hear_about_us",
+   "model": "contact",
+   "used": 19,
+   "pct": 0.17,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "jpwO8aw2uXebpNCWE6lT",
+   "name": "Who referred you? (Referrer's name)",
+   "key": "contact.who_referred_you_referrers_name",
+   "model": "contact",
+   "used": 24,
+   "pct": 0.21,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "EWqBmp7cbslrPvEJO8ZM",
+   "name": "How Long Has This Been Going On?",
+   "key": "contact.how_long_experiencing",
+   "model": "contact",
+   "used": 26,
+   "pct": 0.23,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "k50RxYkVtC2SntahYc1K",
+   "name": "Tried other treatments?",
+   "key": "contact.tried_other_treatments",
+   "model": "contact",
+   "used": 26,
+   "pct": 0.23,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "9dvHRcE6zMOS4GollQVt",
+   "name": "Richmond Stations",
+   "key": "contact.richmond_stations",
+   "model": "contact",
+   "used": 29,
+   "pct": 0.25,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "XVMFTsdjY1hnaX5jHajf",
+   "name": "Product Sold – Item 2",
+   "key": "contact.product_sold__item_2",
+   "model": "contact",
+   "used": 30,
+   "pct": 0.26,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "I2Oidmdcnn068Gz9TRHm",
+   "name": "Sale Type",
+   "key": "contact.sale_type",
+   "model": "contact",
+   "used": 35,
+   "pct": 0.3,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "Zkrqo5T9i59LCVTXzJ8o",
+   "name": "Primary Concern",
+   "key": "contact.primary_concern",
+   "model": "contact",
+   "used": 35,
+   "pct": 0.3,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "1p4G1IQgGNhk4RgHT925",
+   "name": "Referrals & Returning",
+   "key": "contact.referrals__returning",
+   "model": "contact",
+   "used": 39,
+   "pct": 0.34,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "PDhPVirD7ZvPY0mnTLCr",
+   "name": "Norfolk / Virginia Beach Stations",
+   "key": "contact.norfolk__virginia_beach_stations",
+   "model": "contact",
+   "used": 41,
+   "pct": 0.36,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "0h1abMCZWUTIr0QZo8dU",
+   "name": "Consent Source",
+   "key": "contact.consent_source",
+   "model": "contact",
+   "used": 44,
+   "pct": 0.38,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "CvHfvmOChwRYbc7dUXdr",
+   "name": "Consent Method",
+   "key": "contact.consent_method",
+   "model": "contact",
+   "used": 45,
+   "pct": 0.39,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "UxbUbt9h8Xe54Fak0hX7",
+   "name": "Status",
+   "key": "contact.status",
+   "model": "contact",
+   "used": 45,
+   "pct": 0.39,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "lmRl72MIc2C5o2Gy3bEx",
+   "name": "Consent Time",
+   "key": "contact.consent_time",
+   "model": "contact",
+   "used": 45,
+   "pct": 0.39,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "GojPFkMZRoUi93gyb48K",
+   "name": "Consent Date",
+   "key": "contact.consent_date",
+   "model": "contact",
+   "used": 46,
+   "pct": 0.4,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "NKIljBVIOPEw03ioNhDq",
+   "name": "Clinic Name",
+   "key": "contact.clinic_name",
+   "model": "contact",
+   "used": 68,
+   "pct": 0.59,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "kbAaI85q6SaoHfuH1JTE",
+   "name": "Channel",
+   "key": "contact.last_channel",
+   "model": "contact",
+   "used": 85,
+   "pct": 0.74,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "5Ull4AEBVmO038811LEC",
+   "name": "A&D Other Explanation",
+   "key": "contact.ad_other_explanation",
+   "model": "contact",
+   "used": 88,
+   "pct": 0.77,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "hZF3COXUXopq6GY06uMZ",
+   "name": "Please Specify",
+   "key": "contact.please_specify",
+   "model": "contact",
+   "used": 92,
+   "pct": 0.8,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "hNGjNpBcS2xWDXWf6wgg",
+   "name": "May we contact them about your care",
+   "key": "contact.may_we_contact_them_about_your_care",
+   "model": "contact",
+   "used": 95,
+   "pct": 0.83,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "Hv8kK27zrMIQrEhGuzuX",
+   "name": "Would you recommend us to a friend or family member?",
+   "key": "contact.would_you_recommend_us_to_a_friend_or_family_member",
+   "model": "contact",
+   "used": 109,
+   "pct": 0.95,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "5xlMrAtETVhE8e7fKY9e",
+   "name": "How would you rate your interaction with our staff?",
+   "key": "contact.how_would_you_rate_your_interaction_with_our_staff",
+   "model": "contact",
+   "used": 113,
+   "pct": 0.98,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "KpMazPnUg5YLWNL7hdAl",
+   "name": "How would you rate your overall experience today?",
+   "key": "contact.how_would_you_rate_your_overall_experience_today",
+   "model": "contact",
+   "used": 115,
+   "pct": 1.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "gU84HIwnkglNAkRY9tDJ",
+   "name": "Name as Signature",
+   "key": "contact.name_as_signature",
+   "model": "contact",
+   "used": 121,
+   "pct": 1.05,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "GASedHwLnlipgeoNQZKZ",
+   "name": "DOB",
+   "key": "contact.dob",
+   "model": "contact",
+   "used": 127,
+   "pct": 1.11,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "Fk6gqmpI2Zkn9y7nEmhr",
+   "name": "Have you ever used testosterone or other hormone therapy?",
+   "key": "contact.have_you_ever_used_testosterone_or_other_hormone_therapy",
+   "model": "contact",
+   "used": 129,
+   "pct": 1.12,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "dZNaFd1mWIvL2cdqqusd",
+   "name": "Do you drink alcohol?",
+   "key": "contact.do_you_drink_alcohol",
+   "model": "contact",
+   "used": 129,
+   "pct": 1.12,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "gxVMh2ltKRybKDV62Ntm",
+   "name": "Do you smoke or use tobacco?",
+   "key": "contact.do_you_smoke_or_use_tobacco",
+   "model": "contact",
+   "used": 129,
+   "pct": 1.12,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "spAGwwHTampmwRlUlM1M",
+   "name": "What's the main reason you booked today?",
+   "key": "contact.whats_the_main_reason_you_booked_today",
+   "model": "contact",
+   "used": 129,
+   "pct": 1.12,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "aF4eAS7FcvZS2fPej6F9",
+   "name": "If yes, please describe (optional)",
+   "key": "contact.if_yes_please_describe_optional",
+   "model": "contact",
+   "used": 130,
+   "pct": 1.13,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "BPi19EOf5urjCwJlGVTr",
+   "name": "Social Media",
+   "key": "contact.social_media",
+   "model": "contact",
+   "used": 192,
+   "pct": 1.67,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "zJu0Qfw5oRtvwWPY0jXQ",
+   "name": "If yes, please provide brief details (optional)",
+   "key": "contact.if_yes_please_provide_brief_details_optional",
+   "model": "contact",
+   "used": 233,
+   "pct": 2.03,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "D1DgNadskCn7sDNZqWMQ",
+   "name": "_atid",
+   "key": "contact.atclid",
+   "model": "contact",
+   "used": 344,
+   "pct": 2.99,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "XVzxGceorU5WixdjMHvA",
+   "name": "A&D Reason",
+   "key": "contact.ad_reason",
+   "model": "contact",
+   "used": 426,
+   "pct": 3.71,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "aWyDdDlWeHPgcXEJJOy0",
+   "name": "Primary Care Provider Name",
+   "key": "contact.primary_care_provider_name",
+   "model": "contact",
+   "used": 429,
+   "pct": 3.73,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "rGf0p5eaxAWTM9y5KaAE",
+   "name": "Consultation Fee",
+   "key": "contact.consultation_fee",
+   "model": "contact",
+   "used": 505,
+   "pct": 4.39,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "u8pTdcwg5PaMhre7o6f9",
+   "name": " Product Sold - Item 1",
+   "key": "contact.treatment_type",
+   "model": "contact",
+   "used": 561,
+   "pct": 4.88,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "lWml2sn98A7zcGbfUtZe",
+   "name": "Pay Type",
+   "key": "contact.pay_type",
+   "model": "contact",
+   "used": 577,
+   "pct": 5.02,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "vFbd8dheyZozR8gDdfxo",
+   "name": "Term Length – Item 1",
+   "key": "contact.term_length__item_1",
+   "model": "contact",
+   "used": 579,
+   "pct": 5.04,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "z0nsXjBpmFXGdZGfzHAI",
+   "name": " Price – Item 1",
+   "key": "contact.treatment_cost",
+   "model": "contact",
+   "used": 582,
+   "pct": 5.06,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "HC2Oo1MIbwJ0uIrdsIqo",
+   "name": "Current medications (include name, dose, and how often you take them)",
+   "key": "contact.current_medications_include_name_dose_and_how_often_you_take_them",
+   "model": "contact",
+   "used": 659,
+   "pct": 5.73,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "KzsO01rpSeZIA4WUXiGR",
+   "name": "Emergency Contact Name",
+   "key": "contact.emergency_contact_name",
+   "model": "contact",
+   "used": 715,
+   "pct": 6.22,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "6iZQfyb2ISwxEucKs6zm",
+   "name": "CONTACT DISPOSITION",
+   "key": "contact.call_disposition",
+   "model": "contact",
+   "used": 723,
+   "pct": 6.29,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "EVxsSNsGrO1Y6h2uUsjv",
+   "name": "Emergency Contact Phone",
+   "key": "contact.emergency_contact_phone",
+   "model": "contact",
+   "used": 727,
+   "pct": 6.33,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "7A0cRhKAAi7W0ghPWxr7",
+   "name": "\n\n\n\n\n\n\n\nDo you have any known allergies (medications, foods, latex, or environmental)?",
+   "key": "contact.contactcurrent_medications_include_name_dose_and_how_often_you_take_them_f3y_copy",
+   "model": "contact",
+   "used": 740,
+   "pct": 6.44,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "fVTiAYvFFm2ZgGsqKGiU",
+   "name": "Relationship",
+   "key": "contact.relationship",
+   "model": "contact",
+   "used": 744,
+   "pct": 6.47,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "vlEyqwzxwjhmnOWNcIZq",
+   "name": "Psychologic",
+   "key": "contact.checkbox_2lpu_mgj_copy",
+   "model": "contact",
+   "used": 753,
+   "pct": 6.55,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "vaBJvaOrEgUiaenCccwc",
+   "name": "Sexual",
+   "key": "contact.checkbox_2lpu_mgj_copy_i6c_copy",
+   "model": "contact",
+   "used": 760,
+   "pct": 6.61,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "kwhTOpRqbuq9lgpQCbwK",
+   "name": "Physical",
+   "key": "contact.physical",
+   "model": "contact",
+   "used": 804,
+   "pct": 7.0,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "DHq97rjT0xk2QGvFEtj4",
+   "name": "I authorize Men’s Wellness Centers and its licensed medical providers to evaluate, diagnose, and treat me, including laboratory testing when medically appropriate.",
+   "key": "contact.contacti_confirm_the_information_i_provided_is_accurate_to_the_best_of_my_knowledge_dmq_copy",
+   "model": "contact",
+   "used": 868,
+   "pct": 7.55,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "Fr6J27j5YGkL3eN3mmTS",
+   "name": "I confirm the information I provided is accurate to the best of my knowledge.",
+   "key": "contact.i_confirm_the_information_i_provided_is_accurate_to_the_best_of_my_knowledge",
+   "model": "contact",
+   "used": 874,
+   "pct": 7.61,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "07RvFbVdzycUofKW5UPL",
+   "name": "May we contact your primary care provider regarding your care?",
+   "key": "contact.single_dropdown_17827",
+   "model": "contact",
+   "used": 884,
+   "pct": 7.69,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "6hwB9YtdqX6urRGxovGX",
+   "name": "Date",
+   "key": "contact.date",
+   "model": "contact",
+   "used": 884,
+   "pct": 7.69,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "J8L58GqFuzvO0nX6hY3l",
+   "name": "Do you consume alcohol?",
+   "key": "contact.contactsingle_dropdown_17827_8d1_copy_qrg_copy",
+   "model": "contact",
+   "used": 884,
+   "pct": 7.69,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "QWMf64tEMlmWieWvgZMk",
+   "name": "Do you currently smoke or use tobacco products?",
+   "key": "contact.contactsingle_dropdown_17827_8d1_copy",
+   "model": "contact",
+   "used": 884,
+   "pct": 7.69,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "nVTE9uYHuJdNY69ik4Vd",
+   "name": "I understand that my care may be provided in person and, when clinically appropriate, via telemedicine.",
+   "key": "contact.contacti_confirm_the_information_i_provided_is_accurate_to_the_best_of_my_knowledge_dmq_copy_h35_copy",
+   "model": "contact",
+   "used": 884,
+   "pct": 7.69,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "sJLV861xvDXyJgA7H8dk",
+   "name": "Have you ever used testosterone or other hormone therapy?",
+   "key": "contact.contactsingle_dropdown_17827_8d1_copy_qrg_copy_dtk_copy",
+   "model": "contact",
+   "used": 884,
+   "pct": 7.69,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "ysRPwT2nSTzpT8EoAzku",
+   "name": "I acknowledge that I have received and understand the Notice of Privacy Practices.\n\n",
+   "key": "contact.contactcontacti_confirm_the_information_i_provided_is_accurate_to_the_best_of_my_knowledge_dmq_copy_h35_copy_fqk_copy",
+   "model": "contact",
+   "used": 884,
+   "pct": 7.69,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "9w0y3YzxD1ZFIbekQD2F",
+   "name": "How long have these symptoms been present?",
+   "key": "contact.how_long_have_these_symptoms_been_present",
+   "model": "contact",
+   "used": 887,
+   "pct": 7.72,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "LQBCAPByMWJ4o6sTYvXH",
+   "name": "Occupation",
+   "key": "contact.occupation",
+   "model": "contact",
+   "used": 892,
+   "pct": 7.76,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "m2UAYFuBQ1ymyKNN0C6s",
+   "name": "How did you hear about Men’s Wellness Centers?\n",
+   "key": "contact.how_did_you_hear_about_mens_wellness_centers",
+   "model": "contact",
+   "used": 909,
+   "pct": 7.91,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "8MHeXQgyp9q7q6Do407p",
+   "name": "What is the primary reason for today’s visit?\n\n\n",
+   "key": "contact.what_is_the_primary_reason_for_todays_visit",
+   "model": "contact",
+   "used": 929,
+   "pct": 8.08,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "1Wo5z9YpDh9Lv64IBEoa",
+   "name": "UTM Term",
+   "key": "contact.utm_term",
+   "model": "contact",
+   "used": 953,
+   "pct": 8.29,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "thwe93MxRDzS2SO9pxxC",
+   "name": "UTM Source",
+   "key": "contact.utm_source",
+   "model": "contact",
+   "used": 959,
+   "pct": 8.35,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "ssEvmmfe1tz5H4fiMHZR",
+   "name": "UTM Content",
+   "key": "contact.utm_content",
+   "model": "contact",
+   "used": 966,
+   "pct": 8.41,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "Vh0MH504ujQfBh0Q5UFx",
+   "name": "UTM Medium",
+   "key": "contact.utm_medium",
+   "model": "contact",
+   "used": 968,
+   "pct": 8.42,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "Np2WHxON2I4DVnYjZh3e",
+   "name": "UTM Campaign",
+   "key": "contact.utm_campaign",
+   "model": "contact",
+   "used": 971,
+   "pct": 8.45,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "Ur3ezo3b85Xb2l8edGtl",
+   "name": "Have you ever been diagnosed with any of the following? (Check all that apply)",
+   "key": "contact.have_you_ever_been_diagnosed_with_any_of_the_following_check_all_that_apply",
+   "model": "contact",
+   "used": 1000,
+   "pct": 8.7,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "cxUGCjBinbuh0spb4LQS",
+   "name": "Total Program Amount",
+   "key": "contact.total_program_amount",
+   "model": "contact",
+   "used": 1033,
+   "pct": 8.99,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "abYADyjGMj1E2m6Y9S4z",
+   "name": "Provider Making Recommendation",
+   "key": "contact.provider_making_recommendation",
+   "model": "contact",
+   "used": 1046,
+   "pct": 9.1,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "cClk7ad4PHxiake2lChS",
+   "name": "Sale Outcome",
+   "key": "contact.sale_outcome",
+   "model": "contact",
+   "used": 1049,
+   "pct": 9.13,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "UZBaHuKr9PpFNro47it7",
+   "name": "SOURCE URL",
+   "key": "contact.source_url",
+   "model": "contact",
+   "used": 2427,
+   "pct": 21.12,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "RrRyWKMSzZvu6MFGXTZb",
+   "name": "IP Address",
+   "key": "contact.ip_address",
+   "model": "contact",
+   "used": 2535,
+   "pct": 22.06,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "uhNjRIbt5XINpSlk9L5U",
+   "name": "Communication Preference",
+   "key": "contact.communication_preference",
+   "model": "contact",
+   "used": 3224,
+   "pct": 28.06,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "eIlYPOpD28vjKTQbccxM",
+   "name": "Saturday Date EOW",
+   "key": "contact.saturday_date_eow",
+   "model": "contact",
+   "used": 3230,
+   "pct": 28.11,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "P7s4MzoabSdwf0u05vyh",
+   "name": "Original Lead Date",
+   "key": "contact.original_lead_date",
+   "model": "contact",
+   "used": 3233,
+   "pct": 28.14,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "oHMIPSYT8qHLt8BDZKXb",
+   "name": "Last Disposition Date",
+   "key": "contact.last_call_date",
+   "model": "contact",
+   "used": 3544,
+   "pct": 30.84,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "wu0JY0fgKEZCvLNg0lPg",
+   "name": "Last disposition / Channel",
+   "key": "contact.contact_disposition__channel",
+   "model": "contact",
+   "used": 3861,
+   "pct": 33.6,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "kPgFSfNsyEg3q77gRVWg",
+   "name": "Patient Advisor",
+   "key": "contact.patient_advisor",
+   "model": "contact",
+   "used": 4237,
+   "pct": 36.87,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "Cou856tOhaxW62vwehVI",
+   "name": "Preferred Location",
+   "key": "contact.preferred_location",
+   "model": "contact",
+   "used": 4961,
+   "pct": 43.17,
+   "form_or_survey_ref": false
+  },
+  {
+   "id": "9WxVlzvgSlCXx0EL82Sr",
+   "name": "Location",
+   "key": "contact.location",
+   "model": "contact",
+   "used": 5892,
+   "pct": 51.27,
+   "form_or_survey_ref": false
+  }
+ ]
+}

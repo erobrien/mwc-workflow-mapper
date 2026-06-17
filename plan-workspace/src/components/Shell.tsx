@@ -2,7 +2,7 @@ import { type ReactNode } from "react";
 import { NavLink } from "react-router-dom";
 import {
   LayoutDashboard, GitBranch, Boxes, Workflow, Network, MessagesSquare,
-  ListChecks, Terminal, Gavel, ShieldAlert, Moon, Sun, Menu,
+  ListChecks, Terminal, Gavel, ShieldAlert, Moon, Sun, Menu, SearchCheck,
 } from "lucide-react";
 import { cn, useTheme } from "./ui";
 import { useState } from "react";
@@ -23,6 +23,7 @@ const NAV: { group: string; items: { to: string; label: string; icon: any; accen
     { to: "/prompts", label: "Execution Prompts", icon: Terminal },
   ] },
   { group: "Governance", items: [
+    { to: "/gaps", label: "Audit Gaps", icon: SearchCheck },
     { to: "/decisions", label: "Decisions", icon: Gavel },
     { to: "/risks", label: "Risk Register", icon: ShieldAlert },
   ] },

@@ -216,3 +216,30 @@ Two names changed from the earlier list because **calendar auto-confirm is now e
 | 16 | Comms Edge | IVR / chat / inbound | IVR, chat OOO, missed-call text-back, ManyChat/BF inbound |
 
 **Status: `03` and `04` are live priorities** (auto-confirm shipped; intake chase to build next). The remaining 14 are the consolidation target for the published-only scope.
+
+---
+
+## Part 6 — Live crawl findings (2026-06-16)
+
+Read-only sweep of ~25 GHL object types + a full field-usage scan of 11,491 contacts.
+Rendered in the workspace at **/gaps**; raw evidence in `audit/ghl_probe.json` and
+`audit/field_usage.json` (reproducible via `scripts/ghl_deep_probe.py` and
+`scripts/field_usage_scan.py`).
+
+**Live counts (re-baseline):** 11,491 contacts · 7,153 opportunities · 141 custom fields
+(all on Contact, **0 on Opportunity**) · 318 tags · 18 pipelines · 135 workflows ·
+26 forms · 4 surveys · 37 users (6 admins) · 1 custom object · 1 custom value · 0 saved
+templates · 18 trigger links · 9 funnels.
+
+| # | Sev | Finding | Action |
+|---|-----|---------|--------|
+| G1 | Critical | **Orphan Consent Log custom object** (`custom_objects.consent_log`, 1 field, 0 records, unreferenced) — debris from the abandoned spike. Lead Source object was never created. | **Delete it.** Aligns with the no-custom-objects decision; zero dependencies. |
+| G2 | Critical | **TCPA/consent has no single source of truth** — 9 consent fields in two parallel schemas (`consent_*` vs `consent__*`), opt-in proof on ~0 contacts. | Pick one schema, consolidate, fix capture; DND/STOP authority in WF 11. Legal exposure. |
+| G3 | High | **Empty fields:** 38 of 141 have 0 population. 7 safe (junk/dup/rejected), 10 empty-but-critical (gclid/fbclid, consent, EMR, engine `chatbot_*`) MUST stay, 21 need a workflow check. | Delete the 7 (dry-run done); protect the 10; triage the 21. Phase 5 unless sign-off sooner. |
+| G4 | High | **Governance is the root cause** — 37 users / 6 admins, no creation gate. | Reduce admins; add a tag-vs-field-vs-object creation rule; weekly data-quality report as a standing gate. |
+| G5 | Medium | **Custom Values unused** (1 junk value); booking URL/phone/footer/hours hardcoded across 135 workflows. | Centralize shared constants as Custom Values. |
+| G6 | Medium | **No saved templates** — copy lives only inside workflows. | Preserve via the message DB (`db/mwc.db`) before pausing anything. |
+| G7 | Medium | **Surveys uncovered (4)** — Medical Intake is a *survey*, not a form. | Verify `04. Medical Intake Chase` stops on the survey submission. |
+| G8 | Medium | **Stale baseline** — live counts exceed the snapshot (141 vs 135 fields, 318 vs 305 tags, +378 opps). | Re-snapshot immediately before the backfill. |
+| G9 | Low | **Uncovered surfaces** — 18 trigger links, 9 funnels, 2 products. | Mark out of scope; note the attribution dependency. |
+| G10 | Low | **Token scope gaps** — `custom-menus`/`snapshots` return 401 (create+delete on fields IS authorized). | Broaden PIT scopes if full automation needs them. |

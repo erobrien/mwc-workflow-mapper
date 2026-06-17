@@ -13,6 +13,7 @@ import Plan from "./pages/Plan";
 import Prompts from "./pages/Prompts";
 import Decisions from "./pages/Decisions";
 import Risks from "./pages/Risks";
+import Gaps from "./pages/Gaps";
 
 const wrap = (el: React.ReactNode) => <Shell>{el}</Shell>;
 
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
   { path: "/prompts", element: wrap(<Prompts />) },
   { path: "/decisions", element: wrap(<Decisions />) },
   { path: "/risks", element: wrap(<Risks />) },
+  { path: "/gaps", element: wrap(<Gaps />) },
   { path: "*", element: wrap(<div className="py-20 text-center text-muted-foreground">Page not found.</div>) },
 ]);
 

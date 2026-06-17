@@ -14,13 +14,11 @@ import Prompts from "./pages/Prompts";
 import Decisions from "./pages/Decisions";
 import Risks from "./pages/Risks";
 import Gaps from "./pages/Gaps";
-import Daily from "./pages/Daily";
 
 const wrap = (el: React.ReactNode) => <Shell>{el}</Shell>;
 
 const router = createBrowserRouter([
   { path: "/", element: wrap(<Home />) },
-  { path: "/daily", element: wrap(<Daily />) },
   { path: "/as-is", element: wrap(<AsIs />) },
   { path: "/inventory", element: wrap(<Inventory />) },
   { path: "/to-be", element: wrap(<ToBe />) },

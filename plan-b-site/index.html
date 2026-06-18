@@ -73,6 +73,7 @@
   <a href="#fields">Fields</a>
   <a href="#workflows">Workflow changes</a>
   <a href="#triggers">Trigger re-pointing</a>
+  <a href="#migration">Data migration</a>
   <a href="#backfill">Backfill</a>
   <a href="#sequence">Sequence</a>
 </div></nav>
@@ -119,6 +120,15 @@
     <h2>Trigger re-pointing</h2>
     <p class="lead">The signals that fan out today, and how they change. This is the dependency web behind the keystone.</p>
     <div id="trigmap"></div>
+  </section>
+
+  <section id="migration">
+    <h2>Data migration — contact → opportunity</h2>
+    <p class="lead" id="mig-constraint"></p>
+    <div id="mig-steps"></div>
+    <div class="mh" style="margin:18px 0 8px;font-size:13px;color:var(--ink)">Tooling — external tools welcome</div>
+    <div class="grid2" id="mig-tooling"></div>
+    <div class="card" style="margin-top:14px;border-left:4px solid var(--cyan)"><b>Decision:</b> <span id="mig-decision"></span><div class="trg" style="margin-top:6px" id="mig-deps"></div></div>
   </section>
 
   <section id="backfill">
@@ -169,6 +179,14 @@ Promise.all([fetch('planb.json').then(r=>r.json()), fetch('affected.json').then(
         <div><div class="mh" style="color:var(--red)">Today</div><div style="font-size:13.5px;color:var(--mut)">${esc(t.today)}</div></div>
         <div><div class="mh" style="color:var(--green)">Plan B</div><div style="font-size:13.5px">${esc(t.planb)}</div></div>
       </div></div>`).join('');
+  // migration
+  const M = P.migration;
+  document.getElementById('mig-constraint').innerHTML = '<b>The constraint:</b> ' + esc(M.constraint);
+  document.getElementById('mig-steps').innerHTML = M.steps.map(s=>`<div class="card" style="margin-bottom:8px"><b>${s.n}. ${esc(s.title)}</b><div style="color:var(--mut);font-size:14px;margin-top:4px">${esc(s.body)}</div></div>`).join('');
+  const fitB = f => `<span class="badge ${f==='recommended'?'b-cap':f==='limited'?'b-review':'b-conv'}">${esc(f)}</span>`;
+  document.getElementById('mig-tooling').innerHTML = M.tooling.map(t=>`<div class="card"><b>${esc(t.name)}</b> ${fitB(t.fit)}<div class="mh" style="margin-top:4px">${esc(t.role)}</div><div style="color:var(--mut);font-size:13.5px;margin-top:4px">${esc(t.note)}</div></div>`).join('');
+  document.getElementById('mig-decision').textContent = M.decision;
+  document.getElementById('mig-deps').innerHTML = '<b>Depends on:</b> ' + esc(M.deps);
   // backfill
   document.getElementById('bf-q').textContent = P.backfill.question;
   document.getElementById('bf').innerHTML = [P.backfill.goforward,P.backfill.restate].map((o,i)=>`

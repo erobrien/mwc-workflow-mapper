@@ -55,6 +55,24 @@
     { "signal": "Pipeline stage change (Booked/Won)", "today": "Fires CAPI → Meta and Google Ads conversions — including on the fake A&D wins.", "planb": "Fire conversions on real Won (status=won, value>0) with gclid/fbclid attached. No conversions on A&D/No-Sale/Lost." },
     { "signal": "Inbound webhook (form submit)", "today": "01A–E capture source but click IDs land on 0 contacts.", "planb": "Confirm the webhook passes gclid/fbclid; write to contact AND stamp onto the opportunity at create (D9)." }
   ],
+  "migration": {
+    "constraint": "Sale data on the contact is a single value set that overwrote every time a patient consulted again. So the contact only holds the LATEST deal per patient — repeat patients' earlier deals are already gone. You can restate the most recent deal cleanly; for older ones you keep the opportunity shell (date, stage) but the sale detail is unrecoverable. Migration can't undo overwrites that already happened.",
+    "steps": [
+      { "n": 1, "title": "Pick the target opportunity", "body": "Match the contact's latest sale to the most recent real opp by consult date. A contact often has a real sales-pipeline opp AND fake A&D win(s) — target the right one." },
+      { "n": 2, "title": "Evidence-split the 992 A&D wins", "body": "value > 0 or contact Sale Outcome = Sold → real Won; else $0 → Lost. This un-inflates the win rate while preserving real revenue." },
+      { "n": 3, "title": "Translate values", "body": "Build the new opp dropdowns with the contact's exact options so most fields copy 1:1. Two need a mapping table: products (Semaglutide/Tirzepatide → GLP1, THRT → HRT) and pay type (Magwitch → MAG, SFC → SF, CARECredit → CARE)." },
+      { "n": 4, "title": "The 80/20", "body": "total_program_amount → opportunity monetaryValue on real Won deals is what makes revenue reports true. Product/term/price/pay are secondary analytics." },
+      { "n": 5, "title": "Write safely", "body": "Dry-run produces a CSV of every proposed change → human review (spot-check ≥20 rows incl. both A&D splits) → idempotent, batched write → reconcile Σ revenue before = after." }
+    ],
+    "tooling": [
+      { "name": "Custom migration script + staging DB", "role": "Historical backfill — the hard part", "fit": "recommended", "note": "Python/Node over the GHL API with a SQLite staging layer. Stages every proposed change, dry-run CSV, evidence-split, idempotent batched write, full reconciliation + a rollback baseline. Auditable and re-runnable — the opposite of hand-editing." },
+      { "name": "iPaaS — Make.com / Zapier / n8n", "role": "Going-forward stamp (contact → opp at sale)", "fit": "optional, no-code", "note": "Fine for the simple ongoing copy if you'd rather not use a GHL workflow. Weak for the one-time bulk (rate limits, no reconciliation or evidence-splitting)." },
+      { "name": "Spreadsheet review (Google Sheets)", "role": "Human approval layer", "fit": "recommended", "note": "The dry-run CSV opens here; you approve before anything writes to live data." },
+      { "name": "GHL native (Smart Lists / workflow update-opportunity)", "role": "Simple copies", "fit": "limited", "note": "A workflow can copy a contact field → opp field going forward, but it's clumsy for historical bulk with evidence-splitting." }
+    ],
+    "deps": "D1 fields built (with contact-matching options) · D2 workflow 05 fixed · D3 one opp per consult · evidence-split rules + product/pay-type translation tables approved",
+    "decision": "How far back — restate all recoverable history, or just recent/active deals? Older overwritten data has little recoverable value."
+  },
   "backfill": {
     "question": "Backfill is the single biggest size lever in Plan B.",
     "goforward": { "title": "Go-forward only", "desc": "Fix capture + 05 + fields now; new deals are clean from day one. Fastest. But historical revenue and win rate stay wrong until you choose to restate.", "effort": "days" },

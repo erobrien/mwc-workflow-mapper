@@ -2,7 +2,7 @@ import { type ReactNode } from "react";
 import { NavLink } from "react-router-dom";
 import {
   LayoutDashboard, GitBranch, Boxes, Workflow, Network, MessagesSquare,
-  ListChecks, Terminal, Gavel, ShieldAlert, Moon, Sun, Menu, SearchCheck, ClipboardList,
+  ListChecks, Terminal, Gavel, ShieldAlert, Moon, Sun, Menu, SearchCheck, ClipboardList, Share2,
 } from "lucide-react";
 import { cn, useTheme } from "./ui";
 import { useState } from "react";
@@ -18,6 +18,7 @@ const NAV: { group: string; items: { to: string; label: string; icon: any; accen
   ] },
   { group: "Target", items: [
     { to: "/to-be", label: "To-Be Workflows", icon: Workflow, accent: "text-emerald-600 dark:text-emerald-400" },
+    { to: "/wf-diagrams", label: "WF Flow Diagrams", icon: Share2, accent: "text-violet-600 dark:text-violet-400" },
     { to: "/diagrams", label: "Architecture", icon: Network },
     { to: "/messages", label: "Message Library", icon: MessagesSquare },
     { to: "/pcc-form", label: "PCC Sales Form", icon: ClipboardList },

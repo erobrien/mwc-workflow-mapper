@@ -2,6 +2,8 @@ import { PageShell } from "../components/Shell";
 import { Card, CardContent, Badge, Loading } from "../components/ui";
 import { RoutedTabs, RoutedTabPanel } from "../components/RoutedTabs";
 import { useData, type FieldDestination } from "../lib/data";
+import { ghlPipelines } from "../lib/ghl";
+import { ExternalLink } from "lucide-react";
 
 const OBJECT_TONE: Record<string, "good" | "blue" | "warning" | "muted"> = {
   Contact: "blue",
@@ -77,7 +79,13 @@ export default function ToBe() {
         <RoutedTabPanel value="pipelines" className="space-y-3">
           {data.pipelines.map((p, i) => (
             <Card key={i}><CardContent className="p-4">
-              <div className="mb-1 font-semibold">{p.name}</div>
+              <div className="mb-1 flex items-center justify-between gap-2">
+                <span className="font-semibold">{p.name}</span>
+                <a href={ghlPipelines(data.location_id)} target="_blank" rel="noopener noreferrer"
+                  title="Open pipelines in GHL" className="inline-flex items-center gap-1 rounded border px-2 py-0.5 text-[11px] text-muted-foreground hover:bg-muted hover:text-foreground">
+                  <ExternalLink className="h-3 w-3" /> GHL
+                </a>
+              </div>
               {p.role && <p className="mb-2 text-xs text-muted-foreground">{p.role}</p>}
               {p.stages && (
                 <div className="mb-2 flex flex-wrap items-center gap-1">

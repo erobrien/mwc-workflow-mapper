@@ -29,7 +29,7 @@ export function GlobalSearch() {
   const index = useMemo<Hit[]>(() => {
     if (!data) return [];
     const h: Hit[] = [];
-    for (const w of data.as_is_workflows) h.push({ type: "Workflow", label: w.name, to: "/inventory", ghl: ghlWorkflow(loc, w.id), sub: w.status, tone: TONE.Workflow });
+    for (const w of data.as_is_workflows) h.push({ type: "Workflow", label: w.name, to: `/workflow/${w.id}`, ghl: ghlWorkflow(loc, w.id), sub: w.status, tone: TONE.Workflow });
     for (const w of data.tobe_workflows) h.push({ type: "Target workflow", label: `${w.n}. ${w.name}`, to: "/to-be/workflows", sub: w.absorbs, tone: TONE["Target workflow"] });
     for (const p of data.pipelines) h.push({ type: "Pipeline", label: p.name, to: "/to-be/pipelines", ghl: ghlPipelines(loc), sub: p.role, tone: TONE.Pipeline });
     for (const f of data.fields) h.push({ type: "Field", label: f.name, to: "/inventory", ghl: ghlFields(loc), sub: `${f.model} · ${f.key}`, tone: TONE.Field });

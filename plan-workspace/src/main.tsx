@@ -15,6 +15,7 @@ import Decisions from "./pages/Decisions";
 import Risks from "./pages/Risks";
 import Gaps from "./pages/Gaps";
 import SalesForm from "./pages/SalesForm";
+import WorkflowDetail from "./pages/WorkflowDetail";
 
 const wrap = (el: React.ReactNode) => <Shell>{el}</Shell>;
 
@@ -34,6 +35,7 @@ const router = createBrowserRouter([
   { path: "/decisions", element: wrap(<Decisions />) },
   { path: "/risks", element: wrap(<Risks />) },
   { path: "/gaps", element: wrap(<Gaps />) },
+  { path: "/workflow/:id", element: wrap(<WorkflowDetail />) },
   { path: "*", element: wrap(<div className="py-20 text-center text-muted-foreground">Page not found.</div>) },
 ]);
 

@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import { PageShell } from "../components/Shell";
 import { Card, CardContent, Table, TH, TD, Badge, Loading } from "../components/ui";
 import { useData, type AsIsWorkflow } from "../lib/data";
@@ -76,7 +77,7 @@ export default function Inventory() {
               <tbody>
                 {rows.map((w) => (
                   <tr key={w.id} className="hover:bg-muted/40">
-                    <TD className="font-medium">{w.name}</TD>
+                    <TD className="font-medium"><Link to={`/workflow/${w.id}`} className="hover:underline hover:text-primary">{w.name}</Link></TD>
                     <TD><Badge tone={w.status === "published" ? "good" : "muted"}>{w.status}</Badge></TD>
                     {NUMCOLS.map((c) => (
                       <TD key={c.k} className="text-right tabular-nums text-muted-foreground">{(w as any)[c.k] ?? 0}</TD>

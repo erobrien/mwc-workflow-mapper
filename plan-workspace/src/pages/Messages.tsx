@@ -42,16 +42,27 @@ export default function Messages() {
           ))}
         </RoutedTabPanel>
         <RoutedTabPanel value="legacy" className="space-y-2">
+          <div className="flex items-start gap-3 rounded-md border border-amber-300 bg-amber-50 p-4 dark:border-amber-700 dark:bg-amber-950/30">
+            <div className="mt-1 h-2 w-2 shrink-0 rounded-full bg-amber-500" />
+            <div>
+              <div className="font-semibold text-amber-800 dark:text-amber-300">Not brand compliant — all {data.messages_asis.length} messages require audit</div>
+              <p className="mt-0.5 text-sm text-amber-700 dark:text-amber-400">
+                These are the live messages captured directly from GHL. None have been brand-reviewed. Every message below must be audited and rewritten before the target workflows go live. See the <span className="font-medium">Target</span> tab for the planned replacements.
+              </p>
+            </div>
+          </div>
           {asis.map((m, i) => (
             <Card key={i}><CardContent className="p-4">
               <div className="mb-1.5 flex flex-wrap items-center gap-2">
                 <span className="font-semibold">{m.workflow}</span>
                 <Badge tone={chanTone(m.channel)}>{m.channel}</Badge>
+                <Badge tone="warning">Needs brand review</Badge>
                 {m.delay && <Badge tone="muted">{m.delay}</Badge>}
-                {m.status && <span className="text-xs text-muted-foreground">{m.status}</span>}
+                {m.status && <span className="ms-auto text-xs text-muted-foreground">{m.status}</span>}
               </div>
+              {m.step && <div className="mb-1 text-xs text-muted-foreground">{m.step}</div>}
               {m.subject && <div className="mb-1 text-sm font-medium">{m.subject}</div>}
-              <pre className="whitespace-pre-wrap font-sans text-sm text-foreground/90">{m.message}</pre>
+              <pre className="whitespace-pre-wrap rounded-md bg-muted/40 p-3 font-sans text-sm text-foreground/90">{m.message}</pre>
             </CardContent></Card>
           ))}
         </RoutedTabPanel>

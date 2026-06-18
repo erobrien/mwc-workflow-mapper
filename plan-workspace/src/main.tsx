@@ -14,6 +14,7 @@ import Prompts from "./pages/Prompts";
 import Decisions from "./pages/Decisions";
 import Risks from "./pages/Risks";
 import Gaps from "./pages/Gaps";
+import SalesForm from "./pages/SalesForm";
 
 const wrap = (el: React.ReactNode) => <Shell>{el}</Shell>;
 
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
   { path: "/diagrams", element: wrap(<Diagrams />) },
   { path: "/messages", element: wrap(<Messages />) },
   { path: "/messages/:tab", element: wrap(<Messages />) },
+  { path: "/pcc-form", element: wrap(<SalesForm />) },
   { path: "/plan", element: wrap(<Plan />) },
   { path: "/plan/:tab", element: wrap(<Plan />) },
   { path: "/prompts", element: wrap(<Prompts />) },

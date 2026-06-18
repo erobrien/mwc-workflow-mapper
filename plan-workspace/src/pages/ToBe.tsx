@@ -48,8 +48,8 @@ export default function ToBe() {
 
   return (
     <PageShell
-      title="To-be: target architecture"
-      subtitle={`${data.tobe_workflows.length} single-purpose workflows, ${data.pipelines.length} pipelines, and a field model that puts each datum on the object that owns it.`}
+      title="To-be: the rebuild target"
+      subtitle={`Tear down ${data.as_is_workflows.length} workflows into ${data.tobe_workflows.length} single-purpose owners and 18 pipelines into ${data.pipelines.length}, with a field model that puts each datum on the object that owns it.`}
     >
       <RoutedTabs base="/to-be" tabs={[
         { value: "workflows", label: `Workflows (${data.tobe_workflows.length})` },

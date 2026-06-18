@@ -43,7 +43,7 @@ export default function Home() {
   return (
     <PageShell
       title="Project workspace"
-      subtitle="A simplification refactor of the MWC GoHighLevel sub-account. As-is captured directly from the GHL API. Target architecture and migration plan locked 2026-06-16."
+      subtitle="A complete tear-down and rebuild of the MWC GoHighLevel sub-account — workflows and pipelines especially. As-is captured live from the GHL API; every workflow deep-links into its builder. Search anything with ⌘K."
       actions={
         <>
           <Link to="/plan" className="inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-sm hover:bg-muted"><FileText className="h-3.5 w-3.5" /> View plan</Link>

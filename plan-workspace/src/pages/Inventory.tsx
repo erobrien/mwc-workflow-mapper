@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { PageShell } from "../components/Shell";
 import { Card, CardContent, Table, TH, TD, Badge, Loading } from "../components/ui";
 import { useData, type AsIsWorkflow } from "../lib/data";
-import { ghlWorkflows } from "../lib/ghl";
+import { ghlWorkflows, ghlWorkflow } from "../lib/ghl";
 import { ExternalLink } from "lucide-react";
 
 type Col = "name" | "status" | "steps" | "sms" | "email" | "branch" | "tag" | "opp";
@@ -70,6 +70,7 @@ export default function Inventory() {
                     <TH key={c.k} className="cursor-pointer text-right"><button onClick={() => click(c.k)}>{c.label}{sort === c.k ? (dir === 1 ? " ↑" : " ↓") : ""}</button></TH>
                   ))}
                   <TH>Triggers</TH>
+                  <TH className="w-10">GHL</TH>
                 </tr>
               </thead>
               <tbody>
@@ -85,6 +86,12 @@ export default function Inventory() {
                         {(w.triggers ?? []).slice(0, 3).map((t, i) => <Badge key={i} tone="muted">{t.name}</Badge>)}
                         {(w.triggers ?? []).length > 3 && <Badge tone="muted">+{(w.triggers ?? []).length - 3}</Badge>}
                       </div>
+                    </TD>
+                    <TD>
+                      <a href={ghlWorkflow(data.location_id, w.id)} target="_blank" rel="noopener noreferrer"
+                        title="Open this workflow's builder in GHL" className="inline-flex rounded p-1 text-muted-foreground hover:bg-muted hover:text-foreground">
+                        <ExternalLink className="h-3.5 w-3.5" />
+                      </a>
                     </TD>
                   </tr>
                 ))}

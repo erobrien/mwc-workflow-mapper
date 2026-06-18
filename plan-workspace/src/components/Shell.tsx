@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import { cn, useTheme } from "./ui";
 import { useState } from "react";
+import { GlobalSearch } from "./Search";
 
 const NAV: { group: string; items: { to: string; label: string; icon: any; accent?: string }[] }[] = [
   { group: "Overview", items: [
@@ -76,7 +77,8 @@ export function Shell({ children }: { children: ReactNode }) {
       <div className="flex min-w-0 flex-1 flex-col">
         <header className="sticky top-0 z-30 flex h-12 items-center gap-2 border-b bg-background/80 px-4 backdrop-blur">
           <button className="md:hidden" onClick={() => setOpen(true)} aria-label="Menu"><Menu className="h-5 w-5" /></button>
-          <div className="ms-auto">
+          <div className="flex-1"><GlobalSearch /></div>
+          <div>
             <button onClick={toggle} aria-label="Toggle theme" className="rounded-md border p-1.5 hover:bg-muted">
               {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </button>

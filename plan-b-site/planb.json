@@ -1,0 +1,71 @@
+{
+  "generated": "2026-06-17",
+  "problems": [
+    { "n": 1, "title": "Deals are dispositioned on the contact, not the opportunity", "body": "Sale outcome and amount are recorded on the contact (or by a workflow), so each new consult overwrites the last and the opportunity — the only record GHL recognizes revenue on — stays empty. Only ~9% of opportunities carry a dollar value.", "stat": "~9% of opportunities have a value" },
+    { "n": 2, "title": "Marketing attribution isn't carried through to win/loss", "body": "The lead source, UTM and click IDs that drove a deal are never carried onto the opportunity at win or loss, so ad spend can't be tied to Won revenue. Worse, click IDs are captured on essentially zero contacts — attribution is broken at collection.", "stat": "click IDs on 0 of 11,000+ contacts" }
+  ],
+  "keystone": "Both fixes share one dependency: you cannot recognize revenue OR attribute it while workflow 05 auto-creates $0 A&D \"wins.\" That one workflow corrupts the value field and fires garbage conversions to Meta/Google. Fix 05 first — it unblocks both tracks.",
+  "scope_in": [
+    "Revenue recognition on the opportunity (Value = Total Program Amount, set at Won)",
+    "PCC disposition fields on the opportunity (the PCC Sales Data folder)",
+    "Fix workflow 05 so SHOWED no longer auto-creates a Won A&D opp",
+    "Capture click IDs at the lead forms and stamp source/UTM/click-ID onto the opportunity",
+    "Conversions to Meta/Google fire on real Won deals with click IDs",
+    "Re-point the few automations that listen for the old A&D-win signal",
+    "Optional: historical backfill of existing opportunities"
+  ],
+  "scope_out": [
+    "135 → 16 workflow consolidation",
+    "18 → 3 pipeline reduction (you keep all 18)",
+    "305 → 120 tag cleanup",
+    "26 → 9 form consolidation",
+    "Message library rebuild",
+    "Governance / creation-gate overhaul"
+  ],
+  "dependencies": [
+    { "id": "D1", "track": "Revenue", "title": "Rebuild the opportunity sale fields", "desc": "The PCC Sales Data folder (13 fields). Prerequisite for all of Track 1.", "depends": [] },
+    { "id": "D2", "track": "Revenue", "title": "Fix workflow 05 (the keystone)", "desc": "Delete the create-Won-A&D action on SHOWED; set Sale Outcome on the opportunity instead.", "depends": ["D1"], "keystone": true },
+    { "id": "D3", "track": "Revenue", "title": "One opportunity per consult", "desc": "Resolve the double-calendar / duplicate-opp issue so each visit has exactly one deal.", "depends": [] },
+    { "id": "D4", "track": "Revenue", "title": "monetaryValue = Total Program Amount", "desc": "Set the deal Value at Won; Won requires value > 0. This is the actual recognition.", "depends": ["D1", "D2"] },
+    { "id": "D5", "track": "Revenue", "title": "PCCs disposition on the opportunity", "desc": "The form + training + behavior change (the PCC Sales Form mockup).", "depends": ["D1", "D2"] },
+    { "id": "D6", "track": "Revenue", "title": "Outcome → status mapping", "desc": "Sold→Won, A&D/MUT→Lost+reason, MAR→stays Open. Light workflow or manual.", "depends": ["D2"] },
+    { "id": "D7", "track": "Revenue", "title": "Historical backfill (optional)", "desc": "Restate ~7,150 opportunities + split the 992 fake A&D wins. Dry-run first.", "depends": ["D2", "D4"], "optional": true },
+    { "id": "D8", "track": "Attribution", "title": "Capture click IDs at the forms", "desc": "gclid/fbclid are on 0 contacts today — fix the inbound webhook / forms so they're captured. The dependency everyone underestimates.", "depends": [] },
+    { "id": "D9", "track": "Attribution", "title": "Stamp source/UTM/click-ID onto the opportunity", "desc": "Small workflow at opp creation so the deal carries its attribution.", "depends": ["D8"] },
+    { "id": "D10", "track": "Attribution", "title": "Retain source through win/loss", "desc": "Automatic once D9 is in place — the opp keeps its source to Won/Lost.", "depends": ["D9"] },
+    { "id": "D11", "track": "Attribution", "title": "Conversions fire on real Won + click IDs", "desc": "Closes the loop to Meta/Google. Needs the 05 fix (D2) and capture (D8).", "depends": ["D2", "D8"] }
+  ],
+  "fields": [
+    { "name": "Sale Outcome", "type": "Dropdown", "opts": "Sold / A&D / MUT / MAR", "req": true },
+    { "name": "Product Sold 1", "type": "Dropdown", "opts": "TRT / HRT / GLP1 / Combo" },
+    { "name": "Term 1", "type": "Dropdown", "opts": "1 / 3 / 6 / 12 / 24 mo" },
+    { "name": "Price 1", "type": "Money", "opts": "" },
+    { "name": "Product Sold 2", "type": "Dropdown", "opts": "TRT / HRT / GLP1 / Combo" },
+    { "name": "Term 2", "type": "Dropdown", "opts": "1 / 3 / 6 / 12 / 24 mo" },
+    { "name": "Price 2", "type": "Money", "opts": "" },
+    { "name": "Total Program Amount", "type": "Money", "opts": "→ sets opportunity Value" },
+    { "name": "Money Down", "type": "Money", "opts": "collected at signing" },
+    { "name": "Pay Type", "type": "Dropdown", "opts": "PIF / SF / CARE / MAG / Cash / Card" },
+    { "name": "Provider", "type": "Dropdown", "opts": "your provider list" },
+    { "name": "A&D Reason", "type": "Dropdown", "opts": "Not Ready / Think it Over / Cost / Not Interested / Not Qualified / Others" },
+    { "name": "A&D Notes", "type": "Long text", "opts": "" }
+  ],
+  "trigger_map": [
+    { "signal": "\"PA reported PX SHOWED\"", "today": "Fires 05 (creates A&D Won), 06 (price calc), 07 (post-visit/review opp) all at once.", "planb": "Keep the SHOWED signal. 05 sets Sale Outcome instead of creating a Won A&D. Re-point 06/07 to read the opportunity outcome, not the A&D win." },
+    { "signal": "Pipeline stage change (Booked/Won)", "today": "Fires CAPI → Meta and Google Ads conversions — including on the fake A&D wins.", "planb": "Fire conversions on real Won (status=won, value>0) with gclid/fbclid attached. No conversions on A&D/No-Sale/Lost." },
+    { "signal": "Inbound webhook (form submit)", "today": "01A–E capture source but click IDs land on 0 contacts.", "planb": "Confirm the webhook passes gclid/fbclid; write to contact AND stamp onto the opportunity at create (D9)." }
+  ],
+  "backfill": {
+    "question": "Backfill is the single biggest size lever in Plan B.",
+    "goforward": { "title": "Go-forward only", "desc": "Fix capture + 05 + fields now; new deals are clean from day one. Fastest. But historical revenue and win rate stay wrong until you choose to restate.", "effort": "days" },
+    "restate": { "title": "Full restatement", "desc": "Also backfill ~7,150 existing opportunities: split the 992 fake A&D wins (real Won vs $0 no-sale), set monetaryValue from the contact data. Idempotent, dry-run first, reconciled Σ before = after.", "effort": "1–2 weeks added" }
+  },
+  "phases": [
+    { "n": 0, "title": "Instrument + snapshot", "do": "Revenue-integrity monitor (running) + full export as the rollback baseline.", "gate": "Clean daily snapshots", "deps": "—" },
+    { "n": 1, "title": "Additive build (parallel, safe)", "do": "D1 rebuild PCC Sales Data fields  ‖  D8 fix click-ID capture at the forms.", "gate": "Fields verified; a test lead shows gclid/fbclid captured", "deps": "—" },
+    { "n": 2, "title": "Keystone changes (behind canary)", "do": "D2 fix 05  +  D9 attribution stamp  +  D6 outcome→status, on the src:bf-web canary cohort.", "gate": "SHOWED never creates a Won A&D; won-with-$0 trends to 0", "deps": "D1, D8" },
+    { "n": 3, "title": "PCC go-live", "do": "D5 train PCCs to disposition on the opportunity; widen from canary to all.", "gate": "Reps entering outcome+value on the opp; values appearing", "deps": "D1, D2" },
+    { "n": 4, "title": "Close the ad-platform loop", "do": "D11 verify CAPI/Google fire on real Won with click IDs; no fires on A&D.", "gate": "Conversions match real wins for 5 days", "deps": "D2, D8" },
+    { "n": 5, "title": "Backfill (optional)", "do": "D7 dry-run → review CSV → write. Go-forward-only skips this.", "gate": "Σ revenue reconciles to approved CSV", "deps": "D2, D4" }
+  ]
+}

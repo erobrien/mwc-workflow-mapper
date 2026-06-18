@@ -8,6 +8,12 @@
       "port": 4173
     },
     {
+      "name": "plan-b-site",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "4179", "--directory", "plan-b-site"],
+      "port": 4179
+    },
+    {
       "name": "plan-workspace",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["--prefix", "C:\\Users\\eric_\\Webdev\\mwc-workflow-mapper\\plan-workspace", "run", "dev", "--", "--port", "4178", "--strictPort"],

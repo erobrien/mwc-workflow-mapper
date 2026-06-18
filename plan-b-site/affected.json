@@ -1,0 +1,408 @@
+[
+ {
+  "name": "01A. Home Form and Source with Click ID",
+  "kind": "capture",
+  "change": "Confirm the inbound webhook passes gclid/fbclid; write to contact AND stamp source/UTM/click-ID onto the opportunity at create.",
+  "status": "published",
+  "triggers": [
+   "Inbound Webhook"
+  ],
+  "steps": 0,
+  "sms": 0,
+  "email": 0,
+  "messages": []
+ },
+ {
+  "name": "01B. Richmond Form and Source with Click ID",
+  "kind": "capture",
+  "change": "same as 01A",
+  "status": "published",
+  "triggers": [
+   "Inbound Webhook"
+  ],
+  "steps": 0,
+  "sms": 0,
+  "email": 0,
+  "messages": []
+ },
+ {
+  "name": "01C. VA Beach Form and Source with Click ID",
+  "kind": "capture",
+  "change": "same as 01A",
+  "status": "published",
+  "triggers": [
+   "Inbound Webhook"
+  ],
+  "steps": 0,
+  "sms": 0,
+  "email": 0,
+  "messages": []
+ },
+ {
+  "name": "01D. NPN Form and Source with Click ID",
+  "kind": "capture",
+  "change": "same as 01A",
+  "status": "published",
+  "triggers": [
+   "Inbound Webhook"
+  ],
+  "steps": 0,
+  "sms": 0,
+  "email": 0,
+  "messages": []
+ },
+ {
+  "name": "01E. Consultation Form and Source with Click ID",
+  "kind": "capture",
+  "change": "same as 01A",
+  "status": "published",
+  "triggers": [
+   "Inbound Webhook"
+  ],
+  "steps": 0,
+  "sms": 0,
+  "email": 0,
+  "messages": []
+ },
+ {
+  "name": "05. Clinic Appt Outcome",
+  "kind": "KEYSTONE",
+  "change": "DELETE the create-Won-A&D action. Instead set Sale Outcome on the opportunity + open the PCC Sales Data fields. Keep the SHOWED signal.",
+  "status": "draft",
+  "triggers": [],
+  "steps": 0,
+  "sms": 0,
+  "email": 0,
+  "messages": [
+   {
+    "channel": "email",
+    "delay": "",
+    "subject": "You missed your appointment with {{location.name}} in Virginia Beach",
+    "message": "Email Patient (No Show) for VA beach"
+   },
+   {
+    "channel": "email",
+    "delay": "",
+    "subject": "You missed your appointment with {{location.name}} in Newport News",
+    "message": "Email Patient (No Show) for NPN"
+   },
+   {
+    "channel": "email",
+    "delay": "",
+    "subject": "You missed your appointment with {{location.name}} in Richmond",
+    "message": "Email Patient (No Show) for Richmond"
+   },
+   {
+    "channel": "email",
+    "delay": "",
+    "subject": "You canceled your appointment with {{location.name}} in Virginia Beach",
+    "message": "Email Patient (Canceled) for VA beach"
+   },
+   {
+    "channel": "email",
+    "delay": "",
+    "subject": "You canceled your appointment with {{location.name}} in Newport News",
+    "message": "Email Patient (Canceled) for NPN"
+   },
+   {
+    "channel": "email",
+    "delay": "",
+    "subject": "You canceled your appointment with {{location.name}} in Richmond",
+    "message": "Email Patient (Canceled) for Richmond"
+   },
+   {
+    "channel": "email",
+    "delay": "",
+    "subject": "Appointment Cancelled: Newport News Clinic | {{appointment.start_time}} ({{appointment.timezone}})",
+    "message": "Email Patient (Cancellation notification) for NPN"
+   },
+   {
+    "channel": "email",
+    "delay": "",
+    "subject": "Appointment Cancelled: Richmond Clinic | {{appointment.start_time}} ({{appointment.timezone}})",
+    "message": "Email Patient (Cancellation notification) for Richmond"
+   },
+   {
+    "channel": "email",
+    "delay": "",
+    "subject": "Appointment Cancelled: Virginia Beach Clinic | {{appointment.start_time}} ({{appointment.timezone}})",
+    "message": "Email Patient (Cancellation notification) for VA beach"
+   },
+   {
+    "channel": "email",
+    "delay": "",
+    "subject": "You missed your clinic appointment at Virginia Beach Clinic | {{appointment.start_time}} ({{appointment.timezone}})",
+    "message": "Email Patient (No Show) for VA beach"
+   },
+   {
+    "channel": "email",
+    "delay": "",
+    "subject": "You missed your clinic appointment at Newport News Clinic | {{appointment.start_time}} ({{appointment.timezone}})",
+    "message": "Email Patient (No Show) for NPN"
+   },
+   {
+    "channel": "email",
+    "delay": "",
+    "subject": "You missed your clinic appointment at Richmond Clinic | {{appointment.start_time}} ({{appointment.timezone}})",
+    "message": "Email Patient (No Show) for Richmond"
+   },
+   {
+    "channel": "email",
+    "delay": "",
+    "subject": "Appointment Cancelled: Newport News Clinic | {{appointment.start_time}} ({{appointment.timezone}})",
+    "message": "Email Patient (Cancellation notification) for NPN"
+   },
+   {
+    "channel": "email",
+    "delay": "",
+    "subject": "Appointment Cancelled: Richmond Clinic | {{appointment.start_time}} ({{appointment.timezone}})",
+    "message": "Email Patient (Cancellation notification) for Richmond"
+   },
+   {
+    "channel": "email",
+    "delay": "",
+    "subject": "Appointment Cancelled: Virginia Beach Clinic | {{appointment.start_time}} ({{appointment.timezone}})",
+    "message": "Email Patient (Cancellation notification) for VA beach"
+   }
+  ]
+ },
+ {
+  "name": "06. Price Calculator",
+  "kind": "repoint",
+  "change": "Listens on 'PA reported SHOWED' — verify it doesn't depend on the A&D win; re-point to opp outcome if needed.",
+  "status": "published",
+  "triggers": [
+   "PA reported PX SHOWED"
+  ],
+  "steps": 0,
+  "sms": 0,
+  "email": 0,
+  "messages": []
+ },
+ {
+  "name": "07. POST-VISIT - SHOWED Opportunities and For Review/Referral",
+  "kind": "repoint",
+  "change": "This creates the A&D/review opp today. Re-point: trigger on the opportunity Sale Outcome / status instead of creating an A&D win.",
+  "status": "published",
+  "triggers": [
+   "PA reported PX SHOWED"
+  ],
+  "steps": 0,
+  "sms": 0,
+  "email": 0,
+  "messages": []
+ },
+ {
+  "name": "CAPI - Send Booked Call Data Back to Meta (Leads Moved To Booked Call)",
+  "kind": "conversion",
+  "change": "Fire on real Won (status=won, value>0) — not the auto A&D win; pass gclid/fbclid.",
+  "status": "published",
+  "triggers": [
+   "Richmond - Pipeline Stage Change",
+   "Newport News - Pipeline Stage Change",
+   "Virginia Beach - Pipeline Stage Change"
+  ],
+  "steps": 0,
+  "sms": 0,
+  "email": 0,
+  "messages": []
+ },
+ {
+  "name": "Facebook CAPI - Send Booked Call Data Back to Meta",
+  "kind": "conversion",
+  "change": "Same: real Won + click IDs.",
+  "status": "published",
+  "triggers": [
+   "Customer Booked Appointment"
+  ],
+  "steps": 0,
+  "sms": 0,
+  "email": 0,
+  "messages": []
+ },
+ {
+  "name": "GHL Form Submitted - Google Ads",
+  "kind": "conversion",
+  "change": "Ensure gclid present at submit; this is a lead event, keep.",
+  "status": "published",
+  "triggers": [
+   "Form Submitted"
+  ],
+  "steps": 0,
+  "sms": 0,
+  "email": 0,
+  "messages": []
+ },
+ {
+  "name": "GHL Phone Call - Google Ads",
+  "kind": "conversion",
+  "change": "Keep; ensure gclid mapping.",
+  "status": "published",
+  "triggers": [
+   "Call Details"
+  ],
+  "steps": 0,
+  "sms": 0,
+  "email": 0,
+  "messages": []
+ },
+ {
+  "name": "GHL Website Chat - Google Ads",
+  "kind": "conversion",
+  "change": "Keep; ensure gclid mapping.",
+  "status": "published",
+  "triggers": [
+   "Customer Replied",
+   "Customer Replied",
+   "Customer Replied"
+  ],
+  "steps": 0,
+  "sms": 0,
+  "email": 0,
+  "messages": []
+ },
+ {
+  "name": "03. Appointment Booked",
+  "kind": "review",
+  "change": "Unchanged in Plan B. One fix: ensure ONE opp per consult (double-calendar issue).",
+  "status": "published",
+  "triggers": [
+   "Customer Booked Appointment: Virtual",
+   "Appointment Status: VA Beach",
+   "Appointment Status: Richmond",
+   "Appointment Status: Virtual",
+   "Appointment Status: Newport"
+  ],
+  "steps": 0,
+  "sms": 0,
+  "email": 0,
+  "messages": [
+   {
+    "channel": "email",
+    "delay": "",
+    "subject": "Confirmed: {{appointment.only_start_date}}",
+    "message": "96\n\n-\n\n-\n\n{{contact.first_name}},\n\nYou're set for {{appointment.only_start_date}} at {{appointment.only_start_time}}.\nLocation: 827 Diligence Drive, Suite 206 Newport News, VA 23606\nComplete your intake form before you arrive.\n\nWhat to expect:\n- About one hour\n- No fasting required\n- Labs on-site, results in 20 minutes\n- Most men start treatment same day\n\nQuestions? Call or text 866-344-4955\n\n{{location.name}}\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list ."
+   },
+   {
+    "channel": "sms",
+    "delay": "",
+    "subject": "",
+    "message": "https://book.menswellnesscenters.com/watch?name={{contact.first_name}}&loc=richmond\n\n\nHi {{contact.first_name}}, your appointment with Men's Wellness Centers Richmond is confirmed.\n\nYour visit: {{appointment.start_time}} at 4050 Innslake Dr, Suite 360 Glen Allen, VA 23060. You'll sit down in person with a provider who's focused on you.\n\nGet the most out of your time by taking 3 minutes to complete your intake form.\n\nhttps://go.menswellnesscenters.com/medical-intake\n\nQuestions? Call or text 866-344-4955."
+   },
+   {
+    "channel": "email",
+    "delay": "",
+    "subject": "Tomorrow: {{appointment.only_start_time}}",
+    "message": "96\n\n-\n\n-\n\n{{contact.first_name}},\n\nYour appointment is tomorrow at {{appointment.only_start_time}}.\nIntake form\nNeed to reschedule? Call or text 866-344-4955\n\n{{location.name}}\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list ."
+   },
+   {
+    "channel": "email",
+    "delay": "",
+    "subject": "Today: {{appointment.only_start_time}}",
+    "message": "96\n\n-\n\n-\n\n{{contact.first_name}},\n\nYour appointment is today at {{appointment.only_start_time}}.\n\n{{location.name}}\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list ."
+   },
+   {
+    "channel": "sms",
+    "delay": "",
+    "subject": "",
+    "message": "{{contact.first_name}}, your appointment is today at {{appointment.only_start_time}} at 996 First Colonial Road Virginia Beach, VA 23454. \n\nQuestions? Call or text 866-344-4955"
+   },
+   {
+    "channel": "sms",
+    "delay": "",
+    "subject": "",
+    "message": "{{contact.first_name}}, your appointment is today at {{appointment.only_start_time}} at 996 First Colonial Road Virginia Beach, VA 23454. \n\nQuestions? Call or text 866-344-4955"
+   },
+   {
+    "channel": "sms",
+    "delay": "",
+    "subject": "",
+    "message": "{{contact.first_name}}, your appointment is today at {{appointment.only_start_time}} at 4050 Innslake Dr, Suite 360 Glen Allen, VA 23060. \n\n\nQuestions? Call or text 866-344-4955"
+   },
+   {
+    "channel": "sms",
+    "delay": "",
+    "subject": "",
+    "message": "{{contact.first_name}}, your appointment is today at {{appointment.only_start_time}} at 4050 Innslake Dr, Suite 360 Glen Allen, VA 23060. \n\n\nQuestions? Call or text 866-344-4955"
+   },
+   {
+    "channel": "sms",
+    "delay": "",
+    "subject": "",
+    "message": "{{contact.first_name}},  your appointment is today at {{appointment.only_start_time}} at  827 Diligence Drive, Suite 206 Newport News, VA 23606.\n\nQuestions? Call or text 866-344-4955"
+   },
+   {
+    "channel": "sms",
+    "delay": "",
+    "subject": "",
+    "message": "{{contact.first_name}},  your appointment is today at {{appointment.only_start_time}} at  827 Diligence Drive, Suite 206 Newport News, VA 23606.\n\nQuestions? Call or text 866-344-4955"
+   },
+   {
+    "channel": "email",
+    "delay": "",
+    "subject": "Today: {{appointment.only_start_time}}",
+    "message": "96\n\n-\n\n-\n\n{{contact.first_name}},\n\nYour appointment is today at {{appointment.only_start_time}}.\nIntake form not complete? Do it now:\nComplete your intake form here.\n\n{{location.name}}\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list ."
+   },
+   {
+    "channel": "sms",
+    "delay": "",
+    "subject": "",
+    "message": "Hi {{contact.first_name}}, your Men's Wellness Centers visit is today at {{appointment.only_start_time}}, 996 First Colonial Road Virginia Beach, VA 23454.\n\nTake 3 minutes now so your provider can focus on you, not paperwork:\n\nhttps://go.menswellnesscenters.com/medical-intake\n\nSee you soon. Need anything? Call or text 866-344-4955."
+   },
+   {
+    "channel": "sms",
+    "delay": "",
+    "subject": "",
+    "message": "{{contact.first_name}},  Your appointment is today at {{appointment.only_start_time}} at 996 First Colonial Road Virginia Beach, VA 23454. \n\nIntake form not complete? Complete it at bookmwc.com/intake : {{trigger_link.uj0huJZhOS6LNRaXhcDH}}.  Questions? Call or text 866-344-4955"
+   },
+   {
+    "channel": "sms",
+    "delay": "",
+    "subject": "",
+    "message": "Hi {{contact.first_name}}, your Men's Wellness Centers visit is today at {{appointment.only_start_time}}, 4050 Innslake Dr, Suite 360 Glen Allen, VA 23060.\n\nTake 3 minutes now so your provider can focus on you, not paperwork:\n\nhttps://go.menswellnesscenters.com/medical-intake\n\nSee you soon. Need anything? Call or text 866-344-4955."
+   },
+   {
+    "channel": "sms",
+    "delay": "",
+    "subject": "",
+    "message": "{{contact.first_name}},  Your appointment is today at {{appointment.only_start_time}} at 4050 Innslake Dr, Suite 360 Glen Allen, VA 23060. \n\nIntake form not complete? Complete it at bookmwc.com/intake : {{trigger_link.uj0huJZhOS6LNRaXhcDH}}.  Questions? Call or text 866-344-4955"
+   },
+   {
+    "channel": "sms",
+    "delay": "",
+    "subject": "",
+    "message": "Hi {{contact.first_name}}, your Men's Wellness Centers visit is today at {{appointment.only_start_time}}, 827 Diligence Drive, Suite 206 Newport News, VA 23606.\n\nTake 3 minutes now so your provider can focus on you, not paperwork:\n\nhttps://go.menswellnesscenters.com/medical-intake\n\nSee you soon. Need anything? Call or text 866-344-4955."
+   },
+   {
+    "channel": "sms",
+    "delay": "",
+    "subject": "",
+    "message": "{{contact.first_name}},  Your appointment is today at {{appointment.only_start_time}} at  827 Diligence Drive, Suite 206 Newport News, VA 23606.\n\nIntake form not complete? Complete it at bookmwc.com/intake : {{trigger_link.uj0huJZhOS6LNRaXhcDH}}.  Questions? Call or text 866-344-4955"
+   },
+   {
+    "channel": "sms",
+    "delay": "",
+    "subject": "",
+    "message": "Hi {{contact.first_name}}, your appointment with Men's Wellness Centers Newport News is confirmed.\n\nYour visit: {{appointment.start_time}} at 827 Diligence Drive, Suite 206 Newport News, VA 23606. You'll sit down in person with a provider who's focused on you.\n\nGet the most out of your time by taking 3 minutes to complete your intake form.\n\nhttps://go.menswellnesscenters.com/medical-intake\n\nQuestions? Call or text 866-344-4955."
+   },
+   {
+    "channel": "sms",
+    "delay": "",
+    "subject": "",
+    "message": "Hi {{contact.first_name}}, your appointment with Men's Wellness Centers Virginia Beach is confirmed.\n\nYour visit: {{appointment.start_time}} at 996 First Colonial Road Virginia Beach, VA 23454. You'll sit down in person with a provider who's focused on you.\n\nGet the most out of your time by taking 3 minutes to complete your intake form.\n\nhttps://go.menswellnesscenters.com/medical-intake\n\nQuestions? Call or text 866-344-4955."
+   },
+   {
+    "channel": "email",
+    "delay": "",
+    "subject": "Confirmed: {{appointment.only_start_date}}",
+    "message": "96\n\n-\n\n{{contact.first_name}},\n\nYou're set for {{appointment.only_start_date}} at {{appointment.only_start_time}}.\nLocation: 996 First Colonial Road Virginia Beach, VA 23454\nComplete your intake form before you arrive.\n\nWhat to expect:\n- About one hour\n- No fasting required\n- Labs on-site, results in 20 minutes\n- Most men start treatment same day\n\nQuestions? Call or text 866-344-4955\n\n{{location.name}}\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list ."
+   },
+   {
+    "channel": "email",
+    "delay": "",
+    "subject": "Confirmed: {{appointment.only_start_date}}",
+    "message": "96\n\n-\n\n-\n\n{{contact.first_name}},\n\nYou're set for {{appointment.only_start_date}} at {{appointment.only_start_time}}.\nLocation: 4050 Innslake Dr, Suite 360 Glen Allen, VA 23060\nComplete your intake form before you arrive.\n\nWhat to expect:\n- About one hour\n- No fasting required\n- Labs on-site, results in 20 minutes\n- Most men start treatment same day\n\nQuestions? Call or text 866-344-4955\n\n{{location.name}}\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list ."
+   }
+  ]
+ }
+]

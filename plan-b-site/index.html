@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MWC GHL — Plan B: Revenue &amp; Attribution only</title>
+<meta name="description" content="Focused remediation plan: fix revenue recognition on the opportunity and marketing attribution through win/loss — with all dependencies, affected workflows, triggers and messages." />
+<style>
+  :root{--bg:#f6f7f9;--card:#fff;--ink:#15233b;--mut:#5b6b85;--line:#e4e8ef;--navy:#0b2447;--blue:#1b6ec2;--green:#1d9e75;--amber:#b9770b;--red:#c0392b;--cyan:#0e7c86}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+  a{color:var(--blue);text-decoration:none}
+  header.hero{background:var(--navy);color:#fff;padding:34px 22px 26px}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 22px}
+  header.hero .wrap{padding:0}
+  .kick{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#9fc3ec;font-weight:600}
+  h1{font-size:30px;margin:.25em 0 .15em;font-weight:700}
+  .sub{color:#c7d6ea;max-width:760px;font-size:15px}
+  nav.toc{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line);overflow-x:auto;white-space:nowrap}
+  nav.toc .wrap{display:flex;gap:2px;padding:0 22px}
+  nav.toc a{padding:11px 12px;font-size:13px;color:var(--mut);font-weight:500;border-bottom:2px solid transparent}
+  nav.toc a:hover{color:var(--ink);border-bottom-color:var(--blue)}
+  section{padding:30px 0;border-bottom:1px solid var(--line)}
+  h2{font-size:21px;margin:0 0 4px}
+  .lead{color:var(--mut);max-width:780px;margin:.2em 0 18px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:760px){.grid2,.grid3{grid-template-columns:1fr}}
+  .badge{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px}
+  .b-key{background:#fdecea;color:var(--red)}
+  .b-rev{background:#e8f4fd;color:var(--blue)}
+  .b-att{background:#e3f6ef;color:var(--green)}
+  .b-opt{background:#f1f1f4;color:var(--mut)}
+  .b-cap{background:#e3f6ef;color:var(--green)}
+  .b-conv{background:#eaf0fb;color:var(--blue)}
+  .b-repoint{background:#fcf3e2;color:var(--amber)}
+  .b-review{background:#f1f1f4;color:var(--mut)}
+  .b-KEYSTONE{background:#fdecea;color:var(--red)}
+  .problem{border-left:4px solid var(--red);border-radius:0 8px 8px 0}
+  .pill{font-size:12px;background:#fdecea;color:var(--red);padding:3px 9px;border-radius:6px;font-weight:600;display:inline-block;margin-top:8px}
+  .keystone{background:#fdecea;border:1px solid #f3c0ba;border-radius:10px;padding:14px 18px;color:#7a2018}
+  ul.clean{margin:6px 0;padding-left:20px}ul.clean li{margin:4px 0}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--mut)}
+  code{background:#eef1f5;padding:1px 5px;border-radius:4px;font-size:12.5px}
+  details{background:var(--card);border:1px solid var(--line);border-radius:8px;margin:8px 0;overflow:hidden}
+  details>summary{cursor:pointer;padding:11px 14px;font-weight:600;font-size:14px;list-style:none;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  details>summary::-webkit-details-marker{display:none}
+  .wfbody{padding:0 14px 14px}
+  .trg{font-size:12px;color:var(--mut)}
+  .change{background:#f7f9fc;border-left:3px solid var(--blue);padding:8px 11px;border-radius:0 6px 6px 0;font-size:13.5px;margin:8px 0}
+  pre.msg{white-space:pre-wrap;font-family:inherit;font-size:13px;background:#f7f9fc;border:1px solid var(--line);border-radius:6px;padding:9px 11px;margin:7px 0;color:#243049}
+  .mh{font-size:11px;color:var(--mut);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+  .dep{border:1px solid var(--line);border-radius:8px;padding:11px 13px;background:#fff}
+  .dep .id{font-weight:700;font-family:ui-monospace,monospace;font-size:13px}
+  .dep .dn{font-size:12px;color:var(--mut)}
+  .foot{padding:26px 22px;color:var(--mut);font-size:13px;text-align:center}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+  <div class="kick">MWC GoHighLevel · focused remediation</div>
+  <h1>Plan B — Revenue &amp; Attribution only</h1>
+  <p class="sub">Fix the two money problems on the opportunity and leave the sprawl cleanup for later. This is the dependency-complete version: every affected workflow, trigger, message and field that has to change — and nothing more.</p>
+</div></header>
+
+<nav class="toc"><div class="wrap">
+  <a href="#overview">Overview</a>
+  <a href="#scope">Scope</a>
+  <a href="#deps">Dependencies</a>
+  <a href="#fields">Fields</a>
+  <a href="#workflows">Workflow changes</a>
+  <a href="#triggers">Trigger re-pointing</a>
+  <a href="#backfill">Backfill</a>
+  <a href="#sequence">Sequence</a>
+</div></nav>
+
+<div class="wrap">
+  <section id="overview">
+    <h2>The two problems</h2>
+    <p class="lead">Plan B fixes exactly these — accurate per-deal revenue on the opportunity, and marketing attribution tied through to win/loss.</p>
+    <div class="grid2" id="problems"></div>
+    <div class="keystone" id="keystone" style="margin-top:16px"></div>
+  </section>
+
+  <section id="scope">
+    <h2>Scope</h2>
+    <p class="lead">Deliberately narrow. The sprawl stays; we make money and attribution correct on top of it.</p>
+    <div class="grid2">
+      <div class="card"><div class="mh" style="color:var(--green)">In scope</div><ul class="clean" id="scopein"></ul></div>
+      <div class="card"><div class="mh" style="color:var(--mut)">Deferred (not Plan B)</div><ul class="clean" id="scopeout"></ul></div>
+    </div>
+  </section>
+
+  <section id="deps">
+    <h2>Dependencies</h2>
+    <p class="lead">What fixing only these two problems actually requires. The keystone (D2) unblocks both tracks.</p>
+    <div class="grid2">
+      <div><div class="mh b-rev" style="display:inline-block;padding:3px 9px;border-radius:6px;margin-bottom:8px">Track 1 — Revenue</div><div id="dep-rev"></div></div>
+      <div><div class="mh b-att" style="display:inline-block;padding:3px 9px;border-radius:6px;margin-bottom:8px">Track 2 — Attribution</div><div id="dep-att"></div></div>
+    </div>
+  </section>
+
+  <section id="fields">
+    <h2>Fields to build — <code>PCC Sales Data</code></h2>
+    <p class="lead">The opportunity field group the PCC fills after each consult. These were deleted with the June batch and get rebuilt clean, with your real options.</p>
+    <div class="card" style="padding:0"><table><thead><tr><th>Field</th><th>Type</th><th>Options</th></tr></thead><tbody id="fields-b"></tbody></table></div>
+  </section>
+
+  <section id="workflows">
+    <h2>Workflow changes</h2>
+    <p class="lead">Every published workflow Plan B touches — current triggers, the exact change, and the verbatim messages inside it (so nothing is lost when re-pointing). Expand each.</p>
+    <div id="wf"></div>
+  </section>
+
+  <section id="triggers">
+    <h2>Trigger re-pointing</h2>
+    <p class="lead">The signals that fan out today, and how they change. This is the dependency web behind the keystone.</p>
+    <div id="trigmap"></div>
+  </section>
+
+  <section id="backfill">
+    <h2>Backfill — the one big decision</h2>
+    <p class="lead" id="bf-q"></p>
+    <div class="grid2" id="bf"></div>
+  </section>
+
+  <section id="sequence">
+    <h2>Sequence</h2>
+    <p class="lead">Dependency-ordered. Additive and safe first; keystone behind a canary; backfill last and optional.</p>
+    <div class="card" style="padding:0"><table><thead><tr><th>Phase</th><th>Do</th><th>Gate</th><th>Depends</th></tr></thead><tbody id="phases"></tbody></table></div>
+  </section>
+</div>
+<div class="foot">MWC GHL · Plan B (focused) · generated from a live read-only account audit · sample data only, no PHI</div>
+
+<script>
+const esc = s => (s==null?"":String(s)).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+Promise.all([fetch('planb.json').then(r=>r.json()), fetch('affected.json').then(r=>r.json())]).then(([P,AF])=>{
+  // problems
+  document.getElementById('problems').innerHTML = P.problems.map(p=>`
+    <div class="card problem"><b>${p.n}. ${esc(p.title)}</b><div style="color:var(--mut);font-size:14px;margin-top:6px">${esc(p.body)}</div><span class="pill">${esc(p.stat)}</span></div>`).join('');
+  document.getElementById('keystone').innerHTML = `<b>The keystone.</b> ${esc(P.keystone)}`;
+  document.getElementById('scopein').innerHTML = P.scope_in.map(s=>`<li>${esc(s)}</li>`).join('');
+  document.getElementById('scopeout').innerHTML = P.scope_out.map(s=>`<li>${esc(s)}</li>`).join('');
+  // deps
+  const depCard = d=>`<div class="dep" style="margin-bottom:8px"><div class="id">${d.id} · ${esc(d.title)} ${d.keystone?'<span class="badge b-key">keystone</span>':''}${d.optional?'<span class="badge b-opt">optional</span>':''}</div><div class="dn">${esc(d.desc)}${d.depends&&d.depends.length?' · needs '+d.depends.join(', '):''}</div></div>`;
+  document.getElementById('dep-rev').innerHTML = P.dependencies.filter(d=>d.track==='Revenue').map(depCard).join('');
+  document.getElementById('dep-att').innerHTML = P.dependencies.filter(d=>d.track==='Attribution').map(depCard).join('');
+  // fields
+  document.getElementById('fields-b').innerHTML = P.fields.map(f=>`<tr><td><b>${esc(f.name)}</b>${f.req?' <span class="badge b-key">required</span>':''}</td><td>${esc(f.type)}</td><td style="color:var(--mut)">${esc(f.opts)}</td></tr>`).join('');
+  // workflows
+  const kindBadge = k=>`<span class="badge b-${k}">${k}</span>`;
+  document.getElementById('wf').innerHTML = AF.map(w=>{
+    const msgs = (w.messages||[]).map(m=>`<div><div class="mh">${esc(m.channel||'msg')}${m.delay?' · '+esc(m.delay):''}${m.subject?' · '+esc(m.subject):''}</div><pre class="msg">${esc(m.message)}</pre></div>`).join('') || '<div class="trg">No messages in this workflow (API / webhook only).</div>';
+    return `<details><summary>${esc(w.name)} ${kindBadge(w.kind)} <span class="trg">· ${(w.messages||[]).length} msgs · ${(w.triggers||[]).length} triggers</span></summary>
+      <div class="wfbody">
+        <div class="trg"><b>Triggers today:</b> ${(w.triggers||[]).map(esc).join(' · ')||'—'}</div>
+        <div class="change"><b>Plan B change:</b> ${esc(w.change)}</div>
+        <div class="mh" style="margin-top:6px">Messages preserved</div>
+        ${msgs}
+      </div></details>`;
+  }).join('');
+  // trigger map
+  document.getElementById('trigmap').innerHTML = P.trigger_map.map(t=>`
+    <div class="card" style="margin-bottom:10px"><b>${esc(t.signal)}</b>
+      <div class="grid2" style="margin-top:8px">
+        <div><div class="mh" style="color:var(--red)">Today</div><div style="font-size:13.5px;color:var(--mut)">${esc(t.today)}</div></div>
+        <div><div class="mh" style="color:var(--green)">Plan B</div><div style="font-size:13.5px">${esc(t.planb)}</div></div>
+      </div></div>`).join('');
+  // backfill
+  document.getElementById('bf-q').textContent = P.backfill.question;
+  document.getElementById('bf').innerHTML = [P.backfill.goforward,P.backfill.restate].map((o,i)=>`
+    <div class="card" style="border-left:4px solid ${i?'var(--amber)':'var(--green)'}"><b>${esc(o.title)}</b> <span class="badge ${i?'b-repoint':'b-cap'}">${esc(o.effort)}</span><div style="color:var(--mut);font-size:14px;margin-top:6px">${esc(o.desc)}</div></div>`).join('');
+  // phases
+  document.getElementById('phases').innerHTML = P.phases.map(p=>`<tr><td><b>${p.n}</b> ${esc(p.title)}</td><td style="font-size:13px">${esc(p.do)}</td><td style="font-size:12.5px;color:var(--mut)">${esc(p.gate)}</td><td class="trg">${esc(p.deps)}</td></tr>`).join('');
+}).catch(e=>{document.querySelector('.wrap').insertAdjacentHTML('afterbegin','<p style="color:#c0392b">Failed to load plan data: '+esc(e.message)+'</p>');});
+</script>
+</body>
+</html>

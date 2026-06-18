@@ -75,15 +75,15 @@
   },
   "backfill": {
     "question": "Backfill is the single biggest size lever in Plan B.",
-    "goforward": { "title": "Go-forward only", "desc": "Fix capture + 05 + fields now; new deals are clean from day one. Fastest. But historical revenue and win rate stay wrong until you choose to restate.", "effort": "days" },
-    "restate": { "title": "Full restatement", "desc": "Also backfill ~7,150 existing opportunities: split the 992 fake A&D wins (real Won vs $0 no-sale), set monetaryValue from the contact data. Idempotent, dry-run first, reconciled Σ before = after.", "effort": "1–2 weeks added" }
+    "goforward": { "title": "Go-forward only", "desc": "Fix capture + 05 + fields; new deals are clean immediately. But historical revenue and win rate stay wrong until you choose to restate.", "effort": "smaller scope" },
+    "restate": { "title": "Full restatement", "desc": "Also backfill ~7,150 existing opportunities: split the 992 fake A&D wins (real Won vs $0 no-sale), set monetaryValue from the contact data. Idempotent, dry-run first, reconciled Σ before = after.", "effort": "larger scope" }
   },
   "phases": [
-    { "n": 0, "title": "Instrument + snapshot", "do": "Revenue-integrity monitor (running) + full export as the rollback baseline.", "gate": "Clean daily snapshots", "deps": "—" },
+    { "n": 0, "title": "Instrument + snapshot", "do": "Revenue-integrity monitor (running) + full export as the rollback baseline.", "gate": "Clean snapshots, no anomalies", "deps": "—" },
     { "n": 1, "title": "Additive build (parallel, safe)", "do": "D1 rebuild PCC Sales Data fields  ‖  D8 fix click-ID capture at the forms.", "gate": "Fields verified; a test lead shows gclid/fbclid captured", "deps": "—" },
     { "n": 2, "title": "Keystone changes (behind canary)", "do": "D2 fix 05  +  D9 attribution stamp  +  D6 outcome→status, on the src:bf-web canary cohort.", "gate": "SHOWED never creates a Won A&D; won-with-$0 trends to 0", "deps": "D1, D8" },
     { "n": 3, "title": "PCC go-live", "do": "D5 train PCCs to disposition on the opportunity; widen from canary to all.", "gate": "Reps entering outcome+value on the opp; values appearing", "deps": "D1, D2" },
-    { "n": 4, "title": "Close the ad-platform loop", "do": "D11 verify CAPI/Google fire on real Won with click IDs; no fires on A&D.", "gate": "Conversions match real wins for 5 days", "deps": "D2, D8" },
+    { "n": 4, "title": "Close the ad-platform loop", "do": "D11 verify CAPI/Google fire on real Won with click IDs; no fires on A&D.", "gate": "Conversions match real wins, sustained", "deps": "D2, D8" },
     { "n": 5, "title": "Backfill (optional)", "do": "D7 dry-run → review CSV → write. Go-forward-only skips this.", "gate": "Σ revenue reconciles to approved CSV", "deps": "D2, D4" }
   ]
 }

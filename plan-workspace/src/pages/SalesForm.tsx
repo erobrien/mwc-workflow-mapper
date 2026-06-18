@@ -25,6 +25,12 @@ export default function SalesForm() {
         </CardContent>
       </Card>
 
+      <Card className="mb-4 border-l-4 border-l-emerald-500">
+        <CardContent className="p-4 text-sm text-foreground/90">
+          <b>Won't overwrite prior records.</b> Each consultation opens its own opportunity. If a patient adds a service, renews, or returns, a <b>new opportunity is created</b> — the prior one stays exactly as it was. Revenue and attribution are permanently tied to the deal that generated them, not to the person.
+        </CardContent>
+      </Card>
+
       <div className="rounded-lg bg-muted/40 p-3 sm:p-4">
         <Card>
           <CardContent className="p-0">
@@ -53,11 +59,11 @@ export default function SalesForm() {
                 <div className="mt-3 border-l-4 border-l-emerald-500 pl-3">
                   <div className="mb-2 flex items-center gap-2 text-xs font-medium text-emerald-700 dark:text-emerald-400"><Banknote className="h-3.5 w-3.5" /> The sale</div>
                   <div className="grid grid-cols-1 gap-3 sm:grid-cols-[2fr_1fr_1fr]">
-                    <div><label className={lbl}>Product sold 1</label><select className={sel}><option>TRT</option><option>HRT</option><option>GLP1</option><option>Combo</option></select></div>
-                    <div><label className={lbl}>Term 1</label><select className={sel}><option>12 mo</option><option>6 mo</option><option>3 mo</option><option>1 mo</option><option>24 mo</option></select></div>
+                    <div><label className={lbl}>Product sold 1</label><select className={sel}><option>TRT</option><option>HRT</option><option>GLP1</option><option>Combo</option><option>ICP</option><option>ED</option><option>B Complex</option></select></div>
+                    <div><label className={lbl}>Term 1</label><select className={sel}><option>1 mo</option><option>3 mo</option><option>6 mo</option><option>12 mo</option><option>24 mo</option><option>30 mo</option><option>36 mo</option><option>42 mo</option></select></div>
                     <div><label className={lbl}>Price 1</label><input className={sel} placeholder="$" /></div>
                   </div>
-                  <div className="mt-1 flex items-center gap-1 font-mono text-[11px] text-muted-foreground"><Plus className="h-3 w-3" /> add product 2 (TRT / HRT / GLP1 / Combo)</div>
+                  <div className="mt-1 flex items-center gap-1 font-mono text-[11px] text-muted-foreground"><Plus className="h-3 w-3" /> add product 2 (TRT / HRT / GLP1 / Combo / ICP / ED / B Complex)</div>
                   <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
                     <div><label className={lbl}>Total program amount</label><input className={`${sel} border-sky-400`} placeholder="$" /><div className="mt-1 font-mono text-[11px] text-sky-700 dark:text-sky-400">money · sets the deal's Value — revenue shows per deal</div></div>
                     <div><label className={lbl}>Money down</label><input className={sel} placeholder="$" /><Help>money · collected at signing</Help></div>
@@ -80,7 +86,14 @@ export default function SalesForm() {
               {/* Deal context */}
               <div className="mb-2 flex items-center gap-2 text-xs font-medium text-muted-foreground"><Info className="h-3.5 w-3.5" /> Deal context</div>
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                <div><label className={lbl}>Stage</label><select className={sel}><option>Showed</option><option>Booked</option><option>Confirmed</option><option>Won</option></select><Help>auto-set, editable</Help></div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <label className={lbl}>Stage</label>
+                    <span className="rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-medium text-amber-700 dark:bg-amber-900/40 dark:text-amber-400">pending discussion</span>
+                  </div>
+                  <select className={sel}><option>Showed</option><option>No-Show</option><option>Booked</option><option>Confirmed</option><option>Won</option><option>Lost</option></select>
+                  <Help>discuss: auto-set from outcome vs. editable pipeline stage</Help>
+                </div>
                 <div><label className={lbl}>Lead source</label><div className={auto}>Google paid · demo campaign</div><div className="mt-1 font-mono text-[11px] text-sky-700 dark:text-sky-400">auto · carried from contact → ties win/loss to the campaign</div></div>
                 <div><label className={lbl}>Location</label><div className={auto}>Virginia Beach</div><Help>auto · from pipeline</Help></div>
                 <div><label className={lbl}>PCC (owner)</label><div className={auto}>Alex Rivera</div><Help>auto</Help></div>

@@ -17,6 +17,7 @@ import Gaps from "./pages/Gaps";
 import SalesForm from "./pages/SalesForm";
 import WorkflowDetail from "./pages/WorkflowDetail";
 import WFDiagrams from "./pages/WFDiagrams";
+import Tags from "./pages/Tags";
 
 const wrap = (el: React.ReactNode) => <Shell>{el}</Shell>;
 
@@ -38,6 +39,7 @@ const router = createBrowserRouter([
   { path: "/gaps", element: wrap(<Gaps />) },
   { path: "/workflow/:id", element: wrap(<WorkflowDetail />) },
   { path: "/wf-diagrams", element: wrap(<WFDiagrams />) },
+  { path: "/tags", element: wrap(<Tags />) },
   { path: "*", element: wrap(<div className="py-20 text-center text-muted-foreground">Page not found.</div>) },
 ]);
 

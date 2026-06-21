@@ -2,8 +2,15 @@ import { useState, useEffect, useMemo, useCallback } from "react";
 import { PageShell } from "../components/Shell";
 import { Download, AlertTriangle, ChevronUp, ChevronDown, ChevronsUpDown, ChevronLeft, ChevronRight } from "lucide-react";
 
-interface GhlTag { id: string; name: string; locationId: string; pattern: string; }
-interface TagData { pulled_at: string; total: number; tags: GhlTag[]; }
+interface GhlTag {
+  id: string; name: string; locationId: string; pattern: string;
+  count: number | null; usage_tier: string;
+  created_at: string | null; updated_at: string | null;
+}
+interface TagData {
+  pulled_at: string; total: number; has_dates: boolean;
+  total_contacts_tagged: number; tags: GhlTag[];
+}
 
 type Disposition = "" | "keep" | "rename" | "merge" | "delete" | "skip";
 interface Ann { disposition: Disposition; description: string; notes: string; newName: string; mergeInto: string; }
@@ -21,7 +28,6 @@ const DISP_OPTIONS: { value: Disposition; label: string }[] = [
   { value: "skip", label: "No Action" },
 ];
 
-/* colors that work in both light and dark mode */
 const DISP_BADGE: Record<Disposition, string> = {
   "":     "bg-muted text-muted-foreground",
   keep:   "bg-emerald-100 text-emerald-800 dark:bg-emerald-800 dark:text-emerald-100",
@@ -38,12 +44,6 @@ const DISP_ROW: Record<Disposition, string> = {
   delete: "bg-red-50 dark:bg-red-950/25",
   skip:   "",
 };
-const DISP_STAT_VAL: Record<string, string> = {
-  keep: "text-emerald-700 dark:text-emerald-400",
-  delete: "text-red-700 dark:text-red-400",
-  rename: "text-sky-700 dark:text-sky-400",
-  merge: "text-orange-700 dark:text-orange-400",
-};
 
 const PATTERN_BADGE: Record<string, string> = {
   "date-suffixed":      "bg-amber-100 text-amber-800 dark:bg-amber-900/60 dark:text-amber-200",
@@ -51,9 +51,19 @@ const PATTERN_BADGE: Record<string, string> = {
   "broken-merge-field": "bg-red-100 text-red-800 dark:bg-red-900/60 dark:text-red-200",
   "aft-batch":          "bg-purple-100 text-purple-800 dark:bg-purple-900/60 dark:text-purple-200",
   "adhoc-batch":        "bg-purple-100 text-purple-800 dark:bg-purple-900/60 dark:text-purple-200",
+  "test-junk":          "bg-rose-100 text-rose-800 dark:bg-rose-900/60 dark:text-rose-200",
 };
 
-type SortKey = "name" | "disposition" | "pattern";
+const TIER_META: Record<string, { label: string; badge: string }> = {
+  unused:  { label: "unused",  badge: "bg-red-100 text-red-800 dark:bg-red-900/70 dark:text-red-200" },
+  rare:    { label: "rare",    badge: "bg-orange-100 text-orange-800 dark:bg-orange-900/60 dark:text-orange-200" },
+  low:     { label: "low",     badge: "bg-amber-100 text-amber-800 dark:bg-amber-900/60 dark:text-amber-200" },
+  medium:  { label: "medium",  badge: "bg-sky-100 text-sky-800 dark:bg-sky-900/60 dark:text-sky-200" },
+  high:    { label: "high",    badge: "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-200" },
+  unknown: { label: "?",       badge: "bg-muted text-muted-foreground" },
+};
+
+type SortKey = "name" | "count" | "tier" | "disposition" | "created" | "updated";
 type SortDir = "asc" | "desc";
 
 function loadAnnotations(): Record<string, Ann> {
@@ -61,6 +71,12 @@ function loadAnnotations(): Record<string, Ann> {
 }
 function saveAnnotations(a: Record<string, Ann>) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(a));
+}
+function fmtDate(s: string | null): string {
+  if (!s) return "—";
+  const d = new Date(s);
+  if (isNaN(d.getTime())) return "—";
+  return d.toLocaleDateString(undefined, { year: "2-digit", month: "short", day: "numeric" });
 }
 
 const inp = "w-full rounded border border-input bg-background px-2 py-1 text-xs text-foreground placeholder:text-muted-foreground outline-none focus:border-ring focus:ring-1 focus:ring-ring/30";
@@ -71,12 +87,13 @@ function SortIcon({ col, sortBy, sortDir }: { col: SortKey; sortBy: SortKey; sor
   return sortDir === "asc" ? <ChevronUp className="h-3 w-3 shrink-0" /> : <ChevronDown className="h-3 w-3 shrink-0" />;
 }
 
-function TagRow({ tag, ann, onChange, rowIdx }: {
-  tag: GhlTag; ann: Ann; onChange: (id: string, patch: Partial<Ann>) => void; rowIdx: number;
+function TagRow({ tag, ann, onChange, rowIdx, showDates }: {
+  tag: GhlTag; ann: Ann; onChange: (id: string, patch: Partial<Ann>) => void; rowIdx: number; showDates: boolean;
 }) {
   const set = (patch: Partial<Ann>) => onChange(tag.id, patch);
   const disp = ann.disposition;
   const stripe = rowIdx % 2 === 0 ? "bg-card" : "bg-muted/30";
+  const tier = TIER_META[tag.usage_tier] ?? TIER_META.unknown;
 
   return (
     <tr className={`border-b border-border transition-colors hover:bg-muted/50 ${DISP_ROW[disp] || stripe}`}>
@@ -91,6 +108,24 @@ function TagRow({ tag, ann, onChange, rowIdx }: {
           )}
         </div>
       </td>
+      {/* Contacts (count + tier) */}
+      <td className="px-3 py-2 align-middle whitespace-nowrap text-right">
+        <div className="flex items-center justify-end gap-2">
+          <span className={`tabular-nums font-semibold ${tag.count === 0 ? "text-red-600 dark:text-red-400" : "text-foreground"}`}>
+            {tag.count ?? "—"}
+          </span>
+          <span className={`shrink-0 inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-semibold ${tier.badge}`}>
+            {tier.label}
+          </span>
+        </div>
+      </td>
+      {/* Dates (conditional) */}
+      {showDates && (
+        <>
+          <td className="px-3 py-2 align-middle whitespace-nowrap text-xs text-muted-foreground">{fmtDate(tag.created_at)}</td>
+          <td className="px-3 py-2 align-middle whitespace-nowrap text-xs text-muted-foreground">{fmtDate(tag.updated_at)}</td>
+        </>
+      )}
       {/* Disposition */}
       <td className="px-3 py-2 align-middle">
         <div className="space-y-1">
@@ -130,6 +165,7 @@ export default function Tags() {
   const [search, setSearch] = useState("");
   const [filterDisp, setFilterDisp] = useState<Disposition | "all">("all");
   const [filterPattern, setFilterPattern] = useState("all");
+  const [filterTier, setFilterTier] = useState("all");
   const [sortBy, setSortBy] = useState<SortKey>("name");
   const [sortDir, setSortDir] = useState<SortDir>("asc");
   const [page, setPage] = useState(1);
@@ -150,10 +186,11 @@ export default function Tags() {
   }, []);
 
   const tags = data?.tags ?? [];
+  const showDates = !!data?.has_dates;
 
   function handleSort(col: SortKey) {
     if (sortBy === col) setSortDir((d) => d === "asc" ? "desc" : "asc");
-    else { setSortBy(col); setSortDir("asc"); }
+    else { setSortBy(col); setSortDir(col === "count" ? "asc" : "asc"); }
     setPage(1);
   }
 
@@ -162,16 +199,21 @@ export default function Tags() {
     if (search) { const q = search.toLowerCase(); t = t.filter((x) => x.name.toLowerCase().includes(q)); }
     if (filterDisp !== "all") t = t.filter((x) => (annotations[x.id]?.disposition ?? "") === filterDisp);
     if (filterPattern !== "all") t = t.filter((x) => (filterPattern === "" ? !x.pattern : x.pattern === filterPattern));
+    if (filterTier !== "all") t = t.filter((x) => x.usage_tier === filterTier);
     return t;
-  }, [tags, search, filterDisp, filterPattern, annotations]);
+  }, [tags, search, filterDisp, filterPattern, filterTier, annotations]);
 
   const sorted = useMemo(() => {
+    const tierRank: Record<string, number> = { unused: 0, rare: 1, low: 2, medium: 3, high: 4, unknown: 5 };
     return [...filtered].sort((a, b) => {
-      let av = "", bv = "";
-      if (sortBy === "name") { av = a.name; bv = b.name; }
-      else if (sortBy === "disposition") { av = annotations[a.id]?.disposition ?? ""; bv = annotations[b.id]?.disposition ?? ""; }
-      else if (sortBy === "pattern") { av = a.pattern; bv = b.pattern; }
-      return sortDir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
+      let cmp = 0;
+      if (sortBy === "name") cmp = a.name.localeCompare(b.name);
+      else if (sortBy === "count") cmp = (a.count ?? -1) - (b.count ?? -1);
+      else if (sortBy === "tier") cmp = (tierRank[a.usage_tier] ?? 9) - (tierRank[b.usage_tier] ?? 9);
+      else if (sortBy === "disposition") cmp = (annotations[a.id]?.disposition ?? "").localeCompare(annotations[b.id]?.disposition ?? "");
+      else if (sortBy === "created") cmp = (a.created_at ?? "").localeCompare(b.created_at ?? "");
+      else if (sortBy === "updated") cmp = (a.updated_at ?? "").localeCompare(b.updated_at ?? "");
+      return sortDir === "asc" ? cmp : -cmp;
     });
   }, [filtered, sortBy, sortDir, annotations]);
 
@@ -179,7 +221,7 @@ export default function Tags() {
   const safePage = Math.min(page, totalPages);
   const pageSlice = sorted.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
 
-  useEffect(() => { setPage(1); }, [search, filterDisp, filterPattern, sortBy, sortDir]);
+  useEffect(() => { setPage(1); }, [search, filterDisp, filterPattern, filterTier, sortBy, sortDir]);
 
   const stats = useMemo(() => {
     const c: Record<string, number> = { "": 0, keep: 0, rename: 0, merge: 0, delete: 0, skip: 0 };
@@ -187,15 +229,22 @@ export default function Tags() {
     return c;
   }, [tags, annotations]);
 
+  const tierCounts = useMemo(() => {
+    const c: Record<string, number> = {};
+    for (const t of tags) c[t.usage_tier] = (c[t.usage_tier] ?? 0) + 1;
+    return c;
+  }, [tags]);
+
   const reviewed = tags.length - (stats[""] ?? 0);
   const pct = tags.length > 0 ? Math.round((reviewed / tags.length) * 100) : 0;
   const patterns = useMemo(() => Array.from(new Set(tags.map((t) => t.pattern).filter(Boolean))).sort(), [tags]);
 
   function exportCSV() {
-    const rows = [["id", "name", "pattern", "disposition", "new_name", "merge_into", "description", "notes"]];
+    const head = ["id", "name", "pattern", "contact_count", "usage_tier", "created_at", "updated_at", "disposition", "new_name", "merge_into", "description", "notes"];
+    const rows = [head];
     for (const t of tags) {
       const a = annotations[t.id] ?? EMPTY_ANN;
-      rows.push([t.id, t.name, t.pattern, a.disposition, a.newName, a.mergeInto, a.description, a.notes]);
+      rows.push([t.id, t.name, t.pattern, String(t.count ?? ""), t.usage_tier, t.created_at ?? "", t.updated_at ?? "", a.disposition, a.newName, a.mergeInto, a.description, a.notes]);
     }
     const csv = rows.map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(",")).join("\n");
     const blob = new Blob([csv], { type: "text/csv" });
@@ -211,7 +260,7 @@ export default function Tags() {
   return (
     <PageShell
       title="Tag library & rationalization"
-      subtitle={`${tags.length} live GHL tags · pulled ${data?.pulled_at ?? "…"} · click column headers to sort · filter by disposition or pattern · auto-saved`}
+      subtitle={`${tags.length} live GHL tags · pulled ${data?.pulled_at ?? "…"} · ${(data?.total_contacts_tagged ?? 0).toLocaleString()} total tag-applications · sort by Contacts to surface dead tags`}
       actions={
         <div className="flex items-center gap-2">
           {saved && <span className="rounded bg-emerald-600 px-2 py-0.5 text-xs font-medium text-white">Saved</span>}
@@ -222,32 +271,42 @@ export default function Tags() {
         </div>
       }
     >
-      {/* Stats */}
-      <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
-        {[
-          { label: "Total",    value: tags.length, cls: "text-foreground" },
-          { label: "Reviewed", value: reviewed,     cls: "text-foreground" },
-          { label: "Keep",     value: stats.keep,   cls: DISP_STAT_VAL.keep },
-          { label: "Delete",   value: stats.delete, cls: DISP_STAT_VAL.delete },
-          { label: "Rename",   value: stats.rename, cls: DISP_STAT_VAL.rename },
-          { label: "Merge",    value: stats.merge,  cls: DISP_STAT_VAL.merge },
-        ].map((s) => (
-          <div key={s.label} className="rounded-lg border border-border bg-card p-3">
-            <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">{s.label}</div>
-            <div className={`mt-1 text-2xl font-bold ${s.cls}`}>{s.value}</div>
-          </div>
-        ))}
+      {/* Usage stats — the rationalization story */}
+      <div>
+        <div className="mb-2 text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Usage breakdown (by contacts carrying the tag)</div>
+        <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
+          {[
+            { key: "total",   label: "Total tags", value: tags.length, cls: "text-foreground", sub: "" },
+            { key: "unused",  label: "Unused",     value: tierCounts.unused ?? 0, cls: "text-red-600 dark:text-red-400", sub: "0 contacts" },
+            { key: "rare",    label: "Rare",       value: tierCounts.rare ?? 0,   cls: "text-orange-600 dark:text-orange-400", sub: "1–5" },
+            { key: "low",     label: "Low",        value: tierCounts.low ?? 0,    cls: "text-amber-600 dark:text-amber-400", sub: "6–50" },
+            { key: "medium",  label: "Medium",     value: tierCounts.medium ?? 0, cls: "text-sky-600 dark:text-sky-400", sub: "51–500" },
+            { key: "high",    label: "High",       value: tierCounts.high ?? 0,   cls: "text-emerald-600 dark:text-emerald-400", sub: "500+" },
+          ].map((s) => (
+            <button key={s.key}
+              onClick={() => { if (s.key !== "total") { setFilterTier(filterTier === s.key ? "all" : s.key); setPage(1); } }}
+              className={`text-left rounded-lg border bg-card p-3 transition-colors ${s.key !== "total" ? "hover:border-foreground/30 cursor-pointer" : "cursor-default"} ${filterTier === s.key ? "border-foreground/50 ring-1 ring-foreground/20" : "border-border"}`}>
+              <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">{s.label}</div>
+              <div className={`mt-1 text-2xl font-bold ${s.cls}`}>{s.value}</div>
+              {s.sub && <div className="text-[10px] text-muted-foreground">{s.sub}</div>}
+            </button>
+          ))}
+        </div>
       </div>
 
-      {/* Progress */}
+      {/* Review progress */}
       <div className="space-y-1.5">
         <div className="flex items-center justify-between text-xs font-medium text-muted-foreground">
-          <span>{reviewed} of {tags.length} reviewed</span>
+          <span>
+            {reviewed} of {tags.length} reviewed
+            {(stats.keep + stats.delete + stats.rename + stats.merge) > 0 && (
+              <span className="ml-2">· <span className="text-emerald-600 dark:text-emerald-400">{stats.keep} keep</span> · <span className="text-red-600 dark:text-red-400">{stats.delete} delete</span> · <span className="text-sky-600 dark:text-sky-400">{stats.rename} rename</span> · <span className="text-orange-600 dark:text-orange-400">{stats.merge} merge</span></span>
+            )}
+          </span>
           <span>{pct}%</span>
         </div>
         <div className="h-2 w-full rounded-full bg-muted">
-          <div className="h-2 rounded-full bg-emerald-600 dark:bg-emerald-500 transition-all duration-300"
-            style={{ width: `${pct}%` }} />
+          <div className="h-2 rounded-full bg-emerald-600 dark:bg-emerald-500 transition-all duration-300" style={{ width: `${pct}%` }} />
         </div>
       </div>
 
@@ -268,11 +327,20 @@ export default function Tags() {
       {/* Filters */}
       <div className="flex flex-wrap items-center gap-2">
         <input
-          className="h-8 w-60 rounded border border-input bg-background px-3 text-sm text-foreground placeholder:text-muted-foreground outline-none focus:border-ring focus:ring-1 focus:ring-ring/30"
+          className="h-8 w-56 rounded border border-input bg-background px-3 text-sm text-foreground placeholder:text-muted-foreground outline-none focus:border-ring focus:ring-1 focus:ring-ring/30"
           placeholder="Search tag names…"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
+        <select className="h-8 rounded border border-input bg-background px-2 text-sm text-foreground outline-none focus:border-ring"
+          value={filterTier} onChange={(e) => { setFilterTier(e.target.value); setPage(1); }}>
+          <option value="all">All usage</option>
+          <option value="unused">Unused (0)</option>
+          <option value="rare">Rare (1–5)</option>
+          <option value="low">Low (6–50)</option>
+          <option value="medium">Medium (51–500)</option>
+          <option value="high">High (500+)</option>
+        </select>
         <select className="h-8 rounded border border-input bg-background px-2 text-sm text-foreground outline-none focus:border-ring"
           value={filterDisp} onChange={(e) => { setFilterDisp(e.target.value as Disposition | "all"); setPage(1); }}>
           <option value="all">All dispositions</option>
@@ -285,22 +353,12 @@ export default function Tags() {
           {patterns.map((p) => <option key={p} value={p}>{p}</option>)}
         </select>
         <span className="text-sm font-medium text-muted-foreground">{filtered.length} matching</span>
-        {(search || filterDisp !== "all" || filterPattern !== "all") && (
-          <button onClick={() => { setSearch(""); setFilterDisp("all"); setFilterPattern("all"); setPage(1); }}
+        {(search || filterDisp !== "all" || filterPattern !== "all" || filterTier !== "all") && (
+          <button onClick={() => { setSearch(""); setFilterDisp("all"); setFilterPattern("all"); setFilterTier("all"); setPage(1); }}
             className="rounded border border-input px-2 py-1 text-xs text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-colors">
             Clear filters
           </button>
         )}
-      </div>
-
-      {/* Legend */}
-      <div className="flex flex-wrap gap-2 items-center">
-        {DISP_OPTIONS.filter((o) => o.value).map((o) => (
-          <span key={o.value} className={`inline-flex items-center rounded px-2 py-0.5 text-xs font-semibold ${DISP_BADGE[o.value]}`}>
-            {o.label}
-          </span>
-        ))}
-        <span className="text-xs text-muted-foreground">— set per-row in the Disposition column</span>
       </div>
 
       {/* Grid */}
@@ -309,27 +367,32 @@ export default function Tags() {
           <table className="w-full text-sm border-collapse">
             <thead>
               <tr>
-                <th className={thCls} style={{ width: "38%" }}>
-                  <div className={thBtn} onClick={() => handleSort("name")}>
-                    Tag name <SortIcon col="name" sortBy={sortBy} sortDir={sortDir} />
-                  </div>
+                <th className={thCls}>
+                  <div className={thBtn} onClick={() => handleSort("name")}>Tag name <SortIcon col="name" sortBy={sortBy} sortDir={sortDir} /></div>
                 </th>
-                <th className={thCls} style={{ width: "18%" }}>
-                  <div className={thBtn} onClick={() => handleSort("disposition")}>
-                    Disposition <SortIcon col="disposition" sortBy={sortBy} sortDir={sortDir} />
-                  </div>
+                <th className={`${thCls} text-right`}>
+                  <div className={`${thBtn} justify-end`} onClick={() => handleSort("count")}>Contacts <SortIcon col="count" sortBy={sortBy} sortDir={sortDir} /></div>
                 </th>
-                <th className={thCls} style={{ width: "27%" }}>Description</th>
-                <th className={thCls} style={{ width: "17%" }}>Notes</th>
+                {showDates && (
+                  <>
+                    <th className={thCls}><div className={thBtn} onClick={() => handleSort("created")}>Created <SortIcon col="created" sortBy={sortBy} sortDir={sortDir} /></div></th>
+                    <th className={thCls}><div className={thBtn} onClick={() => handleSort("updated")}>Updated <SortIcon col="updated" sortBy={sortBy} sortDir={sortDir} /></div></th>
+                  </>
+                )}
+                <th className={thCls}>
+                  <div className={thBtn} onClick={() => handleSort("disposition")}>Disposition <SortIcon col="disposition" sortBy={sortBy} sortDir={sortDir} /></div>
+                </th>
+                <th className={thCls}>Description</th>
+                <th className={thCls}>Notes</th>
               </tr>
             </thead>
             <tbody>
               {pageSlice.map((tag, i) => (
-                <TagRow key={tag.id} tag={tag} ann={annotations[tag.id] ?? EMPTY_ANN} onChange={update} rowIdx={i} />
+                <TagRow key={tag.id} tag={tag} ann={annotations[tag.id] ?? EMPTY_ANN} onChange={update} rowIdx={i} showDates={showDates} />
               ))}
               {pageSlice.length === 0 && (
                 <tr>
-                  <td colSpan={4} className="px-3 py-12 text-center text-sm text-muted-foreground bg-card">
+                  <td colSpan={showDates ? 7 : 5} className="px-3 py-12 text-center text-sm text-muted-foreground bg-card">
                     No tags match the current filters.
                   </td>
                 </tr>
@@ -347,8 +410,7 @@ export default function Tags() {
           </span>
           <div className="flex items-center gap-1">
             <button onClick={() => setPage(1)} disabled={safePage === 1} className={btnBase}>«</button>
-            <button onClick={() => setPage((p) => Math.max(1, p - 1))} disabled={safePage === 1}
-              className={`${btnBase} flex items-center gap-1`}>
+            <button onClick={() => setPage((p) => Math.max(1, p - 1))} disabled={safePage === 1} className={`${btnBase} flex items-center gap-1`}>
               <ChevronLeft className="h-3 w-3" /> Prev
             </button>
             {Array.from({ length: Math.min(7, totalPages) }, (_, i) => {
@@ -360,15 +422,12 @@ export default function Tags() {
               return (
                 <button key={p} onClick={() => setPage(p)}
                   className={`rounded border px-2.5 py-1 text-xs font-medium transition-colors ${
-                    p === safePage
-                      ? "border-foreground/40 bg-foreground text-background"
-                      : "border-input bg-background text-foreground hover:bg-muted"}`}>
+                    p === safePage ? "border-foreground/40 bg-foreground text-background" : "border-input bg-background text-foreground hover:bg-muted"}`}>
                   {p}
                 </button>
               );
             })}
-            <button onClick={() => setPage((p) => Math.min(totalPages, p + 1))} disabled={safePage === totalPages}
-              className={`${btnBase} flex items-center gap-1`}>
+            <button onClick={() => setPage((p) => Math.min(totalPages, p + 1))} disabled={safePage === totalPages} className={`${btnBase} flex items-center gap-1`}>
               Next <ChevronRight className="h-3 w-3" />
             </button>
             <button onClick={() => setPage(totalPages)} disabled={safePage === totalPages} className={btnBase}>»</button>
@@ -377,7 +436,7 @@ export default function Tags() {
       )}
 
       <p className="text-xs text-muted-foreground">
-        Annotations auto-save to localStorage — no submit needed. Export CSV for GHL admin handoff. No PHI — tag names only.
+        Contact counts are exact (verified against GHL search). {showDates ? "Created/Updated pulled from GHL backend." : "Created/Updated dates need a fresh GHL backend session — not yet loaded."} Annotations auto-save to your browser; Export CSV for handoff. No PHI — tag names and counts only.
       </p>
     </PageShell>
   );

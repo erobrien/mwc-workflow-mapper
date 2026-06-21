@@ -30,10 +30,31 @@ RETRIES = 3
 
 
 def pull_tags() -> list[dict]:
-    r = requests.get(f"{SERVICES}/locations/{LOCATION_ID}/tags",
-                     headers=services_headers(), timeout=30)
-    r.raise_for_status()
-    return r.json().get("tags", [])
+    """Pull all tags via /tags/search — the endpoint the GHL UI uses. Unlike the
+    plain /tags list, this returns dateAdded/dateUpdated per tag. Paginated."""
+    out: list[dict] = []
+    skip, limit = 0, 100
+    while True:
+        url = (f"{SERVICES}/locations/{LOCATION_ID}/tags/search"
+               f"?skip={skip}&limit={limit}&query=&getCount=true")
+        r = requests.get(url, headers=services_headers(), timeout=30)
+        r.raise_for_status()
+        d = r.json()
+        rows = d.get("tags", [])
+        if not rows:
+            break
+        for row in rows:
+            out.append({
+                "id": row.get("_id") or row.get("id"),
+                "name": row.get("name"),
+                "locationId": row.get("locationId", LOCATION_ID),
+                "created_at": row.get("dateAdded"),
+                "updated_at": row.get("dateUpdated"),
+            })
+        skip += limit
+        if skip >= d.get("total", len(out)):
+            break
+    return out
 
 
 def count_for(tag_name: str) -> int | None:
@@ -155,12 +176,12 @@ def main():
             if done % 25 == 0:
                 print(f"    {done}/{len(tags)}")
 
-    dates = try_backend_dates(tags)
-
     enriched = []
+    has_dates = False
     for t in tags:
         c = counts.get(t["id"])
-        d = dates.get(t["id"], {})
+        if t.get("created_at"):
+            has_dates = True
         enriched.append({
             "id": t["id"],
             "name": t["name"],
@@ -168,8 +189,8 @@ def main():
             "pattern": detect_pattern(t["name"]),
             "count": c,
             "usage_tier": usage_tier(c),
-            "created_at": d.get("created_at"),
-            "updated_at": d.get("updated_at"),
+            "created_at": t.get("created_at"),
+            "updated_at": t.get("updated_at"),
         })
 
     enriched.sort(key=lambda x: x["name"].lower())
@@ -177,7 +198,7 @@ def main():
     out = {
         "pulled_at": time.strftime("%Y-%m-%d"),
         "total": len(enriched),
-        "has_dates": bool(dates),
+        "has_dates": has_dates,
         "total_contacts_tagged": sum(c for c in counts.values() if c),
         "tags": enriched,
     }

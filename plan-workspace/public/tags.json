@@ -1,7 +1,7 @@
 {
   "pulled_at": "2026-06-21",
   "total": 386,
-  "has_dates": false,
+  "has_dates": true,
   "total_contacts_tagged": 28541,
   "tags": [
     {
@@ -11,8 +11,8 @@
       "pattern": "date-suffixed",
       "count": 149,
       "usage_tier": "medium",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-03T18:15:26.016Z",
+      "updated_at": "2026-05-03T18:15:26.016Z"
     },
     {
       "id": "kkl3R5itfNE9Eg7iuEp6",
@@ -21,8 +21,8 @@
       "pattern": "date-suffixed",
       "count": 217,
       "usage_tier": "medium",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-23T20:05:10.377Z",
+      "updated_at": "2026-04-23T20:05:10.377Z"
     },
     {
       "id": "bJ10kFVSqo49F7GOw5zk",
@@ -31,8 +31,8 @@
       "pattern": "month-suffixed",
       "count": 531,
       "usage_tier": "high",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-25T17:39:43.700Z",
+      "updated_at": "2026-04-25T17:39:43.700Z"
     },
     {
       "id": "JSQISHUB1czkHeX0BOsV",
@@ -41,8 +41,8 @@
       "pattern": "aft-batch",
       "count": 250,
       "usage_tier": "medium",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-25T17:40:16.896Z",
+      "updated_at": "2026-04-25T17:40:16.896Z"
     },
     {
       "id": "6l9FHpXJRXNqo0vZSMv1",
@@ -51,8 +51,8 @@
       "pattern": "aft-batch",
       "count": 27,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-25T17:39:43.700Z",
+      "updated_at": "2026-04-25T17:39:43.700Z"
     },
     {
       "id": "NxhBIG7XfaTNbpDhSuxu",
@@ -61,7 +61,7 @@
       "pattern": "broken-merge-field",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
+      "created_at": "2026-06-10T16:43:48.027Z",
       "updated_at": null
     },
     {
@@ -71,7 +71,7 @@
       "pattern": "",
       "count": 6,
       "usage_tier": "low",
-      "created_at": null,
+      "created_at": "2026-06-10T16:29:00.049Z",
       "updated_at": null
     },
     {
@@ -81,7 +81,7 @@
       "pattern": "",
       "count": 5,
       "usage_tier": "rare",
-      "created_at": null,
+      "created_at": "2026-06-09T15:50:03.293Z",
       "updated_at": null
     },
     {
@@ -91,7 +91,7 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
+      "created_at": "2026-06-10T16:42:43.242Z",
       "updated_at": null
     },
     {
@@ -101,8 +101,8 @@
       "pattern": "test-junk",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-04T13:38:42.308Z",
+      "updated_at": "2026-05-04T13:38:42.315Z"
     },
     {
       "id": "jYqdIf9F2tVO9oTglxkZ",
@@ -111,7 +111,7 @@
       "pattern": "",
       "count": 69,
       "usage_tier": "medium",
-      "created_at": null,
+      "created_at": "2026-02-26T17:36:40.385Z",
       "updated_at": null
     },
     {
@@ -121,7 +121,7 @@
       "pattern": "",
       "count": 1241,
       "usage_tier": "high",
-      "created_at": null,
+      "created_at": "2026-04-15T15:20:34.543Z",
       "updated_at": null
     },
     {
@@ -131,8 +131,8 @@
       "pattern": "test-junk",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:22:07.668Z",
+      "updated_at": "2025-12-12T10:22:07.677Z"
     },
     {
       "id": "xSellIMqxjlrue2cID5Z",
@@ -141,7 +141,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-01-13T20:45:46.631Z",
       "updated_at": null
     },
     {
@@ -151,7 +151,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-04-30T13:40:00.625Z",
       "updated_at": null
     },
     {
@@ -161,8 +161,8 @@
       "pattern": "",
       "count": 31,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-03T00:19:16.465Z",
+      "updated_at": "2026-05-03T00:19:16.465Z"
     },
     {
       "id": "D0cvqVVPAZ0AeOYwcxfP",
@@ -171,7 +171,7 @@
       "pattern": "",
       "count": 67,
       "usage_tier": "medium",
-      "created_at": null,
+      "created_at": "2026-05-30T19:18:34.149Z",
       "updated_at": null
     },
     {
@@ -181,7 +181,7 @@
       "pattern": "",
       "count": 10,
       "usage_tier": "low",
-      "created_at": null,
+      "created_at": "2026-02-26T17:44:58.756Z",
       "updated_at": null
     },
     {
@@ -191,7 +191,7 @@
       "pattern": "",
       "count": 67,
       "usage_tier": "medium",
-      "created_at": null,
+      "created_at": "2026-02-26T17:37:57.460Z",
       "updated_at": null
     },
     {
@@ -201,8 +201,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-30T00:34:47.513Z",
+      "updated_at": "2026-05-30T00:34:47.522Z"
     },
     {
       "id": "64EzAQzSdXDHkbQG0Lxq",
@@ -211,8 +211,8 @@
       "pattern": "",
       "count": 3,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-02-11T15:01:31.793Z",
+      "updated_at": "2026-02-11T15:01:31.793Z"
     },
     {
       "id": "2fC8ybx3u60RZdeLlbpn",
@@ -221,7 +221,7 @@
       "pattern": "",
       "count": 3,
       "usage_tier": "rare",
-      "created_at": null,
+      "created_at": "2026-01-05T18:32:41.522Z",
       "updated_at": null
     },
     {
@@ -231,8 +231,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:21:57.165Z",
+      "updated_at": "2025-12-12T10:21:57.177Z"
     },
     {
       "id": "dUBaTe5IlcGEL6EIfh7f",
@@ -241,8 +241,8 @@
       "pattern": "",
       "count": 28,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-19T11:19:13.082Z",
+      "updated_at": "2026-05-19T11:19:13.082Z"
     },
     {
       "id": "5pN208WaoX1PgE7GVwJp",
@@ -251,8 +251,8 @@
       "pattern": "",
       "count": 28,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-19T11:19:13.087Z",
+      "updated_at": "2026-05-19T11:19:13.087Z"
     },
     {
       "id": "71TdnhlfPuv31RLKaUgk",
@@ -261,8 +261,8 @@
       "pattern": "",
       "count": 28,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-19T11:19:13.084Z",
+      "updated_at": "2026-05-19T11:19:13.084Z"
     },
     {
       "id": "9m46vPk8dqV8Hq5ZZnuf",
@@ -271,8 +271,8 @@
       "pattern": "",
       "count": 28,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-19T11:19:13.128Z",
+      "updated_at": "2026-05-19T11:19:13.128Z"
     },
     {
       "id": "BQtXWVVjnJarTQ2EzT18",
@@ -281,8 +281,8 @@
       "pattern": "",
       "count": 7,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-06T14:20:06.115Z",
+      "updated_at": "2026-05-06T14:20:06.119Z"
     },
     {
       "id": "fNjbi2VXa0yezLwBTHqR",
@@ -291,8 +291,8 @@
       "pattern": "month-suffixed",
       "count": 195,
       "usage_tier": "medium",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-26T00:20:58.563Z",
+      "updated_at": "2026-04-26T00:20:58.563Z"
     },
     {
       "id": "rw3D28csvyEDbtpf5ZDB",
@@ -301,8 +301,8 @@
       "pattern": "",
       "count": 3,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-02-11T15:01:31.903Z",
+      "updated_at": "2026-02-11T15:01:31.903Z"
     },
     {
       "id": "QAGDl1ef6MTewHnDXzje",
@@ -311,8 +311,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-08T23:13:35.793Z",
+      "updated_at": "2026-05-08T23:13:35.798Z"
     },
     {
       "id": "rKaxABa4vtKQHj9MJU2O",
@@ -321,8 +321,8 @@
       "pattern": "",
       "count": 6,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-06T14:20:06.185Z",
+      "updated_at": "2026-05-06T14:20:06.189Z"
     },
     {
       "id": "zJBLXQInVo3PfyVkhuYV",
@@ -331,8 +331,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-13T17:47:26.165Z",
+      "updated_at": "2026-06-13T17:47:26.169Z"
     },
     {
       "id": "BiKxO6EyPDs90ERQrgH3",
@@ -341,8 +341,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-08T23:13:57.691Z",
+      "updated_at": "2026-05-08T23:13:57.701Z"
     },
     {
       "id": "TEtvH38vmrTrm06q0ajF",
@@ -351,8 +351,8 @@
       "pattern": "date-suffixed",
       "count": 4,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-24T03:43:33.146Z",
+      "updated_at": "2026-04-24T03:43:33.155Z"
     },
     {
       "id": "zfnziKNS0EjxTqRI0o1i",
@@ -361,8 +361,8 @@
       "pattern": "",
       "count": 866,
       "usage_tier": "high",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-01-05T15:14:10.406Z",
+      "updated_at": "2026-01-05T15:14:10.406Z"
     },
     {
       "id": "vdJPsU7D8eu8dItlRvuH",
@@ -371,8 +371,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-30T02:40:02.780Z",
+      "updated_at": "2026-05-30T02:40:02.784Z"
     },
     {
       "id": "RmWXdT2QqOt5ik3bipeZ",
@@ -381,8 +381,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-03-24T17:32:18.985Z",
+      "updated_at": "2026-03-24T17:32:18.985Z"
     },
     {
       "id": "l8no9C0HS9quqKggCEof",
@@ -391,8 +391,8 @@
       "pattern": "test-junk",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-02T18:59:11.147Z",
+      "updated_at": "2026-06-02T18:59:11.152Z"
     },
     {
       "id": "dIQX8bZJ2H7aVCpvTSRq",
@@ -401,7 +401,7 @@
       "pattern": "",
       "count": 48,
       "usage_tier": "low",
-      "created_at": null,
+      "created_at": "2026-01-26T15:10:39.951Z",
       "updated_at": null
     },
     {
@@ -411,8 +411,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-25T22:20:34.740Z",
+      "updated_at": "2026-04-25T22:20:34.743Z"
     },
     {
       "id": "Dz5SYa5hTELrWn98ik58",
@@ -421,8 +421,8 @@
       "pattern": "",
       "count": 88,
       "usage_tier": "medium",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-24T22:19:35.565Z",
+      "updated_at": "2026-04-24T22:19:35.565Z"
     },
     {
       "id": "DsM7K3X7462xkoCuw3jv",
@@ -431,8 +431,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-15T15:36:31.235Z",
+      "updated_at": "2026-05-15T15:36:31.235Z"
     },
     {
       "id": "xEE4J0jMw2uzZFSLuPYw",
@@ -441,8 +441,8 @@
       "pattern": "month-suffixed",
       "count": 366,
       "usage_tier": "medium",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-25T22:28:34.227Z",
+      "updated_at": "2026-04-25T22:28:34.227Z"
     },
     {
       "id": "iBaI7wUEGq1wDBBywo76",
@@ -451,8 +451,8 @@
       "pattern": "",
       "count": 5,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-18T20:15:50.390Z",
+      "updated_at": "2026-06-18T20:15:50.396Z"
     },
     {
       "id": "ou1L9X29GEGInb7uLeHL",
@@ -461,8 +461,8 @@
       "pattern": "",
       "count": 9,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-13T23:00:20.329Z",
+      "updated_at": "2026-05-13T23:00:20.333Z"
     },
     {
       "id": "Z7GPCQs9IplPK2qWhlMj",
@@ -471,8 +471,8 @@
       "pattern": "",
       "count": 25,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-01T15:18:01.154Z",
+      "updated_at": "2026-05-01T15:18:01.154Z"
     },
     {
       "id": "TV1YfuKF2RHbLYzpeYOj",
@@ -481,8 +481,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-15T17:27:23.034Z",
+      "updated_at": "2026-06-15T17:27:23.039Z"
     },
     {
       "id": "pFjMa9dMwR9g30ZqONMT",
@@ -491,8 +491,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-16T21:14:05.239Z",
+      "updated_at": "2026-06-16T21:14:05.252Z"
     },
     {
       "id": "prByD3FDWwQMdnaEMi8K",
@@ -501,8 +501,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-16T14:41:18.572Z",
+      "updated_at": "2026-06-16T14:41:18.579Z"
     },
     {
       "id": "6stlkgYshuYesWb6ouYU",
@@ -511,8 +511,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-16T12:05:12.297Z",
+      "updated_at": "2026-06-16T12:05:12.304Z"
     },
     {
       "id": "J8IDvzfuUUZvJN9BWkDe",
@@ -521,8 +521,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-16T13:40:35.081Z",
+      "updated_at": "2026-06-16T13:40:35.088Z"
     },
     {
       "id": "rFy3iJgVC6QDRb52IWQt",
@@ -531,8 +531,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-16T03:30:18.534Z",
+      "updated_at": "2026-06-16T03:30:18.541Z"
     },
     {
       "id": "v8ay45c0fQ99UzAArZwc",
@@ -541,8 +541,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-20T15:49:28.939Z",
+      "updated_at": "2026-06-20T15:49:28.948Z"
     },
     {
       "id": "qLkYROobfJqSGMotb28l",
@@ -551,8 +551,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-21T12:55:09.327Z",
+      "updated_at": "2026-06-21T12:55:09.331Z"
     },
     {
       "id": "BNQ8EEFpjaYiDh85h5Ie",
@@ -561,8 +561,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-17T05:48:41.963Z",
+      "updated_at": "2026-06-17T05:48:41.966Z"
     },
     {
       "id": "YuFi9d04aw4H02FdR3tU",
@@ -571,8 +571,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-18T17:09:58.303Z",
+      "updated_at": "2026-06-18T17:09:58.308Z"
     },
     {
       "id": "FvuSXn3WNklLrF4DVNm9",
@@ -581,8 +581,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-21T03:17:20.037Z",
+      "updated_at": "2026-06-21T03:17:20.042Z"
     },
     {
       "id": "DbwZf3X8tUujHXTP56sf",
@@ -591,8 +591,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-21T11:45:21.983Z",
+      "updated_at": "2026-06-21T11:45:21.991Z"
     },
     {
       "id": "McEjSMakphrrxjDVHl0J",
@@ -601,8 +601,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-18T01:12:15.902Z",
+      "updated_at": "2026-06-18T01:12:15.914Z"
     },
     {
       "id": "xk4Cx0IJ7ORRoiKvJqpt",
@@ -611,8 +611,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-18T09:51:50.634Z",
+      "updated_at": "2026-06-18T09:51:50.638Z"
     },
     {
       "id": "2kHQKkBe6Jl5zU7DHIWZ",
@@ -621,8 +621,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-18T23:32:06.314Z",
+      "updated_at": "2026-06-18T23:32:06.323Z"
     },
     {
       "id": "k0li0VsSEBpEQ3ZVa7Dq",
@@ -631,8 +631,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-18T07:59:50.804Z",
+      "updated_at": "2026-06-18T07:59:50.807Z"
     },
     {
       "id": "7lYX73E4wA1UY2mKj6sQ",
@@ -641,8 +641,8 @@
       "pattern": "",
       "count": 16,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:22:40.211Z",
+      "updated_at": "2025-12-12T10:22:40.218Z"
     },
     {
       "id": "C2ldJmyfzhmDcwPfMnbN",
@@ -651,8 +651,8 @@
       "pattern": "test-junk",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-25T12:18:44.519Z",
+      "updated_at": "2026-05-25T12:18:44.525Z"
     },
     {
       "id": "FRqSzTQwmYZSVXW9h9Fm",
@@ -661,8 +661,8 @@
       "pattern": "test-junk",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-13T23:00:20.412Z",
+      "updated_at": "2026-05-13T23:00:20.422Z"
     },
     {
       "id": "wt0mwbRC8gJNwjeH0HlE",
@@ -671,8 +671,8 @@
       "pattern": "test-junk",
       "count": 2,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-21T03:52:51.623Z",
+      "updated_at": "2026-05-21T03:52:51.627Z"
     },
     {
       "id": "t64C0J3a5nofTRdhkWQf",
@@ -681,8 +681,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-15T15:49:43.896Z",
+      "updated_at": "2026-05-15T15:49:43.896Z"
     },
     {
       "id": "e9ROWARU7T3NcxNXOut0",
@@ -691,7 +691,7 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
+      "created_at": "2026-02-25T21:15:12.012Z",
       "updated_at": null
     },
     {
@@ -701,7 +701,7 @@
       "pattern": "",
       "count": 5,
       "usage_tier": "rare",
-      "created_at": null,
+      "created_at": "2026-02-26T14:36:32.678Z",
       "updated_at": null
     },
     {
@@ -711,8 +711,8 @@
       "pattern": "",
       "count": 4,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:15:14.569Z",
+      "updated_at": "2025-12-12T10:15:14.580Z"
     },
     {
       "id": "WF470KDe0sWL62HTRbiL",
@@ -721,8 +721,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:15:04.224Z",
+      "updated_at": "2025-12-12T10:15:04.234Z"
     },
     {
       "id": "7l6QVnRGbOFYdyrSicvX",
@@ -731,8 +731,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:15:48.435Z",
+      "updated_at": "2025-12-12T10:15:48.440Z"
     },
     {
       "id": "DhUlXvdblafOXdNFX9RB",
@@ -741,8 +741,8 @@
       "pattern": "",
       "count": 2277,
       "usage_tier": "high",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:14:53.430Z",
+      "updated_at": "2025-12-12T10:14:53.436Z"
     },
     {
       "id": "0AqhZn0VJUAVLOnRAFxb",
@@ -751,8 +751,8 @@
       "pattern": "",
       "count": 55,
       "usage_tier": "medium",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:18:09.612Z",
+      "updated_at": "2025-12-12T10:18:09.619Z"
     },
     {
       "id": "v6XPRgNcjezjsKAa3trU",
@@ -761,8 +761,8 @@
       "pattern": "",
       "count": 59,
       "usage_tier": "medium",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-19T16:21:29.855Z",
+      "updated_at": "2026-04-19T16:21:29.855Z"
     },
     {
       "id": "GhAcDB0cud6gKcxrXy4J",
@@ -771,8 +771,8 @@
       "pattern": "",
       "count": 2,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-19T16:21:31.915Z",
+      "updated_at": "2026-04-19T16:21:31.915Z"
     },
     {
       "id": "VtNkbghKAmzP0EGaZBtV",
@@ -781,8 +781,8 @@
       "pattern": "",
       "count": 981,
       "usage_tier": "high",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:05:56.250Z",
+      "updated_at": "2025-12-12T10:05:56.262Z"
     },
     {
       "id": "vgXYKjewBMHldpuQFcK3",
@@ -791,8 +791,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-19T18:01:51.316Z",
+      "updated_at": "2026-04-19T18:01:51.316Z"
     },
     {
       "id": "3aEMGRl6XhpsyNF45jCC",
@@ -801,8 +801,8 @@
       "pattern": "",
       "count": 14,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-19T18:03:01.069Z",
+      "updated_at": "2026-04-19T18:03:01.069Z"
     },
     {
       "id": "xFflRm9YBlxweq6vSMkJ",
@@ -811,8 +811,8 @@
       "pattern": "",
       "count": 1971,
       "usage_tier": "high",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:05:39.890Z",
+      "updated_at": "2025-12-12T10:05:39.897Z"
     },
     {
       "id": "FP7jqAqI5wo815RJXlAs",
@@ -821,8 +821,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-19T18:03:10.879Z",
+      "updated_at": "2026-04-19T18:03:10.879Z"
     },
     {
       "id": "cTGdACD1KOR1qNeCkDNa",
@@ -831,8 +831,8 @@
       "pattern": "",
       "count": 6,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-19T18:01:30.433Z",
+      "updated_at": "2026-04-19T18:01:30.433Z"
     },
     {
       "id": "jL1VvbobdoOpg6kkgE98",
@@ -841,8 +841,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-19T18:03:04.421Z",
+      "updated_at": "2026-04-19T18:03:04.421Z"
     },
     {
       "id": "0C0ss2uTafM8eQ65ZKMU",
@@ -851,8 +851,8 @@
       "pattern": "",
       "count": 3,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-19T18:03:52.744Z",
+      "updated_at": "2026-04-19T18:03:52.744Z"
     },
     {
       "id": "d8VgNDUksSGJfSu9OsKd",
@@ -861,8 +861,8 @@
       "pattern": "test-junk",
       "count": 8,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-19T18:03:08.589Z",
+      "updated_at": "2026-04-19T18:03:08.589Z"
     },
     {
       "id": "DmYIAH2DoBMuVJP4J7oz",
@@ -871,7 +871,7 @@
       "pattern": "",
       "count": 10,
       "usage_tier": "low",
-      "created_at": null,
+      "created_at": "2025-12-15T09:39:56.736Z",
       "updated_at": null
     },
     {
@@ -881,8 +881,8 @@
       "pattern": "",
       "count": 6,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-19T18:01:50.224Z",
+      "updated_at": "2026-04-19T18:01:50.224Z"
     },
     {
       "id": "z4lkQY9w6VuvHG1SoEFn",
@@ -891,7 +891,7 @@
       "pattern": "",
       "count": 18,
       "usage_tier": "low",
-      "created_at": null,
+      "created_at": "2025-12-15T09:31:44.021Z",
       "updated_at": null
     },
     {
@@ -901,8 +901,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-19T18:01:22.596Z",
+      "updated_at": "2026-04-19T18:01:22.596Z"
     },
     {
       "id": "L4v3bV9Vdse0UBGc8Vbd",
@@ -911,8 +911,8 @@
       "pattern": "",
       "count": 2,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-19T18:02:32.171Z",
+      "updated_at": "2026-04-19T18:02:32.171Z"
     },
     {
       "id": "E4h5pyIrgwnoGuStnXva",
@@ -921,8 +921,8 @@
       "pattern": "test-junk",
       "count": 26,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-19T18:03:05.451Z",
+      "updated_at": "2026-04-19T18:03:05.451Z"
     },
     {
       "id": "LnZtXKYV5MfgEaxGqKoE",
@@ -931,8 +931,8 @@
       "pattern": "",
       "count": 6,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-19T18:01:50.224Z",
+      "updated_at": "2026-04-19T18:01:50.224Z"
     },
     {
       "id": "mjNGbXQSOj3IcMlHF4NY",
@@ -941,8 +941,8 @@
       "pattern": "",
       "count": 6,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-19T18:01:46.629Z",
+      "updated_at": "2026-04-19T18:01:46.629Z"
     },
     {
       "id": "7i2PAxvt1MCO7ydDX51b",
@@ -951,8 +951,8 @@
       "pattern": "",
       "count": 3,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-19T18:04:36.487Z",
+      "updated_at": "2026-04-19T18:04:36.487Z"
     },
     {
       "id": "6oZm3WbXJr8vULj54A6c",
@@ -961,8 +961,8 @@
       "pattern": "",
       "count": 3,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-19T18:04:36.487Z",
+      "updated_at": "2026-04-19T18:04:36.487Z"
     },
     {
       "id": "vsQtmSzbPNbNqMBcnoUm",
@@ -971,8 +971,8 @@
       "pattern": "",
       "count": 2,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-19T18:05:11.672Z",
+      "updated_at": "2026-04-19T18:05:11.672Z"
     },
     {
       "id": "VMvJCSvPFMfoQZzZNEQs",
@@ -981,7 +981,7 @@
       "pattern": "",
       "count": 15,
       "usage_tier": "low",
-      "created_at": null,
+      "created_at": "2025-12-15T09:40:55.088Z",
       "updated_at": null
     },
     {
@@ -991,8 +991,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:18:58.484Z",
+      "updated_at": "2025-12-12T10:18:58.492Z"
     },
     {
       "id": "D46qULSIrUvAgmzyd7qX",
@@ -1001,8 +1001,8 @@
       "pattern": "",
       "count": 4,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:15:35.714Z",
+      "updated_at": "2025-12-12T10:15:35.721Z"
     },
     {
       "id": "MEPmeUjJqVJ61aRx9Yw8",
@@ -1011,8 +1011,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:18:35.742Z",
+      "updated_at": "2025-12-12T10:18:35.746Z"
     },
     {
       "id": "7lweGC09amB75QzWS11a",
@@ -1021,8 +1021,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:18:24.993Z",
+      "updated_at": "2025-12-12T10:18:25.011Z"
     },
     {
       "id": "zFk0dQa64AH6hYzJdwNI",
@@ -1031,8 +1031,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:14:43.916Z",
+      "updated_at": "2025-12-12T10:14:43.923Z"
     },
     {
       "id": "RIQZPaarJBArmAmCQIbJ",
@@ -1041,8 +1041,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:14:31.552Z",
+      "updated_at": "2025-12-12T10:14:31.563Z"
     },
     {
       "id": "loeddxOz4MR8uJFfEJxs",
@@ -1051,8 +1051,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:17:58.861Z",
+      "updated_at": "2025-12-12T10:17:58.870Z"
     },
     {
       "id": "wx37Yi7aZ8wdrpe5j8VS",
@@ -1061,7 +1061,7 @@
       "pattern": "",
       "count": 5,
       "usage_tier": "rare",
-      "created_at": null,
+      "created_at": "2026-02-26T14:27:44.909Z",
       "updated_at": null
     },
     {
@@ -1071,8 +1071,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:17:48.623Z",
+      "updated_at": "2025-12-12T10:17:48.634Z"
     },
     {
       "id": "wdIr1PuCyQ1YNXKE1KHU",
@@ -1081,7 +1081,7 @@
       "pattern": "",
       "count": 3,
       "usage_tier": "rare",
-      "created_at": null,
+      "created_at": "2026-02-25T21:10:54.596Z",
       "updated_at": null
     },
     {
@@ -1091,8 +1091,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:18:47.978Z",
+      "updated_at": "2025-12-12T10:18:47.984Z"
     },
     {
       "id": "QxjsCHLRNAOydJRxzIXS",
@@ -1101,8 +1101,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-19T02:40:49.836Z",
+      "updated_at": "2026-06-19T02:40:49.840Z"
     },
     {
       "id": "eVJxZPUlhIiXolLEERzd",
@@ -1111,8 +1111,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-20T00:44:52.345Z",
+      "updated_at": "2026-06-20T00:44:52.349Z"
     },
     {
       "id": "rCMOGc1v7MxZGWUiKBdZ",
@@ -1121,8 +1121,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-20T15:35:53.693Z",
+      "updated_at": "2026-06-20T15:35:53.697Z"
     },
     {
       "id": "n0vcdQRJ9QuXNgKw298T",
@@ -1131,8 +1131,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-19T02:21:10.654Z",
+      "updated_at": "2026-06-19T02:21:10.661Z"
     },
     {
       "id": "jQkAPqtz91FszWjP5nG5",
@@ -1141,8 +1141,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-21T15:39:04.114Z",
+      "updated_at": "2026-06-21T15:39:04.119Z"
     },
     {
       "id": "HzstODqJQJhwSqXusZls",
@@ -1151,8 +1151,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-18T16:21:09.694Z",
+      "updated_at": "2026-06-18T16:21:09.699Z"
     },
     {
       "id": "XJkTAug0rnFGLnjplvZz",
@@ -1161,8 +1161,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-18T14:06:24.533Z",
+      "updated_at": "2026-06-18T14:06:24.539Z"
     },
     {
       "id": "Q8MpLpyukygp6MY7kCJE",
@@ -1171,8 +1171,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-18T16:21:09.598Z",
+      "updated_at": "2026-06-18T16:21:09.603Z"
     },
     {
       "id": "A3HfoIbFCJUmOADeCvoQ",
@@ -1181,8 +1181,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-19T03:30:43.702Z",
+      "updated_at": "2026-06-19T03:30:43.706Z"
     },
     {
       "id": "kRgiequuuuBRkN8INQkM",
@@ -1191,8 +1191,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-19T14:30:59.989Z",
+      "updated_at": "2026-06-19T14:30:59.993Z"
     },
     {
       "id": "SqJtcX9TA89yFVG47wGo",
@@ -1201,8 +1201,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-19T14:16:27.836Z",
+      "updated_at": "2026-06-19T14:16:27.839Z"
     },
     {
       "id": "yUeuTKBYulnoVyhtG4sn",
@@ -1211,8 +1211,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-19T15:46:04.182Z",
+      "updated_at": "2026-06-19T15:46:04.188Z"
     },
     {
       "id": "YleCO0gwuT8PVBWCvaYg",
@@ -1221,8 +1221,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-20T00:44:52.273Z",
+      "updated_at": "2026-06-20T00:44:52.277Z"
     },
     {
       "id": "klkYZcDGd4GdKuWkJGYy",
@@ -1231,8 +1231,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-20T10:57:07.122Z",
+      "updated_at": "2026-06-20T10:57:07.126Z"
     },
     {
       "id": "FolADGw0wrMIOTFl2b6n",
@@ -1241,8 +1241,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-20T15:35:53.614Z",
+      "updated_at": "2026-06-20T15:35:53.623Z"
     },
     {
       "id": "iwle5PAqh4h94e1Cymkx",
@@ -1251,8 +1251,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-21T14:25:01.426Z",
+      "updated_at": "2026-06-21T14:25:01.431Z"
     },
     {
       "id": "Ns3QMrQQUeDCShkx5oqZ",
@@ -1261,8 +1261,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-21T09:29:39.726Z",
+      "updated_at": "2026-06-21T09:29:39.729Z"
     },
     {
       "id": "CbQtsj3w5BTm8fEumbyv",
@@ -1271,8 +1271,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-21T15:39:04.033Z",
+      "updated_at": "2026-06-21T15:39:04.037Z"
     },
     {
       "id": "3Q4zm2SVfUBidDZYyQ3u",
@@ -1281,8 +1281,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-19T02:21:10.566Z",
+      "updated_at": "2026-06-19T02:21:10.571Z"
     },
     {
       "id": "5BPCzuzZ1lNnvBLtysij",
@@ -1291,7 +1291,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-01-05T04:09:05.647Z",
       "updated_at": null
     },
     {
@@ -1301,7 +1301,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-02-26T18:44:37.852Z",
       "updated_at": null
     },
     {
@@ -1311,7 +1311,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-02-25T19:21:08.973Z",
       "updated_at": null
     },
     {
@@ -1321,7 +1321,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-02-25T19:05:56.898Z",
       "updated_at": null
     },
     {
@@ -1331,7 +1331,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-02-25T19:53:13.301Z",
       "updated_at": null
     },
     {
@@ -1341,7 +1341,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-02-25T19:53:29.978Z",
       "updated_at": null
     },
     {
@@ -1351,7 +1351,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-02-25T20:43:37.903Z",
       "updated_at": null
     },
     {
@@ -1361,7 +1361,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-02-25T20:54:42.769Z",
       "updated_at": null
     },
     {
@@ -1371,7 +1371,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-02-25T20:54:21.072Z",
       "updated_at": null
     },
     {
@@ -1381,7 +1381,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-02-25T20:53:28.278Z",
       "updated_at": null
     },
     {
@@ -1391,8 +1391,8 @@
       "pattern": "test-junk",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-25T22:20:34.673Z",
+      "updated_at": "2026-04-25T22:20:34.681Z"
     },
     {
       "id": "T4AXraTV5XZbHIHP1n77",
@@ -1401,7 +1401,7 @@
       "pattern": "",
       "count": 131,
       "usage_tier": "medium",
-      "created_at": null,
+      "created_at": "2026-01-05T00:43:38.009Z",
       "updated_at": null
     },
     {
@@ -1411,8 +1411,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:13:44.059Z",
+      "updated_at": "2025-12-12T10:13:44.070Z"
     },
     {
       "id": "SBua4EWy4LHRCjE8aT8N",
@@ -1421,8 +1421,8 @@
       "pattern": "",
       "count": 17,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:13:12.842Z",
+      "updated_at": "2025-12-12T10:13:12.849Z"
     },
     {
       "id": "ErWAnzWu6crfGAWeymE3",
@@ -1431,8 +1431,8 @@
       "pattern": "",
       "count": 1619,
       "usage_tier": "high",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:14:06.169Z",
+      "updated_at": "2025-12-12T10:14:06.177Z"
     },
     {
       "id": "1mhnADDMz9MnJL8Jsfxz",
@@ -1441,8 +1441,8 @@
       "pattern": "",
       "count": 689,
       "usage_tier": "high",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:07:26.635Z",
+      "updated_at": "2025-12-12T10:07:26.641Z"
     },
     {
       "id": "hhaYmGBTQxAzOC9QHRM8",
@@ -1451,8 +1451,8 @@
       "pattern": "",
       "count": 797,
       "usage_tier": "high",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:06:24.856Z",
+      "updated_at": "2025-12-12T10:06:24.865Z"
     },
     {
       "id": "yuOSQ4wAJhz9PPkC5Nxg",
@@ -1461,8 +1461,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:13:23.472Z",
+      "updated_at": "2025-12-12T10:13:23.476Z"
     },
     {
       "id": "GGx84WUTANcBii163t58",
@@ -1471,8 +1471,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:14:19.809Z",
+      "updated_at": "2025-12-12T10:14:19.818Z"
     },
     {
       "id": "UbE2s8AfXKsN5HJ6swrP",
@@ -1481,8 +1481,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:13:55.386Z",
+      "updated_at": "2025-12-12T10:13:55.391Z"
     },
     {
       "id": "ZzQiC37Oxq0PkHfbfoni",
@@ -1491,8 +1491,8 @@
       "pattern": "date-suffixed",
       "count": 366,
       "usage_tier": "medium",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-20T20:53:41.279Z",
+      "updated_at": "2026-04-20T20:53:41.279Z"
     },
     {
       "id": "irMIeTs42wagMq16cZ8C",
@@ -1501,8 +1501,8 @@
       "pattern": "date-suffixed",
       "count": 366,
       "usage_tier": "medium",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-20T20:53:41.239Z",
+      "updated_at": "2026-04-20T20:53:41.239Z"
     },
     {
       "id": "9lD1Efe8XJbSs97eD2fE",
@@ -1511,8 +1511,8 @@
       "pattern": "date-suffixed",
       "count": 366,
       "usage_tier": "medium",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-20T20:53:41.230Z",
+      "updated_at": "2026-04-20T20:53:41.230Z"
     },
     {
       "id": "MhhiG7DOzgFaNszOHdzw",
@@ -1521,8 +1521,8 @@
       "pattern": "date-suffixed",
       "count": 366,
       "usage_tier": "medium",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-20T20:53:41.255Z",
+      "updated_at": "2026-04-20T20:53:41.255Z"
     },
     {
       "id": "0jPhTQYv7ww9MUywS9fH",
@@ -1531,7 +1531,7 @@
       "pattern": "",
       "count": 2,
       "usage_tier": "rare",
-      "created_at": null,
+      "created_at": "2026-02-26T14:34:28.068Z",
       "updated_at": null
     },
     {
@@ -1541,7 +1541,7 @@
       "pattern": "",
       "count": 3,
       "usage_tier": "rare",
-      "created_at": null,
+      "created_at": "2026-02-26T14:33:57.702Z",
       "updated_at": null
     },
     {
@@ -1551,7 +1551,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-02-26T14:34:46.924Z",
       "updated_at": null
     },
     {
@@ -1561,8 +1561,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-19T18:31:52.927Z",
+      "updated_at": "2026-06-19T18:31:52.927Z"
     },
     {
       "id": "LavG3Zx5QLynQBqqIZrV",
@@ -1571,8 +1571,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-25T02:41:29.662Z",
+      "updated_at": "2026-05-25T02:41:29.666Z"
     },
     {
       "id": "9enkLeLZQX4olZzU76N8",
@@ -1581,8 +1581,8 @@
       "pattern": "",
       "count": 11,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-21T03:52:51.690Z",
+      "updated_at": "2026-05-21T03:52:51.694Z"
     },
     {
       "id": "cNwZL5RBHrZle0UKQmPv",
@@ -1591,8 +1591,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-13T23:00:20.559Z",
+      "updated_at": "2026-05-13T23:00:20.564Z"
     },
     {
       "id": "tAorswzQqoxGR5B8Z1h2",
@@ -1601,8 +1601,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-25T12:18:44.600Z",
+      "updated_at": "2026-05-25T12:18:44.604Z"
     },
     {
       "id": "vx4Kz8l7Rt9J6luDbYVq",
@@ -1611,8 +1611,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-25T02:38:43.049Z",
+      "updated_at": "2026-05-25T02:38:43.053Z"
     },
     {
       "id": "Brxib5Ub30elJZmtuHdS",
@@ -1621,8 +1621,8 @@
       "pattern": "",
       "count": 898,
       "usage_tier": "high",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:19:20.441Z",
+      "updated_at": "2025-12-12T10:19:20.444Z"
     },
     {
       "id": "0SonwkXcIzeGoFELbHVb",
@@ -1631,8 +1631,8 @@
       "pattern": "",
       "count": 4,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-24T03:43:33.229Z",
+      "updated_at": "2026-04-24T03:43:33.238Z"
     },
     {
       "id": "rSVdJ4c1zEhyZMXgzxCd",
@@ -1641,8 +1641,8 @@
       "pattern": "",
       "count": 1836,
       "usage_tier": "high",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:19:09.669Z",
+      "updated_at": "2025-12-12T10:19:09.677Z"
     },
     {
       "id": "neV5dBMFb23BjjsrNX4d",
@@ -1651,8 +1651,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-24T03:43:37.728Z",
+      "updated_at": "2026-04-24T03:43:37.731Z"
     },
     {
       "id": "PqqsrIH3fYD4gQZ3Syow",
@@ -1661,8 +1661,8 @@
       "pattern": "",
       "count": 1221,
       "usage_tier": "high",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:19:30.898Z",
+      "updated_at": "2025-12-12T10:19:30.902Z"
     },
     {
       "id": "phymU5q6tFTJEVzl6ReC",
@@ -1671,8 +1671,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:19:43.301Z",
+      "updated_at": "2025-12-12T10:19:43.308Z"
     },
     {
       "id": "Rcnt52z6WOZHXv3EugWX",
@@ -1681,8 +1681,8 @@
       "pattern": "month-suffixed",
       "count": 30,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-26T18:42:44.651Z",
+      "updated_at": "2026-04-26T18:42:44.651Z"
     },
     {
       "id": "RiEKHZkOug0Qs5m0YfUN",
@@ -1691,8 +1691,8 @@
       "pattern": "month-suffixed",
       "count": 131,
       "usage_tier": "medium",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-25T14:01:04.981Z",
+      "updated_at": "2026-04-25T14:01:04.981Z"
     },
     {
       "id": "GFoOhQW5P2Gbe4R4iL4R",
@@ -1701,8 +1701,8 @@
       "pattern": "",
       "count": 53,
       "usage_tier": "medium",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-25T14:02:52.795Z",
+      "updated_at": "2026-04-25T14:02:52.795Z"
     },
     {
       "id": "hrGXi6MX1lXrOFjkWzml",
@@ -1711,8 +1711,8 @@
       "pattern": "",
       "count": 78,
       "usage_tier": "medium",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-25T14:01:04.981Z",
+      "updated_at": "2026-04-25T14:01:04.981Z"
     },
     {
       "id": "ZFvRD14TqBJm3wCPWqCN",
@@ -1721,8 +1721,8 @@
       "pattern": "test-junk",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-30T00:33:23.543Z",
+      "updated_at": "2026-05-30T00:33:23.547Z"
     },
     {
       "id": "C97s9SSa5TPHMUFGm6hs",
@@ -1731,8 +1731,8 @@
       "pattern": "",
       "count": 1186,
       "usage_tier": "high",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-01-02T21:19:59.390Z",
+      "updated_at": "2026-01-02T21:19:59.390Z"
     },
     {
       "id": "9ztVTpIiRJ6zRhn0QCnk",
@@ -1741,7 +1741,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-01-20T13:54:53.436Z",
       "updated_at": null
     },
     {
@@ -1751,7 +1751,7 @@
       "pattern": "",
       "count": 647,
       "usage_tier": "high",
-      "created_at": null,
+      "created_at": "2025-12-29T14:26:58.716Z",
       "updated_at": null
     },
     {
@@ -1761,7 +1761,7 @@
       "pattern": "",
       "count": 15,
       "usage_tier": "low",
-      "created_at": null,
+      "created_at": "2026-03-05T17:49:08.010Z",
       "updated_at": null
     },
     {
@@ -1771,8 +1771,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:22:29.588Z",
+      "updated_at": "2025-12-12T10:22:29.597Z"
     },
     {
       "id": "3F9ojNK2w7hTllsA5Y2O",
@@ -1781,8 +1781,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:21:47.539Z",
+      "updated_at": "2025-12-12T10:21:47.545Z"
     },
     {
       "id": "hxc1GERN6alNHCyUvpw3",
@@ -1791,8 +1791,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:22:52.686Z",
+      "updated_at": "2025-12-12T10:22:52.696Z"
     },
     {
       "id": "HRX7hWmJiJO97GpGjPSv",
@@ -1801,8 +1801,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-18T20:25:44.718Z",
+      "updated_at": "2026-04-18T20:25:44.718Z"
     },
     {
       "id": "G0WhOMgg6brQIomGXzOV",
@@ -1811,8 +1811,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-18T20:25:22.012Z",
+      "updated_at": "2026-04-18T20:25:22.012Z"
     },
     {
       "id": "CndiMe51e2Ncs7KKLDKo",
@@ -1821,8 +1821,8 @@
       "pattern": "date-suffixed",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-19T15:14:02.142Z",
+      "updated_at": "2026-04-19T15:14:02.142Z"
     },
     {
       "id": "99vpcnG7uP85Y98Ill1b",
@@ -1831,8 +1831,8 @@
       "pattern": "test-junk",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-19T03:42:04.495Z",
+      "updated_at": "2026-04-19T03:42:04.495Z"
     },
     {
       "id": "DikEiaXiau9phXv26tJA",
@@ -1841,8 +1841,8 @@
       "pattern": "",
       "count": 66,
       "usage_tier": "medium",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-23T13:05:20.125Z",
+      "updated_at": "2026-04-23T13:05:20.125Z"
     },
     {
       "id": "qVlRXCNXqRADtdVmvWCM",
@@ -1851,8 +1851,8 @@
       "pattern": "",
       "count": 28,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-27T17:01:09.107Z",
+      "updated_at": "2026-04-27T17:01:09.107Z"
     },
     {
       "id": "Wm0VfIrTZX0BYc9URiFW",
@@ -1861,8 +1861,8 @@
       "pattern": "",
       "count": 26,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-27T17:04:08.680Z",
+      "updated_at": "2026-04-27T17:04:08.680Z"
     },
     {
       "id": "SLNFsEi12E3AW9h3APh9",
@@ -1871,7 +1871,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-03-09T21:48:43.734Z",
       "updated_at": null
     },
     {
@@ -1881,8 +1881,8 @@
       "pattern": "date-suffixed",
       "count": 130,
       "usage_tier": "medium",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-03T17:50:50.642Z",
+      "updated_at": "2026-05-03T17:50:50.642Z"
     },
     {
       "id": "xf1X0RlLQNdpSJqEvgEC",
@@ -1891,7 +1891,7 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
+      "created_at": "2026-01-26T16:47:42.543Z",
       "updated_at": null
     },
     {
@@ -1901,8 +1901,8 @@
       "pattern": "date-suffixed",
       "count": 371,
       "usage_tier": "medium",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-03T18:06:40.073Z",
+      "updated_at": "2026-05-03T18:06:40.073Z"
     },
     {
       "id": "YkgX5r73zxiNkAF6m4IJ",
@@ -1911,8 +1911,8 @@
       "pattern": "",
       "count": 70,
       "usage_tier": "medium",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-27T17:46:19.195Z",
+      "updated_at": "2026-04-27T17:46:19.195Z"
     },
     {
       "id": "7O9IfewG5NT1kQWDYNIj",
@@ -1921,7 +1921,7 @@
       "pattern": "",
       "count": 5,
       "usage_tier": "rare",
-      "created_at": null,
+      "created_at": "2026-01-20T21:48:15.917Z",
       "updated_at": null
     },
     {
@@ -1931,8 +1931,8 @@
       "pattern": "test-junk",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-03-05T19:29:23.476Z",
+      "updated_at": "2026-03-05T19:29:23.480Z"
     },
     {
       "id": "RXVzFltvwJCmORvdfkno",
@@ -1941,8 +1941,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-03-05T19:28:58.449Z",
+      "updated_at": "2026-03-05T19:28:58.455Z"
     },
     {
       "id": "HOfdu7J9EP9iHPX6RvJW",
@@ -1951,8 +1951,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-03-05T19:29:11.957Z",
+      "updated_at": "2026-03-05T19:29:11.960Z"
     },
     {
       "id": "hxY8OJdInPoKulsiFEku",
@@ -1961,8 +1961,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-03-05T16:14:22.646Z",
+      "updated_at": "2026-03-05T16:14:22.650Z"
     },
     {
       "id": "UP9mE0i0w8F5qvfIMSkY",
@@ -1971,8 +1971,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-03-05T16:15:11.772Z",
+      "updated_at": "2026-03-05T16:15:11.777Z"
     },
     {
       "id": "4TA7vokNYpNygXPnFvkX",
@@ -1981,8 +1981,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-03-05T16:14:59.488Z",
+      "updated_at": "2026-03-05T16:14:59.497Z"
     },
     {
       "id": "QcUYypmjqAcR1dd1v45t",
@@ -1991,8 +1991,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-03-05T16:14:35.806Z",
+      "updated_at": "2026-03-05T16:14:35.814Z"
     },
     {
       "id": "NeqVkgYf3vva5kimzsDk",
@@ -2001,8 +2001,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-03-05T16:14:47.710Z",
+      "updated_at": "2026-03-05T16:14:47.715Z"
     },
     {
       "id": "4dEPWRpehBdlHNgFLy4r",
@@ -2011,7 +2011,7 @@
       "pattern": "",
       "count": 1451,
       "usage_tier": "high",
-      "created_at": null,
+      "created_at": "2026-01-23T17:28:02.116Z",
       "updated_at": null
     },
     {
@@ -2021,7 +2021,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-01-23T17:35:02.779Z",
       "updated_at": null
     },
     {
@@ -2031,8 +2031,8 @@
       "pattern": "",
       "count": 28,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-02T10:15:11.777Z",
+      "updated_at": "2026-06-02T10:15:11.790Z"
     },
     {
       "id": "ZvXTQcOUjsUfpHCLI7vI",
@@ -2041,7 +2041,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-01-20T13:55:26.590Z",
       "updated_at": null
     },
     {
@@ -2051,8 +2051,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-03-04T20:13:08.281Z",
+      "updated_at": "2026-03-04T20:13:08.281Z"
     },
     {
       "id": "n6KChxiGCgSsPpkzEpz0",
@@ -2061,7 +2061,7 @@
       "pattern": "test-junk",
       "count": 596,
       "usage_tier": "high",
-      "created_at": null,
+      "created_at": "2026-01-20T08:58:35.436Z",
       "updated_at": null
     },
     {
@@ -2071,8 +2071,8 @@
       "pattern": "test-junk",
       "count": 3,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-03-06T16:05:14.745Z",
+      "updated_at": "2026-03-06T16:05:14.749Z"
     },
     {
       "id": "3Tgf3uib1sKzLDzEFKi1",
@@ -2081,8 +2081,8 @@
       "pattern": "",
       "count": 5,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-08T23:14:14.902Z",
+      "updated_at": "2026-05-08T23:14:14.906Z"
     },
     {
       "id": "Zr7yCEKIcdrSzy9JtdIp",
@@ -2091,8 +2091,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-06T14:20:06.255Z",
+      "updated_at": "2026-05-06T14:20:06.261Z"
     },
     {
       "id": "k2AxpW1nSCO1UeSGYzjX",
@@ -2101,8 +2101,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-13T01:13:14.127Z",
+      "updated_at": "2026-05-13T01:13:14.131Z"
     },
     {
       "id": "gBl9wdA7WXPDWYzUMoeu",
@@ -2111,7 +2111,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-06-05T22:25:05.335Z",
       "updated_at": null
     },
     {
@@ -2121,7 +2121,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-06-05T22:13:33.619Z",
       "updated_at": null
     },
     {
@@ -2131,7 +2131,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-06-04T01:11:01.319Z",
       "updated_at": null
     },
     {
@@ -2141,7 +2141,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-06-04T01:07:39.005Z",
       "updated_at": null
     },
     {
@@ -2151,7 +2151,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-06-04T01:10:27.240Z",
       "updated_at": null
     },
     {
@@ -2161,7 +2161,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-06-05T22:15:59.203Z",
       "updated_at": null
     },
     {
@@ -2171,7 +2171,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-06-04T01:09:10.412Z",
       "updated_at": null
     },
     {
@@ -2181,7 +2181,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-06-05T22:29:54.494Z",
       "updated_at": null
     },
     {
@@ -2191,7 +2191,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-06-10T16:20:19.618Z",
       "updated_at": null
     },
     {
@@ -2201,7 +2201,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-06-04T01:11:36.909Z",
       "updated_at": null
     },
     {
@@ -2211,7 +2211,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-06-04T01:06:57.378Z",
       "updated_at": null
     },
     {
@@ -2221,7 +2221,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-06-04T01:09:47.135Z",
       "updated_at": null
     },
     {
@@ -2231,7 +2231,7 @@
       "pattern": "",
       "count": 2,
       "usage_tier": "rare",
-      "created_at": null,
+      "created_at": "2026-06-02T14:55:01.624Z",
       "updated_at": null
     },
     {
@@ -2241,7 +2241,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-06-05T22:28:00.050Z",
       "updated_at": null
     },
     {
@@ -2251,7 +2251,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-06-10T16:21:05.444Z",
       "updated_at": null
     },
     {
@@ -2261,7 +2261,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-06-05T22:26:30.980Z",
       "updated_at": null
     },
     {
@@ -2271,7 +2271,7 @@
       "pattern": "",
       "count": 2,
       "usage_tier": "rare",
-      "created_at": null,
+      "created_at": "2026-06-04T01:08:16.378Z",
       "updated_at": null
     },
     {
@@ -2281,7 +2281,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-05-31T16:15:31.100Z",
       "updated_at": null
     },
     {
@@ -2291,7 +2291,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-01-20T16:24:57.868Z",
       "updated_at": null
     },
     {
@@ -2301,8 +2301,8 @@
       "pattern": "",
       "count": 42,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-24T11:57:34.688Z",
+      "updated_at": "2026-04-24T11:57:34.688Z"
     },
     {
       "id": "VEO3t9a4TR9v6O2FdNE6",
@@ -2311,8 +2311,8 @@
       "pattern": "",
       "count": 83,
       "usage_tier": "medium",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-24T11:56:28.451Z",
+      "updated_at": "2026-04-24T11:56:28.451Z"
     },
     {
       "id": "wkUzSuIMBbCmwnoCi0pf",
@@ -2321,8 +2321,8 @@
       "pattern": "",
       "count": 30,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-24T11:57:16.743Z",
+      "updated_at": "2026-04-24T11:57:16.743Z"
     },
     {
       "id": "Z37W18Q9mVH6TQXkT2cc",
@@ -2331,8 +2331,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-13T04:04:12.067Z",
+      "updated_at": "2026-05-13T04:04:12.073Z"
     },
     {
       "id": "IlhoTdEOkDUVphjH1o9P",
@@ -2341,8 +2341,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-20T13:54:06.223Z",
+      "updated_at": "2026-06-20T13:54:06.229Z"
     },
     {
       "id": "c1ZjiQMrKOGvf12P0wdg",
@@ -2351,8 +2351,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-13T04:04:11.818Z",
+      "updated_at": "2026-05-13T04:04:11.822Z"
     },
     {
       "id": "SJ7UrPkurHvE14K9RYrv",
@@ -2361,8 +2361,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-13T04:04:12.322Z",
+      "updated_at": "2026-05-13T04:04:12.326Z"
     },
     {
       "id": "qEvdCAiqNYvXmfx8d01I",
@@ -2371,8 +2371,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-13T04:04:12.460Z",
+      "updated_at": "2026-05-13T04:04:12.472Z"
     },
     {
       "id": "kM9DmbJMgjWQxIjQsof0",
@@ -2381,8 +2381,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-13T04:04:12.002Z",
+      "updated_at": "2026-05-13T04:04:12.007Z"
     },
     {
       "id": "SvPWKfoH9geRA3wKFBF1",
@@ -2391,8 +2391,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-13T04:04:12.403Z",
+      "updated_at": "2026-05-13T04:04:12.407Z"
     },
     {
       "id": "ZKYWeJSnOFHjgbXlFMfJ",
@@ -2401,8 +2401,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-13T04:04:11.723Z",
+      "updated_at": "2026-05-13T04:04:11.729Z"
     },
     {
       "id": "XAUrR0eB6yYpuU5rq9Om",
@@ -2411,8 +2411,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-20T13:54:06.159Z",
+      "updated_at": "2026-06-20T13:54:06.166Z"
     },
     {
       "id": "VvH78j533TXolmpts6EG",
@@ -2421,8 +2421,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-13T04:04:12.150Z",
+      "updated_at": "2026-05-13T04:04:12.155Z"
     },
     {
       "id": "Op9j2llRhKCZVqr4B1ds",
@@ -2431,8 +2431,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-13T04:04:12.232Z",
+      "updated_at": "2026-05-13T04:04:12.242Z"
     },
     {
       "id": "3agj7IxHeXYKRyzSmLkN",
@@ -2441,8 +2441,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-13T04:04:12.921Z",
+      "updated_at": "2026-05-13T04:04:13.030Z"
     },
     {
       "id": "Y5oIy3nrBeNRrZ0Z6c3H",
@@ -2451,8 +2451,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-13T04:04:11.902Z",
+      "updated_at": "2026-05-13T04:04:11.908Z"
     },
     {
       "id": "gSi4o78X3Wt9JPBZ3y21",
@@ -2461,8 +2461,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:22:17.771Z",
+      "updated_at": "2025-12-12T10:22:17.775Z"
     },
     {
       "id": "QqVOQ7QJusZJ9eLka9PN",
@@ -2471,8 +2471,8 @@
       "pattern": "",
       "count": 4,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-28T19:53:41.084Z",
+      "updated_at": "2026-04-28T19:53:41.084Z"
     },
     {
       "id": "dVkz8tEK3ZVBKU5LgpUd",
@@ -2481,8 +2481,8 @@
       "pattern": "",
       "count": 20,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-28T19:52:24.264Z",
+      "updated_at": "2026-04-28T19:52:24.264Z"
     },
     {
       "id": "bAdRummhW0gH1O5o4yN2",
@@ -2491,8 +2491,8 @@
       "pattern": "",
       "count": 7,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-28T19:53:28.838Z",
+      "updated_at": "2026-04-28T19:53:28.838Z"
     },
     {
       "id": "7tgz5YU2JzhyNs5zDIGF",
@@ -2501,8 +2501,8 @@
       "pattern": "",
       "count": 31,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-28T19:52:24.264Z",
+      "updated_at": "2026-04-28T19:52:24.264Z"
     },
     {
       "id": "2NnxrT0YSXvPPSLGoHJ9",
@@ -2511,8 +2511,8 @@
       "pattern": "",
       "count": 3,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-29T13:06:59.449Z",
+      "updated_at": "2026-04-29T13:06:59.449Z"
     },
     {
       "id": "xnMgFBYCGNYzsw3rXI7r",
@@ -2521,8 +2521,8 @@
       "pattern": "",
       "count": 24,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-29T13:09:02.392Z",
+      "updated_at": "2026-04-29T13:09:02.392Z"
     },
     {
       "id": "aBeNse87qxgBYsAX3ux6",
@@ -2531,8 +2531,8 @@
       "pattern": "",
       "count": 17,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-29T13:07:36.700Z",
+      "updated_at": "2026-04-29T13:07:36.700Z"
     },
     {
       "id": "hZsFAxdX03m09WWKr4in",
@@ -2541,8 +2541,8 @@
       "pattern": "",
       "count": 44,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-29T13:07:05.851Z",
+      "updated_at": "2026-04-29T13:07:05.851Z"
     },
     {
       "id": "rApCTPB6C7pAgdXnxPx3",
@@ -2551,8 +2551,8 @@
       "pattern": "",
       "count": 17,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-29T13:06:59.449Z",
+      "updated_at": "2026-04-29T13:06:59.449Z"
     },
     {
       "id": "X7shzuz3UmQAyuSrhbk4",
@@ -2561,8 +2561,8 @@
       "pattern": "",
       "count": 114,
       "usage_tier": "medium",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-29T18:48:02.444Z",
+      "updated_at": "2026-04-29T18:48:02.444Z"
     },
     {
       "id": "31HIfZwGsRplns6h2nm5",
@@ -2571,8 +2571,8 @@
       "pattern": "",
       "count": 51,
       "usage_tier": "medium",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-29T13:07:18.001Z",
+      "updated_at": "2026-04-29T13:07:18.001Z"
     },
     {
       "id": "R2TY7Y2ZfUuGbobpDz8v",
@@ -2581,8 +2581,8 @@
       "pattern": "",
       "count": 78,
       "usage_tier": "medium",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-29T13:06:59.449Z",
+      "updated_at": "2026-04-29T13:06:59.449Z"
     },
     {
       "id": "PPjSxPsGk3Hio8p2sfPU",
@@ -2591,8 +2591,8 @@
       "pattern": "date-suffixed",
       "count": 280,
       "usage_tier": "medium",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-22T13:02:09.077Z",
+      "updated_at": "2026-04-22T13:02:09.077Z"
     },
     {
       "id": "Et8AqisxMyU8MFRqmRds",
@@ -2601,8 +2601,8 @@
       "pattern": "",
       "count": 116,
       "usage_tier": "medium",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-24T14:52:35.008Z",
+      "updated_at": "2026-04-24T14:52:35.008Z"
     },
     {
       "id": "oMlYvPYMt28d8YMISZhT",
@@ -2611,8 +2611,8 @@
       "pattern": "",
       "count": 155,
       "usage_tier": "medium",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-24T11:56:28.451Z",
+      "updated_at": "2026-04-24T11:56:28.451Z"
     },
     {
       "id": "hqvv04DPdfPBj3HooxaG",
@@ -2621,8 +2621,8 @@
       "pattern": "",
       "count": 88,
       "usage_tier": "medium",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-24T22:19:35.565Z",
+      "updated_at": "2026-04-24T22:19:35.565Z"
     },
     {
       "id": "1o6k0AkzTFduoqQol5to",
@@ -2631,7 +2631,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-01-19T18:48:16.789Z",
       "updated_at": null
     },
     {
@@ -2641,8 +2641,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-01-19T18:15:03.752Z",
+      "updated_at": "2026-01-19T18:15:03.761Z"
     },
     {
       "id": "QjdMZyx4dP5M7AagGmPg",
@@ -2651,7 +2651,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-01-19T18:08:50.046Z",
       "updated_at": null
     },
     {
@@ -2661,7 +2661,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-01-15T17:44:45.370Z",
       "updated_at": null
     },
     {
@@ -2671,7 +2671,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-01-15T16:44:44.656Z",
       "updated_at": null
     },
     {
@@ -2681,7 +2681,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-03-09T17:35:13.072Z",
       "updated_at": null
     },
     {
@@ -2691,7 +2691,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-01-19T17:58:04.987Z",
       "updated_at": null
     },
     {
@@ -2701,7 +2701,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-05-15T22:08:50.041Z",
       "updated_at": null
     },
     {
@@ -2711,8 +2711,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:23:22.097Z",
+      "updated_at": "2025-12-12T10:23:22.102Z"
     },
     {
       "id": "9m409KMgZBtt9FA5auPs",
@@ -2721,8 +2721,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:24:02.750Z",
+      "updated_at": "2025-12-12T10:24:02.762Z"
     },
     {
       "id": "nhPwZ8LleeL3OoxQnfxP",
@@ -2731,8 +2731,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:24:13.507Z",
+      "updated_at": "2025-12-12T10:24:13.510Z"
     },
     {
       "id": "73KNAvvoxmvKU71gaKbN",
@@ -2741,8 +2741,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:24:23.736Z",
+      "updated_at": "2025-12-12T10:24:23.747Z"
     },
     {
       "id": "KEKUVPCardwUWuFqjAOO",
@@ -2751,8 +2751,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:23:12.101Z",
+      "updated_at": "2025-12-12T10:23:12.110Z"
     },
     {
       "id": "LCoetJq1khMkZPjBEz4H",
@@ -2761,8 +2761,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:23:52.176Z",
+      "updated_at": "2025-12-12T10:23:52.185Z"
     },
     {
       "id": "fkHrq55RgBu63tGxCp6x",
@@ -2771,8 +2771,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:23:31.764Z",
+      "updated_at": "2025-12-12T10:23:31.768Z"
     },
     {
       "id": "kYZEwXzue7MmvC9Oh2Yv",
@@ -2781,8 +2781,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:23:41.671Z",
+      "updated_at": "2025-12-12T10:23:41.674Z"
     },
     {
       "id": "vBqmozo1gDbkyqSmMBo1",
@@ -2791,7 +2791,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-01-13T20:52:44.344Z",
       "updated_at": null
     },
     {
@@ -2801,7 +2801,7 @@
       "pattern": "",
       "count": 1179,
       "usage_tier": "high",
-      "created_at": null,
+      "created_at": "2025-12-29T14:27:37.972Z",
       "updated_at": null
     },
     {
@@ -2811,7 +2811,7 @@
       "pattern": "",
       "count": 31,
       "usage_tier": "low",
-      "created_at": null,
+      "created_at": "2026-03-05T17:49:29.212Z",
       "updated_at": null
     },
     {
@@ -2821,8 +2821,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-13T04:04:12.548Z",
+      "updated_at": "2026-05-13T04:04:12.553Z"
     },
     {
       "id": "VeM2DNYUwYDN9LSJRQK0",
@@ -2831,8 +2831,8 @@
       "pattern": "month-suffixed",
       "count": 5,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-26T00:02:47.386Z",
+      "updated_at": "2026-04-26T00:02:47.386Z"
     },
     {
       "id": "Gn0nuaaIGBzu9O0jo82U",
@@ -2841,8 +2841,8 @@
       "pattern": "test-junk",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-05T00:00:57.749Z",
+      "updated_at": "2026-05-05T00:00:57.754Z"
     },
     {
       "id": "o3uEyPN2sXAnHIHXyCJ0",
@@ -2851,8 +2851,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-30T02:40:02.699Z",
+      "updated_at": "2026-05-30T02:40:02.703Z"
     },
     {
       "id": "LMbCf8uKrUiXqh8E48hC",
@@ -2861,7 +2861,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-01-20T20:13:44.786Z",
       "updated_at": null
     },
     {
@@ -2871,8 +2871,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-01-14T15:27:30.257Z",
+      "updated_at": "2026-01-14T15:27:30.261Z"
     },
     {
       "id": "Djnb9owqdZGWSYROc4vu",
@@ -2881,8 +2881,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-01-14T15:27:44.246Z",
+      "updated_at": "2026-01-14T15:27:44.251Z"
     },
     {
       "id": "ceBqaqO4P9CJ6otiyeh1",
@@ -2891,8 +2891,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-01-14T15:27:15.584Z",
+      "updated_at": "2026-01-14T15:27:15.587Z"
     },
     {
       "id": "ibwIWykwkStbObqwKv31",
@@ -2901,7 +2901,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-05-15T21:51:42.200Z",
       "updated_at": null
     },
     {
@@ -2911,7 +2911,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-05-15T22:33:02.380Z",
       "updated_at": null
     },
     {
@@ -2921,7 +2921,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-05-15T21:51:46.566Z",
       "updated_at": null
     },
     {
@@ -2931,7 +2931,7 @@
       "pattern": "",
       "count": 2,
       "usage_tier": "rare",
-      "created_at": null,
+      "created_at": "2026-06-09T15:50:27.182Z",
       "updated_at": null
     },
     {
@@ -2941,8 +2941,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-21T23:58:55.306Z",
+      "updated_at": "2026-05-21T23:58:55.310Z"
     },
     {
       "id": "OlR5jE2ZMMsBg0LrvHsb",
@@ -2951,7 +2951,7 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
+      "created_at": "2026-03-09T19:38:49.107Z",
       "updated_at": null
     },
     {
@@ -2961,7 +2961,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-03-09T19:38:18.754Z",
       "updated_at": null
     },
     {
@@ -2971,7 +2971,7 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
+      "created_at": "2026-03-09T19:42:48.918Z",
       "updated_at": null
     },
     {
@@ -2981,7 +2981,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-03-09T19:39:19.926Z",
       "updated_at": null
     },
     {
@@ -2991,8 +2991,8 @@
       "pattern": "",
       "count": 128,
       "usage_tier": "medium",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-01-07T14:44:36.400Z",
+      "updated_at": "2026-01-07T14:44:36.400Z"
     },
     {
       "id": "OgQQNCcEN3f9FtxwvCJN",
@@ -3001,7 +3001,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-03-05T20:23:15.423Z",
       "updated_at": null
     },
     {
@@ -3011,8 +3011,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-23T20:29:00.283Z",
+      "updated_at": "2026-05-23T20:29:00.287Z"
     },
     {
       "id": "fLocNROKRvJPM3GqiCx1",
@@ -3021,8 +3021,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:20:20.177Z",
+      "updated_at": "2025-12-12T10:20:20.187Z"
     },
     {
       "id": "aC1sX9BNqW4KGPeCf9Gm",
@@ -3031,8 +3031,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:20:04.041Z",
+      "updated_at": "2025-12-12T10:20:04.049Z"
     },
     {
       "id": "hBUPstNWwLJRxen8u71B",
@@ -3041,8 +3041,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:21:27.137Z",
+      "updated_at": "2025-12-12T10:21:27.141Z"
     },
     {
       "id": "jWwwv6TDc3D2NDDFTHvB",
@@ -3051,8 +3051,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:20:55.371Z",
+      "updated_at": "2025-12-12T10:20:55.377Z"
     },
     {
       "id": "jBijrzc6xym4lV0wj5aY",
@@ -3061,8 +3061,8 @@
       "pattern": "",
       "count": 2,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:21:37.121Z",
+      "updated_at": "2025-12-12T10:21:37.124Z"
     },
     {
       "id": "LTIM35XKEEN5C5P1y9bN",
@@ -3071,8 +3071,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:20:45.583Z",
+      "updated_at": "2025-12-12T10:20:45.587Z"
     },
     {
       "id": "Ebqkf5rs4Qi2rw0jMiuG",
@@ -3081,8 +3081,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:21:05.835Z",
+      "updated_at": "2025-12-12T10:21:05.842Z"
     },
     {
       "id": "RNmR8LggcmraTrZaMglL",
@@ -3091,8 +3091,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:21:16.594Z",
+      "updated_at": "2025-12-12T10:21:16.598Z"
     },
     {
       "id": "iDY7DLasZzPZUs5eYfMH",
@@ -3101,8 +3101,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:20:34.925Z",
+      "updated_at": "2025-12-12T10:20:34.934Z"
     },
     {
       "id": "q8Do8Ghp7ewvU8uCDpvT",
@@ -3111,8 +3111,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-21T23:58:55.363Z",
+      "updated_at": "2026-05-21T23:58:55.369Z"
     },
     {
       "id": "u1GnQMT6ezjkKKFJskrF",
@@ -3121,7 +3121,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-04-15T13:55:20.185Z",
       "updated_at": null
     },
     {
@@ -3131,7 +3131,7 @@
       "pattern": "test-junk",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-04-15T15:53:40.894Z",
       "updated_at": null
     },
     {
@@ -3141,8 +3141,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-20T13:54:06.300Z",
+      "updated_at": "2026-06-20T13:54:06.303Z"
     },
     {
       "id": "f2UOlKwz2MrNV6ZqC0WK",
@@ -3151,8 +3151,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:24:55.607Z",
+      "updated_at": "2025-12-12T10:24:55.617Z"
     },
     {
       "id": "Hj5TSFsPrmTpCGCUydhO",
@@ -3161,8 +3161,8 @@
       "pattern": "",
       "count": 308,
       "usage_tier": "medium",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-01-05T02:31:27.274Z",
+      "updated_at": "2026-04-13T18:12:11.056Z"
     },
     {
       "id": "5tubjYlky4uKwmjZ8r6S",
@@ -3171,8 +3171,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:25:11.601Z",
+      "updated_at": "2025-12-12T10:25:11.609Z"
     },
     {
       "id": "MEWcnQAp88dNRlnQJbHU",
@@ -3181,8 +3181,8 @@
       "pattern": "",
       "count": 252,
       "usage_tier": "medium",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-01-05T00:42:08.368Z",
+      "updated_at": "2026-04-13T18:11:30.303Z"
     },
     {
       "id": "9nFLTcuD9Y6KRFIqe5MR",
@@ -3191,8 +3191,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:25:37.945Z",
+      "updated_at": "2025-12-12T10:25:37.951Z"
     },
     {
       "id": "QOyNhQEuLf72An3yGVXI",
@@ -3201,8 +3201,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:25:57.073Z",
+      "updated_at": "2025-12-12T10:25:57.080Z"
     },
     {
       "id": "dXQMHCs7L68ODSgOHo3A",
@@ -3211,7 +3211,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-04-17T17:57:07.434Z",
       "updated_at": null
     },
     {
@@ -3221,8 +3221,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2025-12-12T10:25:23.417Z",
+      "updated_at": "2025-12-12T10:25:23.429Z"
     },
     {
       "id": "qCGSB1cGmmITdytPQTtY",
@@ -3231,8 +3231,8 @@
       "pattern": "test-junk",
       "count": 5,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-19T02:46:57.035Z",
+      "updated_at": "2026-06-19T02:46:57.038Z"
     },
     {
       "id": "ewlQPHixGfJpIGl2lGmL",
@@ -3241,7 +3241,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-02-17T16:18:33.840Z",
       "updated_at": null
     },
     {
@@ -3251,7 +3251,7 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2026-02-17T16:18:17.344Z",
       "updated_at": null
     },
     {
@@ -3261,7 +3261,7 @@
       "pattern": "",
       "count": 274,
       "usage_tier": "medium",
-      "created_at": null,
+      "created_at": "2026-02-26T05:09:18.447Z",
       "updated_at": null
     },
     {
@@ -3271,8 +3271,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-19T02:21:10.236Z",
+      "updated_at": "2026-06-19T02:21:10.257Z"
     },
     {
       "id": "d0G14GFQF5wjRUwBQS6U",
@@ -3281,8 +3281,8 @@
       "pattern": "",
       "count": 3,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-18T16:21:09.367Z",
+      "updated_at": "2026-06-18T16:21:09.372Z"
     },
     {
       "id": "GGleLsiVr8bKjJJqvnGG",
@@ -3291,8 +3291,8 @@
       "pattern": "",
       "count": 2,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-18T14:06:24.033Z",
+      "updated_at": "2026-06-18T14:06:24.038Z"
     },
     {
       "id": "U9pAu9o5GLUGZRKYkLGN",
@@ -3301,8 +3301,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-19T02:02:51.821Z",
+      "updated_at": "2026-06-19T02:02:51.827Z"
     },
     {
       "id": "BOmfdosGCbJqzrXuv7Cc",
@@ -3311,8 +3311,8 @@
       "pattern": "test-junk",
       "count": 9,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-16T03:30:18.326Z",
+      "updated_at": "2026-06-16T03:30:18.329Z"
     },
     {
       "id": "coVgnxKxUnkIcae0W052",
@@ -3321,8 +3321,8 @@
       "pattern": "",
       "count": 2,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-18T16:21:09.448Z",
+      "updated_at": "2026-06-18T16:21:09.455Z"
     },
     {
       "id": "MAjc9uYggd9T6EigRug9",
@@ -3331,8 +3331,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-21T15:39:03.856Z",
+      "updated_at": "2026-06-21T15:39:03.861Z"
     },
     {
       "id": "Vijgb1nwcsfJPeO5b2i9",
@@ -3341,8 +3341,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-20T15:35:53.462Z",
+      "updated_at": "2026-06-20T15:35:53.466Z"
     },
     {
       "id": "ocGjBePa9755mb7EsEtv",
@@ -3351,8 +3351,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-19T02:40:49.692Z",
+      "updated_at": "2026-06-19T02:40:49.696Z"
     },
     {
       "id": "E3AORh3Zn034r8xXE5Jl",
@@ -3361,8 +3361,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-18T14:06:24.354Z",
+      "updated_at": "2026-06-18T14:06:24.359Z"
     },
     {
       "id": "DCe4cCxjQ6H8gHT5kyVO",
@@ -3371,8 +3371,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-21T09:29:39.577Z",
+      "updated_at": "2026-06-21T09:29:39.580Z"
     },
     {
       "id": "fAHakqVJ1065t5XMVVP7",
@@ -3381,8 +3381,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-20T00:44:52.127Z",
+      "updated_at": "2026-06-20T00:44:52.134Z"
     },
     {
       "id": "OVaQCLsStIaJ97CrByLj",
@@ -3391,8 +3391,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-19T14:16:27.650Z",
+      "updated_at": "2026-06-19T14:16:27.659Z"
     },
     {
       "id": "Ooe0qxxWTw2tP0GYeCD0",
@@ -3401,8 +3401,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-19T02:21:10.346Z",
+      "updated_at": "2026-06-19T02:21:10.350Z"
     },
     {
       "id": "kX9KX0bfI79ZgNuFFtuE",
@@ -3411,8 +3411,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-19T02:02:51.950Z",
+      "updated_at": "2026-06-19T02:02:51.958Z"
     },
     {
       "id": "TxJbb35oXRaQEIyjsqyM",
@@ -3421,8 +3421,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-16T21:14:05.080Z",
+      "updated_at": "2026-06-16T21:14:05.085Z"
     },
     {
       "id": "ugrFVrspoC7b8i781xpP",
@@ -3431,8 +3431,8 @@
       "pattern": "",
       "count": 2,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-18T01:12:15.732Z",
+      "updated_at": "2026-06-18T01:12:15.741Z"
     },
     {
       "id": "yd3YPAaRHWDRb1atsNaj",
@@ -3441,8 +3441,8 @@
       "pattern": "",
       "count": 2,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-16T03:30:18.392Z",
+      "updated_at": "2026-06-16T03:30:18.396Z"
     },
     {
       "id": "5brzbPql06xHiSTLRKc0",
@@ -3451,8 +3451,8 @@
       "pattern": "",
       "count": 4,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-17T05:48:41.302Z",
+      "updated_at": "2026-06-17T05:48:41.306Z"
     },
     {
       "id": "2u0aDTrlcXCVwBsPCU0g",
@@ -3461,8 +3461,8 @@
       "pattern": "",
       "count": 9,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-16T03:30:18.266Z",
+      "updated_at": "2026-06-16T03:30:18.271Z"
     },
     {
       "id": "1G2B65XucncKTpQKJj9g",
@@ -3471,8 +3471,8 @@
       "pattern": "",
       "count": 6,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-18T14:06:23.887Z",
+      "updated_at": "2026-06-18T14:06:23.891Z"
     },
     {
       "id": "95slLOaGFftYaBow1VCC",
@@ -3481,8 +3481,8 @@
       "pattern": "",
       "count": 10,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-25T12:32:49.068Z",
+      "updated_at": "2026-05-25T12:32:49.079Z"
     },
     {
       "id": "aFLNG2gmki3MPAuVJoiJ",
@@ -3491,8 +3491,8 @@
       "pattern": "",
       "count": 7,
       "usage_tier": "low",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-13T23:00:20.494Z",
+      "updated_at": "2026-05-13T23:00:20.503Z"
     },
     {
       "id": "k9OUn0TqjSEcYxCPBZX4",
@@ -3501,8 +3501,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-16T21:14:05.153Z",
+      "updated_at": "2026-06-16T21:14:05.158Z"
     },
     {
       "id": "Ch7aEzjn5sFt34HQXEmD",
@@ -3511,8 +3511,8 @@
       "pattern": "",
       "count": 2,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-16T03:30:18.462Z",
+      "updated_at": "2026-06-16T03:30:18.468Z"
     },
     {
       "id": "2iocvnCdne7jtj9Xufs0",
@@ -3521,8 +3521,8 @@
       "pattern": "",
       "count": 4,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-17T05:48:41.813Z",
+      "updated_at": "2026-06-17T05:48:41.819Z"
     },
     {
       "id": "O5GRAtABpWTHaxoUgIzu",
@@ -3531,8 +3531,8 @@
       "pattern": "",
       "count": 2,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-18T01:12:15.818Z",
+      "updated_at": "2026-06-18T01:12:15.837Z"
     },
     {
       "id": "9ifcA0aVOGCBxREE4DLg",
@@ -3541,8 +3541,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-18T14:06:24.449Z",
+      "updated_at": "2026-06-18T14:06:24.453Z"
     },
     {
       "id": "W7Xali1DRn5prAZfo6Vl",
@@ -3551,8 +3551,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-19T14:16:27.737Z",
+      "updated_at": "2026-06-19T14:16:27.746Z"
     },
     {
       "id": "xEuXdvKeKEFohzLrahw2",
@@ -3561,8 +3561,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-03T15:16:47.874Z",
+      "updated_at": "2026-06-03T15:16:47.878Z"
     },
     {
       "id": "xUF4XgVAsjcFFdAW3K2g",
@@ -3571,8 +3571,8 @@
       "pattern": "test-junk",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-20T00:44:52.200Z",
+      "updated_at": "2026-06-20T00:44:52.209Z"
     },
     {
       "id": "rtmCuTmrIUoVVrTBsDxP",
@@ -3581,8 +3581,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-30T00:37:23.363Z",
+      "updated_at": "2026-05-30T00:37:23.379Z"
     },
     {
       "id": "vqnmtFIRj2v4oX6V76kN",
@@ -3591,8 +3591,8 @@
       "pattern": "",
       "count": 2,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-11T21:17:39.681Z",
+      "updated_at": "2026-06-11T21:17:39.685Z"
     },
     {
       "id": "ZxHulzLAkwuK2KTsNhSO",
@@ -3601,8 +3601,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-21T09:29:39.650Z",
+      "updated_at": "2026-06-21T09:29:39.654Z"
     },
     {
       "id": "NMeBlKYSRYZHfVzq5aHQ",
@@ -3611,8 +3611,8 @@
       "pattern": "",
       "count": 2,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-19T02:21:10.425Z",
+      "updated_at": "2026-06-19T02:21:10.437Z"
     },
     {
       "id": "SGO6B7K5h8e58ZPcIkg1",
@@ -3621,8 +3621,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-21T15:39:03.943Z",
+      "updated_at": "2026-06-21T15:39:03.947Z"
     },
     {
       "id": "UaiKYIcKunDaRdfTEhgx",
@@ -3631,8 +3631,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-21T14:25:01.336Z",
+      "updated_at": "2026-06-21T14:25:01.344Z"
     },
     {
       "id": "5KdBCGNFmB3sGBfkSyG1",
@@ -3641,8 +3641,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-20T23:43:08.343Z",
+      "updated_at": "2026-06-20T23:43:08.348Z"
     },
     {
       "id": "5Nj8EQWT1BJ7THKWXH3n",
@@ -3651,8 +3651,8 @@
       "pattern": "test-junk",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-19T02:40:49.758Z",
+      "updated_at": "2026-06-19T02:40:49.762Z"
     },
     {
       "id": "iCYYwWu5NX8RXP5Fm6OX",
@@ -3661,8 +3661,8 @@
       "pattern": "test-junk",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-20T15:35:53.546Z",
+      "updated_at": "2026-06-20T15:35:53.551Z"
     },
     {
       "id": "GY5bEJQ4TlmWYulgMfEq",
@@ -3671,8 +3671,8 @@
       "pattern": "test-junk",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-19T03:30:43.623Z",
+      "updated_at": "2026-06-19T03:30:43.628Z"
     },
     {
       "id": "Pjk1JcA5SDhDRUe4ktEM",
@@ -3681,8 +3681,8 @@
       "pattern": "test-junk",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-18T16:21:09.523Z",
+      "updated_at": "2026-06-18T16:21:09.529Z"
     },
     {
       "id": "PhJpO4j7y7EimgHNHX9b",
@@ -3691,8 +3691,8 @@
       "pattern": "test-junk",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-19T15:46:04.064Z",
+      "updated_at": "2026-06-19T15:46:04.069Z"
     },
     {
       "id": "VoiPafXdZPLH7xaASgYG",
@@ -3701,8 +3701,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-06-17T11:39:09.652Z",
+      "updated_at": "2026-06-17T11:39:09.656Z"
     },
     {
       "id": "5J098DL91KABUXBLNdIx",
@@ -3711,7 +3711,7 @@
       "pattern": "",
       "count": 832,
       "usage_tier": "high",
-      "created_at": null,
+      "created_at": "2025-12-29T14:26:37.166Z",
       "updated_at": null
     },
     {
@@ -3721,8 +3721,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-15T15:36:53.021Z",
+      "updated_at": "2026-05-15T15:36:53.021Z"
     },
     {
       "id": "lE9Ex3rRXQ7MzbWNPJH0",
@@ -3731,8 +3731,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-15T15:36:51.429Z",
+      "updated_at": "2026-05-15T15:36:51.429Z"
     },
     {
       "id": "txGoqBTosxGOF66mD2KZ",
@@ -3741,8 +3741,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-15T15:36:46.649Z",
+      "updated_at": "2026-05-15T15:36:46.649Z"
     },
     {
       "id": "NTcJUL7KEeuCGR1um3kf",
@@ -3751,8 +3751,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-15T15:36:50.415Z",
+      "updated_at": "2026-05-15T15:36:50.415Z"
     },
     {
       "id": "qMrTXJlIAmH7u5CHYmZy",
@@ -3761,8 +3761,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-15T15:49:43.896Z",
+      "updated_at": "2026-05-15T15:49:43.896Z"
     },
     {
       "id": "ZzDvpxQ5Gh0X6o7fDuus",
@@ -3771,8 +3771,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-15T15:36:31.235Z",
+      "updated_at": "2026-05-15T15:36:31.235Z"
     },
     {
       "id": "Re9uRVnvhS9TpdHaUQHw",
@@ -3781,8 +3781,8 @@
       "pattern": "",
       "count": 1,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-05-15T15:36:48.615Z",
+      "updated_at": "2026-05-15T15:36:48.615Z"
     },
     {
       "id": "HVEy6cpdYVd60p9bXgzM",
@@ -3791,7 +3791,7 @@
       "pattern": "",
       "count": 21,
       "usage_tier": "low",
-      "created_at": null,
+      "created_at": "2026-03-05T17:48:25.193Z",
       "updated_at": null
     },
     {
@@ -3801,8 +3801,8 @@
       "pattern": "",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-15T13:53:09.089Z",
+      "updated_at": "2026-04-15T13:53:09.089Z"
     },
     {
       "id": "Rjgfup2iGuZ8w4W5Rs4F",
@@ -3811,8 +3811,8 @@
       "pattern": "",
       "count": 3,
       "usage_tier": "rare",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-18T19:19:22.119Z",
+      "updated_at": "2026-04-18T19:19:22.124Z"
     },
     {
       "id": "LWUlgojRLDsygkt7QPjz",
@@ -3821,8 +3821,8 @@
       "pattern": "date-suffixed",
       "count": 134,
       "usage_tier": "medium",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-21T22:23:13.767Z",
+      "updated_at": "2026-04-21T22:23:13.767Z"
     },
     {
       "id": "VoW4XA2fqVqxwg5yWGMe",
@@ -3831,8 +3831,8 @@
       "pattern": "date-suffixed",
       "count": 134,
       "usage_tier": "medium",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-21T22:23:13.828Z",
+      "updated_at": "2026-04-21T22:23:13.828Z"
     },
     {
       "id": "axlqJJWkJITQdIPLWt2j",
@@ -3841,8 +3841,8 @@
       "pattern": "date-suffixed",
       "count": 134,
       "usage_tier": "medium",
-      "created_at": null,
-      "updated_at": null
+      "created_at": "2026-04-21T22:23:13.774Z",
+      "updated_at": "2026-04-21T22:23:13.774Z"
     },
     {
       "id": "0WV4LsFCj1PoOlDoLRSF",
@@ -3851,7 +3851,7 @@
       "pattern": "",
       "count": 217,
       "usage_tier": "medium",
-      "created_at": null,
+      "created_at": "2026-01-05T02:16:52.134Z",
       "updated_at": null
     },
     {
@@ -3861,7 +3861,7 @@
       "pattern": "broken-merge-field",
       "count": 0,
       "usage_tier": "unused",
-      "created_at": null,
+      "created_at": "2025-12-12T11:08:28.742Z",
       "updated_at": null
     }
   ]

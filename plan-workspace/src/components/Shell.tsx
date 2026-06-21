@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import {
   LayoutDashboard, GitBranch, Boxes, Workflow, Network, MessagesSquare,
   ListChecks, Terminal, Gavel, ShieldAlert, Moon, Sun, Menu, SearchCheck, ClipboardList, Share2, Tag,
+  Video, Smartphone, SlidersHorizontal, LayoutGrid, Send, CalendarClock,
 } from "lucide-react";
 import { cn, useTheme } from "./ui";
 import { useState } from "react";
@@ -32,6 +33,15 @@ const NAV: { group: string; items: { to: string; label: string; icon: any; accen
     { to: "/tags", label: "Tag Library", icon: Tag, accent: "text-amber-600 dark:text-amber-400" },
     { to: "/decisions", label: "Decisions", icon: Gavel },
     { to: "/risks", label: "Risk Register", icon: ShieldAlert },
+  ] },
+  { group: "Virginia Online (Telemed)", items: [
+    { to: "/telemed", label: "Overview", icon: Video, accent: "text-sky-600 dark:text-sky-400" },
+    { to: "/telemed/workflows", label: "Workflows", icon: Workflow, accent: "text-sky-600 dark:text-sky-400" },
+    { to: "/telemed/portal", label: "Portal & App", icon: Smartphone, accent: "text-violet-600 dark:text-violet-400" },
+    { to: "/telemed/ghl", label: "GHL Feature Map", icon: LayoutGrid, accent: "text-sky-600 dark:text-sky-400" },
+    { to: "/telemed/config", label: "Config", icon: SlidersHorizontal, accent: "text-sky-600 dark:text-sky-400" },
+    { to: "/telemed/messages", label: "Messages", icon: Send, accent: "text-sky-600 dark:text-sky-400" },
+    { to: "/telemed/plan", label: "Build Plan", icon: CalendarClock, accent: "text-sky-600 dark:text-sky-400" },
   ] },
 ];
 

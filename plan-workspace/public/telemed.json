@@ -1,0 +1,505 @@
+{
+  "meta": {
+    "title": "MWC Virginia Online — Telehealth as the 4th Location",
+    "subtitle": "Single-sub-account build inside the existing MWC HIPAA account using the [ONLINE] namespace. 30-day test, then kill / continue lean / invest.",
+    "brand_voice": "\"Men's Wellness Centers\" or \"MWC\" · members not patients · telehealth appointment not consultation · no \"free\" · no \"guy/guys\" · no em-dashes · no unsubstantiated medical claims",
+    "location_id": "Ghstz8eIsHWLeXek47dk",
+    "timezone": "America/New_York",
+    "test_window": "30-day parallel test alongside the in-person rebuild"
+  },
+  "overview": {
+    "concept": "Treat Virginia Online (telehealth) as the 4th MWC location next to the three physical clinics, built in the same HIPAA sub-account the in-person rebuild team uses. A strict [ONLINE] namespace plus a written carve-out contract prevent collisions. One channel-agnostic member funnel so a member can move between online and in-clinic without a duplicate record.",
+    "principles": [
+      "One sub-account, two workstreams — isolate via [ONLINE] namespace, never by duplicating the account.",
+      "Channel-agnostic member journey — book online, convert to clinic, all on one record.",
+      "Geo-routed lead capture — ZIP drive-time decides which of the 4 locations is offered.",
+      "Virginia-only, 18+ hard gates at lead capture and again at visit join.",
+      "Clinical content lives in Practice Fusion, never in GHL Conversations.",
+      "Cash-pay, No Surprises Act good-faith estimate on file before the first visit.",
+      "Everything reversible — the 30-day test produces data, not lock-in."
+    ],
+    "domains": [
+      { "domain": "menswellnesscenters.com", "purpose": "Main brand site", "where": "Existing Vercel deployment" },
+      { "domain": "menswellnesscenters.com/locations/<city>", "purpose": "City clinic pages (one per physical location)", "where": "Same Vercel deployment" },
+      { "domain": "visit.menswellnesscenters.com", "purpose": "Statewide Virginia Online landing page", "where": "New subdomain, CNAME to Vercel, SSL auto-issued" }
+    ],
+    "carveout_owned": [
+      "All workflows in the [ONLINE] folder",
+      "All tags prefixed mwc-online- or mwc-channel-online",
+      "All Contact custom fields prefixed online_",
+      "All Appointment custom fields prefixed online_",
+      "The Virginia Online calendar group and its calendars",
+      "The [MWC ONLINE] Visit Pipeline",
+      "All comms templates prefixed [ONLINE]",
+      "All trigger links containing online",
+      "Custom values keyed online_* or provider_doxy_room_*",
+      "The visit.menswellnesscenters.com subdomain in GHL settings"
+    ],
+    "carveout_shared": [
+      "Contact records and generic fields (name, email, phone, address, DOB, gender, lead_source, UTMs)",
+      "Appointment generics (start_time, end_time, assigned_user_id, calendar_id, appointment_status)",
+      "The Conversations inbox",
+      "The user-permissions structure",
+      "Existing in-person pipelines"
+    ],
+    "roles": [
+      { "permission": "Workflows", "setting": "Edit only inside [ONLINE] folder" },
+      { "permission": "Custom fields", "setting": "Read all, write only online_*" },
+      { "permission": "Tags", "setting": "Add/remove mwc-online-* and mwc-channel-*" },
+      { "permission": "Calendars", "setting": "Edit Virginia Online calendar group only" },
+      { "permission": "Pipelines", "setting": "Edit [MWC ONLINE] Visit Pipeline only" },
+      { "permission": "Contacts / Conversations", "setting": "Full access" },
+      { "permission": "Settings", "setting": "Read-only" }
+    ],
+    "out_of_scope": [
+      "Veradigm Unity API integration (provider documents manually in Practice Fusion during the test)",
+      "Two-way GHL ↔ Practice Fusion sync (online_pf_patient_guid entered manually)",
+      "Supabase HIPAA infrastructure",
+      "Custom Vercel provider portal (provider works in GHL + Doxy + Practice Fusion)",
+      "Automated EMR write-back",
+      "Multi-state expansion (Virginia only)",
+      "Multi-provider scaling (one provider serves all four locations)",
+      "MyDose / Healthie / other platform migrations (parked until day-30 decision)"
+    ],
+    "day30_decisions": [
+      { "name": "Kill", "detail": "Park telehealth, focus on the in-person rebuild." },
+      { "name": "Continue lean", "detail": "Keep this exact stack, scale carefully with a second provider and more states." },
+      { "name": "Invest", "detail": "Build the full EMR sync architecture (Supabase + Unity, or Healthie / MyDose white-label) for multi-provider, multi-state scale." }
+    ],
+    "day30_metrics": [
+      "Channel mix by geo tier (urban / suburban / rural × city1 / city2 / city3 / online)",
+      "CPL, CPBC, show rate, completion rate, eRx-issued rate, payment-captured rate per channel",
+      "Member-conversion rate at 30 days, 90-day projection from week-4 data",
+      "LTV proxy per channel from first-month spend",
+      "Channel-switch rate (members who tried one then the other)",
+      "Provider satisfaction with both workflows",
+      "Ops cost per visit per channel",
+      "Member NPS / qualitative feedback per channel"
+    ]
+  },
+  "ghl_features": [
+    { "feature": "Calendars & Calendar Groups", "scope": "core", "use": "4 calendar groups (3 clinics + Virginia Online), each with Initial/Follow-Up/Lab Review. Eligibility gate online to VA residents." },
+    { "feature": "Pipelines & Opportunities", "scope": "core", "use": "Channel-agnostic [MWC] Member Journey + per-appointment [MWC ONLINE] Visit Pipeline for today's roster." },
+    { "feature": "Workflows", "scope": "core", "use": "All [ONLINE] automation: qualification, provisioning, reminders, intake chase, completion, no-show, follow-up, membership, labs, channel-switch." },
+    { "feature": "Triggers", "scope": "core", "use": "Form-submit, appointment-booked, appointment-status, custom-field-changed (outcome), payment-captured drive the workflows." },
+    { "feature": "Forms", "scope": "core", "use": "Unified geo-routed lead capture, initial intake, financial responsibility — embedded on the Virginia landing pages." },
+    { "feature": "Surveys & Quizzes", "scope": "use", "use": "\"Help me pick\" decision-tree wizard as a quiz; symptom inventory (ADAM) inside intake; post-visit NPS as a survey." },
+    { "feature": "Trigger Links", "scope": "core", "use": "Booking, switch-channel, intake, reschedule, lab, tech-check, directions — each tags the contact on click for attribution." },
+    { "feature": "Custom Fields", "scope": "core", "use": "30+ online_* Contact fields and online_* Appointment fields, namespaced for the carve-out." },
+    { "feature": "Custom Values", "scope": "use", "use": "provider_doxy_room_{id}, clinic_address_{city}, lab partner URL, fee schedule — referenced by workflows and templates." },
+    { "feature": "Tags", "scope": "core", "use": "Channel, geo-tier, lifecycle, behavioral, and source tag families. Workflow guards key off lifecycle tags." },
+    { "feature": "Conversations (SMS / Email)", "scope": "core", "use": "A2P-registered SMS + authenticated email. Scheduling/billing/logistics only — never clinical content." },
+    { "feature": "Conversations (WhatsApp / IG / FB / GBP)", "scope": "deferred", "use": "Not used in the 30-day test; revisit if a channel proves high-intent." },
+    { "feature": "Voice / Phone / IVR", "scope": "use", "use": "Pattern A: existing main line with IVR (1-3 clinics, 4 Virginia Online, 5 billing). Pattern B dedicated number only if volume justifies." },
+    { "feature": "Conversation AI / Voice AI", "scope": "deferred", "use": "Out of scope for the test (clinical-adjacent). Candidate for after-hours FAQ + booking at scale." },
+    { "feature": "Memberships / Courses", "scope": "portal", "use": "Candidate for the member portal: onboarding course, protocol education, lab-prep modules. See Portal & App." },
+    { "feature": "Communities", "scope": "deferred", "use": "Possible members-only community at scale; not in the 30-day test." },
+    { "feature": "Client Portal", "scope": "portal", "use": "Primary native option for the member portal — appointments, docs, invoices, course content under one login. See Portal & App." },
+    { "feature": "Branded Mobile App (LeadConnector white-label)", "scope": "portal", "use": "Members get the portal as a branded app; providers/ops get the app for roster + conversations. See Portal & App." },
+    { "feature": "Payments — Products & Subscriptions", "scope": "core", "use": "Cash-pay membership as a recurring subscription product; visit fees as one-time products. Drives membership-active + LTV." },
+    { "feature": "Payments — Invoices & Estimates", "scope": "use", "use": "Good-faith estimate (No Surprises Act) as an estimate; receipts for HSA/FSA as invoices." },
+    { "feature": "Payments — Coupons / Tax", "scope": "deferred", "use": "No discounts in brand voice; tax handling per accountant if needed." },
+    { "feature": "Documents & Contracts (e-sign)", "scope": "core", "use": "Telemedicine consent, HIPAA, financial responsibility as e-signable documents tied to the contact." },
+    { "feature": "Reputation / Reviews", "scope": "use", "use": "Post-visit review request workflow to Google Business Profile, gated on a positive NPS response." },
+    { "feature": "Reporting & Dashboards", "scope": "core", "use": "Channel × geo-tier × UTM × provider dashboard — the day-30 decision dataset." },
+    { "feature": "Funnels / Websites / Blogs", "scope": "partial", "use": "Landing pages live on Vercel, not GHL funnels. GHL blog/funnels not used; keep attribution via UTMs." },
+    { "feature": "Email Marketing / Campaigns", "scope": "use", "use": "Monthly member newsletter audience; nurture and win-back broadcasts segmented by channel and geo." },
+    { "feature": "Social Planner", "scope": "deferred", "use": "Org marketing tool, not part of the member lifecycle build." },
+    { "feature": "Affiliate Manager", "scope": "deferred", "use": "Member-referral handled via referrer field + tag for the test; affiliate manager only if a formal program launches." },
+    { "feature": "Custom Objects", "scope": "deferred", "use": "Labs/prescriptions could become custom objects at scale; during the test they stay as appointment fields + Practice Fusion." },
+    { "feature": "Smart Lists / Segments", "scope": "use", "use": "Saved views: today's online roster, intake-incomplete, no-show recovery, labs-due, churn-risk." },
+    { "feature": "QR Codes", "scope": "deferred", "use": "In-clinic QR to the Virginia Online landing page for cross-channel referral; optional." },
+    { "feature": "Certificates", "scope": "deferred", "use": "Not applicable to the member lifecycle." }
+  ],
+  "portal_app": {
+    "intro": "The doc stops at GHL automation; the member portal and app are the biggest un-spec'd surface. GHL now ships a native Client Portal, Memberships/Courses, Communities, and a white-label mobile app, so MWC can give members a real \"home base\" without a custom build for the 30-day test. A custom Vercel + Supabase portal (or a Healthie / MyDose white-label) is the scale path once EMR sync is on the table.",
+    "options": [
+      {
+        "name": "GHL Client Portal (native)",
+        "what": "One member login surfacing appointments, e-signed documents, invoices/subscriptions, and any Memberships course content. Lives at a branded subdomain.",
+        "pros": ["Zero custom code", "Inside the HIPAA sub-account already", "Single sign-on across portal + courses + community", "Ships in days"],
+        "cons": ["Limited UI customization", "No native lab-results view (link out to lab partner)", "No EMR data (clinical stays in Practice Fusion)"],
+        "cost": "Included in plan",
+        "fit": "Best for the 30-day test"
+      },
+      {
+        "name": "GHL Memberships / Courses",
+        "what": "Structured content: onboarding journey, protocol education, lab-prep, what-to-expect modules. Gated to active members.",
+        "pros": ["Drip scheduling", "Progress tracking", "Reuses portal login"],
+        "cons": ["Content-only, not a clinical record"],
+        "cost": "Included",
+        "fit": "Layer onto the Client Portal"
+      },
+      {
+        "name": "GHL Branded Mobile App (white-label)",
+        "what": "The LeadConnector app white-labeled as the MWC app — members get the portal as an app; ops/providers get conversations + roster on mobile.",
+        "pros": ["Native iOS/Android presence", "Push notifications", "No app-store build effort beyond white-label setup"],
+        "cons": ["White-label fee", "Shared LeadConnector feature set, not bespoke"],
+        "cost": "White-label add-on fee",
+        "fit": "Optional during test, strong for continue-lean"
+      },
+      {
+        "name": "Custom Vercel + Supabase portal/app",
+        "what": "Bespoke member dashboard and PWA/native app: visit history, lab trends, billing, secure messaging, prescription status, education.",
+        "pros": ["Full control of UX", "Can integrate EMR/Unity data", "Differentiated product"],
+        "cons": ["Build + HIPAA infra cost", "Ongoing maintenance", "Slow to ship"],
+        "cost": "High (build + infra)",
+        "fit": "Invest path only, post-day-30"
+      },
+      {
+        "name": "Healthie / MyDose white-label",
+        "what": "Purpose-built telehealth platform with member app, scheduling, charting, and billing.",
+        "pros": ["Clinical-grade out of the box", "EMR + portal unified"],
+        "cons": ["Migration off GHL for clinical flows", "Per-seat cost", "Re-platform risk"],
+        "cost": "Per-provider SaaS",
+        "fit": "Invest path alternative to custom"
+      }
+    ],
+    "recommendation": "For the 30-day test: GHL Client Portal + Memberships, optionally the white-label mobile app. It is inside the HIPAA sub-account, needs no custom code, and reuses the same contact records and subscriptions the workflows already drive. Defer the custom Vercel + Supabase portal (or Healthie / MyDose) to the invest path, gated on day-30 demand and the EMR-sync decision.",
+    "member_features": [
+      { "feature": "Upcoming & past appointments", "native": "Client Portal", "notes": "Reads the same GHL calendar/appointment data; reschedule link inline." },
+      { "feature": "Join visit (Doxy link)", "native": "Portal + SMS", "notes": "online_appt_doxy_url surfaced at appointment time." },
+      { "feature": "E-signed documents", "native": "Documents & Contracts", "notes": "Telemedicine consent, HIPAA, financial responsibility stored on the contact." },
+      { "feature": "Membership & billing", "native": "Payments / Subscriptions", "notes": "Card on file, subscription status, receipts for HSA/FSA." },
+      { "feature": "Education / onboarding", "native": "Memberships/Courses", "notes": "First-90-days journey, protocol and lab-prep modules." },
+      { "feature": "Lab scheduling & status", "native": "Trigger link + tag", "notes": "Link to lab partner; mwc-online-labs-* tags. Results stay in Practice Fusion / lab portal during the test." },
+      { "feature": "Prescription status", "native": "Email/SMS", "notes": "\"Your prescription was sent\" comms; full Rx detail in pharmacy/EMR, not GHL." },
+      { "feature": "Secure messaging to care team", "native": "Conversations", "notes": "Scheduling/billing/logistics only — clinical questions routed to a visit." },
+      { "feature": "Referrals", "native": "Trigger link + referrer field", "notes": "online_referrer_member_id; affiliate manager at scale." }
+    ],
+    "native_setup": [
+      "Enable Client Portal in the sub-account; brand it (logo, colors, visit.menswellnesscenters.com domain).",
+      "Turn on Memberships; build the \"MWC Member — First 90 Days\" course with drip modules.",
+      "Connect Payments; create the membership subscription product + visit-fee products.",
+      "Load Documents & Contracts templates for the three consents (attorney-reviewed for VA).",
+      "Map portal tabs: Appointments, Documents, Billing, Learn.",
+      "(Optional) Order the white-label mobile app and submit branding assets.",
+      "Add a portal-invite step to [ONLINE] 08 Member Onboarding."
+    ]
+  },
+  "custom_fields": {
+    "contact": [
+      { "name": "online_channel_preference", "type": "Dropdown", "req": "At lead capture", "notes": "in_person_city1 / city2 / city3 / online / undecided" },
+      { "name": "online_channel_actual", "type": "Dropdown", "req": "Auto on booking", "notes": "Set by booking workflow from the calendar booked" },
+      { "name": "online_geo_tier", "type": "Dropdown", "req": "Auto", "notes": "urban / suburban / rural, computed from ZIP" },
+      { "name": "online_distance_to_nearest_clinic_min", "type": "Number", "req": "Auto", "notes": "Drive minutes to closest clinic" },
+      { "name": "online_nearest_clinic", "type": "Dropdown", "req": "Auto", "notes": "city1 / city2 / city3 / none" },
+      { "name": "online_state_of_residence", "type": "Dropdown (US states)", "req": "Yes at lead", "notes": "Hard-gate to VA during the test" },
+      { "name": "online_age", "type": "Number", "req": "Yes at lead", "notes": "Hard-gate to 18+" },
+      { "name": "online_age_verified", "type": "Boolean", "req": "Auto", "notes": "Set after DOB confirmation at intake" },
+      { "name": "online_consent_telemedicine_signed", "type": "Boolean", "req": "Yes (online)", "notes": "" },
+      { "name": "online_consent_telemedicine_signed_at", "type": "Date/time", "req": "Auto", "notes": "" },
+      { "name": "online_consent_hipaa_signed", "type": "Boolean", "req": "Yes", "notes": "" },
+      { "name": "online_consent_financial_signed", "type": "Boolean", "req": "Yes", "notes": "Cash-pay + No Surprises Act estimate" },
+      { "name": "online_preferred_pharmacy_name", "type": "Text", "req": "At intake", "notes": "eRx routing" },
+      { "name": "online_preferred_pharmacy_zip", "type": "Text", "req": "At intake", "notes": "" },
+      { "name": "online_doxy_room_url", "type": "URL", "req": "Auto", "notes": "Provider permanent Doxy room (online only)" },
+      { "name": "online_assigned_provider", "type": "Dropdown", "req": "Auto", "notes": "Provider name" },
+      { "name": "online_assigned_provider_id", "type": "Text", "req": "Auto", "notes": "Provider GHL user ID" },
+      { "name": "online_pf_patient_guid", "type": "Text", "req": "Manual (test)", "notes": "Manual link to Practice Fusion until sync exists" },
+      { "name": "online_intake_form_complete", "type": "Boolean", "req": "Auto", "notes": "Set when intake submitted" },
+      { "name": "online_intake_form_completed_at", "type": "Date/time", "req": "Auto", "notes": "" },
+      { "name": "online_visits_count_total", "type": "Number", "req": "Auto", "notes": "All MWC visits, all channels" },
+      { "name": "online_visits_count_online", "type": "Number", "req": "Auto", "notes": "Online only" },
+      { "name": "online_visits_count_in_person", "type": "Number", "req": "Auto", "notes": "In-person only" },
+      { "name": "online_last_visit_date", "type": "Date", "req": "Auto", "notes": "" },
+      { "name": "online_last_visit_channel", "type": "Dropdown", "req": "Auto", "notes": "Most recent channel" },
+      { "name": "online_channel_switched_count", "type": "Number", "req": "Auto", "notes": "Times member changed channels" },
+      { "name": "online_next_lab_due_date", "type": "Date", "req": "Manual", "notes": "Provider sets per protocol" },
+      { "name": "online_next_followup_due_date", "type": "Date", "req": "Manual", "notes": "" },
+      { "name": "online_member_status", "type": "Dropdown", "req": "Auto", "notes": "lead / qualified / booked / member_active / member_paused / member_lost / disqualified" },
+      { "name": "online_member_since", "type": "Date", "req": "Auto", "notes": "Converted to paid member" },
+      { "name": "online_lifetime_value", "type": "Currency", "req": "Auto", "notes": "Updated by payment workflow" },
+      { "name": "online_lead_source", "type": "Text", "req": "Auto", "notes": "UTM source or referral" },
+      { "name": "online_lead_medium", "type": "Text", "req": "Auto", "notes": "UTM medium" },
+      { "name": "online_lead_campaign", "type": "Text", "req": "Auto", "notes": "UTM campaign" },
+      { "name": "online_lead_county", "type": "Text", "req": "Auto", "notes": "VA county from ZIP" },
+      { "name": "online_referrer_member_id", "type": "Text", "req": "Manual", "notes": "Member who referred" },
+      { "name": "online_disqualification_reason", "type": "Dropdown", "req": "Auto", "notes": "out_of_state / under_18 / medical_contraindication / payment_declined / other" },
+      { "name": "online_emergency_contact_name", "type": "Text", "req": "At intake", "notes": "" },
+      { "name": "online_emergency_contact_phone", "type": "Phone", "req": "At intake", "notes": "" }
+    ],
+    "appointment": [
+      { "name": "online_appt_channel", "type": "Dropdown", "notes": "in_person_city1 / city2 / city3 / online" },
+      { "name": "online_appt_doxy_url", "type": "URL", "notes": "Online only" },
+      { "name": "online_appt_clinic_address", "type": "Text", "notes": "In-person only" },
+      { "name": "online_appt_type", "type": "Dropdown", "notes": "initial_60 / followup_30 / lab_review_20 / urgent_15" },
+      { "name": "online_appt_intake_required", "type": "Boolean", "notes": "True for initial visits" },
+      { "name": "online_appt_member_state_verified", "type": "Boolean", "notes": "Confirmed at join (online)" },
+      { "name": "online_appt_provider_name", "type": "Text", "notes": "" },
+      { "name": "online_appt_outcome", "type": "Dropdown", "notes": "completed_documented / completed_pending_docs / noshow / cancelled_by_member / cancelled_by_provider / tech_issue" },
+      { "name": "online_appt_payment_status", "type": "Dropdown", "notes": "pending / captured / refunded / failed" },
+      { "name": "online_appt_payment_amount", "type": "Currency", "notes": "" },
+      { "name": "online_appt_followup_recommended_at", "type": "Date", "notes": "Provider sets during visit" },
+      { "name": "online_appt_eRx_issued", "type": "Boolean", "notes": "Provider confirms post-visit" },
+      { "name": "online_appt_labs_ordered", "type": "Boolean", "notes": "Provider confirms post-visit" },
+      { "name": "online_appt_channel_switched_from", "type": "Dropdown", "notes": "If member changed channels at booking" }
+    ]
+  },
+  "tags": {
+    "channel": ["mwc-channel-city1", "mwc-channel-city2", "mwc-channel-city3", "mwc-channel-online", "mwc-channel-undecided", "mwc-channel-switched"],
+    "geo": ["mwc-geo-urban (<20 min)", "mwc-geo-suburban (20-45 min)", "mwc-geo-rural (>45 min)"],
+    "lifecycle": ["mwc-online-lead", "mwc-online-qualified", "mwc-online-disqualified-state", "mwc-online-disqualified-age", "mwc-online-disqualified-medical", "mwc-online-disqualified-payment", "mwc-online-booked", "mwc-online-intake-complete", "mwc-online-confirmed", "mwc-online-joined", "mwc-online-completed", "mwc-online-noshow", "mwc-online-cancelled", "mwc-online-rescheduled", "mwc-online-member-active", "mwc-online-member-paused", "mwc-online-member-lost"],
+    "behavioral": ["mwc-online-eRx-issued", "mwc-online-labs-ordered", "mwc-online-labs-completed", "mwc-online-followup-scheduled", "mwc-online-payment-on-file", "mwc-online-payment-failed-1", "mwc-online-payment-failed-2", "mwc-online-payment-failed-3"],
+    "source": ["mwc-src-google", "mwc-src-meta", "mwc-src-organic", "mwc-src-reddit", "mwc-src-referral", "mwc-src-partner", "mwc-county-{name}"]
+  },
+  "calendars": {
+    "groups": [
+      { "group": "MWC City 1 Clinic", "calendars": "Initial Visit (60), Follow-Up (30), Lab Review (20)" },
+      { "group": "MWC City 2 Clinic", "calendars": "Initial Visit (60), Follow-Up (30), Lab Review (20)" },
+      { "group": "MWC City 3 Clinic", "calendars": "Initial Visit (60), Follow-Up (30), Lab Review (20)" },
+      { "group": "MWC Virginia Online", "calendars": "Initial Visit (60), Follow-Up (30), Lab Review (20)" }
+    ],
+    "common": [
+      { "setting": "Allow rescheduling", "value": "Up to 4 hours before start" },
+      { "setting": "Allow cancellation", "value": "Up to 24 hours before; after that, staff action" },
+      { "setting": "Capacity", "value": "1" },
+      { "setting": "Slot increment", "value": "30 minutes" },
+      { "setting": "Look-ahead window", "value": "21 days" },
+      { "setting": "Min lead time", "value": "4 hours" },
+      { "setting": "Auto-confirm", "value": "Yes" },
+      { "setting": "Pre-form requirement", "value": "Lead capture form complete before booking" },
+      { "setting": "Post-form (Initial only)", "value": "Intake sent after booking, required to attend" }
+    ],
+    "online_specifics": [
+      "Location: \"Virtual (Doxy.me)\" with the provider's permanent room URL in custom value provider_doxy_room_{provider_id}",
+      "Buffer: 10 min after (vs 15 min for clinics)",
+      "Broader hours possible (no commute): Mon-Thu 9am-7pm ET, Fri 9am-3pm ET, optional Sat 10am-2pm ET",
+      "Booking instructions: \"You'll get a secure video link 24 hours before. Have a government-issued ID ready for camera verification\"",
+      "Eligibility gate: ONLY members with online_state_of_residence = VA"
+    ],
+    "provider_blocks": [
+      { "day": "Mon", "am": "City 1 in-person", "pm": "City 1 in-person", "eve": "Virginia Online" },
+      { "day": "Tue", "am": "City 2 in-person", "pm": "Virginia Online", "eve": "Virginia Online" },
+      { "day": "Wed", "am": "City 3 in-person", "pm": "City 3 in-person", "eve": "Virginia Online" },
+      { "day": "Thu", "am": "Virginia Online", "pm": "City 1 in-person", "eve": "Virginia Online" },
+      { "day": "Fri", "am": "Virginia Online", "pm": "Virginia Online", "eve": "off" },
+      { "day": "Sat", "am": "off / Virginia Online (premium)", "pm": "off", "eve": "off" }
+    ]
+  },
+  "forms": [
+    {
+      "name": "[MWC] Virginia Lead Capture",
+      "purpose": "One geo-routed form on every Virginia landing page; branches destination by channel preference.",
+      "channel": "both",
+      "items": ["First name", "Last name", "Email", "Mobile phone", "ZIP (triggers geo lookup)", "State of residence (gate: VA)", "Age (gate: 18+)", "Main concern (multi-select)", "Channel preference (options shown by ZIP geo)", "How did you find us?", "SMS opt-in (A2P)", "Privacy policy acknowledgment"]
+    },
+    {
+      "name": "Geo logic on channel preference",
+      "purpose": "Drive-time lookup from ZIP to the 3 clinics decides which options to show.",
+      "channel": "both",
+      "items": ["Urban (<20 min): all 4 options, nearest clinic preselected", "Suburban (20-45 min): all 4, no preselection", "Rural (>45 min): Online preselected, all 4 visible", "Each option carries a short explainer (address + drive time, or the telehealth pitch)"]
+    },
+    {
+      "name": "\"Help me pick\" decision-tree wizard",
+      "purpose": "Three questions that recommend a channel, member can override.",
+      "channel": "both",
+      "items": ["Q1 Prefer face-to-face for an initial visit? Yes / No / No pref", "Q2 Weekday evenings or Saturday mornings best? Yes / Other times", "Q3 Comfortable with a brief video visit from home/office? Yes / Rather come in", "Yes→nearest clinic; No/No-pref + video-comfortable → Virginia Online; rather-come-in → nearest clinic"]
+    },
+    {
+      "name": "[MWC] Initial Intake",
+      "purpose": "Sent after any Initial Visit booking; same clinical content both channels; required before the appointment.",
+      "channel": "both",
+      "items": ["Identity & demographics (address must be VA)", "Insurance (optional, cash-pay)", "Pharmacy", "Medical history (cardiovascular, prostate, breast cancer family hx)", "Current medications", "Allergies", "Symptom inventory (ADAM / MWC score)", "Prior TRT history", "Lab history (upload or values)", "Lifestyle (sleep, exercise, alcohol, tobacco, substances)", "Goals (free-text 6-month success)", "Emergency contact", "ID upload"]
+    },
+    {
+      "name": "[ONLINE] Telemedicine Consent",
+      "purpose": "Virginia Online channel only; drafted to Virginia telemedicine law; attorney-reviewed before launch.",
+      "channel": "online",
+      "items": ["Nature of telehealth vs in-person", "Risks/limitations (tech failure, no physical exam)", "Right to refuse/discontinue without affecting in-person care", "Confidentiality & security", "Recording policy (none without separate consent)", "Emergency / 911 instructions", "Identity verification (ID on camera)", "Member physically in Virginia at visit time", "Provider licensed in Virginia", "Name, e-signature, date"]
+    },
+    {
+      "name": "[MWC] Financial Responsibility",
+      "purpose": "Both channels. Cash-pay disclosure + No Surprises Act good-faith estimate.",
+      "channel": "both",
+      "items": ["Cash-pay disclosure", "Fee schedule", "No-show fee policy", "Card-on-file authorization", "No Surprises Act good-faith estimate", "HSA/FSA receipt availability"]
+    },
+    {
+      "name": "[CLINIC] Standard Visit Consent",
+      "purpose": "Existing MWC clinic consent — re-link from the new landing pages, do not duplicate.",
+      "channel": "in-person",
+      "items": ["Existing form, already in use"]
+    }
+  ],
+  "pipelines": [
+    {
+      "name": "[MWC] Member Journey",
+      "scope": "Channel-agnostic — one funnel so a member who books online then converts to clinic threads a single record.",
+      "stages": [
+        { "stage": "1. New Lead", "entry": "Lead capture submitted", "exit": "Qualified or Disqualified" },
+        { "stage": "2. Qualified", "entry": "VA + 18+ + consents pass", "exit": "Booked or 7 days idle" },
+        { "stage": "3. Booked", "entry": "Appointment created on any MWC calendar", "exit": "Intake complete or appt time passes" },
+        { "stage": "4. Intake Complete", "entry": "Intake submitted", "exit": "Visit completed or no-show" },
+        { "stage": "5. Visit Completed", "entry": "online_appt_outcome = completed_documented", "exit": "Member converted or 14 days idle" },
+        { "stage": "6. Membership Active", "entry": "Membership payment captured", "exit": "Member churns" },
+        { "stage": "7. Member Lost", "entry": "Tagged mwc-online-member-lost", "exit": "Re-engagement" }
+      ]
+    },
+    {
+      "name": "[MWC ONLINE] Visit Pipeline",
+      "scope": "Per-appointment ops roster for today; channel-aware via tag + field.",
+      "stages": [
+        { "stage": "Scheduled", "entry": "Appointment created", "exit": "T-1h reminder fires" },
+        { "stage": "Confirmed", "entry": "Member acknowledged a reminder OR completed intake", "exit": "Member joins (Doxy or clinic)" },
+        { "stage": "In Waiting Room / Checked In", "entry": "Doxy waiting-room event (online) or front-desk check-in (in-person)", "exit": "Provider sees member" },
+        { "stage": "In Visit", "entry": "Provider starts visit", "exit": "Provider marks complete" },
+        { "stage": "Awaiting Documentation", "entry": "Provider ends visit", "exit": "Provider sets online_appt_outcome" },
+        { "stage": "Documented", "entry": "online_appt_outcome = completed_documented", "exit": "Post-visit workflow finishes" }
+      ]
+    }
+  ],
+  "workflows": [
+    { "code": "00", "name": "Lead Qualification", "source": "doc", "trigger": "Lead capture submitted on any MWC Virginia landing page", "steps": ["Wait 2s for contact to settle", "Tag mwc-online-lead", "Set fields from form (UTMs, source, state, age, channel preference)", "Geo lookup: drive time to each clinic → set distance / nearest clinic / geo tier", "Apply geo-tier tag", "Gate: state = VA? No → tag disqualified-state → 07a → end", "Gate: age >= 18? No → tag disqualified-age → 07b → end", "Tag mwc-online-qualified, set member_status = qualified", "Apply channel tag from channel preference", "Advance Member Journey → Qualified", "Branch on channel preference → send Booking Welcome (online / city / undecided variant)", "Wait 1h, if not booked → 00.1 Booking Nudge"] },
+    { "code": "00.1", "name": "Booking Nudge", "source": "doc", "trigger": "Called by 00 when lead idle 1h after qualification", "steps": ["SMS Booking Nudge 1 (channel variant)", "Wait 23h; booked? stop", "Email Booking Nudge 2", "Wait 48h; booked? stop", "SMS Booking Nudge 3 (may offer to switch channels)", "Wait 5 days; booked? stop", "Tag mwc-online-lead-stale; end"] },
+    { "code": "01", "name": "Appointment Provisioning", "source": "doc", "trigger": "Appointment booked on any MWC calendar (3 clinics + Virginia Online)", "steps": ["Guard: qualified OR member-active? else stop (lets in-person rebuild handle non-online bookings)", "Identify calendar → set online_appt_channel", "Branch: online → look up provider Doxy URL → set appt + contact doxy fields; in_person → look up clinic address → set appt address field", "Set provider name", "Tag mwc-online-booked", "Advance Member Journey → Booked; member_status = booked", "Add to [MWC ONLINE] Visit Pipeline → Scheduled", "Branch → Booking Confirmation (online vs in-person variant)", "If intake required → 03 Intake Form Nudge", "Trigger 02 Pre-Visit Reminders"] },
+    { "code": "02", "name": "Pre-Visit Reminders", "source": "doc", "trigger": "Called by 01", "steps": ["T-72h Prep (online: tech check + intake; in-person: directions, parking, ID, what-to-bring)", "T-24h Reminder SMS + email", "T-1h Reminder SMS", "Online only: T-15min Join Now SMS w/ Doxy link", "In-person only: T-30min Leave Now SMS w/ directions", "T-0 online: Provider Ready SMS"] },
+    { "code": "03", "name": "Intake Form Nudge", "source": "doc", "trigger": "Called by 01 when intake required (Initial Visits)", "steps": ["Wait 5 min after booking → Intake Request email", "Wait 24h; complete? stop → Reminder 1 SMS", "T-48h; complete? stop → Reminder 2 email (concierge offer)", "T-24h; complete? stop → Final Reminder SMS (\"visit may be rescheduled\")", "T-2h; complete? stop → ops task: proceed or reschedule"] },
+    { "code": "04", "name": "Visit Completion", "source": "doc", "trigger": "online_appt_outcome = completed_documented", "steps": ["Tag mwc-online-completed", "Increment visits_count_total", "Branch: increment online vs in-person count", "Set last_visit_date / channel", "Advance Member Journey → Visit Completed", "Post-Visit Thank You email + SMS", "If eRx issued → \"Your Prescription Was Sent\" email", "If labs ordered → \"Your Lab Order Is Ready\" email", "If follow-up recommended → 06 Follow-Up Nudge", "Wait 3 days; if no follow-up booked → Schedule Your Follow-Up email"] },
+    { "code": "05", "name": "No-Show Recovery", "source": "doc", "trigger": "Appt start + 15 min AND outcome null or noshow", "steps": ["Tag mwc-online-noshow; set outcome = noshow if null", "Advance pipeline", "Wait 1h → Recovery 1 SMS (may offer to switch channels) + email", "Wait 24h; rebooked? stop → Recovery 2 SMS (priority-slot framing, not price)", "Wait 3 days; rebooked? stop → Recovery 3 email (FAQ)", "Wait 7 days; rebooked? stop → tag lead-stale; end"] },
+    { "code": "06", "name": "Follow-Up Scheduling Nudge", "source": "doc", "trigger": "Called by 04 OR when next_followup_due_date set", "steps": ["Wait until 14 days before due date", "\"Time to Schedule\" email w/ calendar link (preferred channel, offer to switch)", "Wait 3 days; booked? stop → Follow-Up Reminder SMS", "Continue until booked or due date + 7 days"] },
+    { "code": "07a", "name": "Disqualification — Out of State", "source": "doc", "trigger": "state != VA at qualification", "steps": ["\"Out of State\" email: explain VA-only at launch, capture future-state interest", "Tag mwc-online-future-state-{state}", "End"] },
+    { "code": "07b", "name": "Disqualification — Age", "source": "doc", "trigger": "age < 18 at qualification", "steps": ["\"Under 18\" email with general men's health resources", "No further outreach; end"] },
+    { "code": "08", "name": "Member Onboarding", "source": "doc", "trigger": "Membership payment captured (first time, any channel)", "steps": ["Tag mwc-online-member-active; set member_status + member_since", "Welcome to Membership email (first-90-days, can switch channels anytime)", "Welcome SMS", "Invite to the member portal (Client Portal + onboarding course)", "Schedule first lab reminder for 6 weeks out", "Add to monthly newsletter audience"] },
+    { "code": "09", "name": "Lab Reminder", "source": "doc", "trigger": "next_lab_due_date reaches T-14 days", "steps": ["Lab Reminder email w/ lab partner + scheduling link", "Wait 7 days; labs-completed tag? stop → Lab Reminder SMS", "Wait until due date; completed? stop → ops task: call member"] },
+    { "code": "10", "name": "Channel Switch Detected", "source": "doc", "trigger": "Member books on a channel different from last_visit_channel", "steps": ["Tag mwc-channel-switched", "Increment channel_switched_count", "Ops task: note the switch (retention insight)", "Continue normal provisioning (no member-facing change)"] },
+    { "code": "11", "name": "Membership Billing & Dunning", "source": "added", "trigger": "Subscription payment failed / card expiring", "steps": ["On failure: tag payment-failed-1, set appt_payment_status = failed", "Retry per Payments schedule; email + SMS \"update your card\" w/ portal billing link", "Escalate failed-2 → failed-3 over the dunning window", "On card-expiring: proactive update reminder", "If unrecovered: tag member-paused, ops task, pause protocol comms", "On recovery: clear failed tags, restore member-active"] },
+    { "code": "12", "name": "Reputation / Review Request", "source": "added", "trigger": "04 completion + positive NPS survey response", "steps": ["Send post-visit NPS survey (1 question)", "Branch: promoter (9-10) → review request to Google Business Profile via reputation tool", "Passive/detractor (<=8) → internal ops alert, no public ask, service-recovery outreach", "Tag review-requested; suppress re-asking for 90 days"] },
+    { "code": "13", "name": "Member Referral", "source": "added", "trigger": "Member clicks refer link OR ops sets referrer", "steps": ["Capture online_referrer_member_id on the new lead", "Tag mwc-src-referral on the referred contact", "Thank-you to the referring member (brand-voice, no incentive language unless a program exists)", "Route the referred lead into 00 Lead Qualification", "Ops insight: referral source for LTV analysis"] },
+    { "code": "14", "name": "Win-Back / Reactivation", "source": "added", "trigger": "member-lost OR lead-stale 60+ days", "steps": ["Segment by last channel + geo tier", "Email 1: \"Here when you're ready\" + what's new", "Wait 5 days; engaged? exit → SMS check-in (offer the easier channel)", "Wait 7 days; engaged? exit → final email w/ value reframe", "If re-engaged → 00/01; else tag dormant, drop cadence"] },
+    { "code": "15", "name": "Education / Onboarding Drip", "source": "added", "trigger": "member-active (parallel to 08)", "steps": ["Day 0: portal + onboarding course invite", "Week 1: what to expect on protocol", "Week 3: lab-prep + scheduling primer", "Week 6: progress check-in + symptom re-score survey", "Day 80: 90-day review + follow-up booking nudge", "All content links to Memberships/Courses modules"] },
+    { "code": "16", "name": "Annual / Protocol Cadence", "source": "added", "trigger": "member-active anniversary or protocol interval", "steps": ["Annual: comprehensive review + labs reminder", "Quarterly: follow-up due check vs next_followup_due_date", "Birthday: brand-voice greeting (no medical claim)", "Membership anniversary: tenure acknowledgment + retention touch"] }
+  ],
+  "messages": {
+    "sms": [
+      { "name": "Lead Welcome (Online)", "body": "MWC: Welcome {{first_name}}. Your Virginia Online appointment is one tap away. Pick a time: {{calendar_link}}\nReply STOP to opt out." },
+      { "name": "Lead Welcome (In-person)", "body": "MWC: Welcome {{first_name}}. Your visit at our {{clinic_name}} clinic is one tap away. Pick a time: {{calendar_link}}\nReply STOP to opt out." },
+      { "name": "Lead Welcome (Undecided)", "body": "MWC: Welcome {{first_name}}. We offer four ways to be seen in Virginia: three clinics and online. Pick what works: {{wizard_link}}\nReply STOP to opt out." },
+      { "name": "Booking Confirmation (Online)", "body": "MWC: Booked with {{provider_name}} on {{appt_date}} at {{appt_time}} ET. Join here at start time: {{doxy_url}}\nSave this link." },
+      { "name": "Booking Confirmation (In-person)", "body": "MWC: Booked with {{provider_name}} on {{appt_date}} at {{appt_time}} ET at {{clinic_address}}. Arrive 15 minutes early. Directions: {{directions_link}}" },
+      { "name": "T-24h Reminder (Online)", "body": "MWC: Your Virginia Online appointment is tomorrow at {{appt_time}} ET with {{provider_name}}. Join link: {{doxy_url}}" },
+      { "name": "T-24h Reminder (In-person)", "body": "MWC: Your appointment is tomorrow at {{appt_time}} ET at {{clinic_address}}. Plan for traffic, arrive 15 min early. Directions: {{directions_link}}" },
+      { "name": "T-1h Reminder (Online)", "body": "MWC: Your appointment starts in 1 hour at {{appt_time}} ET. Have your ID ready for the camera. Join: {{doxy_url}}" },
+      { "name": "T-30min Leave Now (In-person)", "body": "MWC: Your appointment at {{clinic_name}} starts in 30 min. Time to head out: {{directions_link}}" },
+      { "name": "T-15min Join Now (Online)", "body": "MWC: We're ready when you are. Tap to join: {{doxy_url}}" },
+      { "name": "Post-Visit Thank You (both)", "body": "MWC: Thanks for meeting with {{provider_name}} today. Your next steps and any prescriptions are coming to your email. Reply if you have questions." },
+      { "name": "No-Show Recovery 1 (Online)", "body": "MWC: We missed you at {{appt_time}}. Things come up. Rebook here: {{rebook_link}}. We also offer in-person at any of our 3 Virginia clinics if that's easier." },
+      { "name": "No-Show Recovery 1 (In-person)", "body": "MWC: We missed you at {{appt_time}}. Things come up. Rebook here: {{rebook_link}}. We also offer Virginia Online if a drive is hard to make work." },
+      { "name": "Intake Form Reminder 1 (both)", "body": "MWC: Heads up, your intake form takes about 10 minutes and is needed before your visit on {{appt_date}}: {{intake_link}}" },
+      { "name": "Lab Reminder (both)", "body": "MWC: Time for your labs. Best draw is in the morning, no food after midnight. Schedule at our lab partner: {{lab_link}}" },
+      { "name": "Payment Update (dunning)", "body": "MWC: We couldn't process your membership payment. Update your card to keep your protocol active: {{billing_link}}" }
+    ],
+    "email": [
+      { "name": "Lead Welcome (Online)", "subject": "Your Virginia Online appointment, one step closer" },
+      { "name": "Lead Welcome (In-person)", "subject": "Your visit at MWC {{clinic_name}}, one step closer" },
+      { "name": "Lead Welcome (Undecided)", "subject": "Four ways to be seen at MWC" },
+      { "name": "Booking Confirmation (Online)", "subject": "Confirmed: {{appt_date}} with {{provider_name}}" },
+      { "name": "Booking Confirmation (In-person)", "subject": "Confirmed: {{appt_date}} at MWC {{clinic_name}}" },
+      { "name": "T-72h Prep (Online)", "subject": "How to prepare for your Virginia Online visit" },
+      { "name": "T-72h Prep (In-person)", "subject": "How to prepare for your MWC visit" },
+      { "name": "T-24h Reminder", "subject": "Your MWC appointment is tomorrow" },
+      { "name": "Post-Visit", "subject": "Your next steps from today's visit" },
+      { "name": "No-Show Recovery", "subject": "Let's get you rescheduled" },
+      { "name": "Welcome to Membership", "subject": "Welcome to Men's Wellness Centers" },
+      { "name": "Out of State", "subject": "We'll let you know when MWC reaches your state" }
+    ],
+    "email_anatomy": [
+      "Header: MWC wordmark, Midnight Navy bar, \"Virginia\" tag",
+      "Salutation: \"Hi {{first_name}},\"",
+      "Lead paragraph (1 sentence)",
+      "Body (2-4 sentences for transactional)",
+      "Single primary CTA button (Accent Orange #E8670A, white text, Oswald)",
+      "Secondary link",
+      "Signature: provider name or \"The Men's Wellness Centers Care Team\"",
+      "Footer: physical address, manage-preferences link"
+    ],
+    "internal": [
+      "Provider: Member has not completed intake at T-2h",
+      "Ops: Payment failed",
+      "Provider: Visit ready to document (T+30min after start)",
+      "Provider: Outcome not set after 24h (escalation)",
+      "Ops: Channel switch detected (retention insight)"
+    ]
+  },
+  "trigger_links": [
+    { "link": "booking-link-online-paid", "dest": "Virginia Online calendar", "tag": "mwc-clicked-booking-online-paid" },
+    { "link": "booking-link-city1-paid", "dest": "City 1 calendar", "tag": "mwc-clicked-booking-city1-paid" },
+    { "link": "booking-link-city2-paid", "dest": "City 2 calendar", "tag": "mwc-clicked-booking-city2-paid" },
+    { "link": "booking-link-city3-paid", "dest": "City 3 calendar", "tag": "mwc-clicked-booking-city3-paid" },
+    { "link": "switch-to-in-person", "dest": "City selector page", "tag": "mwc-online-switch-considered" },
+    { "link": "switch-to-online", "dest": "Virginia Online calendar", "tag": "mwc-online-switch-considered" },
+    { "link": "intake-link", "dest": "Intake form", "tag": "mwc-clicked-intake" },
+    { "link": "reschedule-link", "dest": "Reschedule selector", "tag": "mwc-clicked-reschedule" },
+    { "link": "lab-link", "dest": "Lab partner page", "tag": "mwc-clicked-lab" },
+    { "link": "tech-check-link", "dest": "Doxy pre-call check", "tag": "mwc-clicked-techcheck" },
+    { "link": "directions-link", "dest": "Google Maps for the clinic", "tag": "mwc-clicked-directions" }
+  ],
+  "conversations": {
+    "channels": "SMS, Email, clicked-link tracking",
+    "auto_assign": "Care coordinator owns conversations until paid; then provider owns clinical, coordinator owns admin",
+    "business_hours": "8am-6pm ET Mon-Fri, 9am-12pm ET Sat",
+    "after_hours": "\"Thanks for messaging MWC. Our care team is offline. We respond within 1 business day. For medical emergencies, call 911.\"",
+    "clinical_rule": "GHL Conversations never contain clinical detail from staff side. Clinical content lives in Practice Fusion. Conversations = scheduling, billing, general questions, brief logistics only."
+  },
+  "phone": {
+    "pattern_a": "Existing main MWC number with IVR: 1 City1, 2 City2, 3 City3, 4 Virginia Online, 5 billing. Simpler, fewer numbers. Recommended for the test.",
+    "pattern_b": "Dedicated Virginia Online number on the statewide page, forwards to ops. Cleaner attribution, more A2P overhead. Use post-test if volume justifies."
+  },
+  "build_plan": {
+    "weeks": [
+      { "week": "Week 1", "rows": [
+        { "day": "Mon", "owner": "Eric", "task": "Send rebuild-team carve-out contract; get written acknowledgement" },
+        { "day": "Mon", "owner": "Eric/ops", "task": "Create [ONLINE] Editor role and assign" },
+        { "day": "Mon", "owner": "Eric/ops", "task": "Provision visit.menswellnesscenters.com (DNS + Vercel)" },
+        { "day": "Tue", "owner": "Eric", "task": "Bulk-create all online_* Contact + Appointment custom fields" },
+        { "day": "Tue", "owner": "Eric", "task": "Create all tags" },
+        { "day": "Tue", "owner": "Provider", "task": "Confirm 30-day block schedule (clinic vs online days)" },
+        { "day": "Wed", "owner": "Eric", "task": "Create 4 calendar groups + calendars; set availability per blocks" },
+        { "day": "Wed", "owner": "Eric", "task": "Configure lead capture form with geo logic" },
+        { "day": "Wed", "owner": "Designer/dev", "task": "Build 3 city pages + statewide telehealth page on Vercel" },
+        { "day": "Thu", "owner": "Eric", "task": "Build the 2 pipelines" },
+        { "day": "Thu", "owner": "Eric", "task": "Build comms templates (SMS + email, channel variants)" },
+        { "day": "Thu", "owner": "Eric", "task": "Set up trigger links + UTM conventions" },
+        { "day": "Fri", "owner": "Eric", "task": "Build workflows 00, 00.1, 01, 02, 03" },
+        { "day": "Fri", "owner": "Eric", "task": "End-to-end smoke test (fake VA contact, online channel)" }
+      ]},
+      { "week": "Week 2", "rows": [
+        { "day": "Mon", "owner": "Eric", "task": "Build workflows 04, 05, 06, 07, 08, 09, 10 (+ added 11-16 as scope allows)" },
+        { "day": "Mon", "owner": "Eric", "task": "Smoke test in-person channel for each city" },
+        { "day": "Tue", "owner": "Provider", "task": "Walk the full flow with a real test booking, both channels" },
+        { "day": "Tue", "owner": "Designer", "task": "Final ad creative per geo tier" },
+        { "day": "Wed", "owner": "Eric", "task": "Pilot one real VA member (online); document friction" },
+        { "day": "Wed", "owner": "Eric", "task": "Pilot one real VA member (in-person, any city); document friction" },
+        { "day": "Thu", "owner": "Eric", "task": "Adjust based on pilot feedback" },
+        { "day": "Fri", "owner": "Eric", "task": "Launch ad campaigns in market" }
+      ]}
+    ],
+    "estimate": "24 to 32 focused hours over two weeks.",
+    "checklist": [
+      "Rebuild-team carve-out contract acknowledged in writing",
+      "[ONLINE] Editor role created and assigned",
+      "visit.menswellnesscenters.com DNS resolves, SSL valid",
+      "All 30+ online_* Contact custom fields exist",
+      "All Appointment custom fields exist",
+      "All tags exist",
+      "4 calendar groups with correct availability per block schedule",
+      "Lead capture geo logic returns correct options for urban/suburban/rural ZIPs",
+      "Intake form complete and tested end-to-end",
+      "Telemedicine consent attorney-reviewed for Virginia",
+      "Financial responsibility form includes Good Faith Estimate",
+      "Both pipelines exist with stages defined",
+      "All workflows built with guard step as first action",
+      "All comms templates exist in both channel variants where applicable",
+      "Trigger links + UTM conventions configured",
+      "Phone routing pattern (A or B) decided and configured",
+      "Provider Doxy room URL stored as custom value",
+      "Doxy.me Clinic BAA executed",
+      "Provider VA license + DEA + VA controlled-substance license verified",
+      "EPCS activation underway/active in Practice Fusion",
+      "Provider walked through both online and in-person workflows",
+      "Member portal: Client Portal branded + onboarding course built (if portal in scope)",
+      "At least one fake-contact end-to-end test per channel passed",
+      "At least one real-pilot test per channel passed",
+      "Reporting dashboard wired (channel, geo tier, UTM, provider)"
+    ]
+  }
+}

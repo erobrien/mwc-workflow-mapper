@@ -115,9 +115,9 @@ function TagRow({ tag, ann, onChange, rowIdx, showDates, showSuggest }: {
   return (
     <tr className={`border-b border-border transition-colors hover:bg-muted/50 ${DISP_ROW[disp] || stripe}`}>
       {/* Tag name */}
-      <td className="px-3 py-2 align-middle">
+      <td className="px-3 py-2 align-middle min-w-[190px]">
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="font-mono text-xs font-medium text-foreground break-all">{tag.name}</span>
+          <span className="font-mono text-xs font-medium text-foreground break-words [overflow-wrap:anywhere]">{tag.name}</span>
           {tag.pattern && (
             <span className={`shrink-0 inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-semibold ${PATTERN_BADGE[tag.pattern] ?? "bg-muted text-muted-foreground"}`}>
               {tag.pattern}
@@ -132,7 +132,7 @@ function TagRow({ tag, ann, onChange, rowIdx, showDates, showSuggest }: {
         </div>
       </td>
       {/* Contacts */}
-      <td className="px-3 py-2 align-middle whitespace-nowrap text-right">
+      <td className="px-3 py-2 align-middle whitespace-nowrap text-right min-w-[96px]">
         <div className="flex items-center justify-end gap-2">
           <span className={`tabular-nums font-semibold ${tag.count === 0 ? "text-red-600 dark:text-red-400" : "text-foreground"}`}>{tag.count ?? "—"}</span>
           <span className={`shrink-0 inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-semibold ${tier.badge}`}>{tier.label}</span>
@@ -141,13 +141,13 @@ function TagRow({ tag, ann, onChange, rowIdx, showDates, showSuggest }: {
       {/* Dates */}
       {showDates && (
         <>
-          <td className="px-3 py-2 align-middle whitespace-nowrap text-xs text-muted-foreground">{fmtDate(tag.created_at)}</td>
-          <td className="px-3 py-2 align-middle whitespace-nowrap text-xs text-muted-foreground">{fmtDate(tag.updated_at)}</td>
+          <td className="px-3 py-2 align-middle whitespace-nowrap text-xs text-muted-foreground min-w-[80px]">{fmtDate(tag.created_at)}</td>
+          <td className="px-3 py-2 align-middle whitespace-nowrap text-xs text-muted-foreground min-w-[80px]">{fmtDate(tag.updated_at)}</td>
         </>
       )}
       {/* Suggested */}
       {showSuggest && (
-        <td className="px-3 py-2 align-middle">
+        <td className="px-3 py-2 align-middle min-w-[240px]">
           {sd ? (
             <div className="space-y-1">
               <div className="flex items-center gap-1.5">
@@ -166,24 +166,21 @@ function TagRow({ tag, ann, onChange, rowIdx, showDates, showSuggest }: {
         </td>
       )}
       {/* Disposition */}
-      <td className="px-3 py-2 align-middle">
+      <td className="px-3 py-2 align-middle min-w-[150px]">
         <div className="space-y-1">
-          <div className="flex items-center gap-1.5">
-            {disp && <span className={`shrink-0 inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-semibold ${DISP_BADGE[disp]}`}>{DISP_OPTIONS.find(o => o.value === disp)?.label}</span>}
-            <select className={sel} value={disp} onChange={(e) => set({ disposition: e.target.value as Disposition })}>
-              {DISP_OPTIONS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
-            </select>
-          </div>
+          <select className={`${sel} ${disp ? "font-semibold" : ""}`} value={disp} onChange={(e) => set({ disposition: e.target.value as Disposition })}>
+            {DISP_OPTIONS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
+          </select>
           {disp === "rename" && <input className={inp} placeholder="New name…" value={ann.newName} onChange={(e) => set({ newName: e.target.value })} />}
           {disp === "merge" && <input className={inp} placeholder="Merge into…" value={ann.mergeInto} onChange={(e) => set({ mergeInto: e.target.value })} />}
         </div>
       </td>
       {/* Description */}
-      <td className="px-3 py-2 align-middle">
+      <td className="px-3 py-2 align-middle min-w-[200px]">
         <input className={inp} placeholder="What does this tag mean / where is it set?" value={ann.description} onChange={(e) => set({ description: e.target.value })} />
       </td>
       {/* Notes */}
-      <td className="px-3 py-2 align-middle">
+      <td className="px-3 py-2 align-middle min-w-[140px]">
         <input className={inp} placeholder="Notes…" value={ann.notes} onChange={(e) => set({ notes: e.target.value })} />
       </td>
     </tr>
@@ -446,7 +443,7 @@ export default function Tags() {
       {/* Grid */}
       <div className="rounded-lg border border-border overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
-          <table className="w-full text-sm border-collapse">
+          <table className="w-full min-w-[1080px] text-sm border-collapse">
             <thead>
               <tr>
                 <th className={thCls}><div className={thBtn} onClick={() => handleSort("name")}>Tag name <SortIcon col="name" sortBy={sortBy} sortDir={sortDir} /></div></th>

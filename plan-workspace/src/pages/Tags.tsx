@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { PageShell } from "../components/Shell";
-import { Download, AlertTriangle, ChevronUp, ChevronDown, ChevronsUpDown, ChevronLeft, ChevronRight, Sparkles, Check } from "lucide-react";
+import { Download, AlertTriangle, ChevronUp, ChevronDown, ChevronsUpDown, ChevronLeft, ChevronRight, Sparkles, Check, Workflow } from "lucide-react";
 
 interface GhlTag {
   id: string; name: string; locationId: string; pattern: string;
@@ -8,9 +8,11 @@ interface GhlTag {
   created_at: string | null; updated_at: string | null;
   suggested_disposition?: string; suggested_description?: string;
   suggested_reason?: string; suggested_merge_into?: string;
+  workflow_refs?: string[]; workflow_ref_count?: number;
 }
 interface TagData {
   pulled_at: string; total: number; has_dates: boolean; has_suggestions?: boolean;
+  has_workflow_refs?: boolean; workflows_scanned?: number;
   total_contacts_tagged: number; tags: GhlTag[];
 }
 
@@ -121,6 +123,12 @@ function TagRow({ tag, ann, onChange, rowIdx, showDates, showSuggest }: {
               {tag.pattern}
             </span>
           )}
+          {(tag.workflow_ref_count ?? 0) > 0 && (
+            <span className="shrink-0 inline-flex items-center gap-0.5 rounded bg-violet-100 px-1.5 py-0.5 text-[10px] font-semibold text-violet-800 dark:bg-violet-900/60 dark:text-violet-200"
+              title={`Set by active workflow(s):\n• ${(tag.workflow_refs ?? []).join("\n• ")}`}>
+              <Workflow className="h-2.5 w-2.5" /> {tag.workflow_ref_count}
+            </span>
+          )}
         </div>
       </td>
       {/* Contacts */}
@@ -190,6 +198,7 @@ export default function Tags() {
   const [filterSuggest, setFilterSuggest] = useState("all");
   const [filterPattern, setFilterPattern] = useState("all");
   const [filterTier, setFilterTier] = useState("all");
+  const [filterWf, setFilterWf] = useState("all");
   const [sortBy, setSortBy] = useState<SortKey>("name");
   const [sortDir, setSortDir] = useState<SortDir>("asc");
   const [page, setPage] = useState(1);
@@ -241,8 +250,10 @@ export default function Tags() {
     if (filterSuggest !== "all") t = t.filter((x) => (x.suggested_disposition ?? "") === filterSuggest);
     if (filterPattern !== "all") t = t.filter((x) => (filterPattern === "" ? !x.pattern : x.pattern === filterPattern));
     if (filterTier !== "all") t = t.filter((x) => x.usage_tier === filterTier);
+    if (filterWf === "yes") t = t.filter((x) => (x.workflow_ref_count ?? 0) > 0);
+    else if (filterWf === "no") t = t.filter((x) => (x.workflow_ref_count ?? 0) === 0);
     return t;
-  }, [tags, search, filterDisp, filterSuggest, filterPattern, filterTier, annotations]);
+  }, [tags, search, filterDisp, filterSuggest, filterPattern, filterTier, filterWf, annotations]);
 
   const sorted = useMemo(() => {
     const tierRank: Record<string, number> = { unused: 0, rare: 1, low: 2, medium: 3, high: 4, unknown: 5 };
@@ -263,7 +274,7 @@ export default function Tags() {
   const safePage = Math.min(page, totalPages);
   const pageSlice = sorted.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
 
-  useEffect(() => { setPage(1); }, [search, filterDisp, filterSuggest, filterPattern, filterTier, sortBy, sortDir]);
+  useEffect(() => { setPage(1); }, [search, filterDisp, filterSuggest, filterPattern, filterTier, filterWf, sortBy, sortDir]);
 
   const stats = useMemo(() => {
     const c: Record<string, number> = { "": 0, keep: 0, rename: 0, merge: 0, delete: 0, skip: 0 };
@@ -288,11 +299,11 @@ export default function Tags() {
   const patterns = useMemo(() => Array.from(new Set(tags.map((t) => t.pattern).filter(Boolean))).sort(), [tags]);
 
   function exportCSV() {
-    const head = ["id", "name", "pattern", "contact_count", "usage_tier", "created_at", "updated_at", "suggested_disposition", "suggested_merge_into", "suggested_reason", "disposition", "new_name", "merge_into", "description", "notes"];
+    const head = ["id", "name", "pattern", "contact_count", "usage_tier", "created_at", "updated_at", "workflow_ref_count", "workflows_using", "suggested_disposition", "suggested_merge_into", "suggested_reason", "disposition", "new_name", "merge_into", "description", "notes"];
     const rows = [head];
     for (const t of tags) {
       const a = annotations[t.id] ?? EMPTY_ANN;
-      rows.push([t.id, t.name, t.pattern, String(t.count ?? ""), t.usage_tier, t.created_at ?? "", t.updated_at ?? "", t.suggested_disposition ?? "", t.suggested_merge_into ?? "", t.suggested_reason ?? "", a.disposition, a.newName, a.mergeInto, a.description, a.notes]);
+      rows.push([t.id, t.name, t.pattern, String(t.count ?? ""), t.usage_tier, t.created_at ?? "", t.updated_at ?? "", String(t.workflow_ref_count ?? 0), (t.workflow_refs ?? []).join(" | "), t.suggested_disposition ?? "", t.suggested_merge_into ?? "", t.suggested_reason ?? "", a.disposition, a.newName, a.mergeInto, a.description, a.notes]);
     }
     const csv = rows.map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(",")).join("\n");
     const blob = new Blob([csv], { type: "text/csv" });
@@ -418,9 +429,16 @@ export default function Tags() {
           <option value="all">All patterns</option><option value="">No pattern</option>
           {patterns.map((p) => <option key={p} value={p}>{p}</option>)}
         </select>
+        {data?.has_workflow_refs && (
+          <select className="h-8 rounded border border-input bg-background px-2 text-sm text-foreground outline-none focus:border-ring" value={filterWf} onChange={(e) => { setFilterWf(e.target.value); setPage(1); }}>
+            <option value="all">Any workflow use</option>
+            <option value="yes">Set by a workflow</option>
+            <option value="no">Not set by any workflow</option>
+          </select>
+        )}
         <span className="text-sm font-medium text-muted-foreground">{filtered.length} matching</span>
-        {(search || filterDisp !== "all" || filterSuggest !== "all" || filterPattern !== "all" || filterTier !== "all") && (
-          <button onClick={() => { setSearch(""); setFilterDisp("all"); setFilterSuggest("all"); setFilterPattern("all"); setFilterTier("all"); setPage(1); }}
+        {(search || filterDisp !== "all" || filterSuggest !== "all" || filterPattern !== "all" || filterTier !== "all" || filterWf !== "all") && (
+          <button onClick={() => { setSearch(""); setFilterDisp("all"); setFilterSuggest("all"); setFilterPattern("all"); setFilterTier("all"); setFilterWf("all"); setPage(1); }}
             className="rounded border border-input px-2 py-1 text-xs text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-colors">Clear filters</button>
         )}
       </div>
@@ -479,7 +497,9 @@ export default function Tags() {
       )}
 
       <p className="text-xs text-muted-foreground">
-        Contact counts are exact; Created/Updated from GHL. {showSuggest ? "AI suggestions are advisory (name + count + pattern reasoning, risky deletes double-checked) — your “My disposition” column is the source of truth." : ""} Annotations auto-save to your browser; Export CSV for handoff. No PHI — tag names and counts only.
+        Contact counts are exact; Created/Updated from GHL. {showSuggest ? "AI suggestions are advisory (name + count + pattern + workflow-reference reasoning, risky deletes double-checked) — your “My disposition” column is the source of truth." : ""}
+        {data?.has_workflow_refs ? ` The ⚙ badge marks tags set by an active workflow (scanned ${data.workflows_scanned ?? 0} active workflows; a tag with no badge may still be set by an inactive/unscanned one). Tags set by a workflow are never auto-suggested for deletion even at 0 contacts.` : ""}
+        {" "}Annotations auto-save to your browser; Export CSV for handoff. No PHI — tag names and counts only.
       </p>
     </PageShell>
   );

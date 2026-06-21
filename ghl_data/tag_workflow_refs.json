@@ -1,0 +1,715 @@
+{
+  "generated_for": "Ghstz8eIsHWLeXek47dk",
+  "workflow_count": 22,
+  "tags_referenced": 49,
+  "refs": {
+    "funnel_entry_home_page": [
+      {
+        "workflow": "01A. Home Form and Source with Click ID",
+        "workflow_id": "063460e9-68d9-458d-85e0-cb45df4952a2",
+        "action": "add"
+      }
+    ],
+    "lead_source_meta": [
+      {
+        "workflow": "01A. Home Form and Source with Click ID",
+        "workflow_id": "063460e9-68d9-458d-85e0-cb45df4952a2",
+        "action": "add"
+      },
+      {
+        "workflow": "01B. Richmond Form and Source with Click ID",
+        "workflow_id": "00265495-fb41-4fd8-b37d-a161583d3250",
+        "action": "add"
+      },
+      {
+        "workflow": "01C. VA Beach Form and Source with Click ID",
+        "workflow_id": "d85f5e6d-e6d3-42d4-a673-ed444673c546",
+        "action": "add"
+      },
+      {
+        "workflow": "01D. NPN Form and Source with Click ID",
+        "workflow_id": "043af881-5ba4-4097-9a1b-f5b0b24759ac",
+        "action": "add"
+      },
+      {
+        "workflow": "01E. Consultation Form and Source with Click ID",
+        "workflow_id": "b401f884-66d4-4e37-94d5-08be7041a137",
+        "action": "add"
+      }
+    ],
+    "paid_click": [
+      {
+        "workflow": "01A. Home Form and Source with Click ID",
+        "workflow_id": "063460e9-68d9-458d-85e0-cb45df4952a2",
+        "action": "add"
+      },
+      {
+        "workflow": "01B. Richmond Form and Source with Click ID",
+        "workflow_id": "00265495-fb41-4fd8-b37d-a161583d3250",
+        "action": "add"
+      },
+      {
+        "workflow": "01C. VA Beach Form and Source with Click ID",
+        "workflow_id": "d85f5e6d-e6d3-42d4-a673-ed444673c546",
+        "action": "add"
+      },
+      {
+        "workflow": "01D. NPN Form and Source with Click ID",
+        "workflow_id": "043af881-5ba4-4097-9a1b-f5b0b24759ac",
+        "action": "add"
+      },
+      {
+        "workflow": "01E. Consultation Form and Source with Click ID",
+        "workflow_id": "b401f884-66d4-4e37-94d5-08be7041a137",
+        "action": "add"
+      }
+    ],
+    "location_npn": [
+      {
+        "workflow": "01A. Home Form and Source with Click ID",
+        "workflow_id": "063460e9-68d9-458d-85e0-cb45df4952a2",
+        "action": "add"
+      },
+      {
+        "workflow": "01D. NPN Form and Source with Click ID",
+        "workflow_id": "043af881-5ba4-4097-9a1b-f5b0b24759ac",
+        "action": "add"
+      },
+      {
+        "workflow": "01E. Consultation Form and Source with Click ID",
+        "workflow_id": "b401f884-66d4-4e37-94d5-08be7041a137",
+        "action": "add"
+      },
+      {
+        "workflow": "03. Appointment Booked",
+        "workflow_id": "7ac17ae7-c894-4c6e-be0e-7b77057c7231",
+        "action": "add"
+      },
+      {
+        "workflow": "03A. Unconfirmed Appointment",
+        "workflow_id": "010e8e60-926d-4d43-be33-4c2619c92662",
+        "action": "add"
+      },
+      {
+        "workflow": "03b. Unconfirmed Appointment \u2013 Confirmation Required",
+        "workflow_id": "b9135812-c31a-41fe-b22f-dd47b2623697",
+        "action": "add"
+      }
+    ],
+    "location_rva": [
+      {
+        "workflow": "01A. Home Form and Source with Click ID",
+        "workflow_id": "063460e9-68d9-458d-85e0-cb45df4952a2",
+        "action": "add"
+      },
+      {
+        "workflow": "01B. Richmond Form and Source with Click ID",
+        "workflow_id": "00265495-fb41-4fd8-b37d-a161583d3250",
+        "action": "add"
+      },
+      {
+        "workflow": "01E. Consultation Form and Source with Click ID",
+        "workflow_id": "b401f884-66d4-4e37-94d5-08be7041a137",
+        "action": "add"
+      },
+      {
+        "workflow": "03. Appointment Booked",
+        "workflow_id": "7ac17ae7-c894-4c6e-be0e-7b77057c7231",
+        "action": "add"
+      },
+      {
+        "workflow": "03A. Unconfirmed Appointment",
+        "workflow_id": "010e8e60-926d-4d43-be33-4c2619c92662",
+        "action": "add"
+      },
+      {
+        "workflow": "03b. Unconfirmed Appointment \u2013 Confirmation Required",
+        "workflow_id": "b9135812-c31a-41fe-b22f-dd47b2623697",
+        "action": "add"
+      }
+    ],
+    "location_vba": [
+      {
+        "workflow": "01A. Home Form and Source with Click ID",
+        "workflow_id": "063460e9-68d9-458d-85e0-cb45df4952a2",
+        "action": "add"
+      },
+      {
+        "workflow": "01C. VA Beach Form and Source with Click ID",
+        "workflow_id": "d85f5e6d-e6d3-42d4-a673-ed444673c546",
+        "action": "add"
+      },
+      {
+        "workflow": "01E. Consultation Form and Source with Click ID",
+        "workflow_id": "b401f884-66d4-4e37-94d5-08be7041a137",
+        "action": "add"
+      },
+      {
+        "workflow": "03. Appointment Booked",
+        "workflow_id": "7ac17ae7-c894-4c6e-be0e-7b77057c7231",
+        "action": "add"
+      },
+      {
+        "workflow": "03A. Unconfirmed Appointment",
+        "workflow_id": "010e8e60-926d-4d43-be33-4c2619c92662",
+        "action": "add"
+      },
+      {
+        "workflow": "03b. Unconfirmed Appointment \u2013 Confirmation Required",
+        "workflow_id": "b9135812-c31a-41fe-b22f-dd47b2623697",
+        "action": "add"
+      }
+    ],
+    "location_virtual": [
+      {
+        "workflow": "01A. Home Form and Source with Click ID",
+        "workflow_id": "063460e9-68d9-458d-85e0-cb45df4952a2",
+        "action": "add"
+      },
+      {
+        "workflow": "01E. Consultation Form and Source with Click ID",
+        "workflow_id": "b401f884-66d4-4e37-94d5-08be7041a137",
+        "action": "add"
+      }
+    ],
+    "lead_source_google": [
+      {
+        "workflow": "01A. Home Form and Source with Click ID",
+        "workflow_id": "063460e9-68d9-458d-85e0-cb45df4952a2",
+        "action": "add"
+      },
+      {
+        "workflow": "01B. Richmond Form and Source with Click ID",
+        "workflow_id": "00265495-fb41-4fd8-b37d-a161583d3250",
+        "action": "add"
+      },
+      {
+        "workflow": "01C. VA Beach Form and Source with Click ID",
+        "workflow_id": "d85f5e6d-e6d3-42d4-a673-ed444673c546",
+        "action": "add"
+      },
+      {
+        "workflow": "01D. NPN Form and Source with Click ID",
+        "workflow_id": "043af881-5ba4-4097-9a1b-f5b0b24759ac",
+        "action": "add"
+      },
+      {
+        "workflow": "01E. Consultation Form and Source with Click ID",
+        "workflow_id": "b401f884-66d4-4e37-94d5-08be7041a137",
+        "action": "add"
+      }
+    ],
+    "lead_source_bing": [
+      {
+        "workflow": "01A. Home Form and Source with Click ID",
+        "workflow_id": "063460e9-68d9-458d-85e0-cb45df4952a2",
+        "action": "add"
+      },
+      {
+        "workflow": "01B. Richmond Form and Source with Click ID",
+        "workflow_id": "00265495-fb41-4fd8-b37d-a161583d3250",
+        "action": "add"
+      },
+      {
+        "workflow": "01C. VA Beach Form and Source with Click ID",
+        "workflow_id": "d85f5e6d-e6d3-42d4-a673-ed444673c546",
+        "action": "add"
+      },
+      {
+        "workflow": "01D. NPN Form and Source with Click ID",
+        "workflow_id": "043af881-5ba4-4097-9a1b-f5b0b24759ac",
+        "action": "add"
+      },
+      {
+        "workflow": "01E. Consultation Form and Source with Click ID",
+        "workflow_id": "b401f884-66d4-4e37-94d5-08be7041a137",
+        "action": "add"
+      }
+    ],
+    "lead_source_organic": [
+      {
+        "workflow": "01A. Home Form and Source with Click ID",
+        "workflow_id": "063460e9-68d9-458d-85e0-cb45df4952a2",
+        "action": "add"
+      },
+      {
+        "workflow": "01B. Richmond Form and Source with Click ID",
+        "workflow_id": "00265495-fb41-4fd8-b37d-a161583d3250",
+        "action": "add"
+      },
+      {
+        "workflow": "01C. VA Beach Form and Source with Click ID",
+        "workflow_id": "d85f5e6d-e6d3-42d4-a673-ed444673c546",
+        "action": "add"
+      },
+      {
+        "workflow": "01D. NPN Form and Source with Click ID",
+        "workflow_id": "043af881-5ba4-4097-9a1b-f5b0b24759ac",
+        "action": "add"
+      },
+      {
+        "workflow": "01E. Consultation Form and Source with Click ID",
+        "workflow_id": "b401f884-66d4-4e37-94d5-08be7041a137",
+        "action": "add"
+      }
+    ],
+    "lead_source_affiliate": [
+      {
+        "workflow": "01A. Home Form and Source with Click ID",
+        "workflow_id": "063460e9-68d9-458d-85e0-cb45df4952a2",
+        "action": "add"
+      },
+      {
+        "workflow": "01B. Richmond Form and Source with Click ID",
+        "workflow_id": "00265495-fb41-4fd8-b37d-a161583d3250",
+        "action": "add"
+      },
+      {
+        "workflow": "01C. VA Beach Form and Source with Click ID",
+        "workflow_id": "d85f5e6d-e6d3-42d4-a673-ed444673c546",
+        "action": "add"
+      },
+      {
+        "workflow": "01D. NPN Form and Source with Click ID",
+        "workflow_id": "043af881-5ba4-4097-9a1b-f5b0b24759ac",
+        "action": "add"
+      },
+      {
+        "workflow": "01E. Consultation Form and Source with Click ID",
+        "workflow_id": "b401f884-66d4-4e37-94d5-08be7041a137",
+        "action": "add"
+      }
+    ],
+    "lead_source_referral": [
+      {
+        "workflow": "01A. Home Form and Source with Click ID",
+        "workflow_id": "063460e9-68d9-458d-85e0-cb45df4952a2",
+        "action": "add"
+      },
+      {
+        "workflow": "01B. Richmond Form and Source with Click ID",
+        "workflow_id": "00265495-fb41-4fd8-b37d-a161583d3250",
+        "action": "add"
+      },
+      {
+        "workflow": "01C. VA Beach Form and Source with Click ID",
+        "workflow_id": "d85f5e6d-e6d3-42d4-a673-ed444673c546",
+        "action": "add"
+      },
+      {
+        "workflow": "01D. NPN Form and Source with Click ID",
+        "workflow_id": "043af881-5ba4-4097-9a1b-f5b0b24759ac",
+        "action": "add"
+      },
+      {
+        "workflow": "01E. Consultation Form and Source with Click ID",
+        "workflow_id": "b401f884-66d4-4e37-94d5-08be7041a137",
+        "action": "add"
+      }
+    ],
+    "lead_source_radio_tv": [
+      {
+        "workflow": "01A. Home Form and Source with Click ID",
+        "workflow_id": "063460e9-68d9-458d-85e0-cb45df4952a2",
+        "action": "add"
+      },
+      {
+        "workflow": "01B. Richmond Form and Source with Click ID",
+        "workflow_id": "00265495-fb41-4fd8-b37d-a161583d3250",
+        "action": "add"
+      },
+      {
+        "workflow": "01C. VA Beach Form and Source with Click ID",
+        "workflow_id": "d85f5e6d-e6d3-42d4-a673-ed444673c546",
+        "action": "add"
+      },
+      {
+        "workflow": "01D. NPN Form and Source with Click ID",
+        "workflow_id": "043af881-5ba4-4097-9a1b-f5b0b24759ac",
+        "action": "add"
+      },
+      {
+        "workflow": "01E. Consultation Form and Source with Click ID",
+        "workflow_id": "b401f884-66d4-4e37-94d5-08be7041a137",
+        "action": "add"
+      }
+    ],
+    "lead_source_direct": [
+      {
+        "workflow": "01A. Home Form and Source with Click ID",
+        "workflow_id": "063460e9-68d9-458d-85e0-cb45df4952a2",
+        "action": "add"
+      },
+      {
+        "workflow": "01B. Richmond Form and Source with Click ID",
+        "workflow_id": "00265495-fb41-4fd8-b37d-a161583d3250",
+        "action": "add"
+      },
+      {
+        "workflow": "01C. VA Beach Form and Source with Click ID",
+        "workflow_id": "d85f5e6d-e6d3-42d4-a673-ed444673c546",
+        "action": "add"
+      },
+      {
+        "workflow": "01D. NPN Form and Source with Click ID",
+        "workflow_id": "043af881-5ba4-4097-9a1b-f5b0b24759ac",
+        "action": "add"
+      },
+      {
+        "workflow": "01E. Consultation Form and Source with Click ID",
+        "workflow_id": "b401f884-66d4-4e37-94d5-08be7041a137",
+        "action": "add"
+      }
+    ],
+    "funnel_entry_richmond": [
+      {
+        "workflow": "01B. Richmond Form and Source with Click ID",
+        "workflow_id": "00265495-fb41-4fd8-b37d-a161583d3250",
+        "action": "add"
+      }
+    ],
+    "funnel_entry_virginia_beach": [
+      {
+        "workflow": "01C. VA Beach Form and Source with Click ID",
+        "workflow_id": "d85f5e6d-e6d3-42d4-a673-ed444673c546",
+        "action": "add"
+      }
+    ],
+    "funnel_entry_newport_news": [
+      {
+        "workflow": "01D. NPN Form and Source with Click ID",
+        "workflow_id": "043af881-5ba4-4097-9a1b-f5b0b24759ac",
+        "action": "add"
+      }
+    ],
+    "funnel_entry_consultation_page": [
+      {
+        "workflow": "01E. Consultation Form and Source with Click ID",
+        "workflow_id": "b401f884-66d4-4e37-94d5-08be7041a137",
+        "action": "add"
+      }
+    ],
+    "funnel_qualified": [
+      {
+        "workflow": "02. Qualification Form",
+        "workflow_id": "dc87597e-33ff-40b2-a2e4-f54cac759704",
+        "action": "add"
+      }
+    ],
+    "loc_richmond": [
+      {
+        "workflow": "02. Qualification Form",
+        "workflow_id": "dc87597e-33ff-40b2-a2e4-f54cac759704",
+        "action": "add"
+      }
+    ],
+    "funnel_abandon_p2": [
+      {
+        "workflow": "02. Qualification Form",
+        "workflow_id": "dc87597e-33ff-40b2-a2e4-f54cac759704",
+        "action": "add"
+      }
+    ],
+    "nobook_paid": [
+      {
+        "workflow": "02. Qualification Form",
+        "workflow_id": "dc87597e-33ff-40b2-a2e4-f54cac759704",
+        "action": "add"
+      }
+    ],
+    "loc_newport": [
+      {
+        "workflow": "02. Qualification Form",
+        "workflow_id": "dc87597e-33ff-40b2-a2e4-f54cac759704",
+        "action": "add"
+      }
+    ],
+    "loc_vabeach": [
+      {
+        "workflow": "02. Qualification Form",
+        "workflow_id": "dc87597e-33ff-40b2-a2e4-f54cac759704",
+        "action": "add"
+      }
+    ],
+    "funnel_consultation_booked": [
+      {
+        "workflow": "03. Appointment Booked",
+        "workflow_id": "7ac17ae7-c894-4c6e-be0e-7b77057c7231",
+        "action": "add"
+      },
+      {
+        "workflow": "03A. Unconfirmed Appointment",
+        "workflow_id": "010e8e60-926d-4d43-be33-4c2619c92662",
+        "action": "add"
+      },
+      {
+        "workflow": "03b. Unconfirmed Appointment \u2013 Confirmation Required",
+        "workflow_id": "b9135812-c31a-41fe-b22f-dd47b2623697",
+        "action": "add"
+      }
+    ],
+    "appt_confirmed": [
+      {
+        "workflow": "03. Appointment Booked",
+        "workflow_id": "7ac17ae7-c894-4c6e-be0e-7b77057c7231",
+        "action": "add"
+      }
+    ],
+    "unconfirmed_appt": [
+      {
+        "workflow": "03. Appointment Booked",
+        "workflow_id": "7ac17ae7-c894-4c6e-be0e-7b77057c7231",
+        "action": "remove"
+      },
+      {
+        "workflow": "03b. Unconfirmed Appointment \u2013 Confirmation Required",
+        "workflow_id": "b9135812-c31a-41fe-b22f-dd47b2623697",
+        "action": "add"
+      },
+      {
+        "workflow": "03b. Unconfirmed Appointment \u2013 Confirmation Required",
+        "workflow_id": "b9135812-c31a-41fe-b22f-dd47b2623697",
+        "action": "remove"
+      },
+      {
+        "workflow": "03c. Unconfirmed Reply Handler",
+        "workflow_id": "9ae9b45c-1f79-46cc-9ef1-eb61a9bcbdd8",
+        "action": "remove"
+      }
+    ],
+    "newport appt": [
+      {
+        "workflow": "03. Appointment Booked",
+        "workflow_id": "7ac17ae7-c894-4c6e-be0e-7b77057c7231",
+        "action": "add"
+      },
+      {
+        "workflow": "03A. Unconfirmed Appointment",
+        "workflow_id": "010e8e60-926d-4d43-be33-4c2619c92662",
+        "action": "add"
+      },
+      {
+        "workflow": "03b. Unconfirmed Appointment \u2013 Confirmation Required",
+        "workflow_id": "b9135812-c31a-41fe-b22f-dd47b2623697",
+        "action": "add"
+      }
+    ],
+    "va beach appt": [
+      {
+        "workflow": "03. Appointment Booked",
+        "workflow_id": "7ac17ae7-c894-4c6e-be0e-7b77057c7231",
+        "action": "add"
+      },
+      {
+        "workflow": "03A. Unconfirmed Appointment",
+        "workflow_id": "010e8e60-926d-4d43-be33-4c2619c92662",
+        "action": "add"
+      },
+      {
+        "workflow": "03b. Unconfirmed Appointment \u2013 Confirmation Required",
+        "workflow_id": "b9135812-c31a-41fe-b22f-dd47b2623697",
+        "action": "add"
+      }
+    ],
+    "richmond appt": [
+      {
+        "workflow": "03. Appointment Booked",
+        "workflow_id": "7ac17ae7-c894-4c6e-be0e-7b77057c7231",
+        "action": "add"
+      },
+      {
+        "workflow": "03A. Unconfirmed Appointment",
+        "workflow_id": "010e8e60-926d-4d43-be33-4c2619c92662",
+        "action": "add"
+      },
+      {
+        "workflow": "03b. Unconfirmed Appointment \u2013 Confirmation Required",
+        "workflow_id": "b9135812-c31a-41fe-b22f-dd47b2623697",
+        "action": "add"
+      }
+    ],
+    "appt_booked": [
+      {
+        "workflow": "03A. Unconfirmed Appointment",
+        "workflow_id": "010e8e60-926d-4d43-be33-4c2619c92662",
+        "action": "add"
+      },
+      {
+        "workflow": "03C. Appointment Booked+JJFunnel Page 4 \u2014 Booking Confirmation",
+        "workflow_id": "956f9032-359e-4dc9-bd4a-551f64d24639",
+        "action": "add"
+      }
+    ],
+    "booked_same_day": [
+      {
+        "workflow": "03A. Unconfirmed Appointment",
+        "workflow_id": "010e8e60-926d-4d43-be33-4c2619c92662",
+        "action": "add"
+      },
+      {
+        "workflow": "03C. Appointment Booked+JJFunnel Page 4 \u2014 Booking Confirmation",
+        "workflow_id": "956f9032-359e-4dc9-bd4a-551f64d24639",
+        "action": "add"
+      }
+    ],
+    "nurture_hot": [
+      {
+        "workflow": "03C. Appointment Booked+JJFunnel Page 4 \u2014 Booking Confirmation",
+        "workflow_id": "956f9032-359e-4dc9-bd4a-551f64d24639",
+        "action": "remove"
+      }
+    ],
+    "nurture_warm": [
+      {
+        "workflow": "03C. Appointment Booked+JJFunnel Page 4 \u2014 Booking Confirmation",
+        "workflow_id": "956f9032-359e-4dc9-bd4a-551f64d24639",
+        "action": "remove"
+      }
+    ],
+    "nurture_cold": [
+      {
+        "workflow": "03C. Appointment Booked+JJFunnel Page 4 \u2014 Booking Confirmation",
+        "workflow_id": "956f9032-359e-4dc9-bd4a-551f64d24639",
+        "action": "remove"
+      }
+    ],
+    "funnel_appointment_confirmed": [
+      {
+        "workflow": "03C. Appointment Booked+JJFunnel Page 4 \u2014 Booking Confirmation",
+        "workflow_id": "956f9032-359e-4dc9-bd4a-551f64d24639",
+        "action": "add"
+      }
+    ],
+    "virginia_beach_booked": [
+      {
+        "workflow": "03C. Appointment Booked+JJFunnel Page 4 \u2014 Booking Confirmation",
+        "workflow_id": "956f9032-359e-4dc9-bd4a-551f64d24639",
+        "action": "add"
+      }
+    ],
+    "newport_beach_booked": [
+      {
+        "workflow": "03C. Appointment Booked+JJFunnel Page 4 \u2014 Booking Confirmation",
+        "workflow_id": "956f9032-359e-4dc9-bd4a-551f64d24639",
+        "action": "add"
+      }
+    ],
+    "richmond_beach_booked": [
+      {
+        "workflow": "03C. Appointment Booked+JJFunnel Page 4 \u2014 Booking Confirmation",
+        "workflow_id": "956f9032-359e-4dc9-bd4a-551f64d24639",
+        "action": "add"
+      }
+    ],
+    "auto_noshow_unconfirmed": [
+      {
+        "workflow": "03b. Unconfirmed Appointment \u2013 Confirmation Required",
+        "workflow_id": "b9135812-c31a-41fe-b22f-dd47b2623697",
+        "action": "add"
+      }
+    ],
+    "intake_step_1": [
+      {
+        "workflow": "04. Intake Form Response+JJMWC Funnel Page 5  Medical Intake (7-Step Survey)",
+        "workflow_id": "8befd554-6f9b-42ad-b228-58d8013df67c",
+        "action": "add"
+      },
+      {
+        "workflow": "04. Intake Form Response+JJMWC Funnel Page 5  Medical Intake (7-Step Survey)",
+        "workflow_id": "8befd554-6f9b-42ad-b228-58d8013df67c",
+        "action": "remove"
+      }
+    ],
+    "intake_step_2": [
+      {
+        "workflow": "04. Intake Form Response+JJMWC Funnel Page 5  Medical Intake (7-Step Survey)",
+        "workflow_id": "8befd554-6f9b-42ad-b228-58d8013df67c",
+        "action": "add"
+      },
+      {
+        "workflow": "04. Intake Form Response+JJMWC Funnel Page 5  Medical Intake (7-Step Survey)",
+        "workflow_id": "8befd554-6f9b-42ad-b228-58d8013df67c",
+        "action": "remove"
+      }
+    ],
+    "intake_partial": [
+      {
+        "workflow": "04. Intake Form Response+JJMWC Funnel Page 5  Medical Intake (7-Step Survey)",
+        "workflow_id": "8befd554-6f9b-42ad-b228-58d8013df67c",
+        "action": "remove"
+      },
+      {
+        "workflow": "04. Intake Form Response+JJMWC Funnel Page 5  Medical Intake (7-Step Survey)",
+        "workflow_id": "8befd554-6f9b-42ad-b228-58d8013df67c",
+        "action": "add"
+      }
+    ],
+    "intake_step_3": [
+      {
+        "workflow": "04. Intake Form Response+JJMWC Funnel Page 5  Medical Intake (7-Step Survey)",
+        "workflow_id": "8befd554-6f9b-42ad-b228-58d8013df67c",
+        "action": "add"
+      },
+      {
+        "workflow": "04. Intake Form Response+JJMWC Funnel Page 5  Medical Intake (7-Step Survey)",
+        "workflow_id": "8befd554-6f9b-42ad-b228-58d8013df67c",
+        "action": "remove"
+      }
+    ],
+    "intake_step_4": [
+      {
+        "workflow": "04. Intake Form Response+JJMWC Funnel Page 5  Medical Intake (7-Step Survey)",
+        "workflow_id": "8befd554-6f9b-42ad-b228-58d8013df67c",
+        "action": "add"
+      },
+      {
+        "workflow": "04. Intake Form Response+JJMWC Funnel Page 5  Medical Intake (7-Step Survey)",
+        "workflow_id": "8befd554-6f9b-42ad-b228-58d8013df67c",
+        "action": "remove"
+      }
+    ],
+    "intake_step_5": [
+      {
+        "workflow": "04. Intake Form Response+JJMWC Funnel Page 5  Medical Intake (7-Step Survey)",
+        "workflow_id": "8befd554-6f9b-42ad-b228-58d8013df67c",
+        "action": "add"
+      },
+      {
+        "workflow": "04. Intake Form Response+JJMWC Funnel Page 5  Medical Intake (7-Step Survey)",
+        "workflow_id": "8befd554-6f9b-42ad-b228-58d8013df67c",
+        "action": "remove"
+      }
+    ],
+    "intake_step_6": [
+      {
+        "workflow": "04. Intake Form Response+JJMWC Funnel Page 5  Medical Intake (7-Step Survey)",
+        "workflow_id": "8befd554-6f9b-42ad-b228-58d8013df67c",
+        "action": "add"
+      },
+      {
+        "workflow": "04. Intake Form Response+JJMWC Funnel Page 5  Medical Intake (7-Step Survey)",
+        "workflow_id": "8befd554-6f9b-42ad-b228-58d8013df67c",
+        "action": "remove"
+      }
+    ],
+    "intake_step_7": [
+      {
+        "workflow": "04. Intake Form Response+JJMWC Funnel Page 5  Medical Intake (7-Step Survey)",
+        "workflow_id": "8befd554-6f9b-42ad-b228-58d8013df67c",
+        "action": "add"
+      },
+      {
+        "workflow": "04. Intake Form Response+JJMWC Funnel Page 5  Medical Intake (7-Step Survey)",
+        "workflow_id": "8befd554-6f9b-42ad-b228-58d8013df67c",
+        "action": "remove"
+      }
+    ],
+    "intake_complete": [
+      {
+        "workflow": "04. Intake Form Response+JJMWC Funnel Page 5  Medical Intake (7-Step Survey)",
+        "workflow_id": "8befd554-6f9b-42ad-b228-58d8013df67c",
+        "action": "add"
+      }
+    ]
+  }
+}

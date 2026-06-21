@@ -13,6 +13,10 @@ monitor/reports/
 audit/daily/
 audit/snapshots/
 
+# raw workflow builder captures (3MB+, regenerable via capture_workflows.py;
+# the derived tag_workflow_refs.json is committed instead)
+ghl_data/workflow_defs/
+
 # vercel local link metadata
 .vercel/
 diff-site/.vercel/

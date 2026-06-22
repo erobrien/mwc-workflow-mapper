@@ -1,6 +1,6 @@
 # Revenue-Integrity Monitor — 1-day snapshot
 
-_2026-06-21T12:46:06+00:00 · location Ghstz8eIsHWLeXek47dk · **read-only**, GET-only collector_
+_2026-06-22T13:57:47+00:00 · location Ghstz8eIsHWLeXek47dk · **read-only**, GET-only collector_
 
 ## ✅ All metrics within tolerance
 
@@ -8,20 +8,20 @@ _2026-06-21T12:46:06+00:00 · location Ghstz8eIsHWLeXek47dk · **read-only**, GE
 
 | Metric | Current | Baseline | Drift |
 |---|---|---|---|
-| New opportunities | **74** | 89 |  🔴 **-16.9%** vs baseline |
-| Appointments booked | **41** | 41 |  (+0.0% vs baseline) |
-| Show rate (showed / showed+noshow) | **100.0%** | 66.7% |  (+33.3 pts) |
-| Opportunities Won | **6** | 8 |  🔴 **-25.0%** vs baseline |
-| Won revenue | **26000.0 $** | 18298.0 $ |  🔴 **+42.1%** vs baseline |
-| Won-with-$0 (data-quality) | **1** | 0 |  🔴 **1 won opps with $0** (A&D regression guard) |
+| New opportunities | **43** | 89 |  🔴 **-51.7%** vs baseline |
+| Appointments booked | **26** | 41 |  🔴 **-36.6%** vs baseline |
+| Show rate (showed / showed+noshow) | **None%** | 66.7% | |
+| Opportunities Won | **2** | 8 |  🔴 **-75.0%** vs baseline |
+| Won revenue | **10400.0 $** | 18298.0 $ |  🔴 **-43.2%** vs baseline |
+| Won-with-$0 (data-quality) | **0** | 0 |  ✅ clean |
 
 ## Appointment cohort detail (booked in window)
 
-| Location | Booked | cancelled | confirmed | showed |
-|---|---|---|---|---|
-| Richmond | 27 | 0 | 27 | 0 |
-| Virginia Beach | 9 | 1 | 7 | 1 |
-| Newport News | 5 | 0 | 5 | 0 |
+| Location | Booked | cancelled | confirmed |
+|---|---|---|---|
+| Richmond | 15 | 1 | 14 |
+| Virginia Beach | 3 | 0 | 3 |
+| Newport News | 8 | 0 | 8 |
 
 ## Won detail by pipeline (window)
 
@@ -32,7 +32,7 @@ _2026-06-21T12:46:06+00:00 · location Ghstz8eIsHWLeXek47dk · **read-only**, GE
 | 03. Richmond | 1 | $5,200 | 0 |
 | 04. Virginia Beach | 0 | $0 | 0 |
 | 05. Virtual | 0 | $0 | 0 |
-| 07. A & D | 4 | $15,600 | 1 |
+| 07. A & D | 0 | $0 | 0 |
 
 ---
-_History: 10 snapshots in monitor/data/history.jsonl · alert thresholds: 10% drift, 5-pt show-rate drop._
+_History: 11 snapshots in monitor/data/history.jsonl · alert thresholds: 10% drift, 5-pt show-rate drop._

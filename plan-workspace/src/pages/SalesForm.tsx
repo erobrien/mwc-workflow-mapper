@@ -37,6 +37,7 @@ export default function SalesForm() {
   const [discountType, setDiscountType] = useState<"pct" | "dollar">("pct");
   const [adReason, setAdReason] = useState("Not Ready");
   const [adNotes, setAdNotes] = useState("");
+  const [notes, setNotes] = useState("");
   const sold = outcome === "sold";
 
   // Auto-calculate total from product prices minus discount when not manually overridden
@@ -287,6 +288,18 @@ export default function SalesForm() {
                   </div>
                 </div>
               )}
+
+              {/* ── Notes (all outcomes) ── */}
+              <div>
+                <label className={lbl}>Consultation notes <span className="text-[10px] font-normal text-muted-foreground">(optional)</span></label>
+                <textarea
+                  className={`${sel} min-h-[80px] resize-y`}
+                  placeholder="Objections, next steps, anything relevant to this consult…"
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
+                />
+                <Help>long text · op_consult_notes</Help>
+              </div>
 
               {/* ── Save ── */}
               <div className="flex items-center gap-3 border-t pt-3">

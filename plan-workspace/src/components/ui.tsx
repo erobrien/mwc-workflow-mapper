@@ -87,7 +87,7 @@ export function useTheme() {
   const [dark, setDark] = useState(() => {
     const s = localStorage.getItem("theme");
     if (s) return s === "dark";
-    return window.matchMedia?.("(prefers-color-scheme: dark)").matches ?? false;
+    return false; // default light
   });
   useEffect(() => {
     const root = document.documentElement;

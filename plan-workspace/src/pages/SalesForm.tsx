@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { PageShell } from "../components/Shell";
 import { Card, CardContent } from "../components/ui";
-import { ClipboardCheck, Banknote, X, Info, FolderOpen, Plus } from "lucide-react";
+import { ClipboardCheck, Banknote, X, FolderOpen, Plus } from "lucide-react";
 
 const sel = "mt-1 w-full rounded-md border bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring";
 const auto = "mt-1 rounded-md border bg-muted/40 px-3 py-2 text-sm";
@@ -24,7 +24,6 @@ export default function SalesForm() {
   const [discountType, setDiscountType] = useState<"pct" | "dollar">("pct");
   const [adReason, setAdReason] = useState("Not Ready");
   const [adNotes, setAdNotes] = useState("");
-  const [stage, setStage] = useState("Showed");
   const sold = outcome === "sold";
 
   const total = parseFloat(totalAmount) || 0;
@@ -160,25 +159,7 @@ export default function SalesForm() {
                 </div>
               )}
 
-              <div className="my-4 h-px bg-border" />
 
-              {/* Deal context */}
-              <div className="mb-2 flex items-center gap-2 text-xs font-medium text-muted-foreground"><Info className="h-3.5 w-3.5" /> Deal context</div>
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <label className={lbl}>Stage</label>
-                    <span className="rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-medium text-amber-700 dark:bg-amber-900/40 dark:text-amber-400">pending discussion</span>
-                  </div>
-                  <select className={sel} value={stage} onChange={(e) => setStage(e.target.value)}><option>Showed</option><option>No-Show</option><option>Booked</option><option>Confirmed</option><option>Won</option><option>Lost</option></select>
-                  <Help>discuss: auto-set from outcome vs. editable pipeline stage</Help>
-                </div>
-                <div><label className={lbl}>Lead source</label><div className={auto}>Google paid · demo campaign</div><div className="mt-1 font-mono text-[11px] text-sky-700 dark:text-sky-400">auto · carried from contact → ties win/loss to the campaign</div></div>
-                <div><label className={lbl}>Location</label><div className={auto}>Virginia Beach</div><Help>auto · from pipeline</Help></div>
-                <div><label className={lbl}>PCC (owner)</label><div className={auto}>Alex Rivera</div><Help>auto</Help></div>
-                <div><label className={lbl}>Appointment</label><div className={auto}>Demo date · 11:00 AM</div><Help>auto · stamped at booking</Help></div>
-                <div><label className={lbl}>Patient</label><div className={auto}>Sample Patient (demo)</div><Help>auto</Help></div>
-              </div>
 
 
               <div className="mt-4 flex items-center gap-3 border-t pt-3">

@@ -36,7 +36,6 @@ export default function SalesForm() {
   const [discountValue, setDiscountValue] = useState("");
   const [discountType, setDiscountType] = useState<"pct" | "dollar">("pct");
   const [adReason, setAdReason] = useState("Not Ready");
-  const [adNotes, setAdNotes] = useState("");
   const [notes, setNotes] = useState("");
   const sold = outcome === "sold";
 
@@ -264,6 +263,17 @@ export default function SalesForm() {
                         </div>
                       </div>
                     )}
+
+                    <div>
+                      <label className={lbl}>Consultation notes <span className="text-[10px] font-normal">(optional)</span></label>
+                      <textarea
+                        className={`${sel} min-h-[80px] resize-y`}
+                        placeholder="Anything relevant to this consult — objections, next steps, patient concerns…"
+                        value={notes}
+                        onChange={(e) => setNotes(e.target.value)}
+                      />
+                      <Help>long text · op_consult_notes</Help>
+                    </div>
                   </div>
                 </div>
               )}
@@ -274,32 +284,24 @@ export default function SalesForm() {
                   <div className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
                     <X className="h-3.5 w-3.5" /> Reason for not closing
                   </div>
-                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                    <div>
-                      <label className={lbl}>A&D reason</label>
-                      <select className={sel} value={adReason} onChange={(e) => setAdReason(e.target.value)}>
-                        <option>Not Ready</option><option>Think it Over / Sleep On It</option><option>Cost / Price Objection</option><option>Not Interested</option><option>Not Qualified / MU</option><option>Others</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className={lbl}>Notes</label>
-                      <input className={sel} placeholder="objection detail…" value={adNotes} onChange={(e) => setAdNotes(e.target.value)} />
-                    </div>
+                  <div className="max-w-xs">
+                    <label className={lbl}>A&D reason</label>
+                    <select className={sel} value={adReason} onChange={(e) => setAdReason(e.target.value)}>
+                      <option>Not Ready</option><option>Think it Over / Sleep On It</option><option>Cost / Price Objection</option><option>Not Interested</option><option>Not Qualified / MU</option><option>Others</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className={lbl}>Consultation notes <span className="text-[10px] font-normal">(optional)</span></label>
+                    <textarea
+                      className={`${sel} min-h-[80px] resize-y`}
+                      placeholder="Anything relevant to this consult — objections, next steps, patient concerns…"
+                      value={notes}
+                      onChange={(e) => setNotes(e.target.value)}
+                    />
+                    <Help>long text · op_consult_notes</Help>
                   </div>
                 </div>
               )}
-
-              {/* ── Notes (all outcomes) ── */}
-              <div>
-                <label className={lbl}>Consultation notes <span className="text-[10px] font-normal text-muted-foreground">(optional)</span></label>
-                <textarea
-                  className={`${sel} min-h-[80px] resize-y`}
-                  placeholder="Objections, next steps, anything relevant to this consult…"
-                  value={notes}
-                  onChange={(e) => setNotes(e.target.value)}
-                />
-                <Help>long text · op_consult_notes</Help>
-              </div>
 
               {/* ── Save ── */}
               <div className="flex items-center gap-3 border-t pt-3">

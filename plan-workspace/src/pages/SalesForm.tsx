@@ -20,12 +20,24 @@ export default function SalesForm() {
   const [payType, setPayType] = useState("PIF");
   const [provider, setProvider] = useState("Dr. Marcus Hale");
   const [referredBy, setReferredBy] = useState("");
+  const [discountValue, setDiscountValue] = useState("");
+  const [discountType, setDiscountType] = useState<"pct" | "dollar">("pct");
   const [adReason, setAdReason] = useState("Not Ready");
   const [adNotes, setAdNotes] = useState("");
   const [stage, setStage] = useState("Showed");
   const sold = outcome === "sold";
-  const discountAmount = totalAmount ? Math.round(parseFloat(totalAmount) * 0.1 * 100) / 100 : 0;
-  const discountedTotal = totalAmount ? parseFloat(totalAmount) - discountAmount : 0;
+
+  const total = parseFloat(totalAmount) || 0;
+  const dv = parseFloat(discountValue) || 0;
+  const discountDollar = discountValue
+    ? discountType === "pct" ? Math.round(total * (dv / 100) * 100) / 100 : dv
+    : 0;
+  const referralDiscount = referredBy && total ? Math.round(total * 0.1 * 100) / 100 : 0;
+  const netTotal = total - discountDollar - referralDiscount;
+
+  // legacy aliases used below
+  const discountAmount = referralDiscount;
+  const discountedTotal = total - referralDiscount;
 
   return (
     <PageShell
@@ -83,6 +95,36 @@ export default function SalesForm() {
                     <div><label className={lbl}>Pay type <span className="text-destructive">*</span></label><select className={sel} value={payType} onChange={(e) => setPayType(e.target.value)}><option>PIF</option><option>SF</option><option>CARE</option><option>MAG</option><option>Cash</option><option>Credit card</option></select><Help>dropdown · PIF / SF / CARE / MAG / Cash / Card</Help></div>
                     <div><label className={lbl}>Provider <span className="text-destructive">*</span></label><select className={sel} value={provider} onChange={(e) => setProvider(e.target.value)}><option>Dr. Marcus Hale</option><option>Dr. Priya Shah</option><option>NP Dana Cole</option><option>Dr. Evan Brooks</option></select><Help>dropdown · placeholder names</Help></div>
                     <div className="sm:col-span-2">
+                      <label className={lbl}>Discount <span className="text-[10px] text-muted-foreground">(optional)</span></label>
+                      <div className="mt-1 flex gap-2">
+                        <div className="flex items-center rounded-md border bg-background">
+                          <button
+                            type="button"
+                            onClick={() => setDiscountType("pct")}
+                            className={`rounded-l-md px-3 py-2 text-sm font-medium transition-colors ${discountType === "pct" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+                          >%</button>
+                          <button
+                            type="button"
+                            onClick={() => setDiscountType("dollar")}
+                            className={`rounded-r-md px-3 py-2 text-sm font-medium transition-colors ${discountType === "dollar" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+                          >$</button>
+                        </div>
+                        <input
+                          className={`${sel} mt-0 max-w-[160px]`}
+                          placeholder={discountType === "pct" ? "e.g. 10" : "e.g. 300"}
+                          value={discountValue}
+                          onChange={(e) => setDiscountValue(e.target.value)}
+                        />
+                        {discountDollar > 0 && (
+                          <div className="flex items-center text-sm font-medium text-emerald-700 dark:text-emerald-400">
+                            = −${discountDollar.toFixed(2)}
+                          </div>
+                        )}
+                      </div>
+                      <Help>custom field · op_discount_value + op_discount_type</Help>
+                    </div>
+
+                    <div className="sm:col-span-2">
                       <label className={lbl}>Referred by <span className="text-[10px] text-muted-foreground">(optional — existing member)</span></label>
                       <input className={sel} placeholder="member name or ID…" value={referredBy} onChange={(e) => setReferredBy(e.target.value)} />
                       <Help>lookup · leave blank if not a referral · auto-triggers reward workflow for the referrer</Help>
@@ -90,13 +132,13 @@ export default function SalesForm() {
                     {referredBy && (
                       <>
                         <div>
-                          <label className={lbl}>New member discount (10%)</label>
-                          <div className={`${auto} font-medium text-emerald-700 dark:text-emerald-400`}>-${discountAmount.toFixed(2)}</div>
+                          <label className={lbl}>Referral discount (10%)</label>
+                          <div className={`${auto} font-medium text-emerald-700 dark:text-emerald-400`}>−${referralDiscount.toFixed(2)}</div>
                           <Help>auto · 10% off total program amount</Help>
                         </div>
                         <div>
-                          <label className={lbl}>New member total after discount</label>
-                          <div className={`${auto} font-medium text-emerald-700 dark:text-emerald-400`}>${discountedTotal.toFixed(2)}</div>
+                          <label className={lbl}>Net total{discountDollar > 0 ? " (referral + discount)" : " after referral"}</label>
+                          <div className={`${auto} font-medium text-emerald-700 dark:text-emerald-400`}>${netTotal.toFixed(2)}</div>
                           <Help>money · what the new member pays</Help>
                         </div>
                         <div>

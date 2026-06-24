@@ -69,19 +69,19 @@ export default function SalesForm() {
               </div>
 
               {sold ? (
-                <div className="mt-3 border-l-4 border-l-emerald-500 pl-3">
-                  <div className="mb-2 flex items-center gap-2 text-xs font-medium text-emerald-700 dark:text-emerald-400"><Banknote className="h-3.5 w-3.5" /> The sale</div>
+                <div className="mt-3 rounded-lg border border-emerald-200 bg-emerald-50/50 p-3 dark:border-emerald-900/40 dark:bg-emerald-950/20">
+                  <div className="mb-3 flex items-center gap-2 text-xs font-medium text-emerald-700 dark:text-emerald-400"><Banknote className="h-3.5 w-3.5" /> The sale</div>
                   <div className="grid grid-cols-1 gap-3 sm:grid-cols-[2fr_1fr_1fr]">
-                    <div><label className={lbl}>Product sold 1</label><select className={sel} value={product1} onChange={(e) => setProduct1(e.target.value)}><option>TRT</option><option>HRT</option><option>GLP1</option><option>Combo</option><option>ICP</option><option>ED</option><option>B Complex</option></select></div>
-                    <div><label className={lbl}>Term 1</label><select className={sel} value={term1} onChange={(e) => setTerm1(e.target.value)}><option>1 mo</option><option>3 mo</option><option>6 mo</option><option>12 mo</option><option>24 mo</option><option>30 mo</option><option>36 mo</option><option>42 mo</option></select></div>
-                    <div><label className={lbl}>Price 1</label><input className={sel} placeholder="$" value={price1} onChange={(e) => setPrice1(e.target.value)} /></div>
+                    <div><label className={lbl}>Product sold <span className="text-destructive">*</span></label><select className={sel} value={product1} onChange={(e) => setProduct1(e.target.value)}><option>TRT</option><option>HRT</option><option>GLP1</option><option>Combo</option><option>ICP</option><option>ED</option><option>B Complex</option></select></div>
+                    <div><label className={lbl}>Term <span className="text-destructive">*</span></label><select className={sel} value={term1} onChange={(e) => setTerm1(e.target.value)}><option>1 mo</option><option>3 mo</option><option>6 mo</option><option>12 mo</option><option>24 mo</option><option>30 mo</option><option>36 mo</option><option>42 mo</option></select></div>
+                    <div><label className={lbl}>Price <span className="text-destructive">*</span></label><input className={sel} placeholder="$" value={price1} onChange={(e) => setPrice1(e.target.value)} /></div>
                   </div>
                   <div className="mt-1 flex items-center gap-1 font-mono text-[11px] text-muted-foreground"><Plus className="h-3 w-3" /> add product 2 (TRT / HRT / GLP1 / Combo / ICP / ED / B Complex)</div>
                   <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
-                    <div><label className={lbl}>Total program amount</label><input className={`${sel} border-sky-400`} placeholder="$" value={totalAmount} onChange={(e) => setTotalAmount(e.target.value)} /><div className="mt-1 font-mono text-[11px] text-sky-700 dark:text-sky-400">money · sets the deal's Value — revenue shows per deal</div></div>
-                    <div><label className={lbl}>Money down</label><input className={sel} placeholder="$" value={moneyDown} onChange={(e) => setMoneyDown(e.target.value)} /><Help>money · collected at signing</Help></div>
-                    <div><label className={lbl}>Pay type</label><select className={sel} value={payType} onChange={(e) => setPayType(e.target.value)}><option>PIF</option><option>SF</option><option>CARE</option><option>MAG</option><option>Cash</option><option>Credit card</option></select><Help>dropdown · PIF / SF / CARE / MAG / Cash / Card</Help></div>
-                    <div><label className={lbl}>Provider</label><select className={sel} value={provider} onChange={(e) => setProvider(e.target.value)}><option>Dr. Marcus Hale</option><option>Dr. Priya Shah</option><option>NP Dana Cole</option><option>Dr. Evan Brooks</option></select><Help>dropdown · placeholder names</Help></div>
+                    <div><label className={lbl}>Total program amount <span className="text-destructive">*</span></label><input className={`${sel} border-sky-400`} placeholder="$" value={totalAmount} onChange={(e) => setTotalAmount(e.target.value)} /><div className="mt-1 font-mono text-[11px] text-sky-700 dark:text-sky-400">money · sets the deal's Value — revenue shows per deal</div></div>
+                    <div><label className={lbl}>Money down <span className="text-destructive">*</span></label><input className={sel} placeholder="$" value={moneyDown} onChange={(e) => setMoneyDown(e.target.value)} /><Help>money · collected at signing</Help></div>
+                    <div><label className={lbl}>Pay type <span className="text-destructive">*</span></label><select className={sel} value={payType} onChange={(e) => setPayType(e.target.value)}><option>PIF</option><option>SF</option><option>CARE</option><option>MAG</option><option>Cash</option><option>Credit card</option></select><Help>dropdown · PIF / SF / CARE / MAG / Cash / Card</Help></div>
+                    <div><label className={lbl}>Provider <span className="text-destructive">*</span></label><select className={sel} value={provider} onChange={(e) => setProvider(e.target.value)}><option>Dr. Marcus Hale</option><option>Dr. Priya Shah</option><option>NP Dana Cole</option><option>Dr. Evan Brooks</option></select><Help>dropdown · placeholder names</Help></div>
                   </div>
                 </div>
               ) : (

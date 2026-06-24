@@ -1,20 +1,24 @@
 import { useState } from "react";
 import { PageShell } from "../components/Shell";
 import { Card, CardContent } from "../components/ui";
-import { ClipboardCheck, Banknote, X, FolderOpen, Plus } from "lucide-react";
+import { ClipboardCheck, Banknote, X, FolderOpen, Plus, Trash2 } from "lucide-react";
 
 const sel = "mt-1 w-full rounded-md border bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring";
 const auto = "mt-1 rounded-md border bg-muted/40 px-3 py-2 text-sm";
 const lbl = "text-xs text-muted-foreground";
 const hint = "mt-1 font-mono text-[11px] text-muted-foreground";
 
+const PRODUCTS = ["TRT", "HRT", "GLP1", "Combo", "ICP", "ED", "B Complex"];
+const TERMS = ["1 mo", "3 mo", "6 mo", "12 mo", "24 mo", "30 mo", "36 mo", "42 mo"];
+
+type Product = { name: string; term: string; price: string };
+const emptyProduct = (): Product => ({ name: "TRT", term: "3 mo", price: "" });
+
 function Help({ children }: { children: React.ReactNode }) { return <div className={hint}>{children}</div>; }
 
 export default function SalesForm() {
   const [outcome, setOutcome] = useState("sold");
-  const [product1, setProduct1] = useState("TRT");
-  const [term1, setTerm1] = useState("3 mo");
-  const [price1, setPrice1] = useState("2999");
+  const [products, setProducts] = useState<Product[]>([{ name: "TRT", term: "3 mo", price: "2999" }]);
   const [totalAmount, setTotalAmount] = useState("2999");
   const [moneyDown, setMoneyDown] = useState("500");
   const [payType, setPayType] = useState("PIF");
@@ -26,6 +30,12 @@ export default function SalesForm() {
   const [adNotes, setAdNotes] = useState("");
   const sold = outcome === "sold";
 
+  function updateProduct(i: number, field: keyof Product, val: string) {
+    setProducts(prev => prev.map((p, idx) => idx === i ? { ...p, [field]: val } : p));
+  }
+  function addProduct() { if (products.length < 3) setProducts(prev => [...prev, emptyProduct()]); }
+  function removeProduct(i: number) { setProducts(prev => prev.filter((_, idx) => idx !== i)); }
+
   const total = parseFloat(totalAmount) || 0;
   const dv = parseFloat(discountValue) || 0;
   const discountDollar = discountValue
@@ -33,10 +43,6 @@ export default function SalesForm() {
     : 0;
   const referralDiscount = referredBy && total ? Math.round(total * 0.1 * 100) / 100 : 0;
   const netTotal = total - discountDollar - referralDiscount;
-
-  // legacy aliases used below
-  const discountAmount = referralDiscount;
-  const discountedTotal = total - referralDiscount;
 
   return (
     <PageShell
@@ -82,42 +88,66 @@ export default function SalesForm() {
               {sold ? (
                 <div className="mt-3 rounded-lg border border-emerald-200 bg-emerald-50/50 p-3 dark:border-emerald-900/40 dark:bg-emerald-950/20">
                   <div className="mb-3 flex items-center gap-2 text-xs font-medium text-emerald-700 dark:text-emerald-400"><Banknote className="h-3.5 w-3.5" /> The sale</div>
-                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-[2fr_1fr_1fr]">
-                    <div><label className={lbl}>Product sold <span className="text-destructive">*</span></label><select className={sel} value={product1} onChange={(e) => setProduct1(e.target.value)}><option>TRT</option><option>HRT</option><option>GLP1</option><option>Combo</option><option>ICP</option><option>ED</option><option>B Complex</option></select></div>
-                    <div><label className={lbl}>Term <span className="text-destructive">*</span></label><select className={sel} value={term1} onChange={(e) => setTerm1(e.target.value)}><option>1 mo</option><option>3 mo</option><option>6 mo</option><option>12 mo</option><option>24 mo</option><option>30 mo</option><option>36 mo</option><option>42 mo</option></select></div>
-                    <div><label className={lbl}>Price <span className="text-destructive">*</span></label><input className={sel} placeholder="$" value={price1} onChange={(e) => setPrice1(e.target.value)} /></div>
+
+                  {/* Products */}
+                  <div className="space-y-2">
+                    {products.map((p, i) => (
+                      <div key={i} className="grid grid-cols-1 gap-2 sm:grid-cols-[2fr_1fr_1fr_auto] items-end">
+                        <div>
+                          {i === 0 && <label className={lbl}>Product sold <span className="text-destructive">*</span></label>}
+                          <select className={sel} value={p.name} onChange={(e) => updateProduct(i, "name", e.target.value)}>
+                            {PRODUCTS.map(pr => <option key={pr}>{pr}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          {i === 0 && <label className={lbl}>Term <span className="text-destructive">*</span></label>}
+                          <select className={sel} value={p.term} onChange={(e) => updateProduct(i, "term", e.target.value)}>
+                            {TERMS.map(t => <option key={t}>{t}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          {i === 0 && <label className={lbl}>Price <span className="text-destructive">*</span></label>}
+                          <input className={sel} placeholder="$" value={p.price} onChange={(e) => updateProduct(i, "price", e.target.value)} />
+                        </div>
+                        <div className={i === 0 ? "pt-5" : ""}>
+                          {i > 0 ? (
+                            <button type="button" onClick={() => removeProduct(i)}
+                              className="mt-1 flex h-9 w-9 items-center justify-center rounded-md border text-muted-foreground hover:border-destructive hover:text-destructive">
+                              <Trash2 className="h-3.5 w-3.5" />
+                            </button>
+                          ) : <div className="h-9 w-9" />}
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                  <div className="mt-1 flex items-center gap-1 font-mono text-[11px] text-muted-foreground"><Plus className="h-3 w-3" /> add product 2 (TRT / HRT / GLP1 / Combo / ICP / ED / B Complex)</div>
+
+                  {products.length < 3 && (
+                    <button type="button" onClick={addProduct}
+                      className="mt-2 flex items-center gap-1.5 rounded-md px-2 py-1 text-xs text-muted-foreground hover:bg-muted/60 hover:text-foreground">
+                      <Plus className="h-3 w-3" /> Add product {products.length + 1}
+                    </button>
+                  )}
+
                   <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
                     <div><label className={lbl}>Total program amount <span className="text-destructive">*</span></label><input className={`${sel} border-sky-400`} placeholder="$" value={totalAmount} onChange={(e) => setTotalAmount(e.target.value)} /><div className="mt-1 font-mono text-[11px] text-sky-700 dark:text-sky-400">money · sets the deal's Value — revenue shows per deal</div></div>
                     <div><label className={lbl}>Money down <span className="text-destructive">*</span></label><input className={sel} placeholder="$" value={moneyDown} onChange={(e) => setMoneyDown(e.target.value)} /><Help>money · collected at signing</Help></div>
                     <div><label className={lbl}>Pay type <span className="text-destructive">*</span></label><select className={sel} value={payType} onChange={(e) => setPayType(e.target.value)}><option>PIF</option><option>SF</option><option>CARE</option><option>MAG</option><option>Cash</option><option>Credit card</option></select><Help>dropdown · PIF / SF / CARE / MAG / Cash / Card</Help></div>
                     <div><label className={lbl}>Provider <span className="text-destructive">*</span></label><select className={sel} value={provider} onChange={(e) => setProvider(e.target.value)}><option>Dr. Marcus Hale</option><option>Dr. Priya Shah</option><option>NP Dana Cole</option><option>Dr. Evan Brooks</option></select><Help>dropdown · placeholder names</Help></div>
+
                     <div className="sm:col-span-2">
                       <label className={lbl}>Discount <span className="text-[10px] text-muted-foreground">(optional)</span></label>
                       <div className="mt-1 flex gap-2">
                         <div className="flex items-center rounded-md border bg-background">
-                          <button
-                            type="button"
-                            onClick={() => setDiscountType("pct")}
-                            className={`rounded-l-md px-3 py-2 text-sm font-medium transition-colors ${discountType === "pct" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
-                          >%</button>
-                          <button
-                            type="button"
-                            onClick={() => setDiscountType("dollar")}
-                            className={`rounded-r-md px-3 py-2 text-sm font-medium transition-colors ${discountType === "dollar" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
-                          >$</button>
+                          <button type="button" onClick={() => setDiscountType("pct")}
+                            className={`rounded-l-md px-3 py-2 text-sm font-medium transition-colors ${discountType === "pct" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}>%</button>
+                          <button type="button" onClick={() => setDiscountType("dollar")}
+                            className={`rounded-r-md px-3 py-2 text-sm font-medium transition-colors ${discountType === "dollar" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}>$</button>
                         </div>
-                        <input
-                          className={`${sel} mt-0 max-w-[160px]`}
+                        <input className={`${sel} mt-0 max-w-[160px]`}
                           placeholder={discountType === "pct" ? "e.g. 10" : "e.g. 300"}
-                          value={discountValue}
-                          onChange={(e) => setDiscountValue(e.target.value)}
-                        />
+                          value={discountValue} onChange={(e) => setDiscountValue(e.target.value)} />
                         {discountDollar > 0 && (
-                          <div className="flex items-center text-sm font-medium text-emerald-700 dark:text-emerald-400">
-                            = −${discountDollar.toFixed(2)}
-                          </div>
+                          <div className="flex items-center text-sm font-medium text-emerald-700 dark:text-emerald-400">= −${discountDollar.toFixed(2)}</div>
                         )}
                       </div>
                       <Help>custom field · op_discount_value + op_discount_type</Help>
@@ -128,6 +158,7 @@ export default function SalesForm() {
                       <input className={sel} placeholder="member name or ID…" value={referredBy} onChange={(e) => setReferredBy(e.target.value)} />
                       <Help>lookup · leave blank if not a referral · auto-triggers reward workflow for the referrer</Help>
                     </div>
+
                     {referredBy && (
                       <>
                         <div>
@@ -159,9 +190,6 @@ export default function SalesForm() {
                 </div>
               )}
 
-
-
-
               <div className="mt-4 flex items-center gap-3 border-t pt-3">
                 <button className="rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground">Update</button>
                 <span className="text-xs text-muted-foreground">Sold → Won + Value · A&D → Lost + reason · MAR → stays open{referredBy && " · Referral → auto-apply discount & reward"}</span>
@@ -173,4 +201,3 @@ export default function SalesForm() {
     </PageShell>
   );
 }
-

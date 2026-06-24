@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { PageShell } from "../components/Shell";
 import { Card, CardContent } from "../components/ui";
-import { ClipboardCheck, Banknote, X, Info, FolderOpen, Plus, Users, TrendingUp } from "lucide-react";
+import { ClipboardCheck, Banknote, X, Info, FolderOpen, Plus } from "lucide-react";
 
 const sel = "mt-1 w-full rounded-md border bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring";
 const auto = "mt-1 rounded-md border bg-muted/40 px-3 py-2 text-sm";
@@ -82,6 +82,30 @@ export default function SalesForm() {
                     <div><label className={lbl}>Money down <span className="text-destructive">*</span></label><input className={sel} placeholder="$" value={moneyDown} onChange={(e) => setMoneyDown(e.target.value)} /><Help>money · collected at signing</Help></div>
                     <div><label className={lbl}>Pay type <span className="text-destructive">*</span></label><select className={sel} value={payType} onChange={(e) => setPayType(e.target.value)}><option>PIF</option><option>SF</option><option>CARE</option><option>MAG</option><option>Cash</option><option>Credit card</option></select><Help>dropdown · PIF / SF / CARE / MAG / Cash / Card</Help></div>
                     <div><label className={lbl}>Provider <span className="text-destructive">*</span></label><select className={sel} value={provider} onChange={(e) => setProvider(e.target.value)}><option>Dr. Marcus Hale</option><option>Dr. Priya Shah</option><option>NP Dana Cole</option><option>Dr. Evan Brooks</option></select><Help>dropdown · placeholder names</Help></div>
+                    <div className="sm:col-span-2">
+                      <label className={lbl}>Referred by <span className="text-[10px] text-muted-foreground">(optional — existing member)</span></label>
+                      <input className={sel} placeholder="member name or ID…" value={referredBy} onChange={(e) => setReferredBy(e.target.value)} />
+                      <Help>lookup · leave blank if not a referral · auto-triggers reward workflow for the referrer</Help>
+                    </div>
+                    {referredBy && (
+                      <>
+                        <div>
+                          <label className={lbl}>New member discount (10%)</label>
+                          <div className={`${auto} font-medium text-emerald-700 dark:text-emerald-400`}>-${discountAmount.toFixed(2)}</div>
+                          <Help>auto · 10% off total program amount</Help>
+                        </div>
+                        <div>
+                          <label className={lbl}>New member total after discount</label>
+                          <div className={`${auto} font-medium text-emerald-700 dark:text-emerald-400`}>${discountedTotal.toFixed(2)}</div>
+                          <Help>money · what the new member pays</Help>
+                        </div>
+                        <div>
+                          <label className={lbl}>Referrer reward</label>
+                          <div className={`${auto} font-medium text-emerald-700 dark:text-emerald-400`}>+3 months free service</div>
+                          <Help>auto · added to the referrer's subscription</Help>
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
               ) : (
@@ -114,47 +138,6 @@ export default function SalesForm() {
                 <div><label className={lbl}>Patient</label><div className={auto}>Sample Patient (demo)</div><Help>auto</Help></div>
               </div>
 
-              {sold && (
-                <>
-                  <div className="my-4 h-px bg-border" />
-                  <div className="mb-2 flex items-center gap-2 text-xs font-medium text-emerald-700 dark:text-emerald-400"><Users className="h-3.5 w-3.5" /> Referral program (optional)</div>
-                  <div className="rounded-md border border-emerald-200 bg-emerald-50 p-3 dark:border-emerald-900/30 dark:bg-emerald-950/20">
-                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                      <div>
-                        <label className={lbl}>Referred by (existing member)</label>
-                        <input className={sel} placeholder="member name or ID…" value={referredBy} onChange={(e) => setReferredBy(e.target.value)} />
-                        <Help>lookup · auto-triggers reward workflow for the referrer</Help>
-                      </div>
-                      {referredBy && (
-                        <>
-                          <div>
-                            <label className={lbl}>New member discount (10%)</label>
-                            <div className={`${auto} border-emerald-300 font-medium text-emerald-700 dark:text-emerald-400`}>
-                              -${discountAmount.toFixed(2)}
-                            </div>
-                            <Help>auto · 10% off the program amount</Help>
-                          </div>
-                          <div>
-                            <label className={lbl}>New member total after discount</label>
-                            <div className={`${auto} border-emerald-300 font-medium text-emerald-700 dark:text-emerald-400`}>
-                              ${discountedTotal.toFixed(2)}
-                            </div>
-                            <Help>money · what the new member pays</Help>
-                          </div>
-                          <div>
-                            <label className={lbl}>Referrer reward</label>
-                            <div className={`${auto} border-emerald-300 font-medium text-emerald-700 dark:text-emerald-400`}>
-                              +3 months free service
-                            </div>
-                            <Help>auto · added to the referrer's subscription</Help>
-                          </div>
-                        </>
-                      )}
-                      {!referredBy && <div className="text-xs text-muted-foreground italic">Leave blank if this sale is not a referral</div>}
-                    </div>
-                  </div>
-                </>
-              )}
 
               <div className="mt-4 flex items-center gap-3 border-t pt-3">
                 <button className="rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground">Update</button>

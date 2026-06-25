@@ -1,0 +1,198 @@
+[
+  {
+    "array": "messages_tobe",
+    "index": 2,
+    "field": "message",
+    "before": "{{first_name}}, {{pcc_name}} at MWC. If you're still dealing with low energy, poor sleep, or changes in drive, it's time to address the root cause. Let's get your baseline.",
+    "after": "{{first_name}}, {{pcc_name}} at Men's Wellness. If you're still dealing with low energy, poor sleep, or changes in drive, it's time to address the root cause. Let's get your baseline."
+  },
+  {
+    "array": "messages_tobe",
+    "index": 7,
+    "field": "message",
+    "before": "{{first_name}}, your MWC appointment is confirmed for {{appointment_date}} at {{appointment_time}}. Location: {{preferred_location}} ({{location_address}}). Arrive 10 mins early.",
+    "after": "{{first_name}}, your Men's Wellness appointment is confirmed for {{appointment_date}} at {{appointment_time}}. Location: {{preferred_location}} ({{location_address}}). Arrive 10 mins early."
+  },
+  {
+    "array": "messages_tobe",
+    "index": 9,
+    "field": "message",
+    "before": "{{first_name}}, {{pcc_name}} from MWC. Please confirm your appointment on {{appointment_date}} at {{appointment_time}} by replying YES, or reply to reschedule.",
+    "after": "{{first_name}}, {{pcc_name}} from Men's Wellness. Please confirm your appointment on {{appointment_date}} at {{appointment_time}} by replying YES, or reply to reschedule."
+  },
+  {
+    "array": "messages_tobe",
+    "index": 12,
+    "field": "message",
+    "before": "{{first_name}}, your MWC appointment is tomorrow, {{appointment_date}} at {{appointment_time}} ({{preferred_location}}). Arrive 10 mins early and hydrate well.",
+    "after": "{{first_name}}, your Men's Wellness appointment is tomorrow, {{appointment_date}} at {{appointment_time}} ({{preferred_location}}). Arrive 10 mins early and hydrate well."
+  },
+  {
+    "array": "messages_tobe",
+    "index": 13,
+    "field": "message",
+    "before": "Good morning, {{first_name}}. Your appointment is today at {{appointment_time}} at MWC, {{preferred_location}}. Address: {{location_address}}.",
+    "after": "Good morning, {{first_name}}. Your appointment is today at {{appointment_time}} at Men's Wellness, {{preferred_location}}. Address: {{location_address}}."
+  },
+  {
+    "array": "messages_tobe",
+    "index": 15,
+    "field": "message",
+    "before": "{{first_name}}, {{pcc_name}} at MWC. Your appointment was missed today. When the time is right, reschedule here: BookMWC.com",
+    "after": "{{first_name}}, {{pcc_name}} at Men's Wellness. Your appointment was missed today. When the time is right, reschedule here: BookMWC.com"
+  },
+  {
+    "array": "messages_tobe",
+    "index": 16,
+    "field": "message",
+    "before": "{{first_name}}, {{pcc_name}} at MWC. Appointment openings are available this week at the {{preferred_location}} center. Secure a spot: BookMWC.com",
+    "after": "{{first_name}}, {{pcc_name}} at Men's Wellness. Appointment openings are available this week at the {{preferred_location}} center. Secure a spot: BookMWC.com"
+  },
+  {
+    "array": "messages_tobe",
+    "index": 20,
+    "field": "message",
+    "before": "Hi {{first_name}}, {{pcc_name}} from MWC. Reaching out one last time regarding the missed appointment. Schedules shift and things come up. Whenever the time is right, the team is ready. Call or text {{location_phone}} directly to reschedule. No pressure, no expiration. Take care.",
+    "after": "Hi {{first_name}}, {{pcc_name}} from Men's Wellness. Reaching out one last time regarding the missed appointment. Schedules shift and things come up. Whenever the time is right, the team is ready. Call or text {{location_phone}} directly to reschedule. No pressure, no expiration. Take care."
+  },
+  {
+    "array": "messages_tobe",
+    "index": 21,
+    "field": "message",
+    "before": "{{first_name}}, {{pcc_name}} at MWC. Our team has your optimization plan in motion. The team is available for support along the way. Save this number for direct access.",
+    "after": "{{first_name}}, {{pcc_name}} at Men's Wellness. Our team has your optimization plan in motion. The team is available for support along the way. Save this number for direct access."
+  },
+  {
+    "array": "messages_tobe",
+    "index": 25,
+    "field": "message",
+    "before": "{{first_name}}, {{pcc_name}} at MWC. If another man is dealing with low energy or brain fog, the referral program benefits everyone. Details: {{referral_link}}",
+    "after": "{{first_name}}, {{pcc_name}} at Men's Wellness. If another man is dealing with low energy or brain fog, the referral program benefits everyone. Details: {{referral_link}}"
+  },
+  {
+    "array": "messages_tobe",
+    "index": 26,
+    "field": "message",
+    "before": "{{first_name}}, {{pcc_name}} from MWC. We have your lab baseline. There's a lot to consider, so no rush. We're here for any questions by text or call.",
+    "after": "{{first_name}}, {{pcc_name}} from Men's Wellness. We have your lab baseline. There's a lot to consider, so no rush. We're here for any questions by text or call."
+  },
+  {
+    "array": "messages_tobe",
+    "index": 27,
+    "field": "message",
+    "before": "{{first_name}}, {{pcc_name}} at MWC. Your labs are on file with our team. Whenever the time is right, pick up exactly where your appointment left off: BookMWC.com",
+    "after": "{{first_name}}, {{pcc_name}} at Men's Wellness. Your labs are on file with our team. Whenever the time is right, pick up exactly where your appointment left off: BookMWC.com"
+  },
+  {
+    "array": "messages_tobe",
+    "index": 28,
+    "field": "message",
+    "before": "{{first_name}}, {{pcc_name}} from MWC. Physician-led plans restore energy, focus, and drive. Your labs showed a clear path forward. We're ready when you are.",
+    "after": "{{first_name}}, {{pcc_name}} from Men's Wellness. Physician-led plans restore energy, focus, and drive. Your labs showed a clear path forward. We're ready when you are."
+  },
+  {
+    "array": "messages_tobe",
+    "index": 29,
+    "field": "message",
+    "before": "{{first_name}}, {{pcc_name}} at MWC. It has been a month. Labs remain on file, and our team is available to resume. No new appointment needed. Schedule here: BookMWC.com",
+    "after": "{{first_name}}, {{pcc_name}} at Men's Wellness. It has been a month. Labs remain on file, and our team is available to resume. No new appointment needed. Schedule here: BookMWC.com"
+  },
+  {
+    "array": "messages_tobe",
+    "index": 31,
+    "field": "message",
+    "before": "{{first_name}}, {{pcc_name}} at MWC. Your optimization plan renews on {{renewal_date}}. Everything is on track. Reply here or call for any questions regarding progress.",
+    "after": "{{first_name}}, {{pcc_name}} at Men's Wellness. Your optimization plan renews on {{renewal_date}}. Everything is on track. Reply here or call for any questions regarding progress."
+  },
+  {
+    "array": "messages_tobe",
+    "index": 32,
+    "field": "message",
+    "before": "{{first_name}}, the MWC plan renews in one week on {{renewal_date}}. Reach out at {{location_phone}} or reply here to update payment information or ask questions. - {{pcc_name}}",
+    "after": "{{first_name}}, the Men's Wellness plan renews in one week on {{renewal_date}}. Reach out at {{location_phone}} or reply here to update payment information or ask questions. - {{pcc_name}}"
+  },
+  {
+    "array": "messages_tobe",
+    "index": 33,
+    "field": "message",
+    "before": "{{first_name}}, your optimization plan renewal is processing today. If you need support, call {{location_phone}} or reply to this text. Trust in MWC is valued. - {{pcc_name}}",
+    "after": "{{first_name}}, your optimization plan renewal is processing today. If you need support, call {{location_phone}} or reply to this text. Trust in Men's Wellness is valued. - {{pcc_name}}"
+  },
+  {
+    "array": "messages_tobe",
+    "index": 34,
+    "field": "message",
+    "before": "{{first_name}}, {{pcc_name}} at MWC. Your plan is inactive. If this wasn't intentional, call/text {{location_phone}} to resume care. Your lab history remains securely on file.",
+    "after": "{{first_name}}, {{pcc_name}} at Men's Wellness. Your plan is inactive. If this wasn't intentional, call/text {{location_phone}} to resume care. Your lab history remains securely on file."
+  },
+  {
+    "array": "messages_tobe",
+    "index": 35,
+    "field": "message",
+    "before": "{{first_name}}, {{pcc_name}} at MWC. If fatigue or brain fog is still an issue, a quick lab reveals if hormones are the cause. Secure a no-cost appointment: BookMWC.com",
+    "after": "{{first_name}}, {{pcc_name}} at Men's Wellness. If fatigue or brain fog is still an issue, a quick lab reveals if hormones are the cause. Secure a no-cost appointment: BookMWC.com"
+  },
+  {
+    "array": "messages_tobe",
+    "index": 36,
+    "field": "message",
+    "before": "{{first_name}}, {{pcc_name}} here. No-cost appointment spots are open at MWC {{preferred_location}}. One visit covers labs, review, and next steps. Secure yours: BookMWC.com",
+    "after": "{{first_name}}, {{pcc_name}} here. No-cost appointment spots are open at Men's Wellness {{preferred_location}}. One visit covers labs, review, and next steps. Secure yours: BookMWC.com"
+  },
+  {
+    "array": "messages_tobe",
+    "index": 38,
+    "field": "message",
+    "before": "{{first_name}}, {{pcc_name}} at MWC. Your call was missed. Reply here for immediate assistance or schedule a appointment directly: BookMWC.com",
+    "after": "{{first_name}}, {{pcc_name}} at Men's Wellness. Your call was missed. Reply here for immediate assistance or schedule a appointment directly: BookMWC.com"
+  },
+  {
+    "array": "messages_tobe",
+    "index": 40,
+    "field": "message",
+    "before": "{{first_name}}, feedback matters. A positive experience at MWC can help other men find quality physician-led care. A brief Google review takes 60 seconds: {{review_link}}",
+    "after": "{{first_name}}, feedback matters. A positive experience at Men's Wellness can help other men find quality physician-led care. A brief Google review takes 60 seconds: {{review_link}}"
+  },
+  {
+    "array": "messages_tobe",
+    "index": 41,
+    "field": "message",
+    "before": "{{first_name}}, {{pcc_name}} at MWC. If a friend is dealing with low energy or brain fog, the referral program provides benefits. Details here: {{referral_link}}",
+    "after": "{{first_name}}, {{pcc_name}} at Men's Wellness. If a friend is dealing with low energy or brain fog, the referral program provides benefits. Details here: {{referral_link}}"
+  },
+  {
+    "array": "messages_asis",
+    "index": 234,
+    "field": "subject",
+    "before": "Welcome to the MWC Ambassador Program",
+    "after": "Welcome to the Men's Wellness Ambassador Program"
+  },
+  {
+    "array": "messages_asis",
+    "index": 253,
+    "field": "message",
+    "before": "96\n\n-\n\nHey {{contact.first_name}}\nAt MWC, we’ve helped countless men regain their drive after dealing with low T. In fact, this is what a past client had to say.\n\"Men's Wellness is great. I have been a patient for 5 years now. I feel and recover better after workouts. The staff is all great. Ashley M is a wonderful nurse and always gentle with my injection, great with blood draws and very professional. \"\n— Marty Haddaway\nThis is what happens when hormone health is addressed properly.\nYour story can look like this too — but it starts with an appointment.\nBook your appointment here:\n\nRestore My Energy\n\nIf you don’t book, a team member may reach out to help.\n— Men’s Wellness Center\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
+    "after": "96\n\n-\n\nHey {{contact.first_name}}\nAt Men's Wellness, we’ve helped countless men regain their drive after dealing with low T. In fact, this is what a past client had to say.\n\"Men's Wellness is great. I have been a patient for 5 years now. I feel and recover better after workouts. The staff is all great. Ashley M is a wonderful nurse and always gentle with my injection, great with blood draws and very professional. \"\n— Marty Haddaway\nThis is what happens when hormone health is addressed properly.\nYour story can look like this too — but it starts with an appointment.\nBook your appointment here:\n\nRestore My Energy\n\nIf you don’t book, a team member may reach out to help.\n— Men’s Wellness Center\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list ."
+  },
+  {
+    "array": "messages_asis",
+    "index": 259,
+    "field": "message",
+    "before": "96\n\n-\n\nHey {{contact.first_name}}\nAt MWC, we’ve helped countless men regain their drive after dealing with low T. In fact, this is what a past client had to say.\n\"Men's Wellness is great. I have been a patient for 5 years now. I feel and recover better after workouts. The staff is all great. Ashley M is a wonderful nurse and always gentle with my injection, great with blood draws and very professional. \"\n— Marty Haddaway\nThis is what happens when hormone health is addressed properly.\nYour story can look like this too — but it starts with an appointment.\nBook your appointment here:\n\nRestore My Energy\n\nIf you don’t book, a team member may reach out to help.\n— Men’s Wellness Center\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
+    "after": "96\n\n-\n\nHey {{contact.first_name}}\nAt Men's Wellness, we’ve helped countless men regain their drive after dealing with low T. In fact, this is what a past client had to say.\n\"Men's Wellness is great. I have been a patient for 5 years now. I feel and recover better after workouts. The staff is all great. Ashley M is a wonderful nurse and always gentle with my injection, great with blood draws and very professional. \"\n— Marty Haddaway\nThis is what happens when hormone health is addressed properly.\nYour story can look like this too — but it starts with an appointment.\nBook your appointment here:\n\nRestore My Energy\n\nIf you don’t book, a team member may reach out to help.\n— Men’s Wellness Center\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list ."
+  },
+  {
+    "array": "messages_asis",
+    "index": 265,
+    "field": "message",
+    "before": "96\n\n-\n\nHey {{contact.first_name}}\nAt MWC, we’ve helped countless men regain their drive after dealing with low T. In fact, this is what a past client had to say.\n\"Men's Wellness is great. I have been a patient for 5 years now. I feel and recover better after workouts. The staff is all great. Ashley M is a wonderful nurse and always gentle with my injection, great with blood draws and very professional. \"\n— Marty Haddaway\nThis is what happens when hormone health is addressed properly.\nYour story can look like this too — but it starts with an appointment.\nBook your appointment here:\n\nRestore My Energy\n\nIf you don’t book, a team member may reach out to help.\n— Men’s Wellness Center\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
+    "after": "96\n\n-\n\nHey {{contact.first_name}}\nAt Men's Wellness, we’ve helped countless men regain their drive after dealing with low T. In fact, this is what a past client had to say.\n\"Men's Wellness is great. I have been a patient for 5 years now. I feel and recover better after workouts. The staff is all great. Ashley M is a wonderful nurse and always gentle with my injection, great with blood draws and very professional. \"\n— Marty Haddaway\nThis is what happens when hormone health is addressed properly.\nYour story can look like this too — but it starts with an appointment.\nBook your appointment here:\n\nRestore My Energy\n\nIf you don’t book, a team member may reach out to help.\n— Men’s Wellness Center\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list ."
+  },
+  {
+    "array": "messages_asis",
+    "index": 271,
+    "field": "message",
+    "before": "96\n\n-\n\nHey {{contact.first_name}}\nAt MWC, we’ve helped countless men regain their drive after dealing with low T. In fact, this is what a past client had to say.\n\"Men's Wellness is great. I have been a patient for 5 years now. I feel and recover better after workouts. The staff is all great. Ashley M is a wonderful nurse and always gentle with my injection, great with blood draws and very professional. \"\n— Marty Haddaway\nThis is what happens when hormone health is addressed properly.\nYour story can look like this too — but it starts with an appointment.\nBook your appointment here:\n\nRestore My Energy\n\nIf you don’t book, a team member may reach out to help.\n— Men’s Wellness Center\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
+    "after": "96\n\n-\n\nHey {{contact.first_name}}\nAt Men's Wellness, we’ve helped countless men regain their drive after dealing with low T. In fact, this is what a past client had to say.\n\"Men's Wellness is great. I have been a patient for 5 years now. I feel and recover better after workouts. The staff is all great. Ashley M is a wonderful nurse and always gentle with my injection, great with blood draws and very professional. \"\n— Marty Haddaway\nThis is what happens when hormone health is addressed properly.\nYour story can look like this too — but it starts with an appointment.\nBook your appointment here:\n\nRestore My Energy\n\nIf you don’t book, a team member may reach out to help.\n— Men’s Wellness Center\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list ."
+  }
+]

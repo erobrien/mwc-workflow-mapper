@@ -7,15 +7,28 @@ import { useData } from "../lib/data";
 function chanTone(c: string) {
   return /email/i.test(c) ? "blue" : /sms|text/i.test(c) ? "good" : "muted";
 }
+const CT_TONE = { new: "good", renewal: "blue", both: "muted" } as const;
+const CT_LABEL = { new: "New", renewal: "Renewal", both: "New + Renewal" } as const;
+const CT_FILTERS = [
+  { value: "all", label: "All" },
+  { value: "new", label: "New" },
+  { value: "renewal", label: "Renewal" },
+  { value: "both", label: "Both" },
+];
 
 export default function Messages() {
   const { data, isLoading } = useData();
   const [q, setQ] = useState("");
+  const [ct, setCt] = useState("all");
   if (isLoading || !data) return <Loading />;
   const t = q.trim().toLowerCase();
 
   const tobe = data.messages_tobe.filter((m) =>
-    !t || (m.id_name + m.message + (m.workflow_step ?? "")).toLowerCase().includes(t));
+    (!t || (m.id_name + m.message + (m.workflow_step ?? "")).toLowerCase().includes(t)) &&
+    (ct === "all" || (m.consult_type ?? "both") === ct));
+  const ctCounts = data.messages_tobe.reduce((acc, m) => {
+    const k = m.consult_type ?? "both"; acc[k] = (acc[k] ?? 0) + 1; return acc;
+  }, {} as Record<string, number>);
   const asis = data.messages_asis.filter((m) =>
     !t || (m.workflow + m.message + (m.subject ?? "")).toLowerCase().includes(t));
 
@@ -29,11 +42,23 @@ export default function Messages() {
 
       <RoutedTabs base="/messages" tabs={[{ value: "target", label: `Target (${tobe.length})` }, { value: "legacy", label: `Legacy (${asis.length})` }]}>
         <RoutedTabPanel value="target" className="space-y-2">
+          <div className="flex flex-wrap items-center gap-1.5">
+            <span className="text-xs font-medium text-muted-foreground mr-1">Consult type:</span>
+            {CT_FILTERS.map((f) => (
+              <button key={f.value} onClick={() => setCt(f.value)}
+                className={`rounded-md border px-2.5 py-1 text-xs font-medium transition-colors ${ct === f.value ? "border-foreground/40 bg-foreground text-background" : "border-input bg-background text-muted-foreground hover:bg-muted hover:text-foreground"}`}>
+                {f.label}
+                {f.value !== "all" && <span className="ml-1 opacity-60">{ctCounts[f.value] ?? 0}</span>}
+              </button>
+            ))}
+            <span className="ml-1 text-xs text-muted-foreground">{tobe.length} shown</span>
+          </div>
           {tobe.map((m, i) => (
             <Card key={i}><CardContent className="p-4">
               <div className="mb-1.5 flex flex-wrap items-center gap-2">
                 <span className="font-semibold">{m.id_name}</span>
                 <Badge tone={chanTone(m.type)}>{m.type}</Badge>
+                {m.consult_type && <Badge tone={CT_TONE[m.consult_type]}>{CT_LABEL[m.consult_type]}</Badge>}
                 {m.timing && <Badge tone="muted">{m.timing}</Badge>}
                 {m.workflow_step && <span className="text-xs text-muted-foreground">{m.workflow_step}</span>}
               </div>

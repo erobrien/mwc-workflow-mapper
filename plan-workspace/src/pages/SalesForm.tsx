@@ -5,6 +5,7 @@ import {
   Plus, Trash2, CheckCircle2, XCircle, AlertCircle, Clock,
   UserCheck, UserX, CalendarX, CalendarClock,
   Users, Package, Calculator, Gift, FileText, CalendarDays, RefreshCw,
+  UserPlus, Repeat,
 } from "lucide-react";
 
 // ── Design tokens ─────────────────────────────────────────────────────────────
@@ -36,15 +37,23 @@ const OUTCOME_OPTS = [
   { value: "mar",  label: "MAR",   icon: Clock,        ring: "bg-amber-500 shadow-amber-200 dark:shadow-amber-900" },
 ];
 
+// Patient type — every consult is either a brand-new sale or a renewal of an existing program.
+// Gates referral attribution (new only), pricing context, and downstream pipeline routing (op_sale_type).
+const PATIENT_OPTS = [
+  { value: "new",     label: "New",     icon: UserPlus, ring: "bg-emerald-600 shadow-emerald-200 dark:shadow-emerald-900" },
+  { value: "renewal", label: "Renewal", icon: Repeat,   ring: "bg-sky-600 shadow-sky-200 dark:shadow-sky-900" },
+];
+
 // ── Primitives ─────────────────────────────────────────────────────────────────
 
-function SegCtrl({ opts, value, onChange }: {
+function SegCtrl({ opts, value, onChange, cols = "grid-cols-2 sm:grid-cols-4" }: {
   opts: { value: string; label: string; icon: React.ElementType; ring: string }[];
   value: string;
   onChange: (v: string) => void;
+  cols?: string;
 }) {
   return (
-    <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+    <div className={`grid gap-2 ${cols}`}>
       {opts.map(({ value: v, label, icon: Icon, ring }) => (
         <button key={v} type="button" onClick={() => onChange(v)}
           className={`cursor-pointer flex items-center justify-center gap-2 rounded-xl border px-3 py-3 text-sm font-semibold transition-all
@@ -106,6 +115,7 @@ function ReceiptRow({ label, value, sub, bold, accent }: {
 // ── Component ──────────────────────────────────────────────────────────────────
 export default function SalesForm() {
   const [apptStatus,    setApptStatus]   = useState("showed");
+  const [patientType,   setPatientType]  = useState("new");
   const [pcc,           setPcc]          = useState("Alex Rivera");
   const [provider,      setProvider]     = useState("Dr. Marcus Hale");
   const [outcome,       setOutcome]      = useState("sold");
@@ -123,6 +133,7 @@ export default function SalesForm() {
 
   const showed = apptStatus === "showed";
   const sold   = outcome === "sold";
+  const isNew  = patientType === "new";
 
   // Financials
   const subtotal = products.reduce((s, p) => s + (parseFloat(p.price) || 0), 0);
@@ -137,7 +148,8 @@ export default function SalesForm() {
   }, [autoTotal, totalManual]);
 
   const total    = parseFloat(totalAmount) || 0;
-  const refDisc  = referredBy && total ? Math.round(total * 0.1 * 100) / 100 : 0;
+  // Referral rewards apply to NEW patients only — renewals never compute a referral discount
+  const refDisc  = isNew && referredBy && total ? Math.round(total * 0.1 * 100) / 100 : 0;
   const netTotal = total - refDisc;
   const balance  = total - (parseFloat(moneyDown) || 0);
   const showSubtotal = products.length > 1 || discountDollar > 0;
@@ -153,9 +165,10 @@ export default function SalesForm() {
     sold: "→ Won", ad: "→ Lost", mut: "→ Lost", mar: "stays open"
   }[outcome];
 
+  const ptLabel = isNew ? "New" : "Renewal";
   const saveHint = !showed
     ? (apptStatus === "reschedule" ? "stays open" : "→ Lost")
-    : outcomeLabel;
+    : `${outcomeLabel} · ${ptLabel}`;
 
   return (
     <PageShell
@@ -186,6 +199,20 @@ export default function SalesForm() {
 
         {/* ══ Showed path ════════════════════════════════════════════════════ */}
         {showed && <>
+
+          {/* ── PANEL · PATIENT TYPE — gates attribution, pricing context & routing ── */}
+          <Panel icon={isNew ? UserPlus : Repeat} label="Patient Type" iconClass={isNew ? "text-emerald-600" : "text-sky-600"}>
+            <div>
+              <label className={lbl}>New or Renewal {req}</label>
+              <SegCtrl opts={PATIENT_OPTS} value={patientType} onChange={setPatientType} cols="grid-cols-2 sm:grid-cols-2 sm:max-w-md" />
+              <p className="mt-2 text-xs text-muted-foreground">
+                {isNew
+                  ? "Brand-new patient buying their first program. Referral rewards apply; routes to new-patient onboarding."
+                  : "Existing patient renewing / continuing / expanding. No referral reward; routes to the Retention & Renewals lifecycle."}
+              </p>
+              <Hint>op_sale_type · New | Renewal · drives routing, messaging &amp; KPI split</Hint>
+            </div>
+          </Panel>
 
           {/* ── PANEL 2 · CONSULTATION ── */}
           <Panel icon={Users} label="Consultation">
@@ -243,6 +270,12 @@ export default function SalesForm() {
           {/* ── PANEL 4 · PROGRAM (sold only) ── */}
           {sold && (
             <Panel icon={Package} label="Program" iconClass="text-emerald-600">
+              {!isNew && (
+                <div className="flex items-start gap-2 rounded-lg border border-sky-200 dark:border-sky-800 bg-sky-50/60 dark:bg-sky-950/20 px-3 py-2 text-xs text-sky-800 dark:text-sky-300">
+                  <Repeat className="h-3.5 w-3.5 shrink-0 mt-0.5" />
+                  <span><b>Renewal pricing</b> — continuation / expansion terms (often shorter); money-down is frequently $0–$250 for established patients.</span>
+                </div>
+              )}
               {/* Column headers — desktop only */}
               <div className="hidden sm:grid sm:grid-cols-[2fr_1fr_1fr_2.5rem] gap-3 text-xs font-semibold text-muted-foreground px-0.5">
                 <span>Product {req}</span>
@@ -404,8 +437,14 @@ export default function SalesForm() {
             </Panel>
           )}
 
-          {/* ── PANEL 6 · ATTRIBUTION (showed only) ── */}
+          {/* ── PANEL 6 · ATTRIBUTION — referral rewards apply to NEW patients only ── */}
           <Panel icon={Gift} label="Attribution">
+            {!isNew ? (
+              <div className="flex items-start gap-2 rounded-lg border border-gray-300 dark:border-border bg-muted/40 px-3 py-2.5 text-xs text-muted-foreground">
+                <Repeat className="h-3.5 w-3.5 shrink-0 mt-0.5" />
+                <span>Referral rewards apply to <b>new patients only</b> — renewals don't trigger the referral workflow. <span className="font-mono text-[10px]">op_referred_by</span> stays blank for renewals.</span>
+              </div>
+            ) : <>
             <div>
               <label className={lbl}>Referred by <span className="font-normal text-muted-foreground/60">(optional — existing member)</span></label>
               <input className={inp} placeholder="Member name or ID…" value={referredBy} onChange={e => setReferredBy(e.target.value)} />
@@ -428,6 +467,7 @@ export default function SalesForm() {
                 </div>
               </div>
             )}
+            </>}
           </Panel>
 
           {/* ── PANEL 7 · NOTES ── */}

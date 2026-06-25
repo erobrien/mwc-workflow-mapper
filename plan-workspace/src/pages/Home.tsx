@@ -121,6 +121,11 @@ export default function Home() {
           <Mini label="Pipelines" value={k.pipelines_now} delta={`→ ${k.pipelines_target}`} note="Sales + Retention + Referrals + Instagram" />
           <Mini label="Custom fields" value={k.fields_total} note={`${k.fields_on_contact} contact · ${k.fields_on_opportunity_now} opp`} />
           <Mini label="Total steps" value={fmt(k.steps_published_total)} note="across 38 published workflows" />
+          <Mini
+            label="New vs Renewal"
+            value={k.renewal_rate == null ? "— / —" : `${100 - (k.renewal_rate ?? 0)}% / ${k.renewal_rate}%`}
+            note="revenue split — pending opportunity scan (Decision 7)"
+          />
         </div>
       </section>
 

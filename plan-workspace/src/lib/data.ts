@@ -12,6 +12,9 @@ export interface KPIs {
   ghl_payment_transactions: number; click_ids_captured: number; tcpa_consent_stored: number;
   steps_published_total: number; branches_total: number;
   sms_sends_defined: number; email_sends_defined: number;
+  // New-vs-Renewal segmentation — null until a real opportunity scan populates them
+  new_patient_wins?: number | null; renewal_wins?: number | null; renewal_rate?: number | null;
+  new_vs_renewal_revenue_pct?: number | null; renewal_avg_value?: number | null;
 }
 export interface Trigger { name: string; type: string; active?: boolean; }
 export interface AsIsWorkflow {
@@ -21,7 +24,7 @@ export interface AsIsWorkflow {
 }
 export interface Field {
   id: string; name: string; key: string; type?: string; model?: string;
-  count?: number; pct?: number; usage?: string;
+  count?: number; pct?: number; usage?: string; values?: string[]; note?: string;
 }
 export interface ToBeWorkflow { n: string; name: string; absorbs?: string; copy?: string; }
 export interface Pipeline { name: string; stages?: string[]; exits?: string[]; role?: string; }
@@ -31,7 +34,7 @@ export interface Defect { id: string; title: string; severity: string; evidence?
 export interface MigrationStep { n: string; name: string; status: string; owner?: string; gate?: string; blocked_by?: string; }
 export interface Decision { n: string; decision: string; choice: string; status: string; date?: string; }
 export interface Risk { id: string; sev: string; area: string; mitigation: string; }
-export interface MsgToBe { id_name: string; workflow_step?: string; timing?: string; type: string; message: string; }
+export interface MsgToBe { id_name: string; workflow_step?: string; timing?: string; type: string; message: string; consult_type?: "new" | "renewal" | "both"; }
 export interface MsgAsIs { workflow: string; workflow_id?: string; step?: string; channel: string; delay?: string; subject?: string; message: string; status?: string; }
 export interface TriggersSummary {
   captured_at: string; active_workflows_with_triggers: number; total_trigger_records: number;

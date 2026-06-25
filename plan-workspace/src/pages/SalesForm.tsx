@@ -106,7 +106,7 @@ function ReceiptRow({ label, value, sub, bold, accent }: {
 // ── Component ──────────────────────────────────────────────────────────────────
 export default function SalesForm() {
   const [apptStatus,    setApptStatus]   = useState("showed");
-  const [pcc,           setPcc]          = useState("");
+  const [pcc,           setPcc]          = useState("Alex Rivera");
   const [provider,      setProvider]     = useState("Dr. Marcus Hale");
   const [outcome,       setOutcome]      = useState("sold");
   const [adReason,      setAdReason]     = useState("Not Ready");
@@ -193,7 +193,6 @@ export default function SalesForm() {
               <div>
                 <label className={lbl}>PCC {req}</label>
                 <select className={inp} value={pcc} onChange={e => setPcc(e.target.value)}>
-                  <option value="">Select consultant…</option>
                   {PCCS.map(n => <option key={n}>{n}</option>)}
                 </select>
                 <Hint>op_pcc · placeholder names</Hint>

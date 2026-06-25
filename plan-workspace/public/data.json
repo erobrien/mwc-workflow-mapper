@@ -4289,7 +4289,7 @@
       "workflow_step": "WF-01 Speed to Lead | Step 1",
       "timing": "Instant (0 min)",
       "type": "SMS",
-      "message": "{{first_name}}, {{pcc_name}} from Men's Wellness Centers. Thanks for reaching out! Secure your no-cost appointment: BookMWC.com. Questions? Just reply. Reply STOP to opt-out.",
+      "message": "{{first_name}}, {{pcc_name}} from Men's Wellness. Thanks for reaching out! Secure your no-cost appointment: BookMWC.com. Questions? Just reply. Reply STOP to opt-out.",
       "consult_type": "new"
     },
     {
@@ -4313,7 +4313,7 @@
       "workflow_step": "WF-02 Non-Booked Nurture | Step 5",
       "timing": "+3 days after lead creation",
       "type": "Voicemail",
-      "message": "Hi {{first_name}}, {{pcc_name}} from Men's Wellness Centers in {{preferred_location}}. Calling to follow up on the recent inquiry. We're available to walk you through the process, pricing, or your first visit. Call back directly at {{location_phone}}, or reply to the texts sent previously. Let's get this handled when you're ready.",
+      "message": "Hi {{first_name}}, {{pcc_name}} from Men's Wellness in {{preferred_location}}. Calling to follow up on the recent inquiry. We're available to walk you through the process, pricing, or your first visit. Call back directly at {{location_phone}}, or reply to the texts sent previously. Let's get this handled when you're ready.",
       "consult_type": "new"
     },
     {
@@ -4377,7 +4377,7 @@
       "workflow_step": "WF-04 Confirmation Chase | Step 4",
       "timing": "+36 hours after booking",
       "type": "Voicemail",
-      "message": "Hi {{first_name}}, {{pcc_name}} from Men's Wellness Centers calling to confirm your appointment on {{appointment_date}} at {{appointment_time}}. The team wants to ensure the spot is held and our team is prepared. Call back at {{location_phone}} or reply to the text. If a reschedule is needed, the team will accommodate the new schedule. Talk soon.",
+      "message": "Hi {{first_name}}, {{pcc_name}} from Men's Wellness calling to confirm your appointment on {{appointment_date}} at {{appointment_time}}. The team wants to ensure the spot is held and our team is prepared. Call back at {{location_phone}} or reply to the text. If a reschedule is needed, the team will accommodate the new schedule. Talk soon.",
       "consult_type": "both"
     },
     {
@@ -4625,7 +4625,7 @@
       "workflow_step": "WF-01 Speed to Lead | Step 2",
       "timing": "Instant (0 min)",
       "type": "Email",
-      "message": "Hi {{first_name}},\n\nThis is {{pcc_name}} reaching out on behalf of Men's Wellness Centers. The first visit is designed to provide clear answers about systemic health.\n\nMen who build, protect, and provide often experience a gradual reduction in energy, focus, and drive, alongside stubborn weight gain. These issues are rarely separate problems. They trace back to the same underlying drivers: hormone levels, sleep quality, metabolic health, and recovery.\n\n**The first visit is straightforward:**\n\n1. Walk into the {{preferred_location}} center at the scheduled time.\n2. Labs are drawn on-site with results ready in approximately 15 minutes.\n3. Our team reviews your numbers one-on-one, discussing symptoms to build a plan around your biology.\n\nThere are no templated protocols and no shelf-ready plans. Optimization plans are built from lab data, individual symptoms, and specific goals.\n\nThe initial appointment is complimentary and carries no obligation. Clear expectations are set from the start, including straightforward pricing without surprise add-ons. Taking the first step requires clarity.\n\nReply to this email or call {{location_phone}} for a brief 5-10 minute call before scheduling. If ready to commit, book your appointment below.\n\n**CTA:** [SCHEDULE THE APPOINTMENT](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness Centers\n\n[Standard Privacy Footer]",
+      "message": "Hi {{first_name}},\n\nThis is {{pcc_name}} reaching out on behalf of Men's Wellness. The first visit is designed to provide clear answers about systemic health.\n\nMen who build, protect, and provide often experience a gradual reduction in energy, focus, and drive, alongside stubborn weight gain. These issues are rarely separate problems. They trace back to the same underlying drivers: hormone levels, sleep quality, metabolic health, and recovery.\n\n**The first visit is straightforward:**\n\n1. Walk into the {{preferred_location}} center at the scheduled time.\n2. Labs are drawn on-site with results ready in approximately 15 minutes.\n3. Our team reviews your numbers one-on-one, discussing symptoms to build a plan around your biology.\n\nThere are no templated protocols and no shelf-ready plans. Optimization plans are built from lab data, individual symptoms, and specific goals.\n\nThe initial appointment is complimentary and carries no obligation. Clear expectations are set from the start, including straightforward pricing without surprise add-ons. Taking the first step requires clarity.\n\nReply to this email or call {{location_phone}} for a brief 5-10 minute call before scheduling. If ready to commit, book your appointment below.\n\n**CTA:** [SCHEDULE THE APPOINTMENT](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness\n\n[Standard Privacy Footer]",
       "consult_type": "new"
     },
     {
@@ -4641,7 +4641,7 @@
       "workflow_step": "WF-02 Non-Booked Nurture | Step 2",
       "timing": "+4 hours after lead creation",
       "type": "Email",
-      "message": "Hi {{first_name}},\n\nIf you are dealing with mid-afternoon crashes, poor sleep, or stubborn weight gain, you might be treating them as separate problems. A supplement for energy. A new diet for weight. More coffee for focus.\n\nBut for many men over 50, these symptoms share the exact same root cause: declining hormones. Treating one symptom without looking at the whole picture is just guesswork.\n\nHere is how we get you real answers:\n- **Comprehensive Labs:** Drawn on-site. Results in 15 minutes.\n- **Expert Review:** Our team reviews your full biological picture.\n- **Data-Driven Plan:** Your optimization plan is built from hard data, not guessing.\n\nStop guessing. Secure your complimentary appointment and let's get your baseline.\n\n**CTA:** [CHECK THE LEVELS](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness Centers\n\n[Standard Privacy Footer]",
+      "message": "Hi {{first_name}},\n\nIf you are dealing with mid-afternoon crashes, poor sleep, or stubborn weight gain, you might be treating them as separate problems. A supplement for energy. A new diet for weight. More coffee for focus.\n\nBut for many men over 50, these symptoms share the exact same root cause: declining hormones. Treating one symptom without looking at the whole picture is just guesswork.\n\nHere is how we get you real answers:\n- **Comprehensive Labs:** Drawn on-site. Results in 15 minutes.\n- **Expert Review:** Our team reviews your full biological picture.\n- **Data-Driven Plan:** Your optimization plan is built from hard data, not guessing.\n\nStop guessing. Secure your complimentary appointment and let's get your baseline.\n\n**CTA:** [CHECK THE LEVELS](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness\n\n[Standard Privacy Footer]",
       "consult_type": "new"
     },
     {
@@ -4649,7 +4649,7 @@
       "workflow_step": "WF-02 Non-Booked Nurture | Step 4",
       "timing": "+2 days after lead creation",
       "type": "Email",
-      "message": "Hi {{first_name}},\n\nOne of the most common concerns men share is whether they will receive a cookie-cutter protocol. The answer is no.\n\nEvery member's optimization plan at Men's Wellness Centers begins the same way: with a comprehensive lab panel drawn on-site. Results are ready in approximately 15 minutes. From there, our team reviews the data directly with the member.\n\nOur team considers lab values, reported symptoms, daily demands, and specific goals. The resulting plan is entirely individualized. It is not a template applied to the next man who walks through the door.\n\nThis is what physician-led care looks like in practice. It is why men come to Men's Wellness Centers after trying national chains or generic protocols. Sit with our team in person, at a dedicated Virginia practice, and get a plan built from real data.\n\nThe initial appointment is complimentary. No obligation. No pressure. If cost is a question, it is addressed directly and clearly before any decision is made.\n\n**CTA:** [BOOK THE APPOINTMENT](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness Centers\n\n[Standard Privacy Footer]",
+      "message": "Hi {{first_name}},\n\nOne of the most common concerns men share is whether they will receive a cookie-cutter protocol. The answer is no.\n\nEvery member's optimization plan at Men's Wellness begins the same way: with a comprehensive lab panel drawn on-site. Results are ready in approximately 15 minutes. From there, our team reviews the data directly with the member.\n\nOur team considers lab values, reported symptoms, daily demands, and specific goals. The resulting plan is entirely individualized. It is not a template applied to the next man who walks through the door.\n\nThis is what physician-led care looks like in practice. It is why men come to Men's Wellness after trying national chains or generic protocols. Sit with our team in person, at a dedicated Virginia practice, and get a plan built from real data.\n\nThe initial appointment is complimentary. No obligation. No pressure. If cost is a question, it is addressed directly and clearly before any decision is made.\n\n**CTA:** [BOOK THE APPOINTMENT](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness\n\n[Standard Privacy Footer]",
       "consult_type": "new"
     },
     {
@@ -4657,7 +4657,7 @@
       "workflow_step": "WF-02 Non-Booked Nurture | Step 7",
       "timing": "+7 days after lead creation",
       "type": "Email",
-      "message": "Hi {{first_name}},\n\nThe phrase heard most often from members is some version of the same idea: \"I feel like myself again.\"\n\nNot superhuman. Not a different person. Themselves. The version with steady energy through the afternoon, sharper focus during the workday, restful sleep, and a drive that does not require constant effort to maintain.\n\nThat feeling did not leave because of something done wrong. For many men in their 40s, 50s, and 60s, these changes are biological. The question is whether to address the underlying cause or keep managing symptoms one at a time.\n\nMen's Wellness Centers has helped over 10,000 men in Virginia navigate this process. The 4.9-star rating reflects what happens when physician-led care is built around individual lab results rather than generalized protocols.\n\nThe complimentary appointment includes on-site labs with 15-minute results and a one-on-one physician review. No obligation to proceed. If moving forward is the right choice, pricing is laid out clearly before anything begins.\n\n**CTA:** [SCHEDULE THE APPOINTMENT](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness Centers\n\n[Standard Privacy Footer]",
+      "message": "Hi {{first_name}},\n\nThe phrase heard most often from members is some version of the same idea: \"I feel like myself again.\"\n\nNot superhuman. Not a different person. Themselves. The version with steady energy through the afternoon, sharper focus during the workday, restful sleep, and a drive that does not require constant effort to maintain.\n\nThat feeling did not leave because of something done wrong. For many men in their 40s, 50s, and 60s, these changes are biological. The question is whether to address the underlying cause or keep managing symptoms one at a time.\n\nMen's Wellness has helped over 10,000 men in Virginia navigate this process. The 4.9-star rating reflects what happens when physician-led care is built around individual lab results rather than generalized protocols.\n\nThe complimentary appointment includes on-site labs with 15-minute results and a one-on-one physician review. No obligation to proceed. If moving forward is the right choice, pricing is laid out clearly before anything begins.\n\n**CTA:** [SCHEDULE THE APPOINTMENT](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness\n\n[Standard Privacy Footer]",
       "consult_type": "new"
     },
     {
@@ -4665,7 +4665,7 @@
       "workflow_step": "WF-02 Non-Booked Nurture | Step 9",
       "timing": "+14 days after lead creation",
       "type": "Email",
-      "message": "Hi {{first_name}},\n\nYour inquiry is still on file, and the complimentary appointment at the {{preferred_location}} center remains available.\n\nTaking a few weeks before scheduling is completely reasonable. But the symptoms that prompted your inquiry, whether low energy, changes in focus, difficulty with sleep, or shifts in body composition, rarely improve on their own.\n\nOne visit is all it takes to see where hormone levels stand. Labs are drawn on-site with 15-minute results, and our team reviews everything before any decisions are made. If moving forward is the right step, pricing is discussed clearly and directly.\n\nNot a franchise. Not a chain. Independent practice with a decade of clinical authority in Virginia. Information is protected under HIPAA, and member data is never shared with advertising platforms.\n\n**CTA:** [BOOK THE APPOINTMENT](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness Centers\n\n[Standard Privacy Footer]",
+      "message": "Hi {{first_name}},\n\nYour inquiry is still on file, and the complimentary appointment at the {{preferred_location}} center remains available.\n\nTaking a few weeks before scheduling is completely reasonable. But the symptoms that prompted your inquiry, whether low energy, changes in focus, difficulty with sleep, or shifts in body composition, rarely improve on their own.\n\nOne visit is all it takes to see where hormone levels stand. Labs are drawn on-site with 15-minute results, and our team reviews everything before any decisions are made. If moving forward is the right step, pricing is discussed clearly and directly.\n\nNot a franchise. Not a chain. Independent practice with a decade of clinical authority in Virginia. Information is protected under HIPAA, and member data is never shared with advertising platforms.\n\n**CTA:** [BOOK THE APPOINTMENT](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness\n\n[Standard Privacy Footer]",
       "consult_type": "new"
     },
     {
@@ -4673,7 +4673,7 @@
       "workflow_step": "WF-03 Booking Confirmation | Step 2",
       "timing": "Instant",
       "type": "Email",
-      "message": "Hi {{first_name}},\n\nThe complimentary appointment at Men's Wellness Centers is confirmed.\n\n**Appointment Details:**\n- **Date:** {{appointment_date}}\n- **Time:** {{appointment_time}}\n- **Location:** {{preferred_location}}, {{location_address}}\n\n**What to expect:**\n\n1. Arrive approximately 10 minutes before your appointment time.\n2. Labs are drawn on-site. Results are typically ready within 15 minutes.\n3. Our team reviews the results one-on-one and discusses symptoms, daily demands, and goals.\n4. If optimization is appropriate, our team designs a plan specific to individual biology.\n\nThere is no obligation to proceed with any plan. Your appointment exists to provide clarity on hormone levels and options.\n\n**Before your visit,** please complete your intake form. This allows our team to make the most of the scheduled time.\n\n**CTA:** [COMPLETE THE INTAKE FORM]({{intake_link}})\n\nTo reschedule, reply to this email or call {{location_phone}}.\n\n{{pcc_name}}\nMen's Wellness Centers\n\n[Standard Privacy Footer]",
+      "message": "Hi {{first_name}},\n\nThe complimentary appointment at Men's Wellness is confirmed.\n\n**Appointment Details:**\n- **Date:** {{appointment_date}}\n- **Time:** {{appointment_time}}\n- **Location:** {{preferred_location}}, {{location_address}}\n\n**What to expect:**\n\n1. Arrive approximately 10 minutes before your appointment time.\n2. Labs are drawn on-site. Results are typically ready within 15 minutes.\n3. Our team reviews the results one-on-one and discusses symptoms, daily demands, and goals.\n4. If optimization is appropriate, our team designs a plan specific to individual biology.\n\nThere is no obligation to proceed with any plan. Your appointment exists to provide clarity on hormone levels and options.\n\n**Before your visit,** please complete your intake form. This allows our team to make the most of the scheduled time.\n\n**CTA:** [COMPLETE THE INTAKE FORM]({{intake_link}})\n\nTo reschedule, reply to this email or call {{location_phone}}.\n\n{{pcc_name}}\nMen's Wellness\n\n[Standard Privacy Footer]",
       "consult_type": "both"
     },
     {
@@ -4689,7 +4689,7 @@
       "workflow_step": "WF-04 Confirmation Chase | Step 2",
       "timing": "+12 hours after booking",
       "type": "Email",
-      "message": "Hi {{first_name}},\n\nThe upcoming appointment at Men's Wellness Centers requires confirmation.\n\n**Appointment Details:**\n- **Date:** {{appointment_date}} at {{appointment_time}}\n- **Location:** {{preferred_location}}, {{location_address}}\n\nThe schedule is kept accurate to ensure every member receives the full time needed with our team. Please reply to confirm attendance and hold the spot.\n\nIf the timing no longer works, reschedule below.\n\n**CTA:** [CONFIRM OR RESCHEDULE](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness Centers\n\n[Standard Privacy Footer]",
+      "message": "Hi {{first_name}},\n\nThe upcoming appointment at Men's Wellness requires confirmation.\n\n**Appointment Details:**\n- **Date:** {{appointment_date}} at {{appointment_time}}\n- **Location:** {{preferred_location}}, {{location_address}}\n\nThe schedule is kept accurate to ensure every member receives the full time needed with our team. Please reply to confirm attendance and hold the spot.\n\nIf the timing no longer works, reschedule below.\n\n**CTA:** [CONFIRM OR RESCHEDULE](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness\n\n[Standard Privacy Footer]",
       "consult_type": "both"
     },
     {
@@ -4697,7 +4697,7 @@
       "workflow_step": "WF-05 Appointment Reminders | Step 1",
       "timing": "3 days before appointment",
       "type": "Email",
-      "message": "Hi {{first_name}},\n\nYour appointment at Men's Wellness Centers is coming up on **{{appointment_date}} at {{appointment_time}}** at the {{preferred_location}} center.\n\n**Preparation checklist:**\n\n- **Intake form:** If not yet completed, please finalize it prior to your visit: [Complete Intake Form]({{intake_link}})\n- **Hydration:** Drink plenty of water in the 24 hours before your visit. This makes the lab draw faster and more comfortable.\n- **Fasting:** No fasting is required. Eat normally.\n- **Arrival:** Arrive about 10 minutes early. Total visit time is approximately 60-90 minutes.\n\n**What happens during your visit:**\n\nLabs are drawn on-site with results in approximately 15 minutes. Our team then reviews the full panel one-on-one, discusses symptoms and goals, and determines whether optimization is appropriate. There is no obligation to proceed.\n\nTo reschedule, reply to this email or call {{location_phone}}.\n\n{{pcc_name}}\nMen's Wellness Centers\n\n[Standard Privacy Footer]",
+      "message": "Hi {{first_name}},\n\nYour appointment at Men's Wellness is coming up on **{{appointment_date}} at {{appointment_time}}** at the {{preferred_location}} center.\n\n**Preparation checklist:**\n\n- **Intake form:** If not yet completed, please finalize it prior to your visit: [Complete Intake Form]({{intake_link}})\n- **Hydration:** Drink plenty of water in the 24 hours before your visit. This makes the lab draw faster and more comfortable.\n- **Fasting:** No fasting is required. Eat normally.\n- **Arrival:** Arrive about 10 minutes early. Total visit time is approximately 60-90 minutes.\n\n**What happens during your visit:**\n\nLabs are drawn on-site with results in approximately 15 minutes. Our team then reviews the full panel one-on-one, discusses symptoms and goals, and determines whether optimization is appropriate. There is no obligation to proceed.\n\nTo reschedule, reply to this email or call {{location_phone}}.\n\n{{pcc_name}}\nMen's Wellness\n\n[Standard Privacy Footer]",
       "consult_type": "both"
     },
     {
@@ -4705,7 +4705,7 @@
       "workflow_step": "WF-05 Appointment Reminders | Step 3",
       "timing": "1 day before appointment",
       "type": "Email",
-      "message": "Hi {{first_name}},\n\nThis is a reminder that your appointment at Men's Wellness Centers is tomorrow.\n\n**Appointment Details:**\n- **Date:** {{appointment_date}}\n- **Time:** {{appointment_time}}\n- **Location:** {{preferred_location}}, {{location_address}}\n\nArrive approximately 10 minutes early. Stay well hydrated today, as it makes the lab draw quicker and more comfortable. No fasting required.\n\nOur team will have results within about 15 minutes of the draw and will review everything in a private, one-on-one setting. If optimization is appropriate, your plan will be designed around specific lab values, not a generic protocol.\n\n{{pcc_name}}\nMen's Wellness Centers\n\n[Standard Privacy Footer]",
+      "message": "Hi {{first_name}},\n\nThis is a reminder that your appointment at Men's Wellness is tomorrow.\n\n**Appointment Details:**\n- **Date:** {{appointment_date}}\n- **Time:** {{appointment_time}}\n- **Location:** {{preferred_location}}, {{location_address}}\n\nArrive approximately 10 minutes early. Stay well hydrated today, as it makes the lab draw quicker and more comfortable. No fasting required.\n\nOur team will have results within about 15 minutes of the draw and will review everything in a private, one-on-one setting. If optimization is appropriate, your plan will be designed around specific lab values, not a generic protocol.\n\n{{pcc_name}}\nMen's Wellness\n\n[Standard Privacy Footer]",
       "consult_type": "both"
     },
     {
@@ -4713,7 +4713,7 @@
       "workflow_step": "WF-06 No-Show Recovery | Step 2",
       "timing": "+1 hour after no-show",
       "type": "Email",
-      "message": "Hi {{first_name}},\n\nYour appointment today was missed. Life gets in the way sometimes, and there is no judgment.\n\nYour inquiry remains on file, and rescheduling is available. The process remains simple: walk into the {{preferred_location}} center, have labs drawn on-site with 15-minute results, and sit with our team to review everything one-on-one.\n\nNo templated protocols. Our team builds your optimization plan around specific lab values, symptoms, and goals. Clear expectations and straightforward pricing are established before any commitment.\n\nTaking the next step takes 30 seconds.\n\n**CTA:** [RESCHEDULE THE VISIT](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness Centers\n\n[Standard Privacy Footer]",
+      "message": "Hi {{first_name}},\n\nYour appointment today was missed. Life gets in the way sometimes, and there is no judgment.\n\nYour inquiry remains on file, and rescheduling is available. The process remains simple: walk into the {{preferred_location}} center, have labs drawn on-site with 15-minute results, and sit with our team to review everything one-on-one.\n\nNo templated protocols. Our team builds your optimization plan around specific lab values, symptoms, and goals. Clear expectations and straightforward pricing are established before any commitment.\n\nTaking the next step takes 30 seconds.\n\n**CTA:** [RESCHEDULE THE VISIT](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness\n\n[Standard Privacy Footer]",
       "consult_type": "both"
     },
     {
@@ -4721,7 +4721,7 @@
       "workflow_step": "WF-06 No-Show Recovery | Step 5",
       "timing": "+3 days after no-show",
       "type": "Email",
-      "message": "Hi {{first_name}},\n\nWhen members ask what they may notice after physician-led optimization, the honest answer is that every plan is individual because every man's biology is individual.\n\nThat said, certain outcomes are consistently reported within the first 30 to 60 days:\n\n- **Energy:** Steady, sustained energy through the full day, without a spike-and-crash cycle.\n- **Mental clarity:** Improved focus and reduced brain fog during work hours.\n- **Sleep quality:** Deeper, restorative sleep with fewer disruptions.\n- **Drive and motivation:** A return of the internal push that makes effort natural.\n- **Body composition:** Reduced stubborn fat and improved muscle response to training.\n\nThese are common patterns from members whose plans were built from lab data, physician review, and consistent follow-through.\n\nRestoration is possible. Men who build and protect rely on restorative health to get back to themselves.\n\n**CTA:** [BOOK THE APPOINTMENT](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness Centers\n\n[Standard Privacy Footer]",
+      "message": "Hi {{first_name}},\n\nWhen members ask what they may notice after physician-led optimization, the honest answer is that every plan is individual because every man's biology is individual.\n\nThat said, certain outcomes are consistently reported within the first 30 to 60 days:\n\n- **Energy:** Steady, sustained energy through the full day, without a spike-and-crash cycle.\n- **Mental clarity:** Improved focus and reduced brain fog during work hours.\n- **Sleep quality:** Deeper, restorative sleep with fewer disruptions.\n- **Drive and motivation:** A return of the internal push that makes effort natural.\n- **Body composition:** Reduced stubborn fat and improved muscle response to training.\n\nThese are common patterns from members whose plans were built from lab data, physician review, and consistent follow-through.\n\nRestoration is possible. Men who build and protect rely on restorative health to get back to themselves.\n\n**CTA:** [BOOK THE APPOINTMENT](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness\n\n[Standard Privacy Footer]",
       "consult_type": "both"
     },
     {
@@ -4729,7 +4729,7 @@
       "workflow_step": "WF-07 Post-Visit, Sold | Step 2",
       "timing": "+1 hour after appointment",
       "type": "Email",
-      "message": "Hi {{first_name}},\n\nYour appointment is complete. Our team has reviewed your labs, assessed symptoms, and designed an optimization plan around your biology.\n\n**What happens next:**\n\nYour plan is in progress. Over the coming weeks, the body will begin responding to physician-led optimization. Every man's timeline is different, but noticeable changes often appear within the first 30 to 60 days.\n\n**Key principles for success:**\n\n- **Consistency matters.** Adhere to your plan outlined by our team. Results compound with commitment.\n- **Track progress.** Note energy levels, sleep quality, focus, and drive. Our team requires this feedback at the follow-up.\n- **Reach out anytime.** The team is available by phone at {{location_phone}} or by text. Support is always accessible.\n\nYour plan was built from lab data, symptoms, and goals. Not a template. Not a protocol pulled off a shelf. That distinction is central to Men's Wellness Centers and is reflected in the outcomes members experience.\n\n{{pcc_name}}\nMen's Wellness Centers\n\n[Standard Privacy Footer]",
+      "message": "Hi {{first_name}},\n\nYour appointment is complete. Our team has reviewed your labs, assessed symptoms, and designed an optimization plan around your biology.\n\n**What happens next:**\n\nYour plan is in progress. Over the coming weeks, the body will begin responding to physician-led optimization. Every man's timeline is different, but noticeable changes often appear within the first 30 to 60 days.\n\n**Key principles for success:**\n\n- **Consistency matters.** Adhere to your plan outlined by our team. Results compound with commitment.\n- **Track progress.** Note energy levels, sleep quality, focus, and drive. Our team requires this feedback at the follow-up.\n- **Reach out anytime.** The team is available by phone at {{location_phone}} or by text. Support is always accessible.\n\nYour plan was built from lab data, symptoms, and goals. Not a template. Not a protocol pulled off a shelf. That distinction is central to Men's Wellness and is reflected in the outcomes members experience.\n\n{{pcc_name}}\nMen's Wellness\n\n[Standard Privacy Footer]",
       "consult_type": "both"
     },
     {
@@ -4737,7 +4737,7 @@
       "workflow_step": "WF-07 Post-Visit, Sold | Step 4",
       "timing": "+7 days after appointment",
       "type": "Email",
-      "message": "Hi {{first_name}},\n\nOne week into physician-led optimization plan, some men notice subtle shifts, while others experience more significant changes in the weeks ahead. Both are normal.\n\n**What to pay attention to:**\n\n- **Sleep:** Improved sleep quality in the first two weeks is common. Falling asleep easily and waking up rested are early indicators.\n- **Energy:** Sustained energy throughout the day, particularly in the afternoon, improves as levels stabilize.\n- **Mood and focus:** Mental clarity and reduced irritability are frequently reported alongside energy improvements.\n\n**What to expect:**\n\nIf dramatic changes have not appeared yet, that is expected. Physician-led optimization is not an overnight process. It is a steady recalibration that builds over weeks as the body responds to a customized plan. One day at a time.\n\nFor questions, reach out by phone at {{location_phone}} or reply to this email. Progress is monitored closely.\n\n{{pcc_name}}\nMen's Wellness Centers\n\n[Standard Privacy Footer]",
+      "message": "Hi {{first_name}},\n\nOne week into physician-led optimization plan, some men notice subtle shifts, while others experience more significant changes in the weeks ahead. Both are normal.\n\n**What to pay attention to:**\n\n- **Sleep:** Improved sleep quality in the first two weeks is common. Falling asleep easily and waking up rested are early indicators.\n- **Energy:** Sustained energy throughout the day, particularly in the afternoon, improves as levels stabilize.\n- **Mood and focus:** Mental clarity and reduced irritability are frequently reported alongside energy improvements.\n\n**What to expect:**\n\nIf dramatic changes have not appeared yet, that is expected. Physician-led optimization is not an overnight process. It is a steady recalibration that builds over weeks as the body responds to a customized plan. One day at a time.\n\nFor questions, reach out by phone at {{location_phone}} or reply to this email. Progress is monitored closely.\n\n{{pcc_name}}\nMen's Wellness\n\n[Standard Privacy Footer]",
       "consult_type": "both"
     },
     {
@@ -4745,7 +4745,7 @@
       "workflow_step": "WF-07 Post-Visit, Sold | Step 6",
       "timing": "+14 days after appointment",
       "type": "Email",
-      "message": "Hi {{first_name}},\n\nTwo weeks into your optimization plan, feedback on the experience is requested. Honest perspective helps maintain the standard of care that members expect.\n\nThe survey takes approximately 2 minutes and covers your appointment experience, interactions with the team, and early observations about your plan.\n\n**CTA:** [SHARE FEEDBACK]({{survey_link}})\n\nResponses are confidential and reviewed by clinical leadership.\n\n{{pcc_name}}\nMen's Wellness Centers\n\n[Standard Privacy Footer]",
+      "message": "Hi {{first_name}},\n\nTwo weeks into your optimization plan, feedback on the experience is requested. Honest perspective helps maintain the standard of care that members expect.\n\nThe survey takes approximately 2 minutes and covers your appointment experience, interactions with the team, and early observations about your plan.\n\n**CTA:** [SHARE FEEDBACK]({{survey_link}})\n\nResponses are confidential and reviewed by clinical leadership.\n\n{{pcc_name}}\nMen's Wellness\n\n[Standard Privacy Footer]",
       "consult_type": "both"
     },
     {
@@ -4753,7 +4753,7 @@
       "workflow_step": "WF-08 A&D Recovery | Step 2a",
       "timing": "+1 day after appointment",
       "type": "Email",
-      "message": "Hi {{first_name}},\n\nYour labs are on file. Our team now has a clear picture of where levels stand, and that baseline data does not expire.\n\nThe investment is a significant factor. Consider what is included in your plan.\n\nYour optimization plan at Men's Wellness Centers covers physician-led care from a practice with over a decade of clinical experience. That means ongoing lab monitoring, dosage adjustments based on physiological response, and direct access to our team. Your plan is built from specific lab values. It is not a standardized protocol managed by an algorithm or a call center.\n\nMany members previously spent comparable amounts on supplements, over-the-counter products, and memberships that addressed symptoms without identifying the root cause. Physician-led optimization targets the underlying system.\n\nStructured payment options are available to make the investment manageable.\n\nYour labs remain on file. Pick up exactly where our team left off when the time is right.\n\n**CTA:** [BOOK THE FOLLOW-UP](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness Centers\n\n[Standard Privacy Footer]",
+      "message": "Hi {{first_name}},\n\nYour labs are on file. Our team now has a clear picture of where levels stand, and that baseline data does not expire.\n\nThe investment is a significant factor. Consider what is included in your plan.\n\nYour optimization plan at Men's Wellness covers physician-led care from a practice with over a decade of clinical experience. That means ongoing lab monitoring, dosage adjustments based on physiological response, and direct access to our team. Your plan is built from specific lab values. It is not a standardized protocol managed by an algorithm or a call center.\n\nMany members previously spent comparable amounts on supplements, over-the-counter products, and memberships that addressed symptoms without identifying the root cause. Physician-led optimization targets the underlying system.\n\nStructured payment options are available to make the investment manageable.\n\nYour labs remain on file. Pick up exactly where our team left off when the time is right.\n\n**CTA:** [BOOK THE FOLLOW-UP](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness\n\n[Standard Privacy Footer]",
       "consult_type": "both"
     },
     {
@@ -4761,7 +4761,7 @@
       "workflow_step": "WF-08 A&D Recovery | Step 2b",
       "timing": "+1 day after appointment",
       "type": "Email",
-      "message": "Hi {{first_name}},\n\nDiscussing results and options with a partner before committing is a reasonable step.\n\nTo support that conversation, here is what is critical to know:\n\n**What your labs showed:** Our team identified markers indicating that hormonal levels may be contributing to the symptoms. This is a medical finding, not a lifestyle issue.\n\n**What optimization involves:** Physician-led plan built from lab results. Ongoing monitoring with regular lab draws. Dosage adjustments based on your body's response. This is not a supplement or a one-time intervention.\n\n**What it is not:** It is not a chain or franchise model. Men's Wellness Centers is independent with over 10 years of clinical practice in Virginia. Health data is protected under HIPAA, and member information is never shared with advertising platforms.\n\n**Safety and oversight:** All care is supervised by licensed physicians with specific expertise in men's hormonal health. LegitScript certified.\n\nYour labs remain on file. If a follow-up is needed, or if you have questions about the process, our team, or pricing, the team is ready to assist.\n\n**CTA:** [SCHEDULE A FOLLOW-UP](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness Centers\n\n[Standard Privacy Footer]",
+      "message": "Hi {{first_name}},\n\nDiscussing results and options with a partner before committing is a reasonable step.\n\nTo support that conversation, here is what is critical to know:\n\n**What your labs showed:** Our team identified markers indicating that hormonal levels may be contributing to the symptoms. This is a medical finding, not a lifestyle issue.\n\n**What optimization involves:** Physician-led plan built from lab results. Ongoing monitoring with regular lab draws. Dosage adjustments based on your body's response. This is not a supplement or a one-time intervention.\n\n**What it is not:** It is not a chain or franchise model. Men's Wellness is independent with over 10 years of clinical practice in Virginia. Health data is protected under HIPAA, and member information is never shared with advertising platforms.\n\n**Safety and oversight:** All care is supervised by licensed physicians with specific expertise in men's hormonal health. LegitScript certified.\n\nYour labs remain on file. If a follow-up is needed, or if you have questions about the process, our team, or pricing, the team is ready to assist.\n\n**CTA:** [SCHEDULE A FOLLOW-UP](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness\n\n[Standard Privacy Footer]",
       "consult_type": "both"
     },
     {
@@ -4769,7 +4769,7 @@
       "workflow_step": "WF-08 A&D Recovery | Step 2c",
       "timing": "+1 day after appointment",
       "type": "Email",
-      "message": "Hi {{first_name}},\n\nThe timing may not be right to start a plan immediately. Schedules shift, priorities compete, and sometimes it takes a moment to process the information.\n\nThe important thing is that your labs are now on file. Our team has a clear baseline. When the timing is right, there is no need to repeat the process. Schedule a follow-up and pick up exactly where your appointment ended.\n\nIn the meantime, the symptoms discussed, whether low energy, difficulty with focus, disrupted sleep, or changes in drive, are unlikely to resolve on their own. They are signals from a system responding to declining hormone levels. That process continues with or without intervention.\n\nThere is no expiration date on your appointment, and there is no pressure. When the time comes, the team is ready.\n\n**CTA:** [BOOK WHEN READY](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness Centers\n\n[Standard Privacy Footer]",
+      "message": "Hi {{first_name}},\n\nThe timing may not be right to start a plan immediately. Schedules shift, priorities compete, and sometimes it takes a moment to process the information.\n\nThe important thing is that your labs are now on file. Our team has a clear baseline. When the timing is right, there is no need to repeat the process. Schedule a follow-up and pick up exactly where your appointment ended.\n\nIn the meantime, the symptoms discussed, whether low energy, difficulty with focus, disrupted sleep, or changes in drive, are unlikely to resolve on their own. They are signals from a system responding to declining hormone levels. That process continues with or without intervention.\n\nThere is no expiration date on your appointment, and there is no pressure. When the time comes, the team is ready.\n\n**CTA:** [BOOK WHEN READY](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness\n\n[Standard Privacy Footer]",
       "consult_type": "both"
     },
     {
@@ -4777,7 +4777,7 @@
       "workflow_step": "WF-08 A&D Recovery | Step 2d",
       "timing": "+1 day after appointment",
       "type": "Email",
-      "message": "Hi {{first_name}},\n\nQuestions or concerns about safety indicate sound judgment. Men should scrutinize any medical decision.\n\nA few points to consider when evaluating options:\n\n**Physician oversight:** Every optimization plan at Men's Wellness Centers is designed and monitored by a licensed physician. This is not a telehealth platform where a provider reviews information remotely. Our team is in the room, reviewing labs, and adjusting your plan based on your body's response over time.\n\n**Clinical track record:** Over 10,000 men across Virginia have been served over the past decade. A 4.9-star rating from 200+ reviews reflects the outcomes members experience.\n\n**Not a franchise:** Men's Wellness Centers is independent practice. Not a chain. Not a corporate model. Clinical decisions are made by our team, not by a corporate protocol.\n\n**Certification:** LegitScript certified and HIPAA compliant. Health data stays between the member and our team.\n\nThe team is available by phone, text, or email for specific questions. No pressure.\n\n**CTA:** [SCHEDULE A FOLLOW-UP](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness Centers\n\n[Standard Privacy Footer]",
+      "message": "Hi {{first_name}},\n\nQuestions or concerns about safety indicate sound judgment. Men should scrutinize any medical decision.\n\nA few points to consider when evaluating options:\n\n**Physician oversight:** Every optimization plan at Men's Wellness is designed and monitored by a licensed physician. This is not a telehealth platform where a provider reviews information remotely. Our team is in the room, reviewing labs, and adjusting your plan based on your body's response over time.\n\n**Clinical track record:** Over 10,000 men across Virginia have been served over the past decade. A 4.9-star rating from 200+ reviews reflects the outcomes members experience.\n\n**Not a franchise:** Men's Wellness is independent practice. Not a chain. Not a corporate model. Clinical decisions are made by our team, not by a corporate protocol.\n\n**Certification:** LegitScript certified and HIPAA compliant. Health data stays between the member and our team.\n\nThe team is available by phone, text, or email for specific questions. No pressure.\n\n**CTA:** [SCHEDULE A FOLLOW-UP](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness\n\n[Standard Privacy Footer]",
       "consult_type": "both"
     },
     {
@@ -4785,7 +4785,7 @@
       "workflow_step": "WF-08 A&D Recovery | Step 4",
       "timing": "+7 days after appointment",
       "type": "Email",
-      "message": "Hi {{first_name}},\n\nThe single most common piece of feedback received from members across the three Virginia locations is some version of the same statement: \"I feel like myself again.\"\n\nNot a different person. Not superhuman. Themselves. The version with reliable energy, mental sharpness during the workday, restorative sleep, and a drive that does not require constant effort.\n\nWhat changes is not who they are. What changes is the biology underneath. Once our team identifies the root cause through lab work and builds a plan around the data, the body has a chance to respond properly.\n\nYour baseline is established. The path forward is clear whenever the decision is made to take it.\n\n**CTA:** [BOOK THE FOLLOW-UP](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness Centers\n\n[Standard Privacy Footer]",
+      "message": "Hi {{first_name}},\n\nThe single most common piece of feedback received from members across the three Virginia locations is some version of the same statement: \"I feel like myself again.\"\n\nNot a different person. Not superhuman. Themselves. The version with reliable energy, mental sharpness during the workday, restorative sleep, and a drive that does not require constant effort.\n\nWhat changes is not who they are. What changes is the biology underneath. Once our team identifies the root cause through lab work and builds a plan around the data, the body has a chance to respond properly.\n\nYour baseline is established. The path forward is clear whenever the decision is made to take it.\n\n**CTA:** [BOOK THE FOLLOW-UP](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness\n\n[Standard Privacy Footer]",
       "consult_type": "both"
     },
     {
@@ -4793,7 +4793,7 @@
       "workflow_step": "WF-08 A&D Recovery | Step 6",
       "timing": "+21 days after appointment",
       "type": "Email",
-      "message": "Hi {{first_name}},\n\nThe lab results from your appointment are still on file, and our team's assessment remains relevant. However, hormone levels fluctuate, and the longer the interval between labs and the start of a plan, the more likely a retest becomes necessary.\n\nScheduling a follow-up now allows our team to use the existing baseline without requiring a new draw.\n\nThe symptoms, whether low energy, brain fog, disrupted sleep, or changes in drive, are not random. They are connected, and your labs provided the data to address them at the source.\n\nNot a franchise. Not a chain. Independent practice with a decade of clinical authority in Virginia. Health information is protected under HIPAA at every step.\n\n**CTA:** [BOOK THE FOLLOW-UP](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness Centers\n\n[Standard Privacy Footer]",
+      "message": "Hi {{first_name}},\n\nThe lab results from your appointment are still on file, and our team's assessment remains relevant. However, hormone levels fluctuate, and the longer the interval between labs and the start of a plan, the more likely a retest becomes necessary.\n\nScheduling a follow-up now allows our team to use the existing baseline without requiring a new draw.\n\nThe symptoms, whether low energy, brain fog, disrupted sleep, or changes in drive, are not random. They are connected, and your labs provided the data to address them at the source.\n\nNot a franchise. Not a chain. Independent practice with a decade of clinical authority in Virginia. Health information is protected under HIPAA at every step.\n\n**CTA:** [BOOK THE FOLLOW-UP](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness\n\n[Standard Privacy Footer]",
       "consult_type": "both"
     },
     {
@@ -4801,7 +4801,7 @@
       "workflow_step": "WF-09 Retention and Renewal | Step 1",
       "timing": "30 days before renewal",
       "type": "Email",
-      "message": "Hi {{first_name}},\n\nThe current optimization plan at Men's Wellness Centers is set to renew on **{{renewal_date}}**. This is a routine notification to allow time for planning.\n\n**Why continuity matters:**\n\nPhysician-led optimization delivers its best results through consistency. Our team calibrated your plan based on lab values and physiological response over time. Interruptions in care cause levels to fluctuate, and the symptoms initially addressed may return.\n\nThe next renewal ensures uninterrupted access to:\n- Ongoing physician oversight and dosage adjustments\n- Regular lab monitoring to track progress\n- Direct communication with the care team\n\nFor questions about your plan, results, or the renewal process, reach out by phone at {{location_phone}} or reply to this email.\n\n{{pcc_name}}\nMen's Wellness Centers\n\n[Standard Privacy Footer]",
+      "message": "Hi {{first_name}},\n\nThe current optimization plan at Men's Wellness is set to renew on **{{renewal_date}}**. This is a routine notification to allow time for planning.\n\n**Why continuity matters:**\n\nPhysician-led optimization delivers its best results through consistency. Our team calibrated your plan based on lab values and physiological response over time. Interruptions in care cause levels to fluctuate, and the symptoms initially addressed may return.\n\nThe next renewal ensures uninterrupted access to:\n- Ongoing physician oversight and dosage adjustments\n- Regular lab monitoring to track progress\n- Direct communication with the care team\n\nFor questions about your plan, results, or the renewal process, reach out by phone at {{location_phone}} or reply to this email.\n\n{{pcc_name}}\nMen's Wellness\n\n[Standard Privacy Footer]",
       "consult_type": "renewal"
     },
     {
@@ -4809,7 +4809,7 @@
       "workflow_step": "WF-09 Retention and Renewal | Step 3",
       "timing": "14 days before renewal",
       "type": "Email",
-      "message": "Hi {{first_name}},\n\nYour optimization plan renewal is two weeks away, on **{{renewal_date}}**.\n\nOver the course of the current plan, our team has monitored labs, adjusted care based on your body's response, and tracked progress. That data is cumulative. Each lab draw refines our team's understanding, and that precision improves with time.\n\nRenewing ensures our team continues to optimize without interruption.\n\nTo discuss any aspect of your plan, schedule a check-in, or review recent lab results, contact the center at {{location_phone}} or reply to this email.\n\n{{pcc_name}}\nMen's Wellness Centers\n\n[Standard Privacy Footer]",
+      "message": "Hi {{first_name}},\n\nYour optimization plan renewal is two weeks away, on **{{renewal_date}}**.\n\nOver the course of the current plan, our team has monitored labs, adjusted care based on your body's response, and tracked progress. That data is cumulative. Each lab draw refines our team's understanding, and that precision improves with time.\n\nRenewing ensures our team continues to optimize without interruption.\n\nTo discuss any aspect of your plan, schedule a check-in, or review recent lab results, contact the center at {{location_phone}} or reply to this email.\n\n{{pcc_name}}\nMen's Wellness\n\n[Standard Privacy Footer]",
       "consult_type": "renewal"
     },
     {
@@ -4817,7 +4817,7 @@
       "workflow_step": "WF-09 Retention and Renewal | Step 6",
       "timing": "+3 days after renewal date (if renewal did not process)",
       "type": "Email",
-      "message": "Hi {{first_name}},\n\nYour optimization plan at Men's Wellness Centers did not renew on its scheduled date. Physician-led care is currently interrupted.\n\nLapses happen, and the team is ready to resolve this quickly.\n\n**Why continuity matters for results:**\n\nWhen optimization is interrupted, hormone levels revert toward their pre-plan baseline. Symptoms originally addressed, such as low energy, reduced focus, and changes in sleep and drive, may return. Our team invested significant effort calibrating your plan, and resuming care preserves that work.\n\nTo reinstate your plan, contact the center at {{location_phone}} or schedule a brief check-in below.\n\n**CTA:** [REINSTATE THE PLAN](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness Centers\n\n[Standard Privacy Footer]",
+      "message": "Hi {{first_name}},\n\nYour optimization plan at Men's Wellness did not renew on its scheduled date. Physician-led care is currently interrupted.\n\nLapses happen, and the team is ready to resolve this quickly.\n\n**Why continuity matters for results:**\n\nWhen optimization is interrupted, hormone levels revert toward their pre-plan baseline. Symptoms originally addressed, such as low energy, reduced focus, and changes in sleep and drive, may return. Our team invested significant effort calibrating your plan, and resuming care preserves that work.\n\nTo reinstate your plan, contact the center at {{location_phone}} or schedule a brief check-in below.\n\n**CTA:** [REINSTATE THE PLAN](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness\n\n[Standard Privacy Footer]",
       "consult_type": "renewal"
     },
     {
@@ -4833,7 +4833,7 @@
       "workflow_step": "WF-10 Long-Term Nurture | Step 1",
       "timing": "+30 days after entering nurture",
       "type": "Email",
-      "message": "Hi {{first_name}},\n\nThere is a persistent misconception that low energy in men over 40 is simply a lifestyle problem. Sleep better. Exercise more. Manage stress. Drink more water. Eat cleaner.\n\nThis advice is not wrong. It is incomplete.\n\nWhen sustained fatigue, afternoon crashes, declining motivation, and reduced physical performance occur despite consistent effort, those symptoms usually point to a measurable medical issue. Testosterone, thyroid function, metabolic health, and cortisol patterns all influence energy output. When one or more of those markers move in the wrong direction, discipline alone does not solve it.\n\n**This is not speculation.** It is measurable. A single lab panel can identify whether energy issues have a hormonal component, and our team can determine the appropriate course of action based on the data.\n\nBrain fog, low energy, and poor sleep are usually connected. That is exactly why a proper lab panel matters.\n\nMen's Wellness Centers draws labs on-site with 15-minute results. Our team reviews the data the same visit. Over 10,000 men in Virginia have started with this step.\n\n**CTA:** [CHECK LEVELS](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness Centers\n\n[Standard Privacy Footer]",
+      "message": "Hi {{first_name}},\n\nThere is a persistent misconception that low energy in men over 40 is simply a lifestyle problem. Sleep better. Exercise more. Manage stress. Drink more water. Eat cleaner.\n\nThis advice is not wrong. It is incomplete.\n\nWhen sustained fatigue, afternoon crashes, declining motivation, and reduced physical performance occur despite consistent effort, those symptoms usually point to a measurable medical issue. Testosterone, thyroid function, metabolic health, and cortisol patterns all influence energy output. When one or more of those markers move in the wrong direction, discipline alone does not solve it.\n\n**This is not speculation.** It is measurable. A single lab panel can identify whether energy issues have a hormonal component, and our team can determine the appropriate course of action based on the data.\n\nBrain fog, low energy, and poor sleep are usually connected. That is exactly why a proper lab panel matters.\n\nMen's Wellness draws labs on-site with 15-minute results. Our team reviews the data the same visit. Over 10,000 men in Virginia have started with this step.\n\n**CTA:** [CHECK LEVELS](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness\n\n[Standard Privacy Footer]",
       "consult_type": "both"
     },
     {
@@ -4841,7 +4841,7 @@
       "workflow_step": "WF-10 Long-Term Nurture | Step 3",
       "timing": "+60 days after entering nurture",
       "type": "Email",
-      "message": "Hi {{first_name}},\n\nSleep is where recovery happens. It is when the body repairs tissue, consolidates memory, regulates mood, and recalibrates hormone levels. When sleep quality declines, everything downstream is affected: energy, focus, physical performance, body composition, and drive.\n\nMost men over 35 attribute poor sleep to stress or screen time. Both play a role. But declining testosterone and imbalanced cortisol patterns are frequently overlooked contributors.\n\n**The cycle looks like this:**\n\n1. Hormonal decline disrupts sleep architecture, reducing time in deep and REM sleep.\n2. Poor sleep quality further suppresses testosterone production.\n3. Lower testosterone increases cortisol sensitivity, making stress feel more acute.\n4. Elevated cortisol further disrupts sleep.\n\nIt is a feedback loop, and addressing one variable without examining the others yields limited results.\n\nA comprehensive lab panel measures testosterone, cortisol, thyroid function, and metabolic markers. Our team can identify where the cycle is breaking down and build a plan to interrupt it.\n\nFor many men, this is not a lifestyle issue first. It is a medical issue that deserves proper assessment and physician-led care.\n\n**CTA:** [SCHEDULE THE APPOINTMENT](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness Centers\n\n[Standard Privacy Footer]",
+      "message": "Hi {{first_name}},\n\nSleep is where recovery happens. It is when the body repairs tissue, consolidates memory, regulates mood, and recalibrates hormone levels. When sleep quality declines, everything downstream is affected: energy, focus, physical performance, body composition, and drive.\n\nMost men over 35 attribute poor sleep to stress or screen time. Both play a role. But declining testosterone and imbalanced cortisol patterns are frequently overlooked contributors.\n\n**The cycle looks like this:**\n\n1. Hormonal decline disrupts sleep architecture, reducing time in deep and REM sleep.\n2. Poor sleep quality further suppresses testosterone production.\n3. Lower testosterone increases cortisol sensitivity, making stress feel more acute.\n4. Elevated cortisol further disrupts sleep.\n\nIt is a feedback loop, and addressing one variable without examining the others yields limited results.\n\nA comprehensive lab panel measures testosterone, cortisol, thyroid function, and metabolic markers. Our team can identify where the cycle is breaking down and build a plan to interrupt it.\n\nFor many men, this is not a lifestyle issue first. It is a medical issue that deserves proper assessment and physician-led care.\n\n**CTA:** [SCHEDULE THE APPOINTMENT](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness\n\n[Standard Privacy Footer]",
       "consult_type": "both"
     },
     {
@@ -4849,7 +4849,7 @@
       "workflow_step": "WF-10 Long-Term Nurture | Step 5",
       "timing": "+90 days after entering nurture",
       "type": "Email",
-      "message": "Hi {{first_name}},\n\nThe men's health space has expanded significantly in recent years. Telehealth platforms, subscription services, and franchise centers all offer some version of hormone optimization. The language is often similar. The difference is in the model of care.\n\n**What physician-led care looks like at Men's Wellness Centers:**\n\n- **In-person lab work.** Labs are drawn on-site at the center, not ordered through a third-party lab. Results in approximately 15 minutes.\n- **Face-to-face physician review.** Our team reviews results and explains what your numbers mean in the context of symptoms and goals. This is not a video call or an asynchronous message.\n- **Individualized plan design.** Your optimization plan is built from labs. Not a template. Not a standard protocol. Our team designs it for your biology.\n- **Ongoing monitoring.** Regular lab draws track your body's response. Our team adjusts dosages and approach based on data, not on a fixed schedule.\n\nMen's Wellness Centers is independent practice with over a decade of clinical experience in Virginia, a 4.9-star rating across 200+ reviews, and more than 10,000 members served. LegitScript certified and HIPAA compliant.\n\nIf options are being weighed, one in-person conversation with our team can quickly clarify whether optimization is appropriate, what it would look like, and what it would cost.\n\n**CTA:** [BOOK THE APPOINTMENT](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness Centers\n\n[Standard Privacy Footer]",
+      "message": "Hi {{first_name}},\n\nThe men's health space has expanded significantly in recent years. Telehealth platforms, subscription services, and franchise centers all offer some version of hormone optimization. The language is often similar. The difference is in the model of care.\n\n**What physician-led care looks like at Men's Wellness:**\n\n- **In-person lab work.** Labs are drawn on-site at the center, not ordered through a third-party lab. Results in approximately 15 minutes.\n- **Face-to-face physician review.** Our team reviews results and explains what your numbers mean in the context of symptoms and goals. This is not a video call or an asynchronous message.\n- **Individualized plan design.** Your optimization plan is built from labs. Not a template. Not a standard protocol. Our team designs it for your biology.\n- **Ongoing monitoring.** Regular lab draws track your body's response. Our team adjusts dosages and approach based on data, not on a fixed schedule.\n\nMen's Wellness is independent practice with over a decade of clinical experience in Virginia, a 4.9-star rating across 200+ reviews, and more than 10,000 members served. LegitScript certified and HIPAA compliant.\n\nIf options are being weighed, one in-person conversation with our team can quickly clarify whether optimization is appropriate, what it would look like, and what it would cost.\n\n**CTA:** [BOOK THE APPOINTMENT](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness\n\n[Standard Privacy Footer]",
       "consult_type": "both"
     },
     {
@@ -4857,7 +4857,7 @@
       "workflow_step": "WF-10 Long-Term Nurture | Step 7",
       "timing": "+120 days after entering nurture",
       "type": "Email",
-      "message": "Hi {{first_name}},\n\nThis is the last scheduled message. Information about how men's health is approached at Men's Wellness Centers has been shared, and time is respected.\n\nIf the symptoms that originally prompted your inquiry, whether low energy, difficulty with focus, poor sleep, or changes in drive, are still present, they are worth addressing. These are not conditions that improve with time alone. They are medical signals from a hormonal system that responds to physician-led care.\n\nWhenever the time is right, the complimentary appointment is still available. On-site labs with 15-minute results, a one-on-one physician review, and a plan built from data. No obligation. Clear pricing before any decision is made.\n\n**CTA:** [SCHEDULE WHEN READY](BookMWC.com)\n\nAutomated messages will cease after this email. To reconnect, reply to this email, text, or call. The team is here.\n\n{{pcc_name}}\nMen's Wellness Centers\n\n[Standard Privacy Footer]",
+      "message": "Hi {{first_name}},\n\nThis is the last scheduled message. Information about how men's health is approached at Men's Wellness has been shared, and time is respected.\n\nIf the symptoms that originally prompted your inquiry, whether low energy, difficulty with focus, poor sleep, or changes in drive, are still present, they are worth addressing. These are not conditions that improve with time alone. They are medical signals from a hormonal system that responds to physician-led care.\n\nWhenever the time is right, the complimentary appointment is still available. On-site labs with 15-minute results, a one-on-one physician review, and a plan built from data. No obligation. Clear pricing before any decision is made.\n\n**CTA:** [SCHEDULE WHEN READY](BookMWC.com)\n\nAutomated messages will cease after this email. To reconnect, reply to this email, text, or call. The team is here.\n\n{{pcc_name}}\nMen's Wellness\n\n[Standard Privacy Footer]",
       "consult_type": "both"
     },
     {
@@ -4865,7 +4865,7 @@
       "workflow_step": "WF-12 Review and Referral | Step 2",
       "timing": "+2 days after review SMS",
       "type": "Email",
-      "message": "Hi {{first_name}},\n\nMen's Wellness Centers has maintained a 4.9-star rating across more than 200 Google reviews. Each of those reviews was left by a member who chose to share their experience.\n\nA brief Google review makes a meaningful difference. It helps other men in Virginia who are searching for physician-led care find a practice they can trust.\n\nThe review does not need to be lengthy. A few sentences about the experience, the results, or what the process was like is valuable.\n\n**CTA:** [LEAVE A REVIEW]({{review_link}})\n\nThank you for being part of the Men's Wellness Centers community.\n\n{{pcc_name}}\nMen's Wellness Centers\n\n[Standard Privacy Footer]",
+      "message": "Hi {{first_name}},\n\nMen's Wellness has maintained a 4.9-star rating across more than 200 Google reviews. Each of those reviews was left by a member who chose to share their experience.\n\nA brief Google review makes a meaningful difference. It helps other men in Virginia who are searching for physician-led care find a practice they can trust.\n\nThe review does not need to be lengthy. A few sentences about the experience, the results, or what the process was like is valuable.\n\n**CTA:** [LEAVE A REVIEW]({{review_link}})\n\nThank you for being part of the Men's Wellness community.\n\n{{pcc_name}}\nMen's Wellness\n\n[Standard Privacy Footer]",
       "consult_type": "both"
     },
     {
@@ -4886,7 +4886,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "Hi {{contact.first_name}}, it's Men's Wellness Centers. We've got openings this week for your no-cost appointment. Book a time that works best for you.",
+      "message": "Hi {{contact.first_name}}, it's Men's Wellness. We've got openings this week for your no-cost appointment. Book a time that works best for you.",
       "status": "draft"
     },
     {
@@ -4908,7 +4908,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "{{contact.first_name}}, Men's Wellness Centers. You started booking but didn't finish. Book at BookMWC.com or call/text 866-344-4955",
+      "message": "{{contact.first_name}}, Men's Wellness. You started booking but didn't finish. Book at BookMWC.com or call/text 866-344-4955",
       "status": "draft"
     },
     {
@@ -4930,7 +4930,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "{{contact.first_name}}, Men's Wellness Centers. No-cost first visit. Labs on-site, results in 20 min. BookMWC.com or call/text 866-344-4955",
+      "message": "{{contact.first_name}}, Men's Wellness. No-cost first visit. Labs on-site, results in 20 min. BookMWC.com or call/text 866-344-4955",
       "status": "draft"
     },
     {
@@ -4952,7 +4952,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "{{contact.first_name}}, Men's Wellness Centers. One-hour visit. Results in 20 min. BookMWC.com or call/text 866-344-4955",
+      "message": "{{contact.first_name}}, Men's Wellness. One-hour visit. Results in 20 min. BookMWC.com or call/text 866-344-4955",
       "status": "draft"
     },
     {
@@ -5073,7 +5073,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "https://book.menswellnesscenters.com/watch?name={{contact.first_name}}&loc=richmond\n\n\nHi {{contact.first_name}}, your appointment with Men's Wellness Centers Richmond is confirmed.\n\nYour visit: {{appointment.start_time}} at 4050 Innslake Dr, Suite 360 Glen Allen, VA 23060. You'll sit down in person with a provider who's focused on you.\n\nGet the most out of your time by taking 3 minutes to complete your intake form.\n\nbookmwc.com/intake\n\nQuestions? Call or text 866-344-4955.",
+      "message": "https://book.menswellnesscenters.com/watch?name={{contact.first_name}}&loc=richmond\n\n\nHi {{contact.first_name}}, your appointment with Men's Wellness Richmond is confirmed.\n\nYour visit: {{appointment.start_time}} at 4050 Innslake Dr, Suite 360 Glen Allen, VA 23060. You'll sit down in person with a provider who's focused on you.\n\nGet the most out of your time by taking 3 minutes to complete your intake form.\n\nbookmwc.com/intake\n\nQuestions? Call or text 866-344-4955.",
       "status": "published"
     },
     {
@@ -5183,7 +5183,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "Hi {{contact.first_name}}, your Men's Wellness Centers visit is today at {{appointment.only_start_time}}, 996 First Colonial Road Virginia Beach, VA 23454.\n\nTake 3 minutes now so your provider can focus on you, not paperwork:\n\nbookmwc.com/intake\n\nSee you soon. Need anything? Call or text 866-344-4955.",
+      "message": "Hi {{contact.first_name}}, your Men's Wellness visit is today at {{appointment.only_start_time}}, 996 First Colonial Road Virginia Beach, VA 23454.\n\nTake 3 minutes now so your provider can focus on you, not paperwork:\n\nbookmwc.com/intake\n\nSee you soon. Need anything? Call or text 866-344-4955.",
       "status": "published"
     },
     {
@@ -5205,7 +5205,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "Hi {{contact.first_name}}, your Men's Wellness Centers visit is today at {{appointment.only_start_time}}, 4050 Innslake Dr, Suite 360 Glen Allen, VA 23060.\n\nTake 3 minutes now so your provider can focus on you, not paperwork:\n\nbookmwc.com/intake\n\nSee you soon. Need anything? Call or text 866-344-4955.",
+      "message": "Hi {{contact.first_name}}, your Men's Wellness visit is today at {{appointment.only_start_time}}, 4050 Innslake Dr, Suite 360 Glen Allen, VA 23060.\n\nTake 3 minutes now so your provider can focus on you, not paperwork:\n\nbookmwc.com/intake\n\nSee you soon. Need anything? Call or text 866-344-4955.",
       "status": "published"
     },
     {
@@ -5227,7 +5227,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "Hi {{contact.first_name}}, your Men's Wellness Centers visit is today at {{appointment.only_start_time}}, 827 Diligence Drive, Suite 206 Newport News, VA 23606.\n\nTake 3 minutes now so your provider can focus on you, not paperwork:\n\nbookmwc.com/intake\n\nSee you soon. Need anything? Call or text 866-344-4955.",
+      "message": "Hi {{contact.first_name}}, your Men's Wellness visit is today at {{appointment.only_start_time}}, 827 Diligence Drive, Suite 206 Newport News, VA 23606.\n\nTake 3 minutes now so your provider can focus on you, not paperwork:\n\nbookmwc.com/intake\n\nSee you soon. Need anything? Call or text 866-344-4955.",
       "status": "published"
     },
     {
@@ -5249,7 +5249,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "Hi {{contact.first_name}}, your appointment with Men's Wellness Centers Newport News is confirmed.\n\nYour visit: {{appointment.start_time}} at 827 Diligence Drive, Suite 206 Newport News, VA 23606. You'll sit down in person with a provider who's focused on you.\n\nGet the most out of your time by taking 3 minutes to complete your intake form.\n\nbookmwc.com/intake\n\nQuestions? Call or text 866-344-4955.",
+      "message": "Hi {{contact.first_name}}, your appointment with Men's Wellness Newport News is confirmed.\n\nYour visit: {{appointment.start_time}} at 827 Diligence Drive, Suite 206 Newport News, VA 23606. You'll sit down in person with a provider who's focused on you.\n\nGet the most out of your time by taking 3 minutes to complete your intake form.\n\nbookmwc.com/intake\n\nQuestions? Call or text 866-344-4955.",
       "status": "published"
     },
     {
@@ -5260,7 +5260,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "Hi {{contact.first_name}}, your appointment with Men's Wellness Centers Virginia Beach is confirmed.\n\nYour visit: {{appointment.start_time}} at 996 First Colonial Road Virginia Beach, VA 23454. You'll sit down in person with a provider who's focused on you.\n\nGet the most out of your time by taking 3 minutes to complete your intake form.\n\nbookmwc.com/intake\n\nQuestions? Call or text 866-344-4955.",
+      "message": "Hi {{contact.first_name}}, your appointment with Men's Wellness Virginia Beach is confirmed.\n\nYour visit: {{appointment.start_time}} at 996 First Colonial Road Virginia Beach, VA 23454. You'll sit down in person with a provider who's focused on you.\n\nGet the most out of your time by taking 3 minutes to complete your intake form.\n\nbookmwc.com/intake\n\nQuestions? Call or text 866-344-4955.",
       "status": "published"
     },
     {
@@ -5293,7 +5293,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "Men's Wellness Centers {{contact.location}}, {{appointment.start_time}}. \n\nOur team is setting aside an hour for you. You'll sit down with a provider, get lab work done on the spot, and go over your options.\n\nReply YES to confirm or click here so we know to expect you:\n{{trigger_link.InI8MiYE24HtvPLNLvel}}\n\nQuestions? Call or text (866) 344‑4955.",
+      "message": "Men's Wellness {{contact.location}}, {{appointment.start_time}}. \n\nOur team is setting aside an hour for you. You'll sit down with a provider, get lab work done on the spot, and go over your options.\n\nReply YES to confirm or click here so we know to expect you:\n{{trigger_link.InI8MiYE24HtvPLNLvel}}\n\nQuestions? Call or text (866) 344‑4955.",
       "status": "draft"
     },
     {
@@ -5304,7 +5304,7 @@
       "channel": "email",
       "delay": "",
       "subject": "Your Appointment is Confirmed | {{appointment.start_time}} ({{appointment.timezone}})",
-      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nThis is a reminder of your upcoming initial medical evaluation at Men’s Wellness Centers scheduled for {{appointment.start_time}}.\n\nLocation: 827 Diligence Drive, Suite 206 Newport News, VA 23606\n\nWe’re looking forward to seeing you.\n\nOur clinical team prepares in advance for every new patient. To help us make the most of your visit, please complete your intake form:\n\nComplete your intake form before you arrive\n\nNeed to reschedule? Call or text 866-344-4955\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
+      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nThis is a reminder of your upcoming initial medical evaluation at Men’s Wellness scheduled for {{appointment.start_time}}.\n\nLocation: 827 Diligence Drive, Suite 206 Newport News, VA 23606\n\nWe’re looking forward to seeing you.\n\nOur clinical team prepares in advance for every new patient. To help us make the most of your visit, please complete your intake form:\n\nComplete your intake form before you arrive\n\nNeed to reschedule? Call or text 866-344-4955\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
       "status": "draft"
     },
     {
@@ -5315,7 +5315,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "Men's Wellness Centers {{contact.preferred_location}}, {{appointment.start_time}}. \n\nYour request to cancel you appointment has been processed. \n\nReschedule your no-cost appointment here: BookMWC.com\nQuestions? Call or text (866) 344‑4955.",
+      "message": "Men's Wellness {{contact.preferred_location}}, {{appointment.start_time}}. \n\nYour request to cancel you appointment has been processed. \n\nReschedule your no-cost appointment here: BookMWC.com\nQuestions? Call or text (866) 344‑4955.",
       "status": "draft"
     },
     {
@@ -5348,7 +5348,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "Men's Wellness Centers {{contact.preferred_location}}, {{appointment.start_time}}. \n\nYour request to cancel you appointment has been processed. \n\nReschedule your no-cost appointment here: BookMWC.com\nQuestions? Call or text (866) 344‑4955.",
+      "message": "Men's Wellness {{contact.preferred_location}}, {{appointment.start_time}}. \n\nYour request to cancel you appointment has been processed. \n\nReschedule your no-cost appointment here: BookMWC.com\nQuestions? Call or text (866) 344‑4955.",
       "status": "draft"
     },
     {
@@ -5370,7 +5370,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "Men's Wellness Centers  {{contact.location}}, {{appointment.start_time}}. \n\nOur team is setting aside an hour for you. You'll sit down with a provider, get lab work done on the spot, and go over your options.\n\nReply YES to confirm or click here so we know to expect you,\n{{trigger_link.InI8MiYE24HtvPLNLvel}}\n\nQuestions? Call or text (866) 344‑4955.",
+      "message": "Men's Wellness  {{contact.location}}, {{appointment.start_time}}. \n\nOur team is setting aside an hour for you. You'll sit down with a provider, get lab work done on the spot, and go over your options.\n\nReply YES to confirm or click here so we know to expect you,\n{{trigger_link.InI8MiYE24HtvPLNLvel}}\n\nQuestions? Call or text (866) 344‑4955.",
       "status": "draft"
     },
     {
@@ -5381,7 +5381,7 @@
       "channel": "email",
       "delay": "",
       "subject": "Your Appointment is Confirmed | {{appointment.start_time}} ({{appointment.timezone}})",
-      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nThis is a reminder of your upcoming initial medical evaluation at Men’s Wellness Centers scheduled for {{appointment.start_time}}.\n\nLocation: 996 First Colonial Road Virginia Beach, VA 23454\n\nWe’re looking forward to seeing you.\n\nOur clinical team prepares in advance for every new patient. To help us make the most of your visit, please complete your intake form:\n\nComplete your intake form before you arrive\n\nNeed to reschedule? Call or text 866-344-4955\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
+      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nThis is a reminder of your upcoming initial medical evaluation at Men’s Wellness scheduled for {{appointment.start_time}}.\n\nLocation: 996 First Colonial Road Virginia Beach, VA 23454\n\nWe’re looking forward to seeing you.\n\nOur clinical team prepares in advance for every new patient. To help us make the most of your visit, please complete your intake form:\n\nComplete your intake form before you arrive\n\nNeed to reschedule? Call or text 866-344-4955\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
       "status": "draft"
     },
     {
@@ -5392,7 +5392,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "Men's Wellness Centers {{contact.preferred_location}}, {{appointment.start_time}}. \n\nYour request to cancel you appointment has been processed. \n\nReschedule your no-cost appointment here: BookMWC.com\nQuestions? Call or text (866) 344‑4955.",
+      "message": "Men's Wellness {{contact.preferred_location}}, {{appointment.start_time}}. \n\nYour request to cancel you appointment has been processed. \n\nReschedule your no-cost appointment here: BookMWC.com\nQuestions? Call or text (866) 344‑4955.",
       "status": "draft"
     },
     {
@@ -5425,7 +5425,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "Men's Wellness Centers {{contact.preferred_location}}, {{appointment.start_time}}. \n\nYour request to cancel you appointment has been processed. \n\nReschedule your no-cost appointment here: BookMWC.com\nQuestions? Call or text (866) 344‑4955.",
+      "message": "Men's Wellness {{contact.preferred_location}}, {{appointment.start_time}}. \n\nYour request to cancel you appointment has been processed. \n\nReschedule your no-cost appointment here: BookMWC.com\nQuestions? Call or text (866) 344‑4955.",
       "status": "draft"
     },
     {
@@ -5447,7 +5447,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "Men's Wellness Centers  {{contact.location}}, {{appointment.start_time}}. \n\nOur team is setting aside an hour for you. You'll sit down with a provider, get lab work done on the spot, and go over your options.\n\nReply YES to confirm or click here so we know to expect you:\n{{trigger_link.InI8MiYE24HtvPLNLvel}}\n\nQuestions? Call or text (866) 344‑4955.",
+      "message": "Men's Wellness  {{contact.location}}, {{appointment.start_time}}. \n\nOur team is setting aside an hour for you. You'll sit down with a provider, get lab work done on the spot, and go over your options.\n\nReply YES to confirm or click here so we know to expect you:\n{{trigger_link.InI8MiYE24HtvPLNLvel}}\n\nQuestions? Call or text (866) 344‑4955.",
       "status": "draft"
     },
     {
@@ -5458,7 +5458,7 @@
       "channel": "email",
       "delay": "",
       "subject": "Your Appointment is Confirmed | {{appointment.start_time}} ({{appointment.timezone}})",
-      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nThis is a reminder of your upcoming initial medical evaluation at Men’s Wellness Centers scheduled for {{appointment.start_time}}.\n\nLocation: 4050 Innslake Dr, Suite 360 Glen Allen, VA 23060\n\nWe’re looking forward to seeing you.\n\nOur clinical team prepares in advance for every new patient. To help us make the most of your visit, please complete your intake form:\n\nComplete your intake form before you arrive\n\nNeed to reschedule? Call or text 866-344-4955\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
+      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nThis is a reminder of your upcoming initial medical evaluation at Men’s Wellness scheduled for {{appointment.start_time}}.\n\nLocation: 4050 Innslake Dr, Suite 360 Glen Allen, VA 23060\n\nWe’re looking forward to seeing you.\n\nOur clinical team prepares in advance for every new patient. To help us make the most of your visit, please complete your intake form:\n\nComplete your intake form before you arrive\n\nNeed to reschedule? Call or text 866-344-4955\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
       "status": "draft"
     },
     {
@@ -5469,7 +5469,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "Men's Wellness Centers {{contact.preferred_location}}, {appointment.start_time}}. \n\nYour request to cancel you appointment has been processed. \n\nReschedule your no-cost appointment here: BookMWC.com\nQuestions? Call or text (866) 344‑4955.",
+      "message": "Men's Wellness {{contact.preferred_location}}, {appointment.start_time}}. \n\nYour request to cancel you appointment has been processed. \n\nReschedule your no-cost appointment here: BookMWC.com\nQuestions? Call or text (866) 344‑4955.",
       "status": "draft"
     },
     {
@@ -5502,7 +5502,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "Men's Wellness Centers {{contact.preferred_location}}, {{appointment.start_time}}. \n\nYour request to cancel you appointment has been processed. \n\nReschedule your no-cost appointment here: BookMWC.com\nQuestions? Call or text (866) 344‑4955.",
+      "message": "Men's Wellness {{contact.preferred_location}}, {{appointment.start_time}}. \n\nYour request to cancel you appointment has been processed. \n\nReschedule your no-cost appointment here: BookMWC.com\nQuestions? Call or text (866) 344‑4955.",
       "status": "draft"
     },
     {
@@ -5524,7 +5524,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "Men's Wellness Centers {{contact.preferred_location}}, {{appointment.start_time}}. \n\nOur team is setting aside an hour for you. You'll sit down with a provider, get lab work done on the spot, and go over your options.\n\nReply YES to confirm or click here so we know to expect you, :\n{{trigger_link.InI8MiYE24HtvPLNLvel}}\n\nQuestions? Call or text (866) 344‑4955.",
+      "message": "Men's Wellness {{contact.preferred_location}}, {{appointment.start_time}}. \n\nOur team is setting aside an hour for you. You'll sit down with a provider, get lab work done on the spot, and go over your options.\n\nReply YES to confirm or click here so we know to expect you, :\n{{trigger_link.InI8MiYE24HtvPLNLvel}}\n\nQuestions? Call or text (866) 344‑4955.",
       "status": "draft"
     },
     {
@@ -5535,7 +5535,7 @@
       "channel": "email",
       "delay": "",
       "subject": "Action Required: Confirm Your Appointment Request | {{appointment.start_time}} ({{appointment.timezone}})",
-      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nYour 60-minute no-cost appointment at Men's Wellness Centers {{contact.location}} is reserved for {{appointment.start_time}}.\n\nThis time is held specifically for you with one of our licensed Virginia physicians.\n\nPlease confirm below so our clinical team can prepare your full intake. We'll review your health history, goals, and labs before you arrive.\n\nCONFIRM MY APPOINTMENT\n\nWalking in prepared means we spend your visit focused on you, not paperwork.\n\nNeed to make changes? Text or call (866) 344-4955.\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
+      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nYour 60-minute no-cost appointment at Men's Wellness {{contact.location}} is reserved for {{appointment.start_time}}.\n\nThis time is held specifically for you with one of our licensed Virginia physicians.\n\nPlease confirm below so our clinical team can prepare your full intake. We'll review your health history, goals, and labs before you arrive.\n\nCONFIRM MY APPOINTMENT\n\nWalking in prepared means we spend your visit focused on you, not paperwork.\n\nNeed to make changes? Text or call (866) 344-4955.\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
       "status": "draft"
     },
     {
@@ -5546,7 +5546,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "Men's Wellness Centers {{contact.preferred_location}}, {{appointment.start_time}}. \n\nYour request to cancel you appointment has been processed. \n\nReschedule your no-cost appointment here: BookMWC.com\nQuestions? Call or text (866) 344‑4955.",
+      "message": "Men's Wellness {{contact.preferred_location}}, {{appointment.start_time}}. \n\nYour request to cancel you appointment has been processed. \n\nReschedule your no-cost appointment here: BookMWC.com\nQuestions? Call or text (866) 344‑4955.",
       "status": "draft"
     },
     {
@@ -5568,7 +5568,7 @@
       "channel": "email",
       "delay": "",
       "subject": "Reminder: Confirm Your Appointment Request | {{appointment.start_time}} ({{appointment.timezone}})",
-      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nWe're following up on your upcoming 60-minute no-cost appointment at Men's Wellness Centers {{contact.location}} , scheduled for {{appointment.start_time}}.\n\nYour appointment has not yet been confirmed.\n\nThis time is held specifically for you with one of our licensed Virginia physicians. Please confirm below so our clinical team can prepare your full intake. We'll review your health history, goals, and labs before you arrive.\n\nCONFIRM MY APPOINTMENT\n\nWalking in prepared means we spend your visit focused on you, not paperwork.\n\nNeed to make changes? Text or call (866) 344-4955.\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
+      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nWe're following up on your upcoming 60-minute no-cost appointment at Men's Wellness {{contact.location}} , scheduled for {{appointment.start_time}}.\n\nYour appointment has not yet been confirmed.\n\nThis time is held specifically for you with one of our licensed Virginia physicians. Please confirm below so our clinical team can prepare your full intake. We'll review your health history, goals, and labs before you arrive.\n\nCONFIRM MY APPOINTMENT\n\nWalking in prepared means we spend your visit focused on you, not paperwork.\n\nNeed to make changes? Text or call (866) 344-4955.\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
       "status": "draft"
     },
     {
@@ -5579,7 +5579,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "Men’s Wellness Centers {{contact.location}} scheduled for {{appointment.start_time}}.\n\nReply YES to confirm or click here: {{trigger_link.InI8MiYE24HtvPLNLvel}}\n\n\nQuestions? Call/text (866) 344‑4955.",
+      "message": "Men’s Wellness {{contact.location}} scheduled for {{appointment.start_time}}.\n\nReply YES to confirm or click here: {{trigger_link.InI8MiYE24HtvPLNLvel}}\n\n\nQuestions? Call/text (866) 344‑4955.",
       "status": "draft"
     },
     {
@@ -5590,7 +5590,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "Men's Wellness Centers {{contact.preferred_location}}, {{appointment.start_time}}. \n\nYour request to cancel you appointment has been processed. \n\nReschedule your no-cost appointment here: BookMWC.com\nQuestions? Call or text (866) 344‑4955.",
+      "message": "Men's Wellness {{contact.preferred_location}}, {{appointment.start_time}}. \n\nYour request to cancel you appointment has been processed. \n\nReschedule your no-cost appointment here: BookMWC.com\nQuestions? Call or text (866) 344‑4955.",
       "status": "draft"
     },
     {
@@ -5612,7 +5612,7 @@
       "channel": "email",
       "delay": "",
       "subject": "Reminder: Confirm Your Appointment for Tomorrow | {{appointment.start_time}} ({{appointment.timezone}})",
-      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nThis is a reminder of your upcoming initial medical evaluation at Men’s Wellness Centers scheduled for {{appointment.start_time}}.\n\nLocation: 827 Diligence Drive, Suite 206 Newport News, VA 23606\n\nAt this time, your appointment has not yet been confirmed.\n\nTo ensure we are fully prepared for your visit, please confirm your appointment using the button below:\n\nCONFIRM MY APPOINTMENT\n\nOur clinical team prepares in advance for every new patient. Confirming allows us to review your health history and goals beforehand so we are fully prepared to guide your care.\n\nComplete your intake form before you arrive\n\nNeed to make changes? Call or text (866) 344‑4955.\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
+      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nThis is a reminder of your upcoming initial medical evaluation at Men’s Wellness scheduled for {{appointment.start_time}}.\n\nLocation: 827 Diligence Drive, Suite 206 Newport News, VA 23606\n\nAt this time, your appointment has not yet been confirmed.\n\nTo ensure we are fully prepared for your visit, please confirm your appointment using the button below:\n\nCONFIRM MY APPOINTMENT\n\nOur clinical team prepares in advance for every new patient. Confirming allows us to review your health history and goals beforehand so we are fully prepared to guide your care.\n\nComplete your intake form before you arrive\n\nNeed to make changes? Call or text (866) 344‑4955.\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
       "status": "draft"
     },
     {
@@ -5623,7 +5623,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "Men’s Wellness Centers Appointment: {{appointment.start_time}}\n\nClinic Location: 827 Diligence Drive, Suite 206 Newport News, VA 23606. \n\nReply YES to confirm or click {{trigger_link.InI8MiYE24HtvPLNLvel}}\n\nIntake form has been sent by email. Questions? 866-344-4955",
+      "message": "Men’s Wellness Appointment: {{appointment.start_time}}\n\nClinic Location: 827 Diligence Drive, Suite 206 Newport News, VA 23606. \n\nReply YES to confirm or click {{trigger_link.InI8MiYE24HtvPLNLvel}}\n\nIntake form has been sent by email. Questions? 866-344-4955",
       "status": "draft"
     },
     {
@@ -5634,7 +5634,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "Men's Wellness Centers {{contact.preferred_location}}, {{appointment.start_time}}. \n\nYour request to cancel you appointment has been processed. \n\nReschedule your no-cost appointment here: BookMWC.com\nQuestions? Call or text (866) 344‑4955.",
+      "message": "Men's Wellness {{contact.preferred_location}}, {{appointment.start_time}}. \n\nYour request to cancel you appointment has been processed. \n\nReschedule your no-cost appointment here: BookMWC.com\nQuestions? Call or text (866) 344‑4955.",
       "status": "draft"
     },
     {
@@ -5656,7 +5656,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "Men's Wellness Centers {{contact.preferred_location}}, {appointment.start_time}}. \n\nYour request to cancel you appointment has been processed. \n\nReschedule your no-cost appointment here: BookMWC.com\nQuestions? Call or text (866) 344‑4955.",
+      "message": "Men's Wellness {{contact.preferred_location}}, {appointment.start_time}}. \n\nYour request to cancel you appointment has been processed. \n\nReschedule your no-cost appointment here: BookMWC.com\nQuestions? Call or text (866) 344‑4955.",
       "status": "draft"
     },
     {
@@ -5678,7 +5678,7 @@
       "channel": "email",
       "delay": "",
       "subject": "",
-      "message": "96\n\n-\n\n-\n\n{{contact.first_name}},\n\nWe are holding your {{appointment.only_start_time}} appointment today at Men’s Wellness Centers.\nWe have not yet received your confirmation.\nPlease confirm now to secure your visit.\nIf we do not hear from you, this time may be released to another patient.\n\nCONFIRM MY APPOINTMENT\n\n{{location.name}}\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
+      "message": "96\n\n-\n\n-\n\n{{contact.first_name}},\n\nWe are holding your {{appointment.only_start_time}} appointment today at Men’s Wellness.\nWe have not yet received your confirmation.\nPlease confirm now to secure your visit.\nIf we do not hear from you, this time may be released to another patient.\n\nCONFIRM MY APPOINTMENT\n\n{{location.name}}\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
       "status": "draft"
     },
     {
@@ -5755,7 +5755,7 @@
       "channel": "email",
       "delay": "",
       "subject": "",
-      "message": "96\n\n-\n\n-\n\n{{contact.first_name}},\n\nWe are holding your {{appointment.only_start_time}} appointment today at Men’s Wellness Centers.\nWe have not yet received your confirmation.\nPlease confirm now to secure your visit.\nIf we do not hear from you, this time may be released to another patient.\n\nCONFIRM MY APPOINTMENT\n\nIntake form not complete? Do it now :\nComplete your intake form here.\n\n{{location.name}}\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
+      "message": "96\n\n-\n\n-\n\n{{contact.first_name}},\n\nWe are holding your {{appointment.only_start_time}} appointment today at Men’s Wellness.\nWe have not yet received your confirmation.\nPlease confirm now to secure your visit.\nIf we do not hear from you, this time may be released to another patient.\n\nCONFIRM MY APPOINTMENT\n\nIntake form not complete? Do it now :\nComplete your intake form here.\n\n{{location.name}}\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
       "status": "draft"
     },
     {
@@ -5832,7 +5832,7 @@
       "channel": "email",
       "delay": "",
       "subject": "Reminder: Confirm Your Appointment for Tomorrow | {{appointment.start_time}} ({{appointment.timezone}})",
-      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nThis is a reminder of your upcoming initial medical evaluation at Men’s Wellness Centers scheduled for {{appointment.start_time}}.\n\nLocation: 996 First Colonial Road Virginia Beach, VA 23454\n\nAt this time, your appointment has not yet been confirmed.\n\nTo ensure we are fully prepared for your visit, please confirm your appointment using the button below:\n\nCONFIRM MY APPOINTMENT\n\nOur clinical team prepares in advance for every new patient. Confirming allows us to review your health history and goals beforehand so we are fully prepared to guide your care.\n\nComplete your intake form before you arrive\n\nNeed to make changes? Call or text (866) 344‑4955.\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
+      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nThis is a reminder of your upcoming initial medical evaluation at Men’s Wellness scheduled for {{appointment.start_time}}.\n\nLocation: 996 First Colonial Road Virginia Beach, VA 23454\n\nAt this time, your appointment has not yet been confirmed.\n\nTo ensure we are fully prepared for your visit, please confirm your appointment using the button below:\n\nCONFIRM MY APPOINTMENT\n\nOur clinical team prepares in advance for every new patient. Confirming allows us to review your health history and goals beforehand so we are fully prepared to guide your care.\n\nComplete your intake form before you arrive\n\nNeed to make changes? Call or text (866) 344‑4955.\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
       "status": "draft"
     },
     {
@@ -5843,7 +5843,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "Men’s Wellness Centers Appointment: {{appointment.start_time}}\n\nClinic Location: 996 First Colonial Road Virginia Beach, VA 23454.\n\nReply YES to confirm or click {{trigger_link.InI8MiYE24HtvPLNLvel}}\n\nIntake form has been sent by email. Questions? 866-344-4955",
+      "message": "Men’s Wellness Appointment: {{appointment.start_time}}\n\nClinic Location: 996 First Colonial Road Virginia Beach, VA 23454.\n\nReply YES to confirm or click {{trigger_link.InI8MiYE24HtvPLNLvel}}\n\nIntake form has been sent by email. Questions? 866-344-4955",
       "status": "draft"
     },
     {
@@ -5854,7 +5854,7 @@
       "channel": "email",
       "delay": "",
       "subject": "Reminder: Confirm Your Appointment for Tomorrow | {{appointment.start_time}} ({{appointment.timezone}})",
-      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nThis is a reminder of your upcoming initial medical evaluation at Men’s Wellness Centers scheduled for {{appointment.start_time}}.\n\nLocation: 4050 Innslake Dr, Suite 360, Glen Allen, VA 23060\n\nAt this time, your appointment has not yet been confirmed.\n\nTo ensure we are fully prepared for your visit, please confirm your appointment using the button below:\n\nCONFIRM MY APPOINTMENT\n\nOur clinical team prepares in advance for every new patient. Confirming allows us to review your health history and goals beforehand so we are fully prepared to guide your care.\n\nComplete your intake form before you arrive\n\nNeed to make changes? Call or text (866) 344‑4955.\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
+      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nThis is a reminder of your upcoming initial medical evaluation at Men’s Wellness scheduled for {{appointment.start_time}}.\n\nLocation: 4050 Innslake Dr, Suite 360, Glen Allen, VA 23060\n\nAt this time, your appointment has not yet been confirmed.\n\nTo ensure we are fully prepared for your visit, please confirm your appointment using the button below:\n\nCONFIRM MY APPOINTMENT\n\nOur clinical team prepares in advance for every new patient. Confirming allows us to review your health history and goals beforehand so we are fully prepared to guide your care.\n\nComplete your intake form before you arrive\n\nNeed to make changes? Call or text (866) 344‑4955.\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
       "status": "draft"
     },
     {
@@ -5865,7 +5865,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "Men’s Wellness Centers Appointment: {{appointment.start_time}}\n\nClinic Location: 4050 Innslake Dr, Suite 360 Glen Allen, VA 23060.\n\nReply YES to confirm or click {{trigger_link.InI8MiYE24HtvPLNLvel}}\n\nIntake form has been sent by email. Questions? 866-344-4955",
+      "message": "Men’s Wellness Appointment: {{appointment.start_time}}\n\nClinic Location: 4050 Innslake Dr, Suite 360 Glen Allen, VA 23060.\n\nReply YES to confirm or click {{trigger_link.InI8MiYE24HtvPLNLvel}}\n\nIntake form has been sent by email. Questions? 866-344-4955",
       "status": "draft"
     },
     {
@@ -5876,7 +5876,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "Men's Wellness Centers {{contact.preferred_location}}, {{appointment.start_time}}. \n\nYour request to cancel you appointment has been processed. \n\nReschedule your no-cost appointment here: BookMWC.com\nQuestions? Call or text (866) 344‑4955.",
+      "message": "Men's Wellness {{contact.preferred_location}}, {{appointment.start_time}}. \n\nYour request to cancel you appointment has been processed. \n\nReschedule your no-cost appointment here: BookMWC.com\nQuestions? Call or text (866) 344‑4955.",
       "status": "draft"
     },
     {
@@ -6107,7 +6107,7 @@
       "channel": "email",
       "delay": "",
       "subject": "Your Appointment is Confirmed | {{appointment.start_time}} ({{appointment.timezone}})",
-      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nThis is a reminder of your upcoming initial medical evaluation at Men’s Wellness Centers scheduled for {{appointment.start_time}}.\n\nLocation: 827 Diligence Drive, Suite 206 Newport News, VA 23606\n\nWe’re looking forward to seeing you.\n\nOur clinical team prepares in advance for every new patient. To help us make the most of your visit, please complete your intake form:\n\nComplete your intake form before you arrive\n\nNeed to reschedule? Call or text 866-344-4955\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
+      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nThis is a reminder of your upcoming initial medical evaluation at Men’s Wellness scheduled for {{appointment.start_time}}.\n\nLocation: 827 Diligence Drive, Suite 206 Newport News, VA 23606\n\nWe’re looking forward to seeing you.\n\nOur clinical team prepares in advance for every new patient. To help us make the most of your visit, please complete your intake form:\n\nComplete your intake form before you arrive\n\nNeed to reschedule? Call or text 866-344-4955\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
       "status": "published"
     },
     {
@@ -6118,7 +6118,7 @@
       "channel": "email",
       "delay": "",
       "subject": "Your Appointment is Confirmed | {{appointment.start_time}} ({{appointment.timezone}})",
-      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nThis is a reminder of your upcoming initial medical evaluation at Men’s Wellness Centers scheduled for {{appointment.start_time}}.\n\nLocation: 996 First Colonial Road Virginia Beach, VA 23454\n\nWe’re looking forward to seeing you.\n\nOur clinical team prepares in advance for every new patient. To help us make the most of your visit, please complete your intake form:\n\nComplete your intake form before you arrive\n\nNeed to reschedule? Call or text 866-344-4955\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
+      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nThis is a reminder of your upcoming initial medical evaluation at Men’s Wellness scheduled for {{appointment.start_time}}.\n\nLocation: 996 First Colonial Road Virginia Beach, VA 23454\n\nWe’re looking forward to seeing you.\n\nOur clinical team prepares in advance for every new patient. To help us make the most of your visit, please complete your intake form:\n\nComplete your intake form before you arrive\n\nNeed to reschedule? Call or text 866-344-4955\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
       "status": "published"
     },
     {
@@ -6129,7 +6129,7 @@
       "channel": "email",
       "delay": "",
       "subject": "Your Appointment is Confirmed | {{appointment.start_time}} ({{appointment.timezone}})",
-      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nThis is a reminder of your upcoming initial medical evaluation at Men’s Wellness Centers scheduled for {{appointment.start_time}}.\n\nLocation: 4050 Innslake Dr, Suite 360 Glen Allen, VA 23060\n\nWe’re looking forward to seeing you.\n\nOur clinical team prepares in advance for every new patient. To help us make the most of your visit, please complete your intake form:\n\nComplete your intake form before you arrive\n\nNeed to reschedule? Call or text 866-344-4955\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
+      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nThis is a reminder of your upcoming initial medical evaluation at Men’s Wellness scheduled for {{appointment.start_time}}.\n\nLocation: 4050 Innslake Dr, Suite 360 Glen Allen, VA 23060\n\nWe’re looking forward to seeing you.\n\nOur clinical team prepares in advance for every new patient. To help us make the most of your visit, please complete your intake form:\n\nComplete your intake form before you arrive\n\nNeed to reschedule? Call or text 866-344-4955\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
       "status": "published"
     },
     {
@@ -6140,7 +6140,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "Hi {{contact.first_name}},\n\nYour initial medical evaluation at Men’s Wellness Centers {{contact.location}} has been scheduled for {{appointment.start_time}}.\n\nThis time has been reserved specifically for you.\n\nTo officially secure your visit, please confirm your appointment using the button below.\n{{trigger_link.InI8MiYE24HtvPLNLvel}}",
+      "message": "Hi {{contact.first_name}},\n\nYour initial medical evaluation at Men’s Wellness {{contact.location}} has been scheduled for {{appointment.start_time}}.\n\nThis time has been reserved specifically for you.\n\nTo officially secure your visit, please confirm your appointment using the button below.\n{{trigger_link.InI8MiYE24HtvPLNLvel}}",
       "status": "published"
     },
     {
@@ -6162,7 +6162,7 @@
       "channel": "email",
       "delay": "",
       "subject": "Action Required: Confirm Your Appointment Request | {{appointment.start_time}} ({{appointment.timezone}})",
-      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nYour 60-minute no-cost appointment at Men's Wellness Centers {{contact.location}} is reserved for {{appointment.start_time}}.\n\nThis time is held specifically for you with one of our licensed Virginia physicians.\n\nPlease confirm below so our clinical team can prepare your full intake. We'll review your health history, goals, and labs before you arrive.\n\nCONFIRM MY APPOINTMENT\n\nWalking in prepared means we spend your visit focused on you, not paperwork.\n\nNeed to make changes? Text or call (866) 344-4955.\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
+      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nYour 60-minute no-cost appointment at Men's Wellness {{contact.location}} is reserved for {{appointment.start_time}}.\n\nThis time is held specifically for you with one of our licensed Virginia physicians.\n\nPlease confirm below so our clinical team can prepare your full intake. We'll review your health history, goals, and labs before you arrive.\n\nCONFIRM MY APPOINTMENT\n\nWalking in prepared means we spend your visit focused on you, not paperwork.\n\nNeed to make changes? Text or call (866) 344-4955.\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
       "status": "published"
     },
     {
@@ -6172,7 +6172,7 @@
       "step_id": "9a536c2f-eced-4188-9a89-763d1e6afcae",
       "channel": "email",
       "delay": "",
-      "subject": "Appointment Cancelled: Men's Wellness Centers {{contact.preferred_location}} | {{appointment.start_time}} ({{appointment.timezone}})",
+      "subject": "Appointment Cancelled: Men's Wellness {{contact.preferred_location}} | {{appointment.start_time}} ({{appointment.timezone}})",
       "message": "Email Patient (Cancellation notification)",
       "status": "published"
     },
@@ -6195,7 +6195,7 @@
       "channel": "email",
       "delay": "",
       "subject": "Reminder: Confirm Your Appointment Request | {{appointment.start_time}} ({{appointment.timezone}})",
-      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nWe're following up on your upcoming 60-minute no-cost appointment at Men's Wellness Centers {{contact.location}} , scheduled for {{appointment.start_time}}.\n\nYour appointment has not yet been confirmed.\n\nThis time is held specifically for you with one of our licensed Virginia physicians. Please confirm below so our clinical team can prepare your full intake. We'll review your health history, goals, and labs before you arrive.\n\nCONFIRM MY APPOINTMENT\n\nWalking in prepared means we spend your visit focused on you, not paperwork.\n\nNeed to make changes? Text or call (866) 344-4955.\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
+      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nWe're following up on your upcoming 60-minute no-cost appointment at Men's Wellness {{contact.location}} , scheduled for {{appointment.start_time}}.\n\nYour appointment has not yet been confirmed.\n\nThis time is held specifically for you with one of our licensed Virginia physicians. Please confirm below so our clinical team can prepare your full intake. We'll review your health history, goals, and labs before you arrive.\n\nCONFIRM MY APPOINTMENT\n\nWalking in prepared means we spend your visit focused on you, not paperwork.\n\nNeed to make changes? Text or call (866) 344-4955.\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
       "status": "published"
     },
     {
@@ -6217,7 +6217,7 @@
       "channel": "email",
       "delay": "",
       "subject": "Reminder: Confirm Your Appointment for Tomorrow | {{appointment.start_time}} ({{appointment.timezone}})",
-      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nThis is a reminder of your upcoming initial medical evaluation at Men’s Wellness Centers scheduled for {{appointment.start_time}}.\n\nLocation: 827 Diligence Drive, Suite 206 Newport News, VA 23606\n\nAt this time, your appointment has not yet been confirmed.\n\nTo ensure we are fully prepared for your visit, please confirm your appointment using the button below:\n\nCONFIRM MY APPOINTMENT\n\nOur clinical team prepares in advance for every new patient. Confirming allows us to review your health history and goals beforehand so we are fully prepared to guide your care.\n\nComplete your intake form before you arrive\n\nNeed to make changes? Call or text (866) 344‑4955.\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
+      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nThis is a reminder of your upcoming initial medical evaluation at Men’s Wellness scheduled for {{appointment.start_time}}.\n\nLocation: 827 Diligence Drive, Suite 206 Newport News, VA 23606\n\nAt this time, your appointment has not yet been confirmed.\n\nTo ensure we are fully prepared for your visit, please confirm your appointment using the button below:\n\nCONFIRM MY APPOINTMENT\n\nOur clinical team prepares in advance for every new patient. Confirming allows us to review your health history and goals beforehand so we are fully prepared to guide your care.\n\nComplete your intake form before you arrive\n\nNeed to make changes? Call or text (866) 344‑4955.\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
       "status": "published"
     },
     {
@@ -6239,7 +6239,7 @@
       "channel": "email",
       "delay": "",
       "subject": "[Action Required]: Confirm your Appointment Today: {{appointment.only_start_time}}",
-      "message": "96\n\n-\n\n-\n\n{{contact.first_name}},\n\nWe are holding your {{appointment.only_start_time}} appointment today at Men’s Wellness Centers.\nWe have not yet received your confirmation.\nPlease confirm now to secure your visit.\nIf we do not hear from you, this time may be released to another patient.\n\nCONFIRM MY APPOINTMENT\n\n{{location.name}}\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
+      "message": "96\n\n-\n\n-\n\n{{contact.first_name}},\n\nWe are holding your {{appointment.only_start_time}} appointment today at Men’s Wellness.\nWe have not yet received your confirmation.\nPlease confirm now to secure your visit.\nIf we do not hear from you, this time may be released to another patient.\n\nCONFIRM MY APPOINTMENT\n\n{{location.name}}\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
       "status": "published"
     },
     {
@@ -6316,7 +6316,7 @@
       "channel": "email",
       "delay": "",
       "subject": "[Action Required]: Confirm your Appointment Today: {{appointment.only_start_time}}",
-      "message": "96\n\n-\n\n-\n\n{{contact.first_name}},\n\nWe are holding your {{appointment.only_start_time}} appointment today at Men’s Wellness Centers.\nWe have not yet received your confirmation.\nPlease confirm now to secure your visit.\nIf we do not hear from you, this time may be released to another patient.\n\nCONFIRM MY APPOINTMENT\n\nIntake form not complete? Do it now :\nComplete your intake form here.\n\n{{location.name}}\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
+      "message": "96\n\n-\n\n-\n\n{{contact.first_name}},\n\nWe are holding your {{appointment.only_start_time}} appointment today at Men’s Wellness.\nWe have not yet received your confirmation.\nPlease confirm now to secure your visit.\nIf we do not hear from you, this time may be released to another patient.\n\nCONFIRM MY APPOINTMENT\n\nIntake form not complete? Do it now :\nComplete your intake form here.\n\n{{location.name}}\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
       "status": "published"
     },
     {
@@ -6426,7 +6426,7 @@
       "channel": "email",
       "delay": "",
       "subject": "Reminder: Confirm Your Appointment for Tomorrow | {{appointment.start_time}} ({{appointment.timezone}})",
-      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nThis is a reminder of your upcoming initial medical evaluation at Men’s Wellness Centers scheduled for {{appointment.start_time}}.\n\nLocation: 996 First Colonial Road Virginia Beach, VA 23454\n\nAt this time, your appointment has not yet been confirmed.\n\nTo ensure we are fully prepared for your visit, please confirm your appointment using the button below:\n\nCONFIRM MY APPOINTMENT\n\nOur clinical team prepares in advance for every new patient. Confirming allows us to review your health history and goals beforehand so we are fully prepared to guide your care.\n\nComplete your intake form before you arrive\n\nNeed to make changes? Call or text (866) 344‑4955.\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
+      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nThis is a reminder of your upcoming initial medical evaluation at Men’s Wellness scheduled for {{appointment.start_time}}.\n\nLocation: 996 First Colonial Road Virginia Beach, VA 23454\n\nAt this time, your appointment has not yet been confirmed.\n\nTo ensure we are fully prepared for your visit, please confirm your appointment using the button below:\n\nCONFIRM MY APPOINTMENT\n\nOur clinical team prepares in advance for every new patient. Confirming allows us to review your health history and goals beforehand so we are fully prepared to guide your care.\n\nComplete your intake form before you arrive\n\nNeed to make changes? Call or text (866) 344‑4955.\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
       "status": "published"
     },
     {
@@ -6448,7 +6448,7 @@
       "channel": "email",
       "delay": "",
       "subject": "Reminder: Confirm Your Appointment for Tomorrow | {{appointment.start_time}} ({{appointment.timezone}})",
-      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nThis is a reminder of your upcoming initial medical evaluation at Men’s Wellness Centers scheduled for {{appointment.start_time}}.\n\nLocation: 4050 Innslake Dr, Suite 360, Glen Allen, VA 23060\n\nAt this time, your appointment has not yet been confirmed.\n\nTo ensure we are fully prepared for your visit, please confirm your appointment using the button below:\n\nCONFIRM MY APPOINTMENT\n\nOur clinical team prepares in advance for every new patient. Confirming allows us to review your health history and goals beforehand so we are fully prepared to guide your care.\n\nComplete your intake form before you arrive\n\nNeed to make changes? Call or text (866) 344‑4955.\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
+      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nThis is a reminder of your upcoming initial medical evaluation at Men’s Wellness scheduled for {{appointment.start_time}}.\n\nLocation: 4050 Innslake Dr, Suite 360, Glen Allen, VA 23060\n\nAt this time, your appointment has not yet been confirmed.\n\nTo ensure we are fully prepared for your visit, please confirm your appointment using the button below:\n\nCONFIRM MY APPOINTMENT\n\nOur clinical team prepares in advance for every new patient. Confirming allows us to review your health history and goals beforehand so we are fully prepared to guide your care.\n\nComplete your intake form before you arrive\n\nNeed to make changes? Call or text (866) 344‑4955.\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
       "status": "published"
     },
     {
@@ -9044,7 +9044,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "{{contact.first_name}}, Men's Wellness Centers. No-cost visit. Results in 20 min. BookMWC.com or call/text 866-344-4955",
+      "message": "{{contact.first_name}}, Men's Wellness. No-cost visit. Results in 20 min. BookMWC.com or call/text 866-344-4955",
       "status": "published"
     },
     {
@@ -9066,7 +9066,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "{{contact.first_name}}, Men's Wellness Centers. No-cost visit. Fast results. BookMWC.com or call/text 866-344-4955",
+      "message": "{{contact.first_name}}, Men's Wellness. No-cost visit. Fast results. BookMWC.com or call/text 866-344-4955",
       "status": "published"
     },
     {
@@ -9165,7 +9165,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "Hi {{contact.first_name}}, this is Men's Wellness Centers. We have your appointment pending confirmation. Reply Y to confirm or R to reschedule. Or call (866) 344-4955.",
+      "message": "Hi {{contact.first_name}}, this is Men's Wellness. We have your appointment pending confirmation. Reply Y to confirm or R to reschedule. Or call (866) 344-4955.",
       "status": "draft"
     },
     {
@@ -9176,7 +9176,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "Hi {{contact.first_name}}, this is Men's Wellness Centers. We still have your appointment pending confirmation. Reply Y to confirm or R to reschedule. Or call (866) 344-4955.",
+      "message": "Hi {{contact.first_name}}, this is Men's Wellness. We still have your appointment pending confirmation. Reply Y to confirm or R to reschedule. Or call (866) 344-4955.",
       "status": "draft"
     },
     {
@@ -9187,7 +9187,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "Hi {{contact.first_name}}, Men's Wellness Centers here. Just checking in regarding your upcoming appointment. Please reply Y to confirm your appointment or R if you need to reschedule. Questions? Call us at (866) 344-4955.",
+      "message": "Hi {{contact.first_name}}, Men's Wellness here. Just checking in regarding your upcoming appointment. Please reply Y to confirm your appointment or R if you need to reschedule. Questions? Call us at (866) 344-4955.",
       "status": "draft"
     },
     {
@@ -9264,7 +9264,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "Hi {{contact.first_name}}, thank you for visiting Men’s Wellness Centers today.\n\nWe appreciate you coming in. If you have any questions or need anything following your visit, feel free to reply here or contact our team.\n\nWe look forward to supporting you on your wellness journey.",
+      "message": "Hi {{contact.first_name}}, thank you for visiting Men’s Wellness today.\n\nWe appreciate you coming in. If you have any questions or need anything following your visit, feel free to reply here or contact our team.\n\nWe look forward to supporting you on your wellness journey.",
       "status": "draft"
     },
     {
@@ -9274,8 +9274,8 @@
       "step_id": "c83da624-8aeb-4f8a-aad3-b2c4257d5f8e",
       "channel": "email",
       "delay": "",
-      "subject": "Thank You for Visiting Men’s Wellness Centers",
-      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nThank you for taking the time to visit Men’s Wellness Centers . We appreciate the opportunity to meet with you and discuss your goals.\nOur team is here to support you every step of the way. If you have any follow-up questions, need clarification, or would like to schedule your next visit, please don’t hesitate to reach out.\nWe look forward to continuing to support your health and wellness.\n\nMen’s Wellness Centers\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
+      "subject": "Thank You for Visiting Men’s Wellness",
+      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nThank you for taking the time to visit Men’s Wellness . We appreciate the opportunity to meet with you and discuss your goals.\nOur team is here to support you every step of the way. If you have any follow-up questions, need clarification, or would like to schedule your next visit, please don’t hesitate to reach out.\nWe look forward to continuing to support your health and wellness.\n\nMen’s Wellness\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
       "status": "draft"
     },
     {
@@ -9286,7 +9286,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "Hi {{contact.first_name}}, thank you for visiting Men’s Wellness Centers today.\n\nWe appreciate you coming in. If you have any questions or need anything following your visit, feel free to reply here or contact our team.\n\nWe look forward to supporting you on your wellness journey.",
+      "message": "Hi {{contact.first_name}}, thank you for visiting Men’s Wellness today.\n\nWe appreciate you coming in. If you have any questions or need anything following your visit, feel free to reply here or contact our team.\n\nWe look forward to supporting you on your wellness journey.",
       "status": "draft"
     },
     {
@@ -9296,8 +9296,8 @@
       "step_id": "b64edf2f-e507-4793-b41c-e0985e2617ed",
       "channel": "email",
       "delay": "",
-      "subject": "Thank You for Visiting Men’s Wellness Centers",
-      "message": "96\n\n-\n\nHi {{contact.first_name}},\n\nThank you for taking the time to visit Men’s Wellness Centers. We appreciate the opportunity to meet with you and discuss your goals.\nOur team is here to support you every step of the way. If you have any follow-up questions, need clarification, or would like to schedule your next visit, please don’t hesitate to reach out.\nWe look forward to continuing to support your health and wellness.\n\nWarm regards,\nMen’s Wellness Centers\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
+      "subject": "Thank You for Visiting Men’s Wellness",
+      "message": "96\n\n-\n\nHi {{contact.first_name}},\n\nThank you for taking the time to visit Men’s Wellness. We appreciate the opportunity to meet with you and discuss your goals.\nOur team is here to support you every step of the way. If you have any follow-up questions, need clarification, or would like to schedule your next visit, please don’t hesitate to reach out.\nWe look forward to continuing to support your health and wellness.\n\nWarm regards,\nMen’s Wellness\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
       "status": "draft"
     },
     {
@@ -9308,7 +9308,7 @@
       "channel": "sms",
       "delay": "",
       "subject": "",
-      "message": "Hi {{contact.first_name}}, thank you for visiting Men’s Wellness Centers today.\n\nWe appreciate you coming in. If you have any questions or need anything following your visit, feel free to reply here or contact our team.\n\nWe look forward to supporting you on your wellness journey.",
+      "message": "Hi {{contact.first_name}}, thank you for visiting Men’s Wellness today.\n\nWe appreciate you coming in. If you have any questions or need anything following your visit, feel free to reply here or contact our team.\n\nWe look forward to supporting you on your wellness journey.",
       "status": "draft"
     },
     {
@@ -9318,8 +9318,8 @@
       "step_id": "7040a3ec-7b0b-4368-b1fa-6dc325230c7a",
       "channel": "email",
       "delay": "",
-      "subject": "Thank You for Visiting Men’s Wellness Centers",
-      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nThank you for taking the time to visit Men’s Wellness Centers . We appreciate the opportunity to meet with you and discuss your goals.\nOur team is here to support you every step of the way. If you have any follow-up questions, need clarification, or would like to schedule your next visit, please don’t hesitate to reach out.\nWe look forward to continuing to support your health and wellness.\n\nMen’s Wellness Centers\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
+      "subject": "Thank You for Visiting Men’s Wellness",
+      "message": "96\n\n-\n\n-\n\nHi {{contact.first_name}},\n\nThank you for taking the time to visit Men’s Wellness . We appreciate the opportunity to meet with you and discuss your goals.\nOur team is here to support you every step of the way. If you have any follow-up questions, need clarification, or would like to schedule your next visit, please don’t hesitate to reach out.\nWe look forward to continuing to support your health and wellness.\n\nMen’s Wellness\n\nCopyright © {{right_now.year}} {{location.name}}, All rights reserved.\n\nOur e-mail address is:\n{{location.email}}\n\nWant to change how you receive these emails?\nYou can unsubscribe from this list .",
       "status": "draft"
     },
     {

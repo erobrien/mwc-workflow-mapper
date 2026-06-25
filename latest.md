@@ -1,38 +1,39 @@
 # Revenue-Integrity Monitor — 1-day snapshot
 
-_2026-06-24T12:51:01+00:00 · location Ghstz8eIsHWLeXek47dk · **read-only**, GET-only collector_
+_2026-06-25T12:52:51+00:00 · location Ghstz8eIsHWLeXek47dk · **read-only**, GET-only collector_
 
-## ✅ All metrics within tolerance
+## 🔴 ALERTS
+- Show rate: 0.0% (down 100.0 pts vs 100.0%)
 
 ## Metrics vs baseline (median of same-window snapshots, last 7d)
 
 | Metric | Current | Baseline | Drift |
 |---|---|---|---|
-| New opportunities | **136** | 90 |  🔴 **+51.1%** vs baseline |
-| Appointments booked | **43** | 43 |  (+0.0% vs baseline) |
-| Show rate (showed / showed+noshow) | **None%** | 100.0% | |
-| Opportunities Won | **32** | 12 |  🔴 **+166.7%** vs baseline |
-| Won revenue | **58748.0 $** | 26000.0 $ |  🔴 **+126.0%** vs baseline |
-| Won-with-$0 (data-quality) | **19** | 0 |  🔴 **19 won opps with $0** (A&D regression guard) |
+| New opportunities | **115** | 111 |  (+3.6% vs baseline) |
+| Appointments booked | **49** | 43 |  🔴 **+14.0%** vs baseline |
+| Show rate (showed / showed+noshow) | **0.0%** | 100.0% |  🔴 **−100.0 pts** (auto-confirm watch) |
+| Opportunities Won | **10** | 12 |  🔴 **-16.7%** vs baseline |
+| Won revenue | **15600.0 $** | 26000.0 $ |  🔴 **-40.0%** vs baseline |
+| Won-with-$0 (data-quality) | **7** | 0 |  🔴 **7 won opps with $0** (A&D regression guard) |
 
 ## Appointment cohort detail (booked in window)
 
-| Location | Booked | cancelled | confirmed |
-|---|---|---|---|
-| Richmond | 22 | 1 | 21 |
-| Virginia Beach | 11 | 1 | 10 |
-| Newport News | 10 | 0 | 10 |
+| Location | Booked | cancelled | confirmed | noshow |
+|---|---|---|---|---|
+| Richmond | 28 | 3 | 25 | 0 |
+| Virginia Beach | 16 | 0 | 15 | 1 |
+| Newport News | 5 | 0 | 5 | 0 |
 
 ## Won detail by pipeline (window)
 
 | Pipeline | Won | Revenue | Won-$0 |
 |---|---|---|---|
-| 01. MWC Sales Production | 2 | $5,200 | 1 |
+| 01. MWC Sales Production | 1 | $0 | 1 |
 | 02. Newport News | 0 | $0 | 0 |
-| 03. Richmond | 1 | $5,200 | 0 |
+| 03. Richmond | 0 | $0 | 0 |
 | 04. Virginia Beach | 0 | $0 | 0 |
 | 05. Virtual | 0 | $0 | 0 |
-| 07. A & D | 29 | $48,348 | 18 |
+| 07. A & D | 9 | $15,600 | 6 |
 
 ---
-_History: 13 snapshots in monitor/data/history.jsonl · alert thresholds: 10% drift, 5-pt show-rate drop._
+_History: 14 snapshots in monitor/data/history.jsonl · alert thresholds: 10% drift, 5-pt show-rate drop._

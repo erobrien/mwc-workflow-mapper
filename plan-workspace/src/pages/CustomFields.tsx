@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { PageShell } from "../components/Shell";
-import { Download, ChevronUp, ChevronDown, ChevronsUpDown, ChevronLeft, ChevronRight, Check, Sparkles } from "lucide-react";
+import { Download, ChevronUp, ChevronDown, ChevronsUpDown, ChevronLeft, ChevronRight, Check, Sparkles,
+  FolderTree, ArrowRight, UserPlus, Repeat, Building2, Stethoscope, Trash2, AlertTriangle } from "lucide-react";
 
 interface CustomField {
   id: string;
@@ -22,6 +23,145 @@ interface FieldData {
   total_contacts: number;
   total_fields: number;
   fields: CustomField[];
+}
+
+// ── Folder redesign (folder_redesign.json) ──
+interface RField { key: string; name: string; count: number; disposition?: string; current_folder?: string; }
+interface ProposedFolder { name: string; purpose: string; fields: RField[]; }
+interface MoveField extends RField { destination: string; why: string; }
+interface RedesignDoc {
+  philosophy: string;
+  current_folders: { name: string; field_count: number }[];
+  proposed_folders: ProposedFolder[];
+  move_off_contact: MoveField[];
+  stats: { total_fields: number; kept_on_contact: number; proposed_folder_count: number; current_folder_count: number; moved: number; move_breakdown: Record<string, number> };
+}
+
+// Visual identity per proposed folder — Consultation backbone leads
+function folderStyle(name: string) {
+  if (/Consultation — New/i.test(name))     return { icon: UserPlus,    ring: "border-emerald-300 dark:border-emerald-800", head: "bg-emerald-50 dark:bg-emerald-950/30", accent: "text-emerald-700 dark:text-emerald-400" };
+  if (/Consultation — Renewal/i.test(name)) return { icon: Repeat,      ring: "border-sky-300 dark:border-sky-800",       head: "bg-sky-50 dark:bg-sky-950/30",       accent: "text-sky-700 dark:text-sky-400" };
+  return { icon: FolderTree, ring: "border-gray-300 dark:border-border", head: "bg-muted/40", accent: "text-muted-foreground" };
+}
+const MOVE_STYLE: Record<string, { icon: any; cls: string; label: string }> = {
+  Opportunity: { icon: Building2,    cls: "border-sky-300 text-sky-700 dark:border-sky-800 dark:text-sky-400",        label: "→ Opportunity" },
+  EMR:         { icon: Stethoscope,  cls: "border-violet-300 text-violet-700 dark:border-violet-800 dark:text-violet-400", label: "→ EMR" },
+  Retire:      { icon: Trash2,       cls: "border-red-300 text-red-700 dark:border-red-800 dark:text-red-400",        label: "→ Retire (0-usage)" },
+};
+
+function FieldChip({ f }: { f: RField }) {
+  return (
+    <span className="inline-flex items-center gap-1.5 rounded-md border border-gray-300 dark:border-border bg-background px-2 py-1 text-[11px]" title={`${f.key} · ${f.count.toLocaleString()} records${f.current_folder ? ` · was: ${f.current_folder}` : ""}`}>
+      <span className="text-foreground/90 max-w-[200px] truncate">{f.name}</span>
+      <span className={`tabular-nums font-semibold ${f.count === 0 ? "text-red-500" : "text-muted-foreground"}`}>{f.count.toLocaleString()}</span>
+    </span>
+  );
+}
+
+function FoldersView({ doc }: { doc: RedesignDoc }) {
+  const folders = [...doc.proposed_folders].sort((a, b) => {
+    const rank = (n: string) => /Consultation — New/i.test(n) ? 0 : /Consultation — Renewal/i.test(n) ? 1 : 2;
+    return rank(a.name) - rank(b.name) || b.fields.length - a.fields.length;
+  });
+  const moveGroups = ["Opportunity", "EMR", "Retire"].map((d) => ({ d, items: doc.move_off_contact.filter((m) => m.destination === d) })).filter((g) => g.items.length);
+
+  return (
+    <div className="space-y-6">
+      {/* Stats */}
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+        {[
+          { label: "Folders", value: `${doc.stats.current_folder_count} → ${doc.stats.proposed_folder_count}`, sub: "messy → clean", cls: "text-foreground" },
+          { label: "Kept on Contact", value: doc.stats.kept_on_contact, sub: `of ${doc.stats.total_fields} fields`, cls: "text-emerald-600 dark:text-emerald-400" },
+          { label: "Moved off Contact", value: doc.stats.moved, sub: Object.entries(doc.stats.move_breakdown).map(([k, v]) => `${v} ${k}`).join(" · "), cls: "text-sky-600 dark:text-sky-400" },
+          { label: "Backbone", value: "New / Renewal", sub: "Consultation-first", cls: "text-emerald-600 dark:text-emerald-400" },
+        ].map((s) => (
+          <div key={s.label} className="rounded-lg border border-gray-300 dark:border-border bg-card p-3">
+            <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">{s.label}</div>
+            <div className={`mt-1 text-xl font-bold ${s.cls}`}>{s.value}</div>
+            <div className="text-[10px] text-muted-foreground">{s.sub}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Philosophy */}
+      <div className="rounded-lg border-l-4 border-l-emerald-500 border border-gray-300 dark:border-border bg-card p-4 text-sm text-foreground/90">
+        <span className="font-semibold">Organizing principle: </span>{doc.philosophy}
+      </div>
+
+      {/* Current (as-is) — the mess */}
+      <div>
+        <div className="mb-2 flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
+          <AlertTriangle className="h-3.5 w-3.5 text-amber-500" /> Current folders (as-is) — {doc.current_folders.length} folders, overlapping & vague
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {doc.current_folders.map((f) => (
+            <span key={f.name} className="inline-flex items-center gap-1.5 rounded-md border border-dashed border-gray-400 dark:border-border bg-muted/30 px-2.5 py-1 text-xs text-muted-foreground">
+              {f.name} <span className="tabular-nums font-semibold">{f.field_count}</span>
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* Proposed */}
+      <div>
+        <div className="mb-3 flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
+          <FolderTree className="h-3.5 w-3.5 text-emerald-500" /> Proposed folders (to-be) — Consultation-first
+        </div>
+        <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+          {folders.map((fl) => {
+            const st = folderStyle(fl.name);
+            const Icon = st.icon;
+            return (
+              <div key={fl.name} className={`rounded-lg border ${st.ring} bg-card overflow-hidden`}>
+                <div className={`flex items-start gap-2 px-4 py-3 ${st.head} border-b border-gray-200 dark:border-border`}>
+                  <Icon className={`h-4 w-4 shrink-0 mt-0.5 ${st.accent}`} />
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="font-semibold text-sm text-foreground">{fl.name}</span>
+                      <span className="rounded bg-background/70 px-1.5 py-0.5 text-[10px] font-semibold tabular-nums text-muted-foreground">{fl.fields.length}</span>
+                    </div>
+                    <p className="mt-0.5 text-[11px] leading-snug text-muted-foreground line-clamp-2">{fl.purpose}</p>
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-1.5 p-3">
+                  {fl.fields.length ? fl.fields.map((f) => <FieldChip key={f.key} f={f} />)
+                    : <span className="text-xs italic text-muted-foreground">Forward-looking — populated as renewal workflows go live.</span>}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Moving off contact */}
+      <div>
+        <div className="mb-3 flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
+          <ArrowRight className="h-3.5 w-3.5" /> Moving off the Contact ({doc.move_off_contact.length}) — deal data → Opportunity, clinical → EMR, dead fields retired
+        </div>
+        <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
+          {moveGroups.map(({ d, items }) => {
+            const st = MOVE_STYLE[d]; const Icon = st.icon;
+            return (
+              <div key={d} className={`rounded-lg border bg-card overflow-hidden ${st.cls.split(" ").filter(c => c.startsWith("border")).join(" ")}`}>
+                <div className="flex items-center gap-2 px-4 py-2.5 border-b border-gray-200 dark:border-border">
+                  <Icon className={`h-4 w-4 ${st.cls.split(" ").filter(c => c.startsWith("text")).join(" ")}`} />
+                  <span className="font-semibold text-sm text-foreground">{st.label}</span>
+                  <span className="ml-auto rounded bg-muted px-1.5 py-0.5 text-[10px] font-semibold tabular-nums text-muted-foreground">{items.length}</span>
+                </div>
+                <div className="flex flex-wrap gap-1.5 p-3">
+                  {items.map((f) => <FieldChip key={f.key} f={f} />)}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <p className="text-xs text-muted-foreground">
+        Proposed taxonomy generated from the live field inventory (folders, usage, and AI dispositions) and adversarially verified — every one of the {doc.stats.total_fields} fields is placed exactly once. Internal folder names use "Consultation" (patient-facing copy uses "appointment"). A concept for team review.
+      </p>
+    </div>
+  );
 }
 
 type Disposition = "" | "keep" | "archive" | "delete" | "cleanup" | "skip";
@@ -169,9 +309,12 @@ export default function CustomFields() {
   const [sortDir, setSortDir] = useState<SortDir>("desc");
   const [page, setPage] = useState(1);
   const [saved, setSaved] = useState(false);
+  const [tab, setTab] = useState<"fields" | "folders">("fields");
+  const [redesign, setRedesign] = useState<RedesignDoc | null>(null);
 
   useEffect(() => {
     fetch("/custom_fields.json").then((r) => r.json()).then(setData).catch(() => setData(null));
+    fetch("/folder_redesign.json").then((r) => r.json()).then(setRedesign).catch(() => setRedesign(null));
   }, []);
 
   const update = useCallback((id: string, patch: Partial<Ann>) => {
@@ -304,6 +447,22 @@ export default function CustomFields() {
         </div>
       }
     >
+      {/* Fields | Folders tabs */}
+      <div className="inline-flex rounded-lg border border-gray-400 dark:border-border bg-muted/40 p-0.5">
+        {([["fields", "Fields"], ["folders", "Folder redesign"]] as const).map(([v, label]) => (
+          <button key={v} onClick={() => setTab(v)}
+            className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-semibold transition-colors ${tab === v ? "bg-card text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"}`}>
+            {v === "folders" && <FolderTree className="h-3.5 w-3.5" />}{label}
+            {v === "folders" && redesign && <span className="rounded bg-emerald-100 px-1 text-[9px] font-bold text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300">NEW</span>}
+          </button>
+        ))}
+      </div>
+
+      {tab === "folders" && (redesign
+        ? <FoldersView doc={redesign} />
+        : <div className="py-12 text-center text-sm text-muted-foreground">Loading proposed taxonomy…</div>)}
+
+      {tab === "fields" && <>
       {/* Usage stats */}
       <div>
         <div className="mb-2 text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Field usage (contacts with values)</div>
@@ -444,6 +603,7 @@ export default function CustomFields() {
       <p className="text-xs text-muted-foreground">
         Field names, types, and contact counts from GHL. Annotations auto-save to your browser; Export CSV for handoff. No PHI — field definitions only.
       </p>
+      </>}
     </PageShell>
   );
 }

@@ -15,11 +15,13 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 808 contacts; core operational field.",
-      "suggested_description": "Used by 808 contacts."
+      "suggested_description": "Used by 808 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "z0nsXjBpmFXGdZGfzHAI",
-      "name": " Price \u2013 Item 1",
+      "name": " Price – Item 1",
       "fieldKey": "contact.treatment_cost",
       "type": "",
       "count": 629,
@@ -29,11 +31,13 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 629 contacts; core operational field.",
-      "suggested_description": "Pricing/cost data. Used by 629 contacts."
+      "suggested_description": "Pricing/cost data. Used by 629 contacts.",
+      "folder": "Consultation Record",
+      "folder_id": "EKfZf3seIv6LCOkBRRzI"
     },
     {
       "id": "yuYX7ICV7F4uEyNTEFTw",
-      "name": " Price \u2013 Item 2",
+      "name": " Price – Item 2",
       "fieldKey": "contact.price__item_2",
       "type": "",
       "count": 9,
@@ -43,7 +47,9 @@
       "updated_at": null,
       "suggested_disposition": "cleanup",
       "suggested_reason": "Low usage (9 contacts); verify still needed.",
-      "suggested_description": "Pricing/cost data. Used by 9 contacts."
+      "suggested_description": "Pricing/cost data. Used by 9 contacts.",
+      "folder": "Consultation Record",
+      "folder_id": "EKfZf3seIv6LCOkBRRzI"
     },
     {
       "id": "u8pTdcwg5PaMhre7o6f9",
@@ -57,7 +63,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 608 contacts; core operational field.",
-      "suggested_description": "Product/service selection. Used by 608 contacts."
+      "suggested_description": "Product/service selection. Used by 608 contacts.",
+      "folder": "Additional Info",
+      "folder_id": "x0LntJf0PwZqDbcjhPsG"
     },
     {
       "id": "D1DgNadskCn7sDNZqWMQ",
@@ -71,7 +79,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 1375 contacts; core operational field.",
-      "suggested_description": "Used by 1375 contacts."
+      "suggested_description": "Used by 1375 contacts.",
+      "folder": "Additional Info",
+      "folder_id": "x0LntJf0PwZqDbcjhPsG"
     },
     {
       "id": "5Ull4AEBVmO038811LEC",
@@ -85,7 +95,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 128 contacts; core operational field.",
-      "suggested_description": "Used by 128 contacts."
+      "suggested_description": "Used by 128 contacts.",
+      "folder": "(unknown)",
+      "folder_id": "dAkAdMU70Y17UoFEDsCG"
     },
     {
       "id": "XVzxGceorU5WixdjMHvA",
@@ -99,7 +111,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 471 contacts; core operational field.",
-      "suggested_description": "Used by 471 contacts."
+      "suggested_description": "Used by 471 contacts.",
+      "folder": "Additional Info",
+      "folder_id": "x0LntJf0PwZqDbcjhPsG"
     },
     {
       "id": "eVnkU7zM2tkhq42uuBqK",
@@ -113,7 +127,9 @@
       "updated_at": null,
       "suggested_disposition": "cleanup",
       "suggested_reason": "Low usage (4 contacts); verify still needed.",
-      "suggested_description": "Used by 4 contacts."
+      "suggested_description": "Used by 4 contacts.",
+      "folder": "Contact",
+      "folder_id": "89Z77PyYh2hYN0lxMJq9"
     },
     {
       "id": "jTIu3VYYtwUnqx5TIZHq",
@@ -127,7 +143,9 @@
       "updated_at": null,
       "suggested_disposition": "cleanup",
       "suggested_reason": "Low usage (9 contacts); verify still needed.",
-      "suggested_description": "Used by 9 contacts."
+      "suggested_description": "Used by 9 contacts.",
+      "folder": "Additional Info",
+      "folder_id": "x0LntJf0PwZqDbcjhPsG"
     },
     {
       "id": "kbAaI85q6SaoHfuH1JTE",
@@ -141,7 +159,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Moderate usage (86 contacts); appears to be in use.",
-      "suggested_description": "Used by 86 contacts."
+      "suggested_description": "Used by 86 contacts.",
+      "folder": "DISPOSITION",
+      "folder_id": "2doIwcO0OEFJV0C4Tyf9"
     },
     {
       "id": "S7APIMzwysSMzHAY2ZSN",
@@ -155,7 +175,9 @@
       "updated_at": null,
       "suggested_disposition": "archive",
       "suggested_reason": "No usage; candidate for archival. Review before deleting.",
-      "suggested_description": null
+      "suggested_description": null,
+      "folder": "BotFanatics",
+      "folder_id": "4JdDbbfqDRy3AgTtxvTU"
     },
     {
       "id": "LKjA09mL4YHxBf5nDmh0",
@@ -169,7 +191,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Common field name pattern; likely intentional.",
-      "suggested_description": null
+      "suggested_description": null,
+      "folder": "BotFanatics",
+      "folder_id": "4JdDbbfqDRy3AgTtxvTU"
     },
     {
       "id": "NKIljBVIOPEw03ioNhDq",
@@ -183,7 +207,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 122 contacts; core operational field.",
-      "suggested_description": "Contact name/title. Used by 122 contacts."
+      "suggested_description": "Contact name/title. Used by 122 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "uhNjRIbt5XINpSlk9L5U",
@@ -197,7 +223,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 3224 contacts; core operational field.",
-      "suggested_description": "Used by 3224 contacts."
+      "suggested_description": "Used by 3224 contacts.",
+      "folder": "Additional Info",
+      "folder_id": "x0LntJf0PwZqDbcjhPsG"
     },
     {
       "id": "GojPFkMZRoUi93gyb48K",
@@ -211,7 +239,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Moderate usage (46 contacts); appears to be in use.",
-      "suggested_description": "Date/time information. Used by 46 contacts."
+      "suggested_description": "Date/time information. Used by 46 contacts.",
+      "folder": "Contact",
+      "folder_id": "89Z77PyYh2hYN0lxMJq9"
     },
     {
       "id": "CvHfvmOChwRYbc7dUXdr",
@@ -225,7 +255,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Moderate usage (45 contacts); appears to be in use.",
-      "suggested_description": "Used by 45 contacts."
+      "suggested_description": "Used by 45 contacts.",
+      "folder": "Contact",
+      "folder_id": "89Z77PyYh2hYN0lxMJq9"
     },
     {
       "id": "0h1abMCZWUTIr0QZo8dU",
@@ -239,7 +271,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Moderate usage (44 contacts); appears to be in use.",
-      "suggested_description": "Used by 44 contacts."
+      "suggested_description": "Used by 44 contacts.",
+      "folder": "Contact",
+      "folder_id": "89Z77PyYh2hYN0lxMJq9"
     },
     {
       "id": "lmRl72MIc2C5o2Gy3bEx",
@@ -253,11 +287,13 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Moderate usage (45 contacts); appears to be in use.",
-      "suggested_description": "Date/time information. Used by 45 contacts."
+      "suggested_description": "Date/time information. Used by 45 contacts.",
+      "folder": "Contact",
+      "folder_id": "89Z77PyYh2hYN0lxMJq9"
     },
     {
       "id": "qEeJTkIyz1GMVOfhIuhp",
-      "name": "Consent \u2013 IP Address",
+      "name": "Consent – IP Address",
       "fieldKey": "contact.consent__ip_address",
       "type": "",
       "count": 46,
@@ -267,7 +303,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Moderate usage (46 contacts); appears to be in use.",
-      "suggested_description": "Contact address. Used by 46 contacts."
+      "suggested_description": "Contact address. Used by 46 contacts.",
+      "folder": "Additional Info",
+      "folder_id": "x0LntJf0PwZqDbcjhPsG"
     },
     {
       "id": "rGf0p5eaxAWTM9y5KaAE",
@@ -281,7 +319,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 556 contacts; core operational field.",
-      "suggested_description": "Pricing/cost data. Used by 556 contacts."
+      "suggested_description": "Pricing/cost data. Used by 556 contacts.",
+      "folder": "Consultation Record",
+      "folder_id": "EKfZf3seIv6LCOkBRRzI"
     },
     {
       "id": "6iZQfyb2ISwxEucKs6zm",
@@ -295,7 +335,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 807 contacts; core operational field.",
-      "suggested_description": "Used by 807 contacts."
+      "suggested_description": "Used by 807 contacts.",
+      "folder": "DISPOSITION",
+      "folder_id": "2doIwcO0OEFJV0C4Tyf9"
     },
     {
       "id": "HC2Oo1MIbwJ0uIrdsIqo",
@@ -309,7 +351,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 742 contacts; core operational field.",
-      "suggested_description": "Contact name/title. Used by 742 contacts."
+      "suggested_description": "Contact name/title. Used by 742 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "6hwB9YtdqX6urRGxovGX",
@@ -323,7 +367,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 884 contacts; core operational field.",
-      "suggested_description": "Date/time information. Used by 884 contacts."
+      "suggested_description": "Date/time information. Used by 884 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "J8L58GqFuzvO0nX6hY3l",
@@ -337,7 +383,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 884 contacts; core operational field.",
-      "suggested_description": "Used by 884 contacts."
+      "suggested_description": "Used by 884 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "QWMf64tEMlmWieWvgZMk",
@@ -351,7 +399,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 884 contacts; core operational field.",
-      "suggested_description": "Product/service selection. Used by 884 contacts."
+      "suggested_description": "Product/service selection. Used by 884 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "dZNaFd1mWIvL2cdqqusd",
@@ -365,7 +415,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 247 contacts; core operational field.",
-      "suggested_description": "Used by 247 contacts."
+      "suggested_description": "Used by 247 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "gxVMh2ltKRybKDV62Ntm",
@@ -379,7 +431,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 247 contacts; core operational field.",
-      "suggested_description": "Used by 247 contacts."
+      "suggested_description": "Used by 247 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "GASedHwLnlipgeoNQZKZ",
@@ -393,7 +447,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 245 contacts; core operational field.",
-      "suggested_description": "Used by 245 contacts."
+      "suggested_description": "Used by 245 contacts.",
+      "folder": "Contact",
+      "folder_id": "89Z77PyYh2hYN0lxMJq9"
     },
     {
       "id": "KzsO01rpSeZIA4WUXiGR",
@@ -407,7 +463,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 715 contacts; core operational field.",
-      "suggested_description": "Contact name/title. Used by 715 contacts."
+      "suggested_description": "Contact name/title. Used by 715 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "EVxsSNsGrO1Y6h2uUsjv",
@@ -421,7 +479,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 757 contacts; core operational field.",
-      "suggested_description": "Phone number. Used by 757 contacts."
+      "suggested_description": "Phone number. Used by 757 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "xPXd7sYvBI3uYoqMqVzN",
@@ -435,7 +495,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Common field name pattern; likely intentional.",
-      "suggested_description": null
+      "suggested_description": null,
+      "folder": "SOURCE",
+      "folder_id": "Am8zqVsTN9uKa0G4hXgU"
     },
     {
       "id": "JL9361YdcdliYZn1d0xy",
@@ -449,7 +511,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Common field name pattern; likely intentional.",
-      "suggested_description": null
+      "suggested_description": null,
+      "folder": "SOURCE",
+      "folder_id": "Am8zqVsTN9uKa0G4hXgU"
     },
     {
       "id": "Ur3ezo3b85Xb2l8edGtl",
@@ -463,7 +527,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 1114 contacts; core operational field.",
-      "suggested_description": "Used by 1114 contacts."
+      "suggested_description": "Used by 1114 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "Fk6gqmpI2Zkn9y7nEmhr",
@@ -477,7 +543,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 247 contacts; core operational field.",
-      "suggested_description": "Used by 247 contacts."
+      "suggested_description": "Used by 247 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "sJLV861xvDXyJgA7H8dk",
@@ -491,11 +559,13 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 884 contacts; core operational field.",
-      "suggested_description": "Used by 884 contacts."
+      "suggested_description": "Used by 884 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "m2UAYFuBQ1ymyKNN0C6s",
-      "name": "How did you hear about Men\u2019s Wellness Centers?\n",
+      "name": "How did you hear about Men’s Wellness Centers?\n",
       "fieldKey": "contact.how_did_you_hear_about_mens_wellness_centers",
       "type": "",
       "count": 1018,
@@ -505,7 +575,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 1018 contacts; core operational field.",
-      "suggested_description": "Used by 1018 contacts."
+      "suggested_description": "Used by 1018 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "EWqBmp7cbslrPvEJO8ZM",
@@ -519,7 +591,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Moderate usage (26 contacts); appears to be in use.",
-      "suggested_description": "Used by 26 contacts."
+      "suggested_description": "Used by 26 contacts.",
+      "folder": "Contact",
+      "folder_id": "89Z77PyYh2hYN0lxMJq9"
     },
     {
       "id": "9w0y3YzxD1ZFIbekQD2F",
@@ -533,7 +607,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 887 contacts; core operational field.",
-      "suggested_description": "Used by 887 contacts."
+      "suggested_description": "Used by 887 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "5xlMrAtETVhE8e7fKY9e",
@@ -547,7 +623,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 128 contacts; core operational field.",
-      "suggested_description": "Used by 128 contacts."
+      "suggested_description": "Used by 128 contacts.",
+      "folder": "Contact",
+      "folder_id": "89Z77PyYh2hYN0lxMJq9"
     },
     {
       "id": "KpMazPnUg5YLWNL7hdAl",
@@ -561,7 +639,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 130 contacts; core operational field.",
-      "suggested_description": "Used by 130 contacts."
+      "suggested_description": "Used by 130 contacts.",
+      "folder": "Contact",
+      "folder_id": "89Z77PyYh2hYN0lxMJq9"
     },
     {
       "id": "ysRPwT2nSTzpT8EoAzku",
@@ -575,11 +655,13 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 884 contacts; core operational field.",
-      "suggested_description": "Used by 884 contacts."
+      "suggested_description": "Used by 884 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "DHq97rjT0xk2QGvFEtj4",
-      "name": "I authorize Men\u2019s Wellness Centers and its licensed medical providers to evaluate, diagnose, and treat me, including laboratory testing when medically appropriate.",
+      "name": "I authorize Men’s Wellness Centers and its licensed medical providers to evaluate, diagnose, and treat me, including laboratory testing when medically appropriate.",
       "fieldKey": "contact.contacti_confirm_the_information_i_provided_is_accurate_to_the_best_of_my_knowledge_dmq_copy",
       "type": "",
       "count": 868,
@@ -589,7 +671,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 868 contacts; core operational field.",
-      "suggested_description": "Used by 868 contacts."
+      "suggested_description": "Used by 868 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "Fr6J27j5YGkL3eN3mmTS",
@@ -603,7 +687,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 874 contacts; core operational field.",
-      "suggested_description": "Used by 874 contacts."
+      "suggested_description": "Used by 874 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "nVTE9uYHuJdNY69ik4Vd",
@@ -617,7 +703,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 884 contacts; core operational field.",
-      "suggested_description": "Used by 884 contacts."
+      "suggested_description": "Used by 884 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "aF4eAS7FcvZS2fPej6F9",
@@ -631,7 +719,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 130 contacts; core operational field.",
-      "suggested_description": "Used by 130 contacts."
+      "suggested_description": "Used by 130 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "zJu0Qfw5oRtvwWPY0jXQ",
@@ -645,7 +735,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 233 contacts; core operational field.",
-      "suggested_description": "Used by 233 contacts."
+      "suggested_description": "Used by 233 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "RrRyWKMSzZvu6MFGXTZb",
@@ -659,7 +751,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 2885 contacts; core operational field.",
-      "suggested_description": "Contact address. Used by 2885 contacts."
+      "suggested_description": "Contact address. Used by 2885 contacts.",
+      "folder": "Additional Info",
+      "folder_id": "x0LntJf0PwZqDbcjhPsG"
     },
     {
       "id": "wu0JY0fgKEZCvLNg0lPg",
@@ -673,7 +767,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 4167 contacts; core operational field.",
-      "suggested_description": "Used by 4167 contacts."
+      "suggested_description": "Used by 4167 contacts.",
+      "folder": "Additional Info",
+      "folder_id": "x0LntJf0PwZqDbcjhPsG"
     },
     {
       "id": "oHMIPSYT8qHLt8BDZKXb",
@@ -687,7 +783,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 3850 contacts; core operational field.",
-      "suggested_description": "Date/time information. Used by 3850 contacts."
+      "suggested_description": "Date/time information. Used by 3850 contacts.",
+      "folder": "Additional Info",
+      "folder_id": "x0LntJf0PwZqDbcjhPsG"
     },
     {
       "id": "9WxVlzvgSlCXx0EL82Sr",
@@ -701,7 +799,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 6169 contacts; core operational field.",
-      "suggested_description": "Used by 6169 contacts."
+      "suggested_description": "Used by 6169 contacts.",
+      "folder": "Consultation Record",
+      "folder_id": "EKfZf3seIv6LCOkBRRzI"
     },
     {
       "id": "hNGjNpBcS2xWDXWf6wgg",
@@ -715,7 +815,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 180 contacts; core operational field.",
-      "suggested_description": "Used by 180 contacts."
+      "suggested_description": "Used by 180 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "07RvFbVdzycUofKW5UPL",
@@ -729,7 +831,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 884 contacts; core operational field.",
-      "suggested_description": "Used by 884 contacts."
+      "suggested_description": "Used by 884 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "gU84HIwnkglNAkRY9tDJ",
@@ -743,7 +847,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 239 contacts; core operational field.",
-      "suggested_description": "Contact name/title. Used by 239 contacts."
+      "suggested_description": "Contact name/title. Used by 239 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "PDhPVirD7ZvPY0mnTLCr",
@@ -757,7 +863,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Moderate usage (41 contacts); appears to be in use.",
-      "suggested_description": "Used by 41 contacts."
+      "suggested_description": "Used by 41 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "LQBCAPByMWJ4o6sTYvXH",
@@ -771,7 +879,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 993 contacts; core operational field.",
-      "suggested_description": "Used by 993 contacts."
+      "suggested_description": "Used by 993 contacts.",
+      "folder": "General Info",
+      "folder_id": "BuGKUZ3VWlQXyMNwximw"
     },
     {
       "id": "P7s4MzoabSdwf0u05vyh",
@@ -785,7 +895,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 3233 contacts; core operational field.",
-      "suggested_description": "Date/time information. Used by 3233 contacts."
+      "suggested_description": "Date/time information. Used by 3233 contacts.",
+      "folder": "Additional Info",
+      "folder_id": "x0LntJf0PwZqDbcjhPsG"
     },
     {
       "id": "eTLp3D1ArBsWYhOKouxQ",
@@ -799,7 +911,9 @@
       "updated_at": null,
       "suggested_disposition": "cleanup",
       "suggested_reason": "Low usage (6 contacts); verify still needed.",
-      "suggested_description": "Used by 6 contacts."
+      "suggested_description": "Used by 6 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "kPgFSfNsyEg3q77gRVWg",
@@ -813,7 +927,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 4335 contacts; core operational field.",
-      "suggested_description": "Used by 4335 contacts."
+      "suggested_description": "Used by 4335 contacts.",
+      "folder": "Additional Info",
+      "folder_id": "x0LntJf0PwZqDbcjhPsG"
     },
     {
       "id": "lWml2sn98A7zcGbfUtZe",
@@ -827,7 +943,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 624 contacts; core operational field.",
-      "suggested_description": "Used by 624 contacts."
+      "suggested_description": "Used by 624 contacts.",
+      "folder": "Additional Info",
+      "folder_id": "x0LntJf0PwZqDbcjhPsG"
     },
     {
       "id": "kwhTOpRqbuq9lgpQCbwK",
@@ -841,7 +959,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 918 contacts; core operational field.",
-      "suggested_description": "Used by 918 contacts."
+      "suggested_description": "Used by 918 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "hZF3COXUXopq6GY06uMZ",
@@ -855,7 +975,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Moderate usage (92 contacts); appears to be in use.",
-      "suggested_description": "Used by 92 contacts."
+      "suggested_description": "Used by 92 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "yZFhZGLJtQPD8eP1moWf",
@@ -869,7 +991,9 @@
       "updated_at": null,
       "suggested_disposition": "cleanup",
       "suggested_reason": "Low usage (8 contacts) + date-like name; may be deprecated.",
-      "suggested_description": "Date/time information. Used by 8 contacts."
+      "suggested_description": "Date/time information. Used by 8 contacts.",
+      "folder": "(unknown)",
+      "folder_id": "TLC0XVTSDcTVyZaYJg9D"
     },
     {
       "id": "V3UAgca5lxoPdkCCs4HI",
@@ -883,7 +1007,9 @@
       "updated_at": null,
       "suggested_disposition": "cleanup",
       "suggested_reason": "Low usage (7 contacts); verify still needed.",
-      "suggested_description": "Used by 7 contacts."
+      "suggested_description": "Used by 7 contacts.",
+      "folder": "Contact",
+      "folder_id": "89Z77PyYh2hYN0lxMJq9"
     },
     {
       "id": "b8tdwNkOnkSGedX9SoCo",
@@ -897,7 +1023,9 @@
       "updated_at": null,
       "suggested_disposition": "cleanup",
       "suggested_reason": "Low usage (4 contacts); verify still needed.",
-      "suggested_description": "Date/time information. Used by 4 contacts."
+      "suggested_description": "Date/time information. Used by 4 contacts.",
+      "folder": "(unknown)",
+      "folder_id": "TLC0XVTSDcTVyZaYJg9D"
     },
     {
       "id": "Cou856tOhaxW62vwehVI",
@@ -911,7 +1039,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 5660 contacts; core operational field.",
-      "suggested_description": "Used by 5660 contacts."
+      "suggested_description": "Used by 5660 contacts.",
+      "folder": "Additional Info",
+      "folder_id": "x0LntJf0PwZqDbcjhPsG"
     },
     {
       "id": "aWyDdDlWeHPgcXEJJOy0",
@@ -925,7 +1055,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 476 contacts; core operational field.",
-      "suggested_description": "Contact name/title. Used by 476 contacts."
+      "suggested_description": "Contact name/title. Used by 476 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "Zkrqo5T9i59LCVTXzJ8o",
@@ -939,7 +1071,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Moderate usage (35 contacts); appears to be in use.",
-      "suggested_description": "Used by 35 contacts."
+      "suggested_description": "Used by 35 contacts.",
+      "folder": "Contact",
+      "folder_id": "89Z77PyYh2hYN0lxMJq9"
     },
     {
       "id": "txMJhzO1OTPoUjth2xRA",
@@ -953,11 +1087,13 @@
       "updated_at": null,
       "suggested_disposition": "cleanup",
       "suggested_reason": "Low usage (12 contacts); verify still needed.",
-      "suggested_description": "Used by 12 contacts."
+      "suggested_description": "Used by 12 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "XVMFTsdjY1hnaX5jHajf",
-      "name": "Product Sold \u2013 Item 2",
+      "name": "Product Sold – Item 2",
       "fieldKey": "contact.product_sold__item_2",
       "type": "",
       "count": 30,
@@ -967,7 +1103,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Moderate usage (30 contacts); appears to be in use.",
-      "suggested_description": "Product/service selection. Used by 30 contacts."
+      "suggested_description": "Product/service selection. Used by 30 contacts.",
+      "folder": "Consultation Record",
+      "folder_id": "EKfZf3seIv6LCOkBRRzI"
     },
     {
       "id": "abYADyjGMj1E2m6Y9S4z",
@@ -981,7 +1119,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 1144 contacts; core operational field.",
-      "suggested_description": "Used by 1144 contacts."
+      "suggested_description": "Used by 1144 contacts.",
+      "folder": "Consultation Record",
+      "folder_id": "EKfZf3seIv6LCOkBRRzI"
     },
     {
       "id": "vlEyqwzxwjhmnOWNcIZq",
@@ -995,7 +1135,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 871 contacts; core operational field.",
-      "suggested_description": "Used by 871 contacts."
+      "suggested_description": "Used by 871 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "1p4G1IQgGNhk4RgHT925",
@@ -1009,7 +1151,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Moderate usage (39 contacts); appears to be in use.",
-      "suggested_description": "Used by 39 contacts."
+      "suggested_description": "Used by 39 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "c2cMqnLGR1rsnqH81DNn",
@@ -1023,7 +1167,9 @@
       "updated_at": null,
       "suggested_disposition": "cleanup",
       "suggested_reason": "Low usage (1 contacts); verify still needed.",
-      "suggested_description": "Used by 1 contacts."
+      "suggested_description": "Used by 1 contacts.",
+      "folder": "Contact",
+      "folder_id": "89Z77PyYh2hYN0lxMJq9"
     },
     {
       "id": "Aa6woKZ6GEn5Jdy4GcMb",
@@ -1037,7 +1183,9 @@
       "updated_at": null,
       "suggested_disposition": "cleanup",
       "suggested_reason": "Low usage (8 contacts); verify still needed.",
-      "suggested_description": "Email address. Used by 8 contacts."
+      "suggested_description": "Email address. Used by 8 contacts.",
+      "folder": "Additional Info",
+      "folder_id": "x0LntJf0PwZqDbcjhPsG"
     },
     {
       "id": "fVTiAYvFFm2ZgGsqKGiU",
@@ -1051,7 +1199,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 744 contacts; core operational field.",
-      "suggested_description": "Used by 744 contacts."
+      "suggested_description": "Used by 744 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "9dvHRcE6zMOS4GollQVt",
@@ -1065,7 +1215,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Moderate usage (29 contacts); appears to be in use.",
-      "suggested_description": "Used by 29 contacts."
+      "suggested_description": "Used by 29 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "cClk7ad4PHxiake2lChS",
@@ -1079,7 +1231,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 1147 contacts; core operational field.",
-      "suggested_description": "Used by 1147 contacts."
+      "suggested_description": "Used by 1147 contacts.",
+      "folder": "Consultation Record",
+      "folder_id": "EKfZf3seIv6LCOkBRRzI"
     },
     {
       "id": "I2Oidmdcnn068Gz9TRHm",
@@ -1093,7 +1247,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Moderate usage (35 contacts); appears to be in use.",
-      "suggested_description": "Used by 35 contacts."
+      "suggested_description": "Used by 35 contacts.",
+      "folder": "Consultation Record",
+      "folder_id": "EKfZf3seIv6LCOkBRRzI"
     },
     {
       "id": "eIlYPOpD28vjKTQbccxM",
@@ -1107,7 +1263,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 3230 contacts; core operational field.",
-      "suggested_description": "Date/time information. Used by 3230 contacts."
+      "suggested_description": "Date/time information. Used by 3230 contacts.",
+      "folder": "Additional Info",
+      "folder_id": "x0LntJf0PwZqDbcjhPsG"
     },
     {
       "id": "YwzkHjz7NKKQrzJODEp8",
@@ -1121,7 +1279,9 @@
       "updated_at": null,
       "suggested_disposition": "cleanup",
       "suggested_reason": "Low usage (4 contacts); verify still needed.",
-      "suggested_description": "Product/service selection. Used by 4 contacts."
+      "suggested_description": "Product/service selection. Used by 4 contacts.",
+      "folder": "Contact",
+      "folder_id": "89Z77PyYh2hYN0lxMJq9"
     },
     {
       "id": "vaBJvaOrEgUiaenCccwc",
@@ -1135,7 +1295,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 878 contacts; core operational field.",
-      "suggested_description": "Used by 878 contacts."
+      "suggested_description": "Used by 878 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "NSZ66shmon0vmUhN4Eya",
@@ -1149,7 +1311,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Common field name pattern; likely intentional.",
-      "suggested_description": "Status/state indicator."
+      "suggested_description": "Status/state indicator.",
+      "folder": "Additional Info",
+      "folder_id": "x0LntJf0PwZqDbcjhPsG"
     },
     {
       "id": "IvSIj7bS64TN9qKeOh47",
@@ -1163,7 +1327,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Common field name pattern; likely intentional.",
-      "suggested_description": "Date/time information."
+      "suggested_description": "Date/time information.",
+      "folder": "Additional Info",
+      "folder_id": "x0LntJf0PwZqDbcjhPsG"
     },
     {
       "id": "k8Jlp3XQ8ef2Y7KBQ0yL",
@@ -1177,7 +1343,9 @@
       "updated_at": null,
       "suggested_disposition": "archive",
       "suggested_reason": "No usage; candidate for archival. Review before deleting.",
-      "suggested_description": null
+      "suggested_description": null,
+      "folder": "Additional Info",
+      "folder_id": "x0LntJf0PwZqDbcjhPsG"
     },
     {
       "id": "BPi19EOf5urjCwJlGVTr",
@@ -1191,7 +1359,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 192 contacts; core operational field.",
-      "suggested_description": "Used by 192 contacts."
+      "suggested_description": "Used by 192 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "UZBaHuKr9PpFNro47it7",
@@ -1205,7 +1375,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 2784 contacts; core operational field.",
-      "suggested_description": "Used by 2784 contacts."
+      "suggested_description": "Used by 2784 contacts.",
+      "folder": "SOURCE",
+      "folder_id": "Am8zqVsTN9uKa0G4hXgU"
     },
     {
       "id": "UxbUbt9h8Xe54Fak0hX7",
@@ -1219,11 +1391,13 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Moderate usage (45 contacts); appears to be in use.",
-      "suggested_description": "Status/state indicator. Used by 45 contacts."
+      "suggested_description": "Status/state indicator. Used by 45 contacts.",
+      "folder": "Contact",
+      "folder_id": "89Z77PyYh2hYN0lxMJq9"
     },
     {
       "id": "U3sxmOm1VcdWPBodUbGT",
-      "name": "Survey \u2014 Open Feedback",
+      "name": "Survey — Open Feedback",
       "fieldKey": "contact.survey__open_feedback",
       "type": "",
       "count": 11,
@@ -1233,11 +1407,13 @@
       "updated_at": null,
       "suggested_disposition": "cleanup",
       "suggested_reason": "Low usage (11 contacts); verify still needed.",
-      "suggested_description": "Pricing/cost data. Used by 11 contacts."
+      "suggested_description": "Pricing/cost data. Used by 11 contacts.",
+      "folder": "Contact",
+      "folder_id": "89Z77PyYh2hYN0lxMJq9"
     },
     {
       "id": "vFbd8dheyZozR8gDdfxo",
-      "name": "Term Length \u2013 Item 1",
+      "name": "Term Length – Item 1",
       "fieldKey": "contact.term_length__item_1",
       "type": "",
       "count": 626,
@@ -1247,11 +1423,13 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 626 contacts; core operational field.",
-      "suggested_description": "Used by 626 contacts."
+      "suggested_description": "Used by 626 contacts.",
+      "folder": "Consultation Record",
+      "folder_id": "EKfZf3seIv6LCOkBRRzI"
     },
     {
       "id": "Gtq1EIpcHHGHuejROqan",
-      "name": "Term Length \u2013 Item 2",
+      "name": "Term Length – Item 2",
       "fieldKey": "contact.term_length__item_2",
       "type": "",
       "count": 16,
@@ -1261,7 +1439,9 @@
       "updated_at": null,
       "suggested_disposition": "cleanup",
       "suggested_reason": "Low usage (16 contacts); verify still needed.",
-      "suggested_description": "Used by 16 contacts."
+      "suggested_description": "Used by 16 contacts.",
+      "folder": "Consultation Record",
+      "folder_id": "EKfZf3seIv6LCOkBRRzI"
     },
     {
       "id": "cxUGCjBinbuh0spb4LQS",
@@ -1275,7 +1455,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 1131 contacts; core operational field.",
-      "suggested_description": "Pricing/cost data. Used by 1131 contacts."
+      "suggested_description": "Pricing/cost data. Used by 1131 contacts.",
+      "folder": "Consultation Record",
+      "folder_id": "EKfZf3seIv6LCOkBRRzI"
     },
     {
       "id": "k50RxYkVtC2SntahYc1K",
@@ -1289,7 +1471,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Moderate usage (26 contacts); appears to be in use.",
-      "suggested_description": "Product/service selection. Used by 26 contacts."
+      "suggested_description": "Product/service selection. Used by 26 contacts.",
+      "folder": "Contact",
+      "folder_id": "89Z77PyYh2hYN0lxMJq9"
     },
     {
       "id": "Np2WHxON2I4DVnYjZh3e",
@@ -1303,7 +1487,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 1276 contacts; core operational field.",
-      "suggested_description": "Used by 1276 contacts."
+      "suggested_description": "Used by 1276 contacts.",
+      "folder": "SOURCE",
+      "folder_id": "Am8zqVsTN9uKa0G4hXgU"
     },
     {
       "id": "ssEvmmfe1tz5H4fiMHZR",
@@ -1317,7 +1503,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 1266 contacts; core operational field.",
-      "suggested_description": "Used by 1266 contacts."
+      "suggested_description": "Used by 1266 contacts.",
+      "folder": "SOURCE",
+      "folder_id": "Am8zqVsTN9uKa0G4hXgU"
     },
     {
       "id": "Vh0MH504ujQfBh0Q5UFx",
@@ -1331,7 +1519,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 1268 contacts; core operational field.",
-      "suggested_description": "Used by 1268 contacts."
+      "suggested_description": "Used by 1268 contacts.",
+      "folder": "SOURCE",
+      "folder_id": "Am8zqVsTN9uKa0G4hXgU"
     },
     {
       "id": "thwe93MxRDzS2SO9pxxC",
@@ -1345,7 +1535,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 1256 contacts; core operational field.",
-      "suggested_description": "Used by 1256 contacts."
+      "suggested_description": "Used by 1256 contacts.",
+      "folder": "SOURCE",
+      "folder_id": "Am8zqVsTN9uKa0G4hXgU"
     },
     {
       "id": "1Wo5z9YpDh9Lv64IBEoa",
@@ -1359,11 +1551,13 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 1247 contacts; core operational field.",
-      "suggested_description": "Used by 1247 contacts."
+      "suggested_description": "Used by 1247 contacts.",
+      "folder": "SOURCE",
+      "folder_id": "Am8zqVsTN9uKa0G4hXgU"
     },
     {
       "id": "8MHeXQgyp9q7q6Do407p",
-      "name": "What is the primary reason for today\u2019s visit?\n\n\n",
+      "name": "What is the primary reason for today’s visit?\n\n\n",
       "fieldKey": "contact.what_is_the_primary_reason_for_todays_visit",
       "type": "",
       "count": 929,
@@ -1373,7 +1567,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 929 contacts; core operational field.",
-      "suggested_description": "Used by 929 contacts."
+      "suggested_description": "Used by 929 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "spAGwwHTampmwRlUlM1M",
@@ -1387,7 +1583,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 247 contacts; core operational field.",
-      "suggested_description": "Used by 247 contacts."
+      "suggested_description": "Used by 247 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "aFYKp3PzDg1dEwDC1G50",
@@ -1401,7 +1599,9 @@
       "updated_at": null,
       "suggested_disposition": "cleanup",
       "suggested_reason": "Low usage (3 contacts); verify still needed.",
-      "suggested_description": "Used by 3 contacts."
+      "suggested_description": "Used by 3 contacts.",
+      "folder": "New Patient Intake Form Response",
+      "folder_id": "mpGZaPGhOvJp6KHWy59O"
     },
     {
       "id": "jpwO8aw2uXebpNCWE6lT",
@@ -1415,7 +1615,9 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Moderate usage (30 contacts); appears to be in use.",
-      "suggested_description": "Contact name/title. Used by 30 contacts."
+      "suggested_description": "Contact name/title. Used by 30 contacts.",
+      "folder": "Additional Info",
+      "folder_id": "x0LntJf0PwZqDbcjhPsG"
     },
     {
       "id": "Hv8kK27zrMIQrEhGuzuX",
@@ -1429,8 +1631,62 @@
       "updated_at": null,
       "suggested_disposition": "keep",
       "suggested_reason": "Used by 123 contacts; core operational field.",
-      "suggested_description": "Used by 123 contacts."
+      "suggested_description": "Used by 123 contacts.",
+      "folder": "Contact",
+      "folder_id": "89Z77PyYh2hYN0lxMJq9"
     }
   ],
-  "analysis_generated_at": "2026-06-25T14:39:38.148964Z"
+  "analysis_generated_at": "2026-06-25T14:39:38.148964Z",
+  "folders": [
+    {
+      "id": "2doIwcO0OEFJV0C4Tyf9",
+      "name": "DISPOSITION",
+      "field_count": 2
+    },
+    {
+      "id": "4JdDbbfqDRy3AgTtxvTU",
+      "name": "BotFanatics",
+      "field_count": 2
+    },
+    {
+      "id": "89Z77PyYh2hYN0lxMJq9",
+      "name": "Contact",
+      "field_count": 17
+    },
+    {
+      "id": "Am8zqVsTN9uKa0G4hXgU",
+      "name": "SOURCE",
+      "field_count": 8
+    },
+    {
+      "id": "BuGKUZ3VWlQXyMNwximw",
+      "name": "General Info",
+      "field_count": 1
+    },
+    {
+      "id": "EKfZf3seIv6LCOkBRRzI",
+      "name": "Consultation Record",
+      "field_count": 11
+    },
+    {
+      "id": "TLC0XVTSDcTVyZaYJg9D",
+      "name": "(unknown)",
+      "field_count": 2
+    },
+    {
+      "id": "dAkAdMU70Y17UoFEDsCG",
+      "name": "(unknown)",
+      "field_count": 1
+    },
+    {
+      "id": "mpGZaPGhOvJp6KHWy59O",
+      "name": "New Patient Intake Form Response",
+      "field_count": 39
+    },
+    {
+      "id": "x0LntJf0PwZqDbcjhPsG",
+      "name": "Additional Info",
+      "field_count": 19
+    }
+  ]
 }

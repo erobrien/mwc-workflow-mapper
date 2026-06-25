@@ -1,0 +1,870 @@
+{
+  "generated_at": "2026-06-25T14:35:51.404108Z",
+  "philosophy": "The redesigned Contact custom-field taxonomy is organized around the single most important clinical and business dimension at MWC: whether a consultation is NEW or RENEWAL. This Consultation backbone (split into New vs Renewal) becomes the primary organizing structure, with supporting folders containing durable contact properties (Identity, Consent & Compliance, Source & Attribution), operational metadata (Operational Context, Experience & Feedback), and clinical context for new intakes. Deal/financial fields move to Opportunity per the refactor mandate; clinical intake data is flagged for EMR as the long-term system of record. This design eliminates vague catch-all folders (Additional Info, Contact, General Info), consolidates fragmented data domains (SOURCE split across folders; consent fields scattered; sales/deal fields in Consultation Record AND Additional Info), and provides intuitive, semantically coherent folders for PCC staff navigating the Contact record during both new and renewal patient interactions.",
+  "current_folders": [
+    {
+      "name": "New Patient Intake Form Response",
+      "field_count": 39
+    },
+    {
+      "name": "Additional Info",
+      "field_count": 19
+    },
+    {
+      "name": "Contact",
+      "field_count": 17
+    },
+    {
+      "name": "Consultation Record",
+      "field_count": 11
+    },
+    {
+      "name": "SOURCE",
+      "field_count": 8
+    },
+    {
+      "name": "(unknown)",
+      "field_count": 3
+    },
+    {
+      "name": "DISPOSITION",
+      "field_count": 2
+    },
+    {
+      "name": "BotFanatics",
+      "field_count": 2
+    },
+    {
+      "name": "General Info",
+      "field_count": 1
+    }
+  ],
+  "proposed_folders": [
+    {
+      "name": "Consultation — New",
+      "purpose": "Medical intake and chief complaint for NEW consultations: presenting symptoms, duration, prior treatments, diagnoses, medications, allergies, lifestyle factors (tobacco, alcohol), physical/sexual/psychologic review, emergency contact, primary care provider, and all authorizations/signatures. Represents the complete intake form response and clinical context captured at the first visit. Most high-usage fields; core new-patient workflow.",
+      "fields": [
+        {
+          "key": "contact.have_you_ever_been_diagnosed_with_any_of_the_following_check_all_that_apply",
+          "name": "Have you ever been diagnosed with any of the following? (Check all that apply)",
+          "count": 1114,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.what_is_the_primary_reason_for_todays_visit",
+          "name": "What is the primary reason for today’s visit?",
+          "count": 929,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.physical",
+          "name": "Physical",
+          "count": 918,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.how_long_have_these_symptoms_been_present",
+          "name": "How long have these symptoms been present?",
+          "count": 887,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.contactsingle_dropdown_17827_8d1_copy",
+          "name": "Do you currently smoke or use tobacco products?",
+          "count": 884,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.contactsingle_dropdown_17827_8d1_copy_qrg_copy",
+          "name": "Do you consume alcohol?",
+          "count": 884,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.contactsingle_dropdown_17827_8d1_copy_qrg_copy_dtk_copy",
+          "name": "Have you ever used testosterone or other hormone therapy?",
+          "count": 884,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.date",
+          "name": "Date",
+          "count": 884,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.single_dropdown_17827",
+          "name": "May we contact your primary care provider regarding your care?",
+          "count": 884,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.contactcontacti_confirm_the_information_i_provided_is_accurate_to_the_best_of_my_knowledge_dmq_copy_h35_copy_fqk_copy",
+          "name": "I acknowledge that I have received and understand the Notice of Privacy Practices.",
+          "count": 884,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.contacti_confirm_the_information_i_provided_is_accurate_to_the_best_of_my_knowledge_dmq_copy_h35_copy",
+          "name": "I understand that my care may be provided in person and, when clinically appropriate, via telemedicine.",
+          "count": 884,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.checkbox_2lpu_mgj_copy_i6c_copy",
+          "name": "Sexual",
+          "count": 878,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.i_confirm_the_information_i_provided_is_accurate_to_the_best_of_my_knowledge",
+          "name": "I confirm the information I provided is accurate to the best of my knowledge.",
+          "count": 874,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.checkbox_2lpu_mgj_copy",
+          "name": "Psychologic",
+          "count": 871,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.contacti_confirm_the_information_i_provided_is_accurate_to_the_best_of_my_knowledge_dmq_copy",
+          "name": "I authorize Men’s Wellness Centers and its licensed medical providers to evaluate, diagnose, and treat me, including laboratory testing when medically appropriate.",
+          "count": 868,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.contactcurrent_medications_include_name_dose_and_how_often_you_take_them_f3y_copy",
+          "name": "Do you have any known allergies (medications, foods, latex, or environmental)?",
+          "count": 808,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.emergency_contact_phone",
+          "name": "Emergency Contact Phone",
+          "count": 757,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.relationship",
+          "name": "Relationship",
+          "count": 744,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.current_medications_include_name_dose_and_how_often_you_take_them",
+          "name": "Current medications (include name, dose, and how often you take them)",
+          "count": 742,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.emergency_contact_name",
+          "name": "Emergency Contact Name",
+          "count": 715,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.primary_care_provider_name",
+          "name": "Primary Care Provider Name",
+          "count": 476,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.whats_the_main_reason_you_booked_today",
+          "name": "What's the main reason you booked today?",
+          "count": 247,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.do_you_smoke_or_use_tobacco",
+          "name": "Do you smoke or use tobacco?",
+          "count": 247,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.do_you_drink_alcohol",
+          "name": "Do you drink alcohol?",
+          "count": 247,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.have_you_ever_used_testosterone_or_other_hormone_therapy",
+          "name": "Have you ever used testosterone or other hormone therapy?",
+          "count": 247,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.name_as_signature",
+          "name": "Name as Signature",
+          "count": 239,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.if_yes_please_provide_brief_details_optional",
+          "name": "If yes, please provide brief details (optional)",
+          "count": 233,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.social_media",
+          "name": "Social Media",
+          "count": 192,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.may_we_contact_them_about_your_care",
+          "name": "May we contact them about your care",
+          "count": 180,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.if_yes_please_describe_optional",
+          "name": "If yes, please describe (optional)",
+          "count": 130,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.clinic_name",
+          "name": "Clinic Name",
+          "count": 122,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.please_specify",
+          "name": "Please Specify",
+          "count": 92,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.norfolk__virginia_beach_stations",
+          "name": "Norfolk / Virginia Beach Stations",
+          "count": 41,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.referrals__returning",
+          "name": "Referrals & Returning",
+          "count": 39,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.primary_concern",
+          "name": "Primary Concern",
+          "count": 35,
+          "disposition": "keep",
+          "current_folder": "Contact"
+        },
+        {
+          "key": "contact.richmond_stations",
+          "name": "Richmond Stations",
+          "count": 29,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.how_long_experiencing",
+          "name": "How Long Has This Been Going On?",
+          "count": 26,
+          "disposition": "keep",
+          "current_folder": "Contact"
+        },
+        {
+          "key": "contact.tried_other_treatments",
+          "name": "Tried other treatments?",
+          "count": 26,
+          "disposition": "keep",
+          "current_folder": "Contact"
+        }
+      ]
+    },
+    {
+      "name": "Consultation — Renewal",
+      "purpose": "Forward-looking folder for renewal/ongoing-care consultation context. Reserved for future population as renewal workflow matures. Will capture: renewal reason, prior treatment efficacy, changes since last visit, continuation of care, renewal-specific authorizations and provider recommendations.",
+      "fields": [
+        {
+          "key": "contact.status",
+          "name": "Status",
+          "count": 45,
+          "disposition": "keep",
+          "current_folder": "Contact"
+        }
+      ]
+    },
+    {
+      "name": "Identity & Demographics",
+      "purpose": "Stable core identity information: date of birth, occupation, location/clinic assignment, and preferred location. Durable properties independent of consultation type; define who the patient is.",
+      "fields": [
+        {
+          "key": "contact.location",
+          "name": "Location",
+          "count": 6169,
+          "disposition": "keep",
+          "current_folder": "Consultation Record"
+        },
+        {
+          "key": "contact.preferred_location",
+          "name": "Preferred Location",
+          "count": 5660,
+          "disposition": "keep",
+          "current_folder": "Additional Info"
+        },
+        {
+          "key": "contact.occupation",
+          "name": "Occupation",
+          "count": 993,
+          "disposition": "keep",
+          "current_folder": "General Info"
+        },
+        {
+          "key": "contact.dob",
+          "name": "DOB",
+          "count": 245,
+          "disposition": "keep",
+          "current_folder": "Contact"
+        }
+      ]
+    },
+    {
+      "name": "Source & Attribution",
+      "purpose": "Lead source and marketing attribution: UTM parameters (source/medium/campaign/content/term), source URL, how the patient found MWC, referrer details, social media channel, and lead date. Consolidated from scattered SOURCE folder and intake-form source fields. Enables ROI/attribution analysis.",
+      "fields": [
+        {
+          "key": "contact.original_lead_date",
+          "name": "Original Lead Date",
+          "count": 3233,
+          "disposition": "keep",
+          "current_folder": "Additional Info"
+        },
+        {
+          "key": "contact.source_url",
+          "name": "SOURCE URL",
+          "count": 2784,
+          "disposition": "keep",
+          "current_folder": "SOURCE"
+        },
+        {
+          "key": "contact.atclid",
+          "name": "_atid",
+          "count": 1375,
+          "disposition": "keep",
+          "current_folder": "Additional Info"
+        },
+        {
+          "key": "contact.utm_campaign",
+          "name": "UTM Campaign",
+          "count": 1276,
+          "disposition": "keep",
+          "current_folder": "SOURCE"
+        },
+        {
+          "key": "contact.utm_medium",
+          "name": "UTM Medium",
+          "count": 1268,
+          "disposition": "keep",
+          "current_folder": "SOURCE"
+        },
+        {
+          "key": "contact.utm_content",
+          "name": "UTM Content",
+          "count": 1266,
+          "disposition": "keep",
+          "current_folder": "SOURCE"
+        },
+        {
+          "key": "contact.utm_source",
+          "name": "UTM Source",
+          "count": 1256,
+          "disposition": "keep",
+          "current_folder": "SOURCE"
+        },
+        {
+          "key": "contact.utm_term",
+          "name": "UTM Term",
+          "count": 1247,
+          "disposition": "keep",
+          "current_folder": "SOURCE"
+        },
+        {
+          "key": "contact.how_did_you_hear_about_mens_wellness_centers",
+          "name": "How did you hear about Men’s Wellness Centers?",
+          "count": 1018,
+          "disposition": "keep",
+          "current_folder": "New Patient Intake Form Response"
+        },
+        {
+          "key": "contact.who_referred_you_referrers_name",
+          "name": "Who referred you? (Referrer's name)",
+          "count": 30,
+          "disposition": "keep",
+          "current_folder": "Additional Info"
+        },
+        {
+          "key": "contact.fbclid_value",
+          "name": "fbclid_value",
+          "count": 0,
+          "disposition": "keep",
+          "current_folder": "SOURCE"
+        },
+        {
+          "key": "contact.gclid_value",
+          "name": "gclid_value",
+          "count": 0,
+          "disposition": "keep",
+          "current_folder": "SOURCE"
+        }
+      ]
+    },
+    {
+      "name": "Consent & Compliance",
+      "purpose": "Legal consent tracking and privacy compliance: consent date/time/method/source/IP, communication preference, SMS opt-in status. Controls patient contact authorization and regulatory compliance. Consolidated from scattered Contact/Additional Info consent fields.",
+      "fields": [
+        {
+          "key": "contact.communication_preference",
+          "name": "Communication Preference",
+          "count": 3224,
+          "disposition": "keep",
+          "current_folder": "Additional Info"
+        },
+        {
+          "key": "contact.consent_date",
+          "name": "Consent Date",
+          "count": 46,
+          "disposition": "keep",
+          "current_folder": "Contact"
+        },
+        {
+          "key": "contact.consent__ip_address",
+          "name": "Consent – IP Address",
+          "count": 46,
+          "disposition": "keep",
+          "current_folder": "Additional Info"
+        },
+        {
+          "key": "contact.consent_method",
+          "name": "Consent Method",
+          "count": 45,
+          "disposition": "keep",
+          "current_folder": "Contact"
+        },
+        {
+          "key": "contact.consent_time",
+          "name": "Consent Time",
+          "count": 45,
+          "disposition": "keep",
+          "current_folder": "Contact"
+        },
+        {
+          "key": "contact.consent_source",
+          "name": "Consent Source",
+          "count": 44,
+          "disposition": "keep",
+          "current_folder": "Contact"
+        },
+        {
+          "key": "contact.sms_double_optin",
+          "name": "SMS Consent Status",
+          "count": 0,
+          "disposition": "keep",
+          "current_folder": "Additional Info"
+        },
+        {
+          "key": "contact.sms_optin_date",
+          "name": "SMS Opt-In Date",
+          "count": 0,
+          "disposition": "keep",
+          "current_folder": "Additional Info"
+        }
+      ]
+    },
+    {
+      "name": "Operational Context",
+      "purpose": "Call-center and internal operations: contact disposition (Scheduled, No-Show, Declined, etc.), last contact channel and date, patient advisor assignment, session tracking, and transactional metadata. Separate from consultation data; supports workflow routing and historical audit.",
+      "fields": [
+        {
+          "key": "contact.patient_advisor",
+          "name": "Patient Advisor",
+          "count": 4335,
+          "disposition": "keep",
+          "current_folder": "Additional Info"
+        },
+        {
+          "key": "contact.contact_disposition__channel",
+          "name": "Last disposition / Channel",
+          "count": 4167,
+          "disposition": "keep",
+          "current_folder": "Additional Info"
+        },
+        {
+          "key": "contact.last_call_date",
+          "name": "Last Disposition Date",
+          "count": 3850,
+          "disposition": "keep",
+          "current_folder": "Additional Info"
+        },
+        {
+          "key": "contact.saturday_date_eow",
+          "name": "Saturday Date EOW",
+          "count": 3230,
+          "disposition": "keep",
+          "current_folder": "Additional Info"
+        },
+        {
+          "key": "contact.ip_address",
+          "name": "IP Address",
+          "count": 2885,
+          "disposition": "keep",
+          "current_folder": "Additional Info"
+        },
+        {
+          "key": "contact.call_disposition",
+          "name": "CONTACT DISPOSITION",
+          "count": 807,
+          "disposition": "keep",
+          "current_folder": "DISPOSITION"
+        },
+        {
+          "key": "contact.last_channel",
+          "name": "Channel",
+          "count": 86,
+          "disposition": "keep",
+          "current_folder": "DISPOSITION"
+        },
+        {
+          "key": "contact.chatbot_session_id",
+          "name": "chatbot_session_id",
+          "count": 0,
+          "disposition": "keep",
+          "current_folder": "BotFanatics"
+        }
+      ]
+    },
+    {
+      "name": "Experience & Feedback",
+      "purpose": "Post-visit patient satisfaction and feedback: overall experience rating, staff interaction rating, referral likelihood (NPS), and optional open feedback. Lightweight feedback fields supporting quality improvement and retention insights. Kept on Contact (not moved) as these are non-clinical, summary-level feedback.",
+      "fields": [
+        {
+          "key": "contact.how_would_you_rate_your_overall_experience_today",
+          "name": "How would you rate your overall experience today?",
+          "count": 130,
+          "disposition": "keep",
+          "current_folder": "Contact"
+        },
+        {
+          "key": "contact.how_would_you_rate_your_interaction_with_our_staff",
+          "name": "How would you rate your interaction with our staff?",
+          "count": 128,
+          "disposition": "keep",
+          "current_folder": "Contact"
+        },
+        {
+          "key": "contact.would_you_recommend_us_to_a_friend_or_family_member",
+          "name": "Would you recommend us to a friend or family member?",
+          "count": 123,
+          "disposition": "keep",
+          "current_folder": "Contact"
+        }
+      ]
+    }
+  ],
+  "move_off_contact": [
+    {
+      "key": "contact.past_surgery",
+      "name": "Past Surgery",
+      "count": 6,
+      "disposition": "cleanup",
+      "current_folder": "New Patient Intake Form Response",
+      "destination": "EMR",
+      "why": "Clinical intake field (Past Surgery). Surgical history is part of medical record; EMR is long-term system of record. Low usage (6, cleanup)."
+    },
+    {
+      "key": "contact.sale_outcome",
+      "name": "Sale Outcome",
+      "count": 1147,
+      "disposition": "keep",
+      "current_folder": "Consultation Record",
+      "destination": "Opportunity",
+      "why": "Deal disposition field (Sale Outcome). Defines deal outcome (Sale, No-Sale, etc.). Per refactor, dispositions live on Opportunity. High usage (1147)."
+    },
+    {
+      "key": "contact.provider_making_recommendation",
+      "name": "Provider Making Recommendation",
+      "count": 1144,
+      "disposition": "keep",
+      "current_folder": "Consultation Record",
+      "destination": "Opportunity",
+      "why": "Deal/recommendation field (Provider Making Recommendation). Provider who recommended/closed the sale is a deal attribute. High usage (1144)."
+    },
+    {
+      "key": "contact.total_program_amount",
+      "name": "Total Program Amount",
+      "count": 1131,
+      "disposition": "keep",
+      "current_folder": "Consultation Record",
+      "destination": "Opportunity",
+      "why": "Deal/financial field (Total Program Amount). Total deal value; belongs on Opportunity. High usage (1131)."
+    },
+    {
+      "key": "contact.treatment_cost",
+      "name": "Price – Item 1",
+      "count": 629,
+      "disposition": "keep",
+      "current_folder": "Consultation Record",
+      "destination": "Opportunity",
+      "why": "Deal/financial field (Price – Item 1). Per refactor constraint, all sale/money/deal fields move to Opportunity. High usage (629) indicates Opportunity is primary system of record for pricing."
+    },
+    {
+      "key": "contact.term_length__item_1",
+      "name": "Term Length – Item 1",
+      "count": 626,
+      "disposition": "keep",
+      "current_folder": "Consultation Record",
+      "destination": "Opportunity",
+      "why": "Deal/contract field (Term Length – Item 1). Contract/subscription term is deal data. High usage (626)."
+    },
+    {
+      "key": "contact.pay_type",
+      "name": "Pay Type",
+      "count": 624,
+      "disposition": "keep",
+      "current_folder": "Additional Info",
+      "destination": "Opportunity",
+      "why": "Deal/payment field (Pay Type). Payment method/type is a deal attribute. High usage (624)."
+    },
+    {
+      "key": "contact.treatment_type",
+      "name": "Product Sold - Item 1",
+      "count": 608,
+      "disposition": "keep",
+      "current_folder": "Additional Info",
+      "destination": "Opportunity",
+      "why": "Deal/financial field (Product Sold - Item 1). Defines what product was sold; belongs on Opportunity. High usage (608)."
+    },
+    {
+      "key": "contact.consultation_fee",
+      "name": "Consultation Fee",
+      "count": 556,
+      "disposition": "keep",
+      "current_folder": "Consultation Record",
+      "destination": "Opportunity",
+      "why": "Deal/financial field (Consultation Fee). Fee for service is a deal component. High usage (556)."
+    },
+    {
+      "key": "contact.ad_reason",
+      "name": "A&D Reason",
+      "count": 471,
+      "disposition": "keep",
+      "current_folder": "Additional Info",
+      "destination": "Opportunity",
+      "why": "Deal disposition field (A&D Reason). No-Sale reason (Ask/Decline reason); belongs on Opportunity with sale_outcome. High usage (471)."
+    },
+    {
+      "key": "contact.ad_other_explanation",
+      "name": "A&D Other Explanation",
+      "count": 128,
+      "disposition": "keep",
+      "current_folder": "(unknown)",
+      "destination": "Opportunity",
+      "why": "Deal disposition field (A&D Other Explanation). Details on no-sale reason; move to Opportunity. High usage (128)."
+    },
+    {
+      "key": "contact.sale_type",
+      "name": "Sale Type",
+      "count": 35,
+      "disposition": "keep",
+      "current_folder": "Consultation Record",
+      "destination": "Opportunity",
+      "why": "Deal field (Sale Type). New vs Renewal sale type; canonical opportunity.sale_type already exists on Opportunity. High usage (35)."
+    },
+    {
+      "key": "contact.product_sold__item_2",
+      "name": "Product Sold – Item 2",
+      "count": 30,
+      "disposition": "keep",
+      "current_folder": "Consultation Record",
+      "destination": "Opportunity",
+      "why": "Deal/financial field (Product Sold – Item 2). Secondary product variant; move to Opportunity with Item 1."
+    },
+    {
+      "key": "contact.term_length__item_2",
+      "name": "Term Length – Item 2",
+      "count": 16,
+      "disposition": "cleanup",
+      "current_folder": "Consultation Record",
+      "destination": "Opportunity",
+      "why": "Deal/contract field (Term Length – Item 2). Secondary term variant; move to Opportunity with Item 1."
+    },
+    {
+      "key": "contact.price__item_2",
+      "name": "Price – Item 2",
+      "count": 9,
+      "disposition": "cleanup",
+      "current_folder": "Consultation Record",
+      "destination": "Opportunity",
+      "why": "Deal/financial field (Price – Item 2). Secondary pricing variant; move to Opportunity with Item 1 for deal consolidation."
+    },
+    {
+      "key": "contact.print__local",
+      "name": "Print & Local",
+      "count": 12,
+      "disposition": "cleanup",
+      "current_folder": "New Patient Intake Form Response",
+      "destination": "Retire",
+      "why": "Low usage (12, cleanup). Print/local marketing source unclear; consolidated into Source & Attribution via primary source fields. Retire."
+    },
+    {
+      "key": "contact.survey__open_feedback",
+      "name": "Survey — Open Feedback",
+      "count": 11,
+      "disposition": "cleanup",
+      "current_folder": "Contact",
+      "destination": "Retire",
+      "why": "Low usage (11, cleanup). Unstructured open feedback; consolidated NPS/feedback captured in Experience folder. Retire."
+    },
+    {
+      "key": "contact.cancellation_reason",
+      "name": "Cancellation Reason",
+      "count": 9,
+      "disposition": "cleanup",
+      "current_folder": "Additional Info",
+      "destination": "Retire",
+      "why": "Low usage (9, cleanup). Appointment cancellation reason has minimal usage; operational context fields cover contact tracking. Retire."
+    },
+    {
+      "key": "contact.referrers_email_address",
+      "name": "Referrer's Email Address",
+      "count": 8,
+      "disposition": "cleanup",
+      "current_folder": "Additional Info",
+      "destination": "Retire",
+      "why": "Low usage (8, cleanup). Referrer email should be on a Referrer/Partner Contact record, not main patient contact. Retire."
+    },
+    {
+      "key": "contact.preferred_appointment_date",
+      "name": "Preferred Appointment Date",
+      "count": 8,
+      "disposition": "cleanup",
+      "current_folder": "(unknown)",
+      "destination": "Retire",
+      "why": "Low usage (8, cleanup). Appointment scheduling is native GHL Calendar function; redundant on Contact. Retire."
+    },
+    {
+      "key": "contact.preferred_appointment_location",
+      "name": "Preferred Appointment Location",
+      "count": 7,
+      "disposition": "cleanup",
+      "current_folder": "Contact",
+      "destination": "Retire",
+      "why": "Low usage (7, cleanup). Superseded by contact.preferred_location in Identity & Demographics folder. Retire."
+    },
+    {
+      "key": "contact.ambassador_slug",
+      "name": "Ambassador Slug",
+      "count": 4,
+      "disposition": "cleanup",
+      "current_folder": "Contact",
+      "destination": "Retire",
+      "why": "Low usage (4, cleanup). Ambassador program tracking unclear; minimal operational utility. Retire."
+    },
+    {
+      "key": "contact.preferred_appointment_time",
+      "name": "Preferred Appointment Time",
+      "count": 4,
+      "disposition": "cleanup",
+      "current_folder": "(unknown)",
+      "destination": "Retire",
+      "why": "Low usage (4, cleanup). Appointment scheduling is native GHL Calendar function; redundant on Contact. Retire."
+    },
+    {
+      "key": "contact.service_interested_in",
+      "name": "Service interested in?",
+      "count": 4,
+      "disposition": "cleanup",
+      "current_folder": "Contact",
+      "destination": "Retire",
+      "why": "Low usage (4, cleanup). Service interest is captured in primary concern or product fields. Retire."
+    },
+    {
+      "key": "contact.fwhich_location_are_you_interested_in",
+      "name": "Which Location Are You Interested In?",
+      "count": 3,
+      "disposition": "cleanup",
+      "current_folder": "New Patient Intake Form Response",
+      "destination": "Retire",
+      "why": "Low usage (3, cleanup). Location preference captured via contact.preferred_location. Retire."
+    },
+    {
+      "key": "contact.referred_by_ambassador",
+      "name": "Referred by Ambassador",
+      "count": 1,
+      "disposition": "cleanup",
+      "current_folder": "Contact",
+      "destination": "Retire",
+      "why": "Low usage (1, cleanup). Ambassador referral tracking is sparse; consolidate or retire. Retire."
+    },
+    {
+      "key": "contact.chatbot_intent",
+      "name": "chatbot_intent",
+      "count": 0,
+      "disposition": "archive",
+      "current_folder": "BotFanatics",
+      "destination": "Retire",
+      "why": "Zero usage (archive). Defunct BotFanatics integration; retire."
+    },
+    {
+      "key": "contact.sms_optin_source",
+      "name": "SMS Opt-In Source",
+      "count": 0,
+      "disposition": "archive",
+      "current_folder": "Additional Info",
+      "destination": "Retire",
+      "why": "Zero usage (archive). Redundant SMS tracking; sms_optin_date and sms_double_optin cover consent. Retire."
+    }
+  ],
+  "stats": {
+    "total_fields": 102,
+    "kept_on_contact": 74,
+    "proposed_folder_count": 7,
+    "current_folder_count": 9,
+    "moved": 28,
+    "move_breakdown": {
+      "EMR": 1,
+      "Opportunity": 14,
+      "Retire": 13
+    }
+  }
+}

@@ -1,0 +1,818 @@
+[
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.contactcurrent_medications_include_name_dose_and_how_often_you_take_them_f3y_copy",
+  "name": "Do you have any known allergies (medications, foods, latex, or environ",
+  "type": "",
+  "count": 808,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Consultation Record",
+  "key": "contact.treatment_cost",
+  "name": "Price – Item 1",
+  "type": "",
+  "count": 629,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Consultation Record",
+  "key": "contact.price__item_2",
+  "name": "Price – Item 2",
+  "type": "",
+  "count": 9,
+  "disposition": "cleanup"
+ },
+ {
+  "folder": "Additional Info",
+  "key": "contact.treatment_type",
+  "name": "Product Sold - Item 1",
+  "type": "",
+  "count": 608,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Additional Info",
+  "key": "contact.atclid",
+  "name": "_atid",
+  "type": "",
+  "count": 1375,
+  "disposition": "keep"
+ },
+ {
+  "folder": "(unknown)",
+  "key": "contact.ad_other_explanation",
+  "name": "A&D Other Explanation",
+  "type": "",
+  "count": 128,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Additional Info",
+  "key": "contact.ad_reason",
+  "name": "A&D Reason",
+  "type": "",
+  "count": 471,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Contact",
+  "key": "contact.ambassador_slug",
+  "name": "Ambassador Slug",
+  "type": "",
+  "count": 4,
+  "disposition": "cleanup"
+ },
+ {
+  "folder": "Additional Info",
+  "key": "contact.cancellation_reason",
+  "name": "Cancellation Reason",
+  "type": "",
+  "count": 9,
+  "disposition": "cleanup"
+ },
+ {
+  "folder": "DISPOSITION",
+  "key": "contact.last_channel",
+  "name": "Channel",
+  "type": "",
+  "count": 86,
+  "disposition": "keep"
+ },
+ {
+  "folder": "BotFanatics",
+  "key": "contact.chatbot_intent",
+  "name": "chatbot_intent",
+  "type": "",
+  "count": 0,
+  "disposition": "archive"
+ },
+ {
+  "folder": "BotFanatics",
+  "key": "contact.chatbot_session_id",
+  "name": "chatbot_session_id",
+  "type": "",
+  "count": 0,
+  "disposition": "keep"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.clinic_name",
+  "name": "Clinic Name",
+  "type": "",
+  "count": 122,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Additional Info",
+  "key": "contact.communication_preference",
+  "name": "Communication Preference",
+  "type": "",
+  "count": 3224,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Contact",
+  "key": "contact.consent_date",
+  "name": "Consent Date",
+  "type": "",
+  "count": 46,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Contact",
+  "key": "contact.consent_method",
+  "name": "Consent Method",
+  "type": "",
+  "count": 45,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Contact",
+  "key": "contact.consent_source",
+  "name": "Consent Source",
+  "type": "",
+  "count": 44,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Contact",
+  "key": "contact.consent_time",
+  "name": "Consent Time",
+  "type": "",
+  "count": 45,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Additional Info",
+  "key": "contact.consent__ip_address",
+  "name": "Consent – IP Address",
+  "type": "",
+  "count": 46,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Consultation Record",
+  "key": "contact.consultation_fee",
+  "name": "Consultation Fee",
+  "type": "",
+  "count": 556,
+  "disposition": "keep"
+ },
+ {
+  "folder": "DISPOSITION",
+  "key": "contact.call_disposition",
+  "name": "CONTACT DISPOSITION",
+  "type": "",
+  "count": 807,
+  "disposition": "keep"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.current_medications_include_name_dose_and_how_often_you_take_them",
+  "name": "Current medications (include name, dose, and how often you take them)",
+  "type": "",
+  "count": 742,
+  "disposition": "keep"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.date",
+  "name": "Date",
+  "type": "",
+  "count": 884,
+  "disposition": "keep"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.contactsingle_dropdown_17827_8d1_copy_qrg_copy",
+  "name": "Do you consume alcohol?",
+  "type": "",
+  "count": 884,
+  "disposition": "keep"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.contactsingle_dropdown_17827_8d1_copy",
+  "name": "Do you currently smoke or use tobacco products?",
+  "type": "",
+  "count": 884,
+  "disposition": "keep"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.do_you_drink_alcohol",
+  "name": "Do you drink alcohol?",
+  "type": "",
+  "count": 247,
+  "disposition": "keep"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.do_you_smoke_or_use_tobacco",
+  "name": "Do you smoke or use tobacco?",
+  "type": "",
+  "count": 247,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Contact",
+  "key": "contact.dob",
+  "name": "DOB",
+  "type": "",
+  "count": 245,
+  "disposition": "keep"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.emergency_contact_name",
+  "name": "Emergency Contact Name",
+  "type": "",
+  "count": 715,
+  "disposition": "keep"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.emergency_contact_phone",
+  "name": "Emergency Contact Phone",
+  "type": "",
+  "count": 757,
+  "disposition": "keep"
+ },
+ {
+  "folder": "SOURCE",
+  "key": "contact.fbclid_value",
+  "name": "fbclid_value",
+  "type": "",
+  "count": 0,
+  "disposition": "keep"
+ },
+ {
+  "folder": "SOURCE",
+  "key": "contact.gclid_value",
+  "name": "gclid_value",
+  "type": "",
+  "count": 0,
+  "disposition": "keep"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.have_you_ever_been_diagnosed_with_any_of_the_following_check_all_that_apply",
+  "name": "Have you ever been diagnosed with any of the following? (Check all tha",
+  "type": "",
+  "count": 1114,
+  "disposition": "keep"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.have_you_ever_used_testosterone_or_other_hormone_therapy",
+  "name": "Have you ever used testosterone or other hormone therapy?",
+  "type": "",
+  "count": 247,
+  "disposition": "keep"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.contactsingle_dropdown_17827_8d1_copy_qrg_copy_dtk_copy",
+  "name": "Have you ever used testosterone or other hormone therapy?",
+  "type": "",
+  "count": 884,
+  "disposition": "keep"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.how_did_you_hear_about_mens_wellness_centers",
+  "name": "How did you hear about Men’s Wellness Centers?",
+  "type": "",
+  "count": 1018,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Contact",
+  "key": "contact.how_long_experiencing",
+  "name": "How Long Has This Been Going On?",
+  "type": "",
+  "count": 26,
+  "disposition": "keep"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.how_long_have_these_symptoms_been_present",
+  "name": "How long have these symptoms been present?",
+  "type": "",
+  "count": 887,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Contact",
+  "key": "contact.how_would_you_rate_your_interaction_with_our_staff",
+  "name": "How would you rate your interaction with our staff?",
+  "type": "",
+  "count": 128,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Contact",
+  "key": "contact.how_would_you_rate_your_overall_experience_today",
+  "name": "How would you rate your overall experience today?",
+  "type": "",
+  "count": 130,
+  "disposition": "keep"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.contactcontacti_confirm_the_information_i_provided_is_accurate_to_the_best_of_my_knowledge_dmq_copy_h35_copy_fqk_copy",
+  "name": "I acknowledge that I have received and understand the Notice of Privac",
+  "type": "",
+  "count": 884,
+  "disposition": "keep"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.contacti_confirm_the_information_i_provided_is_accurate_to_the_best_of_my_knowledge_dmq_copy",
+  "name": "I authorize Men’s Wellness Centers and its licensed medical providers ",
+  "type": "",
+  "count": 868,
+  "disposition": "keep"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.i_confirm_the_information_i_provided_is_accurate_to_the_best_of_my_knowledge",
+  "name": "I confirm the information I provided is accurate to the best of my kno",
+  "type": "",
+  "count": 874,
+  "disposition": "keep"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.contacti_confirm_the_information_i_provided_is_accurate_to_the_best_of_my_knowledge_dmq_copy_h35_copy",
+  "name": "I understand that my care may be provided in person and, when clinical",
+  "type": "",
+  "count": 884,
+  "disposition": "keep"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.if_yes_please_describe_optional",
+  "name": "If yes, please describe (optional)",
+  "type": "",
+  "count": 130,
+  "disposition": "keep"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.if_yes_please_provide_brief_details_optional",
+  "name": "If yes, please provide brief details (optional)",
+  "type": "",
+  "count": 233,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Additional Info",
+  "key": "contact.ip_address",
+  "name": "IP Address",
+  "type": "",
+  "count": 2885,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Additional Info",
+  "key": "contact.contact_disposition__channel",
+  "name": "Last disposition / Channel",
+  "type": "",
+  "count": 4167,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Additional Info",
+  "key": "contact.last_call_date",
+  "name": "Last Disposition Date",
+  "type": "",
+  "count": 3850,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Consultation Record",
+  "key": "contact.location",
+  "name": "Location",
+  "type": "",
+  "count": 6169,
+  "disposition": "keep"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.may_we_contact_them_about_your_care",
+  "name": "May we contact them about your care",
+  "type": "",
+  "count": 180,
+  "disposition": "keep"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.single_dropdown_17827",
+  "name": "May we contact your primary care provider regarding your care?",
+  "type": "",
+  "count": 884,
+  "disposition": "keep"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.name_as_signature",
+  "name": "Name as Signature",
+  "type": "",
+  "count": 239,
+  "disposition": "keep"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.norfolk__virginia_beach_stations",
+  "name": "Norfolk / Virginia Beach Stations",
+  "type": "",
+  "count": 41,
+  "disposition": "keep"
+ },
+ {
+  "folder": "General Info",
+  "key": "contact.occupation",
+  "name": "Occupation",
+  "type": "",
+  "count": 993,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Additional Info",
+  "key": "contact.original_lead_date",
+  "name": "Original Lead Date",
+  "type": "",
+  "count": 3233,
+  "disposition": "keep"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.past_surgery",
+  "name": "Past Surgery",
+  "type": "",
+  "count": 6,
+  "disposition": "cleanup"
+ },
+ {
+  "folder": "Additional Info",
+  "key": "contact.patient_advisor",
+  "name": "Patient Advisor",
+  "type": "",
+  "count": 4335,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Additional Info",
+  "key": "contact.pay_type",
+  "name": "Pay Type",
+  "type": "",
+  "count": 624,
+  "disposition": "keep"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.physical",
+  "name": "Physical",
+  "type": "",
+  "count": 918,
+  "disposition": "keep"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.please_specify",
+  "name": "Please Specify",
+  "type": "",
+  "count": 92,
+  "disposition": "keep"
+ },
+ {
+  "folder": "(unknown)",
+  "key": "contact.preferred_appointment_date",
+  "name": "Preferred Appointment Date",
+  "type": "",
+  "count": 8,
+  "disposition": "cleanup"
+ },
+ {
+  "folder": "Contact",
+  "key": "contact.preferred_appointment_location",
+  "name": "Preferred Appointment Location",
+  "type": "",
+  "count": 7,
+  "disposition": "cleanup"
+ },
+ {
+  "folder": "(unknown)",
+  "key": "contact.preferred_appointment_time",
+  "name": "Preferred Appointment Time",
+  "type": "",
+  "count": 4,
+  "disposition": "cleanup"
+ },
+ {
+  "folder": "Additional Info",
+  "key": "contact.preferred_location",
+  "name": "Preferred Location",
+  "type": "",
+  "count": 5660,
+  "disposition": "keep"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.primary_care_provider_name",
+  "name": "Primary Care Provider Name",
+  "type": "",
+  "count": 476,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Contact",
+  "key": "contact.primary_concern",
+  "name": "Primary Concern",
+  "type": "",
+  "count": 35,
+  "disposition": "keep"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.print__local",
+  "name": "Print & Local",
+  "type": "",
+  "count": 12,
+  "disposition": "cleanup"
+ },
+ {
+  "folder": "Consultation Record",
+  "key": "contact.product_sold__item_2",
+  "name": "Product Sold – Item 2",
+  "type": "",
+  "count": 30,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Consultation Record",
+  "key": "contact.provider_making_recommendation",
+  "name": "Provider Making Recommendation",
+  "type": "",
+  "count": 1144,
+  "disposition": "keep"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.checkbox_2lpu_mgj_copy",
+  "name": "Psychologic",
+  "type": "",
+  "count": 871,
+  "disposition": "keep"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.referrals__returning",
+  "name": "Referrals & Returning",
+  "type": "",
+  "count": 39,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Contact",
+  "key": "contact.referred_by_ambassador",
+  "name": "Referred by Ambassador",
+  "type": "",
+  "count": 1,
+  "disposition": "cleanup"
+ },
+ {
+  "folder": "Additional Info",
+  "key": "contact.referrers_email_address",
+  "name": "Referrer's Email Address",
+  "type": "",
+  "count": 8,
+  "disposition": "cleanup"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.relationship",
+  "name": "Relationship",
+  "type": "",
+  "count": 744,
+  "disposition": "keep"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.richmond_stations",
+  "name": "Richmond Stations",
+  "type": "",
+  "count": 29,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Consultation Record",
+  "key": "contact.sale_outcome",
+  "name": "Sale Outcome",
+  "type": "",
+  "count": 1147,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Consultation Record",
+  "key": "contact.sale_type",
+  "name": "Sale Type",
+  "type": "",
+  "count": 35,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Additional Info",
+  "key": "contact.saturday_date_eow",
+  "name": "Saturday Date EOW",
+  "type": "",
+  "count": 3230,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Contact",
+  "key": "contact.service_interested_in",
+  "name": "Service interested in?",
+  "type": "",
+  "count": 4,
+  "disposition": "cleanup"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.checkbox_2lpu_mgj_copy_i6c_copy",
+  "name": "Sexual",
+  "type": "",
+  "count": 878,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Additional Info",
+  "key": "contact.sms_double_optin",
+  "name": "SMS Consent Status",
+  "type": "",
+  "count": 0,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Additional Info",
+  "key": "contact.sms_optin_date",
+  "name": "SMS Opt-In Date",
+  "type": "",
+  "count": 0,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Additional Info",
+  "key": "contact.sms_optin_source",
+  "name": "SMS Opt-In Source",
+  "type": "",
+  "count": 0,
+  "disposition": "archive"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.social_media",
+  "name": "Social Media",
+  "type": "",
+  "count": 192,
+  "disposition": "keep"
+ },
+ {
+  "folder": "SOURCE",
+  "key": "contact.source_url",
+  "name": "SOURCE URL",
+  "type": "",
+  "count": 2784,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Contact",
+  "key": "contact.status",
+  "name": "Status",
+  "type": "",
+  "count": 45,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Contact",
+  "key": "contact.survey__open_feedback",
+  "name": "Survey — Open Feedback",
+  "type": "",
+  "count": 11,
+  "disposition": "cleanup"
+ },
+ {
+  "folder": "Consultation Record",
+  "key": "contact.term_length__item_1",
+  "name": "Term Length – Item 1",
+  "type": "",
+  "count": 626,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Consultation Record",
+  "key": "contact.term_length__item_2",
+  "name": "Term Length – Item 2",
+  "type": "",
+  "count": 16,
+  "disposition": "cleanup"
+ },
+ {
+  "folder": "Consultation Record",
+  "key": "contact.total_program_amount",
+  "name": "Total Program Amount",
+  "type": "",
+  "count": 1131,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Contact",
+  "key": "contact.tried_other_treatments",
+  "name": "Tried other treatments?",
+  "type": "",
+  "count": 26,
+  "disposition": "keep"
+ },
+ {
+  "folder": "SOURCE",
+  "key": "contact.utm_campaign",
+  "name": "UTM Campaign",
+  "type": "",
+  "count": 1276,
+  "disposition": "keep"
+ },
+ {
+  "folder": "SOURCE",
+  "key": "contact.utm_content",
+  "name": "UTM Content",
+  "type": "",
+  "count": 1266,
+  "disposition": "keep"
+ },
+ {
+  "folder": "SOURCE",
+  "key": "contact.utm_medium",
+  "name": "UTM Medium",
+  "type": "",
+  "count": 1268,
+  "disposition": "keep"
+ },
+ {
+  "folder": "SOURCE",
+  "key": "contact.utm_source",
+  "name": "UTM Source",
+  "type": "",
+  "count": 1256,
+  "disposition": "keep"
+ },
+ {
+  "folder": "SOURCE",
+  "key": "contact.utm_term",
+  "name": "UTM Term",
+  "type": "",
+  "count": 1247,
+  "disposition": "keep"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.what_is_the_primary_reason_for_todays_visit",
+  "name": "What is the primary reason for today’s visit?",
+  "type": "",
+  "count": 929,
+  "disposition": "keep"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.whats_the_main_reason_you_booked_today",
+  "name": "What's the main reason you booked today?",
+  "type": "",
+  "count": 247,
+  "disposition": "keep"
+ },
+ {
+  "folder": "New Patient Intake Form Response",
+  "key": "contact.fwhich_location_are_you_interested_in",
+  "name": "Which Location Are You Interested In?",
+  "type": "",
+  "count": 3,
+  "disposition": "cleanup"
+ },
+ {
+  "folder": "Additional Info",
+  "key": "contact.who_referred_you_referrers_name",
+  "name": "Who referred you? (Referrer's name)",
+  "type": "",
+  "count": 30,
+  "disposition": "keep"
+ },
+ {
+  "folder": "Contact",
+  "key": "contact.would_you_recommend_us_to_a_friend_or_family_member",
+  "name": "Would you recommend us to a friend or family member?",
+  "type": "",
+  "count": 123,
+  "disposition": "keep"
+ }
+]

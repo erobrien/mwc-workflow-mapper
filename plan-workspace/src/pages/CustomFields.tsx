@@ -99,11 +99,13 @@ function FieldRow({ field, ann, onChange, rowIdx }: {
 
   return (
     <tr className={`border-b border-border transition-colors hover:bg-muted/50 ${DISP_ROW[disp] || stripe}`}>
-      <td className="px-3 py-2 align-middle min-w-[180px]">
-        <span className="font-mono text-xs font-medium text-foreground break-words [overflow-wrap:anywhere]">{field.name}</span>
+      <td className="px-3 py-2 align-middle min-w-[220px]">
+        <div className="space-y-1">
+          <div className="text-xs font-semibold text-foreground break-words [overflow-wrap:anywhere] line-clamp-2">{field.name}</div>
+          <div className="font-mono text-[10px] text-muted-foreground/70">{field.fieldKey || "—"}</div>
+        </div>
       </td>
-      <td className="px-3 py-2 align-middle whitespace-nowrap text-[10px] text-muted-foreground min-w-[100px]">{field.fieldKey || "—"}</td>
-      <td className="px-3 py-2 align-middle whitespace-nowrap text-xs text-muted-foreground min-w-[70px]">{field.type || "—"}</td>
+      <td className="px-3 py-2 align-middle whitespace-nowrap text-xs text-muted-foreground min-w-[80px]">{field.type || "—"}</td>
       <td className="px-3 py-2 align-middle whitespace-nowrap text-right font-semibold min-w-[90px]">
         <span className={`tabular-nums ${field.count === 0 ? "text-red-600 dark:text-red-400" : "text-emerald-600 dark:text-emerald-400"}`}>
           {field.count.toLocaleString()}
@@ -111,6 +113,7 @@ function FieldRow({ field, ann, onChange, rowIdx }: {
       </td>
       <td className="px-3 py-2 align-middle whitespace-nowrap text-[10px] text-muted-foreground min-w-[80px]">{fmtDate(field.created_at)}</td>
       <td className="px-3 py-2 align-middle whitespace-nowrap text-[10px] text-muted-foreground min-w-[100px]">{field.created_by || "—"}</td>
+      <td className="px-3 py-2 align-middle text-[10px] text-muted-foreground min-w-[120px]">{field.form_refs.length > 0 ? field.form_refs.join(", ") : "—"}</td>
       <td className="px-3 py-2 align-middle min-w-[140px]">
         <select className={`${sel} ${disp ? "font-semibold" : ""}`} value={disp} onChange={(e) => set({ disposition: e.target.value as Disposition })}>
           {DISP_OPTIONS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
@@ -313,6 +316,7 @@ export default function CustomFields() {
                 <th className={`${thCls} text-right`}><div className={`${thBtn} justify-end`} onClick={() => handleSort("count")}>Non-Null Records <SortIcon col="count" sortBy={sortBy} sortDir={sortDir} /></div></th>
                 <th className={thCls}><div className={thBtn} onClick={() => handleSort("created")}>Created Date <SortIcon col="created" sortBy={sortBy} sortDir={sortDir} /></div></th>
                 <th className={thCls}><div className={thBtn} onClick={() => handleSort("created_by")}>Created By <SortIcon col="created_by" sortBy={sortBy} sortDir={sortDir} /></div></th>
+                <th className={thCls}>Forms Using</th>
                 <th className={thCls}><div className={thBtn} onClick={() => handleSort("disposition")}>My disposition <SortIcon col="disposition" sortBy={sortBy} sortDir={sortDir} /></div></th>
                 <th className={thCls}>Description</th>
                 <th className={thCls}>Notes</th>
@@ -323,7 +327,7 @@ export default function CustomFields() {
                 <FieldRow key={field.id} field={field} ann={annotations[field.id] ?? EMPTY_ANN} onChange={update} rowIdx={i} />
               ))}
               {pageSlice.length === 0 && (
-                <tr><td colSpan={9} className="px-3 py-12 text-center text-sm text-muted-foreground bg-card">No fields match the current filters.</td></tr>
+                <tr><td colSpan={10} className="px-3 py-12 text-center text-sm text-muted-foreground bg-card">No fields match the current filters.</td></tr>
               )}
             </tbody>
           </table>

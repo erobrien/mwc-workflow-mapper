@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 
 // ── Design tokens ─────────────────────────────────────────────────────────────
-const inp  = "w-full rounded-lg border bg-background px-3 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/60 outline-none focus:ring-2 focus:ring-ring transition-colors";
+const inp  = "w-full rounded-lg border border-gray-400 dark:border-border bg-background px-3 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/60 outline-none focus:ring-2 focus:ring-ring transition-colors";
 const lbl  = "block text-xs font-semibold text-muted-foreground mb-1.5";
 const mono = "mt-1 text-[11px] font-mono text-muted-foreground/70";
 const req  = <span className="text-destructive ml-0.5">*</span>;
@@ -50,7 +50,7 @@ function SegCtrl({ opts, value, onChange }: {
           className={`cursor-pointer flex items-center justify-center gap-2 rounded-xl border px-3 py-3 text-sm font-semibold transition-all
             ${value === v
               ? `${ring} text-white border-transparent shadow-md`
-              : "bg-card border-border text-muted-foreground hover:bg-muted/60 hover:text-foreground hover:border-border/80"}`}
+              : "bg-card border-gray-400 dark:border-border text-muted-foreground hover:bg-muted/60 hover:text-foreground hover:border-gray-500 dark:hover:border-border/80"}`}
         >
           <Icon className="h-4 w-4 shrink-0" />
           {label}
@@ -311,10 +311,10 @@ export default function SalesForm() {
                   <label className={lbl}>Discount <span className="font-normal text-muted-foreground/60">(optional)</span></label>
                   <div className="flex gap-2">
                     {/* % / $ toggle */}
-                    <div className="flex rounded-lg border bg-background overflow-hidden shrink-0 h-[42px]">
+                    <div className="flex rounded-lg border border-gray-400 dark:border-border bg-background overflow-hidden shrink-0 h-[42px]">
                       {(["pct", "dollar"] as const).map((t, idx) => (
                         <button key={t} type="button" onClick={() => setDiscountType(t)}
-                          className={`cursor-pointer px-3.5 text-sm font-bold transition-colors ${idx > 0 ? "border-l" : ""} ${discountType === t ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-muted"}`}>
+                          className={`cursor-pointer px-3.5 text-sm font-bold transition-colors ${idx > 0 ? "border-l border-l-gray-400 dark:border-l-border" : ""} ${discountType === t ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-muted"}`}>
                           {t === "pct" ? "%" : "$"}
                         </button>
                       ))}
@@ -336,7 +336,7 @@ export default function SalesForm() {
               </Row>
 
               {/* Financial receipt */}
-              <div className="rounded-xl border overflow-hidden divide-y">
+              <div className="rounded-xl border border-gray-400 dark:border-border overflow-hidden divide-y divide-gray-400 dark:divide-border">
                 {showSubtotal && (
                   <ReceiptRow
                     label="Subtotal"
@@ -371,7 +371,7 @@ export default function SalesForm() {
                     <div className="relative">
                       <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-muted-foreground text-sm select-none">$</span>
                       <input
-                        className="w-32 rounded-lg border bg-background pl-6 pr-2 py-2 text-sm font-bold tabular-nums text-right outline-none focus:ring-2 focus:ring-ring transition-colors"
+                        className="w-32 rounded-lg border border-gray-400 dark:border-border bg-background pl-6 pr-2 py-2 text-sm font-bold tabular-nums text-right outline-none focus:ring-2 focus:ring-ring transition-colors"
                         inputMode="numeric" value={totalAmount}
                         onChange={e => { setTotalAmount(e.target.value); setTotalManual(true); }}
                       />
@@ -385,7 +385,7 @@ export default function SalesForm() {
                   <div className="relative">
                     <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-muted-foreground text-sm select-none">$</span>
                     <input
-                      className="w-28 rounded-lg border bg-background pl-6 pr-2 py-2 text-sm tabular-nums text-right outline-none focus:ring-2 focus:ring-ring transition-colors"
+                      className="w-28 rounded-lg border border-gray-400 dark:border-border bg-background pl-6 pr-2 py-2 text-sm tabular-nums text-right outline-none focus:ring-2 focus:ring-ring transition-colors"
                       inputMode="numeric" placeholder="0.00" value={moneyDown}
                       onChange={e => setMoneyDown(e.target.value)}
                     />

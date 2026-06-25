@@ -931,6 +931,11 @@
             "count": 1147
           },
           {
+            "label": "Close Type",
+            "hint": "opportunity tag",
+            "note": "Same Day | Come-back — deal velocity tag set when Won; was contact tag booked_same_day"
+          },
+          {
             "label": "No-Sale Reason (+ Other)",
             "hint": "op_nosale_reason",
             "note": "was A&D Reason / A&D Other Explanation",

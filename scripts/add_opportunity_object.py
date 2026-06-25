@@ -38,6 +38,7 @@ opportunity_object = {
                 {"label": "Sale Type", "hint": "op_sale_type", "note": "New | Renewal — the consultation type. THE backbone.", "star": True, "count": C("contact.sale_type")},
                 {"label": "Appointment Status", "hint": "op_appt_status", "note": "Showed · No-Show · Cancel · Reschedule"},
                 {"label": "Sale Outcome", "hint": "op_sale_outcome", "note": "Sold · A&D · MUT · MAR", "count": C("contact.sale_outcome")},
+                {"label": "Close Type", "hint": "opportunity tag", "note": "Same Day | Come-back — deal velocity tag set when Won; was contact tag booked_same_day"},
                 {"label": "No-Sale Reason (+ Other)", "hint": "op_nosale_reason", "note": "was A&D Reason / A&D Other Explanation", "count": C("contact.ad_reason", "contact.ad_other_explanation")},
             ],
         },

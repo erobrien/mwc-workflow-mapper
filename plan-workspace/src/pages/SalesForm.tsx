@@ -119,6 +119,7 @@ export default function SalesForm() {
   const [pcc,           setPcc]          = useState("Alex Rivera");
   const [provider,      setProvider]     = useState("Dr. Marcus Hale");
   const [outcome,       setOutcome]      = useState("sold");
+  const [closeType,     setCloseType]    = useState("same-day"); // opportunity tag: Same Day | Come-back
   const [adReason,      setAdReason]     = useState("Not Ready");
   const [products,      setProducts]     = useState<Product[]>([{ name: "TRT", term: "3 mo", price: "2999" }]);
   const [totalAmount,   setTotalAmount]  = useState("2999");
@@ -248,6 +249,25 @@ export default function SalesForm() {
               )}
               <Hint>op_sale_outcome</Hint>
             </div>
+
+            {/* Close type — opportunity tags (only when sold) */}
+            {sold && (
+              <div className="pt-1">
+                <label className={lbl}>Close type <span className="font-normal text-muted-foreground/60">(opportunity tag)</span></label>
+                <div className="flex gap-2">
+                  {[
+                    { v: "same-day",  label: "Same Day",  on: "bg-teal-500 text-white border-teal-500",     off: "text-teal-700 dark:text-teal-400 border-teal-400 dark:border-teal-800 hover:bg-teal-50 dark:hover:bg-teal-950/30" },
+                    { v: "come-back", label: "Come-back", on: "bg-orange-500 text-white border-orange-500", off: "text-orange-700 dark:text-orange-400 border-orange-400 dark:border-orange-800 hover:bg-orange-50 dark:hover:bg-orange-950/30" },
+                  ].map(t => (
+                    <button key={t.v} type="button" onClick={() => setCloseType(closeType === t.v ? "" : t.v)}
+                      className={`cursor-pointer rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-colors ${closeType === t.v ? t.on : `bg-background ${t.off}`}`}>
+                      {t.label}
+                    </button>
+                  ))}
+                </div>
+                <Hint>opportunity tags · same-day close vs comeback close · was contact tag booked_same_day</Hint>
+              </div>
+            )}
 
             {/* A&D / MUT / MAR reason */}
             {!sold && (

@@ -18,6 +18,7 @@ import SalesForm from "./pages/SalesForm";
 import WorkflowDetail from "./pages/WorkflowDetail";
 import WFDiagrams from "./pages/WFDiagrams";
 import Tags from "./pages/Tags";
+import CustomFields from "./pages/CustomFields";
 import TelemedOverview from "./pages/TelemedOverview";
 import TelemedConfig from "./pages/TelemedConfig";
 import TelemedWorkflows from "./pages/TelemedWorkflows";
@@ -47,6 +48,7 @@ const router = createBrowserRouter([
   { path: "/workflow/:id", element: wrap(<WorkflowDetail />) },
   { path: "/wf-diagrams", element: wrap(<WFDiagrams />) },
   { path: "/tags", element: wrap(<Tags />) },
+  { path: "/custom-fields", element: wrap(<CustomFields />) },
   { path: "/telemed", element: wrap(<TelemedOverview />) },
   { path: "/telemed/config", element: wrap(<TelemedConfig />) },
   { path: "/telemed/workflows", element: wrap(<TelemedWorkflows />) },

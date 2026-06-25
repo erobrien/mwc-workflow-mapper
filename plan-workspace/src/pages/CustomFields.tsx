@@ -10,6 +10,7 @@ interface CustomField {
   count: number;
   form_refs: string[];
   created_at: string | null;
+  created_by: string;
   updated_at: string | null;
 }
 
@@ -63,7 +64,7 @@ const DISP_ROW: Record<Disposition, string> = {
   skip: "",
 };
 
-type SortKey = "name" | "count" | "disposition" | "type" | "key" | "created";
+type SortKey = "name" | "count" | "disposition" | "type" | "key" | "created" | "created_by";
 type SortDir = "asc" | "desc";
 
 function loadAnnotations(): Record<string, Ann> {
@@ -98,28 +99,27 @@ function FieldRow({ field, ann, onChange, rowIdx }: {
 
   return (
     <tr className={`border-b border-border transition-colors hover:bg-muted/50 ${DISP_ROW[disp] || stripe}`}>
-      <td className="px-3 py-2 align-middle min-w-[200px]">
-        <div className="space-y-0.5">
-          <span className="font-mono text-xs font-medium text-foreground break-words [overflow-wrap:anywhere]">{field.name}</span>
-          {field.fieldKey && <span className="text-[10px] text-muted-foreground/70">{field.fieldKey}</span>}
-        </div>
+      <td className="px-3 py-2 align-middle min-w-[180px]">
+        <span className="font-mono text-xs font-medium text-foreground break-words [overflow-wrap:anywhere]">{field.name}</span>
       </td>
-      <td className="px-3 py-2 align-middle whitespace-nowrap text-xs text-muted-foreground min-w-[80px]">{field.type}</td>
-      <td className="px-3 py-2 align-middle whitespace-nowrap text-right min-w-[80px]">
-        <span className={`tabular-nums font-semibold ${field.count === 0 ? "text-red-600 dark:text-red-400" : "text-foreground"}`}>
-          {field.count}
+      <td className="px-3 py-2 align-middle whitespace-nowrap text-[10px] text-muted-foreground min-w-[100px]">{field.fieldKey || "—"}</td>
+      <td className="px-3 py-2 align-middle whitespace-nowrap text-xs text-muted-foreground min-w-[70px]">{field.type || "—"}</td>
+      <td className="px-3 py-2 align-middle whitespace-nowrap text-right font-semibold min-w-[90px]">
+        <span className={`tabular-nums ${field.count === 0 ? "text-red-600 dark:text-red-400" : "text-emerald-600 dark:text-emerald-400"}`}>
+          {field.count.toLocaleString()}
         </span>
       </td>
       <td className="px-3 py-2 align-middle whitespace-nowrap text-[10px] text-muted-foreground min-w-[80px]">{fmtDate(field.created_at)}</td>
-      <td className="px-3 py-2 align-middle min-w-[150px]">
+      <td className="px-3 py-2 align-middle whitespace-nowrap text-[10px] text-muted-foreground min-w-[100px]">{field.created_by || "—"}</td>
+      <td className="px-3 py-2 align-middle min-w-[140px]">
         <select className={`${sel} ${disp ? "font-semibold" : ""}`} value={disp} onChange={(e) => set({ disposition: e.target.value as Disposition })}>
           {DISP_OPTIONS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
         </select>
       </td>
-      <td className="px-3 py-2 align-middle min-w-[200px]">
+      <td className="px-3 py-2 align-middle min-w-[180px]">
         <input className={inp} placeholder="What does this field do / why exists?" value={ann.description} onChange={(e) => set({ description: e.target.value })} />
       </td>
-      <td className="px-3 py-2 align-middle min-w-[140px]">
+      <td className="px-3 py-2 align-middle min-w-[120px]">
         <input className={inp} placeholder="Notes…" value={ann.notes} onChange={(e) => set({ notes: e.target.value })} />
       </td>
     </tr>
@@ -182,6 +182,7 @@ export default function CustomFields() {
       else if (sortBy === "key") cmp = a.fieldKey.localeCompare(b.fieldKey);
       else if (sortBy === "disposition") cmp = (annotations[a.id]?.disposition ?? "").localeCompare(annotations[b.id]?.disposition ?? "");
       else if (sortBy === "created") cmp = (a.created_at ?? "").localeCompare(b.created_at ?? "");
+      else if (sortBy === "created_by") cmp = (a.created_by ?? "").localeCompare(b.created_by ?? "");
       return sortDir === "asc" ? cmp : -cmp;
     });
   }, [filtered, sortBy, sortDir, annotations]);
@@ -307,9 +308,11 @@ export default function CustomFields() {
             <thead>
               <tr>
                 <th className={thCls}><div className={thBtn} onClick={() => handleSort("name")}>Name <SortIcon col="name" sortBy={sortBy} sortDir={sortDir} /></div></th>
+                <th className={thCls}><div className={thBtn} onClick={() => handleSort("key")}>Field Key <SortIcon col="key" sortBy={sortBy} sortDir={sortDir} /></div></th>
                 <th className={thCls}><div className={thBtn} onClick={() => handleSort("type")}>Type <SortIcon col="type" sortBy={sortBy} sortDir={sortDir} /></div></th>
-                <th className={`${thCls} text-right`}><div className={`${thBtn} justify-end`} onClick={() => handleSort("count")}>Contacts <SortIcon col="count" sortBy={sortBy} sortDir={sortDir} /></div></th>
-                <th className={thCls}><div className={thBtn} onClick={() => handleSort("created")}>Created <SortIcon col="created" sortBy={sortBy} sortDir={sortDir} /></div></th>
+                <th className={`${thCls} text-right`}><div className={`${thBtn} justify-end`} onClick={() => handleSort("count")}>Non-Null Records <SortIcon col="count" sortBy={sortBy} sortDir={sortDir} /></div></th>
+                <th className={thCls}><div className={thBtn} onClick={() => handleSort("created")}>Created Date <SortIcon col="created" sortBy={sortBy} sortDir={sortDir} /></div></th>
+                <th className={thCls}><div className={thBtn} onClick={() => handleSort("created_by")}>Created By <SortIcon col="created_by" sortBy={sortBy} sortDir={sortDir} /></div></th>
                 <th className={thCls}><div className={thBtn} onClick={() => handleSort("disposition")}>My disposition <SortIcon col="disposition" sortBy={sortBy} sortDir={sortDir} /></div></th>
                 <th className={thCls}>Description</th>
                 <th className={thCls}>Notes</th>
@@ -320,7 +323,7 @@ export default function CustomFields() {
                 <FieldRow key={field.id} field={field} ann={annotations[field.id] ?? EMPTY_ANN} onChange={update} rowIdx={i} />
               ))}
               {pageSlice.length === 0 && (
-                <tr><td colSpan={7} className="px-3 py-12 text-center text-sm text-muted-foreground bg-card">No fields match the current filters.</td></tr>
+                <tr><td colSpan={9} className="px-3 py-12 text-center text-sm text-muted-foreground bg-card">No fields match the current filters.</td></tr>
               )}
             </tbody>
           </table>

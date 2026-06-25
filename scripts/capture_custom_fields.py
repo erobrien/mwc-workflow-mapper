@@ -163,6 +163,7 @@ output = {
                 "count": f.get("count", 0),
                 "form_refs": f.get("form_refs", []),
                 "created_at": f.get("createdAt"),
+                "created_by": f.get("createdBy", ""),
                 "updated_at": f.get("updatedAt"),
             }
             for f in fields

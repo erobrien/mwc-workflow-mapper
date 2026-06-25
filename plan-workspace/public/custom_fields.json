@@ -1,6 +1,6 @@
 {
-  "pulled_at": "2026-06-25T14:13:40.088421Z",
-  "total_contacts": 12687,
+  "pulled_at": "2026-06-25T14:35:51.404108Z",
+  "total_contacts": 12691,
   "total_fields": 102,
   "fields": [
     {
@@ -11,6 +11,7 @@
       "count": 808,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -21,6 +22,7 @@
       "count": 629,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -31,6 +33,7 @@
       "count": 9,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -41,6 +44,7 @@
       "count": 608,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -48,9 +52,10 @@
       "name": "_atid",
       "fieldKey": "contact.atclid",
       "type": "",
-      "count": 1373,
+      "count": 1375,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -61,6 +66,7 @@
       "count": 128,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -71,6 +77,7 @@
       "count": 471,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -81,6 +88,7 @@
       "count": 4,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -91,6 +99,7 @@
       "count": 9,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -98,9 +107,10 @@
       "name": "Channel",
       "fieldKey": "contact.last_channel",
       "type": "",
-      "count": 85,
+      "count": 86,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -111,6 +121,7 @@
       "count": 0,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -121,6 +132,7 @@
       "count": 0,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -131,6 +143,7 @@
       "count": 122,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -141,6 +154,7 @@
       "count": 3224,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -151,6 +165,7 @@
       "count": 46,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -161,6 +176,7 @@
       "count": 45,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -171,6 +187,7 @@
       "count": 44,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -181,6 +198,7 @@
       "count": 45,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -188,9 +206,10 @@
       "name": "Consent \u2013 IP Address",
       "fieldKey": "contact.consent__ip_address",
       "type": "",
-      "count": 45,
+      "count": 46,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -201,6 +220,7 @@
       "count": 556,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -208,9 +228,10 @@
       "name": "CONTACT DISPOSITION",
       "fieldKey": "contact.call_disposition",
       "type": "",
-      "count": 806,
+      "count": 807,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -221,6 +242,7 @@
       "count": 742,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -231,6 +253,7 @@
       "count": 884,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -241,6 +264,7 @@
       "count": 884,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -251,6 +275,7 @@
       "count": 884,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -261,6 +286,7 @@
       "count": 247,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -271,6 +297,7 @@
       "count": 247,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -281,6 +308,7 @@
       "count": 245,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -291,6 +319,7 @@
       "count": 715,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -301,6 +330,7 @@
       "count": 757,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -311,6 +341,7 @@
       "count": 0,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -321,6 +352,7 @@
       "count": 0,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -331,6 +363,7 @@
       "count": 1114,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -341,6 +374,7 @@
       "count": 247,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -351,6 +385,7 @@
       "count": 884,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -361,6 +396,7 @@
       "count": 1018,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -371,6 +407,7 @@
       "count": 26,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -381,6 +418,7 @@
       "count": 887,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -391,6 +429,7 @@
       "count": 128,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -401,6 +440,7 @@
       "count": 130,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -411,6 +451,7 @@
       "count": 884,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -421,6 +462,7 @@
       "count": 868,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -431,6 +473,7 @@
       "count": 874,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -441,6 +484,7 @@
       "count": 884,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -451,6 +495,7 @@
       "count": 130,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -461,6 +506,7 @@
       "count": 233,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -468,9 +514,10 @@
       "name": "IP Address",
       "fieldKey": "contact.ip_address",
       "type": "",
-      "count": 2884,
+      "count": 2885,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -478,9 +525,10 @@
       "name": "Last disposition / Channel",
       "fieldKey": "contact.contact_disposition__channel",
       "type": "",
-      "count": 4164,
+      "count": 4167,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -488,9 +536,10 @@
       "name": "Last Disposition Date",
       "fieldKey": "contact.last_call_date",
       "type": "",
-      "count": 3847,
+      "count": 3850,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -501,6 +550,7 @@
       "count": 6169,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -511,6 +561,7 @@
       "count": 180,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -521,6 +572,7 @@
       "count": 884,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -531,6 +583,7 @@
       "count": 239,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -541,6 +594,7 @@
       "count": 41,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -551,6 +605,7 @@
       "count": 993,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -561,6 +616,7 @@
       "count": 3233,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -571,6 +627,7 @@
       "count": 6,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -581,6 +638,7 @@
       "count": 4335,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -591,6 +649,7 @@
       "count": 624,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -601,6 +660,7 @@
       "count": 918,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -611,6 +671,7 @@
       "count": 92,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -621,6 +682,7 @@
       "count": 8,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -631,6 +693,7 @@
       "count": 7,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -641,6 +704,7 @@
       "count": 4,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -651,6 +715,7 @@
       "count": 5660,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -661,6 +726,7 @@
       "count": 476,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -671,6 +737,7 @@
       "count": 35,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -681,6 +748,7 @@
       "count": 12,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -691,6 +759,7 @@
       "count": 30,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -701,6 +770,7 @@
       "count": 1144,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -711,6 +781,7 @@
       "count": 871,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -721,6 +792,7 @@
       "count": 39,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -731,6 +803,7 @@
       "count": 1,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -741,6 +814,7 @@
       "count": 8,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -751,6 +825,7 @@
       "count": 744,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -761,6 +836,7 @@
       "count": 29,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -771,6 +847,7 @@
       "count": 1147,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -781,6 +858,7 @@
       "count": 35,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -791,6 +869,7 @@
       "count": 3230,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -801,6 +880,7 @@
       "count": 4,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -811,6 +891,7 @@
       "count": 878,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -821,6 +902,7 @@
       "count": 0,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -831,6 +913,7 @@
       "count": 0,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -841,6 +924,7 @@
       "count": 0,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -851,6 +935,7 @@
       "count": 192,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -861,6 +946,7 @@
       "count": 2784,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -871,6 +957,7 @@
       "count": 45,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -881,6 +968,7 @@
       "count": 11,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -891,6 +979,7 @@
       "count": 626,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -901,6 +990,7 @@
       "count": 16,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -911,6 +1001,7 @@
       "count": 1131,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -921,6 +1012,7 @@
       "count": 26,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -931,6 +1023,7 @@
       "count": 1276,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -941,6 +1034,7 @@
       "count": 1266,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -951,6 +1045,7 @@
       "count": 1268,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -961,6 +1056,7 @@
       "count": 1256,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -971,6 +1067,7 @@
       "count": 1247,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -981,6 +1078,7 @@
       "count": 929,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -991,6 +1089,7 @@
       "count": 247,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -1001,6 +1100,7 @@
       "count": 3,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -1011,6 +1111,7 @@
       "count": 30,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     },
     {
@@ -1021,6 +1122,7 @@
       "count": 123,
       "form_refs": [],
       "created_at": null,
+      "created_by": "",
       "updated_at": null
     }
   ]

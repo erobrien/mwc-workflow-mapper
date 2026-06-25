@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { PageShell } from "../components/Shell";
-import { Download, ChevronUp, ChevronDown, ChevronsUpDown, ChevronLeft, ChevronRight, Check } from "lucide-react";
+import { Download, ChevronUp, ChevronDown, ChevronsUpDown, ChevronLeft, ChevronRight, Check, Sparkles } from "lucide-react";
 
 interface CustomField {
   id: string;
@@ -12,6 +12,9 @@ interface CustomField {
   created_at: string | null;
   created_by: string;
   updated_at: string | null;
+  suggested_disposition?: string;
+  suggested_description?: string;
+  suggested_reason?: string;
 }
 
 interface FieldData {
@@ -82,6 +85,13 @@ function fmtDate(s: string | null): string {
   return d.toLocaleDateString(undefined, { year: "2-digit", month: "short", day: "numeric" });
 }
 
+function patchFromSuggestion(field: CustomField, curDesc: string): Partial<Ann> {
+  const disp = (field.suggested_disposition ?? "") as Disposition;
+  const patch: Partial<Ann> = { disposition: disp };
+  if (!curDesc && field.suggested_description) patch.description = field.suggested_description;
+  return patch;
+}
+
 const inp = "w-full rounded border border-gray-400 dark:border-border bg-background px-2 py-1 text-xs text-foreground placeholder:text-muted-foreground outline-none focus:border-ring focus:ring-1 focus:ring-ring/30";
 const sel = "w-full rounded border border-gray-400 dark:border-border bg-background px-2 py-1 text-xs text-foreground outline-none focus:border-ring focus:ring-1 focus:ring-ring/30";
 
@@ -96,6 +106,8 @@ function FieldRow({ field, ann, onChange, rowIdx }: {
   const set = (patch: Partial<Ann>) => onChange(field.id, patch);
   const disp = ann.disposition;
   const stripe = rowIdx % 2 === 0 ? "bg-card" : "bg-muted/30";
+  const sd = field.suggested_disposition ?? "";
+  const accepted = sd && disp === sd;
 
   return (
     <tr className={`border-b border-border transition-colors hover:bg-muted/50 ${DISP_ROW[disp] || stripe}`}>
@@ -114,6 +126,22 @@ function FieldRow({ field, ann, onChange, rowIdx }: {
       <td className="px-3 py-2 align-middle whitespace-nowrap text-[10px] text-muted-foreground min-w-[80px]">{fmtDate(field.created_at)}</td>
       <td className="px-3 py-2 align-middle whitespace-nowrap text-[10px] text-muted-foreground min-w-[100px]">{field.created_by || "—"}</td>
       <td className="px-3 py-2 align-middle text-[10px] text-muted-foreground min-w-[120px]">{field.form_refs.length > 0 ? field.form_refs.join(", ") : "—"}</td>
+      <td className="px-3 py-2 align-middle min-w-[220px]">
+        {sd ? (
+          <div className="space-y-1">
+            <div className="flex items-center gap-1.5">
+              <span className={`shrink-0 inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-semibold ${DISP_BADGE[sd]}`}>{DISP_LABEL[sd]}</span>
+              <button
+                onClick={() => set(patchFromSuggestion(field, ann.description))}
+                title={accepted ? "Already applied" : "Apply this suggestion to the Disposition"}
+                className={`ml-auto shrink-0 inline-flex items-center gap-0.5 rounded border px-1.5 py-0.5 text-[10px] font-medium transition-colors ${accepted ? "border-emerald-400 text-emerald-700 dark:text-emerald-400" : "border-input text-foreground hover:bg-muted"}`}>
+                <Check className="h-3 w-3" /> {accepted ? "applied" : "accept"}
+              </button>
+            </div>
+            {field.suggested_reason && <div className="text-[11px] leading-snug text-muted-foreground line-clamp-2" title={field.suggested_reason}>{field.suggested_reason}</div>}
+          </div>
+        ) : <span className="text-xs text-muted-foreground">—</span>}
+      </td>
       <td className="px-3 py-2 align-middle min-w-[140px]">
         <select className={`${sel} ${disp ? "font-semibold" : ""}`} value={disp} onChange={(e) => set({ disposition: e.target.value as Disposition })}>
           {DISP_OPTIONS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
@@ -136,6 +164,7 @@ export default function CustomFields() {
   const [filterDisp, setFilterDisp] = useState<Disposition | "all">("all");
   const [filterType, setFilterType] = useState("all");
   const [filterUsage, setFilterUsage] = useState("all");
+  const [filterSuggest, setFilterSuggest] = useState("all");
   const [sortBy, setSortBy] = useState<SortKey>("name");
   const [sortDir, setSortDir] = useState<SortDir>("asc");
   const [page, setPage] = useState(1);
@@ -148,6 +177,21 @@ export default function CustomFields() {
   const update = useCallback((id: string, patch: Partial<Ann>) => {
     setAnnotations((prev) => {
       const next = { ...prev, [id]: { ...(prev[id] ?? EMPTY_ANN), ...patch } };
+      saveAnnotations(next);
+      return next;
+    });
+    setSaved(true);
+    setTimeout(() => setSaved(false), 1200);
+  }, []);
+
+  const applyMany = useCallback((rows: CustomField[]) => {
+    setAnnotations((prev) => {
+      const next = { ...prev };
+      for (const f of rows) {
+        if (!f.suggested_disposition) continue;
+        const cur = next[f.id] ?? EMPTY_ANN;
+        next[f.id] = { ...cur, ...patchFromSuggestion(f, cur.description) };
+      }
       saveAnnotations(next);
       return next;
     });
@@ -173,8 +217,10 @@ export default function CustomFields() {
     if (filterType !== "all") f = f.filter((x) => x.type === filterType);
     if (filterUsage === "unused") f = f.filter((x) => x.count === 0);
     else if (filterUsage === "used") f = f.filter((x) => x.count > 0);
+    if (filterSuggest === "yes") f = f.filter((x) => x.suggested_disposition);
+    else if (filterSuggest === "no") f = f.filter((x) => !x.suggested_disposition);
     return f;
-  }, [fields, search, filterDisp, filterType, filterUsage, annotations]);
+  }, [fields, search, filterDisp, filterType, filterUsage, filterSuggest, annotations]);
 
   const sorted = useMemo(() => {
     return [...filtered].sort((a, b) => {
@@ -202,6 +248,12 @@ export default function CustomFields() {
     return c;
   }, [fields, annotations]);
 
+  const suggestCounts = useMemo(() => {
+    const c: Record<string, number> = {};
+    for (const f of fields) { const s = f.suggested_disposition ?? ""; if (s) c[s] = (c[s] ?? 0) + 1; }
+    return c;
+  }, [fields]);
+
   const typeCounts = useMemo(() => {
     const c: Record<string, number> = {};
     for (const f of fields) c[f.type] = (c[f.type] ?? 0) + 1;
@@ -225,6 +277,14 @@ export default function CustomFields() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a"); a.href = url; a.download = "mwc-field-rationale.csv"; a.click();
     URL.revokeObjectURL(url);
+  }
+
+  function acceptVisible() {
+    const n = sorted.filter((f) => f.suggested_disposition).length;
+    if (!n) return;
+    if (window.confirm(`Apply the AI-suggested disposition to all ${n} fields matching the current filters? You can still change any of them.`)) {
+      applyMany(sorted);
+    }
   }
 
   const thCls = "px-3 py-2.5 text-left text-[11px] font-bold uppercase tracking-wider text-muted-foreground bg-muted border-b border-border select-none";
@@ -280,6 +340,24 @@ export default function CustomFields() {
         </div>
       </div>
 
+      {/* AI suggestions summary */}
+      {(suggestCounts.keep || suggestCounts.cleanup || suggestCounts.archive || suggestCounts.delete) > 0 && (
+        <div className="flex flex-wrap items-center gap-2 rounded-lg border border-violet-300 bg-violet-50 p-3 dark:border-violet-800 dark:bg-violet-950/30">
+          <Sparkles className="h-4 w-4 shrink-0 text-violet-600 dark:text-violet-400" />
+          <span className="text-sm font-semibold text-violet-800 dark:text-violet-300">AI suggestions:</span>
+          {(["keep", "cleanup", "archive", "delete"] as const).map((k) => (
+            <button key={k} onClick={() => { setFilterSuggest(filterSuggest === k ? "all" : k); setPage(1); }}
+              className={`inline-flex items-center gap-1 rounded px-2 py-0.5 text-xs font-semibold transition-colors ${DISP_BADGE[k]} ${filterSuggest === k ? "ring-2 ring-violet-500" : ""}`}>
+              {suggestCounts[k] ?? 0} {DISP_LABEL[k]}
+            </button>
+          ))}
+          <span className="text-xs text-violet-700/80 dark:text-violet-400/80">advisory — click a chip to filter, then "Accept all" or accept per-row</span>
+          <button onClick={acceptVisible} className="ml-auto inline-flex items-center gap-1 rounded bg-violet-600 px-2.5 py-1 text-xs font-medium text-white hover:bg-violet-700 transition-colors">
+            <Check className="h-3.5 w-3.5" /> Accept all shown ({sorted.filter((f) => f.suggested_disposition).length})
+          </button>
+        </div>
+      )}
+
       {/* Filters */}
       <div className="flex flex-wrap items-center gap-2">
         <input className="h-8 w-52 rounded border border-gray-400 dark:border-border bg-background px-3 text-sm text-foreground placeholder:text-muted-foreground outline-none focus:border-ring focus:ring-1 focus:ring-ring/30"
@@ -297,9 +375,14 @@ export default function CustomFields() {
           <option value="all">My disp: all</option>
           {DISP_OPTIONS.map((o) => <option key={o.value} value={o.value}>{o.label || "Unreviewed"}</option>)}
         </select>
+        <select className="h-8 rounded border border-gray-400 dark:border-border bg-background px-2 text-sm text-foreground outline-none focus:border-ring" value={filterSuggest} onChange={(e) => { setFilterSuggest(e.target.value); setPage(1); }}>
+          <option value="all">AI: all</option>
+          <option value="yes">AI: has suggestion</option>
+          <option value="no">AI: no suggestion</option>
+        </select>
         <span className="text-sm font-medium text-muted-foreground">{filtered.length} matching</span>
-        {(search || filterDisp !== "all" || filterType !== "all" || filterUsage !== "all") && (
-          <button onClick={() => { setSearch(""); setFilterDisp("all"); setFilterType("all"); setFilterUsage("all"); setPage(1); }}
+        {(search || filterDisp !== "all" || filterType !== "all" || filterUsage !== "all" || filterSuggest !== "all") && (
+          <button onClick={() => { setSearch(""); setFilterDisp("all"); setFilterType("all"); setFilterUsage("all"); setFilterSuggest("all"); setPage(1); }}
             className="rounded border border-gray-400 dark:border-border px-2 py-1 text-xs text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-colors">Clear filters</button>
         )}
       </div>
@@ -317,6 +400,7 @@ export default function CustomFields() {
                 <th className={thCls}><div className={thBtn} onClick={() => handleSort("created")}>Created Date <SortIcon col="created" sortBy={sortBy} sortDir={sortDir} /></div></th>
                 <th className={thCls}><div className={thBtn} onClick={() => handleSort("created_by")}>Created By <SortIcon col="created_by" sortBy={sortBy} sortDir={sortDir} /></div></th>
                 <th className={thCls}>Forms Using</th>
+                <th className={thCls}>AI Suggestion</th>
                 <th className={thCls}><div className={thBtn} onClick={() => handleSort("disposition")}>My disposition <SortIcon col="disposition" sortBy={sortBy} sortDir={sortDir} /></div></th>
                 <th className={thCls}>Description</th>
                 <th className={thCls}>Notes</th>
@@ -327,7 +411,7 @@ export default function CustomFields() {
                 <FieldRow key={field.id} field={field} ann={annotations[field.id] ?? EMPTY_ANN} onChange={update} rowIdx={i} />
               ))}
               {pageSlice.length === 0 && (
-                <tr><td colSpan={10} className="px-3 py-12 text-center text-sm text-muted-foreground bg-card">No fields match the current filters.</td></tr>
+                <tr><td colSpan={11} className="px-3 py-12 text-center text-sm text-muted-foreground bg-card">No fields match the current filters.</td></tr>
               )}
             </tbody>
           </table>

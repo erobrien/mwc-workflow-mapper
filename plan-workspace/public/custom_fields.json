@@ -12,7 +12,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 808 contacts; core operational field.",
+      "suggested_description": "Used by 808 contacts."
     },
     {
       "id": "z0nsXjBpmFXGdZGfzHAI",
@@ -23,7 +26,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 629 contacts; core operational field.",
+      "suggested_description": "Pricing/cost data. Used by 629 contacts."
     },
     {
       "id": "yuYX7ICV7F4uEyNTEFTw",
@@ -34,7 +40,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "cleanup",
+      "suggested_reason": "Low usage (9 contacts); verify still needed.",
+      "suggested_description": "Pricing/cost data. Used by 9 contacts."
     },
     {
       "id": "u8pTdcwg5PaMhre7o6f9",
@@ -45,7 +54,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 608 contacts; core operational field.",
+      "suggested_description": "Product/service selection. Used by 608 contacts."
     },
     {
       "id": "D1DgNadskCn7sDNZqWMQ",
@@ -56,7 +68,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 1375 contacts; core operational field.",
+      "suggested_description": "Used by 1375 contacts."
     },
     {
       "id": "5Ull4AEBVmO038811LEC",
@@ -67,7 +82,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 128 contacts; core operational field.",
+      "suggested_description": "Used by 128 contacts."
     },
     {
       "id": "XVzxGceorU5WixdjMHvA",
@@ -78,7 +96,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 471 contacts; core operational field.",
+      "suggested_description": "Used by 471 contacts."
     },
     {
       "id": "eVnkU7zM2tkhq42uuBqK",
@@ -89,7 +110,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "cleanup",
+      "suggested_reason": "Low usage (4 contacts); verify still needed.",
+      "suggested_description": "Used by 4 contacts."
     },
     {
       "id": "jTIu3VYYtwUnqx5TIZHq",
@@ -100,7 +124,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "cleanup",
+      "suggested_reason": "Low usage (9 contacts); verify still needed.",
+      "suggested_description": "Used by 9 contacts."
     },
     {
       "id": "kbAaI85q6SaoHfuH1JTE",
@@ -111,7 +138,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Moderate usage (86 contacts); appears to be in use.",
+      "suggested_description": "Used by 86 contacts."
     },
     {
       "id": "S7APIMzwysSMzHAY2ZSN",
@@ -122,7 +152,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "archive",
+      "suggested_reason": "No usage; candidate for archival. Review before deleting.",
+      "suggested_description": null
     },
     {
       "id": "LKjA09mL4YHxBf5nDmh0",
@@ -133,7 +166,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Common field name pattern; likely intentional.",
+      "suggested_description": null
     },
     {
       "id": "NKIljBVIOPEw03ioNhDq",
@@ -144,7 +180,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 122 contacts; core operational field.",
+      "suggested_description": "Contact name/title. Used by 122 contacts."
     },
     {
       "id": "uhNjRIbt5XINpSlk9L5U",
@@ -155,7 +194,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 3224 contacts; core operational field.",
+      "suggested_description": "Used by 3224 contacts."
     },
     {
       "id": "GojPFkMZRoUi93gyb48K",
@@ -166,7 +208,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Moderate usage (46 contacts); appears to be in use.",
+      "suggested_description": "Date/time information. Used by 46 contacts."
     },
     {
       "id": "CvHfvmOChwRYbc7dUXdr",
@@ -177,7 +222,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Moderate usage (45 contacts); appears to be in use.",
+      "suggested_description": "Used by 45 contacts."
     },
     {
       "id": "0h1abMCZWUTIr0QZo8dU",
@@ -188,7 +236,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Moderate usage (44 contacts); appears to be in use.",
+      "suggested_description": "Used by 44 contacts."
     },
     {
       "id": "lmRl72MIc2C5o2Gy3bEx",
@@ -199,7 +250,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Moderate usage (45 contacts); appears to be in use.",
+      "suggested_description": "Date/time information. Used by 45 contacts."
     },
     {
       "id": "qEeJTkIyz1GMVOfhIuhp",
@@ -210,7 +264,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Moderate usage (46 contacts); appears to be in use.",
+      "suggested_description": "Contact address. Used by 46 contacts."
     },
     {
       "id": "rGf0p5eaxAWTM9y5KaAE",
@@ -221,7 +278,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 556 contacts; core operational field.",
+      "suggested_description": "Pricing/cost data. Used by 556 contacts."
     },
     {
       "id": "6iZQfyb2ISwxEucKs6zm",
@@ -232,7 +292,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 807 contacts; core operational field.",
+      "suggested_description": "Used by 807 contacts."
     },
     {
       "id": "HC2Oo1MIbwJ0uIrdsIqo",
@@ -243,7 +306,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 742 contacts; core operational field.",
+      "suggested_description": "Contact name/title. Used by 742 contacts."
     },
     {
       "id": "6hwB9YtdqX6urRGxovGX",
@@ -254,7 +320,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 884 contacts; core operational field.",
+      "suggested_description": "Date/time information. Used by 884 contacts."
     },
     {
       "id": "J8L58GqFuzvO0nX6hY3l",
@@ -265,7 +334,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 884 contacts; core operational field.",
+      "suggested_description": "Used by 884 contacts."
     },
     {
       "id": "QWMf64tEMlmWieWvgZMk",
@@ -276,7 +348,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 884 contacts; core operational field.",
+      "suggested_description": "Product/service selection. Used by 884 contacts."
     },
     {
       "id": "dZNaFd1mWIvL2cdqqusd",
@@ -287,7 +362,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 247 contacts; core operational field.",
+      "suggested_description": "Used by 247 contacts."
     },
     {
       "id": "gxVMh2ltKRybKDV62Ntm",
@@ -298,7 +376,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 247 contacts; core operational field.",
+      "suggested_description": "Used by 247 contacts."
     },
     {
       "id": "GASedHwLnlipgeoNQZKZ",
@@ -309,7 +390,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 245 contacts; core operational field.",
+      "suggested_description": "Used by 245 contacts."
     },
     {
       "id": "KzsO01rpSeZIA4WUXiGR",
@@ -320,7 +404,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 715 contacts; core operational field.",
+      "suggested_description": "Contact name/title. Used by 715 contacts."
     },
     {
       "id": "EVxsSNsGrO1Y6h2uUsjv",
@@ -331,7 +418,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 757 contacts; core operational field.",
+      "suggested_description": "Phone number. Used by 757 contacts."
     },
     {
       "id": "xPXd7sYvBI3uYoqMqVzN",
@@ -342,7 +432,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Common field name pattern; likely intentional.",
+      "suggested_description": null
     },
     {
       "id": "JL9361YdcdliYZn1d0xy",
@@ -353,7 +446,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Common field name pattern; likely intentional.",
+      "suggested_description": null
     },
     {
       "id": "Ur3ezo3b85Xb2l8edGtl",
@@ -364,7 +460,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 1114 contacts; core operational field.",
+      "suggested_description": "Used by 1114 contacts."
     },
     {
       "id": "Fk6gqmpI2Zkn9y7nEmhr",
@@ -375,7 +474,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 247 contacts; core operational field.",
+      "suggested_description": "Used by 247 contacts."
     },
     {
       "id": "sJLV861xvDXyJgA7H8dk",
@@ -386,7 +488,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 884 contacts; core operational field.",
+      "suggested_description": "Used by 884 contacts."
     },
     {
       "id": "m2UAYFuBQ1ymyKNN0C6s",
@@ -397,7 +502,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 1018 contacts; core operational field.",
+      "suggested_description": "Used by 1018 contacts."
     },
     {
       "id": "EWqBmp7cbslrPvEJO8ZM",
@@ -408,7 +516,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Moderate usage (26 contacts); appears to be in use.",
+      "suggested_description": "Used by 26 contacts."
     },
     {
       "id": "9w0y3YzxD1ZFIbekQD2F",
@@ -419,7 +530,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 887 contacts; core operational field.",
+      "suggested_description": "Used by 887 contacts."
     },
     {
       "id": "5xlMrAtETVhE8e7fKY9e",
@@ -430,7 +544,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 128 contacts; core operational field.",
+      "suggested_description": "Used by 128 contacts."
     },
     {
       "id": "KpMazPnUg5YLWNL7hdAl",
@@ -441,7 +558,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 130 contacts; core operational field.",
+      "suggested_description": "Used by 130 contacts."
     },
     {
       "id": "ysRPwT2nSTzpT8EoAzku",
@@ -452,7 +572,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 884 contacts; core operational field.",
+      "suggested_description": "Used by 884 contacts."
     },
     {
       "id": "DHq97rjT0xk2QGvFEtj4",
@@ -463,7 +586,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 868 contacts; core operational field.",
+      "suggested_description": "Used by 868 contacts."
     },
     {
       "id": "Fr6J27j5YGkL3eN3mmTS",
@@ -474,7 +600,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 874 contacts; core operational field.",
+      "suggested_description": "Used by 874 contacts."
     },
     {
       "id": "nVTE9uYHuJdNY69ik4Vd",
@@ -485,7 +614,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 884 contacts; core operational field.",
+      "suggested_description": "Used by 884 contacts."
     },
     {
       "id": "aF4eAS7FcvZS2fPej6F9",
@@ -496,7 +628,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 130 contacts; core operational field.",
+      "suggested_description": "Used by 130 contacts."
     },
     {
       "id": "zJu0Qfw5oRtvwWPY0jXQ",
@@ -507,7 +642,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 233 contacts; core operational field.",
+      "suggested_description": "Used by 233 contacts."
     },
     {
       "id": "RrRyWKMSzZvu6MFGXTZb",
@@ -518,7 +656,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 2885 contacts; core operational field.",
+      "suggested_description": "Contact address. Used by 2885 contacts."
     },
     {
       "id": "wu0JY0fgKEZCvLNg0lPg",
@@ -529,7 +670,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 4167 contacts; core operational field.",
+      "suggested_description": "Used by 4167 contacts."
     },
     {
       "id": "oHMIPSYT8qHLt8BDZKXb",
@@ -540,7 +684,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 3850 contacts; core operational field.",
+      "suggested_description": "Date/time information. Used by 3850 contacts."
     },
     {
       "id": "9WxVlzvgSlCXx0EL82Sr",
@@ -551,7 +698,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 6169 contacts; core operational field.",
+      "suggested_description": "Used by 6169 contacts."
     },
     {
       "id": "hNGjNpBcS2xWDXWf6wgg",
@@ -562,7 +712,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 180 contacts; core operational field.",
+      "suggested_description": "Used by 180 contacts."
     },
     {
       "id": "07RvFbVdzycUofKW5UPL",
@@ -573,7 +726,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 884 contacts; core operational field.",
+      "suggested_description": "Used by 884 contacts."
     },
     {
       "id": "gU84HIwnkglNAkRY9tDJ",
@@ -584,7 +740,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 239 contacts; core operational field.",
+      "suggested_description": "Contact name/title. Used by 239 contacts."
     },
     {
       "id": "PDhPVirD7ZvPY0mnTLCr",
@@ -595,7 +754,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Moderate usage (41 contacts); appears to be in use.",
+      "suggested_description": "Used by 41 contacts."
     },
     {
       "id": "LQBCAPByMWJ4o6sTYvXH",
@@ -606,7 +768,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 993 contacts; core operational field.",
+      "suggested_description": "Used by 993 contacts."
     },
     {
       "id": "P7s4MzoabSdwf0u05vyh",
@@ -617,7 +782,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 3233 contacts; core operational field.",
+      "suggested_description": "Date/time information. Used by 3233 contacts."
     },
     {
       "id": "eTLp3D1ArBsWYhOKouxQ",
@@ -628,7 +796,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "cleanup",
+      "suggested_reason": "Low usage (6 contacts); verify still needed.",
+      "suggested_description": "Used by 6 contacts."
     },
     {
       "id": "kPgFSfNsyEg3q77gRVWg",
@@ -639,7 +810,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 4335 contacts; core operational field.",
+      "suggested_description": "Used by 4335 contacts."
     },
     {
       "id": "lWml2sn98A7zcGbfUtZe",
@@ -650,7 +824,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 624 contacts; core operational field.",
+      "suggested_description": "Used by 624 contacts."
     },
     {
       "id": "kwhTOpRqbuq9lgpQCbwK",
@@ -661,7 +838,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 918 contacts; core operational field.",
+      "suggested_description": "Used by 918 contacts."
     },
     {
       "id": "hZF3COXUXopq6GY06uMZ",
@@ -672,7 +852,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Moderate usage (92 contacts); appears to be in use.",
+      "suggested_description": "Used by 92 contacts."
     },
     {
       "id": "yZFhZGLJtQPD8eP1moWf",
@@ -683,7 +866,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "cleanup",
+      "suggested_reason": "Low usage (8 contacts) + date-like name; may be deprecated.",
+      "suggested_description": "Date/time information. Used by 8 contacts."
     },
     {
       "id": "V3UAgca5lxoPdkCCs4HI",
@@ -694,7 +880,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "cleanup",
+      "suggested_reason": "Low usage (7 contacts); verify still needed.",
+      "suggested_description": "Used by 7 contacts."
     },
     {
       "id": "b8tdwNkOnkSGedX9SoCo",
@@ -705,7 +894,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "cleanup",
+      "suggested_reason": "Low usage (4 contacts); verify still needed.",
+      "suggested_description": "Date/time information. Used by 4 contacts."
     },
     {
       "id": "Cou856tOhaxW62vwehVI",
@@ -716,7 +908,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 5660 contacts; core operational field.",
+      "suggested_description": "Used by 5660 contacts."
     },
     {
       "id": "aWyDdDlWeHPgcXEJJOy0",
@@ -727,7 +922,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 476 contacts; core operational field.",
+      "suggested_description": "Contact name/title. Used by 476 contacts."
     },
     {
       "id": "Zkrqo5T9i59LCVTXzJ8o",
@@ -738,7 +936,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Moderate usage (35 contacts); appears to be in use.",
+      "suggested_description": "Used by 35 contacts."
     },
     {
       "id": "txMJhzO1OTPoUjth2xRA",
@@ -749,7 +950,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "cleanup",
+      "suggested_reason": "Low usage (12 contacts); verify still needed.",
+      "suggested_description": "Used by 12 contacts."
     },
     {
       "id": "XVMFTsdjY1hnaX5jHajf",
@@ -760,7 +964,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Moderate usage (30 contacts); appears to be in use.",
+      "suggested_description": "Product/service selection. Used by 30 contacts."
     },
     {
       "id": "abYADyjGMj1E2m6Y9S4z",
@@ -771,7 +978,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 1144 contacts; core operational field.",
+      "suggested_description": "Used by 1144 contacts."
     },
     {
       "id": "vlEyqwzxwjhmnOWNcIZq",
@@ -782,7 +992,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 871 contacts; core operational field.",
+      "suggested_description": "Used by 871 contacts."
     },
     {
       "id": "1p4G1IQgGNhk4RgHT925",
@@ -793,7 +1006,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Moderate usage (39 contacts); appears to be in use.",
+      "suggested_description": "Used by 39 contacts."
     },
     {
       "id": "c2cMqnLGR1rsnqH81DNn",
@@ -804,7 +1020,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "cleanup",
+      "suggested_reason": "Low usage (1 contacts); verify still needed.",
+      "suggested_description": "Used by 1 contacts."
     },
     {
       "id": "Aa6woKZ6GEn5Jdy4GcMb",
@@ -815,7 +1034,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "cleanup",
+      "suggested_reason": "Low usage (8 contacts); verify still needed.",
+      "suggested_description": "Email address. Used by 8 contacts."
     },
     {
       "id": "fVTiAYvFFm2ZgGsqKGiU",
@@ -826,7 +1048,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 744 contacts; core operational field.",
+      "suggested_description": "Used by 744 contacts."
     },
     {
       "id": "9dvHRcE6zMOS4GollQVt",
@@ -837,7 +1062,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Moderate usage (29 contacts); appears to be in use.",
+      "suggested_description": "Used by 29 contacts."
     },
     {
       "id": "cClk7ad4PHxiake2lChS",
@@ -848,7 +1076,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 1147 contacts; core operational field.",
+      "suggested_description": "Used by 1147 contacts."
     },
     {
       "id": "I2Oidmdcnn068Gz9TRHm",
@@ -859,7 +1090,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Moderate usage (35 contacts); appears to be in use.",
+      "suggested_description": "Used by 35 contacts."
     },
     {
       "id": "eIlYPOpD28vjKTQbccxM",
@@ -870,7 +1104,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 3230 contacts; core operational field.",
+      "suggested_description": "Date/time information. Used by 3230 contacts."
     },
     {
       "id": "YwzkHjz7NKKQrzJODEp8",
@@ -881,7 +1118,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "cleanup",
+      "suggested_reason": "Low usage (4 contacts); verify still needed.",
+      "suggested_description": "Product/service selection. Used by 4 contacts."
     },
     {
       "id": "vaBJvaOrEgUiaenCccwc",
@@ -892,7 +1132,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 878 contacts; core operational field.",
+      "suggested_description": "Used by 878 contacts."
     },
     {
       "id": "NSZ66shmon0vmUhN4Eya",
@@ -903,7 +1146,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Common field name pattern; likely intentional.",
+      "suggested_description": "Status/state indicator."
     },
     {
       "id": "IvSIj7bS64TN9qKeOh47",
@@ -914,7 +1160,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Common field name pattern; likely intentional.",
+      "suggested_description": "Date/time information."
     },
     {
       "id": "k8Jlp3XQ8ef2Y7KBQ0yL",
@@ -925,7 +1174,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "archive",
+      "suggested_reason": "No usage; candidate for archival. Review before deleting.",
+      "suggested_description": null
     },
     {
       "id": "BPi19EOf5urjCwJlGVTr",
@@ -936,7 +1188,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 192 contacts; core operational field.",
+      "suggested_description": "Used by 192 contacts."
     },
     {
       "id": "UZBaHuKr9PpFNro47it7",
@@ -947,7 +1202,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 2784 contacts; core operational field.",
+      "suggested_description": "Used by 2784 contacts."
     },
     {
       "id": "UxbUbt9h8Xe54Fak0hX7",
@@ -958,7 +1216,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Moderate usage (45 contacts); appears to be in use.",
+      "suggested_description": "Status/state indicator. Used by 45 contacts."
     },
     {
       "id": "U3sxmOm1VcdWPBodUbGT",
@@ -969,7 +1230,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "cleanup",
+      "suggested_reason": "Low usage (11 contacts); verify still needed.",
+      "suggested_description": "Pricing/cost data. Used by 11 contacts."
     },
     {
       "id": "vFbd8dheyZozR8gDdfxo",
@@ -980,7 +1244,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 626 contacts; core operational field.",
+      "suggested_description": "Used by 626 contacts."
     },
     {
       "id": "Gtq1EIpcHHGHuejROqan",
@@ -991,7 +1258,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "cleanup",
+      "suggested_reason": "Low usage (16 contacts); verify still needed.",
+      "suggested_description": "Used by 16 contacts."
     },
     {
       "id": "cxUGCjBinbuh0spb4LQS",
@@ -1002,7 +1272,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 1131 contacts; core operational field.",
+      "suggested_description": "Pricing/cost data. Used by 1131 contacts."
     },
     {
       "id": "k50RxYkVtC2SntahYc1K",
@@ -1013,7 +1286,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Moderate usage (26 contacts); appears to be in use.",
+      "suggested_description": "Product/service selection. Used by 26 contacts."
     },
     {
       "id": "Np2WHxON2I4DVnYjZh3e",
@@ -1024,7 +1300,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 1276 contacts; core operational field.",
+      "suggested_description": "Used by 1276 contacts."
     },
     {
       "id": "ssEvmmfe1tz5H4fiMHZR",
@@ -1035,7 +1314,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 1266 contacts; core operational field.",
+      "suggested_description": "Used by 1266 contacts."
     },
     {
       "id": "Vh0MH504ujQfBh0Q5UFx",
@@ -1046,7 +1328,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 1268 contacts; core operational field.",
+      "suggested_description": "Used by 1268 contacts."
     },
     {
       "id": "thwe93MxRDzS2SO9pxxC",
@@ -1057,7 +1342,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 1256 contacts; core operational field.",
+      "suggested_description": "Used by 1256 contacts."
     },
     {
       "id": "1Wo5z9YpDh9Lv64IBEoa",
@@ -1068,7 +1356,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 1247 contacts; core operational field.",
+      "suggested_description": "Used by 1247 contacts."
     },
     {
       "id": "8MHeXQgyp9q7q6Do407p",
@@ -1079,7 +1370,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 929 contacts; core operational field.",
+      "suggested_description": "Used by 929 contacts."
     },
     {
       "id": "spAGwwHTampmwRlUlM1M",
@@ -1090,7 +1384,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 247 contacts; core operational field.",
+      "suggested_description": "Used by 247 contacts."
     },
     {
       "id": "aFYKp3PzDg1dEwDC1G50",
@@ -1101,7 +1398,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "cleanup",
+      "suggested_reason": "Low usage (3 contacts); verify still needed.",
+      "suggested_description": "Used by 3 contacts."
     },
     {
       "id": "jpwO8aw2uXebpNCWE6lT",
@@ -1112,7 +1412,10 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Moderate usage (30 contacts); appears to be in use.",
+      "suggested_description": "Contact name/title. Used by 30 contacts."
     },
     {
       "id": "Hv8kK27zrMIQrEhGuzuX",
@@ -1123,7 +1426,11 @@
       "form_refs": [],
       "created_at": null,
       "created_by": "",
-      "updated_at": null
+      "updated_at": null,
+      "suggested_disposition": "keep",
+      "suggested_reason": "Used by 123 contacts; core operational field.",
+      "suggested_description": "Used by 123 contacts."
     }
-  ]
+  ],
+  "analysis_generated_at": "2026-06-25T14:39:38.148964Z"
 }

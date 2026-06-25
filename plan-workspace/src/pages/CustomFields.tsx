@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { PageShell } from "../components/Shell";
 import { Download, ChevronUp, ChevronDown, ChevronsUpDown, ChevronLeft, ChevronRight, Check, Sparkles,
-  FolderTree, ArrowRight, UserPlus, Repeat, Building2, Stethoscope, Trash2, AlertTriangle } from "lucide-react";
+  FolderTree, ArrowRight, UserPlus, Repeat, Building2, Stethoscope, Trash2, AlertTriangle, Briefcase, Star, ArrowDown } from "lucide-react";
 
 interface CustomField {
   id: string;
@@ -29,11 +29,15 @@ interface FieldData {
 interface RField { key: string; name: string; count: number; disposition?: string; current_folder?: string; }
 interface ProposedFolder { name: string; purpose: string; fields: RField[]; }
 interface MoveField extends RField { destination: string; why: string; }
+interface OppField { label: string; hint: string; note?: string; star?: boolean; count?: number; }
+interface OppGroup { name: string; note?: string; fields: OppField[]; }
+interface OpportunityObject { title: string; subtitle: string; groups: OppGroup[]; }
 interface RedesignDoc {
   philosophy: string;
   current_folders: { name: string; field_count: number }[];
   proposed_folders: ProposedFolder[];
   move_off_contact: MoveField[];
+  opportunity_object?: OpportunityObject;
   stats: { total_fields: number; kept_on_contact: number; proposed_folder_count: number; current_folder_count: number; moved: number; move_breakdown: Record<string, number> };
 }
 
@@ -58,6 +62,54 @@ function FieldChip({ f }: { f: RField }) {
   );
 }
 
+function OpportunityPanel({ obj }: { obj: OpportunityObject }) {
+  return (
+    <div className="rounded-xl border-2 border-emerald-300 dark:border-emerald-800 bg-card overflow-hidden">
+      <div className="flex items-start gap-2.5 px-4 py-3 bg-emerald-50 dark:bg-emerald-950/30 border-b border-emerald-200 dark:border-emerald-800">
+        <Briefcase className="h-5 w-5 shrink-0 mt-0.5 text-emerald-700 dark:text-emerald-400" />
+        <div>
+          <div className="flex items-center gap-2">
+            <span className="font-bold text-base text-foreground">{obj.title}</span>
+            <span className="rounded-md bg-emerald-600 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">Deal record · start here</span>
+          </div>
+          <p className="mt-0.5 text-xs text-muted-foreground max-w-3xl">{obj.subtitle}</p>
+        </div>
+      </div>
+      <div className="grid grid-cols-1 gap-3 p-4 md:grid-cols-2">
+        {obj.groups.map((g) => (
+          <div key={g.name} className="rounded-lg border border-gray-300 dark:border-border bg-background overflow-hidden">
+            <div className="px-3 py-2 bg-muted/40 border-b border-gray-200 dark:border-border">
+              <div className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">{g.name}</div>
+              {g.note && <div className="text-[10px] text-muted-foreground/80">{g.note}</div>}
+            </div>
+            <div className="divide-y divide-gray-100 dark:divide-border/60">
+              {g.fields.map((f) => (
+                <div key={f.label} className={`flex items-start gap-2 px-3 py-2 ${f.star ? "bg-emerald-50/60 dark:bg-emerald-950/20" : ""}`}>
+                  {f.star
+                    ? <Star className="h-3.5 w-3.5 shrink-0 mt-0.5 text-emerald-600 dark:text-emerald-400 fill-emerald-500/30" />
+                    : <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-muted-foreground/40" />}
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-baseline gap-2 flex-wrap">
+                      <span className={`text-xs ${f.star ? "font-bold text-emerald-800 dark:text-emerald-300" : "font-semibold text-foreground"}`}>{f.label}</span>
+                      <span className="font-mono text-[10px] text-muted-foreground/70">{f.hint}</span>
+                      {!!f.count && f.count > 0 && (
+                        <span className="ml-auto rounded bg-sky-100 dark:bg-sky-950/50 px-1.5 py-0.5 text-[9px] font-semibold text-sky-700 dark:text-sky-400 whitespace-nowrap" title="currently on the Contact — migrating here">
+                          {f.count.toLocaleString()} on Contact →
+                        </span>
+                      )}
+                    </div>
+                    {f.note && <div className="text-[11px] leading-snug text-muted-foreground">{f.note}</div>}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function FoldersView({ doc }: { doc: RedesignDoc }) {
   const folders = [...doc.proposed_folders].sort((a, b) => {
     const rank = (n: string) => /Consultation — New/i.test(n) ? 0 : /Consultation — Renewal/i.test(n) ? 1 : 2;
@@ -67,6 +119,15 @@ function FoldersView({ doc }: { doc: RedesignDoc }) {
 
   return (
     <div className="space-y-6">
+      {/* Opportunity object — the deal record leads */}
+      {doc.opportunity_object && <OpportunityPanel obj={doc.opportunity_object} />}
+
+      {/* Connector: Contact supports the Opportunity */}
+      <div className="flex items-center gap-2 text-xs font-semibold text-muted-foreground">
+        <ArrowDown className="h-4 w-4 text-emerald-500" />
+        The <b className="text-foreground">Contact</b> below supplies the consultation — its folders are redesigned to match (deal/money fields move up to the Opportunity).
+      </div>
+
       {/* Stats */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         {[

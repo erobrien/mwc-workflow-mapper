@@ -29,7 +29,7 @@ interface Ann { disposition: Disposition; description: string; notes: string; }
 
 const EMPTY_ANN: Ann = { disposition: "", description: "", notes: "" };
 const STORAGE_KEY = "mwc-field-rationale-v1";
-const PAGE_SIZE = 50;
+const PAGE_SIZE = 60;
 
 const DISP_OPTIONS: { value: Disposition; label: string }[] = [
   { value: "", label: "— unreviewed" },
@@ -165,8 +165,8 @@ export default function CustomFields() {
   const [filterType, setFilterType] = useState("all");
   const [filterUsage, setFilterUsage] = useState("all");
   const [filterSuggest, setFilterSuggest] = useState("all");
-  const [sortBy, setSortBy] = useState<SortKey>("name");
-  const [sortDir, setSortDir] = useState<SortDir>("asc");
+  const [sortBy, setSortBy] = useState<SortKey>("count");
+  const [sortDir, setSortDir] = useState<SortDir>("desc");
   const [page, setPage] = useState(1);
   const [saved, setSaved] = useState(false);
 

@@ -1,6 +1,6 @@
 # Revenue-Integrity Monitor — 1-day snapshot
 
-_2026-06-30T12:46:35+00:00 · location Ghstz8eIsHWLeXek47dk · **read-only**, GET-only collector_
+_2026-07-01T13:02:18+00:00 · location Ghstz8eIsHWLeXek47dk · **read-only**, GET-only collector_
 
 ## ✅ All metrics within tolerance
 
@@ -8,31 +8,31 @@ _2026-06-30T12:46:35+00:00 · location Ghstz8eIsHWLeXek47dk · **read-only**, GE
 
 | Metric | Current | Baseline | Drift |
 |---|---|---|---|
-| New opportunities | **94** | 94 |  (+0.0% vs baseline) |
-| Appointments booked | **45** | 43 |  (+4.7% vs baseline) |
+| New opportunities | **72** | 82 |  🔴 **-12.2%** vs baseline |
+| Appointments booked | **34** | 31 |  (+9.7% vs baseline) |
 | Show rate (showed / showed+noshow) | **100.0%** | 100.0% |  (+0.0 pts) |
-| Opportunities Won | **25** | 19 |  🔴 **+31.6%** vs baseline |
-| Won revenue | **77397.0 $** | 58600.0 $ |  🔴 **+32.1%** vs baseline |
-| Won-with-$0 (data-quality) | **10** | 0 |  🔴 **10 won opps with $0** (A&D regression guard) |
+| Opportunities Won | **10** | 15 |  🔴 **-33.3%** vs baseline |
+| Won revenue | **5200.0 $** | 36199.0 $ |  🔴 **-85.6%** vs baseline |
+| Won-with-$0 (data-quality) | **9** | 0 |  🔴 **9 won opps with $0** (A&D regression guard) |
 
 ## Appointment cohort detail (booked in window)
 
-| Location | Booked | confirmed | showed |
-|---|---|---|---|
-| Richmond | 26 | 25 | 1 |
-| Virginia Beach | 10 | 10 | 0 |
-| Newport News | 9 | 8 | 1 |
+| Location | Booked | cancelled | confirmed | showed |
+|---|---|---|---|---|
+| Richmond | 17 | 0 | 15 | 2 |
+| Virginia Beach | 9 | 1 | 8 | 0 |
+| Newport News | 8 | 0 | 8 | 0 |
 
 ## Won detail by pipeline (window)
 
 | Pipeline | Won | Revenue | Won-$0 |
 |---|---|---|---|
-| 01. MWC Sales Production | 4 | $15,600 | 1 |
+| 01. MWC Sales Production | 1 | $0 | 1 |
 | 02. Newport News | 0 | $0 | 0 |
-| 03. Richmond | 3 | $15,600 | 0 |
+| 03. Richmond | 1 | $0 | 1 |
 | 04. Virginia Beach | 0 | $0 | 0 |
 | 05. Virtual | 0 | $0 | 0 |
-| 07. A & D | 18 | $46,197 | 9 |
+| 07. A & D | 8 | $5,200 | 7 |
 
 ---
-_History: 19 snapshots in monitor/data/history.jsonl · alert thresholds: 10% drift, 5-pt show-rate drop._
+_History: 20 snapshots in monitor/data/history.jsonl · alert thresholds: 10% drift, 5-pt show-rate drop._

@@ -60,6 +60,7 @@ jobs:
           git rm -rf . >/dev/null 2>&1 || true
           cp /tmp/md/history.jsonl history.jsonl
           cp /tmp/md/latest.md latest.md
-          git add history.jsonl latest.md
+          printf '%s' '{"git": {"deploymentEnabled": {"monitor-data": false}}}' > vercel.json
+          git add history.jsonl latest.md vercel.json
           git commit -m "monitor snapshot $(date -u +%Y-%m-%dT%H:%M)" || echo "nothing to commit"
           git push origin monitor-data

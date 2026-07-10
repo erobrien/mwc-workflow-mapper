@@ -1,8 +1,8 @@
 import { type ReactNode } from "react";
 import { NavLink } from "react-router-dom";
 import {
-  LayoutDashboard, GitBranch, Boxes, Workflow, Network,
-  Gavel, ShieldAlert, Moon, Sun, Menu, SearchCheck, ClipboardList, Share2, Tag,
+  LayoutDashboard, Boxes, Workflow, Network,
+  Gavel, ShieldAlert, Moon, Sun, Menu, SearchCheck, ClipboardList, Tag,
   Database, Waypoints, Route,
 } from "lucide-react";
 import { cn, useTheme } from "./ui";
@@ -14,21 +14,21 @@ const NAV: { group: string; items: { to: string; label: string; icon: any; accen
     { to: "/", label: "Workspace", icon: LayoutDashboard },
   ] },
   { group: "Current state", items: [
-    { to: "/as-is", label: "As-Is Workflows", icon: GitBranch, accent: "text-red-600 dark:text-red-400" },
+    { to: "/as-is", label: "As-Is Workflows", icon: Workflow, accent: "text-red-600 dark:text-red-400" },
     { to: "/asis-diagrams", label: "As-Is Flow Diagrams", icon: Waypoints, accent: "text-red-600 dark:text-red-400" },
     { to: "/asis-flows", label: "As-Is Workflow Flows", icon: Route, accent: "text-red-600 dark:text-red-400" },
-    { to: "/inventory", label: "Field Inventory", icon: Boxes },
+    { to: "/inventory", label: "Field Inventory", icon: Boxes, accent: "text-red-600 dark:text-red-400" },
   ] },
   { group: "Target", items: [
     { to: "/to-be", label: "To-Be Workflows", icon: Workflow, accent: "text-emerald-600 dark:text-emerald-400" },
-    { to: "/wf-diagrams", label: "WF Flow Diagrams", icon: Share2, accent: "text-violet-600 dark:text-violet-400" },
-    { to: "/diagrams", label: "Architecture", icon: Network },
-    { to: "/pcc-form", label: "PCC Sales Form", icon: ClipboardList },
+    { to: "/wf-diagrams", label: "WF Flow Diagrams", icon: Waypoints, accent: "text-emerald-600 dark:text-emerald-400" },
+    { to: "/diagrams", label: "Architecture", icon: Network, accent: "text-emerald-600 dark:text-emerald-400" },
+    { to: "/pcc-form", label: "PCC Sales Form", icon: ClipboardList, accent: "text-emerald-600 dark:text-emerald-400" },
   ] },
   { group: "Governance", items: [
     { to: "/gaps", label: "Audit Gaps", icon: SearchCheck },
-    { to: "/tags", label: "Tag Library", icon: Tag, accent: "text-amber-600 dark:text-amber-400" },
-    { to: "/custom-fields", label: "Custom Fields", icon: Database, accent: "text-sky-600 dark:text-sky-400" },
+    { to: "/tags", label: "Tag Library", icon: Tag },
+    { to: "/custom-fields", label: "Custom Fields", icon: Database },
     { to: "/decisions", label: "Decisions", icon: Gavel },
     { to: "/risks", label: "Risk Register", icon: ShieldAlert },
   ] },

@@ -32,7 +32,7 @@ export interface FieldDestRow { key: string; label: string; to?: string; from?: 
 export interface FieldDestination { target: string; card: string; role: string; examples: string; removing?: FieldDestRow[]; adding?: FieldDestRow[]; }
 export interface Defect { id: string; title: string; severity: string; evidence?: string; impact?: string; }
 export interface MigrationStep { n: string; name: string; status: string; owner?: string; gate?: string; blocked_by?: string; }
-export interface Decision { n: string; decision: string; choice: string; status: string; date?: string; }
+export interface Decision { n: string; decision: string; choice: string; status: string; date?: string; owner?: string; }
 export interface Risk { id: string; sev: string; area: string; mitigation: string; }
 export interface MsgToBe { id_name: string; workflow_step?: string; timing?: string; type: string; message: string; consult_type?: "new" | "renewal" | "both"; }
 export interface MsgAsIs { workflow: string; workflow_id?: string; step?: string; channel: string; delay?: string; subject?: string; message: string; status?: string; }

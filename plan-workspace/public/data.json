@@ -3720,7 +3720,7 @@
       "n": "03",
       "name": "Booking Confirmation and Reminders",
       "absorbs": "03, 3a, 03b, 03c, 03d (merged)",
-      "copy": "Absorbs booking confirmation and all reminder sends. R1 reminder cadence (T-3d / T-1d / morning-of / T-2h) plus a telehealth branch. A cancellation halts reminders and routes to WF-08. Appointment-relative waits use an 'if date already passed' fallback. Quiet hours 8 AM to 9 PM Contact Timezone."
+      "copy": "Absorbs booking confirmation and all reminder sends. Booking runs on the new capacity-controlled class calendars, not the standard service calendars (Decision 12); WF-03 triggers off the new class calendar IDs, wired at build time. R1 reminder cadence (T-3d / T-1d / morning-of / T-2h) plus a telehealth branch. A cancellation halts reminders and routes to WF-08. Appointment-relative waits use an 'if date already passed' fallback. Quiet hours 8 AM to 9 PM Contact Timezone."
     },
     {
       "n": "04",
@@ -4344,6 +4344,14 @@
       "choice": "Canonical WF-01..WF-16 = the workflow list + master-diagram scheme. All diagrams are renumbered to match; a crosswalk (old number to canonical) is shown on /to-be. 'Retention and Renewal' is a labeled Renewal Reminders sub-flow of WF-09 (Long-Term Nurture), not a separate top-level workflow.",
       "status": "Locked",
       "date": "2026-07-10"
+    },
+    {
+      "n": "12",
+      "decision": "Class calendars replace service calendars",
+      "choice": "Target booking runs on new class calendars (capacity-controlled), replacing the standard service calendars, to control overbooking. Existing live calendar IDs do not carry into the target; appointment-triggered workflows (WF-03, WF-05, WF-08) wire to the new class calendar IDs at build time.",
+      "status": "Locked",
+      "date": "2026-07-10",
+      "owner": "Eric"
     }
   ],
   "risks": [

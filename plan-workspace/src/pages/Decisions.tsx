@@ -20,6 +20,7 @@ export default function Decisions() {
                 <span className="font-mono text-xs font-semibold text-muted-foreground">#{d.n}</span>
                 <span className="font-semibold">{d.decision}</span>
                 <span className="ms-auto flex items-center gap-2">
+                  {d.owner && <span className="text-xs text-muted-foreground">{d.owner}</span>}
                   {d.date && <span className="text-xs text-muted-foreground">{d.date}</span>}
                   <Badge tone={toneFor(d.status)}>{d.status}</Badge>
                 </span>

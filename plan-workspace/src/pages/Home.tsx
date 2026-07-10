@@ -71,7 +71,7 @@ export default function Home() {
             <p className="text-sm leading-relaxed text-foreground/90">
               The lead source, UTM, and click IDs that drove each deal are never <b>carried onto the opportunity at win or loss</b> — so you can't connect <b>ad spend to Won revenue</b>, or see which campaigns produce sales versus no-shows and no-sales. What attribution exists sits on the contact and overwrites with each new touch.
             </p>
-            <div className="mt-3 inline-flex rounded-md bg-red-50 px-2.5 py-1 text-xs font-medium text-red-700 dark:bg-red-950 dark:text-red-300">Click IDs captured on 0 of 11,000+ contacts</div>
+            <div className="mt-3 inline-flex rounded-md bg-red-50 px-2.5 py-1 text-xs font-medium text-red-700 dark:bg-red-950 dark:text-red-300">Click IDs captured on 0 of {fmt(k.contacts_scanned)} scanned ({fmt(k.contacts_total)} total)</div>
           </div>
         </div>
       </section>
@@ -92,7 +92,7 @@ export default function Home() {
           <div>
             <div className="mb-1.5 font-mono text-[10.5px] uppercase tracking-wider text-red-700 dark:text-red-400">What's broken</div>
             <p className="text-sm leading-relaxed text-foreground/90">
-              Revenue reporting requires each sale to be tied to a specific deal record, not to a person. Right now sale data lives on the Contact, so every new consultation overwrites the last. Workflow 05 creates a fake Won opportunity in the A&D pipeline every time someone attends a consultation, producing <b>939 false wins, ~50% of all recorded wins account-wide</b>. Click IDs are missing on <b>0 of {fmt(k.contacts_scanned)} contacts</b>; TCPA consent is stored on <b>0 of {fmt(k.contacts_scanned)}</b>. The data we'd use to fix reporting is wrong at the source.
+              Revenue reporting requires each sale to be tied to a specific deal record, not to a person. Right now sale data lives on the Contact, so every new consultation overwrites the last. Workflow 05 creates a fake Won opportunity in the A&D pipeline every time someone attends a consultation, producing <b>939 false wins, ~50% of all recorded wins account-wide</b>. Click IDs are missing on <b>0 of {fmt(k.contacts_scanned)} scanned contacts</b> ({fmt(k.contacts_total)} total); TCPA consent is stored on <b>0 of {fmt(k.contacts_scanned)}</b>. The data we'd use to fix reporting is wrong at the source.
             </p>
           </div>
           <div>
@@ -122,7 +122,7 @@ export default function Home() {
           <Mini
             label="New vs Renewal"
             value={k.renewal_rate == null ? "— / —" : `${100 - (k.renewal_rate ?? 0)}% / ${k.renewal_rate}%`}
-            note="revenue split — pending opportunity scan (Decision 7)"
+            note="revenue split, pending opportunity scan (Decision 7)"
           />
         </div>
       </section>
@@ -131,11 +131,11 @@ export default function Home() {
       <section>
         <h2 className="mb-3 text-base font-semibold">Problems quantified</h2>
         <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-5">
-          <Mini label="False wins" value={k.ad_false_wins} note="A&D auto-Won — ~50% of all wins" problem />
+          <Mini label="False wins" value={k.ad_false_wins} note="A and D auto-Won, ~50% of all wins" problem />
           <Mini label="Wins w/ $0 value" value={`${k.wins_with_zero_value_pct}%`} note="across sampled won deals" problem />
           <Mini label="GHL payment txns" value={k.ghl_payment_transactions} note="revenue recorded on the Opportunity" problem />
-          <Mini label="Click IDs captured" value={`${k.click_ids_captured} / ${fmt(k.contacts_scanned)}`} note="attribution broken at collection" problem />
-          <Mini label="TCPA consent stored" value={`${k.tcpa_consent_stored} / ${fmt(k.contacts_scanned)}`} note="no proof of opt-in" problem />
+          <Mini label="Click IDs captured" value={`${k.click_ids_captured} / ${fmt(k.contacts_scanned)}`} note={`scanned sample of ${fmt(k.contacts_total)} total; attribution broken at collection`} problem />
+          <Mini label="TCPA consent stored" value={`${k.tcpa_consent_stored} / ${fmt(k.contacts_scanned)}`} note={`scanned sample of ${fmt(k.contacts_total)} total; no proof of opt-in`} problem />
         </div>
       </section>
 

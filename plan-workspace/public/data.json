@@ -11,7 +11,8 @@
     "fields_total": 127,
     "fields_on_contact": 113,
     "fields_on_opportunity_now": 14,
-    "fields_on_opportunity_target": 14,
+    "fields_on_opportunity_target": 35,
+    "contacts_total": 11077,
     "fields_never_populated": 36,
     "fields_rare": 39,
     "contacts_scanned": 6016,
@@ -3705,99 +3706,99 @@
   "tobe_workflows": [
     {
       "n": "01",
-      "name": "Lead Capture & Attribution",
-      "absorbs": "01A–E + Form Internal Notification",
-      "copy": "As-is triggers; fix gclid/fbclid capture. Quiet hours 8 AM to 9 PM Contact Timezone on all sends."
+      "name": "Lead Capture and Attribution",
+      "absorbs": "01A-E + Form Internal Notification",
+      "copy": "As-is triggers; fix gclid/fbclid capture. Copies attribution (utm_source, utm_campaign, gclid, fbclid, lead_source) onto the Opportunity at create, so wins and losses both carry it. Speed-to-lead rule: the welcome email goes out instantly; a lead that arrives outside quiet hours (for example 11 PM) has its speed-to-lead SMS queued to 8 AM Contact Timezone (TCPA-safe). Quiet hours 8 AM to 9 PM Contact Timezone on all SMS sends."
     },
     {
       "n": "02",
       "name": "Non-Booked Recovery",
       "absorbs": "02. NON BOOKED NEWLEADS",
-      "copy": "Uses the WF-02 message set (10-touch non-booked recovery). Quiet hours 8 AM to 9 PM Contact Timezone."
+      "copy": "10-touch non-booked recovery (5 SMS, 4 email, 1 voicemail over 16 days). Exits immediately if the lead books (to WF-03); after 16 days hands off to WF-09. Quiet hours 8 AM to 9 PM Contact Timezone."
     },
     {
       "n": "03",
-      "name": "Appointment Reminders",
+      "name": "Booking Confirmation and Reminders",
       "absorbs": "03, 3a, 03b, 03c, 03d (merged)",
-      "copy": "Absorbs booking confirmation and all reminder sends. G1 cadence (T-3d / T-1d / morning / T-2h) + telehealth branch. Appointment-relative waits use an 'if date already passed' fallback. Quiet hours 8 AM to 9 PM Contact Timezone."
+      "copy": "Absorbs booking confirmation and all reminder sends. R1 reminder cadence (T-3d / T-1d / morning-of / T-2h) plus a telehealth branch. A cancellation halts reminders and routes to WF-08. Appointment-relative waits use an 'if date already passed' fallback. Quiet hours 8 AM to 9 PM Contact Timezone."
     },
     {
       "n": "04",
       "name": "Medical Intake Chase",
       "absorbs": "04a. Intake Form Response",
-      "copy": "WF-04 owns all intake chasing going forward (standalone 'Intake Reminder' workflow is retired at cutover, Decision 9). G1 intake nudge copy. Quiet hours 8 AM to 9 PM Contact Timezone."
+      "copy": "WF-04 owns all intake chasing going forward (standalone 'Intake Reminder' workflow is retired at cutover, Decision 9). R1 intake nudge cadence. Quiet hours 8 AM to 9 PM Contact Timezone."
     },
     {
       "n": "05",
       "name": "Clinic Outcome Router",
       "absorbs": "05. Clinic Appt Outcome",
-      "copy": "P0: remove auto-Won (D1). The PCC Sales Form is the sole writer of sale_outcome, sale_type, and value; WF-05 is a router that reacts to the form-written values (never writes outcomes). Branch on opportunity.sale_type: New route to new-patient onboarding; Renewal route to the Retention & Renewals lifecycle. A 'no form by end of appointment day' chaser nags the PCC only and writes no outcome."
+      "copy": "P0: remove auto-Won (Decision 10). The PCC Sales Form is the sole writer of sale_outcome, sale_type, and value; WF-05 is a router that reacts to the form-written values (never writes outcomes). First gates on appt_status: showed routes to outcome handling; no-show or cancel routes to WF-08; reschedule routes back to WF-03. Idempotency: WF-05 checks opportunity.outcome_processed_at before running and stamps it after, so an edit or a duplicate submit updates fields but never re-fires routing or the ad conversion. On Sold it sets renewal_date (Won date + term) and branches on sale_type: New to new-patient onboarding, Renewal to the Retention and Renewals lifecycle. MAR keeps the Opportunity Open and opens a PCC/provider task. A 'no form by end of appointment day' chaser nags the PCC only and writes no outcome."
     },
     {
       "n": "06",
-      "name": "Post-Visit Won - Onboarding & Review",
+      "name": "Post-Visit Won and Onboarding",
       "absorbs": "07. POST-VISIT SHOWED + Feedback (partial)",
-      "copy": "Uses the WF-06 message set (post-visit onboarding, NPS survey, Google review request, negative-NPS internal alert). NEW-patient path; renewals route to the Retention & Renewals lifecycle instead. Survey submission writes opportunity.visit_feedback_score, which drives the NPS branch. Quiet hours 8 AM to 9 PM Contact Timezone."
+      "copy": "Post-visit onboarding sequence: welcome, week-1 progress, NPS survey at 14 days, conditional Google review request, and a negative-NPS internal alert. NEW-patient path; renewals route to the Retention and Renewals lifecycle instead. Survey submission writes opportunity.visit_feedback_score, which drives the NPS branch. WF-05 owns renewal_date; WF-06 no longer sets it. Quiet hours 8 AM to 9 PM Contact Timezone."
     },
     {
       "n": "07",
       "name": "Post-Visit No-Sale Nurture",
-      "absorbs": "WIP A&D drafts",
-      "copy": "Uses the WF-07 message set (A&D objection-handling sequence, not net-new). Quiet hours 8 AM to 9 PM Contact Timezone."
+      "absorbs": "WIP no-sale drafts",
+      "copy": "11-touch no-sale (nosale) objection-handling sequence over 35 days, targeting the declared nosale_reason. Quiet hours 8 AM to 9 PM Contact Timezone."
     },
     {
       "n": "08",
-      "name": "No-Show & Cancel Recovery",
+      "name": "No-Show and Cancel Recovery",
       "absorbs": "Cancelled Appts, Nurture: Missed",
-      "copy": "Uses the WF-08 message set (no-show and cancel recovery sequence). Quiet hours 8 AM to 9 PM Contact Timezone."
+      "copy": "8-touch no-show and cancel recovery over 7 days. Exits immediately at any point if the member re-books (to WF-03); after 7 days with no re-engagement hands off to WF-09. Quiet hours 8 AM to 9 PM Contact Timezone."
     },
     {
       "n": "09",
       "name": "Long-Term Nurture",
       "absorbs": "(net-new)",
-      "copy": "Uses the WF-09 message set: Long-Term Nurture main sequence (120 days) plus an explicitly labeled Renewal Reminders sub-flow for won members approaching opportunity.renewal_date. Quiet hours 8 AM to 9 PM Contact Timezone."
+      "copy": "Long-Term Nurture main sequence (7 touches over 120 days) plus an explicitly labeled Renewal Reminders sub-flow (30 / 21 / 14 / 7 / day-of before opportunity.renewal_date) for won members. Quiet hours 8 AM to 9 PM Contact Timezone."
     },
     {
       "n": "10",
       "name": "Feedback Survey",
       "absorbs": "After Appointment Feedback",
-      "copy": "Feedback survey. Keep as-is bodies where good; survey submission writes opportunity.visit_feedback_score for the WF-06 NPS branch."
+      "copy": "Feedback survey. Keep as-is bodies where good; survey submission writes opportunity.visit_feedback_score for the WF-06 NPS branch. All sends filter on sms_consent_status + native DND and run inside quiet hours 8 AM to 9 PM Contact Timezone (WF-11 gate)."
     },
     {
       "n": "11",
-      "name": "Compliance & Errors",
+      "name": "Compliance and Errors",
       "absorbs": "2. DNC, 3. Bounce, 08. MUT",
-      "copy": "Single DND and consent authority. Filters every send on canonical sms_consent_status + native DND. Assume-consent for the 11,077 historical contacts is an accepted risk (Decision 8)."
+      "copy": "Single DND and consent authority. Filters every send on canonical sms_consent_status + native DND. Assume-consent for the 11,077 total historical contacts is an accepted risk (Decision 8)."
     },
     {
       "n": "12",
       "name": "Call Disposition Handler",
       "absorbs": "4a, 4b, Contact Center Tag Assign",
-      "copy": "Handles call dispositions from softphone and disposition workflows; writes opportunity.call_disposition and patient_care_consultant_id; routes negative-NPS follow-ups. See the dedicated WF-12 diagram."
+      "copy": "Handles call dispositions from softphone and disposition workflows; writes opportunity.call_disposition and reads patient_care_consultant_id (the PCC Sales Form is the sole writer of that field). Routes negative-NPS follow-ups. See the dedicated WF-12 diagram."
     },
     {
       "n": "13",
       "name": "Ad-Platform Conversions",
-      "absorbs": "CAPI ×2, Google Ads ×3",
-      "copy": "Booked + Won only; exclude A&D"
+      "absorbs": "CAPI x2, Google Ads x3",
+      "copy": "Booked and Won only; exclude no-sale (nosale) outcomes."
     },
     {
       "n": "14",
       "name": "Ambassador Program",
       "absorbs": "4 ambassador WFs",
-      "copy": "Post-sale ambassador activation: invitation, program welcome, and reward confirmation. Referred contacts are always created as NEW contacts and routed through WF-15."
+      "copy": "Post-sale ambassador activation: invitation, program welcome, and reward confirmation. Referred contacts are always created as NEW contacts and routed through WF-15. All sends filter on sms_consent_status + native DND and run inside quiet hours 8 AM to 9 PM Contact Timezone (WF-11 gate)."
     },
     {
       "n": "15",
       "name": "PCC Referral Routing",
       "absorbs": "PCC Referral Lead Routing",
-      "copy": "Routes PCC-submitted referrals into the Referrals pipeline (Submitted stage) with a referred-lead welcome (SMS + email) and an internal routing alert. Referred contacts are NEW contacts, not re-enrolled referrers."
+      "copy": "Routes PCC-submitted referrals into the Referrals pipeline (Submitted stage) with a referred-lead welcome (SMS + email) and an internal routing alert. The Referrals pipeline is tracking-only (no monetary value); the referred contact is created NEW and routed back to WF-01, and its Sales opportunity carries all revenue. All sends filter on sms_consent_status + native DND and run inside quiet hours 8 AM to 9 PM Contact Timezone (WF-11 gate)."
     },
     {
       "n": "16",
       "name": "Comms Edge",
       "absorbs": "1. IVR - simultaneous, Chat OOO, Missed Call Text-Back",
-      "copy": "Uses the WF-16 message set (missed-call text-back). Explicit simultaneous-ring IVR path (absorbs '1. IVR - simultaneous'). Quiet hours 8 AM to 9 PM Contact Timezone on outbound sends."
+      "copy": "Missed-call text-back plus an explicit simultaneous-ring IVR path (absorbs '1. IVR - simultaneous'). Quiet hours 8 AM to 9 PM Contact Timezone on outbound sends."
     }
   ],
   "pipelines": [
@@ -3821,7 +3822,7 @@
       "role": "Entire pre-close + close, single opp per lead"
     },
     {
-      "name": "Retention & Renewals",
+      "name": "Retention and Renewals",
       "stages": [
         "Onboarding",
         "Active",
@@ -3845,7 +3846,7 @@
       "exits": [
         "Invalid"
       ],
-      "role": "Ambassador + PCC"
+      "role": "Ambassador and PCC. Tracking-only: carries no monetary value; the Sales opportunity holds all revenue. Excluded from revenue rollups."
     },
     {
       "name": "Instagram DM",
@@ -3921,78 +3922,219 @@
     {
       "target": "Opportunity",
       "card": "1 per deal",
-      "role": "Deal outcome and money",
-      "examples": "Sale Outcome, Product/Term/Price x3, Total Program Amount, nosale_reason, Patient Care Consultant (PCC)",
+      "role": "Deal outcome and money. This is the single canonical Opportunity custom-field list (35 fields); the PCC Sales Form page lists the identical set.",
+      "examples": "sale_outcome, sale_type, appt_status, Product/Term/Price x3, total_program_amount, pay_type, nosale_reason, Patient Care Consultant (PCC), attribution (utm/gclid/fbclid/lead_source)",
+      "note": "monetary_value is a native GHL field (= net collected, netTotal after referral discount), not one of the 35 custom fields.",
       "adding": [
         {
           "key": "sale_outcome",
           "label": "Sale Outcome",
-          "from": "Contact"
+          "from": "Contact",
+          "note": "enum sold | nosale | mut | mar; writer: PCC Sales Form"
         },
         {
-          "key": "product_sold_1",
-          "label": "Product Sold 1",
-          "from": "Contact"
+          "key": "sale_type",
+          "label": "Sale Type",
+          "from": "new",
+          "note": "enum new | renewal; writer: PCC Sales Form"
         },
         {
-          "key": "product_sold_2",
-          "label": "Product Sold 2",
-          "from": "Contact"
-        },
-        {
-          "key": "product_sold_3",
-          "label": "Product Sold 3",
-          "from": "Contact"
-        },
-        {
-          "key": "total_program_amount",
-          "label": "Total Program Amount",
-          "from": "Contact"
-        },
-        {
-          "key": "treatment_cost",
-          "label": "Consultation Fee",
-          "from": "Contact"
-        },
-        {
-          "key": "pay_type",
-          "label": "Pay Type",
-          "from": "Contact"
+          "key": "appt_status",
+          "label": "Appointment Status",
+          "from": "new",
+          "note": "enum showed | no-show | cancel | reschedule; writer: PCC Sales Form; gates WF-05"
         },
         {
           "key": "patient_care_consultant_id",
           "label": "Patient Care Consultant (PCC)",
           "from": "Contact",
-          "note": "was patient_advisor"
+          "note": "was patient_advisor; writer: PCC Sales Form (sole writer); WF-12 reads"
+        },
+        {
+          "key": "provider",
+          "label": "Provider",
+          "from": "new",
+          "note": "writer: PCC Sales Form"
+        },
+        {
+          "key": "product_sold_1",
+          "label": "Product Sold 1",
+          "from": "Contact",
+          "note": "writer: PCC Sales Form"
+        },
+        {
+          "key": "product_sold_2",
+          "label": "Product Sold 2",
+          "from": "Contact",
+          "note": "writer: PCC Sales Form"
+        },
+        {
+          "key": "product_sold_3",
+          "label": "Product Sold 3",
+          "from": "Contact",
+          "note": "writer: PCC Sales Form"
+        },
+        {
+          "key": "term_1",
+          "label": "Term 1",
+          "from": "new",
+          "note": "writer: PCC Sales Form; term_1 drives renewal_date"
+        },
+        {
+          "key": "term_2",
+          "label": "Term 2",
+          "from": "new",
+          "note": "writer: PCC Sales Form"
+        },
+        {
+          "key": "term_3",
+          "label": "Term 3",
+          "from": "new",
+          "note": "writer: PCC Sales Form"
+        },
+        {
+          "key": "price_1",
+          "label": "Price 1",
+          "from": "new",
+          "note": "writer: PCC Sales Form"
+        },
+        {
+          "key": "price_2",
+          "label": "Price 2",
+          "from": "new",
+          "note": "writer: PCC Sales Form"
+        },
+        {
+          "key": "price_3",
+          "label": "Price 3",
+          "from": "new",
+          "note": "writer: PCC Sales Form"
+        },
+        {
+          "key": "total_program_amount",
+          "label": "Total Program Amount (gross)",
+          "from": "Contact",
+          "note": "writer: PCC Sales Form"
+        },
+        {
+          "key": "consultation_fee",
+          "label": "Consultation Fee",
+          "from": "Contact",
+          "note": "was treatment_cost; writer: PCC Sales Form"
+        },
+        {
+          "key": "money_down",
+          "label": "Money Down",
+          "from": "new",
+          "note": "writer: PCC Sales Form"
+        },
+        {
+          "key": "discount_value",
+          "label": "Discount Value",
+          "from": "new",
+          "note": "writer: PCC Sales Form"
+        },
+        {
+          "key": "discount_type",
+          "label": "Discount Type",
+          "from": "new",
+          "note": "enum pct | dollar; writer: PCC Sales Form"
+        },
+        {
+          "key": "pay_type",
+          "label": "Pay Type",
+          "from": "Contact",
+          "note": "PIF = paid in full, others financed; financed flag derivable from this; writer: PCC Sales Form"
         },
         {
           "key": "nosale_reason",
           "label": "No-Sale Reason",
           "from": "Contact",
-          "note": "was ad_reason"
+          "note": "was ad_reason; writer: PCC Sales Form"
         },
         {
           "key": "nosale_reason_other",
           "label": "No-Sale Reason Other",
           "from": "Contact",
-          "note": "was ad_other_explanation"
+          "note": "was ad_other_explanation; writer: PCC Sales Form"
         },
         {
-          "key": "emr_visit_id",
-          "label": "EMR Visit FK",
+          "key": "referred_by",
+          "label": "Referred By",
           "from": "new",
-          "note": "links deal to the clinical visit record"
+          "note": "new deals only; writer: PCC Sales Form"
+        },
+        {
+          "key": "consult_notes",
+          "label": "Consult Notes",
+          "from": "new",
+          "note": "writer: PCC Sales Form"
         },
         {
           "key": "location",
           "label": "Location (4 values)",
           "from": "new",
-          "note": "replaces 4 location-clone pipelines"
+          "note": "replaces 4 location-clone pipelines; writer: WF-01 at create"
         },
         {
-          "key": "sale_type",
-          "label": "Sale Type",
-          "from": "new"
+          "key": "emr_visit_id",
+          "label": "EMR Visit FK",
+          "from": "new",
+          "note": "links deal to the clinical visit record; writer: EMR sync"
+        },
+        {
+          "key": "renewal_date",
+          "label": "Renewal Date",
+          "from": "new",
+          "note": "writer: WF-05 on every Won = Won date + term_1"
+        },
+        {
+          "key": "visit_feedback_score",
+          "label": "Visit Feedback Score",
+          "from": "new",
+          "note": "writer: WF-10 (NPS)"
+        },
+        {
+          "key": "call_disposition",
+          "label": "Call Disposition",
+          "from": "new",
+          "note": "writer: WF-12"
+        },
+        {
+          "key": "outcome_processed_at",
+          "label": "Outcome Processed At",
+          "from": "new",
+          "note": "idempotency stamp; writer: WF-05"
+        },
+        {
+          "key": "utm_source",
+          "label": "UTM Source",
+          "from": "new",
+          "note": "writer: WF-01 attribution copy at create"
+        },
+        {
+          "key": "utm_campaign",
+          "label": "UTM Campaign",
+          "from": "new",
+          "note": "writer: WF-01 attribution copy at create"
+        },
+        {
+          "key": "gclid",
+          "label": "Google Click ID",
+          "from": "new",
+          "note": "writer: WF-01 attribution copy at create"
+        },
+        {
+          "key": "fbclid",
+          "label": "Facebook Click ID",
+          "from": "new",
+          "note": "writer: WF-01 attribution copy at create"
+        },
+        {
+          "key": "lead_source",
+          "label": "Lead Source",
+          "from": "new",
+          "note": "writer: WF-01 attribution copy at create"
         }
       ]
     },
@@ -4000,13 +4142,13 @@
       "target": "External EMR",
       "card": "integration",
       "role": "Medical records - system of record",
-      "examples": "Intake, diagnoses, meds, labs, signature. GHL keeps only emr_patient_id and visit date"
+      "examples": "Intake, diagnoses, meds, labs, signature. GHL keeps only emr_patient_id (Contact) and emr_visit_id (Opportunity)"
     },
     {
       "target": "Retire",
       "card": "-",
       "role": "Never-used fields - will be deleted",
-      "examples": "33 fields confirmed 0 usage in a 90-day scan across 11,077 contacts"
+      "examples": "33 fields confirmed 0 usage in a 90-day scan of a 6,016-contact sample (11,077 contacts total)"
     }
   ],
   "defects": [
@@ -4136,14 +4278,14 @@
     {
       "n": "2",
       "decision": "Confirmation handling",
-      "choice": "Merge into WF 03 Appointment Reminders",
+      "choice": "Merge into WF-03 Booking Confirmation and Reminders",
       "status": "Locked",
       "date": "2026-06-14"
     },
     {
       "n": "3",
       "decision": "Reminder cadence",
-      "choice": "G1 aspirational (T-3d / T-1d / morning / T-2h)",
+      "choice": "R1 reminder cadence (T-3d / T-1d / morning-of / T-2h)",
       "status": "Locked",
       "date": "2026-06-14"
     },
@@ -4185,7 +4327,7 @@
     {
       "n": "9",
       "decision": "Explicit retirements at cutover",
-      "choice": "'06. Price Calculator', standalone 'Intake Reminder', and the Vercel 'Outbound Webhook' are deliberately retired at cutover (dropped, not silently orphaned). WF-04 assumes all intake-chasing responsibility. Retirement is executed in Step 6 (p5-cleanup) after confirming no live dependency.",
+      "choice": "'06. Price Calculator', standalone 'Intake Reminder', the Vercel 'Outbound Webhook', and 'New Workflow : 1780243709697' (unnamed, published; confirm before retiring) are deliberately retired at cutover (dropped, not silently orphaned). WF-04 assumes all intake-chasing responsibility. Retirement is executed in Step 6 (p5-cleanup) after confirming no live dependency.",
       "status": "Locked",
       "date": "2026-07-10"
     },
@@ -4209,7 +4351,7 @@
       "id": "C1",
       "sev": "Critical",
       "area": "Revenue truth must be unambiguous inside GHL",
-      "mitigation": "Opportunity monetaryValue (Total Program Amount) is the single revenue truth; evidence-split the 939 A&D wins into 3 buckets (clear-Won / clear-Lost / ambiguous -> human review)."
+      "mitigation": "Opportunity monetary_value (= net collected, netTotal after referral discount) is the single revenue truth; total_program_amount is gross. Evidence-split the 939 historical A&D wins into 3 buckets (clear-Won / clear-Lost / ambiguous -> human review)."
     },
     {
       "id": "C2",
@@ -4307,11 +4449,11 @@
     "Never delete a pipeline before it is empty (deletes its opportunities)",
     "Never rename or delete engine tags (BotFanatics / Sniper surface stays frozen)",
     "Never write without a dry-run that emits a reviewable diff",
-    "Never convert an A&D no-sale (Advise & Decline ≠ advertising - exclude from WF 13)",
+    "Never treat a nosale (Advised and Declined) as an ad conversion: nosale is not advertising, so exclude it from WF-13 CAPI",
     "Never mark an opportunity Won without Sale Type (New/Renewal) set - it drives revenue split, pipeline routing, and commissions",
     "Never treat a Renewal as new-patient acquisition - exclude renewals from referral rewards and keep new vs renewal revenue separate in reporting",
     "Every SMS and voicemail workflow filters on the canonical sms_consent_status field AND native DND, and runs inside a Time Window of 8 AM to 9 PM in the Contact Timezone (TCPA quiet hours).",
-    "Only the PCC Sales Form writes opportunity.sale_outcome, sale_type, and value - WF-05 is a router that reacts to those values and never writes outcomes itself.",
+    "Only the PCC Sales Form writes opportunity.sale_outcome, sale_type, appt_status, patient_care_consultant_id, and value - WF-05 is a router that reacts to those values and never writes outcomes itself.",
     "No SMS or voicemail contains symptom or treatment specifics: appointment and consultation logistics only."
   ],
   "messages_tobe": [

@@ -7,18 +7,22 @@ import { ghlPipelines } from "../lib/ghl";
 import { ExternalLink } from "lucide-react";
 
 const NUMBERING_CROSSWALK: { old: string; canonical: string; note: string }[] = [
-  { old: "WF-01 Lead Capture", canonical: "WF-01 Lead Capture and Attribution", note: "unchanged" },
-  { old: "WF-02 Non-Booked Recovery", canonical: "WF-02 Non-Booked Recovery", note: "unchanged" },
-  { old: "WF-03 Booking Confirmation", canonical: "WF-03 Booking Confirmation and Reminders", note: "merged with reminders" },
-  { old: "WF-04 Confirmation Chase", canonical: "WF-04 Medical Intake Chase", note: "renamed; owns all intake chasing" },
-  { old: "WF-05 Appointment Reminders", canonical: "WF-03 Reminder Sends", note: "absorbed into WF-03" },
-  { old: "WF-06 No-Show Recovery", canonical: "WF-08 No-Show and Cancel Recovery", note: "renumbered" },
-  { old: "WF-07 Post-Visit Sold", canonical: "WF-06 Post-Visit Won", note: "renumbered" },
-  { old: "WF-08 A&D (Advised and Declined)", canonical: "WF-07 No-Sale Nurture", note: "renumbered" },
-  { old: "WF-09 Renewal Reminders", canonical: "WF-09 Renewal Reminders (sub-flow)", note: "now a labeled sub-flow of WF-09" },
-  { old: "WF-10 Long-Term Nurture", canonical: "WF-09 Long-Term Nurture (main)", note: "merged into WF-09" },
-  { old: "WF-11 Missed Call Text-Back", canonical: "WF-16 Comms Edge", note: "renumbered" },
-  { old: "WF-12 Review and Referral", canonical: "WF-06 (review) + WF-14 (referral)", note: "split by purpose" },
+  { old: "01 Lead Capture", canonical: "WF-01 Lead Capture and Attribution", note: "unchanged; copies attribution to the Opp at create" },
+  { old: "02 Non-Booked Recovery", canonical: "WF-02 Non-Booked Recovery", note: "unchanged" },
+  { old: "03 Booking Confirmation + 05 Appointment Reminders", canonical: "WF-03 Booking Confirmation and Reminders", note: "reminders (05) merged in; R1 cadence" },
+  { old: "04 Confirmation Chase", canonical: "WF-04 Medical Intake Chase", note: "renamed; owns all intake chasing" },
+  { old: "07 Appointment Outcome (auto-Won)", canonical: "WF-05 Clinic Outcome Router", note: "rebuilt as a router; PCC Sales Form is sole writer" },
+  { old: "07 Post-Visit Sold", canonical: "WF-06 Post-Visit Won and Onboarding", note: "renumbered; no longer sets renewal_date" },
+  { old: "08 A&D (Advised and Declined)", canonical: "WF-07 No-Sale Nurture", note: "renamed to nosale" },
+  { old: "06 No-Show Recovery", canonical: "WF-08 No-Show and Cancel Recovery", note: "renumbered; adds cancel and rebook early-exit" },
+  { old: "09 Renewal Reminders + 10 Long-Term Nurture", canonical: "WF-09 Long-Term Nurture (+ Renewal sub-flow)", note: "merged; renewal is now a labeled sub-flow" },
+  { old: "z Post-Visit Survey", canonical: "WF-10 Feedback Survey", note: "formalized; writes visit_feedback_score" },
+  { old: "scattered consent / DND steps", canonical: "WF-11 Compliance and Errors", note: "new single DND and quiet-hours authority" },
+  { old: "z Call Disposition", canonical: "WF-12 Call Disposition Handler", note: "formalized; reads the form-owned PCC id" },
+  { old: "CAPI outbound webhook", canonical: "WF-13 Ad Platform Conversions", note: "formalized; fires once per opportunity" },
+  { old: "12 Review and Referral (referral part)", canonical: "WF-14 Ambassador Program", note: "split by purpose from the review part" },
+  { old: "PCC / Ambassador referral clones", canonical: "WF-15 PCC Referral Routing", note: "consolidated; tracking-only pipeline" },
+  { old: "11 Missed Call Text-Back", canonical: "WF-16 Comms Edge", note: "renumbered" },
 ];
 
 const OBJECT_TONE: Record<string, "good" | "blue" | "warning" | "muted"> = {
@@ -79,7 +83,7 @@ export default function ToBe() {
             <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
               <div>
                 <div className="text-sm font-semibold">Canonical numbering (WF-01 to WF-16)</div>
-                <p className="text-xs text-muted-foreground">The workflow list and master diagram are the canonical scheme. Every diagram is renumbered to match. Step-by-step flows for all 16 owners are on the diagrams page.</p>
+                <p className="text-xs text-muted-foreground">The workflow list and master diagram are the canonical scheme. Every diagram is renumbered to match. The left column maps the retired prior numbering (the old message-library and location-clone scheme) and is shown for traceability only. Step-by-step flows for all 16 owners are on the diagrams page.</p>
               </div>
               <Link to="/wf-diagrams" className="inline-flex items-center gap-1 rounded border px-2 py-1 text-xs font-medium text-primary hover:bg-muted">
                 See to-be workflow diagrams
@@ -89,7 +93,7 @@ export default function ToBe() {
               <table className="w-full border-collapse text-left text-xs">
                 <thead>
                   <tr className="border-b text-[10px] uppercase tracking-wider text-muted-foreground">
-                    <th className="py-1.5 pe-3 font-semibold">Old library number</th>
+                    <th className="py-1.5 pe-3 font-semibold">Prior numbering (retired)</th>
                     <th className="py-1.5 pe-3 font-semibold">Canonical</th>
                     <th className="py-1.5 font-semibold">Note</th>
                   </tr>
@@ -157,7 +161,7 @@ export default function ToBe() {
 
         <RoutedTabPanel value="data-model" className="space-y-4">
           <Card><CardContent className="p-4 text-sm leading-relaxed text-foreground/90">
-            <b>Four destinations, each owning its own data.</b> The Contact holds identity and durable profile — including the lead's attribution and consent state. The Opportunity owns the sale outcome and money, and carries a copy of the attribution that drove the deal so revenue rolls up per sale. Medical records stay in the external EMR (GHL keeps only an <code>emr_visit_id</code> and visit date). Never-used fields retire. <b>No custom objects</b> — attribution is fields + <code>source_*</code> tags, and consent is GHL-native DND/STOP plus the Compliance workflow.
+            <b>Four destinations, each owning its own data.</b> The Contact holds identity and durable profile — including the lead's attribution and consent state. The Opportunity owns the sale outcome and money as one canonical set of 35 custom fields, and carries a copy of the attribution that WF-01 writes at create so both wins and losses roll up per sale. Medical records stay in the external EMR (GHL keeps only <code>emr_patient_id</code> on the Contact and <code>emr_visit_id</code> on the Opportunity; the appointment date lives on the appointment, not an opp field). Never-used fields retire. <b>No custom objects</b> — attribution is fields + <code>source_*</code> tags, and consent is GHL-native DND/STOP plus the Compliance workflow. The canonical enum contract (<code>sale_outcome</code>, <code>sale_type</code>, <code>appt_status</code>) and the identical 35-field list are published on the <Link to="/pcc-form" className="text-primary underline">PCC Sales Form</Link> page.
           </CardContent></Card>
           <div className="grid gap-3 md:grid-cols-2">
             {data.field_destinations.map((d, i) => <DestCard key={i} d={d} />)}

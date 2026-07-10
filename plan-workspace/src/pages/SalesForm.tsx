@@ -31,11 +31,18 @@ const APPT_OPTS = [
 ];
 
 const OUTCOME_OPTS = [
-  { value: "sold", label: "Sold",  icon: CheckCircle2, ring: "bg-emerald-600 shadow-emerald-200 dark:shadow-emerald-900" },
-  { value: "ad",   label: "A&D",   icon: XCircle,      ring: "bg-slate-600 shadow-slate-200 dark:shadow-slate-800" },
-  { value: "mut",  label: "MUT",   icon: AlertCircle,  ring: "bg-slate-600 shadow-slate-200 dark:shadow-slate-800" },
-  { value: "mar",  label: "MAR",   icon: Clock,        ring: "bg-amber-500 shadow-amber-200 dark:shadow-amber-900" },
+  { value: "sold",   label: "Sold",   icon: CheckCircle2, ring: "bg-emerald-600 shadow-emerald-200 dark:shadow-emerald-900" },
+  { value: "nosale", label: "No-Sale",icon: XCircle,      ring: "bg-slate-600 shadow-slate-200 dark:shadow-slate-800" },
+  { value: "mut",    label: "MUT",    icon: AlertCircle,  ring: "bg-slate-600 shadow-slate-200 dark:shadow-slate-800" },
+  { value: "mar",    label: "MAR",    icon: Clock,        ring: "bg-amber-500 shadow-amber-200 dark:shadow-amber-900" },
 ];
+
+// Reason lists are outcome-specific. nosale (Advised and Declined) is a sales objection;
+// MUT is a clinical finding; MAR is a pending medical-approval item. They must not share a list.
+const NOSALE_REASONS = ["Not Ready", "Think it Over / Sleep On It", "Cost / Price Objection", "Not Interested", "Others"];
+const MUT_REASONS    = ["Contraindication", "Abnormal labs", "Provider decision", "Others"];
+const MAR_REASONS    = ["Awaiting labs", "Awaiting provider review", "Awaiting clearance", "Others"];
+const REASONS_BY_OUTCOME: Record<string, string[]> = { nosale: NOSALE_REASONS, mut: MUT_REASONS, mar: MAR_REASONS };
 
 // Patient type — every consult is either a brand-new sale or a renewal of an existing program.
 // Gates referral attribution (new only), pricing context, and downstream pipeline routing (op_sale_type).
@@ -148,6 +155,12 @@ export default function SalesForm() {
     if (!totalManual) setTotalAmount(autoTotal > 0 ? autoTotal.toFixed(2) : "");
   }, [autoTotal, totalManual]);
 
+  // Reset the reason to the first valid option whenever the outcome changes,
+  // so a MUT never carries a leftover sales objection reason.
+  useEffect(() => {
+    if (outcome !== "sold") setAdReason(REASONS_BY_OUTCOME[outcome][0]);
+  }, [outcome]);
+
   const total    = parseFloat(totalAmount) || 0;
   // Referral rewards apply to NEW patients only — renewals never compute a referral discount
   const refDisc  = isNew && referredBy && total ? Math.round(total * 0.1 * 100) / 100 : 0;
@@ -163,7 +176,7 @@ export default function SalesForm() {
   function removeProduct(i: number) { setProducts(p => p.filter((_, idx) => idx !== i)); setTotalManual(false); }
 
   const outcomeLabel = {
-    sold: "→ Won", ad: "→ Lost", mut: "→ Lost", mar: "stays open"
+    sold: "→ Won", nosale: "→ Lost", mut: "→ Lost", mar: "stays open"
   }[outcome];
 
   const ptLabel = isNew ? "New" : "Renewal";
@@ -176,6 +189,17 @@ export default function SalesForm() {
       title="PCC sales form"
       subtitle="Mockup for team review — disposition a deal on the opportunity after every consultation."
     >
+      <Card className="mb-4 p-4 text-sm leading-relaxed text-foreground/90">
+        <p className="mb-2 font-semibold">Enum contract (canonical)</p>
+        <p className="mb-2">This form is the <b>single writer</b> of the opportunity outcome fields. WF-05 reads the values it writes and never writes an outcome itself. The codes below are the contract the diagrams and WF-05 branch conditions reference verbatim.</p>
+        <ul className="mb-2 list-disc space-y-1 pl-5">
+          <li><code>sale_outcome</code> = <code>sold</code> | <code>nosale</code> (Advised and Declined) | <code>mut</code> (Medically Untreatable) | <code>mar</code> (Medical Approval Required)</li>
+          <li><code>sale_type</code> = <code>new</code> | <code>renewal</code></li>
+          <li><code>appt_status</code> = <code>showed</code> | <code>no-show</code> | <code>cancel</code> | <code>reschedule</code> (WF-05 gates on this first)</li>
+        </ul>
+        <p className="mb-1"><code>monetary_value</code> is the <b>net collected</b> (net of any referral discount), not the gross <code>total_program_amount</code>. The form writes one canonical set of 35 opportunity custom fields (the same set shown on the To-Be data model).</p>
+        <p className="text-xs text-muted-foreground">Edit after submit: an edit updates the fields but does not re-fire WF-05 routing or the ad conversion (WF-05 checks <code>outcome_processed_at</code>). MAR keeps the opportunity Open until the form is resubmitted with a final outcome once approval lands.</p>
+      </Card>
       <Card className="overflow-hidden">
 
         {/* ── Card header ── */}
@@ -209,9 +233,9 @@ export default function SalesForm() {
               <p className="mt-2 text-xs text-muted-foreground">
                 {isNew
                   ? "Brand-new patient buying their first program. Referral rewards apply; routes to new-patient onboarding."
-                  : "Existing patient renewing / continuing / expanding. No referral reward; routes to the Retention & Renewals lifecycle."}
+                  : "Existing patient renewing / continuing / expanding. No referral reward; routes to the Retention and Renewals lifecycle."}
               </p>
-              <Hint>op_sale_type · New | Renewal · drives routing, messaging &amp; KPI split</Hint>
+              <Hint>op_sale_type · new | renewal · drives routing, messaging and KPI split</Hint>
             </div>
           </Panel>
 
@@ -223,7 +247,7 @@ export default function SalesForm() {
                 <select className={inp} value={pcc} onChange={e => setPcc(e.target.value)}>
                   {PCCS.map(n => <option key={n}>{n}</option>)}
                 </select>
-                <Hint>op_pcc · placeholder names</Hint>
+                <Hint>op_patient_care_consultant_id · form is sole writer · placeholder names</Hint>
               </div>
               <div>
                 <label className={lbl}>Provider {req}</label>
@@ -242,12 +266,12 @@ export default function SalesForm() {
               <SegCtrl opts={OUTCOME_OPTS} value={outcome} onChange={setOutcome} />
               {outcome !== "sold" && (
                 <p className="mt-2 text-xs text-muted-foreground">
-                  {outcome === "ad"  && "Advised and Declined"}
-                  {outcome === "mut" && "Medically Untreatable"}
-                  {outcome === "mar" && "Medical Approval Required"}
+                  {outcome === "nosale" && "nosale (Advised and Declined)"}
+                  {outcome === "mut" && "mut (Medically Untreatable)"}
+                  {outcome === "mar" && "mar (Medical Approval Required)"}
                 </p>
               )}
-              <Hint>op_sale_outcome</Hint>
+              <Hint>op_sale_outcome · sold | nosale | mut | mar</Hint>
             </div>
 
             {/* Close type — opportunity tags (only when sold) */}
@@ -269,20 +293,16 @@ export default function SalesForm() {
               </div>
             )}
 
-            {/* A&D / MUT / MAR reason */}
+            {/* No-Sale / MUT / MAR reason — each outcome has its own list */}
             {!sold && (
               <div className="max-w-sm pt-1">
                 <label className={lbl}>
-                  {outcome === "ad" ? "A&D reason" : outcome === "mut" ? "MUT reason" : "MAR reason"} {req}
+                  {outcome === "nosale" ? "No-Sale reason" : outcome === "mut" ? "MUT reason" : "MAR reason"} {req}
                 </label>
                 <select className={inp} value={adReason} onChange={e => setAdReason(e.target.value)}>
-                  <option>Not Ready</option>
-                  <option>Think it Over / Sleep On It</option>
-                  <option>Cost / Price Objection</option>
-                  <option>Not Interested</option>
-                  <option>Not Qualified / MU</option>
-                  <option>Others</option>
+                  {REASONS_BY_OUTCOME[outcome].map(r => <option key={r}>{r}</option>)}
                 </select>
+                <Hint>{outcome === "nosale" ? "op_nosale_reason" : outcome === "mut" ? "op_mut_reason (clinical)" : "op_mar_reason (pending item)"}</Hint>
               </div>
             )}
           </Panel>
@@ -384,7 +404,7 @@ export default function SalesForm() {
                   <select className={inp} value={payType} onChange={e => setPayType(e.target.value)}>
                     <option>PIF</option><option>SF</option><option>CARE</option><option>MAG</option><option>Cash</option><option>Credit card</option>
                   </select>
-                  <Hint>op_pay_type</Hint>
+                  <Hint>op_pay_type · PIF = paid in full; all other types are financed (financed flag derivable)</Hint>
                 </div>
               </Row>
 
@@ -411,7 +431,7 @@ export default function SalesForm() {
                   <div>
                     <p className="text-sm font-semibold text-foreground">Program total {req}</p>
                     <p className="text-[11px] font-mono text-muted-foreground/70 mt-0.5">
-                      sets deal Value · {totalManual ? "manual override" : "auto-calc"}
+                      op_total_program_amount (gross) · {totalManual ? "manual override" : "auto-calc"}
                     </p>
                   </div>
                   <div className="flex items-center gap-2">
@@ -451,6 +471,17 @@ export default function SalesForm() {
                     label="Remaining balance"
                     value={`$${Math.max(balance, 0).toLocaleString("en-US", { minimumFractionDigits: 2 })}`}
                     bold
+                  />
+                )}
+
+                {/* Net collected — this, not gross, is the opportunity monetary_value */}
+                {total > 0 && (
+                  <ReceiptRow
+                    label="Net collected"
+                    sub="(monetary_value)"
+                    value={`$${netTotal.toLocaleString("en-US", { minimumFractionDigits: 2 })}`}
+                    bold
+                    accent="text-emerald-700 dark:text-emerald-400"
                   />
                 )}
               </div>

@@ -7,7 +7,7 @@ export interface KPIs {
   fields_total: number; fields_on_contact: number;
   fields_on_opportunity_now: number; fields_on_opportunity_target: number;
   fields_never_populated: number; fields_rare: number;
-  contacts_scanned: number; opportunities_scanned: number; opportunities: number;
+  contacts_scanned: number; contacts_total: number; opportunities_scanned: number; opportunities: number;
   ad_false_wins: number; wins_with_zero_value_pct: number;
   ghl_payment_transactions: number; click_ids_captured: number; tcpa_consent_stored: number;
   steps_published_total: number; branches_total: number;

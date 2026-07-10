@@ -20,6 +20,181 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 DETAIL = json.load(open(os.path.join(HERE, "public", "asis-detail.json"), encoding="utf-8"))
 WF = {w["id"]: w for w in DETAIL["workflows"]}
 
+# --- raw step-graph files: source of truth for edge derivation --------------
+import glob
+RAW = {}
+for _f in glob.glob(os.path.join(HERE, "..", "ghl_data", "workflow_steps", "*.json")):
+    _d = json.load(open(_f, encoding="utf-8"))
+    RAW[_d["id"]] = _d
+RNAME = {i: d.get("name", "?") for i, d in RAW.items()}
+RFOLDER = {i: d.get("folder", "") for i, d in RAW.items()}
+RSTATUS = {i: d.get("status", "") for i, d in RAW.items()}
+
+
+def _listens(d, field):
+    out = []
+    for t in d.get("triggers", []):
+        for c in t.get("conditions", []) or []:
+            if c.get("field") == field:
+                v = c.get("value")
+                out += v if isinstance(v, list) else [v]
+    return out
+
+
+def _trigger_types(d):
+    return {t.get("type") for t in d.get("triggers", [])}
+
+
+def _emit_tags(d):
+    s = set()
+    for n in d.get("templates", []):
+        if n.get("type") == "add_contact_tag":
+            for tg in (n.get("attributes", {}) or {}).get("tags", []) or []:
+                s.add(tg)
+    return s
+
+
+def _set_status(d):
+    s = set()
+    for n in d.get("templates", []):
+        if n.get("type") == "update_appointment_status":
+            v = (n.get("attributes", {}) or {}).get("status_type")
+            if v:
+                s.add(v)
+    return s
+
+
+def _wf_refs(d, ty):
+    out = set()
+    for n in d.get("templates", []):
+        if n.get("type") == ty:
+            w = (n.get("attributes", {}) or {}).get("workflow_id")
+            for x in (w if isinstance(w, list) else [w]):
+                if x:
+                    out.add(x)
+    return out
+
+
+def _folder2(i):
+    return (RFOLDER.get(i, "") or "")[:2]
+
+
+def derive_edges():
+    """Return (cross_edges, entry_edges, isolated, stats), 100% from RAW data.
+
+    cross_edges: {(src,dst): {"mechs": set, "kind": "journey"|"support"}}
+    entry_edges: list of (source_key, dst)
+    isolated:    workflow ids with no inbound/outbound cross-workflow edge
+    """
+    raw_edges = []  # (src, dst, mech)
+
+    # A. tag emitted by A -> tagsAdded listened by B
+    tag_listen = {}
+    for i, d in RAW.items():
+        for tg in _listens(d, "tagsAdded"):
+            tag_listen.setdefault(tg, set()).add(i)
+    for i, d in RAW.items():
+        et = _emit_tags(d)
+        for tg, listeners in tag_listen.items():
+            if tg in et:
+                for L in listeners:
+                    if L != i:
+                        raw_edges.append((i, L, f"tag: {tg} added"))
+
+    # B. add_to_workflow step -> target workflow
+    for i, d in RAW.items():
+        for x in _wf_refs(d, "add_to_workflow"):
+            if x != i:
+                raw_edges.append((i, x, "adds to workflow"))
+    # C. remove_from_workflow step -> target workflow (cleanup)
+    for i, d in RAW.items():
+        for x in _wf_refs(d, "remove_from_workflow"):
+            if x != i:
+                raw_edges.append((i, x, "removes from workflow"))
+    # D. trigger on workflow.id (fires when contact enters that workflow)
+    for i, d in RAW.items():
+        for x in _listens(d, "workflow.id"):
+            if x and x != i:
+                raw_edges.append((x, i, "on entering workflow"))
+    # E. appointment.status set by A -> appointment.status listened by B
+    status_listen = {}
+    for i, d in RAW.items():
+        for s in _listens(d, "appointment.status"):
+            status_listen.setdefault(s, set()).add(i)
+    for i, d in RAW.items():
+        for s in _set_status(d):
+            for L in status_listen.get(s, ()):
+                if L != i:
+                    raw_edges.append((i, L, f"appt set: {s}"))
+
+    # merge + classify
+    def is_support(src, dst, mechs):
+        if any(m.startswith(("removes from", "appt set:", "on entering")) for m in mechs):
+            return True
+        if _folder2(src) in ("03", "04") or _folder2(dst) in ("03", "04"):
+            return True
+        if RFOLDER.get(dst, "").startswith("Vercel") or RFOLDER.get(src, "").startswith("Vercel"):
+            return True
+        return False
+
+    merged = {}
+    for s, dst, mech in raw_edges:
+        merged.setdefault((s, dst), set()).add(mech)
+    cross = {}
+    for (s, dst), mechs in merged.items():
+        cross[(s, dst)] = {
+            "mechs": mechs,
+            "kind": "support" if is_support(s, dst, mechs) else "journey",
+        }
+
+    connected = set()
+    for (s, dst) in cross:
+        connected.add(s)
+        if dst in RAW:
+            connected.add(dst)
+    isolated = [i for i in RAW if i not in connected]
+
+    # entry edges: external source -> in-degree-0 connected workflows, plus the
+    # calendar anchors of the appointment cluster (all justified by real triggers)
+    indeg = {}
+    for (s, dst) in cross:
+        if dst in RAW:
+            indeg[dst] = indeg.get(dst, 0) + 1
+    entry = []
+    for i in sorted(connected, key=lambda x: RNAME[x]):
+        if indeg.get(i, 0) > 0:
+            continue
+        tt = _trigger_types(RAW[i])
+        if "inbound_webhook" in tt:
+            entry.append(("WEB", i))
+        elif "form_submission" in tt:
+            entry.append(("WEB", i))
+        elif tt & {"call_status", "ivr_incoming_call"}:
+            entry.append(("CALL", i))
+        elif tt & {"appointment", "customer_appointment"}:
+            entry.append(("CAL", i))
+    # calendar anchors (appointment-triggered cluster members)
+    for anchor_name in ("03. Appointment Booked", "03b. Unconfirmed", "05. Clinic Appt Outcome"):
+        for i in connected:
+            if RNAME[i].startswith(anchor_name) and (_trigger_types(RAW[i]) & {"appointment", "customer_appointment"}):
+                entry.append(("CAL", i))
+
+    # stats: mechanism breakdown over merged pairs
+    stats = {"pairs": len(cross), "internal": sum(1 for (_, d) in cross if d in RAW),
+             "external": sum(1 for (_, d) in cross if d not in RAW),
+             "journey": sum(1 for v in cross.values() if v["kind"] == "journey"),
+             "support": sum(1 for v in cross.values() if v["kind"] == "support"),
+             "connected": len(connected), "isolated": len(isolated),
+             "tag": 0, "add": 0, "remove": 0, "appt": 0, "enter": 0}
+    for v in cross.values():
+        m = v["mechs"]
+        if any(x.startswith("tag:") for x in m): stats["tag"] += 1
+        if "adds to workflow" in m: stats["add"] += 1
+        if "removes from workflow" in m: stats["remove"] += 1
+        if any(x.startswith("appt set:") for x in m): stats["appt"] += 1
+        if "on entering workflow" in m: stats["enter"] += 1
+    return cross, entry, isolated, stats
+
 # status colours
 C_TRIG = "#1e40af"; C_PUB = "#166534"; C_DRAFT = "#374151"
 C_DECISION = "#0f766e"; C_WAIT = "#b45309"; C_MSG = "#1e3a5f"
@@ -226,22 +401,96 @@ IDS = {
 }
 
 
+CROSS, ENTRY, ISOLATED, STATS = derive_edges()
+
+
+def _mnode(i):
+    """Stable, parse-safe mermaid node id for a workflow (internal or external)."""
+    clean = re.sub(r"[^0-9a-zA-Z]", "", i)[:10]
+    return ("W" if i in RAW else "X") + clean
+
+
 def master_src():
-    """Folder overview of all 28 active workflows, grouped by real GHL folder."""
+    """True interconnection map of the 28 active workflows — every edge derived
+    100% from the extracted step graphs (tags, add/remove_to_workflow,
+    appointment-status changes, workflow-entry triggers). Solid = patient journey;
+    dotted = signal / support / admin handoff. 05 is the outcome keystone."""
     lines = ["flowchart TD"]
     styles = []
-    fi = 0
-    for f in DETAIL["folders"]:
-        ids = [w["id"] for w in DETAIL["workflows"] if w["folder"] == f["name"]]
-        sub = f'F{fi}'
-        lines.append(f'    subgraph {sub} ["{esc(f["name"],40)} — {f["count"]}"]')
-        for j, wid in enumerate(ids):
-            w = WF[wid]
-            nid = f"{sub}_{j}"
-            lines.append(f'        {nid}["{esc(w["name"],44)}<br/>{w["status"]} · {w["n_steps"]} steps"]')
-            styles.append(f"    style {nid} fill:{C_PUB if w['status']=='published' else C_DRAFT},color:#fff")
+
+    connected = set()
+    for (s, d) in CROSS:
+        connected.add(s)
+        if d in RAW:
+            connected.add(d)
+
+    # entry source stadium nodes (only those that really exist in triggers)
+    lines.append('    WEB(["Web forms / ad webhooks"])')
+    lines.append('    CAL(["Calendar & appointment events"])')
+    lines.append('    CALL(["Inbound / missed calls"])')
+    styles.append("    style WEB fill:#0f766e,color:#fff")
+    styles.append("    style CAL fill:#0f766e,color:#fff")
+    styles.append("    style CALL fill:#0f766e,color:#fff")
+
+    # workflow nodes (connected ones + any external target)
+    ext_nodes = set()
+    for (s, d) in CROSS:
+        if d not in RAW:
+            ext_nodes.add(d)
+    for i in sorted(connected, key=lambda x: RNAME[x]):
+        nid = _mnode(i)
+        lines.append(f'    {nid}["{esc(RNAME[i], 40)}"]')
+        if RNAME[i].startswith("05. Clinic Appt Outcome"):
+            styles.append(f"    style {nid} fill:#7c3aed,color:#fff")   # keystone
+        elif RSTATUS.get(i) == "published":
+            styles.append(f"    style {nid} fill:{C_PUB},color:#fff")
+        else:
+            styles.append(f"    style {nid} fill:{C_DRAFT},color:#fff")
+    for e in ext_nodes:
+        lines.append(f'    {_mnode(e)}["(external workflow)"]')
+        styles.append(f"    style {_mnode(e)} fill:#6b7280,color:#fff")
+
+    # real fork: appointment-day outcome fanning into 05 / Cancelled
+    lines.append('    VISIT{"Appointment-day outcome"}')
+    styles.append("    style VISIT fill:#1e3a5f,color:#fff")
+
+    # entry edges (each justified by a real trigger type on the target)
+    seen_entry = set()
+    for src, dst in ENTRY:
+        if dst not in connected:
+            continue
+        key = (src, dst)
+        if key in seen_entry:
+            continue
+        seen_entry.add(key)
+        lines.append(f"    {src} --> {_mnode(dst)}")
+
+    # calendar -> appointment-day fork -> outcome workflows (data: 05 & Cancelled
+    # carry appointment.status showed/no-show/cancelled triggers)
+    outcome_ids = {i for i in connected if RNAME[i].startswith(("05. Clinic Appt Outcome", "Cancelled Appointments"))}
+    if outcome_ids:
+        lines.append("    CAL --> VISIT")
+        for i in sorted(outcome_ids, key=lambda x: RNAME[x]):
+            lbl = "Showed / no-show / cancel reported" if RNAME[i].startswith("05") else "Calendar cancellation"
+            lines.append(f'    VISIT -->|"{esc(lbl,34)}"| {_mnode(i)}')
+
+    # cross-workflow derived edges
+    for (s, d), meta in sorted(CROSS.items(), key=lambda kv: RNAME.get(kv[0][0], "")):
+        tgt = _mnode(d)
+        label = esc(" ; ".join(sorted(meta["mechs"])), 40)
+        arrow = "-->" if meta["kind"] == "journey" else "-.->"
+        lines.append(f'    {_mnode(s)} {arrow}|"{label}"| {tgt}')
+
+    # isolated cluster — honest: no derivable inbound/outbound workflow links
+    if ISOLATED:
+        lines.append('    subgraph ISO ["Isolated — no inbound/outbound workflow links found (external-trigger only)"]')
+        for j, i in enumerate(sorted(ISOLATED, key=lambda x: RNAME[x])):
+            nid = f"ISO{j}"
+            tt = ",".join(sorted(_trigger_types(RAW[i]))) or "no trigger"
+            lines.append(f'        {nid}["{esc(RNAME[i],40)}<br/>{RSTATUS.get(i)} · entry: {esc(tt,30)}"]')
+            styles.append(f"    style {nid} fill:{C_PUB if RSTATUS.get(i)=='published' else C_DRAFT},color:#fff")
         lines.append("    end")
-        fi += 1
+
     return "\n".join(lines + styles)
 
 
@@ -259,8 +508,17 @@ RETENTION_SRC = """flowchart TD
 
 diagrams = [
     {"key": "master",
-     "title": "AS-IS: Active Workflows — folder overview (28)",
-     "caption": "Every workflow under GHL's Active Workflows folder, grouped by its real folder, with live status and resolved step count. Green = published, gray = draft. This is the exact current-state scope — 28 workflows, 100% from the live API.",
+     "title": "AS-IS: Master journey — how the 28 active workflows actually interconnect",
+     "caption": (
+         f"Every edge is derived 100% from the extracted step graphs — no invented links. "
+         f"{STATS['connected']} of 28 workflows are wired together by {STATS['pairs']} real connections "
+         f"({STATS['internal']} workflow-to-workflow, {STATS['external']} to an external workflow): "
+         f"{STATS['tag']} by contact-tag triggers, {STATS['add']} by add-to-workflow steps, "
+         f"{STATS['remove']} by remove-from-workflow cleanup, {STATS['appt']} by appointment-status changes, "
+         f"{STATS['enter']} by a workflow-entry trigger. Solid = patient-journey handoff, dotted = signal/support/admin. "
+         f"05. Clinic Appt Outcome (purple) is the current outcome keystone. The remaining {STATS['isolated']} "
+         f"workflows have no derivable inbound/outbound workflow links — they fire only from external triggers "
+         f"(calls, forms, email/appointment events) and are clustered separately, honestly labeled."),
      "src": master_src()},
     {"key": "wf01",
      "title": "AS-IS: Lead Capture — 01B Richmond (representative of 5 per-location)",

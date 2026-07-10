@@ -3720,7 +3720,7 @@
       "n": "03",
       "name": "Booking Confirmation and Reminders",
       "absorbs": "03, 3a, 03b, 03c, 03d (merged)",
-      "copy": "Absorbs booking confirmation and all reminder sends. Booking runs on the new capacity-controlled class calendars, not the standard service calendars (Decision 12); WF-03 triggers off the new class calendar IDs, wired at build time. R1 reminder cadence (T-3d / T-1d / morning-of / T-2h) plus a telehealth branch. A cancellation halts reminders and routes to WF-08. Appointment-relative waits use an 'if date already passed' fallback. Quiet hours 8 AM to 9 PM Contact Timezone."
+      "copy": "Absorbs booking confirmation and all reminder sends. Booking runs on the new capacity-controlled class calendars, not the standard service calendars (Decision 12): one calendar per clinic (Richmond, Virginia Beach, Newport News), 60-minute slots on a 60-minute interval, 6 seats per slot, 'Show seats per slot' OFF. WF-03 triggers off the per-clinic class calendar IDs, wired at build time. R1 reminder cadence (T-3d / T-1d / morning-of / T-2h) plus a telehealth branch. A cancellation halts reminders and routes to WF-08. Appointment-relative waits use an 'if date already passed' fallback. Quiet hours 8 AM to 9 PM Contact Timezone."
     },
     {
       "n": "04",
@@ -4348,7 +4348,7 @@
     {
       "n": "12",
       "decision": "Class calendars replace service calendars",
-      "choice": "Target booking runs on new class calendars (capacity-controlled), replacing the standard service calendars, to control overbooking. Existing live calendar IDs do not carry into the target; appointment-triggered workflows (WF-03, WF-05, WF-08) wire to the new class calendar IDs at build time.",
+      "choice": "Target booking runs on new class calendars (capacity-controlled), replacing the standard service calendars, to control overbooking. One class booking calendar per clinic (Richmond, Virginia Beach, Newport News): 60-minute slots on a 60-minute meeting interval (no overlap, so seat math stays clean), 6 seats per slot (6 consults per hour, capacity-enforced by the calendar), and 'Show seats per slot' OFF on the booking widget. Existing live calendar IDs do not carry into the target; the per-clinic class calendar IDs are the trigger filters for the appointment-triggered workflows (WF-03, WF-05, WF-08), wired at build time.",
       "status": "Locked",
       "date": "2026-07-10",
       "owner": "Eric"

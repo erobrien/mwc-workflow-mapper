@@ -2,7 +2,8 @@ import { useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
 import { PageShell } from "../components/Shell";
 import { Card, CardContent, Badge, Loading, cn } from "../components/ui";
-import { useAsisDetail, type AsisStep, type AsisWorkflow } from "../lib/asis";
+import { useAsisDetail, useAsisFlows, type AsisStep, type AsisWorkflow } from "../lib/asis";
+import { MermaidChart } from "../components/MermaidChart";
 import { ghlWorkflow } from "../lib/ghl";
 import {
   ExternalLink, ArrowLeft, MessageSquare, Mail, Zap, Tag, FolderOpen, MapPin,
@@ -175,7 +176,9 @@ function StepList({ steps }: { steps: AsisStep[] }) {
 export default function WorkflowDetail() {
   const { id } = useParams<{ id: string }>();
   const { data, isLoading } = useAsisDetail();
+  const { data: flowsData } = useAsisFlows();
   const wf: AsisWorkflow | undefined = useMemo(() => data?.workflows.find((w) => w.id === id), [data, id]);
+  const flow = useMemo(() => flowsData?.flows.find((f) => f.id === id), [flowsData, id]);
 
   if (isLoading || !data) return <Loading />;
   if (!wf) return (
@@ -265,6 +268,19 @@ export default function WorkflowDetail() {
           <StepList steps={wf.steps} />
         )}
       </section>
+
+      {/* Flow diagram */}
+      {flow && (
+        <section>
+          <div className="mb-2 flex items-baseline justify-between">
+            <h2 className="flex items-center gap-1.5 text-sm font-semibold"><GitBranch className="h-4 w-4" /> Flow diagram</h2>
+            <span className="text-[11px] text-muted-foreground">{flow.desc}</span>
+          </div>
+          <Card><CardContent className="p-4">
+            <MermaidChart src={flow.src} active />
+          </CardContent></Card>
+        </section>
+      )}
 
       {/* Footer */}
       <div className="flex items-center justify-between border-t pt-4">

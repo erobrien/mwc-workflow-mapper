@@ -18,6 +18,7 @@ import SalesForm from "./pages/SalesForm";
 import WorkflowDetail from "./pages/WorkflowDetail";
 import WFDiagrams from "./pages/WFDiagrams";
 import AsisDiagrams from "./pages/AsisDiagrams";
+import AsisFlows from "./pages/AsisFlows";
 import Tags from "./pages/Tags";
 import CustomFields from "./pages/CustomFields";
 import TelemedOverview from "./pages/TelemedOverview";
@@ -35,6 +36,7 @@ const router = createBrowserRouter([
   { path: "/as-is", element: wrap(<AsIs />) },
   { path: "/inventory", element: wrap(<Inventory />) },
   { path: "/asis-diagrams", element: wrap(<AsisDiagrams />) },
+  { path: "/asis-flows", element: wrap(<AsisFlows />) },
   { path: "/to-be", element: wrap(<ToBe />) },
   { path: "/to-be/:tab", element: wrap(<ToBe />) },
   { path: "/diagrams", element: wrap(<Diagrams />) },

@@ -60,7 +60,37 @@ export interface AsisDetail {
   workflows: AsisWorkflow[];
 }
 
+// Per-workflow full-fidelity Mermaid flow diagrams (public/asis-flows.json,
+// built by build_asis_flows.py — one diagram per active workflow).
+export interface AsisFlow {
+  key: string; id: string; name: string; folder: string; status: string;
+  n_steps: number; n_sms: number; n_email: number; n_triggers: number;
+  n_branches: number; n_waits: number; n_gotos: number; n_opps: number;
+  title: string; desc: string; src: string;
+}
+export interface AsisFlows {
+  location_id: string;
+  folders: { name: string; count: number }[];
+  flows: AsisFlow[];
+}
+
 let cache: AsisDetail | null = null;
+let flowsCache: AsisFlows | null = null;
+
+export function useAsisFlows() {
+  const [data, setData] = useState<AsisFlows | null>(flowsCache);
+  const [isLoading, setLoading] = useState(!flowsCache);
+  const [error, setError] = useState<unknown>(null);
+  useEffect(() => {
+    if (flowsCache) return;
+    fetch("/asis-flows.json")
+      .then((r) => { if (!r.ok) throw new Error(`asis-flows.json: ${r.status}`); return r.json(); })
+      .then((d: AsisFlows) => { flowsCache = d; setData(d); })
+      .catch(setError)
+      .finally(() => setLoading(false));
+  }, []);
+  return { data, isLoading, error };
+}
 
 export function useAsisDetail() {
   const [data, setData] = useState<AsisDetail | null>(cache);

@@ -100,7 +100,7 @@ export default function Home() {
           <div>
             <div className="mb-1.5 font-mono text-[10.5px] uppercase tracking-wider text-emerald-700 dark:text-emerald-400">Recovery model</div>
             <p className="text-sm leading-relaxed text-foreground/90">
-              This plan runs <b>mostly with AI and a human approving each step</b>. Every migration step is a scripted prompt (see <Link to="/prompts" className="text-primary hover:underline">Prompts</Link>) that runs against the GHL API with a dry-run preview before any data changes. Humans approve each gate; AI does the mechanical work. <b>AI and human testing can wrap up in a single day</b>: the test checklist is automated, the initial test group is one tag (<code>src:bf-web</code>), and the won-with-$0 counter shows pass or fail within hours. Cutover is one publish and one pause; cleanup waits two clean weeks.
+              This plan runs <b>mostly with AI and a human approving each step</b>. Every migration step is a scripted prompt (see <Link to="/prompts" className="text-primary hover:underline">Prompts</Link>) that runs against the GHL API with a dry-run preview before any data changes. Humans approve each gate; AI does the mechanical work. <b>AI and human testing can wrap up in a single day</b>: the test checklist is automated, the initial test group is one tag (<code>src:bf-web</code>), and the won-with-$0 counter shows pass or fail within hours. Cutover is a 48-hour canary cohort followed by 7 clean business days of parallel run; only then does cleanup begin.
             </p>
           </div>
         </div>

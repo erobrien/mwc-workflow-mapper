@@ -18,7 +18,8 @@ const TESTS: [string, string, string][] = [
   ["Reminder cadence", "T-3d email · T-1d SMS · morning-of SMS · T-2h intake nudge fires correctly", "auto"],
   ["Conversion exclusion", "Outcome = A&D / No-Sale / Lost fires zero Meta or Google conversions", "auto"],
   ["Bot creates lead", "Deferred — engine not live", "deferred"],
-  ["Canary watch", "48h: execution-log error rate, won-with-$0 = 0, opp stage-flow sanity on test cohort", "auto"],
+  ["Canary + parallel run", "48h canary then 7 clean business days: error rate < 0.1%, won-with-$0 = 0, no quiet-hours violations, no non-form outcome writes", "auto"],
+  ["Quiet hours", "Every SMS/voicemail send falls inside 8 AM–9 PM Contact Timezone and filters on sms_consent_status + native DND", "auto"],
 ];
 
 // Scope manifest — preserved, with the rejected custom objects removed.

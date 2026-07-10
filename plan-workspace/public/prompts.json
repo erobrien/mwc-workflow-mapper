@@ -11,7 +11,7 @@
    "Field destination plan from /to-be Field placement",
    "Workflow 01 (Lead Capture) - currently 5 location variants 01A–01E"
   ],
-  "prompt": "Goal: Stop the revenue-recognition bleed. New data starts flowing to the correct objects TODAY.\n\nTwo structural problems:\n  RR-1: Sale Outcome + Product/Term/Price ×3 + Total Program Amount + Consultation Fee + Pay Type + nosale_reason all live on the Contact (1 per person). Per-deal revenue recognition impossible.\n  RR-2: UTM ×5 + gclid + fbclid + source_url live on the Contact. Each new touch overwrites. Worse: gclid/fbclid are non-null on 0 of 11,077 contacts - capture is broken.\n\nThis is ADDITIVE-FIRST and DUAL-WRITE. Contact fields keep working; opportunity fields receive parallel writes. Cutover happens later.\n\nPhase A - Create the 14 opportunity-level fields (additive)\nPhase B - Copy the latest UTM + click IDs onto the Opportunity at create (attribution also stays on the Contact; no separate object)\nPhase C - Fix click ID capture in workflows 01A–E (currently silently dropped)\nPhase D - Dual-write: workflows 01 + 05 write to both Contact AND new destinations\nPhase E - Drift validation: assert opp.sale_outcome count == contact.sale_outcome count after 7 days\n\nDO NOT: delete contact fields (Step 6 does that), backfill historical opps (Step 2), or change workflow 05's auto-Won defect (separate P0).",
+  "prompt": "Goal: Stop the revenue-recognition bleed. New data starts flowing to the correct objects TODAY.\n\nTwo structural problems:\n  RR-1: Sale Outcome + Product/Term/Price ×3 + Total Program Amount + Consultation Fee + Pay Type + nosale_reason all live on the Contact (1 per person). Per-deal revenue recognition impossible.\n  RR-2: UTM ×5 + gclid + fbclid + source_url live on the Contact. Each new touch overwrites. Worse: gclid/fbclid are non-null on 0 of 11,077 contacts - capture is broken.\n\nThis is ADDITIVE-FIRST and DUAL-WRITE. Contact fields keep working; opportunity fields receive parallel writes. Cutover happens later.\n\nVERIFY-THEN-CREATE (do not blind-create): the Opportunity object already carries a set of custom fields. Start with GET /customfields?model=opportunity, snapshot it, and create ONLY the fields from the s1c target list that are actually missing. Reconcile the counts before writing anything - the authoritative target set is defined in s1c-add-opp-fields (against pm-site-v2/public/data-spec.json), not a hardcoded number here.\n\nPhase A - Reconcile + create only the MISSING opportunity-level fields from the s1c target set (additive)\nPhase B - Copy the latest UTM + click IDs onto the Opportunity at create (attribution also stays on the Contact; no separate object)\nPhase C - Fix click ID capture in workflows 01A–E (currently silently dropped)\nPhase D - Dual-write: workflow 01 writes attribution to both Contact AND Opportunity. Sale OUTCOME is written by the PCC Sales Form only (single writer); WF-05 is a router that reacts to the form-written values and never writes an outcome itself.\nPhase E - Drift validation: assert opp.sale_outcome count == contact.sale_outcome count after 7 days\n\nDO NOT: delete contact fields (Step 6 does that), backfill historical opps (Step 2), or change workflow 05's auto-Won defect (separate P0).",
   "validates": [
    "Opportunity has sale_outcome + monetaryValue set on new data",
    "gclid/fbclid captured on a test ad click",
@@ -19,36 +19,36 @@
    "Drift check passes after 7 days"
   ],
   "outputs": [
-   "14 opp fields created",
+   "Missing opp fields created (verify-then-create against a fresh pull)",
    "Attribution copied onto the Opportunity",
    "Fixed click-ID capture",
-   "Dual-write across WFs 01 + 05"
+   "Attribution dual-write on WF 01; outcomes written by the PCC Sales Form only"
   ]
  },
  {
   "id": "s1c-add-opp-fields",
   "step": "S1c - Schema build (modify OOTB object)",
-  "title": "Add 30 new fields to the Opportunity object (sale outcome, products, prices, attribution copy + EMR FK)",
+  "title": "Verify-then-create the Opportunity field set (sale outcome, products, prices, attribution copy, renewal, EMR FK)",
   "status": "Ready",
-  "goal": "Make the Opportunity the single source of truth for deals - outcome, money, location, attribution. Adds 30 new opportunity-level custom fields per the spec. Includes a copy of the lead's attribution (UTM + click IDs) on the Opportunity for revenue-to-campaign reporting, and the FK slot for EMR Visit. Renames patient_advisor to patient_care_consultant_id and ad_reason to nosale_reason as part of the same pass.",
+  "goal": "Make the Opportunity the single source of truth for deals - outcome, money, location, attribution. VERIFY-THEN-CREATE: the Opportunity object already carries custom fields, so pull the live set first and create only what is missing from the target list below (do not blind-create, do not assume a fixed count). Reconcile the field count before writing. Includes a copy of the lead's attribution (UTM + click IDs) on the Opportunity for revenue-to-campaign reporting, the renewal_date that arms WF-09 renewals, and the FK slot for EMR Visit. Renames patient_advisor to patient_care_consultant_id and ad_reason to nosale_reason as part of the same pass.",
   "inputs": [
    "~/.ghl_pit",
    "Spec: pm-site-v2/public/data-spec.json -> objects[name=\"Opportunity\"]",
    "Prerequisite: S1a-create-lead-source done (need lead_source.id to reference as FK target)",
    "Note: opportunity.monetary_value, .contact_id, .pipeline_id, .pipeline_stage_id, .status are GHL built-in - do NOT recreate"
   ],
-  "prompt": "Goal: Add 30 new custom fields to the Opportunity object so it can hold sale outcome, revenue, location, attribution, and the EMR back-reference. All additive - no existing field is changed in this prompt. Renames happen in a separate prompt (s1e-renames).\n\nPre-flight:\n  1. GET /customfields?model=opportunity. Snapshot current state to audit/opp-fields-before.json. Confirm none of the new keys below already exist.\n\nStep 1 - Add the 30 new opp fields. For each, POST /customfields with model=opportunity. Use the EXACT key, name, dataType, and (for SINGLE_OPTIONS) values from data-spec.json objects[name=\"Opportunity\"].fields[]. Categories:\n\n  Attribution FKs (1):\n\n  Location & routing (1):\n    opportunity.location (SINGLE_OPTIONS required) - values: [location_richmond, location_va_beach, location_npn, location_telehealth]\n\n  Outcome & sale type (2):\n    opportunity.sale_outcome (SINGLE_OPTIONS) - values: [sold, no_sale, mut, undecided]. WF 05 sole writer.\n    opportunity.sale_type (SINGLE_OPTIONS) - values: [new, renewal, upsell, reactivation]\n\n  Ownership FKs (2):\n    opportunity.patient_care_consultant_id (TEXT) - FK user.id. NEW key; legacy patient_advisor is renamed in s1e.\n    opportunity.provider_making_recommendation_id (TEXT) - FK user.id.\n\n  Products / Terms / Prices (9):\n    opportunity.product_sold_1, product_sold_2, product_sold_3 (SINGLE_OPTIONS) - values: [trt, ed, weight_mgmt, peptides, supplements, labs, other]\n    opportunity.term_length_1, term_length_2, term_length_3 (SINGLE_OPTIONS) - values: [1mo, 3mo, 6mo, 12mo, 24mo]\n    opportunity.price_1, price_2, price_3 (MONETARY)\n\n  Revenue (3):\n    opportunity.total_program_amount (MONETARY) - WF 05 copies into monetary_value on Won.\n    opportunity.consultation_fee (MONETARY)\n    opportunity.pay_type (SINGLE_OPTIONS) - values: [financing, cash, card, ach, hsa, fsa, insurance, other]\n\n  No-sale (renamed; NEW keys here, legacy retired in Step 6):\n    opportunity.nosale_reason (SINGLE_OPTIONS) - values: [nosale_cost, nosale_fear, nosale_partner, nosale_timing, nosale_decision, nosale_medical, nosale_other]\n    opportunity.nosale_reason_other (LARGE_TEXT)\n\n  Cancellation / no-show (2):\n    opportunity.cancellation_reason (SINGLE_OPTIONS) - values: [scheduling_conflict, health_issue, no_longer_interested, found_alternative, other]\n    opportunity.no_show_reason (SINGLE_OPTIONS) - values: [forgot, scheduling_conflict, transportation, no_longer_interested, unreachable, other]\n\n  Qualification (5):\n    opportunity.primary_concern (SINGLE_OPTIONS) - values: [ed, trt, weight, sleep, fatigue, performance, general_wellness, other]\n    opportunity.age_range (SINGLE_OPTIONS) - values: [under_30, 30_39, 40_49, 50_59, 60_69, 70_plus]\n    opportunity.health_goal (LARGE_TEXT)\n    opportunity.service_interested_in (MULTIPLE_OPTIONS)\n    opportunity.preferred_appointment_date (DATE)\n\n  Dispositions (3):\n    opportunity.preferred_appointment_time (SINGLE_OPTIONS) - values: [morning, midday, afternoon, evening]\n    opportunity.call_disposition (SINGLE_OPTIONS) - values: [connected, voicemail, no_answer, wrong_number, callback_requested, dnc, other]\n    opportunity.consult_disposition (SINGLE_OPTIONS) - values: [showed, no_show, cancelled, rescheduled]\n\n  Notes & feedback (4):\n    opportunity.lead_notes (LARGE_TEXT)\n    opportunity.visit_feedback_score (NUMERICAL) - 1-10 NPS/CSAT.\n    opportunity.visit_feedback_text (LARGE_TEXT)\n    opportunity.review_status (SINGLE_OPTIONS) - values: [not_asked, asked, posted, declined]\n    opportunity.review_link (TEXT)\n\n  EMR back-reference (1):\n    opportunity.emr_visit_id (TEXT) - FK external.emr.visit_id; one per visit.\n\nStep 2 - Validation:\n  a. GET /customfields?model=opportunity. Snapshot to audit/opp-fields-after.json. Assert all 30 new keys present.\n  b. Diff before vs after: assert exactly 30 additions, 0 modifications, 0 deletions.\n  c. Test record: pick a test opportunity, PATCH each new field with a sample value. Assert all writes succeed.\n  d. Idempotency: 2nd run reports 0 changes.\n\nHARD rules:\n  - DO NOT modify opportunity.monetary_value, .contact_id, .pipeline_id, .pipeline_stage_id, .status (built-in).\n  - DO NOT delete or rename any existing custom field here. Renames (ad_* -> nosale_*, patient_advisor -> patient_care_consultant) happen in s1e.\n  - DO NOT touch workflow 05 here. Wiring it to write opportunity.sale_outcome is part of the existing P0 fix-bleed prompt + s4-wire-outcome.\n\nOutputs:\n  - migration/s1c-opp-fields.json (field_ids for the 30 new fields)\n  - audit/opp-fields-before.json + audit/opp-fields-after.json (diff baseline)\n  - migration/s1c-opp-fields.log",
+  "prompt": "Goal: Ensure the Opportunity object holds sale outcome, revenue, location, attribution, renewal, and the EMR back-reference. VERIFY-THEN-CREATE: create only the fields from the target list below that are missing. All additive - no existing field is changed in this prompt. Renames happen in a separate prompt (s1e-renames).\n\nPre-flight:\n  1. GET /customfields?model=opportunity. Snapshot current state to audit/opp-fields-before.json.\n  2. Reconcile: diff the live field set against the target list below. Emit migration/s1c-field-reconciliation.json listing {already_present, to_create}. G1b reported ~49 existing opportunity custom fields, so expect many targets to already exist - only create the genuinely missing ones. Never blind-create a duplicate key.\n\nStep 1 - Create ONLY the missing target fields. For each, POST /customfields with model=opportunity. Use the EXACT key, name, dataType, and (for SINGLE_OPTIONS) values from data-spec.json objects[name=\"Opportunity\"].fields[]. Categories:\n\n  Attribution FK (1):\n    opportunity.lead_source_id (TEXT) - FK lead_source.id (from S1a-create-lead-source). Attribution copy of UTM + gclid/fbclid lives in the attribution copy fields; this FK links the canonical lead source.\n\n  Location & routing (1):\n    opportunity.location (SINGLE_OPTIONS required) - values: [location_richmond, location_va_beach, location_npn, location_telehealth]\n\n  Outcome & sale type (2):\n    opportunity.sale_outcome (SINGLE_OPTIONS) - values: [sold, no_sale, mut, mar, undecided]. The PCC Sales Form is the sole writer; WF-05 routes on it. (mar = Medical Approval Required: Opp stays Open, no automation fires.)\n    opportunity.sale_type (SINGLE_OPTIONS) - values: [new, renewal, upsell, reactivation]. REQUIRED on the form when sale_outcome=sold - WF-05 branches New vs Renewal on it.\n\n  Renewal (1):\n    opportunity.renewal_date (DATE) - set by WF-06 at Won; arms the WF-09 Renewal Reminders sub-flow.\n\n  Ownership FKs (2):\n    opportunity.patient_care_consultant_id (TEXT) - FK user.id. NEW key; legacy patient_advisor is renamed in s1e.\n    opportunity.provider_making_recommendation_id (TEXT) - FK user.id.\n\n  Products / Terms / Prices (9):\n    opportunity.product_sold_1, product_sold_2, product_sold_3 (SINGLE_OPTIONS) - values: [trt, ed, weight_mgmt, peptides, supplements, labs, other]\n    opportunity.term_length_1, term_length_2, term_length_3 (SINGLE_OPTIONS) - values: [1mo, 3mo, 6mo, 12mo, 24mo]\n    opportunity.price_1, price_2, price_3 (MONETARY)\n\n  Revenue (3):\n    opportunity.total_program_amount (MONETARY) - WF 05 copies into monetary_value on Won.\n    opportunity.consultation_fee (MONETARY)\n    opportunity.pay_type (SINGLE_OPTIONS) - values: [financing, cash, card, ach, hsa, fsa, insurance, other]\n\n  No-sale (renamed; NEW keys here, legacy retired in Step 6):\n    opportunity.nosale_reason (SINGLE_OPTIONS) - values: [nosale_cost, nosale_fear, nosale_partner, nosale_timing, nosale_decision, nosale_medical, nosale_other]\n    opportunity.nosale_reason_other (LARGE_TEXT)\n\n  Cancellation / no-show (2):\n    opportunity.cancellation_reason (SINGLE_OPTIONS) - values: [scheduling_conflict, health_issue, no_longer_interested, found_alternative, other]\n    opportunity.no_show_reason (SINGLE_OPTIONS) - values: [forgot, scheduling_conflict, transportation, no_longer_interested, unreachable, other]\n\n  Qualification (5):\n    opportunity.primary_concern (SINGLE_OPTIONS) - values: [ed, trt, weight, sleep, fatigue, performance, general_wellness, other]\n    opportunity.age_range (SINGLE_OPTIONS) - values: [under_30, 30_39, 40_49, 50_59, 60_69, 70_plus]\n    opportunity.health_goal (LARGE_TEXT)\n    opportunity.service_interested_in (MULTIPLE_OPTIONS)\n    opportunity.preferred_appointment_date (DATE)\n\n  Dispositions (3):\n    opportunity.preferred_appointment_time (SINGLE_OPTIONS) - values: [morning, midday, afternoon, evening]\n    opportunity.call_disposition (SINGLE_OPTIONS) - values: [connected, voicemail, no_answer, wrong_number, callback_requested, dnc, other]\n    opportunity.consult_disposition (SINGLE_OPTIONS) - values: [showed, no_show, cancelled, rescheduled]\n\n  Notes & feedback (4):\n    opportunity.lead_notes (LARGE_TEXT)\n    opportunity.visit_feedback_score (NUMERICAL) - 1-10 NPS/CSAT.\n    opportunity.visit_feedback_text (LARGE_TEXT)\n    opportunity.review_status (SINGLE_OPTIONS) - values: [not_asked, asked, posted, declined]\n    opportunity.review_link (TEXT)\n\n  EMR back-reference (1):\n    opportunity.emr_visit_id (TEXT) - FK external.emr.visit_id; one per visit.\n\nStep 2 - Validation:\n  a. GET /customfields?model=opportunity. Snapshot to audit/opp-fields-after.json. Assert every target key from the list is present (whether pre-existing or newly created).\n  b. Diff before vs after: assert additions == count(to_create) from the reconciliation file, 0 modifications, 0 deletions.\n  c. Test record: pick a test opportunity, PATCH each target field with a sample value. Assert all writes succeed.\n  d. Idempotency: 2nd run reports 0 changes (all targets already present).\n\nHARD rules:\n  - DO NOT modify opportunity.monetary_value, .contact_id, .pipeline_id, .pipeline_stage_id, .status (built-in).\n  - DO NOT delete or rename any existing custom field here. Renames (ad_* -> nosale_*, patient_advisor -> patient_care_consultant) happen in s1e.\n  - DO NOT blind-create: if a target key already exists, leave it and record it in the reconciliation file. Never create a duplicate key.\n  - DO NOT touch workflow 05 here. Wiring WF-05 to ROUTE on the form-written opportunity.sale_outcome is part of the P0 fix-bleed prompt + s4-wire-outcome. WF-05 never writes the outcome; the PCC Sales Form does.\n\nOutputs:\n  - migration/s1c-field-reconciliation.json (already_present vs to_create)\n  - migration/s1c-opp-fields.json (field_ids for every target field)\n  - audit/opp-fields-before.json + audit/opp-fields-after.json (diff baseline)\n  - migration/s1c-opp-fields.log",
   "validates": [
-   "30 new opportunity-level fields exist with exact spec keys + types",
-   "opportunity.emr_visit_id slot ready for EMR sync",
-   "No existing opp field modified",
-   "Test PATCH succeeds for each new field",
-   "Script is idempotent"
+   "Every target opportunity field exists with exact spec keys + types (pre-existing or newly created)",
+   "sale_outcome enum includes mar; sale_type present for the WF-05 New/Renewal branch",
+   "opportunity.renewal_date + emr_visit_id slots ready",
+   "No existing opp field modified; no duplicate keys created",
+   "Test PATCH succeeds for each target field; script is idempotent"
   ],
   "outputs": [
-   "30 new opportunity custom fields",
-   "Diff snapshots: opp-fields-before / -after",
-   "Field IDs file for downstream prompts"
+   "Missing opportunity custom fields created (verify-then-create)",
+   "Reconciliation file (already_present vs to_create)",
+   "Diff snapshots + field IDs file for downstream prompts"
   ]
  },
  {
@@ -82,19 +82,21 @@
   "step": "P0 - Stop the bleed",
   "title": "Remove the auto-Won action from workflow 05",
   "status": "P0 - go first",
-  "goal": "Stop creating false Won opportunities on attendance. New data is clean from day one even before the historical backfill runs.",
+  "goal": "Stop creating false Won opportunities on attendance. Move WF-05 to the router model: the PCC Sales Form is the sole writer of sale_outcome, sale_type, and value; WF-05 triggers on the form submission and reacts to those values (it never writes an outcome). New data is clean from day one even before the historical backfill runs.",
   "inputs": [
    "JWT in ~/.ghl_jwt",
-   "Workflow 05 ID from inventory"
+   "Workflow 05 ID from inventory (resolve the real ID first: grep the workflow inventory for 'Clinic Appt Outcome' / 'A&D' and substitute it for wf05_id below - do NOT run against the literal placeholder)"
   ],
-  "prompt": "Goal: Remove the auto-Won defect from workflow 05 (Clinic Appt Outcome). Do not touch any other workflow.\n\nSteps:\n1. Read ghl_data/workflow_steps/{wf05_id}.json. Confirm the offending step exists.\n2. Open workflow 05 in GHL UI via deeplink.\n3. DELETE the single create_opportunity action named \"A&D pipeline: Closed, status: WON - hide from a&D opportunity\".\n4. Add Update Opportunity Field action: Sale Outcome = (Sold | No-Sale | MUT) based on branch.\n5. Save as DRAFT.\n\nValidation: re-extract; assert exactly one create_opportunity removed. Drive test contact through SHOWED - assert no new opp in A&D.",
+  "prompt": "Goal: Remove the auto-Won defect from workflow 05 (Clinic Appt Outcome) and convert it into a router. Do not touch any other workflow.\n\nPre-flight: resolve the real workflow-05 ID from the inventory (search title 'Clinic Appt Outcome' / the A&D auto-Won workflow) and use it everywhere below in place of wf05_id.\n\nSteps:\n1. Read ghl_data/workflow_steps/<wf05_id>.json. Confirm the offending step exists.\n2. Open workflow 05 in GHL UI via deeplink.\n3. DELETE the single create_opportunity action named \"A&D pipeline: Closed, status: WON - hide from a&D opportunity\".\n4. Change the TRIGGER to 'PCC Sales Form submitted'. WF-05 READS opportunity.sale_outcome + sale_type that the form already wrote; it does NOT write them. Build the router branches: Sold (require sale_type New|Renewal from the form) -> Won stage, set monetary_value = total_program_amount; No-Sale/Advised-and-Declined -> Lost; MUT -> Lost-MUT + suppress; MAR -> stay Open, tag mar. Add a parallel 'no form by end of appointment day' chaser that only nags the PCC and writes NO outcome fields.\n5. Add the single-writer guardrail: enable Appointment/Opportunity 'Modified By' detection and an alert on any Sale Outcome change not originating from the PCC Sales Form (Risk H5).\n6. Save as DRAFT.\n\nValidation: re-extract; assert exactly one create_opportunity removed. Drive a test contact through SHOWED with NO form -> assert no outcome written and the PCC chaser fires. Submit the form as Sold+New -> assert WF-05 routes to Won and monetary_value is set. Assert no non-form write path can set Sale Outcome.",
   "validates": [
    "A&D pipeline no longer receives new opps from WF 05",
-   "Sale Outcome is single source of truth"
+   "PCC Sales Form is the sole writer of sale_outcome/sale_type/value; WF-05 only routes",
+   "No-form chaser nags the PCC and writes no outcome",
+   "Modified-By alert fires on any non-form outcome change (H5)"
   ],
   "outputs": [
-   "Modified workflow 05 (draft)",
-   "Diff report"
+   "Modified workflow 05 (draft) as a router",
+   "Diff report + single-writer guardrail note"
   ]
  },
  {
@@ -107,14 +109,45 @@
    "PIT token at ~/.ghl_pit",
    "Field destination plan"
   ],
-  "prompt": "Goal: Create the additive foundation: 3 new pipelines, 14 opportunity-level fields, lost reasons, tag registry. Instagram DM pipeline already exists (4th, kept).\n\nPipelines: Sales - Lead to Close · Retention & Renewals · Referrals\nOpportunity fields (14): sale_outcome, sale_type, patient_care_consultant, provider_making_recommendation, product_sold_1..3, term_length_1..3, price_1..3, total_program_amount, consultation_fee, nosale_reason, nosale_reason_other\nTag registry: source_*, location_*, funnel_entry_*, status_*, objection_*\n\nValidation: re-pull pipelines + customfields. Assert 3 pipelines + 14 opp fields exist. Idempotent - second run = 0 changes.",
+  "prompt": "Goal: Create the additive foundation: 3 new pipelines, the opportunity field set (delegated to s1c), lost reasons, tag registry, Custom Values, a tag/field governance gate, and contact dedup preferences. Instagram DM pipeline already exists (4th, kept).\n\nPipelines: Sales - Lead to Close · Retention & Renewals · Referrals\n\nOpportunity fields: do NOT hardcode a count here. The authoritative target set + creation logic is s1c-add-opp-fields (verify-then-create against a fresh GET /customfields?model=opportunity pull, reconciling against the ~49 fields that already exist). This prompt just confirms s1c has run and the target set is present.\n\nTag registry (case-sensitive, exact casing locked): source_*, location_*, funnel_entry_* (kept for attribution only - the timer branch, not a tag, drives WF-02 entry), status_*, objection_*, and the outcome_* family written by WF-05 (outcome_sold, outcome_ad, outcome_mut, outcome_mar).\n\nCustom Values (Decision 6 - parameterize per location, do NOT clone workflows per location): create Custom Values for location address, location_phone, business hours, and the booking URL (BookMWC.com). Workflows and message bodies reference these Custom Values so one workflow serves all locations instead of 92-step per-location clones.\n\nGovernance gate (G4): stand up a tag/field governance checklist - new tags/fields must be registered here with owner + purpose before use; no ad-hoc tag creation in downstream workflows. Emit governance/tag-field-registry.md.\n\nContact dedup preferences: set the account dedup rule to Email primary, Phone secondary so referred/re-submitted contacts merge predictably (relevant to WF-15 NEW-contact creation).\n\nValidation: re-pull pipelines + customfields. Assert 4 pipelines exist and the s1c target field set is present. Assert Custom Values resolve on a test send. Assert dedup preference is set. Idempotent - second run = 0 changes.",
   "validates": [
    "4 target pipelines exist",
-   "14 opp fields with correct types",
+   "s1c opportunity field set present (verify-then-create, no hardcoded count)",
+   "Tag registry includes outcome_* family; casing locked",
+   "Custom Values for address/phone/hours/booking URL resolve",
+   "Governance gate + Email-primary dedup preference in place",
    "Idempotent"
   ],
   "outputs": [
-   "Run log + refreshed audit snapshots"
+   "Run log + refreshed audit snapshots",
+   "governance/tag-field-registry.md",
+   "Custom Values manifest"
+  ]
+ },
+ {
+  "id": "consent-reconciliation",
+  "step": "Step 1 - Consent unification",
+  "title": "Unify 9 legacy consent fields into canonical sms_consent_status (Decisions 5 + 8)",
+  "status": "Ready",
+  "goal": "Establish one source of truth for SMS consent. Today consent is spread across 9 fields in 2 schemas plus an orphan consent_log custom object, and 0 of 11,077 contacts have a stored value. This prompt reconciles all legacy consent signals into the single canonical Contact field sms_consent_status, and records the assume-consent accepted-risk decision (Decision 8) for the historical base. WF-11 is the single DND + consent authority thereafter; every SMS workflow filters on this field + native DND.",
+  "inputs": [
+   "~/.ghl_pit",
+   "Inventory of the 9 legacy consent fields (sms_consent_status, sms_optin_date, consent_source, consent_timestamp, + the EMR-side consent fields)",
+   "consent_log custom object export (orphan, to be deleted in Step 6)",
+   "Decision 8 (assume-consent accepted risk, owner Eric, 2026-07-10)"
+  ],
+  "prompt": "Goal: Collapse all SMS-consent signals into the canonical Contact field sms_consent_status. VERIFY-THEN-WRITE, non-triggering, dry-run first.\n\nPre-flight:\n  1. Snapshot all 9 legacy consent fields + the consent_log object to audit/consent-before.json. This is the backup.\n  2. Confirm sms_consent_status exists as the canonical field (created/confirmed in p1-foundation).\n\nStep 1 - Reconciliation map. For each contact, derive the canonical value by precedence: an explicit opt-out (STOP/DND) anywhere -> opted_out (opt-out always wins). Else any explicit opt-in signal -> opted_in with the earliest opt-in date. Else, per Decision 8 (assume-consent ACCEPTED RISK for the 11,077 historical contacts) -> assumed_consent. Emit exports/consent-reconciliation-dryrun.csv with the source signals and derived value per contact. Owner reviews before write mode.\n\nStep 2 - Write mode (non-triggering). PATCH sms_consent_status directly via API (do NOT enroll workflows). Pause workflows during the window; assert execution-log sends == 0.\n\nStep 3 - Guardrails live FIRST (Decision 8 rationale): confirm native DND/STOP handling is active and the 8 AM to 9 PM Contact-Timezone quiet-hours Time Window is applied on every SMS workflow before any assumed_consent contact can receive a send.\n\nStep 4 - Do NOT delete the 9 legacy fields or the consent_log object here. Step 6 deletes consent_log after this reconciliation is confirmed. Record the assume-consent decision reference in the audit trail (owner Eric, 2026-07-10).\n\nValidation: every contact has a non-null canonical sms_consent_status; opt-outs preserved (opted_out count >= legacy STOP/DND count); dry-run reviewed; zero sends during write window; idempotent second run = 0 changes.",
+  "validates": [
+   "All 11,077 contacts have a canonical sms_consent_status value",
+   "Opt-outs preserved (opt-out always wins over any opt-in)",
+   "assumed_consent applied only where no explicit signal exists (Decision 8)",
+   "DND/STOP + 8a-9p quiet hours confirmed live before any assumed-consent send",
+   "Non-triggering write; idempotent"
+  ],
+  "outputs": [
+   "exports/consent-reconciliation-dryrun.csv",
+   "audit/consent-before.json (backup of 9 legacy fields + consent_log)",
+   "Canonical sms_consent_status populated; consent_log queued for Step 6 deletion"
   ]
  },
  {
@@ -123,7 +156,12 @@
   "title": "Generate the proposed reclassification CSV",
   "status": "Blocked",
   "goal": "Produce a reviewable CSV that proposes: keep / split / reclassify for every Won opp. Writes nothing.",
-  "inputs": [],
+  "inputs": [
+   "~/.ghl_pit",
+   "s1c opportunity field set present (sale_outcome, total_program_amount, etc.)",
+   "Export of all Won opps currently in the A&D pipeline",
+   "Owner review gate (CSV is reviewed before any write mode)"
+  ],
   "prompt": "Goal: Dry-run the revenue restatement. Produce a CSV; write nothing.\n\n\nFor each Won opp in A&D:\n- Classify: clear-Won / clear-Lost / ambiguous\n- Propose move (clear-Won → Sales · Won), Lost + lostReason for clear-Lost\n- Ambiguous → human review queue, never auto-classified\n\nValidation: Σ proposed monetaryValue reconciles against the opportunity values. count(Won)+count(Lost)+count(ambiguous) == count(A&D Won).",
   "validates": [
    "Every Won opp classified",
@@ -143,11 +181,12 @@
   "goal": "Construct each of the 16 target workflows as a draft in production.",
   "inputs": [
    "To-Be workflow list (16) from /to-be",
-   "Messaging copy (74 bodies)"
+   "Messaging copy (79 bodies, canonical WF-01..WF-16 numbering)"
   ],
-  "prompt": "Build all 16 target workflows as drafts. Do not publish.\n\nFor each: open the Workflows list, create from scratch, rename per target name, copy triggers/tags/bodies from source workflows. Reuse engine tag IDs.\n\nSpecial cases: WF 03 absorbs 03/3a/03b/03c/03d with G1 cadence + telehealth branch. WF 05 edit in place. WF 13 trigger on Booked OR Won-with-monetaryValue>0; explicit EXCLUDE for A&D / No-Sale / Lost.\n\nPer-workflow validation: triggers fire on test contact, messages send in test mode, no accidental enrollment of production contacts.",
+  "prompt": "Build all 16 target workflows as drafts. Do not publish.\n\nFor each: open the Workflows list, create from scratch, rename per target name, copy triggers/tags/bodies from source workflows. Reuse engine tag IDs. Reference Custom Values (address/phone/hours/BookMWC.com) instead of hardcoding per location.\n\nQUIET HOURS (TCPA, applies to every SMS + voicemail workflow): wrap outbound sends in a Time Window of 8 AM to 9 PM in the Contact Timezone, and filter every send on canonical sms_consent_status = opted_in AND native DND = false. No SMS body may contain symptom or treatment specifics - appointment/consultation logistics only.\n\nSpecial cases: WF 03 absorbs 03/3a/03b/03c/03d with G1 cadence (T-3d / T-1d / morning / T-2h) + telehealth branch; appointment-relative waits use an 'if date already passed' fallback. WF 05 is a router edited in place (form is sole writer). WF 13 trigger on Booked OR Won-with-monetaryValue>0; explicit EXCLUDE for A&D / No-Sale / Lost. WF 16 includes the simultaneous-ring IVR path.\n\nPer-workflow validation: triggers fire on test contact, messages send in test mode, quiet-hours Time Window present on every messaging workflow, no accidental enrollment of production contacts.",
   "validates": [
    "16 drafts exist and pass test-contact runs",
+   "Every messaging workflow has an 8a-9p Contact-Timezone Time Window + consent/DND filter",
    "No production enrollment during build"
   ],
   "outputs": [
@@ -156,45 +195,116 @@
   ]
  },
  {
-  "id": "p4-canary",
-  "step": "Step 5 - Canary cutover",
-  "title": "48h canary on src:bf-web cohort, then widen",
+  "id": "s4-freeze",
+  "step": "Step 4 - Dormant engine tag freeze + watch",
+  "title": "Freeze the legacy engine tag surface and watch for drift before cutover",
   "status": "Sequenced",
-  "goal": "Publish 16 drafts; pause 38 sources. 48h watch on test cohort.",
+  "goal": "Before cutover, put the legacy 'engine' tag surface (the tags that drive the old workflows) into a known frozen state and watch it, so nothing silently re-enrolls contacts or mutates tags while the new drafts sit ready. This is the gate between Step 3 (drafts built) and Step 5 (canary).",
+  "inputs": [
+   "16 drafts ready (p3-build-drafts done)",
+   "Engine tag inventory (chatbot_lead, src:bf-web, sniper_*, funnel_entry_*, etc.)",
+   "governance/tag-field-registry.md from p1-foundation"
+  ],
+  "prompt": "Goal: Freeze and monitor the dormant legacy engine tag surface so the cutover starts from a stable base.\n\nStep 1 - Snapshot the current engine tag surface (all engine tags + which workflows consume them) to audit/engine-tags-frozen.json.\n\nStep 2 - Freeze: confirm no NEW automation writes engine tags outside the registry. Any workflow that still adds/removes engine tags must be paused or documented. Do NOT delete engine tags (they are protected surface; Step 6 keeps them).\n\nStep 3 - Watch: stand up a daily drift check that diffs the live engine tag surface against the frozen snapshot and alerts on any unexpected add/remove/re-enrollment. Run it through the canary + 7-clean-day parallel run.\n\nValidation: frozen snapshot captured; drift watcher runs and is quiet (0 unexpected changes) for the pre-cutover window; engine tags intact.",
+  "validates": [
+   "Engine tag surface snapshot captured",
+   "No unregistered automation mutates engine tags",
+   "Drift watcher live and quiet before cutover",
+   "Engine tags not deleted"
+  ],
+  "outputs": [
+   "audit/engine-tags-frozen.json",
+   "Drift-watch job + log"
+  ]
+ },
+ {
+  "id": "s4-wire-outcome",
+  "step": "Step 4 - Wire outcomes + feedback + renewal",
+  "title": "Wire WF-05 router, WF-10 survey -> visit_feedback_score, and WF-06 -> renewal_date",
+  "status": "Sequenced",
+  "goal": "Wire the outcome, feedback, and renewal signals the to-be workflows depend on but that do not exist yet. Enforces the single-writer model: the PCC Sales Form writes sale_outcome/sale_type/value; WF-05 only routes. Wires the WF-10 Feedback Survey to write opportunity.visit_feedback_score (which drives the WF-06 NPS branch), and WF-06 to set opportunity.renewal_date at Won (which arms the WF-09 Renewal Reminders sub-flow).",
+  "inputs": [
+   "s1c fields present (sale_outcome incl. mar, sale_type, visit_feedback_score, renewal_date)",
+   "WF-05 draft (router), WF-06 draft, WF-10 draft",
+   "PCC Sales Form field mapping"
+  ],
+  "prompt": "Goal: Wire the three signals the to-be plan assumes exist.\n\nWF-05 (router, single writer): confirm the PCC Sales Form writes opportunity.sale_outcome (sold|no_sale|mut|mar|undecided) + sale_type (required New|Renewal when sold) + total_program_amount. WF-05 TRIGGERS on the form submission, reads those values, and routes: Sold -> Won + monetary_value = total_program_amount + branch New->WF-06 / Renewal->WF-09 renewal sub-flow; No-Sale->WF-07; MUT->WF-11 suppress; MAR->stay Open, tag mar. WF-05 writes NO outcome. Add a Wait (30-60s) between any field write and a downstream If/Else read to avoid the race. Add the Modified-By alert on non-form outcome changes (H5).\n\nWF-10 Feedback Survey: on survey submission, write opportunity.visit_feedback_score (1-10). This is the field the WF-06 NPS branch reads - without this wiring the NPS branch has no input.\n\nWF-06 at Won: set opportunity.renewal_date (e.g., Won date + program term) so the WF-09 Renewal Reminders sub-flow has a date to fire relative to.\n\nValidation: test form submission of each outcome routes correctly; sold-without-sale_type is rejected/flagged; survey submission populates visit_feedback_score and the WF-06 NPS branch fires on it; Won sets renewal_date and WF-09 renewal sub-flow arms. Race Wait present before every cross-read.",
+  "validates": [
+   "PCC Sales Form is sole writer; WF-05 routes only",
+   "sale_outcome enum includes mar; sale_type enforced on Sold",
+   "WF-10 writes visit_feedback_score; WF-06 NPS branch reads it",
+   "WF-06 sets renewal_date; WF-09 renewal sub-flow arms",
+   "30-60s Wait between write and read (race fix)"
+  ],
+  "outputs": [
+   "WF-05/06/10 wiring applied (drafts)",
+   "Outcome/feedback/renewal wiring test log"
+  ]
+ },
+ {
+  "id": "s4-wire-renames",
+  "step": "Step 4 - Wire renamed-field readers",
+  "title": "Update workflow steps that read ad_*/patient_advisor to the new opp fields (consumes s1e spec)",
+  "status": "Sequenced",
+  "goal": "Migrate every workflow that still READS the legacy renamed fields (ad_reason, ad_other_explanation, patient_advisor) to the new Opportunity keys (nosale_reason, nosale_reason_other, patient_care_consultant_id), and stand up the dual-write steps documented by s1e. This must complete before Step 6 can delete the legacy fields.",
+  "inputs": [
+   "migration/s1e-legacy-readers.txt (from s1e-renames)",
+   "migration/s1e-dualwrite-spec.md (from s1e-renames)",
+   "s1c opportunity fields present (nosale_reason, nosale_reason_other, patient_care_consultant_id)"
+  ],
+  "prompt": "Goal: Rewire readers + dual-writers for the renamed fields. Consumes the s1e outputs.\n\nStep 1 - For each workflow file in migration/s1e-legacy-readers.txt, update the step to read the new Opportunity key instead of the legacy Contact key (ad_reason->nosale_reason, ad_other_explanation->nosale_reason_other, patient_advisor->patient_care_consultant_id).\n\nStep 2 - Implement the dual-write steps from migration/s1e-dualwrite-spec.md: wherever a workflow set a legacy field, ALSO write the new opp field on the related opp, until Step 6 retires the legacy field. Note WF-13 (Ad Conversions) must key off outcome_* / Won-with-value, never ad_* (the namespace-collision hazard the rename fixes).\n\nStep 3 - Validation: grep the workflow steps again for ad_reason / ad_other_explanation / patient_advisor reads -> expect 0 remaining legacy READS (dual-WRITES may remain until Step 6). Drive a test contact and assert the new opp fields are populated and read correctly.",
+  "validates": [
+   "0 remaining legacy-field reads across workflows",
+   "Dual-write steps live per s1e spec",
+   "WF-13 keys off outcome_*/Won-value, never ad_*",
+   "Test contact reads new opp fields correctly"
+  ],
+  "outputs": [
+   "Rewired workflow drafts",
+   "Reader-migration checklist (input gate for Step 6 field deletion)"
+  ]
+ },
+ {
+  "id": "p4-canary",
+  "step": "Step 5 - Canary cutover: 48h cohort, then 7 clean business days parallel run",
+  "title": "48h canary on src:bf-web cohort, then 7 clean business days of parallel run",
+  "status": "Sequenced",
+  "goal": "Publish 16 drafts; pause 38 sources. 48h canary on a test cohort, then widen and hold a 7-clean-business-day parallel run before Step 6 (Decision 10). Redesign-plus-migrate deviation is justified by the severity of the auto-Won defect; the extended parallel run offsets the added risk.",
   "inputs": [
    "16 drafts ready",
    "P0 fixes in place",
-   "WF 11 confirmed live"
+   "WF 11 confirmed live (consent + quiet hours as guardrails)"
   ],
-  "prompt": "Publish 16 drafts smallest-first; pause 38 source workflows. Add canary tag gate (src:bf-web).\n\nMonitor 48h: execution-log error rate < 0.1%, won-with-$0 = 0, stage-flow sanity, SMS counts, STOP/DND replies.\n\nGate at 48h: clean → widen; issues → hold + document.",
+  "prompt": "Publish 16 drafts smallest-first; pause 38 source workflows. Add canary tag gate (src:bf-web).\n\nPhase 1 - 48h canary on the src:bf-web cohort. Monitor: execution-log error rate < 0.1%, won-with-$0 = 0, no quiet-hours violations, no non-WF-05 (non-form) outcome writes, stage-flow sanity, SMS counts, STOP/DND replies.\n\nGate at 48h: clean -> widen to full volume; issues -> hold + document.\n\nPhase 2 - after widening, run 7 CLEAN BUSINESS DAYS of parallel run. 'Clean' = error rate < 0.1%, won-with-$0 = 0, zero quiet-hours violations, zero outcome writes from anything other than the PCC Sales Form. Any dirty day resets the counter. Only after 7 consecutive clean business days + owner approval does Step 6 cleanup unlock.",
   "validates": [
-   "48h canary clean",
-   "Won-with-$0 stays 0",
-   "No double-execution"
+   "48h canary clean, then 7 clean business days parallel run",
+   "Won-with-$0 stays 0; no quiet-hours violations",
+   "No non-form outcome writes; no double-execution"
   ],
   "outputs": [
-   "Monitor log",
-   "Widen/hold decision"
+   "Monitor log (canary + 7-day parallel run)",
+   "Widen/hold decision + Step-6 unlock approval"
   ]
  },
  {
   "id": "p5-cleanup",
   "step": "Step 6 - Cleanup",
-  "title": "Retire old workflows/fields/pipelines after 2 clean weeks",
+  "title": "Retire old workflows/fields/pipelines + explicit retirements after 7 clean business days",
   "status": "Sequenced",
-  "goal": "Make the new world the only world. Order by irreversibility.",
+  "goal": "Make the new world the only world. Order by irreversibility. Only runs after 7 clean business days since cutover (Decision 10).",
   "inputs": [
-   "2 clean weeks since cutover",
+   "7 clean business days since cutover (Decision 10)",
    "No alerts on weekly QA"
   ],
-  "prompt": "Phase A: archive paused workflows (low risk).\nPhase B: confirm no reads of ad_*, patient_advisor, or the 33 never-populated fields → DELETE them (irreversible - last).\nPhase C: confirm pipeline opp counts == 0 → DELETE retired pipelines.\n\nNEVER delete engine tag surface (chatbot_lead, src:bf-web, sniper_*, funnel_entry_*).",
+  "prompt": "Phase A: archive paused workflows (low risk).\n\nExplicit retirements (Decision 9 - dropped deliberately, not silently orphaned). After confirming no live dependency, retire:\n  - '06. Price Calculator' workflow\n  - the standalone 'Intake Reminder' workflow (WF-04 owns all intake chasing going forward)\n  - the Vercel 'Outbound Webhook'\nDocument each retirement (what, why, dependency check result) in migration/retirements.md.\n\nConsent reconciliation cleanup (Decision 5): after consent-reconciliation has unified the 9 legacy consent fields into canonical sms_consent_status, DELETE the orphan consent_log custom object.\n\nGoogle Sheets: for any Google Sheets integration still referenced, CONFIRM it is no longer needed (ask the owner, check for live reads) BEFORE deleting - do not assume.\n\nPhase B: confirm no reads of ad_*, patient_advisor, or the never-populated fields -> DELETE them (irreversible - last).\nPhase C: confirm pipeline opp counts == 0 -> DELETE retired pipelines.\n\nNEVER delete engine tag surface (chatbot_lead, src:bf-web, sniper_*, funnel_entry_*).",
   "validates": [
-   "No reads of retired fields",
-   "No opps in retired pipelines",
-   "Engine tags intact"
+   "Explicit retirements (Price Calculator, Intake Reminder, Outbound Webhook) done with dependency check",
+   "Orphan consent_log object deleted after reconciliation",
+   "Google Sheets confirmed unneeded before any delete",
+   "No reads of retired fields; no opps in retired pipelines; engine tags intact"
   ],
   "outputs": [
-   "Cleanup log",
+   "Cleanup log + migration/retirements.md",
    "Final audit snapshot"
   ]
  }

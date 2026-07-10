@@ -4199,7 +4199,7 @@
     {
       "n": "11",
       "decision": "Canonical workflow numbering",
-      "choice": "Canonical WF-01..WF-16 = the workflow list + master-diagram scheme. The message library and all diagrams are renumbered to match; a crosswalk (old library number to canonical) is shown on /to-be. 'Retention and Renewal' is a labeled Renewal Reminders sub-flow of WF-09 (Long-Term Nurture), not a separate top-level workflow.",
+      "choice": "Canonical WF-01..WF-16 = the workflow list + master-diagram scheme. All diagrams are renumbered to match; a crosswalk (old number to canonical) is shown on /to-be. 'Retention and Renewal' is a labeled Renewal Reminders sub-flow of WF-09 (Long-Term Nurture), not a separate top-level workflow.",
       "status": "Locked",
       "date": "2026-07-10"
     }
@@ -4227,7 +4227,7 @@
       "id": "C4",
       "sev": "Critical",
       "area": "PHI + public site exposure",
-      "mitigation": "Re-gate or scrub public site; PHI out of repo; encrypt change CSV; BAA on EMR to GHL sync. SMS bodies carry appointment/consultation logistics only - no symptom or treatment specifics (scrubbed in the message library)."
+      "mitigation": "Re-gate or scrub public site; PHI out of repo; encrypt change CSV; BAA on EMR to GHL sync. SMS bodies carry appointment/consultation logistics only - no symptom or treatment specifics (SMS bodies are scrubbed)."
     },
     {
       "id": "H1",

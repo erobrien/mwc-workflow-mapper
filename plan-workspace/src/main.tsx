@@ -8,9 +8,6 @@ import AsIs from "./pages/AsIs";
 import Inventory from "./pages/Inventory";
 import ToBe from "./pages/ToBe";
 import Diagrams from "./pages/Diagrams";
-import Messages from "./pages/Messages";
-import Plan from "./pages/Plan";
-import Prompts from "./pages/Prompts";
 import Decisions from "./pages/Decisions";
 import Risks from "./pages/Risks";
 import Gaps from "./pages/Gaps";
@@ -40,12 +37,7 @@ const router = createBrowserRouter([
   { path: "/to-be", element: wrap(<ToBe />) },
   { path: "/to-be/:tab", element: wrap(<ToBe />) },
   { path: "/diagrams", element: wrap(<Diagrams />) },
-  { path: "/messages", element: wrap(<Messages />) },
-  { path: "/messages/:tab", element: wrap(<Messages />) },
   { path: "/pcc-form", element: wrap(<SalesForm />) },
-  { path: "/plan", element: wrap(<Plan />) },
-  { path: "/plan/:tab", element: wrap(<Plan />) },
-  { path: "/prompts", element: wrap(<Prompts />) },
   { path: "/decisions", element: wrap(<Decisions />) },
   { path: "/risks", element: wrap(<Risks />) },
   { path: "/gaps", element: wrap(<Gaps />) },

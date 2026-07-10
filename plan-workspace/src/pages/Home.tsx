@@ -37,17 +37,15 @@ export default function Home() {
   const open = data.decisions.filter((d) => d.status === "Open").length;
   const locked = data.decisions.filter((d) => d.status === "Locked").length;
   const crit = data.defects.filter((d) => d.severity === "Critical").slice(0, 4);
-  const ready = data.migration_steps.filter((s) => s.status === "Ready").length;
-  const blocked = data.migration_steps.filter((s) => s.status === "Blocked").length;
 
   return (
     <PageShell
       title="Project workspace"
-      subtitle="A complete tear-down and rebuild of the MWC GoHighLevel sub-account — workflows and pipelines especially. As-is captured live from the GHL API; every workflow deep-links into its builder. Search anything with ⌘K."
+      subtitle="A specification of the MWC GoHighLevel sub-account: what exists today (current state) and what we want it to become (target). Current state is captured live from the GHL API; every workflow deep-links into its builder. Search anything with ⌘K."
       actions={
         <>
-          <Link to="/plan" className="inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-sm hover:bg-muted"><FileText className="h-3.5 w-3.5" /> View plan</Link>
-          <Link to="/prompts" className="inline-flex items-center gap-1.5 rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground hover:opacity-90">Execute prompts <ArrowRight className="h-3.5 w-3.5" /></Link>
+          <Link to="/as-is" className="inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-sm hover:bg-muted"><FileText className="h-3.5 w-3.5" /> Current state</Link>
+          <Link to="/to-be" className="inline-flex items-center gap-1.5 rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground hover:opacity-90">Target <ArrowRight className="h-3.5 w-3.5" /></Link>
         </>
       }
     >
@@ -82,7 +80,7 @@ export default function Home() {
       <section className="rounded-md border bg-card p-5">
         <div className="mb-3 flex flex-wrap items-baseline justify-between gap-3">
           <h2 className="text-base font-semibold">Problem statement</h2>
-          <span className="font-mono text-[10.5px] uppercase tracking-wider text-muted-foreground">How we got here · What's broken · Recovery model</span>
+          <span className="font-mono text-[10.5px] uppercase tracking-wider text-muted-foreground">How we got here · What's broken · Target model</span>
         </div>
         <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
           <div>
@@ -98,9 +96,9 @@ export default function Home() {
             </p>
           </div>
           <div>
-            <div className="mb-1.5 font-mono text-[10.5px] uppercase tracking-wider text-emerald-700 dark:text-emerald-400">Recovery model</div>
+            <div className="mb-1.5 font-mono text-[10.5px] uppercase tracking-wider text-emerald-700 dark:text-emerald-400">Target model</div>
             <p className="text-sm leading-relaxed text-foreground/90">
-              This plan runs <b>mostly with AI and a human approving each step</b>. Every migration step is a scripted prompt (see <Link to="/prompts" className="text-primary hover:underline">Prompts</Link>) that runs against the GHL API with a dry-run preview before any data changes. Humans approve each gate; AI does the mechanical work. <b>AI and human testing can wrap up in a single day</b>: the test checklist is automated, the initial test group is one tag (<code>src:bf-web</code>), and the won-with-$0 counter shows pass or fail within hours. Cutover is a 48-hour canary cohort followed by 7 clean business days of parallel run; only then does cleanup begin.
+              The target puts each datum on the object that owns it: the <b>Opportunity</b> owns the sale outcome and dollar value (one record per deal, so nothing overwrites), and carries a copy of the attribution that drove it so revenue rolls up per sale, per location, and per rep. The <b>Contact</b> holds identity, durable profile, and consent. Clinical records stay in the external EMR. See the <Link to="/to-be" className="text-primary hover:underline">Target</Link> spec for the full field model, the consolidated workflows, and the pipeline design.
             </p>
           </div>
         </div>
@@ -108,9 +106,9 @@ export default function Home() {
 
       {/* Status tiles */}
       <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
-        <Tile icon={ShieldCheck} label="Plan status" value={`${locked} of ${locked + open} decisions locked`} note={open === 0 ? "All decisions resolved" : `${open} open (blocks dependent steps)`} tone={open === 0 ? "good" : "warning"} />
+        <Tile icon={ShieldCheck} label="Decisions" value={`${locked} of ${locked + open} locked`} note={open === 0 ? "All decisions resolved" : `${open} still open`} tone={open === 0 ? "good" : "warning"} />
         <Tile icon={AlertTriangle} label="Critical findings" value={`${crit.length} Critical / ${data.defects.length} total`} note="All evidence-backed by API capture" tone="warning" />
-        <Tile icon={ListChecks} label="Execution" value={`${ready} ready · ${blocked} blocked`} note="2 P0 prompts — go first" tone="neutral" />
+        <Tile icon={ListChecks} label="Target scope" value={`${k.workflows_published} → ${k.target_workflows} workflows`} note={`Pipelines ${k.pipelines_now} → ${k.pipelines_target}`} tone="neutral" />
       </div>
 
       {/* Scope */}

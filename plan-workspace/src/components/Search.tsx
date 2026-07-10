@@ -35,7 +35,6 @@ export function GlobalSearch() {
     for (const f of data.fields) h.push({ type: "Field", label: f.name, to: "/inventory", ghl: ghlFields(loc), sub: `${f.model} · ${f.key}`, tone: TONE.Field });
     for (const d of data.decisions) h.push({ type: "Decision", label: d.decision, to: "/decisions", sub: d.status, tone: TONE.Decision });
     for (const r of data.risks) h.push({ type: "Risk", label: r.area, to: "/risks", sub: r.sev, tone: TONE.Risk });
-    for (const m of data.messages_asis) h.push({ type: "Message", label: (m.subject || m.message || "").slice(0, 70), to: "/messages/legacy", sub: m.workflow, tone: TONE.Message });
     return h;
   }, [data, loc]);
 
@@ -68,7 +67,7 @@ export function GlobalSearch() {
             if (e.key === "ArrowUp") { e.preventDefault(); setActive((a) => Math.max(a - 1, 0)); }
             if (e.key === "Enter" && results[active]) go(results[active]);
           }}
-          placeholder="Search workflows, fields, messages…"
+          placeholder="Search workflows, fields, decisions…"
           className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground" />
         <kbd className="hidden rounded border px-1.5 text-[10px] text-muted-foreground sm:inline">⌘K</kbd>
       </div>

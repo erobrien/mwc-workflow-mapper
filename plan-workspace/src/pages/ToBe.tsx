@@ -79,7 +79,7 @@ export default function ToBe() {
             <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
               <div>
                 <div className="text-sm font-semibold">Canonical numbering (WF-01 to WF-16)</div>
-                <p className="text-xs text-muted-foreground">The workflow list and master diagram are the canonical scheme. The message library and every diagram are renumbered to match. Step-by-step flows for all 16 owners are on the diagrams page.</p>
+                <p className="text-xs text-muted-foreground">The workflow list and master diagram are the canonical scheme. Every diagram is renumbered to match. Step-by-step flows for all 16 owners are on the diagrams page.</p>
               </div>
               <Link to="/wf-diagrams" className="inline-flex items-center gap-1 rounded border px-2 py-1 text-xs font-medium text-primary hover:bg-muted">
                 See to-be workflow diagrams

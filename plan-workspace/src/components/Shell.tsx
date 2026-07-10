@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import {
   LayoutDashboard, GitBranch, Boxes, Workflow, Network, MessagesSquare,
   ListChecks, Terminal, Gavel, ShieldAlert, Moon, Sun, Menu, SearchCheck, ClipboardList, Share2, Tag,
-  Video, Smartphone, SlidersHorizontal, LayoutGrid, Send, CalendarClock, Database,
+  Video, Smartphone, SlidersHorizontal, LayoutGrid, Send, CalendarClock, Database, Waypoints,
 } from "lucide-react";
 import { cn, useTheme } from "./ui";
 import { useState } from "react";
@@ -15,6 +15,7 @@ const NAV: { group: string; items: { to: string; label: string; icon: any; accen
   ] },
   { group: "Current state", items: [
     { to: "/as-is", label: "As-Is Workflows", icon: GitBranch, accent: "text-red-600 dark:text-red-400" },
+    { to: "/asis-diagrams", label: "As-Is Flow Diagrams", icon: Waypoints, accent: "text-red-600 dark:text-red-400" },
     { to: "/inventory", label: "Field Inventory", icon: Boxes },
   ] },
   { group: "Target", items: [

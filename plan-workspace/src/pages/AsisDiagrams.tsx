@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { PageShell } from "../components/Shell";
-import { Card, CardContent, Loading, useTheme } from "../components/ui";
+import { Badge, Card, CardContent, Loading, useTheme } from "../components/ui";
 
 interface Diagram { key: string; title: string; caption: string; src: string; }
 
-export default function WFDiagrams() {
+export default function AsisDiagrams() {
   const { dark } = useTheme();
   const [diagrams, setDiagrams] = useState<Diagram[] | null>(null);
   const [svgs, setSvgs] = useState<Record<string, string>>({});
 
-  useEffect(() => { fetch("/wf-diagrams.json").then((r) => r.json()).then(setDiagrams).catch(() => setDiagrams([])); }, []);
+  useEffect(() => { fetch("/wf-diagrams-asis.json").then((r) => r.json()).then(setDiagrams).catch(() => setDiagrams([])); }, []);
 
   useEffect(() => {
     if (!diagrams) return;
@@ -25,7 +25,7 @@ export default function WFDiagrams() {
       const next: Record<string, string> = {};
       for (const d of diagrams) {
         try {
-          const { svg } = await mermaid.render(`wf-${d.key}-${dark ? "d" : "l"}`, d.src);
+          const { svg } = await mermaid.render(`asis-${d.key}-${dark ? "d" : "l"}`, d.src);
           next[d.key] = svg;
         } catch (e: any) {
           next[d.key] = `<pre class="text-xs text-red-600 whitespace-pre-wrap">${String(e?.message ?? e)}</pre>`;
@@ -41,13 +41,16 @@ export default function WFDiagrams() {
 
   return (
     <PageShell
-      title="To-be workflow diagrams"
-      subtitle={`${diagrams.length} diagrams — master journey map, per-workflow step flows, and support cluster. Each shows triggers, timing, branches, and exits.`}
+      title="As-is workflow diagrams"
+      subtitle={`${diagrams.length} diagrams of the account as it runs today — grounded strictly in the extracted GHL data. Green = live/published, gray = draft-only, red = duplicated or broken. This is current reality, not the target design.`}
     >
       <div className="space-y-8">
         {diagrams.map((d) => (
           <section key={d.key}>
-            <h2 className="mb-0.5 text-base font-semibold">{d.title}</h2>
+            <div className="mb-1 flex items-center gap-2">
+              <Badge tone="red">As-Is · today</Badge>
+              <h2 className="text-base font-semibold">{d.title.replace(/^AS-IS:\s*/, "")}</h2>
+            </div>
             <p className="mb-3 max-w-3xl text-sm text-muted-foreground">{d.caption}</p>
             <Card><CardContent className="p-4">
               {svgs[d.key]

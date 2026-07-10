@@ -1,0 +1,263 @@
+{
+ "id": "c4bf56a1-1c54-4380-9b1e-77367e00c638",
+ "name": "06. Price Calculator",
+ "folder": "02. Appointments & Visit Journey",
+ "status": "published",
+ "updatedAt": "2026-05-18T22:46:17.884Z",
+ "version": 13,
+ "extracted_at": "2026-07-10T05:40:32Z",
+ "extraction_method": "ghl_backend_api",
+ "source": "GHL Active Workflows (live API)",
+ "workflowData": {
+  "_id": "c4bf56a1-1c54-4380-9b1e-77367e00c638",
+  "locationId": "Ghstz8eIsHWLeXek47dk",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 2,
+  "name": "06. Price Calculator",
+  "status": "published",
+  "version": 13,
+  "dataVersion": 7,
+  "allowMultiple": true,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/Ghstz8eIsHWLeXek47dk/workflows/c4bf56a1-1c54-4380-9b1e-77367e00c638/13",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/highlevel-backend.appspot.com/o/location%2FGhstz8eIsHWLeXek47dk%2Fworkflows%2Fc4bf56a1-1c54-4380-9b1e-77367e00c638%2F13",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "type": "workflow",
+  "parentId": "d19faff7-3c76-44ec-8c05-59397c06aa08",
+  "updatedBy": "yntZSizWegCAW6z2Xhq1",
+  "createdAt": "2026-01-13T23:51:26.553Z",
+  "updatedAt": "2026-05-18T22:46:17.884Z",
+  "deleted": false,
+  "allowMultipleOpportunity": true,
+  "creationSource": "builder",
+  "originType": "user",
+  "__v": 0,
+  "eventStartDate": null,
+  "window": null,
+  "workflowNote": null,
+  "triggersFilePath": "location/Ghstz8eIsHWLeXek47dk/workflow-triggers/c4bf56a1-1c54-4380-9b1e-77367e00c638/10",
+  "id": "c4bf56a1-1c54-4380-9b1e-77367e00c638"
+ },
+ "triggers": [
+  {
+   "id": "8h2UiKTfeUkXb1SCdGpt",
+   "date_added": "2026-01-13T23:51:54.615Z",
+   "deleted": false,
+   "actions": [
+    {
+     "workflow_id": "c4bf56a1-1c54-4380-9b1e-77367e00c638",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "is-any-of",
+     "field": "form.id",
+     "value": [
+      "awkdH7MUC8zvQ54n0uwn"
+     ],
+     "title": "Form is",
+     "type": "string"
+    }
+   ],
+   "type": "form_submission",
+   "masterType": "highlevel",
+   "workflow_id": "c4bf56a1-1c54-4380-9b1e-77367e00c638",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "active": true,
+   "date_updated": "2026-02-01T00:25:27.579Z",
+   "name": "PA reported PX SHOWED"
+  }
+ ],
+ "dependentAssets": {},
+ "templates": [
+  {
+   "id": "520414c5-846d-4be0-94a0-0ffc529dad19",
+   "order": 0,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "866fe438-bbcd-4047-8687-a1382912cd19",
+      "name": "Sold",
+      "segments": [
+       {
+        "__segmentId": "2280dc6e-f928-4118-bae7-b7f1e2f0aac7",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "cClk7ad4PHxiake2lChS",
+          "conditionOperator": "==",
+          "conditionValue": "Sold",
+          "__conditionId": "90025c17-894c-4688-acbe-d8c5a5a0f386",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "PA reported Sales outcome:",
+    "version": 2,
+    "noneBranchName": "Not Sold (A&D/MUT)"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "866fe438-bbcd-4047-8687-a1382912cd19",
+    "fa6dff2a-6f75-422a-ac45-0690798bb160"
+   ],
+   "comments": [],
+   "nodeType": "condition-node"
+  },
+  {
+   "id": "866fe438-bbcd-4047-8687-a1382912cd19",
+   "parent": "520414c5-846d-4be0-94a0-0ffc529dad19",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Sold",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "ee9c6c60-b6b0-4e3f-b6cd-873826eabc8c",
+   "sibling": [
+    "fa6dff2a-6f75-422a-ac45-0690798bb160"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "520414c5-846d-4be0-94a0-0ffc529dad19"
+  },
+  {
+   "id": "ee9c6c60-b6b0-4e3f-b6cd-873826eabc8c",
+   "parent": "866fe438-bbcd-4047-8687-a1382912cd19",
+   "order": 0,
+   "attributes": {
+    "selectField": "z0nsXjBpmFXGdZGfzHAI",
+    "selectFieldtype": "numerical",
+    "sourceCustomValueId": "",
+    "updateField": "cxUGCjBinbuh0spb4LQS",
+    "updateFieldType": "numerical",
+    "targetCustomValueId": "",
+    "operators": [
+     {
+      "operator": "add",
+      "__id": "e9da4eee-18d9-4df6-9574-291a7e26dfb9",
+      "value": "{{contact.price__item_2}}"
+     },
+     {
+      "operator": "add",
+      "value": "{{contact.price__item_3}}",
+      "__id": "cebafb2f-b8c1-4bcd-adad-283caedaafcf"
+     },
+     {
+      "operator": "add",
+      "value": "{{contact.consultation_fee}}",
+      "__id": "f901b1e8-5a25-49cc-a2f1-0d39096df99a"
+     }
+    ]
+   },
+   "name": "Prep for Opportunity Value: Compute Price 1 + 2 + 3 + Consultation Fee = Total Program Amt",
+   "type": "math_operation",
+   "parentKey": "866fe438-bbcd-4047-8687-a1382912cd19",
+   "next": "1e29b0b7-f832-49e5-864a-aa67cd18865d"
+  },
+  {
+   "id": "1e29b0b7-f832-49e5-864a-aa67cd18865d",
+   "parent": "866fe438-bbcd-4047-8687-a1382912cd19",
+   "order": 1,
+   "attributes": {
+    "html": "<p style=\"padding-left: 0px!important;\">Consultation Notes ({{contact.location}}):</p><p style=\"padding-left: 0px!important;\">{{contact.primary_care_provider_name}}<br>{{contact.provider_making_recommendation}}</p><p style=\"padding-left: 0px!important;\">{{contact.sale_outcome}}</p><p style=\"padding-left: 0px!important;\">{{contact.treatment_type}} {{contact.term_length__item_1}} {{contact.treatment_cost}}</p><p style=\"padding-left: 0px!important;\">{{contact.product_sold__item_2}} {{contact.term_length__item_2}} {{contact.price__item_2}}</p><p style=\"padding-left: 0px!important;\">{{contact.product_sold__item_3}} {{contact.term_length__item_3}} {{contact.price__item_3}}</p><p style=\"padding-left: 0px!important;\">{{contact.total_program_amount}}</p><p style=\"padding-left: 0px!important;\">{{contact.pay_type}}</p>",
+    "type": "add_notes"
+   },
+   "name": "Note on contact page: Visit outcome report",
+   "type": "add_notes",
+   "parentKey": "ee9c6c60-b6b0-4e3f-b6cd-873826eabc8c"
+  },
+  {
+   "id": "fa6dff2a-6f75-422a-ac45-0690798bb160",
+   "parent": "520414c5-846d-4be0-94a0-0ffc529dad19",
+   "order": 1,
+   "attributes": {
+    "else": true
+   },
+   "name": "Not Sold (A&D/MUT)",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "866fe438-bbcd-4047-8687-a1382912cd19"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "520414c5-846d-4be0-94a0-0ffc529dad19",
+   "next": "4b1f454b-1ecd-4256-8b2b-d75869432aa3"
+  },
+  {
+   "id": "4b1f454b-1ecd-4256-8b2b-d75869432aa3",
+   "parent": "fa6dff2a-6f75-422a-ac45-0690798bb160",
+   "order": 0,
+   "attributes": {
+    "selectField": "rGf0p5eaxAWTM9y5KaAE",
+    "selectFieldtype": "numerical",
+    "sourceCustomValueId": "",
+    "updateField": "cxUGCjBinbuh0spb4LQS",
+    "updateFieldType": "numerical",
+    "targetCustomValueId": "",
+    "operators": []
+   },
+   "name": "Prep for Opportunity Value: Compute Consultation Fee > Total Program Amt",
+   "type": "math_operation",
+   "next": "53caeccf-b104-409b-b3e7-d1ebe6df14e9",
+   "parentKey": "fa6dff2a-6f75-422a-ac45-0690798bb160"
+  },
+  {
+   "id": "53caeccf-b104-409b-b3e7-d1ebe6df14e9",
+   "parent": "fa6dff2a-6f75-422a-ac45-0690798bb160",
+   "order": 1,
+   "attributes": {
+    "html": "<p style=\"padding-left: 0px!important;\">Consultation Notes ({{contact.location}}):</p><p style=\"padding-left: 0px!important;\">{{contact.primary_care_provider_name}}<br>{{contact.provider_making_recommendation}}</p><p style=\"padding-left: 0px!important;\">{{contact.sale_outcome}}</p><p style=\"padding-left: 0px!important;\"></p>",
+    "type": "add_notes"
+   },
+   "name": "Note on contact page: Visit outcome report",
+   "type": "add_notes",
+   "parentKey": "4b1f454b-1ecd-4256-8b2b-d75869432aa3"
+  }
+ ]
+}

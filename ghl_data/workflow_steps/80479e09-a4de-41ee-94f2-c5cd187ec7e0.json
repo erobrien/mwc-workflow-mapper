@@ -1,0 +1,3109 @@
+{
+ "id": "80479e09-a4de-41ee-94f2-c5cd187ec7e0",
+ "name": "1. IVR - simultaneous",
+ "folder": "03. Call Routing & Dispositions",
+ "status": "published",
+ "updatedAt": "2026-06-22T20:55:41.296Z",
+ "version": 63,
+ "extracted_at": "2026-07-10T05:40:32Z",
+ "extraction_method": "ghl_backend_api",
+ "source": "GHL Active Workflows (live API)",
+ "workflowData": {
+  "_id": "80479e09-a4de-41ee-94f2-c5cd187ec7e0",
+  "locationId": "Ghstz8eIsHWLeXek47dk",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 2,
+  "name": "1. IVR - simultaneous",
+  "status": "published",
+  "version": 63,
+  "dataVersion": 7,
+  "allowMultiple": true,
+  "eventStartDate": null,
+  "window": null,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/Ghstz8eIsHWLeXek47dk/workflows/80479e09-a4de-41ee-94f2-c5cd187ec7e0/64_1782161741076",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FGhstz8eIsHWLeXek47dk%2Fworkflows%2F80479e09-a4de-41ee-94f2-c5cd187ec7e0%2F64_1782161741076",
+  "triggersFilePath": "location/Ghstz8eIsHWLeXek47dk/workflow-triggers/80479e09-a4de-41ee-94f2-c5cd187ec7e0/9",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "type": "workflow",
+  "parentId": "8781f1cb-ad2f-430e-beee-3658beb4f104",
+  "meta": {
+   "stepIndexCounter": {
+    "ivr_gather": 8,
+    "ivr_collect_voicemail": 16,
+    "ivr_connect_call": 123
+   }
+  },
+  "createdAt": "2026-01-08T19:58:14.313Z",
+  "updatedAt": "2026-06-22T20:55:41.296Z",
+  "deleted": false,
+  "workflowNote": {
+   "content": "",
+   "createdBy": "clone_workflow",
+   "createdByName": "clone_workflow",
+   "createdAt": "2026-01-08T19:58:14.377Z",
+   "updatedBy": "clone_workflow",
+   "updatedByName": "clone_workflow",
+   "updatedAt": "2026-01-08T19:58:14.377Z"
+  },
+  "allowMultipleOpportunity": false,
+  "creationSource": "builder",
+  "originType": "duplicate-workflow",
+  "__v": 0,
+  "updatedBy": "Automated Loop Lock",
+  "isTriggerBucketMigrated": false,
+  "id": "80479e09-a4de-41ee-94f2-c5cd187ec7e0"
+ },
+ "triggers": [
+  {
+   "id": "XZi1u6J8ET8xoAVExXzG",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "workflow_id": "80479e09-a4de-41ee-94f2-c5cd187ec7e0",
+   "belongs_to": "workflow",
+   "name": "Start IVR Trigger",
+   "masterType": "highlevel",
+   "type": "ivr_incoming_call",
+   "actions": [
+    {
+     "type": "add_to_workflow",
+     "workflow_id": "80479e09-a4de-41ee-94f2-c5cd187ec7e0"
+    }
+   ],
+   "date_added": "2026-01-08T21:08:47.179Z",
+   "schedule_config": {},
+   "deleted": false,
+   "conditions": [
+    {
+     "id": "inbound-twilio-number",
+     "type": "multiselect",
+     "title": "In Phone Number",
+     "operator": "contains-any",
+     "value": [
+      "+18663444955"
+     ],
+     "field": "inbound_number"
+    }
+   ],
+   "date_updated": "2026-01-08T21:08:49.350Z",
+   "active": true
+  }
+ ],
+ "dependentAssets": {},
+ "templates": [
+  {
+   "id": "162a7616-b7af-4719-bde5-c0d460037947",
+   "type": "wait",
+   "name": "Wait",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "minutes",
+     "value": 0.03,
+     "when": "after"
+    },
+    "name": "Wait",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "order": 0,
+   "cat": "",
+   "next": "2bd7d682-696c-4c43-bf96-48c7e0d06615"
+  },
+  {
+   "id": "2bd7d682-696c-4c43-bf96-48c7e0d06615",
+   "order": 1,
+   "attributes": {
+    "widgetType": "play",
+    "language": "en-US",
+    "voice": "man",
+    "message": "To ensure the best service, please listen to the  following options.",
+    "loop": 1,
+    "type": "ivr_say",
+    "audioUrl": "https://storage.googleapis.com/highlevel-backend.appspot.com/location/Ghstz8eIsHWLeXek47dk/workflow/80479e09-a4de-41ee-94f2-c5cd187ec7e0/712c0c86-0be7-477b-a832-e229e1c909d4.mp3",
+    "fileName": "01_Welcome_Message.mp3"
+   },
+   "name": "Welcome Message to the Caller",
+   "type": "ivr_say",
+   "next": "188210a9-ca7d-4e7d-871c-0d538570cd5f",
+   "parentKey": "162a7616-b7af-4719-bde5-c0d460037947"
+  },
+  {
+   "id": "188210a9-ca7d-4e7d-871c-0d538570cd5f",
+   "order": 2,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "c7df07fc-d329-4752-bc95-54dd1c987980",
+      "name": "Outside HOO",
+      "segments": [
+       {
+        "__segmentId": "8b85ed84-8188-45b9-8504-b70bdfb63496",
+        "operator": "or",
+        "conditions": [
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "quarter_hour",
+          "conditionOperator": "<=",
+          "conditionValue": "700",
+          "__conditionId": "2e829a58-4546-4bc6-b299-a1a5b5b68a3a",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         },
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "quarter_hour",
+          "conditionOperator": ">=",
+          "conditionValue": "2100",
+          "__conditionId": "9f734359-2cab-49f1-af1e-c179af420a6b",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Condition",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "c7df07fc-d329-4752-bc95-54dd1c987980",
+    "f2134adf-87bf-4ec5-9b61-e0714c115d93"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "2bd7d682-696c-4c43-bf96-48c7e0d06615"
+  },
+  {
+   "id": "c7df07fc-d329-4752-bc95-54dd1c987980",
+   "parent": "188210a9-ca7d-4e7d-871c-0d538570cd5f",
+   "order": 3,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Outside HOO",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "cb18847a-f841-4a46-948f-363b3511be9b",
+   "sibling": [
+    "f2134adf-87bf-4ec5-9b61-e0714c115d93"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "188210a9-ca7d-4e7d-871c-0d538570cd5f"
+  },
+  {
+   "id": "cb18847a-f841-4a46-948f-363b3511be9b",
+   "parent": "c7df07fc-d329-4752-bc95-54dd1c987980",
+   "order": 0,
+   "attributes": {
+    "widgetType": "play",
+    "language": "en-US",
+    "voice": "man",
+    "message": "All of our agents are currently unavailable. Please leave your name, phone  number, and a brief message, and we will  return your call as soon as possible.",
+    "loop": 1,
+    "type": "ivr_say",
+    "audioUrl": "https://storage.googleapis.com/highlevel-backend.appspot.com/location/Ghstz8eIsHWLeXek47dk/workflow/80479e09-a4de-41ee-94f2-c5cd187ec7e0/0ed53579-2706-4e5b-ba45-051996821adf.mp3",
+    "fileName": "03_After_Hours_Call_Center.mp3"
+   },
+   "name": "Welcome message for outside HOO",
+   "type": "ivr_say",
+   "next": "8f9051d1-1dfc-405b-b1a9-49a89a8fce29",
+   "parentKey": "c7df07fc-d329-4752-bc95-54dd1c987980"
+  },
+  {
+   "id": "8f9051d1-1dfc-405b-b1a9-49a89a8fce29",
+   "stepIndex": 7,
+   "parent": "c7df07fc-d329-4752-bc95-54dd1c987980",
+   "order": 1,
+   "attributes": {
+    "sayPlayAttributes": {
+     "loop": 1,
+     "widgetType": "say",
+     "message": "Please leave a message after the beep.",
+     "type": "ivr_say",
+     "language": "en-US",
+     "voice": "man"
+    },
+    "isSayPlayOn": false,
+    "timeout": 5,
+    "finishOnKey": "#",
+    "maxLength": 360,
+    "playBeep": true,
+    "type": "ivr_collect_voicemail"
+   },
+   "name": "Record voicemail",
+   "type": "ivr_collect_voicemail",
+   "parentKey": "cb18847a-f841-4a46-948f-363b3511be9b"
+  },
+  {
+   "id": "f2134adf-87bf-4ec5-9b61-e0714c115d93",
+   "parent": "188210a9-ca7d-4e7d-871c-0d538570cd5f",
+   "order": 3,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "c7df07fc-d329-4752-bc95-54dd1c987980"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "188210a9-ca7d-4e7d-871c-0d538570cd5f",
+   "next": "3e766e31-905c-4d80-b5c3-a06aa0e2e449"
+  },
+  {
+   "id": "3e766e31-905c-4d80-b5c3-a06aa0e2e449",
+   "stepIndex": 1,
+   "parent": "f2134adf-87bf-4ec5-9b61-e0714c115d93",
+   "order": 0,
+   "attributes": {
+    "loop": 1,
+    "timeout": 5,
+    "enableFinishOnKey": false,
+    "widgetType": "play",
+    "type": "ivr_gather",
+    "language": "en-US",
+    "voice": "man",
+    "message": "For new patient consultation, press 1. For existing patients, press 2. To leave a voicemail, Press 3.",
+    "numDigits": 1,
+    "convertToMultipath": false,
+    "name": "Collect Input from the Caller",
+    "cat": "",
+    "transitions": [],
+    "audioUrl": "https://storage.googleapis.com/highlevel-backend.appspot.com/location/Ghstz8eIsHWLeXek47dk/workflow/80479e09-a4de-41ee-94f2-c5cd187ec7e0/b19d908b-f39d-409b-b2d2-b1ee10fbcecd.mp3",
+    "fileName": "02_Main_Menu_During_Hours.mp3"
+   },
+   "name": "Collect Input from the Caller",
+   "type": "ivr_gather",
+   "next": "668684c4-d054-435e-908b-bf8a3e9d5bcd",
+   "parentKey": "f2134adf-87bf-4ec5-9b61-e0714c115d93",
+   "cat": ""
+  },
+  {
+   "id": "668684c4-d054-435e-908b-bf8a3e9d5bcd",
+   "parent": "f2134adf-87bf-4ec5-9b61-e0714c115d93",
+   "order": 1,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "d9a3e452-42de-44cb-8e50-1fe3173132cc",
+      "name": "Press 1",
+      "segments": [
+       {
+        "__segmentId": "a77cf909-0703-4547-b629-886d00e0b907",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "ivr_gather",
+          "conditionSubType": "1.digits",
+          "conditionOperator": "==",
+          "conditionValue": "1",
+          "__conditionId": "aa5dc4d6-2e52-40f2-93b1-86073fe8cb7d",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "cd7d6964-3ef2-4951-bd2e-be457a6945f9",
+      "name": "Press 2",
+      "segments": [
+       {
+        "__segmentId": "af182241-40d3-410f-bb8b-01c6423996da",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "ivr_gather",
+          "conditionSubType": "1.digits",
+          "conditionOperator": "==",
+          "conditionValue": "2",
+          "__conditionId": "d9a5b5e5-fc2b-440e-aaca-c459b1403f55",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Map Caller's input",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "d9a3e452-42de-44cb-8e50-1fe3173132cc",
+    "cd7d6964-3ef2-4951-bd2e-be457a6945f9",
+    "10382693-d1eb-4490-b0d5-c61dcb9cf9ad"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "3e766e31-905c-4d80-b5c3-a06aa0e2e449"
+  },
+  {
+   "id": "d9a3e452-42de-44cb-8e50-1fe3173132cc",
+   "parent": "668684c4-d054-435e-908b-bf8a3e9d5bcd",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Press 1",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "48f4239d-7ba9-4f33-b833-45a8c1beb72c",
+   "sibling": [
+    "cd7d6964-3ef2-4951-bd2e-be457a6945f9",
+    "10382693-d1eb-4490-b0d5-c61dcb9cf9ad"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "668684c4-d054-435e-908b-bf8a3e9d5bcd"
+  },
+  {
+   "id": "48f4239d-7ba9-4f33-b833-45a8c1beb72c",
+   "parent": "d9a3e452-42de-44cb-8e50-1fe3173132cc",
+   "order": 0,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "dd4592c7-4e20-46b0-b820-d96496ed8e7c",
+      "name": "Outside HOO",
+      "segments": [
+       {
+        "__segmentId": "8b85ed84-8188-45b9-8504-b70bdfb63496",
+        "operator": "or",
+        "conditions": [
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "quarter_hour",
+          "conditionOperator": "<=",
+          "conditionValue": "700",
+          "__conditionId": "2e829a58-4546-4bc6-b299-a1a5b5b68a3a",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         },
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "quarter_hour",
+          "conditionOperator": ">=",
+          "conditionValue": "2100",
+          "__conditionId": "9f734359-2cab-49f1-af1e-c179af420a6b",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Condition",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "dd4592c7-4e20-46b0-b820-d96496ed8e7c",
+    "0c652273-803b-4cb1-81aa-49debb0c4640"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "d9a3e452-42de-44cb-8e50-1fe3173132cc"
+  },
+  {
+   "id": "dd4592c7-4e20-46b0-b820-d96496ed8e7c",
+   "parent": "48f4239d-7ba9-4f33-b833-45a8c1beb72c",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Outside HOO",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "93a55d9f-555d-4ce8-b93a-257bb7fd97f2",
+   "sibling": [
+    "0c652273-803b-4cb1-81aa-49debb0c4640"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "48f4239d-7ba9-4f33-b833-45a8c1beb72c"
+  },
+  {
+   "id": "93a55d9f-555d-4ce8-b93a-257bb7fd97f2",
+   "stepIndex": 8,
+   "parent": "dd4592c7-4e20-46b0-b820-d96496ed8e7c",
+   "order": 0,
+   "attributes": {
+    "sayPlayAttributes": {
+     "loop": 1,
+     "widgetType": "play",
+     "message": "Our business hours is between 7 AM to 9 PM. Please leave a message after the beep. When finished, press the pound key.",
+     "type": "ivr_say",
+     "language": "en-US",
+     "voice": "man",
+     "audioUrl": "https://storage.googleapis.com/highlevel-backend.appspot.com/location/Ghstz8eIsHWLeXek47dk/workflow/80479e09-a4de-41ee-94f2-c5cd187ec7e0/c1afd0ff-936e-4b8c-ad00-6f5ea382b76d.mp3",
+     "fileName": "03_After_Hours_Call_Center.mp3"
+    },
+    "isSayPlayOn": true,
+    "timeout": 5,
+    "finishOnKey": "#",
+    "maxLength": 360,
+    "playBeep": true,
+    "type": "ivr_collect_voicemail"
+   },
+   "name": "Record voicemail",
+   "type": "ivr_collect_voicemail",
+   "parentKey": "dd4592c7-4e20-46b0-b820-d96496ed8e7c"
+  },
+  {
+   "id": "0c652273-803b-4cb1-81aa-49debb0c4640",
+   "parent": "48f4239d-7ba9-4f33-b833-45a8c1beb72c",
+   "order": 1,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "7abe69ba-54a2-45e8-8dfe-4465cdb378a6",
+   "sibling": [
+    "dd4592c7-4e20-46b0-b820-d96496ed8e7c"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "48f4239d-7ba9-4f33-b833-45a8c1beb72c"
+  },
+  {
+   "id": "7abe69ba-54a2-45e8-8dfe-4465cdb378a6",
+   "parent": "0c652273-803b-4cb1-81aa-49debb0c4640",
+   "order": 0,
+   "attributes": {
+    "widgetType": "play",
+    "language": "en-US",
+    "voice": "man",
+    "message": "Your call will be recorded for quality and training purposes. Please hold while we connect you",
+    "loop": 1,
+    "type": "ivr_say",
+    "audioUrl": "https://storage.googleapis.com/highlevel-backend.appspot.com/location/Ghstz8eIsHWLeXek47dk/workflow/80479e09-a4de-41ee-94f2-c5cd187ec7e0/da19a311-474b-43e7-b923-624a962cd28f.mp3",
+    "fileName": "07_New_Patient_Transfer.mp3"
+   },
+   "name": "SAY OR PLAY MESSAGE",
+   "type": "ivr_say",
+   "next": "cf4c37dd-b6c5-4dd4-b1f0-550cb675e420",
+   "parentKey": "0c652273-803b-4cb1-81aa-49debb0c4640"
+  },
+  {
+   "id": "cf4c37dd-b6c5-4dd4-b1f0-550cb675e420",
+   "stepIndex": 117,
+   "parent": "0c652273-803b-4cb1-81aa-49debb0c4640",
+   "order": 1,
+   "attributes": {
+    "timeout": 30,
+    "timeLimit": 3600,
+    "userId": "ZddWmHZ8nyFZTlSxoktv",
+    "record": "record-from-answer",
+    "users": [
+     "gbyheHmXUVp2u62YojJR",
+     "mnXehmAswCcViBO5qUBt",
+     "EHhPvu9Y6ryQNFS9vkbZ",
+     "UkwxgaAkGrPwvxlIB7mO",
+     "Cbd5JqqKqs0iYuab6e7z",
+     "dDXQZliJAYwRaYhkRVmX",
+     "xnzKyU5dFwebC7zxmwLq",
+     "k5KXJIQGFcmgaJjY6c1r"
+    ],
+    "customNumbers": [],
+    "detectVoicemail": false,
+    "isSayPlayOn": false,
+    "sayPlayAttributes": {
+     "loop": 1,
+     "widgetType": "say",
+     "message": "This is an automated call from workflows",
+     "language": "en-US",
+     "voice": "woman",
+     "type": "ivr_say"
+    }
+   },
+   "name": "Transfer call to Agent",
+   "type": "ivr_connect_call",
+   "parentKey": "7abe69ba-54a2-45e8-8dfe-4465cdb378a6",
+   "next": "e16710cb-f398-41fd-9ce3-4590e6c64c32"
+  },
+  {
+   "id": "e16710cb-f398-41fd-9ce3-4590e6c64c32",
+   "stepIndex": 15,
+   "parent": "0c652273-803b-4cb1-81aa-49debb0c4640",
+   "order": 2,
+   "attributes": {
+    "sayPlayAttributes": {
+     "loop": 1,
+     "widgetType": "play",
+     "message": "All agents are busy at the moment. Please leave a message after the beep. When finished, press the pound key.",
+     "type": "ivr_say",
+     "language": "en-US",
+     "voice": "man",
+     "audioUrl": "https://storage.googleapis.com/highlevel-backend.appspot.com/location/Ghstz8eIsHWLeXek47dk/workflow/80479e09-a4de-41ee-94f2-c5cd187ec7e0/fc6e8012-cdb4-462e-b3a3-946c462d213b.mp3",
+     "fileName": "08_New_Patient_No_Answer.mp3"
+    },
+    "isSayPlayOn": true,
+    "timeout": 5,
+    "finishOnKey": "#",
+    "maxLength": 360,
+    "playBeep": true,
+    "type": "ivr_collect_voicemail"
+   },
+   "name": "Record voicemail",
+   "type": "ivr_collect_voicemail",
+   "parentKey": "cf4c37dd-b6c5-4dd4-b1f0-550cb675e420"
+  },
+  {
+   "id": "cd7d6964-3ef2-4951-bd2e-be457a6945f9",
+   "parent": "668684c4-d054-435e-908b-bf8a3e9d5bcd",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Press 2",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "828196fc-9655-431a-a234-95bda7be13a6",
+   "sibling": [
+    "d9a3e452-42de-44cb-8e50-1fe3173132cc",
+    "10382693-d1eb-4490-b0d5-c61dcb9cf9ad"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "668684c4-d054-435e-908b-bf8a3e9d5bcd"
+  },
+  {
+   "id": "828196fc-9655-431a-a234-95bda7be13a6",
+   "parentKey": "cd7d6964-3ef2-4951-bd2e-be457a6945f9",
+   "parent": "cd7d6964-3ef2-4951-bd2e-be457a6945f9",
+   "type": "ivr_gather",
+   "name": "Gather Input on call",
+   "attributes": {
+    "loop": 1,
+    "timeout": 5,
+    "numDigits": 1,
+    "enableFinishOnKey": false,
+    "widgetType": "play",
+    "convertToMultipath": false,
+    "name": "Gather Input on call",
+    "type": "ivr_gather",
+    "language": "en-US",
+    "voice": "man",
+    "message": "Please select your clinic location. To call our Richmond clinic, Press 1. To call our Virginia Beach clinic, press 2. To call our Newport News clinic, Press 3. To go back to the main menu, Press 0.",
+    "cat": "",
+    "transitions": [],
+    "audioUrl": "https://storage.googleapis.com/highlevel-backend.appspot.com/location/Ghstz8eIsHWLeXek47dk/workflow/80479e09-a4de-41ee-94f2-c5cd187ec7e0/2480a5ed-0e62-4508-b884-cea5691f18e4.mp3",
+    "fileName": "09_Existing_Patient_Locations.mp3"
+   },
+   "order": 0,
+   "cat": "",
+   "stepIndex": 5,
+   "next": "703989b5-b40c-45bc-b76e-b52a4ad68912"
+  },
+  {
+   "id": "703989b5-b40c-45bc-b76e-b52a4ad68912",
+   "parent": "cd7d6964-3ef2-4951-bd2e-be457a6945f9",
+   "order": 1,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "5a41dce3-602b-4dd0-9394-8f56402e1bbb",
+      "name": "Newport News",
+      "segments": [
+       {
+        "__segmentId": "5e6334ff-da94-41bd-a23e-539e55e91e76",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "ivr_gather",
+          "conditionSubType": "5.digits",
+          "conditionOperator": "==",
+          "conditionValue": "1",
+          "__conditionId": "8a7d7f22-e6fb-4993-b3dd-767447c3982e",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "3cc87434-1892-4145-a5af-ceadf94a543a",
+      "name": "Virginia Beach",
+      "segments": [
+       {
+        "__segmentId": "5e6334ff-da94-41bd-a23e-539e55e91e76",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "ivr_gather",
+          "conditionSubType": "5.digits",
+          "conditionOperator": "==",
+          "conditionValue": "2",
+          "__conditionId": "8a7d7f22-e6fb-4993-b3dd-767447c3982e",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "756bad2a-60b6-4eb3-ad80-4240168c8197",
+      "name": "Richmond",
+      "segments": [
+       {
+        "__segmentId": "5e6334ff-da94-41bd-a23e-539e55e91e76",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "ivr_gather",
+          "conditionSubType": "5.digits",
+          "conditionOperator": "==",
+          "conditionValue": "3",
+          "__conditionId": "8a7d7f22-e6fb-4993-b3dd-767447c3982e",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Condition",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "5a41dce3-602b-4dd0-9394-8f56402e1bbb",
+    "3cc87434-1892-4145-a5af-ceadf94a543a",
+    "756bad2a-60b6-4eb3-ad80-4240168c8197",
+    "75d4ae63-0a5a-4ec6-8c0c-cd137e3ea6c2"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "828196fc-9655-431a-a234-95bda7be13a6"
+  },
+  {
+   "id": "5a41dce3-602b-4dd0-9394-8f56402e1bbb",
+   "parent": "703989b5-b40c-45bc-b76e-b52a4ad68912",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Newport News",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "876c9aee-fc9a-4f41-a1f6-fa015825336f",
+   "sibling": [
+    "3cc87434-1892-4145-a5af-ceadf94a543a",
+    "756bad2a-60b6-4eb3-ad80-4240168c8197",
+    "75d4ae63-0a5a-4ec6-8c0c-cd137e3ea6c2"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "703989b5-b40c-45bc-b76e-b52a4ad68912"
+  },
+  {
+   "id": "876c9aee-fc9a-4f41-a1f6-fa015825336f",
+   "parent": "5a41dce3-602b-4dd0-9394-8f56402e1bbb",
+   "order": 0,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "d0eed1bd-338b-47ac-b6f1-a0abd3510d29",
+      "name": "Tue Thu Fri",
+      "segments": [
+       {
+        "__segmentId": "3b03b28f-f6e1-4488-a4f6-e5df376b4ddf",
+        "operator": "or",
+        "conditions": [
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "day_week",
+          "conditionOperator": "==",
+          "conditionValue": "2",
+          "__conditionId": "9225b697-9878-48d3-a344-5c9af80f3d4c",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         },
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "day_week",
+          "conditionOperator": "==",
+          "conditionValue": "5",
+          "__conditionId": "61a9f945-954e-4d3f-9140-a4554971fd52",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         },
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "day_week",
+          "conditionOperator": "==",
+          "conditionValue": "4",
+          "__conditionId": "f2d009f3-4be9-4597-a6f4-8034e3f43336",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         }
+        ]
+       },
+       {
+        "__segmentId": "67a236dd-68d5-483c-b7b4-409879bef0a1",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "quarter_hour",
+          "conditionOperator": ">=",
+          "conditionValue": "900",
+          "__conditionId": "2dddb967-9c76-4498-b1c7-666d6f8c0331",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         },
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "quarter_hour",
+          "conditionOperator": "<=",
+          "conditionValue": "1700",
+          "__conditionId": "befdfd3a-475d-4660-9a10-4f75ee99a31c",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "43e822f4-50f1-463c-a439-876a3695ee0e",
+      "name": "Sat",
+      "segments": [
+       {
+        "__segmentId": "3b03b28f-f6e1-4488-a4f6-e5df376b4ddf",
+        "operator": "or",
+        "conditions": [
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "day_week",
+          "conditionOperator": "==",
+          "conditionValue": "6",
+          "__conditionId": "9225b697-9878-48d3-a344-5c9af80f3d4c",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         }
+        ]
+       },
+       {
+        "__segmentId": "67a236dd-68d5-483c-b7b4-409879bef0a1",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "quarter_hour",
+          "conditionOperator": ">=",
+          "conditionValue": "900",
+          "__conditionId": "2dddb967-9c76-4498-b1c7-666d6f8c0331",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         },
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "quarter_hour",
+          "conditionOperator": "<=",
+          "conditionValue": "1500",
+          "__conditionId": "befdfd3a-475d-4660-9a10-4f75ee99a31c",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "HOO",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "d0eed1bd-338b-47ac-b6f1-a0abd3510d29",
+    "43e822f4-50f1-463c-a439-876a3695ee0e",
+    "7adc3468-f390-489c-a67c-37e627b91fd0"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "5a41dce3-602b-4dd0-9394-8f56402e1bbb"
+  },
+  {
+   "id": "d0eed1bd-338b-47ac-b6f1-a0abd3510d29",
+   "parent": "876c9aee-fc9a-4f41-a1f6-fa015825336f",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Tue Thu Fri",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "24269b02-a8bb-4f58-8030-f5714b310542",
+   "sibling": [
+    "43e822f4-50f1-463c-a439-876a3695ee0e",
+    "7adc3468-f390-489c-a67c-37e627b91fd0"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "876c9aee-fc9a-4f41-a1f6-fa015825336f"
+  },
+  {
+   "id": "24269b02-a8bb-4f58-8030-f5714b310542",
+   "parent": "d0eed1bd-338b-47ac-b6f1-a0abd3510d29",
+   "order": 0,
+   "attributes": {
+    "widgetType": "play",
+    "language": "en-US",
+    "voice": "woman",
+    "message": "Please hold while we connect you.",
+    "loop": 1,
+    "type": "ivr_say",
+    "audioUrl": "https://storage.googleapis.com/highlevel-backend.appspot.com/location/Ghstz8eIsHWLeXek47dk/workflow/80479e09-a4de-41ee-94f2-c5cd187ec7e0/8ff3cac8-6078-4011-ad72-5197e268b2b2.mp3",
+    "fileName": "10_NPN_Transfer.mp3"
+   },
+   "name": "SAY OR PLAY MESSAGE",
+   "type": "ivr_say",
+   "next": "f5b15df5-88da-4def-a810-b668a95ccb5f",
+   "parentKey": "d0eed1bd-338b-47ac-b6f1-a0abd3510d29"
+  },
+  {
+   "id": "f5b15df5-88da-4def-a810-b668a95ccb5f",
+   "stepIndex": 118,
+   "parent": "d0eed1bd-338b-47ac-b6f1-a0abd3510d29",
+   "order": 1,
+   "attributes": {
+    "timeout": 10,
+    "timeLimit": 3600,
+    "userId": "",
+    "users": [],
+    "detectVoicemail": false,
+    "customNumbers": [
+     {
+      "country": "US",
+      "phone": "+17576124408",
+      "displayValue": "(757) 612-4408",
+      "isValid": true
+     }
+    ]
+   },
+   "name": "Connect Call: +17576124408 RINGCENTRAL",
+   "type": "ivr_connect_call",
+   "parentKey": "24269b02-a8bb-4f58-8030-f5714b310542"
+  },
+  {
+   "id": "43e822f4-50f1-463c-a439-876a3695ee0e",
+   "parent": "876c9aee-fc9a-4f41-a1f6-fa015825336f",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Sat",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "c9654257-9901-42d7-87ec-04a77bc30b7b",
+   "sibling": [
+    "d0eed1bd-338b-47ac-b6f1-a0abd3510d29",
+    "7adc3468-f390-489c-a67c-37e627b91fd0"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "876c9aee-fc9a-4f41-a1f6-fa015825336f"
+  },
+  {
+   "id": "c9654257-9901-42d7-87ec-04a77bc30b7b",
+   "parent": "43e822f4-50f1-463c-a439-876a3695ee0e",
+   "order": 0,
+   "attributes": {
+    "targetNodeId": "24269b02-a8bb-4f58-8030-f5714b310542",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "43e822f4-50f1-463c-a439-876a3695ee0e"
+  },
+  {
+   "id": "7adc3468-f390-489c-a67c-37e627b91fd0",
+   "parent": "876c9aee-fc9a-4f41-a1f6-fa015825336f",
+   "order": 1,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "0f4240fe-0f79-4dd7-ae7a-2b3dc89d7cbb",
+   "sibling": [
+    "d0eed1bd-338b-47ac-b6f1-a0abd3510d29",
+    "43e822f4-50f1-463c-a439-876a3695ee0e"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "876c9aee-fc9a-4f41-a1f6-fa015825336f"
+  },
+  {
+   "id": "0f4240fe-0f79-4dd7-ae7a-2b3dc89d7cbb",
+   "parent": "7adc3468-f390-489c-a67c-37e627b91fd0",
+   "order": 0,
+   "attributes": {
+    "widgetType": "play",
+    "language": "en-US",
+    "voice": "woman",
+    "message": "Hello, this is an automated message",
+    "loop": 1,
+    "audioUrl": "https://storage.googleapis.com/highlevel-backend.appspot.com/location/Ghstz8eIsHWLeXek47dk/workflow/80479e09-a4de-41ee-94f2-c5cd187ec7e0/627d9252-f691-4942-ac00-5807ae533457.mp3",
+    "fileName": "11_NPN_After_Hours.mp3",
+    "type": "ivr_say"
+   },
+   "name": "SAY OR PLAY MESSAGE",
+   "type": "ivr_say",
+   "next": "869765c8-f642-4a04-8ea0-f3927bd2a37b",
+   "parentKey": "7adc3468-f390-489c-a67c-37e627b91fd0"
+  },
+  {
+   "id": "869765c8-f642-4a04-8ea0-f3927bd2a37b",
+   "parent": "7adc3468-f390-489c-a67c-37e627b91fd0",
+   "order": 1,
+   "attributes": {
+    "targetNodeId": "f5b15df5-88da-4def-a810-b668a95ccb5f",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "0f4240fe-0f79-4dd7-ae7a-2b3dc89d7cbb"
+  },
+  {
+   "id": "3cc87434-1892-4145-a5af-ceadf94a543a",
+   "parent": "703989b5-b40c-45bc-b76e-b52a4ad68912",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Virginia Beach",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "155ad454-0245-460e-aa5b-1bf3b08ae06f",
+   "sibling": [
+    "5a41dce3-602b-4dd0-9394-8f56402e1bbb",
+    "756bad2a-60b6-4eb3-ad80-4240168c8197",
+    "75d4ae63-0a5a-4ec6-8c0c-cd137e3ea6c2"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "703989b5-b40c-45bc-b76e-b52a4ad68912"
+  },
+  {
+   "id": "155ad454-0245-460e-aa5b-1bf3b08ae06f",
+   "parent": "3cc87434-1892-4145-a5af-ceadf94a543a",
+   "order": 0,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "2a02b38f-50fd-46a0-9a26-0e3c84423c9d",
+      "name": "M-F",
+      "segments": [
+       {
+        "__segmentId": "7899ec76-ef95-4d3d-beb8-6a44679f2ef6",
+        "operator": "or",
+        "conditions": [
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "day_week",
+          "conditionOperator": "==",
+          "conditionValue": "1",
+          "__conditionId": "0fa79edd-f6c1-4ea9-8ee0-b172006e059c",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         },
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "day_week",
+          "conditionOperator": "==",
+          "conditionValue": "5",
+          "__conditionId": "70c58e2b-81b3-447d-b2ac-e408f59e5919",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         }
+        ]
+       },
+       {
+        "__segmentId": "1862870c-04f0-4471-b9e0-ad0cde0e3fb7",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "quarter_hour",
+          "conditionOperator": ">=",
+          "conditionValue": "800",
+          "__conditionId": "67d497ce-8859-4476-ab00-659ef58d959a",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         },
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "quarter_hour",
+          "conditionOperator": "<=",
+          "conditionValue": "1800",
+          "__conditionId": "485b2d16-0ec6-4e7d-a222-02c268fc2a5d",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "abb7e939-b9f6-41cb-8de3-e9f0de3057b3",
+      "name": "Tue Wed Thu",
+      "segments": [
+       {
+        "__segmentId": "3b03b28f-f6e1-4488-a4f6-e5df376b4ddf",
+        "operator": "or",
+        "conditions": [
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "day_week",
+          "conditionOperator": "==",
+          "conditionValue": "2",
+          "__conditionId": "9225b697-9878-48d3-a344-5c9af80f3d4c",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         },
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "day_week",
+          "conditionOperator": "==",
+          "conditionValue": "3",
+          "__conditionId": "61a9f945-954e-4d3f-9140-a4554971fd52",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         },
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "day_week",
+          "conditionOperator": "==",
+          "conditionValue": "4",
+          "__conditionId": "f2d009f3-4be9-4597-a6f4-8034e3f43336",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         }
+        ]
+       },
+       {
+        "__segmentId": "67a236dd-68d5-483c-b7b4-409879bef0a1",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "quarter_hour",
+          "conditionOperator": ">=",
+          "conditionValue": "900",
+          "__conditionId": "2dddb967-9c76-4498-b1c7-666d6f8c0331",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         },
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "quarter_hour",
+          "conditionOperator": "<=",
+          "conditionValue": "1700",
+          "__conditionId": "befdfd3a-475d-4660-9a10-4f75ee99a31c",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "8af40703-d2a8-407b-9393-5506ca7aec46",
+      "name": "Sat",
+      "segments": [
+       {
+        "__segmentId": "3b03b28f-f6e1-4488-a4f6-e5df376b4ddf",
+        "operator": "or",
+        "conditions": [
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "day_week",
+          "conditionOperator": "==",
+          "conditionValue": "6",
+          "__conditionId": "9225b697-9878-48d3-a344-5c9af80f3d4c",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         }
+        ]
+       },
+       {
+        "__segmentId": "67a236dd-68d5-483c-b7b4-409879bef0a1",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "quarter_hour",
+          "conditionOperator": ">=",
+          "conditionValue": "900",
+          "__conditionId": "2dddb967-9c76-4498-b1c7-666d6f8c0331",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         },
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "quarter_hour",
+          "conditionOperator": "<=",
+          "conditionValue": "1500",
+          "__conditionId": "befdfd3a-475d-4660-9a10-4f75ee99a31c",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "HOO",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "2a02b38f-50fd-46a0-9a26-0e3c84423c9d",
+    "abb7e939-b9f6-41cb-8de3-e9f0de3057b3",
+    "8af40703-d2a8-407b-9393-5506ca7aec46",
+    "341bacb7-b155-46ef-b11f-5ce2b1d525f8"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "3cc87434-1892-4145-a5af-ceadf94a543a"
+  },
+  {
+   "id": "2a02b38f-50fd-46a0-9a26-0e3c84423c9d",
+   "parent": "155ad454-0245-460e-aa5b-1bf3b08ae06f",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "M-F",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "2300b9b8-1456-4854-85f6-3e72e4a52847",
+   "sibling": [
+    "abb7e939-b9f6-41cb-8de3-e9f0de3057b3",
+    "8af40703-d2a8-407b-9393-5506ca7aec46",
+    "341bacb7-b155-46ef-b11f-5ce2b1d525f8"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "155ad454-0245-460e-aa5b-1bf3b08ae06f"
+  },
+  {
+   "id": "2300b9b8-1456-4854-85f6-3e72e4a52847",
+   "parent": "2a02b38f-50fd-46a0-9a26-0e3c84423c9d",
+   "order": 0,
+   "attributes": {
+    "widgetType": "play",
+    "language": "en-US",
+    "voice": "woman",
+    "message": "Please hold while we connect you.",
+    "loop": 1,
+    "type": "ivr_say",
+    "audioUrl": "https://storage.googleapis.com/highlevel-backend.appspot.com/location/Ghstz8eIsHWLeXek47dk/workflow/80479e09-a4de-41ee-94f2-c5cd187ec7e0/7456ed7b-4189-4fed-9967-89ac7cc27ef6.mp3",
+    "fileName": "12_VB_Transfer.mp3"
+   },
+   "name": "SAY OR PLAY MESSAGE",
+   "type": "ivr_say",
+   "next": "3fcd5484-cb3e-4e89-8eab-350198eab8d6",
+   "parentKey": "2a02b38f-50fd-46a0-9a26-0e3c84423c9d"
+  },
+  {
+   "id": "3fcd5484-cb3e-4e89-8eab-350198eab8d6",
+   "stepIndex": 112,
+   "parent": "2a02b38f-50fd-46a0-9a26-0e3c84423c9d",
+   "order": 1,
+   "attributes": {
+    "timeout": 10,
+    "timeLimit": 3600,
+    "userId": "",
+    "users": [],
+    "detectVoicemail": false,
+    "customNumbers": [
+     {
+      "country": "US",
+      "phone": "+17576124420",
+      "displayValue": "(757) 612-4420",
+      "isValid": true
+     }
+    ]
+   },
+   "name": "Connect Call: +17576124420 RINGCENTRAL",
+   "type": "ivr_connect_call",
+   "parentKey": "2300b9b8-1456-4854-85f6-3e72e4a52847"
+  },
+  {
+   "id": "abb7e939-b9f6-41cb-8de3-e9f0de3057b3",
+   "parent": "155ad454-0245-460e-aa5b-1bf3b08ae06f",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Tue Wed Thu",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "1b462698-786f-4e43-9b52-acde2a7e6953",
+   "sibling": [
+    "2a02b38f-50fd-46a0-9a26-0e3c84423c9d",
+    "8af40703-d2a8-407b-9393-5506ca7aec46",
+    "341bacb7-b155-46ef-b11f-5ce2b1d525f8"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "155ad454-0245-460e-aa5b-1bf3b08ae06f"
+  },
+  {
+   "id": "1b462698-786f-4e43-9b52-acde2a7e6953",
+   "parent": "abb7e939-b9f6-41cb-8de3-e9f0de3057b3",
+   "order": 0,
+   "attributes": {
+    "targetNodeId": "2300b9b8-1456-4854-85f6-3e72e4a52847",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "abb7e939-b9f6-41cb-8de3-e9f0de3057b3"
+  },
+  {
+   "id": "8af40703-d2a8-407b-9393-5506ca7aec46",
+   "parent": "155ad454-0245-460e-aa5b-1bf3b08ae06f",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Sat",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "57eccd28-ed22-4119-9cf0-df2fca177a77",
+   "sibling": [
+    "2a02b38f-50fd-46a0-9a26-0e3c84423c9d",
+    "abb7e939-b9f6-41cb-8de3-e9f0de3057b3",
+    "341bacb7-b155-46ef-b11f-5ce2b1d525f8"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "155ad454-0245-460e-aa5b-1bf3b08ae06f"
+  },
+  {
+   "id": "57eccd28-ed22-4119-9cf0-df2fca177a77",
+   "parent": "8af40703-d2a8-407b-9393-5506ca7aec46",
+   "order": 0,
+   "attributes": {
+    "targetNodeId": "2300b9b8-1456-4854-85f6-3e72e4a52847",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "8af40703-d2a8-407b-9393-5506ca7aec46"
+  },
+  {
+   "id": "341bacb7-b155-46ef-b11f-5ce2b1d525f8",
+   "parent": "155ad454-0245-460e-aa5b-1bf3b08ae06f",
+   "order": 1,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "02f40a42-a945-49d5-b7f5-0fe906f18d5c",
+   "sibling": [
+    "2a02b38f-50fd-46a0-9a26-0e3c84423c9d",
+    "abb7e939-b9f6-41cb-8de3-e9f0de3057b3",
+    "8af40703-d2a8-407b-9393-5506ca7aec46"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "155ad454-0245-460e-aa5b-1bf3b08ae06f"
+  },
+  {
+   "id": "02f40a42-a945-49d5-b7f5-0fe906f18d5c",
+   "parent": "341bacb7-b155-46ef-b11f-5ce2b1d525f8",
+   "order": 0,
+   "attributes": {
+    "widgetType": "play",
+    "language": "en-US",
+    "voice": "woman",
+    "message": "Hello, this is an automated message",
+    "loop": 1,
+    "audioUrl": "https://storage.googleapis.com/highlevel-backend.appspot.com/location/Ghstz8eIsHWLeXek47dk/workflow/80479e09-a4de-41ee-94f2-c5cd187ec7e0/2057be4f-1d0d-481a-be8e-7b9da293354b.mp3",
+    "fileName": "13_VB_After_Hours.mp3",
+    "type": "ivr_say"
+   },
+   "name": "SAY OR PLAY MESSAGE",
+   "type": "ivr_say",
+   "next": "bd52614a-7306-49f0-9bcd-f87ec36f4fea",
+   "parentKey": "341bacb7-b155-46ef-b11f-5ce2b1d525f8"
+  },
+  {
+   "id": "bd52614a-7306-49f0-9bcd-f87ec36f4fea",
+   "parent": "341bacb7-b155-46ef-b11f-5ce2b1d525f8",
+   "order": 1,
+   "attributes": {
+    "targetNodeId": "3fcd5484-cb3e-4e89-8eab-350198eab8d6",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "02f40a42-a945-49d5-b7f5-0fe906f18d5c"
+  },
+  {
+   "id": "756bad2a-60b6-4eb3-ad80-4240168c8197",
+   "parent": "703989b5-b40c-45bc-b76e-b52a4ad68912",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Richmond",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "ac966b60-e9b5-4968-b147-71ed72dfb294",
+   "sibling": [
+    "5a41dce3-602b-4dd0-9394-8f56402e1bbb",
+    "3cc87434-1892-4145-a5af-ceadf94a543a",
+    "75d4ae63-0a5a-4ec6-8c0c-cd137e3ea6c2"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "703989b5-b40c-45bc-b76e-b52a4ad68912"
+  },
+  {
+   "id": "ac966b60-e9b5-4968-b147-71ed72dfb294",
+   "parent": "756bad2a-60b6-4eb3-ad80-4240168c8197",
+   "order": 0,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "b1ee1a34-f4f0-4628-ad99-7af162a65234",
+      "name": "M-F",
+      "segments": [
+       {
+        "__segmentId": "7899ec76-ef95-4d3d-beb8-6a44679f2ef6",
+        "operator": "or",
+        "conditions": [
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "day_week",
+          "conditionOperator": "==",
+          "conditionValue": "1",
+          "__conditionId": "0fa79edd-f6c1-4ea9-8ee0-b172006e059c",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         },
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "day_week",
+          "conditionOperator": "==",
+          "conditionValue": "5",
+          "__conditionId": "70c58e2b-81b3-447d-b2ac-e408f59e5919",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         }
+        ]
+       },
+       {
+        "__segmentId": "1862870c-04f0-4471-b9e0-ad0cde0e3fb7",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "quarter_hour",
+          "conditionOperator": ">=",
+          "conditionValue": "800",
+          "__conditionId": "67d497ce-8859-4476-ab00-659ef58d959a",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         },
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "quarter_hour",
+          "conditionOperator": "<=",
+          "conditionValue": "1800",
+          "__conditionId": "485b2d16-0ec6-4e7d-a222-02c268fc2a5d",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "409e91c7-9910-46ee-aa35-6094ccf0e52f",
+      "name": "Tue Wed Thu",
+      "segments": [
+       {
+        "__segmentId": "3b03b28f-f6e1-4488-a4f6-e5df376b4ddf",
+        "operator": "or",
+        "conditions": [
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "day_week",
+          "conditionOperator": "==",
+          "conditionValue": "2",
+          "__conditionId": "9225b697-9878-48d3-a344-5c9af80f3d4c",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         },
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "day_week",
+          "conditionOperator": "==",
+          "conditionValue": "3",
+          "__conditionId": "61a9f945-954e-4d3f-9140-a4554971fd52",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         },
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "day_week",
+          "conditionOperator": "==",
+          "conditionValue": "4",
+          "__conditionId": "f2d009f3-4be9-4597-a6f4-8034e3f43336",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         }
+        ]
+       },
+       {
+        "__segmentId": "67a236dd-68d5-483c-b7b4-409879bef0a1",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "quarter_hour",
+          "conditionOperator": ">=",
+          "conditionValue": "900",
+          "__conditionId": "2dddb967-9c76-4498-b1c7-666d6f8c0331",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         },
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "quarter_hour",
+          "conditionOperator": "<=",
+          "conditionValue": "1700",
+          "__conditionId": "befdfd3a-475d-4660-9a10-4f75ee99a31c",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "e961dcf9-7182-4dc0-831f-2b82163da3fb",
+      "name": "Sat",
+      "segments": [
+       {
+        "__segmentId": "3b03b28f-f6e1-4488-a4f6-e5df376b4ddf",
+        "operator": "or",
+        "conditions": [
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "day_week",
+          "conditionOperator": "==",
+          "conditionValue": "6",
+          "__conditionId": "9225b697-9878-48d3-a344-5c9af80f3d4c",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         }
+        ]
+       },
+       {
+        "__segmentId": "67a236dd-68d5-483c-b7b4-409879bef0a1",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "quarter_hour",
+          "conditionOperator": ">=",
+          "conditionValue": "900",
+          "__conditionId": "2dddb967-9c76-4498-b1c7-666d6f8c0331",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         },
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "quarter_hour",
+          "conditionOperator": "<=",
+          "conditionValue": "1500",
+          "__conditionId": "befdfd3a-475d-4660-9a10-4f75ee99a31c",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "HOO",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "b1ee1a34-f4f0-4628-ad99-7af162a65234",
+    "409e91c7-9910-46ee-aa35-6094ccf0e52f",
+    "e961dcf9-7182-4dc0-831f-2b82163da3fb",
+    "5e96acfd-db37-4bff-980c-52ff1a57aa1b"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "756bad2a-60b6-4eb3-ad80-4240168c8197"
+  },
+  {
+   "id": "b1ee1a34-f4f0-4628-ad99-7af162a65234",
+   "parent": "ac966b60-e9b5-4968-b147-71ed72dfb294",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "M-F",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "d90a0719-7cab-4cb5-991f-e67f4762225b",
+   "sibling": [
+    "409e91c7-9910-46ee-aa35-6094ccf0e52f",
+    "e961dcf9-7182-4dc0-831f-2b82163da3fb",
+    "5e96acfd-db37-4bff-980c-52ff1a57aa1b"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "ac966b60-e9b5-4968-b147-71ed72dfb294"
+  },
+  {
+   "id": "d90a0719-7cab-4cb5-991f-e67f4762225b",
+   "parent": "b1ee1a34-f4f0-4628-ad99-7af162a65234",
+   "order": 0,
+   "attributes": {
+    "widgetType": "play",
+    "language": "en-US",
+    "voice": "woman",
+    "message": "Please hold while we connect you.",
+    "loop": 1,
+    "type": "ivr_say",
+    "audioUrl": "https://storage.googleapis.com/highlevel-backend.appspot.com/location/Ghstz8eIsHWLeXek47dk/workflow/80479e09-a4de-41ee-94f2-c5cd187ec7e0/0a6b6ab6-4462-4d07-a80c-1dc20916217e.mp3",
+    "fileName": "14_RVA_Transfer.mp3"
+   },
+   "name": "SAY OR PLAY MESSAGE",
+   "type": "ivr_say",
+   "next": "e5ba485d-28b4-45fc-8d0a-84f10b6af5e2",
+   "parentKey": "b1ee1a34-f4f0-4628-ad99-7af162a65234"
+  },
+  {
+   "id": "e5ba485d-28b4-45fc-8d0a-84f10b6af5e2",
+   "stepIndex": 111,
+   "parent": "b1ee1a34-f4f0-4628-ad99-7af162a65234",
+   "order": 1,
+   "attributes": {
+    "timeout": 10,
+    "timeLimit": 3600,
+    "userId": "",
+    "users": [],
+    "detectVoicemail": false,
+    "customNumbers": [
+     {
+      "country": "US",
+      "phone": "+18042730344",
+      "displayValue": "(804) 273-0344",
+      "isValid": true
+     }
+    ]
+   },
+   "name": "Connect Call: +18042730344 RINGCENTRAL",
+   "type": "ivr_connect_call",
+   "parentKey": "d90a0719-7cab-4cb5-991f-e67f4762225b"
+  },
+  {
+   "id": "409e91c7-9910-46ee-aa35-6094ccf0e52f",
+   "parent": "ac966b60-e9b5-4968-b147-71ed72dfb294",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Tue Wed Thu",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "5b8ea4ff-4a91-4a99-b353-519e8b6e83e6",
+   "sibling": [
+    "b1ee1a34-f4f0-4628-ad99-7af162a65234",
+    "e961dcf9-7182-4dc0-831f-2b82163da3fb",
+    "5e96acfd-db37-4bff-980c-52ff1a57aa1b"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "ac966b60-e9b5-4968-b147-71ed72dfb294"
+  },
+  {
+   "id": "5b8ea4ff-4a91-4a99-b353-519e8b6e83e6",
+   "parent": "409e91c7-9910-46ee-aa35-6094ccf0e52f",
+   "order": 0,
+   "attributes": {
+    "targetNodeId": "d90a0719-7cab-4cb5-991f-e67f4762225b",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "409e91c7-9910-46ee-aa35-6094ccf0e52f"
+  },
+  {
+   "id": "e961dcf9-7182-4dc0-831f-2b82163da3fb",
+   "parent": "ac966b60-e9b5-4968-b147-71ed72dfb294",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Sat",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "51d82abb-e3b1-4ee7-a626-81a5b4681acd",
+   "sibling": [
+    "b1ee1a34-f4f0-4628-ad99-7af162a65234",
+    "409e91c7-9910-46ee-aa35-6094ccf0e52f",
+    "5e96acfd-db37-4bff-980c-52ff1a57aa1b"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "ac966b60-e9b5-4968-b147-71ed72dfb294"
+  },
+  {
+   "id": "51d82abb-e3b1-4ee7-a626-81a5b4681acd",
+   "parent": "e961dcf9-7182-4dc0-831f-2b82163da3fb",
+   "order": 0,
+   "attributes": {
+    "targetNodeId": "d90a0719-7cab-4cb5-991f-e67f4762225b",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "e961dcf9-7182-4dc0-831f-2b82163da3fb"
+  },
+  {
+   "id": "5e96acfd-db37-4bff-980c-52ff1a57aa1b",
+   "parent": "ac966b60-e9b5-4968-b147-71ed72dfb294",
+   "order": 1,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "fbdb0906-8a27-4303-aab9-82818be19df7",
+   "sibling": [
+    "b1ee1a34-f4f0-4628-ad99-7af162a65234",
+    "409e91c7-9910-46ee-aa35-6094ccf0e52f",
+    "e961dcf9-7182-4dc0-831f-2b82163da3fb"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "ac966b60-e9b5-4968-b147-71ed72dfb294"
+  },
+  {
+   "id": "fbdb0906-8a27-4303-aab9-82818be19df7",
+   "parent": "5e96acfd-db37-4bff-980c-52ff1a57aa1b",
+   "order": 0,
+   "attributes": {
+    "widgetType": "play",
+    "language": "en-US",
+    "voice": "woman",
+    "message": "Hello, this is an automated message",
+    "loop": 1,
+    "audioUrl": "https://storage.googleapis.com/highlevel-backend.appspot.com/location/Ghstz8eIsHWLeXek47dk/workflow/80479e09-a4de-41ee-94f2-c5cd187ec7e0/59e87aa9-ad08-4368-b395-2e3be04d9be1.mp3",
+    "fileName": "15_RVA_After_Hours.mp3",
+    "type": "ivr_say"
+   },
+   "name": "SAY OR PLAY MESSAGE",
+   "type": "ivr_say",
+   "next": "99fd3c4c-4389-4ee0-9592-a6c11d98e3b4",
+   "parentKey": "5e96acfd-db37-4bff-980c-52ff1a57aa1b"
+  },
+  {
+   "id": "99fd3c4c-4389-4ee0-9592-a6c11d98e3b4",
+   "parent": "5e96acfd-db37-4bff-980c-52ff1a57aa1b",
+   "order": 1,
+   "attributes": {
+    "targetNodeId": "e5ba485d-28b4-45fc-8d0a-84f10b6af5e2",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "fbdb0906-8a27-4303-aab9-82818be19df7"
+  },
+  {
+   "id": "75d4ae63-0a5a-4ec6-8c0c-cd137e3ea6c2",
+   "parent": "703989b5-b40c-45bc-b76e-b52a4ad68912",
+   "order": 2,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "e51ea3c2-f430-4761-bd20-5c84854e2d2e",
+   "sibling": [
+    "5a41dce3-602b-4dd0-9394-8f56402e1bbb",
+    "3cc87434-1892-4145-a5af-ceadf94a543a",
+    "756bad2a-60b6-4eb3-ad80-4240168c8197"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "703989b5-b40c-45bc-b76e-b52a4ad68912"
+  },
+  {
+   "id": "e51ea3c2-f430-4761-bd20-5c84854e2d2e",
+   "parent": "75d4ae63-0a5a-4ec6-8c0c-cd137e3ea6c2",
+   "order": 0,
+   "attributes": {
+    "widgetType": "play",
+    "language": "en-US",
+    "voice": "man",
+    "message": "Sorry, that is not a valid option. Please try  again.",
+    "loop": 1,
+    "type": "ivr_say",
+    "audioUrl": "https://storage.googleapis.com/highlevel-backend.appspot.com/location/Ghstz8eIsHWLeXek47dk/workflow/80479e09-a4de-41ee-94f2-c5cd187ec7e0/2b02dd3f-1a5b-4b6b-9f9e-0b57a1d44852.mp3",
+    "fileName": "04_Invalid_Key_First.mp3"
+   },
+   "name": "SAY OR PLAY MESSAGE",
+   "type": "ivr_say",
+   "next": "294ac339-522c-49d9-ac1b-5060210d26ff",
+   "parentKey": "75d4ae63-0a5a-4ec6-8c0c-cd137e3ea6c2"
+  },
+  {
+   "id": "294ac339-522c-49d9-ac1b-5060210d26ff",
+   "parent": "75d4ae63-0a5a-4ec6-8c0c-cd137e3ea6c2",
+   "order": 1,
+   "attributes": {
+    "targetNodeId": "828196fc-9655-431a-a234-95bda7be13a6",
+    "type": "goto",
+    "loopIdentified": true
+   },
+   "name": "Loop Locked Go To",
+   "type": "goto",
+   "parentKey": "e51ea3c2-f430-4761-bd20-5c84854e2d2e"
+  },
+  {
+   "id": "10382693-d1eb-4490-b0d5-c61dcb9cf9ad",
+   "parent": "668684c4-d054-435e-908b-bf8a3e9d5bcd",
+   "order": 2,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "2c20d0e4-39d6-47d6-acd7-a275fa61bb8f",
+   "sibling": [
+    "d9a3e452-42de-44cb-8e50-1fe3173132cc",
+    "cd7d6964-3ef2-4951-bd2e-be457a6945f9"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "668684c4-d054-435e-908b-bf8a3e9d5bcd"
+  },
+  {
+   "id": "2c20d0e4-39d6-47d6-acd7-a275fa61bb8f",
+   "parent": "10382693-d1eb-4490-b0d5-c61dcb9cf9ad",
+   "order": 0,
+   "attributes": {
+    "widgetType": "play",
+    "language": "en-US",
+    "voice": "man",
+    "message": "Sorry, that is not a valid option. Please listen to the options again and make a valid selection.",
+    "loop": 1,
+    "type": "ivr_say",
+    "audioUrl": "https://storage.googleapis.com/highlevel-backend.appspot.com/location/Ghstz8eIsHWLeXek47dk/workflow/80479e09-a4de-41ee-94f2-c5cd187ec7e0/60904d10-51cc-48d3-a060-88a8b15036a6.mp3",
+    "fileName": "04_Invalid_Key_First.mp3"
+   },
+   "name": "When no condition is matched",
+   "type": "ivr_say",
+   "next": "b276f559-81de-42e2-9ed9-1f36e60b706a",
+   "parentKey": "10382693-d1eb-4490-b0d5-c61dcb9cf9ad"
+  },
+  {
+   "id": "b276f559-81de-42e2-9ed9-1f36e60b706a",
+   "stepIndex": 1,
+   "parent": "10382693-d1eb-4490-b0d5-c61dcb9cf9ad",
+   "order": 1,
+   "attributes": {
+    "loop": 1,
+    "timeout": 5,
+    "enableFinishOnKey": false,
+    "widgetType": "play",
+    "type": "ivr_gather",
+    "language": "en-US",
+    "voice": "man",
+    "message": "For new patient consultation, press 1. For existing patients, press 2. To leave a voicemail, Press 3.",
+    "numDigits": 1,
+    "convertToMultipath": false,
+    "name": "Collect Input from the Caller",
+    "cat": "",
+    "transitions": [],
+    "audioUrl": "https://storage.googleapis.com/highlevel-backend.appspot.com/location/Ghstz8eIsHWLeXek47dk/workflow/80479e09-a4de-41ee-94f2-c5cd187ec7e0/d41b3694-0d32-413d-a23d-31c9f0752791.mp3",
+    "fileName": "02_Main_Menu_During_Hours.mp3"
+   },
+   "name": "Collect Input from the Caller",
+   "type": "ivr_gather",
+   "next": "a99c7f57-a38b-4a91-8773-4a0a8e3778f7",
+   "parentKey": "2c20d0e4-39d6-47d6-acd7-a275fa61bb8f",
+   "cat": ""
+  },
+  {
+   "id": "a99c7f57-a38b-4a91-8773-4a0a8e3778f7",
+   "parent": "10382693-d1eb-4490-b0d5-c61dcb9cf9ad",
+   "order": 2,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "b7d28bac-b503-49ef-9c5f-f4aa9572cc11",
+      "name": "Press 1",
+      "segments": [
+       {
+        "__segmentId": "932594ce-1569-4e7b-8325-45610b0dfb4d",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "ivr_gather",
+          "conditionSubType": "1.digits",
+          "conditionOperator": "==",
+          "conditionValue": "1",
+          "__conditionId": "81122ffd-3822-4e47-9880-303995399036",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "6a1da71d-a669-4e97-9dd3-9bb65d8f072e",
+      "name": "Press 2",
+      "segments": [
+       {
+        "__segmentId": "fe6877b1-ee16-4259-8e20-df22524a6ab9",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "ivr_gather",
+          "conditionSubType": "1.digits",
+          "conditionOperator": "==",
+          "conditionValue": "2",
+          "__conditionId": "22da1fad-b3f8-46c3-8203-dbf7ff8c57fc",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Map Caller's input",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "b7d28bac-b503-49ef-9c5f-f4aa9572cc11",
+    "6a1da71d-a669-4e97-9dd3-9bb65d8f072e",
+    "49266232-8eb4-4bed-b5c8-97786796ea2d"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "b276f559-81de-42e2-9ed9-1f36e60b706a"
+  },
+  {
+   "id": "b7d28bac-b503-49ef-9c5f-f4aa9572cc11",
+   "parent": "a99c7f57-a38b-4a91-8773-4a0a8e3778f7",
+   "order": 3,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Press 1",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "96747e6d-bac7-4ace-80f5-1b76afdd2cb0",
+   "sibling": [
+    "6a1da71d-a669-4e97-9dd3-9bb65d8f072e",
+    "49266232-8eb4-4bed-b5c8-97786796ea2d"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "a99c7f57-a38b-4a91-8773-4a0a8e3778f7"
+  },
+  {
+   "id": "96747e6d-bac7-4ace-80f5-1b76afdd2cb0",
+   "parent": "b7d28bac-b503-49ef-9c5f-f4aa9572cc11",
+   "order": 0,
+   "attributes": {
+    "targetNodeId": "48f4239d-7ba9-4f33-b833-45a8c1beb72c",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "b7d28bac-b503-49ef-9c5f-f4aa9572cc11"
+  },
+  {
+   "id": "6a1da71d-a669-4e97-9dd3-9bb65d8f072e",
+   "parent": "a99c7f57-a38b-4a91-8773-4a0a8e3778f7",
+   "order": 3,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Press 2",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "b260216d-39c1-4b49-b6dd-cbf619e470cd",
+   "sibling": [
+    "b7d28bac-b503-49ef-9c5f-f4aa9572cc11",
+    "49266232-8eb4-4bed-b5c8-97786796ea2d"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "a99c7f57-a38b-4a91-8773-4a0a8e3778f7"
+  },
+  {
+   "id": "b260216d-39c1-4b49-b6dd-cbf619e470cd",
+   "parent": "6a1da71d-a669-4e97-9dd3-9bb65d8f072e",
+   "order": 0,
+   "attributes": {
+    "targetNodeId": "828196fc-9655-431a-a234-95bda7be13a6",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "6a1da71d-a669-4e97-9dd3-9bb65d8f072e"
+  },
+  {
+   "id": "49266232-8eb4-4bed-b5c8-97786796ea2d",
+   "parent": "a99c7f57-a38b-4a91-8773-4a0a8e3778f7",
+   "order": 3,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "97cebec7-8d3a-4cc3-8261-e59ad825e911",
+   "sibling": [
+    "b7d28bac-b503-49ef-9c5f-f4aa9572cc11",
+    "6a1da71d-a669-4e97-9dd3-9bb65d8f072e"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "a99c7f57-a38b-4a91-8773-4a0a8e3778f7"
+  },
+  {
+   "id": "97cebec7-8d3a-4cc3-8261-e59ad825e911",
+   "parent": "49266232-8eb4-4bed-b5c8-97786796ea2d",
+   "order": 0,
+   "attributes": {
+    "widgetType": "play",
+    "language": "en-US",
+    "voice": "man",
+    "message": "Sorry, that is not a valid option.",
+    "loop": 1,
+    "type": "ivr_say",
+    "audioUrl": "https://storage.googleapis.com/highlevel-backend.appspot.com/location/Ghstz8eIsHWLeXek47dk/workflow/80479e09-a4de-41ee-94f2-c5cd187ec7e0/30c3b64b-a72d-4f33-94ac-38e8e54b8e67.mp3",
+    "fileName": "05_Invalid_Key_Final.mp3"
+   },
+   "name": "Say or play a message",
+   "type": "ivr_say",
+   "next": "41c7bcf2-c423-44ce-a6dd-6e6fffc379cb",
+   "parentKey": "49266232-8eb4-4bed-b5c8-97786796ea2d"
+  },
+  {
+   "id": "41c7bcf2-c423-44ce-a6dd-6e6fffc379cb",
+   "stepIndex": 16,
+   "parent": "49266232-8eb4-4bed-b5c8-97786796ea2d",
+   "order": 1,
+   "attributes": {
+    "sayPlayAttributes": {
+     "loop": 1,
+     "widgetType": "say",
+     "message": "Please record your message after the beep.",
+     "type": "ivr_say",
+     "language": "en-US",
+     "voice": "woman"
+    },
+    "isSayPlayOn": false,
+    "timeout": 5,
+    "maxLength": 3600,
+    "playBeep": true,
+    "type": "ivr_collect_voicemail"
+   },
+   "name": "Record Voicemail",
+   "type": "ivr_collect_voicemail",
+   "parentKey": "97cebec7-8d3a-4cc3-8261-e59ad825e911"
+  }
+ ]
+}

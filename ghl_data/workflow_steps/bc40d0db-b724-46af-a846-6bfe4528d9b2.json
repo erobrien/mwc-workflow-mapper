@@ -1,0 +1,165 @@
+{
+ "id": "bc40d0db-b724-46af-a846-6bfe4528d9b2",
+ "name": "3a. Auto Confirm",
+ "folder": "02. Appointments & Visit Journey",
+ "status": "published",
+ "updatedAt": "2026-05-24T00:52:37.528Z",
+ "version": 5,
+ "extracted_at": "2026-07-10T05:40:32Z",
+ "extraction_method": "ghl_backend_api",
+ "source": "GHL Active Workflows (live API)",
+ "workflowData": {
+  "_id": "bc40d0db-b724-46af-a846-6bfe4528d9b2",
+  "locationId": "Ghstz8eIsHWLeXek47dk",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 7,
+  "name": "3a. Auto Confirm",
+  "status": "published",
+  "version": 5,
+  "dataVersion": 7,
+  "allowMultiple": true,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/Ghstz8eIsHWLeXek47dk/workflows/bc40d0db-b724-46af-a846-6bfe4528d9b2/5",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FGhstz8eIsHWLeXek47dk%2Fworkflows%2Fbc40d0db-b724-46af-a846-6bfe4528d9b2%2F5",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "type": "workflow",
+  "parentId": "d19faff7-3c76-44ec-8c05-59397c06aa08",
+  "updatedBy": "1UGaWoisLr0DONjwbenY",
+  "createdAt": "2026-05-24T00:30:17.658Z",
+  "updatedAt": "2026-05-24T00:52:37.528Z",
+  "deleted": false,
+  "allowMultipleOpportunity": true,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "user",
+  "__v": 0,
+  "eventStartDate": null,
+  "triggersFilePath": "location/Ghstz8eIsHWLeXek47dk/workflow-triggers/bc40d0db-b724-46af-a846-6bfe4528d9b2/2",
+  "window": null,
+  "workflowNote": null,
+  "id": "bc40d0db-b724-46af-a846-6bfe4528d9b2"
+ },
+ "triggers": [
+  {
+   "id": "dtpOFAAtrbEUwiAtffjO",
+   "date_added": "2026-05-24T00:33:04.996Z",
+   "belongs_to": "workflow",
+   "active": true,
+   "name": "Appointment Status",
+   "conditions": [
+    {
+     "operator": "==",
+     "value": "normal",
+     "title": "Event Type",
+     "field": "appointment.eventType",
+     "type": "select"
+    },
+    {
+     "value": [
+      "contact"
+     ],
+     "type": "input",
+     "field": "contactMode",
+     "operator": "is-any-of"
+    },
+    {
+     "type": "select",
+     "title": "Appointment status is",
+     "field": "appointment.status",
+     "value": "new",
+     "operator": "=="
+    }
+   ],
+   "workflow_id": "bc40d0db-b724-46af-a846-6bfe4528d9b2",
+   "type": "appointment",
+   "actions": [
+    {
+     "type": "add_to_workflow",
+     "workflow_id": "bc40d0db-b724-46af-a846-6bfe4528d9b2"
+    }
+   ],
+   "masterType": "highlevel",
+   "schedule_config": {},
+   "deleted": false,
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "date_updated": "2026-05-24T00:33:05.425Z"
+  }
+ ],
+ "dependentAssets": {},
+ "templates": [
+  {
+   "id": "9b3ad2d7-d6ab-4bb5-9f3a-50de8b51327b",
+   "order": 0,
+   "attributes": {
+    "category": "appointment",
+    "type": "update_appointment_status",
+    "status_type": "confirmed"
+   },
+   "name": "Update appointment status",
+   "type": "update_appointment_status",
+   "next": "b2e2cb30-424a-4960-9a44-5e171410e7e2"
+  },
+  {
+   "id": "b2e2cb30-424a-4960-9a44-5e171410e7e2",
+   "order": 1,
+   "attributes": {
+    "type": "update_contact_field",
+    "actionType": "update_field_data",
+    "fields": [
+     {
+      "field": "type",
+      "value": "patient",
+      "title": "Contact type",
+      "type": "select",
+      "date": ""
+     }
+    ]
+   },
+   "name": "Update contact field",
+   "type": "update_contact_field",
+   "next": "91fac8bf-7a18-4c79-a893-e7885ef0a203",
+   "parentKey": "9b3ad2d7-d6ab-4bb5-9f3a-50de8b51327b"
+  },
+  {
+   "id": "91fac8bf-7a18-4c79-a893-e7885ef0a203",
+   "order": 2,
+   "attributes": {
+    "tags": [
+     "funnel_consultation_booked"
+    ]
+   },
+   "name": "Add BOOKED APPT Tag: funnel_consultation_booked. Blocks Non-booked workflow messages",
+   "type": "add_contact_tag",
+   "next": "a0f45d00-329f-4fc8-bc75-dc8730c34e67",
+   "parentKey": "b2e2cb30-424a-4960-9a44-5e171410e7e2"
+  },
+  {
+   "id": "a0f45d00-329f-4fc8-bc75-dc8730c34e67",
+   "order": 3,
+   "attributes": {
+    "type": "remove_from_workflow",
+    "workflow_id": [
+     "619cc8e7-b658-4552-8e23-5aeeec443057"
+    ]
+   },
+   "name": "Remove from NON BOOKED Workflow (2nd layer protection from unnecessary msg)",
+   "type": "remove_from_workflow",
+   "next": "6a68070e-8285-48fb-ae6f-1053f8dd3393",
+   "parentKey": "91fac8bf-7a18-4c79-a893-e7885ef0a203"
+  },
+  {
+   "id": "6a68070e-8285-48fb-ae6f-1053f8dd3393",
+   "order": 4,
+   "attributes": {
+    "type": "remove_opportunity",
+    "opportunity_to_be_found": "all",
+    "pipeline_id": "gcRMq1iCj2tGmdWpimGS"
+   },
+   "name": "Remove Opportunity",
+   "type": "remove_opportunity",
+   "parentKey": "a0f45d00-329f-4fc8-bc75-dc8730c34e67"
+  }
+ ]
+}

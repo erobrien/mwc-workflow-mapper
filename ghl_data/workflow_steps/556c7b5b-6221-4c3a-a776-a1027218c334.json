@@ -1,0 +1,269 @@
+{
+ "id": "556c7b5b-6221-4c3a-a776-a1027218c334",
+ "name": "3. Email Bounce",
+ "folder": "04. System Admin & Error Handling",
+ "status": "published",
+ "updatedAt": "2026-05-18T22:50:54.838Z",
+ "version": 7,
+ "extracted_at": "2026-07-10T05:40:32Z",
+ "extraction_method": "ghl_backend_api",
+ "source": "GHL Active Workflows (live API)",
+ "workflowData": {
+  "_id": "556c7b5b-6221-4c3a-a776-a1027218c334",
+  "locationId": "Ghstz8eIsHWLeXek47dk",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 2,
+  "name": "3. Email Bounce",
+  "status": "published",
+  "version": 7,
+  "dataVersion": 7,
+  "allowMultiple": true,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/Ghstz8eIsHWLeXek47dk/workflows/556c7b5b-6221-4c3a-a776-a1027218c334/7",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/highlevel-backend.appspot.com/o/location%2FGhstz8eIsHWLeXek47dk%2Fworkflows%2F556c7b5b-6221-4c3a-a776-a1027218c334%2F7",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "type": "workflow",
+  "parentId": "599ce15b-2f6b-4f99-a14f-2745246e4618",
+  "updatedBy": "yntZSizWegCAW6z2Xhq1",
+  "createdAt": "2026-01-05T00:28:37.956Z",
+  "updatedAt": "2026-05-18T22:50:54.838Z",
+  "deleted": false,
+  "allowMultipleOpportunity": true,
+  "creationSource": "builder",
+  "originType": "user",
+  "__v": 0,
+  "eventStartDate": null,
+  "window": null,
+  "workflowNote": null,
+  "triggersFilePath": "location/Ghstz8eIsHWLeXek47dk/workflow-triggers/556c7b5b-6221-4c3a-a776-a1027218c334/4",
+  "id": "556c7b5b-6221-4c3a-a776-a1027218c334"
+ },
+ "triggers": [
+  {
+   "id": "T89qpLg1tgTQxllqvttW",
+   "type": "mailgun_email_event",
+   "belongs_to": "workflow",
+   "masterType": "highlevel",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "workflow_id": "556c7b5b-6221-4c3a-a776-a1027218c334",
+   "name": "Email Events: Bounce",
+   "schedule_config": {},
+   "deleted": false,
+   "actions": [
+    {
+     "type": "add_to_workflow",
+     "workflow_id": "556c7b5b-6221-4c3a-a776-a1027218c334"
+    }
+   ],
+   "date_added": "2026-01-05T00:33:53.928Z",
+   "active": true,
+   "date_updated": "2026-01-05T00:36:39.662Z",
+   "conditions": [
+    {
+     "title": "Event",
+     "type": "select",
+     "field": "mailgun.event",
+     "operator": "==",
+     "value": "failed"
+    }
+   ]
+  },
+  {
+   "id": "neCEpsHzUAThniwDR2Xk",
+   "name": "Email Events: Unsubscribed",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "schedule_config": {},
+   "masterType": "highlevel",
+   "belongs_to": "workflow",
+   "workflow_id": "556c7b5b-6221-4c3a-a776-a1027218c334",
+   "deleted": false,
+   "date_added": "2026-01-05T00:33:05.935Z",
+   "type": "mailgun_email_event",
+   "actions": [
+    {
+     "type": "add_to_workflow",
+     "workflow_id": "556c7b5b-6221-4c3a-a776-a1027218c334"
+    }
+   ],
+   "conditions": [
+    {
+     "type": "select",
+     "title": "Event",
+     "operator": "==",
+     "value": "unsubscribed",
+     "field": "mailgun.event"
+    }
+   ],
+   "date_updated": "2026-01-05T00:36:27.490Z",
+   "active": true
+  },
+  {
+   "id": "pycTrQtPOgY9yxBCo3S1",
+   "conditions": [
+    {
+     "operator": "==",
+     "type": "select",
+     "title": "Event",
+     "field": "mailgun.event",
+     "value": "complained"
+    }
+   ],
+   "type": "mailgun_email_event",
+   "date_added": "2026-01-05T00:33:31.685Z",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "belongs_to": "workflow",
+   "actions": [
+    {
+     "type": "add_to_workflow",
+     "workflow_id": "556c7b5b-6221-4c3a-a776-a1027218c334"
+    }
+   ],
+   "deleted": false,
+   "schedule_config": {},
+   "masterType": "highlevel",
+   "name": "Email Events: Spam",
+   "workflow_id": "556c7b5b-6221-4c3a-a776-a1027218c334",
+   "date_updated": "2026-01-05T00:36:27.531Z",
+   "active": true
+  }
+ ],
+ "dependentAssets": {},
+ "templates": [
+  {
+   "id": "fcf81107-3281-4bb1-9415-6f0307e8ca0b",
+   "order": 0,
+   "attributes": {
+    "type": "dnd_contact",
+    "dnd_direction": "outbound",
+    "dnd_contact": "enable_specific",
+    "specific_channels": [
+     "Email"
+    ]
+   },
+   "name": "Enable/Disable DND",
+   "type": "dnd_contact",
+   "next": "8e1875f8-8b6f-4583-b999-29aceb6e6d65"
+  },
+  {
+   "id": "8e1875f8-8b6f-4583-b999-29aceb6e6d65",
+   "order": 1,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "a9fa61fc-7cb8-43d5-b99d-e28e7f448e83",
+      "name": "Bounce",
+      "segments": [
+       {
+        "__segmentId": "4651be3e-ed26-4261-a2a8-524eddd7d692",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "T89qpLg1tgTQxllqvttW",
+          "__conditionId": "e03a13f0-6ff7-47cd-afcc-c0904d10bcc0",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Trigger",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "a9fa61fc-7cb8-43d5-b99d-e28e7f448e83",
+    "24adedb5-8c48-4901-98fd-8a34b619c8e5"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "fcf81107-3281-4bb1-9415-6f0307e8ca0b"
+  },
+  {
+   "id": "a9fa61fc-7cb8-43d5-b99d-e28e7f448e83",
+   "parent": "8e1875f8-8b6f-4583-b999-29aceb6e6d65",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Bounce",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "8d5c81c9-b5d1-42fe-93e7-be316f70aa81",
+   "sibling": [
+    "24adedb5-8c48-4901-98fd-8a34b619c8e5"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "8e1875f8-8b6f-4583-b999-29aceb6e6d65"
+  },
+  {
+   "id": "8d5c81c9-b5d1-42fe-93e7-be316f70aa81",
+   "parent": "a9fa61fc-7cb8-43d5-b99d-e28e7f448e83",
+   "order": 0,
+   "attributes": {
+    "body": "{{contact.first_name}}, Men's Wellness Centers. Email to {{contact.email}} bounced. Reply with your correct email.",
+    "attachments": []
+   },
+   "name": "SMS - ask for valid email",
+   "type": "sms",
+   "parentKey": "a9fa61fc-7cb8-43d5-b99d-e28e7f448e83"
+  },
+  {
+   "id": "24adedb5-8c48-4901-98fd-8a34b619c8e5",
+   "parent": "8e1875f8-8b6f-4583-b999-29aceb6e6d65",
+   "order": 2,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "a9fa61fc-7cb8-43d5-b99d-e28e7f448e83"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "8e1875f8-8b6f-4583-b999-29aceb6e6d65"
+  }
+ ]
+}

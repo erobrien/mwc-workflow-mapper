@@ -1,21 +1,1059 @@
 {
-  "id": "9ae9b45c-1f79-46cc-9ef1-eb61a9bcbdd8",
+ "id": "9ae9b45c-1f79-46cc-9ef1-eb61a9bcbdd8",
+ "name": "03c. Unconfirmed Reply Handler",
+ "folder": "02. Appointments & Visit Journey",
+ "status": "published",
+ "updatedAt": "2026-05-18T22:46:17.884Z",
+ "version": 9,
+ "extracted_at": "2026-07-10T05:40:32Z",
+ "extraction_method": "ghl_backend_api",
+ "source": "GHL Active Workflows (live API)",
+ "workflowData": {
+  "_id": "9ae9b45c-1f79-46cc-9ef1-eb61a9bcbdd8",
+  "locationId": "Ghstz8eIsHWLeXek47dk",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 6,
   "name": "03c. Unconfirmed Reply Handler",
-  "folder": "03. Call Routing & Dispositions",
   "status": "published",
   "version": 9,
-  "extracted_at": "2026-05-29T03:00:31Z",
-  "extraction_method": "backend_jwt",
-  "triggers": [],
-  "steps": [],
-  "messages_referenced": [],
-  "stats": {
-    "total_steps": 0,
-    "send_sms_count": 0,
-    "send_email_count": 0,
-    "wait_count": 0,
-    "if_else_count": 0,
-    "terminal_paths": 0
+  "dataVersion": 7,
+  "allowMultiple": true,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/Ghstz8eIsHWLeXek47dk/workflows/9ae9b45c-1f79-46cc-9ef1-eb61a9bcbdd8/9",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FGhstz8eIsHWLeXek47dk%2Fworkflows%2F9ae9b45c-1f79-46cc-9ef1-eb61a9bcbdd8%2F9",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "type": "workflow",
+  "parentId": "d19faff7-3c76-44ec-8c05-59397c06aa08",
+  "updatedBy": "1UGaWoisLr0DONjwbenY",
+  "createdAt": "2026-05-03T01:20:37.507Z",
+  "updatedAt": "2026-05-18T22:46:17.884Z",
+  "deleted": false,
+  "allowMultipleOpportunity": true,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "user",
+  "__v": 0,
+  "eventStartDate": null,
+  "triggersFilePath": "location/Ghstz8eIsHWLeXek47dk/workflow-triggers/9ae9b45c-1f79-46cc-9ef1-eb61a9bcbdd8/8",
+  "window": null,
+  "workflowNote": null,
+  "id": "9ae9b45c-1f79-46cc-9ef1-eb61a9bcbdd8"
+ },
+ "triggers": [
+  {
+   "id": "2PBVQQfY9bJTlSG8QMPe",
+   "date_added": "2026-05-03T06:43:13.421Z",
+   "deleted": false,
+   "actions": [
+    {
+     "workflow_id": "9ae9b45c-1f79-46cc-9ef1-eb61a9bcbdd8",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "==",
+     "field": "appointment.eventType",
+     "value": "normal",
+     "title": "Event Type",
+     "type": "select"
+    },
+    {
+     "operator": "is-any-of",
+     "field": "contactMode",
+     "value": [
+      "contact"
+     ],
+     "type": "input"
+    },
+    {
+     "operator": "==",
+     "field": "appointment.status",
+     "value": "cancelled",
+     "title": "Appointment status is",
+     "type": "select"
+    }
+   ],
+   "type": "appointment",
+   "masterType": "highlevel",
+   "workflow_id": "9ae9b45c-1f79-46cc-9ef1-eb61a9bcbdd8",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "name": "Appointment Status Cancelled",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "date_updated": "2026-05-05T20:39:47.367Z",
+   "active": true
   },
-  "notes": ""
+  {
+   "id": "lQ1qYS90lK47Vyi7zD2F",
+   "date_added": "2026-05-03T01:42:46.347Z",
+   "deleted": false,
+   "actions": [
+    {
+     "workflow_id": "9ae9b45c-1f79-46cc-9ef1-eb61a9bcbdd8",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "index-of-true",
+     "field": "contact.tags",
+     "value": "unconfirmed_appt",
+     "title": "Has Tag",
+     "type": "select",
+     "id": "has-tag"
+    },
+    {
+     "operator": "==",
+     "field": "workflow.id",
+     "value": "b9135812-c31a-41fe-b22f-dd47b2623697",
+     "title": "Replied to Workflow",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "message.type",
+     "value": 2,
+     "title": "Reply channel",
+     "type": "select"
+    }
+   ],
+   "type": "customer_reply",
+   "masterType": "highlevel",
+   "workflow_id": "9ae9b45c-1f79-46cc-9ef1-eb61a9bcbdd8",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "name": "Customer Replied",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "date_updated": "2026-05-05T20:39:47.414Z",
+   "active": true
+  }
+ ],
+ "dependentAssets": {},
+ "templates": [
+  {
+   "id": "1173ca59-d4c9-4756-bf6d-18f7a7c3713f",
+   "order": 0,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "579ec059-7c6d-4c42-bf98-c54abbde6ed5",
+      "name": "Replied Yes",
+      "segments": [
+       {
+        "__segmentId": "cd0595a0-2136-4949-b556-cac9ac315c07",
+        "operator": "or",
+        "conditions": [
+         {
+          "conditionType": "contact_reply",
+          "conditionSubType": "message.body",
+          "conditionOperator": "contain",
+          "conditionValue": "Yes",
+          "__conditionId": "c8f3ada1-9f84-4eb4-afb0-d6330ad55839",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         },
+         {
+          "conditionType": "contact_reply",
+          "conditionSubType": "message.body",
+          "conditionOperator": "==",
+          "conditionValue": "Y",
+          "__conditionId": "cce62661-557a-450f-b4aa-4866bb6d90a1",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         },
+         {
+          "conditionType": "contact_reply",
+          "conditionSubType": "message.body",
+          "conditionOperator": "contain",
+          "conditionValue": "Yeah",
+          "__conditionId": "0da19e9e-f572-4791-ad21-c8a4d57516cf",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         },
+         {
+          "conditionType": "contact_reply",
+          "conditionSubType": "message.body",
+          "conditionOperator": "contain",
+          "conditionValue": "yep",
+          "__conditionId": "81f8103b-d9a8-4002-9d70-8c973e39ebc8",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         },
+         {
+          "conditionType": "contact_reply",
+          "conditionSubType": "message.body",
+          "conditionOperator": "contain",
+          "conditionValue": "yup",
+          "__conditionId": "cf5f06e2-e456-407b-9918-41f8948587d6",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         },
+         {
+          "conditionType": "contact_reply",
+          "conditionSubType": "message.body",
+          "conditionOperator": "==",
+          "conditionValue": "ok",
+          "__conditionId": "1dc90dc3-0bab-479f-a3c1-a3101a481695",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         },
+         {
+          "conditionType": "contact_reply",
+          "conditionSubType": "message.body",
+          "conditionOperator": "contain",
+          "conditionValue": "confirm",
+          "__conditionId": "28babc47-1328-47d4-9440-69633166d756",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         },
+         {
+          "conditionType": "contact_reply",
+          "conditionSubType": "message.body",
+          "conditionOperator": "contain",
+          "conditionValue": "confirmed",
+          "__conditionId": "5ba3b671-38f2-4cff-9cbb-159f2cce227e",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         },
+         {
+          "conditionType": "contact_reply",
+          "conditionSubType": "matches_intent",
+          "conditionOperator": "==",
+          "conditionValue": "schedule-yes",
+          "__conditionId": "d01b9166-9d6d-467d-9935-060c2d48f261",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         },
+         {
+          "conditionType": "contact_reply",
+          "conditionSubType": "message.body",
+          "conditionOperator": "==",
+          "conditionValue": "y",
+          "__conditionId": "d35257dc-4a75-4657-86f0-d10b4f053efe",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         },
+         {
+          "conditionType": "contact_reply",
+          "conditionSubType": "message.body",
+          "conditionOperator": "contain",
+          "conditionValue": "CONFIRM",
+          "__conditionId": "5a659064-c01e-4ffb-acd7-e40c5f6994a0",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "565e9176-ad8e-42f3-9e14-3509bbf51941",
+      "name": "Replied Reschedule",
+      "segments": [
+       {
+        "__segmentId": "bde882b0-9b17-4cea-8dfc-2c4cc74dc4fd",
+        "operator": "or",
+        "conditions": [
+         {
+          "conditionType": "contact_reply",
+          "conditionSubType": "message.body",
+          "conditionOperator": "==",
+          "conditionValue": "r",
+          "__conditionId": "30a0b0da-c48f-484f-be4e-1a7b24451591",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         },
+         {
+          "conditionType": "contact_reply",
+          "conditionSubType": "message.body",
+          "conditionOperator": "==",
+          "conditionValue": "R",
+          "__conditionId": "3432eb06-31af-4948-83f8-f64f07f26be8",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         },
+         {
+          "conditionType": "contact_reply",
+          "conditionSubType": "message.body",
+          "conditionOperator": "contain",
+          "conditionValue": "reschedule",
+          "__conditionId": "d16caab0-5939-45ec-966e-d1374a8fb343",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         },
+         {
+          "conditionType": "contact_reply",
+          "conditionSubType": "message.body",
+          "conditionOperator": "contain",
+          "conditionValue": "Reschedule",
+          "__conditionId": "c3d5c015-40e6-4a09-9fcf-ac0b6eadde68",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         },
+         {
+          "conditionType": "contact_reply",
+          "conditionSubType": "message.body",
+          "conditionOperator": "contain",
+          "conditionValue": "RESCHEDULE",
+          "__conditionId": "3c3893f4-1c1d-40ec-9114-b24acde5a0e8",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         },
+         {
+          "conditionType": "contact_reply",
+          "conditionSubType": "message.body",
+          "conditionOperator": "==",
+          "conditionValue": "move",
+          "__conditionId": "23b65154-79d1-4e68-9e4b-a80616b7947e",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         },
+         {
+          "conditionType": "contact_reply",
+          "conditionSubType": "message.body",
+          "conditionOperator": "contain",
+          "conditionValue": "change",
+          "__conditionId": "f066076d-bd9f-400e-b11e-137568f36a3c",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         },
+         {
+          "conditionType": "contact_reply",
+          "conditionSubType": "message.body",
+          "conditionOperator": "contain",
+          "conditionValue": "different time",
+          "__conditionId": "1f8d1ab1-88ca-496d-81d0-963113df7072",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "076fff0b-62cb-485f-8008-3f1fab3e8d09",
+      "name": "Cancelled Appointments",
+      "segments": [
+       {
+        "__segmentId": "7c2b23a5-772d-4aaf-a132-8a2ca13099d7",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "2PBVQQfY9bJTlSG8QMPe",
+          "__conditionId": "c71b52e6-760d-4af4-9063-2aeeda63e674",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Check for Reply",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "579ec059-7c6d-4c42-bf98-c54abbde6ed5",
+    "565e9176-ad8e-42f3-9e14-3509bbf51941",
+    "076fff0b-62cb-485f-8008-3f1fab3e8d09",
+    "922f9f62-a37f-4fb6-b1a0-2c59d267b35d"
+   ],
+   "comments": [],
+   "nodeType": "condition-node"
+  },
+  {
+   "id": "579ec059-7c6d-4c42-bf98-c54abbde6ed5",
+   "parent": "1173ca59-d4c9-4756-bf6d-18f7a7c3713f",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Replied Yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "363c2d72-be77-4263-bcbc-7639f3dd5310",
+   "sibling": [
+    "565e9176-ad8e-42f3-9e14-3509bbf51941",
+    "076fff0b-62cb-485f-8008-3f1fab3e8d09",
+    "922f9f62-a37f-4fb6-b1a0-2c59d267b35d"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "1173ca59-d4c9-4756-bf6d-18f7a7c3713f"
+  },
+  {
+   "id": "363c2d72-be77-4263-bcbc-7639f3dd5310",
+   "parent": "579ec059-7c6d-4c42-bf98-c54abbde6ed5",
+   "order": 0,
+   "attributes": {
+    "type": "remove_from_workflow",
+    "workflow_id": [
+     "b9135812-c31a-41fe-b22f-dd47b2623697"
+    ]
+   },
+   "name": "Remove from Workflow 03b. Unconfirmed Appointment",
+   "type": "remove_from_workflow",
+   "next": "7559aa8d-f013-4b7c-99d3-93e18791aed4",
+   "parentKey": "579ec059-7c6d-4c42-bf98-c54abbde6ed5"
+  },
+  {
+   "id": "7559aa8d-f013-4b7c-99d3-93e18791aed4",
+   "parent": "579ec059-7c6d-4c42-bf98-c54abbde6ed5",
+   "order": 1,
+   "attributes": {
+    "tags": [
+     "unconfirmed_appt"
+    ],
+    "type": "remove_contact_tag"
+   },
+   "name": "Remove Tag unconfirmed_appt",
+   "type": "remove_contact_tag",
+   "next": "195b571f-a8a2-4dbd-badb-89be58478dba",
+   "parentKey": "363c2d72-be77-4263-bcbc-7639f3dd5310"
+  },
+  {
+   "id": "195b571f-a8a2-4dbd-badb-89be58478dba",
+   "parent": "579ec059-7c6d-4c42-bf98-c54abbde6ed5",
+   "order": 2,
+   "attributes": {
+    "category": "appointment",
+    "type": "update_appointment_status",
+    "status_type": "confirmed"
+   },
+   "name": "Update appointment status to confirmed",
+   "type": "update_appointment_status",
+   "parentKey": "7559aa8d-f013-4b7c-99d3-93e18791aed4"
+  },
+  {
+   "id": "565e9176-ad8e-42f3-9e14-3509bbf51941",
+   "parent": "1173ca59-d4c9-4756-bf6d-18f7a7c3713f",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Replied Reschedule",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "3360d371-031c-442d-912d-ade70e1ed5dd",
+   "sibling": [
+    "579ec059-7c6d-4c42-bf98-c54abbde6ed5",
+    "076fff0b-62cb-485f-8008-3f1fab3e8d09",
+    "922f9f62-a37f-4fb6-b1a0-2c59d267b35d"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "1173ca59-d4c9-4756-bf6d-18f7a7c3713f"
+  },
+  {
+   "id": "3360d371-031c-442d-912d-ade70e1ed5dd",
+   "parent": "565e9176-ad8e-42f3-9e14-3509bbf51941",
+   "order": 0,
+   "attributes": {
+    "type": "remove_from_workflow",
+    "workflow_id": [
+     "b9135812-c31a-41fe-b22f-dd47b2623697"
+    ]
+   },
+   "name": "Remove from Workflow 03b. Unconfirmed Appointment",
+   "type": "remove_from_workflow",
+   "next": "82204552-8cb3-45cb-999e-25be1093a806",
+   "parentKey": "565e9176-ad8e-42f3-9e14-3509bbf51941"
+  },
+  {
+   "id": "82204552-8cb3-45cb-999e-25be1093a806",
+   "parent": "565e9176-ad8e-42f3-9e14-3509bbf51941",
+   "order": 1,
+   "attributes": {
+    "body": "{{contact.first_name}}, no problem. \n\nReschedule here: {{appointment.reschedule_link}}. Or call or text (866) 344‑4955 with a day and time that works and the team will handle it. Your info stays on file.  \n\nMen's Wellness {{contact.preferred_location}}",
+    "attachments": []
+   },
+   "name": "SMS - Reschedule Link",
+   "type": "sms",
+   "parentKey": "3360d371-031c-442d-912d-ade70e1ed5dd"
+  },
+  {
+   "id": "076fff0b-62cb-485f-8008-3f1fab3e8d09",
+   "parent": "1173ca59-d4c9-4756-bf6d-18f7a7c3713f",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Cancelled Appointments",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "3f8b45d5-d2e8-469b-b655-75e481172542",
+   "sibling": [
+    "579ec059-7c6d-4c42-bf98-c54abbde6ed5",
+    "565e9176-ad8e-42f3-9e14-3509bbf51941",
+    "922f9f62-a37f-4fb6-b1a0-2c59d267b35d"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "1173ca59-d4c9-4756-bf6d-18f7a7c3713f"
+  },
+  {
+   "id": "3f8b45d5-d2e8-469b-b655-75e481172542",
+   "parent": "076fff0b-62cb-485f-8008-3f1fab3e8d09",
+   "order": 0,
+   "attributes": {
+    "type": "remove_from_workflow",
+    "workflow_id": [
+     "b9135812-c31a-41fe-b22f-dd47b2623697"
+    ]
+   },
+   "name": "Remove from Workflow 03b. Unconfirmed Appointment",
+   "type": "remove_from_workflow",
+   "parentKey": "076fff0b-62cb-485f-8008-3f1fab3e8d09"
+  },
+  {
+   "id": "922f9f62-a37f-4fb6-b1a0-2c59d267b35d",
+   "parent": "1173ca59-d4c9-4756-bf6d-18f7a7c3713f",
+   "order": 1,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "579ec059-7c6d-4c42-bf98-c54abbde6ed5",
+    "565e9176-ad8e-42f3-9e14-3509bbf51941",
+    "076fff0b-62cb-485f-8008-3f1fab3e8d09"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "1173ca59-d4c9-4756-bf6d-18f7a7c3713f"
+  }
+ ]
 }

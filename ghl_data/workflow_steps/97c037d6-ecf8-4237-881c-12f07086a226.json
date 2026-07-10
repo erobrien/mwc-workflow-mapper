@@ -1,21 +1,490 @@
 {
-  "id": "97c037d6-ecf8-4237-881c-12f07086a226",
+ "id": "97c037d6-ecf8-4237-881c-12f07086a226",
+ "name": "01. WP Lead Capture",
+ "folder": "Onboarding",
+ "status": "draft",
+ "updatedAt": "2026-05-24T16:57:48.618Z",
+ "version": 8,
+ "extracted_at": "2026-07-10T05:40:32Z",
+ "extraction_method": "ghl_backend_api",
+ "source": "GHL Active Workflows (live API)",
+ "workflowData": {
+  "_id": "97c037d6-ecf8-4237-881c-12f07086a226",
+  "locationId": "Ghstz8eIsHWLeXek47dk",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 7,
   "name": "01. WP Lead Capture",
-  "folder": "01. WP Lead Capture",
   "status": "draft",
   "version": 8,
-  "extracted_at": "2026-05-29T03:00:17Z",
-  "extraction_method": "backend_jwt",
-  "triggers": [],
-  "steps": [],
-  "messages_referenced": [],
-  "stats": {
-    "total_steps": 0,
-    "send_sms_count": 0,
-    "send_email_count": 0,
-    "wait_count": 0,
-    "if_else_count": 0,
-    "terminal_paths": 0
+  "dataVersion": 7,
+  "allowMultiple": true,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/Ghstz8eIsHWLeXek47dk/workflows/97c037d6-ecf8-4237-881c-12f07086a226/7",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FGhstz8eIsHWLeXek47dk%2Fworkflows%2F97c037d6-ecf8-4237-881c-12f07086a226%2F7",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "type": "workflow",
+  "parentId": "c03fd1ff-d7e2-411b-b01b-e27bfbc08c6b",
+  "meta": null,
+  "updatedBy": "1UGaWoisLr0DONjwbenY",
+  "createdAt": "2026-05-24T16:39:41.008Z",
+  "updatedAt": "2026-05-24T16:57:48.618Z",
+  "deleted": false,
+  "allowMultipleOpportunity": true,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "user",
+  "__v": 0,
+  "eventStartDate": null,
+  "triggersFilePath": "location/Ghstz8eIsHWLeXek47dk/workflow-triggers/97c037d6-ecf8-4237-881c-12f07086a226/8",
+  "window": null,
+  "workflowNote": null,
+  "id": "97c037d6-ecf8-4237-881c-12f07086a226"
+ },
+ "triggers": [
+  {
+   "id": "8cfaad08-99f3-4234-9970-a1b851af1579",
+   "deleted": false,
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "masterType": "highlevel",
+   "type": "inbound_webhook",
+   "workflow_id": "97c037d6-ecf8-4237-881c-12f07086a226",
+   "conditions": [],
+   "actions": [
+    {
+     "type": "add_to_workflow",
+     "workflow_id": "97c037d6-ecf8-4237-881c-12f07086a226"
+    }
+   ],
+   "belongs_to": "workflow",
+   "date_added": "2026-05-24T16:46:22.604Z",
+   "active": false,
+   "date_updated": "2026-05-24T16:57:48.041Z",
+   "name": "Inbound Webhook Fluent Form WP"
+  }
+ ],
+ "dependentAssets": {},
+ "templates": [
+  {
+   "id": "cc081750-1742-400e-94e6-6cf2f5aa9e42",
+   "order": 0,
+   "attributes": {
+    "type": "create_update_contact",
+    "fields": [
+     {
+      "field": "firstName",
+      "value": "{{inboundWebhookRequest.first_name}}",
+      "title": "First Name",
+      "type": "string",
+      "date": ""
+     },
+     {
+      "field": "email",
+      "value": "{{inboundWebhookRequest.email}}",
+      "title": "Email",
+      "type": "string",
+      "date": ""
+     },
+     {
+      "field": "phone",
+      "value": "{{inboundWebhookRequest.phone}}",
+      "title": "Phone",
+      "type": "string",
+      "date": ""
+     },
+     {
+      "field": "GojPFkMZRoUi93gyb48K",
+      "value": "{{inboundWebhookRequest.__submission.created_at}}",
+      "title": "Consent Date",
+      "type": "string",
+      "date": ""
+     },
+     {
+      "field": "qEeJTkIyz1GMVOfhIuhp",
+      "value": "{{inboundWebhookRequest.__submission.ip}}",
+      "title": "Consent – IP Address",
+      "type": "string",
+      "date": ""
+     },
+     {
+      "field": "Np2WHxON2I4DVnYjZh3e",
+      "value": "{{inboundWebhookRequest.utm_campaign}}",
+      "title": "UTM Campaign",
+      "type": "string",
+      "date": ""
+     },
+     {
+      "field": "ssEvmmfe1tz5H4fiMHZR",
+      "value": "{{inboundWebhookRequest.utm_content}}",
+      "title": "UTM Content",
+      "type": "string",
+      "date": ""
+     },
+     {
+      "field": "Vh0MH504ujQfBh0Q5UFx",
+      "value": "{{inboundWebhookRequest.utm_medium}}",
+      "title": "UTM Medium",
+      "type": "string",
+      "date": ""
+     },
+     {
+      "field": "thwe93MxRDzS2SO9pxxC",
+      "value": "{{inboundWebhookRequest.utm_source}}",
+      "title": "UTM Source",
+      "type": "string",
+      "date": ""
+     },
+     {
+      "field": "1Wo5z9YpDh9Lv64IBEoa",
+      "value": "{{inboundWebhookRequest.utm_term}}",
+      "title": "UTM Term",
+      "type": "string",
+      "date": ""
+     },
+     {
+      "field": "xPXd7sYvBI3uYoqMqVzN",
+      "value": "{{inboundWebhookRequest.fbclid}}",
+      "title": "fbclid_value",
+      "type": "string",
+      "date": ""
+     },
+     {
+      "field": "JL9361YdcdliYZn1d0xy",
+      "value": "{{inboundWebhookRequest.gclid}}",
+      "title": "gclid_value",
+      "type": "string",
+      "date": ""
+     }
+    ]
+   },
+   "name": "Create Contact",
+   "type": "create_update_contact",
+   "next": "1cc80f9b-6365-4372-9e99-9f3fe07d49a2"
   },
-  "notes": ""
+  {
+   "id": "1cc80f9b-6365-4372-9e99-9f3fe07d49a2",
+   "order": 1,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "bc92a3be-6d09-4cf2-acbd-aac4f179cd01",
+      "name": "Richmond",
+      "segments": [
+       {
+        "__segmentId": "c3951820-5d36-44db-9903-62e57df4a0a7",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "inboundWebhookRequest",
+          "conditionSubType": "location",
+          "conditionOperator": "==",
+          "conditionValue": "richmond",
+          "__conditionId": "f385c927-8359-4dd7-a218-79536d943528",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "502226a7-4c61-426e-82bd-af9260682c7e",
+      "name": "Newport News",
+      "segments": [
+       {
+        "__segmentId": "19a05e15-fd36-44e7-aa87-512c39ce7845",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "inboundWebhookRequest",
+          "conditionSubType": "location",
+          "conditionOperator": "==",
+          "conditionValue": "newport-news",
+          "__conditionId": "a4e7ed78-bec4-4263-af49-2e61329862d1",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "04ea463b-4daa-4ff7-8cb6-003660e210bd",
+      "name": "Virginia Beach",
+      "segments": [
+       {
+        "__segmentId": "6cce3960-211d-4709-b2c7-bc360002657b",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "inboundWebhookRequest",
+          "conditionSubType": "location",
+          "conditionOperator": "==",
+          "conditionValue": "virginia-beach",
+          "__conditionId": "e3092527-fa09-4797-9bb2-381fad861d79",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Condition: Location Field Map",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "bc92a3be-6d09-4cf2-acbd-aac4f179cd01",
+    "502226a7-4c61-426e-82bd-af9260682c7e",
+    "04ea463b-4daa-4ff7-8cb6-003660e210bd",
+    "e084d4a1-3078-45de-95be-a9eaaaca6dc4"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "cc081750-1742-400e-94e6-6cf2f5aa9e42"
+  },
+  {
+   "id": "bc92a3be-6d09-4cf2-acbd-aac4f179cd01",
+   "parent": "1cc80f9b-6365-4372-9e99-9f3fe07d49a2",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Richmond",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "3ace3b70-91fe-463e-b8a4-ac58a1e17381",
+   "sibling": [
+    "502226a7-4c61-426e-82bd-af9260682c7e",
+    "04ea463b-4daa-4ff7-8cb6-003660e210bd",
+    "e084d4a1-3078-45de-95be-a9eaaaca6dc4"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "1cc80f9b-6365-4372-9e99-9f3fe07d49a2"
+  },
+  {
+   "id": "3ace3b70-91fe-463e-b8a4-ac58a1e17381",
+   "parent": "bc92a3be-6d09-4cf2-acbd-aac4f179cd01",
+   "order": 0,
+   "attributes": {
+    "type": "update_contact_field",
+    "actionType": "update_field_data",
+    "fields": [
+     {
+      "field": "Cou856tOhaxW62vwehVI",
+      "value": "Richmond, VA",
+      "title": "Preferred Location",
+      "type": "select",
+      "date": ""
+     }
+    ]
+   },
+   "name": "Update location field",
+   "type": "update_contact_field",
+   "parentKey": "bc92a3be-6d09-4cf2-acbd-aac4f179cd01"
+  },
+  {
+   "id": "502226a7-4c61-426e-82bd-af9260682c7e",
+   "parent": "1cc80f9b-6365-4372-9e99-9f3fe07d49a2",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Newport News",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "9ed90f15-0066-4833-b7c2-cf5c02945b85",
+   "sibling": [
+    "bc92a3be-6d09-4cf2-acbd-aac4f179cd01",
+    "04ea463b-4daa-4ff7-8cb6-003660e210bd",
+    "e084d4a1-3078-45de-95be-a9eaaaca6dc4"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "1cc80f9b-6365-4372-9e99-9f3fe07d49a2"
+  },
+  {
+   "id": "9ed90f15-0066-4833-b7c2-cf5c02945b85",
+   "parent": "502226a7-4c61-426e-82bd-af9260682c7e",
+   "order": 0,
+   "attributes": {
+    "type": "update_contact_field",
+    "actionType": "update_field_data",
+    "fields": [
+     {
+      "field": "Cou856tOhaxW62vwehVI",
+      "value": "Newport News, VA",
+      "title": "Preferred Location",
+      "type": "select",
+      "date": ""
+     }
+    ]
+   },
+   "name": "Update location field",
+   "type": "update_contact_field",
+   "parentKey": "502226a7-4c61-426e-82bd-af9260682c7e"
+  },
+  {
+   "id": "04ea463b-4daa-4ff7-8cb6-003660e210bd",
+   "parent": "1cc80f9b-6365-4372-9e99-9f3fe07d49a2",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Virginia Beach",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "bf51c23c-b2b8-4990-9b1c-327d6cb94850",
+   "sibling": [
+    "bc92a3be-6d09-4cf2-acbd-aac4f179cd01",
+    "502226a7-4c61-426e-82bd-af9260682c7e",
+    "e084d4a1-3078-45de-95be-a9eaaaca6dc4"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "1cc80f9b-6365-4372-9e99-9f3fe07d49a2"
+  },
+  {
+   "id": "bf51c23c-b2b8-4990-9b1c-327d6cb94850",
+   "parent": "04ea463b-4daa-4ff7-8cb6-003660e210bd",
+   "order": 0,
+   "attributes": {
+    "type": "update_contact_field",
+    "actionType": "update_field_data",
+    "fields": [
+     {
+      "field": "Cou856tOhaxW62vwehVI",
+      "value": "Virginia Beach, VA",
+      "title": "Preferred Location",
+      "type": "select",
+      "date": ""
+     }
+    ]
+   },
+   "name": "Update location field",
+   "type": "update_contact_field",
+   "parentKey": "04ea463b-4daa-4ff7-8cb6-003660e210bd"
+  },
+  {
+   "id": "e084d4a1-3078-45de-95be-a9eaaaca6dc4",
+   "parent": "1cc80f9b-6365-4372-9e99-9f3fe07d49a2",
+   "order": 2,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "bc92a3be-6d09-4cf2-acbd-aac4f179cd01",
+    "502226a7-4c61-426e-82bd-af9260682c7e",
+    "04ea463b-4daa-4ff7-8cb6-003660e210bd"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "1cc80f9b-6365-4372-9e99-9f3fe07d49a2"
+  }
+ ]
 }

@@ -1,0 +1,1685 @@
+{
+ "id": "e4b3ae4a-8c74-43f3-828e-92fed7c58d30",
+ "name": "4a. Softphone Call Disposition – Workflow",
+ "folder": "03. Call Routing & Dispositions",
+ "status": "published",
+ "updatedAt": "2026-05-18T22:48:43.540Z",
+ "version": 19,
+ "extracted_at": "2026-07-10T05:40:32Z",
+ "extraction_method": "ghl_backend_api",
+ "source": "GHL Active Workflows (live API)",
+ "workflowData": {
+  "_id": "e4b3ae4a-8c74-43f3-828e-92fed7c58d30",
+  "locationId": "Ghstz8eIsHWLeXek47dk",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 3,
+  "name": "4a. Softphone Call Disposition – Workflow",
+  "status": "published",
+  "version": 19,
+  "dataVersion": 7,
+  "allowMultiple": true,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/Ghstz8eIsHWLeXek47dk/workflows/e4b3ae4a-8c74-43f3-828e-92fed7c58d30/19",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FGhstz8eIsHWLeXek47dk%2Fworkflows%2Fe4b3ae4a-8c74-43f3-828e-92fed7c58d30%2F19",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "type": "workflow",
+  "parentId": "8781f1cb-ad2f-430e-beee-3658beb4f104",
+  "updatedBy": "H7KZPo5m9HMtInlvFix3",
+  "createdAt": "2026-01-22T14:41:28.407Z",
+  "updatedAt": "2026-05-18T22:48:43.540Z",
+  "deleted": false,
+  "allowMultipleOpportunity": true,
+  "creationSource": "builder",
+  "originType": "user",
+  "__v": 0,
+  "eventStartDate": null,
+  "window": null,
+  "workflowNote": null,
+  "triggersFilePath": "location/Ghstz8eIsHWLeXek47dk/workflow-triggers/e4b3ae4a-8c74-43f3-828e-92fed7c58d30/17",
+  "isTriggerBucketMigrated": true,
+  "id": "e4b3ae4a-8c74-43f3-828e-92fed7c58d30"
+ },
+ "triggers": [
+  {
+   "id": "9OVTxZ2msVRw5nI5Yibm",
+   "date_added": "2026-01-22T15:39:30.275Z",
+   "deleted": false,
+   "actions": [
+    {
+     "workflow_id": "e4b3ae4a-8c74-43f3-828e-92fed7c58d30",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "contains-any",
+     "field": "custom_disposition",
+     "value": [
+      "Hung up"
+     ],
+     "title": "Custom Disposition",
+     "type": "multiselect"
+    }
+   ],
+   "type": "call_status",
+   "masterType": "highlevel",
+   "workflow_id": "e4b3ae4a-8c74-43f3-828e-92fed7c58d30",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "name": "Hung up",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "date_updated": "2026-02-02T18:02:51.523Z",
+   "active": true
+  },
+  {
+   "id": "LwpeVidgqPBDayY4DLlc",
+   "date_added": "2026-01-22T15:39:13.180Z",
+   "deleted": false,
+   "actions": [
+    {
+     "workflow_id": "e4b3ae4a-8c74-43f3-828e-92fed7c58d30",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "contains-any",
+     "field": "custom_disposition",
+     "value": [
+      "Follow Up Needed"
+     ],
+     "title": "Custom Disposition",
+     "type": "multiselect"
+    }
+   ],
+   "type": "call_status",
+   "masterType": "highlevel",
+   "workflow_id": "e4b3ae4a-8c74-43f3-828e-92fed7c58d30",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "name": "Follow Up Needed",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "date_updated": "2026-02-02T18:02:51.561Z",
+   "active": true
+  },
+  {
+   "id": "NsW5UfFE0UFCRNrPmlqJ",
+   "date_added": "2026-01-22T14:42:46.731Z",
+   "deleted": false,
+   "actions": [
+    {
+     "workflow_id": "e4b3ae4a-8c74-43f3-828e-92fed7c58d30",
+     "type": "add_to_workflow"
+    }
+   ],
+   "type": "call_status",
+   "masterType": "highlevel",
+   "workflow_id": "e4b3ae4a-8c74-43f3-828e-92fed7c58d30",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "name": "Call Completed",
+   "conditions": [
+    {
+     "operator": "contains-any",
+     "field": "custom_disposition",
+     "value": [
+      "Call Completed"
+     ],
+     "title": "Custom Disposition",
+     "type": "multiselect"
+    }
+   ],
+   "date_updated": "2026-02-02T18:02:51.602Z",
+   "active": true
+  },
+  {
+   "id": "QIOO6I6EgeHVdlvj93T0",
+   "date_added": "2026-01-22T15:41:47.972Z",
+   "deleted": false,
+   "actions": [
+    {
+     "workflow_id": "e4b3ae4a-8c74-43f3-828e-92fed7c58d30",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "contains-any",
+     "field": "custom_disposition",
+     "value": [
+      "Do Not Call / DNC"
+     ],
+     "title": "Custom Disposition",
+     "type": "multiselect"
+    }
+   ],
+   "type": "call_status",
+   "masterType": "highlevel",
+   "workflow_id": "e4b3ae4a-8c74-43f3-828e-92fed7c58d30",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "name": "DNC",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "date_updated": "2026-02-02T18:02:51.644Z",
+   "active": true
+  },
+  {
+   "id": "Tenuj24XuJJCbSGcQ2rD",
+   "date_added": "2026-01-22T15:40:28.182Z",
+   "deleted": false,
+   "actions": [
+    {
+     "workflow_id": "e4b3ae4a-8c74-43f3-828e-92fed7c58d30",
+     "type": "add_to_workflow"
+    }
+   ],
+   "type": "call_status",
+   "masterType": "highlevel",
+   "workflow_id": "e4b3ae4a-8c74-43f3-828e-92fed7c58d30",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "name": "Incorrect Number",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "active": true,
+   "date_updated": "2026-02-09T23:08:22.130Z",
+   "conditions": [
+    {
+     "operator": "contains-any",
+     "field": "custom_disposition",
+     "value": [
+      "Incorrect Number/Not a Lead"
+     ],
+     "title": "Custom Disposition",
+     "type": "multiselect"
+    }
+   ]
+  },
+  {
+   "id": "YRAKC9H7TASVmECMydoR",
+   "date_added": "2026-01-22T15:40:50.046Z",
+   "deleted": false,
+   "actions": [
+    {
+     "workflow_id": "e4b3ae4a-8c74-43f3-828e-92fed7c58d30",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "contains-any",
+     "field": "custom_disposition",
+     "value": [
+      "Not Interested"
+     ],
+     "title": "Custom Disposition",
+     "type": "multiselect"
+    }
+   ],
+   "type": "call_status",
+   "masterType": "highlevel",
+   "workflow_id": "e4b3ae4a-8c74-43f3-828e-92fed7c58d30",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "name": "Not Interested",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "date_updated": "2026-02-02T18:02:51.726Z",
+   "active": true
+  },
+  {
+   "id": "ZI73XVdAIKePnAVVG9jb",
+   "date_added": "2026-01-22T15:38:29.641Z",
+   "deleted": false,
+   "actions": [
+    {
+     "workflow_id": "e4b3ae4a-8c74-43f3-828e-92fed7c58d30",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "contains-any",
+     "field": "custom_disposition",
+     "value": [
+      "Requested Appointment"
+     ],
+     "title": "Custom Disposition",
+     "type": "multiselect"
+    }
+   ],
+   "type": "call_status",
+   "masterType": "highlevel",
+   "workflow_id": "e4b3ae4a-8c74-43f3-828e-92fed7c58d30",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "name": "Requested appointment",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "date_updated": "2026-02-02T18:02:51.772Z",
+   "active": true
+  },
+  {
+   "id": "rO4y9tteWwgRa7ElBQhP",
+   "date_added": "2026-01-22T15:41:12.896Z",
+   "deleted": false,
+   "actions": [
+    {
+     "workflow_id": "e4b3ae4a-8c74-43f3-828e-92fed7c58d30",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "contains-any",
+     "field": "custom_disposition",
+     "value": [
+      "Not Qualified"
+     ],
+     "title": "Custom Disposition",
+     "type": "multiselect"
+    }
+   ],
+   "type": "call_status",
+   "masterType": "highlevel",
+   "workflow_id": "e4b3ae4a-8c74-43f3-828e-92fed7c58d30",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "name": "Not Qualified",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "date_updated": "2026-02-02T18:02:51.853Z",
+   "active": true
+  },
+  {
+   "id": "xbqBCAlicn2zOMh7cYAP",
+   "date_added": "2026-01-22T15:41:30.194Z",
+   "deleted": false,
+   "actions": [
+    {
+     "workflow_id": "e4b3ae4a-8c74-43f3-828e-92fed7c58d30",
+     "type": "add_to_workflow"
+    }
+   ],
+   "type": "call_status",
+   "masterType": "highlevel",
+   "workflow_id": "e4b3ae4a-8c74-43f3-828e-92fed7c58d30",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "active": true,
+   "conditions": [
+    {
+     "operator": "contains-any",
+     "field": "custom_disposition",
+     "value": [
+      "No Answer/Voicemail"
+     ],
+     "title": "Custom Disposition",
+     "type": "multiselect"
+    }
+   ],
+   "date_updated": "2026-02-09T23:08:06.206Z",
+   "name": "No answer/Voicemail"
+  }
+ ],
+ "dependentAssets": {},
+ "templates": [
+  {
+   "id": "7ff17d8e-d907-4f8b-9d4f-135c5595d973",
+   "order": 0,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "4de69fbb-ba53-478c-be42-c60a545beb04",
+      "name": "Call Completed",
+      "segments": [
+       {
+        "__segmentId": "db5113c3-1139-4a0c-ad57-7372e1c6da06",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "NsW5UfFE0UFCRNrPmlqJ",
+          "__conditionId": "b8c3251c-c257-4bf8-a814-f485f716f247",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "62fe3794-8b00-4a0e-bfa6-75c684f34256",
+      "name": "Requested Appointment",
+      "segments": [
+       {
+        "__segmentId": "db5113c3-1139-4a0c-ad57-7372e1c6da06",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "ZI73XVdAIKePnAVVG9jb",
+          "__conditionId": "b8c3251c-c257-4bf8-a814-f485f716f247",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "5ccba6d3-9c87-41c9-9867-f720c8a7b763",
+      "name": "Follow Up Needed",
+      "segments": [
+       {
+        "__segmentId": "db5113c3-1139-4a0c-ad57-7372e1c6da06",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "LwpeVidgqPBDayY4DLlc",
+          "__conditionId": "b8c3251c-c257-4bf8-a814-f485f716f247",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "4c3971a4-ab99-45ca-8aaa-f634733cc1f8",
+      "name": "Voicemail",
+      "segments": [
+       {
+        "__segmentId": "db5113c3-1139-4a0c-ad57-7372e1c6da06",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "xbqBCAlicn2zOMh7cYAP",
+          "__conditionId": "b8c3251c-c257-4bf8-a814-f485f716f247",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "4974eb05-5b28-4e41-95d7-bab1f1f259ac",
+      "name": "No Answer",
+      "segments": [
+       {
+        "__segmentId": "db5113c3-1139-4a0c-ad57-7372e1c6da06",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "g2S0r7drfKIIFj5gMQEf",
+          "__conditionId": "b8c3251c-c257-4bf8-a814-f485f716f247",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "222ef1ad-740e-4732-8b17-ccf2921bb7ea",
+      "name": "Hung up",
+      "segments": [
+       {
+        "__segmentId": "db5113c3-1139-4a0c-ad57-7372e1c6da06",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "9OVTxZ2msVRw5nI5Yibm",
+          "__conditionId": "b8c3251c-c257-4bf8-a814-f485f716f247",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "b549d25a-b3a8-45c5-88d0-067d168ff6e6",
+      "name": "Incorrect Number",
+      "segments": [
+       {
+        "__segmentId": "db5113c3-1139-4a0c-ad57-7372e1c6da06",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "Tenuj24XuJJCbSGcQ2rD",
+          "__conditionId": "b8c3251c-c257-4bf8-a814-f485f716f247",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "95209771-a33d-461a-a625-ccd1d5e90611",
+      "name": "Not Interested",
+      "segments": [
+       {
+        "__segmentId": "db5113c3-1139-4a0c-ad57-7372e1c6da06",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "YRAKC9H7TASVmECMydoR",
+          "__conditionId": "b8c3251c-c257-4bf8-a814-f485f716f247",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "3bd96696-0ce7-4e05-9ed1-839b22de2fdc",
+      "name": "Not Qualified",
+      "segments": [
+       {
+        "__segmentId": "db5113c3-1139-4a0c-ad57-7372e1c6da06",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "rO4y9tteWwgRa7ElBQhP",
+          "__conditionId": "b8c3251c-c257-4bf8-a814-f485f716f247",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "fab32e22-af54-4e7c-b89c-3466f677fe7a",
+      "name": "DNC",
+      "segments": [
+       {
+        "__segmentId": "db5113c3-1139-4a0c-ad57-7372e1c6da06",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "QIOO6I6EgeHVdlvj93T0",
+          "__conditionId": "b8c3251c-c257-4bf8-a814-f485f716f247",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Condition",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "4de69fbb-ba53-478c-be42-c60a545beb04",
+    "62fe3794-8b00-4a0e-bfa6-75c684f34256",
+    "5ccba6d3-9c87-41c9-9867-f720c8a7b763",
+    "4c3971a4-ab99-45ca-8aaa-f634733cc1f8",
+    "4974eb05-5b28-4e41-95d7-bab1f1f259ac",
+    "222ef1ad-740e-4732-8b17-ccf2921bb7ea",
+    "b549d25a-b3a8-45c5-88d0-067d168ff6e6",
+    "95209771-a33d-461a-a625-ccd1d5e90611",
+    "3bd96696-0ce7-4e05-9ed1-839b22de2fdc",
+    "fab32e22-af54-4e7c-b89c-3466f677fe7a",
+    "a54b6d7b-b903-475c-9619-920c0c11aa23"
+   ],
+   "comments": [],
+   "nodeType": "condition-node"
+  },
+  {
+   "id": "4de69fbb-ba53-478c-be42-c60a545beb04",
+   "parent": "7ff17d8e-d907-4f8b-9d4f-135c5595d973",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Call Completed",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "42a87a54-2afb-48ef-aaf7-1a2cec39254c",
+   "sibling": [
+    "62fe3794-8b00-4a0e-bfa6-75c684f34256",
+    "5ccba6d3-9c87-41c9-9867-f720c8a7b763",
+    "222ef1ad-740e-4732-8b17-ccf2921bb7ea",
+    "4974eb05-5b28-4e41-95d7-bab1f1f259ac",
+    "b549d25a-b3a8-45c5-88d0-067d168ff6e6",
+    "95209771-a33d-461a-a625-ccd1d5e90611",
+    "3bd96696-0ce7-4e05-9ed1-839b22de2fdc",
+    "4c3971a4-ab99-45ca-8aaa-f634733cc1f8",
+    "fab32e22-af54-4e7c-b89c-3466f677fe7a",
+    "a54b6d7b-b903-475c-9619-920c0c11aa23"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "7ff17d8e-d907-4f8b-9d4f-135c5595d973"
+  },
+  {
+   "id": "42a87a54-2afb-48ef-aaf7-1a2cec39254c",
+   "parent": "4de69fbb-ba53-478c-be42-c60a545beb04",
+   "order": 0,
+   "attributes": {
+    "type": "update_contact_field",
+    "actionType": "update_field_data",
+    "fields": [
+     {
+      "field": "6iZQfyb2ISwxEucKs6zm",
+      "value": "Completed / Successful Call",
+      "title": "CALL DISPOSITION",
+      "type": "select",
+      "date": "",
+      "__customFieldType__": "standard"
+     }
+    ]
+   },
+   "name": "Update Call Disposition Field to Completed",
+   "type": "update_contact_field",
+   "parentKey": "4de69fbb-ba53-478c-be42-c60a545beb04",
+   "next": "618514bb-9e36-4b5d-af33-7e9a6878328b"
+  },
+  {
+   "id": "618514bb-9e36-4b5d-af33-7e9a6878328b",
+   "parent": "4de69fbb-ba53-478c-be42-c60a545beb04",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "GeT92kRjikpLMRu3EgKT",
+    "pipeline_stage_id": "9e74f579-0ad0-4e2e-b19b-4ee17d9faeaa",
+    "opportunity_status": "open",
+    "opportunity_name": "",
+    "opportunity_source": "",
+    "monetary_value": ""
+   },
+   "name": "Add to Call Disposition Pipeline",
+   "type": "create_opportunity",
+   "parentKey": "42a87a54-2afb-48ef-aaf7-1a2cec39254c"
+  },
+  {
+   "id": "62fe3794-8b00-4a0e-bfa6-75c684f34256",
+   "parent": "7ff17d8e-d907-4f8b-9d4f-135c5595d973",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Requested Appointment",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "4de69fbb-ba53-478c-be42-c60a545beb04",
+    "5ccba6d3-9c87-41c9-9867-f720c8a7b763",
+    "222ef1ad-740e-4732-8b17-ccf2921bb7ea",
+    "4974eb05-5b28-4e41-95d7-bab1f1f259ac",
+    "b549d25a-b3a8-45c5-88d0-067d168ff6e6",
+    "95209771-a33d-461a-a625-ccd1d5e90611",
+    "3bd96696-0ce7-4e05-9ed1-839b22de2fdc",
+    "4c3971a4-ab99-45ca-8aaa-f634733cc1f8",
+    "fab32e22-af54-4e7c-b89c-3466f677fe7a",
+    "a54b6d7b-b903-475c-9619-920c0c11aa23"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "7ff17d8e-d907-4f8b-9d4f-135c5595d973",
+   "next": "ab4202fb-c938-4276-8696-f1a61e25a293"
+  },
+  {
+   "id": "ab4202fb-c938-4276-8696-f1a61e25a293",
+   "parent": "62fe3794-8b00-4a0e-bfa6-75c684f34256",
+   "order": 0,
+   "attributes": {
+    "type": "update_contact_field",
+    "actionType": "update_field_data",
+    "fields": [
+     {
+      "field": "6iZQfyb2ISwxEucKs6zm",
+      "value": "Requested Appointment",
+      "title": "CALL DISPOSITION",
+      "type": "select",
+      "date": "",
+      "__customFieldType__": "standard"
+     }
+    ]
+   },
+   "name": "Update Call Disposition Field to Requested Appointment",
+   "type": "update_contact_field",
+   "parentKey": "62fe3794-8b00-4a0e-bfa6-75c684f34256",
+   "next": "e28900eb-4cc9-4bb6-8777-967f848e3e56"
+  },
+  {
+   "id": "e28900eb-4cc9-4bb6-8777-967f848e3e56",
+   "parent": "62fe3794-8b00-4a0e-bfa6-75c684f34256",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "GeT92kRjikpLMRu3EgKT",
+    "pipeline_stage_id": "9e74f579-0ad0-4e2e-b19b-4ee17d9faeaa",
+    "opportunity_status": "open",
+    "opportunity_name": "",
+    "opportunity_source": "",
+    "monetary_value": ""
+   },
+   "name": "Add to Call Disposition Pipeline",
+   "type": "create_opportunity",
+   "parentKey": "ab4202fb-c938-4276-8696-f1a61e25a293"
+  },
+  {
+   "id": "5ccba6d3-9c87-41c9-9867-f720c8a7b763",
+   "parent": "7ff17d8e-d907-4f8b-9d4f-135c5595d973",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Follow Up Needed",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "4de69fbb-ba53-478c-be42-c60a545beb04",
+    "62fe3794-8b00-4a0e-bfa6-75c684f34256",
+    "222ef1ad-740e-4732-8b17-ccf2921bb7ea",
+    "4974eb05-5b28-4e41-95d7-bab1f1f259ac",
+    "b549d25a-b3a8-45c5-88d0-067d168ff6e6",
+    "95209771-a33d-461a-a625-ccd1d5e90611",
+    "3bd96696-0ce7-4e05-9ed1-839b22de2fdc",
+    "4c3971a4-ab99-45ca-8aaa-f634733cc1f8",
+    "fab32e22-af54-4e7c-b89c-3466f677fe7a",
+    "a54b6d7b-b903-475c-9619-920c0c11aa23"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "7ff17d8e-d907-4f8b-9d4f-135c5595d973",
+   "next": "b05208d6-8e1e-43c4-bbd5-5d64a3f09615"
+  },
+  {
+   "id": "b05208d6-8e1e-43c4-bbd5-5d64a3f09615",
+   "parent": "5ccba6d3-9c87-41c9-9867-f720c8a7b763",
+   "order": 0,
+   "attributes": {
+    "type": "update_contact_field",
+    "actionType": "update_field_data",
+    "fields": [
+     {
+      "field": "6iZQfyb2ISwxEucKs6zm",
+      "value": "Follow-Up Needed",
+      "title": "CALL DISPOSITION",
+      "type": "select",
+      "date": "",
+      "__customFieldType__": "standard"
+     }
+    ]
+   },
+   "name": "Update Call Disposition Field to Follow Up Needed",
+   "type": "update_contact_field",
+   "parentKey": "5ccba6d3-9c87-41c9-9867-f720c8a7b763",
+   "next": "04079ea7-6d00-4e45-936e-318899b41415"
+  },
+  {
+   "id": "04079ea7-6d00-4e45-936e-318899b41415",
+   "parent": "5ccba6d3-9c87-41c9-9867-f720c8a7b763",
+   "order": 1,
+   "attributes": {
+    "title": "Follow up",
+    "body": "Follow up",
+    "assignedTo": "contact.assigned_user",
+    "dueDate": "now",
+    "type": "task_notification",
+    "__customInputs__": {}
+   },
+   "name": "Add Task",
+   "type": "task-notification",
+   "workflowsActionType": "INTERNAL",
+   "parentKey": "b05208d6-8e1e-43c4-bbd5-5d64a3f09615",
+   "next": "d9ad7d58-bb4e-4dbf-8527-3529dd326c9d"
+  },
+  {
+   "id": "d9ad7d58-bb4e-4dbf-8527-3529dd326c9d",
+   "parent": "5ccba6d3-9c87-41c9-9867-f720c8a7b763",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "GeT92kRjikpLMRu3EgKT",
+    "pipeline_stage_id": "43feb0ad-ffc5-4716-bba4-160db7b498b2",
+    "opportunity_status": "open",
+    "opportunity_name": "",
+    "opportunity_source": "",
+    "monetary_value": ""
+   },
+   "name": "Add to Call Disposition Pipeline",
+   "type": "create_opportunity",
+   "parentKey": "04079ea7-6d00-4e45-936e-318899b41415"
+  },
+  {
+   "id": "4c3971a4-ab99-45ca-8aaa-f634733cc1f8",
+   "parent": "7ff17d8e-d907-4f8b-9d4f-135c5595d973",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Voicemail",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "4de69fbb-ba53-478c-be42-c60a545beb04",
+    "62fe3794-8b00-4a0e-bfa6-75c684f34256",
+    "5ccba6d3-9c87-41c9-9867-f720c8a7b763",
+    "222ef1ad-740e-4732-8b17-ccf2921bb7ea",
+    "4974eb05-5b28-4e41-95d7-bab1f1f259ac",
+    "b549d25a-b3a8-45c5-88d0-067d168ff6e6",
+    "95209771-a33d-461a-a625-ccd1d5e90611",
+    "3bd96696-0ce7-4e05-9ed1-839b22de2fdc",
+    "fab32e22-af54-4e7c-b89c-3466f677fe7a",
+    "a54b6d7b-b903-475c-9619-920c0c11aa23"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "7ff17d8e-d907-4f8b-9d4f-135c5595d973",
+   "next": "3575c02f-b3d6-42b9-b993-595959bc2256"
+  },
+  {
+   "id": "3575c02f-b3d6-42b9-b993-595959bc2256",
+   "parent": "4c3971a4-ab99-45ca-8aaa-f634733cc1f8",
+   "order": 0,
+   "attributes": {
+    "type": "update_contact_field",
+    "actionType": "update_field_data",
+    "fields": [
+     {
+      "field": "6iZQfyb2ISwxEucKs6zm",
+      "value": "No Answer / Voicemail",
+      "title": "CALL DISPOSITION",
+      "type": "select",
+      "date": "",
+      "__customFieldType__": "standard"
+     }
+    ]
+   },
+   "name": "Update Call Disposition Field to Voicemail",
+   "type": "update_contact_field",
+   "parentKey": "4c3971a4-ab99-45ca-8aaa-f634733cc1f8",
+   "next": "e0baf89b-a9c0-44a2-844e-b212957c7dc9"
+  },
+  {
+   "id": "e0baf89b-a9c0-44a2-844e-b212957c7dc9",
+   "parent": "4c3971a4-ab99-45ca-8aaa-f634733cc1f8",
+   "order": 1,
+   "attributes": {
+    "title": "Follow up after voicemail",
+    "body": "Follow up after voicemail",
+    "assignedTo": "contact.assigned_user",
+    "dueDate": "now",
+    "type": "task_notification",
+    "__customInputs__": {}
+   },
+   "name": "Add Task",
+   "type": "task-notification",
+   "workflowsActionType": "INTERNAL",
+   "parentKey": "3575c02f-b3d6-42b9-b993-595959bc2256",
+   "next": "b6d7d3de-3b84-4ca6-a45f-76f4a3354dac"
+  },
+  {
+   "id": "b6d7d3de-3b84-4ca6-a45f-76f4a3354dac",
+   "parent": "4c3971a4-ab99-45ca-8aaa-f634733cc1f8",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "GeT92kRjikpLMRu3EgKT",
+    "pipeline_stage_id": "43feb0ad-ffc5-4716-bba4-160db7b498b2",
+    "opportunity_status": "open",
+    "opportunity_name": "",
+    "opportunity_source": "",
+    "monetary_value": ""
+   },
+   "name": "Add to Call Disposition Pipeline",
+   "type": "create_opportunity",
+   "parentKey": "e0baf89b-a9c0-44a2-844e-b212957c7dc9"
+  },
+  {
+   "id": "4974eb05-5b28-4e41-95d7-bab1f1f259ac",
+   "parent": "7ff17d8e-d907-4f8b-9d4f-135c5595d973",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "No Answer",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "4de69fbb-ba53-478c-be42-c60a545beb04",
+    "62fe3794-8b00-4a0e-bfa6-75c684f34256",
+    "5ccba6d3-9c87-41c9-9867-f720c8a7b763",
+    "222ef1ad-740e-4732-8b17-ccf2921bb7ea",
+    "b549d25a-b3a8-45c5-88d0-067d168ff6e6",
+    "95209771-a33d-461a-a625-ccd1d5e90611",
+    "3bd96696-0ce7-4e05-9ed1-839b22de2fdc",
+    "4c3971a4-ab99-45ca-8aaa-f634733cc1f8",
+    "fab32e22-af54-4e7c-b89c-3466f677fe7a",
+    "a54b6d7b-b903-475c-9619-920c0c11aa23"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "7ff17d8e-d907-4f8b-9d4f-135c5595d973",
+   "next": "4d1a5c68-c232-4bde-93fa-391b8e64ddf7"
+  },
+  {
+   "id": "4d1a5c68-c232-4bde-93fa-391b8e64ddf7",
+   "parent": "4974eb05-5b28-4e41-95d7-bab1f1f259ac",
+   "order": 0,
+   "attributes": {
+    "type": "update_contact_field",
+    "actionType": "update_field_data",
+    "fields": [
+     {
+      "field": "6iZQfyb2ISwxEucKs6zm",
+      "value": "No Answer / Voicemail",
+      "title": "CALL DISPOSITION",
+      "type": "select",
+      "date": "",
+      "__customFieldType__": "standard"
+     }
+    ]
+   },
+   "name": "Update Call Disposition Field to No Answer",
+   "type": "update_contact_field",
+   "parentKey": "4974eb05-5b28-4e41-95d7-bab1f1f259ac",
+   "next": "97c98323-8b35-4c53-a4cc-b3503c0ab9ab"
+  },
+  {
+   "id": "97c98323-8b35-4c53-a4cc-b3503c0ab9ab",
+   "parent": "4974eb05-5b28-4e41-95d7-bab1f1f259ac",
+   "order": 1,
+   "attributes": {
+    "title": "Follow up after No Answer",
+    "body": "Follow up after No Answer",
+    "assignedTo": "contact.assigned_user",
+    "dueDate": "now",
+    "type": "task_notification",
+    "__customInputs__": {}
+   },
+   "name": "Add Task",
+   "type": "task-notification",
+   "workflowsActionType": "INTERNAL",
+   "parentKey": "4d1a5c68-c232-4bde-93fa-391b8e64ddf7",
+   "next": "5aa6c368-fd19-4698-9ab9-009aeb5cbe81"
+  },
+  {
+   "id": "5aa6c368-fd19-4698-9ab9-009aeb5cbe81",
+   "parent": "4974eb05-5b28-4e41-95d7-bab1f1f259ac",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "GeT92kRjikpLMRu3EgKT",
+    "pipeline_stage_id": "43feb0ad-ffc5-4716-bba4-160db7b498b2",
+    "opportunity_status": "open",
+    "opportunity_name": "",
+    "opportunity_source": "",
+    "monetary_value": ""
+   },
+   "name": "Add to Call Disposition Pipeline",
+   "type": "create_opportunity",
+   "parentKey": "97c98323-8b35-4c53-a4cc-b3503c0ab9ab"
+  },
+  {
+   "id": "222ef1ad-740e-4732-8b17-ccf2921bb7ea",
+   "parent": "7ff17d8e-d907-4f8b-9d4f-135c5595d973",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Hung up",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "4de69fbb-ba53-478c-be42-c60a545beb04",
+    "62fe3794-8b00-4a0e-bfa6-75c684f34256",
+    "5ccba6d3-9c87-41c9-9867-f720c8a7b763",
+    "4974eb05-5b28-4e41-95d7-bab1f1f259ac",
+    "b549d25a-b3a8-45c5-88d0-067d168ff6e6",
+    "95209771-a33d-461a-a625-ccd1d5e90611",
+    "3bd96696-0ce7-4e05-9ed1-839b22de2fdc",
+    "4c3971a4-ab99-45ca-8aaa-f634733cc1f8",
+    "fab32e22-af54-4e7c-b89c-3466f677fe7a",
+    "a54b6d7b-b903-475c-9619-920c0c11aa23"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "7ff17d8e-d907-4f8b-9d4f-135c5595d973",
+   "next": "c4453db6-05a2-461a-a79f-a008ab65b2d2"
+  },
+  {
+   "id": "c4453db6-05a2-461a-a79f-a008ab65b2d2",
+   "parent": "222ef1ad-740e-4732-8b17-ccf2921bb7ea",
+   "order": 0,
+   "attributes": {
+    "type": "update_contact_field",
+    "actionType": "update_field_data",
+    "fields": [
+     {
+      "field": "6iZQfyb2ISwxEucKs6zm",
+      "value": "Hung Up",
+      "title": "CALL DISPOSITION",
+      "type": "select",
+      "date": "",
+      "__customFieldType__": "standard"
+     }
+    ]
+   },
+   "name": "Update Call Disposition Field to Hung up",
+   "type": "update_contact_field",
+   "parentKey": "222ef1ad-740e-4732-8b17-ccf2921bb7ea",
+   "next": "bc72f88d-0c64-494b-aa58-1f312b45b05a"
+  },
+  {
+   "id": "bc72f88d-0c64-494b-aa58-1f312b45b05a",
+   "parent": "222ef1ad-740e-4732-8b17-ccf2921bb7ea",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "GeT92kRjikpLMRu3EgKT",
+    "pipeline_stage_id": "2cb105d6-35da-437d-82ff-602ee954770f",
+    "opportunity_status": "open",
+    "opportunity_name": "",
+    "opportunity_source": "",
+    "monetary_value": ""
+   },
+   "name": "Add to Call Disposition Pipeline",
+   "type": "create_opportunity",
+   "parentKey": "c4453db6-05a2-461a-a79f-a008ab65b2d2"
+  },
+  {
+   "id": "b549d25a-b3a8-45c5-88d0-067d168ff6e6",
+   "parent": "7ff17d8e-d907-4f8b-9d4f-135c5595d973",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Incorrect Number",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "4de69fbb-ba53-478c-be42-c60a545beb04",
+    "62fe3794-8b00-4a0e-bfa6-75c684f34256",
+    "5ccba6d3-9c87-41c9-9867-f720c8a7b763",
+    "222ef1ad-740e-4732-8b17-ccf2921bb7ea",
+    "4974eb05-5b28-4e41-95d7-bab1f1f259ac",
+    "95209771-a33d-461a-a625-ccd1d5e90611",
+    "3bd96696-0ce7-4e05-9ed1-839b22de2fdc",
+    "4c3971a4-ab99-45ca-8aaa-f634733cc1f8",
+    "fab32e22-af54-4e7c-b89c-3466f677fe7a",
+    "a54b6d7b-b903-475c-9619-920c0c11aa23"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "7ff17d8e-d907-4f8b-9d4f-135c5595d973",
+   "next": "20053dab-07b6-4001-8b03-37b3b7c20398"
+  },
+  {
+   "id": "20053dab-07b6-4001-8b03-37b3b7c20398",
+   "parent": "b549d25a-b3a8-45c5-88d0-067d168ff6e6",
+   "order": 0,
+   "attributes": {
+    "type": "update_contact_field",
+    "actionType": "update_field_data",
+    "fields": [
+     {
+      "field": "6iZQfyb2ISwxEucKs6zm",
+      "value": "Incorrect Number/Not a Lead",
+      "title": "CALL DISPOSITION",
+      "type": "select",
+      "date": "",
+      "__customFieldType__": "standard"
+     }
+    ]
+   },
+   "name": "Update Call Disposition Field to Incorrect Number",
+   "type": "update_contact_field",
+   "parentKey": "b549d25a-b3a8-45c5-88d0-067d168ff6e6",
+   "next": "ee241169-c213-4310-bb05-7e001b17a081"
+  },
+  {
+   "id": "ee241169-c213-4310-bb05-7e001b17a081",
+   "parent": "b549d25a-b3a8-45c5-88d0-067d168ff6e6",
+   "order": 1,
+   "attributes": {
+    "tags": [
+     "wrong number"
+    ]
+   },
+   "name": "Add Tag",
+   "type": "add_contact_tag",
+   "parentKey": "20053dab-07b6-4001-8b03-37b3b7c20398",
+   "next": "4263c0c8-171c-43d4-b6e1-60d1ac548029"
+  },
+  {
+   "id": "4263c0c8-171c-43d4-b6e1-60d1ac548029",
+   "parent": "b549d25a-b3a8-45c5-88d0-067d168ff6e6",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "GeT92kRjikpLMRu3EgKT",
+    "pipeline_stage_id": "bfcc01a7-2f54-4e7f-8879-2344b4157b60",
+    "opportunity_status": "abandoned",
+    "opportunity_name": "",
+    "opportunity_source": "",
+    "monetary_value": ""
+   },
+   "name": "Add to Call Disposition Pipeline",
+   "type": "create_opportunity",
+   "parentKey": "ee241169-c213-4310-bb05-7e001b17a081"
+  },
+  {
+   "id": "95209771-a33d-461a-a625-ccd1d5e90611",
+   "parent": "7ff17d8e-d907-4f8b-9d4f-135c5595d973",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Not Interested",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "4de69fbb-ba53-478c-be42-c60a545beb04",
+    "62fe3794-8b00-4a0e-bfa6-75c684f34256",
+    "5ccba6d3-9c87-41c9-9867-f720c8a7b763",
+    "222ef1ad-740e-4732-8b17-ccf2921bb7ea",
+    "4974eb05-5b28-4e41-95d7-bab1f1f259ac",
+    "b549d25a-b3a8-45c5-88d0-067d168ff6e6",
+    "3bd96696-0ce7-4e05-9ed1-839b22de2fdc",
+    "4c3971a4-ab99-45ca-8aaa-f634733cc1f8",
+    "fab32e22-af54-4e7c-b89c-3466f677fe7a",
+    "a54b6d7b-b903-475c-9619-920c0c11aa23"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "7ff17d8e-d907-4f8b-9d4f-135c5595d973",
+   "next": "13329768-23a5-4a93-9e80-ba0628121576"
+  },
+  {
+   "id": "13329768-23a5-4a93-9e80-ba0628121576",
+   "parent": "95209771-a33d-461a-a625-ccd1d5e90611",
+   "order": 0,
+   "attributes": {
+    "type": "update_contact_field",
+    "actionType": "update_field_data",
+    "fields": [
+     {
+      "field": "6iZQfyb2ISwxEucKs6zm",
+      "value": "Not Interested",
+      "title": "CALL DISPOSITION",
+      "type": "select",
+      "date": "",
+      "__customFieldType__": "standard"
+     }
+    ]
+   },
+   "name": "Update Call Disposition Field to Not Interested",
+   "type": "update_contact_field",
+   "next": "352db820-9ac0-4e2a-a902-e317b2e5e49b",
+   "parentKey": "95209771-a33d-461a-a625-ccd1d5e90611"
+  },
+  {
+   "id": "352db820-9ac0-4e2a-a902-e317b2e5e49b",
+   "parent": "95209771-a33d-461a-a625-ccd1d5e90611",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "GTwmWC8TwPIH7PONUtuw",
+    "pipeline_stage_id": "5ae05cf1-6ee8-42e1-8ddf-b70839c63245",
+    "opportunity_status": "lost",
+    "lostReasonId": "696f4d3be95a9c062dfcc959",
+    "opportunity_name": "",
+    "opportunity_source": "",
+    "monetary_value": ""
+   },
+   "name": "Add to Lost Pipeline",
+   "type": "create_opportunity",
+   "next": "00fb7f83-7ea5-4d69-826d-52a42983b029",
+   "parentKey": "13329768-23a5-4a93-9e80-ba0628121576"
+  },
+  {
+   "id": "00fb7f83-7ea5-4d69-826d-52a42983b029",
+   "parent": "95209771-a33d-461a-a625-ccd1d5e90611",
+   "order": 2,
+   "attributes": {
+    "title": "{{contact.name}} is for intervention!",
+    "body": "Patient is not interested. Uncover objection and attempt to Close",
+    "assignedTo": "",
+    "dueDate": "1",
+    "type": "task_notification",
+    "__customInputs__": {}
+   },
+   "name": "Add Task",
+   "type": "task-notification",
+   "next": "8c8c4902-cf1e-43f9-8b9a-90bacc304de8",
+   "workflowsActionType": "INTERNAL",
+   "parentKey": "352db820-9ac0-4e2a-a902-e317b2e5e49b"
+  },
+  {
+   "id": "8c8c4902-cf1e-43f9-8b9a-90bacc304de8",
+   "parent": "95209771-a33d-461a-a625-ccd1d5e90611",
+   "order": 3,
+   "attributes": {
+    "html": "<p style=\"padding-left: 0px!important;\">Reason for disinterest:</p>",
+    "type": "add_notes"
+   },
+   "name": "Note",
+   "type": "add_notes",
+   "parentKey": "00fb7f83-7ea5-4d69-826d-52a42983b029"
+  },
+  {
+   "id": "3bd96696-0ce7-4e05-9ed1-839b22de2fdc",
+   "parent": "7ff17d8e-d907-4f8b-9d4f-135c5595d973",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Not Qualified",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "4de69fbb-ba53-478c-be42-c60a545beb04",
+    "62fe3794-8b00-4a0e-bfa6-75c684f34256",
+    "5ccba6d3-9c87-41c9-9867-f720c8a7b763",
+    "222ef1ad-740e-4732-8b17-ccf2921bb7ea",
+    "4974eb05-5b28-4e41-95d7-bab1f1f259ac",
+    "b549d25a-b3a8-45c5-88d0-067d168ff6e6",
+    "95209771-a33d-461a-a625-ccd1d5e90611",
+    "4c3971a4-ab99-45ca-8aaa-f634733cc1f8",
+    "fab32e22-af54-4e7c-b89c-3466f677fe7a",
+    "a54b6d7b-b903-475c-9619-920c0c11aa23"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "7ff17d8e-d907-4f8b-9d4f-135c5595d973",
+   "next": "fb089efe-0029-485c-a040-037798fb703b"
+  },
+  {
+   "id": "fb089efe-0029-485c-a040-037798fb703b",
+   "parent": "3bd96696-0ce7-4e05-9ed1-839b22de2fdc",
+   "order": 0,
+   "attributes": {
+    "type": "update_contact_field",
+    "actionType": "update_field_data",
+    "fields": [
+     {
+      "field": "6iZQfyb2ISwxEucKs6zm",
+      "value": "Not Qualified",
+      "title": "CALL DISPOSITION",
+      "type": "select",
+      "date": "",
+      "__customFieldType__": "standard"
+     }
+    ]
+   },
+   "name": "Update Call Disposition Field to Not Qualified",
+   "type": "update_contact_field",
+   "parentKey": "3bd96696-0ce7-4e05-9ed1-839b22de2fdc",
+   "next": "0654ba52-800a-43e7-8d37-98080f1f51ce"
+  },
+  {
+   "id": "0654ba52-800a-43e7-8d37-98080f1f51ce",
+   "parent": "3bd96696-0ce7-4e05-9ed1-839b22de2fdc",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "GTwmWC8TwPIH7PONUtuw",
+    "pipeline_stage_id": "051bbd90-5e1b-49b4-a49e-94b22fc0e3c7",
+    "opportunity_status": "lost",
+    "lostReasonId": "696f4d3b2a9d6f12607f4b8f",
+    "opportunity_name": "",
+    "opportunity_source": "",
+    "monetary_value": ""
+   },
+   "name": "Add to Lost Pipeline",
+   "type": "create_opportunity",
+   "parentKey": "fb089efe-0029-485c-a040-037798fb703b"
+  },
+  {
+   "id": "fab32e22-af54-4e7c-b89c-3466f677fe7a",
+   "parent": "7ff17d8e-d907-4f8b-9d4f-135c5595d973",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "DNC",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "4de69fbb-ba53-478c-be42-c60a545beb04",
+    "62fe3794-8b00-4a0e-bfa6-75c684f34256",
+    "5ccba6d3-9c87-41c9-9867-f720c8a7b763",
+    "222ef1ad-740e-4732-8b17-ccf2921bb7ea",
+    "4974eb05-5b28-4e41-95d7-bab1f1f259ac",
+    "b549d25a-b3a8-45c5-88d0-067d168ff6e6",
+    "95209771-a33d-461a-a625-ccd1d5e90611",
+    "3bd96696-0ce7-4e05-9ed1-839b22de2fdc",
+    "4c3971a4-ab99-45ca-8aaa-f634733cc1f8",
+    "a54b6d7b-b903-475c-9619-920c0c11aa23"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "7ff17d8e-d907-4f8b-9d4f-135c5595d973",
+   "next": "0c8425cd-ff8f-4cc9-a77a-cfe426c83884"
+  },
+  {
+   "id": "0c8425cd-ff8f-4cc9-a77a-cfe426c83884",
+   "parent": "fab32e22-af54-4e7c-b89c-3466f677fe7a",
+   "order": 0,
+   "attributes": {
+    "type": "update_contact_field",
+    "actionType": "update_field_data",
+    "fields": [
+     {
+      "field": "6iZQfyb2ISwxEucKs6zm",
+      "value": "Do Not Call / DNC",
+      "title": "CALL DISPOSITION",
+      "type": "select",
+      "date": "",
+      "__customFieldType__": "standard"
+     }
+    ]
+   },
+   "name": "Update Call Disposition Field to DNC",
+   "type": "update_contact_field",
+   "next": "bfcd83c3-a5c8-4ec0-8e1e-b640276aca9c",
+   "parentKey": "fab32e22-af54-4e7c-b89c-3466f677fe7a"
+  },
+  {
+   "id": "bfcd83c3-a5c8-4ec0-8e1e-b640276aca9c",
+   "parent": "fab32e22-af54-4e7c-b89c-3466f677fe7a",
+   "order": 1,
+   "attributes": {
+    "type": "dnd_contact",
+    "dnd_direction": "outbound",
+    "dnd_contact": "enable_specific",
+    "specific_channels": [
+     "Call"
+    ]
+   },
+   "name": "Enable/Disable DND",
+   "type": "dnd_contact",
+   "next": "7562d239-78a7-461e-9d6e-5e4c1e9e2f83",
+   "parentKey": "0c8425cd-ff8f-4cc9-a77a-cfe426c83884"
+  },
+  {
+   "id": "7562d239-78a7-461e-9d6e-5e4c1e9e2f83",
+   "parent": "fab32e22-af54-4e7c-b89c-3466f677fe7a",
+   "order": 2,
+   "attributes": {
+    "tags": [
+     "funnel_warm_lead",
+     "hot lead"
+    ],
+    "type": "remove_contact_tag"
+   },
+   "name": "Remove Lead Tag",
+   "type": "remove_contact_tag",
+   "next": "746e1172-69db-44b0-9176-455d76d2f224",
+   "parentKey": "bfcd83c3-a5c8-4ec0-8e1e-b640276aca9c"
+  },
+  {
+   "id": "746e1172-69db-44b0-9176-455d76d2f224",
+   "parent": "fab32e22-af54-4e7c-b89c-3466f677fe7a",
+   "order": 3,
+   "attributes": {
+    "tags": [
+     "system_dnc"
+    ]
+   },
+   "name": "Add Tag",
+   "type": "add_contact_tag",
+   "parentKey": "7562d239-78a7-461e-9d6e-5e4c1e9e2f83"
+  },
+  {
+   "id": "a54b6d7b-b903-475c-9619-920c0c11aa23",
+   "parent": "7ff17d8e-d907-4f8b-9d4f-135c5595d973",
+   "order": 1,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "4de69fbb-ba53-478c-be42-c60a545beb04",
+    "62fe3794-8b00-4a0e-bfa6-75c684f34256",
+    "5ccba6d3-9c87-41c9-9867-f720c8a7b763",
+    "222ef1ad-740e-4732-8b17-ccf2921bb7ea",
+    "4974eb05-5b28-4e41-95d7-bab1f1f259ac",
+    "b549d25a-b3a8-45c5-88d0-067d168ff6e6",
+    "95209771-a33d-461a-a625-ccd1d5e90611",
+    "3bd96696-0ce7-4e05-9ed1-839b22de2fdc",
+    "4c3971a4-ab99-45ca-8aaa-f634733cc1f8",
+    "fab32e22-af54-4e7c-b89c-3466f677fe7a"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "7ff17d8e-d907-4f8b-9d4f-135c5595d973"
+  }
+ ]
+}

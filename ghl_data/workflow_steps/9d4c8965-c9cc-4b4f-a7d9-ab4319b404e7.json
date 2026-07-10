@@ -1,0 +1,816 @@
+{
+ "id": "9d4c8965-c9cc-4b4f-a7d9-ab4319b404e7",
+ "name": "Intake Reminder",
+ "folder": "02. Appointments & Visit Journey",
+ "status": "published",
+ "updatedAt": "2026-06-26T19:20:36.356Z",
+ "version": 4,
+ "extracted_at": "2026-07-10T05:40:32Z",
+ "extraction_method": "ghl_backend_api",
+ "source": "GHL Active Workflows (live API)",
+ "workflowData": {
+  "_id": "9d4c8965-c9cc-4b4f-a7d9-ab4319b404e7",
+  "locationId": "Ghstz8eIsHWLeXek47dk",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 8,
+  "name": "Intake Reminder",
+  "status": "published",
+  "version": 4,
+  "dataVersion": 7,
+  "allowMultiple": true,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/Ghstz8eIsHWLeXek47dk/workflows/9d4c8965-c9cc-4b4f-a7d9-ab4319b404e7/4",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FGhstz8eIsHWLeXek47dk%2Fworkflows%2F9d4c8965-c9cc-4b4f-a7d9-ab4319b404e7%2F4",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "type": "workflow",
+  "parentId": "d19faff7-3c76-44ec-8c05-59397c06aa08",
+  "updatedBy": "1UGaWoisLr0DONjwbenY",
+  "createdAt": "2026-06-26T14:49:30.745Z",
+  "updatedAt": "2026-06-26T19:20:36.356Z",
+  "deleted": false,
+  "allowMultipleOpportunity": true,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "user",
+  "__v": 0,
+  "eventStartDate": null,
+  "triggersFilePath": "location/Ghstz8eIsHWLeXek47dk/workflow-triggers/9d4c8965-c9cc-4b4f-a7d9-ab4319b404e7/3",
+  "window": null,
+  "workflowNote": null,
+  "id": "9d4c8965-c9cc-4b4f-a7d9-ab4319b404e7"
+ },
+ "triggers": [
+  {
+   "id": "D5UVS3dOwL3xqyWjP6sf",
+   "date_added": "2026-06-26T15:26:36.531Z",
+   "deleted": false,
+   "actions": [
+    {
+     "workflow_id": "9d4c8965-c9cc-4b4f-a7d9-ab4319b404e7",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "is-any-of",
+     "field": "contactMode",
+     "value": [
+      "contact"
+     ],
+     "type": "input"
+    }
+   ],
+   "type": "customer_appointment",
+   "masterType": "highlevel",
+   "workflow_id": "9d4c8965-c9cc-4b4f-a7d9-ab4319b404e7",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "name": "Customer Booked Appointment",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "date_updated": "2026-06-26T18:20:52.390Z",
+   "active": true
+  }
+ ],
+ "dependentAssets": {},
+ "templates": [
+  {
+   "id": "00850118-6b7e-424b-bf18-e4eebb57b7aa",
+   "order": 0,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "3e6d65a5-143b-4dbb-a3b6-d117ad2ebac2",
+      "name": "2+ Days Out",
+      "segments": [
+       {
+        "__segmentId": "f9c575a8-3330-408f-8e18-e429f8cd959d",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "appointment",
+          "conditionSubType": "startTime",
+          "conditionOperator": "==",
+          "conditionValue": "2",
+          "conditionValueOperator": "after",
+          "conditionValueUnit": "days",
+          "__conditionId": "f52c264b-b105-44dd-9b4a-415f8e8526c1",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "3e7fae31-4c12-4a9b-88cd-17c8e39a650e",
+      "name": "Next Day",
+      "segments": [
+       {
+        "__segmentId": "af268d44-a6d0-4ebe-883f-378e1e103935",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "appointment",
+          "conditionSubType": "startTime",
+          "conditionOperator": "==",
+          "conditionValueOperator": "tomorrow",
+          "__conditionId": "95eeb898-69cd-4de7-9926-95b02ac68947",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         },
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "time",
+          "conditionOperator": "<",
+          "conditionValue": "18",
+          "__conditionId": "3ba07b99-e7ec-4935-8d9f-78c344eccdf8",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Condition",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "3e6d65a5-143b-4dbb-a3b6-d117ad2ebac2",
+    "3e7fae31-4c12-4a9b-88cd-17c8e39a650e",
+    "1697f062-f2ac-456a-be12-751ec89da974"
+   ],
+   "comments": [],
+   "nodeType": "condition-node"
+  },
+  {
+   "id": "3e6d65a5-143b-4dbb-a3b6-d117ad2ebac2",
+   "parent": "00850118-6b7e-424b-bf18-e4eebb57b7aa",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "2+ Days Out",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "72c790f7-e1bc-43c1-aadb-fc763ed04b36",
+   "sibling": [
+    "3e7fae31-4c12-4a9b-88cd-17c8e39a650e",
+    "1697f062-f2ac-456a-be12-751ec89da974"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "00850118-6b7e-424b-bf18-e4eebb57b7aa"
+  },
+  {
+   "id": "72c790f7-e1bc-43c1-aadb-fc763ed04b36",
+   "type": "wait",
+   "name": "Wait 36 Hours",
+   "attributes": {
+    "type": "appointment",
+    "name": "Wait 36 Hours",
+    "cat": "",
+    "appointmentStartAfter": {
+     "when": "before",
+     "type": "minutes",
+     "value": 2160,
+     "distributed": {
+      "months": 0,
+      "days": 1,
+      "hours": 12,
+      "minutes": 0
+     }
+    },
+    "appointmentCondition": "skip",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "order": 0,
+   "cat": "",
+   "next": "b301c204-c4fa-4014-a42f-bcedfe9c2b86",
+   "parentKey": "3e6d65a5-143b-4dbb-a3b6-d117ad2ebac2",
+   "parent": "3e6d65a5-143b-4dbb-a3b6-d117ad2ebac2"
+  },
+  {
+   "id": "b301c204-c4fa-4014-a42f-bcedfe9c2b86",
+   "parentKey": "72c790f7-e1bc-43c1-aadb-fc763ed04b36",
+   "type": "wait",
+   "name": "Wait till 6:00 PM",
+   "attributes": {
+    "type": "recurring_schedule",
+    "name": "Wait till 6:00 PM",
+    "cat": "",
+    "recurringFrequency": "weekly",
+    "recurringWeeklyDays": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "recurringMonthlyMode": "day",
+    "recurringMonthlyDay": 1,
+    "recurringMonthlyWeek": "1st",
+    "recurringMonthlyWeekday": 2,
+    "recurringMonths": [
+     1
+    ],
+    "recurringYearlyMonth": 1,
+    "recurringYearlyDay": 1,
+    "recurringTimeHour": 6,
+    "recurringTimeMinute": 0,
+    "recurringTimePeriod": "PM",
+    "recurringProceed": "on",
+    "recurringOffsetDays": 0,
+    "recurringOffsetHours": 0,
+    "recurringOffsetMinutes": 0,
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "order": 1,
+   "cat": "",
+   "next": "91e2de81-97f2-4347-a6ef-7505cce4b927",
+   "parent": "3e6d65a5-143b-4dbb-a3b6-d117ad2ebac2"
+  },
+  {
+   "id": "91e2de81-97f2-4347-a6ef-7505cce4b927",
+   "parent": "3e6d65a5-143b-4dbb-a3b6-d117ad2ebac2",
+   "order": 2,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "c5feb35b-e39f-4d64-8a24-b112cf611bfb",
+      "name": "If Intake Fields are empty",
+      "segments": [
+       {
+        "__segmentId": "32867b37-cfe3-4ba8-8851-2cffd244ec5e",
+        "operator": "or",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "gU84HIwnkglNAkRY9tDJ",
+          "conditionOperator": "has_no_value",
+          "__conditionId": "86cde843-e7ee-4a7c-8ed9-8a7a2460e7e6",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Check for Intake Condition",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "c5feb35b-e39f-4d64-8a24-b112cf611bfb",
+    "a80def0b-7f94-4a72-b4be-27a0bc85ed53"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "b301c204-c4fa-4014-a42f-bcedfe9c2b86"
+  },
+  {
+   "id": "c5feb35b-e39f-4d64-8a24-b112cf611bfb",
+   "parent": "91e2de81-97f2-4347-a6ef-7505cce4b927",
+   "order": 3,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "If Intake Fields are empty",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "fa051526-13cd-453f-bc78-dd4fffe139e9",
+   "sibling": [
+    "a80def0b-7f94-4a72-b4be-27a0bc85ed53"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "91e2de81-97f2-4347-a6ef-7505cce4b927"
+  },
+  {
+   "id": "fa051526-13cd-453f-bc78-dd4fffe139e9",
+   "parent": "c5feb35b-e39f-4d64-8a24-b112cf611bfb",
+   "order": 0,
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, this is Chris from Men's Wellness. We still need your intake to confirm your appointment at {{appointment.only_start_time}}.\n\nPlease complete your intake so our clinical team can prepare and keep your visit on schedule:\n\nBookMWC.com/intake\n\nIf you need help, reply here or call 866-344-4955.",
+    "attachments": []
+   },
+   "name": "SMS (Intake Reminder)",
+   "type": "sms",
+   "parentKey": "c5feb35b-e39f-4d64-8a24-b112cf611bfb"
+  },
+  {
+   "id": "a80def0b-7f94-4a72-b4be-27a0bc85ed53",
+   "parent": "91e2de81-97f2-4347-a6ef-7505cce4b927",
+   "order": 3,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "c5feb35b-e39f-4d64-8a24-b112cf611bfb"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "91e2de81-97f2-4347-a6ef-7505cce4b927"
+  },
+  {
+   "id": "3e7fae31-4c12-4a9b-88cd-17c8e39a650e",
+   "parent": "00850118-6b7e-424b-bf18-e4eebb57b7aa",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Next Day",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "19a66369-c8bf-47ab-8d55-3457d3e6165c",
+   "sibling": [
+    "3e6d65a5-143b-4dbb-a3b6-d117ad2ebac2",
+    "1697f062-f2ac-456a-be12-751ec89da974"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "00850118-6b7e-424b-bf18-e4eebb57b7aa"
+  },
+  {
+   "id": "19a66369-c8bf-47ab-8d55-3457d3e6165c",
+   "parentKey": "3e7fae31-4c12-4a9b-88cd-17c8e39a650e",
+   "parent": "3e7fae31-4c12-4a9b-88cd-17c8e39a650e",
+   "type": "wait",
+   "name": "Wait till 6:00 PM",
+   "attributes": {
+    "type": "recurring_schedule",
+    "name": "Wait till 6:00 PM",
+    "cat": "",
+    "recurringFrequency": "weekly",
+    "recurringWeeklyDays": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ],
+    "recurringMonthlyMode": "day",
+    "recurringMonthlyDay": 1,
+    "recurringMonthlyWeek": "1st",
+    "recurringMonthlyWeekday": 2,
+    "recurringMonths": [
+     1
+    ],
+    "recurringYearlyMonth": 1,
+    "recurringYearlyDay": 1,
+    "recurringTimeHour": 6,
+    "recurringTimeMinute": 0,
+    "recurringTimePeriod": "PM",
+    "recurringProceed": "on",
+    "recurringOffsetDays": 0,
+    "recurringOffsetHours": 0,
+    "recurringOffsetMinutes": 0,
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "order": 0,
+   "cat": "",
+   "next": "44c282d0-dbbb-422b-b44d-7bff8a959ea5"
+  },
+  {
+   "id": "44c282d0-dbbb-422b-b44d-7bff8a959ea5",
+   "parent": "3e7fae31-4c12-4a9b-88cd-17c8e39a650e",
+   "order": 1,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "0d6b1c4e-b7a8-4d73-b883-b502ff2f0dfe",
+      "name": "If Intake Fields are empty",
+      "segments": [
+       {
+        "__segmentId": "32867b37-cfe3-4ba8-8851-2cffd244ec5e",
+        "operator": "or",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "gU84HIwnkglNAkRY9tDJ",
+          "conditionOperator": "has_no_value",
+          "__conditionId": "86cde843-e7ee-4a7c-8ed9-8a7a2460e7e6",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Check for Intake Condition",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "0d6b1c4e-b7a8-4d73-b883-b502ff2f0dfe",
+    "7b36f26f-820d-4636-9cf1-91d4df2791ee"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "19a66369-c8bf-47ab-8d55-3457d3e6165c"
+  },
+  {
+   "id": "0d6b1c4e-b7a8-4d73-b883-b502ff2f0dfe",
+   "parent": "44c282d0-dbbb-422b-b44d-7bff8a959ea5",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "If Intake Fields are empty",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "296f4d0a-0347-4504-a3e2-0f6ba3d4c41f",
+   "sibling": [
+    "7b36f26f-820d-4636-9cf1-91d4df2791ee"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "44c282d0-dbbb-422b-b44d-7bff8a959ea5"
+  },
+  {
+   "id": "296f4d0a-0347-4504-a3e2-0f6ba3d4c41f",
+   "parent": "0d6b1c4e-b7a8-4d73-b883-b502ff2f0dfe",
+   "order": 0,
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, this is Chris from Men's Wellness. We still need your intake to confirm your appointment at {{appointment.only_start_time}}.\n\nPlease complete your intake so our clinical team can prepare and keep your visit on schedule:\n\nBookMWC.com/intake\n\nIf you need help, reply here or call 866-344-4955.",
+    "attachments": []
+   },
+   "name": "SMS (Intake Reminder)",
+   "type": "sms",
+   "parentKey": "0d6b1c4e-b7a8-4d73-b883-b502ff2f0dfe"
+  },
+  {
+   "id": "7b36f26f-820d-4636-9cf1-91d4df2791ee",
+   "parent": "44c282d0-dbbb-422b-b44d-7bff8a959ea5",
+   "order": 2,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "0d6b1c4e-b7a8-4d73-b883-b502ff2f0dfe"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "44c282d0-dbbb-422b-b44d-7bff8a959ea5"
+  },
+  {
+   "id": "1697f062-f2ac-456a-be12-751ec89da974",
+   "parent": "00850118-6b7e-424b-bf18-e4eebb57b7aa",
+   "order": 1,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "fe7fd026-71f7-4b69-acd0-d1715eb895c5",
+   "sibling": [
+    "3e6d65a5-143b-4dbb-a3b6-d117ad2ebac2",
+    "3e7fae31-4c12-4a9b-88cd-17c8e39a650e"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "00850118-6b7e-424b-bf18-e4eebb57b7aa"
+  },
+  {
+   "id": "fe7fd026-71f7-4b69-acd0-d1715eb895c5",
+   "parentKey": "1697f062-f2ac-456a-be12-751ec89da974",
+   "parent": "1697f062-f2ac-456a-be12-751ec89da974",
+   "type": "wait",
+   "name": "Wait 15 mins",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "minutes",
+     "value": 15,
+     "when": "after"
+    },
+    "name": "Wait 15 mins",
+    "cat": "",
+    "timePeriodInputMode": "standard",
+    "unitInputMode": "standard",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "order": 0,
+   "cat": "",
+   "next": "6f07e76d-f469-4af0-abd1-55ecf664c4cb"
+  },
+  {
+   "id": "6f07e76d-f469-4af0-abd1-55ecf664c4cb",
+   "parent": "1697f062-f2ac-456a-be12-751ec89da974",
+   "order": 1,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "9cbd2504-8474-4e9f-ae86-5ed55af7ec98",
+      "name": "If Intake Fields are empty",
+      "segments": [
+       {
+        "__segmentId": "32867b37-cfe3-4ba8-8851-2cffd244ec5e",
+        "operator": "or",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "gU84HIwnkglNAkRY9tDJ",
+          "conditionOperator": "has_no_value",
+          "__conditionId": "86cde843-e7ee-4a7c-8ed9-8a7a2460e7e6",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Check for Intake Condition",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "9cbd2504-8474-4e9f-ae86-5ed55af7ec98",
+    "ddf256df-6627-435a-872f-21b5fdcf9aba"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "fe7fd026-71f7-4b69-acd0-d1715eb895c5"
+  },
+  {
+   "id": "9cbd2504-8474-4e9f-ae86-5ed55af7ec98",
+   "parent": "6f07e76d-f469-4af0-abd1-55ecf664c4cb",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "If Intake Fields are empty",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "646d6e37-c447-4434-8d15-a3ec3b031424",
+   "sibling": [
+    "ddf256df-6627-435a-872f-21b5fdcf9aba"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "6f07e76d-f469-4af0-abd1-55ecf664c4cb"
+  },
+  {
+   "id": "646d6e37-c447-4434-8d15-a3ec3b031424",
+   "parent": "9cbd2504-8474-4e9f-ae86-5ed55af7ec98",
+   "order": 0,
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, this is Chris from Men's Wellness. We still need your intake to confirm your appointment at {{appointment.only_start_time}}.\n\nPlease complete your intake so our clinical team can prepare and keep your visit on schedule:\n\nBookMWC.com/intake\n\nIf you need help, reply here or call 866-344-4955.",
+    "attachments": []
+   },
+   "name": "SMS (Intake Reminder)",
+   "type": "sms",
+   "parentKey": "9cbd2504-8474-4e9f-ae86-5ed55af7ec98"
+  },
+  {
+   "id": "ddf256df-6627-435a-872f-21b5fdcf9aba",
+   "parent": "6f07e76d-f469-4af0-abd1-55ecf664c4cb",
+   "order": 2,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "9cbd2504-8474-4e9f-ae86-5ed55af7ec98"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "6f07e76d-f469-4af0-abd1-55ecf664c4cb"
+  }
+ ]
+}

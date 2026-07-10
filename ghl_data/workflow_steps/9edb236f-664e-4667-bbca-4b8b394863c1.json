@@ -1,0 +1,128 @@
+{
+ "id": "9edb236f-664e-4667-bbca-4b8b394863c1",
+ "name": "Outbound Webhook",
+ "folder": "Vercel",
+ "status": "published",
+ "updatedAt": "2026-06-17T21:53:46.431Z",
+ "version": 3,
+ "extracted_at": "2026-07-10T05:40:32Z",
+ "extraction_method": "ghl_backend_api",
+ "source": "GHL Active Workflows (live API)",
+ "workflowData": {
+  "_id": "9edb236f-664e-4667-bbca-4b8b394863c1",
+  "locationId": "Ghstz8eIsHWLeXek47dk",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 7,
+  "name": "Outbound Webhook",
+  "status": "published",
+  "version": 3,
+  "dataVersion": 7,
+  "allowMultiple": true,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/Ghstz8eIsHWLeXek47dk/workflows/9edb236f-664e-4667-bbca-4b8b394863c1/3",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FGhstz8eIsHWLeXek47dk%2Fworkflows%2F9edb236f-664e-4667-bbca-4b8b394863c1%2F3",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "type": "workflow",
+  "parentId": "dc441f0f-bfe5-4469-8d2f-336d41bdfa55",
+  "updatedBy": "1UGaWoisLr0DONjwbenY",
+  "createdAt": "2026-06-17T21:50:10.789Z",
+  "updatedAt": "2026-06-17T21:53:46.431Z",
+  "deleted": false,
+  "allowMultipleOpportunity": true,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "user",
+  "__v": 0,
+  "eventStartDate": null,
+  "triggersFilePath": "location/Ghstz8eIsHWLeXek47dk/workflow-triggers/9edb236f-664e-4667-bbca-4b8b394863c1/3",
+  "window": null,
+  "workflowNote": null,
+  "id": "9edb236f-664e-4667-bbca-4b8b394863c1"
+ },
+ "triggers": [
+  {
+   "id": "pofNKnN6OBCbEGBlAzDJ",
+   "date_added": "2026-06-17T21:53:41.375Z",
+   "deleted": false,
+   "actions": [
+    {
+     "workflow_id": "9edb236f-664e-4667-bbca-4b8b394863c1",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "is-any-of",
+     "field": "contactMode",
+     "value": [
+      "contact"
+     ],
+     "type": "input"
+    }
+   ],
+   "type": "customer_appointment",
+   "masterType": "highlevel",
+   "workflow_id": "9edb236f-664e-4667-bbca-4b8b394863c1",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "name": "Appointment is Booked",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "date_updated": "2026-06-17T21:53:45.924Z",
+   "active": true
+  },
+  {
+   "id": "wzUuCo92SMgWCJlJmIzt",
+   "date_added": "2026-06-17T21:53:42.438Z",
+   "deleted": false,
+   "actions": [
+    {
+     "workflow_id": "9edb236f-664e-4667-bbca-4b8b394863c1",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "==",
+     "field": "appointment.eventType",
+     "value": "normal",
+     "title": "Event type",
+     "type": "select"
+    },
+    {
+     "operator": "is-any-of",
+     "field": "contactMode",
+     "value": [
+      "contact"
+     ],
+     "type": "input"
+    }
+   ],
+   "type": "appointment",
+   "masterType": "highlevel",
+   "workflow_id": "9edb236f-664e-4667-bbca-4b8b394863c1",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "name": "Appointment Status Update/Change",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "date_updated": "2026-06-17T21:53:45.978Z",
+   "active": true
+  }
+ ],
+ "dependentAssets": {},
+ "templates": [
+  {
+   "id": "eb11d31c-cce5-45c5-acec-bf29639fb9d7",
+   "order": 0,
+   "attributes": {
+    "method": "POST",
+    "url": "https://mwc-admin.vercel.app/api/ghl-webhook",
+    "customData": [],
+    "headers": []
+   },
+   "name": "Webhook (Send data)",
+   "type": "webhook"
+  }
+ ]
+}

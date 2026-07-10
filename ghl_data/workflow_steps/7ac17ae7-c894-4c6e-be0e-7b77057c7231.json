@@ -1,21 +1,3713 @@
 {
-  "id": "7ac17ae7-c894-4c6e-be0e-7b77057c7231",
+ "id": "7ac17ae7-c894-4c6e-be0e-7b77057c7231",
+ "name": "03. Appointment Booked",
+ "folder": "02. Appointments & Visit Journey",
+ "status": "published",
+ "updatedAt": "2026-06-04T15:18:05.138Z",
+ "version": 135,
+ "extracted_at": "2026-07-10T05:40:32Z",
+ "extraction_method": "ghl_backend_api",
+ "source": "GHL Active Workflows (live API)",
+ "workflowData": {
+  "_id": "7ac17ae7-c894-4c6e-be0e-7b77057c7231",
+  "locationId": "Ghstz8eIsHWLeXek47dk",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 2,
   "name": "03. Appointment Booked",
-  "folder": "03. Call Routing & Dispositions",
   "status": "published",
-  "version": 121,
-  "extracted_at": "2026-05-29T03:00:25Z",
-  "extraction_method": "backend_jwt",
-  "triggers": [],
-  "steps": [],
-  "messages_referenced": [],
-  "stats": {
-    "total_steps": 0,
-    "send_sms_count": 0,
-    "send_email_count": 0,
-    "wait_count": 0,
-    "if_else_count": 0,
-    "terminal_paths": 0
+  "version": 135,
+  "dataVersion": 7,
+  "allowMultiple": false,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/Ghstz8eIsHWLeXek47dk/workflows/7ac17ae7-c894-4c6e-be0e-7b77057c7231/135",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FGhstz8eIsHWLeXek47dk%2Fworkflows%2F7ac17ae7-c894-4c6e-be0e-7b77057c7231%2F135",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "type": "workflow",
+  "parentId": "d19faff7-3c76-44ec-8c05-59397c06aa08",
+  "meta": {
+   "stepIndexCounter": {
+    "google_sheets": 4
+   }
   },
-  "notes": ""
+  "updatedBy": "1UGaWoisLr0DONjwbenY",
+  "createdAt": "2026-01-02T00:34:21.666Z",
+  "updatedAt": "2026-06-04T15:18:05.138Z",
+  "deleted": false,
+  "allowMultipleOpportunity": true,
+  "creationSource": "builder",
+  "originType": "user",
+  "__v": 0,
+  "eventStartDate": null,
+  "window": null,
+  "workflowNote": null,
+  "triggersFilePath": "location/Ghstz8eIsHWLeXek47dk/workflow-triggers/7ac17ae7-c894-4c6e-be0e-7b77057c7231/110",
+  "isTriggerBucketMigrated": true,
+  "id": "7ac17ae7-c894-4c6e-be0e-7b77057c7231"
+ },
+ "triggers": [
+  {
+   "id": "9d0DBP8YV5k1fvMONhse",
+   "date_updated": "2026-01-26T18:10:33.800Z",
+   "date_added": "2026-01-26T18:10:33.800Z",
+   "deleted": false,
+   "active": true,
+   "actions": [
+    {
+     "workflow_id": "7ac17ae7-c894-4c6e-be0e-7b77057c7231",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "==",
+     "field": "calendar.id",
+     "value": "aNc3Shm37FBMAfdUL7al",
+     "title": "In calendar",
+     "type": "select"
+    }
+   ],
+   "type": "customer_appointment",
+   "masterType": "highlevel",
+   "workflow_id": "7ac17ae7-c894-4c6e-be0e-7b77057c7231",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "name": "Customer Booked Appointment: Virtual",
+   "belongs_to": "workflow",
+   "schedule_config": {}
+  },
+  {
+   "id": "EtfctQFifwN3HA4E3r8V",
+   "date_added": "2026-01-19T22:54:23.518Z",
+   "deleted": false,
+   "active": true,
+   "actions": [
+    {
+     "workflow_id": "7ac17ae7-c894-4c6e-be0e-7b77057c7231",
+     "type": "add_to_workflow"
+    }
+   ],
+   "type": "appointment",
+   "masterType": "highlevel",
+   "workflow_id": "7ac17ae7-c894-4c6e-be0e-7b77057c7231",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "name": "Appointment Status: VA Beach",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "date_updated": "2026-02-26T08:55:17.692Z",
+   "conditions": [
+    {
+     "operator": "==",
+     "field": "appointment.eventType",
+     "value": "normal",
+     "title": "Event Type",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "appointment.status",
+     "value": "confirmed",
+     "title": "Appointment status is",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "calendar.id",
+     "value": "4xmnBGMWJ6TVUKcAPpPb",
+     "title": "In calendar",
+     "type": "select"
+    }
+   ]
+  },
+  {
+   "id": "iRhPnot4cyIr1oxPHwlu",
+   "date_added": "2026-01-19T22:54:23.515Z",
+   "deleted": false,
+   "active": true,
+   "actions": [
+    {
+     "workflow_id": "7ac17ae7-c894-4c6e-be0e-7b77057c7231",
+     "type": "add_to_workflow"
+    }
+   ],
+   "type": "appointment",
+   "masterType": "highlevel",
+   "workflow_id": "7ac17ae7-c894-4c6e-be0e-7b77057c7231",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "name": "Appointment Status: Richmond",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "date_updated": "2026-02-26T09:13:16.165Z",
+   "conditions": [
+    {
+     "operator": "==",
+     "field": "appointment.eventType",
+     "value": "normal",
+     "title": "Event Type",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "appointment.status",
+     "value": "confirmed",
+     "title": "Appointment status is",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "calendar.id",
+     "value": "1Cfy5JnO2A4ggiZlMVvX",
+     "title": "In calendar",
+     "type": "select"
+    }
+   ]
+  },
+  {
+   "id": "mTFAUQEvWF4tbIYaFoZ1",
+   "date_added": "2026-01-26T18:10:33.802Z",
+   "deleted": false,
+   "active": true,
+   "actions": [
+    {
+     "workflow_id": "7ac17ae7-c894-4c6e-be0e-7b77057c7231",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "==",
+     "field": "appointment.eventType",
+     "value": "normal",
+     "title": "Event Type",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "appointment.status",
+     "value": "confirmed",
+     "title": "Appointment status is",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "calendar.id",
+     "value": "aNc3Shm37FBMAfdUL7al",
+     "title": "In calendar",
+     "type": "select"
+    }
+   ],
+   "type": "appointment",
+   "masterType": "highlevel",
+   "workflow_id": "7ac17ae7-c894-4c6e-be0e-7b77057c7231",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "date_updated": "2026-01-26T18:14:13.787Z",
+   "name": "Appointment Status: Virtual"
+  },
+  {
+   "id": "spwXKQjKmjVqPdIHChQ3",
+   "date_added": "2026-01-19T22:52:54.459Z",
+   "deleted": false,
+   "active": true,
+   "actions": [
+    {
+     "workflow_id": "7ac17ae7-c894-4c6e-be0e-7b77057c7231",
+     "type": "add_to_workflow"
+    }
+   ],
+   "type": "appointment",
+   "masterType": "highlevel",
+   "workflow_id": "7ac17ae7-c894-4c6e-be0e-7b77057c7231",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "name": "Appointment Status: Newport",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "date_updated": "2026-02-26T09:13:16.176Z",
+   "conditions": [
+    {
+     "operator": "==",
+     "field": "appointment.eventType",
+     "value": "normal",
+     "title": "Event Type",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "appointment.status",
+     "value": "confirmed",
+     "title": "Appointment status is",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "calendar.id",
+     "value": "lBaRbjUpEmesxEloFBME",
+     "title": "In calendar",
+     "type": "select"
+    }
+   ]
+  }
+ ],
+ "dependentAssets": {},
+ "templates": [
+  {
+   "id": "3e0f04f5-5715-4989-a405-9390d8b61fee",
+   "order": 0,
+   "attributes": {
+    "tags": [
+     "funnel_consultation_booked",
+     "appt_confirmed"
+    ]
+   },
+   "name": "Add BOOKED APPT Tag: funnel_consultation_booked. Blocks Non-booked workflow messages",
+   "type": "add_contact_tag",
+   "next": "002a5c37-c57e-49c6-8ddc-b2fb31ccc11d"
+  },
+  {
+   "id": "002a5c37-c57e-49c6-8ddc-b2fb31ccc11d",
+   "order": 1,
+   "attributes": {
+    "type": "remove_from_workflow",
+    "workflow_id": [
+     "619cc8e7-b658-4552-8e23-5aeeec443057"
+    ]
+   },
+   "name": "Remove from NON BOOKED Workflow (2nd layer protection from unnecessary msg)",
+   "type": "remove_from_workflow",
+   "next": "5697df80-9557-4e0f-bd8b-bb66f23e391e",
+   "parentKey": "3e0f04f5-5715-4989-a405-9390d8b61fee"
+  },
+  {
+   "id": "5697df80-9557-4e0f-bd8b-bb66f23e391e",
+   "order": 2,
+   "attributes": {
+    "type": "remove_from_workflow",
+    "workflow_id": [
+     "b9135812-c31a-41fe-b22f-dd47b2623697"
+    ]
+   },
+   "name": "Remove from 03b. Unconfirmed Appointment Workflow (makes sure they dont get the request to confirm)",
+   "type": "remove_from_workflow",
+   "next": "74dcd08b-afeb-4aa3-827a-1136613e762f",
+   "parentKey": "002a5c37-c57e-49c6-8ddc-b2fb31ccc11d",
+   "advanceCanvasMeta": {
+    "isDisabled": false
+   }
+  },
+  {
+   "id": "74dcd08b-afeb-4aa3-827a-1136613e762f",
+   "order": 3,
+   "attributes": {
+    "tags": [
+     "unconfirmed_appt"
+    ],
+    "type": "remove_contact_tag"
+   },
+   "name": "Remove unconfirmed_appt Tag",
+   "type": "remove_contact_tag",
+   "next": "a3f5eaa3-178f-44b6-b921-aaa51125dc89",
+   "parentKey": "5697df80-9557-4e0f-bd8b-bb66f23e391e",
+   "advanceCanvasMeta": {
+    "isDisabled": true
+   }
+  },
+  {
+   "id": "a3f5eaa3-178f-44b6-b921-aaa51125dc89",
+   "stepIndex": 3,
+   "order": 4,
+   "attributes": {
+    "type": "google_sheets",
+    "action": {
+     "id": "lookup_row",
+     "name": "Lookup Spreadsheet Row"
+    },
+    "account": {
+     "id": "100464418921113716943",
+     "name": "reports@mwcforme.com",
+     "idType": "altId"
+    },
+    "drive": {
+     "id": "my_drive",
+     "name": "My Drive"
+    },
+    "spreadsheet": {
+     "id": "1_Qji8O_7ZL5tSa7lbb4HwCPicyYkDj_OBseUfrh2etE",
+     "name": "Appointment Study"
+    },
+    "sheet": {
+     "id": "11",
+     "name": "Appointment Slot Control"
+    },
+    "lookupColumns": {
+     "main": {
+      "column": "A",
+      "value": "{{appointment.id}}"
+     }
+    },
+    "options": {
+     "lookupSearchMethod": "top_to_bottom",
+     "createOnEmptyLookup": true
+    },
+    "sheetHeaders": [
+     "Appointment ID",
+     "Requested Time",
+     "Date Added",
+     "Contact Name",
+     "Location",
+     "Email",
+     "Phone",
+     "Appt Status",
+     "Last Status Update"
+    ],
+    "columnRange": [
+     "A",
+     "I"
+    ],
+    "values": [
+     "{{appointment.id}}",
+     "{{appointment.start_time}}",
+     "{{right_now.middle_endian_date}} {{right_now.time_ampm}}",
+     "{{contact.name}}",
+     "{{contact.location}}",
+     "{{contact.email}}",
+     "{{contact.phone}}",
+     "confirmed",
+     "{{right_now.middle_endian_date}} {{right_now.time_ampm}}"
+    ]
+   },
+   "name": "Lookup Appointment ID for Appt Slot Control",
+   "type": "google_sheets",
+   "next": "7a2947b4-922f-43a1-8e50-87edbd5a3a15",
+   "parentKey": "74dcd08b-afeb-4aa3-827a-1136613e762f",
+   "advanceCanvasMeta": {
+    "isDisabled": false
+   }
+  },
+  {
+   "id": "7a2947b4-922f-43a1-8e50-87edbd5a3a15",
+   "stepIndex": 4,
+   "order": 5,
+   "attributes": {
+    "type": "google_sheets",
+    "action": {
+     "id": "update_row_from_lookup",
+     "name": "Update Spreadsheet Row using Lookup"
+    },
+    "account": {
+     "id": "100464418921113716943",
+     "name": "reports@mwcforme.com",
+     "idType": "altId"
+    },
+    "drive": {
+     "id": "my_drive",
+     "name": "My Drive"
+    },
+    "spreadsheet": {
+     "id": "1_Qji8O_7ZL5tSa7lbb4HwCPicyYkDj_OBseUfrh2etE",
+     "name": "Appointment Study"
+    },
+    "sheet": {
+     "id": "11",
+     "name": "Appointment Slot Control"
+    },
+    "columnRange": [
+     "A",
+     "I"
+    ],
+    "values": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     "confirmed",
+     "{{right_now.middle_endian_date}} {{right_now.time_ampm}}"
+    ],
+    "lookupStep": {
+     "label": "#3 Lookup Appointment ID for Appt Slot Control",
+     "value": "a3f5eaa3-178f-44b6-b921-aaa51125dc89",
+     "id": "a3f5eaa3-178f-44b6-b921-aaa51125dc89",
+     "stepIndex": 3
+    },
+    "sheetHeaders": [
+     "Appointment ID",
+     "Requested Time",
+     "Date Added",
+     "Contact Name",
+     "Location",
+     "Email",
+     "Phone",
+     "Appt Status",
+     "Last Status Update"
+    ],
+    "options": {}
+   },
+   "name": "Update col H Appt Status to confirmed",
+   "type": "google_sheets",
+   "next": "362a4f8d-39b4-4b74-9fcf-98e1dce0573e",
+   "parentKey": "a3f5eaa3-178f-44b6-b921-aaa51125dc89",
+   "advanceCanvasMeta": {
+    "isDisabled": false
+   }
+  },
+  {
+   "id": "362a4f8d-39b4-4b74-9fcf-98e1dce0573e",
+   "order": 6,
+   "attributes": {
+    "type": "remove_opportunity",
+    "opportunity_to_be_found": "all",
+    "pipeline_id": "gcRMq1iCj2tGmdWpimGS"
+   },
+   "name": "Remove from Non-Booked pipeline",
+   "type": "remove_opportunity",
+   "next": "ff5aef13-59ec-41d7-9306-7b6225ff981d",
+   "parentKey": "7a2947b4-922f-43a1-8e50-87edbd5a3a15"
+  },
+  {
+   "id": "ff5aef13-59ec-41d7-9306-7b6225ff981d",
+   "order": 7,
+   "attributes": {
+    "type": "update_contact_field",
+    "actionType": "update_field_data",
+    "fields": [
+     {
+      "field": "type",
+      "value": "patient",
+      "title": "Contact type",
+      "type": "select",
+      "date": ""
+     }
+    ]
+   },
+   "name": "Update contact type to Patient as soon as the appointment is booked",
+   "type": "update_contact_field",
+   "next": "06c0df65-5c06-4575-8630-adaf27fd1de6",
+   "parentKey": "362a4f8d-39b4-4b74-9fcf-98e1dce0573e"
+  },
+  {
+   "id": "06c0df65-5c06-4575-8630-adaf27fd1de6",
+   "parentKey": "ff5aef13-59ec-41d7-9306-7b6225ff981d",
+   "type": "wait",
+   "name": "Wait 1 minute after booking",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "minutes",
+     "value": 1,
+     "when": "after"
+    },
+    "name": "Wait 1 minute after booking",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "order": 8,
+   "cat": "",
+   "next": "d6544607-fac4-4dc2-a448-34a466ab6eca"
+  },
+  {
+   "id": "d6544607-fac4-4dc2-a448-34a466ab6eca",
+   "order": 9,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "8e662709-8197-46c0-acf9-9e47fdc77a59",
+      "name": "Newport News",
+      "segments": [
+       {
+        "__segmentId": "17968198-9b50-4ef9-b28e-0ef2c9ab813a",
+        "operator": "or",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "spwXKQjKmjVqPdIHChQ3",
+          "__conditionId": "ff4955f5-9f31-43db-95ea-76cda76b31c8",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "2af60a70-a71f-4704-93c3-b0766274909d",
+      "name": "VA Beach",
+      "segments": [
+       {
+        "__segmentId": "17968198-9b50-4ef9-b28e-0ef2c9ab813a",
+        "operator": "or",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "EtfctQFifwN3HA4E3r8V",
+          "__conditionId": "ff4955f5-9f31-43db-95ea-76cda76b31c8",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "8a68a1cc-6ea4-4f08-bf35-b4eec8cb9d13",
+      "name": "Richmond",
+      "segments": [
+       {
+        "__segmentId": "17968198-9b50-4ef9-b28e-0ef2c9ab813a",
+        "operator": "or",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "iRhPnot4cyIr1oxPHwlu",
+          "__conditionId": "ff4955f5-9f31-43db-95ea-76cda76b31c8",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "LOCATION",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "8e662709-8197-46c0-acf9-9e47fdc77a59",
+    "2af60a70-a71f-4704-93c3-b0766274909d",
+    "8a68a1cc-6ea4-4f08-bf35-b4eec8cb9d13",
+    "c75b71d6-37ad-4532-9fc3-e771d7074448"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "06c0df65-5c06-4575-8630-adaf27fd1de6"
+  },
+  {
+   "id": "8e662709-8197-46c0-acf9-9e47fdc77a59",
+   "parent": "d6544607-fac4-4dc2-a448-34a466ab6eca",
+   "order": 10,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Newport News",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "adf32cf6-3abb-4e73-a633-b2d35cceac11",
+   "sibling": [
+    "2af60a70-a71f-4704-93c3-b0766274909d",
+    "8a68a1cc-6ea4-4f08-bf35-b4eec8cb9d13",
+    "c75b71d6-37ad-4532-9fc3-e771d7074448"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "d6544607-fac4-4dc2-a448-34a466ab6eca"
+  },
+  {
+   "id": "adf32cf6-3abb-4e73-a633-b2d35cceac11",
+   "order": 0,
+   "attributes": {
+    "trackingOptions": {
+     "hasTrackingLinks": false,
+     "hasUtmTracking": true,
+     "hasTags": false,
+     "sourceId": "7ac17ae7-c894-4c6e-be0e-7b77057c7231:adf32cf6-3abb-4e73-a633-b2d35cceac11"
+    },
+    "conditions": [],
+    "subject": "Confirmed: {{appointment.only_start_date}}",
+    "preHeader": "",
+    "from_email": "{{location.email}}",
+    "from_name": "Men's Wellness Center",
+    "previewUrl": "https://firebasestorage.googleapis.com/v0/b/highlevel-backend.appspot.com/o/location%2FGhstz8eIsHWLeXek47dk%2Femails%2F698a082b73c4ce7fc74b1229%2Findex.html",
+    "createdAt": "2026-02-09T16:15:39.827Z",
+    "templateCreationMode": "existing",
+    "syncEnabled": true,
+    "template_id": "698a082b73c4ce7fc74b1229",
+    "templatesource": "email-builder",
+    "attachments": [],
+    "fieldDefaults": {}
+   },
+   "name": "Send Email Confirming Appointment for NPN",
+   "type": "email",
+   "next": "6c543113-7171-4294-82a8-bb08173452d0",
+   "parentKey": "8e662709-8197-46c0-acf9-9e47fdc77a59",
+   "parent": "8e662709-8197-46c0-acf9-9e47fdc77a59"
+  },
+  {
+   "id": "6c543113-7171-4294-82a8-bb08173452d0",
+   "order": 1,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "ef53dd76-fc26-49f7-a158-d7cfdbfdbc3b",
+      "name": "Newport",
+      "segments": [
+       {
+        "__segmentId": "fcecf704-9cca-45a8-87fb-45064a01785c",
+        "operator": "or",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "spwXKQjKmjVqPdIHChQ3",
+          "__conditionId": "9fc7c18b-39a2-462b-b1d8-b7687bbe9f92",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "bd0124e1-ef81-42f9-801b-518bdadc8144",
+      "name": "Va beach",
+      "segments": [
+       {
+        "__segmentId": "fcecf704-9cca-45a8-87fb-45064a01785c",
+        "operator": "or",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "EtfctQFifwN3HA4E3r8V",
+          "__conditionId": "ddd6a3c1-d976-4434-adc9-d2586e8347d8",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "100c115a-8619-4574-a19c-75da5762289f",
+      "name": "Richmond",
+      "segments": [
+       {
+        "__segmentId": "fcecf704-9cca-45a8-87fb-45064a01785c",
+        "operator": "or",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "iRhPnot4cyIr1oxPHwlu",
+          "__conditionId": "134525cb-2e75-44b5-b249-8cd09a0992cd",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Check location calendar that triggered workflow",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "ef53dd76-fc26-49f7-a158-d7cfdbfdbc3b",
+    "bd0124e1-ef81-42f9-801b-518bdadc8144",
+    "100c115a-8619-4574-a19c-75da5762289f",
+    "e0c597a5-a6fa-4d42-a8b7-804e3ca9722a"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "adf32cf6-3abb-4e73-a633-b2d35cceac11",
+   "parent": "8e662709-8197-46c0-acf9-9e47fdc77a59"
+  },
+  {
+   "id": "ef53dd76-fc26-49f7-a158-d7cfdbfdbc3b",
+   "parent": "6c543113-7171-4294-82a8-bb08173452d0",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Newport",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "f5455220-a59c-492f-8884-bd23baeafa52",
+   "sibling": [
+    "bd0124e1-ef81-42f9-801b-518bdadc8144",
+    "100c115a-8619-4574-a19c-75da5762289f",
+    "e0c597a5-a6fa-4d42-a8b7-804e3ca9722a"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "6c543113-7171-4294-82a8-bb08173452d0"
+  },
+  {
+   "id": "f5455220-a59c-492f-8884-bd23baeafa52",
+   "parent": "ef53dd76-fc26-49f7-a158-d7cfdbfdbc3b",
+   "order": 0,
+   "attributes": {
+    "tags": [
+     "newport appt",
+     "location_npn"
+    ]
+   },
+   "name": "Add Tag: Newport appt",
+   "type": "add_contact_tag",
+   "next": "5b7a96a4-2e41-4b06-a674-2e2485c0505d",
+   "parentKey": "ef53dd76-fc26-49f7-a158-d7cfdbfdbc3b"
+  },
+  {
+   "id": "5b7a96a4-2e41-4b06-a674-2e2485c0505d",
+   "parent": "ef53dd76-fc26-49f7-a158-d7cfdbfdbc3b",
+   "order": 1,
+   "attributes": {
+    "type": "update_contact_field",
+    "actionType": "update_field_data",
+    "fields": [
+     {
+      "field": "9WxVlzvgSlCXx0EL82Sr",
+      "value": "Newport News",
+      "title": "Location",
+      "type": "select",
+      "date": ""
+     },
+     {
+      "field": "Cou856tOhaxW62vwehVI",
+      "value": "Newport News, VA",
+      "title": "Preferred Location",
+      "type": "select",
+      "date": ""
+     }
+    ]
+   },
+   "name": "Update location field: newport",
+   "type": "update_contact_field",
+   "next": "40e415bf-bbb9-410b-a135-f547e463c810",
+   "parentKey": "f5455220-a59c-492f-8884-bd23baeafa52"
+  },
+  {
+   "id": "40e415bf-bbb9-410b-a135-f547e463c810",
+   "parent": "ef53dd76-fc26-49f7-a158-d7cfdbfdbc3b",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "9AZEt2Sw6Zv0nnJJmkE0",
+    "pipeline_stage_id": "f19d1c9e-c381-470d-a0dd-c79e6394d1fa",
+    "opportunity_name": "{{contact.name}}",
+    "opportunity_status": "open",
+    "opportunity_source": "{{contact.source}}",
+    "monetary_value": ""
+   },
+   "name": "Opportunity: NPN Stage: Booked Status: Open",
+   "type": "create_opportunity",
+   "next": "6aa58df0-d9d2-4933-aded-9cdacbe58e26",
+   "parentKey": "5b7a96a4-2e41-4b06-a674-2e2485c0505d"
+  },
+  {
+   "id": "6aa58df0-d9d2-4933-aded-9cdacbe58e26",
+   "parent": "ef53dd76-fc26-49f7-a158-d7cfdbfdbc3b",
+   "order": 3,
+   "attributes": {
+    "type": "event_start_date",
+    "event_start_type": "custom_field",
+    "value": "{{appointment.start_time}}"
+   },
+   "name": "Set Appt Time",
+   "type": "event_start_date",
+   "next": "3ae70205-af8d-42c0-be3a-8f98a7a7848b",
+   "parentKey": "40e415bf-bbb9-410b-a135-f547e463c810"
+  },
+  {
+   "id": "3ae70205-af8d-42c0-be3a-8f98a7a7848b",
+   "parent": "ef53dd76-fc26-49f7-a158-d7cfdbfdbc3b",
+   "order": 4,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "a8c70f3a-1bb0-4361-b350-9092df5c4dfd",
+      "name": "Richmond",
+      "segments": [
+       {
+        "__segmentId": "2c9b5732-be55-4e1d-995d-447243af57e0",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "iRhPnot4cyIr1oxPHwlu",
+          "__conditionId": "aee9a6e5-1ab2-4a21-8696-5c6e25156e1e",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "da7f9e21-0248-4ca6-b563-9f9e4b90a463",
+      "name": "NPN",
+      "segments": [
+       {
+        "__segmentId": "2c9b5732-be55-4e1d-995d-447243af57e0",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "spwXKQjKmjVqPdIHChQ3",
+          "__conditionId": "aee9a6e5-1ab2-4a21-8696-5c6e25156e1e",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "3c71ba73-2b13-4aa4-a993-dd32ea1fac04",
+      "name": "VA beach",
+      "segments": [
+       {
+        "__segmentId": "2c9b5732-be55-4e1d-995d-447243af57e0",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "EtfctQFifwN3HA4E3r8V",
+          "__conditionId": "aee9a6e5-1ab2-4a21-8696-5c6e25156e1e",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Location",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "a8c70f3a-1bb0-4361-b350-9092df5c4dfd",
+    "da7f9e21-0248-4ca6-b563-9f9e4b90a463",
+    "3c71ba73-2b13-4aa4-a993-dd32ea1fac04",
+    "8142f1b6-1499-4f61-b9af-e7b79935cb6d"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "6aa58df0-d9d2-4933-aded-9cdacbe58e26"
+  },
+  {
+   "id": "a8c70f3a-1bb0-4361-b350-9092df5c4dfd",
+   "parent": "3ae70205-af8d-42c0-be3a-8f98a7a7848b",
+   "order": 5,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Richmond",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "cf76b88c-6c20-4cbc-b19a-6b042214db03",
+   "sibling": [
+    "da7f9e21-0248-4ca6-b563-9f9e4b90a463",
+    "3c71ba73-2b13-4aa4-a993-dd32ea1fac04",
+    "8142f1b6-1499-4f61-b9af-e7b79935cb6d"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "3ae70205-af8d-42c0-be3a-8f98a7a7848b"
+  },
+  {
+   "id": "cf76b88c-6c20-4cbc-b19a-6b042214db03",
+   "parent": "a8c70f3a-1bb0-4361-b350-9092df5c4dfd",
+   "order": 0,
+   "attributes": {
+    "body": "https://book.menswellnesscenters.com/watch?name={{contact.first_name}}&loc=richmond\n\n\nHi {{contact.first_name}}, your appointment with Men's Wellness Centers Richmond is confirmed.\n\nYour visit: {{appointment.start_time}} at 4050 Innslake Dr, Suite 360 Glen Allen, VA 23060. You'll sit down in person with a provider who's focused on you.\n\nGet the most out of your time by taking 3 minutes to complete your intake form.\n\nhttps://go.menswellnesscenters.com/medical-intake\n\nQuestions? Call or text 866-344-4955.",
+    "attachments": []
+   },
+   "name": "Send SMS to confirm appointment in Richmond",
+   "type": "sms",
+   "next": "ee9f8b70-77ee-414b-9f68-805fadbaf41d",
+   "parentKey": "a8c70f3a-1bb0-4361-b350-9092df5c4dfd"
+  },
+  {
+   "id": "ee9f8b70-77ee-414b-9f68-805fadbaf41d",
+   "parent": "a8c70f3a-1bb0-4361-b350-9092df5c4dfd",
+   "order": 1,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "4515b79c-29dd-4eba-822f-078dbc3ab84e",
+      "name": "Appointment is scheduled for tomorrow",
+      "segments": [
+       {
+        "__segmentId": "74b742e3-44df-4011-a4ea-94a7b61b20f1",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "appointment",
+          "conditionSubType": "startTime",
+          "conditionOperator": "==",
+          "conditionValueOperator": "tomorrow",
+          "__conditionId": "d759f0ba-fa0d-44c4-8dae-e1a75a4f5579",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "e4118d97-1109-4f5b-bc89-4668de3dc566",
+      "name": "Appointment is today (Same day booking)",
+      "segments": [
+       {
+        "__segmentId": "418d18c6-9d42-4261-ae92-751b45f600d5",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "appointment",
+          "conditionSubType": "startTime",
+          "conditionOperator": "==",
+          "conditionValueOperator": "today",
+          "__conditionId": "3a34d1d6-b4be-49de-91d4-9318da766092",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Is appointment scheduled for tomorrow?",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "4515b79c-29dd-4eba-822f-078dbc3ab84e",
+    "e4118d97-1109-4f5b-bc89-4668de3dc566",
+    "84e95673-15ff-4037-937e-1dedc3d8b23f"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "cf76b88c-6c20-4cbc-b19a-6b042214db03"
+  },
+  {
+   "id": "4515b79c-29dd-4eba-822f-078dbc3ab84e",
+   "parent": "ee9f8b70-77ee-414b-9f68-805fadbaf41d",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Appointment is scheduled for tomorrow",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "e4118d97-1109-4f5b-bc89-4668de3dc566",
+    "84e95673-15ff-4037-937e-1dedc3d8b23f"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "ee9f8b70-77ee-414b-9f68-805fadbaf41d",
+   "next": "f5e71e51-419f-4220-8027-e07d00f99893"
+  },
+  {
+   "id": "f5e71e51-419f-4220-8027-e07d00f99893",
+   "parent": "4515b79c-29dd-4eba-822f-078dbc3ab84e",
+   "order": 0,
+   "attributes": {
+    "targetNodeId": "f86fec00-473b-4b73-951d-43d5ff30da9d",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "4515b79c-29dd-4eba-822f-078dbc3ab84e"
+  },
+  {
+   "id": "e4118d97-1109-4f5b-bc89-4668de3dc566",
+   "parent": "ee9f8b70-77ee-414b-9f68-805fadbaf41d",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Appointment is today (Same day booking)",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "60c2f61b-ce94-49a6-b48f-c4036ecf6c87",
+   "sibling": [
+    "4515b79c-29dd-4eba-822f-078dbc3ab84e",
+    "84e95673-15ff-4037-937e-1dedc3d8b23f"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "ee9f8b70-77ee-414b-9f68-805fadbaf41d"
+  },
+  {
+   "id": "60c2f61b-ce94-49a6-b48f-c4036ecf6c87",
+   "parent": "e4118d97-1109-4f5b-bc89-4668de3dc566",
+   "order": 0,
+   "attributes": {
+    "targetNodeId": "1feabcfe-b358-48a0-a88a-adadc06a9a10",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "e4118d97-1109-4f5b-bc89-4668de3dc566"
+  },
+  {
+   "id": "84e95673-15ff-4037-937e-1dedc3d8b23f",
+   "parent": "ee9f8b70-77ee-414b-9f68-805fadbaf41d",
+   "order": 2,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "d9835ac8-1fa1-47bb-9063-afab541d650e",
+   "sibling": [
+    "4515b79c-29dd-4eba-822f-078dbc3ab84e",
+    "e4118d97-1109-4f5b-bc89-4668de3dc566"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "ee9f8b70-77ee-414b-9f68-805fadbaf41d"
+  },
+  {
+   "id": "d9835ac8-1fa1-47bb-9063-afab541d650e",
+   "parent": "84e95673-15ff-4037-937e-1dedc3d8b23f",
+   "order": 0,
+   "attributes": {
+    "type": "appointment",
+    "name": "Wait 24 hrs before Appt Time",
+    "cat": "",
+    "appointmentStartAfter": {
+     "when": "before",
+     "type": "minutes",
+     "value": 1440,
+     "distributed": {
+      "months": 0,
+      "days": 1,
+      "hours": 0,
+      "minutes": 0
+     }
+    },
+    "appointmentCondition": "next",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "name": "Wait 24 hrs before Appt Time",
+   "type": "wait",
+   "cat": "",
+   "next": "c3dbfc76-591d-4cc1-802e-404f52a1cbd1",
+   "parentKey": "84e95673-15ff-4037-937e-1dedc3d8b23f"
+  },
+  {
+   "id": "c3dbfc76-591d-4cc1-802e-404f52a1cbd1",
+   "parent": "84e95673-15ff-4037-937e-1dedc3d8b23f",
+   "order": 1,
+   "attributes": {
+    "type": "appointment",
+    "name": "Wait 24 hrs before Appt Time",
+    "cat": "",
+    "appointmentStartAfter": {
+     "when": "before",
+     "type": "minutes",
+     "value": 1440,
+     "distributed": {
+      "months": 0,
+      "days": 1,
+      "hours": 0,
+      "minutes": 0
+     }
+    },
+    "appointmentCondition": "next",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "name": "Wait 24 hrs before Appt Time",
+   "type": "wait",
+   "next": "f86fec00-473b-4b73-951d-43d5ff30da9d",
+   "parentKey": "d9835ac8-1fa1-47bb-9063-afab541d650e",
+   "cat": ""
+  },
+  {
+   "id": "f86fec00-473b-4b73-951d-43d5ff30da9d",
+   "parent": "84e95673-15ff-4037-937e-1dedc3d8b23f",
+   "order": 2,
+   "attributes": {
+    "trackingOptions": {
+     "hasTrackingLinks": false,
+     "hasUtmTracking": true,
+     "hasTags": false,
+     "sourceId": "7ac17ae7-c894-4c6e-be0e-7b77057c7231:f86fec00-473b-4b73-951d-43d5ff30da9d"
+    },
+    "conditions": [],
+    "from_name": "Men's Wellness Center",
+    "from_email": "{{location.email}}",
+    "subject": "Tomorrow: {{appointment.only_start_time}}",
+    "preHeader": "",
+    "template_id": "6982170afd31e2021e48289e",
+    "templatesource": "email-builder",
+    "previewUrl": "https://firebasestorage.googleapis.com/v0/b/highlevel-backend.appspot.com/o/location%2FGhstz8eIsHWLeXek47dk%2Femails%2F6982170afd31e2021e48289e%2Findex.html",
+    "createdAt": "2026-02-03T15:40:59.072Z",
+    "updatedAt": "2026-02-03T15:44:46.210Z",
+    "templateCreationMode": "existing",
+    "syncEnabled": true,
+    "attachments": []
+   },
+   "name": "Email Follow Through 24 hours before scheduled appointment",
+   "type": "email",
+   "next": "a52656d7-128c-4097-9964-66814f650a6b",
+   "parentKey": "c3dbfc76-591d-4cc1-802e-404f52a1cbd1"
+  },
+  {
+   "id": "a52656d7-128c-4097-9964-66814f650a6b",
+   "parent": "84e95673-15ff-4037-937e-1dedc3d8b23f",
+   "order": 3,
+   "attributes": {
+    "type": "appointment",
+    "name": "Wait 10 hrs before Appt Time",
+    "cat": "",
+    "appointmentStartAfter": {
+     "when": "before",
+     "type": "minutes",
+     "value": 600,
+     "distributed": {
+      "months": 0,
+      "days": 0,
+      "hours": 10,
+      "minutes": 0
+     }
+    },
+    "appointmentCondition": "next",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "name": "Wait 10 hrs before Appt Time",
+   "type": "wait",
+   "next": "1feabcfe-b358-48a0-a88a-adadc06a9a10",
+   "parentKey": "f86fec00-473b-4b73-951d-43d5ff30da9d",
+   "cat": ""
+  },
+  {
+   "id": "1feabcfe-b358-48a0-a88a-adadc06a9a10",
+   "parent": "84e95673-15ff-4037-937e-1dedc3d8b23f",
+   "order": 4,
+   "attributes": {
+    "type": "email",
+    "email": {
+     "isCloned": true,
+     "from_name": "{{location.name}}",
+     "userType": "custom_email",
+     "to": "consult-results@menswellnesscenters.com",
+     "subject": "{{contact.name}} | {{contact.date_of_birth}}",
+     "template_id": "696e95e2bb53afc31b987937",
+     "templatesource": "email-builder",
+     "from_email": "{{location.email}}",
+     "previewUrl": "https://firebasestorage.googleapis.com/v0/b/highlevel-backend.appspot.com/o/location%2FGhstz8eIsHWLeXek47dk%2Femails%2F696e95e2bb53afc31b987937%2Findex.html",
+     "createdAt": "2026-01-19T20:36:50.552Z",
+     "updatedAt": "2026-03-19T15:21:03.321Z",
+     "preHeader": "",
+     "cc": "",
+     "attachments": []
+    }
+   },
+   "name": "Internal Notification: Email with Clinic Appointment Outcome form",
+   "type": "internal_notification",
+   "next": "e0f59dec-1963-400c-95aa-45f71deba729",
+   "parentKey": "a52656d7-128c-4097-9964-66814f650a6b"
+  },
+  {
+   "id": "e0f59dec-1963-400c-95aa-45f71deba729",
+   "stepIndex": 1,
+   "parent": "84e95673-15ff-4037-937e-1dedc3d8b23f",
+   "order": 5,
+   "attributes": {
+    "type": "google_sheets",
+    "action": {
+     "id": "lookup_row",
+     "name": "Lookup Spreadsheet Row"
+    },
+    "account": {
+     "id": "100464418921113716943",
+     "name": "reports@mwcforme.com",
+     "idType": "altId"
+    },
+    "drive": {
+     "id": "my_drive",
+     "name": "My Drive"
+    },
+    "spreadsheet": {
+     "id": "1_Qji8O_7ZL5tSa7lbb4HwCPicyYkDj_OBseUfrh2etE",
+     "name": "Appointment Study"
+    },
+    "sheet": {
+     "id": "5",
+     "name": "Appt Report Raw"
+    },
+    "lookupColumns": {
+     "main": {
+      "column": "A",
+      "value": "{{appointment.id}}"
+     }
+    },
+    "options": {
+     "lookupSearchMethod": "bottom_to_top"
+    },
+    "sheetHeaders": [
+     "Appointment Id",
+     "Requested Time",
+     "Date Added",
+     "Contact Name",
+     "Calendar",
+     "Email",
+     "Phone",
+     "Appointment Owner",
+     "Created By",
+     "Mode",
+     "Appointment Source",
+     "Outcome",
+     "Rescheduled",
+     "Source",
+     "Affiliate UTM Campaign",
+     "Affiliate UTM Medium",
+     "Affiliate UTM Content",
+     "Affiliate UTM Source",
+     "Affiliate UTM Term",
+     "Affiliate Form",
+     "CONTACT  CREATE DATE",
+     "TAG",
+     "Days Between Booking & Appointment",
+     "Same Day Booking?",
+     "TIME Booked",
+     "Booking Time",
+     "APPT Date",
+     "Date Booked",
+     "Appt Time",
+     "Inbound Calls Prior to Booking",
+     "Outbound Calls Prior to Booking",
+     "Voicemails Prior to Booking",
+     "TOTAL Calls prior to Booking",
+     "Booked without Calls",
+     "Average Handle Time",
+     "Appt Confirmed?",
+     "All",
+     "Time Booked",
+     "New Patient Intake Form Submitted",
+     "New Patient Intake Form Date & Time Submitted",
+     "Intake Lead Time\n(Form submitted before Appt)",
+     "Pipeline",
+     "A&D List based on Weekly Result Sheet",
+     "Weekly Result 13.0"
+    ]
+   },
+   "name": "Lookup Appointment ID",
+   "type": "google_sheets",
+   "next": "e7cddbe4-cbb5-44b0-9864-7f85d0c6a7c9",
+   "parentKey": "1feabcfe-b358-48a0-a88a-adadc06a9a10",
+   "advanceCanvasMeta": {
+    "isDisabled": false
+   }
+  },
+  {
+   "id": "e7cddbe4-cbb5-44b0-9864-7f85d0c6a7c9",
+   "stepIndex": 2,
+   "parent": "84e95673-15ff-4037-937e-1dedc3d8b23f",
+   "order": 6,
+   "attributes": {
+    "type": "google_sheets",
+    "action": {
+     "id": "update_row_from_lookup",
+     "name": "Update Spreadsheet Row using Lookup"
+    },
+    "account": {
+     "id": "100464418921113716943",
+     "name": "reports@mwcforme.com",
+     "idType": "altId"
+    },
+    "drive": {
+     "id": "my_drive",
+     "name": "My Drive"
+    },
+    "spreadsheet": {
+     "id": "1_Qji8O_7ZL5tSa7lbb4HwCPicyYkDj_OBseUfrh2etE",
+     "name": "Appointment Study"
+    },
+    "sheet": {
+     "id": "5",
+     "name": "Appt Report Raw"
+    },
+    "columnRange": [
+     "A",
+     "AQ"
+    ],
+    "values": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     "confirmed",
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     "YES"
+    ],
+    "lookupStep": {
+     "label": "#1 Lookup Appointment ID",
+     "value": "e0f59dec-1963-400c-95aa-45f71deba729",
+     "id": "e0f59dec-1963-400c-95aa-45f71deba729",
+     "stepIndex": 1
+    },
+    "sheetHeaders": [
+     "Appointment Id",
+     "Requested Time",
+     "Date Added",
+     "Contact Name",
+     "Calendar",
+     "Email",
+     "Phone",
+     "Appointment Owner",
+     "Created By",
+     "Mode",
+     "Appointment Source",
+     "Outcome",
+     "Rescheduled",
+     "Source",
+     "Affiliate UTM Campaign",
+     "Affiliate UTM Medium",
+     "Affiliate UTM Content",
+     "Affiliate UTM Source",
+     "Affiliate UTM Term",
+     "Affiliate Form",
+     "CONTACT  CREATE DATE",
+     "TAG",
+     "Days Between Booking & Appointment",
+     "Same Day Booking?",
+     "TIME Booked",
+     "Booking Time",
+     "APPT Date",
+     "Date Booked",
+     "Appt Time",
+     "Inbound Calls Prior to Booking",
+     "Outbound Calls Prior to Booking",
+     "Voicemails Prior to Booking",
+     "TOTAL Calls prior to Booking",
+     "Booked without Calls",
+     "Average Handle Time",
+     "Appt Confirmed?",
+     "All",
+     "Time Booked",
+     "New Patient Intake Form Submitted",
+     "New Patient Intake Form Date & Time Submitted",
+     "Intake Lead Time\n(Form submitted before Appt)",
+     "Pipeline",
+     "A&D List based on Weekly Result Sheet",
+     "Weekly Result 13.0"
+    ],
+    "options": {}
+   },
+   "name": "Update Col L to Confirmed & Col AJ to YES",
+   "type": "google_sheets",
+   "next": "988bb7ba-ceff-486b-a8bd-e650808d66c4",
+   "parentKey": "e0f59dec-1963-400c-95aa-45f71deba729",
+   "advanceCanvasMeta": {
+    "isDisabled": false
+   }
+  },
+  {
+   "id": "988bb7ba-ceff-486b-a8bd-e650808d66c4",
+   "parent": "84e95673-15ff-4037-937e-1dedc3d8b23f",
+   "order": 7,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "03b60ca7-9882-41c5-bfbf-3656a11bcfa2",
+      "name": "Yes",
+      "segments": [
+       {
+        "__segmentId": "f8443c4e-87a7-41bd-b13a-8db20d290cdf",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "appointment",
+          "conditionSubType": "startTime",
+          "conditionOperator": "==",
+          "conditionValueOperator": "today",
+          "__conditionId": "454f62d3-916b-447a-baf2-96913ea3293c",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         },
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "quarter_hour",
+          "conditionOperator": ">=",
+          "conditionValue": "800",
+          "__conditionId": "fc7fd0c7-401a-4790-b3f4-f043112e87fa",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Day of Appointment, is time 8am onwards?",
+    "version": 2,
+    "noneBranchName": "No"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "03b60ca7-9882-41c5-bfbf-3656a11bcfa2",
+    "e301b9e7-7637-47c3-928a-a24ab72af3f6"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "e7cddbe4-cbb5-44b0-9864-7f85d0c6a7c9"
+  },
+  {
+   "id": "03b60ca7-9882-41c5-bfbf-3656a11bcfa2",
+   "parent": "988bb7ba-ceff-486b-a8bd-e650808d66c4",
+   "order": 8,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "93b2dc71-5849-4518-b63d-e861a2dbba3e",
+   "sibling": [
+    "e301b9e7-7637-47c3-928a-a24ab72af3f6"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "988bb7ba-ceff-486b-a8bd-e650808d66c4"
+  },
+  {
+   "id": "93b2dc71-5849-4518-b63d-e861a2dbba3e",
+   "parent": "03b60ca7-9882-41c5-bfbf-3656a11bcfa2",
+   "order": 0,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "80947186-6eea-454e-b2e1-8b8fa02457df",
+      "name": "Answered",
+      "segments": [
+       {
+        "__segmentId": "4904beea-a506-46ff-b93e-9f8470308550",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "full_address",
+          "conditionOperator": "has_value",
+          "__conditionId": "abf49527-11a6-43fa-9959-71f17728823a",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Check if Intake Form (Sent upon Booking Confirmation) is already Answered",
+    "version": 2,
+    "noneBranchName": "Unanswered"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "80947186-6eea-454e-b2e1-8b8fa02457df",
+    "50670ecb-a9e0-42c9-b247-956a94fe7bfc"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "03b60ca7-9882-41c5-bfbf-3656a11bcfa2"
+  },
+  {
+   "id": "80947186-6eea-454e-b2e1-8b8fa02457df",
+   "parent": "93b2dc71-5849-4518-b63d-e861a2dbba3e",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Answered",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "f6f8a20b-6513-46d8-9c47-00832b3a3bf3",
+   "sibling": [
+    "50670ecb-a9e0-42c9-b247-956a94fe7bfc"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "93b2dc71-5849-4518-b63d-e861a2dbba3e"
+  },
+  {
+   "id": "f6f8a20b-6513-46d8-9c47-00832b3a3bf3",
+   "parent": "80947186-6eea-454e-b2e1-8b8fa02457df",
+   "order": 0,
+   "attributes": {
+    "trackingOptions": {
+     "hasTrackingLinks": false,
+     "hasUtmTracking": true,
+     "hasTags": false,
+     "sourceId": "7ac17ae7-c894-4c6e-be0e-7b77057c7231:f6f8a20b-6513-46d8-9c47-00832b3a3bf3"
+    },
+    "conditions": [],
+    "from_name": "Men's Wellness Center",
+    "from_email": "{{location.email}}",
+    "subject": "Today: {{appointment.only_start_time}}",
+    "preHeader": "",
+    "template_id": "69824bbf555c87453186c21a",
+    "templatesource": "email-builder",
+    "previewUrl": "https://firebasestorage.googleapis.com/v0/b/highlevel-backend.appspot.com/o/location%2FGhstz8eIsHWLeXek47dk%2Femails%2F69824bbf555c87453186c21a%2Findex.html",
+    "createdAt": "2026-02-03T19:25:51.423Z",
+    "templateCreationMode": "existing",
+    "syncEnabled": true,
+    "attachments": []
+   },
+   "name": "Send Email Reminder for Today's Appointment. Intake form done",
+   "type": "email",
+   "next": "28b6102b-32f4-4fbc-8f65-c7b812139c05",
+   "parentKey": "80947186-6eea-454e-b2e1-8b8fa02457df"
+  },
+  {
+   "id": "28b6102b-32f4-4fbc-8f65-c7b812139c05",
+   "parent": "80947186-6eea-454e-b2e1-8b8fa02457df",
+   "order": 1,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "1f78e0a2-84a8-4548-b244-389e2d4083f6",
+      "name": "Virginia Beach",
+      "segments": [
+       {
+        "__segmentId": "95abe6e0-d620-49f7-97fd-2b429ab820fb",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "EtfctQFifwN3HA4E3r8V",
+          "__conditionId": "b38fc367-7039-4bd6-abce-ec6a2624b475",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "ee9fc9ab-a46a-4fc8-ad1c-f4641dff4f1d",
+      "name": "Richmond",
+      "segments": [
+       {
+        "__segmentId": "95abe6e0-d620-49f7-97fd-2b429ab820fb",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "iRhPnot4cyIr1oxPHwlu",
+          "__conditionId": "b38fc367-7039-4bd6-abce-ec6a2624b475",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "cea520a2-e27b-4a69-923a-81587f819c0d",
+      "name": "Newport News",
+      "segments": [
+       {
+        "__segmentId": "95abe6e0-d620-49f7-97fd-2b429ab820fb",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "spwXKQjKmjVqPdIHChQ3",
+          "__conditionId": "b38fc367-7039-4bd6-abce-ec6a2624b475",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Check for Clinic Location",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "1f78e0a2-84a8-4548-b244-389e2d4083f6",
+    "ee9fc9ab-a46a-4fc8-ad1c-f4641dff4f1d",
+    "cea520a2-e27b-4a69-923a-81587f819c0d",
+    "39fe2b87-2b7a-4af7-bfea-c009da0a7ff8"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "f6f8a20b-6513-46d8-9c47-00832b3a3bf3"
+  },
+  {
+   "id": "1f78e0a2-84a8-4548-b244-389e2d4083f6",
+   "parent": "28b6102b-32f4-4fbc-8f65-c7b812139c05",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Virginia Beach",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "2cf6b9d4-2d1a-4dd4-b1bf-b97657184ee9",
+   "sibling": [
+    "ee9fc9ab-a46a-4fc8-ad1c-f4641dff4f1d",
+    "cea520a2-e27b-4a69-923a-81587f819c0d",
+    "39fe2b87-2b7a-4af7-bfea-c009da0a7ff8"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "28b6102b-32f4-4fbc-8f65-c7b812139c05"
+  },
+  {
+   "id": "2cf6b9d4-2d1a-4dd4-b1bf-b97657184ee9",
+   "parent": "1f78e0a2-84a8-4548-b244-389e2d4083f6",
+   "order": 0,
+   "attributes": {
+    "body": "{{contact.first_name}}, your appointment is today at {{appointment.only_start_time}} at 996 First Colonial Road Virginia Beach, VA 23454. \n\nQuestions? Call or text 866-344-4955",
+    "attachments": []
+   },
+   "name": "8AM SMS Reminder: Appointment Time",
+   "type": "sms",
+   "parentKey": "1f78e0a2-84a8-4548-b244-389e2d4083f6",
+   "next": "6dc9c1c2-6256-4737-a22e-6f9037d6ab65"
+  },
+  {
+   "id": "6dc9c1c2-6256-4737-a22e-6f9037d6ab65",
+   "parentKey": "2cf6b9d4-2d1a-4dd4-b1bf-b97657184ee9",
+   "parent": "1f78e0a2-84a8-4548-b244-389e2d4083f6",
+   "type": "wait",
+   "name": "Wait 15 minutes before Appointment schedule",
+   "attributes": {
+    "type": "appointment",
+    "name": "Wait 15 minutes before Appointment schedule",
+    "cat": "",
+    "appointmentStartAfter": {
+     "when": "before",
+     "type": "minutes",
+     "value": 15,
+     "distributed": {
+      "months": 0,
+      "days": 0,
+      "hours": 0,
+      "minutes": 15
+     }
+    },
+    "appointmentCondition": "next",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "order": 1,
+   "cat": "",
+   "next": "4547ea38-ba37-40e1-9ece-2a1dba5c8649"
+  },
+  {
+   "id": "4547ea38-ba37-40e1-9ece-2a1dba5c8649",
+   "parent": "1f78e0a2-84a8-4548-b244-389e2d4083f6",
+   "order": 2,
+   "attributes": {
+    "body": "{{contact.first_name}}, your appointment is today at {{appointment.only_start_time}} at 996 First Colonial Road Virginia Beach, VA 23454. \n\nQuestions? Call or text 866-344-4955",
+    "attachments": []
+   },
+   "name": "SMS Reminder 15 minutes before Appointment schedule",
+   "type": "sms",
+   "parentKey": "6dc9c1c2-6256-4737-a22e-6f9037d6ab65"
+  },
+  {
+   "id": "ee9fc9ab-a46a-4fc8-ad1c-f4641dff4f1d",
+   "parent": "28b6102b-32f4-4fbc-8f65-c7b812139c05",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Richmond",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "e5784915-f17d-4858-8484-9996e2ea9c4b",
+   "sibling": [
+    "1f78e0a2-84a8-4548-b244-389e2d4083f6",
+    "cea520a2-e27b-4a69-923a-81587f819c0d",
+    "39fe2b87-2b7a-4af7-bfea-c009da0a7ff8"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "28b6102b-32f4-4fbc-8f65-c7b812139c05"
+  },
+  {
+   "id": "e5784915-f17d-4858-8484-9996e2ea9c4b",
+   "parent": "ee9fc9ab-a46a-4fc8-ad1c-f4641dff4f1d",
+   "order": 0,
+   "attributes": {
+    "body": "{{contact.first_name}}, your appointment is today at {{appointment.only_start_time}} at 4050 Innslake Dr, Suite 360 Glen Allen, VA 23060. \n\n\nQuestions? Call or text 866-344-4955",
+    "attachments": []
+   },
+   "name": "8AM SMS Reminder: Appointment Time",
+   "type": "sms",
+   "parentKey": "ee9fc9ab-a46a-4fc8-ad1c-f4641dff4f1d",
+   "next": "bc27a596-ac42-40d5-b618-3d854a252862"
+  },
+  {
+   "id": "bc27a596-ac42-40d5-b618-3d854a252862",
+   "parent": "ee9fc9ab-a46a-4fc8-ad1c-f4641dff4f1d",
+   "order": 1,
+   "attributes": {
+    "type": "appointment",
+    "name": "Wait 15 minutes before Appointment schedule",
+    "cat": "",
+    "appointmentStartAfter": {
+     "when": "before",
+     "type": "minutes",
+     "value": 15,
+     "distributed": {
+      "months": 0,
+      "days": 0,
+      "hours": 0,
+      "minutes": 15
+     }
+    },
+    "appointmentCondition": "next",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "name": "Wait 15 minutes before Appointment schedule",
+   "type": "wait",
+   "next": "957525f1-07c7-457c-bab6-2fda1f21cfbe",
+   "parentKey": "e5784915-f17d-4858-8484-9996e2ea9c4b"
+  },
+  {
+   "id": "957525f1-07c7-457c-bab6-2fda1f21cfbe",
+   "parent": "ee9fc9ab-a46a-4fc8-ad1c-f4641dff4f1d",
+   "order": 2,
+   "attributes": {
+    "body": "{{contact.first_name}}, your appointment is today at {{appointment.only_start_time}} at 4050 Innslake Dr, Suite 360 Glen Allen, VA 23060. \n\n\nQuestions? Call or text 866-344-4955",
+    "attachments": []
+   },
+   "name": "SMS Reminder 15 minutes before Appointment schedule",
+   "type": "sms",
+   "parentKey": "bc27a596-ac42-40d5-b618-3d854a252862"
+  },
+  {
+   "id": "cea520a2-e27b-4a69-923a-81587f819c0d",
+   "parent": "28b6102b-32f4-4fbc-8f65-c7b812139c05",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Newport News",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "00c13615-f3be-4307-b41b-dfa08ffd2326",
+   "sibling": [
+    "1f78e0a2-84a8-4548-b244-389e2d4083f6",
+    "ee9fc9ab-a46a-4fc8-ad1c-f4641dff4f1d",
+    "39fe2b87-2b7a-4af7-bfea-c009da0a7ff8"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "28b6102b-32f4-4fbc-8f65-c7b812139c05"
+  },
+  {
+   "id": "00c13615-f3be-4307-b41b-dfa08ffd2326",
+   "parent": "cea520a2-e27b-4a69-923a-81587f819c0d",
+   "order": 0,
+   "attributes": {
+    "body": "{{contact.first_name}},  your appointment is today at {{appointment.only_start_time}} at  827 Diligence Drive, Suite 206 Newport News, VA 23606.\n\nQuestions? Call or text 866-344-4955",
+    "attachments": []
+   },
+   "name": "8AM SMS Reminder: Appointment Time",
+   "type": "sms",
+   "parentKey": "cea520a2-e27b-4a69-923a-81587f819c0d",
+   "next": "d26a84bd-3c43-4c90-b426-d5ecbe5aaff0"
+  },
+  {
+   "id": "d26a84bd-3c43-4c90-b426-d5ecbe5aaff0",
+   "parent": "cea520a2-e27b-4a69-923a-81587f819c0d",
+   "order": 1,
+   "attributes": {
+    "type": "appointment",
+    "name": "Wait 15 minutes before Appointment schedule",
+    "cat": "",
+    "appointmentStartAfter": {
+     "when": "before",
+     "type": "minutes",
+     "value": 15,
+     "distributed": {
+      "months": 0,
+      "days": 0,
+      "hours": 0,
+      "minutes": 15
+     }
+    },
+    "appointmentCondition": "next",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "name": "Wait 15 minutes before Appointment schedule",
+   "type": "wait",
+   "next": "e35b3447-9c7d-487a-adc6-4db9544b5bfc",
+   "parentKey": "00c13615-f3be-4307-b41b-dfa08ffd2326"
+  },
+  {
+   "id": "e35b3447-9c7d-487a-adc6-4db9544b5bfc",
+   "parent": "cea520a2-e27b-4a69-923a-81587f819c0d",
+   "order": 2,
+   "attributes": {
+    "body": "{{contact.first_name}},  your appointment is today at {{appointment.only_start_time}} at  827 Diligence Drive, Suite 206 Newport News, VA 23606.\n\nQuestions? Call or text 866-344-4955",
+    "attachments": []
+   },
+   "name": "SMS Reminder 15 minutes before Appointment schedule",
+   "type": "sms",
+   "parentKey": "d26a84bd-3c43-4c90-b426-d5ecbe5aaff0"
+  },
+  {
+   "id": "39fe2b87-2b7a-4af7-bfea-c009da0a7ff8",
+   "parent": "28b6102b-32f4-4fbc-8f65-c7b812139c05",
+   "order": 2,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "1f78e0a2-84a8-4548-b244-389e2d4083f6",
+    "ee9fc9ab-a46a-4fc8-ad1c-f4641dff4f1d",
+    "cea520a2-e27b-4a69-923a-81587f819c0d"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "28b6102b-32f4-4fbc-8f65-c7b812139c05"
+  },
+  {
+   "id": "50670ecb-a9e0-42c9-b247-956a94fe7bfc",
+   "parent": "93b2dc71-5849-4518-b63d-e861a2dbba3e",
+   "order": 1,
+   "attributes": {
+    "else": true
+   },
+   "name": "Unanswered",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "42a0f0b0-fe26-4ec7-b262-1d2640a73411",
+   "sibling": [
+    "80947186-6eea-454e-b2e1-8b8fa02457df"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "93b2dc71-5849-4518-b63d-e861a2dbba3e"
+  },
+  {
+   "id": "42a0f0b0-fe26-4ec7-b262-1d2640a73411",
+   "parent": "50670ecb-a9e0-42c9-b247-956a94fe7bfc",
+   "order": 0,
+   "attributes": {
+    "trackingOptions": {
+     "hasTrackingLinks": false,
+     "hasUtmTracking": true,
+     "hasTags": false,
+     "sourceId": "7ac17ae7-c894-4c6e-be0e-7b77057c7231:42a0f0b0-fe26-4ec7-b262-1d2640a73411"
+    },
+    "conditions": [],
+    "from_name": "Men's Wellness Center",
+    "from_email": "{{location.email}}",
+    "subject": "Today: {{appointment.only_start_time}}",
+    "preHeader": "",
+    "template_id": "698218227a067107ef237d4b",
+    "templatesource": "email-builder",
+    "previewUrl": "https://firebasestorage.googleapis.com/v0/b/highlevel-backend.appspot.com/o/location%2FGhstz8eIsHWLeXek47dk%2Femails%2F698218227a067107ef237d4b%2Findex.html",
+    "createdAt": "2026-02-03T15:45:38.987Z",
+    "templateCreationMode": "existing",
+    "syncEnabled": true,
+    "attachments": [],
+    "fieldDefaults": {}
+   },
+   "name": "Send Email Reminder for Today's Appointment, send Intake Form",
+   "type": "email",
+   "next": "ba063d2f-5fd0-4255-b5d4-b80e29f42779",
+   "parentKey": "50670ecb-a9e0-42c9-b247-956a94fe7bfc"
+  },
+  {
+   "id": "ba063d2f-5fd0-4255-b5d4-b80e29f42779",
+   "parent": "50670ecb-a9e0-42c9-b247-956a94fe7bfc",
+   "order": 1,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "7b6e9fc3-bcb9-4dae-b137-25320f285782",
+      "name": "Virginia Beach",
+      "segments": [
+       {
+        "__segmentId": "95abe6e0-d620-49f7-97fd-2b429ab820fb",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "EtfctQFifwN3HA4E3r8V",
+          "__conditionId": "b38fc367-7039-4bd6-abce-ec6a2624b475",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "850882e5-1d9c-4dc7-ab07-b549c8c4b9c6",
+      "name": "Richmond",
+      "segments": [
+       {
+        "__segmentId": "95abe6e0-d620-49f7-97fd-2b429ab820fb",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "iRhPnot4cyIr1oxPHwlu",
+          "__conditionId": "b38fc367-7039-4bd6-abce-ec6a2624b475",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "9748d8e7-bdb4-47b8-b2ee-1a5e821a30ae",
+      "name": "Newport News",
+      "segments": [
+       {
+        "__segmentId": "95abe6e0-d620-49f7-97fd-2b429ab820fb",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "spwXKQjKmjVqPdIHChQ3",
+          "__conditionId": "b38fc367-7039-4bd6-abce-ec6a2624b475",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Check for Clinic Location",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "7b6e9fc3-bcb9-4dae-b137-25320f285782",
+    "850882e5-1d9c-4dc7-ab07-b549c8c4b9c6",
+    "9748d8e7-bdb4-47b8-b2ee-1a5e821a30ae",
+    "d3c29913-c2ee-4bdd-9484-29114939fbec"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "42a0f0b0-fe26-4ec7-b262-1d2640a73411"
+  },
+  {
+   "id": "7b6e9fc3-bcb9-4dae-b137-25320f285782",
+   "parent": "ba063d2f-5fd0-4255-b5d4-b80e29f42779",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Virginia Beach",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "dd6decd3-6b3e-4471-98bc-4633a6023504",
+   "sibling": [
+    "850882e5-1d9c-4dc7-ab07-b549c8c4b9c6",
+    "9748d8e7-bdb4-47b8-b2ee-1a5e821a30ae",
+    "d3c29913-c2ee-4bdd-9484-29114939fbec"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "ba063d2f-5fd0-4255-b5d4-b80e29f42779"
+  },
+  {
+   "id": "dd6decd3-6b3e-4471-98bc-4633a6023504",
+   "parent": "7b6e9fc3-bcb9-4dae-b137-25320f285782",
+   "order": 0,
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, your Men's Wellness Centers visit is today at {{appointment.only_start_time}}, 996 First Colonial Road Virginia Beach, VA 23454.\n\nTake 3 minutes now so your provider can focus on you, not paperwork:\n\nhttps://go.menswellnesscenters.com/medical-intake\n\nSee you soon. Need anything? Call or text 866-344-4955.",
+    "attachments": []
+   },
+   "name": "8AM SMS Reminder: Send Intake Form",
+   "type": "sms",
+   "parentKey": "7b6e9fc3-bcb9-4dae-b137-25320f285782",
+   "next": "0be8ef0c-3b20-4c71-8199-f7b92ef1f23b"
+  },
+  {
+   "id": "0be8ef0c-3b20-4c71-8199-f7b92ef1f23b",
+   "parent": "7b6e9fc3-bcb9-4dae-b137-25320f285782",
+   "order": 1,
+   "attributes": {
+    "type": "appointment",
+    "name": "Wait 15 minutes before Appointment schedule",
+    "cat": "",
+    "appointmentStartAfter": {
+     "when": "before",
+     "type": "minutes",
+     "value": 15,
+     "distributed": {
+      "months": 0,
+      "days": 0,
+      "hours": 0,
+      "minutes": 15
+     }
+    },
+    "appointmentCondition": "next",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "name": "Wait 15 minutes before Appointment schedule",
+   "type": "wait",
+   "next": "e42e2d37-b356-48f7-b4e8-addbab956fe0",
+   "parentKey": "dd6decd3-6b3e-4471-98bc-4633a6023504"
+  },
+  {
+   "id": "e42e2d37-b356-48f7-b4e8-addbab956fe0",
+   "parent": "7b6e9fc3-bcb9-4dae-b137-25320f285782",
+   "order": 2,
+   "attributes": {
+    "body": "{{contact.first_name}},  Your appointment is today at {{appointment.only_start_time}} at 996 First Colonial Road Virginia Beach, VA 23454. \n\nIntake form not complete? Complete it at bookmwc.com/intake : {{trigger_link.uj0huJZhOS6LNRaXhcDH}}.  Questions? Call or text 866-344-4955",
+    "attachments": []
+   },
+   "name": "SMS Reminder 15 minutes before Appointment schedule: Send Intake Form",
+   "type": "sms",
+   "parentKey": "0be8ef0c-3b20-4c71-8199-f7b92ef1f23b"
+  },
+  {
+   "id": "850882e5-1d9c-4dc7-ab07-b549c8c4b9c6",
+   "parent": "ba063d2f-5fd0-4255-b5d4-b80e29f42779",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Richmond",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "04daa09d-e749-43c9-aa67-79ffdfff88c3",
+   "sibling": [
+    "7b6e9fc3-bcb9-4dae-b137-25320f285782",
+    "9748d8e7-bdb4-47b8-b2ee-1a5e821a30ae",
+    "d3c29913-c2ee-4bdd-9484-29114939fbec"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "ba063d2f-5fd0-4255-b5d4-b80e29f42779"
+  },
+  {
+   "id": "04daa09d-e749-43c9-aa67-79ffdfff88c3",
+   "parent": "850882e5-1d9c-4dc7-ab07-b549c8c4b9c6",
+   "order": 0,
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, your Men's Wellness Centers visit is today at {{appointment.only_start_time}}, 4050 Innslake Dr, Suite 360 Glen Allen, VA 23060.\n\nTake 3 minutes now so your provider can focus on you, not paperwork:\n\nhttps://go.menswellnesscenters.com/medical-intake\n\nSee you soon. Need anything? Call or text 866-344-4955.",
+    "attachments": []
+   },
+   "name": "8AM SMS Reminder: Send Intake Form",
+   "type": "sms",
+   "parentKey": "850882e5-1d9c-4dc7-ab07-b549c8c4b9c6",
+   "next": "f1107dd8-e813-4744-bb6b-4855faf61221"
+  },
+  {
+   "id": "f1107dd8-e813-4744-bb6b-4855faf61221",
+   "parent": "850882e5-1d9c-4dc7-ab07-b549c8c4b9c6",
+   "order": 1,
+   "attributes": {
+    "type": "appointment",
+    "name": "Wait 15 minutes before Appointment schedule",
+    "cat": "",
+    "appointmentStartAfter": {
+     "when": "before",
+     "type": "minutes",
+     "value": 15,
+     "distributed": {
+      "months": 0,
+      "days": 0,
+      "hours": 0,
+      "minutes": 15
+     }
+    },
+    "appointmentCondition": "next",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "name": "Wait 15 minutes before Appointment schedule",
+   "type": "wait",
+   "next": "f4eb0f35-a8a5-40b9-beae-3dac4dbadcd6",
+   "parentKey": "04daa09d-e749-43c9-aa67-79ffdfff88c3"
+  },
+  {
+   "id": "f4eb0f35-a8a5-40b9-beae-3dac4dbadcd6",
+   "parent": "850882e5-1d9c-4dc7-ab07-b549c8c4b9c6",
+   "order": 2,
+   "attributes": {
+    "body": "{{contact.first_name}},  Your appointment is today at {{appointment.only_start_time}} at 4050 Innslake Dr, Suite 360 Glen Allen, VA 23060. \n\nIntake form not complete? Complete it at bookmwc.com/intake : {{trigger_link.uj0huJZhOS6LNRaXhcDH}}.  Questions? Call or text 866-344-4955",
+    "attachments": []
+   },
+   "name": "SMS Reminder 15 minutes before Appointment schedule: Send Intake Form",
+   "type": "sms",
+   "parentKey": "f1107dd8-e813-4744-bb6b-4855faf61221"
+  },
+  {
+   "id": "9748d8e7-bdb4-47b8-b2ee-1a5e821a30ae",
+   "parent": "ba063d2f-5fd0-4255-b5d4-b80e29f42779",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Newport News",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "e8aeec75-2e9a-42a4-998f-8a8673e7dd93",
+   "sibling": [
+    "7b6e9fc3-bcb9-4dae-b137-25320f285782",
+    "850882e5-1d9c-4dc7-ab07-b549c8c4b9c6",
+    "d3c29913-c2ee-4bdd-9484-29114939fbec"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "ba063d2f-5fd0-4255-b5d4-b80e29f42779"
+  },
+  {
+   "id": "e8aeec75-2e9a-42a4-998f-8a8673e7dd93",
+   "parent": "9748d8e7-bdb4-47b8-b2ee-1a5e821a30ae",
+   "order": 0,
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, your Men's Wellness Centers visit is today at {{appointment.only_start_time}}, 827 Diligence Drive, Suite 206 Newport News, VA 23606.\n\nTake 3 minutes now so your provider can focus on you, not paperwork:\n\nhttps://go.menswellnesscenters.com/medical-intake\n\nSee you soon. Need anything? Call or text 866-344-4955.",
+    "attachments": []
+   },
+   "name": "8AM SMS Reminder: Send Intake Form",
+   "type": "sms",
+   "parentKey": "9748d8e7-bdb4-47b8-b2ee-1a5e821a30ae",
+   "next": "c3445e4e-0129-48e1-8952-e17e7425f588"
+  },
+  {
+   "id": "c3445e4e-0129-48e1-8952-e17e7425f588",
+   "parent": "9748d8e7-bdb4-47b8-b2ee-1a5e821a30ae",
+   "order": 1,
+   "attributes": {
+    "type": "appointment",
+    "name": "Wait 15 minutes before Appointment schedule",
+    "cat": "",
+    "appointmentStartAfter": {
+     "when": "before",
+     "type": "minutes",
+     "value": 15,
+     "distributed": {
+      "months": 0,
+      "days": 0,
+      "hours": 0,
+      "minutes": 15
+     }
+    },
+    "appointmentCondition": "next",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "name": "Wait 15 minutes before Appointment schedule",
+   "type": "wait",
+   "next": "022ce150-bae3-497b-890f-884490f56121",
+   "parentKey": "e8aeec75-2e9a-42a4-998f-8a8673e7dd93"
+  },
+  {
+   "id": "022ce150-bae3-497b-890f-884490f56121",
+   "parent": "9748d8e7-bdb4-47b8-b2ee-1a5e821a30ae",
+   "order": 2,
+   "attributes": {
+    "body": "{{contact.first_name}},  Your appointment is today at {{appointment.only_start_time}} at  827 Diligence Drive, Suite 206 Newport News, VA 23606.\n\nIntake form not complete? Complete it at bookmwc.com/intake : {{trigger_link.uj0huJZhOS6LNRaXhcDH}}.  Questions? Call or text 866-344-4955",
+    "attachments": []
+   },
+   "name": "SMS Reminder 15 minutes before Appointment schedule: Send Intake Form",
+   "type": "sms",
+   "parentKey": "c3445e4e-0129-48e1-8952-e17e7425f588"
+  },
+  {
+   "id": "d3c29913-c2ee-4bdd-9484-29114939fbec",
+   "parent": "ba063d2f-5fd0-4255-b5d4-b80e29f42779",
+   "order": 2,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "7b6e9fc3-bcb9-4dae-b137-25320f285782",
+    "850882e5-1d9c-4dc7-ab07-b549c8c4b9c6",
+    "9748d8e7-bdb4-47b8-b2ee-1a5e821a30ae"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "ba063d2f-5fd0-4255-b5d4-b80e29f42779"
+  },
+  {
+   "id": "e301b9e7-7637-47c3-928a-a24ab72af3f6",
+   "parent": "988bb7ba-ceff-486b-a8bd-e650808d66c4",
+   "order": 8,
+   "attributes": {
+    "else": true
+   },
+   "name": "No",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "79fa71fd-7943-4b44-b4b7-6a25c6e589f8",
+   "sibling": [
+    "03b60ca7-9882-41c5-bfbf-3656a11bcfa2"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "988bb7ba-ceff-486b-a8bd-e650808d66c4"
+  },
+  {
+   "id": "79fa71fd-7943-4b44-b4b7-6a25c6e589f8",
+   "parent": "e301b9e7-7637-47c3-928a-a24ab72af3f6",
+   "order": 0,
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "minutes",
+     "value": 0,
+     "when": "after"
+    },
+    "name": "Wait for 8am before proceeding to next step",
+    "cat": "",
+    "window": {
+     "condition": "when",
+     "days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "start": "08:00",
+     "end": "20:00"
+    },
+    "windowCondition": {
+     "field": "",
+     "operator": "",
+     "value": ""
+    },
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "name": "Wait for 8am before proceeding to next step",
+   "type": "wait",
+   "next": "52779501-d8f2-4b69-b627-19cffb4c77de",
+   "parentKey": "e301b9e7-7637-47c3-928a-a24ab72af3f6"
+  },
+  {
+   "id": "52779501-d8f2-4b69-b627-19cffb4c77de",
+   "parent": "e301b9e7-7637-47c3-928a-a24ab72af3f6",
+   "order": 1,
+   "attributes": {
+    "targetNodeId": "93b2dc71-5849-4518-b63d-e861a2dbba3e",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "79fa71fd-7943-4b44-b4b7-6a25c6e589f8"
+  },
+  {
+   "id": "da7f9e21-0248-4ca6-b563-9f9e4b90a463",
+   "parent": "3ae70205-af8d-42c0-be3a-8f98a7a7848b",
+   "order": 5,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "NPN",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "eca4efb8-4f37-4b9c-8fa5-7d5daf8fc54b",
+   "sibling": [
+    "a8c70f3a-1bb0-4361-b350-9092df5c4dfd",
+    "3c71ba73-2b13-4aa4-a993-dd32ea1fac04",
+    "8142f1b6-1499-4f61-b9af-e7b79935cb6d"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "3ae70205-af8d-42c0-be3a-8f98a7a7848b"
+  },
+  {
+   "id": "eca4efb8-4f37-4b9c-8fa5-7d5daf8fc54b",
+   "parent": "da7f9e21-0248-4ca6-b563-9f9e4b90a463",
+   "order": 0,
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, your appointment with Men's Wellness Centers Newport News is confirmed.\n\nYour visit: {{appointment.start_time}} at 827 Diligence Drive, Suite 206 Newport News, VA 23606. You'll sit down in person with a provider who's focused on you.\n\nGet the most out of your time by taking 3 minutes to complete your intake form.\n\nhttps://go.menswellnesscenters.com/medical-intake\n\nQuestions? Call or text 866-344-4955.",
+    "attachments": []
+   },
+   "name": "Send SMS to confirm appointment in NPN",
+   "type": "sms",
+   "next": "756f5eb2-71f8-4539-90c5-7519041a0e09",
+   "parentKey": "da7f9e21-0248-4ca6-b563-9f9e4b90a463"
+  },
+  {
+   "id": "756f5eb2-71f8-4539-90c5-7519041a0e09",
+   "parent": "da7f9e21-0248-4ca6-b563-9f9e4b90a463",
+   "order": 1,
+   "attributes": {
+    "targetNodeId": "ee9f8b70-77ee-414b-9f68-805fadbaf41d",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "eca4efb8-4f37-4b9c-8fa5-7d5daf8fc54b"
+  },
+  {
+   "id": "3c71ba73-2b13-4aa4-a993-dd32ea1fac04",
+   "parent": "3ae70205-af8d-42c0-be3a-8f98a7a7848b",
+   "order": 5,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "VA beach",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "114a4b23-6527-4bc2-af6f-d2f26bc79743",
+   "sibling": [
+    "a8c70f3a-1bb0-4361-b350-9092df5c4dfd",
+    "da7f9e21-0248-4ca6-b563-9f9e4b90a463",
+    "8142f1b6-1499-4f61-b9af-e7b79935cb6d"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "3ae70205-af8d-42c0-be3a-8f98a7a7848b"
+  },
+  {
+   "id": "114a4b23-6527-4bc2-af6f-d2f26bc79743",
+   "parent": "3c71ba73-2b13-4aa4-a993-dd32ea1fac04",
+   "order": 0,
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, your appointment with Men's Wellness Centers Virginia Beach is confirmed.\n\nYour visit: {{appointment.start_time}} at 996 First Colonial Road Virginia Beach, VA 23454. You'll sit down in person with a provider who's focused on you.\n\nGet the most out of your time by taking 3 minutes to complete your intake form.\n\nhttps://go.menswellnesscenters.com/medical-intake\n\nQuestions? Call or text 866-344-4955.",
+    "attachments": []
+   },
+   "name": "Send SMS to confirm appointment in VA beach",
+   "type": "sms",
+   "next": "a6ee2c49-719b-47e4-8055-4b733cfee4d9",
+   "parentKey": "3c71ba73-2b13-4aa4-a993-dd32ea1fac04"
+  },
+  {
+   "id": "a6ee2c49-719b-47e4-8055-4b733cfee4d9",
+   "parent": "3c71ba73-2b13-4aa4-a993-dd32ea1fac04",
+   "order": 1,
+   "attributes": {
+    "targetNodeId": "ee9f8b70-77ee-414b-9f68-805fadbaf41d",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "114a4b23-6527-4bc2-af6f-d2f26bc79743"
+  },
+  {
+   "id": "8142f1b6-1499-4f61-b9af-e7b79935cb6d",
+   "parent": "3ae70205-af8d-42c0-be3a-8f98a7a7848b",
+   "order": 5,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "a8c70f3a-1bb0-4361-b350-9092df5c4dfd",
+    "da7f9e21-0248-4ca6-b563-9f9e4b90a463",
+    "3c71ba73-2b13-4aa4-a993-dd32ea1fac04"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "3ae70205-af8d-42c0-be3a-8f98a7a7848b",
+   "next": "e562d30f-97a3-481e-b0cf-68fd4280470c"
+  },
+  {
+   "id": "e562d30f-97a3-481e-b0cf-68fd4280470c",
+   "parentKey": "8142f1b6-1499-4f61-b9af-e7b79935cb6d",
+   "parent": "8142f1b6-1499-4f61-b9af-e7b79935cb6d",
+   "type": "wait",
+   "name": "Wait until Location is added",
+   "attributes": {
+    "type": "condition",
+    "startAfter": {
+     "type": "minutes",
+     "value": 0,
+     "when": "after"
+    },
+    "name": "Wait until Location is added",
+    "cat": "",
+    "condition": {
+     "currentRecipeType": "CUSTOM",
+     "branches": [
+      {
+       "id": "fccfef8e-6597-4cbd-b654-ee8ad2e7c360",
+       "name": "Branch",
+       "segments": [
+        {
+         "__segmentId": "228a8572-6ed9-4b56-93ce-7fa0aa01ad25",
+         "operator": "and",
+         "conditions": [
+          {
+           "conditionType": "contact_detail",
+           "conditionSubType": "Cou856tOhaxW62vwehVI",
+           "conditionOperator": "has_value",
+           "__conditionId": "ce32d775-45fa-4f9f-a49e-4569dee16b7c",
+           "ifElseNodeId": "",
+           "__customFieldType__": "standard",
+           "isWait": true,
+           "nestedDropdownTypes": [
+            "inboundWebhookRequest",
+            "sheet",
+            "datetime_formatter",
+            "custom_webhook",
+            "array_functions",
+            "ivr_gather",
+            "ivr_connect_call",
+            "custom_code",
+            "ai_agent"
+           ],
+           "allowIsOperatorTypes": [
+            "contact_reply",
+            "inboundWebhookRequest",
+            "custom_webhook",
+            "custom_code",
+            "ai_agent",
+            "contact_detail",
+            "array_functions",
+            "appointment",
+            "service_booking",
+            "rental_booking"
+           ]
+          }
+         ]
+        }
+       ],
+       "operator": "and",
+       "showErrors": false,
+       "branchNameError": "Branch name cannot be empty!"
+      }
+     ],
+     "operator": "and",
+     "if": true,
+     "conditionName": "",
+     "version": 2,
+     "noneBranchName": "None"
+    },
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "order": 0,
+   "cat": "",
+   "next": "f2b324ec-b608-473e-87eb-1e241377e34b"
+  },
+  {
+   "id": "f2b324ec-b608-473e-87eb-1e241377e34b",
+   "parent": "8142f1b6-1499-4f61-b9af-e7b79935cb6d",
+   "order": 1,
+   "attributes": {
+    "targetNodeId": "3ae70205-af8d-42c0-be3a-8f98a7a7848b",
+    "type": "goto"
+   },
+   "name": "Check Location",
+   "type": "goto",
+   "parentKey": "e562d30f-97a3-481e-b0cf-68fd4280470c"
+  },
+  {
+   "id": "bd0124e1-ef81-42f9-801b-518bdadc8144",
+   "parent": "6c543113-7171-4294-82a8-bb08173452d0",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Va beach",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "fc363093-1ce3-46d8-8572-ec0b2d8e9223",
+   "sibling": [
+    "ef53dd76-fc26-49f7-a158-d7cfdbfdbc3b",
+    "100c115a-8619-4574-a19c-75da5762289f",
+    "e0c597a5-a6fa-4d42-a8b7-804e3ca9722a"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "6c543113-7171-4294-82a8-bb08173452d0"
+  },
+  {
+   "id": "fc363093-1ce3-46d8-8572-ec0b2d8e9223",
+   "parent": "bd0124e1-ef81-42f9-801b-518bdadc8144",
+   "order": 0,
+   "attributes": {
+    "tags": [
+     "va beach appt",
+     "location_vba"
+    ]
+   },
+   "name": "Add Tag: VA beach appt",
+   "type": "add_contact_tag",
+   "next": "1301f4f1-5701-49ad-8201-00f6f36edc1f",
+   "parentKey": "bd0124e1-ef81-42f9-801b-518bdadc8144"
+  },
+  {
+   "id": "1301f4f1-5701-49ad-8201-00f6f36edc1f",
+   "parent": "bd0124e1-ef81-42f9-801b-518bdadc8144",
+   "order": 1,
+   "attributes": {
+    "type": "update_contact_field",
+    "actionType": "update_field_data",
+    "fields": [
+     {
+      "field": "9WxVlzvgSlCXx0EL82Sr",
+      "value": "Virginia Beach",
+      "title": "Location",
+      "type": "select",
+      "date": ""
+     },
+     {
+      "field": "Cou856tOhaxW62vwehVI",
+      "value": "Virginia Beach, VA",
+      "title": "Preferred Location",
+      "type": "select",
+      "date": "",
+      "__customFieldType__": "standard"
+     }
+    ]
+   },
+   "name": "Update location field: VA beach",
+   "type": "update_contact_field",
+   "next": "1bf24195-09fd-4164-bf35-d047f6a46938",
+   "parentKey": "fc363093-1ce3-46d8-8572-ec0b2d8e9223"
+  },
+  {
+   "id": "1bf24195-09fd-4164-bf35-d047f6a46938",
+   "parent": "bd0124e1-ef81-42f9-801b-518bdadc8144",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "rspsjkBMNYGldN3R71ji",
+    "pipeline_stage_id": "ebb18f03-9e93-4b45-b984-147bae26aabf",
+    "opportunity_name": "{{contact.name}}",
+    "opportunity_status": "open",
+    "opportunity_source": "{{contact.source}}",
+    "monetary_value": ""
+   },
+   "name": "Opportunity: VA Beach Stage: Booked Status: Open",
+   "type": "create_opportunity",
+   "next": "8bb468c4-038c-476d-8041-b8745bfa3a98",
+   "parentKey": "1301f4f1-5701-49ad-8201-00f6f36edc1f"
+  },
+  {
+   "id": "8bb468c4-038c-476d-8041-b8745bfa3a98",
+   "parent": "bd0124e1-ef81-42f9-801b-518bdadc8144",
+   "order": 3,
+   "attributes": {
+    "targetNodeId": "6aa58df0-d9d2-4933-aded-9cdacbe58e26",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "1bf24195-09fd-4164-bf35-d047f6a46938"
+  },
+  {
+   "id": "100c115a-8619-4574-a19c-75da5762289f",
+   "parent": "6c543113-7171-4294-82a8-bb08173452d0",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Richmond",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "152b2eaa-05d9-4cb0-8526-b19c0e70a007",
+   "sibling": [
+    "ef53dd76-fc26-49f7-a158-d7cfdbfdbc3b",
+    "bd0124e1-ef81-42f9-801b-518bdadc8144",
+    "e0c597a5-a6fa-4d42-a8b7-804e3ca9722a"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "6c543113-7171-4294-82a8-bb08173452d0"
+  },
+  {
+   "id": "152b2eaa-05d9-4cb0-8526-b19c0e70a007",
+   "parent": "100c115a-8619-4574-a19c-75da5762289f",
+   "order": 0,
+   "attributes": {
+    "tags": [
+     "richmond appt",
+     "location_rva"
+    ]
+   },
+   "name": "Add Tag: richmond appt",
+   "type": "add_contact_tag",
+   "next": "51052679-06d5-4a81-9a74-357fb1dc38f5",
+   "parentKey": "100c115a-8619-4574-a19c-75da5762289f"
+  },
+  {
+   "id": "51052679-06d5-4a81-9a74-357fb1dc38f5",
+   "parent": "100c115a-8619-4574-a19c-75da5762289f",
+   "order": 1,
+   "attributes": {
+    "type": "update_contact_field",
+    "actionType": "update_field_data",
+    "fields": [
+     {
+      "field": "9WxVlzvgSlCXx0EL82Sr",
+      "value": "Richmond",
+      "title": "Location",
+      "type": "select",
+      "date": "",
+      "__customFieldType__": "standard"
+     },
+     {
+      "field": "Cou856tOhaxW62vwehVI",
+      "value": "Richmond, VA",
+      "title": "Preferred Location",
+      "type": "select",
+      "date": "",
+      "__customFieldType__": "standard"
+     }
+    ]
+   },
+   "name": "Update location field: richmond",
+   "type": "update_contact_field",
+   "next": "7001514c-4c2f-4a70-b082-f3555c1c9171",
+   "parentKey": "152b2eaa-05d9-4cb0-8526-b19c0e70a007"
+  },
+  {
+   "id": "7001514c-4c2f-4a70-b082-f3555c1c9171",
+   "parent": "100c115a-8619-4574-a19c-75da5762289f",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "jRqb0pvexu04zSACPXmd",
+    "pipeline_stage_id": "5eb1c627-5b42-4182-a500-28837f9e6024",
+    "opportunity_name": "{{contact.name}}",
+    "opportunity_status": "open",
+    "opportunity_source": "{{contact.source}}",
+    "monetary_value": ""
+   },
+   "name": "Opportunity: Richmond Stage: Booked Status: Open",
+   "type": "create_opportunity",
+   "next": "7cf37242-1b12-47a6-8481-f39a50bce1a0",
+   "parentKey": "51052679-06d5-4a81-9a74-357fb1dc38f5"
+  },
+  {
+   "id": "7cf37242-1b12-47a6-8481-f39a50bce1a0",
+   "parent": "100c115a-8619-4574-a19c-75da5762289f",
+   "order": 3,
+   "attributes": {
+    "targetNodeId": "6aa58df0-d9d2-4933-aded-9cdacbe58e26",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "7001514c-4c2f-4a70-b082-f3555c1c9171"
+  },
+  {
+   "id": "e0c597a5-a6fa-4d42-a8b7-804e3ca9722a",
+   "parent": "6c543113-7171-4294-82a8-bb08173452d0",
+   "order": 2,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "3c424371-a0e3-49b2-b851-85f243e0caf0",
+   "sibling": [
+    "ef53dd76-fc26-49f7-a158-d7cfdbfdbc3b",
+    "bd0124e1-ef81-42f9-801b-518bdadc8144",
+    "100c115a-8619-4574-a19c-75da5762289f"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "6c543113-7171-4294-82a8-bb08173452d0"
+  },
+  {
+   "id": "3c424371-a0e3-49b2-b851-85f243e0caf0",
+   "parentKey": "e0c597a5-a6fa-4d42-a8b7-804e3ca9722a",
+   "parent": "e0c597a5-a6fa-4d42-a8b7-804e3ca9722a",
+   "type": "wait",
+   "name": "Wait until Location is updated",
+   "attributes": {
+    "type": "condition",
+    "startAfter": {
+     "type": "minutes",
+     "value": 0,
+     "when": "after"
+    },
+    "name": "Wait until Location is updated",
+    "cat": "",
+    "condition": {
+     "currentRecipeType": "CUSTOM",
+     "branches": [
+      {
+       "id": "66df6447-1427-44d2-a9d5-0a39487e50a2",
+       "name": "Branch",
+       "segments": [
+        {
+         "__segmentId": "bad30e4b-c8c9-4bc9-8004-6979a99df6c2",
+         "operator": "and",
+         "conditions": [
+          {
+           "conditionType": "contact_detail",
+           "conditionSubType": "Cou856tOhaxW62vwehVI",
+           "conditionOperator": "has_value",
+           "__conditionId": "68480057-344b-416f-8cc9-ba42609168e2",
+           "ifElseNodeId": "",
+           "__customFieldType__": "standard",
+           "isWait": true,
+           "nestedDropdownTypes": [
+            "inboundWebhookRequest",
+            "sheet",
+            "datetime_formatter",
+            "custom_webhook",
+            "array_functions",
+            "ivr_gather",
+            "ivr_connect_call",
+            "custom_code",
+            "ai_agent"
+           ],
+           "allowIsOperatorTypes": [
+            "contact_reply",
+            "inboundWebhookRequest",
+            "custom_webhook",
+            "custom_code",
+            "ai_agent",
+            "contact_detail",
+            "array_functions",
+            "appointment",
+            "service_booking",
+            "rental_booking"
+           ]
+          }
+         ]
+        }
+       ],
+       "operator": "and",
+       "showErrors": false,
+       "branchNameError": "Branch name cannot be empty!"
+      }
+     ],
+     "operator": "and",
+     "if": true,
+     "conditionName": "",
+     "version": 2,
+     "noneBranchName": "None"
+    },
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "order": 0,
+   "cat": "",
+   "next": "651d8b27-201c-4882-a708-0b00402d6651"
+  },
+  {
+   "id": "651d8b27-201c-4882-a708-0b00402d6651",
+   "parent": "e0c597a5-a6fa-4d42-a8b7-804e3ca9722a",
+   "order": 1,
+   "attributes": {
+    "targetNodeId": "6c543113-7171-4294-82a8-bb08173452d0",
+    "type": "goto"
+   },
+   "name": "Check location",
+   "type": "goto",
+   "parentKey": "3c424371-a0e3-49b2-b851-85f243e0caf0"
+  },
+  {
+   "id": "2af60a70-a71f-4704-93c3-b0766274909d",
+   "parent": "d6544607-fac4-4dc2-a448-34a466ab6eca",
+   "order": 10,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "VA Beach",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "31309262-1a5b-472c-977a-03b0a7937d24",
+   "sibling": [
+    "8e662709-8197-46c0-acf9-9e47fdc77a59",
+    "8a68a1cc-6ea4-4f08-bf35-b4eec8cb9d13",
+    "c75b71d6-37ad-4532-9fc3-e771d7074448"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "d6544607-fac4-4dc2-a448-34a466ab6eca"
+  },
+  {
+   "id": "31309262-1a5b-472c-977a-03b0a7937d24",
+   "parent": "2af60a70-a71f-4704-93c3-b0766274909d",
+   "order": 0,
+   "attributes": {
+    "trackingOptions": {
+     "hasTrackingLinks": false,
+     "hasUtmTracking": true,
+     "hasTags": false,
+     "sourceId": "7ac17ae7-c894-4c6e-be0e-7b77057c7231:31309262-1a5b-472c-977a-03b0a7937d24"
+    },
+    "conditions": [],
+    "subject": "Confirmed: {{appointment.only_start_date}}",
+    "preHeader": "",
+    "from_email": "{{location.email}}",
+    "from_name": "Men's Wellness Center",
+    "previewUrl": "https://firebasestorage.googleapis.com/v0/b/highlevel-backend.appspot.com/o/location%2FGhstz8eIsHWLeXek47dk%2Femails%2F698a0f024db2c153e26dd634%2Findex.html",
+    "createdAt": "2026-02-09T16:44:50.757Z",
+    "templateCreationMode": "existing",
+    "syncEnabled": true,
+    "template_id": "698a0f024db2c153e26dd634",
+    "templatesource": "email-builder",
+    "attachments": [],
+    "fieldDefaults": {}
+   },
+   "name": "Send Email Confirming Appointment for VA Beach",
+   "type": "email",
+   "next": "fdff8051-d096-43c2-aa83-d6ef1489ddf9",
+   "parentKey": "2af60a70-a71f-4704-93c3-b0766274909d"
+  },
+  {
+   "id": "fdff8051-d096-43c2-aa83-d6ef1489ddf9",
+   "parent": "2af60a70-a71f-4704-93c3-b0766274909d",
+   "order": 1,
+   "attributes": {
+    "targetNodeId": "6c543113-7171-4294-82a8-bb08173452d0",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "31309262-1a5b-472c-977a-03b0a7937d24"
+  },
+  {
+   "id": "8a68a1cc-6ea4-4f08-bf35-b4eec8cb9d13",
+   "parent": "d6544607-fac4-4dc2-a448-34a466ab6eca",
+   "order": 10,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Richmond",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "5b985591-68b1-43b6-8a9c-4edf2f58412e",
+   "sibling": [
+    "8e662709-8197-46c0-acf9-9e47fdc77a59",
+    "2af60a70-a71f-4704-93c3-b0766274909d",
+    "c75b71d6-37ad-4532-9fc3-e771d7074448"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "d6544607-fac4-4dc2-a448-34a466ab6eca"
+  },
+  {
+   "id": "5b985591-68b1-43b6-8a9c-4edf2f58412e",
+   "parent": "8a68a1cc-6ea4-4f08-bf35-b4eec8cb9d13",
+   "order": 0,
+   "attributes": {
+    "trackingOptions": {
+     "hasTrackingLinks": false,
+     "hasUtmTracking": true,
+     "hasTags": false,
+     "sourceId": "7ac17ae7-c894-4c6e-be0e-7b77057c7231:5b985591-68b1-43b6-8a9c-4edf2f58412e"
+    },
+    "conditions": [],
+    "subject": "Confirmed: {{appointment.only_start_date}}",
+    "preHeader": "",
+    "from_email": "{{location.email}}",
+    "from_name": "Men's Wellness Center",
+    "previewUrl": "https://firebasestorage.googleapis.com/v0/b/highlevel-backend.appspot.com/o/location%2FGhstz8eIsHWLeXek47dk%2Femails%2F698211e47a06715349231b3a%2Findex.html",
+    "createdAt": "2026-02-03T15:19:00.505Z",
+    "templateCreationMode": "existing",
+    "syncEnabled": true,
+    "updatedAt": "2026-02-09T16:42:06.711Z",
+    "template_id": "698211e47a06715349231b3a",
+    "templatesource": "email-builder",
+    "attachments": []
+   },
+   "name": "Send Email Confirming Appointment for Richmond",
+   "type": "email",
+   "next": "8e290093-c39a-4bc2-9f00-236a360424d7",
+   "parentKey": "8a68a1cc-6ea4-4f08-bf35-b4eec8cb9d13"
+  },
+  {
+   "id": "8e290093-c39a-4bc2-9f00-236a360424d7",
+   "parent": "8a68a1cc-6ea4-4f08-bf35-b4eec8cb9d13",
+   "order": 1,
+   "attributes": {
+    "targetNodeId": "6c543113-7171-4294-82a8-bb08173452d0",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "5b985591-68b1-43b6-8a9c-4edf2f58412e"
+  },
+  {
+   "id": "c75b71d6-37ad-4532-9fc3-e771d7074448",
+   "parent": "d6544607-fac4-4dc2-a448-34a466ab6eca",
+   "order": 10,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "85e8df0c-de4f-4bf4-9f27-747ff02de4da",
+   "sibling": [
+    "8e662709-8197-46c0-acf9-9e47fdc77a59",
+    "2af60a70-a71f-4704-93c3-b0766274909d",
+    "8a68a1cc-6ea4-4f08-bf35-b4eec8cb9d13"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "d6544607-fac4-4dc2-a448-34a466ab6eca"
+  },
+  {
+   "id": "85e8df0c-de4f-4bf4-9f27-747ff02de4da",
+   "parent": "c75b71d6-37ad-4532-9fc3-e771d7074448",
+   "order": 0,
+   "attributes": {
+    "targetNodeId": "06c0df65-5c06-4575-8630-adaf27fd1de6",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "c75b71d6-37ad-4532-9fc3-e771d7074448"
+  }
+ ]
 }

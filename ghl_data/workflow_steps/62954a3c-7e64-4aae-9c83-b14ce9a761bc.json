@@ -1,0 +1,4640 @@
+{
+ "id": "62954a3c-7e64-4aae-9c83-b14ce9a761bc",
+ "name": "07. POST-VISIT - SHOWED Opportunities and For Review/Referral",
+ "folder": "02. Appointments & Visit Journey",
+ "status": "published",
+ "updatedAt": "2026-05-18T22:46:17.884Z",
+ "version": 20,
+ "extracted_at": "2026-07-10T05:40:32Z",
+ "extraction_method": "ghl_backend_api",
+ "source": "GHL Active Workflows (live API)",
+ "workflowData": {
+  "_id": "62954a3c-7e64-4aae-9c83-b14ce9a761bc",
+  "locationId": "Ghstz8eIsHWLeXek47dk",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 2,
+  "name": "07. POST-VISIT - SHOWED Opportunities and For Review/Referral",
+  "status": "published",
+  "version": 20,
+  "dataVersion": 7,
+  "allowMultiple": true,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/Ghstz8eIsHWLeXek47dk/workflows/62954a3c-7e64-4aae-9c83-b14ce9a761bc/20",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FGhstz8eIsHWLeXek47dk%2Fworkflows%2F62954a3c-7e64-4aae-9c83-b14ce9a761bc%2F20",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "type": "workflow",
+  "parentId": "d19faff7-3c76-44ec-8c05-59397c06aa08",
+  "meta": {
+   "stepIndexCounter": {
+    "google_sheets": 6
+   }
+  },
+  "updatedBy": "yntZSizWegCAW6z2Xhq1",
+  "createdAt": "2026-01-19T20:45:48.097Z",
+  "updatedAt": "2026-05-18T22:46:17.884Z",
+  "deleted": false,
+  "allowMultipleOpportunity": true,
+  "creationSource": "builder",
+  "originType": "user",
+  "__v": 0,
+  "eventStartDate": null,
+  "window": null,
+  "workflowNote": null,
+  "triggersFilePath": "location/Ghstz8eIsHWLeXek47dk/workflow-triggers/62954a3c-7e64-4aae-9c83-b14ce9a761bc/15",
+  "isTriggerBucketMigrated": false,
+  "id": "62954a3c-7e64-4aae-9c83-b14ce9a761bc"
+ },
+ "triggers": [
+  {
+   "id": "41wYNXt7iL5BjNoRnIyS",
+   "date_added": "2026-01-19T20:46:26.186Z",
+   "deleted": false,
+   "actions": [
+    {
+     "workflow_id": "62954a3c-7e64-4aae-9c83-b14ce9a761bc",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "is-any-of",
+     "field": "form.id",
+     "value": [
+      "awkdH7MUC8zvQ54n0uwn"
+     ],
+     "title": "Form is",
+     "type": "string"
+    }
+   ],
+   "type": "form_submission",
+   "masterType": "highlevel",
+   "workflow_id": "62954a3c-7e64-4aae-9c83-b14ce9a761bc",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "active": true,
+   "date_updated": "2026-02-01T00:49:36.957Z",
+   "name": "PA reported PX SHOWED"
+  }
+ ],
+ "dependentAssets": {},
+ "templates": [
+  {
+   "id": "5f1dd8f7-c093-42d1-97eb-fdd631945209",
+   "order": 0,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "f0d8ae76-29d0-4cf8-a3ca-56f374b0fb7d",
+      "name": "NPN",
+      "segments": [
+       {
+        "__segmentId": "12354ad8-cc48-468f-8348-35b2600d20e8",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "9WxVlzvgSlCXx0EL82Sr",
+          "conditionOperator": "==",
+          "conditionValue": "Newport News",
+          "__conditionId": "1d18e249-8e13-4cdd-8575-921819c07506",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "fd517891-66ac-4e0d-a0e7-37df26133841",
+      "name": "Richmond",
+      "segments": [
+       {
+        "__segmentId": "12354ad8-cc48-468f-8348-35b2600d20e8",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "9WxVlzvgSlCXx0EL82Sr",
+          "conditionOperator": "==",
+          "conditionValue": "Richmond",
+          "__conditionId": "1d18e249-8e13-4cdd-8575-921819c07506",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "d70d5af0-5c5d-4a38-8878-a484422eb643",
+      "name": "VB",
+      "segments": [
+       {
+        "__segmentId": "12354ad8-cc48-468f-8348-35b2600d20e8",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "9WxVlzvgSlCXx0EL82Sr",
+          "conditionOperator": "==",
+          "conditionValue": "Virginia Beach",
+          "__conditionId": "1d18e249-8e13-4cdd-8575-921819c07506",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Clinic Location",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "f0d8ae76-29d0-4cf8-a3ca-56f374b0fb7d",
+    "fd517891-66ac-4e0d-a0e7-37df26133841",
+    "d70d5af0-5c5d-4a38-8878-a484422eb643",
+    "b6dc48cb-3cf3-47fa-9837-af980ffcd97f"
+   ],
+   "comments": [],
+   "nodeType": "condition-node"
+  },
+  {
+   "id": "f0d8ae76-29d0-4cf8-a3ca-56f374b0fb7d",
+   "parent": "5f1dd8f7-c093-42d1-97eb-fdd631945209",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "NPN",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "0c24a02c-47c2-4a6d-b438-c6db95892775",
+   "sibling": [
+    "fd517891-66ac-4e0d-a0e7-37df26133841",
+    "d70d5af0-5c5d-4a38-8878-a484422eb643",
+    "b6dc48cb-3cf3-47fa-9837-af980ffcd97f"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "5f1dd8f7-c093-42d1-97eb-fdd631945209"
+  },
+  {
+   "id": "0c24a02c-47c2-4a6d-b438-c6db95892775",
+   "stepIndex": 1,
+   "parent": "f0d8ae76-29d0-4cf8-a3ca-56f374b0fb7d",
+   "order": 0,
+   "attributes": {
+    "type": "google_sheets",
+    "action": {
+     "id": "lookup_row",
+     "name": "Lookup Spreadsheet Row"
+    },
+    "account": {
+     "id": "100464418921113716943",
+     "name": "reports@mwcforme.com",
+     "idType": "altId"
+    },
+    "drive": {
+     "id": "my_drive",
+     "name": "My Drive"
+    },
+    "spreadsheet": {
+     "id": "1_Qji8O_7ZL5tSa7lbb4HwCPicyYkDj_OBseUfrh2etE",
+     "name": "Appointment Study"
+    },
+    "sheet": {
+     "id": "5",
+     "name": "Appt Report Raw"
+    },
+    "lookupColumns": {
+     "main": {
+      "column": "A",
+      "value": "{{appointment.id}}"
+     }
+    },
+    "options": {
+     "lookupSearchMethod": "bottom_to_top"
+    },
+    "sheetHeaders": [
+     "Appointment Id",
+     "Requested Time",
+     "Date Added",
+     "Contact Name",
+     "Calendar",
+     "Email",
+     "Phone",
+     "Appointment Owner",
+     "Created By",
+     "Mode",
+     "Appointment Source",
+     "Outcome",
+     "Rescheduled",
+     "Source",
+     "Affiliate UTM Campaign",
+     "Affiliate UTM Medium",
+     "Affiliate UTM Content",
+     "Affiliate UTM Source",
+     "Affiliate UTM Term",
+     "Affiliate Form",
+     "CONTACT  CREATE DATE",
+     "TAG",
+     "Days Between Booking & Appointment",
+     "Same Day Booking?",
+     "TIME Booked",
+     "Booking Time",
+     "APPT Date",
+     "Date Booked",
+     "Appt Time",
+     "Inbound Calls Prior to Booking",
+     "Outbound Calls Prior to Booking",
+     "Voicemails Prior to Booking",
+     "TOTAL Calls prior to Booking",
+     "Booked without Calls",
+     "Average Handle Time",
+     "",
+     "All",
+     "Time Booked",
+     "New Patient Intake Form Submitted",
+     "New Patient Intake Form Date & Time Submitted",
+     "Intake Lead Time\n(Form submitted before Appt)",
+     "Pipeline",
+     "A&D List based on Weekly Result Sheet",
+     "Weekly Result 13.0"
+    ]
+   },
+   "name": "Lookup Appointment ID",
+   "type": "google_sheets",
+   "next": "839c5fad-8d5e-4acc-99ab-a591257b1f60",
+   "parentKey": "f0d8ae76-29d0-4cf8-a3ca-56f374b0fb7d"
+  },
+  {
+   "id": "839c5fad-8d5e-4acc-99ab-a591257b1f60",
+   "stepIndex": 2,
+   "parent": "f0d8ae76-29d0-4cf8-a3ca-56f374b0fb7d",
+   "order": 1,
+   "attributes": {
+    "type": "google_sheets",
+    "action": {
+     "id": "update_row_from_lookup",
+     "name": "Update Spreadsheet Row using Lookup"
+    },
+    "account": {
+     "id": "100464418921113716943",
+     "name": "reports@mwcforme.com",
+     "idType": "altId"
+    },
+    "drive": {
+     "id": "my_drive",
+     "name": "My Drive"
+    },
+    "spreadsheet": {
+     "id": "1_Qji8O_7ZL5tSa7lbb4HwCPicyYkDj_OBseUfrh2etE",
+     "name": "Appointment Study"
+    },
+    "sheet": {
+     "id": "5",
+     "name": "Appt Report Raw"
+    },
+    "columnRange": [
+     "A",
+     "L"
+    ],
+    "values": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     "showed"
+    ],
+    "lookupStep": {
+     "label": "#1 Lookup Appointment ID",
+     "value": "0c24a02c-47c2-4a6d-b438-c6db95892775",
+     "id": "0c24a02c-47c2-4a6d-b438-c6db95892775",
+     "stepIndex": 1
+    },
+    "sheetHeaders": [
+     "Appointment Id",
+     "Requested Time",
+     "Date Added",
+     "Contact Name",
+     "Calendar",
+     "Email",
+     "Phone",
+     "Appointment Owner",
+     "Created By",
+     "Mode",
+     "Appointment Source",
+     "Outcome",
+     "Rescheduled",
+     "Source",
+     "Affiliate UTM Campaign",
+     "Affiliate UTM Medium",
+     "Affiliate UTM Content",
+     "Affiliate UTM Source",
+     "Affiliate UTM Term",
+     "Affiliate Form",
+     "CONTACT  CREATE DATE",
+     "TAG",
+     "Days Between Booking & Appointment",
+     "Same Day Booking?",
+     "TIME Booked",
+     "Booking Time",
+     "APPT Date",
+     "Date Booked",
+     "Appt Time",
+     "Inbound Calls Prior to Booking",
+     "Outbound Calls Prior to Booking",
+     "Voicemails Prior to Booking",
+     "TOTAL Calls prior to Booking",
+     "Booked without Calls",
+     "Average Handle Time",
+     "",
+     "All",
+     "Time Booked",
+     "New Patient Intake Form Submitted",
+     "New Patient Intake Form Date & Time Submitted",
+     "Intake Lead Time\n(Form submitted before Appt)",
+     "Pipeline",
+     "A&D List based on Weekly Result Sheet",
+     "Weekly Result 13.0"
+    ],
+    "options": {}
+   },
+   "name": "Update column L (outcome) to showed",
+   "type": "google_sheets",
+   "next": "a2fbd9d7-9653-4f08-946a-eb8c933034f7",
+   "parentKey": "0c24a02c-47c2-4a6d-b438-c6db95892775"
+  },
+  {
+   "id": "a2fbd9d7-9653-4f08-946a-eb8c933034f7",
+   "order": 2,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "c1e7a091-f75d-48b3-a5c5-e527c986458e",
+      "name": "Sale outcome: A&D",
+      "segments": [
+       {
+        "__segmentId": "ed213e64-0c6b-4637-8e46-07524a9bf08d",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "cClk7ad4PHxiake2lChS",
+          "conditionOperator": "==",
+          "conditionValue": "A&D (Advised and Declined)",
+          "__conditionId": "a366bf50-3ed9-4556-b0cc-9cffa26019fe",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "54b74a1f-3d78-4e19-8102-c0ea55abee22",
+      "name": "Sale outcome: MU",
+      "segments": [
+       {
+        "__segmentId": "ed213e64-0c6b-4637-8e46-07524a9bf08d",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "cClk7ad4PHxiake2lChS",
+          "conditionOperator": "==",
+          "conditionValue": "MUT (Medically Untreatable)",
+          "__conditionId": "a366bf50-3ed9-4556-b0cc-9cffa26019fe",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Condition",
+    "version": 2,
+    "noneBranchName": "Sale outcome: SOLD"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "c1e7a091-f75d-48b3-a5c5-e527c986458e",
+    "54b74a1f-3d78-4e19-8102-c0ea55abee22",
+    "1a222c74-5632-4195-894c-77498f01a546"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parent": "f0d8ae76-29d0-4cf8-a3ca-56f374b0fb7d",
+   "parentKey": "839c5fad-8d5e-4acc-99ab-a591257b1f60"
+  },
+  {
+   "id": "c1e7a091-f75d-48b3-a5c5-e527c986458e",
+   "parent": "a2fbd9d7-9653-4f08-946a-eb8c933034f7",
+   "order": 3,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Sale outcome: A&D",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "54b74a1f-3d78-4e19-8102-c0ea55abee22",
+    "1a222c74-5632-4195-894c-77498f01a546"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "a2fbd9d7-9653-4f08-946a-eb8c933034f7",
+   "next": "ceb91f72-79bf-43ea-94dd-b64dc9527ba0"
+  },
+  {
+   "id": "ceb91f72-79bf-43ea-94dd-b64dc9527ba0",
+   "parent": "c1e7a091-f75d-48b3-a5c5-e527c986458e",
+   "order": 0,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "409555da-3b49-4090-bde4-eae5794d0bef",
+      "name": "Not Ready",
+      "segments": [
+       {
+        "__segmentId": "c77711b5-63f7-4b24-8668-706b02e69a92",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "XVzxGceorU5WixdjMHvA",
+          "conditionOperator": "==",
+          "conditionValue": "Not Ready",
+          "__conditionId": "7c4434b8-a227-4292-9b5f-b455a67fbf9b",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "4e043dcb-607c-42ba-a996-08cb89e22b12",
+      "name": "Think it Over / Sleep On It",
+      "segments": [
+       {
+        "__segmentId": "c77711b5-63f7-4b24-8668-706b02e69a92",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "XVzxGceorU5WixdjMHvA",
+          "conditionOperator": "==",
+          "conditionValue": "Think it Over / Sleep On It",
+          "__conditionId": "7c4434b8-a227-4292-9b5f-b455a67fbf9b",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "aba47338-eb3a-4d7b-8218-1a2440bd3154",
+      "name": "Cost / Price Objection",
+      "segments": [
+       {
+        "__segmentId": "c77711b5-63f7-4b24-8668-706b02e69a92",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "XVzxGceorU5WixdjMHvA",
+          "conditionOperator": "==",
+          "conditionValue": "Cost / Price Objection",
+          "__conditionId": "7c4434b8-a227-4292-9b5f-b455a67fbf9b",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "1b22c021-991a-4a5c-b243-961fecb584a9",
+      "name": "Not Interested",
+      "segments": [
+       {
+        "__segmentId": "c77711b5-63f7-4b24-8668-706b02e69a92",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "XVzxGceorU5WixdjMHvA",
+          "conditionOperator": "==",
+          "conditionValue": "Not Interested",
+          "__conditionId": "7c4434b8-a227-4292-9b5f-b455a67fbf9b",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "5cbdb497-4c07-4856-a690-b0a8c468310a",
+      "name": "Not Qualified / MU",
+      "segments": [
+       {
+        "__segmentId": "c77711b5-63f7-4b24-8668-706b02e69a92",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "XVzxGceorU5WixdjMHvA",
+          "conditionOperator": "==",
+          "conditionValue": "Not Qualified / MU",
+          "__conditionId": "7c4434b8-a227-4292-9b5f-b455a67fbf9b",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "131076bd-66ff-48fd-9fbc-af37dfa84073",
+      "name": "Others",
+      "segments": [
+       {
+        "__segmentId": "c77711b5-63f7-4b24-8668-706b02e69a92",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "XVzxGceorU5WixdjMHvA",
+          "conditionOperator": "==",
+          "conditionValue": "Others",
+          "__conditionId": "7c4434b8-a227-4292-9b5f-b455a67fbf9b",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "A&D Lost Reason",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "409555da-3b49-4090-bde4-eae5794d0bef",
+    "4e043dcb-607c-42ba-a996-08cb89e22b12",
+    "aba47338-eb3a-4d7b-8218-1a2440bd3154",
+    "1b22c021-991a-4a5c-b243-961fecb584a9",
+    "5cbdb497-4c07-4856-a690-b0a8c468310a",
+    "131076bd-66ff-48fd-9fbc-af37dfa84073",
+    "040c2d52-0348-487a-9fca-cb615f0c68b0"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "c1e7a091-f75d-48b3-a5c5-e527c986458e"
+  },
+  {
+   "id": "409555da-3b49-4090-bde4-eae5794d0bef",
+   "parent": "ceb91f72-79bf-43ea-94dd-b64dc9527ba0",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Not Ready",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "645b201d-cb92-4b00-be7a-fa33ee46d966",
+   "sibling": [
+    "4e043dcb-607c-42ba-a996-08cb89e22b12",
+    "aba47338-eb3a-4d7b-8218-1a2440bd3154",
+    "1b22c021-991a-4a5c-b243-961fecb584a9",
+    "5cbdb497-4c07-4856-a690-b0a8c468310a",
+    "131076bd-66ff-48fd-9fbc-af37dfa84073",
+    "040c2d52-0348-487a-9fca-cb615f0c68b0"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "ceb91f72-79bf-43ea-94dd-b64dc9527ba0"
+  },
+  {
+   "id": "645b201d-cb92-4b00-be7a-fa33ee46d966",
+   "parent": "409555da-3b49-4090-bde4-eae5794d0bef",
+   "order": 0,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "9AZEt2Sw6Zv0nnJJmkE0",
+    "pipeline_stage_id": "27e64784-3cce-4c20-8bd7-f17b360f5802",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696fbbdc4a05552ad9a423eb"
+   },
+   "name": "Update Opportunity: NPN A&D",
+   "type": "create_opportunity",
+   "next": "35f17140-a9d5-4f8b-9c8b-f5792aac2e8c",
+   "parentKey": "409555da-3b49-4090-bde4-eae5794d0bef"
+  },
+  {
+   "id": "35f17140-a9d5-4f8b-9c8b-f5792aac2e8c",
+   "parent": "409555da-3b49-4090-bde4-eae5794d0bef",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "7WMjJykajYpvAXys4m0z",
+    "pipeline_stage_id": "f6ff8f1b-33cb-43e6-a17e-96149072b783",
+    "opportunity_name": "{{contact.name}} - {{contact.location}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "open",
+    "opportunity_source": ""
+   },
+   "name": "Update Opportunity: A&D",
+   "type": "create_opportunity",
+   "parentKey": "645b201d-cb92-4b00-be7a-fa33ee46d966",
+   "next": "91e54abe-308e-4ca2-95eb-9b064b182e56"
+  },
+  {
+   "id": "91e54abe-308e-4ca2-95eb-9b064b182e56",
+   "parent": "409555da-3b49-4090-bde4-eae5794d0bef",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "uUm5DInIjq6uYlg9HDwU",
+    "pipeline_stage_id": "5f460760-5532-45d9-b95f-d6dabcadccf3",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696fbbdc4a05552ad9a423eb"
+   },
+   "name": "Update Opportunity: Sales Prod",
+   "type": "create_opportunity",
+   "parentKey": "35f17140-a9d5-4f8b-9c8b-f5792aac2e8c"
+  },
+  {
+   "id": "4e043dcb-607c-42ba-a996-08cb89e22b12",
+   "parent": "ceb91f72-79bf-43ea-94dd-b64dc9527ba0",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Think it Over / Sleep On It",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "058762a8-becd-4d37-b838-1470bda4733d",
+   "sibling": [
+    "409555da-3b49-4090-bde4-eae5794d0bef",
+    "aba47338-eb3a-4d7b-8218-1a2440bd3154",
+    "1b22c021-991a-4a5c-b243-961fecb584a9",
+    "5cbdb497-4c07-4856-a690-b0a8c468310a",
+    "131076bd-66ff-48fd-9fbc-af37dfa84073",
+    "040c2d52-0348-487a-9fca-cb615f0c68b0"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "ceb91f72-79bf-43ea-94dd-b64dc9527ba0"
+  },
+  {
+   "id": "058762a8-becd-4d37-b838-1470bda4733d",
+   "parent": "4e043dcb-607c-42ba-a996-08cb89e22b12",
+   "order": 0,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "9AZEt2Sw6Zv0nnJJmkE0",
+    "pipeline_stage_id": "27e64784-3cce-4c20-8bd7-f17b360f5802",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696fbbdcf76e17bd4af1ce52"
+   },
+   "name": "Update Opportunity: NPN A&D",
+   "type": "create_opportunity",
+   "next": "6a212100-e290-4b10-a388-20520deeb352",
+   "parentKey": "4e043dcb-607c-42ba-a996-08cb89e22b12"
+  },
+  {
+   "id": "6a212100-e290-4b10-a388-20520deeb352",
+   "parent": "4e043dcb-607c-42ba-a996-08cb89e22b12",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "7WMjJykajYpvAXys4m0z",
+    "pipeline_stage_id": "f6ff8f1b-33cb-43e6-a17e-96149072b783",
+    "opportunity_name": "{{contact.name}} - {{contact.location}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "open",
+    "opportunity_source": ""
+   },
+   "name": "Update Opportunity: A&D",
+   "type": "create_opportunity",
+   "next": "71ee5f31-fa0d-4f2a-b5fb-768207ffd27b",
+   "parentKey": "058762a8-becd-4d37-b838-1470bda4733d"
+  },
+  {
+   "id": "71ee5f31-fa0d-4f2a-b5fb-768207ffd27b",
+   "parent": "4e043dcb-607c-42ba-a996-08cb89e22b12",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "uUm5DInIjq6uYlg9HDwU",
+    "pipeline_stage_id": "5f460760-5532-45d9-b95f-d6dabcadccf3",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696fbbdcf76e17bd4af1ce52"
+   },
+   "name": "Update Opportunity: Sales Prod",
+   "type": "create_opportunity",
+   "parentKey": "6a212100-e290-4b10-a388-20520deeb352"
+  },
+  {
+   "id": "aba47338-eb3a-4d7b-8218-1a2440bd3154",
+   "parent": "ceb91f72-79bf-43ea-94dd-b64dc9527ba0",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Cost / Price Objection",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "9e8ecdd2-c055-44f0-8095-bf95fd245772",
+   "sibling": [
+    "409555da-3b49-4090-bde4-eae5794d0bef",
+    "4e043dcb-607c-42ba-a996-08cb89e22b12",
+    "1b22c021-991a-4a5c-b243-961fecb584a9",
+    "5cbdb497-4c07-4856-a690-b0a8c468310a",
+    "131076bd-66ff-48fd-9fbc-af37dfa84073",
+    "040c2d52-0348-487a-9fca-cb615f0c68b0"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "ceb91f72-79bf-43ea-94dd-b64dc9527ba0"
+  },
+  {
+   "id": "9e8ecdd2-c055-44f0-8095-bf95fd245772",
+   "parent": "aba47338-eb3a-4d7b-8218-1a2440bd3154",
+   "order": 0,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "9AZEt2Sw6Zv0nnJJmkE0",
+    "pipeline_stage_id": "27e64784-3cce-4c20-8bd7-f17b360f5802",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696f4d3b726a64fb6987cbd6"
+   },
+   "name": "Update Opportunity: NPN A&D",
+   "type": "create_opportunity",
+   "next": "75c73b2a-ac57-462b-8761-8d3f0ecbbe41",
+   "parentKey": "aba47338-eb3a-4d7b-8218-1a2440bd3154"
+  },
+  {
+   "id": "75c73b2a-ac57-462b-8761-8d3f0ecbbe41",
+   "parent": "aba47338-eb3a-4d7b-8218-1a2440bd3154",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "7WMjJykajYpvAXys4m0z",
+    "pipeline_stage_id": "f6ff8f1b-33cb-43e6-a17e-96149072b783",
+    "opportunity_name": "{{contact.name}} - {{contact.location}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "open",
+    "opportunity_source": ""
+   },
+   "name": "Update Opportunity: A&D",
+   "type": "create_opportunity",
+   "next": "1ee36bd6-265d-42d8-8487-36b4e85c4e97",
+   "parentKey": "9e8ecdd2-c055-44f0-8095-bf95fd245772"
+  },
+  {
+   "id": "1ee36bd6-265d-42d8-8487-36b4e85c4e97",
+   "parent": "aba47338-eb3a-4d7b-8218-1a2440bd3154",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "uUm5DInIjq6uYlg9HDwU",
+    "pipeline_stage_id": "5f460760-5532-45d9-b95f-d6dabcadccf3",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696f4d3b726a64fb6987cbd6"
+   },
+   "name": "Update Opportunity: Sales Prod",
+   "type": "create_opportunity",
+   "parentKey": "75c73b2a-ac57-462b-8761-8d3f0ecbbe41"
+  },
+  {
+   "id": "1b22c021-991a-4a5c-b243-961fecb584a9",
+   "parent": "ceb91f72-79bf-43ea-94dd-b64dc9527ba0",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Not Interested",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "506de8fd-1995-4c36-adf9-024021af92d0",
+   "sibling": [
+    "409555da-3b49-4090-bde4-eae5794d0bef",
+    "4e043dcb-607c-42ba-a996-08cb89e22b12",
+    "aba47338-eb3a-4d7b-8218-1a2440bd3154",
+    "5cbdb497-4c07-4856-a690-b0a8c468310a",
+    "131076bd-66ff-48fd-9fbc-af37dfa84073",
+    "040c2d52-0348-487a-9fca-cb615f0c68b0"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "ceb91f72-79bf-43ea-94dd-b64dc9527ba0"
+  },
+  {
+   "id": "506de8fd-1995-4c36-adf9-024021af92d0",
+   "parent": "1b22c021-991a-4a5c-b243-961fecb584a9",
+   "order": 0,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "9AZEt2Sw6Zv0nnJJmkE0",
+    "pipeline_stage_id": "27e64784-3cce-4c20-8bd7-f17b360f5802",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696f4d3be95a9c062dfcc959"
+   },
+   "name": "Update Opportunity: NPN A&D",
+   "type": "create_opportunity",
+   "next": "c239ab28-af26-4cea-96f1-97d72b2233b2",
+   "parentKey": "1b22c021-991a-4a5c-b243-961fecb584a9"
+  },
+  {
+   "id": "c239ab28-af26-4cea-96f1-97d72b2233b2",
+   "parent": "1b22c021-991a-4a5c-b243-961fecb584a9",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "7WMjJykajYpvAXys4m0z",
+    "pipeline_stage_id": "f6ff8f1b-33cb-43e6-a17e-96149072b783",
+    "opportunity_name": "{{contact.name}} - {{contact.location}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "open",
+    "opportunity_source": ""
+   },
+   "name": "Update Opportunity: A&D",
+   "type": "create_opportunity",
+   "next": "78c4cb9c-9ee8-446b-b2bf-7a92055dd8ca",
+   "parentKey": "506de8fd-1995-4c36-adf9-024021af92d0"
+  },
+  {
+   "id": "78c4cb9c-9ee8-446b-b2bf-7a92055dd8ca",
+   "parent": "1b22c021-991a-4a5c-b243-961fecb584a9",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "uUm5DInIjq6uYlg9HDwU",
+    "pipeline_stage_id": "5f460760-5532-45d9-b95f-d6dabcadccf3",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696f4d3be95a9c062dfcc959"
+   },
+   "name": "Update Opportunity: Sales Prod",
+   "type": "create_opportunity",
+   "parentKey": "c239ab28-af26-4cea-96f1-97d72b2233b2"
+  },
+  {
+   "id": "5cbdb497-4c07-4856-a690-b0a8c468310a",
+   "parent": "ceb91f72-79bf-43ea-94dd-b64dc9527ba0",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Not Qualified / MU",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "1cceb481-7f83-44bf-9b44-74244ce4d7b2",
+   "sibling": [
+    "409555da-3b49-4090-bde4-eae5794d0bef",
+    "4e043dcb-607c-42ba-a996-08cb89e22b12",
+    "aba47338-eb3a-4d7b-8218-1a2440bd3154",
+    "1b22c021-991a-4a5c-b243-961fecb584a9",
+    "131076bd-66ff-48fd-9fbc-af37dfa84073",
+    "040c2d52-0348-487a-9fca-cb615f0c68b0"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "ceb91f72-79bf-43ea-94dd-b64dc9527ba0"
+  },
+  {
+   "id": "1cceb481-7f83-44bf-9b44-74244ce4d7b2",
+   "parent": "5cbdb497-4c07-4856-a690-b0a8c468310a",
+   "order": 0,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "9AZEt2Sw6Zv0nnJJmkE0",
+    "pipeline_stage_id": "27e64784-3cce-4c20-8bd7-f17b360f5802",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696f4d3b2a9d6f12607f4b8f"
+   },
+   "name": "Update Opportunity: NPN A&D",
+   "type": "create_opportunity",
+   "next": "df42ab9b-c40a-4bdb-8acd-f5151028f3cf",
+   "parentKey": "5cbdb497-4c07-4856-a690-b0a8c468310a"
+  },
+  {
+   "id": "df42ab9b-c40a-4bdb-8acd-f5151028f3cf",
+   "parent": "5cbdb497-4c07-4856-a690-b0a8c468310a",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "7WMjJykajYpvAXys4m0z",
+    "pipeline_stage_id": "f6ff8f1b-33cb-43e6-a17e-96149072b783",
+    "opportunity_name": "{{contact.name}} - {{contact.location}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "open",
+    "opportunity_source": ""
+   },
+   "name": "Update Opportunity: A&D",
+   "type": "create_opportunity",
+   "next": "b500dde5-f40a-46c2-b68d-dad994fb0a5a",
+   "parentKey": "1cceb481-7f83-44bf-9b44-74244ce4d7b2"
+  },
+  {
+   "id": "b500dde5-f40a-46c2-b68d-dad994fb0a5a",
+   "parent": "5cbdb497-4c07-4856-a690-b0a8c468310a",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "uUm5DInIjq6uYlg9HDwU",
+    "pipeline_stage_id": "5f460760-5532-45d9-b95f-d6dabcadccf3",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696f4d3b2a9d6f12607f4b8f"
+   },
+   "name": "Update Opportunity: Sales Prod",
+   "type": "create_opportunity",
+   "parentKey": "df42ab9b-c40a-4bdb-8acd-f5151028f3cf"
+  },
+  {
+   "id": "131076bd-66ff-48fd-9fbc-af37dfa84073",
+   "parent": "ceb91f72-79bf-43ea-94dd-b64dc9527ba0",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Others",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "986adc6c-72ec-4cb0-b04c-1f0c5e3a741e",
+   "sibling": [
+    "409555da-3b49-4090-bde4-eae5794d0bef",
+    "4e043dcb-607c-42ba-a996-08cb89e22b12",
+    "aba47338-eb3a-4d7b-8218-1a2440bd3154",
+    "1b22c021-991a-4a5c-b243-961fecb584a9",
+    "5cbdb497-4c07-4856-a690-b0a8c468310a",
+    "040c2d52-0348-487a-9fca-cb615f0c68b0"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "ceb91f72-79bf-43ea-94dd-b64dc9527ba0"
+  },
+  {
+   "id": "986adc6c-72ec-4cb0-b04c-1f0c5e3a741e",
+   "parent": "131076bd-66ff-48fd-9fbc-af37dfa84073",
+   "order": 0,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "9AZEt2Sw6Zv0nnJJmkE0",
+    "pipeline_stage_id": "27e64784-3cce-4c20-8bd7-f17b360f5802",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696fbbdc10cdb5d6b92f0cce"
+   },
+   "name": "Update Opportunity: NPN A&D",
+   "type": "create_opportunity",
+   "next": "569ed392-7691-48ec-9366-3f2e9f262d4b",
+   "parentKey": "131076bd-66ff-48fd-9fbc-af37dfa84073"
+  },
+  {
+   "id": "569ed392-7691-48ec-9366-3f2e9f262d4b",
+   "parent": "131076bd-66ff-48fd-9fbc-af37dfa84073",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "7WMjJykajYpvAXys4m0z",
+    "pipeline_stage_id": "f6ff8f1b-33cb-43e6-a17e-96149072b783",
+    "opportunity_name": "{{contact.name}} - {{contact.location}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "open",
+    "opportunity_source": ""
+   },
+   "name": "Update Opportunity: A&D",
+   "type": "create_opportunity",
+   "next": "f9d32ab1-2425-4974-86b8-f96229b8bb36",
+   "parentKey": "986adc6c-72ec-4cb0-b04c-1f0c5e3a741e"
+  },
+  {
+   "id": "f9d32ab1-2425-4974-86b8-f96229b8bb36",
+   "parent": "131076bd-66ff-48fd-9fbc-af37dfa84073",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "uUm5DInIjq6uYlg9HDwU",
+    "pipeline_stage_id": "5f460760-5532-45d9-b95f-d6dabcadccf3",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696fbbdc10cdb5d6b92f0cce"
+   },
+   "name": "Update Opportunity: Sales Prod",
+   "type": "create_opportunity",
+   "parentKey": "569ed392-7691-48ec-9366-3f2e9f262d4b"
+  },
+  {
+   "id": "040c2d52-0348-487a-9fca-cb615f0c68b0",
+   "parent": "ceb91f72-79bf-43ea-94dd-b64dc9527ba0",
+   "order": 1,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "9616ed4e-f94f-4c83-8468-960c81c48cac",
+   "sibling": [
+    "409555da-3b49-4090-bde4-eae5794d0bef",
+    "4e043dcb-607c-42ba-a996-08cb89e22b12",
+    "aba47338-eb3a-4d7b-8218-1a2440bd3154",
+    "1b22c021-991a-4a5c-b243-961fecb584a9",
+    "5cbdb497-4c07-4856-a690-b0a8c468310a",
+    "131076bd-66ff-48fd-9fbc-af37dfa84073"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "ceb91f72-79bf-43ea-94dd-b64dc9527ba0"
+  },
+  {
+   "id": "9616ed4e-f94f-4c83-8468-960c81c48cac",
+   "parent": "040c2d52-0348-487a-9fca-cb615f0c68b0",
+   "order": 0,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "9AZEt2Sw6Zv0nnJJmkE0",
+    "pipeline_stage_id": "27e64784-3cce-4c20-8bd7-f17b360f5802",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696fbbdc10cdb5d6b92f0cce"
+   },
+   "name": "Update Opportunity: NPN A&D",
+   "type": "create_opportunity",
+   "next": "77be66b9-48dd-404e-901e-6af28a15f5cf",
+   "parentKey": "040c2d52-0348-487a-9fca-cb615f0c68b0"
+  },
+  {
+   "id": "77be66b9-48dd-404e-901e-6af28a15f5cf",
+   "parent": "040c2d52-0348-487a-9fca-cb615f0c68b0",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "7WMjJykajYpvAXys4m0z",
+    "pipeline_stage_id": "f6ff8f1b-33cb-43e6-a17e-96149072b783",
+    "opportunity_name": "{{contact.name}} - {{contact.location}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "open",
+    "opportunity_source": ""
+   },
+   "name": "Update Opportunity: A&D",
+   "type": "create_opportunity",
+   "next": "1dc4169a-af45-4093-83a6-378a4fcda6d9",
+   "parentKey": "9616ed4e-f94f-4c83-8468-960c81c48cac"
+  },
+  {
+   "id": "1dc4169a-af45-4093-83a6-378a4fcda6d9",
+   "parent": "040c2d52-0348-487a-9fca-cb615f0c68b0",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "uUm5DInIjq6uYlg9HDwU",
+    "pipeline_stage_id": "5f460760-5532-45d9-b95f-d6dabcadccf3",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696fbbdc10cdb5d6b92f0cce"
+   },
+   "name": "Update Opportunity: Sales Prod",
+   "type": "create_opportunity",
+   "parentKey": "77be66b9-48dd-404e-901e-6af28a15f5cf"
+  },
+  {
+   "id": "54b74a1f-3d78-4e19-8102-c0ea55abee22",
+   "parent": "a2fbd9d7-9653-4f08-946a-eb8c933034f7",
+   "order": 3,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Sale outcome: MU",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "c1e7a091-f75d-48b3-a5c5-e527c986458e",
+    "1a222c74-5632-4195-894c-77498f01a546"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "a2fbd9d7-9653-4f08-946a-eb8c933034f7",
+   "next": "b8e3c9d4-61cf-4079-86ea-02cc8acefdb2"
+  },
+  {
+   "id": "b8e3c9d4-61cf-4079-86ea-02cc8acefdb2",
+   "parent": "54b74a1f-3d78-4e19-8102-c0ea55abee22",
+   "order": 0,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "9AZEt2Sw6Zv0nnJJmkE0",
+    "pipeline_stage_id": "d0e9b320-87ac-43da-a02e-4303cf7057d2",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696f4d3b2a9d6f12607f4b8f"
+   },
+   "name": "Update Opportunity: NPN MU",
+   "type": "create_opportunity",
+   "next": "747d19d9-1485-458f-9904-b67e1f4acf0b",
+   "parentKey": "54b74a1f-3d78-4e19-8102-c0ea55abee22"
+  },
+  {
+   "id": "747d19d9-1485-458f-9904-b67e1f4acf0b",
+   "parent": "54b74a1f-3d78-4e19-8102-c0ea55abee22",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "GTwmWC8TwPIH7PONUtuw",
+    "pipeline_stage_id": "97fa7367-930a-4438-b97d-8e2a1295b726",
+    "opportunity_name": "{{contact.name}} - {{contact.location}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696f4d3b2a9d6f12607f4b8f"
+   },
+   "name": "Update Opportunity: MU",
+   "type": "create_opportunity",
+   "parentKey": "b8e3c9d4-61cf-4079-86ea-02cc8acefdb2",
+   "next": "89371156-1e5f-4a99-8557-57039f1ace37"
+  },
+  {
+   "id": "89371156-1e5f-4a99-8557-57039f1ace37",
+   "parent": "54b74a1f-3d78-4e19-8102-c0ea55abee22",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "uUm5DInIjq6uYlg9HDwU",
+    "pipeline_stage_id": "5f460760-5532-45d9-b95f-d6dabcadccf3",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696f4d3b2a9d6f12607f4b8f"
+   },
+   "name": "Update Opportunity: Sales Prod",
+   "type": "create_opportunity",
+   "parentKey": "747d19d9-1485-458f-9904-b67e1f4acf0b"
+  },
+  {
+   "id": "1a222c74-5632-4195-894c-77498f01a546",
+   "parent": "a2fbd9d7-9653-4f08-946a-eb8c933034f7",
+   "order": 3,
+   "attributes": {
+    "else": true
+   },
+   "name": "Sale outcome: SOLD",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "c1e7a091-f75d-48b3-a5c5-e527c986458e",
+    "54b74a1f-3d78-4e19-8102-c0ea55abee22"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "a2fbd9d7-9653-4f08-946a-eb8c933034f7",
+   "next": "31925fa8-963d-4b31-a0a5-0f8599decc2d"
+  },
+  {
+   "id": "31925fa8-963d-4b31-a0a5-0f8599decc2d",
+   "parent": "1a222c74-5632-4195-894c-77498f01a546",
+   "order": 0,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "9AZEt2Sw6Zv0nnJJmkE0",
+    "pipeline_stage_id": "fb2811f2-c48c-41aa-9c40-2a41804fdd1a",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "won",
+    "opportunity_source": ""
+   },
+   "name": "Update Opportunity: NPN SOLD",
+   "type": "create_opportunity",
+   "next": "b036ff18-54b0-4847-927a-5c387e19f8d3",
+   "parentKey": "1a222c74-5632-4195-894c-77498f01a546"
+  },
+  {
+   "id": "b036ff18-54b0-4847-927a-5c387e19f8d3",
+   "parent": "1a222c74-5632-4195-894c-77498f01a546",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "uUm5DInIjq6uYlg9HDwU",
+    "pipeline_stage_id": "e07ccbae-b370-43b3-a531-a6ee96216aef",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "won",
+    "opportunity_source": ""
+   },
+   "name": "Update Opportunity: Sales Prod",
+   "type": "create_opportunity",
+   "next": "7f41931a-bc2d-4622-a2d7-c459915f13aa",
+   "parentKey": "31925fa8-963d-4b31-a0a5-0f8599decc2d"
+  },
+  {
+   "id": "7f41931a-bc2d-4622-a2d7-c459915f13aa",
+   "parent": "1a222c74-5632-4195-894c-77498f01a546",
+   "order": 2,
+   "attributes": {
+    "type": "update_contact_field",
+    "actionType": "update_field_data",
+    "fields": [
+     {
+      "field": "type",
+      "value": "Patient",
+      "title": "Contact type",
+      "type": "select",
+      "date": "",
+      "__customFieldType__": "customValues"
+     }
+    ]
+   },
+   "name": "Update to Patient",
+   "type": "update_contact_field",
+   "next": "aaf0ab0c-dbd3-4a2b-bc8a-e4506a3b9a68",
+   "parentKey": "b036ff18-54b0-4847-927a-5c387e19f8d3"
+  },
+  {
+   "id": "aaf0ab0c-dbd3-4a2b-bc8a-e4506a3b9a68",
+   "parent": "1a222c74-5632-4195-894c-77498f01a546",
+   "order": 3,
+   "attributes": {
+    "tags": [
+     "patient/sold"
+    ]
+   },
+   "name": "Add Tag: Patient/sold",
+   "type": "add_contact_tag",
+   "parentKey": "7f41931a-bc2d-4622-a2d7-c459915f13aa",
+   "next": "66ac6433-e87f-4cd0-a1e1-421c7b3f086a"
+  },
+  {
+   "id": "66ac6433-e87f-4cd0-a1e1-421c7b3f086a",
+   "parent": "1a222c74-5632-4195-894c-77498f01a546",
+   "order": 4,
+   "name": "SOLD - For Review/referral",
+   "type": "manual-call",
+   "parentKey": "aaf0ab0c-dbd3-4a2b-bc8a-e4506a3b9a68"
+  },
+  {
+   "id": "fd517891-66ac-4e0d-a0e7-37df26133841",
+   "parent": "5f1dd8f7-c093-42d1-97eb-fdd631945209",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Richmond",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "f0d8ae76-29d0-4cf8-a3ca-56f374b0fb7d",
+    "d70d5af0-5c5d-4a38-8878-a484422eb643",
+    "b6dc48cb-3cf3-47fa-9837-af980ffcd97f"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "5f1dd8f7-c093-42d1-97eb-fdd631945209",
+   "next": "bf5269e9-8bca-441b-8e5c-034d71f401b0"
+  },
+  {
+   "id": "bf5269e9-8bca-441b-8e5c-034d71f401b0",
+   "stepIndex": 3,
+   "parent": "fd517891-66ac-4e0d-a0e7-37df26133841",
+   "order": 0,
+   "attributes": {
+    "type": "google_sheets",
+    "action": {
+     "id": "lookup_row",
+     "name": "Lookup Spreadsheet Row"
+    },
+    "account": {
+     "id": "100464418921113716943",
+     "name": "reports@mwcforme.com",
+     "idType": "altId"
+    },
+    "drive": {
+     "id": "my_drive",
+     "name": "My Drive"
+    },
+    "spreadsheet": {
+     "id": "1_Qji8O_7ZL5tSa7lbb4HwCPicyYkDj_OBseUfrh2etE",
+     "name": "Appointment Study"
+    },
+    "sheet": {
+     "id": "5",
+     "name": "Appt Report Raw"
+    },
+    "lookupColumns": {
+     "main": {
+      "column": "A",
+      "value": "{{appointment.id}}"
+     }
+    },
+    "options": {
+     "lookupSearchMethod": "bottom_to_top"
+    },
+    "sheetHeaders": [
+     "Appointment Id",
+     "Requested Time",
+     "Date Added",
+     "Contact Name",
+     "Calendar",
+     "Email",
+     "Phone",
+     "Appointment Owner",
+     "Created By",
+     "Mode",
+     "Appointment Source",
+     "Outcome",
+     "Rescheduled",
+     "Source",
+     "Affiliate UTM Campaign",
+     "Affiliate UTM Medium",
+     "Affiliate UTM Content",
+     "Affiliate UTM Source",
+     "Affiliate UTM Term",
+     "Affiliate Form",
+     "CONTACT  CREATE DATE",
+     "TAG",
+     "Days Between Booking & Appointment",
+     "Same Day Booking?",
+     "TIME Booked",
+     "Booking Time",
+     "APPT Date",
+     "Date Booked",
+     "Appt Time",
+     "Inbound Calls Prior to Booking",
+     "Outbound Calls Prior to Booking",
+     "Voicemails Prior to Booking",
+     "TOTAL Calls prior to Booking",
+     "Booked without Calls",
+     "Average Handle Time",
+     "",
+     "All",
+     "Time Booked",
+     "New Patient Intake Form Submitted",
+     "New Patient Intake Form Date & Time Submitted",
+     "Intake Lead Time\n(Form submitted before Appt)",
+     "Pipeline",
+     "A&D List based on Weekly Result Sheet",
+     "Weekly Result 13.0"
+    ]
+   },
+   "name": "Lookup Appointment ID",
+   "type": "google_sheets",
+   "next": "13533948-e72f-4df9-bb4e-1ece218b7bb6",
+   "parentKey": "fd517891-66ac-4e0d-a0e7-37df26133841"
+  },
+  {
+   "id": "13533948-e72f-4df9-bb4e-1ece218b7bb6",
+   "stepIndex": 5,
+   "parent": "fd517891-66ac-4e0d-a0e7-37df26133841",
+   "order": 1,
+   "attributes": {
+    "type": "google_sheets",
+    "action": {
+     "id": "update_row_from_lookup",
+     "name": "Update Spreadsheet Row using Lookup"
+    },
+    "account": {
+     "id": "100464418921113716943",
+     "name": "reports@mwcforme.com",
+     "idType": "altId"
+    },
+    "drive": {
+     "id": "my_drive",
+     "name": "My Drive"
+    },
+    "spreadsheet": {
+     "id": "1_Qji8O_7ZL5tSa7lbb4HwCPicyYkDj_OBseUfrh2etE",
+     "name": "Appointment Study"
+    },
+    "sheet": {
+     "id": "5",
+     "name": "Appt Report Raw"
+    },
+    "columnRange": [
+     "A",
+     "L"
+    ],
+    "values": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     "showed"
+    ],
+    "lookupStep": {
+     "label": "#1 Lookup Appointment ID",
+     "value": "0c24a02c-47c2-4a6d-b438-c6db95892775",
+     "id": "0c24a02c-47c2-4a6d-b438-c6db95892775",
+     "stepIndex": 1
+    },
+    "sheetHeaders": [
+     "Appointment Id",
+     "Requested Time",
+     "Date Added",
+     "Contact Name",
+     "Calendar",
+     "Email",
+     "Phone",
+     "Appointment Owner",
+     "Created By",
+     "Mode",
+     "Appointment Source",
+     "Outcome",
+     "Rescheduled",
+     "Source",
+     "Affiliate UTM Campaign",
+     "Affiliate UTM Medium",
+     "Affiliate UTM Content",
+     "Affiliate UTM Source",
+     "Affiliate UTM Term",
+     "Affiliate Form",
+     "CONTACT  CREATE DATE",
+     "TAG",
+     "Days Between Booking & Appointment",
+     "Same Day Booking?",
+     "TIME Booked",
+     "Booking Time",
+     "APPT Date",
+     "Date Booked",
+     "Appt Time",
+     "Inbound Calls Prior to Booking",
+     "Outbound Calls Prior to Booking",
+     "Voicemails Prior to Booking",
+     "TOTAL Calls prior to Booking",
+     "Booked without Calls",
+     "Average Handle Time",
+     "",
+     "All",
+     "Time Booked",
+     "New Patient Intake Form Submitted",
+     "New Patient Intake Form Date & Time Submitted",
+     "Intake Lead Time\n(Form submitted before Appt)",
+     "Pipeline",
+     "A&D List based on Weekly Result Sheet",
+     "Weekly Result 13.0"
+    ],
+    "options": {}
+   },
+   "name": "Update column L (outcome) to showed",
+   "type": "google_sheets",
+   "next": "bc7833a4-0965-4fab-9234-56f3db7daccd",
+   "parentKey": "bf5269e9-8bca-441b-8e5c-034d71f401b0"
+  },
+  {
+   "id": "bc7833a4-0965-4fab-9234-56f3db7daccd",
+   "parent": "fd517891-66ac-4e0d-a0e7-37df26133841",
+   "order": 2,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "df876c4d-3cda-48e4-b37f-ce9a96247209",
+      "name": "A&D",
+      "segments": [
+       {
+        "__segmentId": "ed213e64-0c6b-4637-8e46-07524a9bf08d",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "cClk7ad4PHxiake2lChS",
+          "conditionOperator": "==",
+          "conditionValue": "A&D (Advised and Declined)",
+          "__conditionId": "a366bf50-3ed9-4556-b0cc-9cffa26019fe",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "d78a7f05-0a1d-42b9-96bb-5d13d7bb9694",
+      "name": "MU",
+      "segments": [
+       {
+        "__segmentId": "ed213e64-0c6b-4637-8e46-07524a9bf08d",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "cClk7ad4PHxiake2lChS",
+          "conditionOperator": "==",
+          "conditionValue": "MUT (Medically Untreatable)",
+          "__conditionId": "a366bf50-3ed9-4556-b0cc-9cffa26019fe",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Condition",
+    "version": 2,
+    "noneBranchName": "SOLD"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "df876c4d-3cda-48e4-b37f-ce9a96247209",
+    "d78a7f05-0a1d-42b9-96bb-5d13d7bb9694",
+    "9740aee1-03a6-47a7-be60-5ef936412dee"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "13533948-e72f-4df9-bb4e-1ece218b7bb6"
+  },
+  {
+   "id": "df876c4d-3cda-48e4-b37f-ce9a96247209",
+   "parent": "bc7833a4-0965-4fab-9234-56f3db7daccd",
+   "order": 3,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "A&D",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "64169367-72c2-49ce-9cf2-e8da045edcd4",
+   "sibling": [
+    "d78a7f05-0a1d-42b9-96bb-5d13d7bb9694",
+    "9740aee1-03a6-47a7-be60-5ef936412dee"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "bc7833a4-0965-4fab-9234-56f3db7daccd"
+  },
+  {
+   "id": "64169367-72c2-49ce-9cf2-e8da045edcd4",
+   "parent": "df876c4d-3cda-48e4-b37f-ce9a96247209",
+   "order": 0,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "7c295ba2-ee5f-4b3c-9694-06679a0661d8",
+      "name": "Not Ready",
+      "segments": [
+       {
+        "__segmentId": "c77711b5-63f7-4b24-8668-706b02e69a92",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "XVzxGceorU5WixdjMHvA",
+          "conditionOperator": "==",
+          "conditionValue": "Not Ready",
+          "__conditionId": "7c4434b8-a227-4292-9b5f-b455a67fbf9b",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "5c77469a-1bcb-4ab5-8384-43c7ee4c9acd",
+      "name": "Think it Over / Sleep On It",
+      "segments": [
+       {
+        "__segmentId": "c77711b5-63f7-4b24-8668-706b02e69a92",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "XVzxGceorU5WixdjMHvA",
+          "conditionOperator": "==",
+          "conditionValue": "Think it Over / Sleep On It",
+          "__conditionId": "7c4434b8-a227-4292-9b5f-b455a67fbf9b",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "29871558-f4ee-4dea-876f-a206e27d4e4f",
+      "name": "Cost / Price Objection",
+      "segments": [
+       {
+        "__segmentId": "c77711b5-63f7-4b24-8668-706b02e69a92",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "XVzxGceorU5WixdjMHvA",
+          "conditionOperator": "==",
+          "conditionValue": "Cost / Price Objection",
+          "__conditionId": "7c4434b8-a227-4292-9b5f-b455a67fbf9b",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "1c803c83-9822-4327-85cb-8ccc52487bcb",
+      "name": "Not Interested",
+      "segments": [
+       {
+        "__segmentId": "c77711b5-63f7-4b24-8668-706b02e69a92",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "XVzxGceorU5WixdjMHvA",
+          "conditionOperator": "==",
+          "conditionValue": "Not Interested",
+          "__conditionId": "7c4434b8-a227-4292-9b5f-b455a67fbf9b",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "ad117b67-3c76-489e-bcfa-55027d6a4c6d",
+      "name": "Not Qualified / MU",
+      "segments": [
+       {
+        "__segmentId": "c77711b5-63f7-4b24-8668-706b02e69a92",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "XVzxGceorU5WixdjMHvA",
+          "conditionOperator": "==",
+          "conditionValue": "Not Qualified / MU",
+          "__conditionId": "7c4434b8-a227-4292-9b5f-b455a67fbf9b",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "6b5a08ea-ab7c-4807-b7e5-f5c6f27a14fe",
+      "name": "Others",
+      "segments": [
+       {
+        "__segmentId": "c77711b5-63f7-4b24-8668-706b02e69a92",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "XVzxGceorU5WixdjMHvA",
+          "conditionOperator": "==",
+          "conditionValue": "Others",
+          "__conditionId": "7c4434b8-a227-4292-9b5f-b455a67fbf9b",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "A&D Lost Reason",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "7c295ba2-ee5f-4b3c-9694-06679a0661d8",
+    "5c77469a-1bcb-4ab5-8384-43c7ee4c9acd",
+    "29871558-f4ee-4dea-876f-a206e27d4e4f",
+    "1c803c83-9822-4327-85cb-8ccc52487bcb",
+    "ad117b67-3c76-489e-bcfa-55027d6a4c6d",
+    "6b5a08ea-ab7c-4807-b7e5-f5c6f27a14fe",
+    "1dd223d9-6635-439d-8f76-5142b7ccecf0"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "df876c4d-3cda-48e4-b37f-ce9a96247209"
+  },
+  {
+   "id": "7c295ba2-ee5f-4b3c-9694-06679a0661d8",
+   "parent": "64169367-72c2-49ce-9cf2-e8da045edcd4",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Not Ready",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "983ae02d-da58-4a81-86e0-b9e26a8221cf",
+   "sibling": [
+    "5c77469a-1bcb-4ab5-8384-43c7ee4c9acd",
+    "29871558-f4ee-4dea-876f-a206e27d4e4f",
+    "1c803c83-9822-4327-85cb-8ccc52487bcb",
+    "ad117b67-3c76-489e-bcfa-55027d6a4c6d",
+    "6b5a08ea-ab7c-4807-b7e5-f5c6f27a14fe",
+    "1dd223d9-6635-439d-8f76-5142b7ccecf0"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "64169367-72c2-49ce-9cf2-e8da045edcd4"
+  },
+  {
+   "id": "983ae02d-da58-4a81-86e0-b9e26a8221cf",
+   "parent": "7c295ba2-ee5f-4b3c-9694-06679a0661d8",
+   "order": 0,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "jRqb0pvexu04zSACPXmd",
+    "pipeline_stage_id": "f0cd3e67-a3b5-4765-938d-4b2d1b4edc4a",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696fbbdc4a05552ad9a423eb"
+   },
+   "name": "Update Opportunity: Richmond A&D",
+   "type": "create_opportunity",
+   "next": "fcc1caf4-91e8-4472-9545-b2a8d46f24a9",
+   "parentKey": "7c295ba2-ee5f-4b3c-9694-06679a0661d8"
+  },
+  {
+   "id": "fcc1caf4-91e8-4472-9545-b2a8d46f24a9",
+   "parent": "7c295ba2-ee5f-4b3c-9694-06679a0661d8",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "7WMjJykajYpvAXys4m0z",
+    "pipeline_stage_id": "f6ff8f1b-33cb-43e6-a17e-96149072b783",
+    "opportunity_name": "{{contact.name}} - {{contact.location}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "open",
+    "opportunity_source": ""
+   },
+   "name": "Update Opportunity: A&D",
+   "type": "create_opportunity",
+   "next": "db376be7-5031-4524-9238-76667b20ad27",
+   "parentKey": "983ae02d-da58-4a81-86e0-b9e26a8221cf"
+  },
+  {
+   "id": "db376be7-5031-4524-9238-76667b20ad27",
+   "parent": "7c295ba2-ee5f-4b3c-9694-06679a0661d8",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "uUm5DInIjq6uYlg9HDwU",
+    "pipeline_stage_id": "5f460760-5532-45d9-b95f-d6dabcadccf3",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696fbbdc4a05552ad9a423eb"
+   },
+   "name": "Update Opportunity: Sales Prod",
+   "type": "create_opportunity",
+   "parentKey": "fcc1caf4-91e8-4472-9545-b2a8d46f24a9"
+  },
+  {
+   "id": "5c77469a-1bcb-4ab5-8384-43c7ee4c9acd",
+   "parent": "64169367-72c2-49ce-9cf2-e8da045edcd4",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Think it Over / Sleep On It",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "d668207e-6a19-458e-9192-abfe193a4b14",
+   "sibling": [
+    "7c295ba2-ee5f-4b3c-9694-06679a0661d8",
+    "29871558-f4ee-4dea-876f-a206e27d4e4f",
+    "1c803c83-9822-4327-85cb-8ccc52487bcb",
+    "ad117b67-3c76-489e-bcfa-55027d6a4c6d",
+    "6b5a08ea-ab7c-4807-b7e5-f5c6f27a14fe",
+    "1dd223d9-6635-439d-8f76-5142b7ccecf0"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "64169367-72c2-49ce-9cf2-e8da045edcd4"
+  },
+  {
+   "id": "d668207e-6a19-458e-9192-abfe193a4b14",
+   "parent": "5c77469a-1bcb-4ab5-8384-43c7ee4c9acd",
+   "order": 0,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "jRqb0pvexu04zSACPXmd",
+    "pipeline_stage_id": "f0cd3e67-a3b5-4765-938d-4b2d1b4edc4a",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696fbbdcf76e17bd4af1ce52"
+   },
+   "name": "Update Opportunity: Richmond A&D",
+   "type": "create_opportunity",
+   "next": "773d0147-ce7a-4d8c-8b31-84b8e8b1ecd1",
+   "parentKey": "5c77469a-1bcb-4ab5-8384-43c7ee4c9acd"
+  },
+  {
+   "id": "773d0147-ce7a-4d8c-8b31-84b8e8b1ecd1",
+   "parent": "5c77469a-1bcb-4ab5-8384-43c7ee4c9acd",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "7WMjJykajYpvAXys4m0z",
+    "pipeline_stage_id": "f6ff8f1b-33cb-43e6-a17e-96149072b783",
+    "opportunity_name": "{{contact.name}} - {{contact.location}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "open",
+    "opportunity_source": ""
+   },
+   "name": "Update Opportunity: A&D",
+   "type": "create_opportunity",
+   "next": "9b07c67e-bfb3-41ea-a53a-8070d43eca91",
+   "parentKey": "d668207e-6a19-458e-9192-abfe193a4b14"
+  },
+  {
+   "id": "9b07c67e-bfb3-41ea-a53a-8070d43eca91",
+   "parent": "5c77469a-1bcb-4ab5-8384-43c7ee4c9acd",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "uUm5DInIjq6uYlg9HDwU",
+    "pipeline_stage_id": "5f460760-5532-45d9-b95f-d6dabcadccf3",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696fbbdcf76e17bd4af1ce52"
+   },
+   "name": "Update Opportunity: Sales Prod",
+   "type": "create_opportunity",
+   "parentKey": "773d0147-ce7a-4d8c-8b31-84b8e8b1ecd1"
+  },
+  {
+   "id": "29871558-f4ee-4dea-876f-a206e27d4e4f",
+   "parent": "64169367-72c2-49ce-9cf2-e8da045edcd4",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Cost / Price Objection",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "f15fe04e-4e83-4b69-b7ee-1d1f8c92e318",
+   "sibling": [
+    "7c295ba2-ee5f-4b3c-9694-06679a0661d8",
+    "5c77469a-1bcb-4ab5-8384-43c7ee4c9acd",
+    "1c803c83-9822-4327-85cb-8ccc52487bcb",
+    "ad117b67-3c76-489e-bcfa-55027d6a4c6d",
+    "6b5a08ea-ab7c-4807-b7e5-f5c6f27a14fe",
+    "1dd223d9-6635-439d-8f76-5142b7ccecf0"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "64169367-72c2-49ce-9cf2-e8da045edcd4"
+  },
+  {
+   "id": "f15fe04e-4e83-4b69-b7ee-1d1f8c92e318",
+   "parent": "29871558-f4ee-4dea-876f-a206e27d4e4f",
+   "order": 0,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "jRqb0pvexu04zSACPXmd",
+    "pipeline_stage_id": "f0cd3e67-a3b5-4765-938d-4b2d1b4edc4a",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696f4d3b726a64fb6987cbd6"
+   },
+   "name": "Update Opportunity: Richmond A&D",
+   "type": "create_opportunity",
+   "next": "a9bb3371-3b92-4555-bc2e-e69cdc5b633b",
+   "parentKey": "29871558-f4ee-4dea-876f-a206e27d4e4f"
+  },
+  {
+   "id": "a9bb3371-3b92-4555-bc2e-e69cdc5b633b",
+   "parent": "29871558-f4ee-4dea-876f-a206e27d4e4f",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "7WMjJykajYpvAXys4m0z",
+    "pipeline_stage_id": "f6ff8f1b-33cb-43e6-a17e-96149072b783",
+    "opportunity_name": "{{contact.name}} - {{contact.location}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "open",
+    "opportunity_source": ""
+   },
+   "name": "Update Opportunity: A&D",
+   "type": "create_opportunity",
+   "next": "168b6a54-f265-4780-b86d-36629c2c95e6",
+   "parentKey": "f15fe04e-4e83-4b69-b7ee-1d1f8c92e318"
+  },
+  {
+   "id": "168b6a54-f265-4780-b86d-36629c2c95e6",
+   "parent": "29871558-f4ee-4dea-876f-a206e27d4e4f",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "uUm5DInIjq6uYlg9HDwU",
+    "pipeline_stage_id": "5f460760-5532-45d9-b95f-d6dabcadccf3",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696f4d3b726a64fb6987cbd6"
+   },
+   "name": "Update Opportunity: Sales Prod",
+   "type": "create_opportunity",
+   "parentKey": "a9bb3371-3b92-4555-bc2e-e69cdc5b633b"
+  },
+  {
+   "id": "1c803c83-9822-4327-85cb-8ccc52487bcb",
+   "parent": "64169367-72c2-49ce-9cf2-e8da045edcd4",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Not Interested",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "16892c4c-3ccb-448b-9cc5-c956224c2a00",
+   "sibling": [
+    "7c295ba2-ee5f-4b3c-9694-06679a0661d8",
+    "5c77469a-1bcb-4ab5-8384-43c7ee4c9acd",
+    "29871558-f4ee-4dea-876f-a206e27d4e4f",
+    "ad117b67-3c76-489e-bcfa-55027d6a4c6d",
+    "6b5a08ea-ab7c-4807-b7e5-f5c6f27a14fe",
+    "1dd223d9-6635-439d-8f76-5142b7ccecf0"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "64169367-72c2-49ce-9cf2-e8da045edcd4"
+  },
+  {
+   "id": "16892c4c-3ccb-448b-9cc5-c956224c2a00",
+   "parent": "1c803c83-9822-4327-85cb-8ccc52487bcb",
+   "order": 0,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "jRqb0pvexu04zSACPXmd",
+    "pipeline_stage_id": "f0cd3e67-a3b5-4765-938d-4b2d1b4edc4a",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696f4d3be95a9c062dfcc959"
+   },
+   "name": "Update Opportunity: Richmond A&D",
+   "type": "create_opportunity",
+   "next": "cde2dbdb-5161-40a5-a1ac-553e643a02e2",
+   "parentKey": "1c803c83-9822-4327-85cb-8ccc52487bcb"
+  },
+  {
+   "id": "cde2dbdb-5161-40a5-a1ac-553e643a02e2",
+   "parent": "1c803c83-9822-4327-85cb-8ccc52487bcb",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "7WMjJykajYpvAXys4m0z",
+    "pipeline_stage_id": "f6ff8f1b-33cb-43e6-a17e-96149072b783",
+    "opportunity_name": "{{contact.name}} - {{contact.location}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "open",
+    "opportunity_source": ""
+   },
+   "name": "Update Opportunity: A&D",
+   "type": "create_opportunity",
+   "next": "8b846c20-fda6-49fd-aca8-3b37da6879d3",
+   "parentKey": "16892c4c-3ccb-448b-9cc5-c956224c2a00"
+  },
+  {
+   "id": "8b846c20-fda6-49fd-aca8-3b37da6879d3",
+   "parent": "1c803c83-9822-4327-85cb-8ccc52487bcb",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "uUm5DInIjq6uYlg9HDwU",
+    "pipeline_stage_id": "5f460760-5532-45d9-b95f-d6dabcadccf3",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696f4d3be95a9c062dfcc959"
+   },
+   "name": "Update Opportunity: Sales Prod",
+   "type": "create_opportunity",
+   "parentKey": "cde2dbdb-5161-40a5-a1ac-553e643a02e2"
+  },
+  {
+   "id": "ad117b67-3c76-489e-bcfa-55027d6a4c6d",
+   "parent": "64169367-72c2-49ce-9cf2-e8da045edcd4",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Not Qualified / MU",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "3102f4ca-d596-4037-b542-8de4c3c21768",
+   "sibling": [
+    "7c295ba2-ee5f-4b3c-9694-06679a0661d8",
+    "5c77469a-1bcb-4ab5-8384-43c7ee4c9acd",
+    "29871558-f4ee-4dea-876f-a206e27d4e4f",
+    "1c803c83-9822-4327-85cb-8ccc52487bcb",
+    "6b5a08ea-ab7c-4807-b7e5-f5c6f27a14fe",
+    "1dd223d9-6635-439d-8f76-5142b7ccecf0"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "64169367-72c2-49ce-9cf2-e8da045edcd4"
+  },
+  {
+   "id": "3102f4ca-d596-4037-b542-8de4c3c21768",
+   "parent": "ad117b67-3c76-489e-bcfa-55027d6a4c6d",
+   "order": 0,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "jRqb0pvexu04zSACPXmd",
+    "pipeline_stage_id": "f0cd3e67-a3b5-4765-938d-4b2d1b4edc4a",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696f4d3b2a9d6f12607f4b8f"
+   },
+   "name": "Update Opportunity: Richmond A&D",
+   "type": "create_opportunity",
+   "next": "1aa5d831-3ec3-4498-a6f7-235bbef38356",
+   "parentKey": "ad117b67-3c76-489e-bcfa-55027d6a4c6d"
+  },
+  {
+   "id": "1aa5d831-3ec3-4498-a6f7-235bbef38356",
+   "parent": "ad117b67-3c76-489e-bcfa-55027d6a4c6d",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "7WMjJykajYpvAXys4m0z",
+    "pipeline_stage_id": "f6ff8f1b-33cb-43e6-a17e-96149072b783",
+    "opportunity_name": "{{contact.name}} - {{contact.location}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "open",
+    "opportunity_source": ""
+   },
+   "name": "Update Opportunity: A&D",
+   "type": "create_opportunity",
+   "next": "7a75f5d5-adf3-4951-a5c4-d8800ffb1569",
+   "parentKey": "3102f4ca-d596-4037-b542-8de4c3c21768"
+  },
+  {
+   "id": "7a75f5d5-adf3-4951-a5c4-d8800ffb1569",
+   "parent": "ad117b67-3c76-489e-bcfa-55027d6a4c6d",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "uUm5DInIjq6uYlg9HDwU",
+    "pipeline_stage_id": "5f460760-5532-45d9-b95f-d6dabcadccf3",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696f4d3b2a9d6f12607f4b8f"
+   },
+   "name": "Update Opportunity: Sales Prod",
+   "type": "create_opportunity",
+   "parentKey": "1aa5d831-3ec3-4498-a6f7-235bbef38356"
+  },
+  {
+   "id": "6b5a08ea-ab7c-4807-b7e5-f5c6f27a14fe",
+   "parent": "64169367-72c2-49ce-9cf2-e8da045edcd4",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Others",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "714dbe3e-5422-4e78-8997-f75dda33223e",
+   "sibling": [
+    "7c295ba2-ee5f-4b3c-9694-06679a0661d8",
+    "5c77469a-1bcb-4ab5-8384-43c7ee4c9acd",
+    "29871558-f4ee-4dea-876f-a206e27d4e4f",
+    "1c803c83-9822-4327-85cb-8ccc52487bcb",
+    "ad117b67-3c76-489e-bcfa-55027d6a4c6d",
+    "1dd223d9-6635-439d-8f76-5142b7ccecf0"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "64169367-72c2-49ce-9cf2-e8da045edcd4"
+  },
+  {
+   "id": "714dbe3e-5422-4e78-8997-f75dda33223e",
+   "parent": "6b5a08ea-ab7c-4807-b7e5-f5c6f27a14fe",
+   "order": 0,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "jRqb0pvexu04zSACPXmd",
+    "pipeline_stage_id": "f0cd3e67-a3b5-4765-938d-4b2d1b4edc4a",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696fbbdc10cdb5d6b92f0cce"
+   },
+   "name": "Update Opportunity: Richmond A&D",
+   "type": "create_opportunity",
+   "next": "8c4f5ec0-41bd-4b78-a4e0-d30aeb79d85c",
+   "parentKey": "6b5a08ea-ab7c-4807-b7e5-f5c6f27a14fe"
+  },
+  {
+   "id": "8c4f5ec0-41bd-4b78-a4e0-d30aeb79d85c",
+   "parent": "6b5a08ea-ab7c-4807-b7e5-f5c6f27a14fe",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "7WMjJykajYpvAXys4m0z",
+    "pipeline_stage_id": "f6ff8f1b-33cb-43e6-a17e-96149072b783",
+    "opportunity_name": "{{contact.name}} - {{contact.location}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "open",
+    "opportunity_source": ""
+   },
+   "name": "Update Opportunity: A&D",
+   "type": "create_opportunity",
+   "next": "2ace1231-59f3-4ea9-8f53-2370d2b499eb",
+   "parentKey": "714dbe3e-5422-4e78-8997-f75dda33223e"
+  },
+  {
+   "id": "2ace1231-59f3-4ea9-8f53-2370d2b499eb",
+   "parent": "6b5a08ea-ab7c-4807-b7e5-f5c6f27a14fe",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "uUm5DInIjq6uYlg9HDwU",
+    "pipeline_stage_id": "5f460760-5532-45d9-b95f-d6dabcadccf3",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696fbbdc10cdb5d6b92f0cce"
+   },
+   "name": "Update Opportunity: Sales Prod",
+   "type": "create_opportunity",
+   "parentKey": "8c4f5ec0-41bd-4b78-a4e0-d30aeb79d85c"
+  },
+  {
+   "id": "1dd223d9-6635-439d-8f76-5142b7ccecf0",
+   "parent": "64169367-72c2-49ce-9cf2-e8da045edcd4",
+   "order": 1,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "5ef03c9d-0fa2-43ba-b2c9-51954bcbb90a",
+   "sibling": [
+    "7c295ba2-ee5f-4b3c-9694-06679a0661d8",
+    "5c77469a-1bcb-4ab5-8384-43c7ee4c9acd",
+    "29871558-f4ee-4dea-876f-a206e27d4e4f",
+    "1c803c83-9822-4327-85cb-8ccc52487bcb",
+    "ad117b67-3c76-489e-bcfa-55027d6a4c6d",
+    "6b5a08ea-ab7c-4807-b7e5-f5c6f27a14fe"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "64169367-72c2-49ce-9cf2-e8da045edcd4"
+  },
+  {
+   "id": "5ef03c9d-0fa2-43ba-b2c9-51954bcbb90a",
+   "parent": "1dd223d9-6635-439d-8f76-5142b7ccecf0",
+   "order": 0,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "jRqb0pvexu04zSACPXmd",
+    "pipeline_stage_id": "f0cd3e67-a3b5-4765-938d-4b2d1b4edc4a",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696fbbdc10cdb5d6b92f0cce"
+   },
+   "name": "Update Opportunity: Richmond A&D",
+   "type": "create_opportunity",
+   "next": "e2e7513b-d539-4c75-b6cf-8e605d50a367",
+   "parentKey": "1dd223d9-6635-439d-8f76-5142b7ccecf0"
+  },
+  {
+   "id": "e2e7513b-d539-4c75-b6cf-8e605d50a367",
+   "parent": "1dd223d9-6635-439d-8f76-5142b7ccecf0",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "7WMjJykajYpvAXys4m0z",
+    "pipeline_stage_id": "f6ff8f1b-33cb-43e6-a17e-96149072b783",
+    "opportunity_name": "{{contact.name}} - {{contact.location}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "open",
+    "opportunity_source": ""
+   },
+   "name": "Update Opportunity: A&D",
+   "type": "create_opportunity",
+   "next": "fa2115a8-57cf-4353-a5ae-b046bc558cb2",
+   "parentKey": "5ef03c9d-0fa2-43ba-b2c9-51954bcbb90a"
+  },
+  {
+   "id": "fa2115a8-57cf-4353-a5ae-b046bc558cb2",
+   "parent": "1dd223d9-6635-439d-8f76-5142b7ccecf0",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "uUm5DInIjq6uYlg9HDwU",
+    "pipeline_stage_id": "5f460760-5532-45d9-b95f-d6dabcadccf3",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696fbbdc10cdb5d6b92f0cce"
+   },
+   "name": "Update Opportunity: Sales Prod",
+   "type": "create_opportunity",
+   "parentKey": "e2e7513b-d539-4c75-b6cf-8e605d50a367"
+  },
+  {
+   "id": "d78a7f05-0a1d-42b9-96bb-5d13d7bb9694",
+   "parent": "bc7833a4-0965-4fab-9234-56f3db7daccd",
+   "order": 3,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "MU",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "a00df5f3-1a3f-4a43-befb-eeb4743b6b96",
+   "sibling": [
+    "df876c4d-3cda-48e4-b37f-ce9a96247209",
+    "9740aee1-03a6-47a7-be60-5ef936412dee"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "bc7833a4-0965-4fab-9234-56f3db7daccd"
+  },
+  {
+   "id": "a00df5f3-1a3f-4a43-befb-eeb4743b6b96",
+   "parent": "d78a7f05-0a1d-42b9-96bb-5d13d7bb9694",
+   "order": 0,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "jRqb0pvexu04zSACPXmd",
+    "pipeline_stage_id": "e7e9d943-f2e6-4729-a63a-571f69c06a4d",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696f4d3b2a9d6f12607f4b8f"
+   },
+   "name": "Update Opportunity: Richmond",
+   "type": "create_opportunity",
+   "next": "fe3ba8ac-586d-49eb-8712-d14f072a2498",
+   "parentKey": "d78a7f05-0a1d-42b9-96bb-5d13d7bb9694"
+  },
+  {
+   "id": "fe3ba8ac-586d-49eb-8712-d14f072a2498",
+   "parent": "d78a7f05-0a1d-42b9-96bb-5d13d7bb9694",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "GTwmWC8TwPIH7PONUtuw",
+    "pipeline_stage_id": "97fa7367-930a-4438-b97d-8e2a1295b726",
+    "opportunity_name": "{{contact.name}} - {{contact.location}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696f4d3b2a9d6f12607f4b8f"
+   },
+   "name": "Update Opportunity: MU",
+   "type": "create_opportunity",
+   "parentKey": "a00df5f3-1a3f-4a43-befb-eeb4743b6b96",
+   "next": "33d39a71-a633-487f-aed7-0123765d397b"
+  },
+  {
+   "id": "33d39a71-a633-487f-aed7-0123765d397b",
+   "parent": "d78a7f05-0a1d-42b9-96bb-5d13d7bb9694",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "uUm5DInIjq6uYlg9HDwU",
+    "pipeline_stage_id": "5f460760-5532-45d9-b95f-d6dabcadccf3",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696f4d3b2a9d6f12607f4b8f"
+   },
+   "name": "Update Opportunity: Sales Prod",
+   "type": "create_opportunity",
+   "parentKey": "fe3ba8ac-586d-49eb-8712-d14f072a2498"
+  },
+  {
+   "id": "9740aee1-03a6-47a7-be60-5ef936412dee",
+   "parent": "bc7833a4-0965-4fab-9234-56f3db7daccd",
+   "order": 3,
+   "attributes": {
+    "else": true
+   },
+   "name": "SOLD",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "95e763b4-829c-4a76-8f12-be0d6bfc3bcd",
+   "sibling": [
+    "df876c4d-3cda-48e4-b37f-ce9a96247209",
+    "d78a7f05-0a1d-42b9-96bb-5d13d7bb9694"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "bc7833a4-0965-4fab-9234-56f3db7daccd"
+  },
+  {
+   "id": "95e763b4-829c-4a76-8f12-be0d6bfc3bcd",
+   "parent": "9740aee1-03a6-47a7-be60-5ef936412dee",
+   "order": 0,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "jRqb0pvexu04zSACPXmd",
+    "pipeline_stage_id": "57be574d-9208-47ea-89ff-15c61e3ebb4a",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "won",
+    "opportunity_source": ""
+   },
+   "name": "Update Opportunity: Richmond SOLD",
+   "type": "create_opportunity",
+   "next": "4a31429d-9b7d-4482-9326-f916221bb142",
+   "parentKey": "9740aee1-03a6-47a7-be60-5ef936412dee"
+  },
+  {
+   "id": "4a31429d-9b7d-4482-9326-f916221bb142",
+   "parent": "9740aee1-03a6-47a7-be60-5ef936412dee",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "uUm5DInIjq6uYlg9HDwU",
+    "pipeline_stage_id": "e07ccbae-b370-43b3-a531-a6ee96216aef",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "won",
+    "opportunity_source": ""
+   },
+   "name": "Update Opportunity: Sales Prod",
+   "type": "create_opportunity",
+   "next": "e94d4000-bb95-4ad9-a17d-99c8242fd479",
+   "parentKey": "95e763b4-829c-4a76-8f12-be0d6bfc3bcd"
+  },
+  {
+   "id": "e94d4000-bb95-4ad9-a17d-99c8242fd479",
+   "parent": "9740aee1-03a6-47a7-be60-5ef936412dee",
+   "order": 2,
+   "attributes": {
+    "type": "update_contact_field",
+    "actionType": "update_field_data",
+    "fields": [
+     {
+      "field": "type",
+      "value": "Patient",
+      "title": "Contact type",
+      "type": "select",
+      "date": "",
+      "__customFieldType__": "customValues"
+     }
+    ]
+   },
+   "name": "Update to Patient",
+   "type": "update_contact_field",
+   "next": "b4d61fcb-8acd-4f5e-883a-8d004c1b7183",
+   "parentKey": "4a31429d-9b7d-4482-9326-f916221bb142"
+  },
+  {
+   "id": "b4d61fcb-8acd-4f5e-883a-8d004c1b7183",
+   "parent": "9740aee1-03a6-47a7-be60-5ef936412dee",
+   "order": 3,
+   "attributes": {
+    "tags": [
+     "patient/sold"
+    ]
+   },
+   "name": "Add Tag: Patient/sold",
+   "type": "add_contact_tag",
+   "parentKey": "e94d4000-bb95-4ad9-a17d-99c8242fd479",
+   "next": "0e24949f-029a-4070-858e-54f8d0b04210"
+  },
+  {
+   "id": "0e24949f-029a-4070-858e-54f8d0b04210",
+   "parent": "9740aee1-03a6-47a7-be60-5ef936412dee",
+   "order": 4,
+   "attributes": {},
+   "name": "SOLD - For Review/referral",
+   "type": "manual-call",
+   "parentKey": "b4d61fcb-8acd-4f5e-883a-8d004c1b7183"
+  },
+  {
+   "id": "d70d5af0-5c5d-4a38-8878-a484422eb643",
+   "parent": "5f1dd8f7-c093-42d1-97eb-fdd631945209",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "VB",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "f0d8ae76-29d0-4cf8-a3ca-56f374b0fb7d",
+    "fd517891-66ac-4e0d-a0e7-37df26133841",
+    "b6dc48cb-3cf3-47fa-9837-af980ffcd97f"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "5f1dd8f7-c093-42d1-97eb-fdd631945209",
+   "next": "5c1e2b54-5704-448f-9017-0568c4244ffd"
+  },
+  {
+   "id": "5c1e2b54-5704-448f-9017-0568c4244ffd",
+   "stepIndex": 4,
+   "parent": "d70d5af0-5c5d-4a38-8878-a484422eb643",
+   "order": 0,
+   "attributes": {
+    "type": "google_sheets",
+    "action": {
+     "id": "lookup_row",
+     "name": "Lookup Spreadsheet Row"
+    },
+    "account": {
+     "id": "100464418921113716943",
+     "name": "reports@mwcforme.com",
+     "idType": "altId"
+    },
+    "drive": {
+     "id": "my_drive",
+     "name": "My Drive"
+    },
+    "spreadsheet": {
+     "id": "1_Qji8O_7ZL5tSa7lbb4HwCPicyYkDj_OBseUfrh2etE",
+     "name": "Appointment Study"
+    },
+    "sheet": {
+     "id": "5",
+     "name": "Appt Report Raw"
+    },
+    "lookupColumns": {
+     "main": {
+      "column": "A",
+      "value": "{{appointment.id}}"
+     }
+    },
+    "options": {
+     "lookupSearchMethod": "bottom_to_top"
+    },
+    "sheetHeaders": [
+     "Appointment Id",
+     "Requested Time",
+     "Date Added",
+     "Contact Name",
+     "Calendar",
+     "Email",
+     "Phone",
+     "Appointment Owner",
+     "Created By",
+     "Mode",
+     "Appointment Source",
+     "Outcome",
+     "Rescheduled",
+     "Source",
+     "Affiliate UTM Campaign",
+     "Affiliate UTM Medium",
+     "Affiliate UTM Content",
+     "Affiliate UTM Source",
+     "Affiliate UTM Term",
+     "Affiliate Form",
+     "CONTACT  CREATE DATE",
+     "TAG",
+     "Days Between Booking & Appointment",
+     "Same Day Booking?",
+     "TIME Booked",
+     "Booking Time",
+     "APPT Date",
+     "Date Booked",
+     "Appt Time",
+     "Inbound Calls Prior to Booking",
+     "Outbound Calls Prior to Booking",
+     "Voicemails Prior to Booking",
+     "TOTAL Calls prior to Booking",
+     "Booked without Calls",
+     "Average Handle Time",
+     "",
+     "All",
+     "Time Booked",
+     "New Patient Intake Form Submitted",
+     "New Patient Intake Form Date & Time Submitted",
+     "Intake Lead Time\n(Form submitted before Appt)",
+     "Pipeline",
+     "A&D List based on Weekly Result Sheet",
+     "Weekly Result 13.0"
+    ]
+   },
+   "name": "Lookup Appointment ID",
+   "type": "google_sheets",
+   "next": "e6c2fc24-25e7-44a5-b0ad-fc5503ae720a",
+   "parentKey": "d70d5af0-5c5d-4a38-8878-a484422eb643"
+  },
+  {
+   "id": "e6c2fc24-25e7-44a5-b0ad-fc5503ae720a",
+   "stepIndex": 6,
+   "parent": "d70d5af0-5c5d-4a38-8878-a484422eb643",
+   "order": 1,
+   "attributes": {
+    "type": "google_sheets",
+    "action": {
+     "id": "update_row_from_lookup",
+     "name": "Update Spreadsheet Row using Lookup"
+    },
+    "account": {
+     "id": "100464418921113716943",
+     "name": "reports@mwcforme.com",
+     "idType": "altId"
+    },
+    "drive": {
+     "id": "my_drive",
+     "name": "My Drive"
+    },
+    "spreadsheet": {
+     "id": "1_Qji8O_7ZL5tSa7lbb4HwCPicyYkDj_OBseUfrh2etE",
+     "name": "Appointment Study"
+    },
+    "sheet": {
+     "id": "5",
+     "name": "Appt Report Raw"
+    },
+    "columnRange": [
+     "A",
+     "L"
+    ],
+    "values": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     "showed"
+    ],
+    "lookupStep": {
+     "label": "#1 Lookup Appointment ID",
+     "value": "0c24a02c-47c2-4a6d-b438-c6db95892775",
+     "id": "0c24a02c-47c2-4a6d-b438-c6db95892775",
+     "stepIndex": 1
+    },
+    "sheetHeaders": [
+     "Appointment Id",
+     "Requested Time",
+     "Date Added",
+     "Contact Name",
+     "Calendar",
+     "Email",
+     "Phone",
+     "Appointment Owner",
+     "Created By",
+     "Mode",
+     "Appointment Source",
+     "Outcome",
+     "Rescheduled",
+     "Source",
+     "Affiliate UTM Campaign",
+     "Affiliate UTM Medium",
+     "Affiliate UTM Content",
+     "Affiliate UTM Source",
+     "Affiliate UTM Term",
+     "Affiliate Form",
+     "CONTACT  CREATE DATE",
+     "TAG",
+     "Days Between Booking & Appointment",
+     "Same Day Booking?",
+     "TIME Booked",
+     "Booking Time",
+     "APPT Date",
+     "Date Booked",
+     "Appt Time",
+     "Inbound Calls Prior to Booking",
+     "Outbound Calls Prior to Booking",
+     "Voicemails Prior to Booking",
+     "TOTAL Calls prior to Booking",
+     "Booked without Calls",
+     "Average Handle Time",
+     "",
+     "All",
+     "Time Booked",
+     "New Patient Intake Form Submitted",
+     "New Patient Intake Form Date & Time Submitted",
+     "Intake Lead Time\n(Form submitted before Appt)",
+     "Pipeline",
+     "A&D List based on Weekly Result Sheet",
+     "Weekly Result 13.0"
+    ],
+    "options": {}
+   },
+   "name": "Update column L (outcome) to showed",
+   "type": "google_sheets",
+   "next": "d7215968-938f-497c-bcd7-ff582c32b096",
+   "parentKey": "5c1e2b54-5704-448f-9017-0568c4244ffd"
+  },
+  {
+   "id": "d7215968-938f-497c-bcd7-ff582c32b096",
+   "parent": "d70d5af0-5c5d-4a38-8878-a484422eb643",
+   "order": 2,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "149789d5-12cf-4e2b-96c2-7d35f1202e59",
+      "name": "A&D",
+      "segments": [
+       {
+        "__segmentId": "ed213e64-0c6b-4637-8e46-07524a9bf08d",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "cClk7ad4PHxiake2lChS",
+          "conditionOperator": "==",
+          "conditionValue": "A&D (Advised and Declined)",
+          "__conditionId": "a366bf50-3ed9-4556-b0cc-9cffa26019fe",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "c073e735-0296-4be4-874d-ced5709bc264",
+      "name": "MU",
+      "segments": [
+       {
+        "__segmentId": "ed213e64-0c6b-4637-8e46-07524a9bf08d",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "cClk7ad4PHxiake2lChS",
+          "conditionOperator": "==",
+          "conditionValue": "MUT (Medically Untreatable)",
+          "__conditionId": "a366bf50-3ed9-4556-b0cc-9cffa26019fe",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Condition",
+    "version": 2,
+    "noneBranchName": "SOLD"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "149789d5-12cf-4e2b-96c2-7d35f1202e59",
+    "c073e735-0296-4be4-874d-ced5709bc264",
+    "5e233800-92ac-4d12-83f0-2ac409046cc4"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "e6c2fc24-25e7-44a5-b0ad-fc5503ae720a"
+  },
+  {
+   "id": "149789d5-12cf-4e2b-96c2-7d35f1202e59",
+   "parent": "d7215968-938f-497c-bcd7-ff582c32b096",
+   "order": 3,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "A&D",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "ffcf68a1-b405-4e55-84c6-7bc89ead5297",
+   "sibling": [
+    "c073e735-0296-4be4-874d-ced5709bc264",
+    "5e233800-92ac-4d12-83f0-2ac409046cc4"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "d7215968-938f-497c-bcd7-ff582c32b096"
+  },
+  {
+   "id": "ffcf68a1-b405-4e55-84c6-7bc89ead5297",
+   "parent": "149789d5-12cf-4e2b-96c2-7d35f1202e59",
+   "order": 0,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "ad69e47e-0143-40b2-a1ad-98faa48a23f9",
+      "name": "Not Ready",
+      "segments": [
+       {
+        "__segmentId": "c77711b5-63f7-4b24-8668-706b02e69a92",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "XVzxGceorU5WixdjMHvA",
+          "conditionOperator": "==",
+          "conditionValue": "Not Ready",
+          "__conditionId": "7c4434b8-a227-4292-9b5f-b455a67fbf9b",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "3c6710e8-d838-4762-8ff0-97b36ab8bf28",
+      "name": "Think it Over / Sleep On It",
+      "segments": [
+       {
+        "__segmentId": "c77711b5-63f7-4b24-8668-706b02e69a92",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "XVzxGceorU5WixdjMHvA",
+          "conditionOperator": "==",
+          "conditionValue": "Think it Over / Sleep On It",
+          "__conditionId": "7c4434b8-a227-4292-9b5f-b455a67fbf9b",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "1addc25e-d94b-4695-8bde-2a5d6f64ea5d",
+      "name": "Cost / Price Objection",
+      "segments": [
+       {
+        "__segmentId": "c77711b5-63f7-4b24-8668-706b02e69a92",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "XVzxGceorU5WixdjMHvA",
+          "conditionOperator": "==",
+          "conditionValue": "Cost / Price Objection",
+          "__conditionId": "7c4434b8-a227-4292-9b5f-b455a67fbf9b",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "fc853ec2-eba2-43fd-8247-4a7215966dbd",
+      "name": "Not Interested",
+      "segments": [
+       {
+        "__segmentId": "c77711b5-63f7-4b24-8668-706b02e69a92",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "XVzxGceorU5WixdjMHvA",
+          "conditionOperator": "==",
+          "conditionValue": "Not Interested",
+          "__conditionId": "7c4434b8-a227-4292-9b5f-b455a67fbf9b",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "5dd9d6da-8a08-46c7-91a1-ebfe7de55abc",
+      "name": "Not Qualified / MU",
+      "segments": [
+       {
+        "__segmentId": "c77711b5-63f7-4b24-8668-706b02e69a92",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "XVzxGceorU5WixdjMHvA",
+          "conditionOperator": "==",
+          "conditionValue": "Not Qualified / MU",
+          "__conditionId": "7c4434b8-a227-4292-9b5f-b455a67fbf9b",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "ca365e42-8c73-407e-9fe5-a04fecc01b1e",
+      "name": "Others",
+      "segments": [
+       {
+        "__segmentId": "c77711b5-63f7-4b24-8668-706b02e69a92",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "XVzxGceorU5WixdjMHvA",
+          "conditionOperator": "==",
+          "conditionValue": "Others",
+          "__conditionId": "7c4434b8-a227-4292-9b5f-b455a67fbf9b",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "A&D Lost Reason",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "ad69e47e-0143-40b2-a1ad-98faa48a23f9",
+    "3c6710e8-d838-4762-8ff0-97b36ab8bf28",
+    "1addc25e-d94b-4695-8bde-2a5d6f64ea5d",
+    "fc853ec2-eba2-43fd-8247-4a7215966dbd",
+    "5dd9d6da-8a08-46c7-91a1-ebfe7de55abc",
+    "ca365e42-8c73-407e-9fe5-a04fecc01b1e",
+    "5509595a-1dca-4ab5-9ca5-4c4ac6d17dc2"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "149789d5-12cf-4e2b-96c2-7d35f1202e59"
+  },
+  {
+   "id": "ad69e47e-0143-40b2-a1ad-98faa48a23f9",
+   "parent": "ffcf68a1-b405-4e55-84c6-7bc89ead5297",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Not Ready",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "4e6f8907-11d8-47bc-b296-9eec4da73939",
+   "sibling": [
+    "3c6710e8-d838-4762-8ff0-97b36ab8bf28",
+    "1addc25e-d94b-4695-8bde-2a5d6f64ea5d",
+    "fc853ec2-eba2-43fd-8247-4a7215966dbd",
+    "5dd9d6da-8a08-46c7-91a1-ebfe7de55abc",
+    "ca365e42-8c73-407e-9fe5-a04fecc01b1e",
+    "5509595a-1dca-4ab5-9ca5-4c4ac6d17dc2"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "ffcf68a1-b405-4e55-84c6-7bc89ead5297"
+  },
+  {
+   "id": "4e6f8907-11d8-47bc-b296-9eec4da73939",
+   "parent": "ad69e47e-0143-40b2-a1ad-98faa48a23f9",
+   "order": 0,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "rspsjkBMNYGldN3R71ji",
+    "pipeline_stage_id": "ffc7879d-bc78-43d3-b4e8-76dd1da6b170",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696fbbdc4a05552ad9a423eb"
+   },
+   "name": "Update Opportunity: VAB A&D",
+   "type": "create_opportunity",
+   "next": "bc4387bc-32f1-4de8-b778-10892d14ad1d",
+   "parentKey": "ad69e47e-0143-40b2-a1ad-98faa48a23f9"
+  },
+  {
+   "id": "bc4387bc-32f1-4de8-b778-10892d14ad1d",
+   "parent": "ad69e47e-0143-40b2-a1ad-98faa48a23f9",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "7WMjJykajYpvAXys4m0z",
+    "pipeline_stage_id": "f6ff8f1b-33cb-43e6-a17e-96149072b783",
+    "opportunity_name": "{{contact.name}} - {{contact.location}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "open",
+    "opportunity_source": ""
+   },
+   "name": "Update Opportunity: A&D",
+   "type": "create_opportunity",
+   "next": "d361d5cc-71ac-4eff-8d14-3a2ba3fffcb6",
+   "parentKey": "4e6f8907-11d8-47bc-b296-9eec4da73939"
+  },
+  {
+   "id": "d361d5cc-71ac-4eff-8d14-3a2ba3fffcb6",
+   "parent": "ad69e47e-0143-40b2-a1ad-98faa48a23f9",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "uUm5DInIjq6uYlg9HDwU",
+    "pipeline_stage_id": "5f460760-5532-45d9-b95f-d6dabcadccf3",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696fbbdc4a05552ad9a423eb"
+   },
+   "name": "Update Opportunity: Sales Prod",
+   "type": "create_opportunity",
+   "parentKey": "bc4387bc-32f1-4de8-b778-10892d14ad1d"
+  },
+  {
+   "id": "3c6710e8-d838-4762-8ff0-97b36ab8bf28",
+   "parent": "ffcf68a1-b405-4e55-84c6-7bc89ead5297",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Think it Over / Sleep On It",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "4c1071e6-9554-4b0d-b6a4-05c5f26606a0",
+   "sibling": [
+    "ad69e47e-0143-40b2-a1ad-98faa48a23f9",
+    "1addc25e-d94b-4695-8bde-2a5d6f64ea5d",
+    "fc853ec2-eba2-43fd-8247-4a7215966dbd",
+    "5dd9d6da-8a08-46c7-91a1-ebfe7de55abc",
+    "ca365e42-8c73-407e-9fe5-a04fecc01b1e",
+    "5509595a-1dca-4ab5-9ca5-4c4ac6d17dc2"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "ffcf68a1-b405-4e55-84c6-7bc89ead5297"
+  },
+  {
+   "id": "4c1071e6-9554-4b0d-b6a4-05c5f26606a0",
+   "parent": "3c6710e8-d838-4762-8ff0-97b36ab8bf28",
+   "order": 0,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "rspsjkBMNYGldN3R71ji",
+    "pipeline_stage_id": "ffc7879d-bc78-43d3-b4e8-76dd1da6b170",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696fbbdcf76e17bd4af1ce52"
+   },
+   "name": "Update Opportunity: VAB A&D",
+   "type": "create_opportunity",
+   "next": "eb912643-f8f4-47f8-8118-808809e43858",
+   "parentKey": "3c6710e8-d838-4762-8ff0-97b36ab8bf28"
+  },
+  {
+   "id": "eb912643-f8f4-47f8-8118-808809e43858",
+   "parent": "3c6710e8-d838-4762-8ff0-97b36ab8bf28",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "7WMjJykajYpvAXys4m0z",
+    "pipeline_stage_id": "f6ff8f1b-33cb-43e6-a17e-96149072b783",
+    "opportunity_name": "{{contact.name}} - {{contact.location}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "open",
+    "opportunity_source": ""
+   },
+   "name": "Update Opportunity: A&D",
+   "type": "create_opportunity",
+   "next": "50537ba9-c926-4193-bf40-325c8ad8ca2b",
+   "parentKey": "4c1071e6-9554-4b0d-b6a4-05c5f26606a0"
+  },
+  {
+   "id": "50537ba9-c926-4193-bf40-325c8ad8ca2b",
+   "parent": "3c6710e8-d838-4762-8ff0-97b36ab8bf28",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "uUm5DInIjq6uYlg9HDwU",
+    "pipeline_stage_id": "5f460760-5532-45d9-b95f-d6dabcadccf3",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696fbbdcf76e17bd4af1ce52"
+   },
+   "name": "Update Opportunity: Sales Prod",
+   "type": "create_opportunity",
+   "parentKey": "eb912643-f8f4-47f8-8118-808809e43858"
+  },
+  {
+   "id": "1addc25e-d94b-4695-8bde-2a5d6f64ea5d",
+   "parent": "ffcf68a1-b405-4e55-84c6-7bc89ead5297",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Cost / Price Objection",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "d2b9b2ed-4770-4851-aaf5-68b4b795d764",
+   "sibling": [
+    "ad69e47e-0143-40b2-a1ad-98faa48a23f9",
+    "3c6710e8-d838-4762-8ff0-97b36ab8bf28",
+    "fc853ec2-eba2-43fd-8247-4a7215966dbd",
+    "5dd9d6da-8a08-46c7-91a1-ebfe7de55abc",
+    "ca365e42-8c73-407e-9fe5-a04fecc01b1e",
+    "5509595a-1dca-4ab5-9ca5-4c4ac6d17dc2"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "ffcf68a1-b405-4e55-84c6-7bc89ead5297"
+  },
+  {
+   "id": "d2b9b2ed-4770-4851-aaf5-68b4b795d764",
+   "parent": "1addc25e-d94b-4695-8bde-2a5d6f64ea5d",
+   "order": 0,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "rspsjkBMNYGldN3R71ji",
+    "pipeline_stage_id": "ffc7879d-bc78-43d3-b4e8-76dd1da6b170",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696f4d3b726a64fb6987cbd6"
+   },
+   "name": "Update Opportunity: VAB A&D",
+   "type": "create_opportunity",
+   "next": "cace5584-cfac-4913-b79d-e36c1daad79e",
+   "parentKey": "1addc25e-d94b-4695-8bde-2a5d6f64ea5d"
+  },
+  {
+   "id": "cace5584-cfac-4913-b79d-e36c1daad79e",
+   "parent": "1addc25e-d94b-4695-8bde-2a5d6f64ea5d",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "7WMjJykajYpvAXys4m0z",
+    "pipeline_stage_id": "f6ff8f1b-33cb-43e6-a17e-96149072b783",
+    "opportunity_name": "{{contact.name}} - {{contact.location}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "open",
+    "opportunity_source": ""
+   },
+   "name": "Update Opportunity: A&D",
+   "type": "create_opportunity",
+   "next": "e05be47c-1e5e-478b-ac03-2c60972b77cf",
+   "parentKey": "d2b9b2ed-4770-4851-aaf5-68b4b795d764"
+  },
+  {
+   "id": "e05be47c-1e5e-478b-ac03-2c60972b77cf",
+   "parent": "1addc25e-d94b-4695-8bde-2a5d6f64ea5d",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "uUm5DInIjq6uYlg9HDwU",
+    "pipeline_stage_id": "5f460760-5532-45d9-b95f-d6dabcadccf3",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696f4d3b726a64fb6987cbd6"
+   },
+   "name": "Update Opportunity: Sales Prod",
+   "type": "create_opportunity",
+   "parentKey": "cace5584-cfac-4913-b79d-e36c1daad79e"
+  },
+  {
+   "id": "fc853ec2-eba2-43fd-8247-4a7215966dbd",
+   "parent": "ffcf68a1-b405-4e55-84c6-7bc89ead5297",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Not Interested",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "9e7e8207-80ac-4e86-9964-27827af7aac4",
+   "sibling": [
+    "ad69e47e-0143-40b2-a1ad-98faa48a23f9",
+    "3c6710e8-d838-4762-8ff0-97b36ab8bf28",
+    "1addc25e-d94b-4695-8bde-2a5d6f64ea5d",
+    "5dd9d6da-8a08-46c7-91a1-ebfe7de55abc",
+    "ca365e42-8c73-407e-9fe5-a04fecc01b1e",
+    "5509595a-1dca-4ab5-9ca5-4c4ac6d17dc2"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "ffcf68a1-b405-4e55-84c6-7bc89ead5297"
+  },
+  {
+   "id": "9e7e8207-80ac-4e86-9964-27827af7aac4",
+   "parent": "fc853ec2-eba2-43fd-8247-4a7215966dbd",
+   "order": 0,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "rspsjkBMNYGldN3R71ji",
+    "pipeline_stage_id": "ffc7879d-bc78-43d3-b4e8-76dd1da6b170",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696f4d3be95a9c062dfcc959"
+   },
+   "name": "Update Opportunity: VAB A&D",
+   "type": "create_opportunity",
+   "next": "c2f86627-c3c7-4adf-9c0e-4090d81985d9",
+   "parentKey": "fc853ec2-eba2-43fd-8247-4a7215966dbd"
+  },
+  {
+   "id": "c2f86627-c3c7-4adf-9c0e-4090d81985d9",
+   "parent": "fc853ec2-eba2-43fd-8247-4a7215966dbd",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "7WMjJykajYpvAXys4m0z",
+    "pipeline_stage_id": "f6ff8f1b-33cb-43e6-a17e-96149072b783",
+    "opportunity_name": "{{contact.name}} - {{contact.location}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "open",
+    "opportunity_source": ""
+   },
+   "name": "Update Opportunity: A&D",
+   "type": "create_opportunity",
+   "next": "20a86929-bdef-4da2-9a23-b62593c289bc",
+   "parentKey": "9e7e8207-80ac-4e86-9964-27827af7aac4"
+  },
+  {
+   "id": "20a86929-bdef-4da2-9a23-b62593c289bc",
+   "parent": "fc853ec2-eba2-43fd-8247-4a7215966dbd",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "uUm5DInIjq6uYlg9HDwU",
+    "pipeline_stage_id": "5f460760-5532-45d9-b95f-d6dabcadccf3",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696f4d3be95a9c062dfcc959"
+   },
+   "name": "Update Opportunity: Sales Prod",
+   "type": "create_opportunity",
+   "parentKey": "c2f86627-c3c7-4adf-9c0e-4090d81985d9"
+  },
+  {
+   "id": "5dd9d6da-8a08-46c7-91a1-ebfe7de55abc",
+   "parent": "ffcf68a1-b405-4e55-84c6-7bc89ead5297",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Not Qualified / MU",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "0a78fc9d-fc64-4375-8cb8-12e489c8ddb9",
+   "sibling": [
+    "ad69e47e-0143-40b2-a1ad-98faa48a23f9",
+    "3c6710e8-d838-4762-8ff0-97b36ab8bf28",
+    "1addc25e-d94b-4695-8bde-2a5d6f64ea5d",
+    "fc853ec2-eba2-43fd-8247-4a7215966dbd",
+    "ca365e42-8c73-407e-9fe5-a04fecc01b1e",
+    "5509595a-1dca-4ab5-9ca5-4c4ac6d17dc2"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "ffcf68a1-b405-4e55-84c6-7bc89ead5297"
+  },
+  {
+   "id": "0a78fc9d-fc64-4375-8cb8-12e489c8ddb9",
+   "parent": "5dd9d6da-8a08-46c7-91a1-ebfe7de55abc",
+   "order": 0,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "rspsjkBMNYGldN3R71ji",
+    "pipeline_stage_id": "ffc7879d-bc78-43d3-b4e8-76dd1da6b170",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696f4d3b2a9d6f12607f4b8f"
+   },
+   "name": "Update Opportunity: VAB A&D",
+   "type": "create_opportunity",
+   "next": "92d28fd4-f4fd-4c1b-80d7-3972d528a608",
+   "parentKey": "5dd9d6da-8a08-46c7-91a1-ebfe7de55abc"
+  },
+  {
+   "id": "92d28fd4-f4fd-4c1b-80d7-3972d528a608",
+   "parent": "5dd9d6da-8a08-46c7-91a1-ebfe7de55abc",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "7WMjJykajYpvAXys4m0z",
+    "pipeline_stage_id": "f6ff8f1b-33cb-43e6-a17e-96149072b783",
+    "opportunity_name": "{{contact.name}} - {{contact.location}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "open",
+    "opportunity_source": ""
+   },
+   "name": "Update Opportunity: A&D",
+   "type": "create_opportunity",
+   "next": "356fd5fd-6f43-458a-afa5-d0fde5669cfd",
+   "parentKey": "0a78fc9d-fc64-4375-8cb8-12e489c8ddb9"
+  },
+  {
+   "id": "356fd5fd-6f43-458a-afa5-d0fde5669cfd",
+   "parent": "5dd9d6da-8a08-46c7-91a1-ebfe7de55abc",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "uUm5DInIjq6uYlg9HDwU",
+    "pipeline_stage_id": "5f460760-5532-45d9-b95f-d6dabcadccf3",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696f4d3b2a9d6f12607f4b8f"
+   },
+   "name": "Update Opportunity: Sales Prod",
+   "type": "create_opportunity",
+   "parentKey": "92d28fd4-f4fd-4c1b-80d7-3972d528a608"
+  },
+  {
+   "id": "ca365e42-8c73-407e-9fe5-a04fecc01b1e",
+   "parent": "ffcf68a1-b405-4e55-84c6-7bc89ead5297",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Others",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "a848a145-8be3-4636-a193-c48b54a9294a",
+   "sibling": [
+    "ad69e47e-0143-40b2-a1ad-98faa48a23f9",
+    "3c6710e8-d838-4762-8ff0-97b36ab8bf28",
+    "1addc25e-d94b-4695-8bde-2a5d6f64ea5d",
+    "fc853ec2-eba2-43fd-8247-4a7215966dbd",
+    "5dd9d6da-8a08-46c7-91a1-ebfe7de55abc",
+    "5509595a-1dca-4ab5-9ca5-4c4ac6d17dc2"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "ffcf68a1-b405-4e55-84c6-7bc89ead5297"
+  },
+  {
+   "id": "a848a145-8be3-4636-a193-c48b54a9294a",
+   "parent": "ca365e42-8c73-407e-9fe5-a04fecc01b1e",
+   "order": 0,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "rspsjkBMNYGldN3R71ji",
+    "pipeline_stage_id": "ffc7879d-bc78-43d3-b4e8-76dd1da6b170",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696fbbdc10cdb5d6b92f0cce"
+   },
+   "name": "Update Opportunity: VAB A&D",
+   "type": "create_opportunity",
+   "next": "10ab41f3-8ff4-4375-9e8d-398f5df1f0c6",
+   "parentKey": "ca365e42-8c73-407e-9fe5-a04fecc01b1e"
+  },
+  {
+   "id": "10ab41f3-8ff4-4375-9e8d-398f5df1f0c6",
+   "parent": "ca365e42-8c73-407e-9fe5-a04fecc01b1e",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "7WMjJykajYpvAXys4m0z",
+    "pipeline_stage_id": "f6ff8f1b-33cb-43e6-a17e-96149072b783",
+    "opportunity_name": "{{contact.name}} - {{contact.location}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "open",
+    "opportunity_source": ""
+   },
+   "name": "Update Opportunity: A&D",
+   "type": "create_opportunity",
+   "next": "f2bc8d7c-42c2-4899-95e9-a0edd41a0d46",
+   "parentKey": "a848a145-8be3-4636-a193-c48b54a9294a"
+  },
+  {
+   "id": "f2bc8d7c-42c2-4899-95e9-a0edd41a0d46",
+   "parent": "ca365e42-8c73-407e-9fe5-a04fecc01b1e",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "uUm5DInIjq6uYlg9HDwU",
+    "pipeline_stage_id": "5f460760-5532-45d9-b95f-d6dabcadccf3",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696fbbdc10cdb5d6b92f0cce"
+   },
+   "name": "Update Opportunity: Sales Prod",
+   "type": "create_opportunity",
+   "parentKey": "10ab41f3-8ff4-4375-9e8d-398f5df1f0c6"
+  },
+  {
+   "id": "5509595a-1dca-4ab5-9ca5-4c4ac6d17dc2",
+   "parent": "ffcf68a1-b405-4e55-84c6-7bc89ead5297",
+   "order": 1,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "9e9d0544-47a4-4b13-aea4-a81519e4d6bb",
+   "sibling": [
+    "ad69e47e-0143-40b2-a1ad-98faa48a23f9",
+    "3c6710e8-d838-4762-8ff0-97b36ab8bf28",
+    "1addc25e-d94b-4695-8bde-2a5d6f64ea5d",
+    "fc853ec2-eba2-43fd-8247-4a7215966dbd",
+    "5dd9d6da-8a08-46c7-91a1-ebfe7de55abc",
+    "ca365e42-8c73-407e-9fe5-a04fecc01b1e"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "ffcf68a1-b405-4e55-84c6-7bc89ead5297"
+  },
+  {
+   "id": "9e9d0544-47a4-4b13-aea4-a81519e4d6bb",
+   "parent": "5509595a-1dca-4ab5-9ca5-4c4ac6d17dc2",
+   "order": 0,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "rspsjkBMNYGldN3R71ji",
+    "pipeline_stage_id": "ffc7879d-bc78-43d3-b4e8-76dd1da6b170",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696fbbdc10cdb5d6b92f0cce"
+   },
+   "name": "Update Opportunity: VAB A&D",
+   "type": "create_opportunity",
+   "next": "1be38285-c689-497a-9a40-40edaa38413e",
+   "parentKey": "5509595a-1dca-4ab5-9ca5-4c4ac6d17dc2"
+  },
+  {
+   "id": "1be38285-c689-497a-9a40-40edaa38413e",
+   "parent": "5509595a-1dca-4ab5-9ca5-4c4ac6d17dc2",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "7WMjJykajYpvAXys4m0z",
+    "pipeline_stage_id": "f6ff8f1b-33cb-43e6-a17e-96149072b783",
+    "opportunity_name": "{{contact.name}} - {{contact.location}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "open",
+    "opportunity_source": ""
+   },
+   "name": "Update Opportunity: A&D",
+   "type": "create_opportunity",
+   "next": "eb07394e-6a92-4fa1-b58a-a0398a73b606",
+   "parentKey": "9e9d0544-47a4-4b13-aea4-a81519e4d6bb"
+  },
+  {
+   "id": "eb07394e-6a92-4fa1-b58a-a0398a73b606",
+   "parent": "5509595a-1dca-4ab5-9ca5-4c4ac6d17dc2",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "uUm5DInIjq6uYlg9HDwU",
+    "pipeline_stage_id": "5f460760-5532-45d9-b95f-d6dabcadccf3",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696fbbdc10cdb5d6b92f0cce"
+   },
+   "name": "Update Opportunity: Sales Prod",
+   "type": "create_opportunity",
+   "parentKey": "1be38285-c689-497a-9a40-40edaa38413e"
+  },
+  {
+   "id": "c073e735-0296-4be4-874d-ced5709bc264",
+   "parent": "d7215968-938f-497c-bcd7-ff582c32b096",
+   "order": 3,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "MU",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "025e5d6d-96c4-4ad8-bf81-c0170abbad19",
+   "sibling": [
+    "149789d5-12cf-4e2b-96c2-7d35f1202e59",
+    "5e233800-92ac-4d12-83f0-2ac409046cc4"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "d7215968-938f-497c-bcd7-ff582c32b096"
+  },
+  {
+   "id": "025e5d6d-96c4-4ad8-bf81-c0170abbad19",
+   "parent": "c073e735-0296-4be4-874d-ced5709bc264",
+   "order": 0,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "rspsjkBMNYGldN3R71ji",
+    "pipeline_stage_id": "831f66ae-95c1-40bd-8f15-9baa99a51efa",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696f4d3b2a9d6f12607f4b8f"
+   },
+   "name": "Update Opportunity: VAB MU",
+   "type": "create_opportunity",
+   "next": "0e4a2e49-a864-42c3-a7d6-492835cf9d18",
+   "parentKey": "c073e735-0296-4be4-874d-ced5709bc264"
+  },
+  {
+   "id": "0e4a2e49-a864-42c3-a7d6-492835cf9d18",
+   "parent": "c073e735-0296-4be4-874d-ced5709bc264",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "GTwmWC8TwPIH7PONUtuw",
+    "pipeline_stage_id": "97fa7367-930a-4438-b97d-8e2a1295b726",
+    "opportunity_name": "{{contact.name}} - {{contact.location}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696f4d3b2a9d6f12607f4b8f"
+   },
+   "name": "Update Opportunity: MU",
+   "type": "create_opportunity",
+   "next": "9fec3a75-41f8-40f6-be2a-190619922828",
+   "parentKey": "025e5d6d-96c4-4ad8-bf81-c0170abbad19"
+  },
+  {
+   "id": "9fec3a75-41f8-40f6-be2a-190619922828",
+   "parent": "c073e735-0296-4be4-874d-ced5709bc264",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "uUm5DInIjq6uYlg9HDwU",
+    "pipeline_stage_id": "5f460760-5532-45d9-b95f-d6dabcadccf3",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696f4d3b2a9d6f12607f4b8f"
+   },
+   "name": "Update Opportunity: Sales Prod",
+   "type": "create_opportunity",
+   "parentKey": "0e4a2e49-a864-42c3-a7d6-492835cf9d18"
+  },
+  {
+   "id": "5e233800-92ac-4d12-83f0-2ac409046cc4",
+   "parent": "d7215968-938f-497c-bcd7-ff582c32b096",
+   "order": 3,
+   "attributes": {
+    "else": true
+   },
+   "name": "SOLD",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "f8c8f808-5e55-488d-9e7c-770ecfad2ed4",
+   "sibling": [
+    "149789d5-12cf-4e2b-96c2-7d35f1202e59",
+    "c073e735-0296-4be4-874d-ced5709bc264"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "d7215968-938f-497c-bcd7-ff582c32b096"
+  },
+  {
+   "id": "f8c8f808-5e55-488d-9e7c-770ecfad2ed4",
+   "parentKey": "5e233800-92ac-4d12-83f0-2ac409046cc4",
+   "parent": "5e233800-92ac-4d12-83f0-2ac409046cc4",
+   "type": "wait",
+   "name": "Wait: computation of total",
+   "attributes": {
+    "type": "condition",
+    "startAfter": {
+     "type": "minutes",
+     "value": 0,
+     "when": "after"
+    },
+    "name": "Wait: computation of total",
+    "cat": "",
+    "condition": {
+     "currentRecipeType": "CUSTOM",
+     "branches": [
+      {
+       "id": "6626a113-27d6-4b15-afba-7ccbd9de74fd",
+       "name": "Branch",
+       "segments": [
+        {
+         "__segmentId": "6c81c324-3dcb-4c03-a903-22703e78e9ee",
+         "operator": "and",
+         "conditions": [
+          {
+           "conditionType": "contact_detail",
+           "conditionSubType": "cxUGCjBinbuh0spb4LQS",
+           "conditionOperator": "has_value",
+           "__conditionId": "d9eee0a0-29ee-4821-8598-6f3b148f9095",
+           "ifElseNodeId": "",
+           "__customFieldType__": "standard",
+           "isWait": true,
+           "nestedDropdownTypes": [
+            "inboundWebhookRequest",
+            "sheet",
+            "datetime_formatter",
+            "custom_webhook",
+            "array_functions",
+            "ivr_gather",
+            "ivr_connect_call",
+            "custom_code",
+            "ai_agent",
+            "task-notification"
+           ],
+           "allowIsOperatorTypes": [
+            "contact_reply",
+            "inboundWebhookRequest",
+            "custom_webhook",
+            "custom_code",
+            "ai_agent",
+            "contact_detail",
+            "array_functions",
+            "appointment",
+            "service_booking",
+            "rental_booking"
+           ]
+          }
+         ]
+        }
+       ],
+       "operator": "and",
+       "showErrors": false,
+       "branchNameError": "Branch name cannot be empty!"
+      }
+     ],
+     "operator": "and",
+     "if": true,
+     "conditionName": "",
+     "version": 2,
+     "noneBranchName": "None"
+    },
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "order": 0,
+   "cat": "",
+   "next": "82542a33-fe8c-46f7-9fd3-f5e97c65b645"
+  },
+  {
+   "id": "82542a33-fe8c-46f7-9fd3-f5e97c65b645",
+   "parent": "5e233800-92ac-4d12-83f0-2ac409046cc4",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "jRqb0pvexu04zSACPXmd",
+    "pipeline_stage_id": "57be574d-9208-47ea-89ff-15c61e3ebb4a",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "won",
+    "opportunity_source": ""
+   },
+   "name": "Update Opportunity: Richmond SOLD",
+   "type": "create_opportunity",
+   "next": "0087087d-e139-427e-b05c-9c9a7abeac36",
+   "parentKey": "f8c8f808-5e55-488d-9e7c-770ecfad2ed4"
+  },
+  {
+   "id": "0087087d-e139-427e-b05c-9c9a7abeac36",
+   "parent": "5e233800-92ac-4d12-83f0-2ac409046cc4",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "uUm5DInIjq6uYlg9HDwU",
+    "pipeline_stage_id": "e07ccbae-b370-43b3-a531-a6ee96216aef",
+    "opportunity_name": "{{contact.name}}",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "won",
+    "opportunity_source": ""
+   },
+   "name": "Update Opportunity: Sales Prod",
+   "type": "create_opportunity",
+   "next": "e9fbfb93-84c7-49a6-b39f-0a6298e3fae0",
+   "parentKey": "82542a33-fe8c-46f7-9fd3-f5e97c65b645"
+  },
+  {
+   "id": "e9fbfb93-84c7-49a6-b39f-0a6298e3fae0",
+   "parent": "5e233800-92ac-4d12-83f0-2ac409046cc4",
+   "order": 3,
+   "attributes": {
+    "type": "update_contact_field",
+    "actionType": "update_field_data",
+    "fields": [
+     {
+      "field": "type",
+      "value": "Patient",
+      "title": "Contact type",
+      "type": "select",
+      "date": "",
+      "__customFieldType__": "customValues"
+     }
+    ]
+   },
+   "name": "Update to Patient",
+   "type": "update_contact_field",
+   "next": "d8eeff9f-05de-4214-b59e-faa11b39a4ff",
+   "parentKey": "0087087d-e139-427e-b05c-9c9a7abeac36"
+  },
+  {
+   "id": "d8eeff9f-05de-4214-b59e-faa11b39a4ff",
+   "parent": "5e233800-92ac-4d12-83f0-2ac409046cc4",
+   "order": 4,
+   "attributes": {
+    "tags": [
+     "patient/sold"
+    ]
+   },
+   "name": "Add Tag: Patient/sold",
+   "type": "add_contact_tag",
+   "next": "0af695d5-17fd-4db6-832e-1e290e59db90",
+   "parentKey": "e9fbfb93-84c7-49a6-b39f-0a6298e3fae0"
+  },
+  {
+   "id": "0af695d5-17fd-4db6-832e-1e290e59db90",
+   "parent": "5e233800-92ac-4d12-83f0-2ac409046cc4",
+   "order": 5,
+   "attributes": {},
+   "name": "SOLD - For Review/referral",
+   "type": "manual-call",
+   "parentKey": "d8eeff9f-05de-4214-b59e-faa11b39a4ff"
+  },
+  {
+   "id": "b6dc48cb-3cf3-47fa-9837-af980ffcd97f",
+   "parent": "5f1dd8f7-c093-42d1-97eb-fdd631945209",
+   "order": 1,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "f0d8ae76-29d0-4cf8-a3ca-56f374b0fb7d",
+    "fd517891-66ac-4e0d-a0e7-37df26133841",
+    "d70d5af0-5c5d-4a38-8878-a484422eb643"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "5f1dd8f7-c093-42d1-97eb-fdd631945209"
+  }
+ ]
+}

@@ -1,21 +1,320 @@
 {
-  "id": "09dfdfe0-cb78-440c-b35f-decbb9add3c6",
+ "id": "09dfdfe0-cb78-440c-b35f-decbb9add3c6",
+ "name": "04a. Intake Form Response",
+ "folder": "02. Appointments & Visit Journey",
+ "status": "published",
+ "updatedAt": "2026-06-04T16:40:00.990Z",
+ "version": 14,
+ "extracted_at": "2026-07-10T05:40:32Z",
+ "extraction_method": "ghl_backend_api",
+ "source": "GHL Active Workflows (live API)",
+ "workflowData": {
+  "_id": "09dfdfe0-cb78-440c-b35f-decbb9add3c6",
+  "locationId": "Ghstz8eIsHWLeXek47dk",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 2,
   "name": "04a. Intake Form Response",
-  "folder": "04. System Admin & Error Handling",
   "status": "published",
-  "version": 9,
-  "extracted_at": "2026-05-29T03:00:33Z",
-  "extraction_method": "backend_jwt",
-  "triggers": [],
-  "steps": [],
-  "messages_referenced": [],
-  "stats": {
-    "total_steps": 0,
-    "send_sms_count": 0,
-    "send_email_count": 0,
-    "wait_count": 0,
-    "if_else_count": 0,
-    "terminal_paths": 0
+  "version": 14,
+  "dataVersion": 7,
+  "allowMultiple": true,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/Ghstz8eIsHWLeXek47dk/workflows/09dfdfe0-cb78-440c-b35f-decbb9add3c6/14",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FGhstz8eIsHWLeXek47dk%2Fworkflows%2F09dfdfe0-cb78-440c-b35f-decbb9add3c6%2F14",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "type": "workflow",
+  "parentId": "d19faff7-3c76-44ec-8c05-59397c06aa08",
+  "updatedBy": "1UGaWoisLr0DONjwbenY",
+  "createdAt": "2026-01-13T16:43:59.602Z",
+  "updatedAt": "2026-06-04T16:40:00.990Z",
+  "deleted": false,
+  "allowMultipleOpportunity": true,
+  "creationSource": "builder",
+  "originType": "user",
+  "__v": 0,
+  "eventStartDate": null,
+  "window": null,
+  "workflowNote": null,
+  "triggersFilePath": "location/Ghstz8eIsHWLeXek47dk/workflow-triggers/09dfdfe0-cb78-440c-b35f-decbb9add3c6/10",
+  "isTriggerBucketMigrated": true,
+  "id": "09dfdfe0-cb78-440c-b35f-decbb9add3c6"
+ },
+ "triggers": [
+  {
+   "id": "G8JKtlyGFvDmmJgaVP5k",
+   "date_added": "2026-01-13T16:44:28.818Z",
+   "deleted": false,
+   "actions": [
+    {
+     "workflow_id": "09dfdfe0-cb78-440c-b35f-decbb9add3c6",
+     "type": "add_to_workflow"
+    }
+   ],
+   "type": "form_submission",
+   "masterType": "highlevel",
+   "workflow_id": "09dfdfe0-cb78-440c-b35f-decbb9add3c6",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "active": true,
+   "name": "Form Submitted: New Patient Intake form",
+   "date_updated": "2026-02-12T01:32:38.283Z",
+   "conditions": [
+    {
+     "operator": "is-any-of",
+     "field": "form.id",
+     "value": [
+      "ngZoU8sztJl6O872pZBR",
+      "y21epib0TnOCZtPhTkh9"
+     ],
+     "title": "Form is",
+     "type": "string"
+    }
+   ]
   },
-  "notes": ""
+  {
+   "id": "IFZ5lEmak6ixXBLyZkSh",
+   "date_updated": "2026-06-04T15:20:48.518Z",
+   "date_added": "2026-06-04T15:20:48.518Z",
+   "deleted": false,
+   "active": true,
+   "actions": [
+    {
+     "workflow_id": "09dfdfe0-cb78-440c-b35f-decbb9add3c6",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "is-any-of",
+     "field": "survey.id",
+     "value": [
+      "mZ3OtaeqMDoJaJ8Paq5r"
+     ],
+     "title": "Survey is",
+     "type": "string"
+    }
+   ],
+   "type": "survey_submission",
+   "masterType": "highlevel",
+   "workflow_id": "09dfdfe0-cb78-440c-b35f-decbb9add3c6",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "name": "Survey Submitted",
+   "belongs_to": "workflow",
+   "schedule_config": {}
+  }
+ ],
+ "dependentAssets": {},
+ "templates": [
+  {
+   "id": "2844a98f-0d4c-4e02-8276-f965d29a57f6",
+   "order": 0,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "b6fc8b94-9ac3-4dba-855e-8b3a202ac04b",
+      "name": "Form Submitted",
+      "segments": [
+       {
+        "__segmentId": "787597ce-b3bc-4900-bb0f-6e28207c854f",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "G8JKtlyGFvDmmJgaVP5k",
+          "__conditionId": "6636a62d-cd7b-453a-992a-51ed22dd4256",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "dcdb61f9-3a9f-43f5-90c1-39466570ba4c",
+      "name": "Survey Submitted",
+      "segments": [
+       {
+        "__segmentId": "aff46355-7515-4e42-be6d-26d025283cf0",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "IFZ5lEmak6ixXBLyZkSh",
+          "__conditionId": "b604e34f-bd0b-4441-a5e2-9f304d4b8bb3",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Intake form or Intake Survey?",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "b6fc8b94-9ac3-4dba-855e-8b3a202ac04b",
+    "dcdb61f9-3a9f-43f5-90c1-39466570ba4c",
+    "f7fb371d-c95b-4348-a7d9-ecc5080a3a55"
+   ],
+   "comments": [],
+   "nodeType": "condition-node"
+  },
+  {
+   "id": "b6fc8b94-9ac3-4dba-855e-8b3a202ac04b",
+   "parent": "2844a98f-0d4c-4e02-8276-f965d29a57f6",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Form Submitted",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "cceb2912-7bca-4155-9ddc-b28338101226",
+   "sibling": [
+    "dcdb61f9-3a9f-43f5-90c1-39466570ba4c",
+    "f7fb371d-c95b-4348-a7d9-ecc5080a3a55"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "2844a98f-0d4c-4e02-8276-f965d29a57f6"
+  },
+  {
+   "id": "cceb2912-7bca-4155-9ddc-b28338101226",
+   "order": 0,
+   "attributes": {
+    "html": "<p style=\"padding-left: 0px!important;\">Emergency Contact Name: {{ contact.emergency_contact_name }}</p><p style=\"padding-left: 0px!important;\">Emergency Contact Phone: {{ contact.emergency_contact_phone }}</p><p style=\"padding-left: 0px!important;\">Relationship: {{ contact.relationship }}</p><p style=\"padding-left: 0px!important;\">Primary Care Provider Name: {{ contact.emergency_contact_name }}</p><p style=\"padding-left: 0px!important;\">Clinic Name: {{ contact.emergency_contact_phone }}</p><p style=\"padding-left: 0px!important;\">May we contact your primary care provider regarding your care?: {{ contact.single_dropdown_17827 }}<br>Have you ever been diagnosed with any of the following? (Check all that apply): {{ contact.have_you_ever_been_diagnosed_with_any_of_the_following_check_all_that_apply }}</p><p style=\"padding-left: 0px!important;\">If yes, please provide brief details (optional): {{ contact.if_yes_please_provide_brief_details_optional }}</p><p style=\"padding-left: 0px!important;\">Current Medications: {{ contact.current_medications_include_name_dose_and_how_often_you_take_them }}</p><p style=\"padding-left: 0px!important;\">Do you currently smoke or use tobacco products?: {{ contact.contactsingle_dropdown_17827_8d1_copy }}</p><p style=\"padding-left: 0px!important;\">Do you consume alcohol?: {{ contact.contactsingle_dropdown_17827_8d1_copy_qrg_copy }}</p><p style=\"padding-left: 0px!important;\">Have you ever used testosterone or other hormone therapy?: {{ contact.contactsingle_dropdown_17827_8d1_copy_qrg_copy_dtk_copy }}</p><p style=\"padding-left: 0px!important;\">If yes, please describe: {{ contact.if_yes_please_describe_optional }}</p><p style=\"padding-left: 0px!important;\">Physical: {{ contact.physical }}</p><p style=\"padding-left: 0px!important;\">Psychologic: {{ contact.checkbox_2lpu_mgj_copy }}</p><p style=\"padding-left: 0px!important;\">Sexual: {{ contact.checkbox_2lpu_mgj_copy_i6c_copy }}</p><p style=\"padding-left: 0px!important;\">What is the primary reason for today’s visit?: {{ contact.what_is_the_primary_reason_for_todays_visit }}</p><p style=\"padding-left: 0px!important;\">How long have these symptoms been present?: {{ contact.how_long_have_these_symptoms_been_present }}</p><p style=\"padding-left: 0px!important;\"></p>",
+    "type": "add_notes"
+   },
+   "name": "Add note to contact page: Intake Form Responses",
+   "type": "add_notes",
+   "parent": "b6fc8b94-9ac3-4dba-855e-8b3a202ac04b",
+   "parentKey": "b6fc8b94-9ac3-4dba-855e-8b3a202ac04b"
+  },
+  {
+   "id": "dcdb61f9-3a9f-43f5-90c1-39466570ba4c",
+   "parent": "2844a98f-0d4c-4e02-8276-f965d29a57f6",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Survey Submitted",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "3bb0de1c-811e-4321-bc0c-cd402cfa4ade",
+   "sibling": [
+    "b6fc8b94-9ac3-4dba-855e-8b3a202ac04b",
+    "f7fb371d-c95b-4348-a7d9-ecc5080a3a55"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "2844a98f-0d4c-4e02-8276-f965d29a57f6"
+  },
+  {
+   "id": "3bb0de1c-811e-4321-bc0c-cd402cfa4ade",
+   "parent": "dcdb61f9-3a9f-43f5-90c1-39466570ba4c",
+   "order": 0,
+   "attributes": {
+    "html": "<p>What's the main reason you booked today? : {{contact.whats_the_main_reason_you_booked_today}}</p><p><strong>Patient's Information</strong></p><p>Name: {{contact.first_name}} {{contact.last_name}}</p><p>Phone: {{contact.phone}}</p><p>Email: {{contact.email}}</p><p>Date of Birth: {{contact.dob}}</p><p></p><p>How did you hear about Men’s Wellness Centers?: </p><p>{{contact.how_did_you_hear_about_mens_wellness_centers}}</p><p>Have you ever used testosterone or other hormone therapy?: </p><p>{{contact.have_you_ever_used_testosterone_or_other_hormone_therapy}}</p><p>Have you ever been diagnosed with any of the following? (Check all that apply): {{contact.have_you_ever_been_diagnosed_with_any_of_the_following_check_all_that_apply}}</p><p></p><p><strong>What Have You Noticed?</strong></p><p>Physical: {{contact.physical}}</p><p>Mind/Psychologic: {{contact.checkbox_2lpu_mgj_copy}}</p><p>Sexual: {{contact.checkbox_2lpu_mgj_copy_i6c_copy}}</p><p></p><p>Current Medications: {{contact.current_medications_include_name_dose_and_how_often_you_take_them}}</p><p>Allergies: {{contact.contactcurrent_medications_include_name_dose_and_how_often_you_take_them_f3y_copy}}</p><p></p><p><strong>Lifestyle</strong></p><p>Occupation: {{contact.occupation}}</p><p>Do you drink alcohol?: {{contact.do_you_drink_alcohol}}</p><p>Do you smoke or use tobacoo?: {{contact.do_you_smoke_or_use_tobacco}}</p><p></p><p><strong>Care Provider</strong></p><p>Clinic Name: {{contact.clinic_name}}</p><p>Care Provider Name: {{contact.primary_care_provider_name}}</p><p>Care Provider Phone: {{contact.emergency_contact_phone}}</p><p>May we contact them about your care?: {{contact.may_we_contact_them_about_your_care}}</p><p></p><p><strong>Consent</strong></p><p>Full Legal name as signature: {{contact.name_as_signature}}</p>",
+    "type": "add_notes"
+   },
+   "name": "Add note to contact page: Intake Form Responses",
+   "type": "add_notes",
+   "parentKey": "dcdb61f9-3a9f-43f5-90c1-39466570ba4c"
+  },
+  {
+   "id": "f7fb371d-c95b-4348-a7d9-ecc5080a3a55",
+   "parent": "2844a98f-0d4c-4e02-8276-f965d29a57f6",
+   "order": 1,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "b6fc8b94-9ac3-4dba-855e-8b3a202ac04b",
+    "dcdb61f9-3a9f-43f5-90c1-39466570ba4c"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "2844a98f-0d4c-4e02-8276-f965d29a57f6"
+  }
+ ]
 }

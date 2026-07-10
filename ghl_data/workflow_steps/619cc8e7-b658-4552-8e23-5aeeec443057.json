@@ -1,21 +1,3072 @@
 {
-  "id": "619cc8e7-b658-4552-8e23-5aeeec443057",
+ "id": "619cc8e7-b658-4552-8e23-5aeeec443057",
+ "name": "02. NON BOOKED NEWLEADS",
+ "folder": "02. Appointments & Visit Journey",
+ "status": "published",
+ "updatedAt": "2026-06-01T17:18:04.450Z",
+ "version": 147,
+ "extracted_at": "2026-07-10T05:40:32Z",
+ "extraction_method": "ghl_backend_api",
+ "source": "GHL Active Workflows (live API)",
+ "workflowData": {
+  "_id": "619cc8e7-b658-4552-8e23-5aeeec443057",
+  "locationId": "Ghstz8eIsHWLeXek47dk",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 1,
   "name": "02. NON BOOKED NEWLEADS",
-  "folder": "02. Appointments & Visit Journey",
   "status": "published",
-  "version": 145,
-  "extracted_at": "2026-05-29T03:00:23Z",
-  "extraction_method": "backend_jwt",
-  "triggers": [],
-  "steps": [],
-  "messages_referenced": [],
-  "stats": {
-    "total_steps": 0,
-    "send_sms_count": 0,
-    "send_email_count": 0,
-    "wait_count": 0,
-    "if_else_count": 0,
-    "terminal_paths": 0
+  "version": 147,
+  "dataVersion": 7,
+  "allowMultiple": true,
+  "eventStartDate": null,
+  "window": null,
+  "timezone": "contact",
+  "removeContactFromLastStep": true,
+  "filePath": "location/Ghstz8eIsHWLeXek47dk/workflows/619cc8e7-b658-4552-8e23-5aeeec443057/147",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FGhstz8eIsHWLeXek47dk%2Fworkflows%2F619cc8e7-b658-4552-8e23-5aeeec443057%2F147",
+  "triggersFilePath": "location/Ghstz8eIsHWLeXek47dk/workflow-triggers/619cc8e7-b658-4552-8e23-5aeeec443057/146",
+  "stopOnResponse": false,
+  "autoMarkAsRead": true,
+  "type": "workflow",
+  "parentId": "d19faff7-3c76-44ec-8c05-59397c06aa08",
+  "createdAt": "2025-12-18T17:30:19.901Z",
+  "updatedAt": "2026-06-01T17:18:04.450Z",
+  "deleted": false,
+  "workflowNote": {
+   "content": "",
+   "createdBy": "clone_workflow",
+   "createdByName": "clone_workflow",
+   "createdAt": "2025-12-18T17:30:20.152Z",
+   "updatedBy": "clone_workflow",
+   "updatedByName": "clone_workflow",
+   "updatedAt": "2025-12-18T17:30:20.152Z"
   },
-  "notes": ""
+  "allowMultipleOpportunity": true,
+  "creationSource": "builder",
+  "originType": "duplicate-workflow",
+  "__v": 0,
+  "senderAddress": {
+   "from_email": "{{location.email}}",
+   "from_name": "{{location.name}}",
+   "from_number": "+18663444955"
+  },
+  "updatedBy": "1UGaWoisLr0DONjwbenY",
+  "isTriggerBucketMigrated": true,
+  "id": "619cc8e7-b658-4552-8e23-5aeeec443057"
+ },
+ "triggers": [
+  {
+   "id": "43TNhaaWCoikBZC78D1A",
+   "date_added": "2026-05-30T19:19:12.206Z",
+   "conditions": [
+    {
+     "id": "tag-added",
+     "type": "select",
+     "title": "Tag Added",
+     "operator": "index-of-true",
+     "field": "tagsAdded",
+     "value": "book_react_app"
+    }
+   ],
+   "date_updated": "2026-05-30T19:19:12.206Z",
+   "type": "contact_tag",
+   "schedule_config": {},
+   "belongs_to": "workflow",
+   "workflow_id": "619cc8e7-b658-4552-8e23-5aeeec443057",
+   "masterType": "highlevel",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "deleted": false,
+   "name": "React App",
+   "active": true,
+   "actions": [
+    {
+     "type": "add_to_workflow",
+     "workflow_id": "619cc8e7-b658-4552-8e23-5aeeec443057"
+    }
+   ]
+  },
+  {
+   "id": "9eNPIF3ws4kbGwDKE74M",
+   "date_added": "2025-12-18T17:30:20.013Z",
+   "deleted": false,
+   "belongs_to": "workflow",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "actions": [
+    {
+     "workflow_id": "619cc8e7-b658-4552-8e23-5aeeec443057",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "index-of-true",
+     "field": "tagsAdded",
+     "value": "funnel_entry_newport_news",
+     "title": "Tag Added",
+     "type": "select",
+     "id": "tag-added"
+    }
+   ],
+   "masterType": "highlevel",
+   "name": "Funnel Entry Newport News",
+   "type": "contact_tag",
+   "workflow_id": "619cc8e7-b658-4552-8e23-5aeeec443057",
+   "date_updated": "2025-12-18T17:45:04.883Z",
+   "active": true
+  },
+  {
+   "id": "Pfobn1PXil5ij4eZvMlU",
+   "date_added": "2025-12-18T17:30:20.060Z",
+   "deleted": false,
+   "belongs_to": "workflow",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "actions": [
+    {
+     "workflow_id": "619cc8e7-b658-4552-8e23-5aeeec443057",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "index-of-true",
+     "field": "tagsAdded",
+     "value": "funnel_entry_virginia_beach",
+     "title": "Tag Added",
+     "type": "select",
+     "id": "tag-added"
+    }
+   ],
+   "masterType": "highlevel",
+   "name": "Funnel Entry Virginia Beach",
+   "type": "contact_tag",
+   "workflow_id": "619cc8e7-b658-4552-8e23-5aeeec443057",
+   "date_updated": "2025-12-18T17:45:04.924Z",
+   "active": true
+  },
+  {
+   "id": "WXOaWFwojEo0jcWa3HMw",
+   "date_added": "2025-12-18T17:30:19.969Z",
+   "deleted": false,
+   "belongs_to": "workflow",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "actions": [
+    {
+     "workflow_id": "619cc8e7-b658-4552-8e23-5aeeec443057",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "index-of-true",
+     "field": "tagsAdded",
+     "value": "funnel_entry_richmond",
+     "title": "Tag Added",
+     "type": "select",
+     "id": "tag-added"
+    }
+   ],
+   "masterType": "highlevel",
+   "name": "Funnel Entry Richmond",
+   "type": "contact_tag",
+   "workflow_id": "619cc8e7-b658-4552-8e23-5aeeec443057",
+   "date_updated": "2025-12-18T17:45:04.964Z",
+   "active": true
+  },
+  {
+   "id": "Xr3GaWENph2U1cdYXjKe",
+   "date_added": "2025-12-18T17:30:20.103Z",
+   "deleted": false,
+   "belongs_to": "workflow",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "actions": [
+    {
+     "workflow_id": "619cc8e7-b658-4552-8e23-5aeeec443057",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "index-of-true",
+     "field": "tagsAdded",
+     "value": "funnel_entry_home_page",
+     "title": "Tag Added",
+     "type": "select",
+     "id": "tag-added"
+    }
+   ],
+   "masterType": "highlevel",
+   "name": "Funnel Entry Home",
+   "type": "contact_tag",
+   "workflow_id": "619cc8e7-b658-4552-8e23-5aeeec443057",
+   "date_updated": "2025-12-18T17:45:04.999Z",
+   "active": true
+  },
+  {
+   "id": "q6Uj8KyPvrTB6fHnryyj",
+   "date_added": "2025-12-18T17:30:19.922Z",
+   "deleted": false,
+   "belongs_to": "workflow",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "actions": [
+    {
+     "workflow_id": "619cc8e7-b658-4552-8e23-5aeeec443057",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "index-of-true",
+     "field": "tagsAdded",
+     "value": "funnel_entry_consultation_page",
+     "title": "Tag Added",
+     "type": "select",
+     "id": "tag-added"
+    }
+   ],
+   "masterType": "highlevel",
+   "name": "Funnel Entry Consultation",
+   "type": "contact_tag",
+   "workflow_id": "619cc8e7-b658-4552-8e23-5aeeec443057",
+   "date_updated": "2025-12-18T17:45:05.044Z",
+   "active": true
+  }
+ ],
+ "dependentAssets": {},
+ "templates": [
+  {
+   "id": "4852c64b-c397-427f-bdcd-c6dc3d4b4fd9",
+   "type": "wait",
+   "name": "Wait for Preferred Location Information before sending SMS",
+   "attributes": {
+    "type": "condition",
+    "startAfter": {
+     "type": "minutes",
+     "value": 0,
+     "when": "after"
+    },
+    "name": "Wait for Preferred Location Information before sending SMS",
+    "cat": "",
+    "condition": {
+     "currentRecipeType": "CUSTOM",
+     "branches": [
+      {
+       "id": "e6f09d40-c7ac-4de3-b936-868f3b09ea30",
+       "name": "Branch",
+       "segments": [
+        {
+         "__segmentId": "7308d52a-bc7f-4f6a-9f53-70890efccc99",
+         "operator": "and",
+         "conditions": [
+          {
+           "conditionType": "contact_detail",
+           "conditionSubType": "Cou856tOhaxW62vwehVI",
+           "conditionOperator": "has_value",
+           "__conditionId": "8b95568f-f287-4351-8038-dd50914f7b4b",
+           "ifElseNodeId": "",
+           "__customFieldType__": "standard",
+           "isWait": true,
+           "nestedDropdownTypes": [
+            "inboundWebhookRequest",
+            "sheet",
+            "datetime_formatter",
+            "custom_webhook",
+            "array_functions",
+            "ivr_gather",
+            "ivr_connect_call",
+            "custom_code",
+            "ai_agent"
+           ],
+           "allowIsOperatorTypes": [
+            "contact_reply",
+            "inboundWebhookRequest",
+            "custom_webhook",
+            "custom_code",
+            "ai_agent",
+            "contact_detail",
+            "array_functions",
+            "appointment",
+            "service_booking",
+            "rental_booking"
+           ]
+          }
+         ]
+        }
+       ],
+       "operator": "and",
+       "showErrors": false,
+       "branchNameError": "Branch name cannot be empty!"
+      }
+     ],
+     "operator": "and",
+     "if": true,
+     "conditionName": "",
+     "version": 2,
+     "noneBranchName": "None"
+    },
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "order": 0,
+   "cat": "",
+   "next": "0208ff8a-b2eb-49c1-999d-61725eb843a6"
+  },
+  {
+   "id": "0208ff8a-b2eb-49c1-999d-61725eb843a6",
+   "order": 1,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "088d4970-d97e-47ea-838f-3827ee9c6594",
+      "name": "Does not have tag \"funnel_consultation_booked\"",
+      "segments": [
+       {
+        "__segmentId": "43a34c8d-8dd9-4ccb-8240-ae5e076dd9f3",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "tags",
+          "conditionOperator": "index-of-false",
+          "conditionValue": [
+           "funnel_consultation_booked"
+          ],
+          "__conditionId": "ee991321-7a7b-45b2-90ec-70efbece4438",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Check for active appointment?",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "088d4970-d97e-47ea-838f-3827ee9c6594",
+    "b3c01131-91cf-4403-8f0b-80191b7a18da"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "4852c64b-c397-427f-bdcd-c6dc3d4b4fd9"
+  },
+  {
+   "id": "088d4970-d97e-47ea-838f-3827ee9c6594",
+   "parent": "0208ff8a-b2eb-49c1-999d-61725eb843a6",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Does not have tag \"funnel_consultation_booked\"",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "70072e6f-b79c-4fab-b862-8f92b8195893",
+   "sibling": [
+    "b3c01131-91cf-4403-8f0b-80191b7a18da"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "0208ff8a-b2eb-49c1-999d-61725eb843a6"
+  },
+  {
+   "id": "70072e6f-b79c-4fab-b862-8f92b8195893",
+   "order": 0,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "d824ab36-e94e-49d0-85ca-477d552c8e9e",
+      "name": "Richmond",
+      "segments": [
+       {
+        "__segmentId": "adc9afd5-7716-41ef-a858-904b3c076e99",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "Cou856tOhaxW62vwehVI",
+          "conditionOperator": "==",
+          "conditionValue": "Richmond, VA",
+          "__conditionId": "9c3e9b32-aca1-4399-aabc-5afaea87c7c9",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "32666fa7-061b-4e13-a5c9-f32dc8d9b1ec",
+      "name": "VA Beach",
+      "segments": [
+       {
+        "__segmentId": "adc9afd5-7716-41ef-a858-904b3c076e99",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "Cou856tOhaxW62vwehVI",
+          "conditionOperator": "==",
+          "conditionValue": "Virginia Beach, VA",
+          "__conditionId": "9c3e9b32-aca1-4399-aabc-5afaea87c7c9",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "b99a8262-37f9-4961-af1c-b7d7c1ac98fc",
+      "name": "NPN",
+      "segments": [
+       {
+        "__segmentId": "adc9afd5-7716-41ef-a858-904b3c076e99",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "Cou856tOhaxW62vwehVI",
+          "conditionOperator": "==",
+          "conditionValue": "Newport News, VA",
+          "__conditionId": "9c3e9b32-aca1-4399-aabc-5afaea87c7c9",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Location picked",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "d824ab36-e94e-49d0-85ca-477d552c8e9e",
+    "32666fa7-061b-4e13-a5c9-f32dc8d9b1ec",
+    "b99a8262-37f9-4961-af1c-b7d7c1ac98fc",
+    "375320ea-5dda-4f5d-a681-3e459d203d96"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "088d4970-d97e-47ea-838f-3827ee9c6594",
+   "parent": "088d4970-d97e-47ea-838f-3827ee9c6594"
+  },
+  {
+   "id": "d824ab36-e94e-49d0-85ca-477d552c8e9e",
+   "parent": "70072e6f-b79c-4fab-b862-8f92b8195893",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Richmond",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "a5f65bb7-298b-434d-8405-c8c40fa8d981",
+   "sibling": [
+    "32666fa7-061b-4e13-a5c9-f32dc8d9b1ec",
+    "b99a8262-37f9-4961-af1c-b7d7c1ac98fc",
+    "375320ea-5dda-4f5d-a681-3e459d203d96"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "70072e6f-b79c-4fab-b862-8f92b8195893"
+  },
+  {
+   "id": "a5f65bb7-298b-434d-8405-c8c40fa8d981",
+   "parentKey": "d824ab36-e94e-49d0-85ca-477d552c8e9e",
+   "parent": "d824ab36-e94e-49d0-85ca-477d552c8e9e",
+   "type": "wait",
+   "name": "Wait 3 mins",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "minutes",
+     "value": 3,
+     "when": "after"
+    },
+    "name": "Wait 3 mins",
+    "cat": "",
+    "timePeriodInputMode": "standard",
+    "unitInputMode": "standard",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "order": 0,
+   "cat": "",
+   "next": "95707cba-7291-4038-b919-55a384b52c00"
+  },
+  {
+   "id": "95707cba-7291-4038-b919-55a384b52c00",
+   "order": 1,
+   "attributes": {
+    "body": "{{contact.first_name}}, most men come into Men's Wellness Richmond tired, foggy, or just off. One free visit shows if we can help. \n\nAbout an hour, provider visit plus same-day lab work, no cost. Looking to get started this week?\n\nSame-day and next-day appointments booked online: https://bookmwc.com/richmond-va?phone={{contact.phone_raw}}",
+    "attachments": []
+   },
+   "name": "send SMS to lead right after the initial form is submitted",
+   "type": "sms",
+   "next": "f663c6e1-4b15-4a56-954f-032330b7119a",
+   "parentKey": "a5f65bb7-298b-434d-8405-c8c40fa8d981",
+   "parent": "d824ab36-e94e-49d0-85ca-477d552c8e9e"
+  },
+  {
+   "id": "f663c6e1-4b15-4a56-954f-032330b7119a",
+   "type": "wait",
+   "name": "wait",
+   "attributes": {
+    "type": "condition",
+    "startAfter": {
+     "type": "minutes",
+     "value": 1,
+     "when": "after"
+    },
+    "name": "Wait 1 min: Source update from Workflow: Source form and ClickID",
+    "cat": "multi-path",
+    "condition": {
+     "currentRecipeType": "CUSTOM",
+     "branches": [
+      {
+       "id": "f0e3009f-9dee-4551-a745-368fec825d30",
+       "name": "Branch",
+       "segments": [
+        {
+         "__segmentId": "98c26bb8-db9a-4e05-8059-fa9896ac1ed3",
+         "operator": "and",
+         "conditions": [
+          {
+           "conditionType": "contact_detail",
+           "conditionSubType": "source",
+           "conditionOperator": "has_value",
+           "__conditionId": "7c902a66-68af-4dc4-abee-49ed5b87bd03",
+           "ifElseNodeId": "",
+           "__customFieldType__": "standard",
+           "isWait": true,
+           "nestedDropdownTypes": [
+            "inboundWebhookRequest",
+            "sheet",
+            "datetime_formatter",
+            "custom_webhook",
+            "array_functions",
+            "ivr_gather",
+            "ivr_connect_call",
+            "custom_code"
+           ],
+           "allowIsOperatorTypes": [
+            "contact_reply",
+            "inboundWebhookRequest",
+            "custom_webhook",
+            "custom_code",
+            "contact_detail",
+            "array_functions",
+            "appointment",
+            "service_booking",
+            "rental_booking"
+           ]
+          }
+         ]
+        }
+       ],
+       "operator": "and",
+       "showErrors": false,
+       "branchNameError": "Branch name cannot be empty!"
+      }
+     ],
+     "operator": "and",
+     "if": true,
+     "conditionName": "",
+     "version": 2,
+     "noneBranchName": "None"
+    },
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": true,
+    "transitions": [
+     {
+      "id": "97cd5f59-b429-4a64-ad3d-74273b496f73",
+      "name": "wait",
+      "condition": "primary",
+      "conditionType": "user-defined",
+      "isPrimaryBranch": true,
+      "description": "",
+      "attributes": {
+       "type": "wait_condition",
+       "description": "What will happen when specified conditions are met"
+      }
+     },
+     {
+      "id": "0e6a119e-fdbf-4c2d-a383-8bf199473822",
+      "name": "timeout",
+      "condition": "timeout",
+      "conditionType": "user-defined",
+      "isPrimaryBranch": false,
+      "description": "",
+      "attributes": {
+       "type": "wait_timeout",
+       "description": "What will happen after 1 minutes"
+      }
+     }
+    ]
+   },
+   "order": 2,
+   "cat": "multi-path",
+   "next": [
+    "97cd5f59-b429-4a64-ad3d-74273b496f73",
+    "0e6a119e-fdbf-4c2d-a383-8bf199473822"
+   ],
+   "parentKey": "95707cba-7291-4038-b919-55a384b52c00",
+   "parent": "d824ab36-e94e-49d0-85ca-477d552c8e9e"
+  },
+  {
+   "id": "97cd5f59-b429-4a64-ad3d-74273b496f73",
+   "parentKey": "f663c6e1-4b15-4a56-954f-032330b7119a",
+   "parent": "f663c6e1-4b15-4a56-954f-032330b7119a",
+   "type": "transition",
+   "name": "wait",
+   "attributes": {
+    "type": "wait_condition",
+    "description": "What will happen when specified conditions are met"
+   },
+   "order": 3,
+   "cat": "transition",
+   "next": "9a24f7ce-53a4-474b-b562-60377892e397"
+  },
+  {
+   "id": "9a24f7ce-53a4-474b-b562-60377892e397",
+   "parentKey": "97cd5f59-b429-4a64-ad3d-74273b496f73",
+   "parent": "97cd5f59-b429-4a64-ad3d-74273b496f73",
+   "type": "wait",
+   "name": "Wait",
+   "attributes": {
+    "type": "condition",
+    "startAfter": {
+     "type": "minutes",
+     "value": 5,
+     "when": "after"
+    },
+    "name": "Wait 5 mins or when appt is booked: funnel consultation booked tag",
+    "cat": "multi-path",
+    "condition": {
+     "currentRecipeType": "CUSTOM",
+     "branches": [
+      {
+       "id": "4b722742-90ed-4da3-8b3e-d431a1123c6d",
+       "name": "Branch",
+       "segments": [
+        {
+         "__segmentId": "7a8fc15f-7556-4904-bef6-aaf02723add9",
+         "operator": "and",
+         "conditions": [
+          {
+           "conditionType": "contact_detail",
+           "conditionSubType": "tags",
+           "conditionOperator": "index-of-true",
+           "conditionValue": [
+            "funnel_consultation_booked"
+           ],
+           "__conditionId": "827fcf17-5907-43db-8204-1a1db0bb1709",
+           "ifElseNodeId": "",
+           "__customFieldType__": "standard",
+           "isWait": true,
+           "nestedDropdownTypes": [
+            "inboundWebhookRequest",
+            "sheet",
+            "datetime_formatter",
+            "custom_webhook",
+            "array_functions",
+            "ivr_gather",
+            "ivr_connect_call",
+            "custom_code"
+           ],
+           "allowIsOperatorTypes": [
+            "contact_reply",
+            "inboundWebhookRequest",
+            "custom_webhook",
+            "custom_code",
+            "contact_detail",
+            "array_functions",
+            "appointment",
+            "service_booking",
+            "rental_booking"
+           ]
+          }
+         ]
+        }
+       ],
+       "operator": "and",
+       "showErrors": false,
+       "branchNameError": "Branch name cannot be empty!"
+      }
+     ],
+     "operator": "and",
+     "if": true,
+     "conditionName": "",
+     "version": 2,
+     "noneBranchName": "None"
+    },
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": true,
+    "transitions": [
+     {
+      "id": "65b07e69-851e-4394-8049-0ed8e738c6dc",
+      "name": "wait",
+      "condition": "primary",
+      "conditionType": "user-defined",
+      "isPrimaryBranch": true,
+      "description": "",
+      "attributes": {
+       "type": "wait_condition",
+       "description": "What will happen when specified conditions are met"
+      }
+     },
+     {
+      "id": "478e3d1f-c118-4752-961b-6dfd182d667e",
+      "name": "timeout",
+      "condition": "timeout",
+      "conditionType": "user-defined",
+      "isPrimaryBranch": false,
+      "description": "",
+      "attributes": {
+       "type": "wait_timeout",
+       "description": "What will happen after 5 minutes"
+      }
+     }
+    ]
+   },
+   "order": 0,
+   "cat": "multi-path",
+   "next": [
+    "65b07e69-851e-4394-8049-0ed8e738c6dc",
+    "478e3d1f-c118-4752-961b-6dfd182d667e"
+   ]
+  },
+  {
+   "id": "65b07e69-851e-4394-8049-0ed8e738c6dc",
+   "parentKey": "9a24f7ce-53a4-474b-b562-60377892e397",
+   "parent": "9a24f7ce-53a4-474b-b562-60377892e397",
+   "type": "transition",
+   "name": "wait",
+   "attributes": {
+    "type": "wait_condition",
+    "description": "What will happen when specified conditions are met"
+   },
+   "order": 1,
+   "cat": "transition",
+   "next": "7126a419-ed5d-4702-b5c8-0579ee64ed84"
+  },
+  {
+   "id": "7126a419-ed5d-4702-b5c8-0579ee64ed84",
+   "parent": "65b07e69-851e-4394-8049-0ed8e738c6dc",
+   "order": 0,
+   "attributes": {
+    "type": "email",
+    "email": {
+     "isCloned": false,
+     "html": "<p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">A lead has booked an appointment.</p><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\" class=\"isSelectedEnd\"><strong>Name:</strong> {{contact.first_name}} {{contact.last_name}}<br><strong>Phone:</strong> {{contact.phone}}<br><strong>Email:</strong> {{contact.email}}<br><strong>Date &amp; Time:</strong> {{appointment.only_start_date}} {{appointment.start_time}}<br><strong>Location:</strong> {{contact.location}}</p><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">Please review and follow up as needed.</p>",
+     "from_name": "Men's Wellness Center",
+     "from_email": "{{location.email}}",
+     "subject": "New Appointment Booked",
+     "userType": "user",
+     "attachments": [],
+     "selectedUser": [
+      "gbyheHmXUVp2u62YojJR",
+      "mnXehmAswCcViBO5qUBt",
+      "UkwxgaAkGrPwvxlIB7mO",
+      "OH2nPZtrH8YYyTFyXnOi",
+      "EHhPvu9Y6ryQNFS9vkbZ"
+     ]
+    }
+   },
+   "name": "Internal Notification - Appt Booked",
+   "type": "internal_notification",
+   "parentKey": "65b07e69-851e-4394-8049-0ed8e738c6dc"
+  },
+  {
+   "id": "478e3d1f-c118-4752-961b-6dfd182d667e",
+   "parentKey": "9a24f7ce-53a4-474b-b562-60377892e397",
+   "parent": "9a24f7ce-53a4-474b-b562-60377892e397",
+   "type": "transition",
+   "name": "timeout",
+   "attributes": {
+    "type": "wait_timeout",
+    "description": "What will happen after 5 minutes"
+   },
+   "order": 1,
+   "cat": "transition",
+   "next": "391d5bcd-d9a6-4f32-aa20-0da82e87f54c"
+  },
+  {
+   "id": "391d5bcd-d9a6-4f32-aa20-0da82e87f54c",
+   "parent": "478e3d1f-c118-4752-961b-6dfd182d667e",
+   "order": 0,
+   "attributes": {
+    "type": "email",
+    "email": {
+     "isCloned": false,
+     "html": "<p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">{{contact.name}} visited the website and did not schedule an appointment.</p><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\" class=\"isSelectedEnd\"><strong>Details:</strong></p><ul data-spread=\"false\"><li><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\" class=\"isSelectedEnd\">Location: {{contact.location}}</p></li><li><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\" class=\"isSelectedEnd\">Email: {{contact.email}} </p></li><li><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">Phone: {{contact.phone}}</p></li></ul><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">Please follow up if needed.</p>",
+     "from_name": "",
+     "subject": "Hot Lead – No Appointment Booked",
+     "userType": "user",
+     "attachments": [],
+     "selectedUser": [
+      "gbyheHmXUVp2u62YojJR",
+      "mnXehmAswCcViBO5qUBt",
+      "UkwxgaAkGrPwvxlIB7mO",
+      "EHhPvu9Y6ryQNFS9vkbZ",
+      "OH2nPZtrH8YYyTFyXnOi"
+     ]
+    }
+   },
+   "name": "Internal Notification to Call Center Concierge- Hot Lead",
+   "type": "internal_notification",
+   "next": "8547cfe7-09b1-420c-8847-9102ea7eefcf",
+   "parentKey": "478e3d1f-c118-4752-961b-6dfd182d667e"
+  },
+  {
+   "id": "8547cfe7-09b1-420c-8847-9102ea7eefcf",
+   "parent": "478e3d1f-c118-4752-961b-6dfd182d667e",
+   "order": 1,
+   "attributes": {
+    "only_unassigned_contact": false,
+    "total_index": 4,
+    "traffic_split": "equally",
+    "traffic_weightage": {
+     "mnXehmAswCcViBO5qUBt": 1,
+     "gbyheHmXUVp2u62YojJR": 1,
+     "UkwxgaAkGrPwvxlIB7mO": 1,
+     "OH2nPZtrH8YYyTFyXnOi": 1
+    },
+    "traffic_index": [
+     {
+      "id": "mnXehmAswCcViBO5qUBt",
+      "indexes": [
+       1
+      ]
+     },
+     {
+      "id": "gbyheHmXUVp2u62YojJR",
+      "indexes": [
+       2
+      ]
+     },
+     {
+      "id": "UkwxgaAkGrPwvxlIB7mO",
+      "indexes": [
+       3
+      ]
+     },
+     {
+      "id": "OH2nPZtrH8YYyTFyXnOi",
+      "indexes": [
+       4
+      ]
+     }
+    ],
+    "user_list": [
+     "mnXehmAswCcViBO5qUBt",
+     "gbyheHmXUVp2u62YojJR",
+     "UkwxgaAkGrPwvxlIB7mO",
+     "OH2nPZtrH8YYyTFyXnOi"
+    ],
+    "type": "assign_user"
+   },
+   "name": "Assign to user (RR)",
+   "type": "assign_user",
+   "next": "8e062d0d-3d06-4ac1-b4ad-8b4bd38b6128",
+   "parentKey": "391d5bcd-d9a6-4f32-aa20-0da82e87f54c"
+  },
+  {
+   "id": "8e062d0d-3d06-4ac1-b4ad-8b4bd38b6128",
+   "parent": "478e3d1f-c118-4752-961b-6dfd182d667e",
+   "order": 2,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "27eaafb1-337a-45f7-af3a-1588ef7fc9a2",
+      "name": "Within hours of operation",
+      "segments": [
+       {
+        "__segmentId": "68109e44-18b4-4553-9325-bf2024d2bd3b",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "quarter_hour",
+          "conditionOperator": ">=",
+          "conditionValue": "700",
+          "__conditionId": "9bfa7db6-0eda-4eb8-972e-8e91d0326d39",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         },
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "quarter_hour",
+          "conditionOperator": "<=",
+          "conditionValue": "2100",
+          "__conditionId": "663a16f6-faaa-4946-a1e9-f00288b84ae4",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Check Time now. Skip human interaction if outside hours",
+    "version": 2,
+    "noneBranchName": "Outside HOOp"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "27eaafb1-337a-45f7-af3a-1588ef7fc9a2",
+    "a27675ff-f363-4549-8474-ce244aea3813"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "8547cfe7-09b1-420c-8847-9102ea7eefcf"
+  },
+  {
+   "id": "27eaafb1-337a-45f7-af3a-1588ef7fc9a2",
+   "parent": "8e062d0d-3d06-4ac1-b4ad-8b4bd38b6128",
+   "order": 3,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Within hours of operation",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "af964c3d-e360-4133-a3c8-09858a4f8941",
+   "sibling": [
+    "a27675ff-f363-4549-8474-ce244aea3813"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "8e062d0d-3d06-4ac1-b4ad-8b4bd38b6128"
+  },
+  {
+   "id": "af964c3d-e360-4133-a3c8-09858a4f8941",
+   "parentKey": "27eaafb1-337a-45f7-af3a-1588ef7fc9a2",
+   "parent": "27eaafb1-337a-45f7-af3a-1588ef7fc9a2",
+   "type": "workflow_split",
+   "name": "workflow.asideSection.headerMeta.workflowSplit",
+   "attributes": {
+    "name": "Split",
+    "cat": "multi-path",
+    "transitions": [
+     {
+      "id": "fd7ea392-f3e5-446d-9c16-8da39865c9ea",
+      "name": "100% Go directly to next step",
+      "condition": "Path A",
+      "conditionType": "default",
+      "isPrimaryBranch": false,
+      "description": "",
+      "attributes": {}
+     },
+     {
+      "id": "33884e9e-23bd-40ab-8257-7fe545a2903a",
+      "name": "0% Test 1 in preparation for split testing",
+      "condition": "Path B",
+      "conditionType": "default",
+      "isPrimaryBranch": false,
+      "description": "",
+      "attributes": {}
+     },
+     {
+      "id": "41dd8fb2-f19b-4ed3-8cd3-12d5a5f6087b",
+      "name": "0% Test 2 in preparation for split testing",
+      "condition": "Path C",
+      "conditionType": "default",
+      "isPrimaryBranch": false,
+      "description": "",
+      "attributes": {}
+     },
+     {
+      "id": "22508f57-a517-428d-b435-9cba871aa8cd",
+      "name": "0 Test 3 in preparation for split testing",
+      "condition": "Path D",
+      "conditionType": "default",
+      "isPrimaryBranch": false,
+      "description": "",
+      "attributes": {}
+     }
+    ],
+    "type": "workflow_split",
+    "paths": [
+     {
+      "name": "100% Go directly to next step",
+      "id": "fd7ea392-f3e5-446d-9c16-8da39865c9ea"
+     },
+     {
+      "name": "0% Test 1 in preparation for split testing",
+      "id": "33884e9e-23bd-40ab-8257-7fe545a2903a"
+     },
+     {
+      "name": "0% Test 2 in preparation for split testing",
+      "id": "41dd8fb2-f19b-4ed3-8cd3-12d5a5f6087b"
+     },
+     {
+      "name": "0 Test 3 in preparation for split testing",
+      "id": "22508f57-a517-428d-b435-9cba871aa8cd"
+     }
+    ],
+    "condition": "random-split",
+    "extras": {
+     "weightDistribution": {
+      "fd7ea392-f3e5-446d-9c16-8da39865c9ea": 100,
+      "33884e9e-23bd-40ab-8257-7fe545a2903a": 0,
+      "41dd8fb2-f19b-4ed3-8cd3-12d5a5f6087b": 0,
+      "22508f57-a517-428d-b435-9cba871aa8cd": 0
+     }
+    }
+   },
+   "order": 0,
+   "cat": "multi-path",
+   "next": [
+    "fd7ea392-f3e5-446d-9c16-8da39865c9ea",
+    "33884e9e-23bd-40ab-8257-7fe545a2903a",
+    "41dd8fb2-f19b-4ed3-8cd3-12d5a5f6087b",
+    "22508f57-a517-428d-b435-9cba871aa8cd"
+   ]
+  },
+  {
+   "id": "fd7ea392-f3e5-446d-9c16-8da39865c9ea",
+   "parentKey": "af964c3d-e360-4133-a3c8-09858a4f8941",
+   "parent": "af964c3d-e360-4133-a3c8-09858a4f8941",
+   "type": "transition",
+   "name": "100% Go directly to next step",
+   "attributes": {},
+   "order": 1,
+   "cat": "transition",
+   "next": "3bbeeac8-9262-4503-a06d-ea75b48ec1c6"
+  },
+  {
+   "id": "3bbeeac8-9262-4503-a06d-ea75b48ec1c6",
+   "parent": "fd7ea392-f3e5-446d-9c16-8da39865c9ea",
+   "order": 0,
+   "attributes": {
+    "targetNodeId": "a43935e7-117b-48fa-9ee1-1e0906c02fb5",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "fd7ea392-f3e5-446d-9c16-8da39865c9ea"
+  },
+  {
+   "id": "33884e9e-23bd-40ab-8257-7fe545a2903a",
+   "parentKey": "af964c3d-e360-4133-a3c8-09858a4f8941",
+   "parent": "af964c3d-e360-4133-a3c8-09858a4f8941",
+   "type": "transition",
+   "name": "0% Test 1 in preparation for split testing",
+   "attributes": {},
+   "order": 1,
+   "cat": "transition",
+   "next": "09df9fbb-88ed-480c-9906-c1ca2e9402e9"
+  },
+  {
+   "id": "09df9fbb-88ed-480c-9906-c1ca2e9402e9",
+   "parent": "33884e9e-23bd-40ab-8257-7fe545a2903a",
+   "order": 0,
+   "attributes": {},
+   "name": "Power Dialler (Human intervention): Agent calls patient. Leave VM if no answer. Disposition call",
+   "type": "manual-call",
+   "next": "58504471-5035-45c4-a42e-4d07296e9f0e",
+   "parentKey": "33884e9e-23bd-40ab-8257-7fe545a2903a"
+  },
+  {
+   "id": "58504471-5035-45c4-a42e-4d07296e9f0e",
+   "parent": "33884e9e-23bd-40ab-8257-7fe545a2903a",
+   "order": 1,
+   "attributes": {
+    "targetNodeId": "a43935e7-117b-48fa-9ee1-1e0906c02fb5",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "09df9fbb-88ed-480c-9906-c1ca2e9402e9"
+  },
+  {
+   "id": "41dd8fb2-f19b-4ed3-8cd3-12d5a5f6087b",
+   "parentKey": "af964c3d-e360-4133-a3c8-09858a4f8941",
+   "parent": "af964c3d-e360-4133-a3c8-09858a4f8941",
+   "type": "transition",
+   "name": "0% Test 2 in preparation for split testing",
+   "attributes": {},
+   "order": 1,
+   "cat": "transition",
+   "next": "270119e0-60f6-4ac4-9fe2-4f97c019a5a6"
+  },
+  {
+   "id": "270119e0-60f6-4ac4-9fe2-4f97c019a5a6",
+   "parent": "41dd8fb2-f19b-4ed3-8cd3-12d5a5f6087b",
+   "order": 0,
+   "attributes": {
+    "timeout": 60,
+    "whisper_message": "",
+    "disable_detect_voicemail": false,
+    "call_connect": true
+   },
+   "name": "Automatic call",
+   "type": "call",
+   "next": "8e3776aa-4ce8-4da4-8601-fb835ee6047c",
+   "parentKey": "41dd8fb2-f19b-4ed3-8cd3-12d5a5f6087b"
+  },
+  {
+   "id": "8e3776aa-4ce8-4da4-8601-fb835ee6047c",
+   "parent": "41dd8fb2-f19b-4ed3-8cd3-12d5a5f6087b",
+   "order": 1,
+   "attributes": {
+    "targetNodeId": "a43935e7-117b-48fa-9ee1-1e0906c02fb5",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "270119e0-60f6-4ac4-9fe2-4f97c019a5a6"
+  },
+  {
+   "id": "22508f57-a517-428d-b435-9cba871aa8cd",
+   "parentKey": "af964c3d-e360-4133-a3c8-09858a4f8941",
+   "parent": "af964c3d-e360-4133-a3c8-09858a4f8941",
+   "type": "transition",
+   "name": "0 Test 3 in preparation for split testing",
+   "attributes": {},
+   "order": 1,
+   "cat": "transition",
+   "next": "1bbd4f04-73b5-431d-bb35-4e303fa70eef"
+  },
+  {
+   "id": "1bbd4f04-73b5-431d-bb35-4e303fa70eef",
+   "parent": "22508f57-a517-428d-b435-9cba871aa8cd",
+   "order": 0,
+   "attributes": {
+    "targetNodeId": "a43935e7-117b-48fa-9ee1-1e0906c02fb5",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "22508f57-a517-428d-b435-9cba871aa8cd"
+  },
+  {
+   "id": "a27675ff-f363-4549-8474-ce244aea3813",
+   "parent": "8e062d0d-3d06-4ac1-b4ad-8b4bd38b6128",
+   "order": 3,
+   "attributes": {
+    "else": true
+   },
+   "name": "Outside HOOp",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "a43935e7-117b-48fa-9ee1-1e0906c02fb5",
+   "sibling": [
+    "27eaafb1-337a-45f7-af3a-1588ef7fc9a2"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "8e062d0d-3d06-4ac1-b4ad-8b4bd38b6128"
+  },
+  {
+   "id": "a43935e7-117b-48fa-9ee1-1e0906c02fb5",
+   "parent": "a27675ff-f363-4549-8474-ce244aea3813",
+   "order": 0,
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "minutes",
+     "value": 15,
+     "when": "after"
+    },
+    "name": "Wait 15 minutes",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "name": "Wait 15 minutes",
+   "type": "wait",
+   "next": "6dff1bd1-0735-42af-9ffd-dfc4301d49b5",
+   "parentKey": "a27675ff-f363-4549-8474-ce244aea3813"
+  },
+  {
+   "id": "6dff1bd1-0735-42af-9ffd-dfc4301d49b5",
+   "parent": "a27675ff-f363-4549-8474-ce244aea3813",
+   "order": 1,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "aee71473-1f63-42d9-b796-5880c6e8c214",
+      "name": "Contact has Tag: Funnel_Consultation_Booked",
+      "segments": [
+       {
+        "__segmentId": "0ca8800a-b4bc-44fe-9ae4-7a4f1e57cd78",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "tags",
+          "conditionOperator": "index-of-true",
+          "conditionValue": [
+           "funnel_consultation_booked"
+          ],
+          "__conditionId": "278d7360-af42-4c9d-a967-1c518673dcda",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Check if already booked with Contact has Tag: Funnel_Consultation_Booked",
+    "version": 2,
+    "noneBranchName": "No Booked Tag"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "aee71473-1f63-42d9-b796-5880c6e8c214",
+    "e42bbcf4-4585-4a2f-a040-d58eb00b4f1d"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "a43935e7-117b-48fa-9ee1-1e0906c02fb5"
+  },
+  {
+   "id": "aee71473-1f63-42d9-b796-5880c6e8c214",
+   "parent": "6dff1bd1-0735-42af-9ffd-dfc4301d49b5",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Contact has Tag: Funnel_Consultation_Booked",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "e42bbcf4-4585-4a2f-a040-d58eb00b4f1d"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "6dff1bd1-0735-42af-9ffd-dfc4301d49b5"
+  },
+  {
+   "id": "e42bbcf4-4585-4a2f-a040-d58eb00b4f1d",
+   "parent": "6dff1bd1-0735-42af-9ffd-dfc4301d49b5",
+   "order": 2,
+   "attributes": {
+    "else": true
+   },
+   "name": "No Booked Tag",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "34ccf3fe-ce3d-4a26-8f69-9e2945f8e1d5",
+   "sibling": [
+    "aee71473-1f63-42d9-b796-5880c6e8c214"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "6dff1bd1-0735-42af-9ffd-dfc4301d49b5"
+  },
+  {
+   "id": "34ccf3fe-ce3d-4a26-8f69-9e2945f8e1d5",
+   "parent": "e42bbcf4-4585-4a2f-a040-d58eb00b4f1d",
+   "order": 0,
+   "attributes": {
+    "from_name": "Men's Wellness Center",
+    "from_email": "{{location.email}}",
+    "subject": "Complete your booking",
+    "trackingOptions": {
+     "hasTrackingLinks": false,
+     "hasUtmTracking": true,
+     "hasTags": false,
+     "sourceId": "619cc8e7-b658-4552-8e23-5aeeec443057:34ccf3fe-ce3d-4a26-8f69-9e2945f8e1d5"
+    },
+    "conditions": [],
+    "preHeader": "",
+    "previewUrl": "https://firebasestorage.googleapis.com/v0/b/highlevel-backend.appspot.com/o/location%2FGhstz8eIsHWLeXek47dk%2Femails%2F6981f83c2753ea31e0650f4b%2Findex.html",
+    "createdAt": "2026-02-03T13:29:33.095Z",
+    "updatedAt": "2026-02-03T13:56:58.758Z",
+    "templateCreationMode": "existing",
+    "syncEnabled": true,
+    "template_id": "6981f83c2753ea31e0650f4b",
+    "templatesource": "email-builder",
+    "attachments": []
+   },
+   "name": "Send First Email (Day 1)",
+   "type": "email",
+   "next": "8122a3b2-a066-4af5-9bef-27d2327a21f7",
+   "parentKey": "e42bbcf4-4585-4a2f-a040-d58eb00b4f1d"
+  },
+  {
+   "id": "8122a3b2-a066-4af5-9bef-27d2327a21f7",
+   "parent": "e42bbcf4-4585-4a2f-a040-d58eb00b4f1d",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "gcRMq1iCj2tGmdWpimGS",
+    "pipeline_stage_id": "fa576c18-03e8-4e43-afcf-abaa98cc08d8",
+    "opportunity_name": "{{contact.name}} | NON BOOKED",
+    "opportunity_status": "open",
+    "opportunity_source": "{{contact.source}}",
+    "monetary_value": ""
+   },
+   "name": "add to Non Booked Pipeline",
+   "type": "create_opportunity",
+   "next": "adf1c456-17d2-4f99-bd0c-1ac939d27ff6",
+   "parentKey": "34ccf3fe-ce3d-4a26-8f69-9e2945f8e1d5"
+  },
+  {
+   "id": "adf1c456-17d2-4f99-bd0c-1ac939d27ff6",
+   "parent": "e42bbcf4-4585-4a2f-a040-d58eb00b4f1d",
+   "order": 2,
+   "attributes": {
+    "currentRecipeType": "AVALABILITY",
+    "branches": [
+     {
+      "id": "97372dfe-13a3-45be-b1af-92cbdd5506d1",
+      "name": "Branch",
+      "segments": [
+       {
+        "__segmentId": "7c672ae5-bae6-4add-8155-25d984f343a1",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "quarter_hour",
+          "conditionOperator": ">",
+          "conditionValue": "800",
+          "__conditionId": "af536d80-e230-49b1-83a7-6f1f609fcc16",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         },
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "quarter_hour",
+          "conditionOperator": "<",
+          "conditionValue": "2000",
+          "__conditionId": "11b04522-712c-4eb7-9f57-a7350516faaf",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Condition",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "97372dfe-13a3-45be-b1af-92cbdd5506d1",
+    "b41e38da-2abc-4ed9-8f75-13df6e1c7875"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "8122a3b2-a066-4af5-9bef-27d2327a21f7"
+  },
+  {
+   "id": "97372dfe-13a3-45be-b1af-92cbdd5506d1",
+   "parent": "adf1c456-17d2-4f99-bd0c-1ac939d27ff6",
+   "order": 3,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Branch",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "f04f0609-5694-452d-825b-7872a43cb1d9",
+   "sibling": [
+    "b41e38da-2abc-4ed9-8f75-13df6e1c7875"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "adf1c456-17d2-4f99-bd0c-1ac939d27ff6"
+  },
+  {
+   "id": "f04f0609-5694-452d-825b-7872a43cb1d9",
+   "parent": "97372dfe-13a3-45be-b1af-92cbdd5506d1",
+   "order": 0,
+   "attributes": {
+    "body": "{{contact.first_name}}, you started booking at Men's Wellness but didn't pick a time. Same-day and next-day spots are open. Grab one: https://bookmwc.com/ \n\nOr reply and we'll text you 2 open times.",
+    "attachments": []
+   },
+   "name": "Send SMS (Day 1)",
+   "type": "sms",
+   "next": "8af51419-9c0a-4385-8ea7-b043358bf541",
+   "parentKey": "97372dfe-13a3-45be-b1af-92cbdd5506d1"
+  },
+  {
+   "id": "8af51419-9c0a-4385-8ea7-b043358bf541",
+   "parent": "97372dfe-13a3-45be-b1af-92cbdd5506d1",
+   "order": 1,
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "hour",
+     "value": 24,
+     "when": "after"
+    },
+    "name": "24 Hours Wait",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": [],
+    "window": {
+     "condition": "when",
+     "days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "start": "07:15",
+     "end": "21:00"
+    },
+    "windowCondition": {
+     "field": "",
+     "operator": "",
+     "value": ""
+    }
+   },
+   "name": "24 Hours Wait",
+   "type": "wait",
+   "next": "9547b4b1-5a07-48ed-ba80-171d8368ad22",
+   "parentKey": "f04f0609-5694-452d-825b-7872a43cb1d9"
+  },
+  {
+   "id": "9547b4b1-5a07-48ed-ba80-171d8368ad22",
+   "parent": "97372dfe-13a3-45be-b1af-92cbdd5506d1",
+   "order": 2,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "ab49194a-daa8-4dba-9b91-c2a6bc2721fd",
+      "name": "Contact has Tag: Funnel_Consultation_Booked",
+      "segments": [
+       {
+        "__segmentId": "a4816f04-cb8b-43f6-a729-576185167d91",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "tags",
+          "conditionOperator": "index-of-true",
+          "conditionValue": [
+           "funnel_consultation_booked"
+          ],
+          "__conditionId": "c0c11aa1-0d13-473b-9331-9742c3db1bbc",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Check if already booked with Contact has Tag: Funnel_Consultation_Booked",
+    "version": 2,
+    "noneBranchName": "Contact not have Tag : Funnel_Consultation_Booked"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "ab49194a-daa8-4dba-9b91-c2a6bc2721fd",
+    "0ffc067d-3da1-4c8f-aeda-f633f704e2b0"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "8af51419-9c0a-4385-8ea7-b043358bf541"
+  },
+  {
+   "id": "ab49194a-daa8-4dba-9b91-c2a6bc2721fd",
+   "parent": "9547b4b1-5a07-48ed-ba80-171d8368ad22",
+   "order": 3,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Contact has Tag: Funnel_Consultation_Booked",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "dd9846d8-440b-4a95-8629-9bb6e8fd216f",
+   "sibling": [
+    "0ffc067d-3da1-4c8f-aeda-f633f704e2b0"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "9547b4b1-5a07-48ed-ba80-171d8368ad22"
+  },
+  {
+   "id": "dd9846d8-440b-4a95-8629-9bb6e8fd216f",
+   "parent": "ab49194a-daa8-4dba-9b91-c2a6bc2721fd",
+   "order": 0,
+   "attributes": {
+    "type": "remove_opportunity",
+    "opportunity_to_be_found": "all",
+    "pipeline_id": "gcRMq1iCj2tGmdWpimGS"
+   },
+   "name": "Remove from NON BOOKED LEADS Pipeline",
+   "type": "remove_opportunity",
+   "parentKey": "ab49194a-daa8-4dba-9b91-c2a6bc2721fd",
+   "next": "81e09df4-19dd-4034-b71c-b675d2f66afc"
+  },
+  {
+   "id": "81e09df4-19dd-4034-b71c-b675d2f66afc",
+   "parent": "ab49194a-daa8-4dba-9b91-c2a6bc2721fd",
+   "order": 1,
+   "attributes": {
+    "type": "email",
+    "email": {
+     "isCloned": false,
+     "html": "<p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">A lead has booked an appointment.</p><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\" class=\"isSelectedEnd\"><strong>Name:</strong> {{contact.first_name}} {{contact.last_name}}<br><strong>Phone:</strong> {{contact.phone}}<br><strong>Email:</strong> {{contact.email}}<br><strong>Date &amp; Time:</strong> {{appointment.only_start_date}} {{appointment.start_time}}<br><strong>Location:</strong> {{contact.location}}</p><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">Please review and follow up as needed.</p>",
+     "from_name": "Men's Wellness Center",
+     "from_email": "{{location.email}}",
+     "subject": "New Appointment Booked",
+     "userType": "user",
+     "attachments": [],
+     "selectedUser": [
+      "gbyheHmXUVp2u62YojJR",
+      "mnXehmAswCcViBO5qUBt",
+      "UkwxgaAkGrPwvxlIB7mO",
+      "5FIZEmpa9wLlVSAx9nDE"
+     ]
+    }
+   },
+   "name": "Internal Notification - Appt Booked",
+   "type": "internal_notification",
+   "parentKey": "dd9846d8-440b-4a95-8629-9bb6e8fd216f"
+  },
+  {
+   "id": "0ffc067d-3da1-4c8f-aeda-f633f704e2b0",
+   "parent": "9547b4b1-5a07-48ed-ba80-171d8368ad22",
+   "order": 3,
+   "attributes": {
+    "else": true
+   },
+   "name": "Contact not have Tag : Funnel_Consultation_Booked",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "f96895ff-2d0b-4956-aee1-a1ef4296fcfc",
+   "sibling": [
+    "ab49194a-daa8-4dba-9b91-c2a6bc2721fd"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "9547b4b1-5a07-48ed-ba80-171d8368ad22"
+  },
+  {
+   "id": "f96895ff-2d0b-4956-aee1-a1ef4296fcfc",
+   "parent": "0ffc067d-3da1-4c8f-aeda-f633f704e2b0",
+   "order": 0,
+   "attributes": {
+    "from_email": "{{location.email}}",
+    "from_name": "Men's Wellness Center",
+    "subject": "Your First Visit",
+    "trackingOptions": {
+     "hasTrackingLinks": false,
+     "hasUtmTracking": true,
+     "hasTags": false,
+     "sourceId": "619cc8e7-b658-4552-8e23-5aeeec443057:f96895ff-2d0b-4956-aee1-a1ef4296fcfc"
+    },
+    "conditions": [],
+    "template_id": "6981fed02753ea787d6566ea",
+    "preHeader": "",
+    "templatesource": "email-builder",
+    "previewUrl": "https://firebasestorage.googleapis.com/v0/b/highlevel-backend.appspot.com/o/location%2FGhstz8eIsHWLeXek47dk%2Femails%2F6981fed02753ea787d6566ea%2Findex.html",
+    "createdAt": "2026-02-03T13:57:36.529Z",
+    "templateCreationMode": "existing",
+    "syncEnabled": true,
+    "attachments": []
+   },
+   "name": "Email Day 2",
+   "type": "email",
+   "next": "5eabf1d1-0f92-43a7-ac7f-a0fd33f47695",
+   "parentKey": "0ffc067d-3da1-4c8f-aeda-f633f704e2b0"
+  },
+  {
+   "id": "5eabf1d1-0f92-43a7-ac7f-a0fd33f47695",
+   "parent": "0ffc067d-3da1-4c8f-aeda-f633f704e2b0",
+   "order": 1,
+   "attributes": {
+    "currentRecipeType": "AVALABILITY",
+    "branches": [
+     {
+      "id": "56a3ca9c-e753-47c7-a475-2b7aa6a6d20a",
+      "name": "Branch",
+      "segments": [
+       {
+        "__segmentId": "7c672ae5-bae6-4add-8155-25d984f343a1",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "quarter_hour",
+          "conditionOperator": ">",
+          "conditionValue": "800",
+          "__conditionId": "af536d80-e230-49b1-83a7-6f1f609fcc16",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         },
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "quarter_hour",
+          "conditionOperator": "<",
+          "conditionValue": "2000",
+          "__conditionId": "11b04522-712c-4eb7-9f57-a7350516faaf",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Condition",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "56a3ca9c-e753-47c7-a475-2b7aa6a6d20a",
+    "d0df00fa-346b-4caa-b02f-99beb447f190"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "f96895ff-2d0b-4956-aee1-a1ef4296fcfc"
+  },
+  {
+   "id": "56a3ca9c-e753-47c7-a475-2b7aa6a6d20a",
+   "parent": "5eabf1d1-0f92-43a7-ac7f-a0fd33f47695",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Branch",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "6831a9c5-e156-41d2-a810-e579d1155242",
+   "sibling": [
+    "d0df00fa-346b-4caa-b02f-99beb447f190"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "5eabf1d1-0f92-43a7-ac7f-a0fd33f47695"
+  },
+  {
+   "id": "6831a9c5-e156-41d2-a810-e579d1155242",
+   "parent": "56a3ca9c-e753-47c7-a475-2b7aa6a6d20a",
+   "order": 0,
+   "attributes": {
+    "body": "Quick note, {{contact.first_name}}: same-day and next-day visits at Men's Wellness are filling up. Pick a time: https://bookmwc.com/",
+    "attachments": []
+   },
+   "name": "SMS (Day 2)",
+   "type": "sms",
+   "next": "be3565e5-113f-4077-ba39-438b453da669",
+   "parentKey": "56a3ca9c-e753-47c7-a475-2b7aa6a6d20a"
+  },
+  {
+   "id": "be3565e5-113f-4077-ba39-438b453da669",
+   "parent": "56a3ca9c-e753-47c7-a475-2b7aa6a6d20a",
+   "order": 1,
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "hour",
+     "value": 36,
+     "when": "after"
+    },
+    "name": "36 Hours Wait",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": [],
+    "window": {
+     "condition": "when",
+     "days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "start": "07:15",
+     "end": "21:00"
+    },
+    "windowCondition": {
+     "field": "",
+     "operator": "",
+     "value": ""
+    }
+   },
+   "name": "36 Hours Wait",
+   "type": "wait",
+   "next": "27939c01-ef20-47c3-aaec-ba6d1bc6f7dd",
+   "parentKey": "6831a9c5-e156-41d2-a810-e579d1155242"
+  },
+  {
+   "id": "27939c01-ef20-47c3-aaec-ba6d1bc6f7dd",
+   "parent": "56a3ca9c-e753-47c7-a475-2b7aa6a6d20a",
+   "order": 2,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "9619372f-c31b-4b79-9067-5d440cef4471",
+      "name": "Contact has Tag: Funnel_Consultation_Booked",
+      "segments": [
+       {
+        "__segmentId": "a4816f04-cb8b-43f6-a729-576185167d91",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "tags",
+          "conditionOperator": "index-of-true",
+          "conditionValue": [
+           "funnel_consultation_booked"
+          ],
+          "__conditionId": "c0c11aa1-0d13-473b-9331-9742c3db1bbc",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Check if already booked with Contact has Tag: Funnel_Consultation_Booked",
+    "version": 2,
+    "noneBranchName": "Contact not have Tag : Funnel_Consultation_Booked"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "9619372f-c31b-4b79-9067-5d440cef4471",
+    "84ca790f-6bb9-4c1c-a574-4f9e21337cc8"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "be3565e5-113f-4077-ba39-438b453da669"
+  },
+  {
+   "id": "9619372f-c31b-4b79-9067-5d440cef4471",
+   "parent": "27939c01-ef20-47c3-aaec-ba6d1bc6f7dd",
+   "order": 3,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Contact has Tag: Funnel_Consultation_Booked",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "22521361-5644-42b8-a62b-3226d705de3d",
+   "sibling": [
+    "84ca790f-6bb9-4c1c-a574-4f9e21337cc8"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "27939c01-ef20-47c3-aaec-ba6d1bc6f7dd"
+  },
+  {
+   "id": "22521361-5644-42b8-a62b-3226d705de3d",
+   "parent": "9619372f-c31b-4b79-9067-5d440cef4471",
+   "order": 0,
+   "attributes": {
+    "type": "remove_opportunity",
+    "opportunity_to_be_found": "all",
+    "pipeline_id": "gcRMq1iCj2tGmdWpimGS"
+   },
+   "name": "Remove from NON BOOKED LEADS Pipeline",
+   "type": "remove_opportunity",
+   "parentKey": "9619372f-c31b-4b79-9067-5d440cef4471",
+   "next": "a6f1cf7e-14b1-4b19-a0ed-b968c133cfaf"
+  },
+  {
+   "id": "a6f1cf7e-14b1-4b19-a0ed-b968c133cfaf",
+   "parent": "9619372f-c31b-4b79-9067-5d440cef4471",
+   "order": 1,
+   "attributes": {
+    "type": "email",
+    "email": {
+     "isCloned": false,
+     "html": "<p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">A lead has booked an appointment.</p><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\" class=\"isSelectedEnd\"><strong>Name:</strong> {{contact.first_name}} {{contact.last_name}}<br><strong>Phone:</strong> {{contact.phone}}<br><strong>Email:</strong> {{contact.email}}<br><strong>Date &amp; Time:</strong> {{appointment.only_start_date}} {{appointment.start_time}}<br><strong>Location:</strong> {{contact.location}}</p><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">Please review and follow up as needed.</p>",
+     "from_name": "Men's Wellness Center",
+     "from_email": "{{location.email}}",
+     "subject": "New Appointment Booked",
+     "userType": "user",
+     "attachments": [],
+     "selectedUser": [
+      "gbyheHmXUVp2u62YojJR",
+      "mnXehmAswCcViBO5qUBt",
+      "UkwxgaAkGrPwvxlIB7mO",
+      "5FIZEmpa9wLlVSAx9nDE"
+     ]
+    }
+   },
+   "name": "Internal Notification - Appt Booked",
+   "type": "internal_notification",
+   "parentKey": "22521361-5644-42b8-a62b-3226d705de3d"
+  },
+  {
+   "id": "84ca790f-6bb9-4c1c-a574-4f9e21337cc8",
+   "parent": "27939c01-ef20-47c3-aaec-ba6d1bc6f7dd",
+   "order": 3,
+   "attributes": {
+    "else": true
+   },
+   "name": "Contact not have Tag : Funnel_Consultation_Booked",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "818343f5-fe34-444f-ae59-fde5c7fa6f05",
+   "sibling": [
+    "9619372f-c31b-4b79-9067-5d440cef4471"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "27939c01-ef20-47c3-aaec-ba6d1bc6f7dd"
+  },
+  {
+   "id": "818343f5-fe34-444f-ae59-fde5c7fa6f05",
+   "parent": "84ca790f-6bb9-4c1c-a574-4f9e21337cc8",
+   "order": 0,
+   "attributes": {
+    "subject": "20-Minute Results",
+    "trackingOptions": {
+     "hasTrackingLinks": false,
+     "hasUtmTracking": true,
+     "hasTags": false,
+     "sourceId": "619cc8e7-b658-4552-8e23-5aeeec443057:818343f5-fe34-444f-ae59-fde5c7fa6f05"
+    },
+    "conditions": [],
+    "preHeader": "",
+    "from_email": "{{location.email}}",
+    "from_name": "Men's Wellness Center",
+    "previewUrl": "https://firebasestorage.googleapis.com/v0/b/highlevel-backend.appspot.com/o/location%2FGhstz8eIsHWLeXek47dk%2Femails%2F698204537a06717cf0221ae6%2Findex.html",
+    "createdAt": "2026-02-03T14:21:07.521Z",
+    "templateCreationMode": "existing",
+    "updatedAt": "2026-02-03T14:24:10.558Z",
+    "template_id": "6980b818545eca814dda738a",
+    "templatesource": "email-builder",
+    "syncEnabled": true,
+    "attachments": []
+   },
+   "name": "Email (Final)",
+   "type": "email",
+   "next": "8359e5d1-0fb3-4cbb-bf84-ef02ed4ce750",
+   "parentKey": "84ca790f-6bb9-4c1c-a574-4f9e21337cc8"
+  },
+  {
+   "id": "8359e5d1-0fb3-4cbb-bf84-ef02ed4ce750",
+   "parent": "84ca790f-6bb9-4c1c-a574-4f9e21337cc8",
+   "order": 1,
+   "attributes": {
+    "currentRecipeType": "AVALABILITY",
+    "branches": [
+     {
+      "id": "d4b3ad8e-6431-4d42-84fe-cc51c6e97a0b",
+      "name": "Branch",
+      "segments": [
+       {
+        "__segmentId": "7c672ae5-bae6-4add-8155-25d984f343a1",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "quarter_hour",
+          "conditionOperator": ">",
+          "conditionValue": "800",
+          "__conditionId": "af536d80-e230-49b1-83a7-6f1f609fcc16",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         },
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "quarter_hour",
+          "conditionOperator": "<",
+          "conditionValue": "2000",
+          "__conditionId": "11b04522-712c-4eb7-9f57-a7350516faaf",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Condition",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "d4b3ad8e-6431-4d42-84fe-cc51c6e97a0b",
+    "360281f5-1452-4f77-a31f-aed0c5bba0ec"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "818343f5-fe34-444f-ae59-fde5c7fa6f05"
+  },
+  {
+   "id": "d4b3ad8e-6431-4d42-84fe-cc51c6e97a0b",
+   "parent": "8359e5d1-0fb3-4cbb-bf84-ef02ed4ce750",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Branch",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "15dfb628-ba43-4667-aff8-cf37bd4a092a",
+   "sibling": [
+    "360281f5-1452-4f77-a31f-aed0c5bba0ec"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "8359e5d1-0fb3-4cbb-bf84-ef02ed4ce750"
+  },
+  {
+   "id": "15dfb628-ba43-4667-aff8-cf37bd4a092a",
+   "parent": "d4b3ad8e-6431-4d42-84fe-cc51c6e97a0b",
+   "order": 0,
+   "attributes": {
+    "body": "{{contact.first_name}}, last nudge from Men's Wellness. Your no-cost visit is still open: 1 hour, provider plus same-day labs, $0. Book at BookMWC.com or call/text 866-344-4955. If now isn't the right time, no worries.",
+    "attachments": []
+   },
+   "name": "SMS (Final)",
+   "type": "sms",
+   "next": "b6e07e32-977d-44cd-b972-7011d1aaf598",
+   "parentKey": "d4b3ad8e-6431-4d42-84fe-cc51c6e97a0b"
+  },
+  {
+   "id": "b6e07e32-977d-44cd-b972-7011d1aaf598",
+   "parent": "d4b3ad8e-6431-4d42-84fe-cc51c6e97a0b",
+   "order": 1,
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "hour",
+     "value": 36,
+     "when": "after"
+    },
+    "name": "Wait Another 36 hours",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "name": "Wait Another 36 hours",
+   "type": "wait",
+   "next": "39d554f3-e68f-42e2-9846-6c09442d91a6",
+   "parentKey": "15dfb628-ba43-4667-aff8-cf37bd4a092a"
+  },
+  {
+   "id": "39d554f3-e68f-42e2-9846-6c09442d91a6",
+   "parent": "d4b3ad8e-6431-4d42-84fe-cc51c6e97a0b",
+   "order": 2,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "fe018732-71a2-4b5e-8351-00af1ab2ef61",
+      "name": "Contact has Tag: Funnel_Consultation_Booked",
+      "segments": [
+       {
+        "__segmentId": "a4816f04-cb8b-43f6-a729-576185167d91",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "tags",
+          "conditionOperator": "index-of-true",
+          "conditionValue": [
+           "funnel_consultation_booked"
+          ],
+          "__conditionId": "c0c11aa1-0d13-473b-9331-9742c3db1bbc",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Check if already booked with Contact has Tag: Funnel_Consultation_Booked",
+    "version": 2,
+    "noneBranchName": "Contact not have Tag : Funnel_Consultation_Booked"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "fe018732-71a2-4b5e-8351-00af1ab2ef61",
+    "acfc4fd8-9236-49a2-ade8-37f4893116c7"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "b6e07e32-977d-44cd-b972-7011d1aaf598"
+  },
+  {
+   "id": "fe018732-71a2-4b5e-8351-00af1ab2ef61",
+   "parent": "39d554f3-e68f-42e2-9846-6c09442d91a6",
+   "order": 3,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Contact has Tag: Funnel_Consultation_Booked",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "374c49e4-5474-4f4d-9a87-690248d0ad09",
+   "sibling": [
+    "acfc4fd8-9236-49a2-ade8-37f4893116c7"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "39d554f3-e68f-42e2-9846-6c09442d91a6"
+  },
+  {
+   "id": "374c49e4-5474-4f4d-9a87-690248d0ad09",
+   "parent": "fe018732-71a2-4b5e-8351-00af1ab2ef61",
+   "order": 0,
+   "attributes": {
+    "type": "remove_opportunity",
+    "opportunity_to_be_found": "all",
+    "pipeline_id": "gcRMq1iCj2tGmdWpimGS"
+   },
+   "name": "Remove from NON BOOKED LEADS Pipeline",
+   "type": "remove_opportunity",
+   "parentKey": "fe018732-71a2-4b5e-8351-00af1ab2ef61"
+  },
+  {
+   "id": "acfc4fd8-9236-49a2-ade8-37f4893116c7",
+   "parent": "39d554f3-e68f-42e2-9846-6c09442d91a6",
+   "order": 3,
+   "attributes": {
+    "else": true
+   },
+   "name": "Contact not have Tag : Funnel_Consultation_Booked",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "74d17bba-a03d-40c5-b6cb-7d93b5e3a05d",
+   "sibling": [
+    "fe018732-71a2-4b5e-8351-00af1ab2ef61"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "39d554f3-e68f-42e2-9846-6c09442d91a6"
+  },
+  {
+   "id": "74d17bba-a03d-40c5-b6cb-7d93b5e3a05d",
+   "parent": "acfc4fd8-9236-49a2-ade8-37f4893116c7",
+   "order": 0,
+   "attributes": {
+    "input_trigger_params": false,
+    "type": "add_to_workflow",
+    "workflow_id": "a07e53bd-4e90-4742-b2e6-b7713ea9b15b"
+   },
+   "name": "Add to Nurture Workflow",
+   "type": "add_to_workflow",
+   "parentKey": "acfc4fd8-9236-49a2-ade8-37f4893116c7"
+  },
+  {
+   "id": "360281f5-1452-4f77-a31f-aed0c5bba0ec",
+   "parent": "8359e5d1-0fb3-4cbb-bf84-ef02ed4ce750",
+   "order": 2,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "e1f1e7ae-0ef2-42f1-b2a3-f653ab1e5153",
+   "sibling": [
+    "d4b3ad8e-6431-4d42-84fe-cc51c6e97a0b"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "8359e5d1-0fb3-4cbb-bf84-ef02ed4ce750"
+  },
+  {
+   "id": "e1f1e7ae-0ef2-42f1-b2a3-f653ab1e5153",
+   "parent": "360281f5-1452-4f77-a31f-aed0c5bba0ec",
+   "order": 0,
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "minutes",
+     "value": 0,
+     "when": "after"
+    },
+    "name": "Wait until 8am",
+    "cat": "",
+    "window": {
+     "condition": "when",
+     "days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "start": "08:00",
+     "end": "20:00"
+    },
+    "windowCondition": {
+     "field": "",
+     "operator": "",
+     "value": ""
+    },
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "name": "Wait until 8am",
+   "type": "wait",
+   "next": "029adda6-5831-4ab7-8d35-bc81f8a7cbd8",
+   "parentKey": "360281f5-1452-4f77-a31f-aed0c5bba0ec"
+  },
+  {
+   "id": "029adda6-5831-4ab7-8d35-bc81f8a7cbd8",
+   "parent": "360281f5-1452-4f77-a31f-aed0c5bba0ec",
+   "order": 1,
+   "attributes": {
+    "targetNodeId": "15dfb628-ba43-4667-aff8-cf37bd4a092a",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "e1f1e7ae-0ef2-42f1-b2a3-f653ab1e5153"
+  },
+  {
+   "id": "d0df00fa-346b-4caa-b02f-99beb447f190",
+   "parent": "5eabf1d1-0f92-43a7-ac7f-a0fd33f47695",
+   "order": 2,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "21f16ce7-112f-4b82-85d1-0c4f455fc825",
+   "sibling": [
+    "56a3ca9c-e753-47c7-a475-2b7aa6a6d20a"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "5eabf1d1-0f92-43a7-ac7f-a0fd33f47695"
+  },
+  {
+   "id": "21f16ce7-112f-4b82-85d1-0c4f455fc825",
+   "parent": "d0df00fa-346b-4caa-b02f-99beb447f190",
+   "order": 0,
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "minutes",
+     "value": 0,
+     "when": "after"
+    },
+    "name": "Wait until 8am",
+    "cat": "",
+    "window": {
+     "condition": "when",
+     "days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "start": "08:00",
+     "end": "20:00"
+    },
+    "windowCondition": {
+     "field": "",
+     "operator": "",
+     "value": ""
+    },
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "name": "Wait until 8am",
+   "type": "wait",
+   "next": "3ada1989-f458-4f84-8862-9c04fed8aa99",
+   "parentKey": "d0df00fa-346b-4caa-b02f-99beb447f190"
+  },
+  {
+   "id": "3ada1989-f458-4f84-8862-9c04fed8aa99",
+   "parent": "d0df00fa-346b-4caa-b02f-99beb447f190",
+   "order": 1,
+   "attributes": {
+    "targetNodeId": "6831a9c5-e156-41d2-a810-e579d1155242",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "21f16ce7-112f-4b82-85d1-0c4f455fc825"
+  },
+  {
+   "id": "b41e38da-2abc-4ed9-8f75-13df6e1c7875",
+   "parent": "adf1c456-17d2-4f99-bd0c-1ac939d27ff6",
+   "order": 3,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "4837fcec-67f6-49e7-9fb0-4cde2c3c01a3",
+   "sibling": [
+    "97372dfe-13a3-45be-b1af-92cbdd5506d1"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "adf1c456-17d2-4f99-bd0c-1ac939d27ff6"
+  },
+  {
+   "id": "4837fcec-67f6-49e7-9fb0-4cde2c3c01a3",
+   "parentKey": "b41e38da-2abc-4ed9-8f75-13df6e1c7875",
+   "parent": "b41e38da-2abc-4ed9-8f75-13df6e1c7875",
+   "type": "wait",
+   "name": "Wait until 8am",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "minutes",
+     "value": 0,
+     "when": "after"
+    },
+    "name": "Wait until 8am",
+    "cat": "",
+    "window": {
+     "condition": "when",
+     "days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ],
+     "start": "08:00",
+     "end": "20:00"
+    },
+    "windowCondition": {
+     "field": "",
+     "operator": "",
+     "value": ""
+    },
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "order": 0,
+   "cat": "",
+   "next": "ec375f95-ec05-410e-a904-2f854ae2ffcc"
+  },
+  {
+   "id": "ec375f95-ec05-410e-a904-2f854ae2ffcc",
+   "parent": "b41e38da-2abc-4ed9-8f75-13df6e1c7875",
+   "order": 1,
+   "attributes": {
+    "targetNodeId": "f04f0609-5694-452d-825b-7872a43cb1d9",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "4837fcec-67f6-49e7-9fb0-4cde2c3c01a3"
+  },
+  {
+   "id": "0e6a119e-fdbf-4c2d-a383-8bf199473822",
+   "parentKey": "f663c6e1-4b15-4a56-954f-032330b7119a",
+   "parent": "f663c6e1-4b15-4a56-954f-032330b7119a",
+   "type": "transition",
+   "name": "timeout",
+   "attributes": {
+    "type": "wait_timeout",
+    "description": "What will happen after 1 minutes"
+   },
+   "order": 3,
+   "cat": "transition",
+   "next": "ad64e606-0ffc-4008-b411-2ddf650a987e"
+  },
+  {
+   "id": "ad64e606-0ffc-4008-b411-2ddf650a987e",
+   "parent": "0e6a119e-fdbf-4c2d-a383-8bf199473822",
+   "order": 0,
+   "attributes": {
+    "targetNodeId": "9a24f7ce-53a4-474b-b562-60377892e397",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "0e6a119e-fdbf-4c2d-a383-8bf199473822"
+  },
+  {
+   "id": "32666fa7-061b-4e13-a5c9-f32dc8d9b1ec",
+   "parent": "70072e6f-b79c-4fab-b862-8f92b8195893",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "VA Beach",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "ed895c03-e531-4979-96f0-6a5d071ac89a",
+   "sibling": [
+    "d824ab36-e94e-49d0-85ca-477d552c8e9e",
+    "b99a8262-37f9-4961-af1c-b7d7c1ac98fc",
+    "375320ea-5dda-4f5d-a681-3e459d203d96"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "70072e6f-b79c-4fab-b862-8f92b8195893"
+  },
+  {
+   "id": "ed895c03-e531-4979-96f0-6a5d071ac89a",
+   "parent": "32666fa7-061b-4e13-a5c9-f32dc8d9b1ec",
+   "order": 0,
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "minutes",
+     "value": 3,
+     "when": "after"
+    },
+    "name": "Wait 3 mins",
+    "cat": "",
+    "timePeriodInputMode": "standard",
+    "unitInputMode": "standard",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "name": "Wait 3 mins",
+   "type": "wait",
+   "next": "bc00f41f-baac-4d7c-bfae-d52c3ed6e8ed",
+   "parentKey": "32666fa7-061b-4e13-a5c9-f32dc8d9b1ec"
+  },
+  {
+   "id": "bc00f41f-baac-4d7c-bfae-d52c3ed6e8ed",
+   "parent": "32666fa7-061b-4e13-a5c9-f32dc8d9b1ec",
+   "order": 1,
+   "attributes": {
+    "body": "{{contact.first_name}}, most men come into Men's Wellness Virginia Beach tired, foggy, or just off. One free visit shows if we can help. \n\nAbout an hour, provider visit plus same-day lab work, no cost. Looking to get started this week?\n\nSame-day and next-day appointments booked online: https://bookmwc.com/virginia-beach-va?phone={{contact.phone_raw}}",
+    "attachments": []
+   },
+   "name": "send SMS to lead right after the initial form is submitted",
+   "type": "sms",
+   "next": "4f2377cf-924e-439d-b8dc-e878132e09e3",
+   "parentKey": "ed895c03-e531-4979-96f0-6a5d071ac89a"
+  },
+  {
+   "id": "4f2377cf-924e-439d-b8dc-e878132e09e3",
+   "parent": "32666fa7-061b-4e13-a5c9-f32dc8d9b1ec",
+   "order": 2,
+   "attributes": {
+    "targetNodeId": "f663c6e1-4b15-4a56-954f-032330b7119a",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "bc00f41f-baac-4d7c-bfae-d52c3ed6e8ed"
+  },
+  {
+   "id": "b99a8262-37f9-4961-af1c-b7d7c1ac98fc",
+   "parent": "70072e6f-b79c-4fab-b862-8f92b8195893",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "NPN",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "04bc4b22-34f0-499a-9399-ab4e72df7e5c",
+   "sibling": [
+    "d824ab36-e94e-49d0-85ca-477d552c8e9e",
+    "32666fa7-061b-4e13-a5c9-f32dc8d9b1ec",
+    "375320ea-5dda-4f5d-a681-3e459d203d96"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "70072e6f-b79c-4fab-b862-8f92b8195893"
+  },
+  {
+   "id": "04bc4b22-34f0-499a-9399-ab4e72df7e5c",
+   "parent": "b99a8262-37f9-4961-af1c-b7d7c1ac98fc",
+   "order": 0,
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "minutes",
+     "value": 3,
+     "when": "after"
+    },
+    "name": "Wait 3 mins",
+    "cat": "",
+    "timePeriodInputMode": "standard",
+    "unitInputMode": "standard",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "name": "Wait 3 mins",
+   "type": "wait",
+   "next": "9615350e-ef24-4243-9a94-f3476f3c0280",
+   "parentKey": "b99a8262-37f9-4961-af1c-b7d7c1ac98fc"
+  },
+  {
+   "id": "9615350e-ef24-4243-9a94-f3476f3c0280",
+   "parent": "b99a8262-37f9-4961-af1c-b7d7c1ac98fc",
+   "order": 1,
+   "attributes": {
+    "body": "{{contact.first_name}}, most men come into Men's Wellness Newport News tired, foggy, or just off. One free visit shows if we can help. \n\nAbout an hour, provider visit plus same-day lab work, no cost. Looking to get started this week?\n\nSame-day and next-day appointments booked online: https://bookmwc.com/newport-news-va?phone={{contact.phone_raw}}",
+    "attachments": []
+   },
+   "name": "send SMS to lead right after the initial form is submitted",
+   "type": "sms",
+   "next": "1a53a394-2833-488e-8541-40cc0e876448",
+   "parentKey": "04bc4b22-34f0-499a-9399-ab4e72df7e5c"
+  },
+  {
+   "id": "1a53a394-2833-488e-8541-40cc0e876448",
+   "parent": "b99a8262-37f9-4961-af1c-b7d7c1ac98fc",
+   "order": 2,
+   "attributes": {
+    "targetNodeId": "f663c6e1-4b15-4a56-954f-032330b7119a",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "9615350e-ef24-4243-9a94-f3476f3c0280"
+  },
+  {
+   "id": "375320ea-5dda-4f5d-a681-3e459d203d96",
+   "parent": "70072e6f-b79c-4fab-b862-8f92b8195893",
+   "order": 1,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "c95ccd1a-fdbf-4884-a2fd-b2615f669a27",
+   "sibling": [
+    "d824ab36-e94e-49d0-85ca-477d552c8e9e",
+    "32666fa7-061b-4e13-a5c9-f32dc8d9b1ec",
+    "b99a8262-37f9-4961-af1c-b7d7c1ac98fc"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "70072e6f-b79c-4fab-b862-8f92b8195893"
+  },
+  {
+   "id": "c95ccd1a-fdbf-4884-a2fd-b2615f669a27",
+   "parentKey": "375320ea-5dda-4f5d-a681-3e459d203d96",
+   "parent": "375320ea-5dda-4f5d-a681-3e459d203d96",
+   "type": "wait",
+   "name": "Wait for Preferred Location",
+   "attributes": {
+    "type": "condition",
+    "startAfter": {
+     "type": "minutes",
+     "value": 0,
+     "when": "after"
+    },
+    "name": "Wait for Preferred Location",
+    "cat": "",
+    "condition": {
+     "currentRecipeType": "CUSTOM",
+     "branches": [
+      {
+       "id": "06d66b0c-e2fa-41b5-99fc-92f1d3f837a4",
+       "name": "Branch",
+       "segments": [
+        {
+         "__segmentId": "5f286743-21dc-4485-9b86-0cc92500ba61",
+         "operator": "and",
+         "conditions": [
+          {
+           "conditionType": "contact_detail",
+           "conditionSubType": "Cou856tOhaxW62vwehVI",
+           "conditionOperator": "has_value",
+           "__conditionId": "c408eff5-e1ce-4800-b068-4495f023d59a",
+           "ifElseNodeId": "",
+           "__customFieldType__": "standard",
+           "isWait": true,
+           "nestedDropdownTypes": [
+            "inboundWebhookRequest",
+            "sheet",
+            "datetime_formatter",
+            "custom_webhook",
+            "array_functions",
+            "ivr_gather",
+            "ivr_connect_call",
+            "custom_code",
+            "ai_agent"
+           ],
+           "allowIsOperatorTypes": [
+            "contact_reply",
+            "inboundWebhookRequest",
+            "custom_webhook",
+            "custom_code",
+            "ai_agent",
+            "contact_detail",
+            "array_functions",
+            "appointment",
+            "service_booking",
+            "rental_booking"
+           ]
+          }
+         ]
+        }
+       ],
+       "operator": "and",
+       "showErrors": false,
+       "branchNameError": "Branch name cannot be empty!"
+      }
+     ],
+     "operator": "and",
+     "if": true,
+     "conditionName": "",
+     "version": 2,
+     "noneBranchName": "None"
+    },
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "order": 0,
+   "cat": "",
+   "next": "9b4bbc8b-0ffa-4d42-a432-d4d29c793fdc"
+  },
+  {
+   "id": "9b4bbc8b-0ffa-4d42-a432-d4d29c793fdc",
+   "parent": "375320ea-5dda-4f5d-a681-3e459d203d96",
+   "order": 1,
+   "attributes": {
+    "targetNodeId": "70072e6f-b79c-4fab-b862-8f92b8195893",
+    "type": "goto"
+   },
+   "name": "Check Location",
+   "type": "goto",
+   "parentKey": "c95ccd1a-fdbf-4884-a2fd-b2615f669a27"
+  },
+  {
+   "id": "b3c01131-91cf-4403-8f0b-80191b7a18da",
+   "parent": "0208ff8a-b2eb-49c1-999d-61725eb843a6",
+   "order": 2,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "088d4970-d97e-47ea-838f-3827ee9c6594"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "0208ff8a-b2eb-49c1-999d-61725eb843a6"
+  }
+ ]
 }

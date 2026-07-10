@@ -2,28 +2,180 @@ import { useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
 import { PageShell } from "../components/Shell";
 import { Card, CardContent, Badge, Loading, cn } from "../components/ui";
-import { useAsisDetail, type Coverage } from "../lib/asis";
+import { useAsisDetail, type AsisStep, type AsisWorkflow } from "../lib/asis";
 import { ghlWorkflow } from "../lib/ghl";
-import { ExternalLink, ArrowLeft, MessageSquare, Mail, Zap, Tag, FolderOpen, MapPin } from "lucide-react";
+import {
+  ExternalLink, ArrowLeft, MessageSquare, Mail, Zap, Tag, FolderOpen, MapPin,
+  Clock, GitBranch, CornerDownRight, Target, Database, Table2, Webhook, Phone,
+  StickyNote, BellOff, LogOut, Pencil, CalendarCheck, CircleDot,
+} from "lucide-react";
 
-function chanTone(c: string) {
-  return /email/i.test(c) ? "blue" : /sms|text/i.test(c) ? "good" : "muted";
+/* ---- per-kind visual treatment ---------------------------------------- */
+const KIND_META: Record<string, { icon: any; tone: string; label: string }> = {
+  message: { icon: MessageSquare, tone: "text-emerald-600 dark:text-emerald-400", label: "Message" },
+  wait: { icon: Clock, tone: "text-amber-600 dark:text-amber-400", label: "Wait" },
+  decision: { icon: GitBranch, tone: "text-sky-600 dark:text-sky-400", label: "If / else" },
+  goto: { icon: CornerDownRight, tone: "text-violet-600 dark:text-violet-400", label: "Go to" },
+  tag: { icon: Tag, tone: "text-indigo-600 dark:text-indigo-400", label: "Tag" },
+  opportunity: { icon: Target, tone: "text-rose-600 dark:text-rose-400", label: "Opportunity" },
+  field: { icon: Pencil, tone: "text-teal-600 dark:text-teal-400", label: "Contact field" },
+  appointment: { icon: CalendarCheck, tone: "text-cyan-600 dark:text-cyan-400", label: "Appointment" },
+  sheets: { icon: Table2, tone: "text-green-700 dark:text-green-400", label: "Google Sheets" },
+  webhook: { icon: Webhook, tone: "text-orange-600 dark:text-orange-400", label: "Webhook" },
+  ivr: { icon: Phone, tone: "text-blue-600 dark:text-blue-400", label: "IVR / call" },
+  note: { icon: StickyNote, tone: "text-yellow-700 dark:text-yellow-400", label: "Note" },
+  dnd: { icon: BellOff, tone: "text-red-600 dark:text-red-400", label: "DND" },
+  exit: { icon: LogOut, tone: "text-muted-foreground", label: "Exit" },
+  workflow: { icon: Database, tone: "text-fuchsia-600 dark:text-fuchsia-400", label: "Workflow" },
+  action: { icon: CircleDot, tone: "text-muted-foreground", label: "Action" },
+};
+
+function StepBody({ step }: { step: AsisStep }) {
+  const d = step.detail;
+  if (!d) return null;
+
+  if (step.kind === "message") {
+    if (d.channel === "sms") {
+      return <pre className="mt-2 whitespace-pre-wrap rounded-md bg-muted/40 p-3 font-sans text-sm text-foreground/90">{d.body}</pre>;
+    }
+    // email / internal email — sanitised plain-text projection, no live HTML
+    return (
+      <div className="mt-2 space-y-1.5">
+        {d.subject && <div className="text-sm font-medium">Subject: {d.subject}</div>}
+        {(d.from_name || d.from_email) && <div className="text-xs text-muted-foreground">From: {d.from_name} {d.from_email && `<${d.from_email}>`}</div>}
+        {d.preheader && <div className="text-xs italic text-muted-foreground">Preheader: {d.preheader}</div>}
+        {d.body_text && <pre className="whitespace-pre-wrap rounded-md bg-muted/40 p-3 font-sans text-sm text-foreground/90">{d.body_text}</pre>}
+      </div>
+    );
+  }
+  if (step.kind === "wait") {
+    return <div className="mt-1 text-sm text-muted-foreground">{d.summary}{d.description ? ` — ${d.description}` : ""}</div>;
+  }
+  if (step.kind === "goto") {
+    return <div className="mt-1 text-sm text-muted-foreground">→ jumps to <span className="font-medium text-foreground">{d.target_name || d.target_id}</span></div>;
+  }
+  if (step.kind === "tag") {
+    return (
+      <div className="mt-1.5 flex flex-wrap items-center gap-1">
+        <span className="text-xs text-muted-foreground">{d.op === "remove" ? "Remove" : "Add"}:</span>
+        {(d.tags || []).map((t) => <Badge key={t} tone={d.op === "remove" ? "red" : "good"}>{t}</Badge>)}
+      </div>
+    );
+  }
+  if (step.kind === "opportunity") {
+    return (
+      <div className="mt-1 space-y-0.5 text-xs text-muted-foreground">
+        <div><span className="font-medium text-foreground capitalize">{d.op}</span> opportunity{d.name ? ` — ${d.name}` : ""}</div>
+        {d.status && <div>Status: {d.status}{d.value ? ` · value ${d.value}` : ""}</div>}
+        {d.pipeline_id && <div className="font-mono text-[10px]">pipeline {d.pipeline_id}{d.stage_id ? ` · stage ${d.stage_id}` : ""}</div>}
+        {d.scope && <div>Scope: {d.scope}</div>}
+      </div>
+    );
+  }
+  if (step.kind === "field") {
+    return (
+      <div className="mt-1 text-xs text-muted-foreground">
+        {d.action && <span className="font-medium text-foreground">{d.action}</span>}
+        {d.fields && d.fields.length > 0 && <span> — {d.fields.join(", ")}</span>}
+      </div>
+    );
+  }
+  if (step.kind === "appointment") {
+    return <div className="mt-1 text-sm text-muted-foreground">Set status → <span className="font-medium text-foreground">{d.status}</span></div>;
+  }
+  if (step.kind === "sheets") {
+    return <div className="mt-1 text-xs text-muted-foreground">{d.action} · {d.spreadsheet}{d.sheet ? ` / ${d.sheet}` : ""}</div>;
+  }
+  if (step.kind === "webhook") {
+    return <div className="mt-1 break-all font-mono text-xs text-muted-foreground">{d.method} {d.url}</div>;
+  }
+  if (step.kind === "ivr") {
+    return (
+      <div className="mt-1 text-sm text-muted-foreground">
+        {d.message && <pre className="whitespace-pre-wrap rounded-md bg-muted/40 p-3 font-sans text-sm text-foreground/90">{d.message}</pre>}
+        {d.num_digits != null && <div className="mt-1 text-xs">Collects {d.num_digits} digit(s)</div>}
+      </div>
+    );
+  }
+  if (step.kind === "note") {
+    return d.body_text ? <pre className="mt-2 whitespace-pre-wrap rounded-md bg-muted/40 p-3 font-sans text-sm text-foreground/90">{d.body_text}</pre> : null;
+  }
+  if (step.kind === "dnd") {
+    return <div className="mt-1 text-xs text-muted-foreground">{d.mode} · {d.direction}{d.channels && d.channels.length ? ` · ${d.channels.join(", ")}` : ""}</div>;
+  }
+  if (step.kind === "exit") {
+    return d.action ? <div className="mt-1 text-xs text-muted-foreground">{d.action}</div> : null;
+  }
+  return null;
 }
 
-const COVERAGE_LABEL: Record<Coverage, string> = {
-  messages: "Message detail recovered",
-  triggers: "Triggers only",
-  metadata: "Structure only",
-};
-const COVERAGE_TONE: Record<Coverage, "good" | "blue" | "muted"> = {
-  messages: "good", triggers: "blue", metadata: "muted",
-};
+function StepNode({ step, n }: { step: AsisStep; n: number }) {
+  const meta = KIND_META[step.kind] || KIND_META.action;
+  const Icon = meta.icon;
+
+  if (step.kind === "decision") {
+    return (
+      <div className="rounded-md border border-l-4 border-l-sky-400 bg-sky-50/40 dark:bg-sky-950/20">
+        <div className="flex items-start gap-2 p-3">
+          <Icon className={cn("mt-0.5 h-4 w-4 shrink-0", meta.tone)} />
+          <div className="min-w-0">
+            <div className="text-sm font-semibold">If / else{step.condition_name ? `: ${step.condition_name}` : ""}</div>
+            <div className="text-xs text-muted-foreground">{step.branches?.length || 0} branch(es){step.none_branch ? ` · else → ${step.none_branch}` : ""}</div>
+          </div>
+        </div>
+        <div className="space-y-3 border-t border-sky-200/60 p-3 dark:border-sky-900/40">
+          {step.branches?.map((b, i) => (
+            <div key={i} className="rounded-md border bg-card">
+              <div className="flex flex-wrap items-center gap-1.5 border-b bg-muted/30 px-3 py-1.5">
+                <Badge tone={b.is_else ? "muted" : "blue"}>{b.label}</Badge>
+                {b.conditions.map((c, j) => <span key={j} className="text-xs text-muted-foreground">· {c}</span>)}
+              </div>
+              <div className="p-2">
+                {b.steps.length ? <StepList steps={b.steps} /> : <div className="px-1 py-2 text-xs italic text-muted-foreground">(branch ends — contact exits this path)</div>}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <Card>
+      <CardContent className="p-3">
+        <div className="flex items-start gap-2">
+          <span className="mt-0.5 w-6 shrink-0 text-right font-mono text-[11px] text-muted-foreground">{n}</span>
+          <Icon className={cn("mt-0.5 h-4 w-4 shrink-0", meta.tone)} />
+          <div className="min-w-0 flex-1">
+            <div className="flex flex-wrap items-center gap-1.5">
+              <span className="text-sm font-medium">{step.name}</span>
+              <Badge tone="muted">{meta.label}</Badge>
+            </div>
+            <StepBody step={step} />
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
+/* Sequential list; decisions self-number as 'B'. Linear steps get running index. */
+function StepList({ steps }: { steps: AsisStep[] }) {
+  let idx = 0;
+  return (
+    <div className="space-y-2">
+      {steps.map((s) => {
+        const label = s.kind === "decision" ? "◆" : String(++idx);
+        return <StepNode key={s.id} step={s} n={label as any} />;
+      })}
+    </div>
+  );
+}
 
 export default function WorkflowDetail() {
   const { id } = useParams<{ id: string }>();
   const { data, isLoading } = useAsisDetail();
-
-  const wf = useMemo(() => data?.workflows.find((w) => w.id === id), [data, id]);
+  const wf: AsisWorkflow | undefined = useMemo(() => data?.workflows.find((w) => w.id === id), [data, id]);
 
   if (isLoading || !data) return <Loading />;
   if (!wf) return (
@@ -33,12 +185,11 @@ export default function WorkflowDetail() {
   );
 
   const loc = data.location_id;
-  const stepDetail = wf.coverage === "messages";
 
   return (
     <PageShell
       title={wf.name}
-      subtitle={`As-is workflow · captured verbatim from GHL · no brand-voice rewrite`}
+      subtitle="As-is workflow · complete step graph captured verbatim from the live GHL API · no brand-voice rewrite"
       actions={
         <div className="flex items-center gap-2">
           <Link to="/as-is" className="inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-sm hover:bg-muted">
@@ -55,10 +206,7 @@ export default function WorkflowDetail() {
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <Card><CardContent className="p-4">
           <div className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Status</div>
-          <div className="mt-1 flex flex-wrap items-center gap-1.5">
-            <Badge tone={wf.status === "published" ? "good" : "muted"}>{wf.status}</Badge>
-            <Badge tone={COVERAGE_TONE[wf.coverage]}>{COVERAGE_LABEL[wf.coverage]}</Badge>
-          </div>
+          <div className="mt-1"><Badge tone={wf.status === "published" ? "good" : "muted"}>{wf.status}</Badge></div>
         </CardContent></Card>
         <Card><CardContent className="p-4">
           <div className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Folder</div>
@@ -73,99 +221,48 @@ export default function WorkflowDetail() {
           <div className="mt-1 truncate font-mono text-[10px] text-muted-foreground">{wf.id}</div>
         </CardContent></Card>
         <Card><CardContent className="p-4">
-          <div className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Migration disposition</div>
-          {wf.disposition ? (
-            <div className="mt-1 text-sm font-medium">{wf.disposition}{wf.target_nn ? ` → ${wf.target_nn}` : ""}</div>
-          ) : (
-            <div className="mt-1 text-xs text-muted-foreground">Not yet mapped</div>
-          )}
+          <div className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Graph size</div>
+          <div className="mt-1 text-sm font-medium">{wf.n_steps} steps · {wf.n_nodes} nodes</div>
+          <div className="mt-1 text-xs text-muted-foreground">{wf.sms} SMS · {wf.email} email</div>
         </CardContent></Card>
       </div>
 
-      {/* Coverage banner for non-message workflows */}
-      {!stepDetail && (
-        <div className="flex items-start gap-3 rounded-md border border-l-4 border-l-amber-500 bg-amber-50 p-4 dark:bg-amber-950/30">
-          <div className="mt-0.5 h-2 w-2 shrink-0 rounded-full bg-amber-500" />
-          <div>
-            <div className="font-semibold text-amber-800 dark:text-amber-300">Structure only — step extraction pending</div>
-            <p className="mt-0.5 text-sm text-amber-700 dark:text-amber-400">
-              {wf.triggers.length > 0
-                ? "Triggers were recovered for this workflow, but the ordered step sequence (waits, if/else branches, and message copy) was not extractable from the GHL export."
-                : "Only name, status, and folder metadata were recoverable for this workflow. The trigger list, ordered steps, and message copy were not extractable from the GHL export."}
-              {" "}Open it in the GHL builder to see the live configuration.
-            </p>
-          </div>
-        </div>
-      )}
-
       {/* Triggers */}
-      {wf.triggers.length > 0 && (
-        <section>
-          <h2 className="mb-2 flex items-center gap-1.5 text-sm font-semibold"><Zap className="h-4 w-4" /> Triggers ({wf.triggers.length})</h2>
-          <div className="flex flex-wrap gap-2">
-            {wf.triggers.map((t, i) => (
-              <div key={i} className="flex items-center gap-1.5 rounded-md border bg-card px-3 py-1.5 text-sm">
-                <span className={cn("h-2 w-2 rounded-full", t.active ? "bg-emerald-500" : "bg-muted-foreground")} />
-                <span className="font-medium">{t.name}</span>
-                <span className="text-xs text-muted-foreground">{t.type}</span>
+      <section>
+        <h2 className="mb-2 flex items-center gap-1.5 text-sm font-semibold"><Zap className="h-4 w-4" /> Triggers ({wf.triggers.length})</h2>
+        {wf.triggers.length === 0 ? (
+          <div className="rounded-md border bg-card p-3 text-sm text-muted-foreground">No triggers configured — this workflow is entered from another workflow or manually.</div>
+        ) : (
+          <div className="grid gap-2 sm:grid-cols-2">
+            {wf.triggers.map((t) => (
+              <div key={t.id} className="rounded-md border bg-card p-3">
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <span className={cn("h-2 w-2 rounded-full", t.active ? "bg-emerald-500" : "bg-muted-foreground")} />
+                  <span className="text-sm font-medium">{t.name}</span>
+                  <Badge tone="blue">{t.type}</Badge>
+                  {!t.active && <Badge tone="muted">inactive</Badge>}
+                </div>
+                {t.conditions.length > 0 && (
+                  <ul className="mt-1.5 space-y-0.5">
+                    {t.conditions.map((c, i) => <li key={i} className="text-xs text-muted-foreground">· {c}</li>)}
+                  </ul>
+                )}
               </div>
             ))}
           </div>
-        </section>
-      )}
+        )}
+      </section>
 
-      {/* Tag references */}
-      {(wf.tags_added.length > 0 || wf.tags_removed.length > 0) && (
-        <section>
-          <h2 className="mb-2 flex items-center gap-1.5 text-sm font-semibold"><Tag className="h-4 w-4" /> Tag operations</h2>
-          <div className="grid gap-3 sm:grid-cols-2">
-            <div>
-              <div className="mb-1 text-xs font-medium text-emerald-700 dark:text-emerald-400">Adds ({wf.tags_added.length})</div>
-              <div className="flex flex-wrap gap-1">
-                {wf.tags_added.length ? wf.tags_added.map((t) => <Badge key={t} tone="good">{t}</Badge>) : <span className="text-xs text-muted-foreground">none</span>}
-              </div>
-            </div>
-            <div>
-              <div className="mb-1 text-xs font-medium text-red-700 dark:text-red-400">Removes ({wf.tags_removed.length})</div>
-              <div className="flex flex-wrap gap-1">
-                {wf.tags_removed.length ? wf.tags_removed.map((t) => <Badge key={t} tone="red">{t}</Badge>) : <span className="text-xs text-muted-foreground">none</span>}
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Messages */}
+      {/* Step graph */}
       <section>
         <div className="mb-2 flex items-baseline justify-between">
-          <h2 className="flex items-center gap-1.5 text-sm font-semibold">
-            <MessageSquare className="h-4 w-4" /> Message steps ({wf.messages.length})
-            {wf.messages.length > 0 && <span className="text-xs font-normal text-muted-foreground">{wf.msg_sms} SMS · {wf.msg_email} email</span>}
-          </h2>
-          {wf.messages.length > 0 && <span className="text-[11px] text-amber-600 dark:text-amber-400">Verbatim — needs brand review before rebuild</span>}
+          <h2 className="flex items-center gap-1.5 text-sm font-semibold"><GitBranch className="h-4 w-4" /> Step graph ({wf.n_steps})</h2>
+          <span className="text-[11px] text-amber-600 dark:text-amber-400">Verbatim — message copy needs brand review before rebuild</span>
         </div>
-        {wf.messages.length === 0 ? (
-          <div className="rounded-md border bg-card p-6 text-center text-sm text-muted-foreground">
-            No message copy was recovered for this workflow.
-          </div>
+        {wf.steps.length === 0 ? (
+          <div className="rounded-md border bg-card p-6 text-center text-sm text-muted-foreground">This workflow has no action steps — it is trigger-only.</div>
         ) : (
-          <div className="space-y-2">
-            {wf.messages.map((m, i) => (
-              <Card key={i}>
-                <CardContent className="p-4">
-                  <div className="mb-2 flex flex-wrap items-center gap-2">
-                    <span className="text-xs font-semibold text-muted-foreground">#{i + 1}</span>
-                    <Badge tone={chanTone(m.channel)}>{m.channel}</Badge>
-                    {m.step && <span className="text-xs text-muted-foreground">{m.step}</span>}
-                    {m.delay && <Badge tone="muted">{m.delay}</Badge>}
-                    {m.status && <span className="ms-auto text-xs text-muted-foreground">{m.status}</span>}
-                  </div>
-                  {m.subject && <div className="mb-1.5 text-sm font-medium">{m.subject}</div>}
-                  <pre className="whitespace-pre-wrap rounded-md bg-muted/40 p-3 font-sans text-sm text-foreground/90">{m.message}</pre>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          <StepList steps={wf.steps} />
         )}
       </section>
 

@@ -1,0 +1,2464 @@
+{
+ "id": "528b598e-cd6c-488b-9e17-ccc65c25c7f1",
+ "name": "05. Clinic Appt Outcome",
+ "folder": "02. Appointments & Visit Journey",
+ "status": "published",
+ "updatedAt": "2026-06-01T17:22:18.890Z",
+ "version": 54,
+ "extracted_at": "2026-07-10T05:40:32Z",
+ "extraction_method": "ghl_backend_api",
+ "source": "GHL Active Workflows (live API)",
+ "workflowData": {
+  "_id": "528b598e-cd6c-488b-9e17-ccc65c25c7f1",
+  "locationId": "Ghstz8eIsHWLeXek47dk",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 2,
+  "name": "05. Clinic Appt Outcome",
+  "status": "published",
+  "version": 54,
+  "dataVersion": 7,
+  "allowMultiple": true,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/Ghstz8eIsHWLeXek47dk/workflows/528b598e-cd6c-488b-9e17-ccc65c25c7f1/54",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FGhstz8eIsHWLeXek47dk%2Fworkflows%2F528b598e-cd6c-488b-9e17-ccc65c25c7f1%2F54",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "type": "workflow",
+  "parentId": "d19faff7-3c76-44ec-8c05-59397c06aa08",
+  "meta": {
+   "stepIndexCounter": {
+    "google_sheets": 3
+   }
+  },
+  "updatedBy": "1UGaWoisLr0DONjwbenY",
+  "createdAt": "2026-01-02T02:44:01.138Z",
+  "updatedAt": "2026-06-01T17:22:18.890Z",
+  "deleted": false,
+  "allowMultipleOpportunity": true,
+  "creationSource": "builder",
+  "originType": "user",
+  "__v": 0,
+  "eventStartDate": null,
+  "window": null,
+  "workflowNote": null,
+  "triggersFilePath": "location/Ghstz8eIsHWLeXek47dk/workflow-triggers/528b598e-cd6c-488b-9e17-ccc65c25c7f1/34",
+  "isTriggerBucketMigrated": false,
+  "id": "528b598e-cd6c-488b-9e17-ccc65c25c7f1"
+ },
+ "triggers": [
+  {
+   "id": "2QrpA7uRlqNscg50yein",
+   "date_added": "2026-01-02T02:51:16.685Z",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "workflow_id": "528b598e-cd6c-488b-9e17-ccc65c25c7f1",
+   "conditions": [
+    {
+     "operator": "is-any-of",
+     "value": [
+      "awkdH7MUC8zvQ54n0uwn"
+     ],
+     "type": "string",
+     "title": "Form is",
+     "field": "form.id"
+    }
+   ],
+   "actions": [
+    {
+     "type": "add_to_workflow",
+     "workflow_id": "528b598e-cd6c-488b-9e17-ccc65c25c7f1"
+    }
+   ],
+   "schedule_config": {},
+   "deleted": false,
+   "type": "form_submission",
+   "masterType": "highlevel",
+   "belongs_to": "workflow",
+   "active": true,
+   "date_updated": "2026-02-01T00:12:44.646Z",
+   "name": "PA reported Px SHOWED"
+  },
+  {
+   "id": "3TrUFZXjRUUc2pxvgxsq",
+   "date_added": "2026-01-13T22:32:50.049Z",
+   "deleted": false,
+   "active": true,
+   "actions": [
+    {
+     "workflow_id": "528b598e-cd6c-488b-9e17-ccc65c25c7f1",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "==",
+     "field": "link.id",
+     "value": "Ak879sTEaNRh2SupLNIJ",
+     "title": "Trigger link",
+     "type": "select"
+    }
+   ],
+   "type": "trigger_link",
+   "masterType": "highlevel",
+   "workflow_id": "528b598e-cd6c-488b-9e17-ccc65c25c7f1",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "date_updated": "2026-02-01T00:12:44.651Z",
+   "name": "PA reported PX Cancelled"
+  },
+  {
+   "id": "LkOeTd7cLr4hMbxUNGIj",
+   "date_added": "2026-01-13T22:54:09.145Z",
+   "deleted": false,
+   "active": true,
+   "actions": [
+    {
+     "workflow_id": "528b598e-cd6c-488b-9e17-ccc65c25c7f1",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "==",
+     "field": "link.id",
+     "value": "tMRaHlvdBKOD6khabnWq",
+     "title": "Trigger link",
+     "type": "select"
+    }
+   ],
+   "type": "trigger_link",
+   "masterType": "highlevel",
+   "workflow_id": "528b598e-cd6c-488b-9e17-ccc65c25c7f1",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "date_updated": "2026-02-01T00:12:44.618Z",
+   "name": "PA reported PX Rescheduled"
+  },
+  {
+   "id": "j09bA9GUodsFxfGH5RFR",
+   "date_added": "2026-01-13T22:14:21.055Z",
+   "deleted": false,
+   "active": true,
+   "actions": [
+    {
+     "workflow_id": "528b598e-cd6c-488b-9e17-ccc65c25c7f1",
+     "type": "add_to_workflow"
+    }
+   ],
+   "type": "appointment",
+   "masterType": "highlevel",
+   "workflow_id": "528b598e-cd6c-488b-9e17-ccc65c25c7f1",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "name": "Px Cancelled calendar Appt: Newport",
+   "date_updated": "2026-02-03T05:28:36.200Z",
+   "conditions": [
+    {
+     "operator": "==",
+     "field": "appointment.eventType",
+     "value": "normal",
+     "title": "Event Type",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "calendar.id",
+     "value": "lBaRbjUpEmesxEloFBME",
+     "title": "In calendar",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "appointment.status",
+     "value": "cancelled",
+     "title": "Appointment status is",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "appointment.modifiedBy",
+     "value": "customer",
+     "title": "Created By/Modified By",
+     "type": "select"
+    }
+   ]
+  },
+  {
+   "id": "jMre1BxNkkvuz1rZeeDF",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "schedule_config": {},
+   "date_added": "2026-01-02T02:44:24.744Z",
+   "deleted": false,
+   "conditions": [
+    {
+     "value": "qKYulR0VQuftYTYWyant",
+     "field": "link.id",
+     "type": "select",
+     "title": "Trigger link",
+     "operator": "=="
+    }
+   ],
+   "masterType": "highlevel",
+   "actions": [
+    {
+     "type": "add_to_workflow",
+     "workflow_id": "528b598e-cd6c-488b-9e17-ccc65c25c7f1"
+    }
+   ],
+   "belongs_to": "workflow",
+   "type": "trigger_link",
+   "workflow_id": "528b598e-cd6c-488b-9e17-ccc65c25c7f1",
+   "active": true,
+   "date_updated": "2026-02-01T00:12:44.665Z",
+   "name": "PA reported PX is No show"
+  },
+  {
+   "id": "lwMTTTfTy3qSZDMAtItP",
+   "date_added": "2026-01-13T22:17:57.314Z",
+   "deleted": false,
+   "active": true,
+   "actions": [
+    {
+     "workflow_id": "528b598e-cd6c-488b-9e17-ccc65c25c7f1",
+     "type": "add_to_workflow"
+    }
+   ],
+   "type": "appointment",
+   "masterType": "highlevel",
+   "workflow_id": "528b598e-cd6c-488b-9e17-ccc65c25c7f1",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "name": "Px Cancelled calendar Appt: VA beach",
+   "date_updated": "2026-02-03T05:28:36.200Z",
+   "conditions": [
+    {
+     "operator": "==",
+     "field": "appointment.eventType",
+     "value": "normal",
+     "title": "Event Type",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "calendar.id",
+     "value": "4xmnBGMWJ6TVUKcAPpPb",
+     "title": "In calendar",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "appointment.status",
+     "value": "cancelled",
+     "title": "Appointment status is",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "appointment.modifiedBy",
+     "value": "customer",
+     "title": "Created By/Modified By",
+     "type": "select"
+    }
+   ]
+  },
+  {
+   "id": "s0TZ3rONYcV1PsDWa0Iv",
+   "date_added": "2026-01-13T22:17:57.326Z",
+   "deleted": false,
+   "active": true,
+   "actions": [
+    {
+     "workflow_id": "528b598e-cd6c-488b-9e17-ccc65c25c7f1",
+     "type": "add_to_workflow"
+    }
+   ],
+   "type": "appointment",
+   "masterType": "highlevel",
+   "workflow_id": "528b598e-cd6c-488b-9e17-ccc65c25c7f1",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "name": "Px Cancelled calendar Appt: Richmond",
+   "date_updated": "2026-02-03T05:28:36.188Z",
+   "conditions": [
+    {
+     "operator": "==",
+     "field": "appointment.eventType",
+     "value": "normal",
+     "title": "Event Type",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "calendar.id",
+     "value": "1Cfy5JnO2A4ggiZlMVvX",
+     "title": "In calendar",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "appointment.status",
+     "value": "cancelled",
+     "title": "Appointment status is",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "appointment.modifiedBy",
+     "value": "customer",
+     "title": "Created By/Modified By",
+     "type": "select"
+    }
+   ]
+  }
+ ],
+ "dependentAssets": {},
+ "templates": [
+  {
+   "id": "01c3b154-2fc8-482c-94e3-32859ea76d22",
+   "order": 0,
+   "attributes": {
+    "type": "remove_from_workflow",
+    "workflow_id": [
+     "b9135812-c31a-41fe-b22f-dd47b2623697"
+    ]
+   },
+   "name": "Remove from Workflow-unconfirmed flow",
+   "type": "remove_from_workflow",
+   "next": "65dce8e9-5629-4bbd-adf9-bf63df487be7"
+  },
+  {
+   "id": "65dce8e9-5629-4bbd-adf9-bf63df487be7",
+   "order": 1,
+   "attributes": {
+    "tags": [
+     "funnel_consultation_booked"
+    ],
+    "type": "remove_contact_tag"
+   },
+   "name": "Remove Consulation Booked Tag",
+   "type": "remove_contact_tag",
+   "next": "703ad5b4-acd6-4982-9a14-4ddb08e1918a",
+   "parentKey": "01c3b154-2fc8-482c-94e3-32859ea76d22"
+  },
+  {
+   "id": "703ad5b4-acd6-4982-9a14-4ddb08e1918a",
+   "order": 2,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "4eb55379-17b4-4068-978b-ce19e9d436fe",
+      "name": "Px is No Show",
+      "segments": [
+       {
+        "__segmentId": "f4485332-b839-4582-82eb-aebf605b79f8",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "jMre1BxNkkvuz1rZeeDF",
+          "__conditionId": "da5d19e5-d82e-4f84-b605-f17604baf215",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "882b55d0-ce6c-4e50-a05d-35c2e9bf31ad",
+      "name": "PA reported PX Cancelled",
+      "segments": [
+       {
+        "__segmentId": "f4485332-b839-4582-82eb-aebf605b79f8",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "3TrUFZXjRUUc2pxvgxsq",
+          "__conditionId": "da5d19e5-d82e-4f84-b605-f17604baf215",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "1c7b34c4-c0b1-4e5b-b8aa-3d04f12fdb81",
+      "name": "PA reported PX Resched",
+      "segments": [
+       {
+        "__segmentId": "f4485332-b839-4582-82eb-aebf605b79f8",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "LkOeTd7cLr4hMbxUNGIj",
+          "__conditionId": "da5d19e5-d82e-4f84-b605-f17604baf215",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "1ebd6935-4957-45ab-80eb-4b977cdf6161",
+      "name": "Px Cancelled calendar Appt: Newport",
+      "segments": [
+       {
+        "__segmentId": "8d0d235a-7776-43dc-9d28-3610e833c828",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "j09bA9GUodsFxfGH5RFR",
+          "__conditionId": "9f608211-d1cd-46a7-ae17-3cc1daca7a1c",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "58f56167-62b3-4074-940d-c9d9ab655dd2",
+      "name": "Px Cancelled calendar Appt: Richmond",
+      "segments": [
+       {
+        "__segmentId": "8d0d235a-7776-43dc-9d28-3610e833c828",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "s0TZ3rONYcV1PsDWa0Iv",
+          "__conditionId": "9f608211-d1cd-46a7-ae17-3cc1daca7a1c",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "e32fe589-3df4-4711-a2d6-49970f4aa762",
+      "name": "Px Cancelled calendar Appt: Virginia Beach",
+      "segments": [
+       {
+        "__segmentId": "8d0d235a-7776-43dc-9d28-3610e833c828",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "lwMTTTfTy3qSZDMAtItP",
+          "__conditionId": "9f608211-d1cd-46a7-ae17-3cc1daca7a1c",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Clinic visit OUTCOME that Triggered WF",
+    "version": 2,
+    "noneBranchName": "SHOWED"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "4eb55379-17b4-4068-978b-ce19e9d436fe",
+    "882b55d0-ce6c-4e50-a05d-35c2e9bf31ad",
+    "1c7b34c4-c0b1-4e5b-b8aa-3d04f12fdb81",
+    "1ebd6935-4957-45ab-80eb-4b977cdf6161",
+    "58f56167-62b3-4074-940d-c9d9ab655dd2",
+    "e32fe589-3df4-4711-a2d6-49970f4aa762",
+    "b5bd15ae-0fc3-40cf-b843-8e0887c2d80f"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "65dce8e9-5629-4bbd-adf9-bf63df487be7"
+  },
+  {
+   "id": "4eb55379-17b4-4068-978b-ce19e9d436fe",
+   "parent": "703ad5b4-acd6-4982-9a14-4ddb08e1918a",
+   "order": 3,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Px is No Show",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "559cb0a4-442e-4024-b06b-3770a695ba4f",
+   "sibling": [
+    "882b55d0-ce6c-4e50-a05d-35c2e9bf31ad",
+    "1c7b34c4-c0b1-4e5b-b8aa-3d04f12fdb81",
+    "1ebd6935-4957-45ab-80eb-4b977cdf6161",
+    "58f56167-62b3-4074-940d-c9d9ab655dd2",
+    "e32fe589-3df4-4711-a2d6-49970f4aa762",
+    "b5bd15ae-0fc3-40cf-b843-8e0887c2d80f"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "703ad5b4-acd6-4982-9a14-4ddb08e1918a"
+  },
+  {
+   "id": "559cb0a4-442e-4024-b06b-3770a695ba4f",
+   "parent": "4eb55379-17b4-4068-978b-ce19e9d436fe",
+   "order": 0,
+   "attributes": {
+    "type": "update_appointment_status",
+    "status_type": "noshow",
+    "category": "appointment"
+   },
+   "name": "Update calendar appointment status: No show",
+   "type": "update_appointment_status",
+   "next": "978e9d76-5b19-42fb-a77e-ebdee9c915a4",
+   "parentKey": "4eb55379-17b4-4068-978b-ce19e9d436fe"
+  },
+  {
+   "id": "978e9d76-5b19-42fb-a77e-ebdee9c915a4",
+   "parent": "4eb55379-17b4-4068-978b-ce19e9d436fe",
+   "order": 1,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "fd1fd321-3074-460f-9381-b8d33531e2ac",
+      "name": "VA Beach",
+      "segments": [
+       {
+        "__segmentId": "8d282e46-ad3c-4aeb-9bef-686bc3c1084a",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "Cou856tOhaxW62vwehVI",
+          "conditionOperator": "==",
+          "conditionValue": "Virginia Beach, VA",
+          "__conditionId": "9bf9800f-29bd-4593-9e4c-ee6ba659f37c",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "61378063-d9ae-49d1-8abf-cbb8b0114be4",
+      "name": "Newport",
+      "segments": [
+       {
+        "__segmentId": "8d282e46-ad3c-4aeb-9bef-686bc3c1084a",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "Cou856tOhaxW62vwehVI",
+          "conditionOperator": "==",
+          "conditionValue": "Newport News, VA",
+          "__conditionId": "9bf9800f-29bd-4593-9e4c-ee6ba659f37c",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "5efa7966-05bc-4a43-97d8-b46ac8cd6ea7",
+      "name": "Richmond",
+      "segments": [
+       {
+        "__segmentId": "8d282e46-ad3c-4aeb-9bef-686bc3c1084a",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "Cou856tOhaxW62vwehVI",
+          "conditionOperator": "==",
+          "conditionValue": "Richmond, VA",
+          "__conditionId": "9bf9800f-29bd-4593-9e4c-ee6ba659f37c",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Check appt Location",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "fd1fd321-3074-460f-9381-b8d33531e2ac",
+    "61378063-d9ae-49d1-8abf-cbb8b0114be4",
+    "5efa7966-05bc-4a43-97d8-b46ac8cd6ea7",
+    "4038c7aa-5eb3-49f4-b613-d53d8ced774f"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "559cb0a4-442e-4024-b06b-3770a695ba4f"
+  },
+  {
+   "id": "fd1fd321-3074-460f-9381-b8d33531e2ac",
+   "parent": "978e9d76-5b19-42fb-a77e-ebdee9c915a4",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "VA Beach",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "a5514d16-22bf-4ed1-a528-d0c583db2a5f",
+   "sibling": [
+    "61378063-d9ae-49d1-8abf-cbb8b0114be4",
+    "5efa7966-05bc-4a43-97d8-b46ac8cd6ea7",
+    "4038c7aa-5eb3-49f4-b613-d53d8ced774f"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "978e9d76-5b19-42fb-a77e-ebdee9c915a4"
+  },
+  {
+   "id": "a5514d16-22bf-4ed1-a528-d0c583db2a5f",
+   "parent": "fd1fd321-3074-460f-9381-b8d33531e2ac",
+   "order": 0,
+   "attributes": {
+    "trackingOptions": {
+     "hasTrackingLinks": false,
+     "hasUtmTracking": true,
+     "hasTags": false,
+     "sourceId": "528b598e-cd6c-488b-9e17-ccc65c25c7f1:a5514d16-22bf-4ed1-a528-d0c583db2a5f"
+    },
+    "conditions": [],
+    "html": "<p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">Hi {{contact.first_name}},</p><br/><br/><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">You missed your scheduled appointment. We understand that things come up, and we’d be happy to help you reschedule at a time that works better for you.</p><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\"><em><span style=\"font-size: 16px\">Schedule your new appointment </span></em><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://menswellnesscenters.com/locations/virginia-beach/\" title=\"HERE\"><em><u><span style=\"font-size: 16px\">HERE</span></u></em></a><em><span style=\"font-size: 16px\">. Have Questions? Call </span></em><strong><span style=\"font-size: 16px\">(757) 612-4420.</span></strong></p><br/><br/><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">Sincerely,</p><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\"><strong>{{location.name}}</strong></p>",
+    "from_email": "{{location.email}}",
+    "from_name": "{{location.name}}",
+    "subject": "You missed your appointment with {{location.name}} in Virginia Beach",
+    "preHeader": "Reschedule your clinic appointment",
+    "attachments": []
+   },
+   "name": "Email Patient (No Show) for VA beach",
+   "type": "email",
+   "next": "83537047-15bc-4707-89e2-1acc8da13b13",
+   "parentKey": "fd1fd321-3074-460f-9381-b8d33531e2ac"
+  },
+  {
+   "id": "83537047-15bc-4707-89e2-1acc8da13b13",
+   "parent": "fd1fd321-3074-460f-9381-b8d33531e2ac",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "rspsjkBMNYGldN3R71ji",
+    "pipeline_stage_id": "1540a40b-0189-4caa-9a00-bef21a763b89",
+    "opportunity_name": "{{contact.name}}",
+    "opportunity_status": "lost",
+    "monetary_value": "0",
+    "opportunity_source": ""
+   },
+   "name": "VA Beach pipeline: No show/Cancel, status: lost",
+   "type": "create_opportunity",
+   "parentKey": "a5514d16-22bf-4ed1-a528-d0c583db2a5f",
+   "next": "61709cf2-bbeb-4b6f-bf97-0ca23a0fbfd7"
+  },
+  {
+   "id": "61709cf2-bbeb-4b6f-bf97-0ca23a0fbfd7",
+   "parentKey": "83537047-15bc-4707-89e2-1acc8da13b13",
+   "parent": "fd1fd321-3074-460f-9381-b8d33531e2ac",
+   "type": "wait",
+   "name": "Wait 12 seconds to make sure contact is not re-enrolled by mistake",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "minutes",
+     "value": 0.2,
+     "when": "after"
+    },
+    "name": "Wait 12 seconds to make sure contact is not re-enrolled by mistake",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "order": 2,
+   "cat": ""
+  },
+  {
+   "id": "61378063-d9ae-49d1-8abf-cbb8b0114be4",
+   "parent": "978e9d76-5b19-42fb-a77e-ebdee9c915a4",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Newport",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "d3e33170-4444-460f-8974-798cce585b85",
+   "sibling": [
+    "fd1fd321-3074-460f-9381-b8d33531e2ac",
+    "5efa7966-05bc-4a43-97d8-b46ac8cd6ea7",
+    "4038c7aa-5eb3-49f4-b613-d53d8ced774f"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "978e9d76-5b19-42fb-a77e-ebdee9c915a4"
+  },
+  {
+   "id": "d3e33170-4444-460f-8974-798cce585b85",
+   "parent": "61378063-d9ae-49d1-8abf-cbb8b0114be4",
+   "order": 0,
+   "attributes": {
+    "trackingOptions": {
+     "hasTrackingLinks": false,
+     "hasUtmTracking": true,
+     "hasTags": false,
+     "sourceId": "528b598e-cd6c-488b-9e17-ccc65c25c7f1:d3e33170-4444-460f-8974-798cce585b85"
+    },
+    "conditions": [],
+    "html": "<p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">Hi {{contact.first_name}},</p><br/><br/><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">You missed your scheduled appointment. We understand that things come up, and we’d be happy to help you reschedule at a time that works better for you.</p><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\"><em><span style=\"font-size: 16px\">Schedule your new appointment </span></em><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://menswellnesscenters.com/locations/newport-news/\" title=\"HERE\"><em><u><span style=\"font-size: 16px\">HERE</span></u></em></a><em><span style=\"font-size: 16px\">.</span></em><br><em><span style=\"font-size: 16px\">Have questions? Call</span></em><strong><span style=\"font-size: 16px\"> (757) 612-4408</span></strong>.</p><br/><br/><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">Sincerely,</p><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\"><strong>{{location.name}}</strong></p><br/><br/>",
+    "from_email": "{{location.email}}",
+    "from_name": "{{location.name}}",
+    "subject": "You missed your appointment with {{location.name}} in Newport News",
+    "preHeader": "Reschedule your clinic appointment",
+    "attachments": []
+   },
+   "name": "Email Patient (No Show) for NPN",
+   "type": "email",
+   "next": "50cae2c3-ac65-4cc2-b223-bcec461bf61e",
+   "parentKey": "61378063-d9ae-49d1-8abf-cbb8b0114be4"
+  },
+  {
+   "id": "50cae2c3-ac65-4cc2-b223-bcec461bf61e",
+   "parent": "61378063-d9ae-49d1-8abf-cbb8b0114be4",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "9AZEt2Sw6Zv0nnJJmkE0",
+    "pipeline_stage_id": "6ac0aa71-4e97-48df-96d3-daf679dcab41",
+    "opportunity_name": "{{contact.name}}",
+    "opportunity_status": "lost",
+    "monetary_value": "0",
+    "opportunity_source": ""
+   },
+   "name": "NPN pipeline: No show/Cancel, status: lost",
+   "type": "create_opportunity",
+   "parentKey": "d3e33170-4444-460f-8974-798cce585b85",
+   "next": "15628b74-9309-43d3-9844-e093ab6d1fbd"
+  },
+  {
+   "id": "15628b74-9309-43d3-9844-e093ab6d1fbd",
+   "parent": "61378063-d9ae-49d1-8abf-cbb8b0114be4",
+   "order": 2,
+   "attributes": {
+    "targetNodeId": "61709cf2-bbeb-4b6f-bf97-0ca23a0fbfd7",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "50cae2c3-ac65-4cc2-b223-bcec461bf61e"
+  },
+  {
+   "id": "5efa7966-05bc-4a43-97d8-b46ac8cd6ea7",
+   "parent": "978e9d76-5b19-42fb-a77e-ebdee9c915a4",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Richmond",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "1ee1caf3-9e5f-4f74-a428-027f6c91a962",
+   "sibling": [
+    "fd1fd321-3074-460f-9381-b8d33531e2ac",
+    "61378063-d9ae-49d1-8abf-cbb8b0114be4",
+    "4038c7aa-5eb3-49f4-b613-d53d8ced774f"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "978e9d76-5b19-42fb-a77e-ebdee9c915a4"
+  },
+  {
+   "id": "1ee1caf3-9e5f-4f74-a428-027f6c91a962",
+   "parent": "5efa7966-05bc-4a43-97d8-b46ac8cd6ea7",
+   "order": 0,
+   "attributes": {
+    "trackingOptions": {
+     "hasTrackingLinks": false,
+     "hasUtmTracking": true,
+     "hasTags": false,
+     "sourceId": "528b598e-cd6c-488b-9e17-ccc65c25c7f1:1ee1caf3-9e5f-4f74-a428-027f6c91a962"
+    },
+    "conditions": [],
+    "html": "<p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">Hi {{contact.first_name}},</p><br/><br/><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">You missed your scheduled appointment. We understand that things come up, and we’d be happy to help you reschedule at a time that works better for you.</p><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\"><em><span style=\"font-size: 16px\">Schedule your new appointment </span></em><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://menswellnesscenters.com/locations/richmond/\" title=\"HERE\"><em><u><span style=\"font-size: 16px\">HERE</span></u></em></a><em><span style=\"font-size: 16px\">.</span></em><br><em><span style=\"font-size: 16px\">Have questions? Call</span></em><strong><span style=\"font-size: 16px\"> (804) 273-0344.</span></strong></p><br/><br/><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">Sincerely,</p><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\"><strong>{{location.name}}</strong></p><br/>",
+    "from_email": "{{location.email}}",
+    "from_name": "{{location.name}}",
+    "subject": "You missed your appointment with {{location.name}} in Richmond",
+    "preHeader": "Reschedule your clinic appointment",
+    "attachments": []
+   },
+   "name": "Email Patient (No Show) for Richmond",
+   "type": "email",
+   "next": "20ae21bd-619c-4fa5-9559-4e45672150aa",
+   "parentKey": "5efa7966-05bc-4a43-97d8-b46ac8cd6ea7"
+  },
+  {
+   "id": "20ae21bd-619c-4fa5-9559-4e45672150aa",
+   "parent": "5efa7966-05bc-4a43-97d8-b46ac8cd6ea7",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "jRqb0pvexu04zSACPXmd",
+    "pipeline_stage_id": "6a9c34b7-87fc-49cb-8763-c2d11ef035dd",
+    "opportunity_name": "{{contact.name}}",
+    "opportunity_status": "lost",
+    "monetary_value": "0",
+    "opportunity_source": ""
+   },
+   "name": "Richmond  pipeline: No show/Cancel, status: lost",
+   "type": "create_opportunity",
+   "parentKey": "1ee1caf3-9e5f-4f74-a428-027f6c91a962",
+   "next": "b9480e28-d1f3-4bfc-99a0-dfea2a6f302f"
+  },
+  {
+   "id": "b9480e28-d1f3-4bfc-99a0-dfea2a6f302f",
+   "parent": "5efa7966-05bc-4a43-97d8-b46ac8cd6ea7",
+   "order": 2,
+   "attributes": {
+    "targetNodeId": "61709cf2-bbeb-4b6f-bf97-0ca23a0fbfd7",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "20ae21bd-619c-4fa5-9559-4e45672150aa"
+  },
+  {
+   "id": "4038c7aa-5eb3-49f4-b613-d53d8ced774f",
+   "parent": "978e9d76-5b19-42fb-a77e-ebdee9c915a4",
+   "order": 2,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "fd1fd321-3074-460f-9381-b8d33531e2ac",
+    "61378063-d9ae-49d1-8abf-cbb8b0114be4",
+    "5efa7966-05bc-4a43-97d8-b46ac8cd6ea7"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "978e9d76-5b19-42fb-a77e-ebdee9c915a4"
+  },
+  {
+   "id": "882b55d0-ce6c-4e50-a05d-35c2e9bf31ad",
+   "parent": "703ad5b4-acd6-4982-9a14-4ddb08e1918a",
+   "order": 3,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "PA reported PX Cancelled",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "4eb55379-17b4-4068-978b-ce19e9d436fe",
+    "1c7b34c4-c0b1-4e5b-b8aa-3d04f12fdb81",
+    "1ebd6935-4957-45ab-80eb-4b977cdf6161",
+    "58f56167-62b3-4074-940d-c9d9ab655dd2",
+    "e32fe589-3df4-4711-a2d6-49970f4aa762",
+    "b5bd15ae-0fc3-40cf-b843-8e0887c2d80f"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "703ad5b4-acd6-4982-9a14-4ddb08e1918a",
+   "next": "6ae0d55d-d386-485a-8319-f69ab886449a"
+  },
+  {
+   "id": "6ae0d55d-d386-485a-8319-f69ab886449a",
+   "parent": "882b55d0-ce6c-4e50-a05d-35c2e9bf31ad",
+   "order": 0,
+   "attributes": {
+    "type": "update_appointment_status",
+    "status_type": "cancelled",
+    "category": "appointment"
+   },
+   "name": "Update calendar appointment status: Cancelled",
+   "type": "update_appointment_status",
+   "next": "22988c21-8b9e-4ffe-a419-cfe55c977b8f",
+   "parentKey": "882b55d0-ce6c-4e50-a05d-35c2e9bf31ad"
+  },
+  {
+   "id": "22988c21-8b9e-4ffe-a419-cfe55c977b8f",
+   "parent": "882b55d0-ce6c-4e50-a05d-35c2e9bf31ad",
+   "order": 1,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "9137fc30-2392-4ab9-9ec6-6ebb6bc43566",
+      "name": "VA Beach",
+      "segments": [
+       {
+        "__segmentId": "8d282e46-ad3c-4aeb-9bef-686bc3c1084a",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "Cou856tOhaxW62vwehVI",
+          "conditionOperator": "==",
+          "conditionValue": "Virginia Beach, VA",
+          "__conditionId": "9bf9800f-29bd-4593-9e4c-ee6ba659f37c",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "ca455866-ccd8-4704-8c98-a632230f4cf0",
+      "name": "Newport",
+      "segments": [
+       {
+        "__segmentId": "8d282e46-ad3c-4aeb-9bef-686bc3c1084a",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "Cou856tOhaxW62vwehVI",
+          "conditionOperator": "==",
+          "conditionValue": "Newport News, VA",
+          "__conditionId": "9bf9800f-29bd-4593-9e4c-ee6ba659f37c",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "acb24dac-6822-442e-a1a7-29a2bcf01a2b",
+      "name": "Richmond",
+      "segments": [
+       {
+        "__segmentId": "8d282e46-ad3c-4aeb-9bef-686bc3c1084a",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "Cou856tOhaxW62vwehVI",
+          "conditionOperator": "==",
+          "conditionValue": "Richmond, VA",
+          "__conditionId": "9bf9800f-29bd-4593-9e4c-ee6ba659f37c",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Check appt Location",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "9137fc30-2392-4ab9-9ec6-6ebb6bc43566",
+    "ca455866-ccd8-4704-8c98-a632230f4cf0",
+    "acb24dac-6822-442e-a1a7-29a2bcf01a2b",
+    "cf89b585-c679-4e9e-b3f7-5e2c0bf1d1e1"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "6ae0d55d-d386-485a-8319-f69ab886449a"
+  },
+  {
+   "id": "9137fc30-2392-4ab9-9ec6-6ebb6bc43566",
+   "parent": "22988c21-8b9e-4ffe-a419-cfe55c977b8f",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "VA Beach",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "87218fad-9f51-426d-88b2-9fe51c185ea7",
+   "sibling": [
+    "ca455866-ccd8-4704-8c98-a632230f4cf0",
+    "acb24dac-6822-442e-a1a7-29a2bcf01a2b",
+    "cf89b585-c679-4e9e-b3f7-5e2c0bf1d1e1"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "22988c21-8b9e-4ffe-a419-cfe55c977b8f"
+  },
+  {
+   "id": "87218fad-9f51-426d-88b2-9fe51c185ea7",
+   "parent": "9137fc30-2392-4ab9-9ec6-6ebb6bc43566",
+   "order": 0,
+   "attributes": {
+    "trackingOptions": {
+     "hasTrackingLinks": false,
+     "hasUtmTracking": true,
+     "hasTags": false,
+     "sourceId": "528b598e-cd6c-488b-9e17-ccc65c25c7f1:87218fad-9f51-426d-88b2-9fe51c185ea7"
+    },
+    "conditions": [],
+    "html": "<p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">Hi {{contact.first_name}},</p><br/><br/><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">You canceled your scheduled appointment. We understand that things come up, and we’d be happy to help you reschedule at a time that works better for you.</p><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\"><em><span style=\"font-size: 16px\">Schedule your new appointment </span></em><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://menswellnesscenters.com/locations/virginia-beach/\" title=\"HERE\"><em><u><span style=\"font-size: 16px\">HERE</span></u></em></a><em><span style=\"font-size: 16px\">. Have Questions? Call </span></em><strong><span style=\"font-size: 16px\">(757) 612-4420.</span></strong></p><br/><br/><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">Sincerely,</p><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\"><strong>{{location.name}}</strong></p>",
+    "from_email": "{{location.email}}",
+    "from_name": "{{location.name}}",
+    "subject": "You canceled your appointment with {{location.name}} in Virginia Beach",
+    "preHeader": "Reschedule your clinic appointment",
+    "attachments": []
+   },
+   "name": "Email Patient (Canceled) for VA beach",
+   "type": "email",
+   "next": "ed14f712-f707-4b50-befc-def942923d25",
+   "parentKey": "9137fc30-2392-4ab9-9ec6-6ebb6bc43566"
+  },
+  {
+   "id": "ed14f712-f707-4b50-befc-def942923d25",
+   "parent": "9137fc30-2392-4ab9-9ec6-6ebb6bc43566",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "rspsjkBMNYGldN3R71ji",
+    "pipeline_stage_id": "1540a40b-0189-4caa-9a00-bef21a763b89",
+    "opportunity_name": "{{contact.name}}",
+    "opportunity_status": "lost",
+    "monetary_value": "0",
+    "opportunity_source": ""
+   },
+   "name": "VA Beach pipeline: No show/Cancel, status: lost",
+   "type": "create_opportunity",
+   "next": "287f3bae-7194-463b-b78a-fe317507e06e",
+   "parentKey": "87218fad-9f51-426d-88b2-9fe51c185ea7"
+  },
+  {
+   "id": "287f3bae-7194-463b-b78a-fe317507e06e",
+   "parent": "9137fc30-2392-4ab9-9ec6-6ebb6bc43566",
+   "order": 2,
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "minutes",
+     "value": 0.2,
+     "when": "after"
+    },
+    "name": "Wait 12 seconds to make sure contact is not re-enrolled by mistake",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "name": "Wait 12 seconds to make sure contact is not re-enrolled by mistake",
+   "type": "wait",
+   "parentKey": "ed14f712-f707-4b50-befc-def942923d25"
+  },
+  {
+   "id": "ca455866-ccd8-4704-8c98-a632230f4cf0",
+   "parent": "22988c21-8b9e-4ffe-a419-cfe55c977b8f",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Newport",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "b034803a-1084-4deb-be6d-edd378d00b5a",
+   "sibling": [
+    "9137fc30-2392-4ab9-9ec6-6ebb6bc43566",
+    "acb24dac-6822-442e-a1a7-29a2bcf01a2b",
+    "cf89b585-c679-4e9e-b3f7-5e2c0bf1d1e1"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "22988c21-8b9e-4ffe-a419-cfe55c977b8f"
+  },
+  {
+   "id": "b034803a-1084-4deb-be6d-edd378d00b5a",
+   "parent": "ca455866-ccd8-4704-8c98-a632230f4cf0",
+   "order": 0,
+   "attributes": {
+    "trackingOptions": {
+     "hasTrackingLinks": false,
+     "hasUtmTracking": true,
+     "hasTags": false,
+     "sourceId": "528b598e-cd6c-488b-9e17-ccc65c25c7f1:b034803a-1084-4deb-be6d-edd378d00b5a"
+    },
+    "conditions": [],
+    "html": "<p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">Hi {{contact.first_name}},</p><br/><br/><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">You canceled your scheduled appointment. We understand that things come up, and we’d be happy to help you reschedule at a time that works better for you.</p><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\"><em><span style=\"font-size: 16px\">Schedule your new appointment </span></em><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://menswellnesscenters.com/locations/newport-news/\" title=\"HERE\"><em><u><span style=\"font-size: 16px\">HERE</span></u></em></a><em><span style=\"font-size: 16px\">.</span></em><br><em><span style=\"font-size: 16px\">Have questions? Call</span></em><strong><span style=\"font-size: 16px\"> (757) 612-4408</span></strong>.</p><br/><br/><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">Sincerely,</p><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\"><strong>{{location.name}}</strong></p><br/><br/>",
+    "from_email": "{{location.email}}",
+    "from_name": "{{location.name}}",
+    "subject": "You canceled your appointment with {{location.name}} in Newport News",
+    "preHeader": "Reschedule your clinic appointment",
+    "attachments": []
+   },
+   "name": "Email Patient (Canceled) for NPN",
+   "type": "email",
+   "next": "b834aada-6247-4c1e-bd7a-a2a8d537d7cc",
+   "parentKey": "ca455866-ccd8-4704-8c98-a632230f4cf0"
+  },
+  {
+   "id": "b834aada-6247-4c1e-bd7a-a2a8d537d7cc",
+   "parent": "ca455866-ccd8-4704-8c98-a632230f4cf0",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "9AZEt2Sw6Zv0nnJJmkE0",
+    "pipeline_stage_id": "6ac0aa71-4e97-48df-96d3-daf679dcab41",
+    "opportunity_name": "{{contact.name}}",
+    "opportunity_status": "lost",
+    "monetary_value": "0",
+    "opportunity_source": ""
+   },
+   "name": "NPN pipeline: No show/Cancel, status: lost",
+   "type": "create_opportunity",
+   "next": "9865564e-9f52-49d0-a843-a2c467c9e38c",
+   "parentKey": "b034803a-1084-4deb-be6d-edd378d00b5a"
+  },
+  {
+   "id": "9865564e-9f52-49d0-a843-a2c467c9e38c",
+   "parent": "ca455866-ccd8-4704-8c98-a632230f4cf0",
+   "order": 2,
+   "attributes": {
+    "targetNodeId": "287f3bae-7194-463b-b78a-fe317507e06e",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "b834aada-6247-4c1e-bd7a-a2a8d537d7cc"
+  },
+  {
+   "id": "acb24dac-6822-442e-a1a7-29a2bcf01a2b",
+   "parent": "22988c21-8b9e-4ffe-a419-cfe55c977b8f",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Richmond",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "a46123ee-e592-4731-8f7a-cb8ee62ce5e6",
+   "sibling": [
+    "9137fc30-2392-4ab9-9ec6-6ebb6bc43566",
+    "ca455866-ccd8-4704-8c98-a632230f4cf0",
+    "cf89b585-c679-4e9e-b3f7-5e2c0bf1d1e1"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "22988c21-8b9e-4ffe-a419-cfe55c977b8f"
+  },
+  {
+   "id": "a46123ee-e592-4731-8f7a-cb8ee62ce5e6",
+   "parent": "acb24dac-6822-442e-a1a7-29a2bcf01a2b",
+   "order": 0,
+   "attributes": {
+    "trackingOptions": {
+     "hasTrackingLinks": false,
+     "hasUtmTracking": true,
+     "hasTags": false,
+     "sourceId": "528b598e-cd6c-488b-9e17-ccc65c25c7f1:a46123ee-e592-4731-8f7a-cb8ee62ce5e6"
+    },
+    "conditions": [],
+    "html": "<p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">Hi {{contact.first_name}},</p><br/><br/><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">You missed your scheduled appointment. We understand that things come up, and we’d be happy to help you reschedule at a time that works better for you.</p><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\"><em><span style=\"font-size: 16px\">Schedule your new appointment </span></em><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://menswellnesscenters.com/locations/richmond/\" title=\"HERE\"><em><u><span style=\"font-size: 16px\">HERE</span></u></em></a><em><span style=\"font-size: 16px\">.</span></em><br><em><span style=\"font-size: 16px\">Have questions? Call</span></em><strong><span style=\"font-size: 16px\"> (804) 273-0344.</span></strong></p><br/><br/><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">Sincerely,</p><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\"><strong>{{location.name}}</strong></p><br/>",
+    "from_email": "{{location.email}}",
+    "from_name": "{{location.name}}",
+    "subject": "You canceled your appointment with {{location.name}} in Richmond",
+    "preHeader": "Reschedule your clinic appointment",
+    "attachments": []
+   },
+   "name": "Email Patient (Canceled) for Richmond",
+   "type": "email",
+   "next": "a1fd6242-d881-4fd4-8560-1a8cd2d0277b",
+   "parentKey": "acb24dac-6822-442e-a1a7-29a2bcf01a2b"
+  },
+  {
+   "id": "a1fd6242-d881-4fd4-8560-1a8cd2d0277b",
+   "parent": "acb24dac-6822-442e-a1a7-29a2bcf01a2b",
+   "order": 1,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "jRqb0pvexu04zSACPXmd",
+    "pipeline_stage_id": "6a9c34b7-87fc-49cb-8763-c2d11ef035dd",
+    "opportunity_name": "{{contact.name}}",
+    "opportunity_status": "lost",
+    "monetary_value": "0",
+    "opportunity_source": ""
+   },
+   "name": "Richmond  pipeline: No show/Cancel, status: lost",
+   "type": "create_opportunity",
+   "next": "ada1186c-135b-4800-8326-6b89a654dc58",
+   "parentKey": "a46123ee-e592-4731-8f7a-cb8ee62ce5e6"
+  },
+  {
+   "id": "ada1186c-135b-4800-8326-6b89a654dc58",
+   "parent": "acb24dac-6822-442e-a1a7-29a2bcf01a2b",
+   "order": 2,
+   "attributes": {
+    "targetNodeId": "287f3bae-7194-463b-b78a-fe317507e06e",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "a1fd6242-d881-4fd4-8560-1a8cd2d0277b"
+  },
+  {
+   "id": "cf89b585-c679-4e9e-b3f7-5e2c0bf1d1e1",
+   "parent": "22988c21-8b9e-4ffe-a419-cfe55c977b8f",
+   "order": 2,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "9137fc30-2392-4ab9-9ec6-6ebb6bc43566",
+    "ca455866-ccd8-4704-8c98-a632230f4cf0",
+    "acb24dac-6822-442e-a1a7-29a2bcf01a2b"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "22988c21-8b9e-4ffe-a419-cfe55c977b8f"
+  },
+  {
+   "id": "1c7b34c4-c0b1-4e5b-b8aa-3d04f12fdb81",
+   "parent": "703ad5b4-acd6-4982-9a14-4ddb08e1918a",
+   "order": 3,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "PA reported PX Resched",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "4eb55379-17b4-4068-978b-ce19e9d436fe",
+    "882b55d0-ce6c-4e50-a05d-35c2e9bf31ad",
+    "1ebd6935-4957-45ab-80eb-4b977cdf6161",
+    "58f56167-62b3-4074-940d-c9d9ab655dd2",
+    "e32fe589-3df4-4711-a2d6-49970f4aa762",
+    "b5bd15ae-0fc3-40cf-b843-8e0887c2d80f"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "703ad5b4-acd6-4982-9a14-4ddb08e1918a"
+  },
+  {
+   "id": "1ebd6935-4957-45ab-80eb-4b977cdf6161",
+   "parent": "703ad5b4-acd6-4982-9a14-4ddb08e1918a",
+   "order": 3,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Px Cancelled calendar Appt: Newport",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "eb4e0da5-ed77-4640-9d89-dd619036b052",
+   "sibling": [
+    "4eb55379-17b4-4068-978b-ce19e9d436fe",
+    "882b55d0-ce6c-4e50-a05d-35c2e9bf31ad",
+    "1c7b34c4-c0b1-4e5b-b8aa-3d04f12fdb81",
+    "58f56167-62b3-4074-940d-c9d9ab655dd2",
+    "e32fe589-3df4-4711-a2d6-49970f4aa762",
+    "b5bd15ae-0fc3-40cf-b843-8e0887c2d80f"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "703ad5b4-acd6-4982-9a14-4ddb08e1918a"
+  },
+  {
+   "id": "eb4e0da5-ed77-4640-9d89-dd619036b052",
+   "parent": "1ebd6935-4957-45ab-80eb-4b977cdf6161",
+   "order": 0,
+   "attributes": {
+    "trackingOptions": {
+     "hasTrackingLinks": false,
+     "hasUtmTracking": true,
+     "hasTags": false,
+     "sourceId": "528b598e-cd6c-488b-9e17-ccc65c25c7f1:eb4e0da5-ed77-4640-9d89-dd619036b052"
+    },
+    "conditions": [],
+    "html": "<p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">Hi {{contact.first_name}},</p><br/><br/><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">We regret to inform you that your upcoming appointment, originally scheduled for {{appointment.start_time}} ({{appointment.timezone}}), has been <u>cancelled</u>.</p><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">Here are the details for your reference:</p><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\"><strong>{{location.name}} Clinic Visit</strong></p><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">Date and Time: <strong>{{appointment.start_time}} ({{appointment.timezone}})</strong><br>Location: <strong>827 Diligence Drive, Suite 206 Newport News, VA 23606</strong></p><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\"><span style=\"font-size: 16px\">Have questions? Call your clinic at</span><strong><span style=\"font-size: 16px\"> (757) 612-4408</span></strong></p><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\"><em><span style=\"font-size: 16px\">Want to re-book your clinic visit for a different date? Schedule your new appointment </span></em><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://menswellnesscenters.com/locations/newport-news/\" title=\"HERE\"><em><u><span style=\"font-size: 16px\">HERE</span></u></em></a><em><span style=\"font-size: 16px\">.</span></em></p><br/><br/><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">Sincerely,</p><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\"><strong>{{location.name}}</strong></p><br/><br/>",
+    "from_email": "{{location.email}}",
+    "from_name": "{{location.name}}",
+    "subject": "Appointment Cancelled: Newport News Clinic | {{appointment.start_time}} ({{appointment.timezone}})",
+    "preHeader": "Reschedule your clinic visit",
+    "attachments": []
+   },
+   "name": "Email Patient (Cancellation notification) for NPN",
+   "type": "email",
+   "next": "ca7174d9-2c7b-4e48-a43c-5d6fab050733",
+   "parentKey": "1ebd6935-4957-45ab-80eb-4b977cdf6161"
+  },
+  {
+   "id": "ca7174d9-2c7b-4e48-a43c-5d6fab050733",
+   "parent": "1ebd6935-4957-45ab-80eb-4b977cdf6161",
+   "order": 1,
+   "attributes": {
+    "category": "appointment",
+    "type": "update_appointment_status",
+    "status_type": "cancelled"
+   },
+   "name": "Update calendar appointment status: cancelled",
+   "type": "update_appointment_status",
+   "next": "31427592-993e-4124-9249-595bd4ff8bd8",
+   "parentKey": "eb4e0da5-ed77-4640-9d89-dd619036b052"
+  },
+  {
+   "id": "31427592-993e-4124-9249-595bd4ff8bd8",
+   "parent": "1ebd6935-4957-45ab-80eb-4b977cdf6161",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "9AZEt2Sw6Zv0nnJJmkE0",
+    "pipeline_stage_id": "6ac0aa71-4e97-48df-96d3-daf679dcab41",
+    "opportunity_name": "{{contact.name}}",
+    "opportunity_status": "lost",
+    "monetary_value": "0",
+    "opportunity_source": ""
+   },
+   "name": "NPN pipeline: No show/Cancel, status: LOST",
+   "type": "create_opportunity",
+   "parentKey": "ca7174d9-2c7b-4e48-a43c-5d6fab050733",
+   "next": "7ae080fe-b761-4ac3-83a2-b7a994afec06"
+  },
+  {
+   "id": "7ae080fe-b761-4ac3-83a2-b7a994afec06",
+   "parentKey": "31427592-993e-4124-9249-595bd4ff8bd8",
+   "parent": "1ebd6935-4957-45ab-80eb-4b977cdf6161",
+   "type": "wait",
+   "name": "Wait 12 seconds to make sure contact is not re-enrolled by mistake",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "minutes",
+     "value": 0.2,
+     "when": "after"
+    },
+    "name": "Wait 12 seconds to make sure contact is not re-enrolled by mistake",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "order": 3,
+   "cat": ""
+  },
+  {
+   "id": "58f56167-62b3-4074-940d-c9d9ab655dd2",
+   "parent": "703ad5b4-acd6-4982-9a14-4ddb08e1918a",
+   "order": 3,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Px Cancelled calendar Appt: Richmond",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "ef7e9bf6-94ab-41e8-8b21-ac427002659c",
+   "sibling": [
+    "4eb55379-17b4-4068-978b-ce19e9d436fe",
+    "882b55d0-ce6c-4e50-a05d-35c2e9bf31ad",
+    "1c7b34c4-c0b1-4e5b-b8aa-3d04f12fdb81",
+    "1ebd6935-4957-45ab-80eb-4b977cdf6161",
+    "e32fe589-3df4-4711-a2d6-49970f4aa762",
+    "b5bd15ae-0fc3-40cf-b843-8e0887c2d80f"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "703ad5b4-acd6-4982-9a14-4ddb08e1918a"
+  },
+  {
+   "id": "ef7e9bf6-94ab-41e8-8b21-ac427002659c",
+   "parent": "58f56167-62b3-4074-940d-c9d9ab655dd2",
+   "order": 0,
+   "attributes": {
+    "trackingOptions": {
+     "hasTrackingLinks": false,
+     "hasUtmTracking": true,
+     "hasTags": false,
+     "sourceId": "528b598e-cd6c-488b-9e17-ccc65c25c7f1:ef7e9bf6-94ab-41e8-8b21-ac427002659c"
+    },
+    "conditions": [],
+    "html": "<p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">Hi {{contact.first_name}},</p><br/><br/><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">We regret to inform you that your upcoming appointment, originally scheduled for {{appointment.start_time}} ({{appointment.timezone}}), has been <u>cancelled</u>.</p><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">Here are the details for your reference:</p><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\"><strong>{{location.name}} Clinic Visit</strong></p><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">Date and Time: <strong>{{appointment.start_time}} ({{appointment.timezone}})</strong><br>Location: <strong>4050 Innslake Dr, Suite 360 Glen Allen, VA 23060</strong></p><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\"><span style=\"font-size: 16px\">Have questions? Call your clinic at</span><strong><span style=\"font-size: 16px\"> (804) 273-0344</span></strong></p><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\"><em><span style=\"font-size: 16px\">Want to re-book your clinic visit for a different date? Schedule your new appointment </span></em><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://menswellnesscenters.com/locations/richmond/\" title=\"HERE\"><em><u><span style=\"font-size: 16px\">HERE</span></u></em></a><em><span style=\"font-size: 16px\">.</span></em></p><br/><br/><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">Sincerely,</p><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\"><strong>{{location.name}}</strong></p><br/>",
+    "from_email": "{{location.email}}",
+    "from_name": "{{location.name}}",
+    "subject": "Appointment Cancelled: Richmond Clinic | {{appointment.start_time}} ({{appointment.timezone}})",
+    "preHeader": "Reschedule your clinic visit",
+    "attachments": []
+   },
+   "name": "Email Patient (Cancellation notification) for Richmond",
+   "type": "email",
+   "next": "ca670ac1-e22b-4de6-b626-108b91f2f1d8",
+   "parentKey": "58f56167-62b3-4074-940d-c9d9ab655dd2"
+  },
+  {
+   "id": "ca670ac1-e22b-4de6-b626-108b91f2f1d8",
+   "parent": "58f56167-62b3-4074-940d-c9d9ab655dd2",
+   "order": 1,
+   "attributes": {
+    "category": "appointment",
+    "type": "update_appointment_status",
+    "status_type": "cancelled"
+   },
+   "name": "Update calendar appointment status: cancelled",
+   "type": "update_appointment_status",
+   "next": "2d8f3c98-346e-4cb3-b59f-1c66c88c7a9f",
+   "parentKey": "ef7e9bf6-94ab-41e8-8b21-ac427002659c"
+  },
+  {
+   "id": "2d8f3c98-346e-4cb3-b59f-1c66c88c7a9f",
+   "parent": "58f56167-62b3-4074-940d-c9d9ab655dd2",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "jRqb0pvexu04zSACPXmd",
+    "pipeline_stage_id": "6a9c34b7-87fc-49cb-8763-c2d11ef035dd",
+    "opportunity_name": "{{contact.name}}",
+    "opportunity_status": "lost",
+    "monetary_value": "0",
+    "opportunity_source": ""
+   },
+   "name": "Richmond pipeline: No show/Cancel, status: LOST",
+   "type": "create_opportunity",
+   "parentKey": "ca670ac1-e22b-4de6-b626-108b91f2f1d8",
+   "next": "ce6fc3e5-23f5-45c1-a706-b3bc429e0fac"
+  },
+  {
+   "id": "ce6fc3e5-23f5-45c1-a706-b3bc429e0fac",
+   "parent": "58f56167-62b3-4074-940d-c9d9ab655dd2",
+   "order": 3,
+   "attributes": {
+    "targetNodeId": "7ae080fe-b761-4ac3-83a2-b7a994afec06",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "2d8f3c98-346e-4cb3-b59f-1c66c88c7a9f"
+  },
+  {
+   "id": "e32fe589-3df4-4711-a2d6-49970f4aa762",
+   "parent": "703ad5b4-acd6-4982-9a14-4ddb08e1918a",
+   "order": 3,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Px Cancelled calendar Appt: Virginia Beach",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "2e857794-23c8-481e-a845-814e5165f692",
+   "sibling": [
+    "4eb55379-17b4-4068-978b-ce19e9d436fe",
+    "882b55d0-ce6c-4e50-a05d-35c2e9bf31ad",
+    "1c7b34c4-c0b1-4e5b-b8aa-3d04f12fdb81",
+    "1ebd6935-4957-45ab-80eb-4b977cdf6161",
+    "58f56167-62b3-4074-940d-c9d9ab655dd2",
+    "b5bd15ae-0fc3-40cf-b843-8e0887c2d80f"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "703ad5b4-acd6-4982-9a14-4ddb08e1918a"
+  },
+  {
+   "id": "2e857794-23c8-481e-a845-814e5165f692",
+   "parent": "e32fe589-3df4-4711-a2d6-49970f4aa762",
+   "order": 0,
+   "attributes": {
+    "trackingOptions": {
+     "hasTrackingLinks": false,
+     "hasUtmTracking": true,
+     "hasTags": false,
+     "sourceId": "528b598e-cd6c-488b-9e17-ccc65c25c7f1:2e857794-23c8-481e-a845-814e5165f692"
+    },
+    "conditions": [],
+    "html": "<p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">Hi {{contact.first_name}},</p><br/><br/><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">We regret to inform you that your upcoming appointment, originally scheduled for {{appointment.start_time}} ({{appointment.timezone}}), has been <u>cancelled</u>.</p><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">Here are the details for your reference:</p><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\"><strong>{{location.name}} Clinic Visit</strong></p><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">Date and Time: <strong>{{appointment.start_time}} ({{appointment.timezone}})</strong><br>Location: <strong>996 First Colonial Road Virginia Beach, VA 23454</strong></p><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\"><span style=\"font-size: 16px\">Have questions? Call your clinic at</span><strong><span style=\"font-size: 16px\"> (757) 612-4420</span></strong></p><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\"><em><span style=\"font-size: 16px\">Want to re-book your clinic visit for a different date? Schedule your new appointment </span></em><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://menswellnesscenters.com/locations/virginia-beach/\" title=\"HE\"><em><u><span style=\"font-size: 16px\">HE</span></u></em></a><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://menswellnesscenters.com/locations/richmond/\"><em><u><span style=\"font-size: 16px\">RE </span></u></em></a><em><span style=\"font-size: 16px\">.</span></em></p><br/><br/><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">Sincerely,</p><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\"><strong>{{location.name}}</strong></p>",
+    "from_email": "{{location.email}}",
+    "from_name": "{{location.name}}",
+    "subject": "Appointment Cancelled: Virginia Beach Clinic | {{appointment.start_time}} ({{appointment.timezone}})",
+    "preHeader": "Reschedule your clinic visit",
+    "attachments": []
+   },
+   "name": "Email Patient (Cancellation notification) for VA beach",
+   "type": "email",
+   "next": "0df80abc-2be0-4d69-bcfc-e2d6e2e8d1d5",
+   "parentKey": "e32fe589-3df4-4711-a2d6-49970f4aa762"
+  },
+  {
+   "id": "0df80abc-2be0-4d69-bcfc-e2d6e2e8d1d5",
+   "parent": "e32fe589-3df4-4711-a2d6-49970f4aa762",
+   "order": 1,
+   "attributes": {
+    "category": "appointment",
+    "type": "update_appointment_status",
+    "status_type": "cancelled"
+   },
+   "name": "Update calendar appointment status: cancelled",
+   "type": "update_appointment_status",
+   "next": "3dd4e119-0697-417c-99fa-e872ede6de41",
+   "parentKey": "2e857794-23c8-481e-a845-814e5165f692"
+  },
+  {
+   "id": "3dd4e119-0697-417c-99fa-e872ede6de41",
+   "parent": "e32fe589-3df4-4711-a2d6-49970f4aa762",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "rspsjkBMNYGldN3R71ji",
+    "pipeline_stage_id": "1540a40b-0189-4caa-9a00-bef21a763b89",
+    "opportunity_name": "{{contact.name}} Cancelled",
+    "opportunity_source": "",
+    "monetary_value": "",
+    "opportunity_status": "lost"
+   },
+   "name": "VA beach pipeline: No show/Cancel, status: LOST",
+   "type": "create_opportunity",
+   "parentKey": "0df80abc-2be0-4d69-bcfc-e2d6e2e8d1d5",
+   "next": "a7190a67-2320-4673-a11c-ea1339f99fda"
+  },
+  {
+   "id": "a7190a67-2320-4673-a11c-ea1339f99fda",
+   "parent": "e32fe589-3df4-4711-a2d6-49970f4aa762",
+   "order": 3,
+   "attributes": {
+    "targetNodeId": "7ae080fe-b761-4ac3-83a2-b7a994afec06",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "3dd4e119-0697-417c-99fa-e872ede6de41"
+  },
+  {
+   "id": "b5bd15ae-0fc3-40cf-b843-8e0887c2d80f",
+   "parent": "703ad5b4-acd6-4982-9a14-4ddb08e1918a",
+   "order": 3,
+   "attributes": {
+    "else": true
+   },
+   "name": "SHOWED",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "d120679a-9c20-4292-a30a-113893f84249",
+   "sibling": [
+    "4eb55379-17b4-4068-978b-ce19e9d436fe",
+    "882b55d0-ce6c-4e50-a05d-35c2e9bf31ad",
+    "1c7b34c4-c0b1-4e5b-b8aa-3d04f12fdb81",
+    "1ebd6935-4957-45ab-80eb-4b977cdf6161",
+    "58f56167-62b3-4074-940d-c9d9ab655dd2",
+    "e32fe589-3df4-4711-a2d6-49970f4aa762"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "703ad5b4-acd6-4982-9a14-4ddb08e1918a"
+  },
+  {
+   "id": "d120679a-9c20-4292-a30a-113893f84249",
+   "parent": "b5bd15ae-0fc3-40cf-b843-8e0887c2d80f",
+   "order": 0,
+   "attributes": {
+    "type": "update_appointment_status",
+    "status_type": "showed",
+    "category": "appointment"
+   },
+   "name": "Update calendar appointment status: Showed",
+   "type": "update_appointment_status",
+   "next": "9a67563f-a29b-4e53-b50f-3300a89740aa",
+   "parentKey": "b5bd15ae-0fc3-40cf-b843-8e0887c2d80f"
+  },
+  {
+   "id": "9a67563f-a29b-4e53-b50f-3300a89740aa",
+   "parent": "b5bd15ae-0fc3-40cf-b843-8e0887c2d80f",
+   "order": 1,
+   "attributes": {
+    "type": "condition",
+    "startAfter": {
+     "type": "minutes",
+     "value": 0,
+     "when": "after"
+    },
+    "name": "Wait for Clinic Appointment form to be submitted",
+    "cat": "",
+    "condition": {
+     "currentRecipeType": "CUSTOM",
+     "branches": [
+      {
+       "id": "a476d9e7-16b4-4c50-9b21-6d2e889515ca",
+       "name": "Branch",
+       "segments": [
+        {
+         "__segmentId": "231a8ac3-4d3c-46a5-9f7c-63e0a49561eb",
+         "operator": "and",
+         "conditions": [
+          {
+           "conditionType": "contact_detail",
+           "conditionSubType": "cClk7ad4PHxiake2lChS",
+           "conditionOperator": "has_value",
+           "__conditionId": "59bf7dcb-11a4-4d87-8fd5-540163e9a087",
+           "ifElseNodeId": "",
+           "__customFieldType__": "standard",
+           "isWait": true,
+           "nestedDropdownTypes": [
+            "inboundWebhookRequest",
+            "sheet",
+            "datetime_formatter",
+            "custom_webhook",
+            "array_functions",
+            "ivr_gather",
+            "ivr_connect_call",
+            "custom_code",
+            "ai_agent"
+           ],
+           "allowIsOperatorTypes": [
+            "contact_reply",
+            "inboundWebhookRequest",
+            "custom_webhook",
+            "custom_code",
+            "ai_agent",
+            "contact_detail",
+            "array_functions",
+            "appointment",
+            "service_booking",
+            "rental_booking"
+           ]
+          }
+         ]
+        }
+       ],
+       "operator": "and",
+       "showErrors": false,
+       "branchNameError": "Branch name cannot be empty!"
+      }
+     ],
+     "operator": "and",
+     "if": true,
+     "conditionName": "",
+     "version": 2,
+     "noneBranchName": "None"
+    },
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "name": "Wait for Clinic Appointment form to be submitted",
+   "type": "wait",
+   "next": "f7f9dbcc-a955-4fd7-ab30-0d1886c66606",
+   "parentKey": "d120679a-9c20-4292-a30a-113893f84249",
+   "cat": ""
+  },
+  {
+   "id": "f7f9dbcc-a955-4fd7-ab30-0d1886c66606",
+   "parent": "b5bd15ae-0fc3-40cf-b843-8e0887c2d80f",
+   "order": 2,
+   "attributes": {
+    "type": "condition",
+    "startAfter": {
+     "type": "minutes",
+     "value": 0,
+     "when": "after"
+    },
+    "name": "Wait",
+    "cat": "",
+    "condition": {
+     "currentRecipeType": "CUSTOM",
+     "branches": [
+      {
+       "id": "3906cd02-ac5f-4f04-8bdf-5402f4b045f1",
+       "name": "Branch",
+       "segments": [
+        {
+         "__segmentId": "a6bcaed6-f743-4f66-9a9c-c01b415ad07d",
+         "operator": "and",
+         "conditions": [
+          {
+           "conditionType": "contact_detail",
+           "conditionSubType": "cxUGCjBinbuh0spb4LQS",
+           "conditionOperator": "has_value",
+           "__conditionId": "432271ca-ad77-413d-870f-f317310ba87c",
+           "ifElseNodeId": "",
+           "__customFieldType__": "standard",
+           "isWait": true,
+           "nestedDropdownTypes": [
+            "inboundWebhookRequest",
+            "sheet",
+            "datetime_formatter",
+            "custom_webhook",
+            "array_functions",
+            "ivr_gather",
+            "ivr_connect_call",
+            "custom_code",
+            "ai_agent"
+           ],
+           "allowIsOperatorTypes": [
+            "contact_reply",
+            "inboundWebhookRequest",
+            "custom_webhook",
+            "custom_code",
+            "ai_agent",
+            "contact_detail",
+            "array_functions",
+            "appointment",
+            "service_booking",
+            "rental_booking"
+           ]
+          }
+         ]
+        }
+       ],
+       "operator": "and",
+       "showErrors": false,
+       "branchNameError": "Branch name cannot be empty!"
+      }
+     ],
+     "operator": "and",
+     "if": true,
+     "conditionName": "",
+     "version": 2,
+     "noneBranchName": "None"
+    },
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "name": "Wait",
+   "type": "wait",
+   "next": "e6a804b8-32e7-4abd-a174-553d7afc2de4",
+   "parentKey": "9a67563f-a29b-4e53-b50f-3300a89740aa"
+  },
+  {
+   "id": "e6a804b8-32e7-4abd-a174-553d7afc2de4",
+   "stepIndex": 1,
+   "parent": "b5bd15ae-0fc3-40cf-b843-8e0887c2d80f",
+   "order": 3,
+   "attributes": {
+    "type": "google_sheets",
+    "action": {
+     "id": "lookup_row",
+     "name": "Lookup Spreadsheet Row"
+    },
+    "account": {
+     "id": "100464418921113716943",
+     "name": "reports@mwcforme.com",
+     "idType": "altId"
+    },
+    "drive": {
+     "id": "my_drive",
+     "name": "My Drive"
+    },
+    "spreadsheet": {
+     "id": "1_Qji8O_7ZL5tSa7lbb4HwCPicyYkDj_OBseUfrh2etE",
+     "name": "Appointment Study"
+    },
+    "sheet": {
+     "id": "3",
+     "name": "Contact Raw"
+    },
+    "lookupColumns": {
+     "main": {
+      "column": "A",
+      "value": "{{contact.id}}"
+     }
+    },
+    "options": {
+     "lookupSearchMethod": "top_to_bottom"
+    },
+    "sheetHeaders": [
+     "Contact Id",
+     "First Name",
+     "Last Name",
+     "Phone",
+     "Email",
+     "Business Name",
+     "Created",
+     "Last Activity",
+     "Tags",
+     "Last Disposition",
+     "Last Disposition Date",
+     "Contact Type",
+     "UTM Campaign",
+     "UTM Medium",
+     "UTM Content",
+     "UTM Source",
+     "UTM Term",
+     "SOURCE URL",
+     "Source",
+     "Patient Advisor",
+     "Sale Outcome",
+     "Total Program Amount",
+     "Pay Type",
+     "Sale Type",
+     "Paid Ads?",
+     "Source",
+     "Created time",
+     "SOURCE WF",
+     "UTM Campaign",
+     "UTM Medium",
+     "UTM Content",
+     "UTM Term",
+     "",
+     "Campaign",
+     "Medium",
+     "Content",
+     "Term",
+     "2/13/2026",
+     "2/15/2026",
+     "Patient Advisor",
+     "Sale Outcome",
+     "Total Program Amount",
+     "Pay Type",
+     "Sale Type",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "All"
+    ]
+   },
+   "name": "Lookup Patient Contact ID",
+   "type": "google_sheets",
+   "next": "695717a1-4aef-4ce6-b07f-5024472d5b18",
+   "parentKey": "f7f9dbcc-a955-4fd7-ab30-0d1886c66606"
+  },
+  {
+   "id": "695717a1-4aef-4ce6-b07f-5024472d5b18",
+   "stepIndex": 2,
+   "parent": "b5bd15ae-0fc3-40cf-b843-8e0887c2d80f",
+   "order": 4,
+   "attributes": {
+    "type": "google_sheets",
+    "action": {
+     "id": "update_row_from_lookup",
+     "name": "Update Spreadsheet Row using Lookup"
+    },
+    "account": {
+     "id": "100464418921113716943",
+     "name": "reports@mwcforme.com",
+     "idType": "altId"
+    },
+    "drive": {
+     "id": "my_drive",
+     "name": "My Drive"
+    },
+    "spreadsheet": {
+     "id": "1_Qji8O_7ZL5tSa7lbb4HwCPicyYkDj_OBseUfrh2etE",
+     "name": "Appointment Study"
+    },
+    "sheet": {
+     "id": "3",
+     "name": "Contact Raw"
+    },
+    "columnRange": [
+     "T",
+     "X"
+    ],
+    "values": [
+     "{{contact.patient_advisor}}",
+     "{{contact.sale_outcome}}",
+     "{{contact.total_program_amount}}",
+     "{{contact.pay_type}}",
+     "{{contact.sale_type}}"
+    ],
+    "lookupStep": {
+     "label": "#1 Lookup Patient Contact ID",
+     "value": "e6a804b8-32e7-4abd-a174-553d7afc2de4",
+     "id": "e6a804b8-32e7-4abd-a174-553d7afc2de4",
+     "stepIndex": 1
+    },
+    "sheetHeaders": [
+     "Contact Id",
+     "First Name",
+     "Last Name",
+     "Phone",
+     "Email",
+     "Business Name",
+     "Created",
+     "Last Activity",
+     "Tags",
+     "Last Disposition",
+     "Last Disposition Date",
+     "Contact Type",
+     "UTM Campaign",
+     "UTM Medium",
+     "UTM Content",
+     "UTM Source",
+     "UTM Term",
+     "SOURCE URL",
+     "Source",
+     "Patient Advisor",
+     "Sale Outcome",
+     "Total Program Amount",
+     "Pay Type",
+     "Sale Type",
+     "Paid Ads?",
+     "Source",
+     "Created time",
+     "SOURCE WF",
+     "UTM Campaign",
+     "UTM Medium",
+     "UTM Content",
+     "UTM Term",
+     "",
+     "Campaign",
+     "Medium",
+     "Content",
+     "Term",
+     "2/13/2026",
+     "2/15/2026",
+     "Patient Advisor",
+     "Sale Outcome",
+     "Total Program Amount",
+     "Pay Type",
+     "Sale Type",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "All"
+    ],
+    "options": {}
+   },
+   "name": "Update Appointment Study spreadsheet, from column T to X",
+   "type": "google_sheets",
+   "next": "3d922574-d4ca-4789-b9fe-5958e9ce5773",
+   "parentKey": "e6a804b8-32e7-4abd-a174-553d7afc2de4"
+  },
+  {
+   "id": "3d922574-d4ca-4789-b9fe-5958e9ce5773",
+   "stepIndex": 3,
+   "parent": "b5bd15ae-0fc3-40cf-b843-8e0887c2d80f",
+   "order": 5,
+   "attributes": {
+    "type": "google_sheets",
+    "action": {
+     "id": "update_row_from_lookup",
+     "name": "Update Spreadsheet Row using Lookup"
+    },
+    "account": {
+     "id": "100464418921113716943",
+     "name": "reports@mwcforme.com",
+     "idType": "altId"
+    },
+    "drive": {
+     "id": "my_drive",
+     "name": "My Drive"
+    },
+    "spreadsheet": {
+     "id": "1_Qji8O_7ZL5tSa7lbb4HwCPicyYkDj_OBseUfrh2etE",
+     "name": "Appointment Study"
+    },
+    "sheet": {
+     "id": "3",
+     "name": "Contact Raw"
+    },
+    "columnRange": [
+     "L",
+     "L"
+    ],
+    "values": [
+     "{{contact.type}}"
+    ],
+    "lookupStep": {
+     "label": "#1 Lookup Patient Contact ID",
+     "value": "e6a804b8-32e7-4abd-a174-553d7afc2de4",
+     "id": "e6a804b8-32e7-4abd-a174-553d7afc2de4",
+     "stepIndex": 1
+    },
+    "sheetHeaders": [
+     "Contact Id",
+     "First Name",
+     "Last Name",
+     "Phone",
+     "Email",
+     "Business Name",
+     "Created",
+     "Last Activity",
+     "Tags",
+     "Last Disposition",
+     "Last Disposition Date",
+     "Contact Type",
+     "UTM Campaign",
+     "UTM Medium",
+     "UTM Content",
+     "UTM Source",
+     "UTM Term",
+     "SOURCE URL",
+     "Source",
+     "Patient Advisor",
+     "Sale Outcome",
+     "Total Program Amount",
+     "Pay Type",
+     "Sale Type",
+     "Paid Ads?",
+     "Source",
+     "Created time",
+     "SOURCE WF",
+     "UTM Campaign",
+     "UTM Medium",
+     "UTM Content",
+     "UTM Term",
+     "",
+     "Campaign",
+     "Medium",
+     "Content",
+     "Term",
+     "2/13/2026",
+     "2/15/2026",
+     "Patient Advisor",
+     "Sale Outcome",
+     "Total Program Amount",
+     "Pay Type",
+     "Sale Type",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "All"
+    ],
+    "options": {}
+   },
+   "name": "Update Contact Type in Contact Raw",
+   "type": "google_sheets",
+   "next": "088a8955-6dce-450b-aada-702c2785b6d8",
+   "parentKey": "695717a1-4aef-4ce6-b07f-5024472d5b18"
+  },
+  {
+   "id": "088a8955-6dce-450b-aada-702c2785b6d8",
+   "parent": "b5bd15ae-0fc3-40cf-b843-8e0887c2d80f",
+   "order": 6,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "7WMjJykajYpvAXys4m0z",
+    "pipeline_stage_id": "1223fdaf-d65f-4f43-b6e7-ce3f7281a457",
+    "opportunity_name": "{{contact.name}} SHOWED",
+    "opportunity_source": "",
+    "monetary_value": "{{contact.total_program_amount}}",
+    "opportunity_status": "won"
+   },
+   "name": "A&D pipeline: Closed, status: WON - hide from a&D opportunity",
+   "type": "create_opportunity",
+   "next": "62c67df6-3bcd-4c04-803a-a83db5f1d4c4",
+   "comments": [
+    {
+     "id": "bfb068dd-08b0-4502-96eb-749dba13501c",
+     "userId": "yntZSizWegCAW6z2Xhq1",
+     "timestamp": "2026-01-30T21:05:35Z",
+     "comment": "<p style=\"margin:0px; padding-left: 0px!important;\">Additional opportunities automation runs in step 07 simultaneously</p>"
+    }
+   ],
+   "parentKey": "3d922574-d4ca-4789-b9fe-5958e9ce5773"
+  },
+  {
+   "id": "62c67df6-3bcd-4c04-803a-a83db5f1d4c4",
+   "parent": "b5bd15ae-0fc3-40cf-b843-8e0887c2d80f",
+   "order": 7,
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "minutes",
+     "value": 0.2,
+     "when": "after"
+    },
+    "name": "Wait 12 seconds to make sure contact is not re-enrolled by mistake",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "name": "Wait 12 seconds to make sure contact is not re-enrolled by mistake",
+   "type": "wait",
+   "parentKey": "088a8955-6dce-450b-aada-702c2785b6d8"
+  }
+ ]
+}

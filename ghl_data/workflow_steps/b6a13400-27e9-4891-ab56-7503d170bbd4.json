@@ -1,0 +1,490 @@
+{
+ "id": "b6a13400-27e9-4891-ab56-7503d170bbd4",
+ "name": "Chat Widget Out of Office Hours",
+ "folder": "04. System Admin & Error Handling",
+ "status": "published",
+ "updatedAt": "2026-05-18T22:50:54.838Z",
+ "version": 7,
+ "extracted_at": "2026-07-10T05:40:32Z",
+ "extraction_method": "ghl_backend_api",
+ "source": "GHL Active Workflows (live API)",
+ "workflowData": {
+  "_id": "b6a13400-27e9-4891-ab56-7503d170bbd4",
+  "locationId": "Ghstz8eIsHWLeXek47dk",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 4,
+  "name": "Chat Widget Out of Office Hours",
+  "status": "published",
+  "version": 7,
+  "dataVersion": 7,
+  "allowMultiple": true,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/Ghstz8eIsHWLeXek47dk/workflows/b6a13400-27e9-4891-ab56-7503d170bbd4/7",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FGhstz8eIsHWLeXek47dk%2Fworkflows%2Fb6a13400-27e9-4891-ab56-7503d170bbd4%2F7",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "type": "workflow",
+  "parentId": "599ce15b-2f6b-4f99-a14f-2745246e4618",
+  "updatedBy": "FRXQwFmvrfoYHX3wYra6",
+  "createdAt": "2026-02-27T18:40:40.598Z",
+  "updatedAt": "2026-05-18T22:50:54.838Z",
+  "deleted": false,
+  "allowMultipleOpportunity": true,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "user",
+  "__v": 0,
+  "eventStartDate": null,
+  "window": null,
+  "workflowNote": null,
+  "triggersFilePath": "location/Ghstz8eIsHWLeXek47dk/workflow-triggers/b6a13400-27e9-4891-ab56-7503d170bbd4/5",
+  "id": "b6a13400-27e9-4891-ab56-7503d170bbd4"
+ },
+ "triggers": [
+  {
+   "id": "m3YjYqRHCbFrTSRqGnHl",
+   "date_added": "2026-02-27T18:42:44.007Z",
+   "deleted": false,
+   "actions": [
+    {
+     "workflow_id": "b6a13400-27e9-4891-ab56-7503d170bbd4",
+     "type": "add_to_workflow"
+    }
+   ],
+   "type": "customer_reply",
+   "masterType": "highlevel",
+   "workflow_id": "b6a13400-27e9-4891-ab56-7503d170bbd4",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "name": "Customer Replied",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "active": true,
+   "date_updated": "2026-02-27T19:44:07.412Z",
+   "conditions": [
+    {
+     "operator": "==",
+     "field": "message.type",
+     "value": 1000,
+     "title": "Reply channel",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "allInOne.chatType",
+     "value": "webchat",
+     "title": "Chat Type Is",
+     "type": "select"
+    },
+    {
+     "operator": "is-any-of",
+     "field": "allInOne.webChatId",
+     "value": [
+      "69337243d355bdcd9c27675e",
+      "6952a8536682120c2b2656b9"
+     ],
+     "title": "Chat Widget Is",
+     "type": "multiselect"
+    }
+   ]
+  }
+ ],
+ "dependentAssets": {},
+ "templates": [
+  {
+   "id": "dcbcdd23-dae4-4a20-91e8-26b28f5372db",
+   "order": 0,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "07b61dd7-392f-4333-a961-e5577f3d1ff4",
+      "name": "Within hours of operation",
+      "segments": [
+       {
+        "__segmentId": "8aa06ec1-f3ca-44cf-aa36-a02ab78d90f2",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "quarter_hour",
+          "conditionOperator": ">=",
+          "conditionValue": "800",
+          "__conditionId": "692c6b09-7631-4516-b9cc-22a601a18023",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         },
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "quarter_hour",
+          "conditionOperator": "<=",
+          "conditionValue": "2100",
+          "__conditionId": "fa2e1f04-1795-4cae-86ba-c78e01bc8839",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       },
+       {
+        "__segmentId": "55039ef9-97b2-40f0-9a3e-e2dc5627b2f3",
+        "operator": "or",
+        "conditions": [
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "day_week",
+          "conditionOperator": "==",
+          "conditionValue": "weekday",
+          "__conditionId": "44e0f0cb-c362-40da-a2c3-44379bc0a7e8",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         },
+         {
+          "conditionType": "date_time",
+          "conditionSubType": "day_week",
+          "conditionOperator": "==",
+          "conditionValue": "6",
+          "__conditionId": "b77580db-c84f-42dd-a9b6-9b72202e3ad4",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Condition",
+    "version": 2,
+    "noneBranchName": "Outside HOOp"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "07b61dd7-392f-4333-a961-e5577f3d1ff4",
+    "55bee7b3-b079-4df0-a92e-cceb855b0d0a"
+   ],
+   "comments": [],
+   "nodeType": "condition-node"
+  },
+  {
+   "id": "07b61dd7-392f-4333-a961-e5577f3d1ff4",
+   "parent": "dcbcdd23-dae4-4a20-91e8-26b28f5372db",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Within hours of operation",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "55bee7b3-b079-4df0-a92e-cceb855b0d0a"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "dcbcdd23-dae4-4a20-91e8-26b28f5372db"
+  },
+  {
+   "id": "55bee7b3-b079-4df0-a92e-cceb855b0d0a",
+   "parent": "dcbcdd23-dae4-4a20-91e8-26b28f5372db",
+   "order": 1,
+   "attributes": {
+    "else": true
+   },
+   "name": "Outside HOOp",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "df8b8785-3889-4f6f-960b-d25e770fe4c2",
+   "sibling": [
+    "07b61dd7-392f-4333-a961-e5577f3d1ff4"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "dcbcdd23-dae4-4a20-91e8-26b28f5372db"
+  },
+  {
+   "id": "df8b8785-3889-4f6f-960b-d25e770fe4c2",
+   "parent": "55bee7b3-b079-4df0-a92e-cceb855b0d0a",
+   "order": 0,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "b42e0ce4-4424-42b0-a8d4-4efadc8926b0",
+      "name": "Branch",
+      "segments": [
+       {
+        "__segmentId": "b8762e7e-63ec-4caf-bf92-e0a0b37632d3",
+        "operator": "or",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "email",
+          "conditionOperator": "has_value",
+          "__conditionId": "8bfb3fd4-9b45-49a8-b34b-3ed022e3401a",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         },
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "phone",
+          "conditionOperator": "has_value",
+          "__conditionId": "5fe60b1f-4f29-4167-af03-18223273cab4",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Check if Email/Phone was filled out during",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "b42e0ce4-4424-42b0-a8d4-4efadc8926b0",
+    "57101f1d-714c-4de7-abfe-ef5aced2e05b"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "55bee7b3-b079-4df0-a92e-cceb855b0d0a"
+  },
+  {
+   "id": "b42e0ce4-4424-42b0-a8d4-4efadc8926b0",
+   "parent": "df8b8785-3889-4f6f-960b-d25e770fe4c2",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Branch",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "d3700eab-49b7-4f55-8444-091b2011ac71",
+   "sibling": [
+    "57101f1d-714c-4de7-abfe-ef5aced2e05b"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "df8b8785-3889-4f6f-960b-d25e770fe4c2"
+  },
+  {
+   "id": "d3700eab-49b7-4f55-8444-091b2011ac71",
+   "parent": "b42e0ce4-4424-42b0-a8d4-4efadc8926b0",
+   "order": 0,
+   "attributes": {
+    "body": "Thank you for contacting Men’s Wellness Centers. Our office is currently closed, but we’ve received your message. Our team is available Monday through Saturday from 8:00 AM to 9:00 PM and will respond as soon as we are back in the office.",
+    "attachments": []
+   },
+   "name": "Send SMS Outside Office Hours Welcome Message",
+   "type": "sms",
+   "next": "1e254853-9bfe-4a0b-809c-5f9ed2946630",
+   "parentKey": "b42e0ce4-4424-42b0-a8d4-4efadc8926b0",
+   "advanceCanvasMeta": {
+    "isDisabled": false
+   }
+  },
+  {
+   "id": "1e254853-9bfe-4a0b-809c-5f9ed2946630",
+   "parent": "b42e0ce4-4424-42b0-a8d4-4efadc8926b0",
+   "order": 1,
+   "attributes": {
+    "trackingOptions": {
+     "hasTrackingLinks": false,
+     "hasUtmTracking": true,
+     "hasTags": false,
+     "sourceId": "b6a13400-27e9-4891-ab56-7503d170bbd4:1e254853-9bfe-4a0b-809c-5f9ed2946630"
+    },
+    "conditions": [],
+    "html": "<p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">Thank you for contacting Men’s Wellness Centers.</p><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\" data-start=\"198\" data-end=\"377\">Our office is currently closed, but we have received your message. Our team is available Monday through Saturday from 8:00 AM to 9:00 PM, and we will respond as soon as we return.</p><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\" data-start=\"468\" data-end=\"512\">We look forward to connecting with you soon.</p><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\" data-start=\"514\" data-end=\"544\">Sincerely,<br>{{location.name}}</p>",
+    "subject": "Thank You for Contacting Us",
+    "from_name": "{{location.name}}",
+    "from_email": "{{location.email}}",
+    "preHeader": "Our Team Will Contact You Soon",
+    "attachments": []
+   },
+   "name": "Email Outside Office Hours Welcome Message",
+   "type": "email",
+   "parentKey": "d3700eab-49b7-4f55-8444-091b2011ac71"
+  },
+  {
+   "id": "57101f1d-714c-4de7-abfe-ef5aced2e05b",
+   "parent": "df8b8785-3889-4f6f-960b-d25e770fe4c2",
+   "order": 1,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "b42e0ce4-4424-42b0-a8d4-4efadc8926b0"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "df8b8785-3889-4f6f-960b-d25e770fe4c2"
+  }
+ ]
+}

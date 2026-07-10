@@ -1,21 +1,1159 @@
 {
-  "id": "860ae134-9ed2-4144-a19b-6aae8a0937a3",
+ "id": "860ae134-9ed2-4144-a19b-6aae8a0937a3",
+ "name": "03d. Update Appointment Status",
+ "folder": "02. Appointments & Visit Journey",
+ "status": "published",
+ "updatedAt": "2026-05-18T22:46:54.036Z",
+ "version": 15,
+ "extracted_at": "2026-07-10T05:40:32Z",
+ "extraction_method": "ghl_backend_api",
+ "source": "GHL Active Workflows (live API)",
+ "workflowData": {
+  "_id": "860ae134-9ed2-4144-a19b-6aae8a0937a3",
+  "locationId": "Ghstz8eIsHWLeXek47dk",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 3,
   "name": "03d. Update Appointment Status",
-  "folder": "03. Call Routing & Dispositions",
   "status": "published",
   "version": 15,
-  "extracted_at": "2026-05-29T03:00:32Z",
-  "extraction_method": "backend_jwt",
-  "triggers": [],
-  "steps": [],
-  "messages_referenced": [],
-  "stats": {
-    "total_steps": 0,
-    "send_sms_count": 0,
-    "send_email_count": 0,
-    "wait_count": 0,
-    "if_else_count": 0,
-    "terminal_paths": 0
+  "dataVersion": 7,
+  "allowMultiple": true,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/Ghstz8eIsHWLeXek47dk/workflows/860ae134-9ed2-4144-a19b-6aae8a0937a3/15",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FGhstz8eIsHWLeXek47dk%2Fworkflows%2F860ae134-9ed2-4144-a19b-6aae8a0937a3%2F15",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "type": "workflow",
+  "parentId": "d19faff7-3c76-44ec-8c05-59397c06aa08",
+  "meta": {
+   "stepIndexCounter": {
+    "google_sheets": 8
+   }
   },
-  "notes": ""
+  "updatedBy": "FRXQwFmvrfoYHX3wYra6",
+  "createdAt": "2026-02-05T14:16:01.053Z",
+  "updatedAt": "2026-05-18T22:46:54.036Z",
+  "deleted": false,
+  "allowMultipleOpportunity": true,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "user",
+  "__v": 0,
+  "eventStartDate": null,
+  "window": null,
+  "workflowNote": null,
+  "triggersFilePath": "location/Ghstz8eIsHWLeXek47dk/workflow-triggers/860ae134-9ed2-4144-a19b-6aae8a0937a3/6",
+  "id": "860ae134-9ed2-4144-a19b-6aae8a0937a3"
+ },
+ "triggers": [
+  {
+   "id": "8y6G3H5XhECnYDhQQ19a",
+   "date_updated": "2026-02-05T14:25:08.524Z",
+   "date_added": "2026-02-05T14:25:08.524Z",
+   "deleted": false,
+   "active": true,
+   "actions": [
+    {
+     "workflow_id": "860ae134-9ed2-4144-a19b-6aae8a0937a3",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "==",
+     "field": "appointment.eventType",
+     "value": "normal",
+     "title": "Event Type",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "appointment.status",
+     "value": "noshow",
+     "title": "Appointment status is",
+     "type": "select"
+    }
+   ],
+   "type": "appointment",
+   "masterType": "highlevel",
+   "workflow_id": "860ae134-9ed2-4144-a19b-6aae8a0937a3",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "name": "Appointment Status changed to No Show",
+   "belongs_to": "workflow",
+   "schedule_config": {}
+  },
+  {
+   "id": "UToBOiNVWv53PYN4H8Hp",
+   "date_updated": "2026-02-05T14:23:23.447Z",
+   "date_added": "2026-02-05T14:23:23.447Z",
+   "deleted": false,
+   "active": true,
+   "actions": [
+    {
+     "workflow_id": "860ae134-9ed2-4144-a19b-6aae8a0937a3",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "==",
+     "field": "appointment.eventType",
+     "value": "normal",
+     "title": "Event Type",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "appointment.status",
+     "value": "cancelled",
+     "title": "Appointment status is",
+     "type": "select"
+    }
+   ],
+   "type": "appointment",
+   "masterType": "highlevel",
+   "workflow_id": "860ae134-9ed2-4144-a19b-6aae8a0937a3",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "name": "Appointment Status changed to Cancelled",
+   "belongs_to": "workflow",
+   "schedule_config": {}
+  },
+  {
+   "id": "jzzOsXFhX5S0knL5N5XQ",
+   "date_added": "2026-02-05T14:21:26.047Z",
+   "deleted": false,
+   "actions": [
+    {
+     "workflow_id": "860ae134-9ed2-4144-a19b-6aae8a0937a3",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "==",
+     "field": "appointment.eventType",
+     "value": "normal",
+     "title": "Event Type",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "appointment.status",
+     "value": "showed",
+     "title": "Appointment status is",
+     "type": "select"
+    }
+   ],
+   "type": "appointment",
+   "masterType": "highlevel",
+   "workflow_id": "860ae134-9ed2-4144-a19b-6aae8a0937a3",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "name": "Appointment Status changed to Showed",
+   "date_updated": "2026-02-05T14:22:14.899Z",
+   "active": true
+  }
+ ],
+ "dependentAssets": {},
+ "templates": [
+  {
+   "id": "d7fef4b8-7ade-4c48-b378-027a9d27118c",
+   "stepIndex": 1,
+   "order": 0,
+   "attributes": {
+    "type": "google_sheets",
+    "action": {
+     "id": "lookup_row",
+     "name": "Lookup Spreadsheet Row"
+    },
+    "account": {
+     "id": "100464418921113716943",
+     "name": "reports@mwcforme.com",
+     "idType": "altId"
+    },
+    "drive": {
+     "id": "my_drive",
+     "name": "My Drive"
+    },
+    "spreadsheet": {
+     "id": "1_Qji8O_7ZL5tSa7lbb4HwCPicyYkDj_OBseUfrh2etE",
+     "name": "Appointment Study"
+    },
+    "sheet": {
+     "id": "4",
+     "name": "Appt Report Raw"
+    },
+    "lookupColumns": {
+     "main": {
+      "column": "G",
+      "value": "{{contact.phone_raw}}"
+     }
+    },
+    "options": {
+     "lookupSearchMethod": "top_to_bottom"
+    },
+    "sheetHeaders": [
+     "Appointment Id",
+     "Requested Time",
+     "Date Added",
+     "Contact Name",
+     "Calendar",
+     "Email",
+     "Phone",
+     "Appointment Owner",
+     "Created By",
+     "Mode",
+     "Source",
+     "Outcome",
+     "Rescheduled",
+     "Source",
+     "UTM Campaign",
+     "UTM Medium",
+     "UTM Content",
+     "UTM Source",
+     "UTM Term",
+     "Form",
+     "CONTACT  CREATE DATE",
+     "TAG",
+     "Days Between Booking & Appointment",
+     "Same Day Booking?",
+     "TIME Booked",
+     "Booking Time",
+     "APPT Date",
+     "Date Booked",
+     "Appt Time",
+     "Inbound Calls Prior to Booking",
+     "Outbound Calls Prior to Booking",
+     "Voicemails Prior to Booking",
+     "TOTAL Calls prior to Booking",
+     "Booked without Calls"
+    ]
+   },
+   "name": "Lookup Contact's Phone number",
+   "type": "google_sheets",
+   "next": "ed22ba0e-ab70-4d87-8fbe-0050761d480b"
+  },
+  {
+   "id": "ed22ba0e-ab70-4d87-8fbe-0050761d480b",
+   "order": 1,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "ad74a48d-f338-41ae-88ca-a340bf0a802b",
+      "name": "PA reported Px Showed",
+      "segments": [
+       {
+        "__segmentId": "a09a17e4-6e8b-4580-8492-90f4cbf17c71",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "jzzOsXFhX5S0knL5N5XQ",
+          "__conditionId": "bb6a43f7-280a-4158-aaff-0e0dea5f8987",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "4a132311-683a-4592-8d84-26702113f9a6",
+      "name": "PA reported Px Cancelled",
+      "segments": [
+       {
+        "__segmentId": "a09a17e4-6e8b-4580-8492-90f4cbf17c71",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "UToBOiNVWv53PYN4H8Hp",
+          "__conditionId": "bb6a43f7-280a-4158-aaff-0e0dea5f8987",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "4c3c6ecf-a944-466e-9471-9e56173f95a4",
+      "name": "PA reported Px No Show",
+      "segments": [
+       {
+        "__segmentId": "a09a17e4-6e8b-4580-8492-90f4cbf17c71",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "8y6G3H5XhECnYDhQQ19a",
+          "__conditionId": "bb6a43f7-280a-4158-aaff-0e0dea5f8987",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "b7f10cfc-2542-4efb-9ff2-f72a225ec785",
+      "name": "PA reported Px Rescheduled",
+      "segments": [
+       {
+        "__segmentId": "6a21fb62-906f-48ae-85b6-2994c7ac3d4e",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "appointment",
+          "conditionSubType": "appointmentRescheduled",
+          "conditionOperator": "is",
+          "conditionValue": "true",
+          "__conditionId": "4e5089ab-4f42-46ab-9382-14158f5b0f74",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Trigger: Appointment status changed to",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "ad74a48d-f338-41ae-88ca-a340bf0a802b",
+    "4a132311-683a-4592-8d84-26702113f9a6",
+    "4c3c6ecf-a944-466e-9471-9e56173f95a4",
+    "b7f10cfc-2542-4efb-9ff2-f72a225ec785",
+    "da74c02a-f240-4afb-95e5-0b4b67ea4223"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "d7fef4b8-7ade-4c48-b378-027a9d27118c"
+  },
+  {
+   "id": "ad74a48d-f338-41ae-88ca-a340bf0a802b",
+   "parent": "ed22ba0e-ab70-4d87-8fbe-0050761d480b",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "PA reported Px Showed",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "7d8ed531-c0cc-4685-b6d7-ae68a307aa82",
+   "sibling": [
+    "4a132311-683a-4592-8d84-26702113f9a6",
+    "4c3c6ecf-a944-466e-9471-9e56173f95a4",
+    "b7f10cfc-2542-4efb-9ff2-f72a225ec785",
+    "da74c02a-f240-4afb-95e5-0b4b67ea4223"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "ed22ba0e-ab70-4d87-8fbe-0050761d480b"
+  },
+  {
+   "id": "7d8ed531-c0cc-4685-b6d7-ae68a307aa82",
+   "stepIndex": 2,
+   "parent": "ad74a48d-f338-41ae-88ca-a340bf0a802b",
+   "order": 0,
+   "attributes": {
+    "type": "google_sheets",
+    "action": {
+     "id": "update_row_from_lookup",
+     "name": "Update Spreadsheet Row using Lookup"
+    },
+    "account": {
+     "id": "100464418921113716943",
+     "name": "reports@mwcforme.com",
+     "idType": "altId"
+    },
+    "drive": {
+     "id": "my_drive",
+     "name": "My Drive"
+    },
+    "spreadsheet": {
+     "id": "1_g_00qdhv8g6_4owG9oRlsn8VSNkyou8QQXel3eo78E",
+     "name": "MWC Appointment Study"
+    },
+    "sheet": {
+     "id": "4",
+     "name": "Appt Report Raw"
+    },
+    "columnRange": [
+     "L",
+     "L"
+    ],
+    "values": [
+     "showed"
+    ],
+    "lookupStep": {
+     "label": "#1 Lookup Contact's Phone number",
+     "value": "d7fef4b8-7ade-4c48-b378-027a9d27118c",
+     "id": "d7fef4b8-7ade-4c48-b378-027a9d27118c",
+     "stepIndex": 1
+    },
+    "sheetHeaders": [
+     "Appointment Id",
+     "Requested Time",
+     "Date Added",
+     "Contact Name",
+     "Calendar",
+     "Email",
+     "Phone",
+     "Appointment Owner",
+     "Created By",
+     "Mode",
+     "Source",
+     "Outcome",
+     "Rescheduled",
+     "Source",
+     "UTM Campaign",
+     "UTM Medium",
+     "UTM Content",
+     "UTM Source",
+     "UTM Term",
+     "Form",
+     "CONTACT  CREATE DATE",
+     "TAG",
+     "Days Between Booking & Appointment",
+     "Same Day Booking?",
+     "TIME Booked",
+     "Booking Time",
+     "APPT Date",
+     "Date Booked",
+     "Appt Time",
+     "Inbound Calls Prior to Booking",
+     "Outbound Calls Prior to Booking",
+     "Voicemails Prior to Booking",
+     "TOTAL Calls prior to Booking",
+     "Booked without Calls"
+    ],
+    "options": {}
+   },
+   "name": "Update Outcome to Showed | Workflow: Appointment Report | Sheet: Appt Report Raw ",
+   "type": "google_sheets",
+   "parentKey": "ad74a48d-f338-41ae-88ca-a340bf0a802b",
+   "next": "1ac1d8f4-b592-4de4-beb1-d6b2ad6ac3dd"
+  },
+  {
+   "id": "1ac1d8f4-b592-4de4-beb1-d6b2ad6ac3dd",
+   "stepIndex": 6,
+   "parent": "ad74a48d-f338-41ae-88ca-a340bf0a802b",
+   "order": 1,
+   "attributes": {
+    "type": "google_sheets",
+    "action": {
+     "id": "lookup_row",
+     "name": "Lookup Spreadsheet Row"
+    },
+    "account": {
+     "id": "100464418921113716943",
+     "name": "reports@mwcforme.com",
+     "idType": "altId"
+    },
+    "drive": {
+     "id": "my_drive",
+     "name": "My Drive"
+    },
+    "spreadsheet": {
+     "id": "1_Qji8O_7ZL5tSa7lbb4HwCPicyYkDj_OBseUfrh2etE",
+     "name": "Appointment Study"
+    },
+    "sheet": {
+     "id": "3",
+     "name": "Contact Raw"
+    },
+    "lookupColumns": {
+     "main": {
+      "column": "A",
+      "value": "{{contact.id}}"
+     }
+    },
+    "options": {
+     "lookupSearchMethod": "top_to_bottom"
+    },
+    "sheetHeaders": [
+     "Contact Id",
+     "First Name",
+     "Last Name",
+     "Phone",
+     "Email",
+     "Business Name",
+     "Created",
+     "Last Activity",
+     "Tags",
+     "Last Disposition",
+     "Last Disposition Date",
+     "Contact Type",
+     "UTM Campaign",
+     "UTM Medium",
+     "UTM Content",
+     "UTM Source",
+     "UTM Term",
+     "SOURCE URL",
+     "Source",
+     "Patient Advisor",
+     "Sale Outcome",
+     "Total Program Amount",
+     "Pay Type",
+     "Sale Type",
+     "Paid Ads?",
+     "Source",
+     "Created time",
+     "SOURCE WF",
+     "UTM Campaign",
+     "UTM Medium",
+     "UTM Content",
+     "UTM Term",
+     "",
+     "Campaign",
+     "Medium",
+     "Content",
+     "Term",
+     "2/12/2026",
+     "2/12/2026",
+     "Patient Advisor",
+     "Sale Outcome",
+     "Total Program Amount",
+     "Pay Type",
+     "Sale Type",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "All"
+    ]
+   },
+   "name": "Lookup Contact ID",
+   "type": "google_sheets",
+   "next": "e8fef3a9-dcc6-4fa8-a674-0d6dcdf8c4ba",
+   "parentKey": "7d8ed531-c0cc-4685-b6d7-ae68a307aa82"
+  },
+  {
+   "id": "e8fef3a9-dcc6-4fa8-a674-0d6dcdf8c4ba",
+   "stepIndex": 7,
+   "parent": "ad74a48d-f338-41ae-88ca-a340bf0a802b",
+   "order": 2,
+   "attributes": {
+    "type": "google_sheets",
+    "action": {
+     "id": "update_row_from_lookup",
+     "name": "Update Spreadsheet Row using Lookup"
+    },
+    "account": {
+     "id": "100464418921113716943",
+     "name": "reports@mwcforme.com",
+     "idType": "altId"
+    },
+    "drive": {
+     "id": "my_drive",
+     "name": "My Drive"
+    },
+    "spreadsheet": {
+     "id": "1_Qji8O_7ZL5tSa7lbb4HwCPicyYkDj_OBseUfrh2etE",
+     "name": "Appointment Study"
+    },
+    "sheet": {
+     "id": "3",
+     "name": "Contact Raw"
+    },
+    "columnRange": [
+     "T",
+     "X"
+    ],
+    "values": [
+     "{{contact.patient_advisor}}",
+     "{{contact.sale_outcome}}",
+     "{{contact.total_program_amount}}",
+     "{{contact.pay_type}}",
+     "{{contact.sale_type}}"
+    ],
+    "lookupStep": {
+     "label": "#6 Lookup Spreadsheet Row",
+     "value": "1ac1d8f4-b592-4de4-beb1-d6b2ad6ac3dd",
+     "id": "1ac1d8f4-b592-4de4-beb1-d6b2ad6ac3dd",
+     "stepIndex": 6
+    },
+    "sheetHeaders": [
+     "Contact Id",
+     "First Name",
+     "Last Name",
+     "Phone",
+     "Email",
+     "Business Name",
+     "Created",
+     "Last Activity",
+     "Tags",
+     "Last Disposition",
+     "Last Disposition Date",
+     "Contact Type",
+     "UTM Campaign",
+     "UTM Medium",
+     "UTM Content",
+     "UTM Source",
+     "UTM Term",
+     "SOURCE URL",
+     "Source",
+     "Patient Advisor",
+     "Sale Outcome",
+     "Total Program Amount",
+     "Pay Type",
+     "Sale Type",
+     "Paid Ads?",
+     "Source",
+     "Created time",
+     "SOURCE WF",
+     "UTM Campaign",
+     "UTM Medium",
+     "UTM Content",
+     "UTM Term",
+     "",
+     "Campaign",
+     "Medium",
+     "Content",
+     "Term",
+     "2/12/2026",
+     "2/12/2026",
+     "Patient Advisor",
+     "Sale Outcome",
+     "Total Program Amount",
+     "Pay Type",
+     "Sale Type",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "All"
+    ],
+    "options": {}
+   },
+   "name": "Update Columns T to X; (Patient Advisor, Sale Outcome, Total Program Amount, Pay Type, Sale Type)",
+   "type": "google_sheets",
+   "parentKey": "1ac1d8f4-b592-4de4-beb1-d6b2ad6ac3dd"
+  },
+  {
+   "id": "4a132311-683a-4592-8d84-26702113f9a6",
+   "parent": "ed22ba0e-ab70-4d87-8fbe-0050761d480b",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "PA reported Px Cancelled",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "c72c2d0a-1d00-4c57-92db-bcdc6dbe857a",
+   "sibling": [
+    "ad74a48d-f338-41ae-88ca-a340bf0a802b",
+    "4c3c6ecf-a944-466e-9471-9e56173f95a4",
+    "b7f10cfc-2542-4efb-9ff2-f72a225ec785",
+    "da74c02a-f240-4afb-95e5-0b4b67ea4223"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "ed22ba0e-ab70-4d87-8fbe-0050761d480b"
+  },
+  {
+   "id": "c72c2d0a-1d00-4c57-92db-bcdc6dbe857a",
+   "stepIndex": 3,
+   "parent": "4a132311-683a-4592-8d84-26702113f9a6",
+   "order": 0,
+   "attributes": {
+    "type": "google_sheets",
+    "action": {
+     "id": "update_row_from_lookup",
+     "name": "Update Spreadsheet Row using Lookup"
+    },
+    "account": {
+     "id": "100464418921113716943",
+     "name": "reports@mwcforme.com",
+     "idType": "altId"
+    },
+    "drive": {
+     "id": "my_drive",
+     "name": "My Drive"
+    },
+    "spreadsheet": {
+     "id": "1_g_00qdhv8g6_4owG9oRlsn8VSNkyou8QQXel3eo78E",
+     "name": "MWC Appointment Study"
+    },
+    "sheet": {
+     "id": "4",
+     "name": "Appt Report Raw"
+    },
+    "columnRange": [
+     "L",
+     "L"
+    ],
+    "values": [
+     "cancelled"
+    ],
+    "lookupStep": {
+     "label": "#1 Lookup Contact's Phone number",
+     "value": "d7fef4b8-7ade-4c48-b378-027a9d27118c",
+     "id": "d7fef4b8-7ade-4c48-b378-027a9d27118c",
+     "stepIndex": 1
+    },
+    "sheetHeaders": [
+     "Appointment Id",
+     "Requested Time",
+     "Date Added",
+     "Contact Name",
+     "Calendar",
+     "Email",
+     "Phone",
+     "Appointment Owner",
+     "Created By",
+     "Mode",
+     "Source",
+     "Outcome",
+     "Rescheduled",
+     "Source",
+     "UTM Campaign",
+     "UTM Medium",
+     "UTM Content",
+     "UTM Source",
+     "UTM Term",
+     "Form",
+     "CONTACT  CREATE DATE",
+     "TAG",
+     "Days Between Booking & Appointment",
+     "Same Day Booking?",
+     "TIME Booked",
+     "Booking Time",
+     "APPT Date",
+     "Date Booked",
+     "Appt Time",
+     "Inbound Calls Prior to Booking",
+     "Outbound Calls Prior to Booking",
+     "Voicemails Prior to Booking",
+     "TOTAL Calls prior to Booking",
+     "Booked without Calls"
+    ],
+    "options": {}
+   },
+   "name": "Update Outcome to Cancelled | Workflow: Appointment Report | Sheet: Appt Report Raw ",
+   "type": "google_sheets",
+   "parentKey": "4a132311-683a-4592-8d84-26702113f9a6",
+   "next": "5352a11d-50f4-4d48-8460-9b17f1857491"
+  },
+  {
+   "id": "5352a11d-50f4-4d48-8460-9b17f1857491",
+   "parent": "4a132311-683a-4592-8d84-26702113f9a6",
+   "order": 1,
+   "attributes": {
+    "targetNodeId": "1ac1d8f4-b592-4de4-beb1-d6b2ad6ac3dd",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "c72c2d0a-1d00-4c57-92db-bcdc6dbe857a"
+  },
+  {
+   "id": "4c3c6ecf-a944-466e-9471-9e56173f95a4",
+   "parent": "ed22ba0e-ab70-4d87-8fbe-0050761d480b",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "PA reported Px No Show",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "30002f21-c4ce-4180-93cf-3e502eb22456",
+   "sibling": [
+    "ad74a48d-f338-41ae-88ca-a340bf0a802b",
+    "4a132311-683a-4592-8d84-26702113f9a6",
+    "b7f10cfc-2542-4efb-9ff2-f72a225ec785",
+    "da74c02a-f240-4afb-95e5-0b4b67ea4223"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "ed22ba0e-ab70-4d87-8fbe-0050761d480b"
+  },
+  {
+   "id": "30002f21-c4ce-4180-93cf-3e502eb22456",
+   "stepIndex": 4,
+   "parent": "4c3c6ecf-a944-466e-9471-9e56173f95a4",
+   "order": 0,
+   "attributes": {
+    "type": "google_sheets",
+    "action": {
+     "id": "update_row_from_lookup",
+     "name": "Update Spreadsheet Row using Lookup"
+    },
+    "account": {
+     "id": "100464418921113716943",
+     "name": "reports@mwcforme.com",
+     "idType": "altId"
+    },
+    "drive": {
+     "id": "my_drive",
+     "name": "My Drive"
+    },
+    "spreadsheet": {
+     "id": "1_g_00qdhv8g6_4owG9oRlsn8VSNkyou8QQXel3eo78E",
+     "name": "MWC Appointment Study"
+    },
+    "sheet": {
+     "id": "4",
+     "name": "Appt Report Raw"
+    },
+    "columnRange": [
+     "L",
+     "L"
+    ],
+    "values": [
+     "noshow"
+    ],
+    "lookupStep": {
+     "label": "#1 Lookup Contact's Phone number",
+     "value": "d7fef4b8-7ade-4c48-b378-027a9d27118c",
+     "id": "d7fef4b8-7ade-4c48-b378-027a9d27118c",
+     "stepIndex": 1
+    },
+    "sheetHeaders": [
+     "Appointment Id",
+     "Requested Time",
+     "Date Added",
+     "Contact Name",
+     "Calendar",
+     "Email",
+     "Phone",
+     "Appointment Owner",
+     "Created By",
+     "Mode",
+     "Source",
+     "Outcome",
+     "Rescheduled",
+     "Source",
+     "UTM Campaign",
+     "UTM Medium",
+     "UTM Content",
+     "UTM Source",
+     "UTM Term",
+     "Form",
+     "CONTACT  CREATE DATE",
+     "TAG",
+     "Days Between Booking & Appointment",
+     "Same Day Booking?",
+     "TIME Booked",
+     "Booking Time",
+     "APPT Date",
+     "Date Booked",
+     "Appt Time",
+     "Inbound Calls Prior to Booking",
+     "Outbound Calls Prior to Booking",
+     "Voicemails Prior to Booking",
+     "TOTAL Calls prior to Booking",
+     "Booked without Calls"
+    ],
+    "options": {}
+   },
+   "name": "Update Outcome to No Show | Workflow: Appointment Report | Sheet: Appt Report Raw ",
+   "type": "google_sheets",
+   "parentKey": "4c3c6ecf-a944-466e-9471-9e56173f95a4",
+   "next": "5a26fcb8-905b-46c4-8341-8e3125f125ec"
+  },
+  {
+   "id": "5a26fcb8-905b-46c4-8341-8e3125f125ec",
+   "parent": "4c3c6ecf-a944-466e-9471-9e56173f95a4",
+   "order": 1,
+   "attributes": {
+    "targetNodeId": "1ac1d8f4-b592-4de4-beb1-d6b2ad6ac3dd",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "30002f21-c4ce-4180-93cf-3e502eb22456"
+  },
+  {
+   "id": "b7f10cfc-2542-4efb-9ff2-f72a225ec785",
+   "parent": "ed22ba0e-ab70-4d87-8fbe-0050761d480b",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "PA reported Px Rescheduled",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "3ec5ea8c-6828-441d-94ad-692be02ae1d0",
+   "sibling": [
+    "ad74a48d-f338-41ae-88ca-a340bf0a802b",
+    "4a132311-683a-4592-8d84-26702113f9a6",
+    "4c3c6ecf-a944-466e-9471-9e56173f95a4",
+    "da74c02a-f240-4afb-95e5-0b4b67ea4223"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "ed22ba0e-ab70-4d87-8fbe-0050761d480b"
+  },
+  {
+   "id": "3ec5ea8c-6828-441d-94ad-692be02ae1d0",
+   "stepIndex": 5,
+   "parent": "b7f10cfc-2542-4efb-9ff2-f72a225ec785",
+   "order": 0,
+   "attributes": {
+    "type": "google_sheets",
+    "action": {
+     "id": "update_row_from_lookup",
+     "name": "Update Spreadsheet Row using Lookup"
+    },
+    "account": {
+     "id": "100464418921113716943",
+     "name": "reports@mwcforme.com",
+     "idType": "altId"
+    },
+    "drive": {
+     "id": "my_drive",
+     "name": "My Drive"
+    },
+    "spreadsheet": {
+     "id": "1_g_00qdhv8g6_4owG9oRlsn8VSNkyou8QQXel3eo78E",
+     "name": "MWC Appointment Study"
+    },
+    "sheet": {
+     "id": "4",
+     "name": "Appt Report Raw"
+    },
+    "columnRange": [
+     "B",
+     "M"
+    ],
+    "values": [
+     "{{appointment.start_time}}",
+     "{{right_now.middle_endian_date}} {{right_now.time}}",
+     null,
+     null,
+     null,
+     null,
+     null,
+     "{{user.name}}",
+     null,
+     null,
+     null,
+     "Yes"
+    ],
+    "lookupStep": {
+     "label": "#1 Lookup Contact's Phone number",
+     "value": "d7fef4b8-7ade-4c48-b378-027a9d27118c",
+     "id": "d7fef4b8-7ade-4c48-b378-027a9d27118c",
+     "stepIndex": 1
+    },
+    "sheetHeaders": [
+     "Appointment Id",
+     "Requested Time",
+     "Date Added",
+     "Contact Name",
+     "Calendar",
+     "Email",
+     "Phone",
+     "Appointment Owner",
+     "Created By",
+     "Mode",
+     "Source",
+     "Outcome",
+     "Rescheduled",
+     "Source",
+     "UTM Campaign",
+     "UTM Medium",
+     "UTM Content",
+     "UTM Source",
+     "UTM Term",
+     "Form",
+     "CONTACT  CREATE DATE",
+     "TAG",
+     "Days Between Booking & Appointment",
+     "Same Day Booking?",
+     "TIME Booked",
+     "Booking Time",
+     "APPT Date",
+     "Date Booked",
+     "Appt Time",
+     "Inbound Calls Prior to Booking",
+     "Outbound Calls Prior to Booking",
+     "Voicemails Prior to Booking",
+     "TOTAL Calls prior to Booking",
+     "Booked without Calls"
+    ],
+    "options": {}
+   },
+   "name": "Update Outcome to No Show | Workflow: Appointment Report | Sheet: Appt Report Raw ",
+   "type": "google_sheets",
+   "parentKey": "b7f10cfc-2542-4efb-9ff2-f72a225ec785",
+   "next": "e3e26f17-647f-4086-babe-f8e5691a3064"
+  },
+  {
+   "id": "e3e26f17-647f-4086-babe-f8e5691a3064",
+   "parent": "b7f10cfc-2542-4efb-9ff2-f72a225ec785",
+   "order": 1,
+   "attributes": {
+    "targetNodeId": "1ac1d8f4-b592-4de4-beb1-d6b2ad6ac3dd",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "3ec5ea8c-6828-441d-94ad-692be02ae1d0"
+  },
+  {
+   "id": "da74c02a-f240-4afb-95e5-0b4b67ea4223",
+   "parent": "ed22ba0e-ab70-4d87-8fbe-0050761d480b",
+   "order": 2,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "ad74a48d-f338-41ae-88ca-a340bf0a802b",
+    "4a132311-683a-4592-8d84-26702113f9a6",
+    "4c3c6ecf-a944-466e-9471-9e56173f95a4",
+    "b7f10cfc-2542-4efb-9ff2-f72a225ec785"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "ed22ba0e-ab70-4d87-8fbe-0050761d480b"
+  }
+ ]
 }

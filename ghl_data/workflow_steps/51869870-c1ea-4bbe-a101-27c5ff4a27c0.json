@@ -1,0 +1,723 @@
+{
+ "id": "51869870-c1ea-4bbe-a101-27c5ff4a27c0",
+ "name": "After Appointment Feedback Survey Send",
+ "folder": "02. Appointments & Visit Journey",
+ "status": "published",
+ "updatedAt": "2026-05-30T18:43:15.430Z",
+ "version": 36,
+ "extracted_at": "2026-07-10T05:40:32Z",
+ "extraction_method": "ghl_backend_api",
+ "source": "GHL Active Workflows (live API)",
+ "workflowData": {
+  "_id": "51869870-c1ea-4bbe-a101-27c5ff4a27c0",
+  "locationId": "Ghstz8eIsHWLeXek47dk",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 4,
+  "name": "After Appointment Feedback Survey Send",
+  "status": "published",
+  "version": 36,
+  "dataVersion": 7,
+  "allowMultiple": true,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/Ghstz8eIsHWLeXek47dk/workflows/51869870-c1ea-4bbe-a101-27c5ff4a27c0/36",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FGhstz8eIsHWLeXek47dk%2Fworkflows%2F51869870-c1ea-4bbe-a101-27c5ff4a27c0%2F36",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "type": "workflow",
+  "parentId": "d19faff7-3c76-44ec-8c05-59397c06aa08",
+  "updatedBy": "1UGaWoisLr0DONjwbenY",
+  "createdAt": "2026-03-06T16:11:57.350Z",
+  "updatedAt": "2026-05-30T18:43:15.430Z",
+  "deleted": false,
+  "allowMultipleOpportunity": true,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "user",
+  "__v": 0,
+  "eventStartDate": null,
+  "triggersFilePath": "location/Ghstz8eIsHWLeXek47dk/workflow-triggers/51869870-c1ea-4bbe-a101-27c5ff4a27c0/33",
+  "window": null,
+  "workflowNote": null,
+  "id": "51869870-c1ea-4bbe-a101-27c5ff4a27c0"
+ },
+ "triggers": [
+  {
+   "id": "C36nrwcjst9uKE4gWRW5",
+   "date_added": "2026-03-11T17:14:21.647Z",
+   "deleted": false,
+   "actions": [
+    {
+     "workflow_id": "51869870-c1ea-4bbe-a101-27c5ff4a27c0",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "==",
+     "field": "appointment.eventType",
+     "value": "normal",
+     "title": "Event Type",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "appointment.status",
+     "value": "showed",
+     "title": "Appointment status is",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "calendar.id",
+     "value": "1Cfy5JnO2A4ggiZlMVvX",
+     "title": "In calendar",
+     "type": "select"
+    }
+   ],
+   "type": "appointment",
+   "masterType": "highlevel",
+   "workflow_id": "51869870-c1ea-4bbe-a101-27c5ff4a27c0",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "name": "Appointment Status Showed |  Book in Richmond",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "date_updated": "2026-05-30T18:23:52.421Z",
+   "active": true
+  },
+  {
+   "id": "ENJBBK8Wmwty96VqKqB1",
+   "date_added": "2026-03-11T17:14:21.671Z",
+   "deleted": false,
+   "actions": [
+    {
+     "workflow_id": "51869870-c1ea-4bbe-a101-27c5ff4a27c0",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "==",
+     "field": "appointment.eventType",
+     "value": "normal",
+     "title": "Event Type",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "appointment.status",
+     "value": "showed",
+     "title": "Appointment status is",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "calendar.id",
+     "value": "lBaRbjUpEmesxEloFBME",
+     "title": "In calendar",
+     "type": "select"
+    }
+   ],
+   "type": "appointment",
+   "masterType": "highlevel",
+   "workflow_id": "51869870-c1ea-4bbe-a101-27c5ff4a27c0",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "name": "Appointment Status Showed |  Book in Newport",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "date_updated": "2026-05-30T18:23:52.461Z",
+   "active": true
+  },
+  {
+   "id": "Px3mNKOuhTATz9R4KiTR",
+   "date_added": "2026-03-11T17:14:21.678Z",
+   "deleted": false,
+   "actions": [
+    {
+     "workflow_id": "51869870-c1ea-4bbe-a101-27c5ff4a27c0",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "==",
+     "field": "appointment.eventType",
+     "value": "normal",
+     "title": "Event Type",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "appointment.status",
+     "value": "showed",
+     "title": "Appointment status is",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "calendar.id",
+     "value": "4xmnBGMWJ6TVUKcAPpPb",
+     "title": "In calendar",
+     "type": "select"
+    }
+   ],
+   "type": "appointment",
+   "masterType": "highlevel",
+   "workflow_id": "51869870-c1ea-4bbe-a101-27c5ff4a27c0",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "name": "Appointment Status Showed |  Book in Virginia Beach",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "date_updated": "2026-05-30T18:23:52.503Z",
+   "active": true
+  },
+  {
+   "id": "SY0IaseDZGj5KwqtMUEo",
+   "date_added": "2026-03-06T16:30:30.617Z",
+   "deleted": false,
+   "actions": [
+    {
+     "workflow_id": "51869870-c1ea-4bbe-a101-27c5ff4a27c0",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "index-of-true",
+     "field": "tagsAdded",
+     "value": "patient_sold",
+     "title": "Tag Added",
+     "type": "select",
+     "id": "tag-added"
+    }
+   ],
+   "type": "contact_tag",
+   "masterType": "highlevel",
+   "workflow_id": "51869870-c1ea-4bbe-a101-27c5ff4a27c0",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "name": "Contact Tag | patient_sold",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "date_updated": "2026-05-30T18:23:52.544Z",
+   "active": true
+  },
+  {
+   "id": "rIY5Ya6xCFTJHCiVbLiY",
+   "date_added": "2026-04-15T15:54:07.388Z",
+   "deleted": false,
+   "actions": [
+    {
+     "workflow_id": "51869870-c1ea-4bbe-a101-27c5ff4a27c0",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "index-of-true",
+     "field": "tagsAdded",
+     "value": "status_sold",
+     "title": "Tag Added",
+     "type": "select",
+     "id": "tag-added"
+    }
+   ],
+   "type": "contact_tag",
+   "masterType": "highlevel",
+   "workflow_id": "51869870-c1ea-4bbe-a101-27c5ff4a27c0",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "name": "Contact Tag | status_sold",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "date_updated": "2026-05-30T18:23:52.586Z",
+   "active": true
+  }
+ ],
+ "dependentAssets": {},
+ "templates": [
+  {
+   "id": "3d79c8ee-ec6b-4f93-8e68-55c81057bcd4",
+   "type": "find_opportunity",
+   "name": "Find Opportunity",
+   "attributes": {
+    "sorting": "latest",
+    "type": "find_opportunity",
+    "__customInputs__": {},
+    "cat": "multi-path",
+    "convertToMultipath": true,
+    "transitions": [
+     {
+      "id": "5335c1ca-0510-4074-8ba0-e810d452aa80",
+      "name": "Opportunity Found",
+      "fields": [],
+      "meta": {
+       "__branchKey__": "predefined_Opportunity Found"
+      },
+      "conditionType": "pre-defined"
+     },
+     {
+      "id": "cffe537f-8aa1-41d2-ad5e-dc75f3743200",
+      "name": "Opportunity Not Found",
+      "fields": [],
+      "meta": {
+       "__branchKey__": "predefined_Opportunity Not Found"
+      },
+      "conditionType": "pre-defined"
+     }
+    ],
+    "__name__": "Find Opportunity",
+    "__customInputFields__": []
+   },
+   "order": 0,
+   "cat": "multi-path",
+   "workflowsActionType": "INTERNAL",
+   "next": [
+    "5335c1ca-0510-4074-8ba0-e810d452aa80",
+    "cffe537f-8aa1-41d2-ad5e-dc75f3743200"
+   ]
+  },
+  {
+   "id": "5335c1ca-0510-4074-8ba0-e810d452aa80",
+   "parentKey": "3d79c8ee-ec6b-4f93-8e68-55c81057bcd4",
+   "parent": "3d79c8ee-ec6b-4f93-8e68-55c81057bcd4",
+   "type": "transition",
+   "name": "Opportunity Found",
+   "attributes": {},
+   "order": 1,
+   "cat": "transition",
+   "next": "09b704f8-f112-41f1-a24c-ee3a92896973"
+  },
+  {
+   "id": "09b704f8-f112-41f1-a24c-ee3a92896973",
+   "parent": "5335c1ca-0510-4074-8ba0-e810d452aa80",
+   "order": 0,
+   "attributes": {
+    "allowBackward": true,
+    "type": "internal_update_opportunity",
+    "__customInputFields__": [
+     {
+      "__customInputs__": {},
+      "dataType": "SINGLE_OPTIONS",
+      "filterField": "pipelineId",
+      "value": "Sa0OFNaNT6oEvFth46ks",
+      "valueFieldType": "select"
+     },
+     {
+      "__customInputs__": {},
+      "dataType": "SINGLE_OPTIONS",
+      "filterField": "pipelineStageId",
+      "value": "f4c9d5d0-cba0-4d7d-aaa4-4d3f208088f8",
+      "valueFieldType": "select"
+     }
+    ],
+    "__customInputs__": {}
+   },
+   "name": "Update opportunity",
+   "type": "internal_update_opportunity",
+   "next": "83e8fe65-6748-4dbc-bc07-c7963acb97bd",
+   "workflowsActionType": "INTERNAL",
+   "parentKey": "5335c1ca-0510-4074-8ba0-e810d452aa80"
+  },
+  {
+   "id": "83e8fe65-6748-4dbc-bc07-c7963acb97bd",
+   "type": "wait",
+   "name": "Wait - 02 Hours",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "hour",
+     "value": 2,
+     "when": "after"
+    },
+    "name": "Wait - 02 Hours",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": [],
+    "window": {
+     "condition": "when",
+     "days": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ],
+     "start": "08:00",
+     "end": "21:00"
+    },
+    "windowCondition": {
+     "field": "",
+     "operator": "",
+     "value": ""
+    }
+   },
+   "order": 1,
+   "cat": "",
+   "next": "01b9302f-e880-4e7a-8d77-1ec8a3e053a8",
+   "parentKey": "09b704f8-f112-41f1-a24c-ee3a92896973",
+   "parent": "5335c1ca-0510-4074-8ba0-e810d452aa80"
+  },
+  {
+   "id": "01b9302f-e880-4e7a-8d77-1ec8a3e053a8",
+   "parent": "5335c1ca-0510-4074-8ba0-e810d452aa80",
+   "order": 2,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "0a663220-a4af-40f3-b4f7-b665155e4deb",
+      "name": "RVA",
+      "segments": [
+       {
+        "__segmentId": "3b26a528-be27-49b5-923c-e0bf9834ece4",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "C36nrwcjst9uKE4gWRW5",
+          "__conditionId": "b754b0e6-2d5b-4966-a7d6-e61ac1e5f738",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "6b6359e1-b15a-48ce-b675-179dab812c9a",
+      "name": "NPN",
+      "segments": [
+       {
+        "__segmentId": "3b26a528-be27-49b5-923c-e0bf9834ece4",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "ENJBBK8Wmwty96VqKqB1",
+          "__conditionId": "b754b0e6-2d5b-4966-a7d6-e61ac1e5f738",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "6e34228d-6a37-4374-837e-9dabb076ca84",
+      "name": "VBA",
+      "segments": [
+       {
+        "__segmentId": "3b26a528-be27-49b5-923c-e0bf9834ece4",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "Px3mNKOuhTATz9R4KiTR",
+          "__conditionId": "b754b0e6-2d5b-4966-a7d6-e61ac1e5f738",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Condition",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "0a663220-a4af-40f3-b4f7-b665155e4deb",
+    "6b6359e1-b15a-48ce-b675-179dab812c9a",
+    "6e34228d-6a37-4374-837e-9dabb076ca84",
+    "4bf5df41-394b-4f2d-9d89-ba1286cb2474"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "83e8fe65-6748-4dbc-bc07-c7963acb97bd"
+  },
+  {
+   "id": "0a663220-a4af-40f3-b4f7-b665155e4deb",
+   "parent": "01b9302f-e880-4e7a-8d77-1ec8a3e053a8",
+   "order": 3,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "RVA",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "a6f4cae3-e724-4697-8ba8-53344dbab991",
+   "sibling": [
+    "6b6359e1-b15a-48ce-b675-179dab812c9a",
+    "6e34228d-6a37-4374-837e-9dabb076ca84",
+    "4bf5df41-394b-4f2d-9d89-ba1286cb2474"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "01b9302f-e880-4e7a-8d77-1ec8a3e053a8"
+  },
+  {
+   "id": "a6f4cae3-e724-4697-8ba8-53344dbab991",
+   "order": 0,
+   "attributes": {
+    "body": "{{contact.first_name}}, would you mind a quick favor? If we earned it today, a 30-sec review would mean a lot: https://go.menswellnesscenters.com/review?location=Richmond%2C%20VA\n\nIf we fell short, just reply and tell us.",
+    "attachments": []
+   },
+   "name": "Pre-Screening Questions Survey",
+   "type": "sms",
+   "next": "c0093914-3a60-475f-a8e6-03ac72445069",
+   "parentKey": "0a663220-a4af-40f3-b4f7-b665155e4deb",
+   "parent": "0a663220-a4af-40f3-b4f7-b665155e4deb"
+  },
+  {
+   "id": "c0093914-3a60-475f-a8e6-03ac72445069",
+   "order": 1,
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, just checking in. How are you feeling since your visit? If you have any questions our team is always here to help.",
+    "attachments": []
+   },
+   "name": "Touch 2 (Check-In)",
+   "type": "sms",
+   "parentKey": "a6f4cae3-e724-4697-8ba8-53344dbab991",
+   "parent": "0a663220-a4af-40f3-b4f7-b665155e4deb",
+   "advanceCanvasMeta": {
+    "isDisabled": true
+   }
+  },
+  {
+   "id": "6b6359e1-b15a-48ce-b675-179dab812c9a",
+   "parent": "01b9302f-e880-4e7a-8d77-1ec8a3e053a8",
+   "order": 3,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "NPN",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "ddf61320-4929-4902-b591-a449304bcbd5",
+   "sibling": [
+    "0a663220-a4af-40f3-b4f7-b665155e4deb",
+    "6e34228d-6a37-4374-837e-9dabb076ca84",
+    "4bf5df41-394b-4f2d-9d89-ba1286cb2474"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "01b9302f-e880-4e7a-8d77-1ec8a3e053a8"
+  },
+  {
+   "id": "ddf61320-4929-4902-b591-a449304bcbd5",
+   "parent": "6b6359e1-b15a-48ce-b675-179dab812c9a",
+   "order": 0,
+   "attributes": {
+    "body": "{{contact.first_name}}, would you mind a quick favor? If we earned it today, a 30-sec review would mean a lot: https://go.menswellnesscenters.com/review?location=Newport%20News%2C%20VA\n\nIf we fell short, just reply and tell us.",
+    "attachments": []
+   },
+   "name": "Pre-Screening Questions Survey",
+   "type": "sms",
+   "parentKey": "6b6359e1-b15a-48ce-b675-179dab812c9a"
+  },
+  {
+   "id": "6e34228d-6a37-4374-837e-9dabb076ca84",
+   "parent": "01b9302f-e880-4e7a-8d77-1ec8a3e053a8",
+   "order": 3,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "VBA",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "f6ea37da-13da-47f0-b2ee-ca6496c9a0af",
+   "sibling": [
+    "0a663220-a4af-40f3-b4f7-b665155e4deb",
+    "6b6359e1-b15a-48ce-b675-179dab812c9a",
+    "4bf5df41-394b-4f2d-9d89-ba1286cb2474"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "01b9302f-e880-4e7a-8d77-1ec8a3e053a8"
+  },
+  {
+   "id": "f6ea37da-13da-47f0-b2ee-ca6496c9a0af",
+   "parent": "6e34228d-6a37-4374-837e-9dabb076ca84",
+   "order": 0,
+   "attributes": {
+    "body": "{{contact.first_name}}, would you mind a quick favor? If we earned it today, a 30-sec review would mean a lot: https://go.menswellnesscenters.com/review?location=Virginia%20Beach%2C%20VA\n\nIf we fell short, just reply and tell us.",
+    "attachments": []
+   },
+   "name": "Pre-Screening Questions Survey",
+   "type": "sms",
+   "parentKey": "6e34228d-6a37-4374-837e-9dabb076ca84"
+  },
+  {
+   "id": "4bf5df41-394b-4f2d-9d89-ba1286cb2474",
+   "parent": "01b9302f-e880-4e7a-8d77-1ec8a3e053a8",
+   "order": 3,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "0a663220-a4af-40f3-b4f7-b665155e4deb",
+    "6b6359e1-b15a-48ce-b675-179dab812c9a",
+    "6e34228d-6a37-4374-837e-9dabb076ca84"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "01b9302f-e880-4e7a-8d77-1ec8a3e053a8"
+  },
+  {
+   "id": "cffe537f-8aa1-41d2-ad5e-dc75f3743200",
+   "parentKey": "3d79c8ee-ec6b-4f93-8e68-55c81057bcd4",
+   "parent": "3d79c8ee-ec6b-4f93-8e68-55c81057bcd4",
+   "type": "transition",
+   "name": "Opportunity Not Found",
+   "attributes": {},
+   "order": 1,
+   "cat": "transition",
+   "next": "a11c4bbc-be0a-4e7b-83cf-6d22456f6de3"
+  },
+  {
+   "id": "a11c4bbc-be0a-4e7b-83cf-6d22456f6de3",
+   "parent": "cffe537f-8aa1-41d2-ad5e-dc75f3743200",
+   "order": 0,
+   "attributes": {
+    "pipelineId": "Sa0OFNaNT6oEvFth46ks",
+    "type": "internal_create_opportunity",
+    "__customInputFields__": [
+     {
+      "__customInputs__": {},
+      "dataType": "SINGLE_OPTIONS",
+      "filterField": "pipelineStageId",
+      "value": "f4c9d5d0-cba0-4d7d-aaa4-4d3f208088f8",
+      "valueFieldType": "select"
+     }
+    ],
+    "__customInputs__": {}
+   },
+   "name": "Create Opportunity",
+   "type": "internal_create_opportunity",
+   "next": "86187487-ae24-486a-87cd-557bc40175fa",
+   "workflowsActionType": "INTERNAL",
+   "parentKey": "cffe537f-8aa1-41d2-ad5e-dc75f3743200"
+  },
+  {
+   "id": "86187487-ae24-486a-87cd-557bc40175fa",
+   "parent": "cffe537f-8aa1-41d2-ad5e-dc75f3743200",
+   "order": 1,
+   "attributes": {
+    "targetNodeId": "83e8fe65-6748-4dbc-bc07-c7963acb97bd",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "a11c4bbc-be0a-4e7b-83cf-6d22456f6de3"
+  }
+ ]
+}

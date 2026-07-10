@@ -1,0 +1,763 @@
+{
+ "id": "12df62cb-6fd7-43c7-823d-2f406c2199e3",
+ "name": "08. MUT (Medically Untreatable)",
+ "folder": "02. Appointments & Visit Journey",
+ "status": "published",
+ "updatedAt": "2026-05-24T02:06:43.088Z",
+ "version": 11,
+ "extracted_at": "2026-07-10T05:40:32Z",
+ "extraction_method": "ghl_backend_api",
+ "source": "GHL Active Workflows (live API)",
+ "workflowData": {
+  "_id": "12df62cb-6fd7-43c7-823d-2f406c2199e3",
+  "locationId": "Ghstz8eIsHWLeXek47dk",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 2,
+  "name": "08. MUT (Medically Untreatable)",
+  "status": "published",
+  "version": 11,
+  "dataVersion": 7,
+  "allowMultiple": true,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/Ghstz8eIsHWLeXek47dk/workflows/12df62cb-6fd7-43c7-823d-2f406c2199e3/11",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FGhstz8eIsHWLeXek47dk%2Fworkflows%2F12df62cb-6fd7-43c7-823d-2f406c2199e3%2F11",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "type": "workflow",
+  "parentId": "d19faff7-3c76-44ec-8c05-59397c06aa08",
+  "updatedBy": "1UGaWoisLr0DONjwbenY",
+  "createdAt": "2026-01-20T14:33:47.433Z",
+  "updatedAt": "2026-05-24T02:06:43.088Z",
+  "deleted": false,
+  "allowMultipleOpportunity": true,
+  "creationSource": "builder",
+  "originType": "user",
+  "__v": 0,
+  "eventStartDate": null,
+  "window": null,
+  "workflowNote": null,
+  "triggersFilePath": "location/Ghstz8eIsHWLeXek47dk/workflow-triggers/12df62cb-6fd7-43c7-823d-2f406c2199e3/8",
+  "isTriggerBucketMigrated": false,
+  "id": "12df62cb-6fd7-43c7-823d-2f406c2199e3"
+ },
+ "triggers": [
+  {
+   "id": "J57L8OergRj06ugjnygq",
+   "date_added": "2026-01-20T14:34:05.660Z",
+   "deleted": false,
+   "actions": [
+    {
+     "workflow_id": "12df62cb-6fd7-43c7-823d-2f406c2199e3",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "is-any-of",
+     "field": "form.id",
+     "value": [
+      "awkdH7MUC8zvQ54n0uwn"
+     ],
+     "title": "Form is",
+     "type": "string"
+    }
+   ],
+   "type": "form_submission",
+   "masterType": "highlevel",
+   "workflow_id": "12df62cb-6fd7-43c7-823d-2f406c2199e3",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "active": true,
+   "date_updated": "2026-02-01T01:00:29.400Z",
+   "name": "PA reported PX SHOWED"
+  }
+ ],
+ "dependentAssets": {},
+ "templates": [
+  {
+   "id": "d95e4a25-9e02-4cd1-a739-eba5948a3e37",
+   "type": "wait",
+   "name": "Wait",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "hour",
+     "value": 1,
+     "when": "after"
+    },
+    "name": "Wait",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "order": 0,
+   "cat": "",
+   "next": "dadebfa1-537d-4e42-888e-22fabc3f9c6d"
+  },
+  {
+   "id": "dadebfa1-537d-4e42-888e-22fabc3f9c6d",
+   "order": 1,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "a2c211a1-6a3b-4913-8d2d-86c055de8007",
+      "name": "Branch",
+      "segments": [
+       {
+        "__segmentId": "6b7bbed8-9678-4fbc-9cc4-8e36ce8074a7",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "cClk7ad4PHxiake2lChS",
+          "conditionOperator": "==",
+          "conditionValue": "MUT (Medically Untreatable)",
+          "__conditionId": "1b1936db-99d2-4a79-859c-9ceeb394bb59",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Condition",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "a2c211a1-6a3b-4913-8d2d-86c055de8007",
+    "3526fabb-a842-41e2-9704-865fa75c6228"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "d95e4a25-9e02-4cd1-a739-eba5948a3e37"
+  },
+  {
+   "id": "a2c211a1-6a3b-4913-8d2d-86c055de8007",
+   "parent": "dadebfa1-537d-4e42-888e-22fabc3f9c6d",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Branch",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "099a6619-14e4-45d0-b0d8-46644c7e2946",
+   "sibling": [
+    "3526fabb-a842-41e2-9704-865fa75c6228"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "dadebfa1-537d-4e42-888e-22fabc3f9c6d"
+  },
+  {
+   "id": "099a6619-14e4-45d0-b0d8-46644c7e2946",
+   "parent": "a2c211a1-6a3b-4913-8d2d-86c055de8007",
+   "order": 0,
+   "attributes": {
+    "tags": [],
+    "type": "remove_contact_tag",
+    "removeAll": true
+   },
+   "name": "Remove Tag",
+   "type": "remove_contact_tag",
+   "next": "ac17a733-d81a-47b1-baa1-18de17d6f16e",
+   "parentKey": "a2c211a1-6a3b-4913-8d2d-86c055de8007"
+  },
+  {
+   "id": "ac17a733-d81a-47b1-baa1-18de17d6f16e",
+   "parent": "a2c211a1-6a3b-4913-8d2d-86c055de8007",
+   "order": 1,
+   "attributes": {
+    "type": "update_contact_field",
+    "actionType": "clear_field_data",
+    "fields": [
+     {
+      "field": "HC2Oo1MIbwJ0uIrdsIqo",
+      "value": "",
+      "title": "Current medications (include name, dose, and how often you take them)",
+      "type": "string",
+      "date": ""
+     },
+     {
+      "field": "6hwB9YtdqX6urRGxovGX",
+      "value": "",
+      "title": "Date",
+      "type": "date",
+      "date": "specificDate"
+     },
+     {
+      "field": "J8L58GqFuzvO0nX6hY3l",
+      "value": "",
+      "title": "Do you consume alcohol?",
+      "type": "select",
+      "date": ""
+     },
+     {
+      "field": "QWMf64tEMlmWieWvgZMk",
+      "value": "",
+      "title": "Do you currently smoke or use tobacco products?",
+      "type": "select",
+      "date": ""
+     },
+     {
+      "field": "JfKExo0tee4Yai1eKrGn",
+      "value": "",
+      "title": "Electronic Signature (Type Full Legal Name)",
+      "type": "file",
+      "date": ""
+     },
+     {
+      "field": "KzsO01rpSeZIA4WUXiGR",
+      "value": "",
+      "title": "Emergency Contact Name",
+      "type": "string",
+      "date": ""
+     },
+     {
+      "field": "EVxsSNsGrO1Y6h2uUsjv",
+      "value": "",
+      "title": "Emergency Contact Phone",
+      "type": "string",
+      "date": ""
+     },
+     {
+      "field": "Ur3ezo3b85Xb2l8edGtl",
+      "value": "",
+      "title": "Have you ever been diagnosed with any of the following? (Check all that apply)",
+      "type": "multiselect",
+      "date": ""
+     },
+     {
+      "field": "sJLV861xvDXyJgA7H8dk",
+      "value": "",
+      "title": "Have you ever used testosterone or other hormone therapy?",
+      "type": "select",
+      "date": ""
+     },
+     {
+      "field": "m2UAYFuBQ1ymyKNN0C6s",
+      "value": "",
+      "title": "How did you hear about Men’s Wellness Centers?\n",
+      "type": "select",
+      "date": ""
+     },
+     {
+      "field": "9w0y3YzxD1ZFIbekQD2F",
+      "value": "",
+      "title": "How long have these symptoms been present?",
+      "type": "select",
+      "date": ""
+     },
+     {
+      "field": "ysRPwT2nSTzpT8EoAzku",
+      "value": "",
+      "title": "I acknowledge that I have received and understand the Notice of Privacy Practices.\n\n",
+      "type": "multiselect",
+      "date": ""
+     },
+     {
+      "field": "DHq97rjT0xk2QGvFEtj4",
+      "value": "",
+      "title": "I authorize Men’s Wellness Centers and its licensed medical providers to evaluate, diagnose, and treat me, including laboratory testing when medically appropriate.",
+      "type": "multiselect",
+      "date": ""
+     },
+     {
+      "field": "Fr6J27j5YGkL3eN3mmTS",
+      "value": "",
+      "title": "I confirm the information I provided is accurate to the best of my knowledge.",
+      "type": "multiselect",
+      "date": ""
+     },
+     {
+      "field": "nVTE9uYHuJdNY69ik4Vd",
+      "value": "",
+      "title": "I understand that my care may be provided in person and, when clinically appropriate, via telemedicine.",
+      "type": "multiselect",
+      "date": ""
+     },
+     {
+      "field": "aF4eAS7FcvZS2fPej6F9",
+      "value": "",
+      "title": "If yes, please describe (optional)",
+      "type": "string",
+      "date": ""
+     },
+     {
+      "field": "zJu0Qfw5oRtvwWPY0jXQ",
+      "value": "",
+      "title": "If yes, please provide brief details (optional)",
+      "type": "string",
+      "date": ""
+     },
+     {
+      "field": "9WxVlzvgSlCXx0EL82Sr",
+      "value": "",
+      "title": "Location",
+      "type": "select",
+      "date": ""
+     },
+     {
+      "field": "07RvFbVdzycUofKW5UPL",
+      "value": "",
+      "title": "May we contact your primary care provider regarding your care?",
+      "type": "select",
+      "date": ""
+     },
+     {
+      "field": "PDhPVirD7ZvPY0mnTLCr",
+      "value": "",
+      "title": "Norfolk / Virginia Beach Stations",
+      "type": "select",
+      "date": ""
+     },
+     {
+      "field": "RQqL2Zwl8vAND9m3pllJ",
+      "value": "",
+      "title": "Other",
+      "type": "select",
+      "date": ""
+     },
+     {
+      "field": "lWml2sn98A7zcGbfUtZe",
+      "value": "",
+      "title": "Pay Type",
+      "type": "select",
+      "date": ""
+     },
+     {
+      "field": "kwhTOpRqbuq9lgpQCbwK",
+      "value": "",
+      "title": "Physical",
+      "type": "multiselect",
+      "date": ""
+     },
+     {
+      "field": "hZF3COXUXopq6GY06uMZ",
+      "value": "",
+      "title": "Please Specify",
+      "type": "string",
+      "date": ""
+     },
+     {
+      "field": "Cou856tOhaxW62vwehVI",
+      "value": "",
+      "title": "Preferred Location",
+      "type": "select",
+      "date": ""
+     },
+     {
+      "field": "aWyDdDlWeHPgcXEJJOy0",
+      "value": "",
+      "title": "Primary Care Provider Name",
+      "type": "string",
+      "date": ""
+     }
+    ]
+   },
+   "name": "Clear Intake Fields to prepare for updated intake form in the future",
+   "type": "update_contact_field",
+   "next": "fff8b4b9-a686-4700-9ad0-ba35b990ca0a",
+   "parentKey": "099a6619-14e4-45d0-b0d8-46644c7e2946"
+  },
+  {
+   "id": "fff8b4b9-a686-4700-9ad0-ba35b990ca0a",
+   "parent": "a2c211a1-6a3b-4913-8d2d-86c055de8007",
+   "order": 2,
+   "attributes": {
+    "type": "remove_assigned_user"
+   },
+   "name": "Remove Assigned User",
+   "type": "remove_assigned_user",
+   "next": "2a6c749a-dc02-4ec1-8591-c4d0705e4318",
+   "parentKey": "ac17a733-d81a-47b1-baa1-18de17d6f16e"
+  },
+  {
+   "id": "2a6c749a-dc02-4ec1-8591-c4d0705e4318",
+   "parent": "a2c211a1-6a3b-4913-8d2d-86c055de8007",
+   "order": 3,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "dcd9cbb9-6bf7-4071-8543-e19da26c2436",
+      "name": "VA Beach",
+      "segments": [
+       {
+        "__segmentId": "71070956-66a9-45cb-ad0a-41573aa67214",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "9WxVlzvgSlCXx0EL82Sr",
+          "conditionOperator": "==",
+          "conditionValue": "Virginia Beach",
+          "__conditionId": "dffc339c-3af6-4239-983b-426368ba1cab",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "8f985e5c-cf1f-4b93-829d-f010def76b0c",
+      "name": "Newport News",
+      "segments": [
+       {
+        "__segmentId": "71070956-66a9-45cb-ad0a-41573aa67214",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "9WxVlzvgSlCXx0EL82Sr",
+          "conditionOperator": "==",
+          "conditionValue": "Newport News",
+          "__conditionId": "dffc339c-3af6-4239-983b-426368ba1cab",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "ebffad23-8c29-4bd5-a5e4-bd2d7e6a53b9",
+      "name": "Richmond",
+      "segments": [
+       {
+        "__segmentId": "71070956-66a9-45cb-ad0a-41573aa67214",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "9WxVlzvgSlCXx0EL82Sr",
+          "conditionOperator": "==",
+          "conditionValue": "Richmond",
+          "__conditionId": "dffc339c-3af6-4239-983b-426368ba1cab",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Condition",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "dcd9cbb9-6bf7-4071-8543-e19da26c2436",
+    "8f985e5c-cf1f-4b93-829d-f010def76b0c",
+    "ebffad23-8c29-4bd5-a5e4-bd2d7e6a53b9",
+    "3b169a2b-dab4-47b8-9b47-cabbbf980685"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "fff8b4b9-a686-4700-9ad0-ba35b990ca0a"
+  },
+  {
+   "id": "dcd9cbb9-6bf7-4071-8543-e19da26c2436",
+   "parent": "2a6c749a-dc02-4ec1-8591-c4d0705e4318",
+   "order": 4,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "VA Beach",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "7c59b9b7-4867-48a8-b743-96ae29d09ba7",
+   "sibling": [
+    "8f985e5c-cf1f-4b93-829d-f010def76b0c",
+    "ebffad23-8c29-4bd5-a5e4-bd2d7e6a53b9",
+    "3b169a2b-dab4-47b8-9b47-cabbbf980685"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "2a6c749a-dc02-4ec1-8591-c4d0705e4318"
+  },
+  {
+   "id": "7c59b9b7-4867-48a8-b743-96ae29d09ba7",
+   "parent": "dcd9cbb9-6bf7-4071-8543-e19da26c2436",
+   "order": 0,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "rspsjkBMNYGldN3R71ji",
+    "pipeline_stage_id": "831f66ae-95c1-40bd-8f15-9baa99a51efa",
+    "opportunity_status": "lost",
+    "opportunity_name": "MUT | {{contact.name}}",
+    "opportunity_source": "",
+    "monetary_value": "",
+    "lostReasonId": "696f4d3b2a9d6f12607f4b8f"
+   },
+   "name": "Create Or Update Opportunity",
+   "type": "create_opportunity",
+   "parentKey": "dcd9cbb9-6bf7-4071-8543-e19da26c2436"
+  },
+  {
+   "id": "8f985e5c-cf1f-4b93-829d-f010def76b0c",
+   "parent": "2a6c749a-dc02-4ec1-8591-c4d0705e4318",
+   "order": 4,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Newport News",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "948f7ea6-e34d-4c2b-8fa3-e30f5bf06774",
+   "sibling": [
+    "dcd9cbb9-6bf7-4071-8543-e19da26c2436",
+    "ebffad23-8c29-4bd5-a5e4-bd2d7e6a53b9",
+    "3b169a2b-dab4-47b8-9b47-cabbbf980685"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "2a6c749a-dc02-4ec1-8591-c4d0705e4318"
+  },
+  {
+   "id": "948f7ea6-e34d-4c2b-8fa3-e30f5bf06774",
+   "parent": "8f985e5c-cf1f-4b93-829d-f010def76b0c",
+   "order": 0,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "9AZEt2Sw6Zv0nnJJmkE0",
+    "pipeline_stage_id": "d0e9b320-87ac-43da-a02e-4303cf7057d2",
+    "opportunity_status": "lost",
+    "opportunity_name": "MUT | {{contact.name}}",
+    "opportunity_source": "",
+    "monetary_value": "",
+    "lostReasonId": "696f4d3b2a9d6f12607f4b8f"
+   },
+   "name": "Create Or Update Opportunity",
+   "type": "create_opportunity",
+   "parentKey": "8f985e5c-cf1f-4b93-829d-f010def76b0c"
+  },
+  {
+   "id": "ebffad23-8c29-4bd5-a5e4-bd2d7e6a53b9",
+   "parent": "2a6c749a-dc02-4ec1-8591-c4d0705e4318",
+   "order": 4,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Richmond",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "41c1e6a1-4d55-4824-b0b1-6eeebe779689",
+   "sibling": [
+    "dcd9cbb9-6bf7-4071-8543-e19da26c2436",
+    "8f985e5c-cf1f-4b93-829d-f010def76b0c",
+    "3b169a2b-dab4-47b8-9b47-cabbbf980685"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "2a6c749a-dc02-4ec1-8591-c4d0705e4318"
+  },
+  {
+   "id": "41c1e6a1-4d55-4824-b0b1-6eeebe779689",
+   "parent": "ebffad23-8c29-4bd5-a5e4-bd2d7e6a53b9",
+   "order": 0,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "jRqb0pvexu04zSACPXmd",
+    "pipeline_stage_id": "e7e9d943-f2e6-4729-a63a-571f69c06a4d",
+    "opportunity_status": "lost",
+    "opportunity_name": "MUT | {{contact.name}}",
+    "opportunity_source": "",
+    "monetary_value": "",
+    "lostReasonId": "696f4d3b2a9d6f12607f4b8f"
+   },
+   "name": "Create Or Update Opportunity",
+   "type": "create_opportunity",
+   "parentKey": "ebffad23-8c29-4bd5-a5e4-bd2d7e6a53b9"
+  },
+  {
+   "id": "3b169a2b-dab4-47b8-9b47-cabbbf980685",
+   "parent": "2a6c749a-dc02-4ec1-8591-c4d0705e4318",
+   "order": 4,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "dcd9cbb9-6bf7-4071-8543-e19da26c2436",
+    "8f985e5c-cf1f-4b93-829d-f010def76b0c",
+    "ebffad23-8c29-4bd5-a5e4-bd2d7e6a53b9"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "2a6c749a-dc02-4ec1-8591-c4d0705e4318",
+   "next": "70200705-501c-4710-b838-1edd12f5feb2"
+  },
+  {
+   "id": "70200705-501c-4710-b838-1edd12f5feb2",
+   "parent": "3b169a2b-dab4-47b8-9b47-cabbbf980685",
+   "order": 0,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "egwukvpj425enQbEpQKI",
+    "pipeline_stage_id": "35777458-05d0-418a-b8e4-303d0a2642c5",
+    "opportunity_status": "lost",
+    "lostReasonId": "696f4d3b2a9d6f12607f4b8f",
+    "opportunity_name": "MUT | {{contact.name}}",
+    "opportunity_source": "",
+    "monetary_value": ""
+   },
+   "name": "Create Or Update Opportunity",
+   "type": "create_opportunity",
+   "parentKey": "3b169a2b-dab4-47b8-9b47-cabbbf980685"
+  },
+  {
+   "id": "3526fabb-a842-41e2-9704-865fa75c6228",
+   "parent": "dadebfa1-537d-4e42-888e-22fabc3f9c6d",
+   "order": 2,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "a2c211a1-6a3b-4913-8d2d-86c055de8007"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "dadebfa1-537d-4e42-888e-22fabc3f9c6d"
+  }
+ ]
+}

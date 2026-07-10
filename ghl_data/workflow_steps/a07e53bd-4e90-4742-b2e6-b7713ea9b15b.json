@@ -1,0 +1,1005 @@
+{
+ "id": "a07e53bd-4e90-4742-b2e6-b7713ea9b15b",
+ "name": "Nurture: Missed Clinic Appointment",
+ "folder": "02. Appointments & Visit Journey",
+ "status": "published",
+ "updatedAt": "2026-05-18T22:50:25.151Z",
+ "version": 12,
+ "extracted_at": "2026-07-10T05:40:32Z",
+ "extraction_method": "ghl_backend_api",
+ "source": "GHL Active Workflows (live API)",
+ "workflowData": {
+  "_id": "a07e53bd-4e90-4742-b2e6-b7713ea9b15b",
+  "locationId": "Ghstz8eIsHWLeXek47dk",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 2,
+  "name": "Nurture: Missed Clinic Appointment",
+  "status": "published",
+  "version": 12,
+  "dataVersion": 7,
+  "allowMultiple": true,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/Ghstz8eIsHWLeXek47dk/workflows/a07e53bd-4e90-4742-b2e6-b7713ea9b15b/12",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FGhstz8eIsHWLeXek47dk%2Fworkflows%2Fa07e53bd-4e90-4742-b2e6-b7713ea9b15b%2F12",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "type": "workflow",
+  "parentId": "d19faff7-3c76-44ec-8c05-59397c06aa08",
+  "meta": {
+   "advanceCanvasMeta": {
+    "enabled": false,
+    "disabledAt": "2026-02-03T22:05:09.277Z"
+   }
+  },
+  "updatedBy": "FRXQwFmvrfoYHX3wYra6",
+  "createdAt": "2026-01-05T02:42:22.275Z",
+  "updatedAt": "2026-05-18T22:50:25.151Z",
+  "deleted": false,
+  "allowMultipleOpportunity": true,
+  "creationSource": "builder",
+  "originType": "user",
+  "__v": 0,
+  "eventStartDate": null,
+  "window": null,
+  "workflowNote": null,
+  "triggersFilePath": null,
+  "isTriggerBucketMigrated": false,
+  "id": "a07e53bd-4e90-4742-b2e6-b7713ea9b15b"
+ },
+ "triggers": [],
+ "dependentAssets": {},
+ "templates": [
+  {
+   "id": "df7c6fdf-97ba-4744-81fe-7b513a09fb67",
+   "order": 0,
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 7,
+     "when": "after"
+    },
+    "name": "Wait 1 week from previous workflow - NON BOOKED NEW LEADS",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "name": "Wait 1 week from previous workflow - NON BOOKED NEW LEADS",
+   "type": "wait",
+   "next": "e1430c29-90f0-4b5c-967a-698e72022376",
+   "cat": "",
+   "advanceCanvasMeta": {
+    "position": {
+     "x": 12,
+     "y": 134.5
+    }
+   }
+  },
+  {
+   "id": "e1430c29-90f0-4b5c-967a-698e72022376",
+   "order": 1,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "ecf351ef-6f90-47bf-8c2c-297adc433293",
+      "name": "Yes, lead has booked an appointment",
+      "segments": [
+       {
+        "__segmentId": "e3177c96-285a-4c99-817f-2dd864b795d7",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "tags",
+          "conditionOperator": "index-of-true",
+          "conditionValue": [
+           "funnel_consultation_booked"
+          ],
+          "__conditionId": "9cb88131-f373-4bf8-9550-9fc8af14affe",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Check if lead has booked an appointment by checking if tag is present \"funnel_consultation_booked\"",
+    "version": 2,
+    "noneBranchName": "No, no appointment booked"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "ecf351ef-6f90-47bf-8c2c-297adc433293",
+    "8382cc0a-982f-4add-9387-cf7fa512a790"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "df7c6fdf-97ba-4744-81fe-7b513a09fb67",
+   "advanceCanvasMeta": {
+    "position": {
+     "x": 242,
+     "y": 134.5
+    }
+   }
+  },
+  {
+   "id": "ecf351ef-6f90-47bf-8c2c-297adc433293",
+   "parent": "e1430c29-90f0-4b5c-967a-698e72022376",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Yes, lead has booked an appointment",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "8382cc0a-982f-4add-9387-cf7fa512a790"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "e1430c29-90f0-4b5c-967a-698e72022376",
+   "next": "37cc7cfc-bfcf-421c-8041-fcbbc064f4cd",
+   "advanceCanvasMeta": {
+    "position": {
+     "x": 472,
+     "y": 12
+    }
+   }
+  },
+  {
+   "id": "37cc7cfc-bfcf-421c-8041-fcbbc064f4cd",
+   "parent": "ecf351ef-6f90-47bf-8c2c-297adc433293",
+   "order": 0,
+   "attributes": {
+    "type": "remove_opportunity",
+    "opportunity_to_be_found": "all",
+    "pipeline_id": "gcRMq1iCj2tGmdWpimGS"
+   },
+   "name": "Remove contact from Non-booked Pipeline",
+   "type": "remove_opportunity",
+   "parentKey": "ecf351ef-6f90-47bf-8c2c-297adc433293",
+   "advanceCanvasMeta": {
+    "position": {
+     "x": 862,
+     "y": 19.5
+    }
+   }
+  },
+  {
+   "id": "8382cc0a-982f-4add-9387-cf7fa512a790",
+   "parent": "e1430c29-90f0-4b5c-967a-698e72022376",
+   "order": 2,
+   "attributes": {
+    "else": true
+   },
+   "name": "No, no appointment booked",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "eec8e46e-0ae3-4492-97fd-f2d541274643",
+   "sibling": [
+    "ecf351ef-6f90-47bf-8c2c-297adc433293"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "e1430c29-90f0-4b5c-967a-698e72022376",
+   "advanceCanvasMeta": {
+    "position": {
+     "x": 472,
+     "y": 242
+    }
+   }
+  },
+  {
+   "id": "eec8e46e-0ae3-4492-97fd-f2d541274643",
+   "parent": "8382cc0a-982f-4add-9387-cf7fa512a790",
+   "order": 0,
+   "attributes": {
+    "trackingOptions": {
+     "hasTrackingLinks": false,
+     "hasUtmTracking": true,
+     "hasTags": false,
+     "sourceId": "a07e53bd-4e90-4742-b2e6-b7713ea9b15b:eec8e46e-0ae3-4492-97fd-f2d541274643"
+    },
+    "conditions": [],
+    "from_email": "{{location.email}}",
+    "from_name": "Men's Wellness Center",
+    "subject": "Your consultation is waiting",
+    "preHeader": "",
+    "template_id": "69821b093892ae2784b44162",
+    "templatesource": "email-builder",
+    "previewUrl": "https://firebasestorage.googleapis.com/v0/b/highlevel-backend.appspot.com/o/location%2FGhstz8eIsHWLeXek47dk%2Femails%2F69821b093892ae2784b44162%2Findex.html",
+    "createdAt": "2026-02-03T15:58:01.976Z",
+    "updatedAt": "2026-02-03T15:59:01.857Z",
+    "templateCreationMode": "existing",
+    "syncEnabled": true,
+    "attachments": []
+   },
+   "name": "Email sent to lead after a week, for re-engagement",
+   "type": "email",
+   "next": "2bd2fb30-b9f0-41de-96e7-f0b1590d306e",
+   "parentKey": "8382cc0a-982f-4add-9387-cf7fa512a790",
+   "advanceCanvasMeta": {
+    "position": {
+     "x": 892,
+     "y": 249.5
+    }
+   }
+  },
+  {
+   "id": "2bd2fb30-b9f0-41de-96e7-f0b1590d306e",
+   "parent": "8382cc0a-982f-4add-9387-cf7fa512a790",
+   "order": 1,
+   "attributes": {
+    "body": "{{contact.first_name}}, Men's Wellness Centers. Free visit. Results in 20 min. BookMWC.com or call/text 866-344-4955",
+    "attachments": []
+   },
+   "name": "SMS sent to lead after a week, for re-engagement",
+   "type": "sms",
+   "parentKey": "eec8e46e-0ae3-4492-97fd-f2d541274643",
+   "next": "be61f9d2-a509-4832-9a04-74c3f11d59f7",
+   "advanceCanvasMeta": {
+    "position": {
+     "x": 1152,
+     "y": 249.5
+    }
+   }
+  },
+  {
+   "id": "be61f9d2-a509-4832-9a04-74c3f11d59f7",
+   "parentKey": "2bd2fb30-b9f0-41de-96e7-f0b1590d306e",
+   "parent": "8382cc0a-982f-4add-9387-cf7fa512a790",
+   "type": "wait",
+   "name": "Wait Another 7 days to send a follow up email",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 7,
+     "when": "after"
+    },
+    "name": "Wait Another 7 days to send a follow up email",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "order": 2,
+   "cat": "",
+   "next": "9263ebc3-ce0d-4c85-96d4-81fce87d4d21",
+   "advanceCanvasMeta": {
+    "position": {
+     "x": 1382,
+     "y": 249.5
+    }
+   }
+  },
+  {
+   "id": "9263ebc3-ce0d-4c85-96d4-81fce87d4d21",
+   "parent": "8382cc0a-982f-4add-9387-cf7fa512a790",
+   "order": 3,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "727bb351-719a-4a9b-8ad4-97a1e54eaf4e",
+      "name": "Yes, tag is present",
+      "segments": [
+       {
+        "__segmentId": "e3177c96-285a-4c99-817f-2dd864b795d7",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "tags",
+          "conditionOperator": "index-of-true",
+          "conditionValue": [
+           "funnel_consultation_booked"
+          ],
+          "__conditionId": "9cb88131-f373-4bf8-9550-9fc8af14affe",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Check if lead has booked an appointment by checking if tag is present \"funnel_consultation_booked\"",
+    "version": 2,
+    "noneBranchName": "No appointment booked"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "727bb351-719a-4a9b-8ad4-97a1e54eaf4e",
+    "c1237683-2bf4-4924-9c92-78a9e0c63fbc"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "be61f9d2-a509-4832-9a04-74c3f11d59f7",
+   "advanceCanvasMeta": {
+    "position": {
+     "x": 1612,
+     "y": 249.5
+    }
+   }
+  },
+  {
+   "id": "727bb351-719a-4a9b-8ad4-97a1e54eaf4e",
+   "parent": "9263ebc3-ce0d-4c85-96d4-81fce87d4d21",
+   "order": 4,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Yes, tag is present",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "c1237683-2bf4-4924-9c92-78a9e0c63fbc"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "9263ebc3-ce0d-4c85-96d4-81fce87d4d21",
+   "next": "e804f9ed-c520-4ac7-bc07-187c1c136b80",
+   "advanceCanvasMeta": {
+    "position": {
+     "x": 1842,
+     "y": 127
+    }
+   }
+  },
+  {
+   "id": "e804f9ed-c520-4ac7-bc07-187c1c136b80",
+   "parent": "727bb351-719a-4a9b-8ad4-97a1e54eaf4e",
+   "order": 0,
+   "attributes": {
+    "type": "remove_opportunity",
+    "opportunity_to_be_found": "all",
+    "pipeline_id": "gcRMq1iCj2tGmdWpimGS"
+   },
+   "name": "Remove contact from Non-booked Pipeline",
+   "type": "remove_opportunity",
+   "parentKey": "727bb351-719a-4a9b-8ad4-97a1e54eaf4e",
+   "advanceCanvasMeta": {
+    "position": {
+     "x": 2232,
+     "y": 134.5
+    }
+   }
+  },
+  {
+   "id": "c1237683-2bf4-4924-9c92-78a9e0c63fbc",
+   "parent": "9263ebc3-ce0d-4c85-96d4-81fce87d4d21",
+   "order": 4,
+   "attributes": {
+    "else": true
+   },
+   "name": "No appointment booked",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "f44e0a9e-58eb-40b4-a245-2763d4a92440",
+   "sibling": [
+    "727bb351-719a-4a9b-8ad4-97a1e54eaf4e"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "9263ebc3-ce0d-4c85-96d4-81fce87d4d21",
+   "advanceCanvasMeta": {
+    "position": {
+     "x": 1842,
+     "y": 357
+    }
+   }
+  },
+  {
+   "id": "f44e0a9e-58eb-40b4-a245-2763d4a92440",
+   "parent": "c1237683-2bf4-4924-9c92-78a9e0c63fbc",
+   "order": 0,
+   "attributes": {
+    "trackingOptions": {
+     "hasTrackingLinks": false,
+     "hasUtmTracking": true,
+     "hasTags": false,
+     "sourceId": "a07e53bd-4e90-4742-b2e6-b7713ea9b15b:f44e0a9e-58eb-40b4-a245-2763d4a92440"
+    },
+    "conditions": [],
+    "from_email": "{{location.email}}",
+    "from_name": "Men's Wellness Center",
+    "subject": "Last chance",
+    "template_id": "69821b60555c8770f48335b6",
+    "preHeader": "",
+    "templatesource": "email-builder",
+    "previewUrl": "https://firebasestorage.googleapis.com/v0/b/highlevel-backend.appspot.com/o/location%2FGhstz8eIsHWLeXek47dk%2Femails%2F69821b60555c8770f48335b6%2Findex.html",
+    "createdAt": "2026-02-03T15:59:28.784Z",
+    "updatedAt": "2026-02-03T16:00:22.741Z",
+    "templateCreationMode": "existing",
+    "syncEnabled": true,
+    "attachments": []
+   },
+   "name": "2nd email sent to lead, after waiting for another 7 days",
+   "type": "email",
+   "next": "3bcc83be-bb7f-4ccb-8adc-e839162adca0",
+   "parentKey": "c1237683-2bf4-4924-9c92-78a9e0c63fbc",
+   "advanceCanvasMeta": {
+    "position": {
+     "x": 2262,
+     "y": 364.5
+    }
+   }
+  },
+  {
+   "id": "3bcc83be-bb7f-4ccb-8adc-e839162adca0",
+   "parent": "c1237683-2bf4-4924-9c92-78a9e0c63fbc",
+   "order": 1,
+   "attributes": {
+    "body": "{{contact.first_name}}, Men's Wellness Centers. Free visit. Fast results. BookMWC.com or call/text 866-344-4955",
+    "attachments": []
+   },
+   "name": "2nd SMS sent to lead",
+   "type": "sms",
+   "next": "0c2ac61d-8383-490d-908e-9b3b0509e1b3",
+   "parentKey": "f44e0a9e-58eb-40b4-a245-2763d4a92440",
+   "advanceCanvasMeta": {
+    "position": {
+     "x": 2522,
+     "y": 364.5
+    }
+   }
+  },
+  {
+   "id": "0c2ac61d-8383-490d-908e-9b3b0509e1b3",
+   "parent": "c1237683-2bf4-4924-9c92-78a9e0c63fbc",
+   "order": 2,
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 30,
+     "when": "after"
+    },
+    "name": "Wait 1 month before checking if lead has booked an appointment",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "name": "Wait 1 month before checking if lead has booked an appointment",
+   "type": "wait",
+   "cat": "",
+   "next": "2358161b-9b1b-47e4-93f0-5dd1bbad6610",
+   "parentKey": "3bcc83be-bb7f-4ccb-8adc-e839162adca0",
+   "advanceCanvasMeta": {
+    "position": {
+     "x": 2752,
+     "y": 364.5
+    }
+   }
+  },
+  {
+   "id": "2358161b-9b1b-47e4-93f0-5dd1bbad6610",
+   "parent": "c1237683-2bf4-4924-9c92-78a9e0c63fbc",
+   "order": 3,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "89dcf74b-7311-4b21-9043-75ff61d5a465",
+      "name": "Lead has booked an appointment",
+      "segments": [
+       {
+        "__segmentId": "e3177c96-285a-4c99-817f-2dd864b795d7",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "tags",
+          "conditionOperator": "index-of-true",
+          "conditionValue": [
+           "funnel_consultation_booked"
+          ],
+          "__conditionId": "9cb88131-f373-4bf8-9550-9fc8af14affe",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Check if lead has booked an appointment by checking if tag is present \"funnel_consultation_booked\"",
+    "version": 2,
+    "noneBranchName": "No appointment booked"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "89dcf74b-7311-4b21-9043-75ff61d5a465",
+    "a800e7cd-35e8-4893-8236-8f8ac1f07222"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "0c2ac61d-8383-490d-908e-9b3b0509e1b3",
+   "advanceCanvasMeta": {
+    "position": {
+     "x": 2982,
+     "y": 364.5
+    }
+   }
+  },
+  {
+   "id": "89dcf74b-7311-4b21-9043-75ff61d5a465",
+   "parent": "2358161b-9b1b-47e4-93f0-5dd1bbad6610",
+   "order": 4,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Lead has booked an appointment",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "a800e7cd-35e8-4893-8236-8f8ac1f07222"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "2358161b-9b1b-47e4-93f0-5dd1bbad6610",
+   "next": "bf67ea28-bfce-4c50-8bd7-ff0f0475475e",
+   "advanceCanvasMeta": {
+    "position": {
+     "x": 3212,
+     "y": 242
+    }
+   }
+  },
+  {
+   "id": "bf67ea28-bfce-4c50-8bd7-ff0f0475475e",
+   "parent": "89dcf74b-7311-4b21-9043-75ff61d5a465",
+   "order": 0,
+   "attributes": {
+    "type": "remove_opportunity",
+    "opportunity_to_be_found": "all",
+    "pipeline_id": "gcRMq1iCj2tGmdWpimGS"
+   },
+   "name": "Remove contact from Non-booked Pipeline",
+   "type": "remove_opportunity",
+   "parentKey": "89dcf74b-7311-4b21-9043-75ff61d5a465",
+   "advanceCanvasMeta": {
+    "position": {
+     "x": 3602,
+     "y": 249.5
+    }
+   }
+  },
+  {
+   "id": "a800e7cd-35e8-4893-8236-8f8ac1f07222",
+   "parent": "2358161b-9b1b-47e4-93f0-5dd1bbad6610",
+   "order": 4,
+   "attributes": {
+    "else": true
+   },
+   "name": "No appointment booked",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "fbb5dccd-77ca-4f2b-b594-58967fdfa44c",
+   "sibling": [
+    "89dcf74b-7311-4b21-9043-75ff61d5a465"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "2358161b-9b1b-47e4-93f0-5dd1bbad6610",
+   "advanceCanvasMeta": {
+    "position": {
+     "x": 3212,
+     "y": 472
+    }
+   }
+  },
+  {
+   "id": "fbb5dccd-77ca-4f2b-b594-58967fdfa44c",
+   "parent": "a800e7cd-35e8-4893-8236-8f8ac1f07222",
+   "order": 0,
+   "attributes": {
+    "trackingOptions": {
+     "hasTrackingLinks": false,
+     "hasUtmTracking": true,
+     "hasTags": false,
+     "sourceId": "a07e53bd-4e90-4742-b2e6-b7713ea9b15b:fbb5dccd-77ca-4f2b-b594-58967fdfa44c"
+    },
+    "conditions": [],
+    "from_email": "{{location.email}}",
+    "from_name": "Men's Wellness Center",
+    "subject": "Checking in",
+    "template_id": "697a49cca234443a0d3562d1",
+    "preHeader": "",
+    "templatesource": "email-builder",
+    "previewUrl": "https://firebasestorage.googleapis.com/v0/b/highlevel-backend.appspot.com/o/location%2FGhstz8eIsHWLeXek47dk%2Femails%2F697a49cca234443a0d3562d1%2Findex.html",
+    "createdAt": "2026-01-28T17:39:24.546Z",
+    "updatedAt": "2026-02-02T14:04:31.720Z",
+    "templateCreationMode": "existing",
+    "syncEnabled": true,
+    "attachments": []
+   },
+   "name": "3rd Email sent to lead, one month after the previous email sent for re engagement",
+   "type": "email",
+   "next": "32ec6b9c-2dfa-41da-a690-e4eb20d95235",
+   "parentKey": "a800e7cd-35e8-4893-8236-8f8ac1f07222",
+   "advanceCanvasMeta": {
+    "position": {
+     "x": 3632,
+     "y": 479.5
+    }
+   }
+  },
+  {
+   "id": "32ec6b9c-2dfa-41da-a690-e4eb20d95235",
+   "parent": "a800e7cd-35e8-4893-8236-8f8ac1f07222",
+   "order": 1,
+   "attributes": {
+    "body": "Hi {{contact.first_name}}— just a quick reminder that you can schedule a confidential appointment with Men’s Wellness Center anytime here: https://menswellnesscenters.com/book-a-consultation/\n\nWe’re here if you need us.",
+    "attachments": []
+   },
+   "name": "3rd SMS sent to lead, one month after the previous email sent for re engagement",
+   "type": "sms",
+   "next": "13ac3c2c-8dfe-4e6d-9e44-e9bc359edd89",
+   "parentKey": "fbb5dccd-77ca-4f2b-b594-58967fdfa44c",
+   "advanceCanvasMeta": {
+    "position": {
+     "x": 3892,
+     "y": 479.5
+    }
+   }
+  },
+  {
+   "id": "13ac3c2c-8dfe-4e6d-9e44-e9bc359edd89",
+   "parent": "a800e7cd-35e8-4893-8236-8f8ac1f07222",
+   "order": 2,
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 180,
+     "when": "after"
+    },
+    "name": "Wait for another 6 months to check if lead has booked an appointment",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "name": "Wait for another 6 months to check if lead has booked an appointment",
+   "type": "wait",
+   "cat": "",
+   "next": "9a5aef17-c6de-4d4b-9e08-bcab461a5aa7",
+   "parentKey": "32ec6b9c-2dfa-41da-a690-e4eb20d95235",
+   "advanceCanvasMeta": {
+    "position": {
+     "x": 4122,
+     "y": 479.5
+    }
+   }
+  },
+  {
+   "id": "9a5aef17-c6de-4d4b-9e08-bcab461a5aa7",
+   "parent": "a800e7cd-35e8-4893-8236-8f8ac1f07222",
+   "order": 3,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "608eb31b-4ad3-4cb2-bb51-c15085101ac6",
+      "name": "Appointment has been booked",
+      "segments": [
+       {
+        "__segmentId": "e3177c96-285a-4c99-817f-2dd864b795d7",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "tags",
+          "conditionOperator": "index-of-true",
+          "conditionValue": [
+           "funnel_consultation_booked"
+          ],
+          "__conditionId": "9cb88131-f373-4bf8-9550-9fc8af14affe",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Check if lead has booked an appointment by checking if tag is present \"funnel_consultation_booked\"",
+    "version": 2,
+    "noneBranchName": "No appointment booked"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "608eb31b-4ad3-4cb2-bb51-c15085101ac6",
+    "18bc61f2-7969-471c-a1cc-1521c3c5bdb6"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "13ac3c2c-8dfe-4e6d-9e44-e9bc359edd89",
+   "advanceCanvasMeta": {
+    "position": {
+     "x": 4352,
+     "y": 479.5
+    }
+   }
+  },
+  {
+   "id": "608eb31b-4ad3-4cb2-bb51-c15085101ac6",
+   "parent": "9a5aef17-c6de-4d4b-9e08-bcab461a5aa7",
+   "order": 4,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Appointment has been booked",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "18bc61f2-7969-471c-a1cc-1521c3c5bdb6"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "9a5aef17-c6de-4d4b-9e08-bcab461a5aa7",
+   "next": "ce7bb88c-7974-41ea-93f4-79a05812ab2f",
+   "advanceCanvasMeta": {
+    "position": {
+     "x": 4582,
+     "y": 356.99999999999994
+    }
+   }
+  },
+  {
+   "id": "ce7bb88c-7974-41ea-93f4-79a05812ab2f",
+   "parent": "608eb31b-4ad3-4cb2-bb51-c15085101ac6",
+   "order": 0,
+   "attributes": {
+    "type": "remove_opportunity",
+    "opportunity_to_be_found": "all",
+    "pipeline_id": "gcRMq1iCj2tGmdWpimGS"
+   },
+   "name": "Remove contact from Non-booked Pipeline",
+   "type": "remove_opportunity",
+   "parentKey": "608eb31b-4ad3-4cb2-bb51-c15085101ac6",
+   "advanceCanvasMeta": {
+    "position": {
+     "x": 4972,
+     "y": 364.49999999999994
+    }
+   }
+  },
+  {
+   "id": "18bc61f2-7969-471c-a1cc-1521c3c5bdb6",
+   "parent": "9a5aef17-c6de-4d4b-9e08-bcab461a5aa7",
+   "order": 4,
+   "attributes": {
+    "else": true
+   },
+   "name": "No appointment booked",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "6d2ef887-f61e-4ee8-9767-71480449188a",
+   "sibling": [
+    "608eb31b-4ad3-4cb2-bb51-c15085101ac6"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "9a5aef17-c6de-4d4b-9e08-bcab461a5aa7",
+   "advanceCanvasMeta": {
+    "position": {
+     "x": 4582,
+     "y": 587
+    }
+   }
+  },
+  {
+   "id": "6d2ef887-f61e-4ee8-9767-71480449188a",
+   "parent": "18bc61f2-7969-471c-a1cc-1521c3c5bdb6",
+   "order": 0,
+   "attributes": {
+    "body": "Hi {{contact.first_name}}— just checking in from Men’s Wellness Center. If you have questions or would like to schedule a confidential appointment, you can do so here: https://menswellnesscenters.com/book-a-consultation/",
+    "attachments": []
+   },
+   "name": "Last SMS sent before moving to Lost Opportunity",
+   "type": "sms",
+   "next": "edb0289e-cc2e-4c55-b783-eca0f5b347bd",
+   "parentKey": "18bc61f2-7969-471c-a1cc-1521c3c5bdb6",
+   "advanceCanvasMeta": {
+    "position": {
+     "x": 5002,
+     "y": 594.5
+    }
+   }
+  },
+  {
+   "id": "edb0289e-cc2e-4c55-b783-eca0f5b347bd",
+   "parent": "18bc61f2-7969-471c-a1cc-1521c3c5bdb6",
+   "order": 1,
+   "attributes": {
+    "trackingOptions": {
+     "hasTrackingLinks": false,
+     "hasUtmTracking": true,
+     "hasTags": false,
+     "sourceId": "a07e53bd-4e90-4742-b2e6-b7713ea9b15b:edb0289e-cc2e-4c55-b783-eca0f5b347bd"
+    },
+    "conditions": [],
+    "html": "<p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">Hi {{contact.first_name}},</p><br/><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\" class=\"isSelectedEnd\">It’s been a while since you last visited Men’s Wellness Center, so we just wanted to check in.</p><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\" class=\"isSelectedEnd\">If you’re still experiencing symptoms or have questions about your health, a confidential consultation can help you understand your options — no pressure, no obligation.</p><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\" class=\"isSelectedEnd\">If you’d like to schedule an appointment, you can do so anytime here:<br><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://menswellnesscenters.com/book-a-consultation/\"><strong>Schedule Your Appointment</strong></a></p><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\" class=\"isSelectedEnd\">And if now isn’t the right time, that’s completely okay. We’re here whenever you’re ready.</p><br/><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">Best,<br><strong>Men’s Wellness Center</strong></p>",
+    "from_name": "Men's Wellness Center",
+    "from_email": "{{location.email}}",
+    "subject": "Checking in. Questions on how we can help?",
+    "attachments": []
+   },
+   "name": "Final Email sent before moving to Lost Pipeline",
+   "type": "email",
+   "parentKey": "6d2ef887-f61e-4ee8-9767-71480449188a",
+   "next": "3b252bc5-873e-46c5-8107-6e0a3241c44f",
+   "advanceCanvasMeta": {
+    "position": {
+     "x": 5262,
+     "y": 594.5
+    }
+   }
+  },
+  {
+   "id": "3b252bc5-873e-46c5-8107-6e0a3241c44f",
+   "parent": "18bc61f2-7969-471c-a1cc-1521c3c5bdb6",
+   "order": 2,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "GTwmWC8TwPIH7PONUtuw",
+    "pipeline_stage_id": "5f2738e3-c0ed-4385-8dde-1794c9edb52e",
+    "opportunity_name": "{{contact.name}}",
+    "opportunity_status": "lost",
+    "lostReasonId": "696fbbdc10cdb5d6b92f0cce",
+    "opportunity_source": "",
+    "monetary_value": ""
+   },
+   "name": "Add to LOST / DEAD PIPELINE - NO RESPONSE",
+   "type": "create_opportunity",
+   "parentKey": "edb0289e-cc2e-4c55-b783-eca0f5b347bd",
+   "advanceCanvasMeta": {
+    "position": {
+     "x": 5492,
+     "y": 594.5
+    }
+   }
+  }
+ ]
+}

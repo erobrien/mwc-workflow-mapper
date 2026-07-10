@@ -1,0 +1,1407 @@
+{
+ "id": "98168f51-2856-43f3-82db-c3d19b6cbb48",
+ "name": "2. DNC/wrong number/SMS & Call Errors",
+ "folder": "04. System Admin & Error Handling",
+ "status": "published",
+ "updatedAt": "2026-05-18T22:50:54.838Z",
+ "version": 35,
+ "extracted_at": "2026-07-10T05:40:32Z",
+ "extraction_method": "ghl_backend_api",
+ "source": "GHL Active Workflows (live API)",
+ "workflowData": {
+  "_id": "98168f51-2856-43f3-82db-c3d19b6cbb48",
+  "locationId": "Ghstz8eIsHWLeXek47dk",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 2,
+  "name": "2. DNC/wrong number/SMS & Call Errors",
+  "status": "published",
+  "version": 35,
+  "dataVersion": 7,
+  "allowMultiple": true,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/Ghstz8eIsHWLeXek47dk/workflows/98168f51-2856-43f3-82db-c3d19b6cbb48/35",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FGhstz8eIsHWLeXek47dk%2Fworkflows%2F98168f51-2856-43f3-82db-c3d19b6cbb48%2F35",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "type": "workflow",
+  "parentId": "599ce15b-2f6b-4f99-a14f-2745246e4618",
+  "updatedBy": "system_tag_edit",
+  "createdAt": "2026-01-05T00:37:47.706Z",
+  "updatedAt": "2026-05-18T22:50:54.838Z",
+  "deleted": false,
+  "allowMultipleOpportunity": true,
+  "creationSource": "builder",
+  "originType": "user",
+  "__v": 0,
+  "eventStartDate": null,
+  "window": null,
+  "workflowNote": null,
+  "triggersFilePath": "location/Ghstz8eIsHWLeXek47dk/workflow-triggers/98168f51-2856-43f3-82db-c3d19b6cbb48/32",
+  "isTriggerBucketMigrated": true,
+  "id": "98168f51-2856-43f3-82db-c3d19b6cbb48"
+ },
+ "triggers": [
+  {
+   "id": "12PsW8b0QNR42IhTKWsv",
+   "belongs_to": "workflow",
+   "date_added": "2026-01-05T02:34:52.952Z",
+   "workflow_id": "98168f51-2856-43f3-82db-c3d19b6cbb48",
+   "date_updated": "2026-04-13T18:12:32.359Z",
+   "actions": [
+    {
+     "workflow_id": "98168f51-2856-43f3-82db-c3d19b6cbb48",
+     "type": "add_to_workflow"
+    }
+   ],
+   "type": "contact_tag",
+   "schedule_config": {},
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "deleted": false,
+   "name": "Contact Tag Added: DNC",
+   "masterType": "highlevel",
+   "conditions": [
+    {
+     "type": "select",
+     "title": "Tag Added",
+     "value": "system_dnc",
+     "id": "tag-added",
+     "field": "tagsAdded",
+     "operator": "index-of-true"
+    }
+   ],
+   "active": true
+  },
+  {
+   "id": "BiwC2w6gCwTUGVXlvz0A",
+   "belongs_to": "workflow",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "conditions": [
+    {
+     "field": "errorCode",
+     "title": "Error Code",
+     "operator": "is-any-of",
+     "type": "multiselect",
+     "id": "errorCode",
+     "value": [
+      "21610"
+     ]
+    }
+   ],
+   "actions": [
+    {
+     "workflow_id": "98168f51-2856-43f3-82db-c3d19b6cbb48",
+     "type": "add_to_workflow"
+    }
+   ],
+   "date_added": "2026-01-05T02:21:25.193Z",
+   "workflowsTriggerType": "INTERNAL",
+   "name": "Messaging Error - STOP opt out",
+   "schedule_config": {},
+   "masterType": "internal",
+   "workflow_id": "98168f51-2856-43f3-82db-c3d19b6cbb48",
+   "date_updated": "2026-01-05T02:21:25.193Z",
+   "deleted": false,
+   "type": "messaging_errors",
+   "active": true
+  },
+  {
+   "id": "HIT2ksCQnDBoYmdg8ywZ",
+   "masterType": "internal",
+   "date_added": "2026-01-05T02:27:15.606Z",
+   "deleted": false,
+   "belongs_to": "workflow",
+   "active": true,
+   "schedule_config": {},
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "name": "Messaging Error - Inactive",
+   "workflowsTriggerType": "INTERNAL",
+   "type": "messaging_errors",
+   "actions": [
+    {
+     "workflow_id": "98168f51-2856-43f3-82db-c3d19b6cbb48",
+     "type": "add_to_workflow"
+    }
+   ],
+   "workflow_id": "98168f51-2856-43f3-82db-c3d19b6cbb48",
+   "date_updated": "2026-01-05T02:28:12.506Z",
+   "conditions": [
+    {
+     "value": [
+      "30005",
+      "21211"
+     ],
+     "title": "Error Code",
+     "id": "errorCode",
+     "field": "errorCode",
+     "type": "multiselect",
+     "operator": "is-any-of"
+    }
+   ]
+  },
+  {
+   "id": "NZ7ACDQeI9idsrhqFgPE",
+   "name": "Contact Tag: wrong number",
+   "workflow_id": "98168f51-2856-43f3-82db-c3d19b6cbb48",
+   "type": "contact_tag",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "actions": [
+    {
+     "workflow_id": "98168f51-2856-43f3-82db-c3d19b6cbb48",
+     "type": "add_to_workflow"
+    }
+   ],
+   "deleted": false,
+   "masterType": "highlevel",
+   "active": true,
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "date_added": "2026-01-05T02:10:54.974Z",
+   "date_updated": "2026-01-05T02:16:56.198Z",
+   "conditions": [
+    {
+     "id": "tag-added",
+     "type": "select",
+     "field": "tagsAdded",
+     "operator": "index-of-true",
+     "value": "wrong number",
+     "title": "Tag Added"
+    }
+   ]
+  },
+  {
+   "id": "TQ6lPH1eZp0wWlD1TkgU",
+   "name": "Contact DND: SMS",
+   "workflow_id": "98168f51-2856-43f3-82db-c3d19b6cbb48",
+   "masterType": "highlevel",
+   "deleted": false,
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "date_added": "2026-01-05T00:39:58.168Z",
+   "conditions": [
+    {
+     "title": "DND direction is",
+     "field": "contact.dnd_direction",
+     "type": "select",
+     "operator": "==",
+     "value": "outbound"
+    },
+    {
+     "type": "select",
+     "value": "enable_specific",
+     "field": "contact.dnd",
+     "operator": "==",
+     "title": "DND flag is"
+    },
+    {
+     "type": "select",
+     "value": "SMS",
+     "field": "contact.dnd_channel",
+     "title": "DND Channel is",
+     "operator": "=="
+    }
+   ],
+   "schedule_config": {},
+   "belongs_to": "workflow",
+   "actions": [
+    {
+     "type": "add_to_workflow",
+     "workflow_id": "98168f51-2856-43f3-82db-c3d19b6cbb48"
+    }
+   ],
+   "type": "dnd_contact",
+   "date_updated": "2026-01-05T01:53:23.489Z",
+   "active": true
+  },
+  {
+   "id": "XA6DKah8TsHtKSeBV4BJ",
+   "masterType": "internal",
+   "workflow_id": "98168f51-2856-43f3-82db-c3d19b6cbb48",
+   "schedule_config": {},
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "type": "messaging_errors",
+   "belongs_to": "workflow",
+   "date_updated": "2026-01-05T02:31:09.603Z",
+   "date_added": "2026-01-05T02:31:09.603Z",
+   "conditions": [
+    {
+     "field": "errorCode",
+     "id": "errorCode",
+     "operator": "is-any-of",
+     "type": "multiselect",
+     "title": "Error Code",
+     "value": [
+      "30004"
+     ]
+    }
+   ],
+   "deleted": false,
+   "workflowsTriggerType": "INTERNAL",
+   "actions": [
+    {
+     "type": "add_to_workflow",
+     "workflow_id": "98168f51-2856-43f3-82db-c3d19b6cbb48"
+    }
+   ],
+   "active": true,
+   "name": "Messaging Error - DND"
+  },
+  {
+   "id": "ZBmqQ5VvHz3YDW3F3ifb",
+   "date_updated": "2026-01-20T23:52:49.664Z",
+   "date_added": "2026-01-20T23:52:49.664Z",
+   "deleted": false,
+   "active": true,
+   "actions": [
+    {
+     "workflow_id": "98168f51-2856-43f3-82db-c3d19b6cbb48",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "string-matches-any-of",
+     "field": "message.body",
+     "value": [
+      "STOP"
+     ],
+     "title": "Exact match phrase",
+     "type": "input",
+     "id": "message-exact-phrase"
+    }
+   ],
+   "type": "customer_reply",
+   "masterType": "highlevel",
+   "workflow_id": "98168f51-2856-43f3-82db-c3d19b6cbb48",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "name": "Customer Replied: STOP",
+   "belongs_to": "workflow",
+   "schedule_config": {}
+  },
+  {
+   "id": "aqQe4X2IwpnWHsMkYIeE",
+   "date_updated": "2026-03-27T14:57:57.225Z",
+   "date_added": "2026-03-27T14:57:57.225Z",
+   "deleted": false,
+   "active": true,
+   "actions": [
+    {
+     "workflow_id": "98168f51-2856-43f3-82db-c3d19b6cbb48",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "string-matches-any-of",
+     "field": "message.body",
+     "value": [
+      "Pause"
+     ],
+     "title": "Exact match phrase",
+     "type": "input",
+     "id": "message-exact-phrase"
+    }
+   ],
+   "type": "customer_reply",
+   "masterType": "highlevel",
+   "workflow_id": "98168f51-2856-43f3-82db-c3d19b6cbb48",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "name": "Customer Replied: PAUSE",
+   "belongs_to": "workflow",
+   "schedule_config": {}
+  },
+  {
+   "id": "mxbyTiWOwbLuVyT4eWI9",
+   "belongs_to": "workflow",
+   "actions": [
+    {
+     "workflow_id": "98168f51-2856-43f3-82db-c3d19b6cbb48",
+     "type": "add_to_workflow"
+    }
+   ],
+   "type": "validation_error",
+   "deleted": false,
+   "name": "Number Validation: Landline",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "workflow_id": "98168f51-2856-43f3-82db-c3d19b6cbb48",
+   "masterType": "highlevel",
+   "schedule_config": {},
+   "date_added": "2026-01-05T00:39:09.056Z",
+   "active": true,
+   "date_updated": "2026-01-20T23:55:38.111Z",
+   "conditions": [
+    {
+     "operator": "contains-any",
+     "field": "contact.phoneInfo",
+     "value": [
+      "sms_incapable"
+     ],
+     "title": "Number is",
+     "type": "multiselect"
+    }
+   ]
+  },
+  {
+   "id": "v90G1JN2zTsBdQO1jqcK",
+   "workflow_id": "98168f51-2856-43f3-82db-c3d19b6cbb48",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "conditions": [
+    {
+     "value": [
+      "30006"
+     ],
+     "operator": "is-any-of",
+     "field": "errorCode",
+     "id": "errorCode",
+     "type": "multiselect",
+     "title": "Error Code"
+    }
+   ],
+   "workflowsTriggerType": "INTERNAL",
+   "masterType": "internal",
+   "date_updated": "2026-01-05T02:24:22.482Z",
+   "deleted": false,
+   "name": "Messaging Error - Landline",
+   "actions": [
+    {
+     "workflow_id": "98168f51-2856-43f3-82db-c3d19b6cbb48",
+     "type": "add_to_workflow"
+    }
+   ],
+   "belongs_to": "workflow",
+   "active": true,
+   "date_added": "2026-01-05T02:24:22.482Z",
+   "type": "messaging_errors",
+   "schedule_config": {}
+  },
+  {
+   "id": "yhhgwTybtxUt7BBwdoRB",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "workflow_id": "98168f51-2856-43f3-82db-c3d19b6cbb48",
+   "type": "validation_error",
+   "actions": [
+    {
+     "type": "add_to_workflow",
+     "workflow_id": "98168f51-2856-43f3-82db-c3d19b6cbb48"
+    }
+   ],
+   "schedule_config": {},
+   "belongs_to": "workflow",
+   "deleted": false,
+   "name": "Number Validation: Invalid",
+   "masterType": "highlevel",
+   "date_added": "2026-01-05T00:38:31.773Z",
+   "active": true,
+   "date_updated": "2026-01-20T23:55:38.125Z",
+   "conditions": [
+    {
+     "operator": "contains-any",
+     "field": "contact.phoneInfo",
+     "value": [
+      "not_valid"
+     ],
+     "title": "Number is",
+     "type": "multiselect"
+    }
+   ]
+  }
+ ],
+ "dependentAssets": {},
+ "templates": [
+  {
+   "id": "28757323-38f1-4c22-bad6-8aede15b7587",
+   "order": 0,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "1db72ccd-b03a-4ec6-a4dc-a91a06f5b20d",
+      "name": "SMS incapable",
+      "segments": [
+       {
+        "__segmentId": "3bff384e-8c3f-4213-98bd-484041c33fa6",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "mxbyTiWOwbLuVyT4eWI9",
+          "__conditionId": "b165d7cb-4e45-4f2b-9415-a24cf398cf74",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "messaging_errors"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking",
+           "messaging_errors"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "or",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "74afb0cf-a1d4-47a6-b043-5fbf41e75195",
+      "name": "Landline",
+      "segments": [
+       {
+        "__segmentId": "d1af90bb-9c1a-4e82-a155-c0cf9c5a6b48",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "v90G1JN2zTsBdQO1jqcK",
+          "__conditionId": "901dc9b7-b289-4624-84bc-a17f6222a4ef",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "messaging_errors"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking",
+           "messaging_errors"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "6fbc3b41-df40-4902-bae7-6d583216a4ef",
+      "name": "Invalid",
+      "segments": [
+       {
+        "__segmentId": "8c35f082-c3ea-4c47-b69c-4c59eb8714c7",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "yhhgwTybtxUt7BBwdoRB",
+          "__conditionId": "6030224a-cfd6-44bd-8995-2ffb0c24cd69",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "messaging_errors"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking",
+           "messaging_errors"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "a9ac5e16-df62-44b0-8d20-f7a19b2a8471",
+      "name": "Inactive",
+      "segments": [
+       {
+        "__segmentId": "7f49e7fd-d6a7-4654-a72b-933d69691ee5",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "HIT2ksCQnDBoYmdg8ywZ",
+          "__conditionId": "76a01f57-f73e-4b25-a016-a9bb3c72a64f",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "messaging_errors"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking",
+           "messaging_errors"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "5282903a-b2ea-4cad-9cc6-f646d8810abd",
+      "name": "Wrong number",
+      "segments": [
+       {
+        "__segmentId": "f6575086-53ef-4653-876c-8f10e8702f70",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "NZ7ACDQeI9idsrhqFgPE",
+          "__conditionId": "5f26d231-3711-4f2b-aef9-72a5a330b72f",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "messaging_errors"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking",
+           "messaging_errors"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "2ac54d41-c8b4-4827-bbeb-8b1b136717c2",
+      "name": "STOP",
+      "segments": [
+       {
+        "__segmentId": "a53870af-a725-45cf-a54b-ee38d058d301",
+        "operator": "or",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "BiwC2w6gCwTUGVXlvz0A",
+          "__conditionId": "b8700ef3-eee2-4851-b2fc-ad904fd941dd",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "messaging_errors"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking",
+           "messaging_errors"
+          ]
+         },
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "ZBmqQ5VvHz3YDW3F3ifb",
+          "__conditionId": "d81a422f-0da0-4660-9dc9-e507ef55c424",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "messaging_errors"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking",
+           "messaging_errors"
+          ]
+         },
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "aqQe4X2IwpnWHsMkYIeE",
+          "__conditionId": "b9684817-f5ff-4fc6-89ea-1d97d58779f7",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "messaging_errors"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking",
+           "messaging_errors"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "a98f7801-f9c7-4e37-8bf4-9e9768d7318e",
+      "name": "Req DNC",
+      "segments": [
+       {
+        "__segmentId": "785d2bbc-8bf8-4d4d-9e54-f0792705da51",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "12PsW8b0QNR42IhTKWsv",
+          "__conditionId": "b899df57-8595-4576-89ee-abe44bcd5f9d",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "messaging_errors"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking",
+           "messaging_errors"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "fe07caf1-ffb3-44d1-9544-9a8cd5ae8679",
+      "name": "DND",
+      "segments": [
+       {
+        "__segmentId": "11f53640-ea13-4bee-8ea3-c3bd108c16e7",
+        "operator": "or",
+        "conditions": [
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "XA6DKah8TsHtKSeBV4BJ",
+          "__conditionId": "c4b7ce40-463b-472f-a1b5-1fb22897eb2b",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "messaging_errors"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking",
+           "messaging_errors"
+          ]
+         },
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "TQ6lPH1eZp0wWlD1TkgU",
+          "__conditionId": "b4121e1f-4a8c-45c8-9c92-3d2b6038e2f4",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "messaging_errors"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking",
+           "messaging_errors"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Error",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "1db72ccd-b03a-4ec6-a4dc-a91a06f5b20d",
+    "74afb0cf-a1d4-47a6-b043-5fbf41e75195",
+    "6fbc3b41-df40-4902-bae7-6d583216a4ef",
+    "a9ac5e16-df62-44b0-8d20-f7a19b2a8471",
+    "5282903a-b2ea-4cad-9cc6-f646d8810abd",
+    "2ac54d41-c8b4-4827-bbeb-8b1b136717c2",
+    "a98f7801-f9c7-4e37-8bf4-9e9768d7318e",
+    "fe07caf1-ffb3-44d1-9544-9a8cd5ae8679",
+    "80953461-2335-4359-a724-d476bd3ef71a"
+   ],
+   "comments": [],
+   "nodeType": "condition-node"
+  },
+  {
+   "id": "1db72ccd-b03a-4ec6-a4dc-a91a06f5b20d",
+   "parent": "28757323-38f1-4c22-bad6-8aede15b7587",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "SMS incapable",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "4d234d67-353a-4b43-ae73-71a269f5c0da",
+   "sibling": [
+    "74afb0cf-a1d4-47a6-b043-5fbf41e75195",
+    "6fbc3b41-df40-4902-bae7-6d583216a4ef",
+    "a9ac5e16-df62-44b0-8d20-f7a19b2a8471",
+    "5282903a-b2ea-4cad-9cc6-f646d8810abd",
+    "2ac54d41-c8b4-4827-bbeb-8b1b136717c2",
+    "a98f7801-f9c7-4e37-8bf4-9e9768d7318e",
+    "fe07caf1-ffb3-44d1-9544-9a8cd5ae8679",
+    "80953461-2335-4359-a724-d476bd3ef71a"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "28757323-38f1-4c22-bad6-8aede15b7587"
+  },
+  {
+   "id": "4d234d67-353a-4b43-ae73-71a269f5c0da",
+   "parent": "1db72ccd-b03a-4ec6-a4dc-a91a06f5b20d",
+   "order": 0,
+   "attributes": {
+    "tags": [
+     "system_landline"
+    ]
+   },
+   "name": "Add Tag: landline",
+   "type": "add_contact_tag",
+   "next": "58f0ef02-e9fc-4e71-893f-1d5f1ba10872",
+   "parentKey": "1db72ccd-b03a-4ec6-a4dc-a91a06f5b20d"
+  },
+  {
+   "id": "58f0ef02-e9fc-4e71-893f-1d5f1ba10872",
+   "parent": "1db72ccd-b03a-4ec6-a4dc-a91a06f5b20d",
+   "order": 1,
+   "attributes": {
+    "html": "<p style=\"margin:0px; padding-left: 0px!important;\">Hi {{contact.first_name}},<br><br><br>The contact number you provided us, {{contact.phone}}, is <strong>invalid</strong>. Please reply you working phone number so we can continue reaching out to you for updates.</p><br/><br/><p style=\"margin:0px; padding-left: 0px!important;\">Best regards,</p><p style=\"margin:0px; padding-left: 0px!important;\"><strong>{{location.name}}</strong></p>",
+    "from_email": "{{location.email}}",
+    "from_name": "{{location.name}}",
+    "subject": "We tried to reach you but your number is INVALID",
+    "attachments": []
+   },
+   "name": "Email",
+   "type": "email",
+   "parentKey": "4d234d67-353a-4b43-ae73-71a269f5c0da"
+  },
+  {
+   "id": "74afb0cf-a1d4-47a6-b043-5fbf41e75195",
+   "parent": "28757323-38f1-4c22-bad6-8aede15b7587",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Landline",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "43d8f5d0-e922-4934-a3ef-f4c0439c2717",
+   "sibling": [
+    "1db72ccd-b03a-4ec6-a4dc-a91a06f5b20d",
+    "6fbc3b41-df40-4902-bae7-6d583216a4ef",
+    "a9ac5e16-df62-44b0-8d20-f7a19b2a8471",
+    "5282903a-b2ea-4cad-9cc6-f646d8810abd",
+    "2ac54d41-c8b4-4827-bbeb-8b1b136717c2",
+    "a98f7801-f9c7-4e37-8bf4-9e9768d7318e",
+    "fe07caf1-ffb3-44d1-9544-9a8cd5ae8679",
+    "80953461-2335-4359-a724-d476bd3ef71a"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "28757323-38f1-4c22-bad6-8aede15b7587"
+  },
+  {
+   "id": "43d8f5d0-e922-4934-a3ef-f4c0439c2717",
+   "parent": "74afb0cf-a1d4-47a6-b043-5fbf41e75195",
+   "order": 0,
+   "attributes": {
+    "targetNodeId": "4d234d67-353a-4b43-ae73-71a269f5c0da",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "74afb0cf-a1d4-47a6-b043-5fbf41e75195"
+  },
+  {
+   "id": "6fbc3b41-df40-4902-bae7-6d583216a4ef",
+   "parent": "28757323-38f1-4c22-bad6-8aede15b7587",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Invalid",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "a3886be9-50e7-41ce-90bb-ba7e56c3a2cb",
+   "sibling": [
+    "1db72ccd-b03a-4ec6-a4dc-a91a06f5b20d",
+    "74afb0cf-a1d4-47a6-b043-5fbf41e75195",
+    "a9ac5e16-df62-44b0-8d20-f7a19b2a8471",
+    "5282903a-b2ea-4cad-9cc6-f646d8810abd",
+    "2ac54d41-c8b4-4827-bbeb-8b1b136717c2",
+    "a98f7801-f9c7-4e37-8bf4-9e9768d7318e",
+    "fe07caf1-ffb3-44d1-9544-9a8cd5ae8679",
+    "80953461-2335-4359-a724-d476bd3ef71a"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "28757323-38f1-4c22-bad6-8aede15b7587"
+  },
+  {
+   "id": "a3886be9-50e7-41ce-90bb-ba7e56c3a2cb",
+   "parent": "6fbc3b41-df40-4902-bae7-6d583216a4ef",
+   "order": 0,
+   "attributes": {
+    "tags": [
+     "invalid number"
+    ]
+   },
+   "name": "Add Tag: Invalid number",
+   "type": "add_contact_tag",
+   "next": "1a33718b-7346-43cd-a3a9-50d136b76588",
+   "parentKey": "6fbc3b41-df40-4902-bae7-6d583216a4ef"
+  },
+  {
+   "id": "1a33718b-7346-43cd-a3a9-50d136b76588",
+   "parent": "6fbc3b41-df40-4902-bae7-6d583216a4ef",
+   "order": 1,
+   "attributes": {
+    "html": "<p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">Hello {{contact.first_name}},</p><br/><br/><br/><p style=\"margin:0px; padding-left: 0px!important;\">Your future updates could be sent via SMS for added convenience. If you would like to receive reminders and announcements by text, simply reply to this email with an SMS‑capable phone number.</p><br/><br/><br/><p style=\"margin:0px; padding-left: 0px!important;\">Thank you,<br><strong>{{location.name}}</strong></p>",
+    "from_email": "{{location.email}}",
+    "from_name": "{{location.name}}",
+    "subject": "Future Updates Available via SMS",
+    "attachments": []
+   },
+   "name": "Email",
+   "type": "email",
+   "parentKey": "a3886be9-50e7-41ce-90bb-ba7e56c3a2cb",
+   "next": "fa3af9cb-2971-4efe-8138-9235f719d776"
+  },
+  {
+   "id": "fa3af9cb-2971-4efe-8138-9235f719d776",
+   "parent": "6fbc3b41-df40-4902-bae7-6d583216a4ef",
+   "order": 2,
+   "attributes": {
+    "type": "dnd_contact",
+    "dnd_direction": "outbound",
+    "dnd_contact": "enable_specific",
+    "specific_channels": [
+     "Call",
+     "SMS"
+    ]
+   },
+   "name": "Enable/Disable DND",
+   "type": "dnd_contact",
+   "parentKey": "1a33718b-7346-43cd-a3a9-50d136b76588"
+  },
+  {
+   "id": "a9ac5e16-df62-44b0-8d20-f7a19b2a8471",
+   "parent": "28757323-38f1-4c22-bad6-8aede15b7587",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Inactive",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "f3d87000-1da1-4ba2-9ec7-5bc258b9c7a1",
+   "sibling": [
+    "1db72ccd-b03a-4ec6-a4dc-a91a06f5b20d",
+    "74afb0cf-a1d4-47a6-b043-5fbf41e75195",
+    "6fbc3b41-df40-4902-bae7-6d583216a4ef",
+    "5282903a-b2ea-4cad-9cc6-f646d8810abd",
+    "2ac54d41-c8b4-4827-bbeb-8b1b136717c2",
+    "a98f7801-f9c7-4e37-8bf4-9e9768d7318e",
+    "fe07caf1-ffb3-44d1-9544-9a8cd5ae8679",
+    "80953461-2335-4359-a724-d476bd3ef71a"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "28757323-38f1-4c22-bad6-8aede15b7587"
+  },
+  {
+   "id": "f3d87000-1da1-4ba2-9ec7-5bc258b9c7a1",
+   "parent": "a9ac5e16-df62-44b0-8d20-f7a19b2a8471",
+   "order": 0,
+   "attributes": {
+    "targetNodeId": "a3886be9-50e7-41ce-90bb-ba7e56c3a2cb",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "a9ac5e16-df62-44b0-8d20-f7a19b2a8471"
+  },
+  {
+   "id": "5282903a-b2ea-4cad-9cc6-f646d8810abd",
+   "parent": "28757323-38f1-4c22-bad6-8aede15b7587",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Wrong number",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "8d95526f-8fe6-4e7f-8576-f16105310d53",
+   "sibling": [
+    "1db72ccd-b03a-4ec6-a4dc-a91a06f5b20d",
+    "74afb0cf-a1d4-47a6-b043-5fbf41e75195",
+    "6fbc3b41-df40-4902-bae7-6d583216a4ef",
+    "a9ac5e16-df62-44b0-8d20-f7a19b2a8471",
+    "2ac54d41-c8b4-4827-bbeb-8b1b136717c2",
+    "a98f7801-f9c7-4e37-8bf4-9e9768d7318e",
+    "fe07caf1-ffb3-44d1-9544-9a8cd5ae8679",
+    "80953461-2335-4359-a724-d476bd3ef71a"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "28757323-38f1-4c22-bad6-8aede15b7587"
+  },
+  {
+   "id": "8d95526f-8fe6-4e7f-8576-f16105310d53",
+   "parent": "5282903a-b2ea-4cad-9cc6-f646d8810abd",
+   "order": 0,
+   "attributes": {
+    "html": "<p style=\"margin:0px; padding-left: 0px!important;\">Hello {{contact.first_name}},</p><br/><br/><br/><p style=\"margin:0px; padding-left: 0px!important;\">We recently tried reaching you at the number on file ({{contact.phone}}), but it appears to be incorrect. To ensure you continue receiving important updates and reminders, we’d like to confirm your best contact number.</p><br/><p style=\"margin:0px; padding-left: 0px!important;\">Please reply to this email with your correct phone number, and we’ll update your record right away.</p><br/><br/><br/><p style=\"margin:0px; padding-left: 0px!important;\">Thank you for helping us keep your information current.</p><p style=\"margin:0px; padding-left: 0px!important;\"><strong>{{location.name}}</strong></p>",
+    "from_email": "{{location.email}}",
+    "from_name": "{{location.name}}",
+    "subject": "Update Your Contact Information",
+    "attachments": []
+   },
+   "name": "Email",
+   "type": "email",
+   "parentKey": "5282903a-b2ea-4cad-9cc6-f646d8810abd"
+  },
+  {
+   "id": "2ac54d41-c8b4-4827-bbeb-8b1b136717c2",
+   "parent": "28757323-38f1-4c22-bad6-8aede15b7587",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "STOP",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "d5aa103e-9fd8-4857-a46b-97783424d7e4",
+   "sibling": [
+    "1db72ccd-b03a-4ec6-a4dc-a91a06f5b20d",
+    "74afb0cf-a1d4-47a6-b043-5fbf41e75195",
+    "6fbc3b41-df40-4902-bae7-6d583216a4ef",
+    "a9ac5e16-df62-44b0-8d20-f7a19b2a8471",
+    "5282903a-b2ea-4cad-9cc6-f646d8810abd",
+    "a98f7801-f9c7-4e37-8bf4-9e9768d7318e",
+    "fe07caf1-ffb3-44d1-9544-9a8cd5ae8679",
+    "80953461-2335-4359-a724-d476bd3ef71a"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "28757323-38f1-4c22-bad6-8aede15b7587"
+  },
+  {
+   "id": "d5aa103e-9fd8-4857-a46b-97783424d7e4",
+   "parent": "2ac54d41-c8b4-4827-bbeb-8b1b136717c2",
+   "order": 0,
+   "attributes": {
+    "html": "<p style=\"padding-left: 0px!important;\">Contact req to be added to DNC list</p>",
+    "type": "add_notes"
+   },
+   "name": "Note",
+   "type": "add_notes",
+   "next": "305c04f9-defa-4160-b583-184d4f3feca4",
+   "parentKey": "2ac54d41-c8b4-4827-bbeb-8b1b136717c2"
+  },
+  {
+   "id": "305c04f9-defa-4160-b583-184d4f3feca4",
+   "parent": "2ac54d41-c8b4-4827-bbeb-8b1b136717c2",
+   "order": 1,
+   "attributes": {
+    "tags": [
+     "system_dnc"
+    ]
+   },
+   "name": "Add Tag: DNC",
+   "type": "add_contact_tag",
+   "next": "3b20c45e-1d8d-4c78-9929-b5af10251400",
+   "parentKey": "d5aa103e-9fd8-4857-a46b-97783424d7e4"
+  },
+  {
+   "id": "3b20c45e-1d8d-4c78-9929-b5af10251400",
+   "parent": "2ac54d41-c8b4-4827-bbeb-8b1b136717c2",
+   "order": 2,
+   "attributes": {
+    "type": "dnd_contact",
+    "dnd_direction": "outbound",
+    "dnd_contact": "enable"
+   },
+   "name": "Enable/Disable DND",
+   "type": "dnd_contact",
+   "next": "eebe19e2-2e95-43f0-ba61-a8f16de527b6",
+   "parentKey": "305c04f9-defa-4160-b583-184d4f3feca4"
+  },
+  {
+   "id": "eebe19e2-2e95-43f0-ba61-a8f16de527b6",
+   "parent": "2ac54d41-c8b4-4827-bbeb-8b1b136717c2",
+   "order": 3,
+   "attributes": {
+    "type": "remove_from_workflow",
+    "allWorkflows": true,
+    "includeCurrent": true
+   },
+   "name": "Remove from ALL Workflows",
+   "type": "remove_from_workflow",
+   "next": "8ffc1ceb-7e3f-49c9-bb93-285502c6a1da",
+   "parentKey": "3b20c45e-1d8d-4c78-9929-b5af10251400"
+  },
+  {
+   "id": "8ffc1ceb-7e3f-49c9-bb93-285502c6a1da",
+   "parent": "2ac54d41-c8b4-4827-bbeb-8b1b136717c2",
+   "order": 4,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "GTwmWC8TwPIH7PONUtuw",
+    "pipeline_stage_id": "5ae05cf1-6ee8-42e1-8ddf-b70839c63245",
+    "opportunity_name": "{{contact.name}} DNC",
+    "monetary_value": "0",
+    "opportunity_status": "lost",
+    "opportunity_source": "",
+    "lostReasonId": "696fbbdc10cdb5d6b92f0cce"
+   },
+   "name": "Update Opportunity - LOST",
+   "type": "create_opportunity",
+   "parentKey": "eebe19e2-2e95-43f0-ba61-a8f16de527b6"
+  },
+  {
+   "id": "a98f7801-f9c7-4e37-8bf4-9e9768d7318e",
+   "parent": "28757323-38f1-4c22-bad6-8aede15b7587",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Req DNC",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "11cb9d0d-619c-4ce7-b9f2-7f793aca2b14",
+   "sibling": [
+    "1db72ccd-b03a-4ec6-a4dc-a91a06f5b20d",
+    "74afb0cf-a1d4-47a6-b043-5fbf41e75195",
+    "6fbc3b41-df40-4902-bae7-6d583216a4ef",
+    "a9ac5e16-df62-44b0-8d20-f7a19b2a8471",
+    "5282903a-b2ea-4cad-9cc6-f646d8810abd",
+    "2ac54d41-c8b4-4827-bbeb-8b1b136717c2",
+    "fe07caf1-ffb3-44d1-9544-9a8cd5ae8679",
+    "80953461-2335-4359-a724-d476bd3ef71a"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "28757323-38f1-4c22-bad6-8aede15b7587"
+  },
+  {
+   "id": "11cb9d0d-619c-4ce7-b9f2-7f793aca2b14",
+   "parent": "a98f7801-f9c7-4e37-8bf4-9e9768d7318e",
+   "order": 0,
+   "attributes": {
+    "targetNodeId": "d5aa103e-9fd8-4857-a46b-97783424d7e4",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "a98f7801-f9c7-4e37-8bf4-9e9768d7318e"
+  },
+  {
+   "id": "fe07caf1-ffb3-44d1-9544-9a8cd5ae8679",
+   "parent": "28757323-38f1-4c22-bad6-8aede15b7587",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "DND",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "4792c1ed-06b8-49f3-aa91-3b947c09be07",
+   "sibling": [
+    "1db72ccd-b03a-4ec6-a4dc-a91a06f5b20d",
+    "74afb0cf-a1d4-47a6-b043-5fbf41e75195",
+    "6fbc3b41-df40-4902-bae7-6d583216a4ef",
+    "a9ac5e16-df62-44b0-8d20-f7a19b2a8471",
+    "5282903a-b2ea-4cad-9cc6-f646d8810abd",
+    "2ac54d41-c8b4-4827-bbeb-8b1b136717c2",
+    "a98f7801-f9c7-4e37-8bf4-9e9768d7318e",
+    "80953461-2335-4359-a724-d476bd3ef71a"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "28757323-38f1-4c22-bad6-8aede15b7587"
+  },
+  {
+   "id": "4792c1ed-06b8-49f3-aa91-3b947c09be07",
+   "parent": "fe07caf1-ffb3-44d1-9544-9a8cd5ae8679",
+   "order": 0,
+   "attributes": {
+    "html": "<p style=\"padding-left: 0px!important;\">Contact's phone is on DND</p>",
+    "type": "add_notes"
+   },
+   "name": "Note: DND",
+   "type": "add_notes",
+   "parentKey": "fe07caf1-ffb3-44d1-9544-9a8cd5ae8679"
+  },
+  {
+   "id": "80953461-2335-4359-a724-d476bd3ef71a",
+   "parent": "28757323-38f1-4c22-bad6-8aede15b7587",
+   "order": 1,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "1db72ccd-b03a-4ec6-a4dc-a91a06f5b20d",
+    "74afb0cf-a1d4-47a6-b043-5fbf41e75195",
+    "6fbc3b41-df40-4902-bae7-6d583216a4ef",
+    "a9ac5e16-df62-44b0-8d20-f7a19b2a8471",
+    "5282903a-b2ea-4cad-9cc6-f646d8810abd",
+    "2ac54d41-c8b4-4827-bbeb-8b1b136717c2",
+    "a98f7801-f9c7-4e37-8bf4-9e9768d7318e",
+    "fe07caf1-ffb3-44d1-9544-9a8cd5ae8679"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "28757323-38f1-4c22-bad6-8aede15b7587"
+  }
+ ]
+}

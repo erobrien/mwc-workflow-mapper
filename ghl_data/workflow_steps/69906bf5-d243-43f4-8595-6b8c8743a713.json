@@ -1,0 +1,652 @@
+{
+ "id": "69906bf5-d243-43f4-8595-6b8c8743a713",
+ "name": "Cancelled Appointments",
+ "folder": "02. Appointments & Visit Journey",
+ "status": "published",
+ "updatedAt": "2026-05-18T22:50:25.151Z",
+ "version": 6,
+ "extracted_at": "2026-07-10T05:40:32Z",
+ "extraction_method": "ghl_backend_api",
+ "source": "GHL Active Workflows (live API)",
+ "workflowData": {
+  "_id": "69906bf5-d243-43f4-8595-6b8c8743a713",
+  "locationId": "Ghstz8eIsHWLeXek47dk",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 4,
+  "name": "Cancelled Appointments",
+  "status": "published",
+  "version": 6,
+  "dataVersion": 7,
+  "allowMultiple": true,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/Ghstz8eIsHWLeXek47dk/workflows/69906bf5-d243-43f4-8595-6b8c8743a713/6",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FGhstz8eIsHWLeXek47dk%2Fworkflows%2F69906bf5-d243-43f4-8595-6b8c8743a713%2F6",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "type": "workflow",
+  "parentId": "d19faff7-3c76-44ec-8c05-59397c06aa08",
+  "updatedBy": "FRXQwFmvrfoYHX3wYra6",
+  "createdAt": "2026-02-26T17:06:54.342Z",
+  "updatedAt": "2026-05-18T22:50:25.151Z",
+  "deleted": false,
+  "allowMultipleOpportunity": true,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "user",
+  "__v": 0,
+  "eventStartDate": null,
+  "window": null,
+  "workflowNote": null,
+  "triggersFilePath": "location/Ghstz8eIsHWLeXek47dk/workflow-triggers/69906bf5-d243-43f4-8595-6b8c8743a713/3",
+  "id": "69906bf5-d243-43f4-8595-6b8c8743a713"
+ },
+ "triggers": [
+  {
+   "id": "JTX95bFS5z9XAsbEIffQ",
+   "date_added": "2026-02-26T17:10:16.819Z",
+   "deleted": false,
+   "actions": [
+    {
+     "workflow_id": "69906bf5-d243-43f4-8595-6b8c8743a713",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "==",
+     "field": "appointment.eventType",
+     "value": "normal",
+     "title": "Event Type",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "appointment.status",
+     "value": "cancelled",
+     "title": "Appointment status is",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "calendar.id",
+     "value": "1Cfy5JnO2A4ggiZlMVvX",
+     "title": "In calendar",
+     "type": "select"
+    }
+   ],
+   "type": "appointment",
+   "masterType": "highlevel",
+   "workflow_id": "69906bf5-d243-43f4-8595-6b8c8743a713",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "name": "Richmond Appointment Status Cancelled",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "date_updated": "2026-02-26T17:11:54.590Z",
+   "active": true
+  },
+  {
+   "id": "ObpP29nklnKq4JViF4SJ",
+   "date_added": "2026-02-26T17:09:27.492Z",
+   "deleted": false,
+   "actions": [
+    {
+     "workflow_id": "69906bf5-d243-43f4-8595-6b8c8743a713",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "==",
+     "field": "appointment.eventType",
+     "value": "normal",
+     "title": "Event Type",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "appointment.status",
+     "value": "cancelled",
+     "title": "Appointment status is",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "calendar.id",
+     "value": "lBaRbjUpEmesxEloFBME",
+     "title": "In calendar",
+     "type": "select"
+    }
+   ],
+   "type": "appointment",
+   "masterType": "highlevel",
+   "workflow_id": "69906bf5-d243-43f4-8595-6b8c8743a713",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "name": "Newport Appointment Status Cancelled",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "date_updated": "2026-02-26T17:11:54.550Z",
+   "active": true
+  },
+  {
+   "id": "olTo9N3sVhBQA8W9LVF4",
+   "date_added": "2026-02-26T17:10:49.362Z",
+   "deleted": false,
+   "actions": [
+    {
+     "workflow_id": "69906bf5-d243-43f4-8595-6b8c8743a713",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "==",
+     "field": "appointment.eventType",
+     "value": "normal",
+     "title": "Event Type",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "appointment.status",
+     "value": "cancelled",
+     "title": "Appointment status is",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "calendar.id",
+     "value": "4xmnBGMWJ6TVUKcAPpPb",
+     "title": "In calendar",
+     "type": "select"
+    }
+   ],
+   "type": "appointment",
+   "masterType": "highlevel",
+   "workflow_id": "69906bf5-d243-43f4-8595-6b8c8743a713",
+   "location_id": "Ghstz8eIsHWLeXek47dk",
+   "name": "VA Beach Appointment Status Cancelled",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "date_updated": "2026-02-26T17:11:54.632Z",
+   "active": true
+  }
+ ],
+ "dependentAssets": {},
+ "templates": [
+  {
+   "id": "3c84036b-5ad9-482f-8fb7-07a7efe74969",
+   "order": 0,
+   "attributes": {
+    "type": "remove_from_workflow",
+    "workflow_id": [
+     "7ac17ae7-c894-4c6e-be0e-7b77057c7231",
+     "b9135812-c31a-41fe-b22f-dd47b2623697"
+    ]
+   },
+   "name": "Remove from Active Booking Workflows (03. Appt Booked & 03b. Unconfirmed Appt)",
+   "type": "remove_from_workflow",
+   "next": "4dde2b25-da88-45d3-8bf0-46d797c370ec"
+  },
+  {
+   "id": "4dde2b25-da88-45d3-8bf0-46d797c370ec",
+   "order": 1,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "e3a9d61b-6afd-4297-9078-0c38b46997be",
+      "name": "VA Beach",
+      "segments": [
+       {
+        "__segmentId": "8d282e46-ad3c-4aeb-9bef-686bc3c1084a",
+        "operator": "or",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "Cou856tOhaxW62vwehVI",
+          "conditionOperator": "==",
+          "conditionValue": "Virginia Beach, VA",
+          "__conditionId": "9bf9800f-29bd-4593-9e4c-ee6ba659f37c",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         },
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "olTo9N3sVhBQA8W9LVF4",
+          "__conditionId": "54b756a8-eccd-465a-a806-c3a54869d837",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "1b9f7564-d6f4-4e8a-aeee-9726a04b4dd3",
+      "name": "Newport",
+      "segments": [
+       {
+        "__segmentId": "8d282e46-ad3c-4aeb-9bef-686bc3c1084a",
+        "operator": "or",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "Cou856tOhaxW62vwehVI",
+          "conditionOperator": "==",
+          "conditionValue": "Newport News, VA",
+          "__conditionId": "9bf9800f-29bd-4593-9e4c-ee6ba659f37c",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         },
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "ObpP29nklnKq4JViF4SJ",
+          "__conditionId": "b2ca7651-5a98-4fc0-8246-15eedfd2e902",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "198869da-83af-4285-8eef-8572d101255c",
+      "name": "Richmond",
+      "segments": [
+       {
+        "__segmentId": "8d282e46-ad3c-4aeb-9bef-686bc3c1084a",
+        "operator": "or",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "Cou856tOhaxW62vwehVI",
+          "conditionOperator": "==",
+          "conditionValue": "Richmond, VA",
+          "__conditionId": "9bf9800f-29bd-4593-9e4c-ee6ba659f37c",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         },
+         {
+          "conditionType": "trigger",
+          "conditionSubType": "trigger",
+          "conditionOperator": "==",
+          "conditionValue": "JTX95bFS5z9XAsbEIffQ",
+          "__conditionId": "f5eeb0fd-c39f-4907-8799-4677c4eec68a",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Check appt Location",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "e3a9d61b-6afd-4297-9078-0c38b46997be",
+    "1b9f7564-d6f4-4e8a-aeee-9726a04b4dd3",
+    "198869da-83af-4285-8eef-8572d101255c",
+    "d7838647-95b3-4dba-96d7-4c7c5c2bc37e"
+   ],
+   "comments": [],
+   "nodeType": "condition-node",
+   "parentKey": "3c84036b-5ad9-482f-8fb7-07a7efe74969"
+  },
+  {
+   "id": "e3a9d61b-6afd-4297-9078-0c38b46997be",
+   "parent": "4dde2b25-da88-45d3-8bf0-46d797c370ec",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "VA Beach",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "ac0ab220-41cf-49f0-a018-0ca96e79d0b6",
+   "sibling": [
+    "1b9f7564-d6f4-4e8a-aeee-9726a04b4dd3",
+    "198869da-83af-4285-8eef-8572d101255c",
+    "d7838647-95b3-4dba-96d7-4c7c5c2bc37e"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "4dde2b25-da88-45d3-8bf0-46d797c370ec"
+  },
+  {
+   "id": "ac0ab220-41cf-49f0-a018-0ca96e79d0b6",
+   "parent": "e3a9d61b-6afd-4297-9078-0c38b46997be",
+   "order": 0,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "rspsjkBMNYGldN3R71ji",
+    "pipeline_stage_id": "1540a40b-0189-4caa-9a00-bef21a763b89",
+    "opportunity_name": "{{contact.name}}",
+    "opportunity_status": "lost",
+    "monetary_value": "0",
+    "opportunity_source": ""
+   },
+   "name": "VA Beach pipeline: No show/Cancel, status: lost",
+   "type": "create_opportunity",
+   "next": "310dc667-9af7-4284-a1f5-d9421e6e3a6e",
+   "parentKey": "e3a9d61b-6afd-4297-9078-0c38b46997be"
+  },
+  {
+   "id": "310dc667-9af7-4284-a1f5-d9421e6e3a6e",
+   "parent": "e3a9d61b-6afd-4297-9078-0c38b46997be",
+   "order": 1,
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "minutes",
+     "value": 0.2,
+     "when": "after"
+    },
+    "name": "Wait 12 seconds to make sure contact is not re-enrolled by mistake",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "name": "Wait 12 seconds to make sure contact is not re-enrolled by mistake",
+   "type": "wait",
+   "parentKey": "ac0ab220-41cf-49f0-a018-0ca96e79d0b6"
+  },
+  {
+   "id": "1b9f7564-d6f4-4e8a-aeee-9726a04b4dd3",
+   "parent": "4dde2b25-da88-45d3-8bf0-46d797c370ec",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Newport",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "685f0ff8-e73d-44e9-bead-8b13ca6ce3c5",
+   "sibling": [
+    "e3a9d61b-6afd-4297-9078-0c38b46997be",
+    "198869da-83af-4285-8eef-8572d101255c",
+    "d7838647-95b3-4dba-96d7-4c7c5c2bc37e"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "4dde2b25-da88-45d3-8bf0-46d797c370ec"
+  },
+  {
+   "id": "685f0ff8-e73d-44e9-bead-8b13ca6ce3c5",
+   "parent": "1b9f7564-d6f4-4e8a-aeee-9726a04b4dd3",
+   "order": 0,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "9AZEt2Sw6Zv0nnJJmkE0",
+    "pipeline_stage_id": "6ac0aa71-4e97-48df-96d3-daf679dcab41",
+    "opportunity_name": "{{contact.name}}",
+    "opportunity_status": "lost",
+    "monetary_value": "0",
+    "opportunity_source": ""
+   },
+   "name": "NPN pipeline: No show/Cancel, status: lost",
+   "type": "create_opportunity",
+   "next": "70670e4c-cfae-42de-b395-253af855f9af",
+   "parentKey": "1b9f7564-d6f4-4e8a-aeee-9726a04b4dd3"
+  },
+  {
+   "id": "70670e4c-cfae-42de-b395-253af855f9af",
+   "parent": "1b9f7564-d6f4-4e8a-aeee-9726a04b4dd3",
+   "order": 1,
+   "attributes": {
+    "targetNodeId": "310dc667-9af7-4284-a1f5-d9421e6e3a6e",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "685f0ff8-e73d-44e9-bead-8b13ca6ce3c5"
+  },
+  {
+   "id": "198869da-83af-4285-8eef-8572d101255c",
+   "parent": "4dde2b25-da88-45d3-8bf0-46d797c370ec",
+   "order": 2,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Richmond",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "9ee15fad-1e89-4cef-941b-238ba809f9e3",
+   "sibling": [
+    "e3a9d61b-6afd-4297-9078-0c38b46997be",
+    "1b9f7564-d6f4-4e8a-aeee-9726a04b4dd3",
+    "d7838647-95b3-4dba-96d7-4c7c5c2bc37e"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "4dde2b25-da88-45d3-8bf0-46d797c370ec"
+  },
+  {
+   "id": "9ee15fad-1e89-4cef-941b-238ba809f9e3",
+   "parent": "198869da-83af-4285-8eef-8572d101255c",
+   "order": 0,
+   "attributes": {
+    "fields": [],
+    "type": "create_opportunity",
+    "pipeline_id": "jRqb0pvexu04zSACPXmd",
+    "pipeline_stage_id": "6a9c34b7-87fc-49cb-8763-c2d11ef035dd",
+    "opportunity_name": "{{contact.name}}",
+    "opportunity_status": "lost",
+    "monetary_value": "0",
+    "opportunity_source": ""
+   },
+   "name": "Richmond  pipeline: No show/Cancel, status: lost",
+   "type": "create_opportunity",
+   "next": "4ea300e4-4eed-4f8a-86fa-b8eaccae46fd",
+   "parentKey": "198869da-83af-4285-8eef-8572d101255c"
+  },
+  {
+   "id": "4ea300e4-4eed-4f8a-86fa-b8eaccae46fd",
+   "parent": "198869da-83af-4285-8eef-8572d101255c",
+   "order": 1,
+   "attributes": {
+    "targetNodeId": "310dc667-9af7-4284-a1f5-d9421e6e3a6e",
+    "type": "goto"
+   },
+   "name": "Go To",
+   "type": "goto",
+   "parentKey": "9ee15fad-1e89-4cef-941b-238ba809f9e3"
+  },
+  {
+   "id": "d7838647-95b3-4dba-96d7-4c7c5c2bc37e",
+   "parent": "4dde2b25-da88-45d3-8bf0-46d797c370ec",
+   "order": 2,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "e3a9d61b-6afd-4297-9078-0c38b46997be",
+    "1b9f7564-d6f4-4e8a-aeee-9726a04b4dd3",
+    "198869da-83af-4285-8eef-8572d101255c"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "4dde2b25-da88-45d3-8bf0-46d797c370ec"
+  }
+ ]
+}

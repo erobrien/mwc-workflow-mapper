@@ -653,8 +653,10 @@
   },
   "_note": "Committed reference IDs for scripted workflow builds against the LIVE MWC sub-account. Regenerate field/stage sections via a PIT-authed pull. Never commit tokens here.",
   "target_deployment_folder": {
-    "note": "Live-account folder for all target drafts. Sandbox folder id was 456e67da-bbc4-417f-a65f-5288f224f187 / d15ca26c-3448-4063-a0e5-d4dfa617d76c; confirm/create the equivalent in the LIVE account and record its id here.",
-    "id": "TBD-live"
+    "id": "d15ca26c-3448-4063-a0e5-d4dfa617d76c",
+    "name": "-Target Release",
+    "location": "Ghstz8eIsHWLeXek47dk (LIVE)",
+    "note": "All target workflow drafts are built here in the LIVE account."
   },
   "locations_object": {
     "object_key": "custom_objects.locations",

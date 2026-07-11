@@ -699,9 +699,10 @@
     "auth": "JWT (~/.ghl_jwt) + full header set; see scripts/auth.py backend_headers()",
     "create_workflow": "POST /workflow/{locationId}  body {name, parentId, type:'workflow', status:'draft'}  -> {id}  [PROVEN]",
     "update_metadata": "PUT /workflow/{locationId}/{workflowId}  body must include current version int  [PROVEN]",
-    "save_steps": "PUT /workflow/{locationId}/{workflowId} with full workflowData.templates + createdSteps/modifiedSteps/deletedSteps diff arrays  [PROVEN per Claude Code]",
+    "save_steps": "PUT /workflow/{loc}/{id} with FULL workflow doc from GET, then set workflowData={'templates':[...]} AND top-level templates=[...] AND createdSteps/modifiedSteps/deletedSteps diff arrays. Must include current version int. Read back via fileUrl. [PROVEN 2026-07-11]",
     "read_trigger": "GET /workflow/{locationId}/trigger?workflowId=...  [PROVEN]",
     "write_trigger": "POST /workflow/{locationId}/trigger  body {workflowId, type (REQUIRED), name, conditions[], actions[], masterType:'highlevel', belongs_to:'workflow'} -> {id}  [PROVEN 2026-07-11]",
-    "update_trigger": "PUT /workflow/{locationId}/trigger/{triggerId}  full trigger object -> success  [PROVEN 2026-07-11]"
+    "update_trigger": "PUT /workflow/{locationId}/trigger/{triggerId}  full trigger object -> success  [PROVEN 2026-07-11]",
+    "node_notes": "wait.attributes.startAfter.type must be hour|day (NOT minute - rejected). Node ids are uuids; chain via 'next'. if_else uses attributes.branches[].segments[].conditions[] with conditionType/conditionSubType(fieldId)/conditionOperator/conditionValue."
   }
 }

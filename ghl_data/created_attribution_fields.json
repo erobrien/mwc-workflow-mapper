@@ -1,0 +1,52 @@
+{
+  "contact.First UTM Source": {
+    "id": "iDIj3LS3i7hbCskXUT3P",
+    "fieldKey": "contact.first_utm_source",
+    "dataType": "TEXT"
+  },
+  "contact.First UTM Campaign": {
+    "id": "Za73uYVh1c9I9bNs0Go3",
+    "fieldKey": "contact.first_utm_campaign",
+    "dataType": "TEXT"
+  },
+  "contact.First GCLID": {
+    "id": "j1ElI2GxfgUkqIwf3u46",
+    "fieldKey": "contact.first_gclid",
+    "dataType": "TEXT"
+  },
+  "contact.First FBCLID": {
+    "id": "fC3JpX65m6X6sn8eDlxG",
+    "fieldKey": "contact.first_fbclid",
+    "dataType": "TEXT"
+  },
+  "contact.First Landing Page": {
+    "id": "WFQ9AHA9hkmZHd5BgKJ4",
+    "fieldKey": "contact.first_landing_page",
+    "dataType": "TEXT"
+  },
+  "contact.First Touch At": {
+    "id": "8AAQscUixNAmF16Z2lJu",
+    "fieldKey": "contact.first_touch_at",
+    "dataType": "DATE"
+  },
+  "contact.Last Touch At": {
+    "id": "uFsQVMk8RUnev9MG13RB",
+    "fieldKey": "contact.last_touch_at",
+    "dataType": "DATE"
+  },
+  "opportunity.Attr First UTM Source": {
+    "id": "AmXtCgd8zNRpR3yB47ef",
+    "fieldKey": "opportunity.attr_first_utm_source",
+    "dataType": "TEXT"
+  },
+  "opportunity.Attr First UTM Campaign": {
+    "id": "twXaBShMDvRAgvFpwBa8",
+    "fieldKey": "opportunity.attr_first_utm_campaign",
+    "dataType": "TEXT"
+  },
+  "opportunity.Attr Landing Page": {
+    "id": "9UPQlldt1s2nBD077WSo",
+    "fieldKey": "opportunity.attr_landing_page",
+    "dataType": "TEXT"
+  }
+}

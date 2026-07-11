@@ -326,6 +326,14 @@
       "category": "decision",
       "summary": "Decision 17 locked: attribution upgrade. Two-touch model (first_*/last_* paired fields, write-once vs overwrite), frozen opportunity attribution stamp at create, closed-loop revenue conversions in WF-13 (Won with value, new vs renewal separated, event_id=opp ID dedup, enhanced conversions beyond the 90-day click window), showed as its own conversion event, phone-call attribution stamping in WF-12/16 with channel tracking numbers, and UTM governance (source enum + campaign convention + attr_needs_review tagging). Spec updated: 17 new fields in the model, 4 new guardrails, WF-01/12/13/16 build guides revised. Fields are PLANNED (verify-then-create) -- existing gclid_value/utm fields to be audited and mapped rather than duplicated.",
       "ref": "Decision 17"
+    },
+    {
+      "date": "2026-07-11",
+      "time": "16:2x",
+      "actor": "Computer",
+      "category": "build",
+      "summary": "Decision 17 fields implemented on the LIVE sub-account, additive-only: audited existing attribution fields first (contact utm_*/gclid_value/fbclid_value/source_url mapped as the last-touch living set; opportunity utm/gclid/fbclid mapped as the frozen last-touch stamp -- zero renames, zero duplicates), then created exactly the 10 missing fields: contact first_utm_source/first_utm_campaign/first_gclid/first_fbclid/first_landing_page/first_touch_at/last_touch_at + opportunity attr_first_utm_source/attr_first_utm_campaign/attr_landing_page. IDs in created_attribution_fields.json; complete role map in build_ids.json attribution_fields_d17. Server-side-only posture documented (no pixel required; native server actions + event_id dedup + hashed-identifier matching). No live workflow, pipeline, or existing field touched. Remaining: WF-01/12/13/16 draft-node wiring (needs JWT).",
+      "ref": "Decision 17"
     }
   ]
 }

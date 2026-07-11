@@ -1020,29 +1020,42 @@
   },
   "custom_values_created_2026_07_11": true,
   "attribution_fields_d17": {
-    "status": "PLANNED — create via verify-then-create before WF-01 attribution enrichment",
-    "contact_fields": [
-      "first_utm_source",
-      "first_utm_campaign",
-      "first_gclid",
-      "first_fbclid",
-      "first_landing_page",
-      "first_touch_at",
-      "last_utm_source",
-      "last_utm_campaign",
-      "last_gclid",
-      "last_fbclid",
-      "last_landing_page",
-      "last_touch_at"
-    ],
-    "opportunity_fields": [
-      "attr_first_utm_source",
-      "attr_last_utm_source",
-      "attr_gclid",
-      "attr_fbclid",
-      "attr_landing_page"
-    ],
-    "rules": "first_* write-once (if-empty gate in WF-01); last_* overwrite; opportunity attr_* FROZEN at create; event_id=opportunity ID on all conversion payloads; utm_source enum google/meta/gbp/bing/referral/direct; malformed -> tag attr_needs_review",
-    "existing_overlap": "contact gclid_value/fbclid_value/utm_source/utm_campaign already exist (vendor + prior work) — map/rename rather than duplicate where possible; audit before creating"
+    "status": "CREATED 2026-07-11 (additive only; zero existing fields touched)",
+    "model": {
+      "contact_last_touch_living": {
+        "utm_source": "thwe93MxRDzS2SO9pxxC",
+        "utm_campaign": "Np2WHxON2I4DVnYjZh3e",
+        "utm_medium": "Vh0MH504ujQfBh0Q5UFx",
+        "utm_term": "1Wo5z9YpDh9Lv64IBEoa",
+        "utm_content": "ssEvmmfe1tz5H4fiMHZR",
+        "gclid_value": "JL9361YdcdliYZn1d0xy",
+        "fbclid_value": "xPXd7sYvBI3uYoqMqVzN",
+        "source_url": "UZBaHuKr9PpFNro47it7",
+        "last_touch_at": "uFsQVMk8RUnev9MG13RB",
+        "_rule": "EXISTING fields mapped as the last-touch set; overwritten on every inbound; source_url = last landing page"
+      },
+      "contact_first_touch_write_once": {
+        "first_utm_source": "iDIj3LS3i7hbCskXUT3P",
+        "first_utm_campaign": "Za73uYVh1c9I9bNs0Go3",
+        "first_gclid": "j1ElI2GxfgUkqIwf3u46",
+        "first_fbclid": "fC3JpX65m6X6sn8eDlxG",
+        "first_landing_page": "WFQ9AHA9hkmZHd5BgKJ4",
+        "first_touch_at": "8AAQscUixNAmF16Z2lJu",
+        "_rule": "NEW fields; WF-01 writes only behind an 'first_utm_source is empty' if_else gate"
+      },
+      "opportunity_frozen_stamp": {
+        "utm_source": "jKDSQszdqKejAsmMT6Gu",
+        "utm_campaign": "COJSVNf87anEngPn3wUh",
+        "gclid": "oembtxjOJ98g3GeMV803",
+        "fbclid": "fwqzHdMEXCByNC1OA5JX",
+        "lead_source": "JlXqexn9eKt4dn9AOkvs",
+        "attr_first_utm_source": "AmXtCgd8zNRpR3yB47ef",
+        "attr_first_utm_campaign": "twXaBShMDvRAgvFpwBa8",
+        "attr_landing_page": "9UPQlldt1s2nBD077WSo",
+        "_rule": "EXISTING opp utm/gclid/fbclid = frozen LAST-touch copy; NEW attr_first_* = frozen FIRST-touch copy; all written exactly once at opportunity create by WF-01, never updated"
+      }
+    },
+    "server_side_only": "Design is server-side-first: click IDs captured first-party at the form, frozen on the opportunity, conversions fired from GHL native server-side actions (google_adword / facebook_conversion_api) with event_id=opportunity ID. No browser pixel required. Meta match quality: send hashed email+phone+name, format fbclid as fbc. Google auto-tagging must remain ON (Ads setting, no gtag needed).",
+    "remaining_workflow_wiring": "WF-01 two-touch capture + freeze copy, WF-12/16 phone stamps, WF-13 conversion payloads -- draft-node edits, need backend JWT"
   }
 }

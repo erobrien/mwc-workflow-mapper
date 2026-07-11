@@ -4381,9 +4381,10 @@
       "n": "16",
       "date": "2026-07-11",
       "owner": "Eric",
-      "status": "Locked",
+      "status": "Locked (with platform caveat)",
       "decision": "2-surface content model: message copy lives in native GHL Templates (one per message, sms_wfNN_*/email_wfNN_*); shared brand-wide merge-free constants live in Custom Values (sms_opt_out_footer, brand_tagline, consult_descriptor, intake_link, survey_link, referral_link) referenced inside templates; per-clinic data stays in the Locations Custom Object + generic current_* contact fields (current_review_link added). Reconciliation: booking_link and review_link are per-clinic and use {{contact.current_*}}, not Custom Values (collision rule, Decision 14). Brand constants are safe as Custom Values because they contain no merge fields (no nesting fragility). Legacy per-clinic Custom Values (richmond_*/virginia_beach_*/newport_news_*) are deprecated but NOT deleted in this build. Hard guard: only CREATE new assets; never edit/delete live templates or values outside the build.",
-      "choice": "Option B (2 managed surfaces) over Option A (inline everything, footer drift) and Option C (single Custom Object, breaks merge-field rendering in message bodies)."
+      "choice": "Option B (2 managed surfaces) over Option A (inline everything, footer drift) and Option C (single Custom Object, breaks merge-field rendering in message bodies).",
+      "platform_finding": "PROBED 2026-07-11: GHL workflow SMS nodes do NOT support template references. Saving templateId/messageTemplateId on an SMS node returns 200 but GHL STRIPS both on read-back — the node only retains body+attachments. 0 of 54 live SMS nodes reference a template. Therefore templates are NOT live runtime links for SMS; they are (a) the canonical editing surface, (b) a build-time source for inserting canonical copy, and (c) a drift-detection reference. Edits to a template do NOT auto-propagate to already-built workflow nodes. Propagation model: template = source of truth; workflow SMS node body = deployed copy; a drift-detection script flags nodes whose body diverges from their template, and re-sync = re-copy. This is still a major win (single canonical copy, non-technical editing, drift enforcement) but NOT automatic propagation. The 'wire send-steps to reference template IDs' step is impossible for SMS; the substitute is 'copy reconciled template body into each draft SMS node body' — mutates drafts, needs Eric sign-off."
     }
   ],
   "risks": [

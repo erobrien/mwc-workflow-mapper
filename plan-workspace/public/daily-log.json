@@ -302,6 +302,14 @@
       "category": "build",
       "summary": "Created all 15 message templates live in the GHL Templates library (sms_wf01..wf16 + email_wf01), IDs saved to created_templates.json and registry updated to status created_draft. Read back sms_wf16/sms_wf06 confirming reconciled tokens round-tripped ({{contact.current_booking_url}}, {{contact.current_review_link}}, {{ custom_values.consult_descriptor }}, {{ custom_values.sms_opt_out_footer }}). Templates are live records but NOT yet referenced by any workflow send-step (wiring is the remaining step). Still TODO: wire -Target Release draft send-steps to reference template IDs + add WF-01 current_review_link stamp step.",
       "ref": "Decision 16"
+    },
+    {
+      "date": "2026-07-11",
+      "time": "12:2x",
+      "actor": "Computer",
+      "category": "finding",
+      "summary": "CRITICAL PLATFORM FINDING (probe-confirmed): GHL workflow SMS nodes cannot reference templates by ID. Saved templateId + messageTemplateId on a draft SMS node -> 200 OK, but read-back shows GHL stripped both; node retains only body+attachments. 0 of 54 live SMS nodes use a template reference. Implication: the 15 templates created this session are the canonical message library + drift-detection reference, NOT live runtime links. 'Wire send-steps to reference template IDs' (approved plan Step 4) is impossible for SMS. Substitute: copy each reconciled template body into the corresponding draft SMS node body (applies per-clinic token fixes + footer/descriptor templatization to the workflows). 19 of 44 draft SMS nodes currently hold unreconciled tokens. This substitute mutates -Target Release drafts, so it needs Eric's explicit go-ahead before proceeding. Validation script to be extended as a drift detector (template body vs workflow node body).",
+      "ref": "Decision 16"
     }
   ]
 }

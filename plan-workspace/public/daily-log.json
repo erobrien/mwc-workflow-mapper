@@ -254,6 +254,14 @@
       "category": "decision",
       "summary": "Decision 14 locked: per-clinic data lives in a Locations Custom Object (one record per clinic), stamped into generic operational contact fields by WF-01 at capture; templates reference only generic fields. Wave 0 addendum required: create the object + 3 records, add generic current_* fields, and reconcile already-executed Wave 0 custom values for per-clinic collisions.",
       "ref": "Decision 14"
+    },
+    {
+      "date": "2026-07-11",
+      "time": "06:4x",
+      "actor": "Computer",
+      "category": "build",
+      "summary": "Decision 14 executed against the live account: Locations Custom Object created with 6 fields; Richmond, Virginia Beach, and Newport News records seeded with real address/phone/hours/booking data; 4 generic operational contact fields created (current_clinic_*); contact-to-Home-Clinic association defined (contact_clinic). All additive; nothing deleted or published.",
+      "ref": "custom_objects.locations"
     }
   ]
 }

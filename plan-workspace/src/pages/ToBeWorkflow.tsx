@@ -10,7 +10,8 @@ interface Step { order: number; action: string; name: string; config: string; br
 interface Message { step: string; channel: string; body: string; }
 interface TriggerSetup { type: string; filters: string[]; target: string; }
 interface Settings { quiet_hours: string; allow_reentry: string; stop_on_response: string; reentry_caveat: string; status: string; }
-interface Variables { principle: string; location_variable: string; custom_values: string[]; }
+interface WFMethod { name: string; detail: string; }
+interface Variables { principle: string; location_variable: string; collision_warning?: string; methods?: WFMethod[]; custom_values: string[]; }
 interface WFDetail {
   purpose: string; diagram_key: string; trigger: TriggerSetup;
   prerequisites: string[]; steps: Step[]; messages: Message[];
@@ -150,8 +151,29 @@ export default function ToBeWorkflow() {
                 <div className="mb-1 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Location variable</div>
                 <p className="text-sm"><code className="rounded bg-muted px-1 py-0.5 text-[12px]">opportunity.location</code> {d.variables.location_variable.replace('opportunity.location ', '')}</p>
               </div>
+              {d.variables.collision_warning && (
+                <div className="rounded-md border-s-2 border-red-500 bg-red-50 py-2 ps-3 dark:bg-red-950/30">
+                  <div className="mb-1 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-red-700 dark:text-red-400">
+                    <AlertTriangle className="h-3.5 w-3.5" /> Custom Value collision risk
+                  </div>
+                  <p className="text-sm text-foreground/90">{d.variables.collision_warning}</p>
+                </div>
+              )}
+              {d.variables.methods && d.variables.methods.length > 0 && (
+                <div>
+                  <div className="mb-1 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Per-clinic data: the three GHL-native patterns</div>
+                  <div className="space-y-2">
+                    {d.variables.methods.map((m, i) => (
+                      <div key={i} className="rounded border bg-muted/30 p-2.5">
+                        <div className="mb-0.5 text-[12px] font-semibold">{m.name}</div>
+                        <p className="text-[13px] text-foreground/85">{m.detail}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
               <div>
-                <div className="mb-1 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Using custom values</div>
+                <div className="mb-1 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Custom values: safe vs collision</div>
                 <ul className="space-y-1.5 text-sm">
                   {d.variables.custom_values.map((c, i) => (
                     <li key={i} className="flex gap-2"><span className="text-muted-foreground">•</span><span>{c}</span></li>

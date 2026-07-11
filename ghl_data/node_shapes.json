@@ -1,0 +1,567 @@
+{
+ "wait": {
+  "id": "d95e4a25-9e02-4cd1-a739-eba5948a3e37",
+  "type": "wait",
+  "name": "Wait",
+  "attributes": {
+   "type": "time",
+   "startAfter": {
+    "type": "hour",
+    "value": 1,
+    "when": "after"
+   },
+   "name": "Wait",
+   "cat": "",
+   "isHybridAction": true,
+   "hybridActionType": "wait",
+   "convertToMultipath": false,
+   "transitions": []
+  },
+  "order": 0,
+  "cat": "",
+  "next": "dadebfa1-537d-4e42-888e-22fabc3f9c6d"
+ },
+ "if_else": {
+  "id": "dadebfa1-537d-4e42-888e-22fabc3f9c6d",
+  "order": 1,
+  "attributes": {
+   "currentRecipeType": "CUSTOM",
+   "branches": [
+    {
+     "id": "a2c211a1-6a3b-4913-8d2d-86c055de8007",
+     "name": "Branch",
+     "segments": [
+      {
+       "__segmentId": "6b7bbed8-9678-4fbc-9cc4-8e36ce8074a7",
+       "operator": "and",
+       "conditions": [
+        {
+         "conditionType": "contact_detail",
+         "conditionSubType": "cClk7ad4PHxiake2lChS",
+         "conditionOperator": "==",
+         "conditionValue": "MUT (Medically Untreatable)",
+         "__conditionId": "1b1936db-99d2-4a79-859c-9ceeb394bb59",
+         "ifElseNodeId": "",
+         "__customFieldType__": "standard",
+         "isWait": false,
+         "nestedDropdownTypes": [
+          "inboundWebhookRequest",
+          "sheet",
+          "datetime_formatter",
+          "custom_webhook",
+          "array_functions",
+          "ivr_gather",
+          "ivr_connect_call",
+          "custom_code"
+         ],
+         "allowIsOperatorTypes": [
+          "contact_reply",
+          "inboundWebhookRequest",
+          "custom_webhook",
+          "custom_code",
+          "contact_detail",
+          "array_functions",
+          "appointment",
+          "service_booking",
+          "rental_booking"
+         ]
+        }
+       ]
+      }
+     ],
+     "operator": "and",
+     "showErrors": false,
+     "branchNameError": "Branch name cannot be empty!"
+    }
+   ],
+   "operator": "and",
+   "if": true,
+   "conditionName": "Condition",
+   "version": 2,
+   "noneBranchName": "None"
+  },
+  "name": "yes",
+  "type": "if_else",
+  "cat": "conditions",
+  "next": [
+   "a2c211a1-6a3b-4913-8d2d-86c055de8007",
+   "3526fabb-a842-41e2-9704-865fa75c6228"
+  ],
+  "comments": [],
+  "nodeType": "condition-node",
+  "parentKey": "d95e4a25-9e02-4cd1-a739-eba5948a3e37"
+ },
+ "update_contact_field": {
+  "id": "ac17a733-d81a-47b1-baa1-18de17d6f16e",
+  "parent": "a2c211a1-6a3b-4913-8d2d-86c055de8007",
+  "order": 1,
+  "attributes": {
+   "type": "update_contact_field",
+   "actionType": "clear_field_data",
+   "fields": [
+    {
+     "field": "HC2Oo1MIbwJ0uIrdsIqo",
+     "value": "",
+     "title": "Current medications (include name, dose, and how often you take them)",
+     "type": "string",
+     "date": ""
+    },
+    {
+     "field": "6hwB9YtdqX6urRGxovGX",
+     "value": "",
+     "title": "Date",
+     "type": "date",
+     "date": "specificDate"
+    },
+    {
+     "field": "J8L58GqFuzvO0nX6hY3l",
+     "value": "",
+     "title": "Do you consume alcohol?",
+     "type": "select",
+     "date": ""
+    },
+    {
+     "field": "QWMf64tEMlmWieWvgZMk",
+     "value": "",
+     "title": "Do you currently smoke or use tobacco products?",
+     "type": "select",
+     "date": ""
+    },
+    {
+     "field": "JfKExo0tee4Yai1eKrGn",
+     "value": "",
+     "title": "Electronic Signature (Type Full Legal Name)",
+     "type": "file",
+     "date": ""
+    },
+    {
+     "field": "KzsO01rpSeZIA4WUXiGR",
+     "value": "",
+     "title": "Emergency Contact Name",
+     "type": "string",
+     "date": ""
+    },
+    {
+     "field": "EVxsSNsGrO1Y6h2uUsjv",
+     "value": "",
+     "title": "Emergency Contact Phone",
+     "type": "string",
+     "date": ""
+    },
+    {
+     "field": "Ur3ezo3b85Xb2l8edGtl",
+     "value": "",
+     "title": "Have you ever been diagnosed with any of the following? (Check all that apply)",
+     "type": "multiselect",
+     "date": ""
+    },
+    {
+     "field": "sJLV861xvDXyJgA7H8dk",
+     "value": "",
+     "title": "Have you ever used testosterone or other hormone therapy?",
+     "type": "select",
+     "date": ""
+    },
+    {
+     "field": "m2UAYFuBQ1ymyKNN0C6s",
+     "value": "",
+     "title": "How did you hear about Men\u2019s Wellness Centers?\n",
+     "type": "select",
+     "date": ""
+    },
+    {
+     "field": "9w0y3YzxD1ZFIbekQD2F",
+     "value": "",
+     "title": "How long have these symptoms been present?",
+     "type": "select",
+     "date": ""
+    },
+    {
+     "field": "ysRPwT2nSTzpT8EoAzku",
+     "value": "",
+     "title": "I acknowledge that I have received and understand the Notice of Privacy Practices.\n\n",
+     "type": "multiselect",
+     "date": ""
+    },
+    {
+     "field": "DHq97rjT0xk2QGvFEtj4",
+     "value": "",
+     "title": "I authorize Men\u2019s Wellness Centers and its licensed medical providers to evaluate, diagnose, and treat me, including laboratory testing when medically appropriate.",
+     "type": "multiselect",
+     "date": ""
+    },
+    {
+     "field": "Fr6J27j5YGkL3eN3mmTS",
+     "value": "",
+     "title": "I confirm the information I provided is accurate to the best of my knowledge.",
+     "type": "multiselect",
+     "date": ""
+    },
+    {
+     "field": "nVTE9uYHuJdNY69ik4Vd",
+     "value": "",
+     "title": "I understand that my care may be provided in person and, when clinically appropriate, via telemedicine.",
+     "type": "multiselect",
+     "date": ""
+    },
+    {
+     "field": "aF4eAS7FcvZS2fPej6F9",
+     "value": "",
+     "title": "If yes, please describe (optional)",
+     "type": "string",
+     "date": ""
+    },
+    {
+     "field": "zJu0Qfw5oRtvwWPY0jXQ",
+     "value": "",
+     "title": "If yes, please provide brief details (optional)",
+     "type": "string",
+     "date": ""
+    },
+    {
+     "field": "9WxVlzvgSlCXx0EL82Sr",
+     "value": "",
+     "title": "Location",
+     "type": "select",
+     "date": ""
+    },
+    {
+     "field": "07RvFbVdzycUofKW5UPL",
+     "value": "",
+     "title": "May we contact your primary care provider regarding your care?",
+     "type": "select",
+     "date": ""
+    },
+    {
+     "field": "PDhPVirD7ZvPY0mnTLCr",
+     "value": "",
+     "title": "Norfolk / Virginia Beach Stations",
+     "type": "select",
+     "date": ""
+    },
+    {
+     "field": "RQqL2Zwl8vAND9m3pllJ",
+     "value": "",
+     "title": "Other",
+     "type": "select",
+     "date": ""
+    },
+    {
+     "field": "lWml2sn98A7zcGbfUtZe",
+     "value": "",
+     "title": "Pay Type",
+     "type": "select",
+     "date": ""
+    },
+    {
+     "field": "kwhTOpRqbuq9lgpQCbwK",
+     "value": "",
+     "title": "Physical",
+     "type": "multiselect",
+     "date": ""
+    },
+    {
+     "field": "hZF3COXUXopq6GY06uMZ",
+     "value": "",
+     "title": "Please Specify",
+     "type": "string",
+     "date": ""
+    },
+    {
+     "field": "Cou856tOhaxW62vwehVI",
+     "value": "",
+     "title": "Preferred Location",
+     "type": "select",
+     "date": ""
+    },
+    {
+     "field": "aWyDdDlWeHPgcXEJJOy0",
+     "value": "",
+     "title": "Primary Care Provider Name",
+     "type": "string",
+     "date": ""
+    }
+   ]
+  },
+  "name": "Clear Intake Fields to prepare for updated intake form in the future",
+  "type": "update_contact_field",
+  "next": "fff8b4b9-a686-4700-9ad0-ba35b990ca0a",
+  "parentKey": "099a6619-14e4-45d0-b0d8-46644c7e2946"
+ },
+ "create_opportunity": {
+  "id": "7c59b9b7-4867-48a8-b743-96ae29d09ba7",
+  "parent": "dcd9cbb9-6bf7-4071-8543-e19da26c2436",
+  "order": 0,
+  "attributes": {
+   "fields": [],
+   "type": "create_opportunity",
+   "pipeline_id": "rspsjkBMNYGldN3R71ji",
+   "pipeline_stage_id": "831f66ae-95c1-40bd-8f15-9baa99a51efa",
+   "opportunity_status": "lost",
+   "opportunity_name": "MUT | {{contact.name}}",
+   "opportunity_source": "",
+   "monetary_value": "",
+   "lostReasonId": "696f4d3b2a9d6f12607f4b8f"
+  },
+  "name": "Create Or Update Opportunity",
+  "type": "create_opportunity",
+  "parentKey": "dcd9cbb9-6bf7-4071-8543-e19da26c2436"
+ },
+ "goto": {
+  "id": "5352a11d-50f4-4d48-8460-9b17f1857491",
+  "parent": "4a132311-683a-4592-8d84-26702113f9a6",
+  "order": 1,
+  "attributes": {
+   "targetNodeId": "1ac1d8f4-b592-4de4-beb1-d6b2ad6ac3dd",
+   "type": "goto"
+  },
+  "name": "Go To",
+  "type": "goto",
+  "parentKey": "c72c2d0a-1d00-4c57-92db-bcdc6dbe857a"
+ },
+ "email": {
+  "id": "a5514d16-22bf-4ed1-a528-d0c583db2a5f",
+  "parent": "fd1fd321-3074-460f-9381-b8d33531e2ac",
+  "order": 0,
+  "attributes": {
+   "trackingOptions": {
+    "hasTrackingLinks": false,
+    "hasUtmTracking": true,
+    "hasTags": false,
+    "sourceId": "528b598e-cd6c-488b-9e17-ccc65c25c7f1:a5514d16-22bf-4ed1-a528-d0c583db2a5f"
+   },
+   "conditions": [],
+   "html": "<p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">Hi {{contact.first_name}},</p><br/><br/><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">You missed your scheduled appointment. We understand that things come up, and we\u2019d be happy to help you reschedule at a time that works better for you.</p><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\"><em><span style=\"font-size: 16px\">Schedule your new appointment </span></em><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://menswellnesscenters.com/locations/virginia-beach/\" title=\"HERE\"><em><u><span style=\"font-size: 16px\">HERE</span></u></em></a><em><span style=\"font-size: 16px\">. Have Questions? Call </span></em><strong><span style=\"font-size: 16px\">(757) 612-4420.</span></strong></p><br/><br/><br/><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\">Sincerely,</p><p style=\"margin:0px; padding-left: 0px!important;margin: 0px;\"><strong>{{location.name}}</strong></p>",
+   "from_email": "{{location.email}}",
+   "from_name": "{{location.name}}",
+   "subject": "You missed your appointment with {{location.name}} in Virginia Beach",
+   "preHeader": "Reschedule your clinic appointment",
+   "attachments": []
+  },
+  "name": "Email Patient (No Show) for VA beach",
+  "type": "email",
+  "next": "83537047-15bc-4707-89e2-1acc8da13b13",
+  "parentKey": "fd1fd321-3074-460f-9381-b8d33531e2ac"
+ },
+ "sms": {
+  "id": "d3700eab-49b7-4f55-8444-091b2011ac71",
+  "parent": "b42e0ce4-4424-42b0-a8d4-4efadc8926b0",
+  "order": 0,
+  "attributes": {
+   "body": "Thank you for contacting Men\u2019s Wellness Centers. Our office is currently closed, but we\u2019ve received your message. Our team is available Monday through Saturday from 8:00 AM to 9:00 PM and will respond as soon as we are back in the office.",
+   "attachments": []
+  },
+  "name": "Send SMS Outside Office Hours Welcome Message",
+  "type": "sms",
+  "next": "1e254853-9bfe-4a0b-809c-5f9ed2946630",
+  "parentKey": "b42e0ce4-4424-42b0-a8d4-4efadc8926b0",
+  "advanceCanvasMeta": {
+   "isDisabled": false
+  }
+ },
+ "create_update_contact": {
+  "id": "4c81fb16-801e-438d-b4e2-35757d7ba829",
+  "order": 0,
+  "attributes": {
+   "type": "create_update_contact",
+   "fields": [
+    {
+     "field": "email",
+     "value": "{{inboundWebhookRequest.3}}",
+     "title": "Email",
+     "type": "string",
+     "date": ""
+    },
+    {
+     "field": "firstName",
+     "value": "{{inboundWebhookRequest.20}}",
+     "title": "First Name",
+     "type": "string",
+     "date": ""
+    },
+    {
+     "field": "lastName",
+     "value": "{{inboundWebhookRequest.21}}",
+     "title": "Last Name",
+     "type": "string",
+     "date": ""
+    },
+    {
+     "field": "phone",
+     "value": "{{inboundWebhookRequest.4}}",
+     "title": "Phone",
+     "type": "string",
+     "date": ""
+    },
+    {
+     "field": "Cou856tOhaxW62vwehVI",
+     "value": "{{inboundWebhookRequest.5}}",
+     "title": "Preferred Location",
+     "type": "string",
+     "date": ""
+    },
+    {
+     "field": "RrRyWKMSzZvu6MFGXTZb",
+     "value": "{{inboundWebhookRequest.ip}}",
+     "title": "IP Address",
+     "type": "string",
+     "date": ""
+    },
+    {
+     "field": "Np2WHxON2I4DVnYjZh3e",
+     "value": "{{inboundWebhookRequest.12}}",
+     "title": "UTM Campaign",
+     "type": "string",
+     "date": ""
+    },
+    {
+     "field": "ssEvmmfe1tz5H4fiMHZR",
+     "value": "{{inboundWebhookRequest.13}}",
+     "title": "UTM Content",
+     "type": "string",
+     "date": ""
+    },
+    {
+     "field": "Vh0MH504ujQfBh0Q5UFx",
+     "value": "{{inboundWebhookRequest.14}}",
+     "title": "UTM Medium",
+     "type": "string",
+     "date": ""
+    },
+    {
+     "field": "thwe93MxRDzS2SO9pxxC",
+     "value": "{{inboundWebhookRequest.15}}",
+     "title": "UTM Source",
+     "type": "string",
+     "date": ""
+    },
+    {
+     "field": "1Wo5z9YpDh9Lv64IBEoa",
+     "value": "{{inboundWebhookRequest.16}}",
+     "title": "UTM Term",
+     "type": "string",
+     "date": ""
+    },
+    {
+     "field": "UZBaHuKr9PpFNro47it7",
+     "value": "{{inboundWebhookRequest.source_url}}",
+     "title": "SOURCE URL",
+     "type": "string",
+     "date": ""
+    }
+   ]
+  },
+  "name": "Create Contact",
+  "type": "create_update_contact",
+  "next": "284cd4e7-e800-4a63-a6ce-15c222063268"
+ },
+ "add_contact_tag": {
+  "id": "284cd4e7-e800-4a63-a6ce-15c222063268",
+  "order": 1,
+  "attributes": {
+   "tags": [
+    "funnel_entry_consultation_page"
+   ]
+  },
+  "name": "Tag : Funnel_Entry_Home_Page",
+  "type": "add_contact_tag",
+  "next": "4a9fea79-f784-4895-bd78-51366ead4d82",
+  "parentKey": "4c81fb16-801e-438d-b4e2-35757d7ba829"
+ },
+ "internal_create_opportunity": {
+  "id": "72396611-5cc6-4c3a-985a-097f955cd5aa",
+  "parent": "1b214d4e-9c34-40d8-b909-1a8140046948",
+  "order": 1,
+  "attributes": {
+   "pipelineId": "9AZEt2Sw6Zv0nnJJmkE0",
+   "type": "internal_create_opportunity",
+   "__customInputFields__": [
+    {
+     "__customInputs__": {},
+     "value": "6f0e004b-f6cd-4558-bec3-86bdc112b8b9",
+     "filterField": "pipelineStageId",
+     "valueFieldType": "select"
+    },
+    {
+     "__customInputs__": {},
+     "value": "open",
+     "filterField": "status",
+     "valueFieldType": "select"
+    },
+    {
+     "__customInputs__": {},
+     "value": "{{inboundWebhookRequest.23}}",
+     "filterField": "name",
+     "valueFieldType": "string"
+    },
+    {
+     "__customInputs__": {},
+     "value": "Meta paid Ad",
+     "filterField": "custom_fields.erNYds93RsIn9mEyplyY",
+     "valueFieldType": "select"
+    }
+   ],
+   "__customInputs__": {}
+  },
+  "name": "Newport News Opportunity",
+  "type": "internal_create_opportunity",
+  "workflowsActionType": "INTERNAL",
+  "parentKey": "5c56747b-2bcb-43ef-ae2c-72493186571c"
+ },
+ "internal_notification": {
+  "id": "62849337-795b-4383-8698-961c47931b29",
+  "parent": "a88d1272-af00-4b31-9068-e1494c0c71ad",
+  "order": 1,
+  "attributes": {
+   "type": "email",
+   "email": {
+    "isCloned": true,
+    "from_name": "{{location.name}}",
+    "userType": "custom_email",
+    "to": "consult-results@menswellnesscenters.com",
+    "subject": "Appointment ({{contact.location}}): {{contact.name}} | {{appointment.start_time}}",
+    "template_id": "699f3b0e7e7d4f700d376316",
+    "templatesource": "email-builder",
+    "from_email": "{{location.email}}",
+    "previewUrl": "https://firebasestorage.googleapis.com/v0/b/highlevel-backend.appspot.com/o/location%2FGhstz8eIsHWLeXek47dk%2Femails%2F699f3b0e7e7d4f700d376316%2Findex.html?alt=media&token=c698afe9-f17c-42c6-9c70-1d2057e7f252?cb=1772072142333",
+    "createdAt": "2026-02-25T18:10:22.632Z",
+    "updatedAt": "2026-02-26T02:15:31.688Z",
+    "preHeader": "",
+    "cc": "",
+    "attachments": []
+   }
+  },
+  "name": "Internal Notification: Email with Clinic Appointment Outcome form",
+  "type": "internal_notification",
+  "next": "aea31407-9b09-4378-a875-363cbfe9fb1b",
+  "parentKey": "669cc629-587d-4de2-b17d-f7e10ed54a8c",
+  "advanceCanvasMeta": {
+   "isDisabled": true
+  }
+ },
+ "manual-call": {
+  "id": "09df9fbb-88ed-480c-9906-c1ca2e9402e9",
+  "parent": "33884e9e-23bd-40ab-8257-7fe545a2903a",
+  "order": 0,
+  "attributes": {},
+  "name": "Power Dialler (Human intervention): Agent calls patient. Leave VM if no answer. Disposition call",
+  "type": "manual-call",
+  "next": "58504471-5035-45c4-a42e-4d07296e9f0e",
+  "parentKey": "33884e9e-23bd-40ab-8257-7fe545a2903a"
+ },
+ "call": {
+  "id": "270119e0-60f6-4ac4-9fe2-4f97c019a5a6",
+  "parent": "41dd8fb2-f19b-4ed3-8cd3-12d5a5f6087b",
+  "order": 0,
+  "attributes": {
+   "timeout": 60,
+   "whisper_message": "",
+   "disable_detect_voicemail": false,
+   "call_connect": true
+  },
+  "name": "Automatic call",
+  "type": "call",
+  "next": "8e3776aa-4ce8-4da4-8601-fb835ee6047c",
+  "parentKey": "41dd8fb2-f19b-4ed3-8cd3-12d5a5f6087b"
+ }
+}

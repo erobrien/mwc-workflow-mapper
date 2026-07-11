@@ -1,0 +1,467 @@
+{
+  "WF-01 Lead Capture and Attribution": {
+    "id": "f9a8aadf-6e85-4f74-96c0-e943ddf0835e",
+    "status": "draft",
+    "nodes": [
+      {
+        "type": "email",
+        "name": "Email: Welcome (instant)"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: Speed-to-Lead (T+0, quiet-hours)"
+      },
+      {
+        "type": "wait",
+        "name": "Wait: 2 minutes"
+      },
+      {
+        "type": "internal_notification",
+        "name": "Notify: Staff new lead"
+      },
+      {
+        "type": "wait",
+        "name": "Wait: 5 minutes from entry"
+      },
+      {
+        "type": "wait",
+        "name": "Wait: 24 hours"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: Sequence end placeholder"
+      }
+    ],
+    "triggers": [
+      {
+        "name": "Lead captured (form/tag)",
+        "active": false
+      }
+    ]
+  },
+  "WF-02 Non-Booked Recovery": {
+    "id": "e8401da7-0ff2-42b9-87af-ec7609c37257",
+    "status": "draft",
+    "nodes": [
+      {
+        "type": "sms",
+        "name": "Call: Speed-to-Lead (T+5m)"
+      },
+      {
+        "type": "wait",
+        "name": "Wait: 2 hours"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: Follow-Up 1 (T+2h)"
+      },
+      {
+        "type": "wait",
+        "name": "Wait: to +4h"
+      },
+      {
+        "type": "email",
+        "name": "Email: Health Education 1 (T+4h)"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: Re-Engagement 2 (T+1d)"
+      },
+      {
+        "type": "email",
+        "name": "Email: Physician-Led Process 2 (T+2d)"
+      },
+      {
+        "type": "sms",
+        "name": "Call: Voicemail Drop (T+3d)"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: Availability 3 (T+5d)"
+      },
+      {
+        "type": "email",
+        "name": "Email: Testimonial 3 (T+7d)"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: Re-Engagement 4 (T+10d)"
+      },
+      {
+        "type": "email",
+        "name": "Email: Urgency 4 (T+14d)"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: Empathetic Breakup 5 (T+16d)"
+      }
+    ],
+    "triggers": []
+  },
+  "WF-03 Booking Confirmation and Reminders": {
+    "id": "88d3c015-eb00-406f-bfa1-bba101322d6a",
+    "status": "draft",
+    "nodes": [
+      {
+        "type": "sms",
+        "name": "SMS: Booking Confirmation (T+0)"
+      },
+      {
+        "type": "email",
+        "name": "Email: Booking Confirmation (T+0)"
+      },
+      {
+        "type": "internal_notification",
+        "name": "Notify: Staff booking"
+      },
+      {
+        "type": "wait",
+        "name": "Wait: 1 hour"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: Intake Reminder (T+1h)"
+      },
+      {
+        "type": "email",
+        "name": "Email: 3-Day Prep (T-3d)"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: 1-Day Reminder (T-1d)"
+      },
+      {
+        "type": "email",
+        "name": "Email: 1-Day Prep (T-1d)"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: Morning-Of (8 AM)"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: 2-Hour Intake Prompt (T-2h)"
+      }
+    ],
+    "triggers": []
+  },
+  "WF-04 Medical Intake Chase": {
+    "id": "42294583-e0b1-454e-b9df-aa2b05b2504c",
+    "status": "draft",
+    "nodes": [
+      {
+        "type": "sms",
+        "name": "SMS: Intake Chase 1 (T+4h)"
+      },
+      {
+        "type": "email",
+        "name": "Email: Confirmation Chase (T+12h)"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: Urgency Chase 2 (T+24h)"
+      },
+      {
+        "type": "sms",
+        "name": "Call: Voicemail Drop (T+36h)"
+      }
+    ],
+    "triggers": []
+  },
+  "WF-05 Clinic Outcome Router": {
+    "id": "a1cd8b8d-8510-4d68-905a-612022180119",
+    "status": "draft",
+    "nodes": [
+      {
+        "type": "if_else",
+        "name": "If: appt_status gate"
+      },
+      {
+        "type": "if_else",
+        "name": "If: sale_outcome router"
+      },
+      {
+        "type": "internal_create_opportunity",
+        "name": "Opp: Set Won + renewal_date + processed stamp"
+      },
+      {
+        "type": "add_contact_tag",
+        "name": "Tag: outcome_sold"
+      },
+      {
+        "type": "internal_create_opportunity",
+        "name": "Opp: Move to A&D (lost)"
+      },
+      {
+        "type": "internal_create_opportunity",
+        "name": "Opp: Move to MUT (lost)"
+      },
+      {
+        "type": "add_contact_tag",
+        "name": "Tag: outcome_mar (PCC task, opp stays open)"
+      },
+      {
+        "type": "add_contact_tag",
+        "name": "Tag: route to WF-08"
+      }
+    ],
+    "triggers": []
+  },
+  "WF-06 Post-Visit Won and Onboarding": {
+    "id": "74218bd7-6b05-4c13-8b88-6595a678d4ea",
+    "status": "draft",
+    "nodes": [
+      {
+        "type": "sms",
+        "name": "SMS: Welcome (T+1h)"
+      },
+      {
+        "type": "email",
+        "name": "Email: Welcome and Onboarding (T+1h)"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: Check-In (T+3d)"
+      },
+      {
+        "type": "email",
+        "name": "Email: Week 1 Progress (T+7d)"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: Google Review Request (T+14d, conditional)"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: Referral Activation (T+21d)"
+      }
+    ],
+    "triggers": []
+  },
+  "WF-07 Post-Visit A&D Nurture": {
+    "id": "b98a1687-5788-4eda-aa7c-832d685e5999",
+    "status": "draft",
+    "nodes": [
+      {
+        "type": "sms",
+        "name": "SMS: No-Pressure 1 (T+2h)"
+      },
+      {
+        "type": "email",
+        "name": "Email: Objection Handling (T+1d)"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: Labs on File 2 (T+3d)"
+      },
+      {
+        "type": "email",
+        "name": "Email: Testimonial (T+7d)"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: Encouragement 3 (T+14d)"
+      },
+      {
+        "type": "email",
+        "name": "Email: Labs Expiring (T+21d)"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: Final Reminder 4 (T+30d)"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: Empathetic Breakup 5 (T+35d)"
+      }
+    ],
+    "triggers": []
+  },
+  "WF-08 No-Show and Cancel Recovery": {
+    "id": "7a40676c-a5a2-46c4-a321-81cacc70cc90",
+    "status": "draft",
+    "nodes": [
+      {
+        "type": "sms",
+        "name": "SMS: Recovery 1 (T+15m)"
+      },
+      {
+        "type": "email",
+        "name": "Email: Physician Recovery (T+1h)"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: Availability 2 (T+1d)"
+      },
+      {
+        "type": "email",
+        "name": "Email: Benefits Pivot (T+3d)"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: Re-Engagement 3 (T+3d)"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: Scarcity 4 (T+5d)"
+      },
+      {
+        "type": "sms",
+        "name": "Call: Voicemail Drop (T+7d)"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: Empathetic Breakup 5 (T+7d)"
+      }
+    ],
+    "triggers": []
+  },
+  "WF-09 Long-Term Nurture": {
+    "id": "5f7429ed-59fb-4204-bd60-783d280994de",
+    "status": "draft",
+    "nodes": [
+      {
+        "type": "email",
+        "name": "Email: Energy as Medical Issue (T+30d)"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: CTA (T+45d)"
+      },
+      {
+        "type": "email",
+        "name": "Email: Sleep and Performance (T+60d)"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: Seasonal Scarcity (T+75d)"
+      },
+      {
+        "type": "email",
+        "name": "Email: Medical Authority (T+90d)"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: Return to Self (T+105d)"
+      },
+      {
+        "type": "email",
+        "name": "Email: Re-Engage Breakup (T+120d)"
+      }
+    ],
+    "triggers": []
+  },
+  "WF-10 Feedback Survey": {
+    "id": "701bc7c4-ad77-4b32-9a23-fceec10cde75",
+    "status": "draft",
+    "nodes": [
+      {
+        "type": "sms",
+        "name": "SMS: Survey Invite"
+      }
+    ],
+    "triggers": []
+  },
+  "WF-11 Compliance and Errors": {
+    "id": "535d945e-7ff6-421d-9f2d-332401acbe8f",
+    "status": "draft",
+    "nodes": [
+      {
+        "type": "sms",
+        "name": "PLACEHOLDER: needs canonical sms_consent_status field"
+      }
+    ],
+    "triggers": []
+  },
+  "WF-12 Call Disposition Handler": {
+    "id": "4432fcbd-9dc2-4490-88b9-3565058ce8bf",
+    "status": "draft",
+    "nodes": [
+      {
+        "type": "if_else",
+        "name": "If: call disposition"
+      },
+      {
+        "type": "add_contact_tag",
+        "name": "Tag: flag bad number"
+      }
+    ],
+    "triggers": []
+  },
+  "WF-13 Ad-Platform Conversions": {
+    "id": "31d2903c-c0e1-4712-b833-3f7dea44b628",
+    "status": "draft",
+    "nodes": [
+      {
+        "type": "webhook",
+        "name": "Webhook: Booked Conversion (Google+Meta)"
+      },
+      {
+        "type": "webhook",
+        "name": "Webhook: Won Conversion (Google+Meta, once per opp)"
+      }
+    ],
+    "triggers": []
+  },
+  "WF-14 Ambassador Program": {
+    "id": "2dccaef5-134b-4a46-bfce-a2fce56b55a7",
+    "status": "draft",
+    "nodes": [
+      {
+        "type": "sms",
+        "name": "SMS: Ambassador Invitation"
+      },
+      {
+        "type": "email",
+        "name": "Email: Program Welcome"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: Reward Confirmation"
+      }
+    ],
+    "triggers": []
+  },
+  "WF-15 PCC Referral Routing": {
+    "id": "292610a8-4ac2-44bc-bfa4-9c55489d941c",
+    "status": "draft",
+    "nodes": [
+      {
+        "type": "sms",
+        "name": "SMS: Referred-Lead Welcome"
+      },
+      {
+        "type": "email",
+        "name": "Email: Referred-Lead Welcome"
+      },
+      {
+        "type": "internal_notification",
+        "name": "Notify: Routing alert"
+      }
+    ],
+    "triggers": []
+  },
+  "WF-16 Comms Edge": {
+    "id": "c49b9535-542e-4b23-9af7-bcd0d0b8a238",
+    "status": "draft",
+    "nodes": [
+      {
+        "type": "sms",
+        "name": "IVR: Simultaneous ring"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: Instant Text-Back (T+0)"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: Follow-Up (T+30m)"
+      },
+      {
+        "type": "sms",
+        "name": "Chat: Auto-Response"
+      }
+    ],
+    "triggers": []
+  }
+}

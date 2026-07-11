@@ -750,17 +750,17 @@
     },
     "templates": {
       "email_wf01_welcome": {
-        "id": "PENDING_CREATE",
+        "id": "KV7ewKzUkNTjVQnjkDci",
         "wf": "01",
         "channel": "email",
         "depends_on": [
           "{{contact.first_name}}",
           "{{ custom_values.consult_descriptor }}"
         ],
-        "status": "payload_ready"
+        "status": "created_draft"
       },
       "sms_wf01_speed_to_lead": {
-        "id": "PENDING_CREATE",
+        "id": "6N44ECFpGNTjigmp84Qx",
         "wf": "01",
         "channel": "sms",
         "depends_on": [
@@ -768,10 +768,10 @@
           "{{ custom_values.consult_descriptor }}",
           "{{ custom_values.sms_opt_out_footer }}"
         ],
-        "status": "payload_ready"
+        "status": "created_draft"
       },
       "sms_wf02_follow_up_1": {
-        "id": "PENDING_CREATE",
+        "id": "LEZA8ycUH2RZnLqrIuwZ",
         "wf": "02",
         "channel": "sms",
         "depends_on": [
@@ -779,20 +779,20 @@
           "{{ custom_values.consult_descriptor }}",
           "{{ custom_values.sms_opt_out_footer }}"
         ],
-        "status": "payload_ready"
+        "status": "created_draft"
       },
       "sms_wf02_empathetic_breakup_5": {
-        "id": "PENDING_CREATE",
+        "id": "al7uAJSbVdUR5xjRVc05",
         "wf": "02",
         "channel": "sms",
         "depends_on": [
           "{{contact.first_name}}",
           "{{ custom_values.sms_opt_out_footer }}"
         ],
-        "status": "payload_ready"
+        "status": "created_draft"
       },
       "sms_wf03_booking_confirmation": {
-        "id": "PENDING_CREATE",
+        "id": "Mdpgw4QfymGoUJ4LGTVV",
         "wf": "03",
         "channel": "sms",
         "depends_on": [
@@ -800,20 +800,20 @@
           "{{appointment.start_time}}",
           "{{ custom_values.sms_opt_out_footer }}"
         ],
-        "status": "payload_ready"
+        "status": "created_draft"
       },
       "sms_wf03_morning_of": {
-        "id": "PENDING_CREATE",
+        "id": "3PyUyrtPNamzOO6hvVew",
         "wf": "03",
         "channel": "sms",
         "depends_on": [
           "{{contact.first_name}}",
           "{{appointment.start_time}}"
         ],
-        "status": "payload_ready"
+        "status": "created_draft"
       },
       "sms_wf04_intake_chase_1": {
-        "id": "PENDING_CREATE",
+        "id": "jKPJMtCWdbsu1ScOiXTY",
         "wf": "04",
         "channel": "sms",
         "depends_on": [
@@ -821,10 +821,10 @@
           "{{custom_values.intake_link}}",
           "{{ custom_values.sms_opt_out_footer }}"
         ],
-        "status": "payload_ready"
+        "status": "created_draft"
       },
       "sms_wf06_google_review_request": {
-        "id": "PENDING_CREATE",
+        "id": "PQrL3Wn59r8jYxfxWlbq",
         "wf": "06",
         "channel": "sms",
         "depends_on": [
@@ -832,40 +832,40 @@
           "{{contact.current_review_link}}",
           "{{ custom_values.sms_opt_out_footer }}"
         ],
-        "status": "payload_ready"
+        "status": "created_draft"
       },
       "sms_wf07_no_pressure_1": {
-        "id": "PENDING_CREATE",
+        "id": "DkE1N6fVa5bpRGYbf5Kj",
         "wf": "07",
         "channel": "sms",
         "depends_on": [
           "{{contact.first_name}}",
           "{{ custom_values.sms_opt_out_footer }}"
         ],
-        "status": "payload_ready"
+        "status": "created_draft"
       },
       "sms_wf08_recovery_1": {
-        "id": "PENDING_CREATE",
+        "id": "EP0rD8PQ6wco4BaFQeeq",
         "wf": "08",
         "channel": "sms",
         "depends_on": [
           "{{contact.first_name}}",
           "{{ custom_values.sms_opt_out_footer }}"
         ],
-        "status": "payload_ready"
+        "status": "created_draft"
       },
       "sms_wf09_7_day_urgency_renewal": {
-        "id": "PENDING_CREATE",
+        "id": "4LFUiPv2qeh51BjR4ClW",
         "wf": "09",
         "channel": "sms",
         "depends_on": [
           "{{contact.first_name}}",
           "{{ custom_values.sms_opt_out_footer }}"
         ],
-        "status": "payload_ready"
+        "status": "created_draft"
       },
       "sms_wf10_survey_invite": {
-        "id": "PENDING_CREATE",
+        "id": "Bd9Kr7GHzJx4bDm8nwTD",
         "wf": "10",
         "channel": "sms",
         "depends_on": [
@@ -873,10 +873,10 @@
           "{{custom_values.survey_link}}",
           "{{ custom_values.sms_opt_out_footer }}"
         ],
-        "status": "payload_ready"
+        "status": "created_draft"
       },
       "sms_wf14_ambassador_invitation": {
-        "id": "PENDING_CREATE",
+        "id": "nkO6Pt2Uf8iBTl2WW0yR",
         "wf": "14",
         "channel": "sms",
         "depends_on": [
@@ -884,10 +884,10 @@
           "{{custom_values.referral_link}}",
           "{{ custom_values.sms_opt_out_footer }}"
         ],
-        "status": "payload_ready"
+        "status": "created_draft"
       },
       "sms_wf15_referred_lead_welcome": {
-        "id": "PENDING_CREATE",
+        "id": "tJXyohzAzak8F2OLGpi7",
         "wf": "15",
         "channel": "sms",
         "depends_on": [
@@ -895,10 +895,10 @@
           "{{ custom_values.consult_descriptor }}",
           "{{ custom_values.sms_opt_out_footer }}"
         ],
-        "status": "payload_ready"
+        "status": "created_draft"
       },
       "sms_wf16_instant_text_back": {
-        "id": "PENDING_CREATE",
+        "id": "FGjpFlSLoByg6ECKbrMY",
         "wf": "16",
         "channel": "sms",
         "depends_on": [
@@ -907,7 +907,7 @@
           "{{contact.current_booking_url}}",
           "{{ custom_values.sms_opt_out_footer }}"
         ],
-        "status": "payload_ready"
+        "status": "created_draft"
       }
     },
     "current_review_link_field": {

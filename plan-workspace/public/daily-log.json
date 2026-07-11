@@ -294,6 +294,14 @@
       "category": "build",
       "summary": "Decision 16 locked + executed the 2-surface templatization: created 6 brand Custom Values (footer, tagline, consult_descriptor, intake/survey/referral links — 3 links flagged placeholder-fill-before-go-live), created current_review_link contact field (id 7Pos1K79nIr21Or8xnHu), built 15 reconciled message-template payloads (sms_wf01..wf16 + email_wf01) with per-clinic token corrections (booking_link/review_link -> current_*), wrote message_registry into build_ids.json, and wrote scripts/create_templates.py (runnable with JWT) + scripts/validate_templates.py (PASSES: all tokens resolve). BLOCKED on backend JWT for: creating the 15 templates in GHL (PIT has read-only scope for templates, 401 on create) and wiring WF send-steps + WF-01 current_review_link stamp. All prep complete so creation is a one-command run once JWT is provided.",
       "ref": "Decision 16"
+    },
+    {
+      "date": "2026-07-11",
+      "time": "12:1x",
+      "actor": "Computer",
+      "category": "build",
+      "summary": "Created all 15 message templates live in the GHL Templates library (sms_wf01..wf16 + email_wf01), IDs saved to created_templates.json and registry updated to status created_draft. Read back sms_wf16/sms_wf06 confirming reconciled tokens round-tripped ({{contact.current_booking_url}}, {{contact.current_review_link}}, {{ custom_values.consult_descriptor }}, {{ custom_values.sms_opt_out_footer }}). Templates are live records but NOT yet referenced by any workflow send-step (wiring is the remaining step). Still TODO: wire -Target Release draft send-steps to reference template IDs + add WF-01 current_review_link stamp step.",
+      "ref": "Decision 16"
     }
   ]
 }

@@ -4368,6 +4368,14 @@
       "status": "Locked",
       "date": "2026-07-11",
       "owner": "Eric"
+    },
+    {
+      "n": "15",
+      "decision": "Message bodies live in a centralized Template library, not inline in workflows",
+      "choice": "All SMS and email copy lives in GHL's native Template library (Marketing > Templates), one saved template per message (named to its workflow + step, e.g. wf01_speed_to_lead, wf03_reminder_t1d). Workflow send-steps REFERENCE a template by id rather than carrying inline text. Rationale: copy is edited in one place and reused across workflows, a wording change never touches a workflow, merge fields render correctly (unlike Custom Values, which do not nest reliably), and it cleanly separates the flow (workflows) from the words (templates). Personalization stays via merge fields ({{contact.first_name}}, {{contact.current_booking_url}}, {{appointment.start_time}}). If structured A/B variants or non-GHL-user editing are later needed, a Messages Custom Object (one record per message, copy-before-send bridge like the Locations object) is the fallback, but native Templates is the default. Note: GHL has no single all-messages blob and should not have one; centralization means one library of per-message records, not one variable.",
+      "status": "Locked",
+      "date": "2026-07-11",
+      "owner": "Eric"
     }
   ],
   "risks": [

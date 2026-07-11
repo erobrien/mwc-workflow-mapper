@@ -270,6 +270,14 @@
       "category": "build",
       "summary": "Full workflow-build pipeline proven end-to-end on the live account: all 16 WF-01..16 built as inactive drafts in -Target Release (messaging spines at full fidelity), plus the last hard node types solved: trigger-write (POST /workflow/{loc}/trigger), step-save envelope (full doc + templates + diff arrays + version), and if_else branching validated against real opportunity field IDs (WF-05 appt_status gate). Everything draft, zero active triggers, nothing fires. Data-node enrichment (opportunity writes, webhooks, full branch trees) is the remaining pass.",
       "ref": "-Target Release"
+    },
+    {
+      "date": "2026-07-11",
+      "time": "07:5x",
+      "actor": "Eric",
+      "category": "decision",
+      "summary": "Decision 15 locked: message bodies live in GHL's native Template library (one template per message), referenced by workflow send-steps rather than inline, so copy is centralized and swappable without touching workflows. Personalization stays via merge fields; a Messages Custom Object is the fallback only if A/B variants are needed later.",
+      "ref": "Decision 15"
     }
   ]
 }

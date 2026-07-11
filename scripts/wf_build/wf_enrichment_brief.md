@@ -72,3 +72,14 @@ The remainder is repetition of proven patterns, not discovery. In a local sessio
 - `wf_build_state.json` — exact live node state per workflow
 - `build_ids.json` — all reference IDs + proven node/endpoint recipes
 - `node_shapes.json` — real node shapes extracted from the 28 live production workflows
+
+## 6. Decision 15 — message bodies via native Templates (build change)
+
+Message copy is centralized in GHL's native Template library (Marketing > Templates), NOT inline in workflow nodes. Build implications for the enrichment pass:
+- Create one saved SMS/Email template per message, named `wfNN_<step>` (e.g. wf01_speed_to_lead, wf03_reminder_t1d), body = the brand-compliant copy from tobe-detail.json, keeping merge fields.
+- Workflow send-steps reference the template by id. For SMS nodes the attribute is `templateId` / template select (confirm the exact key by reading a live SMS node that already uses a template, same way the email node exposes `template_id`).
+- The inline `attributes.body` copy currently in the draft workflows is a PLACEHOLDER; replace with template references during enrichment.
+- Do NOT collapse all messages into one Custom Value or one blob. One template record per message. Custom Values do not nest merge fields reliably — that is why templates, not custom values, hold the copy.
+- Fallback only if A/B variants are later required: a Messages Custom Object with a copy-before-send bridge (mirror the Locations object pattern).
+
+Sequencing: build/confirm the template library first, then wire send-steps to reference templates, so no workflow ever carries authoritative copy.

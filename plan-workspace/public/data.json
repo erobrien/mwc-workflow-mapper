@@ -4360,6 +4360,14 @@
       "status": "Locked",
       "date": "2026-07-10",
       "owner": "Eric"
+    },
+    {
+      "n": "14",
+      "decision": "Per-clinic data lives in a Locations Custom Object (Method 1)",
+      "choice": "Per-clinic values (address, direct phone, booking or calendar URL, location email, review link) live in a 'Locations' Custom Object with one record per clinic (Richmond, Virginia Beach, Newport News). Each contact is associated with its Location at capture, and WF-01 stamps the associated Location's values into generic operational contact fields (current_clinic_address, current_clinic_phone, current_booking_url) exactly once at creation. All templates reference ONLY the generic fields, so WF-02 through WF-16 never know clinics exist. Rationale: one authoritative record per clinic (change a phone number once), auditable clinic entity consistent with the data-on-the-owning-object principle, and adding a fourth clinic is one new record with zero workflow edits. Method 3 (base URL + ?branch= parameter with landing-page routing) is layered on for booking links on the Vercel funnel pages. The field-matrix alternative (per-clinic values embedded in If/Else branches) is rejected: it buries data inside workflow steps, which is the defect this project exists to remove. EXECUTION NOTE: Wave 0 was executed before this decision; addendum required: (1) create the Locations object + 3 records, (2) create the generic current_* contact fields if missing, (3) reconcile the Wave 0 custom values and migrate any per-clinic values out of Custom Values into the object.",
+      "status": "Locked",
+      "date": "2026-07-11",
+      "owner": "Eric"
     }
   ],
   "risks": [

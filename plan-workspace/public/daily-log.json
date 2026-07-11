@@ -246,6 +246,14 @@
       "category": "decision",
       "summary": "Decision 13 locked: MWC stays on a single GHL sub-account with location as a per-record variable (Architecture A), not one sub-account per clinic, because pooled contact-center operations and shared lead flow require cross-clinic visibility. Commits the build to parameterized (never cloned) workflows and a Locations Custom Object for per-clinic data.",
       "ref": "Decision 13"
+    },
+    {
+      "date": "2026-07-11",
+      "time": "06:2x",
+      "actor": "Eric",
+      "category": "decision",
+      "summary": "Decision 14 locked: per-clinic data lives in a Locations Custom Object (one record per clinic), stamped into generic operational contact fields by WF-01 at capture; templates reference only generic fields. Wave 0 addendum required: create the object + 3 records, add generic current_* fields, and reconcile already-executed Wave 0 custom values for per-clinic collisions.",
+      "ref": "Decision 14"
     }
   ]
 }

@@ -13,6 +13,17 @@ STAGES = "New Lead, Disqualified, Engaged, Booked, Confirmed, No-Show, Cancelled
 FOLDER = '-Target Deployment folder'
 QUIET = "Time Window 8:00 AM to 9:00 PM, Contact Timezone, all 7 days. Set under Workflow Settings, not per action."
 
+# Shared templatization note, attached to every workflow (OO principle: build once, parameterize).
+VARIABLES = {
+  "principle": "Build ONE workflow, not one per clinic. Location is a static variable set once at object creation (WF-01 branches on opportunity.location and stamps the clinic-specific fields). Every downstream step reads merge fields, so the same workflow serves Richmond, Virginia Beach, and Newport News. Never hardcode a clinic name, address, phone, or booking URL into a message or action; never clone a workflow just to change words. Branch per location only when BEHAVIOR differs (a different calendar or routing), never when only the copy differs.",
+  "location_variable": "opportunity.location (static: richmond | va_beach | npn | telehealth). Set once by WF-01 at create. This is the single source of clinic identity; downstream workflows read it, they do not re-derive it.",
+  "custom_values": [
+    "Custom Values are account-wide constants (class-level): brand booking domain, main brand phone, brand name, compliance links, review link, survey link, intake link. Reference as {{custom_values.name}}. They are the SAME for every contact, so use them for brand-wide, not per-clinic, values.",
+    "Per-CLINIC values that DIFFER by location (clinic address, clinic direct phone, per-clinic booking/calendar URL) must live on the contact/opportunity record and be stamped by WF-01, then read as {{opportunity.location_booking_url}} / {{contact.clinic_phone}} etc. Custom Values cannot vary by contact, so per-clinic data does NOT belong in a Custom Value.",
+    "Merge-field syntax: contact fields {{contact.field_key}}, opportunity fields {{opportunity.field_key}}, account constants {{custom_values.name}}, appointment {{appointment.start_time}}."
+  ],
+}
+
 # Each workflow: purpose, diagram_key, trigger, prerequisites[], build_steps[], messages[], settings{}, test[], depends_on[]
 # build_steps: {order, action, name, config, branches?[]}
 WF = {}
@@ -401,6 +412,10 @@ WF["16"] = {
   "test": ["Place a test call and miss it; confirm instant text-back + 30-min follow-up.", "Confirm simultaneous ring across locations.", "Trigger chat OOO and confirm the auto-response with scheduling link."],
   "depends_on": ["Clinic phone numbers", "chat widget", "booking link custom value", "WF-11"]
 }
+
+# Attach the templatization note to every workflow.
+for _n, _w in WF.items():
+    _w["variables"] = VARIABLES
 
 out = {
   "_note": "SOP build guides for the 16 to-be workflows. Grounded in data.json copy, wf-diagrams.json src, and the enum contract. 'BUILD DECISION NEEDED' marks values the spec does not yet fix. Regenerate with scripts/build_tobe_detail.py.",

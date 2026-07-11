@@ -3,17 +3,18 @@ import { useParams, Link } from "react-router-dom";
 import { PageShell } from "../components/Shell";
 import { Card, CardContent, Badge, Loading, useTheme } from "../components/ui";
 import { useData } from "../lib/data";
-import { ChevronLeft, ChevronRight, ArrowLeft, AlertTriangle } from "lucide-react";
+import { ChevronLeft, ChevronRight, ArrowLeft, AlertTriangle, Variable } from "lucide-react";
 
 interface Branch { label: string; condition: string; path: string; }
 interface Step { order: number; action: string; name: string; config: string; branches?: Branch[]; }
 interface Message { step: string; channel: string; body: string; }
 interface TriggerSetup { type: string; filters: string[]; target: string; }
 interface Settings { quiet_hours: string; allow_reentry: string; stop_on_response: string; reentry_caveat: string; status: string; }
+interface Variables { principle: string; location_variable: string; custom_values: string[]; }
 interface WFDetail {
   purpose: string; diagram_key: string; trigger: TriggerSetup;
   prerequisites: string[]; steps: Step[]; messages: Message[];
-  settings: Settings; test: string[]; depends_on: string[];
+  settings: Settings; test: string[]; depends_on: string[]; variables?: Variables;
 }
 interface Diagram { key: string; title: string; caption: string; src: string; }
 
@@ -135,6 +136,31 @@ export default function ToBeWorkflow() {
             )}
           </CardContent></Card>
         </Section>
+
+        {d.variables && (
+          <Section title="Custom values and variables">
+            <Card><CardContent className="p-4 space-y-3">
+              <div className="rounded-md border-s-2 border-accent bg-accent/5 py-2 ps-3">
+                <div className="mb-1 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-accent">
+                  <Variable className="h-3.5 w-3.5" /> Location is a static variable
+                </div>
+                <p className="text-sm text-foreground/90">{d.variables.principle}</p>
+              </div>
+              <div>
+                <div className="mb-1 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Location variable</div>
+                <p className="text-sm"><code className="rounded bg-muted px-1 py-0.5 text-[12px]">opportunity.location</code> {d.variables.location_variable.replace('opportunity.location ', '')}</p>
+              </div>
+              <div>
+                <div className="mb-1 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">Using custom values</div>
+                <ul className="space-y-1.5 text-sm">
+                  {d.variables.custom_values.map((c, i) => (
+                    <li key={i} className="flex gap-2"><span className="text-muted-foreground">•</span><span>{c}</span></li>
+                  ))}
+                </ul>
+              </div>
+            </CardContent></Card>
+          </Section>
+        )}
 
         <Section title="Trigger setup">
           <Card><CardContent className="p-4 space-y-2">

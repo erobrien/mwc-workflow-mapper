@@ -126,7 +126,16 @@
         "Sales - Lead to Close (id Vt8cPz51C3i87moo73gQ)",
         "Contact + Opportunity attribution fields (Wave 0)",
         "WF-02 and WF-03 to receive exits"
-      ]
+      ],
+      "variables": {
+        "principle": "Build ONE workflow, not one per clinic. Location is a static variable set once at object creation (WF-01 branches on opportunity.location and stamps the clinic-specific fields). Every downstream step reads merge fields, so the same workflow serves Richmond, Virginia Beach, and Newport News. Never hardcode a clinic name, address, phone, or booking URL into a message or action; never clone a workflow just to change words. Branch per location only when BEHAVIOR differs (a different calendar or routing), never when only the copy differs.",
+        "location_variable": "opportunity.location (static: richmond | va_beach | npn | telehealth). Set once by WF-01 at create. This is the single source of clinic identity; downstream workflows read it, they do not re-derive it.",
+        "custom_values": [
+          "Custom Values are account-wide constants (class-level): brand booking domain, main brand phone, brand name, compliance links, review link, survey link, intake link. Reference as {{custom_values.name}}. They are the SAME for every contact, so use them for brand-wide, not per-clinic, values.",
+          "Per-CLINIC values that DIFFER by location (clinic address, clinic direct phone, per-clinic booking/calendar URL) must live on the contact/opportunity record and be stamped by WF-01, then read as {{opportunity.location_booking_url}} / {{contact.clinic_phone}} etc. Custom Values cannot vary by contact, so per-clinic data does NOT belong in a Custom Value.",
+          "Merge-field syntax: contact fields {{contact.field_key}}, opportunity fields {{opportunity.field_key}}, account constants {{custom_values.name}}, appointment {{appointment.start_time}}."
+        ]
+      }
     },
     "02": {
       "purpose": "Recover leads that never booked: a 10-touch sequence over 16 days, exit instantly on booking.",
@@ -259,7 +268,16 @@
         "WF-03 (early exit on booking)",
         "WF-09 (16-day exit)",
         "WF-11 consent gate"
-      ]
+      ],
+      "variables": {
+        "principle": "Build ONE workflow, not one per clinic. Location is a static variable set once at object creation (WF-01 branches on opportunity.location and stamps the clinic-specific fields). Every downstream step reads merge fields, so the same workflow serves Richmond, Virginia Beach, and Newport News. Never hardcode a clinic name, address, phone, or booking URL into a message or action; never clone a workflow just to change words. Branch per location only when BEHAVIOR differs (a different calendar or routing), never when only the copy differs.",
+        "location_variable": "opportunity.location (static: richmond | va_beach | npn | telehealth). Set once by WF-01 at create. This is the single source of clinic identity; downstream workflows read it, they do not re-derive it.",
+        "custom_values": [
+          "Custom Values are account-wide constants (class-level): brand booking domain, main brand phone, brand name, compliance links, review link, survey link, intake link. Reference as {{custom_values.name}}. They are the SAME for every contact, so use them for brand-wide, not per-clinic, values.",
+          "Per-CLINIC values that DIFFER by location (clinic address, clinic direct phone, per-clinic booking/calendar URL) must live on the contact/opportunity record and be stamped by WF-01, then read as {{opportunity.location_booking_url}} / {{contact.clinic_phone}} etc. Custom Values cannot vary by contact, so per-clinic data does NOT belong in a Custom Value.",
+          "Merge-field syntax: contact fields {{contact.field_key}}, opportunity fields {{opportunity.field_key}}, account constants {{custom_values.name}}, appointment {{appointment.start_time}}."
+        ]
+      }
     },
     "03": {
       "purpose": "Confirm the booking and run all pre-appointment reminders on the new class calendars.",
@@ -394,7 +412,16 @@
         "WF-04 (intake chase)",
         "WF-05 (appointment day)",
         "WF-08 (cancel routing)"
-      ]
+      ],
+      "variables": {
+        "principle": "Build ONE workflow, not one per clinic. Location is a static variable set once at object creation (WF-01 branches on opportunity.location and stamps the clinic-specific fields). Every downstream step reads merge fields, so the same workflow serves Richmond, Virginia Beach, and Newport News. Never hardcode a clinic name, address, phone, or booking URL into a message or action; never clone a workflow just to change words. Branch per location only when BEHAVIOR differs (a different calendar or routing), never when only the copy differs.",
+        "location_variable": "opportunity.location (static: richmond | va_beach | npn | telehealth). Set once by WF-01 at create. This is the single source of clinic identity; downstream workflows read it, they do not re-derive it.",
+        "custom_values": [
+          "Custom Values are account-wide constants (class-level): brand booking domain, main brand phone, brand name, compliance links, review link, survey link, intake link. Reference as {{custom_values.name}}. They are the SAME for every contact, so use them for brand-wide, not per-clinic, values.",
+          "Per-CLINIC values that DIFFER by location (clinic address, clinic direct phone, per-clinic booking/calendar URL) must live on the contact/opportunity record and be stamped by WF-01, then read as {{opportunity.location_booking_url}} / {{contact.clinic_phone}} etc. Custom Values cannot vary by contact, so per-clinic data does NOT belong in a Custom Value.",
+          "Merge-field syntax: contact fields {{contact.field_key}}, opportunity fields {{opportunity.field_key}}, account constants {{custom_values.name}}, appointment {{appointment.start_time}}."
+        ]
+      }
     },
     "04": {
       "purpose": "Own all medical intake chasing for booked members who have not completed intake.",
@@ -466,7 +493,16 @@
         "WF-03",
         "Intake form",
         "WF-11 consent gate"
-      ]
+      ],
+      "variables": {
+        "principle": "Build ONE workflow, not one per clinic. Location is a static variable set once at object creation (WF-01 branches on opportunity.location and stamps the clinic-specific fields). Every downstream step reads merge fields, so the same workflow serves Richmond, Virginia Beach, and Newport News. Never hardcode a clinic name, address, phone, or booking URL into a message or action; never clone a workflow just to change words. Branch per location only when BEHAVIOR differs (a different calendar or routing), never when only the copy differs.",
+        "location_variable": "opportunity.location (static: richmond | va_beach | npn | telehealth). Set once by WF-01 at create. This is the single source of clinic identity; downstream workflows read it, they do not re-derive it.",
+        "custom_values": [
+          "Custom Values are account-wide constants (class-level): brand booking domain, main brand phone, brand name, compliance links, review link, survey link, intake link. Reference as {{custom_values.name}}. They are the SAME for every contact, so use them for brand-wide, not per-clinic, values.",
+          "Per-CLINIC values that DIFFER by location (clinic address, clinic direct phone, per-clinic booking/calendar URL) must live on the contact/opportunity record and be stamped by WF-01, then read as {{opportunity.location_booking_url}} / {{contact.clinic_phone}} etc. Custom Values cannot vary by contact, so per-clinic data does NOT belong in a Custom Value.",
+          "Merge-field syntax: contact fields {{contact.field_key}}, opportunity fields {{opportunity.field_key}}, account constants {{custom_values.name}}, appointment {{appointment.start_time}}."
+        ]
+      }
     },
     "05": {
       "purpose": "THE KEYSTONE. Route on the outcome the PCC Sales Form wrote. WF-05 never writes outcomes.",
@@ -616,7 +652,16 @@
         "WF-13 (CAPI)",
         "WF-06/07/08/09 (exits)",
         "Opportunity fields renewal_date + outcome_processed_at"
-      ]
+      ],
+      "variables": {
+        "principle": "Build ONE workflow, not one per clinic. Location is a static variable set once at object creation (WF-01 branches on opportunity.location and stamps the clinic-specific fields). Every downstream step reads merge fields, so the same workflow serves Richmond, Virginia Beach, and Newport News. Never hardcode a clinic name, address, phone, or booking URL into a message or action; never clone a workflow just to change words. Branch per location only when BEHAVIOR differs (a different calendar or routing), never when only the copy differs.",
+        "location_variable": "opportunity.location (static: richmond | va_beach | npn | telehealth). Set once by WF-01 at create. This is the single source of clinic identity; downstream workflows read it, they do not re-derive it.",
+        "custom_values": [
+          "Custom Values are account-wide constants (class-level): brand booking domain, main brand phone, brand name, compliance links, review link, survey link, intake link. Reference as {{custom_values.name}}. They are the SAME for every contact, so use them for brand-wide, not per-clinic, values.",
+          "Per-CLINIC values that DIFFER by location (clinic address, clinic direct phone, per-clinic booking/calendar URL) must live on the contact/opportunity record and be stamped by WF-01, then read as {{opportunity.location_booking_url}} / {{contact.clinic_phone}} etc. Custom Values cannot vary by contact, so per-clinic data does NOT belong in a Custom Value.",
+          "Merge-field syntax: contact fields {{contact.field_key}}, opportunity fields {{opportunity.field_key}}, account constants {{custom_values.name}}, appointment {{appointment.start_time}}."
+        ]
+      }
     },
     "06": {
       "purpose": "New-patient post-visit onboarding, NPS survey, conditional review request, negative-NPS alert.",
@@ -725,7 +770,16 @@
         "WF-14",
         "WF-09",
         "opportunity.visit_feedback_score"
-      ]
+      ],
+      "variables": {
+        "principle": "Build ONE workflow, not one per clinic. Location is a static variable set once at object creation (WF-01 branches on opportunity.location and stamps the clinic-specific fields). Every downstream step reads merge fields, so the same workflow serves Richmond, Virginia Beach, and Newport News. Never hardcode a clinic name, address, phone, or booking URL into a message or action; never clone a workflow just to change words. Branch per location only when BEHAVIOR differs (a different calendar or routing), never when only the copy differs.",
+        "location_variable": "opportunity.location (static: richmond | va_beach | npn | telehealth). Set once by WF-01 at create. This is the single source of clinic identity; downstream workflows read it, they do not re-derive it.",
+        "custom_values": [
+          "Custom Values are account-wide constants (class-level): brand booking domain, main brand phone, brand name, compliance links, review link, survey link, intake link. Reference as {{custom_values.name}}. They are the SAME for every contact, so use them for brand-wide, not per-clinic, values.",
+          "Per-CLINIC values that DIFFER by location (clinic address, clinic direct phone, per-clinic booking/calendar URL) must live on the contact/opportunity record and be stamped by WF-01, then read as {{opportunity.location_booking_url}} / {{contact.clinic_phone}} etc. Custom Values cannot vary by contact, so per-clinic data does NOT belong in a Custom Value.",
+          "Merge-field syntax: contact fields {{contact.field_key}}, opportunity fields {{opportunity.field_key}}, account constants {{custom_values.name}}, appointment {{appointment.start_time}}."
+        ]
+      }
     },
     "07": {
       "purpose": "A&D (Advise and Decline) objection-handling nurture, 11 touches over 35 days.",
@@ -816,7 +870,16 @@
         "ad_reason field",
         "WF-09",
         "WF-11"
-      ]
+      ],
+      "variables": {
+        "principle": "Build ONE workflow, not one per clinic. Location is a static variable set once at object creation (WF-01 branches on opportunity.location and stamps the clinic-specific fields). Every downstream step reads merge fields, so the same workflow serves Richmond, Virginia Beach, and Newport News. Never hardcode a clinic name, address, phone, or booking URL into a message or action; never clone a workflow just to change words. Branch per location only when BEHAVIOR differs (a different calendar or routing), never when only the copy differs.",
+        "location_variable": "opportunity.location (static: richmond | va_beach | npn | telehealth). Set once by WF-01 at create. This is the single source of clinic identity; downstream workflows read it, they do not re-derive it.",
+        "custom_values": [
+          "Custom Values are account-wide constants (class-level): brand booking domain, main brand phone, brand name, compliance links, review link, survey link, intake link. Reference as {{custom_values.name}}. They are the SAME for every contact, so use them for brand-wide, not per-clinic, values.",
+          "Per-CLINIC values that DIFFER by location (clinic address, clinic direct phone, per-clinic booking/calendar URL) must live on the contact/opportunity record and be stamped by WF-01, then read as {{opportunity.location_booking_url}} / {{contact.clinic_phone}} etc. Custom Values cannot vary by contact, so per-clinic data does NOT belong in a Custom Value.",
+          "Merge-field syntax: contact fields {{contact.field_key}}, opportunity fields {{opportunity.field_key}}, account constants {{custom_values.name}}, appointment {{appointment.start_time}}."
+        ]
+      }
     },
     "08": {
       "purpose": "No-show and cancel recovery, 8 touches over 7 days, exit instantly on rebook.",
@@ -928,7 +991,16 @@
         "WF-03",
         "WF-09",
         "WF-11"
-      ]
+      ],
+      "variables": {
+        "principle": "Build ONE workflow, not one per clinic. Location is a static variable set once at object creation (WF-01 branches on opportunity.location and stamps the clinic-specific fields). Every downstream step reads merge fields, so the same workflow serves Richmond, Virginia Beach, and Newport News. Never hardcode a clinic name, address, phone, or booking URL into a message or action; never clone a workflow just to change words. Branch per location only when BEHAVIOR differs (a different calendar or routing), never when only the copy differs.",
+        "location_variable": "opportunity.location (static: richmond | va_beach | npn | telehealth). Set once by WF-01 at create. This is the single source of clinic identity; downstream workflows read it, they do not re-derive it.",
+        "custom_values": [
+          "Custom Values are account-wide constants (class-level): brand booking domain, main brand phone, brand name, compliance links, review link, survey link, intake link. Reference as {{custom_values.name}}. They are the SAME for every contact, so use them for brand-wide, not per-clinic, values.",
+          "Per-CLINIC values that DIFFER by location (clinic address, clinic direct phone, per-clinic booking/calendar URL) must live on the contact/opportunity record and be stamped by WF-01, then read as {{opportunity.location_booking_url}} / {{contact.clinic_phone}} etc. Custom Values cannot vary by contact, so per-clinic data does NOT belong in a Custom Value.",
+          "Merge-field syntax: contact fields {{contact.field_key}}, opportunity fields {{opportunity.field_key}}, account constants {{custom_values.name}}, appointment {{appointment.start_time}}."
+        ]
+      }
     },
     "09": {
       "purpose": "Long-term nurture (7 touches / 120 days) plus a Renewal Reminders sub-flow for won members.",
@@ -1031,7 +1103,16 @@
         "WF-05 (renewal_date)",
         "WF-02/07/08 hand-offs",
         "WF-11"
-      ]
+      ],
+      "variables": {
+        "principle": "Build ONE workflow, not one per clinic. Location is a static variable set once at object creation (WF-01 branches on opportunity.location and stamps the clinic-specific fields). Every downstream step reads merge fields, so the same workflow serves Richmond, Virginia Beach, and Newport News. Never hardcode a clinic name, address, phone, or booking URL into a message or action; never clone a workflow just to change words. Branch per location only when BEHAVIOR differs (a different calendar or routing), never when only the copy differs.",
+        "location_variable": "opportunity.location (static: richmond | va_beach | npn | telehealth). Set once by WF-01 at create. This is the single source of clinic identity; downstream workflows read it, they do not re-derive it.",
+        "custom_values": [
+          "Custom Values are account-wide constants (class-level): brand booking domain, main brand phone, brand name, compliance links, review link, survey link, intake link. Reference as {{custom_values.name}}. They are the SAME for every contact, so use them for brand-wide, not per-clinic, values.",
+          "Per-CLINIC values that DIFFER by location (clinic address, clinic direct phone, per-clinic booking/calendar URL) must live on the contact/opportunity record and be stamped by WF-01, then read as {{opportunity.location_booking_url}} / {{contact.clinic_phone}} etc. Custom Values cannot vary by contact, so per-clinic data does NOT belong in a Custom Value.",
+          "Merge-field syntax: contact fields {{contact.field_key}}, opportunity fields {{opportunity.field_key}}, account constants {{custom_values.name}}, appointment {{appointment.start_time}}."
+        ]
+      }
     },
     "10": {
       "purpose": "Feedback survey. Writes opportunity.visit_feedback_score that drives the WF-06 NPS branch.",
@@ -1087,7 +1168,16 @@
         "survey form",
         "opportunity.visit_feedback_score",
         "WF-11"
-      ]
+      ],
+      "variables": {
+        "principle": "Build ONE workflow, not one per clinic. Location is a static variable set once at object creation (WF-01 branches on opportunity.location and stamps the clinic-specific fields). Every downstream step reads merge fields, so the same workflow serves Richmond, Virginia Beach, and Newport News. Never hardcode a clinic name, address, phone, or booking URL into a message or action; never clone a workflow just to change words. Branch per location only when BEHAVIOR differs (a different calendar or routing), never when only the copy differs.",
+        "location_variable": "opportunity.location (static: richmond | va_beach | npn | telehealth). Set once by WF-01 at create. This is the single source of clinic identity; downstream workflows read it, they do not re-derive it.",
+        "custom_values": [
+          "Custom Values are account-wide constants (class-level): brand booking domain, main brand phone, brand name, compliance links, review link, survey link, intake link. Reference as {{custom_values.name}}. They are the SAME for every contact, so use them for brand-wide, not per-clinic, values.",
+          "Per-CLINIC values that DIFFER by location (clinic address, clinic direct phone, per-clinic booking/calendar URL) must live on the contact/opportunity record and be stamped by WF-01, then read as {{opportunity.location_booking_url}} / {{contact.clinic_phone}} etc. Custom Values cannot vary by contact, so per-clinic data does NOT belong in a Custom Value.",
+          "Merge-field syntax: contact fields {{contact.field_key}}, opportunity fields {{opportunity.field_key}}, account constants {{custom_values.name}}, appointment {{appointment.start_time}}."
+        ]
+      }
     },
     "11": {
       "purpose": "The single DND and consent authority. Every send checks it. Also handles bounces and MUT suppression.",
@@ -1165,7 +1255,16 @@
         "sms_consent_status field",
         "native DND",
         "audit trail"
-      ]
+      ],
+      "variables": {
+        "principle": "Build ONE workflow, not one per clinic. Location is a static variable set once at object creation (WF-01 branches on opportunity.location and stamps the clinic-specific fields). Every downstream step reads merge fields, so the same workflow serves Richmond, Virginia Beach, and Newport News. Never hardcode a clinic name, address, phone, or booking URL into a message or action; never clone a workflow just to change words. Branch per location only when BEHAVIOR differs (a different calendar or routing), never when only the copy differs.",
+        "location_variable": "opportunity.location (static: richmond | va_beach | npn | telehealth). Set once by WF-01 at create. This is the single source of clinic identity; downstream workflows read it, they do not re-derive it.",
+        "custom_values": [
+          "Custom Values are account-wide constants (class-level): brand booking domain, main brand phone, brand name, compliance links, review link, survey link, intake link. Reference as {{custom_values.name}}. They are the SAME for every contact, so use them for brand-wide, not per-clinic, values.",
+          "Per-CLINIC values that DIFFER by location (clinic address, clinic direct phone, per-clinic booking/calendar URL) must live on the contact/opportunity record and be stamped by WF-01, then read as {{opportunity.location_booking_url}} / {{contact.clinic_phone}} etc. Custom Values cannot vary by contact, so per-clinic data does NOT belong in a Custom Value.",
+          "Merge-field syntax: contact fields {{contact.field_key}}, opportunity fields {{opportunity.field_key}}, account constants {{custom_values.name}}, appointment {{appointment.start_time}}."
+        ]
+      }
     },
     "12": {
       "purpose": "Handle call dispositions; write opportunity.call_disposition; route negative-NPS follow-ups. Never writes sale fields.",
@@ -1253,7 +1352,16 @@
         "opportunity.call_disposition",
         "patient_care_consultant_id (form-owned)",
         "WF-06"
-      ]
+      ],
+      "variables": {
+        "principle": "Build ONE workflow, not one per clinic. Location is a static variable set once at object creation (WF-01 branches on opportunity.location and stamps the clinic-specific fields). Every downstream step reads merge fields, so the same workflow serves Richmond, Virginia Beach, and Newport News. Never hardcode a clinic name, address, phone, or booking URL into a message or action; never clone a workflow just to change words. Branch per location only when BEHAVIOR differs (a different calendar or routing), never when only the copy differs.",
+        "location_variable": "opportunity.location (static: richmond | va_beach | npn | telehealth). Set once by WF-01 at create. This is the single source of clinic identity; downstream workflows read it, they do not re-derive it.",
+        "custom_values": [
+          "Custom Values are account-wide constants (class-level): brand booking domain, main brand phone, brand name, compliance links, review link, survey link, intake link. Reference as {{custom_values.name}}. They are the SAME for every contact, so use them for brand-wide, not per-clinic, values.",
+          "Per-CLINIC values that DIFFER by location (clinic address, clinic direct phone, per-clinic booking/calendar URL) must live on the contact/opportunity record and be stamped by WF-01, then read as {{opportunity.location_booking_url}} / {{contact.clinic_phone}} etc. Custom Values cannot vary by contact, so per-clinic data does NOT belong in a Custom Value.",
+          "Merge-field syntax: contact fields {{contact.field_key}}, opportunity fields {{opportunity.field_key}}, account constants {{custom_values.name}}, appointment {{appointment.start_time}}."
+        ]
+      }
     },
     "13": {
       "purpose": "Fire Booked and Won conversions to Google and Meta. Exclude A&D. Do not key off ad_* fields.",
@@ -1310,7 +1418,16 @@
         "WF-05 (signal)",
         "CAPI endpoints",
         "outcome_processed_at guard"
-      ]
+      ],
+      "variables": {
+        "principle": "Build ONE workflow, not one per clinic. Location is a static variable set once at object creation (WF-01 branches on opportunity.location and stamps the clinic-specific fields). Every downstream step reads merge fields, so the same workflow serves Richmond, Virginia Beach, and Newport News. Never hardcode a clinic name, address, phone, or booking URL into a message or action; never clone a workflow just to change words. Branch per location only when BEHAVIOR differs (a different calendar or routing), never when only the copy differs.",
+        "location_variable": "opportunity.location (static: richmond | va_beach | npn | telehealth). Set once by WF-01 at create. This is the single source of clinic identity; downstream workflows read it, they do not re-derive it.",
+        "custom_values": [
+          "Custom Values are account-wide constants (class-level): brand booking domain, main brand phone, brand name, compliance links, review link, survey link, intake link. Reference as {{custom_values.name}}. They are the SAME for every contact, so use them for brand-wide, not per-clinic, values.",
+          "Per-CLINIC values that DIFFER by location (clinic address, clinic direct phone, per-clinic booking/calendar URL) must live on the contact/opportunity record and be stamped by WF-01, then read as {{opportunity.location_booking_url}} / {{contact.clinic_phone}} etc. Custom Values cannot vary by contact, so per-clinic data does NOT belong in a Custom Value.",
+          "Merge-field syntax: contact fields {{contact.field_key}}, opportunity fields {{opportunity.field_key}}, account constants {{custom_values.name}}, appointment {{appointment.start_time}}."
+        ]
+      }
     },
     "14": {
       "purpose": "Post-sale ambassador activation: invitation, welcome, reward confirmation. Referrals go through WF-15.",
@@ -1370,7 +1487,16 @@
         "WF-06",
         "WF-15",
         "WF-11"
-      ]
+      ],
+      "variables": {
+        "principle": "Build ONE workflow, not one per clinic. Location is a static variable set once at object creation (WF-01 branches on opportunity.location and stamps the clinic-specific fields). Every downstream step reads merge fields, so the same workflow serves Richmond, Virginia Beach, and Newport News. Never hardcode a clinic name, address, phone, or booking URL into a message or action; never clone a workflow just to change words. Branch per location only when BEHAVIOR differs (a different calendar or routing), never when only the copy differs.",
+        "location_variable": "opportunity.location (static: richmond | va_beach | npn | telehealth). Set once by WF-01 at create. This is the single source of clinic identity; downstream workflows read it, they do not re-derive it.",
+        "custom_values": [
+          "Custom Values are account-wide constants (class-level): brand booking domain, main brand phone, brand name, compliance links, review link, survey link, intake link. Reference as {{custom_values.name}}. They are the SAME for every contact, so use them for brand-wide, not per-clinic, values.",
+          "Per-CLINIC values that DIFFER by location (clinic address, clinic direct phone, per-clinic booking/calendar URL) must live on the contact/opportunity record and be stamped by WF-01, then read as {{opportunity.location_booking_url}} / {{contact.clinic_phone}} etc. Custom Values cannot vary by contact, so per-clinic data does NOT belong in a Custom Value.",
+          "Merge-field syntax: contact fields {{contact.field_key}}, opportunity fields {{opportunity.field_key}}, account constants {{custom_values.name}}, appointment {{appointment.start_time}}."
+        ]
+      }
     },
     "15": {
       "purpose": "Route PCC-submitted referrals into the tracking-only Referrals pipeline; referred contact goes back to WF-01.",
@@ -1442,7 +1568,16 @@
         "Referrals pipeline",
         "WF-01",
         "WF-11"
-      ]
+      ],
+      "variables": {
+        "principle": "Build ONE workflow, not one per clinic. Location is a static variable set once at object creation (WF-01 branches on opportunity.location and stamps the clinic-specific fields). Every downstream step reads merge fields, so the same workflow serves Richmond, Virginia Beach, and Newport News. Never hardcode a clinic name, address, phone, or booking URL into a message or action; never clone a workflow just to change words. Branch per location only when BEHAVIOR differs (a different calendar or routing), never when only the copy differs.",
+        "location_variable": "opportunity.location (static: richmond | va_beach | npn | telehealth). Set once by WF-01 at create. This is the single source of clinic identity; downstream workflows read it, they do not re-derive it.",
+        "custom_values": [
+          "Custom Values are account-wide constants (class-level): brand booking domain, main brand phone, brand name, compliance links, review link, survey link, intake link. Reference as {{custom_values.name}}. They are the SAME for every contact, so use them for brand-wide, not per-clinic, values.",
+          "Per-CLINIC values that DIFFER by location (clinic address, clinic direct phone, per-clinic booking/calendar URL) must live on the contact/opportunity record and be stamped by WF-01, then read as {{opportunity.location_booking_url}} / {{contact.clinic_phone}} etc. Custom Values cannot vary by contact, so per-clinic data does NOT belong in a Custom Value.",
+          "Merge-field syntax: contact fields {{contact.field_key}}, opportunity fields {{opportunity.field_key}}, account constants {{custom_values.name}}, appointment {{appointment.start_time}}."
+        ]
+      }
     },
     "16": {
       "purpose": "Missed-call text-back plus a simultaneous-ring IVR path and chat out-of-office auto-response.",
@@ -1529,7 +1664,16 @@
         "chat widget",
         "booking link custom value",
         "WF-11"
-      ]
+      ],
+      "variables": {
+        "principle": "Build ONE workflow, not one per clinic. Location is a static variable set once at object creation (WF-01 branches on opportunity.location and stamps the clinic-specific fields). Every downstream step reads merge fields, so the same workflow serves Richmond, Virginia Beach, and Newport News. Never hardcode a clinic name, address, phone, or booking URL into a message or action; never clone a workflow just to change words. Branch per location only when BEHAVIOR differs (a different calendar or routing), never when only the copy differs.",
+        "location_variable": "opportunity.location (static: richmond | va_beach | npn | telehealth). Set once by WF-01 at create. This is the single source of clinic identity; downstream workflows read it, they do not re-derive it.",
+        "custom_values": [
+          "Custom Values are account-wide constants (class-level): brand booking domain, main brand phone, brand name, compliance links, review link, survey link, intake link. Reference as {{custom_values.name}}. They are the SAME for every contact, so use them for brand-wide, not per-clinic, values.",
+          "Per-CLINIC values that DIFFER by location (clinic address, clinic direct phone, per-clinic booking/calendar URL) must live on the contact/opportunity record and be stamped by WF-01, then read as {{opportunity.location_booking_url}} / {{contact.clinic_phone}} etc. Custom Values cannot vary by contact, so per-clinic data does NOT belong in a Custom Value.",
+          "Merge-field syntax: contact fields {{contact.field_key}}, opportunity fields {{opportunity.field_key}}, account constants {{custom_values.name}}, appointment {{appointment.start_time}}."
+        ]
+      }
     }
   }
 }

@@ -1,0 +1,38 @@
+{
+  "sms_opt_out_footer": {
+    "id": "pvvpTfE7qwjIJZ1vxMaL",
+    "fieldKey": "{{ custom_values.sms_opt_out_footer }}",
+    "value": "Reply STOP to opt out.",
+    "status": "created"
+  },
+  "brand_tagline": {
+    "id": "50ldGJxFn17bz6uKSCDz",
+    "fieldKey": "{{ custom_values.brand_tagline }}",
+    "value": "Find Your Edge Over Age.",
+    "status": "created"
+  },
+  "consult_descriptor": {
+    "id": "OMvNGQH7HsURLeaxzfBU",
+    "fieldKey": "{{ custom_values.consult_descriptor }}",
+    "value": "no-cost 60-minute in-person consultation",
+    "status": "created"
+  },
+  "intake_link": {
+    "id": "txz5yQ2UPVCD7hJNmqQK",
+    "fieldKey": "{{ custom_values.intake_link }}",
+    "value": "PLACEHOLDER_FILL_BEFORE_GOLIVE",
+    "status": "created"
+  },
+  "survey_link": {
+    "id": "eK87E6XHpmAGX3QsvAlG",
+    "fieldKey": "{{ custom_values.survey_link }}",
+    "value": "PLACEHOLDER_FILL_BEFORE_GOLIVE",
+    "status": "created"
+  },
+  "referral_link": {
+    "id": "ZrXtdKMo8yIyNIJHY86U",
+    "fieldKey": "{{ custom_values.referral_link }}",
+    "value": "PLACEHOLDER_FILL_BEFORE_GOLIVE",
+    "status": "created"
+  }
+}

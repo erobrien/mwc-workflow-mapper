@@ -83,3 +83,12 @@ Message copy is centralized in GHL's native Template library (Marketing > Templa
 - Fallback only if A/B variants are later required: a Messages Custom Object with a copy-before-send bridge (mirror the Locations object pattern).
 
 Sequencing: build/confirm the template library first, then wire send-steps to reference templates, so no workflow ever carries authoritative copy.
+
+## 7. Decision 16 — 2-surface content model (templatization)
+
+Executed 2026-07-11. Message copy is centralized across two managed surfaces:
+- **Surface 1 — Templates**: 15 message templates (sms_wf01..wf16 + email_wf01) in the native GHL Templates library. Bodies in `ghl_data/template_payloads.json`, reconciled (booking_link/review_link -> per-clinic current_* fields; footer + consult_descriptor templatized). Create via `scripts/create_templates.py` (needs backend JWT — PIT is read-only for templates).
+- **Surface 2 — Custom Values**: 6 brand-wide constants created (sms_opt_out_footer, brand_tagline, consult_descriptor, intake_link, survey_link, referral_link). 3 links are PLACEHOLDER_FILL_BEFORE_GOLIVE — fill before go-live.
+- **Per-clinic**: Locations Custom Object + generic current_* contact fields (added current_review_link, id 7Pos1K79nIr21Or8xnHu). WF-01 stamp step still TODO (needs JWT).
+- **Validation**: `scripts/validate_templates.py` PASSES — every token resolves to a declared source.
+- **Hard guard**: only CREATE new assets; never edit/delete live templates or values outside the build. Legacy per-clinic Custom Values deprecated, not deleted.

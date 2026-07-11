@@ -707,5 +707,223 @@
     "if_else": "if_else node PROVEN 2026-07-11: attributes.branches[].segments[].conditions[] with conditionType:'opportunity', conditionSubType:<fieldId>, conditionOperator (==, is_any_of), conditionValue. Branch children link via parent+parentKey=branch.id. Validated against opportunity.appt_status on live.",
     "opportunity_write": "internal_create_opportunity node PROVEN 2026-07-11: attributes {pipelineId, type:'internal_create_opportunity', __customInputFields__:[{value,filterField,valueFieldType}], __customInputs__:{}}. filterField = pipelineStageId | status | name | custom_fields.<fieldId>. Writes/updates the opportunity incl. custom-field values."
   },
-  "_node_types_proven": "sms, email, wait (hour/day, non-terminal), internal_notification (type:email + email{}), add_contact_tag, if_else (nested ok), internal_create_opportunity, webhook. All validated on live 2026-07-11."
+  "_node_types_proven": "sms, email, wait (hour/day, non-terminal), internal_notification (type:email + email{}), add_contact_tag, if_else (nested ok), internal_create_opportunity, webhook. All validated on live 2026-07-11.",
+  "message_registry": {
+    "model": "2-surface (Templates + Custom Values) + Locations object for per-clinic + native merge fields",
+    "custom_values": {
+      "sms_opt_out_footer": {
+        "id": "pvvpTfE7qwjIJZ1vxMaL",
+        "token": "{{ custom_values.sms_opt_out_footer }}",
+        "value": "Reply STOP to opt out.",
+        "status": "ready"
+      },
+      "brand_tagline": {
+        "id": "50ldGJxFn17bz6uKSCDz",
+        "token": "{{ custom_values.brand_tagline }}",
+        "value": "Find Your Edge Over Age.",
+        "status": "ready"
+      },
+      "consult_descriptor": {
+        "id": "OMvNGQH7HsURLeaxzfBU",
+        "token": "{{ custom_values.consult_descriptor }}",
+        "value": "no-cost 60-minute in-person consultation",
+        "status": "ready"
+      },
+      "intake_link": {
+        "id": "txz5yQ2UPVCD7hJNmqQK",
+        "token": "{{ custom_values.intake_link }}",
+        "value": "PLACEHOLDER_FILL_BEFORE_GOLIVE",
+        "status": "PLACEHOLDER_FILL_BEFORE_GOLIVE"
+      },
+      "survey_link": {
+        "id": "eK87E6XHpmAGX3QsvAlG",
+        "token": "{{ custom_values.survey_link }}",
+        "value": "PLACEHOLDER_FILL_BEFORE_GOLIVE",
+        "status": "PLACEHOLDER_FILL_BEFORE_GOLIVE"
+      },
+      "referral_link": {
+        "id": "ZrXtdKMo8yIyNIJHY86U",
+        "token": "{{ custom_values.referral_link }}",
+        "value": "PLACEHOLDER_FILL_BEFORE_GOLIVE",
+        "status": "PLACEHOLDER_FILL_BEFORE_GOLIVE"
+      }
+    },
+    "templates": {
+      "email_wf01_welcome": {
+        "id": "PENDING_CREATE",
+        "wf": "01",
+        "channel": "email",
+        "depends_on": [
+          "{{contact.first_name}}",
+          "{{ custom_values.consult_descriptor }}"
+        ],
+        "status": "payload_ready"
+      },
+      "sms_wf01_speed_to_lead": {
+        "id": "PENDING_CREATE",
+        "wf": "01",
+        "channel": "sms",
+        "depends_on": [
+          "{{contact.first_name}}",
+          "{{ custom_values.consult_descriptor }}",
+          "{{ custom_values.sms_opt_out_footer }}"
+        ],
+        "status": "payload_ready"
+      },
+      "sms_wf02_follow_up_1": {
+        "id": "PENDING_CREATE",
+        "wf": "02",
+        "channel": "sms",
+        "depends_on": [
+          "{{contact.first_name}}",
+          "{{ custom_values.consult_descriptor }}",
+          "{{ custom_values.sms_opt_out_footer }}"
+        ],
+        "status": "payload_ready"
+      },
+      "sms_wf02_empathetic_breakup_5": {
+        "id": "PENDING_CREATE",
+        "wf": "02",
+        "channel": "sms",
+        "depends_on": [
+          "{{contact.first_name}}",
+          "{{ custom_values.sms_opt_out_footer }}"
+        ],
+        "status": "payload_ready"
+      },
+      "sms_wf03_booking_confirmation": {
+        "id": "PENDING_CREATE",
+        "wf": "03",
+        "channel": "sms",
+        "depends_on": [
+          "{{contact.first_name}}",
+          "{{appointment.start_time}}",
+          "{{ custom_values.sms_opt_out_footer }}"
+        ],
+        "status": "payload_ready"
+      },
+      "sms_wf03_morning_of": {
+        "id": "PENDING_CREATE",
+        "wf": "03",
+        "channel": "sms",
+        "depends_on": [
+          "{{contact.first_name}}",
+          "{{appointment.start_time}}"
+        ],
+        "status": "payload_ready"
+      },
+      "sms_wf04_intake_chase_1": {
+        "id": "PENDING_CREATE",
+        "wf": "04",
+        "channel": "sms",
+        "depends_on": [
+          "{{contact.first_name}}",
+          "{{custom_values.intake_link}}",
+          "{{ custom_values.sms_opt_out_footer }}"
+        ],
+        "status": "payload_ready"
+      },
+      "sms_wf06_google_review_request": {
+        "id": "PENDING_CREATE",
+        "wf": "06",
+        "channel": "sms",
+        "depends_on": [
+          "{{contact.first_name}}",
+          "{{contact.current_review_link}}",
+          "{{ custom_values.sms_opt_out_footer }}"
+        ],
+        "status": "payload_ready"
+      },
+      "sms_wf07_no_pressure_1": {
+        "id": "PENDING_CREATE",
+        "wf": "07",
+        "channel": "sms",
+        "depends_on": [
+          "{{contact.first_name}}",
+          "{{ custom_values.sms_opt_out_footer }}"
+        ],
+        "status": "payload_ready"
+      },
+      "sms_wf08_recovery_1": {
+        "id": "PENDING_CREATE",
+        "wf": "08",
+        "channel": "sms",
+        "depends_on": [
+          "{{contact.first_name}}",
+          "{{ custom_values.sms_opt_out_footer }}"
+        ],
+        "status": "payload_ready"
+      },
+      "sms_wf09_7_day_urgency_renewal": {
+        "id": "PENDING_CREATE",
+        "wf": "09",
+        "channel": "sms",
+        "depends_on": [
+          "{{contact.first_name}}",
+          "{{ custom_values.sms_opt_out_footer }}"
+        ],
+        "status": "payload_ready"
+      },
+      "sms_wf10_survey_invite": {
+        "id": "PENDING_CREATE",
+        "wf": "10",
+        "channel": "sms",
+        "depends_on": [
+          "{{contact.first_name}}",
+          "{{custom_values.survey_link}}",
+          "{{ custom_values.sms_opt_out_footer }}"
+        ],
+        "status": "payload_ready"
+      },
+      "sms_wf14_ambassador_invitation": {
+        "id": "PENDING_CREATE",
+        "wf": "14",
+        "channel": "sms",
+        "depends_on": [
+          "{{contact.first_name}}",
+          "{{custom_values.referral_link}}",
+          "{{ custom_values.sms_opt_out_footer }}"
+        ],
+        "status": "payload_ready"
+      },
+      "sms_wf15_referred_lead_welcome": {
+        "id": "PENDING_CREATE",
+        "wf": "15",
+        "channel": "sms",
+        "depends_on": [
+          "{{contact.first_name}}",
+          "{{ custom_values.consult_descriptor }}",
+          "{{ custom_values.sms_opt_out_footer }}"
+        ],
+        "status": "payload_ready"
+      },
+      "sms_wf16_instant_text_back": {
+        "id": "PENDING_CREATE",
+        "wf": "16",
+        "channel": "sms",
+        "depends_on": [
+          "{{contact.first_name}}",
+          "{{ custom_values.consult_descriptor }}",
+          "{{contact.current_booking_url}}",
+          "{{ custom_values.sms_opt_out_footer }}"
+        ],
+        "status": "payload_ready"
+      }
+    },
+    "current_review_link_field": {
+      "id": "7Pos1K79nIr21Or8xnHu",
+      "fieldKey": "contact.current_review_link",
+      "note": "stamped by WF-01 from Locations.review_link (WF-01 step not yet added — needs JWT)"
+    },
+    "legacy_per_clinic_custom_values": {
+      "status": "deprecated_recommendation",
+      "action": "do NOT delete in this build; document for separate sign-off",
+      "values": [
+        "richmond_*",
+        "virginia_beach_*",
+        "newport_news_*"
+      ]
+    }
+  },
+  "custom_values_created_2026_07_11": true
 }

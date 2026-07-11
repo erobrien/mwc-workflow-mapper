@@ -4376,6 +4376,14 @@
       "status": "Locked",
       "date": "2026-07-11",
       "owner": "Eric"
+    },
+    {
+      "n": "16",
+      "date": "2026-07-11",
+      "owner": "Eric",
+      "status": "Locked",
+      "decision": "2-surface content model: message copy lives in native GHL Templates (one per message, sms_wfNN_*/email_wfNN_*); shared brand-wide merge-free constants live in Custom Values (sms_opt_out_footer, brand_tagline, consult_descriptor, intake_link, survey_link, referral_link) referenced inside templates; per-clinic data stays in the Locations Custom Object + generic current_* contact fields (current_review_link added). Reconciliation: booking_link and review_link are per-clinic and use {{contact.current_*}}, not Custom Values (collision rule, Decision 14). Brand constants are safe as Custom Values because they contain no merge fields (no nesting fragility). Legacy per-clinic Custom Values (richmond_*/virginia_beach_*/newport_news_*) are deprecated but NOT deleted in this build. Hard guard: only CREATE new assets; never edit/delete live templates or values outside the build.",
+      "choice": "Option B (2 managed surfaces) over Option A (inline everything, footer drift) and Option C (single Custom Object, breaks merge-field rendering in message bodies)."
     }
   ],
   "risks": [

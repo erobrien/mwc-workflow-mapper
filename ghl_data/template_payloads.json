@@ -1,0 +1,253 @@
+[
+  {
+    "template_name": "email_wf01_welcome",
+    "wf": "01",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{ custom_values.consult_descriptor }}"
+    ],
+    "payload": {
+      "name": "email_wf01_welcome",
+      "type": "email",
+      "template": {
+        "subject": "Welcome to Men's Wellness Centers.",
+        "body": "Thanks for reaching out, {{contact.first_name}}. A Men's Wellness Centers team member will call you within one business hour to schedule your {{ custom_values.consult_descriptor }} at your local clinic. BUILD DECISION NEEDED: paste final approved welcome copy."
+      }
+    }
+  },
+  {
+    "template_name": "sms_wf01_speed_to_lead",
+    "wf": "01",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{ custom_values.consult_descriptor }}",
+      "{{ custom_values.sms_opt_out_footer }}"
+    ],
+    "payload": {
+      "name": "sms_wf01_speed_to_lead",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, this is Men's Wellness Centers. Thanks for reaching out. What is the best time today for a quick call to book your {{ custom_values.consult_descriptor }}? {{ custom_values.sms_opt_out_footer }}"
+      }
+    }
+  },
+  {
+    "template_name": "sms_wf02_follow_up_1",
+    "wf": "02",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{ custom_values.consult_descriptor }}",
+      "{{ custom_values.sms_opt_out_footer }}"
+    ],
+    "payload": {
+      "name": "sms_wf02_follow_up_1",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, following up from Men's Wellness Centers. Ready to book your {{ custom_values.consult_descriptor }}? Reply with a day that works. {{ custom_values.sms_opt_out_footer }}"
+      }
+    }
+  },
+  {
+    "template_name": "sms_wf02_empathetic_breakup_5",
+    "wf": "02",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{ custom_values.sms_opt_out_footer }}"
+    ],
+    "payload": {
+      "name": "sms_wf02_empathetic_breakup_5",
+      "type": "sms",
+      "template": {
+        "body": "{{contact.first_name}}, we will step back for now. When you are ready to book your consultation at Men's Wellness Centers, we are here. {{ custom_values.sms_opt_out_footer }}"
+      }
+    }
+  },
+  {
+    "template_name": "sms_wf03_booking_confirmation",
+    "wf": "03",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{appointment.start_time}}",
+      "{{ custom_values.sms_opt_out_footer }}"
+    ],
+    "payload": {
+      "name": "sms_wf03_booking_confirmation",
+      "type": "sms",
+      "template": {
+        "body": "You are booked, {{contact.first_name}}. Your 60-minute in-person consultation at Men's Wellness Centers is {{appointment.start_time}}. {{ custom_values.sms_opt_out_footer }}"
+      }
+    }
+  },
+  {
+    "template_name": "sms_wf03_morning_of",
+    "wf": "03",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{appointment.start_time}}"
+    ],
+    "payload": {
+      "name": "sms_wf03_morning_of",
+      "type": "sms",
+      "template": {
+        "body": "Good morning {{contact.first_name}}. We look forward to seeing you today at {{appointment.start_time}} for your 60-minute in-person consultation at Men's Wellness Centers."
+      }
+    }
+  },
+  {
+    "template_name": "sms_wf04_intake_chase_1",
+    "wf": "04",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{custom_values.intake_link}}",
+      "{{ custom_values.sms_opt_out_footer }}"
+    ],
+    "payload": {
+      "name": "sms_wf04_intake_chase_1",
+      "type": "sms",
+      "template": {
+        "body": "{{contact.first_name}}, to make the most of your 60-minute in-person consultation at Men's Wellness Centers, please complete your intake form here: {{custom_values.intake_link}}. {{ custom_values.sms_opt_out_footer }}"
+      }
+    }
+  },
+  {
+    "template_name": "sms_wf06_google_review_request",
+    "wf": "06",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_review_link}}",
+      "{{ custom_values.sms_opt_out_footer }}"
+    ],
+    "payload": {
+      "name": "sms_wf06_google_review_request",
+      "type": "sms",
+      "template": {
+        "body": "{{contact.first_name}}, it means a lot to hear your visit went well. Would you share a quick review of Men's Wellness Centers? {{contact.current_review_link}} {{ custom_values.sms_opt_out_footer }}"
+      }
+    }
+  },
+  {
+    "template_name": "sms_wf07_no_pressure_1",
+    "wf": "07",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{ custom_values.sms_opt_out_footer }}"
+    ],
+    "payload": {
+      "name": "sms_wf07_no_pressure_1",
+      "type": "sms",
+      "template": {
+        "body": "{{contact.first_name}}, no pressure at all. If any questions came up after your consultation at Men's Wellness Centers, I am here to help. {{ custom_values.sms_opt_out_footer }}"
+      }
+    }
+  },
+  {
+    "template_name": "sms_wf08_recovery_1",
+    "wf": "08",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{ custom_values.sms_opt_out_footer }}"
+    ],
+    "payload": {
+      "name": "sms_wf08_recovery_1",
+      "type": "sms",
+      "template": {
+        "body": "{{contact.first_name}}, we missed you today at Men's Wellness Centers. Let us get you rescheduled for your 60-minute in-person consultation. What day works? {{ custom_values.sms_opt_out_footer }}"
+      }
+    }
+  },
+  {
+    "template_name": "sms_wf09_7_day_urgency_renewal",
+    "wf": "09",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{ custom_values.sms_opt_out_footer }}"
+    ],
+    "payload": {
+      "name": "sms_wf09_7_day_urgency_renewal",
+      "type": "sms",
+      "template": {
+        "body": "{{contact.first_name}}, your Men's Wellness Centers program renews in 7 days. Reply here to confirm and we will take care of the rest. {{ custom_values.sms_opt_out_footer }}"
+      }
+    }
+  },
+  {
+    "template_name": "sms_wf10_survey_invite",
+    "wf": "10",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{custom_values.survey_link}}",
+      "{{ custom_values.sms_opt_out_footer }}"
+    ],
+    "payload": {
+      "name": "sms_wf10_survey_invite",
+      "type": "sms",
+      "template": {
+        "body": "{{contact.first_name}}, how was your visit to Men's Wellness Centers? One quick tap: {{custom_values.survey_link}} {{ custom_values.sms_opt_out_footer }}"
+      }
+    }
+  },
+  {
+    "template_name": "sms_wf14_ambassador_invitation",
+    "wf": "14",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{custom_values.referral_link}}",
+      "{{ custom_values.sms_opt_out_footer }}"
+    ],
+    "payload": {
+      "name": "sms_wf14_ambassador_invitation",
+      "type": "sms",
+      "template": {
+        "body": "{{contact.first_name}}, know a man who could use his edge back? Refer him to Men's Wellness Centers and we will take care of you both. {{custom_values.referral_link}} {{ custom_values.sms_opt_out_footer }}"
+      }
+    }
+  },
+  {
+    "template_name": "sms_wf15_referred_lead_welcome",
+    "wf": "15",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{ custom_values.consult_descriptor }}",
+      "{{ custom_values.sms_opt_out_footer }}"
+    ],
+    "payload": {
+      "name": "sms_wf15_referred_lead_welcome",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, you were referred to Men's Wellness Centers. We would love to book your {{ custom_values.consult_descriptor }}. What day works? {{ custom_values.sms_opt_out_footer }}"
+      }
+    }
+  },
+  {
+    "template_name": "sms_wf16_instant_text_back",
+    "wf": "16",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{ custom_values.consult_descriptor }}",
+      "{{contact.current_booking_url}}",
+      "{{ custom_values.sms_opt_out_footer }}"
+    ],
+    "payload": {
+      "name": "sms_wf16_instant_text_back",
+      "type": "sms",
+      "template": {
+        "body": "Sorry we missed your call to Men's Wellness Centers, {{contact.first_name}}. How can we help? You can book your {{ custom_values.consult_descriptor }} here: {{contact.current_booking_url}} {{ custom_values.sms_opt_out_footer }}"
+      }
+    }
+  }
+]

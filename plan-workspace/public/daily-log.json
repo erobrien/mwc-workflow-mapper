@@ -286,6 +286,14 @@
       "category": "blocker",
       "summary": "Pipeline reconciliation note (not a defect -- expected pre-go-live state): live revenue currently runs through '01. MWC Sales Production' (uUm5DInIjq6uYlg9HDwU, 1,079 opportunities), while all -Target Release workflows are built against the new canonical pipeline 'Sales - Lead to Close' (Vt8cPz51C3i87moo73gQ, 0 opportunities -- expected, since it is not live yet). Account has 18 total pipelines; several pre-existing ones (02/03/04 per-clinic, MWC Lead Pipeline, PCC Referrals, Referral Rewards, Retention, No Show/Cancel, z Call Disposition) may still be in active use. OPEN DECISION for the go-live pass: does cutover migrate open opportunities from '01. MWC Sales Production' into 'Sales - Lead to Close' (and retire the old pipeline), or does the new pipeline only capture leads going forward from cutover while old-pipeline opportunities finish out their lifecycle in place? Also note the stage models differ: '01. MWC Sales Production' has 8 stages (Pending New/Renewal Arrival, New Sale, Renewal Sale, A&D/No Sale, No-Show, Rescheduled, Cancelled) vs. the 11-stage model (New Lead...Won) the spec and build_ids.json assume. Not a blocker for continued drafting; must be resolved before triggers are attached at go-live.",
       "ref": "pipeline-mismatch"
+    },
+    {
+      "date": "2026-07-11",
+      "time": "10:5x",
+      "actor": "Computer",
+      "category": "build",
+      "summary": "Decision 16 locked + executed the 2-surface templatization: created 6 brand Custom Values (footer, tagline, consult_descriptor, intake/survey/referral links — 3 links flagged placeholder-fill-before-go-live), created current_review_link contact field (id 7Pos1K79nIr21Or8xnHu), built 15 reconciled message-template payloads (sms_wf01..wf16 + email_wf01) with per-clinic token corrections (booking_link/review_link -> current_*), wrote message_registry into build_ids.json, and wrote scripts/create_templates.py (runnable with JWT) + scripts/validate_templates.py (PASSES: all tokens resolve). BLOCKED on backend JWT for: creating the 15 templates in GHL (PIT has read-only scope for templates, 401 on create) and wiring WF send-steps + WF-01 current_review_link stamp. All prep complete so creation is a one-command run once JWT is provided.",
+      "ref": "Decision 16"
     }
   ]
 }

@@ -1,0 +1,135 @@
+[
+  {
+    "wf": "01",
+    "channel": "email",
+    "template_name": "email_01_email_welcome",
+    "orig_name": "Email: Welcome",
+    "body": "Subject: Welcome to Men's Wellness Centers. Body: Thanks for reaching out, {{contact.first_name}}. A Men's Wellness Centers team member will call you within one business hour to schedule your no-cost 60-minute in-person consultation at your local clinic. BUILD DECISION NEEDED: paste final approved welcome copy."
+  },
+  {
+    "wf": "01",
+    "channel": "sms",
+    "template_name": "sms_01_sms_speed_to_lead",
+    "orig_name": "SMS: Speed-to-Lead",
+    "body": "Hi {{contact.first_name}}, this is Men's Wellness Centers. Thanks for reaching out. What is the best time today for a quick call to book your no-cost 60-minute in-person consultation? Reply STOP to opt out."
+  },
+  {
+    "wf": "02",
+    "channel": "sms",
+    "template_name": "sms_02_sms_follow_up_1",
+    "orig_name": "SMS: Follow-Up 1",
+    "body": "Hi {{contact.first_name}}, following up from Men's Wellness Centers. Ready to book your no-cost 60-minute in-person consultation? Reply with a day that works. Reply STOP to opt out."
+  },
+  {
+    "wf": "02",
+    "channel": "sms",
+    "template_name": "sms_02_sms_empathetic_breakup_5",
+    "orig_name": "SMS: Empathetic Breakup 5",
+    "body": "{{contact.first_name}}, we will step back for now. When you are ready to book your consultation at Men's Wellness Centers, we are here. Reply STOP to opt out."
+  },
+  {
+    "wf": "03",
+    "channel": "sms",
+    "template_name": "sms_03_sms_booking_confirmation",
+    "orig_name": "SMS: Booking Confirmation",
+    "body": "You are booked, {{contact.first_name}}. Your 60-minute in-person consultation at Men's Wellness Centers is {{appointment.start_time}}. Reply STOP to opt out."
+  },
+  {
+    "wf": "03",
+    "channel": "sms",
+    "template_name": "sms_03_sms_morning_of",
+    "orig_name": "SMS: Morning-Of",
+    "body": "Good morning {{contact.first_name}}. We look forward to seeing you today at {{appointment.start_time}} for your 60-minute in-person consultation at Men's Wellness Centers."
+  },
+  {
+    "wf": "04",
+    "channel": "sms",
+    "template_name": "sms_04_sms_intake_chase_1",
+    "orig_name": "SMS: Intake Chase 1",
+    "body": "{{contact.first_name}}, to make the most of your 60-minute in-person consultation at Men's Wellness Centers, please complete your intake form here: {{custom_values.intake_link}}. Reply STOP to opt out."
+  },
+  {
+    "wf": "05",
+    "channel": "sms",
+    "template_name": "sms_05_n_a",
+    "orig_name": "n/a",
+    "body": "WF-05 sends no member messages. It only routes. A 'no form by end of appointment day' chaser nags the PCC internally and writes no outcome."
+  },
+  {
+    "wf": "06",
+    "channel": "sms",
+    "template_name": "sms_06_sms_google_review_request",
+    "orig_name": "SMS: Google Review Request",
+    "body": "{{contact.first_name}}, it means a lot to hear your visit went well. Would you share a quick review of Men's Wellness Centers? {{custom_values.review_link}} Reply STOP to opt out."
+  },
+  {
+    "wf": "07",
+    "channel": "sms",
+    "template_name": "sms_07_sms_no_pressure_1",
+    "orig_name": "SMS: No-Pressure 1",
+    "body": "{{contact.first_name}}, no pressure at all. If any questions came up after your consultation at Men's Wellness Centers, I am here to help. Reply STOP to opt out."
+  },
+  {
+    "wf": "08",
+    "channel": "sms",
+    "template_name": "sms_08_sms_recovery_1",
+    "orig_name": "SMS: Recovery 1",
+    "body": "{{contact.first_name}}, we missed you today at Men's Wellness Centers. Let us get you rescheduled for your 60-minute in-person consultation. What day works? Reply STOP to opt out."
+  },
+  {
+    "wf": "09",
+    "channel": "sms",
+    "template_name": "sms_09_sms_7_day_urgency_renewal",
+    "orig_name": "SMS: 7-Day Urgency (renewal)",
+    "body": "{{contact.first_name}}, your Men's Wellness Centers program renews in 7 days. Reply here to confirm and we will take care of the rest. Reply STOP to opt out."
+  },
+  {
+    "wf": "10",
+    "channel": "sms",
+    "template_name": "sms_10_sms_survey_invite",
+    "orig_name": "SMS: Survey Invite",
+    "body": "{{contact.first_name}}, how was your visit to Men's Wellness Centers? One quick tap: {{custom_values.survey_link}} Reply STOP to opt out."
+  },
+  {
+    "wf": "11",
+    "channel": "sms",
+    "template_name": "sms_11_n_a",
+    "orig_name": "n/a",
+    "body": "WF-11 sends nothing. It gates and suppresses. Assume-consent for the 11,077 total historical contacts is an accepted risk (Decision 8)."
+  },
+  {
+    "wf": "12",
+    "channel": "sms",
+    "template_name": "sms_12_n_a",
+    "orig_name": "n/a",
+    "body": "WF-12 never writes sale_outcome, sale_type, or value. That is the PCC Sales Form only (H5 single-writer guardrail). It only reads patient_care_consultant_id."
+  },
+  {
+    "wf": "13",
+    "channel": "sms",
+    "template_name": "sms_13_n_a",
+    "orig_name": "n/a",
+    "body": "GUARDRAIL: sale_outcome's AD value and the ad_reason field are named for 'Advise and Decline', NOT advertising. Do not key conversion logic off ad_* fields or tags, or lost consultations will be reported as fake conversions to Meta and Google."
+  },
+  {
+    "wf": "14",
+    "channel": "sms",
+    "template_name": "sms_14_sms_ambassador_invitation",
+    "orig_name": "SMS: Ambassador Invitation",
+    "body": "{{contact.first_name}}, know a man who could use his edge back? Refer him to Men's Wellness Centers and we will take care of you both. {{custom_values.referral_link}} Reply STOP to opt out."
+  },
+  {
+    "wf": "15",
+    "channel": "sms",
+    "template_name": "sms_15_sms_referred_lead_welcome",
+    "orig_name": "SMS: Referred-Lead Welcome",
+    "body": "Hi {{contact.first_name}}, you were referred to Men's Wellness Centers. We would love to book your no-cost 60-minute in-person consultation. What day works? Reply STOP to opt out."
+  },
+  {
+    "wf": "16",
+    "channel": "sms",
+    "template_name": "sms_16_sms_instant_text_back",
+    "orig_name": "SMS: Instant Text-Back",
+    "body": "Sorry we missed your call to Men's Wellness Centers, {{contact.first_name}}. How can we help? You can book your no-cost 60-minute in-person consultation here: {{custom_values.booking_link}} Reply STOP to opt out."
+  }
+]

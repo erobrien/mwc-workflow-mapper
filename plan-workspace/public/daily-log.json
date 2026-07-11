@@ -310,6 +310,14 @@
       "category": "finding",
       "summary": "CRITICAL PLATFORM FINDING (probe-confirmed): GHL workflow SMS nodes cannot reference templates by ID. Saved templateId + messageTemplateId on a draft SMS node -> 200 OK, but read-back shows GHL stripped both; node retains only body+attachments. 0 of 54 live SMS nodes use a template reference. Implication: the 15 templates created this session are the canonical message library + drift-detection reference, NOT live runtime links. 'Wire send-steps to reference template IDs' (approved plan Step 4) is impossible for SMS. Substitute: copy each reconciled template body into the corresponding draft SMS node body (applies per-clinic token fixes + footer/descriptor templatization to the workflows). 19 of 44 draft SMS nodes currently hold unreconciled tokens. This substitute mutates -Target Release drafts, so it needs Eric's explicit go-ahead before proceeding. Validation script to be extended as a drift detector (template body vs workflow node body).",
       "ref": "Decision 16"
+    },
+    {
+      "date": "2026-07-11",
+      "time": "12:4x",
+      "actor": "Computer",
+      "category": "review",
+      "summary": "Vendor conformance review v2: extracted all 73 workflows (3,875 nodes) from the vendor's sandbox folder and diffed against the 16-workflow spec. Verdict: rebuild of the legacy sprawl, not an implementation of the spec -- 73 wfs vs 16, per-location clones (01B/C/D + 3x city nurtures + 6 JJ-prefixed + 3 Copy-), canonical contract absent (appt_status and sale_type appear NOWHERE; sale_outcome only in prose notes; no outcome_processed_at; renewal_date never written on Won), keystone 05 has two divergent copies (60 vs 44 nodes) with per-location branch trees and 10 create_opportunity nodes, 235 creates vs 17 updates (duplicate-opportunity pattern), 32 google_sheets steps as shadow data layer, 83 active triggers. Strengths worth porting: form-level gclid/fbclid/utm capture (01A-E), appointment-status transition plumbing (03x set), DNC/error hygiene, call-disposition pair, A&D objection tag segmentation. Recommendation: keep -Target Release as canonical, port the 2-3 good mechanics, hand vendor the punch list. Full extract in vendor_extract/ for reproducible verification.",
+      "ref": "vendor-review-v2"
     }
   ]
 }

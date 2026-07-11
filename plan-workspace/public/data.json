@@ -3935,6 +3935,12 @@
       "name": "Comms Edge",
       "absorbs": "1. IVR - simultaneous, Chat OOO, Missed Call Text-Back",
       "copy": "Missed-call text-back plus an explicit simultaneous-ring IVR path (absorbs '1. IVR - simultaneous'). Quiet hours 8 AM to 9 PM Contact Timezone on outbound sends."
+    },
+    {
+      "n": "17",
+      "name": "Price Calculator (PCC Tool)",
+      "absorbs": "06. Price Calculator (live, ported as-is)",
+      "copy": "Internal PCC consult tool: computes package total from selected program components via math_operation, logs structured quote note. Feeds Won revenue value to WF-13 conversions (D17). No member messaging; no quiet-hours concerns. Trigger deferred like all others."
     }
   ],
   "pipelines": [
@@ -4529,6 +4535,14 @@
       "status": "Locked",
       "decision": "Attribution upgrade: two-touch model + revenue closed loop. (1) Paired first_*/last_* attribution field sets on the contact (first_utm_source, first_utm_campaign, first_gclid, first_fbclid, first_landing_page, first_touch_at + last_* equivalents). First-touch fields are WRITE-ONCE (WF-01 writes only if empty); last-touch overwrite on every new inbound session/form. (2) Attribution is stamped onto the opportunity at create and then FROZEN -- written exactly once, never updated (the opportunity is the immutable record of what created the revenue event; the contact carries living last-touch). (3) Closed loop in WF-13: on Won, send conversion with gclid/fbclid + actual revenue value, new vs renewal as separate conversion actions; event_id = opportunity ID on both Google and Meta payloads for pixel/server dedup; enhanced conversions (hashed email/phone) for conversions outside the 90-day click window. (4) appt_status=showed fires as its own conversion event (higher-volume optimization signal; exposes bad-lead campaigns via show rate weeks before revenue does). (5) Phone-call attribution: WF-12/16 stamp lead_source=phone + dialed tracking number; channel-level tracking numbers minimum, number-pool DNI when volume justifies. (6) UTM governance: allowed utm_source enum (google/meta/gbp/bing/referral/direct), utm_campaign convention {clinic}_{service}_{intent}, WF-01 tags malformed UTMs for cleanup instead of storing garbage.",
       "choice": "Two-touch write-once/overwrite pattern + frozen opportunity stamp + value-based conversion feedback, over single-touch last-click (over-credits branded search, starves demand creation) and over third-party attribution tools (unnecessary given GHL native session attribution + server-side conversions)."
+    },
+    {
+      "n": "18",
+      "date": "2026-07-11",
+      "owner": "Eric",
+      "status": "Locked",
+      "decision": "Port pass from the 28 live production workflows into the target build. Ports into existing targets: WF-03 gains auto-confirm + recovery-exit (remove_from_workflow) + reply-based confirm; WF-05/06/10 gain find_opportunity guards before opportunity writes; WF-08 gains cancel cleanup (booking-chain exit + Cancelled stage write, parameterized not per-location); WF-10 gains the complete survey-send mechanic (find_opportunity -> internal_update_opportunity -> SMS); WF-11 gains email-bounce and DNC/wrong-number/error hygiene branches; WF-16 gains the full IVR tree (ivr_say/gather/connect_call/collect_voicemail) and the native business-hours gate (quarter_hour + day_week conditions) covering chat-widget out-of-office handling. One NEW workflow: WF-17 Price Calculator (ported from live 06) -- internal PCC tool whose computed total feeds WF-13's Won-with-revenue conversion. The canonical set is now 17 workflows. 13 additional live node shapes captured into the manifest (find_opportunity, internal_update_opportunity, update_appointment_status, remove_from_workflow, remove_opportunity, math_operation, 4x ivr_*, create_update_contact, goto, transition).",
+      "choice": "Port proven live mechanics into the parameterized architecture rather than rebuilding from scratch or keeping per-location clones."
     }
   ],
   "risks": [

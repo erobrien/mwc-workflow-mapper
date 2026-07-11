@@ -411,6 +411,18 @@
           "action": "Go To",
           "name": "Exit: appointment day",
           "config": "On appointment day WF-05 fires from the PCC Sales Form. A cancellation at any point halts reminders and routes to WF-08."
+        },
+        {
+          "order": 13,
+          "action": "Multi-action",
+          "name": "Port: Auto-confirm + recovery exit (live 3a)",
+          "config": "On booking: update_appointment_status=confirmed (when auto-confirm rules met), remove_from_workflow [WF-02 Non-Booked Recovery], remove stale recovery opportunity if one exists in No-Show/Cancel limbo. Node shapes in build_ids live_node_shapes_port_pass."
+        },
+        {
+          "order": 14,
+          "action": "Reply trigger branch",
+          "name": "Port: Reply-based confirm handler (live 03c)",
+          "config": "Inbound SMS reply parsing on unconfirmed appointments: C/CONFIRM -> update_appointment_status=confirmed + remove from confirmation chase; R -> reschedule path. Port the 03c pattern as a WF-03 reply branch, not a separate workflow."
         }
       ],
       "messages": [
@@ -687,6 +699,12 @@
               "path": "Exit to WF-09 Renewal Reminders sub-flow"
             }
           ]
+        },
+        {
+          "order": 8,
+          "action": "Find Opportunity (multipath)",
+          "name": "Port: find_opportunity guard (before outcome writes)",
+          "config": "Use find_opportunity (sorting: latest, multipath Opportunity Found / Not Found) before outcome writes so updates target the correct opportunity instead of assuming trigger context. Live shape from 'After Appointment Feedback Survey Send'."
         }
       ],
       "messages": [
@@ -819,6 +837,12 @@
           "action": "Send SMS",
           "name": "SMS: Referral Activation (T+21d)",
           "config": "Then exit to WF-14 Ambassador Program and WF-09 Renewal Reminders sub-flow."
+        },
+        {
+          "order": 9,
+          "action": "Find Opportunity (multipath)",
+          "name": "Port: find_opportunity guard (before NPS branch)",
+          "config": "Use find_opportunity (sorting: latest, multipath Opportunity Found / Not Found) before NPS branch so updates target the correct opportunity instead of assuming trigger context. Live shape from 'After Appointment Feedback Survey Send'."
         }
       ],
       "messages": [
@@ -1071,6 +1095,12 @@
               "path": "Exit to WF-09"
             }
           ]
+        },
+        {
+          "order": 10,
+          "action": "Multi-action",
+          "name": "Port: booking-chain cleanup on cancel (live Cancelled Appointments)",
+          "config": "On cancel: remove_from_workflow [WF-03 booking/reminder chains] + write opportunity to Cancelled stage (ONE parameterized write -- the live version does this with 3 per-location clones; ours branches on nothing). Prevents cancelled members from receiving reminder SMS."
         }
       ],
       "messages": [
@@ -1279,6 +1309,18 @@
           "action": "Update Contact Field",
           "name": "Opp: Write visit_feedback_score",
           "config": "On submission write opportunity.visit_feedback_score for the WF-06 NPS branch."
+        },
+        {
+          "order": 3,
+          "action": "Find Opportunity (multipath)",
+          "name": "Port: find_opportunity guard (before survey-sent stamp)",
+          "config": "Use find_opportunity (sorting: latest, multipath Opportunity Found / Not Found) before survey-sent stamp so updates target the correct opportunity instead of assuming trigger context. Live shape from 'After Appointment Feedback Survey Send'."
+        },
+        {
+          "order": 4,
+          "action": "Multi-action",
+          "name": "Port: survey send mechanics (live After Appt Feedback)",
+          "config": "find_opportunity (latest) -> internal_update_opportunity stamps survey_sent_at -> SMS survey link (sms_wf10 template). This is the complete missing WF-10 mechanic; live workflow proves every node."
         }
       ],
       "messages": [
@@ -1382,6 +1424,18 @@
           "action": "Update Contact Field",
           "name": "MUT: Suppress automation",
           "config": "On MUT outcome: suppress all future automation for the contact."
+        },
+        {
+          "order": 5,
+          "action": "Bounce trigger branch",
+          "name": "Port: email bounce handler (live 3. Email Bounce)",
+          "config": "On email bounce: dnd_contact (Email channel only) + tag email_bounced + internal notification. Port as a WF-11 branch."
+        },
+        {
+          "order": 6,
+          "action": "Error trigger branches",
+          "name": "Port: DNC/wrong-number/error hygiene (live 2. DNC)",
+          "config": "Port the live error-hygiene trigger set at go-live: invalid-number -> dnd Call+SMS + tag bad_number; opt-out keyword set beyond STOP (remove/unsubscribe/wrong person) -> dnd SMS; SMS delivery errors -> notify. 10 trigger patterns exist live; consolidate to 3-4 canonical ones."
         }
       ],
       "messages": [
@@ -1880,6 +1934,18 @@
           "action": "Update Contact Field",
           "name": "Attr: missed-call source stamp (D17)",
           "config": "On missed call, apply the same phone-source stamping as WF-12: first_utm_source=phone if empty, last_utm_source=phone, dialed tracking number captured. Number-pool DNI upgrade path documented in Decision 17."
+        },
+        {
+          "order": 7,
+          "action": "IVR nodes",
+          "name": "Port: IVR tree (live 1. IVR - simultaneous)",
+          "config": "ivr_say greeting -> ivr_gather (press 1 new consult / 2 existing / 3 billing) -> ivr_connect_call (simultaneous ring to clinic user list, record-from-answer) -> ivr_collect_voicemail fallback. All 4 node shapes captured in build_ids."
+        },
+        {
+          "order": 8,
+          "action": "If/Else on quarter_hour + day_week",
+          "name": "Port: business-hours gate + chat-widget OOO (live Chat Widget OOO)",
+          "config": "The live workflow proves a NATIVE business-hours condition: if_else on quarter_hour >= open AND quarter_hour <= close AND day_week in Mon-Fri. Port as WF-16's hours gate for missed-call/chat-widget auto-replies (within hours: instant text-back; outside: OOO message with booking link). Also covers chat-widget inquiries, which the 16-workflow set previously did not handle at all."
         }
       ],
       "messages": [
@@ -1931,6 +1997,44 @@
           "Merge-field syntax: contact fields {{contact.field_key}}, opportunity fields {{opportunity.field_key}}, account constants {{custom_values.name}}, appointment {{appointment.start_time}}. Operational pattern: templates read a generic field like {{contact.current_location_booking_link}} that the workflow fills per clinic, never a hardcoded clinic value."
         ]
       }
+    },
+    "17": {
+      "purpose": "PCC consult pricing tool (ported from live 06. Price Calculator). During the consult, PCC selects program options on the contact/opportunity; math_operation nodes compute the package total into a total-price field and log a structured note. Feeds the monetary value that WF-13's Won-with-revenue conversion sends to ad platforms (D17).",
+      "diagram_key": "wf17",
+      "trigger": "Contact tag price_calc OR PCC form submission (defer until go-live pass, like all triggers)",
+      "prerequisites": [
+        "Price component fields exist (live: z0nsXjBpmFXGdZGfzHAI, rGf0p5eaxAWTM9y5KaAE -> total cxUGCjBinbuh0spb4LQS -- audit and map to canonical names)",
+        "math_operation node (numerical) proven live"
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "action": "If/Else",
+          "name": "Gate: which program selected",
+          "config": "Branch on program selection field (live gate: cClk7ad4PHxiake2lChS)"
+        },
+        {
+          "order": 2,
+          "action": "Math Operation",
+          "name": "Compute: package total",
+          "config": "math_operation numerical: selectField (component price) -> operators [add ...] -> updateField (total). Live shape in build_ids live_node_shapes_port_pass."
+        },
+        {
+          "order": 3,
+          "action": "Add Note",
+          "name": "Note: structured price quote",
+          "config": "Write the computed quote as a structured contact note for the PCC record"
+        }
+      ],
+      "messages": [],
+      "settings": {
+        "quiet_hours": "n/a (internal tool)"
+      },
+      "test": "Set component fields on a test contact, run, verify total field arithmetic and note content",
+      "depends_on": [
+        "WF-13 (consumes total as Won revenue value)"
+      ],
+      "variables": []
     }
   }
 }

@@ -1057,5 +1057,304 @@
     },
     "server_side_only": "Design is server-side-first: click IDs captured first-party at the form, frozen on the opportunity, conversions fired from GHL native server-side actions (google_adword / facebook_conversion_api) with event_id=opportunity ID. No browser pixel required. Meta match quality: send hashed email+phone+name, format fbclid as fbc. Google auto-tagging must remain ON (Ads setting, no gtag needed).",
     "remaining_workflow_wiring": "WF-01 two-touch capture + freeze copy, WF-12/16 phone stamps, WF-13 conversion payloads -- draft-node edits, need backend JWT"
+  },
+  "live_node_shapes_port_pass": {
+    "create_update_contact": {
+      "from": "01A. Home Form and Source with Click ID",
+      "attributes_sample": {
+        "type": "create_update_contact",
+        "fields": [
+          {
+            "field": "email",
+            "value": "{{inboundWebhookRequest.3}}",
+            "title": "Email",
+            "type": "string",
+            "date": ""
+          },
+          {
+            "field": "firstName",
+            "value": "{{inboundWebhookRequest.20}}",
+            "title": "First Name",
+            "type": "string",
+            "date": ""
+          },
+          {
+            "field": "lastName",
+            "value": "{{inboundWebhookRequest.21}}",
+            "title": "Last Name",
+            "type": "string",
+            "date": ""
+          },
+          {
+            "field": "phone",
+            "value": "{{inboundWebhookRequest.4}}",
+            "title": "Phone",
+            "type": "string",
+            "date": ""
+          },
+          {
+            "field": "Cou856tOhaxW62vwehVI",
+            "value": "{{inboundWebhookRequest.5}}",
+            "title": "Preferred Location",
+            "type": "string",
+            "date": ""
+          },
+          {
+            "field": "RrRyWKMSzZvu6MFGXTZb",
+            "value": "{{inboundWebhookRequest.ip}}",
+            "title": "IP Address",
+            "type": "string",
+            "date": ""
+          },
+          {
+            "field": "Np2WHxON2I4DVnYjZh3e",
+            "value": "{{inboundWebhookRequest.12}}",
+            "title": "UTM Campaign",
+            "type": "string",
+            "date": ""
+          },
+          {
+            "field": "ssEvmmfe1tz5H4fiMHZR",
+            "value": "{{inboundWebhookRequest.13}}",
+            "title": "UTM Content",
+            "type": "string",
+            "date": ""
+          },
+          {
+            "field": "Vh0MH504ujQfBh0Q5UFx",
+            "value": "{{inboundWebhookRequest.14}}",
+            "title": "UTM Medium",
+            "type": "string",
+            "date": ""
+          },
+          {
+            "field": "thwe93MxRDzS2SO9pxxC",
+            "value": "{{inboundWebhookRequest.15}}",
+            "title": "UTM Source",
+            "type": "string",
+            "date": ""
+          },
+          {
+            "field": "1Wo5z9YpDh9Lv64IBEoa",
+            "value": "{{inboundWebhookRequest.16}}",
+            "title": "UTM Term",
+            "type": "string",
+            "date": ""
+          },
+          {
+            "field": "UZBaHuKr9PpFNro47it7",
+            "value": "{{inboundWebhookRequest.source_url}}",
+            "title": "SOURCE URL",
+            "type": "string",
+            "date": ""
+          }
+        ]
+      }
+    },
+    "goto": {
+      "from": "01A. Home Form and Source with Click ID",
+      "attributes_sample": {
+        "targetNodeId": "e64a3929-4a93-4e79-ac92-f19515db70e0",
+        "type": "goto"
+      }
+    },
+    "transition": {
+      "from": "02. NON BOOKED NEWLEADS",
+      "attributes_sample": {
+        "type": "wait_condition",
+        "description": "What will happen when specified conditions are met"
+      }
+    },
+    "remove_opportunity": {
+      "from": "02. NON BOOKED NEWLEADS",
+      "attributes_sample": {
+        "type": "remove_opportunity",
+        "opportunity_to_be_found": "all",
+        "pipeline_id": "gcRMq1iCj2tGmdWpimGS"
+      }
+    },
+    "remove_from_workflow": {
+      "from": "03. Appointment Booked",
+      "attributes_sample": {
+        "type": "remove_from_workflow",
+        "workflow_id": [
+          "619cc8e7-b658-4552-8e23-5aeeec443057"
+        ]
+      }
+    },
+    "update_appointment_status": {
+      "from": "03b. Unconfirmed Appointment – Confirmation Required",
+      "attributes_sample": {
+        "category": "appointment",
+        "type": "update_appointment_status",
+        "status_type": "new"
+      }
+    },
+    "math_operation": {
+      "from": "06. Price Calculator",
+      "attributes_sample": {
+        "selectField": "z0nsXjBpmFXGdZGfzHAI",
+        "selectFieldtype": "numerical",
+        "sourceCustomValueId": "",
+        "updateField": "cxUGCjBinbuh0spb4LQS",
+        "updateFieldType": "numerical",
+        "targetCustomValueId": "",
+        "operators": [
+          {
+            "operator": "add",
+            "__id": "e9da4eee-18d9-4df6-9574-291a7e26dfb9",
+            "value": "{{contact.price__item_2}}"
+          },
+          {
+            "operator": "add",
+            "value": "{{contact.price__item_3}}",
+            "__id": "cebafb2f-b8c1-4bcd-adad-283caedaafcf"
+          },
+          {
+            "operator": "add",
+            "value": "{{contact.consultation_fee}}",
+            "__id": "f901b1e8-5a25-49cc-a2f1-0d39096df99a"
+          }
+        ]
+      }
+    },
+    "find_opportunity": {
+      "from": "After Appointment Feedback Survey Send",
+      "attributes_sample": {
+        "sorting": "latest",
+        "type": "find_opportunity",
+        "__customInputs__": {},
+        "cat": "multi-path",
+        "convertToMultipath": true,
+        "transitions": [
+          {
+            "id": "5335c1ca-0510-4074-8ba0-e810d452aa80",
+            "name": "Opportunity Found",
+            "fields": [],
+            "meta": {
+              "__branchKey__": "predefined_Opportunity Found"
+            },
+            "conditionType": "pre-defined"
+          },
+          {
+            "id": "cffe537f-8aa1-41d2-ad5e-dc75f3743200",
+            "name": "Opportunity Not Found",
+            "fields": [],
+            "meta": {
+              "__branchKey__": "predefined_Opportunity Not Found"
+            },
+            "conditionType": "pre-defined"
+          }
+        ],
+        "__name__": "Find Opportunity",
+        "__customInputFields__": []
+      }
+    },
+    "internal_update_opportunity": {
+      "from": "After Appointment Feedback Survey Send",
+      "attributes_sample": {
+        "allowBackward": true,
+        "type": "internal_update_opportunity",
+        "__customInputFields__": [
+          {
+            "__customInputs__": {},
+            "dataType": "SINGLE_OPTIONS",
+            "filterField": "pipelineId",
+            "value": "Sa0OFNaNT6oEvFth46ks",
+            "valueFieldType": "select"
+          },
+          {
+            "__customInputs__": {},
+            "dataType": "SINGLE_OPTIONS",
+            "filterField": "pipelineStageId",
+            "value": "f4c9d5d0-cba0-4d7d-aaa4-4d3f208088f8",
+            "valueFieldType": "select"
+          }
+        ],
+        "__customInputs__": {}
+      }
+    },
+    "ivr_say": {
+      "from": "1. IVR - simultaneous",
+      "attributes_sample": {
+        "widgetType": "play",
+        "language": "en-US",
+        "voice": "man",
+        "message": "To ensure the best service, please listen to the  following options.",
+        "loop": 1,
+        "type": "ivr_say",
+        "audioUrl": "https://storage.googleapis.com/highlevel-backend.appspot.com/location/Ghstz8eIsHWLeXek47dk/workflow/80479e09-a4de-41ee-94f2-c5cd187ec7e0/712c0c86-0be7-477b-a832-e229e1c909d4.mp3?alt=media&token=5560fe11-47e3-47ff-967e-5c27854bcf9f",
+        "fileName": "01_Welcome_Message.mp3"
+      }
+    },
+    "ivr_collect_voicemail": {
+      "from": "1. IVR - simultaneous",
+      "attributes_sample": {
+        "sayPlayAttributes": {
+          "loop": 1,
+          "widgetType": "say",
+          "message": "Please leave a message after the beep.",
+          "type": "ivr_say",
+          "language": "en-US",
+          "voice": "man"
+        },
+        "isSayPlayOn": false,
+        "timeout": 5,
+        "finishOnKey": "#",
+        "maxLength": 360,
+        "playBeep": true,
+        "type": "ivr_collect_voicemail"
+      }
+    },
+    "ivr_gather": {
+      "from": "1. IVR - simultaneous",
+      "attributes_sample": {
+        "loop": 1,
+        "timeout": 5,
+        "enableFinishOnKey": false,
+        "widgetType": "play",
+        "type": "ivr_gather",
+        "language": "en-US",
+        "voice": "man",
+        "message": "For new patient consultation, press 1. For existing patients, press 2. To leave a voicemail, Press 3.",
+        "numDigits": 1,
+        "convertToMultipath": false,
+        "name": "Collect Input from the Caller",
+        "cat": "",
+        "transitions": [],
+        "audioUrl": "https://storage.googleapis.com/highlevel-backend.appspot.com/location/Ghstz8eIsHWLeXek47dk/workflow/80479e09-a4de-41ee-94f2-c5cd187ec7e0/b19d908b-f39d-409b-b2d2-b1ee10fbcecd.mp3?alt=media&token=2dd1fb46-a88c-485a-b88a-3c4f21021b51",
+        "fileName": "02_Main_Menu_During_Hours.mp3"
+      }
+    },
+    "ivr_connect_call": {
+      "from": "1. IVR - simultaneous",
+      "attributes_sample": {
+        "timeout": 30,
+        "timeLimit": 3600,
+        "userId": "ZddWmHZ8nyFZTlSxoktv",
+        "record": "record-from-answer",
+        "users": [
+          "gbyheHmXUVp2u62YojJR",
+          "mnXehmAswCcViBO5qUBt",
+          "EHhPvu9Y6ryQNFS9vkbZ",
+          "UkwxgaAkGrPwvxlIB7mO",
+          "Cbd5JqqKqs0iYuab6e7z",
+          "dDXQZliJAYwRaYhkRVmX",
+          "xnzKyU5dFwebC7zxmwLq",
+          "k5KXJIQGFcmgaJjY6c1r"
+        ],
+        "customNumbers": [],
+        "detectVoicemail": false,
+        "isSayPlayOn": false,
+        "sayPlayAttributes": {
+          "loop": 1,
+          "widgetType": "say",
+          "message": "This is an automated call from workflows",
+          "language": "en-US",
+          "voice": "woman",
+          "type": "ivr_say"
+        }
+      }
+    }
   }
 }

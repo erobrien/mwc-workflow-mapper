@@ -334,6 +334,14 @@
       "category": "build",
       "summary": "Decision 17 fields implemented on the LIVE sub-account, additive-only: audited existing attribution fields first (contact utm_*/gclid_value/fbclid_value/source_url mapped as the last-touch living set; opportunity utm/gclid/fbclid mapped as the frozen last-touch stamp -- zero renames, zero duplicates), then created exactly the 10 missing fields: contact first_utm_source/first_utm_campaign/first_gclid/first_fbclid/first_landing_page/first_touch_at/last_touch_at + opportunity attr_first_utm_source/attr_first_utm_campaign/attr_landing_page. IDs in created_attribution_fields.json; complete role map in build_ids.json attribution_fields_d17. Server-side-only posture documented (no pixel required; native server actions + event_id dedup + hashed-identifier matching). No live workflow, pipeline, or existing field touched. Remaining: WF-01/12/13/16 draft-node wiring (needs JWT).",
       "ref": "Decision 17"
+    },
+    {
+      "date": "2026-07-11",
+      "time": "16:4x",
+      "actor": "Computer",
+      "category": "build",
+      "summary": "Port-mining pass over all 28 live production workflows (full node fidelity, ghl_extract). Decision 18 locked: 10 port items written into the WF-03/05/06/08/10/11/16 build guides + new WF-17 Price Calculator (canonical set now 17). Highest-value finds: find_opportunity multipath guard (fixes update-the-wrong-opportunity risk in WF-05/06/10), auto-confirm + remove_from_workflow recovery-exit (prevents booked members from getting recovery SMS -- a real member-experience bug in our current draft), reply-based confirm parsing, native business-hours condition (quarter_hour/day_week if_else -- also solves chat-widget OOO which the 16-set did not cover), complete IVR node shapes, and the price-calculator math_operation chain that feeds Won revenue to D17 conversions. 13 new node shapes captured into build_ids. NOTE: analysis based on the 28-workflow extract from this morning; if the linked folder contains workflows beyond those 28, a fresh JWT is needed to diff.",
+      "ref": "Decision 18"
     }
   ]
 }

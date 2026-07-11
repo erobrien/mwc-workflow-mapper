@@ -703,6 +703,7 @@
     "read_trigger": "GET /workflow/{locationId}/trigger?workflowId=...  [PROVEN]",
     "write_trigger": "POST /workflow/{locationId}/trigger  body {workflowId, type (REQUIRED), name, conditions[], actions[], masterType:'highlevel', belongs_to:'workflow'} -> {id}  [PROVEN 2026-07-11]",
     "update_trigger": "PUT /workflow/{locationId}/trigger/{triggerId}  full trigger object -> success  [PROVEN 2026-07-11]",
-    "node_notes": "wait.attributes.startAfter.type must be hour|day (NOT minute - rejected). Node ids are uuids; chain via 'next'. if_else uses attributes.branches[].segments[].conditions[] with conditionType/conditionSubType(fieldId)/conditionOperator/conditionValue."
+    "node_notes": "wait.attributes.startAfter.type must be hour|day (NOT minute - rejected). Node ids are uuids; chain via 'next'. if_else uses attributes.branches[].segments[].conditions[] with conditionType/conditionSubType(fieldId)/conditionOperator/conditionValue.",
+    "if_else": "if_else node PROVEN 2026-07-11: attributes.branches[].segments[].conditions[] with conditionType:'opportunity', conditionSubType:<fieldId>, conditionOperator (==, is_any_of), conditionValue. Branch children link via parent+parentKey=branch.id. Validated against opportunity.appt_status on live."
   }
 }

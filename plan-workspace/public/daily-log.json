@@ -262,6 +262,14 @@
       "category": "build",
       "summary": "Decision 14 executed against the live account: Locations Custom Object created with 6 fields; Richmond, Virginia Beach, and Newport News records seeded with real address/phone/hours/booking data; 4 generic operational contact fields created (current_clinic_*); contact-to-Home-Clinic association defined (contact_clinic). All additive; nothing deleted or published.",
       "ref": "custom_objects.locations"
+    },
+    {
+      "date": "2026-07-11",
+      "time": "07:2x",
+      "actor": "Computer",
+      "category": "build",
+      "summary": "Full workflow-build pipeline proven end-to-end on the live account: all 16 WF-01..16 built as inactive drafts in -Target Release (messaging spines at full fidelity), plus the last hard node types solved: trigger-write (POST /workflow/{loc}/trigger), step-save envelope (full doc + templates + diff arrays + version), and if_else branching validated against real opportunity field IDs (WF-05 appt_status gate). Everything draft, zero active triggers, nothing fires. Data-node enrichment (opportunity writes, webhooks, full branch trees) is the remaining pass.",
+      "ref": "-Target Release"
     }
   ]
 }

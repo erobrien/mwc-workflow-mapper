@@ -699,6 +699,7 @@
     "update_metadata": "PUT /workflow/{locationId}/{workflowId}  body must include current version int  [PROVEN]",
     "save_steps": "PUT /workflow/{locationId}/{workflowId} with full workflowData.templates + createdSteps/modifiedSteps/deletedSteps diff arrays  [PROVEN per Claude Code]",
     "read_trigger": "GET /workflow/{locationId}/trigger?workflowId=...  [PROVEN]",
-    "write_trigger": "UNKNOWN - probe candidates: PUT workflow with triggers+createdTriggers arrays; POST /workflow/{loc}/trigger; PUT /workflow/{loc}/{id}/trigger"
+    "write_trigger": "POST /workflow/{locationId}/trigger  body {workflowId, type (REQUIRED), name, conditions[], actions[], masterType:'highlevel', belongs_to:'workflow'} -> {id}  [PROVEN 2026-07-11]",
+    "update_trigger": "PUT /workflow/{locationId}/trigger/{triggerId}  full trigger object -> success  [PROVEN 2026-07-11]"
   }
 }

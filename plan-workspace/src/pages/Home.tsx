@@ -98,7 +98,7 @@ export default function Home() {
           <div>
             <div className="mb-1.5 font-mono text-[10.5px] uppercase tracking-wider text-emerald-700 dark:text-emerald-400">Target model</div>
             <p className="text-sm leading-relaxed text-foreground/90">
-              The target puts each datum on the object that owns it: the <b>Opportunity</b> owns the sale outcome and dollar value (one record per deal, so nothing overwrites), and carries a copy of the attribution that drove it so revenue rolls up per sale, per location, and per rep. The <b>Contact</b> holds identity, durable profile, and consent. Clinical records stay in the external EMR. See the <Link to="/to-be" className="text-primary hover:underline">Target</Link> spec for the full field model, the consolidated workflows, and the pipeline design.
+              The target puts each datum on the object that owns it: the <b>Opportunity</b> owns the sale outcome and dollar value (one record per deal, so nothing overwrites), and carries a copy of the attribution that drove it so revenue rolls up per sale, per location, and per rep. The <b>Contact</b> holds identity, durable profile, and consent. Clinical records stay in the external EMR. All three clinics run on <b>one sub-account with location as a variable</b> (Decision 13): workflows are built once and parameterized by <code className="rounded bg-muted px-1 text-[12px]">opportunity.location</code>, never cloned per clinic. See the <Link to="/to-be" className="text-primary hover:underline">Target</Link> spec for the full field model, the consolidated workflows, and the pipeline design.
             </p>
           </div>
         </div>

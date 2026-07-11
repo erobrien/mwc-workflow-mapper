@@ -4352,6 +4352,14 @@
       "status": "Locked",
       "date": "2026-07-10",
       "owner": "Eric"
+    },
+    {
+      "n": "13",
+      "decision": "Single sub-account, location as a variable (Architecture A)",
+      "choice": "Men's Wellness Centers stays on ONE GHL sub-account with clinic handled as a per-record variable (opportunity.location), NOT one sub-account per clinic. Rationale: the shared contact center works a single pooled lead queue and offshore setters work across clinics, so three isolated sub-accounts would break lead flow, cross-clinic visibility, and unified reporting, and would create duplicate-contact contamination. Top GHL architects otherwise recommend sub-account-per-location + Snapshot for franchises, but that model does not fit MWC's pooled operations. This decision commits the build to three things: (1) workflows are built once and parameterized by opportunity.location, never cloned per clinic; (2) per-clinic data (address, direct phone, booking or calendar URL, location email) cannot use account-wide Custom Values because they would collide across clinics, so it is delivered via a Locations Custom Object (recommended) or a contact-field matrix with tag-based routing; (3) A2P/10DLC and per-clinic phone routing are handled per-number inside the one sub-account, with the number-to-clinic mapping owned by the contact center layer and WF-16.",
+      "status": "Locked",
+      "date": "2026-07-10",
+      "owner": "Eric"
     }
   ],
   "risks": [
@@ -4462,7 +4470,8 @@
     "Never treat a Renewal as new-patient acquisition - exclude renewals from referral rewards and keep new vs renewal revenue separate in reporting",
     "Every SMS and voicemail workflow filters on the canonical sms_consent_status field AND native DND, and runs inside a Time Window of 8 AM to 9 PM in the Contact Timezone (TCPA quiet hours).",
     "Only the PCC Sales Form writes opportunity.sale_outcome, sale_type, appt_status, patient_care_consultant_id, and value - WF-05 is a router that reacts to those values and never writes outcomes itself.",
-    "No SMS or voicemail contains symptom or treatment specifics: appointment and consultation logistics only."
+    "No SMS or voicemail contains symptom or treatment specifics: appointment and consultation logistics only.",
+    "Never clone a workflow per clinic and never put per-clinic data in an account-wide Custom Value: build one workflow parameterized by opportunity.location, and deliver per-clinic values via the Locations Custom Object or a tag-routed contact-field matrix (a Custom Value applies to the whole sub-account and would collide across clinics)."
   ],
   "messages_tobe": [
     {

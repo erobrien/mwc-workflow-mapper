@@ -238,6 +238,14 @@
       "actor": "Eric",
       "category": "decision",
       "summary": "Requested this Daily Log module."
+    },
+    {
+      "date": "2026-07-10",
+      "time": "22:4x",
+      "actor": "Eric",
+      "category": "decision",
+      "summary": "Decision 13 locked: MWC stays on a single GHL sub-account with location as a per-record variable (Architecture A), not one sub-account per clinic, because pooled contact-center operations and shared lead flow require cross-clinic visibility. Commits the build to parameterized (never cloned) workflows and a Locations Custom Object for per-clinic data.",
+      "ref": "Decision 13"
     }
   ]
 }

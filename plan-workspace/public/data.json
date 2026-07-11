@@ -3742,9 +3742,9 @@
     },
     {
       "n": "07",
-      "name": "Post-Visit No-Sale Nurture",
-      "absorbs": "WIP no-sale drafts",
-      "copy": "11-touch no-sale (nosale) objection-handling sequence over 35 days, targeting the declared nosale_reason. Quiet hours 8 AM to 9 PM Contact Timezone."
+      "name": "Post-Visit A&D Nurture",
+      "absorbs": "WIP A&D drafts",
+      "copy": "11-touch A&D (Advise and Decline) objection-handling sequence over 35 days, targeting the declared ad_reason. Quiet hours 8 AM to 9 PM Contact Timezone."
     },
     {
       "n": "08",
@@ -3780,7 +3780,7 @@
       "n": "13",
       "name": "Ad-Platform Conversions",
       "absorbs": "CAPI x2, Google Ads x3",
-      "copy": "Booked and Won only; exclude no-sale (nosale) outcomes."
+      "copy": "Booked and Won only; exclude AD (Advise and Decline) outcomes. GUARDRAIL: sale_outcome's AD value and the ad_reason field are named for 'Advise and Decline', NOT advertising — do not key off ad_* fields/tags when building this workflow's conversion-matching logic, or lost consultations will get reported as fake conversions to Meta/Google."
     },
     {
       "n": "14",
@@ -3815,7 +3815,7 @@
       "exits": [
         "No-Show",
         "Cancelled",
-        "No-Sale (lost)",
+        "A&D (lost)",
         "MUT",
         "Disqualified"
       ],
@@ -3909,13 +3909,13 @@
           "key": "ad_reason",
           "label": "A&D Reason",
           "to": "Opportunity",
-          "note": "renamed to nosale_reason"
+          "note": "moved to Opportunity (field name unchanged: ad_reason)"
         },
         {
           "key": "ad_other_explanation",
           "label": "A&D Other Explanation",
           "to": "Opportunity",
-          "note": "renamed to nosale_reason_other"
+          "note": "moved to Opportunity as ad_reason_other"
         }
       ]
     },
@@ -3923,14 +3923,14 @@
       "target": "Opportunity",
       "card": "1 per deal",
       "role": "Deal outcome and money. This is the single canonical Opportunity custom-field list (35 fields); the PCC Sales Form page lists the identical set.",
-      "examples": "sale_outcome, sale_type, appt_status, Product/Term/Price x3, total_program_amount, pay_type, nosale_reason, Patient Care Consultant (PCC), attribution (utm/gclid/fbclid/lead_source)",
+      "examples": "sale_outcome, sale_type, appt_status, Product/Term/Price x3, total_program_amount, pay_type, ad_reason, Patient Care Consultant (PCC), attribution (utm/gclid/fbclid/lead_source)",
       "note": "monetary_value is a native GHL field (= net collected, netTotal after referral discount), not one of the 35 custom fields.",
       "adding": [
         {
           "key": "sale_outcome",
           "label": "Sale Outcome",
           "from": "Contact",
-          "note": "enum sold | nosale | mut | mar; writer: PCC Sales Form"
+          "note": "enum SOLD | AD | MUT | MAR (AD = Advise and Decline); writer: PCC Sales Form"
         },
         {
           "key": "sale_type",
@@ -4047,14 +4047,14 @@
           "note": "PIF = paid in full, others financed; financed flag derivable from this; writer: PCC Sales Form"
         },
         {
-          "key": "nosale_reason",
-          "label": "No-Sale Reason",
+          "key": "ad_reason",
+          "label": "A&D Reason",
           "from": "Contact",
-          "note": "was ad_reason; writer: PCC Sales Form"
+          "note": "field name unchanged from legacy Contact field; writer: PCC Sales Form"
         },
         {
-          "key": "nosale_reason_other",
-          "label": "No-Sale Reason Other",
+          "key": "ad_reason_other",
+          "label": "A&D Reason Other",
           "from": "Contact",
           "note": "was ad_other_explanation; writer: PCC Sales Form"
         },
@@ -4457,7 +4457,7 @@
     "Never delete a pipeline before it is empty (deletes its opportunities)",
     "Never rename or delete engine tags (BotFanatics / Sniper surface stays frozen)",
     "Never write without a dry-run that emits a reviewable diff",
-    "Never treat a nosale (Advised and Declined) as an ad conversion: nosale is not advertising, so exclude it from WF-13 CAPI",
+    "Never treat AD (Advise and Decline) as an ad-platform conversion: despite the ad_* field/tag naming, AD is not advertising - exclude it from WF-13 CAPI. This naming collision was flagged and accepted as a known risk (2026-07-11); do not key off ad_* fields/tags for ad-platform matching logic.",
     "Never mark an opportunity Won without Sale Type (New/Renewal) set - it drives revenue split, pipeline routing, and commissions",
     "Never treat a Renewal as new-patient acquisition - exclude renewals from referral rewards and keep new vs renewal revenue separate in reporting",
     "Every SMS and voicemail workflow filters on the canonical sms_consent_status field AND native DND, and runs inside a Time Window of 8 AM to 9 PM in the Contact Timezone (TCPA quiet hours).",
@@ -4675,7 +4675,7 @@
     },
     {
       "id_name": "WF-07-S1: A&D Recovery, No-Pressure SMS 1",
-      "workflow_step": "WF-07 No-Sale Nurture (A&D) | Step 1",
+      "workflow_step": "WF-07 A&D Nurture | Step 1",
       "timing": "+2 hours after appointment",
       "type": "SMS",
       "message": "{{first_name}}, {{pcc_name}} from Men's Wellness. We have your lab baseline. There's a lot to consider, so no rush. We're here for any questions by text or call. Reply STOP to opt out.",
@@ -4683,7 +4683,7 @@
     },
     {
       "id_name": "WF-07-S2: A&D Recovery, Labs on File SMS 2",
-      "workflow_step": "WF-07 No-Sale Nurture (A&D) | Step 3",
+      "workflow_step": "WF-07 A&D Nurture | Step 3",
       "timing": "+3 days after appointment",
       "type": "SMS",
       "message": "{{first_name}}, {{pcc_name}} at Men's Wellness. Your labs are on file with our team. Whenever the time is right, pick up exactly where your appointment left off: BookMWC.com",
@@ -4691,7 +4691,7 @@
     },
     {
       "id_name": "WF-07-S3: A&D Recovery, Encouragement SMS 3",
-      "workflow_step": "WF-07 No-Sale Nurture (A&D) | Step 5",
+      "workflow_step": "WF-07 A&D Nurture | Step 5",
       "timing": "+14 days after appointment",
       "type": "SMS",
       "message": "{{first_name}}, {{pcc_name}} from Men's Wellness Centers. Your labs are on file and a physician reviewed them with you. When you're ready to talk next steps, we're here.",
@@ -4699,7 +4699,7 @@
     },
     {
       "id_name": "WF-07-S4: A&D Recovery, Final SMS 4",
-      "workflow_step": "WF-07 No-Sale Nurture (A&D) | Step 7",
+      "workflow_step": "WF-07 A&D Nurture | Step 7",
       "timing": "+30 days after appointment",
       "type": "SMS",
       "message": "{{first_name}}, {{pcc_name}} at Men's Wellness. It has been a month. Labs remain on file, and our team is available to resume. No new appointment needed. Schedule here: BookMWC.com",
@@ -4707,7 +4707,7 @@
     },
     {
       "id_name": "WF-07-S5: A&D Recovery, Empathetic Breakup SMS",
-      "workflow_step": "WF-07 No-Sale Nurture (A&D) | Step 8",
+      "workflow_step": "WF-07 A&D Nurture | Step 8",
       "timing": "+35 days after appointment",
       "type": "SMS",
       "message": "{{first_name}}, pausing my outreach. Whenever the timing is right, your labs remain on file and a visit is easy to pick back up. Just reach out.",
@@ -4931,7 +4931,7 @@
     },
     {
       "id_name": "WF-07-E1: A&D Recovery, Cost Objection Email",
-      "workflow_step": "WF-07 No-Sale Nurture (A&D) | Step 2a",
+      "workflow_step": "WF-07 A&D Nurture | Step 2a",
       "timing": "+1 day after appointment",
       "type": "Email",
       "message": "Hi {{first_name}},\n\nYour labs are on file. Our team now has a clear picture of where levels stand, and that baseline data does not expire.\n\nThe investment is a significant factor. Consider what is included in your plan.\n\nYour optimization plan at Men's Wellness covers physician-led care from a practice with over a decade of clinical experience. That means ongoing lab monitoring, dosage adjustments based on physiological response, and direct access to our team. Your plan is built from specific lab values. It is not a standardized protocol managed by an algorithm or a call center.\n\nMany members previously spent comparable amounts on supplements, over-the-counter products, and memberships that addressed symptoms without identifying the root cause. Physician-led optimization targets the underlying system.\n\nStructured payment options are available to make the investment manageable.\n\nYour labs remain on file. Pick up exactly where our team left off when the time is right.\n\n**CTA:** [BOOK THE FOLLOW-UP](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness\n\n[Standard Privacy Footer]",
@@ -4939,7 +4939,7 @@
     },
     {
       "id_name": "WF-07-E2: A&D Recovery, Partner Objection Email",
-      "workflow_step": "WF-07 No-Sale Nurture (A&D) | Step 2b",
+      "workflow_step": "WF-07 A&D Nurture | Step 2b",
       "timing": "+1 day after appointment",
       "type": "Email",
       "message": "Hi {{first_name}},\n\nDiscussing results and options with a partner before committing is a reasonable step.\n\nTo support that conversation, here is what is critical to know:\n\n**What your labs showed:** Our team identified markers indicating that hormonal levels may be contributing to the symptoms. This is a medical finding, not a lifestyle issue.\n\n**What optimization involves:** Physician-led plan built from lab results. Ongoing monitoring with regular lab draws. Dosage adjustments based on your body's response. This is not a supplement or a one-time intervention.\n\n**What it is not:** It is not a chain or franchise model. Men's Wellness is independent with over 10 years of clinical practice in Virginia. Health data is protected under HIPAA, and member information is never shared with advertising platforms.\n\n**Safety and oversight:** All care is supervised by licensed physicians with specific expertise in men's hormonal health. LegitScript certified.\n\nYour labs remain on file. If a follow-up is needed, or if you have questions about the process, our team, or pricing, the team is ready to assist.\n\n**CTA:** [SCHEDULE A FOLLOW-UP](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness\n\n[Standard Privacy Footer]",
@@ -4947,7 +4947,7 @@
     },
     {
       "id_name": "WF-07-E3: A&D Recovery, Timing Objection Email",
-      "workflow_step": "WF-07 No-Sale Nurture (A&D) | Step 2c",
+      "workflow_step": "WF-07 A&D Nurture | Step 2c",
       "timing": "+1 day after appointment",
       "type": "Email",
       "message": "Hi {{first_name}},\n\nThe timing may not be right to start a plan immediately. Schedules shift, priorities compete, and sometimes it takes a moment to process the information.\n\nThe important thing is that your labs are now on file. Our team has a clear baseline. When the timing is right, there is no need to repeat the process. Schedule a follow-up and pick up exactly where your appointment ended.\n\nIn the meantime, the symptoms discussed, whether low energy, difficulty with focus, disrupted sleep, or changes in drive, are unlikely to resolve on their own. They are signals from a system responding to declining hormone levels. That process continues with or without intervention.\n\nThere is no expiration date on your appointment, and there is no pressure. When the time comes, the team is ready.\n\n**CTA:** [BOOK WHEN READY](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness\n\n[Standard Privacy Footer]",
@@ -4955,7 +4955,7 @@
     },
     {
       "id_name": "WF-07-E4: A&D Recovery, Fear and Trust Objection Email",
-      "workflow_step": "WF-07 No-Sale Nurture (A&D) | Step 2d",
+      "workflow_step": "WF-07 A&D Nurture | Step 2d",
       "timing": "+1 day after appointment",
       "type": "Email",
       "message": "Hi {{first_name}},\n\nQuestions or concerns about safety indicate sound judgment. Men should scrutinize any medical decision.\n\nA few points to consider when evaluating options:\n\n**Physician oversight:** Every optimization plan at Men's Wellness is designed and monitored by a licensed physician. This is not a telehealth platform where a provider reviews information remotely. Our team is in the room, reviewing labs, and adjusting your plan based on your body's response over time.\n\n**Clinical track record:** Over 10,000 men across Virginia have been served over the past decade. A 4.9-star rating from 200+ reviews reflects the outcomes members experience.\n\n**Not a franchise:** Men's Wellness is independent practice. Not a chain. Not a corporate model. Clinical decisions are made by our team, not by a corporate protocol.\n\n**Certification:** LegitScript certified and HIPAA compliant. Health data stays between the member and our team.\n\nThe team is available by phone, text, or email for specific questions. No pressure.\n\n**CTA:** [SCHEDULE A FOLLOW-UP](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness\n\n[Standard Privacy Footer]",
@@ -4963,7 +4963,7 @@
     },
     {
       "id_name": "WF-07-E5: A&D Recovery, Return-to-Self Testimonial Email",
-      "workflow_step": "WF-07 No-Sale Nurture (A&D) | Step 4",
+      "workflow_step": "WF-07 A&D Nurture | Step 4",
       "timing": "+7 days after appointment",
       "type": "Email",
       "message": "Hi {{first_name}},\n\nThe single most common piece of feedback received from members across the three Virginia locations is some version of the same statement: \"I feel like myself again.\"\n\nNot a different person. Not superhuman. Themselves. The version with reliable energy, mental sharpness during the workday, restorative sleep, and a drive that does not require constant effort.\n\nWhat changes is not who they are. What changes is the biology underneath. Once our team identifies the root cause through lab work and builds a plan around the data, the body has a chance to respond properly.\n\nYour baseline is established. The path forward is clear whenever the decision is made to take it.\n\n**CTA:** [BOOK THE FOLLOW-UP](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness\n\n[Standard Privacy Footer]",
@@ -4971,7 +4971,7 @@
     },
     {
       "id_name": "WF-07-E6: A&D Recovery, Labs Expiring Email",
-      "workflow_step": "WF-07 No-Sale Nurture (A&D) | Step 6",
+      "workflow_step": "WF-07 A&D Nurture | Step 6",
       "timing": "+21 days after appointment",
       "type": "Email",
       "message": "Hi {{first_name}},\n\nThe lab results from your appointment are still on file, and our team's assessment remains relevant. However, hormone levels fluctuate, and the longer the interval between labs and the start of a plan, the more likely a retest becomes necessary.\n\nScheduling a follow-up now allows our team to use the existing baseline without requiring a new draw.\n\nThe symptoms, whether low energy, brain fog, disrupted sleep, or changes in drive, are not random. They are connected, and your labs provided the data to address them at the source.\n\nNot a franchise. Not a chain. Independent practice with a decade of clinical authority in Virginia. Health information is protected under HIPAA at every step.\n\n**CTA:** [BOOK THE FOLLOW-UP](BookMWC.com)\n\n{{pcc_name}}\nMen's Wellness\n\n[Standard Privacy Footer]",

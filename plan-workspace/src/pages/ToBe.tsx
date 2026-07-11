@@ -13,7 +13,7 @@ const NUMBERING_CROSSWALK: { old: string; canonical: string; note: string }[] = 
   { old: "04 Confirmation Chase", canonical: "WF-04 Medical Intake Chase", note: "renamed; owns all intake chasing" },
   { old: "07 Appointment Outcome (auto-Won)", canonical: "WF-05 Clinic Outcome Router", note: "rebuilt as a router; PCC Sales Form is sole writer" },
   { old: "07 Post-Visit Sold", canonical: "WF-06 Post-Visit Won and Onboarding", note: "renumbered; no longer sets renewal_date" },
-  { old: "08 A&D (Advised and Declined)", canonical: "WF-07 No-Sale Nurture", note: "renamed to nosale" },
+  { old: "08 A&D (Advised and Declined)", canonical: "WF-07 A&D Nurture", note: "renumbered; outcome code is AD (kept as A&D, not renamed to nosale)" },
   { old: "06 No-Show Recovery", canonical: "WF-08 No-Show and Cancel Recovery", note: "renumbered; adds cancel and rebook early-exit" },
   { old: "09 Renewal Reminders + 10 Long-Term Nurture", canonical: "WF-09 Long-Term Nurture (+ Renewal sub-flow)", note: "merged; renewal is now a labeled sub-flow" },
   { old: "z Post-Visit Survey", canonical: "WF-10 Feedback Survey", note: "formalized; writes visit_feedback_score" },

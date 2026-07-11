@@ -937,7 +937,7 @@
           },
           {
             "label": "No-Sale Reason (+ Other)",
-            "hint": "op_nosale_reason",
+            "hint": "op_ad_reason",
             "note": "was A&D Reason / A&D Other Explanation",
             "count": 471
           }

@@ -31,18 +31,19 @@ const APPT_OPTS = [
 ];
 
 const OUTCOME_OPTS = [
-  { value: "sold",   label: "Sold",   icon: CheckCircle2, ring: "bg-emerald-600 shadow-emerald-200 dark:shadow-emerald-900" },
-  { value: "nosale", label: "No-Sale",icon: XCircle,      ring: "bg-slate-600 shadow-slate-200 dark:shadow-slate-800" },
-  { value: "mut",    label: "MUT",    icon: AlertCircle,  ring: "bg-slate-600 shadow-slate-200 dark:shadow-slate-800" },
-  { value: "mar",    label: "MAR",    icon: Clock,        ring: "bg-amber-500 shadow-amber-200 dark:shadow-amber-900" },
+  { value: "SOLD", label: "Sold", icon: CheckCircle2, ring: "bg-emerald-600 shadow-emerald-200 dark:shadow-emerald-900" },
+  { value: "AD",   label: "A&D",  icon: XCircle,      ring: "bg-slate-600 shadow-slate-200 dark:shadow-slate-800" },
+  { value: "MUT",  label: "MUT",  icon: AlertCircle,  ring: "bg-slate-600 shadow-slate-200 dark:shadow-slate-800" },
+  { value: "MAR",  label: "MAR",  icon: Clock,        ring: "bg-amber-500 shadow-amber-200 dark:shadow-amber-900" },
 ];
 
-// Reason lists are outcome-specific. nosale (Advised and Declined) is a sales objection;
+// Reason lists are outcome-specific. AD (Advise and Decline) is a sales objection;
 // MUT is a clinical finding; MAR is a pending medical-approval item. They must not share a list.
-const NOSALE_REASONS = ["Not Ready", "Think it Over / Sleep On It", "Cost / Price Objection", "Not Interested", "Others"];
-const MUT_REASONS    = ["Contraindication", "Abnormal labs", "Provider decision", "Others"];
-const MAR_REASONS    = ["Awaiting labs", "Awaiting provider review", "Awaiting clearance", "Others"];
-const REASONS_BY_OUTCOME: Record<string, string[]> = { nosale: NOSALE_REASONS, mut: MUT_REASONS, mar: MAR_REASONS };
+// GUARDRAIL: "AD"/"ad_reason" mean Advise and Decline, NOT advertising — never key off ad_* for WF-13 ad-platform conversion logic.
+const AD_REASONS  = ["Not Ready", "Think it Over / Sleep On It", "Cost / Price Objection", "Not Interested", "Others"];
+const MUT_REASONS = ["Contraindication", "Abnormal labs", "Provider decision", "Others"];
+const MAR_REASONS = ["Awaiting labs", "Awaiting provider review", "Awaiting clearance", "Others"];
+const REASONS_BY_OUTCOME: Record<string, string[]> = { AD: AD_REASONS, MUT: MUT_REASONS, MAR: MAR_REASONS };
 
 // Patient type — every consult is either a brand-new sale or a renewal of an existing program.
 // Gates referral attribution (new only), pricing context, and downstream pipeline routing (op_sale_type).
@@ -125,7 +126,7 @@ export default function SalesForm() {
   const [patientType,   setPatientType]  = useState("new");
   const [pcc,           setPcc]          = useState("Alex Rivera");
   const [provider,      setProvider]     = useState("Dr. Marcus Hale");
-  const [outcome,       setOutcome]      = useState("sold");
+  const [outcome,       setOutcome]      = useState("SOLD");
   const [closeType,     setCloseType]    = useState("same-day"); // opportunity tag: Same Day | Come-back
   const [adReason,      setAdReason]     = useState("Not Ready");
   const [products,      setProducts]     = useState<Product[]>([{ name: "TRT", term: "3 mo", price: "2999" }]);
@@ -140,7 +141,7 @@ export default function SalesForm() {
   const [noShowReason,  setNoShowReason] = useState("No call, no show");
 
   const showed = apptStatus === "showed";
-  const sold   = outcome === "sold";
+  const sold   = outcome === "SOLD";
   const isNew  = patientType === "new";
 
   // Financials
@@ -158,7 +159,7 @@ export default function SalesForm() {
   // Reset the reason to the first valid option whenever the outcome changes,
   // so a MUT never carries a leftover sales objection reason.
   useEffect(() => {
-    if (outcome !== "sold") setAdReason(REASONS_BY_OUTCOME[outcome][0]);
+    if (outcome !== "SOLD") setAdReason(REASONS_BY_OUTCOME[outcome][0]);
   }, [outcome]);
 
   const total    = parseFloat(totalAmount) || 0;
@@ -176,7 +177,7 @@ export default function SalesForm() {
   function removeProduct(i: number) { setProducts(p => p.filter((_, idx) => idx !== i)); setTotalManual(false); }
 
   const outcomeLabel = {
-    sold: "→ Won", nosale: "→ Lost", mut: "→ Lost", mar: "stays open"
+    SOLD: "→ Won", AD: "→ Lost", MUT: "→ Lost", MAR: "stays open"
   }[outcome];
 
   const ptLabel = isNew ? "New" : "Renewal";
@@ -193,7 +194,7 @@ export default function SalesForm() {
         <p className="mb-2 font-semibold">Enum contract (canonical)</p>
         <p className="mb-2">This form is the <b>single writer</b> of the opportunity outcome fields. WF-05 reads the values it writes and never writes an outcome itself. The codes below are the contract the diagrams and WF-05 branch conditions reference verbatim.</p>
         <ul className="mb-2 list-disc space-y-1 pl-5">
-          <li><code>sale_outcome</code> = <code>sold</code> | <code>nosale</code> (Advised and Declined) | <code>mut</code> (Medically Untreatable) | <code>mar</code> (Medical Approval Required)</li>
+          <li><code>sale_outcome</code> = <code>SOLD</code> | <code>AD</code> (Advise and Decline) | <code>MUT</code> (Medically Untreatable) | <code>MAR</code> (Medical Approval Required)</li>
           <li><code>sale_type</code> = <code>new</code> | <code>renewal</code></li>
           <li><code>appt_status</code> = <code>showed</code> | <code>no-show</code> | <code>cancel</code> | <code>reschedule</code> (WF-05 gates on this first)</li>
         </ul>
@@ -264,14 +265,14 @@ export default function SalesForm() {
             <div>
               <label className={lbl}>Result {req}</label>
               <SegCtrl opts={OUTCOME_OPTS} value={outcome} onChange={setOutcome} />
-              {outcome !== "sold" && (
+              {outcome !== "SOLD" && (
                 <p className="mt-2 text-xs text-muted-foreground">
-                  {outcome === "nosale" && "nosale (Advised and Declined)"}
-                  {outcome === "mut" && "mut (Medically Untreatable)"}
-                  {outcome === "mar" && "mar (Medical Approval Required)"}
+                  {outcome === "AD" && "AD (Advise and Decline)"}
+                  {outcome === "MUT" && "MUT (Medically Untreatable)"}
+                  {outcome === "MAR" && "MAR (Medical Approval Required)"}
                 </p>
               )}
-              <Hint>op_sale_outcome · sold | nosale | mut | mar</Hint>
+              <Hint>op_sale_outcome · SOLD | AD | MUT | MAR</Hint>
             </div>
 
             {/* Close type — opportunity tags (only when sold) */}
@@ -293,16 +294,16 @@ export default function SalesForm() {
               </div>
             )}
 
-            {/* No-Sale / MUT / MAR reason — each outcome has its own list */}
+            {/* A&D / MUT / MAR reason — each outcome has its own list */}
             {!sold && (
               <div className="max-w-sm pt-1">
                 <label className={lbl}>
-                  {outcome === "nosale" ? "No-Sale reason" : outcome === "mut" ? "MUT reason" : "MAR reason"} {req}
+                  {outcome === "AD" ? "A&D reason" : outcome === "MUT" ? "MUT reason" : "MAR reason"} {req}
                 </label>
                 <select className={inp} value={adReason} onChange={e => setAdReason(e.target.value)}>
                   {REASONS_BY_OUTCOME[outcome].map(r => <option key={r}>{r}</option>)}
                 </select>
-                <Hint>{outcome === "nosale" ? "op_nosale_reason" : outcome === "mut" ? "op_mut_reason (clinical)" : "op_mar_reason (pending item)"}</Hint>
+                <Hint>{outcome === "AD" ? "op_ad_reason" : outcome === "MUT" ? "op_mut_reason (clinical)" : "op_mar_reason (pending item)"}</Hint>
               </div>
             )}
           </Panel>

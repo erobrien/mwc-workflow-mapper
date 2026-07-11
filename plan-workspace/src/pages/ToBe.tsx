@@ -4,7 +4,11 @@ import { Card, CardContent, Badge, Loading } from "../components/ui";
 import { RoutedTabs, RoutedTabPanel } from "../components/RoutedTabs";
 import { useData, type FieldDestination } from "../lib/data";
 import { ghlPipelines } from "../lib/ghl";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, ChevronRight } from "lucide-react";
+import { useEffect, useState } from "react";
+
+interface WFDetailLite { trigger?: { type: string }; steps?: unknown[]; }
+
 
 const NUMBERING_CROSSWALK: { old: string; canonical: string; note: string }[] = [
   { old: "01 Lead Capture", canonical: "WF-01 Lead Capture and Attribution", note: "unchanged; copies attribution to the Opp at create" },
@@ -64,6 +68,41 @@ function DestCard({ d }: { d: FieldDestination }) {
   );
 }
 
+function WorkflowTiles({ workflows }: { workflows: { n: string; name: string; absorbs?: string; copy?: string }[] }) {
+  const [detail, setDetail] = useState<Record<string, WFDetailLite>>({});
+  useEffect(() => {
+    fetch("/tobe-detail.json").then((r) => r.json()).then((d) => setDetail(d.workflows ?? {})).catch(() => setDetail({}));
+  }, []);
+  return (
+    <div className="grid gap-3 md:grid-cols-2">
+      {workflows.map((w) => {
+        const d = detail[w.n];
+        return (
+          <Link key={w.n} to={`/to-be/wf/${w.n}`} className="group block">
+            <Card className="h-full transition-colors group-hover:border-primary/50 group-hover:bg-muted/30">
+              <CardContent className="p-4">
+                <div className="mb-1 flex items-center justify-between gap-2">
+                  <div className="flex items-baseline gap-2">
+                    <span className="font-mono text-xs font-semibold text-muted-foreground">WF-{w.n}</span>
+                    <span className="font-semibold">{w.name}</span>
+                  </div>
+                  <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
+                </div>
+                {w.copy && <p className="mb-2 line-clamp-3 text-sm text-foreground/90">{w.copy}</p>}
+                <div className="flex flex-wrap items-center gap-1.5">
+                  {d?.trigger?.type && <Badge tone="blue">{d.trigger.type.split(" (")[0]}</Badge>}
+                  {d?.steps && <Badge tone="muted">{d.steps.length} build steps</Badge>}
+                  <span className="text-[11px] font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">Open build guide</span>
+                </div>
+              </CardContent>
+            </Card>
+          </Link>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function ToBe() {
   const { data, isLoading } = useData();
   if (isLoading || !data) return <Loading />;
@@ -110,23 +149,7 @@ export default function ToBe() {
               </table>
             </div>
           </CardContent></Card>
-          <div className="grid gap-3 md:grid-cols-2">
-            {data.tobe_workflows.map((w) => (
-              <Card key={w.n}><CardContent className="p-4">
-                <div className="mb-1 flex items-baseline gap-2">
-                  <span className="font-mono text-xs font-semibold text-muted-foreground">{w.n}</span>
-                  <span className="font-semibold">{w.name}</span>
-                </div>
-                {w.copy && <p className="mb-2 text-sm text-foreground/90">{w.copy}</p>}
-                {w.absorbs && (
-                  <div>
-                    <div className="mb-1 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Absorbs</div>
-                    <div className="text-[12px] text-muted-foreground">{w.absorbs}</div>
-                  </div>
-                )}
-              </CardContent></Card>
-            ))}
-          </div>
+          <WorkflowTiles workflows={data.tobe_workflows} />
         </RoutedTabPanel>
 
         <RoutedTabPanel value="pipelines" className="space-y-3">

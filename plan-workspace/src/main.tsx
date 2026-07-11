@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import AsIs from "./pages/AsIs";
 import Inventory from "./pages/Inventory";
 import ToBe from "./pages/ToBe";
+import ToBeWorkflow from "./pages/ToBeWorkflow";
 import Diagrams from "./pages/Diagrams";
 import Decisions from "./pages/Decisions";
 import Risks from "./pages/Risks";
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
   { path: "/asis-diagrams", element: wrap(<AsisDiagrams />) },
   { path: "/asis-flows", element: wrap(<AsisFlows />) },
   { path: "/to-be", element: wrap(<ToBe />) },
+  { path: "/to-be/wf/:n", element: wrap(<ToBeWorkflow />) },
   { path: "/to-be/:tab", element: wrap(<ToBe />) },
   { path: "/diagrams", element: wrap(<Diagrams />) },
   { path: "/pcc-form", element: wrap(<SalesForm />) },

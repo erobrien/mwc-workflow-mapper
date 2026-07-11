@@ -18,11 +18,13 @@ import AsisDiagrams from "./pages/AsisDiagrams";
 import AsisFlows from "./pages/AsisFlows";
 import Tags from "./pages/Tags";
 import CustomFields from "./pages/CustomFields";
+import DailyLog from "./pages/DailyLog";
 
 const wrap = (el: React.ReactNode) => <Shell>{el}</Shell>;
 
 const router = createBrowserRouter([
   { path: "/", element: wrap(<Home />) },
+  { path: "/daily-log", element: wrap(<DailyLog />) },
   { path: "/as-is", element: wrap(<AsIs />) },
   { path: "/inventory", element: wrap(<Inventory />) },
   { path: "/asis-diagrams", element: wrap(<AsisDiagrams />) },

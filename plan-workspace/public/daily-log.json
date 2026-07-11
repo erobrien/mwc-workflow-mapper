@@ -1,0 +1,281 @@
+{
+  "_note": "Daily Log of actions taken on the MWC GHL transformation. To add a new record, append an object to \"entries\": { \"date\": \"YYYY-MM-DD\", \"time\": \"optional string kept as given\", \"actor\": \"Eric | Computer | Claude Code | Vendor | System\", \"category\": \"extraction | spec | build | audit | incident | decision | deploy | investigation\", \"summary\": \"what happened\", \"ref\": \"optional commit sha, GHL id, or file path\" }. The page groups entries by date and sorts newest first, so order here does not matter. Keep raw commit shas and GHL ids in ref where you have them.",
+  "entries": [
+    {
+      "date": "2026-06-14",
+      "actor": "System",
+      "category": "extraction",
+      "summary": "Field inventory snapshot captured (generated_at in data.json): 128 fields listed, 14 real Opportunity custom fields present."
+    },
+    {
+      "date": "2026-06-14",
+      "actor": "System",
+      "category": "incident",
+      "summary": "Audit log (incident context): \"Test Field\" custom field deleted.",
+      "ref": "69c9654b..."
+    },
+    {
+      "date": "2026-06-17",
+      "time": "~01:12-02:43 UTC (Jun 16/17)",
+      "actor": "System",
+      "category": "incident",
+      "summary": "49 custom fields deleted across two bursts, including probe/test fields and form fields.",
+      "ref": "69c9654b3ac8c7a2b0db51d7"
+    },
+    {
+      "date": "2026-06-17",
+      "time": "02:20-02:41 UTC",
+      "actor": "Eric",
+      "category": "incident",
+      "summary": "46 custom fields deleted in a systematic 14-minute pass, including ALL 14 legacy Opportunity fields (Lead Source id erNYds93RsIn9mEyplyY, Location, Patient Advisor, Payment Type, Clinic Type, Treatment Stage, Insurance Provider, Appointment Date, Consultation Date, Deductible Met, Patient's Birthday, Promo Code, Sale Amount, Today's Date). Actor mSpcuA8jA7ddYqKoZ1Cy is Eric's auth id. Confirmed via audit log export 2026-07-10.",
+      "ref": "mSpcuA8jA7ddYqKoZ1Cy"
+    },
+    {
+      "date": "2026-06-24",
+      "time": "Jun 24-25",
+      "actor": "Computer",
+      "category": "spec",
+      "summary": "Brand-voice rules applied across all 74 to-be messages; New/Renewal consult dimension; Same Day/Come-back close tags; custom-fields library redesign.",
+      "ref": "60adba0"
+    },
+    {
+      "date": "2026-06-27",
+      "actor": "Eric",
+      "category": "deploy",
+      "summary": "Last production deploy of plan-workspace before the July rebuild cycle (Eric and Computer)."
+    },
+    {
+      "date": "2026-06-28",
+      "actor": "Vendor",
+      "category": "build",
+      "summary": "PR #1 opened (Keeps staging clone). Still open.",
+      "ref": "PR #1"
+    },
+    {
+      "date": "2026-07-03",
+      "actor": "System",
+      "category": "audit",
+      "summary": "Revenue-integrity monitor GitHub Action reached scheduled self-stop; last snapshot commit recorded; monitor-data branch preview failures on Vercel end.",
+      "ref": "32188a1"
+    },
+    {
+      "date": "2026-07-10",
+      "time": "00:0x",
+      "actor": "Computer",
+      "category": "deploy",
+      "summary": "Session pickup; diagnosed 2 weeks of Vercel preview failures as monitor-data branch builds; committed vercel.json deployment-disable to monitor-data.",
+      "ref": "97fa3a0"
+    },
+    {
+      "date": "2026-07-10",
+      "time": "00:1x",
+      "actor": "Computer",
+      "category": "build",
+      "summary": "As-is workflow diagrams v1 built and paired side-by-side with to-be; deployed.",
+      "ref": "802f0b2"
+    },
+    {
+      "date": "2026-07-10",
+      "time": "00:1x",
+      "actor": "Eric",
+      "category": "decision",
+      "summary": "Course correction: separate as-is and to-be diagram surfaces; plan approved."
+    },
+    {
+      "date": "2026-07-10",
+      "time": "00:2x",
+      "actor": "Computer",
+      "category": "build",
+      "summary": "Detailed as-is explorer plus per-workflow detail pages from all recoverable repo data; monitor.yml patched to persist vercel.json.",
+      "ref": "b5f86d6"
+    },
+    {
+      "date": "2026-07-10",
+      "time": "00:30",
+      "actor": "Eric",
+      "category": "decision",
+      "summary": "Fresh GHL JWT provided; scope directive: Current State = ONLY the Active Workflows folder."
+    },
+    {
+      "date": "2026-07-10",
+      "time": "00:3x-00:5x",
+      "actor": "Computer",
+      "category": "extraction",
+      "summary": "Live-account extraction: 28 active workflows, full step graphs (1,328 steps), 83 triggers, verbatim SMS/email bodies, via backend API plus Firebase fileUrl downloads."
+    },
+    {
+      "date": "2026-07-10",
+      "time": "00:5x",
+      "actor": "Computer",
+      "category": "build",
+      "summary": "Current State re-scoped to the 28 active workflows at 100% fidelity; deployed.",
+      "ref": "02466c3"
+    },
+    {
+      "date": "2026-07-10",
+      "time": "01:0x",
+      "actor": "Computer",
+      "category": "build",
+      "summary": "Per-workflow As-Is Workflow Flows page: 28 full-fidelity Mermaid diagrams.",
+      "ref": "7d19b05"
+    },
+    {
+      "date": "2026-07-10",
+      "time": "01:2x",
+      "actor": "Computer",
+      "category": "build",
+      "summary": "As-is master interconnection map derived 100% from step graphs: 17 of 28 workflows wired by 28 connections, 11 isolated.",
+      "ref": "d662751"
+    },
+    {
+      "date": "2026-07-10",
+      "time": "12:2x",
+      "actor": "Computer",
+      "category": "audit",
+      "summary": "To-be plan review: readability, GHL best-practice validation (cited research), coverage matrix, prompt audit. Verdict: strategically sound, not yet executable; 6 P0 blockers."
+    },
+    {
+      "date": "2026-07-10",
+      "time": "14:0x",
+      "actor": "Eric",
+      "category": "decision",
+      "summary": "Four decisions locked: PCC Sales Form triggers WF-05 (sole writer); IVR gets a to-be home while Price Calculator, Intake Reminder, and Vercel webhook retire; assume-consent for 11,077 historical contacts (accepted risk); 7 clean business days cutover gate."
+    },
+    {
+      "date": "2026-07-10",
+      "time": "14:0x-15:0x",
+      "actor": "Computer",
+      "category": "audit",
+      "summary": "Vendor sandbox extracted (90 unique workflows); conformance diff harness built; vendor verdict: not acceptable, 3 built / 5 built wrong / 8 missing, 13 blockers including contact-level \"Sold\" branching and per-location clones.",
+      "ref": "2ccdeb9"
+    },
+    {
+      "date": "2026-07-10",
+      "time": "14:3x",
+      "actor": "Computer",
+      "category": "spec",
+      "summary": "All review fixes plus decisions applied across plan surfaces; canonical WF-01..16 renumbering; 13 execution prompts; quiet hours everywhere.",
+      "ref": "a2e7fd2"
+    },
+    {
+      "date": "2026-07-10",
+      "time": "14:4x",
+      "actor": "Eric",
+      "category": "decision",
+      "summary": "ghl-development custom skill created (Eric and Computer): naming standards (no default action names), OO templatization rules, compliance defaults, API playbook."
+    },
+    {
+      "date": "2026-07-10",
+      "time": "14:45",
+      "actor": "Eric",
+      "category": "decision",
+      "summary": "Decision 12: class booking calendars replace service calendars; amended to one per clinic, 60-min slots, 6 seats, seat display off.",
+      "ref": "6420a74, c7c128c"
+    },
+    {
+      "date": "2026-07-10",
+      "time": "14:5x",
+      "actor": "Eric",
+      "category": "decision",
+      "summary": "Direction: strip execution phase; app becomes pure current-state-vs-target spec.",
+      "ref": "b30b2c0"
+    },
+    {
+      "date": "2026-07-10",
+      "time": "15:0x",
+      "actor": "Computer",
+      "category": "audit",
+      "summary": "Target pressure test: 3 blockers (two-vocabulary enum break, contradictory field models, missing appt_status gate), 12 majors."
+    },
+    {
+      "date": "2026-07-10",
+      "time": "15:0x",
+      "actor": "Computer",
+      "category": "build",
+      "summary": "Telemed section removed from app.",
+      "ref": "5a1283b"
+    },
+    {
+      "date": "2026-07-10",
+      "time": "15:1x",
+      "actor": "Computer",
+      "category": "build",
+      "summary": "Write-path pilot: POST /workflow/{loc} creates drafts (proven), PUT updates metadata with version field (proven); step-graph save mechanism unknown at that point. Pilot draft created in sandbox -Target Deployment folder."
+    },
+    {
+      "date": "2026-07-10",
+      "time": "15:2x",
+      "actor": "Computer",
+      "category": "spec",
+      "summary": "All 28 pressure-test findings fixed: canonical enum contract (sold|nosale|mut|mar), 35-field single opportunity model, WF-05 appt_status gating, attribution-at-create, renewal_date on every Won, idempotency stamp.",
+      "ref": "8a7e08b"
+    },
+    {
+      "date": "2026-07-10",
+      "time": "15:2x-15:3x",
+      "actor": "Computer",
+      "category": "decision",
+      "summary": "Claude Code handoff brief written (local build recommended); MCP server capabilities documented (no workflow write support)."
+    },
+    {
+      "date": "2026-07-10",
+      "time": "15:3x",
+      "actor": "Eric",
+      "category": "incident",
+      "summary": "Local repo merge incident (Eric and Claude Code): 8 local-only commits (PCC form mobile-first redesign, Guide mode) discarded by hard reset to origin/main; recoverable via reflog for about 30 days.",
+      "ref": "aecbc18"
+    },
+    {
+      "date": "2026-07-10",
+      "time": "15:4x",
+      "actor": "Computer",
+      "category": "build",
+      "summary": "Sidebar icons made consistent per nav group.",
+      "ref": "e2c41ef"
+    },
+    {
+      "date": "2026-07-10",
+      "time": "16:1x",
+      "actor": "Claude Code",
+      "category": "build",
+      "summary": "35 new Opportunity custom fields created in live account per canonical model; 2 deleted and recreated same-session to fix key mismatch."
+    },
+    {
+      "date": "2026-07-10",
+      "time": "16:16 (23:16 UTC)",
+      "actor": "System",
+      "category": "incident",
+      "summary": "Audit log: \"Appointment Status\" and \"Patient Care Consultant (PCC)\" Opportunity fields DELETED at 23:16 UTC. Attribution to specific tool unconfirmed.",
+      "ref": "6a3e39da...-mquoeu081"
+    },
+    {
+      "date": "2026-07-10",
+      "time": "18:1x-18:4x",
+      "actor": "Computer",
+      "category": "investigation",
+      "summary": "Field-deletion investigation: live pull shows 0 Opportunity custom fields / 102 contact fields at pull time; opportunity records carry no orphaned custom data (207 sampled, 40 Won); sale data confirmed living on Contact (the documented defect). Audit log export pins legacy field deletion to June 17, 02:20-02:34 UTC, actor = Eric's auth id."
+    },
+    {
+      "date": "2026-07-10",
+      "time": "19:0x",
+      "actor": "Eric",
+      "category": "decision",
+      "summary": "PCC Sales Data tab layout confirmed live on Opportunity record; direction: no separate GHL Form needed, PCCs edit the Opportunity directly; /pcc-form to be reframed as real-screenshot plus conditional-logic overlay."
+    },
+    {
+      "date": "2026-07-10",
+      "time": "20:xx-21:xx",
+      "actor": "Claude Code",
+      "category": "build",
+      "summary": "Phase 3-4: workflow write endpoint fully reverse-engineered (PUT full-object read-modify-write with createdSteps/modifiedSteps/deletedSteps arrays; ~14 node type shapes verified from live workflows). New pipeline \"Sales - Lead to Close\" created live (Vt8cPz51C3i87moo73gQ, 11 stages). Blank WF-01 draft created in -Target Deployment folder (9163af32-a9e1-4a3b-beac-553c22125bb8). Blocked: trigger-write endpoint unknown; UI trigger add failed via automation. Cleanup pending: ZZ-TEST published scratch workflow plus duplicate blank draft.",
+      "ref": "ghl_data/workflow_write_endpoint.md"
+    },
+    {
+      "date": "2026-07-10",
+      "time": "21:19",
+      "actor": "Eric",
+      "category": "decision",
+      "summary": "Requested this Daily Log module."
+    }
+  ]
+}

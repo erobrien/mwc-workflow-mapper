@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import {
   LayoutDashboard, Boxes, Workflow, Network,
   Gavel, ShieldAlert, Moon, Sun, Menu, SearchCheck, ClipboardList, Tag,
-  Database, Waypoints, Route,
+  Database, Waypoints, Route, History,
 } from "lucide-react";
 import { cn, useTheme } from "./ui";
 import { useState } from "react";
@@ -12,6 +12,7 @@ import { GlobalSearch } from "./Search";
 const NAV: { group: string; items: { to: string; label: string; icon: any; accent?: string }[] }[] = [
   { group: "Overview", items: [
     { to: "/", label: "Workspace", icon: LayoutDashboard },
+    { to: "/daily-log", label: "Daily Log", icon: History },
   ] },
   { group: "Current state", items: [
     { to: "/as-is", label: "As-Is Workflows", icon: Workflow, accent: "text-red-600 dark:text-red-400" },

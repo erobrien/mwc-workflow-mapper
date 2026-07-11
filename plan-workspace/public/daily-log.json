@@ -318,6 +318,14 @@
       "category": "review",
       "summary": "Vendor conformance review v2: extracted all 73 workflows (3,875 nodes) from the vendor's sandbox folder and diffed against the 16-workflow spec. Verdict: rebuild of the legacy sprawl, not an implementation of the spec -- 73 wfs vs 16, per-location clones (01B/C/D + 3x city nurtures + 6 JJ-prefixed + 3 Copy-), canonical contract absent (appt_status and sale_type appear NOWHERE; sale_outcome only in prose notes; no outcome_processed_at; renewal_date never written on Won), keystone 05 has two divergent copies (60 vs 44 nodes) with per-location branch trees and 10 create_opportunity nodes, 235 creates vs 17 updates (duplicate-opportunity pattern), 32 google_sheets steps as shadow data layer, 83 active triggers. Strengths worth porting: form-level gclid/fbclid/utm capture (01A-E), appointment-status transition plumbing (03x set), DNC/error hygiene, call-disposition pair, A&D objection tag segmentation. Recommendation: keep -Target Release as canonical, port the 2-3 good mechanics, hand vendor the punch list. Full extract in vendor_extract/ for reproducible verification.",
       "ref": "vendor-review-v2"
+    },
+    {
+      "date": "2026-07-11",
+      "time": "16:0x",
+      "actor": "Eric",
+      "category": "decision",
+      "summary": "Decision 17 locked: attribution upgrade. Two-touch model (first_*/last_* paired fields, write-once vs overwrite), frozen opportunity attribution stamp at create, closed-loop revenue conversions in WF-13 (Won with value, new vs renewal separated, event_id=opp ID dedup, enhanced conversions beyond the 90-day click window), showed as its own conversion event, phone-call attribution stamping in WF-12/16 with channel tracking numbers, and UTM governance (source enum + campaign convention + attr_needs_review tagging). Spec updated: 17 new fields in the model, 4 new guardrails, WF-01/12/13/16 build guides revised. Fields are PLANNED (verify-then-create) -- existing gclid_value/utm fields to be audited and mapped rather than duplicated.",
+      "ref": "Decision 17"
     }
   ]
 }

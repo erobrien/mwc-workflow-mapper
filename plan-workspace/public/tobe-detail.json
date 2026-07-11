@@ -16,14 +16,15 @@
         "Contact fields: gclid_value, fbclid_value, utm_source, utm_campaign, utm_medium, utm_content, utm_term, lead_source, lead_source_detail (Wave 0 creates these)",
         "Wave 0 ADDENDUM (Decision 14): Locations Custom Object with 3 records (Richmond, Virginia Beach, Newport News) + generic operational contact fields current_clinic_address, current_clinic_phone, current_booking_url",
         "Opportunity pipeline Sales - Lead to Close (id Vt8cPz51C3i87moo73gQ), New Lead stage",
-        "Opportunity attribution fields (utm_*, gclid, fbclid, lead_source) to receive the copy at create"
+        "Opportunity attribution fields (utm_*, gclid, fbclid, lead_source) to receive the copy at create",
+        "D17 attribution fields exist (12 contact first_*/last_* + 5 frozen opportunity attr fields) -- see Decisions page"
       ],
       "steps": [
         {
           "order": 1,
           "action": "Update Contact Field",
-          "name": "Fields: Capture gclid/fbclid/UTM",
-          "config": "Write inbound values to contact.gclid_value, contact.fbclid_value, contact.utm_source, utm_campaign, utm_medium, utm_content, utm_term. For webhook triggers reference the real {{inboundWebhookRequest.N}} indices (read them back from the saved trigger first)."
+          "name": "Fields: Two-touch attribution capture (D17)",
+          "config": "Write inbound gclid/fbclid/utm_source/utm_campaign/landing_page to BOTH field sets per Decision 17: last_* fields overwrite on every inbound; first_* fields write ONLY IF EMPTY (use an If/Else 'first_utm_source is empty' gate so first-touch is write-once). Stamp first_touch_at/last_touch_at with {{right_now.middle_endian_date}}. UTM governance: if utm_source is not one of google/meta/gbp/bing/referral/direct, add tag attr_needs_review instead of silently storing."
         },
         {
           "order": 2,
@@ -35,7 +36,7 @@
           "order": 3,
           "action": "Create/Update Opportunity",
           "name": "Opp: Create in New Lead",
-          "config": "Create Opportunity in Sales - Lead to Close (id Vt8cPz51C3i87moo73gQ), stage New Lead. Copy attribution onto the Opp at create: utm_source, utm_campaign, gclid, fbclid, lead_source. This is the single moment attribution lands on the Opp, so wins AND losses carry it."
+          "config": "Create Opportunity in Sales - Lead to Close (id Vt8cPz51C3i87moo73gQ), stage New Lead. Copy attribution onto the Opp at create: utm_source, utm_campaign, gclid, fbclid, lead_source. This is the single moment attribution lands on the Opp, so wins AND losses carry it. D17 FREEZE RULE: copy first_*/last_* attribution + gclid/fbclid/landing_page from contact onto the opportunity fields at CREATE, exactly once; no workflow may update opportunity attribution fields afterward."
         },
         {
           "order": 4,
@@ -1445,7 +1446,8 @@
       "prerequisites": [
         "opportunity.call_disposition field",
         "patient_care_consultant_id (written only by the PCC Sales Form)",
-        "WF-06 negative-NPS flag"
+        "WF-06 negative-NPS flag",
+        "Channel-level tracking numbers provisioned (Google Ads / GBP / site / other) so dialed number maps to channel (D17)"
       ],
       "steps": [
         {
@@ -1493,6 +1495,12 @@
               "path": "Disposition recorded, end"
             }
           ]
+        },
+        {
+          "order": 3,
+          "action": "Update Contact/Opportunity Field",
+          "name": "Attr: stamp phone lead source (D17)",
+          "config": "On call disposition, if the contact has no first_utm_source, set first_utm_source=phone and last_utm_source=phone, and stamp the dialed tracking number into last_landing_page (or a dedicated dialed_number field). Ensures called-in leads are not attribution-blank."
         }
       ],
       "messages": [
@@ -1545,7 +1553,7 @@
       }
     },
     "13": {
-      "purpose": "Fire Booked and Won conversions to Google and Meta. Exclude A&D. Do not key off ad_* fields.",
+      "purpose": "Fire Booked and Won conversions to Google and Meta. Exclude A&D. Do not key off ad_* fields. D17: closed-loop value feedback enables value-based bidding (optimize for men who buy, not form-fills).",
       "diagram_key": "support",
       "trigger": {
         "type": "Opportunity Booked event and Opportunity Won event (signaled by WF-05)",
@@ -1559,20 +1567,22 @@
       "prerequisites": [
         "CAPI/Google Ads conversion endpoints configured",
         "WF-05 signals Won once",
-        "WF-13 fires once per opportunity"
+        "WF-13 fires once per opportunity",
+        "Native facebook_conversion_api + google_adword conversion actions (exist in account per local-session scan)",
+        "Frozen opportunity attribution fields populated by WF-01 (D17)"
       ],
       "steps": [
         {
           "order": 1,
-          "action": "Webhook",
-          "name": "Webhook: Booked Conversion",
-          "config": "On Appointment Booked, fire the Booked conversion to Google Ads and Meta CAPI."
+          "action": "Native Conversion (Google)",
+          "name": "Conv: Showed event (D17)",
+          "config": "Fire on appt_status=showed. Higher-volume optimization signal; lets campaigns be judged on show rate weeks before revenue. Payload includes gclid (frozen opp field) + event_id=opportunity ID."
         },
         {
           "order": 2,
-          "action": "Webhook",
-          "name": "Webhook: Won Conversion",
-          "config": "On Opportunity Won, fire the Won conversion. Signaled once by WF-05, guarded by outcome_processed_at."
+          "action": "Native Conversion (Google + Meta)",
+          "name": "Conv: Won with revenue value (D17)",
+          "config": "Fire once per opportunity on Won (gate on outcome_processed_at). Send actual revenue value; SEPARATE conversion actions for sale_type=new vs renewal. gclid/fbclid from FROZEN opportunity fields; event_id=opportunity ID for pixel/server dedup. If click is outside the 90-day window (renewals), use enhanced conversions (hashed email/phone) instead of click ID."
         }
       ],
       "messages": [
@@ -1864,6 +1874,12 @@
           "action": "Send SMS",
           "name": "Chat: Auto-Response",
           "config": "On chat OOO, auto-respond with the scheduling link."
+        },
+        {
+          "order": 6,
+          "action": "Update Contact Field",
+          "name": "Attr: missed-call source stamp (D17)",
+          "config": "On missed call, apply the same phone-source stamping as WF-12: first_utm_source=phone if empty, last_utm_source=phone, dialed tracking number captured. Number-pool DNI upgrade path documented in Decision 17."
         }
       ],
       "messages": [

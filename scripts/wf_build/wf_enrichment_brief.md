@@ -92,3 +92,10 @@ Executed 2026-07-11. Message copy is centralized across two managed surfaces:
 - **Per-clinic**: Locations Custom Object + generic current_* contact fields (added current_review_link, id 7Pos1K79nIr21Or8xnHu). WF-01 stamp step still TODO (needs JWT).
 - **Validation**: `scripts/validate_templates.py` PASSES — every token resolves to a declared source.
 - **Hard guard**: only CREATE new assets; never edit/delete live templates or values outside the build. Legacy per-clinic Custom Values deprecated, not deleted.
+
+## 8. Decision 17 — attribution upgrade (build additions)
+
+Two-touch + closed loop. Before enriching WF-01 attribution: create (verify-then-create) 12 contact fields (first_/last_ x utm_source, utm_campaign, gclid, fbclid, landing_page, touch_at) and 5 frozen opportunity fields (attr_first_utm_source, attr_last_utm_source, attr_gclid, attr_fbclid, attr_landing_page). AUDIT FIRST: gclid_value/fbclid_value/utm_source/utm_campaign contact fields already exist — map, do not duplicate.
+- WF-01: last_* overwrite every inbound; first_* behind an "is empty" if_else gate; both copied onto the opportunity at create and FROZEN. Malformed utm_source (not in google/meta/gbp/bing/referral/direct) -> tag attr_needs_review.
+- WF-12/16: phone-source stamping (first/last_utm_source=phone when blank, dialed number captured).
+- WF-13: use native facebook_conversion_api + google_adword actions; Showed event (gclid + event_id=opp ID); Won event with revenue value, new vs renewal as separate actions, gated on outcome_processed_at; enhanced conversions for beyond-window renewals.

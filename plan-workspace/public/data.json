@@ -3630,6 +3630,142 @@
         "Renewal"
       ],
       "note": "Canonical consult-type set by PCC at disposition. Required at Win. Supersedes rare contact.sale_type (35)."
+    },
+    {
+      "key": "first_utm_source",
+      "label": "First UTM Source",
+      "object": "Contact",
+      "type": "TEXT",
+      "writer": "WF-01 (write-once, only-if-empty)",
+      "note": "Decision 17"
+    },
+    {
+      "key": "first_utm_campaign",
+      "label": "First UTM Campaign",
+      "object": "Contact",
+      "type": "TEXT",
+      "writer": "WF-01 (write-once)",
+      "note": "Decision 17"
+    },
+    {
+      "key": "first_gclid",
+      "label": "First GCLID",
+      "object": "Contact",
+      "type": "TEXT",
+      "writer": "WF-01 (write-once)",
+      "note": "Decision 17"
+    },
+    {
+      "key": "first_fbclid",
+      "label": "First FBCLID",
+      "object": "Contact",
+      "type": "TEXT",
+      "writer": "WF-01 (write-once)",
+      "note": "Decision 17"
+    },
+    {
+      "key": "first_landing_page",
+      "label": "First Landing Page",
+      "object": "Contact",
+      "type": "TEXT",
+      "writer": "WF-01 (write-once)",
+      "note": "Decision 17"
+    },
+    {
+      "key": "first_touch_at",
+      "label": "First Touch At",
+      "object": "Contact",
+      "type": "DATE",
+      "writer": "WF-01 (write-once)",
+      "note": "Decision 17"
+    },
+    {
+      "key": "last_utm_source",
+      "label": "Last UTM Source",
+      "object": "Contact",
+      "type": "TEXT",
+      "writer": "WF-01 (overwrite each inbound)",
+      "note": "Decision 17"
+    },
+    {
+      "key": "last_utm_campaign",
+      "label": "Last UTM Campaign",
+      "object": "Contact",
+      "type": "TEXT",
+      "writer": "WF-01 (overwrite)",
+      "note": "Decision 17"
+    },
+    {
+      "key": "last_gclid",
+      "label": "Last GCLID",
+      "object": "Contact",
+      "type": "TEXT",
+      "writer": "WF-01 (overwrite)",
+      "note": "Decision 17"
+    },
+    {
+      "key": "last_fbclid",
+      "label": "Last FBCLID",
+      "object": "Contact",
+      "type": "TEXT",
+      "writer": "WF-01 (overwrite)",
+      "note": "Decision 17"
+    },
+    {
+      "key": "last_landing_page",
+      "label": "Last Landing Page",
+      "object": "Contact",
+      "type": "TEXT",
+      "writer": "WF-01 (overwrite)",
+      "note": "Decision 17"
+    },
+    {
+      "key": "last_touch_at",
+      "label": "Last Touch At",
+      "object": "Contact",
+      "type": "DATE",
+      "writer": "WF-01 (overwrite)",
+      "note": "Decision 17"
+    },
+    {
+      "key": "opp_first_utm_source",
+      "label": "Attr: First UTM Source (frozen)",
+      "object": "Opportunity",
+      "type": "TEXT",
+      "writer": "WF-01 at opportunity create (FROZEN, never updated)",
+      "note": "Decision 17 -- copy of contact first_*/last_* at create"
+    },
+    {
+      "key": "opp_last_utm_source",
+      "label": "Attr: Last UTM Source (frozen)",
+      "object": "Opportunity",
+      "type": "TEXT",
+      "writer": "WF-01 at opportunity create (FROZEN)",
+      "note": "Decision 17"
+    },
+    {
+      "key": "opp_gclid",
+      "label": "Attr: GCLID (frozen)",
+      "object": "Opportunity",
+      "type": "TEXT",
+      "writer": "WF-01 at opportunity create (FROZEN)",
+      "note": "Decision 17 -- fed to WF-13 Won conversion"
+    },
+    {
+      "key": "opp_fbclid",
+      "label": "Attr: FBCLID (frozen)",
+      "object": "Opportunity",
+      "type": "TEXT",
+      "writer": "WF-01 at opportunity create (FROZEN)",
+      "note": "Decision 17"
+    },
+    {
+      "key": "opp_landing_page",
+      "label": "Attr: Landing Page (frozen)",
+      "object": "Opportunity",
+      "type": "TEXT",
+      "writer": "WF-01 at opportunity create (FROZEN)",
+      "note": "Decision 17"
     }
   ],
   "triggers_summary": {
@@ -4385,6 +4521,14 @@
       "decision": "2-surface content model: message copy lives in native GHL Templates (one per message, sms_wfNN_*/email_wfNN_*); shared brand-wide merge-free constants live in Custom Values (sms_opt_out_footer, brand_tagline, consult_descriptor, intake_link, survey_link, referral_link) referenced inside templates; per-clinic data stays in the Locations Custom Object + generic current_* contact fields (current_review_link added). Reconciliation: booking_link and review_link are per-clinic and use {{contact.current_*}}, not Custom Values (collision rule, Decision 14). Brand constants are safe as Custom Values because they contain no merge fields (no nesting fragility). Legacy per-clinic Custom Values (richmond_*/virginia_beach_*/newport_news_*) are deprecated but NOT deleted in this build. Hard guard: only CREATE new assets; never edit/delete live templates or values outside the build.",
       "choice": "Option B (2 managed surfaces) over Option A (inline everything, footer drift) and Option C (single Custom Object, breaks merge-field rendering in message bodies).",
       "platform_finding": "PROBED 2026-07-11: GHL workflow SMS nodes do NOT support template references. Saving templateId/messageTemplateId on an SMS node returns 200 but GHL STRIPS both on read-back — the node only retains body+attachments. 0 of 54 live SMS nodes reference a template. Therefore templates are NOT live runtime links for SMS; they are (a) the canonical editing surface, (b) a build-time source for inserting canonical copy, and (c) a drift-detection reference. Edits to a template do NOT auto-propagate to already-built workflow nodes. Propagation model: template = source of truth; workflow SMS node body = deployed copy; a drift-detection script flags nodes whose body diverges from their template, and re-sync = re-copy. This is still a major win (single canonical copy, non-technical editing, drift enforcement) but NOT automatic propagation. The 'wire send-steps to reference template IDs' step is impossible for SMS; the substitute is 'copy reconciled template body into each draft SMS node body' — mutates drafts, needs Eric sign-off."
+    },
+    {
+      "n": "17",
+      "date": "2026-07-11",
+      "owner": "Eric",
+      "status": "Locked",
+      "decision": "Attribution upgrade: two-touch model + revenue closed loop. (1) Paired first_*/last_* attribution field sets on the contact (first_utm_source, first_utm_campaign, first_gclid, first_fbclid, first_landing_page, first_touch_at + last_* equivalents). First-touch fields are WRITE-ONCE (WF-01 writes only if empty); last-touch overwrite on every new inbound session/form. (2) Attribution is stamped onto the opportunity at create and then FROZEN -- written exactly once, never updated (the opportunity is the immutable record of what created the revenue event; the contact carries living last-touch). (3) Closed loop in WF-13: on Won, send conversion with gclid/fbclid + actual revenue value, new vs renewal as separate conversion actions; event_id = opportunity ID on both Google and Meta payloads for pixel/server dedup; enhanced conversions (hashed email/phone) for conversions outside the 90-day click window. (4) appt_status=showed fires as its own conversion event (higher-volume optimization signal; exposes bad-lead campaigns via show rate weeks before revenue does). (5) Phone-call attribution: WF-12/16 stamp lead_source=phone + dialed tracking number; channel-level tracking numbers minimum, number-pool DNI when volume justifies. (6) UTM governance: allowed utm_source enum (google/meta/gbp/bing/referral/direct), utm_campaign convention {clinic}_{service}_{intent}, WF-01 tags malformed UTMs for cleanup instead of storing garbage.",
+      "choice": "Two-touch write-once/overwrite pattern + frozen opportunity stamp + value-based conversion feedback, over single-touch last-click (over-credits branded search, starves demand creation) and over third-party attribution tools (unnecessary given GHL native session attribution + server-side conversions)."
     }
   ],
   "risks": [
@@ -4496,7 +4640,11 @@
     "Every SMS and voicemail workflow filters on the canonical sms_consent_status field AND native DND, and runs inside a Time Window of 8 AM to 9 PM in the Contact Timezone (TCPA quiet hours).",
     "Only the PCC Sales Form writes opportunity.sale_outcome, sale_type, appt_status, patient_care_consultant_id, and value - WF-05 is a router that reacts to those values and never writes outcomes itself.",
     "No SMS or voicemail contains symptom or treatment specifics: appointment and consultation logistics only.",
-    "Never clone a workflow per clinic and never put per-clinic data in an account-wide Custom Value: build one workflow parameterized by opportunity.location, and deliver per-clinic values via the Locations Custom Object or a tag-routed contact-field matrix (a Custom Value applies to the whole sub-account and would collide across clinics)."
+    "Never clone a workflow per clinic and never put per-clinic data in an account-wide Custom Value: build one workflow parameterized by opportunity.location, and deliver per-clinic values via the Locations Custom Object or a tag-routed contact-field matrix (a Custom Value applies to the whole sub-account and would collide across clinics).",
+    "Attribution freeze rule (D17): opportunity attribution fields are written exactly once at opportunity create and never updated after. Contact carries living last-touch; opportunity is the immutable revenue-event record.",
+    "First-touch write-once rule (D17): WF-01 writes first_* fields only when empty. Any workflow found overwriting a populated first_* field is a defect.",
+    "UTM governance (D17): utm_source must be one of google/meta/gbp/bing/referral/direct; utm_campaign follows {clinic}_{service}_{intent}. WF-01 tags malformed UTMs (attr_needs_review) rather than storing unvalidated values.",
+    "Conversion dedup (D17): every server-side conversion event (Google/Meta) carries event_id = opportunity ID so pixel and server events dedupe."
   ],
   "messages_tobe": [
     {

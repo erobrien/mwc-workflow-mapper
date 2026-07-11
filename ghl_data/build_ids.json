@@ -1018,5 +1018,31 @@
       }
     }
   },
-  "custom_values_created_2026_07_11": true
+  "custom_values_created_2026_07_11": true,
+  "attribution_fields_d17": {
+    "status": "PLANNED — create via verify-then-create before WF-01 attribution enrichment",
+    "contact_fields": [
+      "first_utm_source",
+      "first_utm_campaign",
+      "first_gclid",
+      "first_fbclid",
+      "first_landing_page",
+      "first_touch_at",
+      "last_utm_source",
+      "last_utm_campaign",
+      "last_gclid",
+      "last_fbclid",
+      "last_landing_page",
+      "last_touch_at"
+    ],
+    "opportunity_fields": [
+      "attr_first_utm_source",
+      "attr_last_utm_source",
+      "attr_gclid",
+      "attr_fbclid",
+      "attr_landing_page"
+    ],
+    "rules": "first_* write-once (if-empty gate in WF-01); last_* overwrite; opportunity attr_* FROZEN at create; event_id=opportunity ID on all conversion payloads; utm_source enum google/meta/gbp/bing/referral/direct; malformed -> tag attr_needs_review",
+    "existing_overlap": "contact gclid_value/fbclid_value/utm_source/utm_campaign already exist (vendor + prior work) — map/rename rather than duplicate where possible; audit before creating"
+  }
 }

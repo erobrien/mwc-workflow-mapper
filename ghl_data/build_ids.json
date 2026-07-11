@@ -923,6 +923,99 @@
         "virginia_beach_*",
         "newport_news_*"
       ]
+    },
+    "naming_convention": "<channel>_wf<NN>_<step> | channel=sms|email | NN=zero-padded workflow number | step=snake_case step label. Examples: sms_wf01_speed_to_lead, email_wf01_welcome. This name is the SOLE linkage between a workflow SMS/email node and its template (GHL SMS nodes cannot reference templates by ID), so drift detection and re-sync match by parsing this convention.",
+    "template_to_workflow": {
+      "email_wf01_welcome": {
+        "id": "KV7ewKzUkNTjVQnjkDci",
+        "wf": "WF-01",
+        "channel": "email",
+        "step": "welcome"
+      },
+      "sms_wf01_speed_to_lead": {
+        "id": "6N44ECFpGNTjigmp84Qx",
+        "wf": "WF-01",
+        "channel": "sms",
+        "step": "speed_to_lead"
+      },
+      "sms_wf02_follow_up_1": {
+        "id": "LEZA8ycUH2RZnLqrIuwZ",
+        "wf": "WF-02",
+        "channel": "sms",
+        "step": "follow_up_1"
+      },
+      "sms_wf02_empathetic_breakup_5": {
+        "id": "al7uAJSbVdUR5xjRVc05",
+        "wf": "WF-02",
+        "channel": "sms",
+        "step": "empathetic_breakup_5"
+      },
+      "sms_wf03_booking_confirmation": {
+        "id": "Mdpgw4QfymGoUJ4LGTVV",
+        "wf": "WF-03",
+        "channel": "sms",
+        "step": "booking_confirmation"
+      },
+      "sms_wf03_morning_of": {
+        "id": "3PyUyrtPNamzOO6hvVew",
+        "wf": "WF-03",
+        "channel": "sms",
+        "step": "morning_of"
+      },
+      "sms_wf04_intake_chase_1": {
+        "id": "jKPJMtCWdbsu1ScOiXTY",
+        "wf": "WF-04",
+        "channel": "sms",
+        "step": "intake_chase_1"
+      },
+      "sms_wf06_google_review_request": {
+        "id": "PQrL3Wn59r8jYxfxWlbq",
+        "wf": "WF-06",
+        "channel": "sms",
+        "step": "google_review_request"
+      },
+      "sms_wf07_no_pressure_1": {
+        "id": "DkE1N6fVa5bpRGYbf5Kj",
+        "wf": "WF-07",
+        "channel": "sms",
+        "step": "no_pressure_1"
+      },
+      "sms_wf08_recovery_1": {
+        "id": "EP0rD8PQ6wco4BaFQeeq",
+        "wf": "WF-08",
+        "channel": "sms",
+        "step": "recovery_1"
+      },
+      "sms_wf09_7_day_urgency_renewal": {
+        "id": "4LFUiPv2qeh51BjR4ClW",
+        "wf": "WF-09",
+        "channel": "sms",
+        "step": "7_day_urgency_renewal"
+      },
+      "sms_wf10_survey_invite": {
+        "id": "Bd9Kr7GHzJx4bDm8nwTD",
+        "wf": "WF-10",
+        "channel": "sms",
+        "step": "survey_invite"
+      },
+      "sms_wf14_ambassador_invitation": {
+        "id": "nkO6Pt2Uf8iBTl2WW0yR",
+        "wf": "WF-14",
+        "channel": "sms",
+        "step": "ambassador_invitation"
+      },
+      "sms_wf15_referred_lead_welcome": {
+        "id": "tJXyohzAzak8F2OLGpi7",
+        "wf": "WF-15",
+        "channel": "sms",
+        "step": "referred_lead_welcome"
+      },
+      "sms_wf16_instant_text_back": {
+        "id": "FGjpFlSLoByg6ECKbrMY",
+        "wf": "WF-16",
+        "channel": "sms",
+        "step": "instant_text_back"
+      }
     }
   },
   "custom_values_created_2026_07_11": true

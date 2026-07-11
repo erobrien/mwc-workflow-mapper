@@ -8,29 +8,6 @@
       "summary": "Field inventory snapshot captured (generated_at in data.json): 128 fields listed, 14 real Opportunity custom fields present."
     },
     {
-      "date": "2026-06-14",
-      "actor": "System",
-      "category": "incident",
-      "summary": "Audit log (incident context): \"Test Field\" custom field deleted.",
-      "ref": "69c9654b..."
-    },
-    {
-      "date": "2026-06-17",
-      "time": "~01:12-02:43 UTC (Jun 16/17)",
-      "actor": "System",
-      "category": "incident",
-      "summary": "49 custom fields deleted across two bursts, including probe/test fields and form fields.",
-      "ref": "69c9654b3ac8c7a2b0db51d7"
-    },
-    {
-      "date": "2026-06-17",
-      "time": "02:20-02:41 UTC",
-      "actor": "Eric",
-      "category": "incident",
-      "summary": "46 custom fields deleted in a systematic 14-minute pass, including ALL 14 legacy Opportunity fields (Lead Source id erNYds93RsIn9mEyplyY, Location, Patient Advisor, Payment Type, Clinic Type, Treatment Stage, Insurance Provider, Appointment Date, Consultation Date, Deductible Met, Patient's Birthday, Promo Code, Sale Amount, Today's Date). Actor mSpcuA8jA7ddYqKoZ1Cy is Eric's auth id. Confirmed via audit log export 2026-07-10.",
-      "ref": "mSpcuA8jA7ddYqKoZ1Cy"
-    },
-    {
       "date": "2026-06-24",
       "time": "Jun 24-25",
       "actor": "Computer",
@@ -238,22 +215,7 @@
       "time": "16:1x",
       "actor": "Claude Code",
       "category": "build",
-      "summary": "35 new Opportunity custom fields created in live account per canonical model; 2 deleted and recreated same-session to fix key mismatch."
-    },
-    {
-      "date": "2026-07-10",
-      "time": "16:16 (23:16 UTC)",
-      "actor": "System",
-      "category": "incident",
-      "summary": "Audit log: \"Appointment Status\" and \"Patient Care Consultant (PCC)\" Opportunity fields DELETED at 23:16 UTC. Attribution to specific tool unconfirmed.",
-      "ref": "6a3e39da...-mquoeu081"
-    },
-    {
-      "date": "2026-07-10",
-      "time": "18:1x-18:4x",
-      "actor": "Computer",
-      "category": "investigation",
-      "summary": "Field-deletion investigation: live pull shows 0 Opportunity custom fields / 102 contact fields at pull time; opportunity records carry no orphaned custom data (207 sampled, 40 Won); sale data confirmed living on Contact (the documented defect). Audit log export pins legacy field deletion to June 17, 02:20-02:34 UTC, actor = Eric's auth id."
+      "summary": "35 new Opportunity custom fields created in live account per canonical model."
     },
     {
       "date": "2026-07-10",

@@ -278,6 +278,14 @@
       "category": "decision",
       "summary": "Decision 15 locked: message bodies live in GHL's native Template library (one template per message), referenced by workflow send-steps rather than inline, so copy is centralized and swappable without touching workflows. Personalization stays via merge fields; a Messages Custom Object is the fallback only if A/B variants are needed later.",
       "ref": "Decision 15"
+    },
+    {
+      "date": "2026-07-11",
+      "time": "10:2x",
+      "actor": "Computer",
+      "category": "blocker",
+      "summary": "CRITICAL FINDING before Phase 5 proceeds: the live revenue pipeline is '01. MWC Sales Production' (uUm5DInIjq6uYlg9HDwU), confirmed by Eric and by opportunity count (1,079 open/total opportunities). 'Sales - Lead to Close' (Vt8cPz51C3i87moo73gQ) -- the pipeline all -Target Release workflows (WF-01, WF-05, etc.) were built against all session -- has ZERO opportunities. Every internal_create_opportunity / internal_update_opportunity node built so far writes to the wrong, unused pipeline and would never touch a real lead or real revenue if triggers were attached as-is. Account has 18 total pipelines, most pre-existing and some (02/03/04 per-clinic pipelines, MWC Lead Pipeline, PCC Referrals, Referral Rewards, Retention, No Show/Cancel, z Call Disposition) potentially still in active use elsewhere. This must be resolved -- either retarget all opportunity-write nodes to '01. MWC Sales Production' with its real stage IDs (Pending New Arrival, Pending Renewal Arrival, New Sale, Renewal Sale, A&D/No Sale, No-Show, Rescheduled, Cancelled -- a DIFFERENT stage model than the 11-stage Sales-Lead-to-Close model the spec, tobe-detail, and build_ids.json all assume) or make an explicit, documented decision to migrate production to the new pipeline as part of go-live. DO NOT attach triggers or proceed with Phase 5 build until this is decided.",
+      "ref": "pipeline-mismatch"
     }
   ]
 }

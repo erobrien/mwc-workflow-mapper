@@ -350,6 +350,14 @@
       "category": "decision",
       "summary": "Decision 19 locked and folded into spec: JJ nurture designs adopted as branches (WF-07 five objection branches, WF-09 three temperature tiers) with the field-tested cadences and 78 brand-transformed JJ messages registered as template payloads (validation PASSES, 93 total). Rejected per-location gates (naming-bug clone drift found: newport_beach_booked), separate-workflow structure, and mid-nurture opportunity creation. Deployment to -Target Release drafts prepped (scripts/enrich_wf07_09.py) pending fresh JWT.",
       "ref": "Decision 19"
+    },
+    {
+      "date": "2026-07-11",
+      "time": "19:4x",
+      "actor": "Computer",
+      "category": "build",
+      "summary": "Full deploy queue executed on live (one JWT window): (1) Decision 19 deployed -- WF-07 rebuilt as 5-objection branch tree (97 nodes) and WF-09 as HOT/WARM/COLD tiers (61 nodes) with JJ cadences and brand-transformed copy, read-back verified. (2) Template-body sync: 14 nodes across 10 workflows updated to canonical reconciled copy; drift detector now reports 15 matched / 0 drift (email-node html comparison fixed). (3) Decision 17 wired into drafts: WF-01 last-touch overwrite + first-touch write-once gate (if-empty) + stamps, WF-12 phone-source stamp on Connected branch, WF-16 missed-call stamp, WF-13 webhooks upgraded with event_id={{opportunity.id}} + value param and flagged for native-action swap at go-live. (4) All 78 JJ templates created in the GHL library (93 total ours, verified via pagination). Folder state: 16 workflows + ZZ probe, 269 nodes, ALL DRAFT, ZERO active triggers. New wf_build_state.json snapshot committed.",
+      "ref": "Deploy queue"
     }
   ]
 }

@@ -4,6 +4,22 @@
     "status": "draft",
     "nodes": [
       {
+        "type": "update_contact_field",
+        "name": "Attr: last_* overwrite (D17, every inbound)"
+      },
+      {
+        "type": "if_else",
+        "name": "If: first_utm_source is empty (D17 write-once gate)"
+      },
+      {
+        "type": "update_contact_field",
+        "name": "Attr: first_* write-once stamp (D17)"
+      },
+      {
+        "type": "internal_create_opportunity",
+        "name": "Opp: Create in New Lead + copy attribution"
+      },
+      {
         "type": "email",
         "name": "Email: Welcome (instant)"
       },
@@ -21,15 +37,19 @@
       },
       {
         "type": "wait",
-        "name": "Wait: 5 minutes from entry"
+        "name": "Wait: 3 minutes (to +5m from entry)"
       },
       {
         "type": "wait",
         "name": "Wait: 24 hours"
       },
       {
-        "type": "sms",
-        "name": "SMS: Sequence end placeholder"
+        "type": "if_else",
+        "name": "If: Booked within 24h? (appointment present)"
+      },
+      {
+        "type": "add_to_workflow",
+        "name": "-> WF-02 Non-Booked Recovery"
       }
     ],
     "triggers": [
@@ -44,12 +64,16 @@
     "status": "draft",
     "nodes": [
       {
+        "type": "wait",
+        "name": "Wait: 5 minutes(s)"
+      },
+      {
         "type": "sms",
         "name": "Call: Speed-to-Lead (T+5m)"
       },
       {
         "type": "wait",
-        "name": "Wait: 2 hours"
+        "name": "Wait: 2 hour(s)"
       },
       {
         "type": "sms",
@@ -57,39 +81,71 @@
       },
       {
         "type": "wait",
-        "name": "Wait: to +4h"
+        "name": "Wait: 2 hour(s)"
       },
       {
         "type": "email",
         "name": "Email: Health Education 1 (T+4h)"
       },
       {
+        "type": "wait",
+        "name": "Wait: 20 hour(s)"
+      },
+      {
         "type": "sms",
         "name": "SMS: Re-Engagement 2 (T+1d)"
+      },
+      {
+        "type": "wait",
+        "name": "Wait: 1 days(s)"
       },
       {
         "type": "email",
         "name": "Email: Physician-Led Process 2 (T+2d)"
       },
       {
+        "type": "wait",
+        "name": "Wait: 1 days(s)"
+      },
+      {
         "type": "sms",
         "name": "Call: Voicemail Drop (T+3d)"
+      },
+      {
+        "type": "wait",
+        "name": "Wait: 2 days(s)"
       },
       {
         "type": "sms",
         "name": "SMS: Availability 3 (T+5d)"
       },
       {
+        "type": "wait",
+        "name": "Wait: 2 days(s)"
+      },
+      {
         "type": "email",
         "name": "Email: Testimonial 3 (T+7d)"
+      },
+      {
+        "type": "wait",
+        "name": "Wait: 3 days(s)"
       },
       {
         "type": "sms",
         "name": "SMS: Re-Engagement 4 (T+10d)"
       },
       {
+        "type": "wait",
+        "name": "Wait: 4 days(s)"
+      },
+      {
         "type": "email",
         "name": "Email: Urgency 4 (T+14d)"
+      },
+      {
+        "type": "wait",
+        "name": "Wait: 2 days(s)"
       },
       {
         "type": "sms",
@@ -150,16 +206,32 @@
     "status": "draft",
     "nodes": [
       {
+        "type": "wait",
+        "name": "Wait: 4 hour(s)"
+      },
+      {
         "type": "sms",
         "name": "SMS: Intake Chase 1 (T+4h)"
+      },
+      {
+        "type": "wait",
+        "name": "Wait: 8 hour(s)"
       },
       {
         "type": "email",
         "name": "Email: Confirmation Chase (T+12h)"
       },
       {
+        "type": "wait",
+        "name": "Wait: 12 hour(s)"
+      },
+      {
         "type": "sms",
         "name": "SMS: Urgency Chase 2 (T+24h)"
+      },
+      {
+        "type": "wait",
+        "name": "Wait: 12 hour(s)"
       },
       {
         "type": "sms",
@@ -212,6 +284,10 @@
     "status": "draft",
     "nodes": [
       {
+        "type": "wait",
+        "name": "Wait: 1 hour"
+      },
+      {
         "type": "sms",
         "name": "SMS: Welcome (T+1h)"
       },
@@ -220,20 +296,44 @@
         "name": "Email: Welcome and Onboarding (T+1h)"
       },
       {
+        "type": "wait",
+        "name": "Wait: 3 days"
+      },
+      {
         "type": "sms",
         "name": "SMS: Check-In (T+3d)"
+      },
+      {
+        "type": "wait",
+        "name": "Wait: 4 days"
       },
       {
         "type": "email",
         "name": "Email: Week 1 Progress (T+7d)"
       },
       {
+        "type": "wait",
+        "name": "Wait: 7 days"
+      },
+      {
+        "type": "if_else",
+        "name": "If: NPS on visit_feedback_score"
+      },
+      {
         "type": "sms",
         "name": "SMS: Google Review Request (T+14d, conditional)"
       },
       {
+        "type": "wait",
+        "name": "Wait: 7 days"
+      },
+      {
         "type": "sms",
         "name": "SMS: Referral Activation (T+21d)"
+      },
+      {
+        "type": "internal_notification",
+        "name": "Notify: Negative NPS - PCC follow-up"
       }
     ],
     "triggers": []
@@ -243,36 +343,392 @@
     "status": "draft",
     "nodes": [
       {
+        "type": "if_else",
+        "name": "D19: objection branch router"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 1d"
+      },
+      {
         "type": "sms",
-        "name": "SMS: No-Pressure 1 (T+2h)"
+        "name": "SMS: cost touch 1 [sms_wf07_cost_t1]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 2d"
       },
       {
         "type": "email",
-        "name": "Email: Objection Handling (T+1d)"
+        "name": "Email: cost touch 2 [email_wf07_cost_t2]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 3d"
       },
       {
         "type": "sms",
-        "name": "SMS: Labs on File 2 (T+3d)"
+        "name": "SMS: cost touch 3 [sms_wf07_cost_t3]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 1d"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: cost touch 4 [sms_wf07_cost_t4]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 2d"
       },
       {
         "type": "email",
-        "name": "Email: Testimonial (T+7d)"
+        "name": "Email: cost touch 5 [email_wf07_cost_t5]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 3d"
       },
       {
         "type": "sms",
-        "name": "SMS: Encouragement 3 (T+14d)"
+        "name": "SMS: cost touch 6 [sms_wf07_cost_t6]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 1d"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: cost touch 7 [sms_wf07_cost_t7]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 2d"
       },
       {
         "type": "email",
-        "name": "Email: Labs Expiring (T+21d)"
+        "name": "Email: cost touch 8 [email_wf07_cost_t8]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 3d"
       },
       {
         "type": "sms",
-        "name": "SMS: Final Reminder 4 (T+30d)"
+        "name": "SMS: cost touch 9 [sms_wf07_cost_t9]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 1d"
+      },
+      {
+        "type": "email",
+        "name": "Email: fear touch 1 [email_wf07_fear_t1]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 2d"
       },
       {
         "type": "sms",
-        "name": "SMS: Empathetic Breakup 5 (T+35d)"
+        "name": "SMS: fear touch 2 [sms_wf07_fear_t2]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 3d"
+      },
+      {
+        "type": "email",
+        "name": "Email: fear touch 3 [email_wf07_fear_t3]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 1d"
+      },
+      {
+        "type": "email",
+        "name": "Email: fear touch 4 [email_wf07_fear_t4]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 2d"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: fear touch 5 [sms_wf07_fear_t5]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 3d"
+      },
+      {
+        "type": "email",
+        "name": "Email: fear touch 6 [email_wf07_fear_t6]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 1d"
+      },
+      {
+        "type": "email",
+        "name": "Email: fear touch 7 [email_wf07_fear_t7]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 2d"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: fear touch 8 [sms_wf07_fear_t8]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 3d"
+      },
+      {
+        "type": "email",
+        "name": "Email: fear touch 9 [email_wf07_fear_t9]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 1d"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: partner touch 1 [sms_wf07_partner_t1]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 2d"
+      },
+      {
+        "type": "email",
+        "name": "Email: partner touch 2 [email_wf07_partner_t2]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 3d"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: partner touch 3 [sms_wf07_partner_t3]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 1d"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: partner touch 4 [sms_wf07_partner_t4]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 2d"
+      },
+      {
+        "type": "email",
+        "name": "Email: partner touch 5 [email_wf07_partner_t5]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 3d"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: partner touch 6 [sms_wf07_partner_t6]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 1d"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: partner touch 7 [sms_wf07_partner_t7]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 2d"
+      },
+      {
+        "type": "email",
+        "name": "Email: partner touch 8 [email_wf07_partner_t8]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 3d"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: partner touch 9 [sms_wf07_partner_t9]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 1d"
+      },
+      {
+        "type": "email",
+        "name": "Email: timing touch 1 [email_wf07_timing_t1]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 2d"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: timing touch 2 [sms_wf07_timing_t2]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 3d"
+      },
+      {
+        "type": "email",
+        "name": "Email: timing touch 3 [email_wf07_timing_t3]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 1d"
+      },
+      {
+        "type": "email",
+        "name": "Email: timing touch 4 [email_wf07_timing_t4]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 2d"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: timing touch 5 [sms_wf07_timing_t5]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 3d"
+      },
+      {
+        "type": "email",
+        "name": "Email: timing touch 6 [email_wf07_timing_t6]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 1d"
+      },
+      {
+        "type": "email",
+        "name": "Email: timing touch 7 [email_wf07_timing_t7]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 2d"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: timing touch 8 [sms_wf07_timing_t8]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 3d"
+      },
+      {
+        "type": "email",
+        "name": "Email: timing touch 9 [email_wf07_timing_t9]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 1d"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: decision touch 1 [sms_wf07_decision_t1]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 2d"
+      },
+      {
+        "type": "email",
+        "name": "Email: decision touch 2 [email_wf07_decision_t2]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 3d"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: decision touch 3 [sms_wf07_decision_t3]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 1d"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: decision touch 4 [sms_wf07_decision_t4]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 2d"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: decision touch 5 [sms_wf07_decision_t5]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 3d"
+      },
+      {
+        "type": "email",
+        "name": "Email: decision touch 6 [email_wf07_decision_t6]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 1d"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: decision touch 7 [sms_wf07_decision_t7]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 2d"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: decision touch 8 [sms_wf07_decision_t8]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 3d"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: decision touch 9 [sms_wf07_decision_t9]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 1d"
+      },
+      {
+        "type": "email",
+        "name": "Email: decision touch 10 [email_wf07_decision_t10]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 2d"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: decision touch 11 [sms_wf07_decision_t11]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 3d"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: decision touch 12 [sms_wf07_decision_t12]"
       }
     ],
     "triggers": []
@@ -282,16 +738,32 @@
     "status": "draft",
     "nodes": [
       {
+        "type": "wait",
+        "name": "Wait: 15 minutes(s)"
+      },
+      {
         "type": "sms",
         "name": "SMS: Recovery 1 (T+15m)"
+      },
+      {
+        "type": "wait",
+        "name": "Wait: 45 minutes(s)"
       },
       {
         "type": "email",
         "name": "Email: Physician Recovery (T+1h)"
       },
       {
+        "type": "wait",
+        "name": "Wait: 23 hour(s)"
+      },
+      {
         "type": "sms",
         "name": "SMS: Availability 2 (T+1d)"
+      },
+      {
+        "type": "wait",
+        "name": "Wait: 2 days(s)"
       },
       {
         "type": "email",
@@ -302,8 +774,16 @@
         "name": "SMS: Re-Engagement 3 (T+3d)"
       },
       {
+        "type": "wait",
+        "name": "Wait: 2 days(s)"
+      },
+      {
         "type": "sms",
         "name": "SMS: Scarcity 4 (T+5d)"
+      },
+      {
+        "type": "wait",
+        "name": "Wait: 2 days(s)"
       },
       {
         "type": "sms",
@@ -321,32 +801,248 @@
     "status": "draft",
     "nodes": [
       {
-        "type": "email",
-        "name": "Email: Energy as Medical Issue (T+30d)"
+        "type": "if_else",
+        "name": "D19: temperature tier router"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 3d"
       },
       {
         "type": "sms",
-        "name": "SMS: CTA (T+45d)"
+        "name": "SMS: hot touch 1 [sms_wf09_hot_t1]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 4d"
       },
       {
         "type": "email",
-        "name": "Email: Sleep and Performance (T+60d)"
+        "name": "Email: hot touch 2 [email_wf09_hot_t2]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 5d"
       },
       {
         "type": "sms",
-        "name": "SMS: Seasonal Scarcity (T+75d)"
+        "name": "SMS: hot touch 3 [sms_wf09_hot_t3]"
       },
       {
-        "type": "email",
-        "name": "Email: Medical Authority (T+90d)"
+        "type": "wait",
+        "name": "Wait 3d"
       },
       {
         "type": "sms",
-        "name": "SMS: Return to Self (T+105d)"
+        "name": "SMS: hot touch 4 [sms_wf09_hot_t4]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 4d"
       },
       {
         "type": "email",
-        "name": "Email: Re-Engage Breakup (T+120d)"
+        "name": "Email: hot touch 5 [email_wf09_hot_t5]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 5d"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: hot touch 6 [sms_wf09_hot_t6]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 3d"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: hot touch 7 [sms_wf09_hot_t7]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 4d"
+      },
+      {
+        "type": "email",
+        "name": "Email: hot touch 8 [email_wf09_hot_t8]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 5d"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: hot touch 9 [sms_wf09_hot_t9]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 7d"
+      },
+      {
+        "type": "email",
+        "name": "Email: warm touch 1 [email_wf09_warm_t1]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 10d"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: warm touch 2 [sms_wf09_warm_t2]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 14d"
+      },
+      {
+        "type": "email",
+        "name": "Email: warm touch 3 [email_wf09_warm_t3]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 14d"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: warm touch 4 [sms_wf09_warm_t4]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 20d"
+      },
+      {
+        "type": "email",
+        "name": "Email: warm touch 5 [email_wf09_warm_t5]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 7d"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: warm touch 6 [sms_wf09_warm_t6]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 10d"
+      },
+      {
+        "type": "email",
+        "name": "Email: warm touch 7 [email_wf09_warm_t7]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 14d"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: warm touch 8 [sms_wf09_warm_t8]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 14d"
+      },
+      {
+        "type": "email",
+        "name": "Email: warm touch 9 [email_wf09_warm_t9]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 20d"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: warm touch 10 [sms_wf09_warm_t10]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 7d"
+      },
+      {
+        "type": "email",
+        "name": "Email: warm touch 11 [email_wf09_warm_t11]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 10d"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: warm touch 12 [sms_wf09_warm_t12]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 30d"
+      },
+      {
+        "type": "email",
+        "name": "Email: cold touch 1 [email_wf09_cold_t1]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 45d"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: cold touch 2 [sms_wf09_cold_t2]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 14d"
+      },
+      {
+        "type": "email",
+        "name": "Email: cold touch 3 [email_wf09_cold_t3]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 30d"
+      },
+      {
+        "type": "email",
+        "name": "Email: cold touch 4 [email_wf09_cold_t4]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 45d"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: cold touch 5 [sms_wf09_cold_t5]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 14d"
+      },
+      {
+        "type": "email",
+        "name": "Email: cold touch 6 [email_wf09_cold_t6]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 30d"
+      },
+      {
+        "type": "email",
+        "name": "Email: cold touch 7 [email_wf09_cold_t7]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 45d"
+      },
+      {
+        "type": "sms",
+        "name": "SMS: cold touch 8 [sms_wf09_cold_t8]"
+      },
+      {
+        "type": "wait",
+        "name": "Wait 14d"
+      },
+      {
+        "type": "email",
+        "name": "Email: cold touch 9 [email_wf09_cold_t9]"
       }
     ],
     "triggers": []
@@ -367,8 +1063,12 @@
     "status": "draft",
     "nodes": [
       {
-        "type": "sms",
-        "name": "PLACEHOLDER: needs canonical sms_consent_status field"
+        "type": "if_else",
+        "name": "If: sms_consent_status == opted_out"
+      },
+      {
+        "type": "dnd_contact",
+        "name": "Set DND (suppress SMS + Call)"
       }
     ],
     "triggers": []
@@ -384,6 +1084,10 @@
       {
         "type": "add_contact_tag",
         "name": "Tag: flag bad number"
+      },
+      {
+        "type": "update_contact_field",
+        "name": "Attr: phone lead-source stamp if blank (D17)"
       }
     ],
     "triggers": []
@@ -394,11 +1098,11 @@
     "nodes": [
       {
         "type": "webhook",
-        "name": "Webhook: Booked Conversion (Google+Meta)"
+        "name": "Webhook: Booked Conversion (D17: swap to native google_adword+facebook_conversion_api at go-live; event_id={{opportunity.id}})"
       },
       {
         "type": "webhook",
-        "name": "Webhook: Won Conversion (Google+Meta, once per opp)"
+        "name": "Webhook: Won Conversion w/ value (D17: native actions at go-live; value from WF-17 total; event_id={{opportunity.id}})"
       }
     ],
     "triggers": []
@@ -410,6 +1114,10 @@
       {
         "type": "sms",
         "name": "SMS: Ambassador Invitation"
+      },
+      {
+        "type": "wait",
+        "name": "Wait: 1 day"
       },
       {
         "type": "email",
@@ -426,6 +1134,10 @@
     "id": "292610a8-4ac2-44bc-bfa4-9c55489d941c",
     "status": "draft",
     "nodes": [
+      {
+        "type": "create_opportunity",
+        "name": "Opp: Tracking (PCC Referrals, $500)"
+      },
       {
         "type": "sms",
         "name": "SMS: Referred-Lead Welcome"
@@ -460,6 +1172,29 @@
       {
         "type": "sms",
         "name": "Chat: Auto-Response"
+      },
+      {
+        "type": "update_contact_field",
+        "name": "Attr: missed-call source stamp (D17)"
+      }
+    ],
+    "triggers": []
+  },
+  "ZZ-TEST-datemath-probe (delete me)": {
+    "id": "38573ee6-8ecb-49da-ad35-259358aa0383",
+    "status": "draft",
+    "nodes": [
+      {
+        "type": "sms",
+        "name": "probe lead"
+      },
+      {
+        "type": "math_operation",
+        "name": "PROBE date add"
+      },
+      {
+        "type": "sms",
+        "name": "probe close"
       }
     ],
     "triggers": []

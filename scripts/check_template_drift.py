@@ -48,7 +48,8 @@ for w in rows:
     for n in (g.json().get("templates", []) if g.status_code == 200 else []):
         if n.get("type") not in ("sms", "email"):
             continue
-        node_body = n.get("attributes", {}).get("body", "")
+        a = n.get("attributes", {})
+        node_body = a.get("html", "") if n.get("type") == "email" else a.get("body", "")
         step = norm(n.get("name", ""))
         key = (wf, step)
         if key in templates:

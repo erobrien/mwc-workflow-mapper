@@ -249,5 +249,1499 @@
         "body": "Sorry we missed your call to Men's Wellness Centers, {{contact.first_name}}. How can we help? You can book your {{ custom_values.consult_descriptor }} here: {{contact.current_booking_url}} {{ custom_values.sms_opt_out_footer }}"
       }
     }
+  },
+  {
+    "template_name": "sms_wf07_cost_t1",
+    "wf": "07",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}"
+    ],
+    "payload": {
+      "name": "sms_wf07_cost_t1",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, many members had the same concern about cost at first. During a visit we can walk through the options available and answer any questions."
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "cost",
+    "seq": 1
+  },
+  {
+    "template_name": "email_wf07_cost_t2",
+    "wf": "07",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}"
+    ],
+    "payload": {
+      "name": "email_wf07_cost_t2",
+      "type": "email",
+      "template": {
+        "subject": "Your options at Men's Wellness Centers",
+        "body": "Hi {{contact.first_name}}, Many men tell us their biggest question after the consultation is cost. The good news is that our team can review different options and help you understand what works best for your situation. If you would like to continue the conversation, we would be happy to schedule another visit. {{contact.current_booking_url}}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "cost",
+    "seq": 2
+  },
+  {
+    "template_name": "sms_wf07_cost_t3",
+    "wf": "07",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}"
+    ],
+    "payload": {
+      "name": "sms_wf07_cost_t3",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, just checking in. If you would like to come back and review your options with the doctor, we can help you find a time that works."
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "cost",
+    "seq": 3
+  },
+  {
+    "template_name": "sms_wf07_cost_t4",
+    "wf": "07",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}"
+    ],
+    "payload": {
+      "name": "sms_wf07_cost_t4",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, many members had the same concern about cost at first. During a visit we can walk through the options available and answer any questions."
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "cost",
+    "seq": 4
+  },
+  {
+    "template_name": "email_wf07_cost_t5",
+    "wf": "07",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}"
+    ],
+    "payload": {
+      "name": "email_wf07_cost_t5",
+      "type": "email",
+      "template": {
+        "subject": "Your options at Men's Wellness Centers",
+        "body": "Hi {{contact.first_name}}, Many men tell us their biggest question after the consultation is cost. The good news is that our team can review different options and help you understand what works best for your situation. If you would like to continue the conversation, we would be happy to schedule another visit. {{contact.current_booking_url}}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "cost",
+    "seq": 5
+  },
+  {
+    "template_name": "sms_wf07_cost_t6",
+    "wf": "07",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}"
+    ],
+    "payload": {
+      "name": "sms_wf07_cost_t6",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, just checking in. If you would like to come back and review your options with the doctor, we can help you find a time that works."
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "cost",
+    "seq": 6
+  },
+  {
+    "template_name": "sms_wf07_cost_t7",
+    "wf": "07",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}"
+    ],
+    "payload": {
+      "name": "sms_wf07_cost_t7",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, many members had the same concern about cost at first. During a visit we can walk through the options available and answer any questions."
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "cost",
+    "seq": 7
+  },
+  {
+    "template_name": "email_wf07_cost_t8",
+    "wf": "07",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}"
+    ],
+    "payload": {
+      "name": "email_wf07_cost_t8",
+      "type": "email",
+      "template": {
+        "subject": "Your options at Men's Wellness Centers",
+        "body": "Hi {{contact.first_name}}, Many men tell us their biggest question after the consultation is cost. The good news is that our team can review different options and help you understand what works best for your situation. If you would like to continue the conversation, we would be happy to schedule another visit. {{contact.current_booking_url}}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "cost",
+    "seq": 8
+  },
+  {
+    "template_name": "sms_wf07_cost_t9",
+    "wf": "07",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}"
+    ],
+    "payload": {
+      "name": "sms_wf07_cost_t9",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, just checking in. If you would like to come back and review your options with the doctor, we can help you find a time that works."
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "cost",
+    "seq": 9
+  },
+  {
+    "template_name": "email_wf07_fear_t1",
+    "wf": "07",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}"
+    ],
+    "payload": {
+      "name": "email_wf07_fear_t1",
+      "type": "email",
+      "template": {
+        "subject": "Your safety is our priority",
+        "body": "Hi {{contact.first_name}}, Some members leave their first consultation with questions about safety. Our treatments are physician supervised and based on FDA approved therapies. During a visit the doctor will review your health history and answer every question you may have. If you would like to continue the conversation, we would be glad to see you again. {{contact.current_booking_url}}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "fear",
+    "seq": 1
+  },
+  {
+    "template_name": "sms_wf07_fear_t2",
+    "wf": "07",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}"
+    ],
+    "payload": {
+      "name": "sms_wf07_fear_t2",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, many members have safety questions at first. Our doctors take time to explain everything during the visit so you can make a comfortable decision."
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "fear",
+    "seq": 2
+  },
+  {
+    "template_name": "email_wf07_fear_t3",
+    "wf": "07",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}"
+    ],
+    "payload": {
+      "name": "email_wf07_fear_t3",
+      "type": "email",
+      "template": {
+        "subject": "Questions are always welcome",
+        "body": "Hi {{contact.first_name}}, It is completely normal to have questions before starting any treatment. Our physicians are here to explain the process, review your health history, and make sure you feel comfortable with every step. If you would like to speak with us again, you can schedule a visit here. {{contact.current_booking_url}}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "fear",
+    "seq": 3
+  },
+  {
+    "template_name": "email_wf07_fear_t4",
+    "wf": "07",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}"
+    ],
+    "payload": {
+      "name": "email_wf07_fear_t4",
+      "type": "email",
+      "template": {
+        "subject": "Your safety is our priority",
+        "body": "Hi {{contact.first_name}}, Some members leave their first consultation with questions about safety. Our treatments are physician supervised and based on FDA approved therapies. During a visit the doctor will review your health history and answer every question you may have. If you would like to continue the conversation, we would be glad to see you again. {{contact.current_booking_url}}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "fear",
+    "seq": 4
+  },
+  {
+    "template_name": "sms_wf07_fear_t5",
+    "wf": "07",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}"
+    ],
+    "payload": {
+      "name": "sms_wf07_fear_t5",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, many members have safety questions at first. Our doctors take time to explain everything during the visit so you can make a comfortable decision."
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "fear",
+    "seq": 5
+  },
+  {
+    "template_name": "email_wf07_fear_t6",
+    "wf": "07",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}"
+    ],
+    "payload": {
+      "name": "email_wf07_fear_t6",
+      "type": "email",
+      "template": {
+        "subject": "Questions are always welcome",
+        "body": "Hi {{contact.first_name}}, It is completely normal to have questions before starting any treatment. Our physicians are here to explain the process, review your health history, and make sure you feel comfortable with every step. If you would like to speak with us again, you can schedule a visit here. {{contact.current_booking_url}}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "fear",
+    "seq": 6
+  },
+  {
+    "template_name": "email_wf07_fear_t7",
+    "wf": "07",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}"
+    ],
+    "payload": {
+      "name": "email_wf07_fear_t7",
+      "type": "email",
+      "template": {
+        "subject": "Your safety is our priority",
+        "body": "Hi {{contact.first_name}}, Some members leave their first consultation with questions about safety. Our treatments are physician supervised and based on FDA approved therapies. During a visit the doctor will review your health history and answer every question you may have. If you would like to continue the conversation, we would be glad to see you again. {{contact.current_booking_url}}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "fear",
+    "seq": 7
+  },
+  {
+    "template_name": "sms_wf07_fear_t8",
+    "wf": "07",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}"
+    ],
+    "payload": {
+      "name": "sms_wf07_fear_t8",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, many members have safety questions at first. Our doctors take time to explain everything during the visit so you can make a comfortable decision."
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "fear",
+    "seq": 8
+  },
+  {
+    "template_name": "email_wf07_fear_t9",
+    "wf": "07",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}"
+    ],
+    "payload": {
+      "name": "email_wf07_fear_t9",
+      "type": "email",
+      "template": {
+        "subject": "Questions are always welcome",
+        "body": "Hi {{contact.first_name}}, It is completely normal to have questions before starting any treatment. Our physicians are here to explain the process, review your health history, and make sure you feel comfortable with every step. If you would like to speak with us again, you can schedule a visit here. {{contact.current_booking_url}}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "fear",
+    "seq": 9
+  },
+  {
+    "template_name": "sms_wf07_partner_t1",
+    "wf": "07",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}"
+    ],
+    "payload": {
+      "name": "sms_wf07_partner_t1",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, it is very common for members to want to talk with their partner before making a decision. You are welcome to bring them to the clinic so both of you can ask questions."
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "partner",
+    "seq": 1
+  },
+  {
+    "template_name": "email_wf07_partner_t2",
+    "wf": "07",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}"
+    ],
+    "payload": {
+      "name": "email_wf07_partner_t2",
+      "type": "email",
+      "template": {
+        "subject": "You can bring your partner to the visit",
+        "body": "Hi {{contact.first_name}}, Many members choose to bring their partner to the consultation so everyone can hear the information together and ask questions. If that would help you feel more comfortable, we would be happy to schedule a visit for both of you. {{contact.current_booking_url}}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "partner",
+    "seq": 2
+  },
+  {
+    "template_name": "sms_wf07_partner_t3",
+    "wf": "07",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}"
+    ],
+    "payload": {
+      "name": "sms_wf07_partner_t3",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, if you and your partner would like to visit the clinic together, we can help you find a convenient time."
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "partner",
+    "seq": 3
+  },
+  {
+    "template_name": "sms_wf07_partner_t4",
+    "wf": "07",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}"
+    ],
+    "payload": {
+      "name": "sms_wf07_partner_t4",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, it is very common for members to want to talk with their partner before making a decision. You are welcome to bring them to the clinic so both of you can ask questions."
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "partner",
+    "seq": 4
+  },
+  {
+    "template_name": "email_wf07_partner_t5",
+    "wf": "07",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}"
+    ],
+    "payload": {
+      "name": "email_wf07_partner_t5",
+      "type": "email",
+      "template": {
+        "subject": "You can bring your partner to the visit",
+        "body": "Hi {{contact.first_name}}, Many members choose to bring their partner to the consultation so everyone can hear the information together and ask questions. If that would help you feel more comfortable, we would be happy to schedule a visit for both of you. {{contact.current_booking_url}}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "partner",
+    "seq": 5
+  },
+  {
+    "template_name": "sms_wf07_partner_t6",
+    "wf": "07",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}"
+    ],
+    "payload": {
+      "name": "sms_wf07_partner_t6",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, if you and your partner would like to visit the clinic together, we can help you find a convenient time."
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "partner",
+    "seq": 6
+  },
+  {
+    "template_name": "sms_wf07_partner_t7",
+    "wf": "07",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}"
+    ],
+    "payload": {
+      "name": "sms_wf07_partner_t7",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, it is very common for members to want to talk with their partner before making a decision. You are welcome to bring them to the clinic so both of you can ask questions."
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "partner",
+    "seq": 7
+  },
+  {
+    "template_name": "email_wf07_partner_t8",
+    "wf": "07",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}"
+    ],
+    "payload": {
+      "name": "email_wf07_partner_t8",
+      "type": "email",
+      "template": {
+        "subject": "You can bring your partner to the visit",
+        "body": "Hi {{contact.first_name}}, Many members choose to bring their partner to the consultation so everyone can hear the information together and ask questions. If that would help you feel more comfortable, we would be happy to schedule a visit for both of you. {{contact.current_booking_url}}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "partner",
+    "seq": 8
+  },
+  {
+    "template_name": "sms_wf07_partner_t9",
+    "wf": "07",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}"
+    ],
+    "payload": {
+      "name": "sms_wf07_partner_t9",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, if you and your partner would like to visit the clinic together, we can help you find a convenient time."
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "partner",
+    "seq": 9
+  },
+  {
+    "template_name": "email_wf07_timing_t1",
+    "wf": "07",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}"
+    ],
+    "payload": {
+      "name": "email_wf07_timing_t1",
+      "type": "email",
+      "template": {
+        "subject": "A quick note from Men's Wellness Centers",
+        "body": "Hi {{contact.first_name}}, We understand that timing is not always right. Many men start with a simple consultation to learn what might be causing their symptoms and what options exist. Whenever you feel ready, our team will be here to help. {{contact.current_booking_url}}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "timing",
+    "seq": 1
+  },
+  {
+    "template_name": "sms_wf07_timing_t2",
+    "wf": "07",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}"
+    ],
+    "payload": {
+      "name": "sms_wf07_timing_t2",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, just checking in. If you ever want to revisit the conversation about your health, we are here whenever the timing feels right."
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "timing",
+    "seq": 2
+  },
+  {
+    "template_name": "email_wf07_timing_t3",
+    "wf": "07",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}"
+    ],
+    "payload": {
+      "name": "email_wf07_timing_t3",
+      "type": "email",
+      "template": {
+        "subject": "Whenever you are ready",
+        "body": "Hi {{contact.first_name}}, Your health does not have to be rushed. When you feel ready to take the next step, our physicians are here to help you understand what may be going on and what can be done. You can schedule a visit anytime here. {{contact.current_booking_url}}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "timing",
+    "seq": 3
+  },
+  {
+    "template_name": "email_wf07_timing_t4",
+    "wf": "07",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}"
+    ],
+    "payload": {
+      "name": "email_wf07_timing_t4",
+      "type": "email",
+      "template": {
+        "subject": "A quick note from Men's Wellness Centers",
+        "body": "Hi {{contact.first_name}}, We understand that timing is not always right. Many men start with a simple consultation to learn what might be causing their symptoms and what options exist. Whenever you feel ready, our team will be here to help. {{contact.current_booking_url}}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "timing",
+    "seq": 4
+  },
+  {
+    "template_name": "sms_wf07_timing_t5",
+    "wf": "07",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}"
+    ],
+    "payload": {
+      "name": "sms_wf07_timing_t5",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, just checking in. If you ever want to revisit the conversation about your health, we are here whenever the timing feels right."
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "timing",
+    "seq": 5
+  },
+  {
+    "template_name": "email_wf07_timing_t6",
+    "wf": "07",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}"
+    ],
+    "payload": {
+      "name": "email_wf07_timing_t6",
+      "type": "email",
+      "template": {
+        "subject": "Whenever you are ready",
+        "body": "Hi {{contact.first_name}}, Your health does not have to be rushed. When you feel ready to take the next step, our physicians are here to help you understand what may be going on and what can be done. You can schedule a visit anytime here. {{contact.current_booking_url}}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "timing",
+    "seq": 6
+  },
+  {
+    "template_name": "email_wf07_timing_t7",
+    "wf": "07",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}"
+    ],
+    "payload": {
+      "name": "email_wf07_timing_t7",
+      "type": "email",
+      "template": {
+        "subject": "A quick note from Men's Wellness Centers",
+        "body": "Hi {{contact.first_name}}, We understand that timing is not always right. Many men start with a simple consultation to learn what might be causing their symptoms and what options exist. Whenever you feel ready, our team will be here to help. {{contact.current_booking_url}}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "timing",
+    "seq": 7
+  },
+  {
+    "template_name": "sms_wf07_timing_t8",
+    "wf": "07",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}"
+    ],
+    "payload": {
+      "name": "sms_wf07_timing_t8",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, just checking in. If you ever want to revisit the conversation about your health, we are here whenever the timing feels right."
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "timing",
+    "seq": 8
+  },
+  {
+    "template_name": "email_wf07_timing_t9",
+    "wf": "07",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}"
+    ],
+    "payload": {
+      "name": "email_wf07_timing_t9",
+      "type": "email",
+      "template": {
+        "subject": "Whenever you are ready",
+        "body": "Hi {{contact.first_name}}, Your health does not have to be rushed. When you feel ready to take the next step, our physicians are here to help you understand what may be going on and what can be done. You can schedule a visit anytime here. {{contact.current_booking_url}}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "timing",
+    "seq": 9
+  },
+  {
+    "template_name": "sms_wf07_decision_t1",
+    "wf": "07",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}"
+    ],
+    "payload": {
+      "name": "sms_wf07_decision_t1",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, taking time to think things over is completely normal. If you ever want to talk again or ask another question, we are here for you."
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "decision",
+    "seq": 1
+  },
+  {
+    "template_name": "email_wf07_decision_t2",
+    "wf": "07",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}"
+    ],
+    "payload": {
+      "name": "email_wf07_decision_t2",
+      "type": "email",
+      "template": {
+        "subject": "Many members felt the same way",
+        "body": "Hi {{contact.first_name}}, A lot of members tell us they needed time to think after their first visit. Many of them later said they were glad they came back to learn more and understand their options. If you ever want to continue the conversation, we would be happy to see you again. {{contact.current_booking_url}}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "decision",
+    "seq": 2
+  },
+  {
+    "template_name": "sms_wf07_decision_t3",
+    "wf": "07",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}"
+    ],
+    "payload": {
+      "name": "sms_wf07_decision_t3",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, just checking in. If you would like to revisit the discussion with the doctor, we can help you schedule another visit."
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "decision",
+    "seq": 3
+  },
+  {
+    "template_name": "sms_wf07_decision_t4",
+    "wf": "07",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}"
+    ],
+    "payload": {
+      "name": "sms_wf07_decision_t4",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, whenever you feel ready to take the next step, our team is here to help."
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "decision",
+    "seq": 4
+  },
+  {
+    "template_name": "sms_wf07_decision_t5",
+    "wf": "07",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}"
+    ],
+    "payload": {
+      "name": "sms_wf07_decision_t5",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, taking time to think things over is completely normal. If you ever want to talk again or ask another question, we are here for you."
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "decision",
+    "seq": 5
+  },
+  {
+    "template_name": "email_wf07_decision_t6",
+    "wf": "07",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}"
+    ],
+    "payload": {
+      "name": "email_wf07_decision_t6",
+      "type": "email",
+      "template": {
+        "subject": "Many members felt the same way",
+        "body": "Hi {{contact.first_name}}, A lot of members tell us they needed time to think after their first visit. Many of them later said they were glad they came back to learn more and understand their options. If you ever want to continue the conversation, we would be happy to see you again. {{contact.current_booking_url}}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "decision",
+    "seq": 6
+  },
+  {
+    "template_name": "sms_wf07_decision_t7",
+    "wf": "07",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}"
+    ],
+    "payload": {
+      "name": "sms_wf07_decision_t7",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, just checking in. If you would like to revisit the discussion with the doctor, we can help you schedule another visit."
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "decision",
+    "seq": 7
+  },
+  {
+    "template_name": "sms_wf07_decision_t8",
+    "wf": "07",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}"
+    ],
+    "payload": {
+      "name": "sms_wf07_decision_t8",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, whenever you feel ready to take the next step, our team is here to help."
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "decision",
+    "seq": 8
+  },
+  {
+    "template_name": "sms_wf07_decision_t9",
+    "wf": "07",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}"
+    ],
+    "payload": {
+      "name": "sms_wf07_decision_t9",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, taking time to think things over is completely normal. If you ever want to talk again or ask another question, we are here for you."
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "decision",
+    "seq": 9
+  },
+  {
+    "template_name": "email_wf07_decision_t10",
+    "wf": "07",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}"
+    ],
+    "payload": {
+      "name": "email_wf07_decision_t10",
+      "type": "email",
+      "template": {
+        "subject": "Many members felt the same way",
+        "body": "Hi {{contact.first_name}}, A lot of members tell us they needed time to think after their first visit. Many of them later said they were glad they came back to learn more and understand their options. If you ever want to continue the conversation, we would be happy to see you again. {{contact.current_booking_url}}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "decision",
+    "seq": 10
+  },
+  {
+    "template_name": "sms_wf07_decision_t11",
+    "wf": "07",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}"
+    ],
+    "payload": {
+      "name": "sms_wf07_decision_t11",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, just checking in. If you would like to revisit the discussion with the doctor, we can help you schedule another visit."
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "decision",
+    "seq": 11
+  },
+  {
+    "template_name": "sms_wf07_decision_t12",
+    "wf": "07",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}"
+    ],
+    "payload": {
+      "name": "sms_wf07_decision_t12",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, whenever you feel ready to take the next step, our team is here to help."
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "decision",
+    "seq": 12
+  },
+  {
+    "template_name": "sms_wf09_hot_t1",
+    "wf": "09",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{ custom_values.sms_opt_out_footer }}"
+    ],
+    "payload": {
+      "name": "sms_wf09_hot_t1",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, many men start with a simple consultation to understand what might be causing their symptoms. If you ever want to talk with our doctor, we can help you find a time.\n\n{{ custom_values.sms_opt_out_footer }}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "hot",
+    "seq": 1
+  },
+  {
+    "template_name": "email_wf09_hot_t2",
+    "wf": "09",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}",
+      "{{ custom_values.sms_opt_out_footer }}"
+    ],
+    "payload": {
+      "name": "email_wf09_hot_t2",
+      "type": "email",
+      "template": {
+        "subject": "A quick health check can answer a lot",
+        "body": "Hi {{contact.first_name}}, Many men notice changes in energy, focus, or overall wellness as they get older. A consultation with our physician can help identify what might be going on and what options may help. You can schedule a visit anytime here. {{contact.current_booking_url}} {{ custom_values.sms_opt_out_footer }}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "hot",
+    "seq": 2
+  },
+  {
+    "template_name": "sms_wf09_hot_t3",
+    "wf": "09",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}"
+    ],
+    "payload": {
+      "name": "sms_wf09_hot_t3",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}},if you ever want to come in for a consultation, our team would be happy to help you schedule a time."
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "hot",
+    "seq": 3
+  },
+  {
+    "template_name": "sms_wf09_hot_t4",
+    "wf": "09",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{ custom_values.sms_opt_out_footer }}"
+    ],
+    "payload": {
+      "name": "sms_wf09_hot_t4",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, many men start with a simple consultation to understand what might be causing their symptoms. If you ever want to talk with our doctor, we can help you find a time.\n\n{{ custom_values.sms_opt_out_footer }}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "hot",
+    "seq": 4
+  },
+  {
+    "template_name": "email_wf09_hot_t5",
+    "wf": "09",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}",
+      "{{ custom_values.sms_opt_out_footer }}"
+    ],
+    "payload": {
+      "name": "email_wf09_hot_t5",
+      "type": "email",
+      "template": {
+        "subject": "A quick health check can answer a lot",
+        "body": "Hi {{contact.first_name}}, Many men notice changes in energy, focus, or overall wellness as they get older. A consultation with our physician can help identify what might be going on and what options may help. You can schedule a visit anytime here. {{contact.current_booking_url}} {{ custom_values.sms_opt_out_footer }}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "hot",
+    "seq": 5
+  },
+  {
+    "template_name": "sms_wf09_hot_t6",
+    "wf": "09",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}"
+    ],
+    "payload": {
+      "name": "sms_wf09_hot_t6",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}},if you ever want to come in for a consultation, our team would be happy to help you schedule a time."
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "hot",
+    "seq": 6
+  },
+  {
+    "template_name": "sms_wf09_hot_t7",
+    "wf": "09",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{ custom_values.sms_opt_out_footer }}"
+    ],
+    "payload": {
+      "name": "sms_wf09_hot_t7",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, many men start with a simple consultation to understand what might be causing their symptoms. If you ever want to talk with our doctor, we can help you find a time.\n\n{{ custom_values.sms_opt_out_footer }}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "hot",
+    "seq": 7
+  },
+  {
+    "template_name": "email_wf09_hot_t8",
+    "wf": "09",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}",
+      "{{ custom_values.sms_opt_out_footer }}"
+    ],
+    "payload": {
+      "name": "email_wf09_hot_t8",
+      "type": "email",
+      "template": {
+        "subject": "A quick health check can answer a lot",
+        "body": "Hi {{contact.first_name}}, Many men notice changes in energy, focus, or overall wellness as they get older. A consultation with our physician can help identify what might be going on and what options may help. You can schedule a visit anytime here. {{contact.current_booking_url}} {{ custom_values.sms_opt_out_footer }}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "hot",
+    "seq": 8
+  },
+  {
+    "template_name": "sms_wf09_hot_t9",
+    "wf": "09",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}"
+    ],
+    "payload": {
+      "name": "sms_wf09_hot_t9",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}},if you ever want to come in for a consultation, our team would be happy to help you schedule a time."
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "hot",
+    "seq": 9
+  },
+  {
+    "template_name": "email_wf09_warm_t1",
+    "wf": "09",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}",
+      "{{ custom_values.sms_opt_out_footer }}"
+    ],
+    "payload": {
+      "name": "email_wf09_warm_t1",
+      "type": "email",
+      "template": {
+        "subject": "Understanding men's health changes",
+        "body": "Hi {{contact.first_name}}, Many members visit us because they notice changes in energy, sleep, or overall wellness. Our physicians help men understand what may be happening and what options are available. Whenever you feel ready, we are here to help. {{contact.current_booking_url}} {{ custom_values.sms_opt_out_footer }}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "warm",
+    "seq": 1
+  },
+  {
+    "template_name": "sms_wf09_warm_t2",
+    "wf": "09",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{ custom_values.sms_opt_out_footer }}"
+    ],
+    "payload": {
+      "name": "sms_wf09_warm_t2",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, just checking in. If you ever want to speak with one of our doctors about your health, we can help you schedule a visit.\n\n{{ custom_values.sms_opt_out_footer }}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "warm",
+    "seq": 2
+  },
+  {
+    "template_name": "email_wf09_warm_t3",
+    "wf": "09",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}"
+    ],
+    "payload": {
+      "name": "email_wf09_warm_t3",
+      "type": "email",
+      "template": {
+        "subject": "What other members experienced",
+        "body": "Hi {{contact.first_name}}, Many members who visit our clinic say they wish they had come in sooner just to understand what was going on with their health. If you ever want to learn more, we would be happy to see you. {{contact.current_booking_url}}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "warm",
+    "seq": 3
+  },
+  {
+    "template_name": "sms_wf09_warm_t4",
+    "wf": "09",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}"
+    ],
+    "payload": {
+      "name": "sms_wf09_warm_t4",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, just checking in. If you ever want to speak with one of our doctors about your health, we can help you schedule a visit."
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "warm",
+    "seq": 4
+  },
+  {
+    "template_name": "email_wf09_warm_t5",
+    "wf": "09",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}",
+      "{{ custom_values.sms_opt_out_footer }}"
+    ],
+    "payload": {
+      "name": "email_wf09_warm_t5",
+      "type": "email",
+      "template": {
+        "subject": "Understanding men's health changes",
+        "body": "Hi {{contact.first_name}}, Many members visit us because they notice changes in energy, sleep, or overall wellness. Our physicians help men understand what may be happening and what options are available. Whenever you feel ready, we are here to help. {{contact.current_booking_url}} {{ custom_values.sms_opt_out_footer }}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "warm",
+    "seq": 5
+  },
+  {
+    "template_name": "sms_wf09_warm_t6",
+    "wf": "09",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{ custom_values.sms_opt_out_footer }}"
+    ],
+    "payload": {
+      "name": "sms_wf09_warm_t6",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, just checking in. If you ever want to speak with one of our doctors about your health, we can help you schedule a visit.\n\n{{ custom_values.sms_opt_out_footer }}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "warm",
+    "seq": 6
+  },
+  {
+    "template_name": "email_wf09_warm_t7",
+    "wf": "09",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}"
+    ],
+    "payload": {
+      "name": "email_wf09_warm_t7",
+      "type": "email",
+      "template": {
+        "subject": "What other members experienced",
+        "body": "Hi {{contact.first_name}}, Many members who visit our clinic say they wish they had come in sooner just to understand what was going on with their health. If you ever want to learn more, we would be happy to see you. {{contact.current_booking_url}}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "warm",
+    "seq": 7
+  },
+  {
+    "template_name": "sms_wf09_warm_t8",
+    "wf": "09",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}"
+    ],
+    "payload": {
+      "name": "sms_wf09_warm_t8",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, just checking in. If you ever want to speak with one of our doctors about your health, we can help you schedule a visit."
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "warm",
+    "seq": 8
+  },
+  {
+    "template_name": "email_wf09_warm_t9",
+    "wf": "09",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}",
+      "{{ custom_values.sms_opt_out_footer }}"
+    ],
+    "payload": {
+      "name": "email_wf09_warm_t9",
+      "type": "email",
+      "template": {
+        "subject": "Understanding men's health changes",
+        "body": "Hi {{contact.first_name}}, Many members visit us because they notice changes in energy, sleep, or overall wellness. Our physicians help men understand what may be happening and what options are available. Whenever you feel ready, we are here to help. {{contact.current_booking_url}} {{ custom_values.sms_opt_out_footer }}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "warm",
+    "seq": 9
+  },
+  {
+    "template_name": "sms_wf09_warm_t10",
+    "wf": "09",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{ custom_values.sms_opt_out_footer }}"
+    ],
+    "payload": {
+      "name": "sms_wf09_warm_t10",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, just checking in. If you ever want to speak with one of our doctors about your health, we can help you schedule a visit.\n\n{{ custom_values.sms_opt_out_footer }}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "warm",
+    "seq": 10
+  },
+  {
+    "template_name": "email_wf09_warm_t11",
+    "wf": "09",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}"
+    ],
+    "payload": {
+      "name": "email_wf09_warm_t11",
+      "type": "email",
+      "template": {
+        "subject": "What other members experienced",
+        "body": "Hi {{contact.first_name}}, Many members who visit our clinic say they wish they had come in sooner just to understand what was going on with their health. If you ever want to learn more, we would be happy to see you. {{contact.current_booking_url}}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "warm",
+    "seq": 11
+  },
+  {
+    "template_name": "sms_wf09_warm_t12",
+    "wf": "09",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}"
+    ],
+    "payload": {
+      "name": "sms_wf09_warm_t12",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, just checking in. If you ever want to speak with one of our doctors about your health, we can help you schedule a visit."
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "warm",
+    "seq": 12
+  },
+  {
+    "template_name": "email_wf09_cold_t1",
+    "wf": "09",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}",
+      "{{ custom_values.sms_opt_out_footer }}"
+    ],
+    "payload": {
+      "name": "email_wf09_cold_t1",
+      "type": "email",
+      "template": {
+        "subject": "Checking in",
+        "body": "Hi {{contact.first_name}}, We have not spoken in a while, but we wanted to check in. If you ever want to understand more about your health or speak with one of our doctors, our team is here to help. {{contact.current_booking_url}} {{ custom_values.sms_opt_out_footer }}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "cold",
+    "seq": 1
+  },
+  {
+    "template_name": "sms_wf09_cold_t2",
+    "wf": "09",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{ custom_values.sms_opt_out_footer }}"
+    ],
+    "payload": {
+      "name": "sms_wf09_cold_t2",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, if you ever want to visit the clinic for a consultation, we would be happy to help you schedule a time.\n\n{{ custom_values.sms_opt_out_footer }}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "cold",
+    "seq": 2
+  },
+  {
+    "template_name": "email_wf09_cold_t3",
+    "wf": "09",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}"
+    ],
+    "payload": {
+      "name": "email_wf09_cold_t3",
+      "type": "email",
+      "template": {
+        "subject": "Your health questions matter",
+        "body": "Hi {{contact.first_name}}, Whenever you feel ready to revisit the conversation about your health, our physicians are here to help. You can schedule a visit anytime. {{contact.current_booking_url}}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "cold",
+    "seq": 3
+  },
+  {
+    "template_name": "email_wf09_cold_t4",
+    "wf": "09",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}",
+      "{{ custom_values.sms_opt_out_footer }}"
+    ],
+    "payload": {
+      "name": "email_wf09_cold_t4",
+      "type": "email",
+      "template": {
+        "subject": "Checking in",
+        "body": "Hi {{contact.first_name}}, We have not spoken in a while, but we wanted to check in. If you ever want to understand more about your health or speak with one of our doctors, our team is here to help. {{contact.current_booking_url}} {{ custom_values.sms_opt_out_footer }}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "cold",
+    "seq": 4
+  },
+  {
+    "template_name": "sms_wf09_cold_t5",
+    "wf": "09",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{ custom_values.sms_opt_out_footer }}"
+    ],
+    "payload": {
+      "name": "sms_wf09_cold_t5",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, if you ever want to visit the clinic for a consultation, we would be happy to help you schedule a time.\n\n{{ custom_values.sms_opt_out_footer }}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "cold",
+    "seq": 5
+  },
+  {
+    "template_name": "email_wf09_cold_t6",
+    "wf": "09",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}"
+    ],
+    "payload": {
+      "name": "email_wf09_cold_t6",
+      "type": "email",
+      "template": {
+        "subject": "Your health questions matter",
+        "body": "Hi {{contact.first_name}}, Whenever you feel ready to revisit the conversation about your health, our physicians are here to help. You can schedule a visit anytime. {{contact.current_booking_url}}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "cold",
+    "seq": 6
+  },
+  {
+    "template_name": "email_wf09_cold_t7",
+    "wf": "09",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}",
+      "{{ custom_values.sms_opt_out_footer }}"
+    ],
+    "payload": {
+      "name": "email_wf09_cold_t7",
+      "type": "email",
+      "template": {
+        "subject": "Checking in",
+        "body": "Hi {{contact.first_name}}, We have not spoken in a while, but we wanted to check in. If you ever want to understand more about your health or speak with one of our doctors, our team is here to help. {{contact.current_booking_url}} {{ custom_values.sms_opt_out_footer }}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "cold",
+    "seq": 7
+  },
+  {
+    "template_name": "sms_wf09_cold_t8",
+    "wf": "09",
+    "channel": "sms",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{ custom_values.sms_opt_out_footer }}"
+    ],
+    "payload": {
+      "name": "sms_wf09_cold_t8",
+      "type": "sms",
+      "template": {
+        "body": "Hi {{contact.first_name}}, if you ever want to visit the clinic for a consultation, we would be happy to help you schedule a time.\n\n{{ custom_values.sms_opt_out_footer }}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "cold",
+    "seq": 8
+  },
+  {
+    "template_name": "email_wf09_cold_t9",
+    "wf": "09",
+    "channel": "email",
+    "depends_on": [
+      "{{contact.first_name}}",
+      "{{contact.current_booking_url}}"
+    ],
+    "payload": {
+      "name": "email_wf09_cold_t9",
+      "type": "email",
+      "template": {
+        "subject": "Your health questions matter",
+        "body": "Hi {{contact.first_name}}, Whenever you feel ready to revisit the conversation about your health, our physicians are here to help. You can schedule a visit anytime. {{contact.current_booking_url}}"
+      }
+    },
+    "source": "JJ nurture port (Decision 19)",
+    "segment": "cold",
+    "seq": 9
   }
 ]

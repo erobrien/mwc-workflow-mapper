@@ -342,6 +342,14 @@
       "category": "build",
       "summary": "Port-mining pass over all 28 live production workflows (full node fidelity, ghl_extract). Decision 18 locked: 10 port items written into the WF-03/05/06/08/10/11/16 build guides + new WF-17 Price Calculator (canonical set now 17). Highest-value finds: find_opportunity multipath guard (fixes update-the-wrong-opportunity risk in WF-05/06/10), auto-confirm + remove_from_workflow recovery-exit (prevents booked members from getting recovery SMS -- a real member-experience bug in our current draft), reply-based confirm parsing, native business-hours condition (quarter_hour/day_week if_else -- also solves chat-widget OOO which the 16-set did not cover), complete IVR node shapes, and the price-calculator math_operation chain that feeds Won revenue to D17 conversions. 13 new node shapes captured into build_ids. NOTE: analysis based on the 28-workflow extract from this morning; if the linked folder contains workflows beyond those 28, a fresh JWT is needed to diff.",
       "ref": "Decision 18"
+    },
+    {
+      "date": "2026-07-11",
+      "time": "18:1x",
+      "actor": "Eric",
+      "category": "decision",
+      "summary": "Decision 19 locked and folded into spec: JJ nurture designs adopted as branches (WF-07 five objection branches, WF-09 three temperature tiers) with the field-tested cadences and 78 brand-transformed JJ messages registered as template payloads (validation PASSES, 93 total). Rejected per-location gates (naming-bug clone drift found: newport_beach_booked), separate-workflow structure, and mid-nurture opportunity creation. Deployment to -Target Release drafts prepped (scripts/enrich_wf07_09.py) pending fresh JWT.",
+      "ref": "Decision 19"
     }
   ]
 }

@@ -898,7 +898,7 @@
       }
     },
     "07": {
-      "purpose": "A&D (Advise and Decline) objection-handling nurture, 11 touches over 35 days.",
+      "purpose": "A&D (Advise and Decline) objection-handling nurture, 11 touches over 35 days. D19: five objection branches (cost/fear/partner/timing/decision) using the JJ taxonomy and cadence.",
       "diagram_key": "wf07-08",
       "trigger": {
         "type": "Hand-off from WF-05 (sale_outcome = ad)",
@@ -961,6 +961,12 @@
           "action": "Send SMS",
           "name": "SMS: Empathetic Breakup 5 (T+35d)",
           "config": "Then exit to WF-09."
+        },
+        {
+          "order": 9,
+          "action": "If/Else on objection tag",
+          "name": "D19: objection branch router",
+          "config": "Branch on which objection_* tag fired the entry: cost/fear/partner/timing/decision. Each branch runs the JJ cadence (wait 1d -> SMS t1 -> wait 2d -> SMS t2 -> wait 3d -> Email t3, cycle x3, 9 touches). Message bodies = templates sms/email_wf07_<objection>_tN (brand-transformed JJ copy). ONE booked-exit gate at each cycle start (appointment-booked check), location-agnostic. No opportunity creation mid-nurture."
         }
       ],
       "messages": [
@@ -1155,7 +1161,7 @@
       }
     },
     "09": {
-      "purpose": "Long-term nurture (7 touches / 120 days) plus a Renewal Reminders sub-flow for won members.",
+      "purpose": "Long-term nurture (7 touches / 120 days) plus a Renewal Reminders sub-flow for won members. D19: HOT/WARM/COLD temperature tiers replace the single undifferentiated nurture.",
       "diagram_key": "retention",
       "trigger": {
         "type": "Hand-off from WF-02/07/08 (main) and WF-05/06 renewal path (sub-flow)",
@@ -1230,6 +1236,12 @@
               "path": "Lapsed sequence then back to Long-Term Nurture"
             }
           ]
+        },
+        {
+          "order": 9,
+          "action": "If/Else on temperature tag",
+          "name": "D19: temperature tier router",
+          "config": "Branch on temp_hot/temp_warm/temp_cold (set by setters at disposition via WF-12). HOT: 3d/4d/5d cycles (near-buyers). WARM: 7d/10d/14d/14d/20d (patient mid-funnel). COLD: 30d/45d/14d cycles (low-pressure long tail). Message bodies = templates sms/email_wf09_<tier>_tN. Booked-exit gate per cycle. Renewal sub-flow (renewal_date-keyed) remains a separate WF-09 branch."
         }
       ],
       "messages": [

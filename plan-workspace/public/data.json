@@ -4543,6 +4543,14 @@
       "status": "Locked",
       "decision": "Port pass from the 28 live production workflows into the target build. Ports into existing targets: WF-03 gains auto-confirm + recovery-exit (remove_from_workflow) + reply-based confirm; WF-05/06/10 gain find_opportunity guards before opportunity writes; WF-08 gains cancel cleanup (booking-chain exit + Cancelled stage write, parameterized not per-location); WF-10 gains the complete survey-send mechanic (find_opportunity -> internal_update_opportunity -> SMS); WF-11 gains email-bounce and DNC/wrong-number/error hygiene branches; WF-16 gains the full IVR tree (ivr_say/gather/connect_call/collect_voicemail) and the native business-hours gate (quarter_hour + day_week conditions) covering chat-widget out-of-office handling. One NEW workflow: WF-17 Price Calculator (ported from live 06) -- internal PCC tool whose computed total feeds WF-13's Won-with-revenue conversion. The canonical set is now 17 workflows. 13 additional live node shapes captured into the manifest (find_opportunity, internal_update_opportunity, update_appointment_status, remove_from_workflow, remove_opportunity, math_operation, 4x ivr_*, create_update_contact, goto, transition).",
       "choice": "Port proven live mechanics into the parameterized architecture rather than rebuilding from scratch or keeping per-location clones."
+    },
+    {
+      "n": "19",
+      "date": "2026-07-11",
+      "owner": "Eric",
+      "status": "Locked",
+      "decision": "Adopt the JJ-built nurture designs as BRANCHES inside WF-07 and WF-09, not as separate workflows. Adopted: the 5-objection taxonomy (cost/fear/partner/timing/decision, tag-triggered), the field-tested cadences (objections 1d/2d/3d x3 cycles ~9 touches; HOT 3d/4d/5d cycles; WARM 7d/10d/14d/14d/20d; COLD 30d/45d/14d cycles), HOT/WARM/COLD temperature segmentation for long-term nurture (temperature tag set at disposition, ties to WF-12), booked early-exit concept, and the actual JJ message copy (78 messages extracted, brand-transformed: patients->members, em-dashes removed, footers -> custom value, booking links -> per-clinic current_booking_url, trigger_link tokens -> current_booking_url). Rejected: per-location exit gates (incl. the clone-drift naming bugs newport_beach_booked/richmond_beach_booked found in the extract), 8-separate-workflows structure (canonical set stays 17), Cody's mid-nurture internal_create_opportunity wrapper (duplicate-opportunity anti-pattern), non-compliant copy as-is. WF-07 = 5 objection branches; WF-09 = 3 temperature branches; single parameterized booked-exit gate per cycle.",
+      "choice": "Branches in 2 canonical workflows over 8 standalone workflows; JJ copy as the base (field-designed by MWC) with brand-compliance transform, honoring Chris Peck's and Josh's nurture asks without re-creating sprawl."
     }
   ],
   "risks": [

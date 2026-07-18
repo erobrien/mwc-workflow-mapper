@@ -99,6 +99,20 @@
    "isAllowedCustomOption": false
   },
   {
+   "id": "2psXGcRn83g2Ti6V8zYh",
+   "name": "FBCLID",
+   "model": "opportunity",
+   "fieldKey": "opportunity.fbclid",
+   "placeholder": "",
+   "dataType": "TEXT",
+   "position": 200,
+   "documentType": "field",
+   "parentId": "u6olP1mmu1I19VxKMKcn",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "dateAdded": "2026-07-06T18:39:30.502Z",
+   "standard": false
+  },
+  {
    "id": "4WxJLJKlOPNJPfVQK5b9",
    "name": "A&D Other Explanation",
    "model": "contact",
@@ -111,6 +125,25 @@
    "locationId": "VoeVvlByAem9pkxb7f6a",
    "dateAdded": "2026-07-06T04:31:53.613Z",
    "standard": false
+  },
+  {
+   "id": "4xDrxXKuMZQZbxd2hisT",
+   "name": "Medical Intake Status",
+   "model": "opportunity",
+   "fieldKey": "opportunity.medical_intake_status",
+   "placeholder": "",
+   "dataType": "SINGLE_OPTIONS",
+   "position": 150,
+   "documentType": "field",
+   "parentId": "n5eZ18GFQcaUCxWZ6iHI",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "dateAdded": "2026-07-06T18:29:10.816Z",
+   "standard": false,
+   "picklistOptions": [
+    "Not Started",
+    "Pending",
+    "Complete"
+   ]
   },
   {
    "id": "5KgrW6RtkvIcKRN7KSYg",
@@ -178,6 +211,20 @@
    "standard": false
   },
   {
+   "id": "6NXSDZM2ebhxm8NjMgDK",
+   "name": "Money Down",
+   "model": "opportunity",
+   "fieldKey": "opportunity.money_down",
+   "placeholder": "",
+   "dataType": "MONETORY",
+   "position": 450,
+   "documentType": "field",
+   "parentId": "ZqenFtYrVxxWXyL2dyPj",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "dateAdded": "2026-07-06T18:37:36.095Z",
+   "standard": false
+  },
+  {
    "id": "6U41YgIF1NBKXnYDBp2N",
    "name": "Status",
    "model": "contact",
@@ -189,6 +236,20 @@
    "parentId": "QpskR2fQiV74ZLJCF4dV",
    "locationId": "VoeVvlByAem9pkxb7f6a",
    "dateAdded": "2026-07-06T04:31:53.707Z",
+   "standard": false
+  },
+  {
+   "id": "6xR4aGEP8HJhcgrgNS1f",
+   "name": "Remaining Balance",
+   "model": "opportunity",
+   "fieldKey": "opportunity.remaining_balance",
+   "placeholder": "",
+   "dataType": "MONETORY",
+   "position": 500,
+   "documentType": "field",
+   "parentId": "ZqenFtYrVxxWXyL2dyPj",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "dateAdded": "2026-07-06T18:37:44.828Z",
    "standard": false
   },
   {
@@ -218,6 +279,26 @@
    "locationId": "VoeVvlByAem9pkxb7f6a",
    "dateAdded": "2026-07-06T04:31:53.687Z",
    "standard": false
+  },
+  {
+   "id": "8wnrkyJnBSHB84LYUDva",
+   "name": "Sale Outcome",
+   "model": "opportunity",
+   "fieldKey": "opportunity.sale_outcome",
+   "placeholder": "",
+   "dataType": "MULTIPLE_OPTIONS",
+   "position": 50,
+   "documentType": "field",
+   "parentId": "n5eZ18GFQcaUCxWZ6iHI",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "dateAdded": "2026-07-06T18:28:12.367Z",
+   "standard": false,
+   "picklistOptions": [
+    "Sold",
+    "A&D",
+    "MUT",
+    "MAR"
+   ]
   },
   {
    "id": "9h1MwizfapDG10naLaQy",
@@ -372,6 +453,20 @@
    "standard": false
   },
   {
+   "id": "Gys0wXtRNi76m2NpFIZA",
+   "name": "Price 2",
+   "model": "opportunity",
+   "fieldKey": "opportunity.price_2",
+   "placeholder": "",
+   "dataType": "MONETORY",
+   "position": 300,
+   "documentType": "field",
+   "parentId": "ZqenFtYrVxxWXyL2dyPj",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "dateAdded": "2026-07-06T18:36:45.915Z",
+   "standard": false
+  },
+  {
    "id": "HfNnPKa2z3eAR8xHIRdS",
    "name": "What is the primary reason for today’s visit?\n\n\n",
    "model": "contact",
@@ -405,6 +500,27 @@
    "locationId": "VoeVvlByAem9pkxb7f6a",
    "dateAdded": "2026-07-06T04:31:53.445Z",
    "standard": false
+  },
+  {
+   "id": "IvlCGV3s5h8fsXqtymnR",
+   "name": "Product Sold 2",
+   "model": "opportunity",
+   "fieldKey": "opportunity.product_sold_2",
+   "placeholder": "",
+   "dataType": "SINGLE_OPTIONS",
+   "position": 700,
+   "documentType": "field",
+   "parentId": "ZqenFtYrVxxWXyL2dyPj",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "dateAdded": "2026-07-09T05:56:17.819Z",
+   "standard": false,
+   "picklistOptions": [
+    "TRT",
+    "ED",
+    "Weight Loss",
+    "Peptides",
+    "Other"
+   ]
   },
   {
    "id": "JuB4dZEizbYrkrQt8Bt2",
@@ -532,6 +648,20 @@
    ]
   },
   {
+   "id": "ML4nIaQoHmznzMSSMRWb",
+   "name": "UTM Campaign",
+   "model": "opportunity",
+   "fieldKey": "opportunity.utm_campaign",
+   "placeholder": "",
+   "dataType": "TEXT",
+   "position": 350,
+   "documentType": "field",
+   "parentId": "u6olP1mmu1I19VxKMKcn",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "dateAdded": "2026-07-18T01:12:24.022Z",
+   "standard": false
+  },
+  {
    "id": "MQiFyxjBcy9lQqzkmVnE",
    "name": "Product Sold – Item 2",
    "model": "contact",
@@ -637,6 +767,20 @@
    ],
    "optionDisplayType": "TEXT_ONLY",
    "isAllowedCustomOption": false
+  },
+  {
+   "id": "NYk1vm1QeLyRLqnKJgNy",
+   "name": "GCLID",
+   "model": "opportunity",
+   "fieldKey": "opportunity.gclid",
+   "placeholder": "",
+   "dataType": "TEXT",
+   "position": 150,
+   "documentType": "field",
+   "parentId": "u6olP1mmu1I19VxKMKcn",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "dateAdded": "2026-07-06T18:39:22.942Z",
+   "standard": false
   },
   {
    "id": "O4dr1Y2KRI9wYwFBVlCl",
@@ -767,6 +911,34 @@
    ]
   },
   {
+   "id": "Q4ewtwg85Tjhm7SekG8A",
+   "name": "EMR Visit ID",
+   "model": "opportunity",
+   "fieldKey": "opportunity.emr_visit_id",
+   "placeholder": "",
+   "dataType": "TEXT",
+   "position": 250,
+   "documentType": "field",
+   "parentId": "u6olP1mmu1I19VxKMKcn",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "dateAdded": "2026-07-06T18:39:39.739Z",
+   "standard": false
+  },
+  {
+   "id": "QPPYdm731O9ystRzRmwm",
+   "name": "Total Program Amount",
+   "model": "opportunity",
+   "fieldKey": "opportunity.total_program_amount",
+   "placeholder": "",
+   "dataType": "MONETORY",
+   "position": 550,
+   "documentType": "field",
+   "parentId": "ZqenFtYrVxxWXyL2dyPj",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "dateAdded": "2026-07-06T18:37:54.603Z",
+   "standard": false
+  },
+  {
    "id": "QyAo6jMA2TZEZKuaP9Xf",
    "name": "Referrer's Email Address",
    "model": "contact",
@@ -845,6 +1017,34 @@
    ],
    "optionDisplayType": "TEXT_ONLY",
    "isAllowedCustomOption": false
+  },
+  {
+   "id": "UQwDKsWdlocZtJll8uS0",
+   "name": "Discount",
+   "model": "opportunity",
+   "fieldKey": "opportunity.discount",
+   "placeholder": "",
+   "dataType": "MONETORY",
+   "position": 400,
+   "documentType": "field",
+   "parentId": "ZqenFtYrVxxWXyL2dyPj",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "dateAdded": "2026-07-06T18:37:27.527Z",
+   "standard": false
+  },
+  {
+   "id": "UX8O34Lpyu0XSCsgerJw",
+   "name": "Price 1",
+   "model": "opportunity",
+   "fieldKey": "opportunity.price_1",
+   "placeholder": "",
+   "dataType": "MONETORY",
+   "position": 150,
+   "documentType": "field",
+   "parentId": "ZqenFtYrVxxWXyL2dyPj",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "dateAdded": "2026-07-06T18:32:57.928Z",
+   "standard": false
   },
   {
    "id": "VMNUPUY6SmOjYzNusjiF",
@@ -973,6 +1173,20 @@
    "standard": false
   },
   {
+   "id": "a7XDhjVxAw8saTEs5jdw",
+   "name": "UTM Source",
+   "model": "opportunity",
+   "fieldKey": "opportunity.utm_source",
+   "placeholder": "",
+   "dataType": "TEXT",
+   "position": 100,
+   "documentType": "field",
+   "parentId": "u6olP1mmu1I19VxKMKcn",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "dateAdded": "2026-07-06T18:39:14.757Z",
+   "standard": false
+  },
+  {
    "id": "aYKJRX2r9heSyN6S3xvy",
    "name": "Would you recommend us to a friend or family member?",
    "model": "contact",
@@ -1013,6 +1227,20 @@
    ],
    "optionDisplayType": "TEXT_ONLY",
    "isAllowedCustomOption": false
+  },
+  {
+   "id": "bTEi3Pc9kiKAcseieptW",
+   "name": "No-Sale Notes",
+   "model": "opportunity",
+   "fieldKey": "opportunity.nosale_notes",
+   "placeholder": "",
+   "dataType": "TEXT",
+   "position": 300,
+   "documentType": "field",
+   "parentId": "n5eZ18GFQcaUCxWZ6iHI",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "dateAdded": "2026-07-06T18:31:16.456Z",
+   "standard": false
   },
   {
    "id": "cEuiP6pCLItWWEcSTDmH",
@@ -1110,6 +1338,25 @@
    ]
   },
   {
+   "id": "eLh1UcCfqVaphI0f4I31",
+   "name": "Location",
+   "model": "opportunity",
+   "fieldKey": "opportunity.location",
+   "placeholder": "",
+   "dataType": "SINGLE_OPTIONS",
+   "position": 50,
+   "documentType": "field",
+   "parentId": "u6olP1mmu1I19VxKMKcn",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "dateAdded": "2026-07-06T18:39:05.569Z",
+   "standard": false,
+   "picklistOptions": [
+    "Richmond",
+    "Newport News",
+    "Virginia Beach"
+   ]
+  },
+  {
    "id": "eTJ6QzZe5maChyu7S4AT",
    "name": "Consent Time",
    "model": "contact",
@@ -1122,6 +1369,24 @@
    "locationId": "VoeVvlByAem9pkxb7f6a",
    "dateAdded": "2026-07-06T04:31:53.686Z",
    "standard": false
+  },
+  {
+   "id": "el14GjoN9Vs5ywx6QaeJ",
+   "name": "Sale Type",
+   "model": "opportunity",
+   "fieldKey": "opportunity.sale_type",
+   "placeholder": "",
+   "dataType": "SINGLE_OPTIONS",
+   "position": 100,
+   "documentType": "field",
+   "parentId": "n5eZ18GFQcaUCxWZ6iHI",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "dateAdded": "2026-07-06T18:28:33.647Z",
+   "standard": false,
+   "picklistOptions": [
+    "New",
+    "Renewal"
+   ]
   },
   {
    "id": "eyDcKWnUeAxbDXoKg3xa",
@@ -1162,6 +1427,26 @@
    "isAllowedCustomOption": false
   },
   {
+   "id": "fkkYVbDKu2i0AvRnYu03",
+   "name": "Pay Type",
+   "model": "opportunity",
+   "fieldKey": "opportunity.pay_type",
+   "placeholder": "",
+   "dataType": "SINGLE_OPTIONS",
+   "position": 350,
+   "documentType": "field",
+   "parentId": "ZqenFtYrVxxWXyL2dyPj",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "dateAdded": "2026-07-06T18:37:21.054Z",
+   "standard": false,
+   "picklistOptions": [
+    "PIF",
+    "SF",
+    "CARE",
+    "MAG"
+   ]
+  },
+  {
    "id": "hIrRLfQr4gkPxPZEpTH7",
    "name": "New or Renewal",
    "model": "contact",
@@ -1177,6 +1462,27 @@
    "picklistOptions": [
     "New",
     "Renewal"
+   ]
+  },
+  {
+   "id": "hQ7mam38m7vvUjRoVHht",
+   "name": "Product Sold 1",
+   "model": "opportunity",
+   "fieldKey": "opportunity.product_sold_1",
+   "placeholder": "",
+   "dataType": "SINGLE_OPTIONS",
+   "position": 650,
+   "documentType": "field",
+   "parentId": "ZqenFtYrVxxWXyL2dyPj",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "dateAdded": "2026-07-09T05:55:24.813Z",
+   "standard": false,
+   "picklistOptions": [
+    "TRT",
+    "ED",
+    "Weight Loss",
+    "Peptides",
+    "Other"
    ]
   },
   {
@@ -1262,6 +1568,27 @@
    "standard": false
   },
   {
+   "id": "ibPnm4RnhSfV7KrPo2nI",
+   "name": "No-Sale Reason",
+   "model": "opportunity",
+   "fieldKey": "opportunity.nosale_reason",
+   "placeholder": "",
+   "dataType": "SINGLE_OPTIONS",
+   "position": 250,
+   "documentType": "field",
+   "parentId": "n5eZ18GFQcaUCxWZ6iHI",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "dateAdded": "2026-07-06T18:31:03.522Z",
+   "standard": false,
+   "picklistOptions": [
+    "Cost",
+    "Partner",
+    "Timing",
+    "Trust",
+    "Other"
+   ]
+  },
+  {
    "id": "inAPyNhQ7ocYep3OB2FP",
    "name": "Cancellation Reason",
    "model": "contact",
@@ -1297,6 +1624,20 @@
    "parentId": "YlE8PQwiZURmNutVsBDC",
    "locationId": "VoeVvlByAem9pkxb7f6a",
    "dateAdded": "2026-07-06T04:31:53.734Z",
+   "standard": false
+  },
+  {
+   "id": "jADeTd4JZ9eaKDOVFz3X",
+   "name": "UTM Medium",
+   "model": "opportunity",
+   "fieldKey": "opportunity.utm_medium",
+   "placeholder": "",
+   "dataType": "TEXT",
+   "position": 300,
+   "documentType": "field",
+   "parentId": "u6olP1mmu1I19VxKMKcn",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "dateAdded": "2026-07-18T01:09:51.252Z",
    "standard": false
   },
   {
@@ -1381,6 +1722,20 @@
    ],
    "optionDisplayType": "TEXT_ONLY",
    "isAllowedCustomOption": false
+  },
+  {
+   "id": "lefCP4t8yM8OWimYFgel",
+   "name": "Term 1",
+   "model": "opportunity",
+   "fieldKey": "opportunity.term_1",
+   "placeholder": "",
+   "dataType": "TEXT",
+   "position": 100,
+   "documentType": "field",
+   "parentId": "ZqenFtYrVxxWXyL2dyPj",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "dateAdded": "2026-07-06T18:32:47.048Z",
+   "standard": false
   },
   {
    "id": "mSN5rzCH3l7WXN60HzMK",
@@ -1785,6 +2140,29 @@
    "standard": false
   },
   {
+   "id": "wwDhy1BhxqPZw6CgIOrV",
+   "name": "Patient Care Consultant",
+   "model": "opportunity",
+   "fieldKey": "opportunity.patient_care_consultant",
+   "placeholder": "",
+   "dataType": "SINGLE_OPTIONS",
+   "position": 200,
+   "documentType": "field",
+   "parentId": "n5eZ18GFQcaUCxWZ6iHI",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "dateAdded": "2026-07-06T18:30:09.790Z",
+   "standard": false,
+   "picklistOptions": [
+    "Morgan",
+    "Ashley",
+    "Chris",
+    "Conner",
+    "Steven",
+    "Ford",
+    "Ryan"
+   ]
+  },
+  {
    "id": "ykIL8F2dzOZAn452HOpX",
    "name": " Price – Item 1",
    "model": "contact",
@@ -1811,7 +2189,21 @@
    "locationId": "VoeVvlByAem9pkxb7f6a",
    "dateAdded": "2026-07-06T04:31:53.534Z",
    "standard": false
+  },
+  {
+   "id": "zPBtoz0ZBl2q6y5b1BRI",
+   "name": "Term 2",
+   "model": "opportunity",
+   "fieldKey": "opportunity.term_2",
+   "placeholder": "",
+   "dataType": "TEXT",
+   "position": 250,
+   "documentType": "field",
+   "parentId": "ZqenFtYrVxxWXyL2dyPj",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "dateAdded": "2026-07-06T18:36:36.447Z",
+   "standard": false
   }
  ],
- "traceId": "7b4fd89b-d1e4-49ad-a657-605d0883f97f"
+ "traceId": "1dc38e11-0dd9-49d2-831d-ade975ab5e23"
 }

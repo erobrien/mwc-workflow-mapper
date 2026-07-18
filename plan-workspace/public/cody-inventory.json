@@ -37,11 +37,25 @@
    "group": "5U55hHkduzbW5TKwAxIH"
   },
   {
+   "name": "FBCLID",
+   "key": "opportunity.fbclid",
+   "dataType": "TEXT",
+   "model": "opportunity",
+   "group": "u6olP1mmu1I19VxKMKcn"
+  },
+  {
    "name": "A&D Other Explanation",
    "key": "contact.ad_other_explanation",
    "dataType": "LARGE_TEXT",
    "model": "contact",
    "group": "QpskR2fQiV74ZLJCF4dV"
+  },
+  {
+   "name": "Medical Intake Status",
+   "key": "opportunity.medical_intake_status",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "opportunity",
+   "group": "n5eZ18GFQcaUCxWZ6iHI"
   },
   {
    "name": "May we contact your primary care provider regarding your care?",
@@ -72,11 +86,25 @@
    "group": "YlE8PQwiZURmNutVsBDC"
   },
   {
+   "name": "Money Down",
+   "key": "opportunity.money_down",
+   "dataType": "MONETORY",
+   "model": "opportunity",
+   "group": "ZqenFtYrVxxWXyL2dyPj"
+  },
+  {
    "name": "Status",
    "key": "contact.status",
    "dataType": "TEXT",
    "model": "contact",
    "group": "QpskR2fQiV74ZLJCF4dV"
+  },
+  {
+   "name": "Remaining Balance",
+   "key": "opportunity.remaining_balance",
+   "dataType": "MONETORY",
+   "model": "opportunity",
+   "group": "ZqenFtYrVxxWXyL2dyPj"
   },
   {
    "name": "Clinic Name",
@@ -91,6 +119,13 @@
    "dataType": "LARGE_TEXT",
    "model": "contact",
    "group": "5U55hHkduzbW5TKwAxIH"
+  },
+  {
+   "name": "Sale Outcome",
+   "key": "opportunity.sale_outcome",
+   "dataType": "MULTIPLE_OPTIONS",
+   "model": "opportunity",
+   "group": "n5eZ18GFQcaUCxWZ6iHI"
   },
   {
    "name": "Original Campaign",
@@ -156,6 +191,13 @@
    "group": "QpskR2fQiV74ZLJCF4dV"
   },
   {
+   "name": "Price 2",
+   "key": "opportunity.price_2",
+   "dataType": "MONETORY",
+   "model": "opportunity",
+   "group": "ZqenFtYrVxxWXyL2dyPj"
+  },
+  {
    "name": "What is the primary reason for today’s visit?\n\n\n",
    "key": "contact.what_is_the_primary_reason_for_todays_visit",
    "dataType": "SINGLE_OPTIONS",
@@ -168,6 +210,13 @@
    "dataType": "DATE",
    "model": "contact",
    "group": "5U55hHkduzbW5TKwAxIH"
+  },
+  {
+   "name": "Product Sold 2",
+   "key": "opportunity.product_sold_2",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "opportunity",
+   "group": "ZqenFtYrVxxWXyL2dyPj"
   },
   {
    "name": "May we contact them about your care",
@@ -212,6 +261,13 @@
    "group": "5U55hHkduzbW5TKwAxIH"
   },
   {
+   "name": "UTM Campaign",
+   "key": "opportunity.utm_campaign",
+   "dataType": "TEXT",
+   "model": "opportunity",
+   "group": "u6olP1mmu1I19VxKMKcn"
+  },
+  {
    "name": "Product Sold – Item 2",
    "key": "contact.product_sold__item_2",
    "dataType": "SINGLE_OPTIONS",
@@ -245,6 +301,13 @@
    "dataType": "CHECKBOX",
    "model": "contact",
    "group": "5U55hHkduzbW5TKwAxIH"
+  },
+  {
+   "name": "GCLID",
+   "key": "opportunity.gclid",
+   "dataType": "TEXT",
+   "model": "opportunity",
+   "group": "u6olP1mmu1I19VxKMKcn"
   },
   {
    "name": "Provider Making Recommendation",
@@ -289,6 +352,20 @@
    "group": "QpskR2fQiV74ZLJCF4dV"
   },
   {
+   "name": "EMR Visit ID",
+   "key": "opportunity.emr_visit_id",
+   "dataType": "TEXT",
+   "model": "opportunity",
+   "group": "u6olP1mmu1I19VxKMKcn"
+  },
+  {
+   "name": "Total Program Amount",
+   "key": "opportunity.total_program_amount",
+   "dataType": "MONETORY",
+   "model": "opportunity",
+   "group": "ZqenFtYrVxxWXyL2dyPj"
+  },
+  {
    "name": "Referrer's Email Address",
    "key": "contact.referrers_email_address",
    "dataType": "TEXT",
@@ -322,6 +399,20 @@
    "dataType": "CHECKBOX",
    "model": "contact",
    "group": "5U55hHkduzbW5TKwAxIH"
+  },
+  {
+   "name": "Discount",
+   "key": "opportunity.discount",
+   "dataType": "MONETORY",
+   "model": "opportunity",
+   "group": "ZqenFtYrVxxWXyL2dyPj"
+  },
+  {
+   "name": "Price 1",
+   "key": "opportunity.price_1",
+   "dataType": "MONETORY",
+   "model": "opportunity",
+   "group": "ZqenFtYrVxxWXyL2dyPj"
   },
   {
    "name": "How would you rate your interaction with our staff?",
@@ -373,6 +464,13 @@
    "group": "YlE8PQwiZURmNutVsBDC"
   },
   {
+   "name": "UTM Source",
+   "key": "opportunity.utm_source",
+   "dataType": "TEXT",
+   "model": "opportunity",
+   "group": "u6olP1mmu1I19VxKMKcn"
+  },
+  {
    "name": "Would you recommend us to a friend or family member?",
    "key": "contact.would_you_recommend_us_to_a_friend_or_family_member",
    "dataType": "RADIO",
@@ -385,6 +483,13 @@
    "dataType": "RADIO",
    "model": "contact",
    "group": "QpskR2fQiV74ZLJCF4dV"
+  },
+  {
+   "name": "No-Sale Notes",
+   "key": "opportunity.nosale_notes",
+   "dataType": "TEXT",
+   "model": "opportunity",
+   "group": "n5eZ18GFQcaUCxWZ6iHI"
   },
   {
    "name": "Sale Outcome",
@@ -422,11 +527,25 @@
    "group": "QpskR2fQiV74ZLJCF4dV"
   },
   {
+   "name": "Location",
+   "key": "opportunity.location",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "opportunity",
+   "group": "u6olP1mmu1I19VxKMKcn"
+  },
+  {
    "name": "Consent Time",
    "key": "contact.consent_time",
    "dataType": "TEXT",
    "model": "contact",
    "group": "QpskR2fQiV74ZLJCF4dV"
+  },
+  {
+   "name": "Sale Type",
+   "key": "opportunity.sale_type",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "opportunity",
+   "group": "n5eZ18GFQcaUCxWZ6iHI"
   },
   {
    "name": "Last disposition / Channel",
@@ -443,11 +562,25 @@
    "group": "5U55hHkduzbW5TKwAxIH"
   },
   {
+   "name": "Pay Type",
+   "key": "opportunity.pay_type",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "opportunity",
+   "group": "ZqenFtYrVxxWXyL2dyPj"
+  },
+  {
    "name": "New or Renewal",
    "key": "contact.new_or_renewal",
    "dataType": "SINGLE_OPTIONS",
    "model": "contact",
    "group": "QpskR2fQiV74ZLJCF4dV"
+  },
+  {
+   "name": "Product Sold 1",
+   "key": "opportunity.product_sold_1",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "opportunity",
+   "group": "ZqenFtYrVxxWXyL2dyPj"
   },
   {
    "name": "Do you smoke or use tobacco?",
@@ -478,6 +611,13 @@
    "group": "QpskR2fQiV74ZLJCF4dV"
   },
   {
+   "name": "No-Sale Reason",
+   "key": "opportunity.nosale_reason",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "opportunity",
+   "group": "n5eZ18GFQcaUCxWZ6iHI"
+  },
+  {
    "name": "Cancellation Reason",
    "key": "contact.cancellation_reason",
    "dataType": "SINGLE_OPTIONS",
@@ -490,6 +630,13 @@
    "dataType": "MONETORY",
    "model": "contact",
    "group": "YlE8PQwiZURmNutVsBDC"
+  },
+  {
+   "name": "UTM Medium",
+   "key": "opportunity.utm_medium",
+   "dataType": "TEXT",
+   "model": "opportunity",
+   "group": "u6olP1mmu1I19VxKMKcn"
   },
   {
    "name": "_atid",
@@ -525,6 +672,13 @@
    "dataType": "RADIO",
    "model": "contact",
    "group": "QpskR2fQiV74ZLJCF4dV"
+  },
+  {
+   "name": "Term 1",
+   "key": "opportunity.term_1",
+   "dataType": "TEXT",
+   "model": "opportunity",
+   "group": "ZqenFtYrVxxWXyL2dyPj"
   },
   {
    "name": "Term Length – Item 1",
@@ -688,6 +842,13 @@
    "group": "NHCBTXZQvEINOKExStGB"
   },
   {
+   "name": "Patient Care Consultant",
+   "key": "opportunity.patient_care_consultant",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "opportunity",
+   "group": "n5eZ18GFQcaUCxWZ6iHI"
+  },
+  {
    "name": " Price – Item 1",
    "key": "contact.treatment_cost",
    "dataType": "MONETORY",
@@ -700,6 +861,13 @@
    "dataType": "LARGE_TEXT",
    "model": "contact",
    "group": "5U55hHkduzbW5TKwAxIH"
+  },
+  {
+   "name": "Term 2",
+   "key": "opportunity.term_2",
+   "dataType": "TEXT",
+   "model": "opportunity",
+   "group": "ZqenFtYrVxxWXyL2dyPj"
   }
  ],
  "tags": [

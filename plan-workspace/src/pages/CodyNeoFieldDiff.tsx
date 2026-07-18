@@ -1,7 +1,7 @@
 import { PageShell } from "../components/Shell";
 import { Badge, Card, CardContent, Stat, Loading } from "../components/ui";
 import { useJson } from "../lib/asis";
-import { ArrowRight, Plus, RefreshCw, ListChecks, Archive } from "lucide-react";
+import { ArrowRight, Plus, RefreshCw, ListChecks, Archive, AlertTriangle, ExternalLink } from "lucide-react";
 
 interface AddedField { key: string; name: string; dataType: string; options: string[]; reason: string; }
 interface RetypedField { key: string; name: string; before_type: string; after_type: string; before_options: string[]; after_options: string[]; note: string; }
@@ -68,6 +68,46 @@ export default function CodyNeoFieldDiff() {
             <p className="mt-1 text-sm text-muted-foreground">Current state that is true once per member: identity, consent/DND, membership_status, renewal_date, preferences. These need contact-level superpowers — form writes, specific field-change triggers, custom-date triggers — that opportunity fields do not get in GHL.</p>
           </CardContent></Card>
         </div>
+      </section>
+
+      {/* Platform limitations */}
+      <section className="space-y-3">
+        <h2 className="flex items-center gap-1.5 text-sm font-semibold"><AlertTriangle className="h-4 w-4 text-amber-600" /> GHL limitations on opportunity custom fields — confirmed, and how this design accounts for them</h2>
+        <p className="max-w-3xl text-sm text-muted-foreground">Opportunity custom fields are second-class citizens in GHL relative to contact fields. Each limitation below is confirmed against HighLevel's docs and ideas board, and the Neo build is shaped around it — this is why some data deliberately stays on the Contact, and why the writers are wired the way they are.</p>
+        <Card><CardContent className="p-0">
+          <table className="w-full text-sm">
+            <thead><tr className="border-b text-left text-[11px] uppercase tracking-wider text-muted-foreground">
+              <th className="px-3 py-2">Platform limitation</th><th className="px-3 py-2">How the Neo build accounts for it</th>
+            </tr></thead>
+            <tbody>
+              <tr className="border-b align-top">
+                <td className="px-3 py-2"><b>Merge fields and opp writes need a bound opportunity.</b> Reading or writing <span className="font-mono text-xs">{"{{opportunity.*}}"}</span> only works when the workflow has an opportunity in context — an opportunity-based trigger, or a Create/Update/Find Opportunity step earlier in the flow. Without context, merge fields render empty and writes go nowhere. <a className="inline-flex items-center gap-0.5 text-xs text-muted-foreground underline" href="https://help.gohighlevel.com/support/solutions/articles/155000004751-workflow-action-find-opportunity" target="_blank" rel="noopener noreferrer">Find Opportunity docs<ExternalLink className="h-3 w-3" /></a></td>
+                <td className="px-3 py-2">Every “Opp: stamp” node is spliced <b>immediately after</b> an opportunity create/update action, which binds the context in the same chain. Workflows that need to touch the opportunity later (per the port pass) get an explicit <span className="font-mono text-xs">find_opportunity</span> guard first. No stamp runs on a bare contact trigger.</td>
+              </tr>
+              <tr className="border-b align-top">
+                <td className="px-3 py-2"><b>No trigger on a specific opp field change.</b> The Opportunity Changed trigger fires on any modification; you cannot trigger on “sale_outcome was set” or run custom-date triggers off an opportunity date field. <a className="inline-flex items-center gap-0.5 text-xs text-muted-foreground underline" href="https://ideas.gohighlevel.com/automations/p/trigger-on-custom-field-update-in-opportunities" target="_blank" rel="noopener noreferrer">open feature request<ExternalLink className="h-3 w-3" /></a></td>
+                <td className="px-3 py-2">Nothing in the build triggers off opportunity field changes. Routing triggers stay contact-level (form submission, tags), and the opp fields are written as <b>outputs</b> inside those flows. <span className="font-mono text-xs">renewal_date</span> deliberately stays a <b>Contact</b> field so renewal campaigns can use the native custom-date trigger.</td>
+              </tr>
+              <tr className="border-b align-top">
+                <td className="px-3 py-2"><b>Monetary/numeric opp fields reject merge tags in workflow actions.</b> Update actions can set them to literals only — you cannot copy a dollar amount from a contact field via <span className="font-mono text-xs">{"{{contact.x}}"}</span>. <a className="inline-flex items-center gap-0.5 text-xs text-muted-foreground underline" href="https://ideas.gohighlevel.com/automations/p/use-merge-tags-to-update-monetary-and-numeric-custom-fields-within-workflow-acti" target="_blank" rel="noopener noreferrer">ideas board<ExternalLink className="h-3 w-3" /></a></td>
+                <td className="px-3 py-2">The five MONETORY fields (<span className="font-mono text-xs">total_program_amount</span>, <span className="font-mono text-xs">price_1/2</span>, <span className="font-mono text-xs">money_down</span>, <span className="font-mono text-xs">remaining_balance</span>) are <b>never</b> written by workflow stamps. Their single writer is the PCC form (which can write opp fields directly); the native Opportunity Value field carries net revenue for reporting and conversions.</td>
+              </tr>
+              <tr className="border-b align-top">
+                <td className="px-3 py-2"><b>Select-option values must match exactly.</b> A workflow write of a value that is not in the option list (or a merge-copy of prose into a code enum) produces mismatched data that if/else conditions cannot branch on.</td>
+                <td className="px-3 py-2">Enum stamps are <b>branch-static codes</b>, never merge copies: the sold branch writes the literal <span className="font-mono text-xs">sold</span>, each objection branch writes its literal reason code. Merge copies are used only where the value spaces match exactly (PCC and provider names) or the target is free TEXT (<span className="font-mono text-xs">term_1</span>, <span className="font-mono text-xs">referred_by</span>). <span className="font-mono text-xs">sale_type</span> and <span className="font-mono text-xs">product_sold_1</span> are deliberately NOT merge-copied (prose contact options vs code enums) — the PCC form writes them directly.</td>
+              </tr>
+              <tr className="border-b align-top">
+                <td className="px-3 py-2"><b>Weak Zapier/Make support.</b> Third-party integrations mostly cannot read or set opportunity custom fields; the common workaround is mirroring through a contact field. <a className="inline-flex items-center gap-0.5 text-xs text-muted-foreground underline" href="https://ideas.gohighlevel.com/opportunities/p/opportunity-custom-fields-available-to-update-via-zapier" target="_blank" rel="noopener noreferrer">ideas board<ExternalLink className="h-3 w-3" /></a></td>
+                <td className="px-3 py-2">The deprecated contact fields are parked, not deleted — they remain available as a mirror/staging layer for any external tooling during transition. Server-side integrations use the public API (v2 supports opportunity custom fields), not Zapier.</td>
+              </tr>
+              <tr className="align-top">
+                <td className="px-3 py-2"><b>No field-change automation, form-first writes.</b> Contact fields get form writes, specific field-change triggers, and custom-date triggers; opportunity fields get none of these superpowers by default (forms CAN include opportunity fields when the submission creates/updates an opportunity). <a className="inline-flex items-center gap-0.5 text-xs text-muted-foreground underline" href="https://help.gohighlevel.com/support/solutions/articles/48001161579-how-to-use-custom-fields" target="_blank" rel="noopener noreferrer">custom fields docs<ExternalLink className="h-3 w-3" /></a></td>
+                <td className="px-3 py-2">The split follows the capability boundary: anything needing triggers or member-facing form capture as <b>input</b> stays on the Contact (consent, <span className="font-mono text-xs">membership_status</span>, <span className="font-mono text-xs">renewal_date</span>, preferences); the Opportunity holds per-deal <b>outputs</b> written by exactly one workflow stamp or the PCC form. Follow-up: move the PCC form to direct opportunity-field writes so the parked contact staging layer can retire.</td>
+              </tr>
+            </tbody>
+          </table>
+        </CardContent></Card>
+        <div className="rounded-md border bg-card p-3 text-xs text-muted-foreground">Also verified during this build, from the write side: the builder-level save API rejects invalid nodes (server-side validation), option-list updates work in place, but a field's <b>type</b> cannot be changed after creation (silently ignored — recreating <span className="font-mono">sale_outcome</span> was required, which changes the field id), and the default fields read hides opportunity fields unless <span className="font-mono">model=all</span> is requested.</div>
       </section>
 
       {/* Added */}

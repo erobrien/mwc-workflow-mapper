@@ -1,0 +1,99 @@
+{
+ "workflowData": {
+  "_id": "79a2ad54-48cd-463e-8a18-0e7eb1e92625",
+  "locationId": "VoeVvlByAem9pkxb7f6a",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 8,
+  "name": "Intake Survey Completion",
+  "status": "draft",
+  "version": 4,
+  "dataVersion": 7,
+  "allowMultiple": true,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/VoeVvlByAem9pkxb7f6a/workflows/79a2ad54-48cd-463e-8a18-0e7eb1e92625/2",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "permission": 380,
+  "type": "workflow",
+  "parentId": "3488bc68-21b7-4d9d-9c6f-a20ef08d9e68",
+  "updatedBy": "MyFtShSIGksH1SAoD5Ye",
+  "createdAt": "2026-07-14T20:16:45.022Z",
+  "updatedAt": "2026-07-17T14:46:24.341Z",
+  "deleted": false,
+  "allowMultipleOpportunity": false,
+  "creationSource": "workflow_ai",
+  "isTriggerBucketMigrated": true,
+  "originType": "user",
+  "__v": 0,
+  "eventStartDate": null,
+  "window": {
+   "condition": "when",
+   "start": "08:00",
+   "end": "17:00",
+   "days": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
+  },
+  "workflowNote": null,
+  "id": "79a2ad54-48cd-463e-8a18-0e7eb1e92625",
+  "workflowData": {
+   "templates": [
+    {
+     "type": "add_contact_tag",
+     "id": "d54b019c-882b-4785-ab7d-4c60a1963a15",
+     "name": "Add intake-complete tag",
+     "attributes": {
+      "tags": [
+       "intake-complete"
+      ]
+     },
+     "order": 0
+    }
+   ]
+  }
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ },
+ "triggers": [
+  {
+   "id": "niM3sS72uNly22iM5t26",
+   "date_added": "2026-07-14T20:17:12.259Z",
+   "deleted": false,
+   "actions": [
+    {
+     "workflow_id": "79a2ad54-48cd-463e-8a18-0e7eb1e92625",
+     "type": "add_to_workflow"
+    }
+   ],
+   "type": "survey_submission",
+   "masterType": "highlevel",
+   "workflow_id": "79a2ad54-48cd-463e-8a18-0e7eb1e92625",
+   "location_id": "VoeVvlByAem9pkxb7f6a",
+   "name": "Survey Submitted: 02. Medical Intake - Onboarding",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "conditions": [
+    {
+     "operator": "is-any-of",
+     "field": "survey.id",
+     "value": [
+      "VbL39UF5b9iroSiomemE"
+     ],
+     "title": "Survey is",
+     "type": "string",
+     "id": "a3994333-b1b5-411f-8634-4d6aa9d75b10"
+    }
+   ],
+   "date_updated": "2026-07-17T14:46:24.118Z",
+   "active": false
+  }
+ ],
+ "dependentAssets": {}
+}

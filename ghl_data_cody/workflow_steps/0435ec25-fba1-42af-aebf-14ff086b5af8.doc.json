@@ -1,0 +1,220 @@
+{
+ "workflowData": {
+  "_id": "0435ec25-fba1-42af-aebf-14ff086b5af8",
+  "locationId": "VoeVvlByAem9pkxb7f6a",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 8,
+  "name": "Newport News Lead Notification",
+  "status": "draft",
+  "version": 15,
+  "dataVersion": 7,
+  "allowMultiple": true,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/VoeVvlByAem9pkxb7f6a/workflows/0435ec25-fba1-42af-aebf-14ff086b5af8/10",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "permission": 380,
+  "type": "workflow",
+  "parentId": "9b2ba534-1408-41ab-849b-ce507178f567",
+  "updatedBy": "MyFtShSIGksH1SAoD5Ye",
+  "createdAt": "2026-07-14T17:48:49.598Z",
+  "updatedAt": "2026-07-17T14:46:41.873Z",
+  "deleted": false,
+  "allowMultipleOpportunity": false,
+  "creationSource": "workflow_ai",
+  "isTriggerBucketMigrated": true,
+  "originType": "user",
+  "__v": 0,
+  "eventStartDate": null,
+  "window": {
+   "condition": "when",
+   "start": "08:00",
+   "end": "17:00",
+   "days": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
+  },
+  "workflowNote": null,
+  "id": "0435ec25-fba1-42af-aebf-14ff086b5af8",
+  "workflowData": {
+   "templates": [
+    {
+     "type": "internal_create_opportunity",
+     "id": "103a6bdc-99f2-4887-a106-a073f7b51948",
+     "name": "Create Opportunity in Newport News Pipeline",
+     "next": "8d74162d-cd38-4038-a755-d49b3a6e49ef",
+     "attributes": {
+      "pipelineId": "UVl6YRg8ffaHA1iCAKMe",
+      "__customInputFields__": [
+       {
+        "__customInputs__": {},
+        "dataType": "SINGLE_OPTIONS",
+        "filterField": "pipelineStageId",
+        "value": "fe0ee3f1-5338-4964-b4d9-69266fd5a6cc",
+        "valueFieldType": "select"
+       }
+      ],
+      "type": "internal_create_opportunity",
+      "__customInputs__": {}
+     },
+     "workflowsActionType": "INTERNAL",
+     "order": 0
+    },
+    {
+     "type": "internal_update_opportunity",
+     "id": "8d74162d-cd38-4038-a755-d49b3a6e49ef",
+     "name": "Set Opportunity Location Field to Newport News",
+     "next": "f13f8713-35e6-4e03-8b1a-191826789f92",
+     "attributes": {
+      "allowBackward": false,
+      "__customInputFields__": [
+       {
+        "__customInputs__": {},
+        "dataType": "SINGLE_OPTIONS",
+        "filterField": "custom_fields.eLh1UcCfqVaphI0f4I31",
+        "value": "Newport News",
+        "valueFieldType": "select"
+       }
+      ],
+      "type": "internal_update_opportunity",
+      "__customInputs__": {}
+     },
+     "parentKey": "103a6bdc-99f2-4887-a106-a073f7b51948",
+     "workflowsActionType": "INTERNAL",
+     "order": 1
+    },
+    {
+     "type": "add_contact_tag",
+     "id": "f13f8713-35e6-4e03-8b1a-191826789f92",
+     "name": "Tag Contact as Newport News Lead",
+     "next": "062cf421-8ec1-46be-ae81-076ea56e9b26",
+     "attributes": {
+      "tags": [
+       "npn-lead"
+      ]
+     },
+     "parentKey": "8d74162d-cd38-4038-a755-d49b3a6e49ef",
+     "order": 2
+    },
+    {
+     "type": "sms",
+     "id": "062cf421-8ec1-46be-ae81-076ea56e9b26",
+     "name": "Send Newport News Lead SMS",
+     "next": "c2da7725-5df9-4186-804d-df79f3fcaeeb",
+     "attributes": {
+      "body": "Hi {{contact.first_name}}, thanks for reaching out to Men's Wellness Centers - Newport News. Book your consult here: {{custom_values.newport_news__booking_link}}. Reply STOP to opt out.",
+      "assignedOwners": [
+       "contact_owner"
+      ],
+      "alsoNotifyContactFollowers": false,
+      "alsoNotifyOpportunityFollowers": false
+     },
+     "parentKey": "f13f8713-35e6-4e03-8b1a-191826789f92",
+     "order": 3
+    },
+    {
+     "type": "internal_notification",
+     "id": "c2da7725-5df9-4186-804d-df79f3fcaeeb",
+     "name": "Notify Team of New Newport News Lead",
+     "attributes": {
+      "type": "notification",
+      "notification": {
+       "title": "New Newport News Lead",
+       "body": "A new lead has been captured for Newport News.\nCheck the contact and opportunity details.",
+       "redirectPage": "contact",
+       "userType": "all",
+       "assignedOwners": null,
+       "alsoNotifyContactFollowers": false,
+       "alsoNotifyOpportunityFollowers": false,
+       "type": "send_notification"
+      }
+     },
+     "parentKey": "062cf421-8ec1-46be-ae81-076ea56e9b26",
+     "order": 4
+    }
+   ]
+  }
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ },
+ "triggers": [
+  {
+   "id": "DIWuOjYaD9zY80N5XQXN",
+   "date_added": "2026-07-15T21:43:04.697Z",
+   "deleted": false,
+   "actions": [
+    {
+     "workflow_id": "0435ec25-fba1-42af-aebf-14ff086b5af8",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "is-any-of",
+     "field": "form.id",
+     "value": [
+      "gnPI3Ut7aHoBzVp8CsvH"
+     ],
+     "title": "Form is",
+     "type": "string"
+    }
+   ],
+   "type": "form_submission",
+   "masterType": "highlevel",
+   "workflow_id": "0435ec25-fba1-42af-aebf-14ff086b5af8",
+   "location_id": "VoeVvlByAem9pkxb7f6a",
+   "name": "Form Submitted",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "date_updated": "2026-07-17T14:46:41.592Z",
+   "active": false
+  },
+  {
+   "id": "u3yRRcQbiW3BqjMeaPe7",
+   "date_added": "2026-07-14T17:51:50.294Z",
+   "deleted": false,
+   "actions": [
+    {
+     "workflow_id": "0435ec25-fba1-42af-aebf-14ff086b5af8",
+     "type": "add_to_workflow"
+    }
+   ],
+   "masterType": "highlevel",
+   "workflow_id": "0435ec25-fba1-42af-aebf-14ff086b5af8",
+   "location_id": "VoeVvlByAem9pkxb7f6a",
+   "belongs_to": "workflow",
+   "schedule_config": {},
+   "name": "Form",
+   "type": "form_submission",
+   "conditions": [
+    {
+     "operator": "is-any-of",
+     "field": "form.id",
+     "value": [
+      "In6rjFseWXFcBNnLmlJn"
+     ],
+     "title": "Form is",
+     "type": "string"
+    },
+    {
+     "operator": "==",
+     "field": "contact.dIEAqttYCyNqAHgGeFCE",
+     "value": "Newport News, VA",
+     "title": "Preferred Location",
+     "type": "select",
+     "id": "dIEAqttYCyNqAHgGeFCE"
+    }
+   ],
+   "date_updated": "2026-07-17T14:46:41.639Z",
+   "active": false
+  }
+ ],
+ "dependentAssets": {}
+}

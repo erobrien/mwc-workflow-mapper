@@ -1,0 +1,128 @@
+{
+ "workflowData": {
+  "_id": "0f25f49e-0dcd-4126-9cb1-fd6854f99dc8",
+  "locationId": "VoeVvlByAem9pkxb7f6a",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 8,
+  "name": "Bad Contact Handler",
+  "status": "draft",
+  "version": 7,
+  "dataVersion": 7,
+  "allowMultiple": false,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/VoeVvlByAem9pkxb7f6a/workflows/0f25f49e-0dcd-4126-9cb1-fd6854f99dc8/6",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "permission": 380,
+  "type": "workflow",
+  "parentId": "3488bc68-21b7-4d9d-9c6f-a20ef08d9e68",
+  "updatedBy": "MyFtShSIGksH1SAoD5Ye",
+  "createdAt": "2026-07-14T17:26:22.570Z",
+  "updatedAt": "2026-07-17T14:46:12.533Z",
+  "deleted": false,
+  "allowMultipleOpportunity": false,
+  "creationSource": "workflow_ai",
+  "isTriggerBucketMigrated": true,
+  "originType": "user",
+  "__v": 0,
+  "eventStartDate": null,
+  "window": {
+   "condition": "when",
+   "start": "08:00",
+   "end": "17:00",
+   "days": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
+  },
+  "workflowNote": null,
+  "id": "0f25f49e-0dcd-4126-9cb1-fd6854f99dc8",
+  "workflowData": {
+   "templates": [
+    {
+     "type": "add_contact_tag",
+     "id": "e5b78d88-a3a2-43c5-b722-1c3ef25c3bf1",
+     "name": "Add Bad Contact Tag",
+     "next": "0c6b540a-e3e5-4d83-95cd-44646121e971",
+     "attributes": {
+      "tags": [
+       "bad-contact"
+      ]
+     },
+     "order": 0
+    },
+    {
+     "type": "dnd_contact",
+     "id": "0c6b540a-e3e5-4d83-95cd-44646121e971",
+     "name": "Set Contact to DND",
+     "attributes": {
+      "dnd_contact": "enable",
+      "specific_channels": null
+     },
+     "parentKey": "e5b78d88-a3a2-43c5-b722-1c3ef25c3bf1",
+     "order": 1
+    }
+   ]
+  }
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ },
+ "triggers": [
+  {
+   "id": "LmZQb1wED32ogi0WDuYv",
+   "date_added": "2026-07-14T17:26:51.684Z",
+   "deleted": false,
+   "actions": [
+    {
+     "workflow_id": "0f25f49e-0dcd-4126-9cb1-fd6854f99dc8",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "==",
+     "field": "mailgun.event",
+     "value": "failed",
+     "title": "Event",
+     "type": "select",
+     "id": "14b83628-3b8c-4d80-bf8a-62e1e9e082f7"
+    }
+   ],
+   "type": "mailgun_email_event",
+   "masterType": "highlevel",
+   "workflow_id": "0f25f49e-0dcd-4126-9cb1-fd6854f99dc8",
+   "location_id": "VoeVvlByAem9pkxb7f6a",
+   "name": "Email Hard Bounced or Bounced",
+   "belongs_to": "workflow",
+   "date_updated": "2026-07-17T14:46:12.252Z",
+   "active": false
+  },
+  {
+   "id": "Z3YXqIEEFAiW3vbW8huc",
+   "date_added": "2026-07-14T17:26:51.708Z",
+   "deleted": false,
+   "actions": [
+    {
+     "workflow_id": "0f25f49e-0dcd-4126-9cb1-fd6854f99dc8",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [],
+   "type": "validation_error",
+   "masterType": "highlevel",
+   "workflow_id": "0f25f49e-0dcd-4126-9cb1-fd6854f99dc8",
+   "location_id": "VoeVvlByAem9pkxb7f6a",
+   "name": "Invalid Phone Detected",
+   "belongs_to": "workflow",
+   "date_updated": "2026-07-17T14:46:12.299Z",
+   "active": false
+  }
+ ],
+ "dependentAssets": {}
+}

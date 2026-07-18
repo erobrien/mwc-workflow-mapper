@@ -20,6 +20,11 @@ const NAV: { group: string; accent?: string; dot?: string; items: { to: string; 
     { to: "/asis-flows", label: "As-Is Workflow Flows", icon: Route, accent: "text-red-600 dark:text-red-400" },
     { to: "/inventory", label: "Field Inventory", icon: Boxes, accent: "text-red-600 dark:text-red-400" },
   ] },
+  { group: "Cody build", accent: "text-sky-600 dark:text-sky-400", dot: "bg-sky-500", items: [
+    { to: "/cody", label: "Cody Workflows", icon: Workflow, accent: "text-sky-600 dark:text-sky-400" },
+    { to: "/cody-flows", label: "Cody Flow Diagrams", icon: Waypoints, accent: "text-sky-600 dark:text-sky-400" },
+    { to: "/cody-inventory", label: "Cody Inventory", icon: Boxes, accent: "text-sky-600 dark:text-sky-400" },
+  ] },
   { group: "Target", accent: "text-emerald-600 dark:text-emerald-400", dot: "bg-emerald-500", items: [
     { to: "/to-be", label: "To-Be Workflows", icon: Workflow, accent: "text-emerald-600 dark:text-emerald-400" },
     { to: "/wf-diagrams", label: "WF Flow Diagrams", icon: Waypoints, accent: "text-emerald-600 dark:text-emerald-400" },

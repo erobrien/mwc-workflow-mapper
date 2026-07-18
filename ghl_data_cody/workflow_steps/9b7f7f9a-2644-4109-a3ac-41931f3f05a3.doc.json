@@ -1,0 +1,2278 @@
+{
+ "workflowData": {
+  "_id": "9b7f7f9a-2644-4109-a3ac-41931f3f05a3",
+  "locationId": "VoeVvlByAem9pkxb7f6a",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 8,
+  "name": "5.1 — Virginia Beach – PCC Disposition Router",
+  "status": "draft",
+  "version": 10,
+  "dataVersion": 7,
+  "allowMultiple": true,
+  "eventStartDate": null,
+  "window": {
+   "condition": "when",
+   "start": "08:00",
+   "end": "17:00",
+   "days": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
+  },
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/VoeVvlByAem9pkxb7f6a/workflows/9b7f7f9a-2644-4109-a3ac-41931f3f05a3/9",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "permission": 380,
+  "type": "workflow",
+  "parentId": "eb4fad62-7990-4739-bbce-900d8ad6160c",
+  "createdAt": "2026-07-15T23:14:19.956Z",
+  "updatedAt": "2026-07-17T14:45:31.298Z",
+  "deleted": false,
+  "workflowNote": {
+   "content": "",
+   "createdBy": "clone_workflow",
+   "createdByName": "clone_workflow",
+   "createdAt": "2026-07-15T23:14:20.020Z",
+   "updatedBy": "clone_workflow",
+   "updatedByName": "clone_workflow",
+   "updatedAt": "2026-07-15T23:14:20.020Z"
+  },
+  "allowMultipleOpportunity": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "duplicate-workflow",
+  "__v": 0,
+  "meta": {
+   "stepIndexCounter": {
+    "math_operation": 7
+   }
+  },
+  "updatedBy": "MyFtShSIGksH1SAoD5Ye",
+  "id": "9b7f7f9a-2644-4109-a3ac-41931f3f05a3",
+  "workflowData": {
+   "templates": [
+    {
+     "type": "wait",
+     "id": "741d8084-6887-460b-88ab-b47c4951f884",
+     "name": "Wait 1 Minute Race Buffer",
+     "next": "bf2970fa-0415-47dd-8f3f-9d348dc18d69",
+     "attributes": {
+      "type": "time",
+      "convertToMultipath": false,
+      "hybridActionType": "wait",
+      "isHybridAction": true,
+      "name": "Wait 1 Minute Race Buffer",
+      "cat": "action",
+      "transitions": [],
+      "startAfter": {
+       "when": "after",
+       "type": "minutes",
+       "value": 1
+      },
+      "timePeriodInputMode": "standard",
+      "unitInputMode": "standard"
+     },
+     "order": 0
+    },
+    {
+     "type": "if_else",
+     "id": "bf2970fa-0415-47dd-8f3f-9d348dc18d69",
+     "name": "yes",
+     "attributes": {
+      "currentRecipeType": "CUSTOM",
+      "branches": [
+       {
+        "id": "ab01da5d-609c-4fe3-8d37-f4e5665689f3",
+        "name": "Check if Sale Outcome is SOLD from PCC-FORM submission",
+        "segments": [
+         {
+          "__segmentId": "9b4b8fb7-2979-4ede-851d-baaf29b3b2c1",
+          "operator": "and",
+          "conditions": [
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "cEuiP6pCLItWWEcSTDmH",
+            "conditionOperator": "==",
+            "conditionValue": "Sold",
+            "__conditionId": "167813bd-03be-4aef-9c6b-8a68193564b5",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           }
+          ]
+         }
+        ],
+        "operator": "and",
+        "showErrors": false,
+        "branchNameError": "Branch name cannot be empty!"
+       },
+       {
+        "id": "d063074c-bf65-487f-a35d-03030720a09b",
+        "name": "Check Sale Outcome A&D from PCC-FORM submission",
+        "segments": [
+         {
+          "__segmentId": "de90bcf6-032c-4a2f-ab5b-e463f1e42ec3",
+          "operator": "and",
+          "conditions": [
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "cEuiP6pCLItWWEcSTDmH",
+            "conditionOperator": "==",
+            "conditionValue": "A&D (Advised and Declined)",
+            "__conditionId": "fbaa5465-a21a-47cf-89f8-3b29cb1a63e1",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           }
+          ]
+         }
+        ],
+        "operator": "and",
+        "showErrors": false,
+        "branchNameError": "Branch name cannot be empty!"
+       },
+       {
+        "id": "7c881279-0bd8-40ec-a9ff-8402427122f0",
+        "name": "Check if Sale Outcome is MUT from PCC-FORM",
+        "segments": [
+         {
+          "__segmentId": "80d94274-1b03-4320-b958-2ad079115a5c",
+          "operator": "and",
+          "conditions": [
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "cEuiP6pCLItWWEcSTDmH",
+            "conditionOperator": "==",
+            "conditionValue": "MUT (Medically Untreatable)",
+            "__conditionId": "37f776bc-fde8-47fe-936d-939412c182db",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           }
+          ]
+         }
+        ],
+        "operator": "and",
+        "showErrors": false,
+        "branchNameError": "Branch name cannot be empty!"
+       },
+       {
+        "id": "e9474cb9-70f3-428f-a1a3-d9b32edbf064",
+        "name": "Check if Sale Outcome is MAR from PCC-FORM",
+        "segments": [
+         {
+          "__segmentId": "6ad9ed67-422c-48c5-8c4c-a1a6d99bb4ee",
+          "operator": "and",
+          "conditions": [
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "cEuiP6pCLItWWEcSTDmH",
+            "conditionOperator": "==",
+            "conditionValue": "MAR (Medical Approval Required)",
+            "__conditionId": "16e02999-2c6f-49d9-ac8a-b7cab3d0a0d3",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           }
+          ]
+         }
+        ],
+        "operator": "and",
+        "showErrors": false,
+        "branchNameError": "Branch name cannot be empty!"
+       }
+      ],
+      "operator": "and",
+      "if": true,
+      "conditionName": "If/Else on Sale Outcome",
+      "version": 2,
+      "noneBranchName": "None"
+     },
+     "parentKey": "741d8084-6887-460b-88ab-b47c4951f884",
+     "nodeType": "condition-node",
+     "cat": "conditions",
+     "next": [
+      "ab01da5d-609c-4fe3-8d37-f4e5665689f3",
+      "d063074c-bf65-487f-a35d-03030720a09b",
+      "7c881279-0bd8-40ec-a9ff-8402427122f0",
+      "e9474cb9-70f3-428f-a1a3-d9b32edbf064",
+      "f5546aa7-7ad8-4042-819e-3f5a5992dc95"
+     ],
+     "order": 1
+    },
+    {
+     "type": "if_else",
+     "id": "ab01da5d-609c-4fe3-8d37-f4e5665689f3",
+     "name": "Check if Sale Outcome is SOLD from PCC-FORM submission",
+     "parentKey": "bf2970fa-0415-47dd-8f3f-9d348dc18d69",
+     "parent": "bf2970fa-0415-47dd-8f3f-9d348dc18d69",
+     "nodeType": "branch-yes",
+     "cat": "conditions",
+     "sibling": [
+      "d063074c-bf65-487f-a35d-03030720a09b",
+      "7c881279-0bd8-40ec-a9ff-8402427122f0",
+      "e9474cb9-70f3-428f-a1a3-d9b32edbf064",
+      "f5546aa7-7ad8-4042-819e-3f5a5992dc95"
+     ],
+     "attributes": {
+      "if": false,
+      "conditionName": "Condition",
+      "operator": "and",
+      "branches": []
+     },
+     "order": 2,
+     "next": "79bf4f5d-226a-441a-9a60-efb790810969"
+    },
+    {
+     "id": "79bf4f5d-226a-441a-9a60-efb790810969",
+     "parent": "ab01da5d-609c-4fe3-8d37-f4e5665689f3",
+     "order": 0,
+     "attributes": {
+      "fields": [
+       {
+        "field": "lefCP4t8yM8OWimYFgel",
+        "value": "{{contact.term_length__item_1}}",
+        "title": "Term 1",
+        "type": "string",
+        "date": ""
+       },
+       {
+        "field": "UX8O34Lpyu0XSCsgerJw",
+        "value": "{{contact.treatment_cost}}",
+        "title": "Price 1",
+        "type": "numerical",
+        "date": ""
+       },
+       {
+        "field": "wwDhy1BhxqPZw6CgIOrV",
+        "value": "{{contact.patient_care_consultant}}",
+        "title": "Patient Care Consultant",
+        "type": "select",
+        "date": "",
+        "__customFieldType__": "customValues"
+       },
+       {
+        "field": "el14GjoN9Vs5ywx6QaeJ",
+        "value": "{{contact.new_or_renewal}}",
+        "title": "Sale Type",
+        "type": "select",
+        "date": "",
+        "__customFieldType__": "customValues"
+       },
+       {
+        "field": "4xDrxXKuMZQZbxd2hisT",
+        "value": "Not Started",
+        "title": "Medical Intake Status",
+        "type": "select",
+        "date": "",
+        "__customFieldType__": "standard"
+       },
+       {
+        "field": "8wnrkyJnBSHB84LYUDva",
+        "value": [
+         "Sold"
+        ],
+        "title": "Sale Outcome",
+        "type": "multiselect",
+        "date": ""
+       }
+      ],
+      "type": "create_opportunity",
+      "pipeline_id": "KZ6u78XpKcCZPr8X5TvK",
+      "pipeline_stage_id": "edb2efbb-30e4-498e-9fc4-2f280625cf18",
+      "allow_multiple": false,
+      "allow_backward": false,
+      "opportunity_status": "won",
+      "opportunity_name": "",
+      "opportunity_source": "",
+      "monetary_value": "{{contact.total_program_amount}}"
+     },
+     "name": "Update Opp – NN → Sold / Won",
+     "type": "create_opportunity",
+     "next": "0d36a8a8-76ef-41da-b06b-09607411f46e",
+     "parentKey": "ab01da5d-609c-4fe3-8d37-f4e5665689f3"
+    },
+    {
+     "id": "0d36a8a8-76ef-41da-b06b-09607411f46e",
+     "parent": "ab01da5d-609c-4fe3-8d37-f4e5665689f3",
+     "order": 1,
+     "attributes": {
+      "type": "update_contact_field",
+      "actionType": "update_field_data",
+      "fields": [
+       {
+        "field": "TkkcmSInV6zGQWAtD0Y0",
+        "value": "{{right_now.date}}",
+        "title": "Term End Date",
+        "type": "date",
+        "date": "customDate",
+        "__customFieldType__": "customValues"
+       }
+      ]
+     },
+     "name": "Write Contact – Term Start",
+     "type": "update_contact_field",
+     "next": "e598a02e-09b0-46fe-b626-5901d9d81bd4",
+     "parentKey": "79bf4f5d-226a-441a-9a60-efb790810969"
+    },
+    {
+     "id": "e598a02e-09b0-46fe-b626-5901d9d81bd4",
+     "parent": "ab01da5d-609c-4fe3-8d37-f4e5665689f3",
+     "order": 2,
+     "attributes": {
+      "currentRecipeType": "CUSTOM",
+      "branches": [
+       {
+        "id": "1cc4ed41-2d75-4c3d-89ff-253ee2f3229c",
+        "name": "Branch",
+        "segments": [
+         {
+          "__segmentId": "28ee38a3-efe7-4aa8-b8ad-c62846d6b879",
+          "operator": "and",
+          "conditions": [
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "mSN5rzCH3l7WXN60HzMK",
+            "conditionOperator": "==",
+            "conditionValue": "1 Month",
+            "__conditionId": "eee85815-7554-4b62-afbc-028509e7df55",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           }
+          ]
+         }
+        ],
+        "operator": "and",
+        "showErrors": false,
+        "branchNameError": "Branch name cannot be empty!"
+       },
+       {
+        "id": "c27a9eef-de26-4cca-aace-942d26240e22",
+        "name": "Branch",
+        "segments": [
+         {
+          "__segmentId": "8e89c221-22d6-4b6d-ab0b-6d42c6f34b1a",
+          "operator": "and",
+          "conditions": [
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "mSN5rzCH3l7WXN60HzMK",
+            "conditionOperator": "==",
+            "conditionValue": "3 Month",
+            "__conditionId": "7f1f350d-c2ce-4405-b837-9135afb24788",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           }
+          ]
+         }
+        ],
+        "operator": "and",
+        "showErrors": false,
+        "branchNameError": "Branch name cannot be empty!"
+       },
+       {
+        "id": "cb031000-7b0c-40f1-8e4f-a645194d92a3",
+        "name": "Branch",
+        "segments": [
+         {
+          "__segmentId": "07d1241e-cda6-4682-9201-0047df60ad88",
+          "operator": "and",
+          "conditions": [
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "mSN5rzCH3l7WXN60HzMK",
+            "conditionOperator": "==",
+            "conditionValue": "6 Month",
+            "__conditionId": "64e8454e-657d-4097-bcdb-c9e5a1d4bd44",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           }
+          ]
+         }
+        ],
+        "operator": "and",
+        "showErrors": false,
+        "branchNameError": "Branch name cannot be empty!"
+       },
+       {
+        "id": "e4dff2fc-c7bf-43e5-804c-9636b411d94e",
+        "name": "Branch",
+        "segments": [
+         {
+          "__segmentId": "8194faaf-c042-4d57-96eb-4847bb45af24",
+          "operator": "and",
+          "conditions": [
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "mSN5rzCH3l7WXN60HzMK",
+            "conditionOperator": "==",
+            "conditionValue": "12 Month",
+            "__conditionId": "0bfd003e-cc51-4d5d-9a4c-94a92c5dcb59",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           }
+          ]
+         }
+        ],
+        "operator": "and",
+        "showErrors": false,
+        "branchNameError": "Branch name cannot be empty!"
+       },
+       {
+        "id": "02b817e2-6d7f-4c42-9ddd-7b3f9fd735a3",
+        "name": "Branch",
+        "segments": [
+         {
+          "__segmentId": "a38ef3fd-bc64-4c8a-8dc0-ac8d185acb72",
+          "operator": "and",
+          "conditions": [
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "mSN5rzCH3l7WXN60HzMK",
+            "conditionOperator": "==",
+            "conditionValue": "24 Month",
+            "__conditionId": "fbeb3e1f-d1c4-4023-bdbc-e3b8c706506e",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           }
+          ]
+         }
+        ],
+        "operator": "and",
+        "showErrors": false,
+        "branchNameError": "Branch name cannot be empty!"
+       },
+       {
+        "id": "f7c7833b-51d4-4d2f-85a3-5440c0e892bb",
+        "name": "Branch",
+        "segments": [
+         {
+          "__segmentId": "1e8b1572-e85a-4286-bc7e-1a9947523ebc",
+          "operator": "and",
+          "conditions": [
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "mSN5rzCH3l7WXN60HzMK",
+            "conditionOperator": "==",
+            "conditionValue": "30 Month",
+            "__conditionId": "5ed9b02d-d4d5-4a8f-811c-bf6f436dbe1d",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           }
+          ]
+         }
+        ],
+        "operator": "and",
+        "showErrors": false,
+        "branchNameError": "Branch name cannot be empty!"
+       },
+       {
+        "id": "1e397f3f-f3bb-4799-b6e8-5495f2aedcab",
+        "name": "Branch",
+        "segments": [
+         {
+          "__segmentId": "e2495325-8d70-4599-927f-46ca124eefca",
+          "operator": "and",
+          "conditions": [
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "mSN5rzCH3l7WXN60HzMK",
+            "conditionOperator": "==",
+            "conditionValue": "36 Month",
+            "__conditionId": "46662e0f-d8ad-4270-b60f-28ab6b619892",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           }
+          ]
+         }
+        ],
+        "operator": "and",
+        "showErrors": false,
+        "branchNameError": "Branch name cannot be empty!"
+       }
+      ],
+      "operator": "and",
+      "if": true,
+      "conditionName": "Condition",
+      "version": 2,
+      "noneBranchName": "None"
+     },
+     "name": "yes",
+     "type": "if_else",
+     "cat": "conditions",
+     "next": [
+      "1cc4ed41-2d75-4c3d-89ff-253ee2f3229c",
+      "c27a9eef-de26-4cca-aace-942d26240e22",
+      "cb031000-7b0c-40f1-8e4f-a645194d92a3",
+      "e4dff2fc-c7bf-43e5-804c-9636b411d94e",
+      "02b817e2-6d7f-4c42-9ddd-7b3f9fd735a3",
+      "f7c7833b-51d4-4d2f-85a3-5440c0e892bb",
+      "1e397f3f-f3bb-4799-b6e8-5495f2aedcab",
+      "f5bd4131-a7c2-4da8-bc9f-0d0c5e7c3607"
+     ],
+     "comments": [],
+     "nodeType": "condition-node",
+     "parentKey": "0d36a8a8-76ef-41da-b06b-09607411f46e"
+    },
+    {
+     "id": "1cc4ed41-2d75-4c3d-89ff-253ee2f3229c",
+     "parent": "e598a02e-09b0-46fe-b626-5901d9d81bd4",
+     "order": 3,
+     "attributes": {
+      "if": false,
+      "conditionName": "Condition",
+      "operator": "and",
+      "branches": []
+     },
+     "name": "Branch",
+     "type": "if_else",
+     "cat": "conditions",
+     "next": "4c6293f5-5b44-4f5d-bf1b-3eea87028b80",
+     "sibling": [
+      "c27a9eef-de26-4cca-aace-942d26240e22",
+      "cb031000-7b0c-40f1-8e4f-a645194d92a3",
+      "e4dff2fc-c7bf-43e5-804c-9636b411d94e",
+      "02b817e2-6d7f-4c42-9ddd-7b3f9fd735a3",
+      "f7c7833b-51d4-4d2f-85a3-5440c0e892bb",
+      "1e397f3f-f3bb-4799-b6e8-5495f2aedcab",
+      "f5bd4131-a7c2-4da8-bc9f-0d0c5e7c3607"
+     ],
+     "comments": [],
+     "nodeType": "branch-yes",
+     "parentKey": "e598a02e-09b0-46fe-b626-5901d9d81bd4"
+    },
+    {
+     "id": "4c6293f5-5b44-4f5d-bf1b-3eea87028b80",
+     "stepIndex": 2,
+     "parent": "1cc4ed41-2d75-4c3d-89ff-253ee2f3229c",
+     "order": 0,
+     "attributes": {
+      "selectField": "TkkcmSInV6zGQWAtD0Y0",
+      "selectFieldtype": "date",
+      "sourceCustomValueId": "",
+      "updateField": "TkkcmSInV6zGQWAtD0Y0",
+      "updateFieldType": "date",
+      "targetCustomValueId": "",
+      "operators": [
+       {
+        "operator": "add",
+        "__id": "bcb7bdc7-a5b6-4a9d-8853-40e434f4c125",
+        "value": {
+         "days": 0,
+         "months": 1,
+         "years": 0
+        }
+       }
+      ]
+     },
+     "name": "Math operation",
+     "type": "math_operation",
+     "next": "fb7fd43a-af53-443c-b482-fc5b655fc3e6",
+     "parentKey": "1cc4ed41-2d75-4c3d-89ff-253ee2f3229c"
+    },
+    {
+     "id": "fb7fd43a-af53-443c-b482-fc5b655fc3e6",
+     "parent": "1cc4ed41-2d75-4c3d-89ff-253ee2f3229c",
+     "order": 1,
+     "attributes": {
+      "tags": [
+       "patient_sold"
+      ]
+     },
+     "name": "Add Tag \"Sold\"",
+     "type": "add_contact_tag",
+     "next": "dededda5-5310-45de-ae50-f4683192b317",
+     "parentKey": "4c6293f5-5b44-4f5d-bf1b-3eea87028b80"
+    },
+    {
+     "id": "dededda5-5310-45de-ae50-f4683192b317",
+     "parent": "1cc4ed41-2d75-4c3d-89ff-253ee2f3229c",
+     "order": 2,
+     "attributes": {
+      "type": "remove_from_workflow",
+      "allWorkflows": true,
+      "includeCurrent": false
+     },
+     "name": "Remove – all NN nurtures",
+     "type": "remove_from_workflow",
+     "next": "53a186e6-6742-4d37-a6e4-712b10583f9b",
+     "parentKey": "fb7fd43a-af53-443c-b482-fc5b655fc3e6"
+    },
+    {
+     "id": "53a186e6-6742-4d37-a6e4-712b10583f9b",
+     "parent": "1cc4ed41-2d75-4c3d-89ff-253ee2f3229c",
+     "order": 3,
+     "attributes": {
+      "input_trigger_params": false,
+      "type": "add_to_workflow",
+      "workflow_id": "2555d07f-dc17-4283-899a-6a6a9e4fa56c"
+     },
+     "name": "Virginia Beach - Renewal Date Engine.",
+     "type": "add_to_workflow",
+     "next": "63e2837c-b3f7-4e21-8176-87f3a96b8454",
+     "parentKey": "dededda5-5310-45de-ae50-f4683192b317"
+    },
+    {
+     "id": "63e2837c-b3f7-4e21-8176-87f3a96b8454",
+     "parent": "1cc4ed41-2d75-4c3d-89ff-253ee2f3229c",
+     "order": 4,
+     "attributes": {
+      "input_trigger_params": false,
+      "type": "add_to_workflow",
+      "workflow_id": "d4bec717-d3e1-4f6d-94ed-d961ead8468e"
+     },
+     "name": "Virginia Beach - Won & Onboarding.",
+     "type": "add_to_workflow",
+     "next": "e9de8986-0fbc-4b70-89c3-bd0e9d2e0ae2",
+     "parentKey": "53a186e6-6742-4d37-a6e4-712b10583f9b"
+    },
+    {
+     "id": "e9de8986-0fbc-4b70-89c3-bd0e9d2e0ae2",
+     "parent": "1cc4ed41-2d75-4c3d-89ff-253ee2f3229c",
+     "order": 5,
+     "attributes": {
+      "currentRecipeType": "CUSTOM",
+      "branches": [
+       {
+        "id": "7fe1d65a-4e27-413b-ad77-080cd062440c",
+        "name": "Branch",
+        "segments": [
+         {
+          "__segmentId": "b825b4e6-2ccd-4033-8069-ccdcf34a76b5",
+          "operator": "and",
+          "conditions": [
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "hIrRLfQr4gkPxPZEpTH7",
+            "conditionOperator": "==",
+            "conditionValue": "Renewal",
+            "__conditionId": "e7d53973-d25d-4738-b8fd-e4a4c55f92e4",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           }
+          ]
+         }
+        ],
+        "operator": "and",
+        "showErrors": false,
+        "branchNameError": "Branch name cannot be empty!"
+       }
+      ],
+      "operator": "and",
+      "if": true,
+      "conditionName": "Branch – New or Renewal",
+      "version": 2,
+      "noneBranchName": "None"
+     },
+     "name": "yes",
+     "type": "if_else",
+     "cat": "conditions",
+     "next": [
+      "7fe1d65a-4e27-413b-ad77-080cd062440c",
+      "775b382d-4cf5-4e58-a8e7-f7472e428d1b"
+     ],
+     "comments": [],
+     "nodeType": "condition-node",
+     "parentKey": "63e2837c-b3f7-4e21-8176-87f3a96b8454"
+    },
+    {
+     "id": "7fe1d65a-4e27-413b-ad77-080cd062440c",
+     "parent": "e9de8986-0fbc-4b70-89c3-bd0e9d2e0ae2",
+     "order": 6,
+     "attributes": {
+      "if": false,
+      "conditionName": "Condition",
+      "operator": "and",
+      "branches": []
+     },
+     "name": "Branch",
+     "type": "if_else",
+     "cat": "conditions",
+     "next": "2b24708a-553f-419c-becf-035caa136e0b",
+     "sibling": [
+      "775b382d-4cf5-4e58-a8e7-f7472e428d1b"
+     ],
+     "comments": [],
+     "nodeType": "branch-yes",
+     "parentKey": "e9de8986-0fbc-4b70-89c3-bd0e9d2e0ae2"
+    },
+    {
+     "id": "2b24708a-553f-419c-becf-035caa136e0b",
+     "parent": "7fe1d65a-4e27-413b-ad77-080cd062440c",
+     "order": 0,
+     "attributes": {
+      "tags": [
+       "retention_renewal_completed"
+      ]
+     },
+     "name": "Renewal: Completed",
+     "type": "add_contact_tag",
+     "parentKey": "7fe1d65a-4e27-413b-ad77-080cd062440c"
+    },
+    {
+     "id": "775b382d-4cf5-4e58-a8e7-f7472e428d1b",
+     "parent": "e9de8986-0fbc-4b70-89c3-bd0e9d2e0ae2",
+     "order": 6,
+     "attributes": {
+      "else": true
+     },
+     "name": "None",
+     "type": "if_else",
+     "cat": "conditions",
+     "sibling": [
+      "7fe1d65a-4e27-413b-ad77-080cd062440c"
+     ],
+     "comments": [],
+     "nodeType": "branch-no",
+     "parentKey": "e9de8986-0fbc-4b70-89c3-bd0e9d2e0ae2"
+    },
+    {
+     "id": "c27a9eef-de26-4cca-aace-942d26240e22",
+     "parent": "e598a02e-09b0-46fe-b626-5901d9d81bd4",
+     "order": 3,
+     "attributes": {
+      "if": false,
+      "conditionName": "Condition",
+      "operator": "and",
+      "branches": []
+     },
+     "name": "Branch",
+     "type": "if_else",
+     "cat": "conditions",
+     "next": "98f78728-9a10-4b1a-832f-1cfa1625738e",
+     "sibling": [
+      "1cc4ed41-2d75-4c3d-89ff-253ee2f3229c",
+      "cb031000-7b0c-40f1-8e4f-a645194d92a3",
+      "e4dff2fc-c7bf-43e5-804c-9636b411d94e",
+      "02b817e2-6d7f-4c42-9ddd-7b3f9fd735a3",
+      "f7c7833b-51d4-4d2f-85a3-5440c0e892bb",
+      "1e397f3f-f3bb-4799-b6e8-5495f2aedcab",
+      "f5bd4131-a7c2-4da8-bc9f-0d0c5e7c3607"
+     ],
+     "comments": [],
+     "nodeType": "branch-yes",
+     "parentKey": "e598a02e-09b0-46fe-b626-5901d9d81bd4"
+    },
+    {
+     "id": "98f78728-9a10-4b1a-832f-1cfa1625738e",
+     "stepIndex": 1,
+     "parent": "c27a9eef-de26-4cca-aace-942d26240e22",
+     "order": 0,
+     "attributes": {
+      "selectField": "TkkcmSInV6zGQWAtD0Y0",
+      "selectFieldtype": "date",
+      "sourceCustomValueId": "",
+      "updateField": "TkkcmSInV6zGQWAtD0Y0",
+      "updateFieldType": "date",
+      "targetCustomValueId": "",
+      "operators": [
+       {
+        "operator": "add",
+        "__id": "5c15bd16-82f1-4b25-9339-d656c39efc68",
+        "value": {
+         "days": 0,
+         "months": 3,
+         "years": 0
+        }
+       }
+      ]
+     },
+     "name": "Math operation",
+     "type": "math_operation",
+     "next": "cacb7502-0063-4025-8e48-87fe39b90eed",
+     "parentKey": "c27a9eef-de26-4cca-aace-942d26240e22"
+    },
+    {
+     "id": "cacb7502-0063-4025-8e48-87fe39b90eed",
+     "parent": "c27a9eef-de26-4cca-aace-942d26240e22",
+     "order": 1,
+     "attributes": {
+      "targetNodeId": "fb7fd43a-af53-443c-b482-fc5b655fc3e6",
+      "type": "goto"
+     },
+     "name": "Go to",
+     "type": "goto",
+     "parentKey": "98f78728-9a10-4b1a-832f-1cfa1625738e"
+    },
+    {
+     "id": "cb031000-7b0c-40f1-8e4f-a645194d92a3",
+     "parent": "e598a02e-09b0-46fe-b626-5901d9d81bd4",
+     "order": 3,
+     "attributes": {
+      "if": false,
+      "conditionName": "Condition",
+      "operator": "and",
+      "branches": []
+     },
+     "name": "Branch",
+     "type": "if_else",
+     "cat": "conditions",
+     "next": "59bd29e9-9874-4af3-bc53-ef71b66ee65b",
+     "sibling": [
+      "1cc4ed41-2d75-4c3d-89ff-253ee2f3229c",
+      "c27a9eef-de26-4cca-aace-942d26240e22",
+      "e4dff2fc-c7bf-43e5-804c-9636b411d94e",
+      "02b817e2-6d7f-4c42-9ddd-7b3f9fd735a3",
+      "f7c7833b-51d4-4d2f-85a3-5440c0e892bb",
+      "1e397f3f-f3bb-4799-b6e8-5495f2aedcab",
+      "f5bd4131-a7c2-4da8-bc9f-0d0c5e7c3607"
+     ],
+     "comments": [],
+     "nodeType": "branch-yes",
+     "parentKey": "e598a02e-09b0-46fe-b626-5901d9d81bd4"
+    },
+    {
+     "id": "59bd29e9-9874-4af3-bc53-ef71b66ee65b",
+     "stepIndex": 3,
+     "parent": "cb031000-7b0c-40f1-8e4f-a645194d92a3",
+     "order": 0,
+     "attributes": {
+      "selectField": "TkkcmSInV6zGQWAtD0Y0",
+      "selectFieldtype": "date",
+      "sourceCustomValueId": "",
+      "updateField": "TkkcmSInV6zGQWAtD0Y0",
+      "updateFieldType": "date",
+      "targetCustomValueId": "",
+      "operators": [
+       {
+        "operator": "add",
+        "__id": "f68a7be4-a8b4-4281-8a5f-d656f0be4ffd",
+        "value": {
+         "days": 0,
+         "months": 6,
+         "years": 0
+        }
+       }
+      ]
+     },
+     "name": "Math operation",
+     "type": "math_operation",
+     "next": "22498497-717f-4408-9d36-423d5a1dd52b",
+     "parentKey": "cb031000-7b0c-40f1-8e4f-a645194d92a3"
+    },
+    {
+     "id": "22498497-717f-4408-9d36-423d5a1dd52b",
+     "parent": "cb031000-7b0c-40f1-8e4f-a645194d92a3",
+     "order": 1,
+     "attributes": {
+      "targetNodeId": "fb7fd43a-af53-443c-b482-fc5b655fc3e6",
+      "type": "goto"
+     },
+     "name": "Go to",
+     "type": "goto",
+     "parentKey": "59bd29e9-9874-4af3-bc53-ef71b66ee65b"
+    },
+    {
+     "id": "e4dff2fc-c7bf-43e5-804c-9636b411d94e",
+     "parent": "e598a02e-09b0-46fe-b626-5901d9d81bd4",
+     "order": 3,
+     "attributes": {
+      "if": false,
+      "conditionName": "Condition",
+      "operator": "and",
+      "branches": []
+     },
+     "name": "Branch",
+     "type": "if_else",
+     "cat": "conditions",
+     "next": "4dec1c80-0dc5-4769-9590-8b113878d220",
+     "sibling": [
+      "1cc4ed41-2d75-4c3d-89ff-253ee2f3229c",
+      "c27a9eef-de26-4cca-aace-942d26240e22",
+      "cb031000-7b0c-40f1-8e4f-a645194d92a3",
+      "02b817e2-6d7f-4c42-9ddd-7b3f9fd735a3",
+      "f7c7833b-51d4-4d2f-85a3-5440c0e892bb",
+      "1e397f3f-f3bb-4799-b6e8-5495f2aedcab",
+      "f5bd4131-a7c2-4da8-bc9f-0d0c5e7c3607"
+     ],
+     "comments": [],
+     "nodeType": "branch-yes",
+     "parentKey": "e598a02e-09b0-46fe-b626-5901d9d81bd4"
+    },
+    {
+     "id": "4dec1c80-0dc5-4769-9590-8b113878d220",
+     "stepIndex": 4,
+     "parent": "e4dff2fc-c7bf-43e5-804c-9636b411d94e",
+     "order": 0,
+     "attributes": {
+      "selectField": "TkkcmSInV6zGQWAtD0Y0",
+      "selectFieldtype": "date",
+      "sourceCustomValueId": "",
+      "updateField": "TkkcmSInV6zGQWAtD0Y0",
+      "updateFieldType": "date",
+      "targetCustomValueId": "",
+      "operators": [
+       {
+        "operator": "add",
+        "__id": "ce2a877e-3bcd-45f9-a989-2d8086198366",
+        "value": {
+         "days": 0,
+         "months": 12,
+         "years": 0
+        }
+       }
+      ]
+     },
+     "name": "Math operation",
+     "type": "math_operation",
+     "next": "3bb679a4-2089-41f1-a08a-199a360085ca",
+     "parentKey": "e4dff2fc-c7bf-43e5-804c-9636b411d94e"
+    },
+    {
+     "id": "3bb679a4-2089-41f1-a08a-199a360085ca",
+     "parent": "e4dff2fc-c7bf-43e5-804c-9636b411d94e",
+     "order": 1,
+     "attributes": {
+      "targetNodeId": "fb7fd43a-af53-443c-b482-fc5b655fc3e6",
+      "type": "goto"
+     },
+     "name": "Go to",
+     "type": "goto",
+     "parentKey": "4dec1c80-0dc5-4769-9590-8b113878d220"
+    },
+    {
+     "id": "02b817e2-6d7f-4c42-9ddd-7b3f9fd735a3",
+     "parent": "e598a02e-09b0-46fe-b626-5901d9d81bd4",
+     "order": 3,
+     "attributes": {
+      "if": false,
+      "conditionName": "Condition",
+      "operator": "and",
+      "branches": []
+     },
+     "name": "Branch",
+     "type": "if_else",
+     "cat": "conditions",
+     "next": "13b79edd-c0f2-4f8f-b9b0-c634de910eb4",
+     "sibling": [
+      "1cc4ed41-2d75-4c3d-89ff-253ee2f3229c",
+      "c27a9eef-de26-4cca-aace-942d26240e22",
+      "cb031000-7b0c-40f1-8e4f-a645194d92a3",
+      "e4dff2fc-c7bf-43e5-804c-9636b411d94e",
+      "f7c7833b-51d4-4d2f-85a3-5440c0e892bb",
+      "1e397f3f-f3bb-4799-b6e8-5495f2aedcab",
+      "f5bd4131-a7c2-4da8-bc9f-0d0c5e7c3607"
+     ],
+     "comments": [],
+     "nodeType": "branch-yes",
+     "parentKey": "e598a02e-09b0-46fe-b626-5901d9d81bd4"
+    },
+    {
+     "id": "13b79edd-c0f2-4f8f-b9b0-c634de910eb4",
+     "stepIndex": 5,
+     "parent": "02b817e2-6d7f-4c42-9ddd-7b3f9fd735a3",
+     "order": 0,
+     "attributes": {
+      "selectField": "TkkcmSInV6zGQWAtD0Y0",
+      "selectFieldtype": "date",
+      "sourceCustomValueId": "",
+      "updateField": "TkkcmSInV6zGQWAtD0Y0",
+      "updateFieldType": "date",
+      "targetCustomValueId": "",
+      "operators": [
+       {
+        "operator": "add",
+        "__id": "86d44dfa-405d-4f50-9469-e62f32064a90",
+        "value": {
+         "days": 0,
+         "months": 24,
+         "years": 0
+        }
+       }
+      ]
+     },
+     "name": "Math operation",
+     "type": "math_operation",
+     "next": "54b69857-e1b6-446a-996d-cff00ecd69d4",
+     "parentKey": "02b817e2-6d7f-4c42-9ddd-7b3f9fd735a3"
+    },
+    {
+     "id": "54b69857-e1b6-446a-996d-cff00ecd69d4",
+     "parent": "02b817e2-6d7f-4c42-9ddd-7b3f9fd735a3",
+     "order": 1,
+     "attributes": {
+      "targetNodeId": "fb7fd43a-af53-443c-b482-fc5b655fc3e6",
+      "type": "goto"
+     },
+     "name": "Go to",
+     "type": "goto",
+     "parentKey": "13b79edd-c0f2-4f8f-b9b0-c634de910eb4"
+    },
+    {
+     "id": "f7c7833b-51d4-4d2f-85a3-5440c0e892bb",
+     "parent": "e598a02e-09b0-46fe-b626-5901d9d81bd4",
+     "order": 3,
+     "attributes": {
+      "if": false,
+      "conditionName": "Condition",
+      "operator": "and",
+      "branches": []
+     },
+     "name": "Branch",
+     "type": "if_else",
+     "cat": "conditions",
+     "next": "011cb860-59a4-4ccf-a5da-ce4a614ca5f0",
+     "sibling": [
+      "1cc4ed41-2d75-4c3d-89ff-253ee2f3229c",
+      "c27a9eef-de26-4cca-aace-942d26240e22",
+      "cb031000-7b0c-40f1-8e4f-a645194d92a3",
+      "e4dff2fc-c7bf-43e5-804c-9636b411d94e",
+      "02b817e2-6d7f-4c42-9ddd-7b3f9fd735a3",
+      "1e397f3f-f3bb-4799-b6e8-5495f2aedcab",
+      "f5bd4131-a7c2-4da8-bc9f-0d0c5e7c3607"
+     ],
+     "comments": [],
+     "nodeType": "branch-yes",
+     "parentKey": "e598a02e-09b0-46fe-b626-5901d9d81bd4"
+    },
+    {
+     "id": "011cb860-59a4-4ccf-a5da-ce4a614ca5f0",
+     "stepIndex": 6,
+     "parent": "f7c7833b-51d4-4d2f-85a3-5440c0e892bb",
+     "order": 0,
+     "attributes": {
+      "selectField": "TkkcmSInV6zGQWAtD0Y0",
+      "selectFieldtype": "date",
+      "sourceCustomValueId": "",
+      "updateField": "TkkcmSInV6zGQWAtD0Y0",
+      "updateFieldType": "date",
+      "targetCustomValueId": "",
+      "operators": [
+       {
+        "operator": "add",
+        "__id": "5aba07bb-c729-4b3d-90e5-cf2439877809",
+        "value": {
+         "days": 0,
+         "months": 30,
+         "years": 0
+        }
+       }
+      ]
+     },
+     "name": "Math operation",
+     "type": "math_operation",
+     "next": "36084fa4-e730-4876-ad44-b6485ccf2c3c",
+     "parentKey": "f7c7833b-51d4-4d2f-85a3-5440c0e892bb"
+    },
+    {
+     "id": "36084fa4-e730-4876-ad44-b6485ccf2c3c",
+     "parent": "f7c7833b-51d4-4d2f-85a3-5440c0e892bb",
+     "order": 1,
+     "attributes": {
+      "targetNodeId": "fb7fd43a-af53-443c-b482-fc5b655fc3e6",
+      "type": "goto"
+     },
+     "name": "Go to",
+     "type": "goto",
+     "parentKey": "011cb860-59a4-4ccf-a5da-ce4a614ca5f0"
+    },
+    {
+     "id": "1e397f3f-f3bb-4799-b6e8-5495f2aedcab",
+     "parent": "e598a02e-09b0-46fe-b626-5901d9d81bd4",
+     "order": 3,
+     "attributes": {
+      "if": false,
+      "conditionName": "Condition",
+      "operator": "and",
+      "branches": []
+     },
+     "name": "Branch",
+     "type": "if_else",
+     "cat": "conditions",
+     "next": "c7ee57f1-a175-42d1-9c96-eac41725971b",
+     "sibling": [
+      "1cc4ed41-2d75-4c3d-89ff-253ee2f3229c",
+      "c27a9eef-de26-4cca-aace-942d26240e22",
+      "cb031000-7b0c-40f1-8e4f-a645194d92a3",
+      "e4dff2fc-c7bf-43e5-804c-9636b411d94e",
+      "02b817e2-6d7f-4c42-9ddd-7b3f9fd735a3",
+      "f7c7833b-51d4-4d2f-85a3-5440c0e892bb",
+      "f5bd4131-a7c2-4da8-bc9f-0d0c5e7c3607"
+     ],
+     "comments": [],
+     "nodeType": "branch-yes",
+     "parentKey": "e598a02e-09b0-46fe-b626-5901d9d81bd4"
+    },
+    {
+     "id": "c7ee57f1-a175-42d1-9c96-eac41725971b",
+     "stepIndex": 7,
+     "parent": "1e397f3f-f3bb-4799-b6e8-5495f2aedcab",
+     "order": 0,
+     "attributes": {
+      "selectField": "TkkcmSInV6zGQWAtD0Y0",
+      "selectFieldtype": "date",
+      "sourceCustomValueId": "",
+      "updateField": "TkkcmSInV6zGQWAtD0Y0",
+      "updateFieldType": "date",
+      "targetCustomValueId": "",
+      "operators": [
+       {
+        "operator": "add",
+        "__id": "5022f61a-490c-4684-b6cf-ce40376516bf",
+        "value": {
+         "days": 0,
+         "months": 36,
+         "years": 0
+        }
+       }
+      ]
+     },
+     "name": "Math operation",
+     "type": "math_operation",
+     "next": "384a15cb-476c-4d1f-a709-76cd88257dcc",
+     "parentKey": "1e397f3f-f3bb-4799-b6e8-5495f2aedcab"
+    },
+    {
+     "id": "384a15cb-476c-4d1f-a709-76cd88257dcc",
+     "parent": "1e397f3f-f3bb-4799-b6e8-5495f2aedcab",
+     "order": 1,
+     "attributes": {
+      "targetNodeId": "fb7fd43a-af53-443c-b482-fc5b655fc3e6",
+      "type": "goto"
+     },
+     "name": "Go to",
+     "type": "goto",
+     "parentKey": "c7ee57f1-a175-42d1-9c96-eac41725971b"
+    },
+    {
+     "id": "f5bd4131-a7c2-4da8-bc9f-0d0c5e7c3607",
+     "parent": "e598a02e-09b0-46fe-b626-5901d9d81bd4",
+     "order": 3,
+     "attributes": {
+      "else": true
+     },
+     "name": "None",
+     "type": "if_else",
+     "cat": "conditions",
+     "sibling": [
+      "1cc4ed41-2d75-4c3d-89ff-253ee2f3229c",
+      "c27a9eef-de26-4cca-aace-942d26240e22",
+      "cb031000-7b0c-40f1-8e4f-a645194d92a3",
+      "e4dff2fc-c7bf-43e5-804c-9636b411d94e",
+      "02b817e2-6d7f-4c42-9ddd-7b3f9fd735a3",
+      "f7c7833b-51d4-4d2f-85a3-5440c0e892bb",
+      "1e397f3f-f3bb-4799-b6e8-5495f2aedcab"
+     ],
+     "comments": [],
+     "nodeType": "branch-no",
+     "parentKey": "e598a02e-09b0-46fe-b626-5901d9d81bd4"
+    },
+    {
+     "type": "if_else",
+     "id": "d063074c-bf65-487f-a35d-03030720a09b",
+     "name": "Check Sale Outcome A&D from PCC-FORM submission",
+     "parentKey": "bf2970fa-0415-47dd-8f3f-9d348dc18d69",
+     "parent": "bf2970fa-0415-47dd-8f3f-9d348dc18d69",
+     "nodeType": "branch-yes",
+     "cat": "conditions",
+     "sibling": [
+      "ab01da5d-609c-4fe3-8d37-f4e5665689f3",
+      "7c881279-0bd8-40ec-a9ff-8402427122f0",
+      "e9474cb9-70f3-428f-a1a3-d9b32edbf064",
+      "f5546aa7-7ad8-4042-819e-3f5a5992dc95"
+     ],
+     "attributes": {
+      "if": false,
+      "conditionName": "Condition",
+      "operator": "and",
+      "branches": []
+     },
+     "order": 2,
+     "next": "129233b5-ef77-4d96-bcf0-ea929ae22e03"
+    },
+    {
+     "id": "129233b5-ef77-4d96-bcf0-ea929ae22e03",
+     "parent": "d063074c-bf65-487f-a35d-03030720a09b",
+     "order": 0,
+     "attributes": {
+      "fields": [],
+      "type": "create_opportunity",
+      "pipeline_id": "KZ6u78XpKcCZPr8X5TvK",
+      "pipeline_stage_id": "b2c95e91-e751-4054-baab-b89fff3de11e",
+      "opportunity_status": "lost",
+      "opportunity_name": "",
+      "opportunity_source": "",
+      "monetary_value": ""
+     },
+     "name": "Update Opp – NN → A&D / Lost",
+     "type": "create_opportunity",
+     "next": "32dbc338-cbe8-46c4-9aaf-4bcc48a959e5",
+     "parentKey": "d063074c-bf65-487f-a35d-03030720a09b"
+    },
+    {
+     "id": "32dbc338-cbe8-46c4-9aaf-4bcc48a959e5",
+     "parent": "d063074c-bf65-487f-a35d-03030720a09b",
+     "order": 1,
+     "attributes": {
+      "currentRecipeType": "CUSTOM",
+      "branches": [
+       {
+        "id": "6daa0158-b760-463b-b791-a740dfc2df31",
+        "name": "Branch if contact's A&D Reason is 'cost'",
+        "segments": [
+         {
+          "__segmentId": "760a0b5f-75ba-4315-b9d8-f184562bd3ce",
+          "operator": "and",
+          "conditions": [
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "eBoq7sbBelPkqzeOTpsN",
+            "conditionOperator": "==",
+            "conditionValue": "Cost / Price Objection",
+            "__conditionId": "cbc489d2-9306-4a50-bd1f-c1844b9dd513",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           }
+          ]
+         }
+        ],
+        "operator": "and",
+        "showErrors": false,
+        "branchNameError": "Branch name cannot be empty!"
+       },
+       {
+        "id": "8e14cc8b-29b8-48c5-9985-5c49da5cc086",
+        "name": "Branch if A&D Reason is Fear",
+        "segments": [
+         {
+          "__segmentId": "30072671-0f03-4b37-86d7-509464a29745",
+          "operator": "and",
+          "conditions": [
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "eBoq7sbBelPkqzeOTpsN",
+            "conditionOperator": "==",
+            "conditionValue": "Fear",
+            "__conditionId": "f81da750-c52e-42eb-b749-8845975ad05c",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           }
+          ]
+         }
+        ],
+        "operator": "and",
+        "showErrors": false,
+        "branchNameError": "Branch name cannot be empty!"
+       },
+       {
+        "id": "5778f779-4c9d-44b5-9d61-1bf9be6a72c6",
+        "name": "Branch if contact's A&D Reason is partner",
+        "segments": [
+         {
+          "__segmentId": "a6e69ea9-6324-44e7-acd5-77d989e69c35",
+          "operator": "and",
+          "conditions": [
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "eBoq7sbBelPkqzeOTpsN",
+            "conditionOperator": "==",
+            "conditionValue": "Partner",
+            "__conditionId": "f359a7ca-eceb-4de4-9ff2-a6cbdaa21c0a",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           }
+          ]
+         }
+        ],
+        "operator": "and",
+        "showErrors": false,
+        "branchNameError": "Branch name cannot be empty!"
+       },
+       {
+        "id": "b1a286dd-4c34-4cbe-a404-f0b9a6b72735",
+        "name": "Branch if Contact's A&D Reason field is 'time-to-think'",
+        "segments": [
+         {
+          "__segmentId": "ce28a64b-042e-4e3d-a418-3c197b03515d",
+          "operator": "and",
+          "conditions": [
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "eBoq7sbBelPkqzeOTpsN",
+            "conditionOperator": "==",
+            "conditionValue": "Time to Think",
+            "__conditionId": "c26ee26b-c5d6-4fc2-bc10-dc56a935ccd6",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           }
+          ]
+         }
+        ],
+        "operator": "and",
+        "showErrors": false,
+        "branchNameError": "Branch name cannot be empty!"
+       },
+       {
+        "id": "14c9a035-9b41-4663-b087-d0dcca42aa3a",
+        "name": "Branch on A&D Reason equals timing",
+        "segments": [
+         {
+          "__segmentId": "e17548a2-6474-462a-8468-cbb3c77eeae6",
+          "operator": "and",
+          "conditions": [
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "eBoq7sbBelPkqzeOTpsN",
+            "conditionOperator": "==",
+            "conditionValue": "Timing",
+            "__conditionId": "3ba0aaa5-1edc-4ed2-b3ff-295ad682696c",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           }
+          ]
+         }
+        ],
+        "operator": "and",
+        "showErrors": false,
+        "branchNameError": "Branch name cannot be empty!"
+       }
+      ],
+      "operator": "and",
+      "if": true,
+      "conditionName": "A&D Reason Branch",
+      "version": 2,
+      "noneBranchName": "None"
+     },
+     "name": "yes",
+     "type": "if_else",
+     "cat": "conditions",
+     "next": [
+      "6daa0158-b760-463b-b791-a740dfc2df31",
+      "8e14cc8b-29b8-48c5-9985-5c49da5cc086",
+      "5778f779-4c9d-44b5-9d61-1bf9be6a72c6",
+      "b1a286dd-4c34-4cbe-a404-f0b9a6b72735",
+      "14c9a035-9b41-4663-b087-d0dcca42aa3a",
+      "e2082254-bee4-412c-b2bb-45287ede7618"
+     ],
+     "comments": [],
+     "nodeType": "condition-node",
+     "parentKey": "129233b5-ef77-4d96-bcf0-ea929ae22e03"
+    },
+    {
+     "id": "6daa0158-b760-463b-b791-a740dfc2df31",
+     "parent": "32dbc338-cbe8-46c4-9aaf-4bcc48a959e5",
+     "order": 2,
+     "attributes": {
+      "if": false,
+      "conditionName": "Condition",
+      "operator": "and",
+      "branches": []
+     },
+     "name": "Branch if contact's A&D Reason is 'cost'",
+     "type": "if_else",
+     "cat": "conditions",
+     "next": "89af9434-b88f-4322-b23a-7923d633244e",
+     "sibling": [
+      "8e14cc8b-29b8-48c5-9985-5c49da5cc086",
+      "5778f779-4c9d-44b5-9d61-1bf9be6a72c6",
+      "b1a286dd-4c34-4cbe-a404-f0b9a6b72735",
+      "14c9a035-9b41-4663-b087-d0dcca42aa3a",
+      "e2082254-bee4-412c-b2bb-45287ede7618"
+     ],
+     "comments": [],
+     "nodeType": "branch-yes",
+     "parentKey": "32dbc338-cbe8-46c4-9aaf-4bcc48a959e5"
+    },
+    {
+     "id": "89af9434-b88f-4322-b23a-7923d633244e",
+     "parent": "6daa0158-b760-463b-b791-a740dfc2df31",
+     "order": 0,
+     "attributes": {
+      "tags": [
+       "objection_cost"
+      ]
+     },
+     "name": "Add Tag Objection Cost",
+     "type": "add_contact_tag",
+     "parentKey": "6daa0158-b760-463b-b791-a740dfc2df31"
+    },
+    {
+     "id": "8e14cc8b-29b8-48c5-9985-5c49da5cc086",
+     "parent": "32dbc338-cbe8-46c4-9aaf-4bcc48a959e5",
+     "order": 2,
+     "attributes": {
+      "if": false,
+      "conditionName": "Condition",
+      "operator": "and",
+      "branches": []
+     },
+     "name": "Branch if A&D Reason is Fear",
+     "type": "if_else",
+     "cat": "conditions",
+     "next": "dca62a61-2c24-4f25-ab44-590d0fca4a73",
+     "sibling": [
+      "6daa0158-b760-463b-b791-a740dfc2df31",
+      "5778f779-4c9d-44b5-9d61-1bf9be6a72c6",
+      "b1a286dd-4c34-4cbe-a404-f0b9a6b72735",
+      "14c9a035-9b41-4663-b087-d0dcca42aa3a",
+      "e2082254-bee4-412c-b2bb-45287ede7618"
+     ],
+     "comments": [],
+     "nodeType": "branch-yes",
+     "parentKey": "32dbc338-cbe8-46c4-9aaf-4bcc48a959e5"
+    },
+    {
+     "id": "dca62a61-2c24-4f25-ab44-590d0fca4a73",
+     "parent": "8e14cc8b-29b8-48c5-9985-5c49da5cc086",
+     "order": 0,
+     "attributes": {
+      "tags": [
+       "objection_fear"
+      ]
+     },
+     "name": "Add Tag Objection Fear",
+     "type": "add_contact_tag",
+     "parentKey": "8e14cc8b-29b8-48c5-9985-5c49da5cc086"
+    },
+    {
+     "id": "5778f779-4c9d-44b5-9d61-1bf9be6a72c6",
+     "parent": "32dbc338-cbe8-46c4-9aaf-4bcc48a959e5",
+     "order": 2,
+     "attributes": {
+      "if": false,
+      "conditionName": "Condition",
+      "operator": "and",
+      "branches": []
+     },
+     "name": "Branch if contact's A&D Reason is partner",
+     "type": "if_else",
+     "cat": "conditions",
+     "next": "312df8e6-2292-49bc-aa76-912789f6efde",
+     "sibling": [
+      "6daa0158-b760-463b-b791-a740dfc2df31",
+      "8e14cc8b-29b8-48c5-9985-5c49da5cc086",
+      "b1a286dd-4c34-4cbe-a404-f0b9a6b72735",
+      "14c9a035-9b41-4663-b087-d0dcca42aa3a",
+      "e2082254-bee4-412c-b2bb-45287ede7618"
+     ],
+     "comments": [],
+     "nodeType": "branch-yes",
+     "parentKey": "32dbc338-cbe8-46c4-9aaf-4bcc48a959e5"
+    },
+    {
+     "id": "312df8e6-2292-49bc-aa76-912789f6efde",
+     "parent": "5778f779-4c9d-44b5-9d61-1bf9be6a72c6",
+     "order": 0,
+     "attributes": {
+      "tags": [
+       "objection_partner"
+      ]
+     },
+     "name": "Add Tag Objection Partner",
+     "type": "add_contact_tag",
+     "parentKey": "5778f779-4c9d-44b5-9d61-1bf9be6a72c6"
+    },
+    {
+     "id": "b1a286dd-4c34-4cbe-a404-f0b9a6b72735",
+     "parent": "32dbc338-cbe8-46c4-9aaf-4bcc48a959e5",
+     "order": 2,
+     "attributes": {
+      "if": false,
+      "conditionName": "Condition",
+      "operator": "and",
+      "branches": []
+     },
+     "name": "Branch if Contact's A&D Reason field is 'time-to-think'",
+     "type": "if_else",
+     "cat": "conditions",
+     "next": "e45923b6-703a-4245-b785-d2f6cc7ef07c",
+     "sibling": [
+      "6daa0158-b760-463b-b791-a740dfc2df31",
+      "8e14cc8b-29b8-48c5-9985-5c49da5cc086",
+      "5778f779-4c9d-44b5-9d61-1bf9be6a72c6",
+      "14c9a035-9b41-4663-b087-d0dcca42aa3a",
+      "e2082254-bee4-412c-b2bb-45287ede7618"
+     ],
+     "comments": [],
+     "nodeType": "branch-yes",
+     "parentKey": "32dbc338-cbe8-46c4-9aaf-4bcc48a959e5"
+    },
+    {
+     "id": "e45923b6-703a-4245-b785-d2f6cc7ef07c",
+     "parent": "b1a286dd-4c34-4cbe-a404-f0b9a6b72735",
+     "order": 0,
+     "attributes": {
+      "tags": [
+       "objection_time-to-think"
+      ]
+     },
+     "name": "Add Tag Objection Time-to-think",
+     "type": "add_contact_tag",
+     "parentKey": "b1a286dd-4c34-4cbe-a404-f0b9a6b72735"
+    },
+    {
+     "id": "14c9a035-9b41-4663-b087-d0dcca42aa3a",
+     "parent": "32dbc338-cbe8-46c4-9aaf-4bcc48a959e5",
+     "order": 2,
+     "attributes": {
+      "if": false,
+      "conditionName": "Condition",
+      "operator": "and",
+      "branches": []
+     },
+     "name": "Branch on A&D Reason equals timing",
+     "type": "if_else",
+     "cat": "conditions",
+     "next": "d5b60402-de78-44b0-bd14-d75f60e382dc",
+     "sibling": [
+      "6daa0158-b760-463b-b791-a740dfc2df31",
+      "8e14cc8b-29b8-48c5-9985-5c49da5cc086",
+      "5778f779-4c9d-44b5-9d61-1bf9be6a72c6",
+      "b1a286dd-4c34-4cbe-a404-f0b9a6b72735",
+      "e2082254-bee4-412c-b2bb-45287ede7618"
+     ],
+     "comments": [],
+     "nodeType": "branch-yes",
+     "parentKey": "32dbc338-cbe8-46c4-9aaf-4bcc48a959e5"
+    },
+    {
+     "id": "d5b60402-de78-44b0-bd14-d75f60e382dc",
+     "parent": "14c9a035-9b41-4663-b087-d0dcca42aa3a",
+     "order": 0,
+     "attributes": {
+      "tags": [
+       "objection_timing"
+      ]
+     },
+     "name": "Add Tag Objection Timing",
+     "type": "add_contact_tag",
+     "parentKey": "14c9a035-9b41-4663-b087-d0dcca42aa3a"
+    },
+    {
+     "id": "e2082254-bee4-412c-b2bb-45287ede7618",
+     "parent": "32dbc338-cbe8-46c4-9aaf-4bcc48a959e5",
+     "order": 2,
+     "attributes": {
+      "else": true
+     },
+     "name": "None",
+     "type": "if_else",
+     "cat": "conditions",
+     "next": "82475009-2b66-4039-b428-11d8bedfe197",
+     "sibling": [
+      "6daa0158-b760-463b-b791-a740dfc2df31",
+      "8e14cc8b-29b8-48c5-9985-5c49da5cc086",
+      "5778f779-4c9d-44b5-9d61-1bf9be6a72c6",
+      "b1a286dd-4c34-4cbe-a404-f0b9a6b72735",
+      "14c9a035-9b41-4663-b087-d0dcca42aa3a"
+     ],
+     "comments": [],
+     "nodeType": "branch-no",
+     "parentKey": "32dbc338-cbe8-46c4-9aaf-4bcc48a959e5"
+    },
+    {
+     "id": "82475009-2b66-4039-b428-11d8bedfe197",
+     "parent": "e2082254-bee4-412c-b2bb-45287ede7618",
+     "order": 0,
+     "attributes": {
+      "tags": [
+       "objection_timing"
+      ]
+     },
+     "name": "Add Tag Objection Timing",
+     "type": "add_contact_tag",
+     "next": "21350a1e-f384-4d09-aa6a-bbae11341113",
+     "parentKey": "e2082254-bee4-412c-b2bb-45287ede7618"
+    },
+    {
+     "id": "21350a1e-f384-4d09-aa6a-bbae11341113",
+     "parent": "e2082254-bee4-412c-b2bb-45287ede7618",
+     "order": 1,
+     "attributes": {
+      "type": "notification",
+      "notification": {
+       "type": "send_notification",
+       "body": "An A&D came through with no A&D Reason selected. Member was defaulted into the Timing nurture so they don't fall through, but the objection data is missing. Ask {{contact.patient_care_consultant}} for the real objection and set the A&D Reason field — if it isn't Timing, remove tag objection:timing and add the correct objection tag.",
+       "title": "A&D missing reason — {{contact.name}}",
+       "redirectPage": "contact",
+       "userType": "user",
+       "selectedUser": "mSpcuA8jA7ddYqKoZ1Cy"
+      }
+     },
+     "name": "Alert – A&D with no reason selected",
+     "type": "internal_notification",
+     "parentKey": "82475009-2b66-4039-b428-11d8bedfe197"
+    },
+    {
+     "type": "if_else",
+     "id": "7c881279-0bd8-40ec-a9ff-8402427122f0",
+     "name": "Check if Sale Outcome is MUT from PCC-FORM",
+     "parentKey": "bf2970fa-0415-47dd-8f3f-9d348dc18d69",
+     "parent": "bf2970fa-0415-47dd-8f3f-9d348dc18d69",
+     "nodeType": "branch-yes",
+     "cat": "conditions",
+     "sibling": [
+      "ab01da5d-609c-4fe3-8d37-f4e5665689f3",
+      "d063074c-bf65-487f-a35d-03030720a09b",
+      "e9474cb9-70f3-428f-a1a3-d9b32edbf064",
+      "f5546aa7-7ad8-4042-819e-3f5a5992dc95"
+     ],
+     "attributes": {
+      "if": false,
+      "conditionName": "Condition",
+      "operator": "and",
+      "branches": []
+     },
+     "order": 2,
+     "next": "c0e3f0c3-61f8-4177-863b-23403172f697"
+    },
+    {
+     "id": "c0e3f0c3-61f8-4177-863b-23403172f697",
+     "parent": "7c881279-0bd8-40ec-a9ff-8402427122f0",
+     "order": 0,
+     "attributes": {
+      "fields": [],
+      "type": "create_opportunity",
+      "pipeline_id": "KZ6u78XpKcCZPr8X5TvK",
+      "pipeline_stage_id": "b2c95e91-e751-4054-baab-b89fff3de11e",
+      "opportunity_status": "lost",
+      "opportunity_name": "",
+      "opportunity_source": "",
+      "monetary_value": ""
+     },
+     "name": "Update Opp – NN → A&D / Lost (MUT)",
+     "type": "create_opportunity",
+     "next": "c2abd4aa-7c39-4cde-aaf0-cf0f6e421009",
+     "parentKey": "7c881279-0bd8-40ec-a9ff-8402427122f0"
+    },
+    {
+     "id": "c2abd4aa-7c39-4cde-aaf0-cf0f6e421009",
+     "parent": "7c881279-0bd8-40ec-a9ff-8402427122f0",
+     "order": 1,
+     "attributes": {
+      "tags": [
+       "mut"
+      ]
+     },
+     "name": "Add Tag MUT",
+     "type": "add_contact_tag",
+     "next": "9f29c6a3-d3ae-443c-908c-a3ae374668cf",
+     "parentKey": "c0e3f0c3-61f8-4177-863b-23403172f697"
+    },
+    {
+     "id": "9f29c6a3-d3ae-443c-908c-a3ae374668cf",
+     "parent": "7c881279-0bd8-40ec-a9ff-8402427122f0",
+     "order": 2,
+     "attributes": {
+      "type": "remove_from_workflow",
+      "allWorkflows": true,
+      "includeCurrent": false
+     },
+     "name": "Remove from Workflow",
+     "type": "remove_from_workflow",
+     "next": "688a318b-d77c-4cf9-84fe-29d169bd5bea",
+     "parentKey": "c2abd4aa-7c39-4cde-aaf0-cf0f6e421009"
+    },
+    {
+     "id": "688a318b-d77c-4cf9-84fe-29d169bd5bea",
+     "parent": "7c881279-0bd8-40ec-a9ff-8402427122f0",
+     "order": 3,
+     "attributes": {
+      "type": "notification",
+      "notification": {
+       "type": "send_notification",
+       "body": "{{contact.name}} was dispositioned Medically Untreatable by {{contact.patient_care_consultant}}. All marketing automation permanently suppressed. No action needed unless clinical follow-up is required.",
+       "title": "MUT recorded — {{contact.name}}",
+       "redirectPage": "contact",
+       "userType": "user",
+       "selectedUser": "mSpcuA8jA7ddYqKoZ1Cy"
+      }
+     },
+     "name": "Notify – MUT recorded",
+     "type": "internal_notification",
+     "parentKey": "9f29c6a3-d3ae-443c-908c-a3ae374668cf"
+    },
+    {
+     "id": "e9474cb9-70f3-428f-a1a3-d9b32edbf064",
+     "parent": "bf2970fa-0415-47dd-8f3f-9d348dc18d69",
+     "order": 2,
+     "attributes": {
+      "if": false,
+      "conditionName": "Condition",
+      "operator": "and",
+      "branches": []
+     },
+     "name": "Check if Sale Outcome is MAR from PCC-FORM",
+     "type": "if_else",
+     "cat": "conditions",
+     "next": "e9f5237b-6794-4f8a-8441-9c66b408a84c",
+     "sibling": [
+      "ab01da5d-609c-4fe3-8d37-f4e5665689f3",
+      "d063074c-bf65-487f-a35d-03030720a09b",
+      "7c881279-0bd8-40ec-a9ff-8402427122f0",
+      "f5546aa7-7ad8-4042-819e-3f5a5992dc95"
+     ],
+     "comments": [],
+     "nodeType": "branch-yes",
+     "parentKey": "bf2970fa-0415-47dd-8f3f-9d348dc18d69"
+    },
+    {
+     "id": "e9f5237b-6794-4f8a-8441-9c66b408a84c",
+     "parent": "e9474cb9-70f3-428f-a1a3-d9b32edbf064",
+     "order": 0,
+     "attributes": {
+      "fields": [],
+      "type": "create_opportunity",
+      "pipeline_id": "KZ6u78XpKcCZPr8X5TvK",
+      "opportunity_name": "",
+      "opportunity_source": "",
+      "monetary_value": "",
+      "pipeline_stage_id": "b2c95e91-e751-4054-baab-b89fff3de11e",
+      "opportunity_status": "open"
+     },
+     "name": "Update Opp – NN → hold at Showed (MAR)",
+     "type": "create_opportunity",
+     "next": "967f34b5-0eba-4a35-9fa7-a581405111ae",
+     "parentKey": "e9474cb9-70f3-428f-a1a3-d9b32edbf064"
+    },
+    {
+     "id": "967f34b5-0eba-4a35-9fa7-a581405111ae",
+     "parent": "e9474cb9-70f3-428f-a1a3-d9b32edbf064",
+     "order": 1,
+     "attributes": {
+      "tags": [
+       "disposition: mar-pending"
+      ]
+     },
+     "name": "Add Tag disposition:mar-pending",
+     "type": "add_contact_tag",
+     "next": "c1fff21f-7b76-4c95-aae7-e862960237c9",
+     "parentKey": "e9f5237b-6794-4f8a-8441-9c66b408a84c"
+    },
+    {
+     "id": "c1fff21f-7b76-4c95-aae7-e862960237c9",
+     "parent": "e9474cb9-70f3-428f-a1a3-d9b32edbf064",
+     "order": 2,
+     "attributes": {
+      "type": "notification",
+      "notification": {
+       "type": "send_notification",
+       "body": "{{contact.name}} was dispositioned Medical Approval Required at Newport News by {{contact.patient_care_consultant}}. Opportunity is holding OPEN at Showed. Provider sign-off needed — once ruled, resubmit the disposition form as Sold or MUT. No automated messages will go to this member while pending.",
+       "title": "MAR: {{contact.name}} needs medical approval",
+       "redirectPage": "contact",
+       "selectedUser": "mSpcuA8jA7ddYqKoZ1Cy",
+       "userType": "user"
+      }
+     },
+     "name": "Notify – medical approval needed",
+     "type": "internal_notification",
+     "parentKey": "967f34b5-0eba-4a35-9fa7-a581405111ae"
+    },
+    {
+     "type": "if_else",
+     "id": "f5546aa7-7ad8-4042-819e-3f5a5992dc95",
+     "name": "None",
+     "next": "f10785aa-8b47-41ad-b01f-f039c5235af0",
+     "parentKey": "bf2970fa-0415-47dd-8f3f-9d348dc18d69",
+     "parent": "bf2970fa-0415-47dd-8f3f-9d348dc18d69",
+     "nodeType": "branch-no",
+     "cat": "conditions",
+     "sibling": [
+      "ab01da5d-609c-4fe3-8d37-f4e5665689f3",
+      "d063074c-bf65-487f-a35d-03030720a09b",
+      "7c881279-0bd8-40ec-a9ff-8402427122f0",
+      "e9474cb9-70f3-428f-a1a3-d9b32edbf064"
+     ],
+     "attributes": {
+      "else": true
+     },
+     "order": 2
+    },
+    {
+     "id": "f10785aa-8b47-41ad-b01f-f039c5235af0",
+     "parent": "f5546aa7-7ad8-4042-819e-3f5a5992dc95",
+     "order": 0,
+     "attributes": {
+      "type": "email",
+      "email": {
+       "isCloned": false,
+       "html": "<p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">A PCC Sales Disposition Form was submitted for Newport News but the Sale Outcome did not match SOLD, A&amp;D, or MUT. No opportunity was updated and no nurture fired.<br></p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">Member: {{contact.name}}</p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">Phone: {{contact.phone}}</p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">Submitted: </p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">Sale Outcome received: [insert the Sale Outcome merge tag from the picker]</p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">Submitted by (PCC): [insert the PCC field merge tag]<br></p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">ACTION NEEDED TODAY:<br></p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">1. Open the contact and disposition manually (move the opp + apply the correct tag).</p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">2. Check whether the form's Sale Outcome options changed, if a new option was added, the router branches need updating to match.<br></p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">Contact: {{contact.name}}</p>",
+       "subject": "⚠ NN Disposition NOT routed — {{contact.name}}",
+       "selectedUser": [
+        "ogVHLNia6fdfuBhF3nv6"
+       ],
+       "userType": "user",
+       "attachments": []
+      }
+     },
+     "name": "Alert – Disposition with unmapped outcome",
+     "type": "internal_notification",
+     "parentKey": "f5546aa7-7ad8-4042-819e-3f5a5992dc95"
+    }
+   ]
+  }
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ },
+ "triggers": [
+  {
+   "id": "sWMvce5ySEfc3G7AUbL1",
+   "date_added": "2026-07-15T23:14:19.970Z",
+   "deleted": false,
+   "belongs_to": "workflow",
+   "location_id": "VoeVvlByAem9pkxb7f6a",
+   "actions": [
+    {
+     "workflow_id": "9b7f7f9a-2644-4109-a3ac-41931f3f05a3",
+     "type": "add_to_workflow"
+    }
+   ],
+   "masterType": "highlevel",
+   "name": "Form Submitted [PCC-FORM] with Newport News Location",
+   "type": "form_submission",
+   "workflow_id": "9b7f7f9a-2644-4109-a3ac-41931f3f05a3",
+   "schedule_config": {},
+   "conditions": [
+    {
+     "operator": "is-any-of",
+     "field": "form.id",
+     "value": [
+      "AWMuRHhaxuS5b0wiIMna"
+     ],
+     "title": "Form is",
+     "type": "string",
+     "id": "ff84fe8d-9164-4dd1-b1e9-d3ebc8fb495d"
+    },
+    {
+     "operator": "==",
+     "field": "contact.PFkjC3ZETChg9XkQsbwF",
+     "value": "Virginia Beach",
+     "title": "Location",
+     "type": "select",
+     "id": "PFkjC3ZETChg9XkQsbwF"
+    }
+   ],
+   "date_updated": "2026-07-17T14:45:31.079Z",
+   "active": false
+  }
+ ],
+ "dependentAssets": {}
+}

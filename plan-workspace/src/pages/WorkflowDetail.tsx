@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
 import { PageShell } from "../components/Shell";
 import { Card, CardContent, Badge, Loading, cn } from "../components/ui";
-import { useAsisDetail, useAsisFlows, type AsisStep, type AsisWorkflow } from "../lib/asis";
+import { useJson, type AsisDetail, type AsisFlows, type AsisStep, type AsisWorkflow } from "../lib/asis";
 import { MermaidChart } from "../components/MermaidChart";
 import { ghlWorkflow } from "../lib/ghl";
 import {
@@ -173,17 +173,20 @@ function StepList({ steps }: { steps: AsisStep[] }) {
   );
 }
 
-export default function WorkflowDetail() {
+export default function WorkflowDetail({ dataset = "asis" }: { dataset?: "asis" | "cody" }) {
   const { id } = useParams<{ id: string }>();
-  const { data, isLoading } = useAsisDetail();
-  const { data: flowsData } = useAsisFlows();
+  const cody = dataset === "cody";
+  const { data, isLoading } = useJson<AsisDetail>(cody ? "/cody-detail.json" : "/asis-detail.json");
+  const { data: flowsData } = useJson<AsisFlows>(cody ? "/cody-flows.json" : "/asis-flows.json");
+  const backTo = cody ? "/cody" : "/as-is";
+  const backLabel = cody ? "Cody build workflows" : "As-is workflows";
   const wf: AsisWorkflow | undefined = useMemo(() => data?.workflows.find((w) => w.id === id), [data, id]);
   const flow = useMemo(() => flowsData?.flows.find((f) => f.id === id), [flowsData, id]);
 
   if (isLoading || !data) return <Loading />;
   if (!wf) return (
     <PageShell title="Workflow not found">
-      <Link to="/as-is" className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"><ArrowLeft className="h-3.5 w-3.5" /> Back to as-is workflows</Link>
+      <Link to={backTo} className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"><ArrowLeft className="h-3.5 w-3.5" /> Back to {backLabel.toLowerCase()}</Link>
     </PageShell>
   );
 
@@ -192,11 +195,13 @@ export default function WorkflowDetail() {
   return (
     <PageShell
       title={wf.name}
-      subtitle="As-is workflow · complete step graph captured verbatim from the live GHL API · no brand-voice rewrite"
+      subtitle={cody
+        ? "Cody build workflow · complete step graph captured verbatim from the live GHL API · no rewrite"
+        : "As-is workflow · complete step graph captured verbatim from the live GHL API · no brand-voice rewrite"}
       actions={
         <div className="flex items-center gap-2">
-          <Link to="/as-is" className="inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-sm hover:bg-muted">
-            <ArrowLeft className="h-3.5 w-3.5" /> As-is workflows
+          <Link to={backTo} className="inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-sm hover:bg-muted">
+            <ArrowLeft className="h-3.5 w-3.5" /> {backLabel}
           </Link>
           <a href={ghlWorkflow(loc, wf.id)} target="_blank" rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground hover:opacity-90">

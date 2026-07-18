@@ -1,0 +1,201 @@
+{
+ "workflowData": {
+  "_id": "ad0680d1-1f61-4568-b82b-a11272f31b9e",
+  "locationId": "VoeVvlByAem9pkxb7f6a",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 8,
+  "name": "6.4 Virginia Beach Term Extension",
+  "status": "draft",
+  "version": 5,
+  "dataVersion": 7,
+  "allowMultiple": false,
+  "eventStartDate": null,
+  "window": {
+   "condition": "when",
+   "start": "08:00",
+   "end": "17:00",
+   "days": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
+  },
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/VoeVvlByAem9pkxb7f6a/workflows/ad0680d1-1f61-4568-b82b-a11272f31b9e/3",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "permission": 380,
+  "type": "workflow",
+  "parentId": "51e8fa77-0610-4168-aeb0-dd049b8f766e",
+  "createdAt": "2026-07-15T23:29:58.048Z",
+  "updatedAt": "2026-07-17T14:43:41.398Z",
+  "deleted": false,
+  "workflowNote": {
+   "content": "",
+   "createdBy": "clone_workflow",
+   "createdByName": "clone_workflow",
+   "createdAt": "2026-07-15T23:29:58.125Z",
+   "updatedBy": "clone_workflow",
+   "updatedByName": "clone_workflow",
+   "updatedAt": "2026-07-15T23:29:58.125Z"
+  },
+  "allowMultipleOpportunity": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "duplicate-workflow",
+  "__v": 0,
+  "updatedBy": "MyFtShSIGksH1SAoD5Ye",
+  "id": "ad0680d1-1f61-4568-b82b-a11272f31b9e",
+  "workflowData": {
+   "templates": [
+    {
+     "type": "add_notes",
+     "id": "8116d2af-9f96-4dfb-bbf6-fef53c6688be",
+     "name": "Add Term Extension Note",
+     "next": "7112fffa-7d91-4602-a347-e56833dab83d",
+     "attributes": {
+      "html": "Term extended +3 months. New term end date: {{contact.term_end_date}}.",
+      "title": "",
+      "color": ""
+     },
+     "order": 0
+    },
+    {
+     "type": "add_contact_tag",
+     "id": "7112fffa-7d91-4602-a347-e56833dab83d",
+     "name": "Tag for Term Extension",
+     "next": "fe4b79bb-c85d-4cc3-8b93-e70dbe12051f",
+     "attributes": {
+      "tags": [
+       "term_extended"
+      ]
+     },
+     "parentKey": "8116d2af-9f96-4dfb-bbf6-fef53c6688be",
+     "order": 1
+    },
+    {
+     "type": "remove_contact_tag",
+     "id": "fe4b79bb-c85d-4cc3-8b93-e70dbe12051f",
+     "name": "Remove Extension Tag",
+     "next": "77288ffd-8492-419e-914c-749daea6f30f",
+     "attributes": {
+      "tags": [
+       "extend_3mo"
+      ]
+     },
+     "parentKey": "7112fffa-7d91-4602-a347-e56833dab83d",
+     "order": 2
+    },
+    {
+     "type": "remove_from_workflow",
+     "id": "77288ffd-8492-419e-914c-749daea6f30f",
+     "name": "Remove from Renewal Reminder Workflow",
+     "next": "e7a9410b-1fcf-490e-a74e-783aff1d7146",
+     "attributes": {
+      "type": "remove_from_workflow",
+      "workflow_id": [
+       "2555d07f-dc17-4283-899a-6a6a9e4fa56c"
+      ]
+     },
+     "parentKey": "fe4b79bb-c85d-4cc3-8b93-e70dbe12051f",
+     "order": 3
+    },
+    {
+     "type": "add_to_workflow",
+     "id": "e7a9410b-1fcf-490e-a74e-783aff1d7146",
+     "name": "Re-add to Renewal Reminder Engine.",
+     "next": "703b97ad-54e2-4f65-ba5a-6bb5a40f61d0",
+     "attributes": {
+      "input_trigger_params": false,
+      "type": "add_to_workflow",
+      "workflow_id": "2555d07f-dc17-4283-899a-6a6a9e4fa56c"
+     },
+     "parentKey": "77288ffd-8492-419e-914c-749daea6f30f",
+     "order": 4
+    },
+    {
+     "type": "sms",
+     "id": "703b97ad-54e2-4f65-ba5a-6bb5a40f61d0",
+     "name": "Send Term Extension SMS",
+     "next": "3fb06141-e260-487b-b129-7d1643c5549d",
+     "attributes": {
+      "body": "Hi {{contact.first_name}}, good news - your Men's Wellness Centers membership is extended. Your term now runs through {{contact.term_end_date}}. Questions? Call {{custom_values.newport_news__phone}}. Reply STOP to opt out.",
+      "assignedOwners": null,
+      "alsoNotifyContactFollowers": false,
+      "alsoNotifyOpportunityFollowers": false
+     },
+     "parentKey": "e7a9410b-1fcf-490e-a74e-783aff1d7146",
+     "order": 5
+    },
+    {
+     "type": "internal_notification",
+     "id": "3fb06141-e260-487b-b129-7d1643c5549d",
+     "name": "Notify Newport News Team",
+     "attributes": {
+      "type": "notification",
+      "notification": {
+       "title": "Term Extended for Contact",
+       "body": "Term extended +3mo for {{contact.first_name}} {{contact.last_name}} - new end date {{contact.term_end_date}}.",
+       "redirectPage": "contact",
+       "userType": "all",
+       "assignedOwners": null,
+       "alsoNotifyContactFollowers": false,
+       "alsoNotifyOpportunityFollowers": false,
+       "type": "send_notification"
+      }
+     },
+     "parentKey": "703b97ad-54e2-4f65-ba5a-6bb5a40f61d0",
+     "order": 6
+    }
+   ]
+  }
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ },
+ "triggers": [
+  {
+   "id": "xfGClNu0om739RuVuz9i",
+   "date_added": "2026-07-15T23:29:58.075Z",
+   "deleted": false,
+   "belongs_to": "workflow",
+   "location_id": "VoeVvlByAem9pkxb7f6a",
+   "actions": [
+    {
+     "workflow_id": "ad0680d1-1f61-4568-b82b-a11272f31b9e",
+     "type": "add_to_workflow"
+    }
+   ],
+   "masterType": "highlevel",
+   "type": "contact_tag",
+   "workflow_id": "ad0680d1-1f61-4568-b82b-a11272f31b9e",
+   "schedule_config": {},
+   "conditions": [
+    {
+     "operator": "index-of-true",
+     "field": "tagsAdded",
+     "value": "extend_3mo",
+     "title": "Tag Added",
+     "type": "select",
+     "id": "tag-added"
+    },
+    {
+     "operator": "==",
+     "field": "contact.PFkjC3ZETChg9XkQsbwF",
+     "value": "Virginia Beach",
+     "title": "Location",
+     "type": "select",
+     "id": "PFkjC3ZETChg9XkQsbwF"
+    }
+   ],
+   "name": "Extend 3 Month Tag Added for Virginia Beach",
+   "date_updated": "2026-07-17T14:43:41.158Z",
+   "active": false
+  }
+ ],
+ "dependentAssets": {}
+}

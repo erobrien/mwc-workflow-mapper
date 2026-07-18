@@ -18,6 +18,9 @@ import WFDiagrams from "./pages/WFDiagrams";
 import AsisDiagrams from "./pages/AsisDiagrams";
 import AsisFlows from "./pages/AsisFlows";
 import Tags from "./pages/Tags";
+import Cody from "./pages/Cody";
+import CodyFlows from "./pages/CodyFlows";
+import CodyInventory from "./pages/CodyInventory";
 import CustomFields from "./pages/CustomFields";
 import DailyLog from "./pages/DailyLog";
 
@@ -30,6 +33,10 @@ const router = createBrowserRouter([
   { path: "/inventory", element: wrap(<Inventory />) },
   { path: "/asis-diagrams", element: wrap(<AsisDiagrams />) },
   { path: "/asis-flows", element: wrap(<AsisFlows />) },
+  { path: "/cody", element: wrap(<Cody />) },
+  { path: "/cody-flows", element: wrap(<CodyFlows />) },
+  { path: "/cody-inventory", element: wrap(<CodyInventory />) },
+  { path: "/cody/workflow/:id", element: wrap(<WorkflowDetail dataset="cody" />) },
   { path: "/to-be", element: wrap(<ToBe />) },
   { path: "/to-be/wf/:n", element: wrap(<ToBeWorkflow />) },
   { path: "/to-be/:tab", element: wrap(<ToBe />) },

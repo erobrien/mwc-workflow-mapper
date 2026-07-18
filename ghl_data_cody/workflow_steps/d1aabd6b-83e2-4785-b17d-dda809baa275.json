@@ -1,0 +1,86 @@
+{
+ "templates": [
+  {
+   "type": "update_contact_field",
+   "id": "a139cbd9-a238-48e7-8678-924cb05a301a",
+   "name": "Set Original Source",
+   "next": "5db85ec7-8c4f-4bf3-8878-866b3a5fbb34",
+   "attributes": {
+    "type": "update_contact_field",
+    "actionType": "update_field_data",
+    "fields": [
+     {
+      "field": "w8Zt76nmxIVJe2G4cdHj",
+      "value": "{{contact.attributionSource.sessionSource}}",
+      "title": "Original Source",
+      "type": "string",
+      "date": ""
+     }
+    ]
+   },
+   "order": 0
+  },
+  {
+   "type": "update_contact_field",
+   "id": "5db85ec7-8c4f-4bf3-8878-866b3a5fbb34",
+   "name": "Set Original Campaign",
+   "next": "6630e18e-c873-4cba-9b0c-741459725683",
+   "attributes": {
+    "type": "update_contact_field",
+    "actionType": "update_field_data",
+    "fields": [
+     {
+      "field": "w8Zt76nmxIVJe2G4cdHj",
+      "value": "{{contact.attributionSource.utmCampaign}}",
+      "title": "Original Source",
+      "type": "string",
+      "date": ""
+     }
+    ]
+   },
+   "parentKey": "a139cbd9-a238-48e7-8678-924cb05a301a",
+   "order": 1
+  },
+  {
+   "type": "update_contact_field",
+   "id": "6630e18e-c873-4cba-9b0c-741459725683",
+   "name": "Set Original Ad ID",
+   "next": "c8a7ecec-9bc1-4e5c-bc74-bad2c4569f83",
+   "attributes": {
+    "type": "update_contact_field",
+    "actionType": "update_field_data",
+    "fields": [
+     {
+      "field": "msEt3W9wffecOi4SWntP",
+      "value": "{{contact.original_ad_id}}",
+      "title": "Original Ad ID",
+      "type": "string",
+      "date": ""
+     }
+    ]
+   },
+   "parentKey": "5db85ec7-8c4f-4bf3-8878-866b3a5fbb34",
+   "order": 2
+  },
+  {
+   "type": "update_contact_field",
+   "id": "c8a7ecec-9bc1-4e5c-bc74-bad2c4569f83",
+   "name": "Set Original Lead Date",
+   "attributes": {
+    "type": "update_contact_field",
+    "actionType": "update_field_data",
+    "fields": [
+     {
+      "field": "pNAZBPYmQb9JmlIKBGPc",
+      "value": "{{right_now}}",
+      "title": "Original Lead Date",
+      "type": "date",
+      "date": "customDate"
+     }
+    ]
+   },
+   "parentKey": "6630e18e-c873-4cba-9b0c-741459725683",
+   "order": 3
+  }
+ ]
+}

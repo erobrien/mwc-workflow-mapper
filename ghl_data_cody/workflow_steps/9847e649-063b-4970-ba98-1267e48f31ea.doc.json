@@ -1,0 +1,174 @@
+{
+ "workflowData": {
+  "_id": "9847e649-063b-4970-ba98-1267e48f31ea",
+  "locationId": "VoeVvlByAem9pkxb7f6a",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 8,
+  "name": "7.1 Richmond Attribution Stamp",
+  "status": "draft",
+  "version": 4,
+  "dataVersion": 7,
+  "allowMultiple": false,
+  "eventStartDate": null,
+  "window": {
+   "condition": "when",
+   "start": "08:00",
+   "end": "17:00",
+   "days": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
+  },
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/VoeVvlByAem9pkxb7f6a/workflows/9847e649-063b-4970-ba98-1267e48f31ea/3",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "permission": 380,
+  "type": "workflow",
+  "parentId": "f24e2fc8-7f63-432f-9f28-b8dcf3ae777c",
+  "createdAt": "2026-07-15T22:48:42.043Z",
+  "updatedAt": "2026-07-17T14:50:05.088Z",
+  "deleted": false,
+  "workflowNote": {
+   "content": "",
+   "createdBy": "clone_workflow",
+   "createdByName": "clone_workflow",
+   "createdAt": "2026-07-15T22:48:42.109Z",
+   "updatedBy": "clone_workflow",
+   "updatedByName": "clone_workflow",
+   "updatedAt": "2026-07-15T22:48:42.109Z"
+  },
+  "allowMultipleOpportunity": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "duplicate-workflow",
+  "__v": 0,
+  "updatedBy": "MyFtShSIGksH1SAoD5Ye",
+  "id": "9847e649-063b-4970-ba98-1267e48f31ea",
+  "workflowData": {
+   "templates": [
+    {
+     "id": "c313592b-b285-47be-bf48-3f956db9d24c",
+     "type": "wait",
+     "name": "Wait 1 min race buffer",
+     "attributes": {
+      "type": "time",
+      "startAfter": {
+       "type": "minutes",
+       "value": 1,
+       "when": "after"
+      },
+      "name": "Wait 1 min race buffer",
+      "cat": "",
+      "timePeriodInputMode": "standard",
+      "unitInputMode": "standard",
+      "isHybridAction": true,
+      "hybridActionType": "wait",
+      "convertToMultipath": false,
+      "transitions": []
+     },
+     "order": 0,
+     "cat": "",
+     "next": "6256e249-9818-46c8-8eb5-a888196ca5f3"
+    },
+    {
+     "type": "internal_update_opportunity",
+     "id": "6256e249-9818-46c8-8eb5-a888196ca5f3",
+     "name": "Update Opportunity Attribution Fields",
+     "next": "4dd30a0f-33a5-4cc3-8b8b-5d2fd71263ce",
+     "attributes": {
+      "allowBackward": false,
+      "__customInputFields__": [
+       {
+        "__customInputs__": {},
+        "dataType": "TEXT",
+        "filterField": "custom_fields.a7XDhjVxAw8saTEs5jdw",
+        "value": "{{contact.original_source}}",
+        "valueFieldType": "string"
+       },
+       {
+        "__customInputs__": {},
+        "dataType": "SINGLE_OPTIONS",
+        "filterField": "custom_fields.eLh1UcCfqVaphI0f4I31",
+        "value": "Richmond",
+        "valueFieldType": "select"
+       },
+       {
+        "__customInputs__": {},
+        "dataType": "TEXT",
+        "filterField": "custom_fields.NYk1vm1QeLyRLqnKJgNy",
+        "value": "{{opportunity.gclid}}",
+        "valueFieldType": "string"
+       },
+       {
+        "__customInputs__": {},
+        "dataType": "TEXT",
+        "filterField": "custom_fields.2psXGcRn83g2Ti6V8zYh",
+        "value": "{{opportunity.fbclid}}",
+        "valueFieldType": "string"
+       }
+      ],
+      "type": "internal_update_opportunity",
+      "__customInputs__": {}
+     },
+     "workflowsActionType": "INTERNAL",
+     "order": 1,
+     "parentKey": "c313592b-b285-47be-bf48-3f956db9d24c"
+    },
+    {
+     "type": "add_contact_tag",
+     "id": "4dd30a0f-33a5-4cc3-8b8b-5d2fd71263ce",
+     "name": "Add Attribution Stamped Tag",
+     "attributes": {
+      "tags": [
+       "attribution_stamped"
+      ]
+     },
+     "parentKey": "6256e249-9818-46c8-8eb5-a888196ca5f3",
+     "order": 2
+    }
+   ]
+  }
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ },
+ "triggers": [
+  {
+   "id": "ZtTIpTP9sT1R7JOOzCDl",
+   "date_added": "2026-07-15T22:48:42.059Z",
+   "deleted": false,
+   "belongs_to": "workflow",
+   "location_id": "VoeVvlByAem9pkxb7f6a",
+   "actions": [
+    {
+     "workflow_id": "9847e649-063b-4970-ba98-1267e48f31ea",
+     "type": "add_to_workflow"
+    }
+   ],
+   "masterType": "highlevel",
+   "name": "Opportunity Created in Newport News Pipeline",
+   "type": "opportunity_created",
+   "workflow_id": "9847e649-063b-4970-ba98-1267e48f31ea",
+   "schedule_config": {},
+   "conditions": [
+    {
+     "operator": "==",
+     "field": "opportunity.pipelineId",
+     "value": "4KHhJkSYaYghr2m0Rixg",
+     "title": "In pipeline",
+     "type": "select",
+     "id": "c5bb48e2-37db-4a3d-92a9-892e473020a9"
+    }
+   ],
+   "date_updated": "2026-07-17T14:50:04.867Z",
+   "active": false
+  }
+ ],
+ "dependentAssets": {}
+}

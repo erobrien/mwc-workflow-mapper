@@ -1,0 +1,86 @@
+{
+ "templates": [
+  {
+   "type": "update_contact_field",
+   "id": "6ececfe0-61e0-4c52-9914-ea8036c3af4b",
+   "name": "Update SMS Consent Status",
+   "next": "3c681a4e-0d38-40b5-bcfe-b8b5ebadc8d2",
+   "attributes": {
+    "type": "update_contact_field",
+    "actionType": "update_field_data",
+    "fields": [
+     {
+      "field": "uDO5M5FT7HFJ7xzCTcye",
+      "value": "Confirmed",
+      "title": "SMS Consent Status",
+      "type": "select",
+      "date": ""
+     }
+    ]
+   },
+   "order": 0
+  },
+  {
+   "type": "update_contact_field",
+   "id": "3c681a4e-0d38-40b5-bcfe-b8b5ebadc8d2",
+   "name": "Update Consent Date",
+   "next": "ba91e027-c886-4ee0-b087-8cdb8ccf952c",
+   "attributes": {
+    "type": "update_contact_field",
+    "actionType": "update_field_data",
+    "fields": [
+     {
+      "field": "szgMndK6TiVNoxnn7pX7",
+      "value": "{{right_now}}",
+      "title": "Consent Date",
+      "type": "date",
+      "date": "customDate"
+     }
+    ]
+   },
+   "parentKey": "6ececfe0-61e0-4c52-9914-ea8036c3af4b",
+   "order": 1
+  },
+  {
+   "type": "update_contact_field",
+   "id": "ba91e027-c886-4ee0-b087-8cdb8ccf952c",
+   "name": "Update Consent Source",
+   "next": "9fad0ebc-668c-42b7-8f25-3cd0bf86a923",
+   "attributes": {
+    "type": "update_contact_field",
+    "actionType": "update_field_data",
+    "fields": [
+     {
+      "field": "KgzU4RZxl3XAWEhtJ0Fb",
+      "value": "Website form",
+      "title": "Consent Source",
+      "type": "string",
+      "date": ""
+     }
+    ]
+   },
+   "parentKey": "3c681a4e-0d38-40b5-bcfe-b8b5ebadc8d2",
+   "order": 2
+  },
+  {
+   "type": "update_contact_field",
+   "id": "9fad0ebc-668c-42b7-8f25-3cd0bf86a923",
+   "name": "Update Consent Method",
+   "attributes": {
+    "type": "update_contact_field",
+    "actionType": "update_field_data",
+    "fields": [
+     {
+      "field": "KUrUlf819hn2e5ySTweY",
+      "value": "Web form",
+      "title": "Consent Method",
+      "type": "string",
+      "date": ""
+     }
+    ]
+   },
+   "parentKey": "ba91e027-c886-4ee0-b087-8cdb8ccf952c",
+   "order": 3
+  }
+ ]
+}

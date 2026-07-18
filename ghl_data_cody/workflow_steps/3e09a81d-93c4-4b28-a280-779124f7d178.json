@@ -1,0 +1,1461 @@
+{
+ "templates": [
+  {
+   "id": "ed4333c5-c5b3-416f-baaa-48ad2faa0513",
+   "order": 0,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "2a081cb8-d8e3-45f3-9760-0b71720c195b",
+      "name": "Branch – Objection cost",
+      "segments": [
+       {
+        "__segmentId": "7dc241e1-3d4e-4c06-8a28-7edb53714238",
+        "operator": "or",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "tags",
+          "conditionOperator": "index-of-true",
+          "conditionValue": [
+           "objection_cost"
+          ],
+          "__conditionId": "99b2b744-c956-4919-9f46-70dcd39aff14",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "40ca7d38-293b-4309-83df-1018e1060704",
+      "name": "Branch – Objection fear",
+      "segments": [
+       {
+        "__segmentId": "7dc241e1-3d4e-4c06-8a28-7edb53714238",
+        "operator": "or",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "tags",
+          "conditionOperator": "index-of-true",
+          "conditionValue": [
+           "objection_fear"
+          ],
+          "__conditionId": "99b2b744-c956-4919-9f46-70dcd39aff14",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "07be6868-9204-45c1-a2ad-38715c1d79c7",
+      "name": "Branch – Objection partner",
+      "segments": [
+       {
+        "__segmentId": "7dc241e1-3d4e-4c06-8a28-7edb53714238",
+        "operator": "or",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "tags",
+          "conditionOperator": "index-of-true",
+          "conditionValue": [
+           "objection_partner"
+          ],
+          "__conditionId": "99b2b744-c956-4919-9f46-70dcd39aff14",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "f40a1b53-f782-4917-82ae-b096d2657189",
+      "name": "Branch – Objection time to think",
+      "segments": [
+       {
+        "__segmentId": "7dc241e1-3d4e-4c06-8a28-7edb53714238",
+        "operator": "or",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "tags",
+          "conditionOperator": "index-of-true",
+          "conditionValue": [
+           "objection_time-to-think"
+          ],
+          "__conditionId": "99b2b744-c956-4919-9f46-70dcd39aff14",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     },
+     {
+      "id": "178ea118-21c7-4565-b506-0915e6cad0b0",
+      "name": "Branch – Objection timing",
+      "segments": [
+       {
+        "__segmentId": "7dc241e1-3d4e-4c06-8a28-7edb53714238",
+        "operator": "or",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "tags",
+          "conditionOperator": "index-of-true",
+          "conditionValue": [
+           "objection_timing"
+          ],
+          "__conditionId": "99b2b744-c956-4919-9f46-70dcd39aff14",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Gate – blocked contacts",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "2a081cb8-d8e3-45f3-9760-0b71720c195b",
+    "40ca7d38-293b-4309-83df-1018e1060704",
+    "07be6868-9204-45c1-a2ad-38715c1d79c7",
+    "f40a1b53-f782-4917-82ae-b096d2657189",
+    "178ea118-21c7-4565-b506-0915e6cad0b0",
+    "15d11681-9075-43a1-a84c-4615690d8fd9"
+   ],
+   "comments": [],
+   "nodeType": "condition-node"
+  },
+  {
+   "id": "2a081cb8-d8e3-45f3-9760-0b71720c195b",
+   "parent": "ed4333c5-c5b3-416f-baaa-48ad2faa0513",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Branch – Objection cost",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "a7f9cd87-6de7-4fe9-9ede-10f20d7ec95c",
+   "sibling": [
+    "40ca7d38-293b-4309-83df-1018e1060704",
+    "07be6868-9204-45c1-a2ad-38715c1d79c7",
+    "f40a1b53-f782-4917-82ae-b096d2657189",
+    "178ea118-21c7-4565-b506-0915e6cad0b0",
+    "15d11681-9075-43a1-a84c-4615690d8fd9"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "ed4333c5-c5b3-416f-baaa-48ad2faa0513"
+  },
+  {
+   "type": "sms",
+   "id": "a7f9cd87-6de7-4fe9-9ede-10f20d7ec95c",
+   "name": "Day 0 SMS - Cost Reframe",
+   "next": "107cf4ed-3fb5-4166-bc75-bcc2bdf66576",
+   "attributes": {
+    "body": "Hello {{contact.name}},\n\n…most members use a payment plan, several options make the monthly number very manageable. Want me to send them over?\n\nReply STOP to end msgs.\n\nThank you,\n{{user.name}}",
+    "assignedOwners": [
+     "contact_owner"
+    ],
+    "alsoNotifyContactFollowers": false,
+    "alsoNotifyOpportunityFollowers": false,
+    "attachments": []
+   },
+   "parentKey": "2a081cb8-d8e3-45f3-9760-0b71720c195b",
+   "parent": "2a081cb8-d8e3-45f3-9760-0b71720c195b",
+   "order": 0
+  },
+  {
+   "type": "wait",
+   "id": "107cf4ed-3fb5-4166-bc75-bcc2bdf66576",
+   "name": "Wait 2 days before next message (9am–7pm delivery restriction)",
+   "next": "4795defb-5ab1-4d48-9137-8c55a2c78e1a",
+   "attributes": {
+    "type": "time",
+    "convertToMultipath": false,
+    "hybridActionType": "wait",
+    "isHybridAction": true,
+    "name": "Wait 2 days before next message (9am–7pm delivery restriction)",
+    "cat": "action",
+    "transitions": [],
+    "startAfter": {
+     "when": "after",
+     "type": "days",
+     "value": 2
+    },
+    "timePeriodInputMode": "standard",
+    "unitInputMode": "standard"
+   },
+   "parentKey": "a7f9cd87-6de7-4fe9-9ede-10f20d7ec95c",
+   "parent": "2a081cb8-d8e3-45f3-9760-0b71720c195b",
+   "order": 1
+  },
+  {
+   "type": "email",
+   "id": "4795defb-5ab1-4d48-9137-8c55a2c78e1a",
+   "name": "Cost Objection Email",
+   "next": "59cb66d1-8db8-46af-b301-943ed5a5a11b",
+   "attributes": {
+    "subject": "Payment Options to Suit Your Budget",
+    "html": "Hello {{contact.name}},<br><br>We understand that cost can be a concern when considering our services. Many of our members choose from a variety of payment plans designed to make the monthly cost manageable and fit within their budget.<br><br>If you'd like, I can send you details on these options to help you make the best decision for your needs.<br><br>Feel free to reach out with any questions or if you'd like to discuss further.<br><br>Best regards,<br>{{user.name}}",
+    "from_name": "",
+    "from_email": "",
+    "assignedOwners": [
+     "contact_owner"
+    ],
+    "alsoNotifyContactFollowers": false,
+    "alsoNotifyOpportunityFollowers": false
+   },
+   "parentKey": "107cf4ed-3fb5-4166-bc75-bcc2bdf66576",
+   "parent": "2a081cb8-d8e3-45f3-9760-0b71720c195b",
+   "order": 2
+  },
+  {
+   "type": "wait",
+   "id": "59cb66d1-8db8-46af-b301-943ed5a5a11b",
+   "name": "Wait 3 Days",
+   "next": "3fef920a-f4e5-4e35-ae23-818c9fd22fb9",
+   "attributes": {
+    "type": "time",
+    "convertToMultipath": false,
+    "hybridActionType": "wait",
+    "isHybridAction": true,
+    "name": "Wait 3 Days",
+    "cat": "action",
+    "transitions": [],
+    "startAfter": {
+     "when": "after",
+     "type": "days",
+     "value": 3
+    },
+    "timePeriodInputMode": "standard",
+    "unitInputMode": "standard"
+   },
+   "parentKey": "4795defb-5ab1-4d48-9137-8c55a2c78e1a",
+   "parent": "2a081cb8-d8e3-45f3-9760-0b71720c195b",
+   "order": 3
+  },
+  {
+   "type": "sms",
+   "id": "3fef920a-f4e5-4e35-ae23-818c9fd22fb9",
+   "name": "SMS Rebook - Richmond",
+   "next": "b0cc90e2-993a-4748-adb1-7dab42464c06",
+   "attributes": {
+    "body": "Send SMS using [LOC-BOOKING] rebook link/message to encourage Richmond contacts to rebook. Use exact user message content for SMS.",
+    "assignedOwners": [
+     "contact_owner"
+    ],
+    "alsoNotifyContactFollowers": false,
+    "alsoNotifyOpportunityFollowers": false,
+    "attachments": []
+   },
+   "parentKey": "59cb66d1-8db8-46af-b301-943ed5a5a11b",
+   "parent": "2a081cb8-d8e3-45f3-9760-0b71720c195b",
+   "order": 4
+  },
+  {
+   "type": "wait",
+   "id": "b0cc90e2-993a-4748-adb1-7dab42464c06",
+   "name": "Wait 7 Days (9am-7pm)",
+   "next": "e4937d7f-c54a-4816-9677-835d63706dab",
+   "attributes": {
+    "type": "time",
+    "convertToMultipath": false,
+    "hybridActionType": "wait",
+    "isHybridAction": true,
+    "name": "Wait 7 Days (9am-7pm)",
+    "cat": "action",
+    "transitions": [],
+    "startAfter": {
+     "when": "after",
+     "type": "days",
+     "value": 7
+    },
+    "window": {
+     "condition": "when",
+     "start": "09:00",
+     "end": "19:00",
+     "days": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+     ]
+    },
+    "timePeriodInputMode": "standard",
+    "unitInputMode": "standard"
+   },
+   "parentKey": "3fef920a-f4e5-4e35-ae23-818c9fd22fb9",
+   "parent": "2a081cb8-d8e3-45f3-9760-0b71720c195b",
+   "order": 5
+  },
+  {
+   "type": "sms",
+   "id": "e4937d7f-c54a-4816-9677-835d63706dab",
+   "name": "Door-open SMS - Cost",
+   "next": "bc852cb4-39b3-4454-aa3d-f2c09e2da90f",
+   "attributes": {
+    "body": "Hi {{contact.name}},\n\nJust a quick note to let you know the door's open whenever timing and budget line up. Whenever you're ready, reach out and we'll help you get started again!\n\nBest regards,\n{{user.name}}",
+    "assignedOwners": [
+     "contact_owner"
+    ],
+    "alsoNotifyContactFollowers": false,
+    "alsoNotifyOpportunityFollowers": false,
+    "attachments": []
+   },
+   "parentKey": "b0cc90e2-993a-4748-adb1-7dab42464c06",
+   "parent": "2a081cb8-d8e3-45f3-9760-0b71720c195b",
+   "order": 6
+  },
+  {
+   "type": "add_contact_tag",
+   "id": "bc852cb4-39b3-4454-aa3d-f2c09e2da90f",
+   "name": "Apply Long-term Nurture Eligible Tag",
+   "next": "a9cd4d3a-beb0-489a-96f0-f38d5d406d42",
+   "attributes": {
+    "tags": [
+     "nurture:longterm-eligible"
+    ]
+   },
+   "parentKey": "e4937d7f-c54a-4816-9677-835d63706dab",
+   "parent": "2a081cb8-d8e3-45f3-9760-0b71720c195b",
+   "order": 7
+  },
+  {
+   "type": "add_to_workflow",
+   "id": "a9cd4d3a-beb0-489a-96f0-f38d5d406d42",
+   "name": "Add To Long-Term Nurture Workflow",
+   "next": "38d96afd-fa9c-4595-99e5-f030ca5f4dfb",
+   "attributes": {
+    "input_trigger_params": false,
+    "type": "add_to_workflow",
+    "workflow_id": "d223ba43-7f11-42d2-a5a0-87d48e768530"
+   },
+   "parentKey": "bc852cb4-39b3-4454-aa3d-f2c09e2da90f",
+   "parent": "2a081cb8-d8e3-45f3-9760-0b71720c195b",
+   "order": 8
+  },
+  {
+   "id": "38d96afd-fa9c-4595-99e5-f030ca5f4dfb",
+   "parent": "2a081cb8-d8e3-45f3-9760-0b71720c195b",
+   "order": 9,
+   "attributes": {
+    "op": "or",
+    "segments": [
+     {
+      "conditions": [
+       {
+        "goal_condition": "appointment_status",
+        "extras": {
+         "calendarId": "yNEyRsAO0rBI46IDM7NJ",
+         "statuses": [
+          "new"
+         ],
+         "calendarOptions": [
+          {
+           "id": "AbmPR1kgGolxENiNwP8g",
+           "availabilities": [],
+           "addServiceActiveStep": "Complete",
+           "allowBookingAfter": 1,
+           "allowBookingAfterUnit": "days",
+           "allowBookingForUnit": "days",
+           "allowCancellation": true,
+           "allowReschedule": true,
+           "appoinmentPerDay": "",
+           "appoinmentPerSlot": 6,
+           "autoConfirm": true,
+           "calendarCoverImage": "https://msgsndr-private.storage.googleapis.com/calendar-widget-logo/a374bc51-adfa-444b-b5d0-d82b2cca0a13.png",
+           "calendarType": "class_booking",
+           "cancellationPreference": {
+            "expiryTimeUnit": "mins",
+            "expiryTime": null
+           },
+           "codeBlock": "",
+           "consentLabel": "I confirm that I want to receive content from this company using any contact information I provide.",
+           "createdBy": {
+            "userId": "9SxqV2FFXAGhjkSFYaYi",
+            "channel": "APP",
+            "source": "WEB_USER",
+            "timestamp": "2026-07-08T06:07:40.000Z",
+            "traceId": "74b6ed01-46ed-4e4d-abbe-19f942eec88c"
+           },
+           "dateAdded": "2026-07-08T06:07:40.000Z",
+           "deleted": false,
+           "description": "<p style=\"margin:0px;color:#10182899; margin: 0px;color: #10182899;\">Free men's health consultation at our Newport News center on Diligence Drive. Includes physician evaluation and same-day on-site lab work. Most visits are complete in about 60 minutes.</p>",
+           "enableConsentCheck": true,
+           "enableChargeGuests": false,
+           "enableGuests": false,
+           "enableMandatoryGuestType": false,
+           "enableOfficeHours": true,
+           "enableRecurring": false,
+           "enableSameUserAssignment": false,
+           "enableSameUserAssignmentForReschedule": false,
+           "enableStaffSelection": false,
+           "eventColor": "#039BE5",
+           "eventTitle": "Men's Wellness Centers Consultation - {{contact.name}}",
+           "eventType": "RoundRobin_OptimizeForAvailability",
+           "formId": "",
+           "formSubmitRedirectUrl": "",
+           "formSubmitThanksMessage": "Thank you for your appointment request. We will contact you shortly to confirm your request. Please call our office at {{contactMethod}} if you have any questions.",
+           "formSubmitType": "ThankYouMessage",
+           "googleInvitationEmails": true,
+           "guestType": "collect_detail",
+           "isSystemGenerated": false,
+           "isActive": true,
+           "isLivePaymentMode": false,
+           "linkedCalendars": {
+            "clio": {},
+            "drchrono": {},
+            "google": {},
+            "calendly": {}
+           },
+           "locationId": "VoeVvlByAem9pkxb7f6a",
+           "locationConfigurations": [],
+           "lookBusyConfig": {
+            "enabled": false,
+            "lookBusyPercentage": 0
+           },
+           "name": "Newport News Consults",
+           "notes": "Phone:- {{contact.phone}}\nEmail:- {{contact.email}}\n\nNeed to make a change to this event?\nReschedule:-\n{{reschedule_link}}\n\nCancel:-\n{{cancellation_link}}",
+           "openHours": {},
+           "order": 9999,
+           "pixelId": "",
+           "preBufferUnit": "mins",
+           "recurring": {
+            "count": 1,
+            "bookingOption": "skip",
+            "bookingOverlapDefaultStatus": "",
+            "interval": null,
+            "freq": "DAILY",
+            "monthDays": [],
+            "weekDays": []
+           },
+           "reschedulePreference": {
+            "expiryTimeUnit": "mins",
+            "expiryTime": null
+           },
+           "reserveService": false,
+           "shouldAssignContactToTeamMember": true,
+           "shouldSendCustomForm": false,
+           "shouldSkipAssigningContactForExisting": false,
+           "showSeatsPerSlot": true,
+           "slotBufferUnit": "mins",
+           "slotDuration": 60,
+           "slotDurationUnit": "hours",
+           "slotInterval": 30,
+           "slotIntervalUnit": "mins",
+           "stickyContact": false,
+           "stripe": {},
+           "teamMembers": [
+            {
+             "priority": 0.5,
+             "selected": true,
+             "userId": "aIb6qhsMGHNXlTEzbeEV",
+             "isZoomAdded": "false",
+             "isPrimary": true,
+             "locationConfigurations": [
+              {
+               "location": "827 Diligence Drive, Suite 206, Newport News, VA 23606",
+               "position": 0,
+               "kind": "custom",
+               "meetingId": "custom_0"
+              }
+             ],
+             "meetingLocation": "827 Diligence Drive, Suite 206, Newport News, VA 23606"
+            }
+           ],
+           "version": 2,
+           "widgetConfig": {
+            "primarySettings": {
+             "primaryColor": "#178af6ff",
+             "backgroundColor": "#ffffff",
+             "buttonText": "Schedule Meeting",
+             "showCalendarTitle": true,
+             "showCalendarDescription": true,
+             "showCalendarDetails": true
+            },
+            "default": true,
+            "pageOrder": [
+             {
+              "kind": "calendar",
+              "position": 0
+             },
+             {
+              "kind": "form",
+              "position": 1
+             }
+            ]
+           },
+           "widgetLogo": {
+            "shape": "square",
+            "url": "https://assets.cdn.filesafe.space/VoeVvlByAem9pkxb7f6a/media/6a4de967a97402b00b9873e1.webp"
+           },
+           "widgetSlug": "newport-news-consults",
+           "widgetType": "default",
+           "appointmentPerSlot": 6,
+           "appointmentPerDay": "",
+           "lastUpdatedBy": {
+            "userId": "9SxqV2FFXAGhjkSFYaYi",
+            "channel": "APP",
+            "source": "WEB_USER",
+            "timestamp": "2026-07-08T06:18:59.834Z",
+            "traceId": "76919225-c08a-483b-8410-c217893ce749"
+           },
+           "dateUpdated": "2026-07-08T06:18:59.846Z",
+           "providerId": "MxrXPzIqKXYWJjAOqbAA",
+           "groupId": "MxrXPzIqKXYWJjAOqbAA",
+           "label": "Newport News Consults",
+           "value": "AbmPR1kgGolxENiNwP8g"
+          },
+          {
+           "id": "KCwl2npRBxd25J9qZEkA",
+           "availabilities": [],
+           "addServiceActiveStep": "Complete",
+           "allowBookingAfter": 1,
+           "allowBookingAfterUnit": "days",
+           "allowBookingForUnit": "days",
+           "allowCancellation": true,
+           "allowReschedule": true,
+           "appoinmentPerDay": "",
+           "appoinmentPerSlot": 6,
+           "autoConfirm": true,
+           "calendarCoverImage": "https://msgsndr-private.storage.googleapis.com/calendar-widget-logo/a374bc51-adfa-444b-b5d0-d82b2cca0a13.png",
+           "calendarType": "class_booking",
+           "cancellationPreference": {
+            "expiryTimeUnit": "mins",
+            "expiryTime": null
+           },
+           "codeBlock": "",
+           "consentLabel": "I confirm that I want to receive content from this company using any contact information I provide.",
+           "createdBy": {
+            "userId": "9SxqV2FFXAGhjkSFYaYi",
+            "channel": "APP",
+            "source": "WEB_USER",
+            "timestamp": "2026-07-08T06:10:24.000Z",
+            "traceId": "a4992bdd-f9fe-4058-a075-7e426b1f1119"
+           },
+           "dateAdded": "2026-07-08T06:10:24.000Z",
+           "deleted": false,
+           "description": "<p style=\"margin:0px;color:#10182899; margin: 0px;color: #10182899;\">Free men's health consultation at our Virginia Beach center on First Colonial Road. Includes physician evaluation and same-day on-site lab work. Most visits are complete in about 60 minutes.</p>",
+           "enableConsentCheck": true,
+           "enableChargeGuests": false,
+           "enableGuests": false,
+           "enableMandatoryGuestType": false,
+           "enableOfficeHours": true,
+           "enableRecurring": false,
+           "enableSameUserAssignment": false,
+           "enableSameUserAssignmentForReschedule": false,
+           "enableStaffSelection": false,
+           "eventColor": "#039BE5",
+           "eventTitle": "Men's Wellness Centers Consultation - {{contact.name}}",
+           "eventType": "RoundRobin_OptimizeForAvailability",
+           "formId": "",
+           "formSubmitRedirectUrl": "",
+           "formSubmitThanksMessage": "Thank you for your appointment request. We will contact you shortly to confirm your request. Please call our office at {{contactMethod}} if you have any questions.",
+           "formSubmitType": "ThankYouMessage",
+           "googleInvitationEmails": true,
+           "guestType": "collect_detail",
+           "isSystemGenerated": false,
+           "isActive": true,
+           "isLivePaymentMode": false,
+           "linkedCalendars": {
+            "clio": {},
+            "drchrono": {},
+            "google": {},
+            "calendly": {}
+           },
+           "locationId": "VoeVvlByAem9pkxb7f6a",
+           "locationConfigurations": [],
+           "lookBusyConfig": {
+            "enabled": false,
+            "lookBusyPercentage": 0
+           },
+           "name": "Virginia Beach Consults",
+           "notes": "Phone:- {{contact.phone}}\nEmail:- {{contact.email}}\n\nNeed to make a change to this event?\nReschedule:-\n{{reschedule_link}}\n\nCancel:-\n{{cancellation_link}}",
+           "openHours": {},
+           "order": 9999,
+           "pixelId": "",
+           "preBufferUnit": "mins",
+           "recurring": {
+            "count": 1,
+            "bookingOption": "skip",
+            "bookingOverlapDefaultStatus": "",
+            "interval": null,
+            "freq": "DAILY",
+            "monthDays": [],
+            "weekDays": []
+           },
+           "reschedulePreference": {
+            "expiryTimeUnit": "mins",
+            "expiryTime": null
+           },
+           "reserveService": false,
+           "shouldAssignContactToTeamMember": true,
+           "shouldSendCustomForm": false,
+           "shouldSkipAssigningContactForExisting": false,
+           "showSeatsPerSlot": true,
+           "slotBufferUnit": "mins",
+           "slotDuration": 60,
+           "slotDurationUnit": "hours",
+           "slotInterval": 30,
+           "slotIntervalUnit": "mins",
+           "stickyContact": false,
+           "stripe": {},
+           "teamMembers": [
+            {
+             "priority": 0.5,
+             "selected": true,
+             "userId": "aIb6qhsMGHNXlTEzbeEV",
+             "isZoomAdded": "false",
+             "isPrimary": true,
+             "locationConfigurations": [
+              {
+               "location": "996 First Colonial Road, Virginia Beach, VA 23454",
+               "position": 0,
+               "kind": "custom",
+               "meetingId": "custom_0"
+              }
+             ],
+             "meetingLocation": "996 First Colonial Road, Virginia Beach, VA 23454"
+            }
+           ],
+           "version": 2,
+           "widgetConfig": {
+            "primarySettings": {
+             "primaryColor": "#178af6ff",
+             "backgroundColor": "#ffffff",
+             "buttonText": "Schedule Meeting",
+             "showCalendarTitle": true,
+             "showCalendarDescription": true,
+             "showCalendarDetails": true
+            },
+            "default": true,
+            "pageOrder": [
+             {
+              "kind": "calendar",
+              "position": 0
+             },
+             {
+              "kind": "form",
+              "position": 1
+             }
+            ]
+           },
+           "widgetLogo": {
+            "shape": "square",
+            "url": "https://assets.cdn.filesafe.space/VoeVvlByAem9pkxb7f6a/media/6a4de967a97402b00b9873e1.webp"
+           },
+           "widgetSlug": "virginia-beach-consults",
+           "widgetType": "default",
+           "appointmentPerSlot": 6,
+           "appointmentPerDay": "",
+           "lastUpdatedBy": {
+            "userId": "9SxqV2FFXAGhjkSFYaYi",
+            "channel": "APP",
+            "source": "WEB_USER",
+            "timestamp": "2026-07-08T06:18:59.836Z",
+            "traceId": "76919225-c08a-483b-8410-c217893ce749"
+           },
+           "dateUpdated": "2026-07-08T06:18:59.850Z",
+           "providerId": "MxrXPzIqKXYWJjAOqbAA",
+           "groupId": "MxrXPzIqKXYWJjAOqbAA",
+           "label": "Virginia Beach Consults",
+           "value": "KCwl2npRBxd25J9qZEkA"
+          },
+          {
+           "id": "yNEyRsAO0rBI46IDM7NJ",
+           "availabilities": [],
+           "addServiceActiveStep": "Complete",
+           "allowBookingAfter": 1,
+           "allowBookingAfterUnit": "days",
+           "allowBookingForUnit": "days",
+           "allowCancellation": true,
+           "allowReschedule": true,
+           "appoinmentPerDay": "",
+           "appoinmentPerSlot": 6,
+           "autoConfirm": true,
+           "calendarCoverImage": "https://msgsndr-private.storage.googleapis.com/calendar-widget-logo/a374bc51-adfa-444b-b5d0-d82b2cca0a13.png",
+           "calendarType": "class_booking",
+           "cancellationPreference": {
+            "expiryTimeUnit": "mins",
+            "expiryTime": null
+           },
+           "codeBlock": "",
+           "consentLabel": "I confirm that I want to receive content from this company using any contact information I provide.",
+           "createdBy": {
+            "userId": "9SxqV2FFXAGhjkSFYaYi",
+            "channel": "APP",
+            "source": "WEB_USER",
+            "timestamp": "2026-07-08T06:07:08.000Z",
+            "traceId": "e256ca64-8a28-460b-a47a-1b8af67bbe55"
+           },
+           "dateAdded": "2026-07-08T06:07:08.000Z",
+           "deleted": false,
+           "description": "<p style=\"margin:0px;color:#10182899\">Free men's health consultation at our Richmond center in Glen Allen. Includes physician evaluation and same-day on-site lab work. Most visits are complete in about 60 minutes.</p>",
+           "enableConsentCheck": true,
+           "enableChargeGuests": false,
+           "enableGuests": false,
+           "enableMandatoryGuestType": false,
+           "enableOfficeHours": true,
+           "enableRecurring": false,
+           "enableSameUserAssignment": false,
+           "enableSameUserAssignmentForReschedule": false,
+           "enableStaffSelection": false,
+           "eventColor": "#039BE5",
+           "eventTitle": "Men's Wellness Centers Consultation - {{contact.name}}",
+           "eventType": "RoundRobin_OptimizeForAvailability",
+           "formId": "",
+           "formSubmitRedirectUrl": "",
+           "formSubmitThanksMessage": "Thank you for your appointment request. We will contact you shortly to confirm your request. Please call our office at {{contactMethod}} if you have any questions.",
+           "formSubmitType": "ThankYouMessage",
+           "googleInvitationEmails": true,
+           "guestType": "collect_detail",
+           "isSystemGenerated": false,
+           "isActive": true,
+           "isLivePaymentMode": false,
+           "linkedCalendars": {
+            "clio": {},
+            "drchrono": {},
+            "google": {},
+            "calendly": {}
+           },
+           "locationId": "VoeVvlByAem9pkxb7f6a",
+           "locationConfigurations": [],
+           "lookBusyConfig": {
+            "enabled": false,
+            "lookBusyPercentage": 0
+           },
+           "name": "Richmond Consults",
+           "notes": "Phone:- {{contact.phone}}\nEmail:- {{contact.email}}\n\nNeed to make a change to this event?\nReschedule:-\n{{reschedule_link}}\n\nCancel:-\n{{cancellation_link}}",
+           "openHours": {},
+           "order": 9999,
+           "pixelId": "",
+           "preBufferUnit": "mins",
+           "recurring": {
+            "count": 1,
+            "bookingOption": "skip",
+            "bookingOverlapDefaultStatus": "",
+            "interval": null,
+            "freq": "DAILY",
+            "monthDays": [],
+            "weekDays": []
+           },
+           "reschedulePreference": {
+            "expiryTimeUnit": "mins",
+            "expiryTime": null
+           },
+           "reserveService": false,
+           "shouldAssignContactToTeamMember": true,
+           "shouldSendCustomForm": false,
+           "shouldSkipAssigningContactForExisting": false,
+           "showSeatsPerSlot": true,
+           "slotBufferUnit": "mins",
+           "slotDuration": 60,
+           "slotDurationUnit": "hours",
+           "slotInterval": 30,
+           "slotIntervalUnit": "mins",
+           "stickyContact": false,
+           "stripe": {},
+           "teamMembers": [
+            {
+             "priority": 0.5,
+             "selected": true,
+             "userId": "aIb6qhsMGHNXlTEzbeEV",
+             "isZoomAdded": "false",
+             "isPrimary": true,
+             "locationConfigurations": [
+              {
+               "location": "4050 Innslake Drive, Suite 360, Glen Allen, VA 23060",
+               "position": 0,
+               "kind": "custom",
+               "meetingId": "custom_0"
+              }
+             ],
+             "meetingLocation": "4050 Innslake Drive, Suite 360, Glen Allen, VA 23060"
+            }
+           ],
+           "version": 2,
+           "widgetConfig": {
+            "primarySettings": {
+             "primaryColor": "#178af6ff",
+             "backgroundColor": "#ffffff",
+             "buttonText": "Schedule Meeting",
+             "showCalendarTitle": true,
+             "showCalendarDescription": true,
+             "showCalendarDetails": true
+            },
+            "default": true,
+            "pageOrder": [
+             {
+              "kind": "calendar",
+              "position": 0
+             },
+             {
+              "kind": "form",
+              "position": 1
+             }
+            ]
+           },
+           "widgetLogo": {
+            "shape": "square",
+            "url": ""
+           },
+           "widgetSlug": "richmond-consults",
+           "widgetType": "default",
+           "appointmentPerSlot": 6,
+           "appointmentPerDay": "",
+           "lastUpdatedBy": {
+            "userId": "9SxqV2FFXAGhjkSFYaYi",
+            "channel": "APP",
+            "source": "WEB_USER",
+            "timestamp": "2026-07-08T06:18:59.839Z",
+            "traceId": "76919225-c08a-483b-8410-c217893ce749"
+           },
+           "dateUpdated": "2026-07-08T06:18:59.850Z",
+           "providerId": "MxrXPzIqKXYWJjAOqbAA",
+           "groupId": "MxrXPzIqKXYWJjAOqbAA",
+           "label": "Richmond Consults",
+           "value": "yNEyRsAO0rBI46IDM7NJ"
+          }
+         ],
+         "isLoading": false
+        },
+        "id": "6a6c4a94-fadf-47c4-9251-afac93421132"
+       }
+      ],
+      "op": "or"
+     }
+    ],
+    "type": "workflow_goal",
+    "action": "exit"
+   },
+   "name": "Goal – Booked an appointment",
+   "type": "workflow_goal",
+   "parentKey": "a9cd4d3a-beb0-489a-96f0-f38d5d406d42"
+  },
+  {
+   "id": "40ca7d38-293b-4309-83df-1018e1060704",
+   "parent": "ed4333c5-c5b3-416f-baaa-48ad2faa0513",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Branch – Objection fear",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "bfae853c-49f2-4438-8b92-62da7d37ea9e",
+   "sibling": [
+    "2a081cb8-d8e3-45f3-9760-0b71720c195b",
+    "07be6868-9204-45c1-a2ad-38715c1d79c7",
+    "f40a1b53-f782-4917-82ae-b096d2657189",
+    "178ea118-21c7-4565-b506-0915e6cad0b0",
+    "15d11681-9075-43a1-a84c-4615690d8fd9"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "ed4333c5-c5b3-416f-baaa-48ad2faa0513"
+  },
+  {
+   "id": "bfae853c-49f2-4438-8b92-62da7d37ea9e",
+   "parent": "40ca7d38-293b-4309-83df-1018e1060704",
+   "order": 0,
+   "attributes": {
+    "body": "{{contact.first_name}}, \n\ntotally normal to want to think it over.\n\n Most members tell us the first visit was the hardest part everything after is straightforward and on your schedule. \n\nHappy to answer anything by text. \n\nReply STOP to opt out.",
+    "assignedOwners": [
+     "contact_owner"
+    ],
+    "alsoNotifyContactFollowers": false,
+    "alsoNotifyOpportunityFollowers": false,
+    "attachments": []
+   },
+   "name": "Day 0 SMS - Fear",
+   "type": "sms",
+   "next": "0635309a-388c-49d7-a38b-9d66a321556c",
+   "parentKey": "40ca7d38-293b-4309-83df-1018e1060704"
+  },
+  {
+   "id": "0635309a-388c-49d7-a38b-9d66a321556c",
+   "parent": "40ca7d38-293b-4309-83df-1018e1060704",
+   "order": 1,
+   "attributes": {
+    "type": "time",
+    "convertToMultipath": false,
+    "hybridActionType": "wait",
+    "isHybridAction": true,
+    "name": "Wait 2 days before next message (9am–7pm delivery restriction)",
+    "cat": "action",
+    "transitions": [],
+    "startAfter": {
+     "when": "after",
+     "type": "days",
+     "value": 2
+    },
+    "timePeriodInputMode": "standard",
+    "unitInputMode": "standard"
+   },
+   "name": "Wait 2 days before next message (9am–7pm delivery restriction)",
+   "type": "wait",
+   "next": "c121cb5d-ca82-43c7-b5fa-730959c8f8cf",
+   "parentKey": "bfae853c-49f2-4438-8b92-62da7d37ea9e"
+  },
+  {
+   "id": "c121cb5d-ca82-43c7-b5fa-730959c8f8cf",
+   "parent": "40ca7d38-293b-4309-83df-1018e1060704",
+   "order": 2,
+   "attributes": {
+    "subject": "What membership actually looks like, week to week",
+    "html": "<p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">Hi {{contact.first_name}}, A lot of guys go in expecting complicated it's really not. <br><br>Most members describe it as: a quick visit on the schedule, a few minutes at the front desk, and a conversation with your Patient Care Consultant about how things are going. That's it. There's no big commitment moment after the first visit it's just part of the routine, like anything else you've built a habit around. <br><br>Any specific question on your mind? <br>Reply here a real person answers.</p>",
+    "from_name": "",
+    "from_email": "",
+    "assignedOwners": [
+     "contact_owner"
+    ],
+    "alsoNotifyContactFollowers": false,
+    "alsoNotifyOpportunityFollowers": false,
+    "fieldDefaults": {},
+    "htmlDefaults": {},
+    "trackingOptions": {
+     "hasTrackingLinks": false,
+     "hasUtmTracking": false,
+     "hasTags": false,
+     "sourceId": "3e4c99d6-f05d-496c-b1d5-e0d842600ffc:c121cb5d-ca82-43c7-b5fa-730959c8f8cf"
+    },
+    "conditions": [],
+    "attachments": []
+   },
+   "name": "Fear Objection Email",
+   "type": "email",
+   "next": "96404f79-b724-4d8c-8e75-28c363fa9ecb",
+   "parentKey": "0635309a-388c-49d7-a38b-9d66a321556c"
+  },
+  {
+   "id": "96404f79-b724-4d8c-8e75-28c363fa9ecb",
+   "parent": "40ca7d38-293b-4309-83df-1018e1060704",
+   "order": 3,
+   "attributes": {
+    "targetNodeId": "59cb66d1-8db8-46af-b301-943ed5a5a11b",
+    "type": "goto"
+   },
+   "name": "Go to",
+   "type": "goto",
+   "parentKey": "c121cb5d-ca82-43c7-b5fa-730959c8f8cf"
+  },
+  {
+   "id": "07be6868-9204-45c1-a2ad-38715c1d79c7",
+   "parent": "ed4333c5-c5b3-416f-baaa-48ad2faa0513",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Branch – Objection partner",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "c86ac864-ad97-4641-89e1-c0bbf35349f1",
+   "sibling": [
+    "2a081cb8-d8e3-45f3-9760-0b71720c195b",
+    "40ca7d38-293b-4309-83df-1018e1060704",
+    "f40a1b53-f782-4917-82ae-b096d2657189",
+    "178ea118-21c7-4565-b506-0915e6cad0b0",
+    "15d11681-9075-43a1-a84c-4615690d8fd9"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "ed4333c5-c5b3-416f-baaa-48ad2faa0513"
+  },
+  {
+   "id": "c86ac864-ad97-4641-89e1-c0bbf35349f1",
+   "parent": "07be6868-9204-45c1-a2ad-38715c1d79c7",
+   "order": 0,
+   "attributes": {
+    "body": "{{contact.first_name}}, makes sense to talk it over at home first. If it would help, your partner is welcome to join a quick call or your next visit most spouses have the same three questions. Reply STOP to opt out.",
+    "assignedOwners": [
+     "contact_owner"
+    ],
+    "alsoNotifyContactFollowers": false,
+    "alsoNotifyOpportunityFollowers": false,
+    "attachments": []
+   },
+   "name": "Day 0 SMS - Partner",
+   "type": "sms",
+   "next": "1377db2b-4485-476f-b3c5-2969bd7ba3a9",
+   "parentKey": "07be6868-9204-45c1-a2ad-38715c1d79c7"
+  },
+  {
+   "id": "1377db2b-4485-476f-b3c5-2969bd7ba3a9",
+   "parent": "07be6868-9204-45c1-a2ad-38715c1d79c7",
+   "order": 1,
+   "attributes": {
+    "type": "time",
+    "convertToMultipath": false,
+    "hybridActionType": "wait",
+    "isHybridAction": true,
+    "name": "Wait 2 days before next message (9am–7pm delivery restriction)",
+    "cat": "action",
+    "transitions": [],
+    "startAfter": {
+     "when": "after",
+     "type": "days",
+     "value": 2
+    },
+    "timePeriodInputMode": "standard",
+    "unitInputMode": "standard"
+   },
+   "name": "Wait 2 days before next message (9am–7pm delivery restriction)",
+   "type": "wait",
+   "next": "f2941238-0f15-4ec7-a192-2bd688c3b0a2",
+   "parentKey": "c86ac864-ad97-4641-89e1-c0bbf35349f1"
+  },
+  {
+   "id": "f2941238-0f15-4ec7-a192-2bd688c3b0a2",
+   "parent": "07be6868-9204-45c1-a2ad-38715c1d79c7",
+   "order": 2,
+   "attributes": {
+    "subject": "Payment Options to Suit Your Budget",
+    "html": "<p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">Hi {{contact.first_name}}, Totally reasonable to want your partner looped in before deciding anything. We're glad to have them join either a quick call, or your next visit in person. <br><br>The questions partners usually ask: what the time commitment looks like, how the cost breaks down, and what actually changes day to day. All fair, all easy to answer together. <br><br>Just reply here with a time that works for both of you, or have them call us directly at (757) 806-6263.</p>",
+    "from_name": "",
+    "from_email": "",
+    "assignedOwners": [
+     "contact_owner"
+    ],
+    "alsoNotifyContactFollowers": false,
+    "alsoNotifyOpportunityFollowers": false,
+    "fieldDefaults": {},
+    "htmlDefaults": {},
+    "trackingOptions": {
+     "hasTrackingLinks": false,
+     "hasUtmTracking": false,
+     "hasTags": false,
+     "sourceId": "3e4c99d6-f05d-496c-b1d5-e0d842600ffc:f2941238-0f15-4ec7-a192-2bd688c3b0a2"
+    },
+    "conditions": [],
+    "attachments": []
+   },
+   "name": "Partner Objection Email",
+   "type": "email",
+   "next": "fd1172c0-b237-4320-9797-9da05e3a1867",
+   "parentKey": "1377db2b-4485-476f-b3c5-2969bd7ba3a9"
+  },
+  {
+   "id": "fd1172c0-b237-4320-9797-9da05e3a1867",
+   "parent": "07be6868-9204-45c1-a2ad-38715c1d79c7",
+   "order": 3,
+   "attributes": {
+    "targetNodeId": "59cb66d1-8db8-46af-b301-943ed5a5a11b",
+    "type": "goto"
+   },
+   "name": "Go to",
+   "type": "goto",
+   "parentKey": "f2941238-0f15-4ec7-a192-2bd688c3b0a2"
+  },
+  {
+   "id": "f40a1b53-f782-4917-82ae-b096d2657189",
+   "parent": "ed4333c5-c5b3-416f-baaa-48ad2faa0513",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Branch – Objection time to think",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "1fa4fae5-8a72-4e26-868e-6dcea69970ba",
+   "sibling": [
+    "2a081cb8-d8e3-45f3-9760-0b71720c195b",
+    "40ca7d38-293b-4309-83df-1018e1060704",
+    "07be6868-9204-45c1-a2ad-38715c1d79c7",
+    "178ea118-21c7-4565-b506-0915e6cad0b0",
+    "15d11681-9075-43a1-a84c-4615690d8fd9"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "ed4333c5-c5b3-416f-baaa-48ad2faa0513"
+  },
+  {
+   "id": "1fa4fae5-8a72-4e26-868e-6dcea69970ba",
+   "parent": "f40a1b53-f782-4917-82ae-b096d2657189",
+   "order": 0,
+   "attributes": {
+    "body": "{{contact.first_name}}, take the time you need. One thing worth knowing: your consult results stay on file, so picking this up later is a 10-minute conversation, not a restart. Reply STOP to opt out.",
+    "assignedOwners": [
+     "contact_owner"
+    ],
+    "alsoNotifyContactFollowers": false,
+    "alsoNotifyOpportunityFollowers": false,
+    "attachments": []
+   },
+   "name": "Day 0 SMS - Time to Think",
+   "type": "sms",
+   "next": "9e3fe248-88cb-475c-9510-bef1873f1a9b",
+   "parentKey": "f40a1b53-f782-4917-82ae-b096d2657189"
+  },
+  {
+   "id": "9e3fe248-88cb-475c-9510-bef1873f1a9b",
+   "parent": "f40a1b53-f782-4917-82ae-b096d2657189",
+   "order": 1,
+   "attributes": {
+    "type": "time",
+    "convertToMultipath": false,
+    "hybridActionType": "wait",
+    "isHybridAction": true,
+    "name": "Wait 2 days before next message (9am–7pm delivery restriction)",
+    "cat": "action",
+    "transitions": [],
+    "startAfter": {
+     "when": "after",
+     "type": "days",
+     "value": 2
+    },
+    "timePeriodInputMode": "standard",
+    "unitInputMode": "standard"
+   },
+   "name": "Wait 2 days before next message (9am–7pm delivery restriction)",
+   "type": "wait",
+   "next": "b4aaf0ff-3576-4c13-ae32-80abc95f513c",
+   "parentKey": "1fa4fae5-8a72-4e26-868e-6dcea69970ba"
+  },
+  {
+   "id": "b4aaf0ff-3576-4c13-ae32-80abc95f513c",
+   "parent": "f40a1b53-f782-4917-82ae-b096d2657189",
+   "order": 2,
+   "attributes": {
+    "subject": "A few questions members ask before deciding",
+    "html": "<p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;\">Hi {{contact.first_name}},</p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;\">No rush at all. While you're thinking it over, here are answers to the</p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;\">things members usually want to know before committing:<br></p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;\">- Your consult notes stay on file nothing gets lost if you wait</p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;\">- There's no expiration on picking this back up</p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;\">- Most members say the decision got easier once they slept on it, not harder<br></p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;\">If something specific is on your mind, just reply we'd rather answer the real question than guess at it.</p>",
+    "from_name": "",
+    "from_email": "",
+    "assignedOwners": [
+     "contact_owner"
+    ],
+    "alsoNotifyContactFollowers": false,
+    "alsoNotifyOpportunityFollowers": false,
+    "fieldDefaults": {},
+    "htmlDefaults": {},
+    "trackingOptions": {
+     "hasTrackingLinks": false,
+     "hasUtmTracking": false,
+     "hasTags": false,
+     "sourceId": "3e4c99d6-f05d-496c-b1d5-e0d842600ffc:b4aaf0ff-3576-4c13-ae32-80abc95f513c"
+    },
+    "conditions": [],
+    "attachments": []
+   },
+   "name": "Time to think Objection Email",
+   "type": "email",
+   "next": "a30117b2-0bba-43ad-a7ae-5e1c5b5cc43d",
+   "parentKey": "9e3fe248-88cb-475c-9510-bef1873f1a9b"
+  },
+  {
+   "id": "a30117b2-0bba-43ad-a7ae-5e1c5b5cc43d",
+   "parent": "f40a1b53-f782-4917-82ae-b096d2657189",
+   "order": 3,
+   "attributes": {
+    "targetNodeId": "59cb66d1-8db8-46af-b301-943ed5a5a11b",
+    "type": "goto"
+   },
+   "name": "Go to",
+   "type": "goto",
+   "parentKey": "b4aaf0ff-3576-4c13-ae32-80abc95f513c"
+  },
+  {
+   "id": "178ea118-21c7-4565-b506-0915e6cad0b0",
+   "parent": "ed4333c5-c5b3-416f-baaa-48ad2faa0513",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Branch – Objection timing",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "5aa259b0-229b-413d-a2fa-2b8d927984a5",
+   "sibling": [
+    "2a081cb8-d8e3-45f3-9760-0b71720c195b",
+    "40ca7d38-293b-4309-83df-1018e1060704",
+    "07be6868-9204-45c1-a2ad-38715c1d79c7",
+    "f40a1b53-f782-4917-82ae-b096d2657189",
+    "15d11681-9075-43a1-a84c-4615690d8fd9"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "ed4333c5-c5b3-416f-baaa-48ad2faa0513"
+  },
+  {
+   "id": "5aa259b0-229b-413d-a2fa-2b8d927984a5",
+   "parent": "178ea118-21c7-4565-b506-0915e6cad0b0",
+   "order": 0,
+   "attributes": {
+    "body": "{{contact.first_name}}, understood — life's schedule wins sometimes. When things open up, rebooking takes about a minute and your consult carries over. Reply STOP to opt out.",
+    "assignedOwners": [
+     "contact_owner"
+    ],
+    "alsoNotifyContactFollowers": false,
+    "alsoNotifyOpportunityFollowers": false,
+    "attachments": []
+   },
+   "name": "Day 0 SMS - Cost Reframe",
+   "type": "sms",
+   "next": "30b7d950-272d-4a3b-8666-e2a3351f2b39",
+   "parentKey": "178ea118-21c7-4565-b506-0915e6cad0b0"
+  },
+  {
+   "id": "30b7d950-272d-4a3b-8666-e2a3351f2b39",
+   "parent": "178ea118-21c7-4565-b506-0915e6cad0b0",
+   "order": 1,
+   "attributes": {
+    "type": "time",
+    "convertToMultipath": false,
+    "hybridActionType": "wait",
+    "isHybridAction": true,
+    "name": "Wait 2 days before next message (9am–7pm delivery restriction)",
+    "cat": "action",
+    "transitions": [],
+    "startAfter": {
+     "when": "after",
+     "type": "days",
+     "value": 2
+    },
+    "timePeriodInputMode": "standard",
+    "unitInputMode": "standard"
+   },
+   "name": "Wait 2 days before next message (9am–7pm delivery restriction)",
+   "type": "wait",
+   "next": "9bcd4a38-814c-465a-b31e-035e672f119c",
+   "parentKey": "5aa259b0-229b-413d-a2fa-2b8d927984a5"
+  },
+  {
+   "id": "9bcd4a38-814c-465a-b31e-035e672f119c",
+   "parent": "178ea118-21c7-4565-b506-0915e6cad0b0",
+   "order": 2,
+   "attributes": {
+    "subject": "We work around your schedule, not the other way around",
+    "html": "<p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">Hi {{contact.first_name}}, If timing was the issue, good news visits are quick (about an hour), and we keep extended hours on Mondays and Fridays specifically for schedules like yours. Whenever your calendar clears, rebooking takes under a minute and nothing about your consult needs to be redone.</p>",
+    "from_name": "",
+    "from_email": "",
+    "assignedOwners": [
+     "contact_owner"
+    ],
+    "alsoNotifyContactFollowers": false,
+    "alsoNotifyOpportunityFollowers": false,
+    "fieldDefaults": {},
+    "htmlDefaults": {},
+    "trackingOptions": {
+     "hasTrackingLinks": false,
+     "hasUtmTracking": false,
+     "hasTags": false,
+     "sourceId": "3e4c99d6-f05d-496c-b1d5-e0d842600ffc:9bcd4a38-814c-465a-b31e-035e672f119c"
+    },
+    "conditions": [],
+    "attachments": []
+   },
+   "name": "Timing Objection Email",
+   "type": "email",
+   "next": "eaddd40e-d278-438c-82d8-44e4787c81db",
+   "parentKey": "30b7d950-272d-4a3b-8666-e2a3351f2b39"
+  },
+  {
+   "id": "eaddd40e-d278-438c-82d8-44e4787c81db",
+   "parent": "178ea118-21c7-4565-b506-0915e6cad0b0",
+   "order": 3,
+   "attributes": {
+    "targetNodeId": "59cb66d1-8db8-46af-b301-943ed5a5a11b",
+    "type": "goto"
+   },
+   "name": "Go to",
+   "type": "goto",
+   "parentKey": "9bcd4a38-814c-465a-b31e-035e672f119c"
+  },
+  {
+   "id": "15d11681-9075-43a1-a84c-4615690d8fd9",
+   "parent": "ed4333c5-c5b3-416f-baaa-48ad2faa0513",
+   "order": 1,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "2a081cb8-d8e3-45f3-9760-0b71720c195b",
+    "40ca7d38-293b-4309-83df-1018e1060704",
+    "07be6868-9204-45c1-a2ad-38715c1d79c7",
+    "f40a1b53-f782-4917-82ae-b096d2657189",
+    "178ea118-21c7-4565-b506-0915e6cad0b0"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "ed4333c5-c5b3-416f-baaa-48ad2faa0513"
+  }
+ ]
+}

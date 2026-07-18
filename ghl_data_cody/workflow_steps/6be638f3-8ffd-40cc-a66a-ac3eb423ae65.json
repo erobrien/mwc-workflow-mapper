@@ -1,0 +1,102 @@
+{
+ "templates": [
+  {
+   "type": "wait",
+   "id": "58530342-25e9-4ec0-8895-e3777121ca1b",
+   "name": "Wait 1 Minute",
+   "next": "f5690fb3-59e2-4ec4-8a92-59994d9f4c01",
+   "attributes": {
+    "type": "time",
+    "convertToMultipath": false,
+    "hybridActionType": "wait",
+    "isHybridAction": true,
+    "name": "Wait 1 Minute",
+    "cat": "action",
+    "transitions": [],
+    "startAfter": {
+     "when": "after",
+     "type": "minutes",
+     "value": 1
+    },
+    "timePeriodInputMode": "standard",
+    "unitInputMode": "standard"
+   },
+   "order": 0
+  },
+  {
+   "type": "math_operation",
+   "id": "f5690fb3-59e2-4ec4-8a92-59994d9f4c01",
+   "name": "Add 3 Months to Term End Date",
+   "next": "f2977c0f-cb38-4729-9906-be53fed647a7",
+   "attributes": {
+    "selectField": "TkkcmSInV6zGQWAtD0Y0",
+    "selectFieldtype": "date",
+    "sourceCustomValueId": "",
+    "updateField": "TkkcmSInV6zGQWAtD0Y0",
+    "targetCustomValueId": "",
+    "operators": [
+     {
+      "operator": "add",
+      "__id": "8cf6f9d8-38c2-4f79-9832-916830f6dd2b",
+      "value": {
+       "days": 0,
+       "months": 3,
+       "years": 0
+      }
+     }
+    ],
+    "updateFieldType": "date"
+   },
+   "parentKey": "58530342-25e9-4ec0-8895-e3777121ca1b",
+   "order": 1,
+   "stepIndex": 1
+  },
+  {
+   "type": "add_notes",
+   "id": "f2977c0f-cb38-4729-9906-be53fed647a7",
+   "name": "Add Note for Extension",
+   "next": "a48f2ec5-e2db-4e54-8f02-7e0c63343820",
+   "attributes": {
+    "html": "Term extended +3 months — {{reason}}, by {{authorized by}}, {{right_now.date}}",
+    "title": "",
+    "color": ""
+   },
+   "parentKey": "f5690fb3-59e2-4ec4-8a92-59994d9f4c01",
+   "order": 2
+  },
+  {
+   "type": "internal_notification",
+   "id": "a48f2ec5-e2db-4e54-8f02-7e0c63343820",
+   "name": "Notify COO and Operations",
+   "next": "d0dd05e4-3b50-4ef9-9a31-b160cf706ec3",
+   "attributes": {
+    "type": "notification",
+    "notification": {
+     "title": "Richmond Term Extended",
+     "body": "Term extended +3 months. New Term End Date: {{contact.term_end_date}}. Reason: {{extension_reason}}. Authorized by: {{authorized_by}}. Submitted {{right_now.date}}.",
+     "redirectPage": "contact",
+     "userType": "all",
+     "assignedOwners": null,
+     "alsoNotifyContactFollowers": false,
+     "alsoNotifyOpportunityFollowers": false,
+     "type": "send_notification"
+    }
+   },
+   "parentKey": "f2977c0f-cb38-4729-9906-be53fed647a7",
+   "order": 3
+  },
+  {
+   "type": "remove_from_workflow",
+   "id": "d0dd05e4-3b50-4ef9-9a31-b160cf706ec3",
+   "name": "Remove from Richmond - Renewal T-30 Workflow",
+   "attributes": {
+    "type": "remove_from_workflow",
+    "workflow_id": [
+     "6be638f3-8ffd-40cc-a66a-ac3eb423ae65"
+    ]
+   },
+   "parentKey": "a48f2ec5-e2db-4e54-8f02-7e0c63343820",
+   "order": 4
+  }
+ ]
+}

@@ -1,0 +1,326 @@
+{
+ "workflowData": {
+  "_id": "d0d55f71-04dd-402f-a06e-b9a09b7cb888",
+  "locationId": "VoeVvlByAem9pkxb7f6a",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 8,
+  "name": "Virginia Beach No-Show Recovery",
+  "status": "draft",
+  "version": 4,
+  "dataVersion": 7,
+  "allowMultiple": false,
+  "eventStartDate": null,
+  "window": {
+   "condition": "when",
+   "start": "08:00",
+   "end": "17:00",
+   "days": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
+  },
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/VoeVvlByAem9pkxb7f6a/workflows/d0d55f71-04dd-402f-a06e-b9a09b7cb888/3",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "permission": 380,
+  "type": "workflow",
+  "parentId": "0216341b-92e6-4e55-8f8b-fd4419e856b4",
+  "createdAt": "2026-07-15T23:47:18.857Z",
+  "updatedAt": "2026-07-17T14:45:20.379Z",
+  "deleted": false,
+  "workflowNote": {
+   "content": "",
+   "createdBy": "clone_workflow",
+   "createdByName": "clone_workflow",
+   "createdAt": "2026-07-15T23:47:18.928Z",
+   "updatedBy": "clone_workflow",
+   "updatedByName": "clone_workflow",
+   "updatedAt": "2026-07-15T23:47:18.928Z"
+  },
+  "allowMultipleOpportunity": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "duplicate-workflow",
+  "__v": 0,
+  "updatedBy": "MyFtShSIGksH1SAoD5Ye",
+  "id": "d0d55f71-04dd-402f-a06e-b9a09b7cb888",
+  "workflowData": {
+   "templates": [
+    {
+     "type": "task-notification",
+     "id": "0a5bf617-fe7b-45ac-9c80-b371be3b748f",
+     "name": "Create High Priority Task to Call No-Show",
+     "next": "3808594d-7ffe-4acd-ae0e-59d6ad9e1db5",
+     "attributes": {
+      "title": "Call {{contact.first_name}} - no-showed today, rebook",
+      "body": "Follow up with {{contact.first_name}} as they no-showed their appointment today. Contact them to reschedule as soon as possible.",
+      "assignedTo": "contact.assigned_user",
+      "dueDate": {
+       "duration": 0,
+       "unit": "days",
+       "skipWeekends": false
+      },
+      "type": "task_notification",
+      "__customInputs__": {}
+     },
+     "workflowsActionType": "INTERNAL",
+     "order": 0,
+     "stepIndex": 1
+    },
+    {
+     "type": "sms",
+     "id": "3808594d-7ffe-4acd-ae0e-59d6ad9e1db5",
+     "name": "Send Initial No-Show SMS",
+     "next": "c3276cdf-b70f-4d4a-9bf7-ac9106c3ba0f",
+     "attributes": {
+      "body": "We missed you today, {{contact.first_name}}. Let's get you back in - grab a new time here: {{custom_values.newport_news__booking_link}}. Reply STOP to opt out.",
+      "assignedOwners": [
+       "contact_owner"
+      ],
+      "alsoNotifyContactFollowers": false,
+      "alsoNotifyOpportunityFollowers": false
+     },
+     "parentKey": "0a5bf617-fe7b-45ac-9c80-b371be3b748f",
+     "order": 1
+    },
+    {
+     "type": "find_opportunity",
+     "id": "c3276cdf-b70f-4d4a-9bf7-ac9106c3ba0f",
+     "name": "Find Opportunity in Newport News Pipeline",
+     "attributes": {
+      "transitions": [
+       {
+        "id": "55bc9b73-a2b3-4482-9ab6-a9f99e0484fa",
+        "fields": {},
+        "conditionType": "user-defined",
+        "meta": {
+         "__branchKey__": "open_opportunity_found"
+        }
+       },
+       {
+        "id": "4a462110-0895-430a-a941-39491d4deed1"
+       }
+      ],
+      "type": "find_opportunity",
+      "name": "Find Opportunity in Newport News Pipeline",
+      "__name__": "Find Opportunity in Newport News Pipeline",
+      "convertToMultipath": true,
+      "cat": "multi-path",
+      "sorting": "latest"
+     },
+     "parentKey": "3808594d-7ffe-4acd-ae0e-59d6ad9e1db5",
+     "cat": "multi-path",
+     "convertToMultipath": true,
+     "next": [
+      "55bc9b73-a2b3-4482-9ab6-a9f99e0484fa",
+      "4a462110-0895-430a-a941-39491d4deed1"
+     ],
+     "workflowsActionType": "INTERNAL",
+     "order": 2
+    },
+    {
+     "id": "55bc9b73-a2b3-4482-9ab6-a9f99e0484fa",
+     "name": "Open Opportunity Found",
+     "type": "transition",
+     "next": "77010095-5365-4ef6-a919-fb02a9e9dbe3",
+     "attributes": {},
+     "parentKey": "c3276cdf-b70f-4d4a-9bf7-ac9106c3ba0f",
+     "parent": "c3276cdf-b70f-4d4a-9bf7-ac9106c3ba0f",
+     "cat": "transition",
+     "order": 3
+    },
+    {
+     "id": "77010095-5365-4ef6-a919-fb02a9e9dbe3",
+     "parent": "55bc9b73-a2b3-4482-9ab6-a9f99e0484fa",
+     "order": 0,
+     "attributes": {
+      "allowBackward": false,
+      "__customInputFields__": [
+       {
+        "__customInputs__": {},
+        "dataType": "SINGLE_OPTIONS",
+        "filterField": "pipelineId",
+        "value": "4KHhJkSYaYghr2m0Rixg",
+        "valueFieldType": "select"
+       },
+       {
+        "__customInputs__": {},
+        "dataType": "SINGLE_OPTIONS",
+        "filterField": "pipelineStageId",
+        "value": "078f71e8-e3a5-4d22-9f64-d92e4cc1b956",
+        "valueFieldType": "select"
+       }
+      ],
+      "type": "internal_update_opportunity",
+      "__customInputs__": {}
+     },
+     "name": "Update opportunity",
+     "type": "internal_update_opportunity",
+     "next": "e63e7eec-0052-46ee-b4f1-8c225bf3d64c",
+     "workflowsActionType": "INTERNAL",
+     "parentKey": "55bc9b73-a2b3-4482-9ab6-a9f99e0484fa"
+    },
+    {
+     "type": "wait",
+     "id": "e63e7eec-0052-46ee-b4f1-8c225bf3d64c",
+     "name": "Wait 1 Day",
+     "next": "07006a8b-4c4d-488d-9515-2f3afc305ace",
+     "attributes": {
+      "type": "time",
+      "convertToMultipath": false,
+      "hybridActionType": "wait",
+      "isHybridAction": true,
+      "name": "Wait 1 Day",
+      "cat": "action",
+      "transitions": [],
+      "startAfter": {
+       "when": "after",
+       "type": "days",
+       "value": 1
+      },
+      "timePeriodInputMode": "standard",
+      "unitInputMode": "standard"
+     },
+     "parentKey": "77010095-5365-4ef6-a919-fb02a9e9dbe3",
+     "parent": "55bc9b73-a2b3-4482-9ab6-a9f99e0484fa",
+     "order": 1
+    },
+    {
+     "type": "sms",
+     "id": "07006a8b-4c4d-488d-9515-2f3afc305ace",
+     "name": "Send 1-Day Rebook SMS Nudge",
+     "next": "341019dd-6f88-4e62-832c-8f6735f55467",
+     "attributes": {
+      "body": "Hi {{contact.first_name}}, we'd still love to see you! Book your Newport News consult here:{{custom_values.newport_news__booking_link}} Reply STOP to opt out.",
+      "assignedOwners": [
+       "contact_owner"
+      ],
+      "alsoNotifyContactFollowers": false,
+      "alsoNotifyOpportunityFollowers": false,
+      "attachments": []
+     },
+     "parentKey": "e63e7eec-0052-46ee-b4f1-8c225bf3d64c",
+     "parent": "55bc9b73-a2b3-4482-9ab6-a9f99e0484fa",
+     "order": 2
+    },
+    {
+     "type": "wait",
+     "id": "341019dd-6f88-4e62-832c-8f6735f55467",
+     "name": "Wait 3 Days",
+     "next": "43e39abf-a613-45a9-b1b1-1ba9c22d3d9d",
+     "attributes": {
+      "type": "time",
+      "convertToMultipath": false,
+      "hybridActionType": "wait",
+      "isHybridAction": true,
+      "name": "Wait 3 Days",
+      "cat": "action",
+      "transitions": [],
+      "startAfter": {
+       "when": "after",
+       "type": "days",
+       "value": 3
+      },
+      "timePeriodInputMode": "standard",
+      "unitInputMode": "standard"
+     },
+     "parentKey": "07006a8b-4c4d-488d-9515-2f3afc305ace",
+     "parent": "55bc9b73-a2b3-4482-9ab6-a9f99e0484fa",
+     "order": 3
+    },
+    {
+     "type": "sms",
+     "id": "43e39abf-a613-45a9-b1b1-1ba9c22d3d9d",
+     "name": "Send Final Rebook SMS Nudge",
+     "attributes": {
+      "body": "Just checking in—ready to rebook your consult? Secure your new time here: {{custom_values.newport_news__booking_link}} Reply STOP to opt out.",
+      "assignedOwners": [
+       "contact_owner"
+      ],
+      "alsoNotifyContactFollowers": false,
+      "alsoNotifyOpportunityFollowers": false,
+      "attachments": []
+     },
+     "parentKey": "341019dd-6f88-4e62-832c-8f6735f55467",
+     "parent": "55bc9b73-a2b3-4482-9ab6-a9f99e0484fa",
+     "order": 4
+    },
+    {
+     "id": "4a462110-0895-430a-a941-39491d4deed1",
+     "name": "No Open Opportunity Found",
+     "type": "transition",
+     "attributes": {},
+     "parentKey": "c3276cdf-b70f-4d4a-9bf7-ac9106c3ba0f",
+     "parent": "c3276cdf-b70f-4d4a-9bf7-ac9106c3ba0f",
+     "cat": "transition",
+     "order": 3
+    }
+   ]
+  }
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ },
+ "triggers": [
+  {
+   "id": "SkCzJNtJIGucy7MQ3HsD",
+   "date_added": "2026-07-15T23:47:18.881Z",
+   "deleted": false,
+   "belongs_to": "workflow",
+   "location_id": "VoeVvlByAem9pkxb7f6a",
+   "actions": [
+    {
+     "workflow_id": "d0d55f71-04dd-402f-a06e-b9a09b7cb888",
+     "type": "add_to_workflow"
+    }
+   ],
+   "masterType": "highlevel",
+   "name": "Appointment Status Changed to No Show - Newport News Consults",
+   "type": "appointment",
+   "workflow_id": "d0d55f71-04dd-402f-a06e-b9a09b7cb888",
+   "schedule_config": {},
+   "conditions": [
+    {
+     "operator": "==",
+     "field": "appointment.eventType",
+     "value": "normal",
+     "title": "Event type",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "calendar.id",
+     "value": "KCwl2npRBxd25J9qZEkA",
+     "title": "In calendar",
+     "type": "select",
+     "id": "96b3fc76-cf8b-46eb-8757-3c00b57c868c"
+    },
+    {
+     "operator": "==",
+     "field": "appointment.status",
+     "value": "noshow",
+     "title": "Appointment status is",
+     "type": "select",
+     "id": "46b5011a-a404-4589-98c4-24625f1ecc08"
+    },
+    {
+     "operator": "is-any-of",
+     "field": "contactMode",
+     "value": [
+      "contact"
+     ],
+     "type": "input"
+    }
+   ],
+   "date_updated": "2026-07-17T14:45:20.108Z",
+   "active": false
+  }
+ ],
+ "dependentAssets": {}
+}

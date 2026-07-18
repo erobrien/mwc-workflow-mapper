@@ -1,0 +1,176 @@
+{
+ "customValues": [
+  {
+   "id": "3DF6NPisqTPAdnkIoh94",
+   "name": "booking_url",
+   "fieldKey": "{{ custom_values.booking_url }}",
+   "value": "https://bookmwc.com/",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "documentType": "field",
+   "parentId": null
+  },
+  {
+   "id": "jIUaBowpgZxqx4EedDj9",
+   "name": "intake_url",
+   "fieldKey": "{{ custom_values.intake_url }}",
+   "value": "https://bookmwc.com/intake",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "documentType": "field",
+   "parentId": null
+  },
+  {
+   "id": "N5CjQq6kVAs30KrlpTDU",
+   "name": "review_link",
+   "fieldKey": "{{ custom_values.review_link }}",
+   "value": "placeholder for now",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "documentType": "field",
+   "parentId": null
+  },
+  {
+   "id": "nVCFBpF8uQsFuBKPUL0d",
+   "name": "referral_link",
+   "fieldKey": "{{ custom_values.referral_link }}",
+   "value": "referral_link",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "documentType": "field",
+   "parentId": null
+  },
+  {
+   "id": "zGj71ocNaVwSdJ7tFNmT",
+   "name": "richmond_phone",
+   "fieldKey": "{{ custom_values.richmond_phone }}",
+   "value": "8043464636",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "documentType": "field",
+   "parentId": null
+  },
+  {
+   "id": "Ow9vzQGc8xMXgkXRlqLX",
+   "name": "richmond_address",
+   "fieldKey": "{{ custom_values.richmond_address }}",
+   "value": "4050 Innslake Drive, Suite 360, Glen Allen, VA",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "documentType": "field",
+   "parentId": null
+  },
+  {
+   "id": "UgX25cDNVYXa2L1x1B9i",
+   "name": "npn_phone",
+   "fieldKey": "{{ custom_values.npn_phone }}",
+   "value": "7578066263",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "documentType": "field",
+   "parentId": null
+  },
+  {
+   "id": "USODoFM740MWI6Zzu9ys",
+   "name": "npn_address",
+   "fieldKey": "{{ custom_values.npn_address }}",
+   "value": "827 Diligence Dr Ste 206, Newport News, VA 23606",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "documentType": "field",
+   "parentId": null
+  },
+  {
+   "id": "3AkZQrg29DwMfmVhJS1Y",
+   "name": "vab_phone",
+   "fieldKey": "{{ custom_values.vab_phone }}",
+   "value": "https://www.google.com/search?q=virginia+beach+mens+wellness+centers&sca_esv=4b04a474141781e0&biw=1512&bih=756&sxsrf=APpeQntQKNeUwPDYdTQoC0uKzNjIrSrhaw%3A1783361392118&ei=cO9LaoTbBvy1qtsPsanSyQI&ved=0ahUKEwiE06Hy0r6VAxX8mmoFHbGUNCkQ4dUDCBA&uact=5&oq=virginia+beach+mens+wellness+centers&gs_lp=Egxnd3Mtd2l6LXNlcnAiJHZpcmdpbmlhIGJlYWNoIG1lbnMgd2VsbG5lc3MgY2VudGVyczIIEAAYCBgeGA0yCBAAGAgYHhgNMggQABgIGB4YCjIFEAAY7wUyBRAAGO8FMggQABiABBiiBEjOEFAAWNsPcAB4AZABAJgBpwGgAfQQqgEEMy4xNrgBA8gBAPgBAZgCBqACmwXCAgYQABgHGB7CAggQABgIGAcYHsICCxAAGIAEGIoFGIYDwgIGEAAYCBgemAMAkgcDMS41oAfYpgGyBwMxLjW4B5sFwgcDMi02yAcagAgB&sclient=gws-wiz-serp#",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "documentType": "field",
+   "parentId": null
+  },
+  {
+   "id": "M2RDbeeL0SoZ2LlJPowm",
+   "name": "vab_address",
+   "fieldKey": "{{ custom_values.vab_address }}",
+   "value": "996 First Colonial Rd, Virginia Beach, VA 23454",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "documentType": "field",
+   "parentId": null
+  },
+  {
+   "id": "4QA28XXbEMZ0CoVaDPJj",
+   "name": "Newport News - Estimated Revenue Per Appointment",
+   "fieldKey": "{{ custom_values.newport_news__estimated_revenue_per_appointment }}",
+   "value": "1500",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "documentType": "field",
+   "parentId": "BdKDJnin3TIIO05BTP33"
+  },
+  {
+   "id": "PhLOUEAkeXchV1LG1s5n",
+   "name": "Newport News - Phone",
+   "fieldKey": "{{ custom_values.newport_news__phone }}",
+   "value": "(757) 806-6263",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "documentType": "field",
+   "parentId": "BdKDJnin3TIIO05BTP33"
+  },
+  {
+   "id": "u1fsto6DwCOId07TweUL",
+   "name": "Newport News - Booking Link",
+   "fieldKey": "{{ custom_values.newport_news__booking_link }}",
+   "value": "https://api.leadconnectorhq.com/widget/booking/AbmPR1kgGolxENiNwP8g",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "documentType": "field",
+   "parentId": "BdKDJnin3TIIO05BTP33"
+  },
+  {
+   "id": "UdStIo5Jf9Fn9Tufqndx",
+   "name": "Virginia Beach - Estimated Revenue Per Appointment",
+   "fieldKey": "{{ custom_values.virginia_beach__estimated_revenue_per_appointment }}",
+   "value": "1500",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "documentType": "field",
+   "parentId": "HJAH7FsdQwNaf30AOuEz"
+  },
+  {
+   "id": "u4H9NObSEY3lJ58JodjY",
+   "name": "Virginia Beach - Booking Link",
+   "fieldKey": "{{ custom_values.virginia_beach__booking_link }}",
+   "value": "https://api.leadconnectorhq.com/widget/booking/KCwl2npRBxd25J9qZEkA",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "documentType": "field",
+   "parentId": "HJAH7FsdQwNaf30AOuEz"
+  },
+  {
+   "id": "HPFhNAddVknG0QBSGKdS",
+   "name": "Virginia Beach - Phone",
+   "fieldKey": "{{ custom_values.virginia_beach__phone }}",
+   "value": "(757) 612-4428",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "documentType": "field",
+   "parentId": "HJAH7FsdQwNaf30AOuEz"
+  },
+  {
+   "id": "s4kvaMELAlWZp0JlVRpC",
+   "name": "Richmond - Estimated Revenue Per Appointment",
+   "fieldKey": "{{ custom_values.richmond__estimated_revenue_per_appointment }}",
+   "value": "1500",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "documentType": "field",
+   "parentId": "iZRXNX033bJYNa39mDNz"
+  },
+  {
+   "id": "KabDyIsKoDQJwgsp9uCt",
+   "name": "Richmond - Booking Link",
+   "fieldKey": "{{ custom_values.richmond__booking_link }}",
+   "value": "https://api.leadconnectorhq.com/widget/booking/yNEyRsAO0rBI46IDM7NJ",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "documentType": "field",
+   "parentId": "iZRXNX033bJYNa39mDNz"
+  },
+  {
+   "id": "JuhCoRau8EWOyR3XQSZf",
+   "name": "Richmond - Phone",
+   "fieldKey": "{{ custom_values.richmond__phone }}",
+   "value": "(804) 346-4636",
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "documentType": "field",
+   "parentId": "iZRXNX033bJYNa39mDNz"
+  }
+ ],
+ "traceId": "48ddbb25-54ee-4a45-9d32-8451aaa0712a"
+}

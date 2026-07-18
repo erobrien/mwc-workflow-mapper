@@ -1,0 +1,438 @@
+{
+ "workflowData": {
+  "_id": "238bc304-954d-45ce-be54-2a7e1c2b6008",
+  "locationId": "VoeVvlByAem9pkxb7f6a",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 8,
+  "name": "Virginia Beach - Medical Intake Reminder Chase",
+  "status": "draft",
+  "version": 4,
+  "dataVersion": 7,
+  "allowMultiple": true,
+  "eventStartDate": null,
+  "window": {
+   "condition": "when",
+   "start": "08:00",
+   "end": "17:00",
+   "days": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
+  },
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/VoeVvlByAem9pkxb7f6a/workflows/238bc304-954d-45ce-be54-2a7e1c2b6008/3",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "permission": 380,
+  "type": "workflow",
+  "parentId": "7041ca7f-e82a-4dca-b5cc-1c97cfdcbc7b",
+  "createdAt": "2026-07-15T23:46:42.900Z",
+  "updatedAt": "2026-07-17T14:44:48.536Z",
+  "deleted": false,
+  "workflowNote": {
+   "content": "",
+   "createdBy": "clone_workflow",
+   "createdByName": "clone_workflow",
+   "createdAt": "2026-07-15T23:46:42.976Z",
+   "updatedBy": "clone_workflow",
+   "updatedByName": "clone_workflow",
+   "updatedAt": "2026-07-15T23:46:42.976Z"
+  },
+  "allowMultipleOpportunity": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "duplicate-workflow",
+  "__v": 0,
+  "updatedBy": "MyFtShSIGksH1SAoD5Ye",
+  "id": "238bc304-954d-45ce-be54-2a7e1c2b6008",
+  "workflowData": {
+   "templates": [
+    {
+     "type": "wait",
+     "id": "748951f5-7a40-4bbf-b038-754a18d7ca54",
+     "name": "Wait 5 Minutes",
+     "next": "3af11817-5b88-49e9-86a5-8e3a583d0fff",
+     "attributes": {
+      "type": "time",
+      "convertToMultipath": false,
+      "hybridActionType": "wait",
+      "isHybridAction": true,
+      "name": "Wait 5 Minutes",
+      "cat": "",
+      "transitions": [],
+      "startAfter": {
+       "when": "after",
+       "type": "minutes",
+       "value": 5
+      },
+      "timePeriodInputMode": "standard",
+      "unitInputMode": "standard"
+     },
+     "order": 0,
+     "cat": ""
+    },
+    {
+     "type": "sms",
+     "id": "3af11817-5b88-49e9-86a5-8e3a583d0fff",
+     "name": "Initial Intake SMS",
+     "next": "949ec0b9-4033-4130-a4dc-a5000f11b4a1",
+     "attributes": {
+      "body": "One quick step to lock in your visit, {{contact.first_name}} - finish your intake here: {{custom_values.intake_url}} (2 min). Reply STOP to opt out.",
+      "assignedOwners": [
+       "contact_owner"
+      ],
+      "alsoNotifyContactFollowers": false,
+      "alsoNotifyOpportunityFollowers": false,
+      "attachments": []
+     },
+     "parentKey": "748951f5-7a40-4bbf-b038-754a18d7ca54",
+     "order": 1
+    },
+    {
+     "type": "wait",
+     "id": "949ec0b9-4033-4130-a4dc-a5000f11b4a1",
+     "name": "Wait 1 Day for Intake Completion",
+     "next": "7832792a-fe6e-4a23-9e10-4237aa858557",
+     "attributes": {
+      "type": "time",
+      "convertToMultipath": false,
+      "hybridActionType": "wait",
+      "isHybridAction": true,
+      "name": "Wait 1 Day for Intake Completion",
+      "cat": "action",
+      "transitions": [],
+      "startAfter": {
+       "when": "after",
+       "type": "days",
+       "value": 1
+      },
+      "timePeriodInputMode": "standard",
+      "unitInputMode": "standard"
+     },
+     "parentKey": "3af11817-5b88-49e9-86a5-8e3a583d0fff",
+     "order": 2
+    },
+    {
+     "type": "if_else",
+     "id": "7832792a-fe6e-4a23-9e10-4237aa858557",
+     "name": "yes",
+     "attributes": {
+      "currentRecipeType": "CUSTOM",
+      "branches": [
+       {
+        "id": "0da484e9-3f84-4e1b-a758-f41e791a6b31",
+        "name": "Check if intake form is submitted or Medical Intake Status complete",
+        "segments": [
+         {
+          "__segmentId": "8b3fb61d-8d58-4138-bfbf-9cd99c003b24",
+          "operator": "and",
+          "conditions": [
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "tags",
+            "conditionOperator": "index-of-true",
+            "conditionValue": [
+             "intake-complete"
+            ],
+            "__conditionId": "11b2b093-b301-4ad3-8b1a-49826fe26787",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           }
+          ]
+         },
+         {
+          "__segmentId": "00589b89-c91a-47af-8003-baae00a76a64",
+          "operator": "and",
+          "conditions": [
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "custom_field",
+            "conditionOperator": "==",
+            "conditionValue": "Complete",
+            "__conditionId": "77278d46-ea5c-47c9-9aac-8acabf8a1515",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           }
+          ]
+         }
+        ],
+        "operator": "or",
+        "showErrors": false,
+        "branchNameError": "Branch name cannot be empty!"
+       }
+      ],
+      "operator": "and",
+      "if": true,
+      "conditionName": "Check Intake Completion",
+      "version": 2,
+      "noneBranchName": "None"
+     },
+     "parentKey": "949ec0b9-4033-4130-a4dc-a5000f11b4a1",
+     "nodeType": "condition-node",
+     "cat": "conditions",
+     "next": [
+      "0da484e9-3f84-4e1b-a758-f41e791a6b31",
+      "28427738-fa3b-4427-9bd7-2ea5503e4909"
+     ],
+     "order": 3
+    },
+    {
+     "type": "if_else",
+     "id": "0da484e9-3f84-4e1b-a758-f41e791a6b31",
+     "name": "Intake Submitted or Medical Intake Status Complete",
+     "parentKey": "7832792a-fe6e-4a23-9e10-4237aa858557",
+     "parent": "7832792a-fe6e-4a23-9e10-4237aa858557",
+     "nodeType": "branch-yes",
+     "cat": "conditions",
+     "sibling": [
+      "28427738-fa3b-4427-9bd7-2ea5503e4909"
+     ],
+     "attributes": {
+      "if": false,
+      "conditionName": "Condition",
+      "operator": "and",
+      "branches": []
+     },
+     "order": 4
+    },
+    {
+     "type": "if_else",
+     "id": "28427738-fa3b-4427-9bd7-2ea5503e4909",
+     "name": "None",
+     "next": "c26b192e-61ee-4bd2-bb5a-b49100697e88",
+     "parentKey": "7832792a-fe6e-4a23-9e10-4237aa858557",
+     "parent": "7832792a-fe6e-4a23-9e10-4237aa858557",
+     "nodeType": "branch-no",
+     "cat": "conditions",
+     "sibling": [
+      "0da484e9-3f84-4e1b-a758-f41e791a6b31"
+     ],
+     "attributes": {
+      "else": true
+     },
+     "order": 4
+    },
+    {
+     "type": "sms",
+     "id": "c26b192e-61ee-4bd2-bb5a-b49100697e88",
+     "name": "1-Day Nudge SMS",
+     "next": "225c8abb-2bca-45eb-a096-7f2b72b3db8c",
+     "attributes": {
+      "body": "Quick reminder, {{contact.first_name}}: Please finish your medical intake here before your visit: {{ custom_values.intake_url }}. Reply STOP to opt out.",
+      "assignedOwners": [
+       "contact_owner"
+      ],
+      "alsoNotifyContactFollowers": false,
+      "alsoNotifyOpportunityFollowers": false
+     },
+     "parentKey": "28427738-fa3b-4427-9bd7-2ea5503e4909",
+     "parent": "28427738-fa3b-4427-9bd7-2ea5503e4909",
+     "order": 0
+    },
+    {
+     "type": "wait",
+     "id": "225c8abb-2bca-45eb-a096-7f2b72b3db8c",
+     "name": "Wait 1 More Day",
+     "next": "6fdbf7e9-117d-4068-975e-982f988c30b1",
+     "attributes": {
+      "type": "appointment",
+      "convertToMultipath": false,
+      "hybridActionType": "wait",
+      "isHybridAction": true,
+      "name": "Wait 1 More Day",
+      "cat": "",
+      "transitions": [],
+      "appointmentStartAfter": {
+       "when": "before",
+       "type": "minutes",
+       "value": 1440,
+       "action_in": 0,
+       "distributed": {
+        "months": 0,
+        "days": 1,
+        "hours": 0,
+        "minutes": 0
+       }
+      },
+      "appointmentCondition": "next"
+     },
+     "parentKey": "c26b192e-61ee-4bd2-bb5a-b49100697e88",
+     "parent": "28427738-fa3b-4427-9bd7-2ea5503e4909",
+     "order": 1,
+     "cat": ""
+    },
+    {
+     "type": "sms",
+     "id": "6fdbf7e9-117d-4068-975e-982f988c30b1",
+     "name": "Final Nudge SMS (Day Before Appointment)",
+     "next": "aa68e4e3-643d-4063-8e5d-9c49fef25c33",
+     "attributes": {
+      "body": "Last call, {{contact.first_name}}! Please complete your intake here right away: {{ custom_values.intake_url }} – it only takes 2 minutes. Reply STOP to opt out.",
+      "assignedOwners": [
+       "contact_owner"
+      ],
+      "alsoNotifyContactFollowers": false,
+      "alsoNotifyOpportunityFollowers": false
+     },
+     "parentKey": "225c8abb-2bca-45eb-a096-7f2b72b3db8c",
+     "parent": "28427738-fa3b-4427-9bd7-2ea5503e4909",
+     "order": 2
+    },
+    {
+     "type": "wait",
+     "id": "aa68e4e3-643d-4063-8e5d-9c49fef25c33",
+     "name": "Wait Before Appointment",
+     "next": "8b0c18db-9d8f-4693-9b34-8410ab314222",
+     "attributes": {
+      "type": "appointment",
+      "convertToMultipath": false,
+      "hybridActionType": "wait",
+      "isHybridAction": true,
+      "name": "Wait Before Appointment",
+      "cat": "",
+      "transitions": [],
+      "appointmentStartAfter": {
+       "when": "before",
+       "type": "minutes",
+       "value": 1440,
+       "action_in": 0,
+       "distributed": {
+        "months": 0,
+        "days": 1,
+        "hours": 0,
+        "minutes": 0
+       }
+      },
+      "appointmentCondition": "next"
+     },
+     "parentKey": "6fdbf7e9-117d-4068-975e-982f988c30b1",
+     "parent": "28427738-fa3b-4427-9bd7-2ea5503e4909",
+     "order": 3,
+     "cat": ""
+    },
+    {
+     "type": "internal_notification",
+     "id": "8b0c18db-9d8f-4693-9b34-8410ab314222",
+     "name": "Internal Notification to Team",
+     "attributes": {
+      "type": "notification",
+      "notification": {
+       "title": "Incomplete Intake Reminder",
+       "body": "Intake still not complete for {{contact.first_name}} {{contact.last_name}} before tomorrow's appointment. Please call the patient to ensure intake is finished. Contact info: {{contact.phone}}, {{contact.email}}.",
+       "redirectPage": "contact",
+       "userType": "assign",
+       "assignedOwners": [
+        "contact_owner"
+       ],
+       "alsoNotifyContactFollowers": false,
+       "alsoNotifyOpportunityFollowers": false,
+       "type": "send_notification"
+      }
+     },
+     "parentKey": "aa68e4e3-643d-4063-8e5d-9c49fef25c33",
+     "parent": "28427738-fa3b-4427-9bd7-2ea5503e4909",
+     "order": 4
+    }
+   ]
+  }
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ },
+ "triggers": [
+  {
+   "id": "gUwniT1YmPvvdvuL6rND",
+   "date_added": "2026-07-15T23:46:42.916Z",
+   "deleted": false,
+   "belongs_to": "workflow",
+   "location_id": "VoeVvlByAem9pkxb7f6a",
+   "actions": [
+    {
+     "workflow_id": "238bc304-954d-45ce-be54-2a7e1c2b6008",
+     "type": "add_to_workflow"
+    }
+   ],
+   "masterType": "highlevel",
+   "name": "Appointment Booked - Richmond Consults",
+   "type": "customer_appointment",
+   "workflow_id": "238bc304-954d-45ce-be54-2a7e1c2b6008",
+   "schedule_config": {},
+   "conditions": [
+    {
+     "operator": "==",
+     "field": "calendar.id",
+     "value": "KCwl2npRBxd25J9qZEkA",
+     "title": "In calendar",
+     "type": "select",
+     "id": "929b7771-00d5-4968-8fc3-8a09d8e86a97"
+    },
+    {
+     "operator": "is-any-of",
+     "field": "contactMode",
+     "value": [
+      "contact"
+     ],
+     "type": "input"
+    }
+   ],
+   "date_updated": "2026-07-17T14:44:48.297Z",
+   "active": false
+  }
+ ],
+ "dependentAssets": {}
+}

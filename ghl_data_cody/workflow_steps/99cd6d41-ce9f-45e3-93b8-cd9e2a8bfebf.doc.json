@@ -1,0 +1,124 @@
+{
+ "workflowData": {
+  "_id": "99cd6d41-ce9f-45e3-93b8-cd9e2a8bfebf",
+  "locationId": "VoeVvlByAem9pkxb7f6a",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 8,
+  "name": "Global Opt-Out Handler",
+  "status": "draft",
+  "version": 4,
+  "dataVersion": 7,
+  "allowMultiple": false,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/VoeVvlByAem9pkxb7f6a/workflows/99cd6d41-ce9f-45e3-93b8-cd9e2a8bfebf/2",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "permission": 380,
+  "type": "workflow",
+  "parentId": "3488bc68-21b7-4d9d-9c6f-a20ef08d9e68",
+  "updatedBy": "MyFtShSIGksH1SAoD5Ye",
+  "createdAt": "2026-07-14T17:23:56.520Z",
+  "updatedAt": "2026-07-17T14:46:21.525Z",
+  "deleted": false,
+  "allowMultipleOpportunity": false,
+  "creationSource": "workflow_ai",
+  "isTriggerBucketMigrated": true,
+  "originType": "user",
+  "__v": 0,
+  "eventStartDate": null,
+  "window": {
+   "condition": "when",
+   "start": "08:00",
+   "end": "17:00",
+   "days": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
+  },
+  "workflowNote": null,
+  "id": "99cd6d41-ce9f-45e3-93b8-cd9e2a8bfebf",
+  "workflowData": {
+   "templates": [
+    {
+     "type": "add_contact_tag",
+     "id": "c9e82d52-eeb8-440e-bc50-dbb75c68c7cc",
+     "name": "Tag Contact as Opted-Out",
+     "next": "25f6d43e-2db2-4852-b209-74706048c2e1",
+     "attributes": {
+      "tags": [
+       "opted-out"
+      ]
+     },
+     "order": 0
+    },
+    {
+     "type": "dnd_contact",
+     "id": "25f6d43e-2db2-4852-b209-74706048c2e1",
+     "name": "Set Contact DND for All Channels",
+     "attributes": {
+      "dnd_contact": "enable",
+      "specific_channels": null
+     },
+     "parentKey": "c9e82d52-eeb8-440e-bc50-dbb75c68c7cc",
+     "order": 1
+    }
+   ]
+  }
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ },
+ "triggers": [
+  {
+   "id": "0guBEfK4IrsKnQf4Bs7L",
+   "date_added": "2026-07-14T17:24:20.754Z",
+   "deleted": false,
+   "actions": [
+    {
+     "workflow_id": "99cd6d41-ce9f-45e3-93b8-cd9e2a8bfebf",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "string-matches-any-of",
+     "field": "message.body",
+     "value": [
+      "STOP",
+      "STOPALL",
+      "UNSUBSCRIBE",
+      "CANCEL",
+      "END",
+      "QUIT",
+      "REMOVE"
+     ],
+     "title": "Exact match phrase",
+     "type": "input",
+     "id": "message-exact-phrase"
+    },
+    {
+     "operator": "==",
+     "field": "message.type",
+     "value": 2,
+     "title": "Reply channel",
+     "type": "select",
+     "id": "698a5dfc-7529-44be-a2d1-6025b39c1873"
+    }
+   ],
+   "type": "customer_reply",
+   "masterType": "highlevel",
+   "workflow_id": "99cd6d41-ce9f-45e3-93b8-cd9e2a8bfebf",
+   "location_id": "VoeVvlByAem9pkxb7f6a",
+   "name": "Customer Reply with Opt-Out Keywords",
+   "belongs_to": "workflow",
+   "date_updated": "2026-07-17T14:46:21.088Z",
+   "active": false
+  }
+ ],
+ "dependentAssets": {}
+}

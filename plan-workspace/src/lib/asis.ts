@@ -74,35 +74,29 @@ export interface AsisFlows {
   flows: AsisFlow[];
 }
 
-let cache: AsisDetail | null = null;
-let flowsCache: AsisFlows | null = null;
+// Generic cached JSON hooks — one cache entry per URL so the as-is and Cody
+// datasets (identical schemas) share all rendering code.
+const jsonCache: Record<string, unknown> = {};
 
-export function useAsisFlows() {
-  const [data, setData] = useState<AsisFlows | null>(flowsCache);
-  const [isLoading, setLoading] = useState(!flowsCache);
+export function useJson<T>(url: string) {
+  const [data, setData] = useState<T | null>((jsonCache[url] as T) ?? null);
+  const [isLoading, setLoading] = useState(!jsonCache[url]);
   const [error, setError] = useState<unknown>(null);
   useEffect(() => {
-    if (flowsCache) return;
-    fetch("/asis-flows.json")
-      .then((r) => { if (!r.ok) throw new Error(`asis-flows.json: ${r.status}`); return r.json(); })
-      .then((d: AsisFlows) => { flowsCache = d; setData(d); })
+    if (jsonCache[url]) { setData(jsonCache[url] as T); setLoading(false); return; }
+    setLoading(true);
+    fetch(url)
+      .then((r) => { if (!r.ok) throw new Error(`${url}: ${r.status}`); return r.json(); })
+      .then((d: T) => { jsonCache[url] = d; setData(d); })
       .catch(setError)
       .finally(() => setLoading(false));
-  }, []);
+  }, [url]);
   return { data, isLoading, error };
 }
 
-export function useAsisDetail() {
-  const [data, setData] = useState<AsisDetail | null>(cache);
-  const [isLoading, setLoading] = useState(!cache);
-  const [error, setError] = useState<unknown>(null);
-  useEffect(() => {
-    if (cache) return;
-    fetch("/asis-detail.json")
-      .then((r) => { if (!r.ok) throw new Error(`asis-detail.json: ${r.status}`); return r.json(); })
-      .then((d: AsisDetail) => { cache = d; setData(d); })
-      .catch(setError)
-      .finally(() => setLoading(false));
-  }, []);
-  return { data, isLoading, error };
-}
+export const useAsisFlows = () => useJson<AsisFlows>("/asis-flows.json");
+export const useAsisDetail = () => useJson<AsisDetail>("/asis-detail.json");
+
+// Cody (Cavenaugh Media) build sub-account — same schemas, different capture.
+export const useCodyFlows = () => useJson<AsisFlows>("/cody-flows.json");
+export const useCodyDetail = () => useJson<AsisDetail>("/cody-detail.json");

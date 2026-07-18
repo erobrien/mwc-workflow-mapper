@@ -1,0 +1,562 @@
+{
+ "pipelines": [
+  {
+   "id": "YE0hrHSShHKkgT7xBrcz",
+   "name": "Sales - Lead to Close",
+   "showInFunnel": true,
+   "showInPieChart": true,
+   "useOpportunityProbability": false,
+   "dateAdded": "2026-07-06T19:26:20.767Z",
+   "dateUpdated": "2026-07-08T05:56:45.153Z",
+   "stages": [
+    {
+     "id": "8e4c1e90-6d0f-41f1-a2d8-25b476925c26",
+     "name": "New Lead",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 0,
+     "stageWinProbability": 14.29,
+     "color": "#64748B"
+    },
+    {
+     "id": "c05f7b89-6307-445d-956a-010875d7f99f",
+     "name": "Engaged",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 1,
+     "stageWinProbability": 28.57,
+     "color": "#64748B"
+    },
+    {
+     "id": "9618762e-3882-4ad9-9be4-e8ae6768413a",
+     "name": "Booked",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 2,
+     "stageWinProbability": 42.86,
+     "color": "#64748B"
+    },
+    {
+     "id": "8968c633-def7-4132-bc38-a473f1eb1006",
+     "name": "Confirmed",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 3,
+     "stageWinProbability": 57.14,
+     "color": "#64748B"
+    },
+    {
+     "id": "ce31a23d-064d-4e82-9e0d-158c5d5ce023",
+     "name": "Showed",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 4,
+     "stageWinProbability": 71.43,
+     "color": "#64748B"
+    },
+    {
+     "id": "358d0cf0-7cef-4909-81b8-dc156256eb80",
+     "name": "Won",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 5,
+     "stageWinProbability": 85.71,
+     "color": "#64748B"
+    }
+   ],
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "colorRenderMode": "none",
+   "position": "Zy27QDYG"
+  },
+  {
+   "id": "UVl6YRg8ffaHA1iCAKMe",
+   "name": "Newport News, Virginia Pipeline",
+   "showInFunnel": true,
+   "showInPieChart": true,
+   "useOpportunityProbability": false,
+   "dateAdded": "2026-07-08T05:55:22.241Z",
+   "dateUpdated": "2026-07-09T04:38:09.254Z",
+   "stages": [
+    {
+     "id": "fe0ee3f1-5338-4964-b4d9-69266fd5a6cc",
+     "name": "New Lead",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 0,
+     "stageWinProbability": 10,
+     "color": "#64748B"
+    },
+    {
+     "id": "f7332040-bbd0-4d3f-b30c-1c7579f5b10c",
+     "name": "Appointment Booked",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 1,
+     "stageWinProbability": 20,
+     "color": "#64748B"
+    },
+    {
+     "id": "48b64543-5f18-4ed0-8f25-792c19385ab0",
+     "name": "Confirmed",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 2,
+     "stageWinProbability": 30,
+     "color": "#64748B"
+    },
+    {
+     "id": "356b4da8-4a03-4358-a341-5c8d271dd233",
+     "name": "Rescheduled",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 3,
+     "stageWinProbability": 40,
+     "color": "#64748B"
+    },
+    {
+     "id": "34d13fd0-f2c7-4d11-9d49-a05751104949",
+     "name": "Cancelled",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 4,
+     "stageWinProbability": 50,
+     "color": "#64748B"
+    },
+    {
+     "id": "f49c6173-fbb5-48c9-8dd0-b293064ed020",
+     "name": "Showed",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 5,
+     "stageWinProbability": 60,
+     "color": "#64748B"
+    },
+    {
+     "id": "8cbf7dac-b009-403a-b9ed-b108b78ab46f",
+     "name": "No-Show",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 6,
+     "stageWinProbability": 70,
+     "color": "#64748B"
+    },
+    {
+     "id": "5d2e91b8-ad39-4499-aba4-164cc60d44ab",
+     "name": "Not Sold",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 7,
+     "stageWinProbability": 80,
+     "color": "#64748B"
+    },
+    {
+     "id": "edb7569e-1a69-42eb-a944-ec440862d67b",
+     "name": "Sold",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 8,
+     "stageWinProbability": 90,
+     "color": "#64748B"
+    }
+   ],
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "colorRenderMode": "none",
+   "position": "ZyDfWQ5l"
+  },
+  {
+   "id": "4KHhJkSYaYghr2m0Rixg",
+   "name": "Richmond, Virginia Pipeline",
+   "showInFunnel": true,
+   "showInPieChart": true,
+   "useOpportunityProbability": false,
+   "dateAdded": "2026-07-08T05:56:28.043Z",
+   "dateUpdated": "2026-07-09T04:39:31.351Z",
+   "stages": [
+    {
+     "id": "078f71e8-e3a5-4d22-9f64-d92e4cc1b956",
+     "name": "New Lead",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 0,
+     "stageWinProbability": 10,
+     "color": "#64748B"
+    },
+    {
+     "id": "bba85d90-f348-4dc7-b2d3-72bfbb99a32b",
+     "name": "Appointment Booked",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 1,
+     "stageWinProbability": 20,
+     "color": "#64748B"
+    },
+    {
+     "id": "3522f19c-1e0e-4671-b049-2458aeb40aa4",
+     "name": "Confirmed",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 2,
+     "stageWinProbability": 30,
+     "color": "#64748B"
+    },
+    {
+     "id": "b80a7fd2-a0c5-4425-a110-0a02ac5a3105",
+     "name": "Rescheduled",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 3,
+     "stageWinProbability": 40,
+     "color": "#64748B"
+    },
+    {
+     "id": "e8f382b2-0ef9-4b98-9822-3d064eb733c7",
+     "name": "Cancelled",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 4,
+     "stageWinProbability": 50,
+     "color": "#64748B"
+    },
+    {
+     "id": "599ceb2a-079d-447f-b1c6-eaf9002da568",
+     "name": "Showed",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 5,
+     "stageWinProbability": 60,
+     "color": "#64748B"
+    },
+    {
+     "id": "67700ca5-c6b9-4e55-aded-43f1ff42f3b1",
+     "name": "No-Show",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 6,
+     "stageWinProbability": 70,
+     "color": "#64748B"
+    },
+    {
+     "id": "a28d7f50-c1b3-4b98-88c0-e194dcfdf2de",
+     "name": "Not Sold",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 7,
+     "stageWinProbability": 80,
+     "color": "#64748B"
+    },
+    {
+     "id": "fa625236-0cbc-48ae-84bb-38a1baa47f32",
+     "name": "Sold",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 8,
+     "stageWinProbability": 90,
+     "color": "#64748B"
+    }
+   ],
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "colorRenderMode": "none",
+   "position": "ZyDmfZTS"
+  },
+  {
+   "id": "KZ6u78XpKcCZPr8X5TvK",
+   "name": "Virginia Beach, VA Pipeline",
+   "showInFunnel": true,
+   "showInPieChart": true,
+   "useOpportunityProbability": false,
+   "dateAdded": "2026-07-08T05:56:36.050Z",
+   "dateUpdated": "2026-07-09T04:39:20.586Z",
+   "stages": [
+    {
+     "id": "a7de1551-9ec9-4dcb-87e3-b4f1bfc99ae7",
+     "name": "New Lead",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 0,
+     "stageWinProbability": 10,
+     "color": "#64748B"
+    },
+    {
+     "id": "ee82cd04-824c-4d5c-99e6-f1b66188412e",
+     "name": "Appointment Booked",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 1,
+     "stageWinProbability": 20,
+     "color": "#64748B"
+    },
+    {
+     "id": "57fbb5aa-2a80-4aa7-b48f-66b20ec9fe8c",
+     "name": "Confirmed",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 2,
+     "stageWinProbability": 30,
+     "color": "#64748B"
+    },
+    {
+     "id": "69f6ef27-0280-4b76-affc-a2211b41d133",
+     "name": "Rescheduled",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 3,
+     "stageWinProbability": 40,
+     "color": "#64748B"
+    },
+    {
+     "id": "688b6a74-3e3c-42e2-baa2-6a7fa2739c16",
+     "name": "Cancelled",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 4,
+     "stageWinProbability": 50,
+     "color": "#64748B"
+    },
+    {
+     "id": "537b4d84-d5ea-4afd-95df-690938d24d36",
+     "name": "Showed",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 5,
+     "stageWinProbability": 60,
+     "color": "#64748B"
+    },
+    {
+     "id": "4c610825-1286-4eb6-a68f-0c031a6e2897",
+     "name": "No-Show",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 6,
+     "stageWinProbability": 70,
+     "color": "#64748B"
+    },
+    {
+     "id": "b2c95e91-e751-4054-baab-b89fff3de11e",
+     "name": "Not Sold",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 7,
+     "stageWinProbability": 80,
+     "color": "#64748B"
+    },
+    {
+     "id": "edb2efbb-30e4-498e-9fc4-2f280625cf18",
+     "name": "Sold",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 8,
+     "stageWinProbability": 90,
+     "color": "#64748B"
+    }
+   ],
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "colorRenderMode": "none",
+   "position": "ZyK6byKC"
+  },
+  {
+   "id": "YgWDeNEV4RIstqbUJkkY",
+   "name": "Retention and Renewals",
+   "showInFunnel": true,
+   "showInPieChart": true,
+   "useOpportunityProbability": false,
+   "dateAdded": "2026-07-06T19:26:59.831Z",
+   "dateUpdated": "2026-07-08T05:55:56.100Z",
+   "stages": [
+    {
+     "id": "3a44148e-1d6a-41e8-8d06-110824d779c8",
+     "name": "Onboarding",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 0,
+     "stageWinProbability": 20,
+     "color": "#64748B"
+    },
+    {
+     "id": "84a0d57b-f98e-4c6a-b1fe-a2663097c808",
+     "name": "Active",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 1,
+     "stageWinProbability": 40,
+     "color": "#64748B"
+    },
+    {
+     "id": "10ad343f-9319-46b0-ba38-3f4a7853ac76",
+     "name": "Renewal Due",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 2,
+     "stageWinProbability": 60,
+     "color": "#64748B"
+    },
+    {
+     "id": "4403fe5d-bfb6-496f-9107-3ed99c2e216a",
+     "name": "Renewed",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 3,
+     "stageWinProbability": 80,
+     "color": "#64748B"
+    }
+   ],
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "colorRenderMode": "none",
+   "position": "ZybX8QCl"
+  },
+  {
+   "id": "49OptBtJpFdgB6Z7TBxk",
+   "name": "Referrals",
+   "showInFunnel": true,
+   "showInPieChart": true,
+   "useOpportunityProbability": false,
+   "dateAdded": "2026-07-06T19:27:48.637Z",
+   "dateUpdated": "2026-07-08T05:56:04.414Z",
+   "stages": [
+    {
+     "id": "31e63b9b-3581-4b4a-a0ae-5de8aad57685",
+     "name": "Submitted",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 0,
+     "stageWinProbability": 16.67,
+     "color": "#64748B"
+    },
+    {
+     "id": "6c2f516a-bafc-448f-b411-a9fe48cf6f23",
+     "name": "Qualified",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 1,
+     "stageWinProbability": 33.33,
+     "color": "#64748B"
+    },
+    {
+     "id": "967be01c-2c1b-4990-9790-40c6c7ef890f",
+     "name": "Booked",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 2,
+     "stageWinProbability": 50,
+     "color": "#64748B"
+    },
+    {
+     "id": "5eca5b74-a4c7-42d2-829d-dbd17d133956",
+     "name": "Showed",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 3,
+     "stageWinProbability": 66.67,
+     "color": "#64748B"
+    },
+    {
+     "id": "c7a66d93-3802-4c37-9d53-ed842d74ee83",
+     "name": "Rewarded",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 4,
+     "stageWinProbability": 83.33,
+     "color": "#64748B"
+    }
+   ],
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "colorRenderMode": "none",
+   "position": "ZylBb2aO"
+  },
+  {
+   "id": "aKrdH9fVPyDyl6KgaRnS",
+   "name": "Attribution Tracking",
+   "showInFunnel": true,
+   "showInPieChart": true,
+   "useOpportunityProbability": false,
+   "dateAdded": "2026-07-06T20:54:56.992Z",
+   "dateUpdated": "2026-07-08T05:56:11.500Z",
+   "stages": [
+    {
+     "id": "2661a668-3764-42b1-9ece-416312296685",
+     "name": "Google Ads",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 0,
+     "stageWinProbability": 10,
+     "color": "#64748B"
+    },
+    {
+     "id": "b1ee56aa-c2a5-49a8-a672-f8a239de43b1",
+     "name": "Meta Ads- Facebook",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 1,
+     "stageWinProbability": 20,
+     "color": "#64748B"
+    },
+    {
+     "id": "09538cb5-a9eb-4b53-a0df-6dd143b80762",
+     "name": "Meta Ads- Instagram",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 2,
+     "stageWinProbability": 30,
+     "color": "#64748B"
+    },
+    {
+     "id": "563d8967-6c0c-4681-ae1e-3ff8a5d0d7a1",
+     "name": "Organic site traffic",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 3,
+     "stageWinProbability": 40,
+     "color": "#64748B"
+    },
+    {
+     "id": "027c492b-85e2-4077-9a92-a7176cc7418a",
+     "name": "Google Business Profile- Newport News",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 4,
+     "stageWinProbability": 50,
+     "color": "#64748B"
+    },
+    {
+     "id": "efb7bc60-bee4-4528-bde8-1b9a260d4c71",
+     "name": "Google Business Profile- Richmond",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 5,
+     "stageWinProbability": 60,
+     "color": "#64748B"
+    },
+    {
+     "id": "52ac1133-2b35-4831-ba25-8c9d20770ca2",
+     "name": "Google Business Profile- Virginia Beach",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 6,
+     "stageWinProbability": 70,
+     "color": "#64748B"
+    },
+    {
+     "id": "faf141dd-04de-4edd-9c6f-6795849b78a2",
+     "name": "Member referrals",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 7,
+     "stageWinProbability": 80,
+     "color": "#64748B"
+    },
+    {
+     "id": "598edda3-d5e8-4a28-99a0-29b54ff5ca6d",
+     "name": "Ambassadors",
+     "showInFunnel": true,
+     "showInPieChart": true,
+     "position": 8,
+     "stageWinProbability": 90,
+     "color": "#64748B"
+    }
+   ],
+   "locationId": "VoeVvlByAem9pkxb7f6a",
+   "colorRenderMode": "none",
+   "position": "ZymSthFp"
+  }
+ ],
+ "traceId": "72d38869-48c8-4982-bb25-342dc4d72c8d"
+}

@@ -1,0 +1,143 @@
+{
+ "workflowData": {
+  "_id": "1b05a9d2-d58d-4ae7-ae90-65b9efca279f",
+  "locationId": "VoeVvlByAem9pkxb7f6a",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 8,
+  "name": "Opportunity Attribution Update",
+  "status": "draft",
+  "version": 6,
+  "dataVersion": 7,
+  "allowMultiple": false,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/VoeVvlByAem9pkxb7f6a/workflows/1b05a9d2-d58d-4ae7-ae90-65b9efca279f/4",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "permission": 380,
+  "type": "workflow",
+  "parentId": "3488bc68-21b7-4d9d-9c6f-a20ef08d9e68",
+  "updatedBy": "MyFtShSIGksH1SAoD5Ye",
+  "createdAt": "2026-07-14T17:43:07.829Z",
+  "updatedAt": "2026-07-17T14:46:27.340Z",
+  "deleted": false,
+  "allowMultipleOpportunity": false,
+  "creationSource": "workflow_ai",
+  "isTriggerBucketMigrated": true,
+  "originType": "user",
+  "__v": 0,
+  "eventStartDate": null,
+  "window": {
+   "condition": "when",
+   "start": "08:00",
+   "end": "17:00",
+   "days": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
+  },
+  "workflowNote": null,
+  "id": "1b05a9d2-d58d-4ae7-ae90-65b9efca279f",
+  "workflowData": {
+   "templates": [
+    {
+     "type": "internal_update_opportunity",
+     "id": "1af226b7-14b2-4c71-ae6c-1ed7daf8cf55",
+     "name": "Update Opportunity UTM Source Field",
+     "next": "20c7f48a-4565-478c-b9dd-8ab8e44e6c47",
+     "attributes": {
+      "allowBackward": false,
+      "type": "internal_update_opportunity",
+      "__customInputFields__": [
+       {
+        "__customInputs__": {},
+        "dataType": "TEXT",
+        "filterField": "custom_fields.a7XDhjVxAw8saTEs5jdw",
+        "value": "{{contact.attributionSource.sessionSource}}",
+        "valueFieldType": "string"
+       }
+      ],
+      "__customInputs__": {}
+     },
+     "workflowsActionType": "INTERNAL",
+     "order": 0
+    },
+    {
+     "type": "internal_update_opportunity",
+     "id": "20c7f48a-4565-478c-b9dd-8ab8e44e6c47",
+     "name": "Update Opportunity GCLID Field",
+     "next": "15740a35-f05e-474a-b274-7b865becdb6c",
+     "attributes": {
+      "allowBackward": false,
+      "type": "internal_update_opportunity",
+      "__customInputFields__": [
+       {
+        "__customInputs__": {},
+        "dataType": "TEXT",
+        "filterField": "custom_fields.NYk1vm1QeLyRLqnKJgNy",
+        "value": "{{contact.attributionSource.gclid}}",
+        "valueFieldType": "string"
+       }
+      ],
+      "__customInputs__": {}
+     },
+     "parentKey": "1af226b7-14b2-4c71-ae6c-1ed7daf8cf55",
+     "workflowsActionType": "INTERNAL",
+     "order": 1
+    },
+    {
+     "type": "internal_update_opportunity",
+     "id": "15740a35-f05e-474a-b274-7b865becdb6c",
+     "name": "Update Opportunity FBCLID Field",
+     "attributes": {
+      "allowBackward": false,
+      "type": "internal_update_opportunity",
+      "__customInputFields__": [
+       {
+        "__customInputs__": {},
+        "dataType": "TEXT",
+        "filterField": "custom_fields.2psXGcRn83g2Ti6V8zYh",
+        "value": "{{contact.attributionSource.fbclid}}",
+        "valueFieldType": "string"
+       }
+      ],
+      "__customInputs__": {}
+     },
+     "parentKey": "20c7f48a-4565-478c-b9dd-8ab8e44e6c47",
+     "workflowsActionType": "INTERNAL",
+     "order": 2
+    }
+   ]
+  }
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ },
+ "triggers": [
+  {
+   "id": "TeurFKkjUBFYhuaz6rJ4",
+   "date_added": "2026-07-14T17:43:36.184Z",
+   "deleted": false,
+   "actions": [
+    {
+     "workflow_id": "1b05a9d2-d58d-4ae7-ae90-65b9efca279f",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [],
+   "type": "opportunity_created",
+   "masterType": "highlevel",
+   "workflow_id": "1b05a9d2-d58d-4ae7-ae90-65b9efca279f",
+   "location_id": "VoeVvlByAem9pkxb7f6a",
+   "name": "Opportunity Created (Allow Re-Entry ON)",
+   "belongs_to": "workflow",
+   "date_updated": "2026-07-17T14:46:27.078Z",
+   "active": false
+  }
+ ],
+ "dependentAssets": {}
+}

@@ -1,0 +1,894 @@
+{
+ "templates": [
+  {
+   "id": "43a6c396-e713-41a4-b1e2-3de6363c1058",
+   "order": 0,
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "016e8ba3-1c83-41aa-b44d-bd3396e26369",
+      "name": "Gate – blocked contacts",
+      "segments": [
+       {
+        "__segmentId": "26ad4be4-a5b4-4e2a-b98e-c592e0b172a0",
+        "operator": "or",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "tags",
+          "conditionOperator": "index-of-true",
+          "conditionValue": [
+           "mut"
+          ],
+          "__conditionId": "23fd8e51-6b95-414e-ac6c-e15eccc9264a",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         },
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "tags",
+          "conditionOperator": "index-of-true",
+          "conditionValue": [
+           "optout:sms"
+          ],
+          "__conditionId": "50e2f0fc-27ee-47ae-9506-b5c6f28b5c0f",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         },
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "uDO5M5FT7HFJ7xzCTcye",
+          "conditionOperator": "!=",
+          "conditionValue": "Confirmed",
+          "__conditionId": "606e0b07-69c3-4232-9fdf-554058915f9d",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false,
+          "nestedDropdownTypes": [
+           "inboundWebhookRequest",
+           "sheet",
+           "datetime_formatter",
+           "custom_webhook",
+           "array_functions",
+           "ivr_gather",
+           "ivr_connect_call",
+           "custom_code",
+           "ai_agent",
+           "task-notification"
+          ],
+          "allowIsOperatorTypes": [
+           "contact_reply",
+           "inboundWebhookRequest",
+           "custom_webhook",
+           "custom_code",
+           "ai_agent",
+           "contact_detail",
+           "array_functions",
+           "appointment",
+           "service_booking",
+           "rental_booking"
+          ]
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!"
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "Condition",
+    "version": 2,
+    "noneBranchName": "None"
+   },
+   "name": "yes",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": [
+    "016e8ba3-1c83-41aa-b44d-bd3396e26369",
+    "dbbaf477-fc97-454d-9bd7-fc64fc33f091"
+   ],
+   "comments": [],
+   "nodeType": "condition-node"
+  },
+  {
+   "id": "016e8ba3-1c83-41aa-b44d-bd3396e26369",
+   "parent": "43a6c396-e713-41a4-b1e2-3de6363c1058",
+   "order": 1,
+   "attributes": {
+    "if": false,
+    "conditionName": "Condition",
+    "operator": "and",
+    "branches": []
+   },
+   "name": "Gate – blocked contacts",
+   "type": "if_else",
+   "cat": "conditions",
+   "sibling": [
+    "dbbaf477-fc97-454d-9bd7-fc64fc33f091"
+   ],
+   "comments": [],
+   "nodeType": "branch-yes",
+   "parentKey": "43a6c396-e713-41a4-b1e2-3de6363c1058"
+  },
+  {
+   "id": "dbbaf477-fc97-454d-9bd7-fc64fc33f091",
+   "parent": "43a6c396-e713-41a4-b1e2-3de6363c1058",
+   "order": 1,
+   "attributes": {
+    "else": true
+   },
+   "name": "None",
+   "type": "if_else",
+   "cat": "conditions",
+   "next": "6c9046b5-ad35-4053-b7eb-493c2c129f36",
+   "sibling": [
+    "016e8ba3-1c83-41aa-b44d-bd3396e26369"
+   ],
+   "comments": [],
+   "nodeType": "branch-no",
+   "parentKey": "43a6c396-e713-41a4-b1e2-3de6363c1058"
+  },
+  {
+   "id": "6c9046b5-ad35-4053-b7eb-493c2c129f36",
+   "parent": "dbbaf477-fc97-454d-9bd7-fc64fc33f091",
+   "order": 0,
+   "attributes": {
+    "type": "time",
+    "convertToMultipath": false,
+    "hybridActionType": "wait",
+    "isHybridAction": true,
+    "name": "Wait 30 Days",
+    "cat": "action",
+    "transitions": [],
+    "startAfter": {
+     "when": "after",
+     "type": "days",
+     "value": 30
+    },
+    "timePeriodInputMode": "standard",
+    "unitInputMode": "standard"
+   },
+   "name": "Wait 30 Days",
+   "type": "wait",
+   "next": "9ae98e51-63e6-40b2-8b41-68b9f51a6813",
+   "parentKey": "dbbaf477-fc97-454d-9bd7-fc64fc33f091"
+  },
+  {
+   "id": "9ae98e51-63e6-40b2-8b41-68b9f51a6813",
+   "parent": "dbbaf477-fc97-454d-9bd7-fc64fc33f091",
+   "order": 1,
+   "attributes": {
+    "subject": "Small habits, big difference — {{contact.first_name}}",
+    "html": "<p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">Hi {{contact.first_name}},<br></p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">It's been about a month since we saw you at Men's Wellness Centers, and</p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">we wanted to check in — no agenda, just a few things worth passing along.</p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">Most men tell us the changes that made the biggest difference weren't</p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">dramatic. They were small and repeatable:<br></p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">- Getting to bed and waking up at consistent times, even on weekends</p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">- Ten minutes of morning light before the phone comes out</p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">- Protein earlier in the day instead of loading it all at dinner</p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">- A short daily walk — not a workout, just movement<br></p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">None of this is a substitute for what we talked about in your consult —</p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">it's just the groundwork that makes everything else work better.</p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">And whenever you're ready to pick up where we left off, your consult</p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">notes are still on file. Restarting is a short conversation, not a</p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">do-over.<br></p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">Take care of yourself,</p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">The Men's Wellness Centers Team – Newport News</p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">(757) 806-6263</p>",
+    "from_name": "",
+    "from_email": "",
+    "assignedOwners": [
+     "contact_owner"
+    ],
+    "alsoNotifyContactFollowers": false,
+    "alsoNotifyOpportunityFollowers": false,
+    "fieldDefaults": {},
+    "htmlDefaults": {},
+    "trackingOptions": {
+     "hasTrackingLinks": false,
+     "hasUtmTracking": false,
+     "hasTags": false,
+     "sourceId": "5a6f3c32-ce50-4190-829d-eca6049adf9d:9ae98e51-63e6-40b2-8b41-68b9f51a6813"
+    },
+    "conditions": [],
+    "attachments": []
+   },
+   "name": "Send Educational Email (Touch 1)",
+   "type": "email",
+   "next": "d8ae7802-400f-49fd-9835-99016fc32d77",
+   "parentKey": "6c9046b5-ad35-4053-b7eb-493c2c129f36"
+  },
+  {
+   "id": "d8ae7802-400f-49fd-9835-99016fc32d77",
+   "parent": "dbbaf477-fc97-454d-9bd7-fc64fc33f091",
+   "order": 2,
+   "attributes": {
+    "type": "time",
+    "convertToMultipath": false,
+    "hybridActionType": "wait",
+    "isHybridAction": true,
+    "name": "Wait 60 Days",
+    "cat": "action",
+    "transitions": [],
+    "startAfter": {
+     "when": "after",
+     "type": "days",
+     "value": 60
+    },
+    "timePeriodInputMode": "standard",
+    "unitInputMode": "standard"
+   },
+   "name": "Wait 60 Days",
+   "type": "wait",
+   "next": "a830cc71-639d-49d2-ba96-de08f1e8f96e",
+   "parentKey": "9ae98e51-63e6-40b2-8b41-68b9f51a6813"
+  },
+  {
+   "id": "a830cc71-639d-49d2-ba96-de08f1e8f96e",
+   "parent": "dbbaf477-fc97-454d-9bd7-fc64fc33f091",
+   "order": 3,
+   "attributes": {
+    "body": "{{contact.first_name}}, checking in from Men's Wellness Centers — no pitch, just wondering how you've been feeling lately. If anything's changed, we're an easy text away.",
+    "assignedOwners": [
+     "contact_owner"
+    ],
+    "alsoNotifyContactFollowers": false,
+    "alsoNotifyOpportunityFollowers": false,
+    "attachments": []
+   },
+   "name": "Send SMS Touch 2 (Check-in)",
+   "type": "sms",
+   "next": "47ba14df-ff89-4837-959d-70ae136e1fff",
+   "parentKey": "d8ae7802-400f-49fd-9835-99016fc32d77"
+  },
+  {
+   "id": "47ba14df-ff89-4837-959d-70ae136e1fff",
+   "parent": "dbbaf477-fc97-454d-9bd7-fc64fc33f091",
+   "order": 4,
+   "attributes": {
+    "type": "time",
+    "convertToMultipath": false,
+    "hybridActionType": "wait",
+    "isHybridAction": true,
+    "name": "Wait 60 Days Again",
+    "cat": "action",
+    "transitions": [],
+    "startAfter": {
+     "when": "after",
+     "type": "days",
+     "value": 60
+    },
+    "timePeriodInputMode": "standard",
+    "unitInputMode": "standard"
+   },
+   "name": "Wait 60 Days Again",
+   "type": "wait",
+   "next": "4055a5f6-00b9-4dd5-8173-66e3b870383b",
+   "parentKey": "a830cc71-639d-49d2-ba96-de08f1e8f96e"
+  },
+  {
+   "id": "4055a5f6-00b9-4dd5-8173-66e3b870383b",
+   "parent": "dbbaf477-fc97-454d-9bd7-fc64fc33f091",
+   "order": 5,
+   "attributes": {
+    "subject": "The season most men let it slide — {{contact.first_name}}",
+    "html": "<p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">Hi {{contact.first_name}},<br></p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">There's a stretch every year shorter days, colder mornings, the</p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">schedule gets heavier where energy and motivation tend to dip for a</p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">lot of men.<br><br>It's common enough that it's almost predictable.</p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">If you've noticed it in yourself lately, you're not imagining it, and</p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">you're not alone in it. It's also the time of year where the men who</p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">stay consistent sleep, movement, the basics notice the biggest gap</p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">between how they feel and how everyone around them feels.</p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">We're still here, and your consult is still on file. If the timing feels</p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">better now than it did a few months ago, picking it back up takes about</p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">ten minutes.<br></p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">No pressure either way just didn't want the season to pass without</p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">checking in.<br></p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">The Men's Wellness Centers Team – Newport News</p><p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">(757) 806-6263</p>",
+    "from_name": "",
+    "from_email": "",
+    "assignedOwners": [
+     "contact_owner"
+    ],
+    "alsoNotifyContactFollowers": false,
+    "alsoNotifyOpportunityFollowers": false,
+    "fieldDefaults": {},
+    "htmlDefaults": {},
+    "trackingOptions": {
+     "hasTrackingLinks": false,
+     "hasUtmTracking": false,
+     "hasTags": false,
+     "sourceId": "5a6f3c32-ce50-4190-829d-eca6049adf9d:4055a5f6-00b9-4dd5-8173-66e3b870383b"
+    },
+    "conditions": [],
+    "attachments": []
+   },
+   "name": "Send Email Touch 3 (Seasonal)",
+   "type": "email",
+   "next": "a7b44bca-841a-4100-92ac-c5accf0820b2",
+   "parentKey": "47ba14df-ff89-4837-959d-70ae136e1fff"
+  },
+  {
+   "id": "a7b44bca-841a-4100-92ac-c5accf0820b2",
+   "parent": "dbbaf477-fc97-454d-9bd7-fc64fc33f091",
+   "order": 6,
+   "attributes": {
+    "type": "time",
+    "convertToMultipath": false,
+    "hybridActionType": "wait",
+    "isHybridAction": true,
+    "name": "Wait 90 Days",
+    "cat": "action",
+    "transitions": [],
+    "startAfter": {
+     "when": "after",
+     "type": "days",
+     "value": 90
+    },
+    "timePeriodInputMode": "standard",
+    "unitInputMode": "standard"
+   },
+   "name": "Wait 90 Days",
+   "type": "wait",
+   "next": "b72e9878-bf02-4154-8f79-338c3255458f",
+   "parentKey": "4055a5f6-00b9-4dd5-8173-66e3b870383b"
+  },
+  {
+   "id": "b72e9878-bf02-4154-8f79-338c3255458f",
+   "parent": "dbbaf477-fc97-454d-9bd7-fc64fc33f091",
+   "order": 7,
+   "attributes": {
+    "body": "{{contact.first_name}}, last note from us for a while your file with Men's Wellness Centers stays active, and the door's open whenever the timing's right. Reply anytime, a real person answers.",
+    "assignedOwners": [
+     "contact_owner"
+    ],
+    "alsoNotifyContactFollowers": false,
+    "alsoNotifyOpportunityFollowers": false,
+    "attachments": []
+   },
+   "name": "Send SMS Touch 4 (Final)",
+   "type": "sms",
+   "next": "cdb88768-0c8b-49a1-a96c-620f91681eb4",
+   "parentKey": "a7b44bca-841a-4100-92ac-c5accf0820b2"
+  },
+  {
+   "id": "cdb88768-0c8b-49a1-a96c-620f91681eb4",
+   "parent": "dbbaf477-fc97-454d-9bd7-fc64fc33f091",
+   "order": 8,
+   "attributes": {
+    "tags": [
+     "newsletter"
+    ]
+   },
+   "name": "Add Tag: newsletter",
+   "type": "add_contact_tag",
+   "next": "e4b24d4f-ea51-4515-b9ed-ea93011f1f32",
+   "parentKey": "b72e9878-bf02-4154-8f79-338c3255458f"
+  },
+  {
+   "id": "e4b24d4f-ea51-4515-b9ed-ea93011f1f32",
+   "parent": "dbbaf477-fc97-454d-9bd7-fc64fc33f091",
+   "order": 9,
+   "attributes": {
+    "op": "or",
+    "segments": [
+     {
+      "op": "or",
+      "conditions": [
+       {
+        "goal_condition": "appointment_status",
+        "extras": {
+         "calendarId": "AbmPR1kgGolxENiNwP8g",
+         "statuses": [
+          "new"
+         ],
+         "calendarOptions": [
+          {
+           "id": "AbmPR1kgGolxENiNwP8g",
+           "availabilities": [],
+           "addServiceActiveStep": "Complete",
+           "allowBookingAfter": 1,
+           "allowBookingAfterUnit": "days",
+           "allowBookingForUnit": "days",
+           "allowCancellation": true,
+           "allowReschedule": true,
+           "appoinmentPerDay": "",
+           "appoinmentPerSlot": 6,
+           "autoConfirm": true,
+           "calendarCoverImage": "https://msgsndr-private.storage.googleapis.com/calendar-widget-logo/a374bc51-adfa-444b-b5d0-d82b2cca0a13.png",
+           "calendarType": "class_booking",
+           "cancellationPreference": {
+            "expiryTimeUnit": "mins",
+            "expiryTime": null
+           },
+           "codeBlock": "",
+           "consentLabel": "I confirm that I want to receive content from this company using any contact information I provide.",
+           "createdBy": {
+            "userId": "9SxqV2FFXAGhjkSFYaYi",
+            "channel": "APP",
+            "source": "WEB_USER",
+            "timestamp": "2026-07-08T06:07:40.000Z",
+            "traceId": "74b6ed01-46ed-4e4d-abbe-19f942eec88c"
+           },
+           "dateAdded": "2026-07-08T06:07:40.000Z",
+           "deleted": false,
+           "description": "<p style=\"margin:0px;color:#10182899; margin: 0px;color: #10182899;\">Free men's health consultation at our Newport News center on Diligence Drive. Includes physician evaluation and same-day on-site lab work. Most visits are complete in about 60 minutes.</p>",
+           "enableConsentCheck": true,
+           "enableChargeGuests": false,
+           "enableGuests": false,
+           "enableMandatoryGuestType": false,
+           "enableOfficeHours": true,
+           "enableRecurring": false,
+           "enableSameUserAssignment": false,
+           "enableSameUserAssignmentForReschedule": false,
+           "enableStaffSelection": false,
+           "eventColor": "#039BE5",
+           "eventTitle": "Men's Wellness Centers Consultation - {{contact.name}}",
+           "eventType": "RoundRobin_OptimizeForAvailability",
+           "formId": "",
+           "formSubmitRedirectUrl": "",
+           "formSubmitThanksMessage": "Thank you for your appointment request. We will contact you shortly to confirm your request. Please call our office at {{contactMethod}} if you have any questions.",
+           "formSubmitType": "ThankYouMessage",
+           "googleInvitationEmails": true,
+           "guestType": "collect_detail",
+           "isSystemGenerated": false,
+           "isActive": true,
+           "isLivePaymentMode": false,
+           "linkedCalendars": {
+            "clio": {},
+            "drchrono": {},
+            "google": {},
+            "calendly": {}
+           },
+           "locationId": "VoeVvlByAem9pkxb7f6a",
+           "locationConfigurations": [],
+           "lookBusyConfig": {
+            "enabled": false,
+            "lookBusyPercentage": 0
+           },
+           "name": "Newport News Consults",
+           "notes": "Phone:- {{contact.phone}}\nEmail:- {{contact.email}}\n\nNeed to make a change to this event?\nReschedule:-\n{{reschedule_link}}\n\nCancel:-\n{{cancellation_link}}",
+           "openHours": {},
+           "order": 9999,
+           "pixelId": "",
+           "preBufferUnit": "mins",
+           "recurring": {
+            "count": 1,
+            "bookingOption": "skip",
+            "bookingOverlapDefaultStatus": "",
+            "interval": null,
+            "freq": "DAILY",
+            "monthDays": [],
+            "weekDays": []
+           },
+           "reschedulePreference": {
+            "expiryTimeUnit": "mins",
+            "expiryTime": null
+           },
+           "reserveService": false,
+           "shouldAssignContactToTeamMember": true,
+           "shouldSendCustomForm": false,
+           "shouldSkipAssigningContactForExisting": false,
+           "showSeatsPerSlot": true,
+           "slotBufferUnit": "mins",
+           "slotDuration": 60,
+           "slotDurationUnit": "hours",
+           "slotInterval": 30,
+           "slotIntervalUnit": "mins",
+           "stickyContact": false,
+           "stripe": {},
+           "teamMembers": [
+            {
+             "priority": 0.5,
+             "selected": true,
+             "userId": "aIb6qhsMGHNXlTEzbeEV",
+             "isZoomAdded": "false",
+             "isPrimary": true,
+             "locationConfigurations": [
+              {
+               "location": "827 Diligence Drive, Suite 206, Newport News, VA 23606",
+               "position": 0,
+               "kind": "custom",
+               "meetingId": "custom_0"
+              }
+             ],
+             "meetingLocation": "827 Diligence Drive, Suite 206, Newport News, VA 23606"
+            }
+           ],
+           "version": 2,
+           "widgetConfig": {
+            "primarySettings": {
+             "primaryColor": "#178af6ff",
+             "backgroundColor": "#ffffff",
+             "buttonText": "Schedule Meeting",
+             "showCalendarTitle": true,
+             "showCalendarDescription": true,
+             "showCalendarDetails": true
+            },
+            "default": true,
+            "pageOrder": [
+             {
+              "kind": "calendar",
+              "position": 0
+             },
+             {
+              "kind": "form",
+              "position": 1
+             }
+            ]
+           },
+           "widgetLogo": {
+            "shape": "square",
+            "url": "https://assets.cdn.filesafe.space/VoeVvlByAem9pkxb7f6a/media/6a4de967a97402b00b9873e1.webp"
+           },
+           "widgetSlug": "newport-news-consults",
+           "widgetType": "default",
+           "appointmentPerSlot": 6,
+           "appointmentPerDay": "",
+           "lastUpdatedBy": {
+            "userId": "9SxqV2FFXAGhjkSFYaYi",
+            "channel": "APP",
+            "source": "WEB_USER",
+            "timestamp": "2026-07-08T06:18:59.834Z",
+            "traceId": "76919225-c08a-483b-8410-c217893ce749"
+           },
+           "dateUpdated": "2026-07-08T06:18:59.846Z",
+           "providerId": "MxrXPzIqKXYWJjAOqbAA",
+           "groupId": "MxrXPzIqKXYWJjAOqbAA",
+           "label": "Newport News Consults",
+           "value": "AbmPR1kgGolxENiNwP8g"
+          },
+          {
+           "id": "KCwl2npRBxd25J9qZEkA",
+           "availabilities": [],
+           "addServiceActiveStep": "Complete",
+           "allowBookingAfter": 1,
+           "allowBookingAfterUnit": "days",
+           "allowBookingForUnit": "days",
+           "allowCancellation": true,
+           "allowReschedule": true,
+           "appoinmentPerDay": "",
+           "appoinmentPerSlot": 6,
+           "autoConfirm": true,
+           "calendarCoverImage": "https://msgsndr-private.storage.googleapis.com/calendar-widget-logo/a374bc51-adfa-444b-b5d0-d82b2cca0a13.png",
+           "calendarType": "class_booking",
+           "cancellationPreference": {
+            "expiryTimeUnit": "mins",
+            "expiryTime": null
+           },
+           "codeBlock": "",
+           "consentLabel": "I confirm that I want to receive content from this company using any contact information I provide.",
+           "createdBy": {
+            "userId": "9SxqV2FFXAGhjkSFYaYi",
+            "channel": "APP",
+            "source": "WEB_USER",
+            "timestamp": "2026-07-08T06:10:24.000Z",
+            "traceId": "a4992bdd-f9fe-4058-a075-7e426b1f1119"
+           },
+           "dateAdded": "2026-07-08T06:10:24.000Z",
+           "deleted": false,
+           "description": "<p style=\"margin:0px;color:#10182899; margin: 0px;color: #10182899;\">Free men's health consultation at our Virginia Beach center on First Colonial Road. Includes physician evaluation and same-day on-site lab work. Most visits are complete in about 60 minutes.</p>",
+           "enableConsentCheck": true,
+           "enableChargeGuests": false,
+           "enableGuests": false,
+           "enableMandatoryGuestType": false,
+           "enableOfficeHours": true,
+           "enableRecurring": false,
+           "enableSameUserAssignment": false,
+           "enableSameUserAssignmentForReschedule": false,
+           "enableStaffSelection": false,
+           "eventColor": "#039BE5",
+           "eventTitle": "Men's Wellness Centers Consultation - {{contact.name}}",
+           "eventType": "RoundRobin_OptimizeForAvailability",
+           "formId": "",
+           "formSubmitRedirectUrl": "",
+           "formSubmitThanksMessage": "Thank you for your appointment request. We will contact you shortly to confirm your request. Please call our office at {{contactMethod}} if you have any questions.",
+           "formSubmitType": "ThankYouMessage",
+           "googleInvitationEmails": true,
+           "guestType": "collect_detail",
+           "isSystemGenerated": false,
+           "isActive": true,
+           "isLivePaymentMode": false,
+           "linkedCalendars": {
+            "clio": {},
+            "drchrono": {},
+            "google": {},
+            "calendly": {}
+           },
+           "locationId": "VoeVvlByAem9pkxb7f6a",
+           "locationConfigurations": [],
+           "lookBusyConfig": {
+            "enabled": false,
+            "lookBusyPercentage": 0
+           },
+           "name": "Virginia Beach Consults",
+           "notes": "Phone:- {{contact.phone}}\nEmail:- {{contact.email}}\n\nNeed to make a change to this event?\nReschedule:-\n{{reschedule_link}}\n\nCancel:-\n{{cancellation_link}}",
+           "openHours": {},
+           "order": 9999,
+           "pixelId": "",
+           "preBufferUnit": "mins",
+           "recurring": {
+            "count": 1,
+            "bookingOption": "skip",
+            "bookingOverlapDefaultStatus": "",
+            "interval": null,
+            "freq": "DAILY",
+            "monthDays": [],
+            "weekDays": []
+           },
+           "reschedulePreference": {
+            "expiryTimeUnit": "mins",
+            "expiryTime": null
+           },
+           "reserveService": false,
+           "shouldAssignContactToTeamMember": true,
+           "shouldSendCustomForm": false,
+           "shouldSkipAssigningContactForExisting": false,
+           "showSeatsPerSlot": true,
+           "slotBufferUnit": "mins",
+           "slotDuration": 60,
+           "slotDurationUnit": "hours",
+           "slotInterval": 30,
+           "slotIntervalUnit": "mins",
+           "stickyContact": false,
+           "stripe": {},
+           "teamMembers": [
+            {
+             "priority": 0.5,
+             "selected": true,
+             "userId": "aIb6qhsMGHNXlTEzbeEV",
+             "isZoomAdded": "false",
+             "isPrimary": true,
+             "locationConfigurations": [
+              {
+               "location": "996 First Colonial Road, Virginia Beach, VA 23454",
+               "position": 0,
+               "kind": "custom",
+               "meetingId": "custom_0"
+              }
+             ],
+             "meetingLocation": "996 First Colonial Road, Virginia Beach, VA 23454"
+            }
+           ],
+           "version": 2,
+           "widgetConfig": {
+            "primarySettings": {
+             "primaryColor": "#178af6ff",
+             "backgroundColor": "#ffffff",
+             "buttonText": "Schedule Meeting",
+             "showCalendarTitle": true,
+             "showCalendarDescription": true,
+             "showCalendarDetails": true
+            },
+            "default": true,
+            "pageOrder": [
+             {
+              "kind": "calendar",
+              "position": 0
+             },
+             {
+              "kind": "form",
+              "position": 1
+             }
+            ]
+           },
+           "widgetLogo": {
+            "shape": "square",
+            "url": "https://assets.cdn.filesafe.space/VoeVvlByAem9pkxb7f6a/media/6a4de967a97402b00b9873e1.webp"
+           },
+           "widgetSlug": "virginia-beach-consults",
+           "widgetType": "default",
+           "appointmentPerSlot": 6,
+           "appointmentPerDay": "",
+           "lastUpdatedBy": {
+            "userId": "9SxqV2FFXAGhjkSFYaYi",
+            "channel": "APP",
+            "source": "WEB_USER",
+            "timestamp": "2026-07-08T06:18:59.836Z",
+            "traceId": "76919225-c08a-483b-8410-c217893ce749"
+           },
+           "dateUpdated": "2026-07-08T06:18:59.850Z",
+           "providerId": "MxrXPzIqKXYWJjAOqbAA",
+           "groupId": "MxrXPzIqKXYWJjAOqbAA",
+           "label": "Virginia Beach Consults",
+           "value": "KCwl2npRBxd25J9qZEkA"
+          },
+          {
+           "id": "yNEyRsAO0rBI46IDM7NJ",
+           "availabilities": [],
+           "addServiceActiveStep": "Complete",
+           "allowBookingAfter": 1,
+           "allowBookingAfterUnit": "days",
+           "allowBookingForUnit": "days",
+           "allowCancellation": true,
+           "allowReschedule": true,
+           "appoinmentPerDay": "",
+           "appoinmentPerSlot": 6,
+           "autoConfirm": true,
+           "calendarCoverImage": "https://msgsndr-private.storage.googleapis.com/calendar-widget-logo/a374bc51-adfa-444b-b5d0-d82b2cca0a13.png",
+           "calendarType": "class_booking",
+           "cancellationPreference": {
+            "expiryTimeUnit": "mins",
+            "expiryTime": null
+           },
+           "codeBlock": "",
+           "consentLabel": "I confirm that I want to receive content from this company using any contact information I provide.",
+           "createdBy": {
+            "userId": "9SxqV2FFXAGhjkSFYaYi",
+            "channel": "APP",
+            "source": "WEB_USER",
+            "timestamp": "2026-07-08T06:07:08.000Z",
+            "traceId": "e256ca64-8a28-460b-a47a-1b8af67bbe55"
+           },
+           "dateAdded": "2026-07-08T06:07:08.000Z",
+           "deleted": false,
+           "description": "<p style=\"margin:0px;color:#10182899\">Free men's health consultation at our Richmond center in Glen Allen. Includes physician evaluation and same-day on-site lab work. Most visits are complete in about 60 minutes.</p>",
+           "enableConsentCheck": true,
+           "enableChargeGuests": false,
+           "enableGuests": false,
+           "enableMandatoryGuestType": false,
+           "enableOfficeHours": true,
+           "enableRecurring": false,
+           "enableSameUserAssignment": false,
+           "enableSameUserAssignmentForReschedule": false,
+           "enableStaffSelection": false,
+           "eventColor": "#039BE5",
+           "eventTitle": "Men's Wellness Centers Consultation - {{contact.name}}",
+           "eventType": "RoundRobin_OptimizeForAvailability",
+           "formId": "",
+           "formSubmitRedirectUrl": "",
+           "formSubmitThanksMessage": "Thank you for your appointment request. We will contact you shortly to confirm your request. Please call our office at {{contactMethod}} if you have any questions.",
+           "formSubmitType": "ThankYouMessage",
+           "googleInvitationEmails": true,
+           "guestType": "collect_detail",
+           "isSystemGenerated": false,
+           "isActive": true,
+           "isLivePaymentMode": false,
+           "linkedCalendars": {
+            "clio": {},
+            "drchrono": {},
+            "google": {},
+            "calendly": {}
+           },
+           "locationId": "VoeVvlByAem9pkxb7f6a",
+           "locationConfigurations": [],
+           "lookBusyConfig": {
+            "enabled": false,
+            "lookBusyPercentage": 0
+           },
+           "name": "Richmond Consults",
+           "notes": "Phone:- {{contact.phone}}\nEmail:- {{contact.email}}\n\nNeed to make a change to this event?\nReschedule:-\n{{reschedule_link}}\n\nCancel:-\n{{cancellation_link}}",
+           "openHours": {},
+           "order": 9999,
+           "pixelId": "",
+           "preBufferUnit": "mins",
+           "recurring": {
+            "count": 1,
+            "bookingOption": "skip",
+            "bookingOverlapDefaultStatus": "",
+            "interval": null,
+            "freq": "DAILY",
+            "monthDays": [],
+            "weekDays": []
+           },
+           "reschedulePreference": {
+            "expiryTimeUnit": "mins",
+            "expiryTime": null
+           },
+           "reserveService": false,
+           "shouldAssignContactToTeamMember": true,
+           "shouldSendCustomForm": false,
+           "shouldSkipAssigningContactForExisting": false,
+           "showSeatsPerSlot": true,
+           "slotBufferUnit": "mins",
+           "slotDuration": 60,
+           "slotDurationUnit": "hours",
+           "slotInterval": 30,
+           "slotIntervalUnit": "mins",
+           "stickyContact": false,
+           "stripe": {},
+           "teamMembers": [
+            {
+             "priority": 0.5,
+             "selected": true,
+             "userId": "aIb6qhsMGHNXlTEzbeEV",
+             "isZoomAdded": "false",
+             "isPrimary": true,
+             "locationConfigurations": [
+              {
+               "location": "4050 Innslake Drive, Suite 360, Glen Allen, VA 23060",
+               "position": 0,
+               "kind": "custom",
+               "meetingId": "custom_0"
+              }
+             ],
+             "meetingLocation": "4050 Innslake Drive, Suite 360, Glen Allen, VA 23060"
+            }
+           ],
+           "version": 2,
+           "widgetConfig": {
+            "primarySettings": {
+             "primaryColor": "#178af6ff",
+             "backgroundColor": "#ffffff",
+             "buttonText": "Schedule Meeting",
+             "showCalendarTitle": true,
+             "showCalendarDescription": true,
+             "showCalendarDetails": true
+            },
+            "default": true,
+            "pageOrder": [
+             {
+              "kind": "calendar",
+              "position": 0
+             },
+             {
+              "kind": "form",
+              "position": 1
+             }
+            ]
+           },
+           "widgetLogo": {
+            "shape": "square",
+            "url": ""
+           },
+           "widgetSlug": "richmond-consults",
+           "widgetType": "default",
+           "appointmentPerSlot": 6,
+           "appointmentPerDay": "",
+           "lastUpdatedBy": {
+            "userId": "9SxqV2FFXAGhjkSFYaYi",
+            "channel": "APP",
+            "source": "WEB_USER",
+            "timestamp": "2026-07-08T06:18:59.839Z",
+            "traceId": "76919225-c08a-483b-8410-c217893ce749"
+           },
+           "dateUpdated": "2026-07-08T06:18:59.850Z",
+           "providerId": "MxrXPzIqKXYWJjAOqbAA",
+           "groupId": "MxrXPzIqKXYWJjAOqbAA",
+           "label": "Richmond Consults",
+           "value": "yNEyRsAO0rBI46IDM7NJ"
+          }
+         ],
+         "isLoading": false
+        },
+        "id": "1fcd1edc-a0a9-4b9b-b926-49dc9f37c1d0"
+       }
+      ]
+     }
+    ],
+    "type": "workflow_goal",
+    "action": "exit"
+   },
+   "name": "Goal",
+   "type": "workflow_goal",
+   "parentKey": "cdb88768-0c8b-49a1-a96c-620f91681eb4"
+  }
+ ]
+}

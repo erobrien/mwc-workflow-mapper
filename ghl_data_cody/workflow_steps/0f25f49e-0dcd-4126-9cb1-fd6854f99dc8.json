@@ -1,0 +1,27 @@
+{
+ "templates": [
+  {
+   "type": "add_contact_tag",
+   "id": "e5b78d88-a3a2-43c5-b722-1c3ef25c3bf1",
+   "name": "Add Bad Contact Tag",
+   "next": "0c6b540a-e3e5-4d83-95cd-44646121e971",
+   "attributes": {
+    "tags": [
+     "bad-contact"
+    ]
+   },
+   "order": 0
+  },
+  {
+   "type": "dnd_contact",
+   "id": "0c6b540a-e3e5-4d83-95cd-44646121e971",
+   "name": "Set Contact to DND",
+   "attributes": {
+    "dnd_contact": "enable",
+    "specific_channels": null
+   },
+   "parentKey": "e5b78d88-a3a2-43c5-b722-1c3ef25c3bf1",
+   "order": 1
+  }
+ ]
+}

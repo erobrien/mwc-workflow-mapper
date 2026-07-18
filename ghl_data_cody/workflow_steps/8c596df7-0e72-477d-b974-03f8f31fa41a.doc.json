@@ -1,0 +1,484 @@
+{
+ "workflowData": {
+  "_id": "8c596df7-0e72-477d-b974-03f8f31fa41a",
+  "locationId": "VoeVvlByAem9pkxb7f6a",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 8,
+  "name": "Virginia - WF-13 - Ad Platform Conversions",
+  "status": "draft",
+  "version": 3.2,
+  "dataVersion": 7,
+  "allowMultiple": true,
+  "eventStartDate": null,
+  "window": null,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/VoeVvlByAem9pkxb7f6a/workflows/8c596df7-0e72-477d-b974-03f8f31fa41a/3",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "permission": 380,
+  "type": "workflow",
+  "parentId": "c9163c5a-71d8-4e45-81ad-53bfd6260b8f",
+  "meta": null,
+  "createdAt": "2026-07-14T14:29:42.869Z",
+  "updatedAt": "2026-07-16T15:41:39.546Z",
+  "deleted": false,
+  "workflowNote": {
+   "content": "",
+   "createdBy": "clone_workflow",
+   "createdByName": "clone_workflow",
+   "createdAt": "2026-07-14T14:29:43.237Z",
+   "updatedBy": "clone_workflow",
+   "updatedByName": "clone_workflow",
+   "updatedAt": "2026-07-14T14:29:43.237Z"
+  },
+  "allowMultipleOpportunity": true,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "duplicate-workflow",
+  "__v": 0,
+  "updatedBy": "9SxqV2FFXAGhjkSFYaYi",
+  "deletedAt": "2026-07-16T04:49:21.799Z",
+  "restoredAt": "2026-07-16T14:41:41.248Z",
+  "id": "8c596df7-0e72-477d-b974-03f8f31fa41a",
+  "workflowData": {
+   "templates": [
+    {
+     "id": "69837851-4ef4-436a-8dce-bf62ae590f8f",
+     "order": 0,
+     "attributes": {
+      "currentRecipeType": "CUSTOM",
+      "branches": [
+       {
+        "id": "2ef7ca71-fa6d-426a-814e-38d3adb6975b",
+        "name": "CAPI- Qualified ",
+        "segments": [
+         {
+          "__segmentId": "94d8fd96-beff-4e65-afdf-ffd1d5629f38",
+          "operator": "or",
+          "conditions": [
+           {
+            "conditionType": "trigger",
+            "conditionSubType": "trigger",
+            "conditionOperator": "==",
+            "conditionValue": "feH0J1VtrpqahBFHZ0ei",
+            "__conditionId": "670e1b69-4e3c-4211-9428-0f9c1bb2b0b0",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           },
+           {
+            "conditionType": "trigger",
+            "conditionSubType": "trigger",
+            "conditionOperator": "==",
+            "conditionValue": "s9vHL9Bhu25x0RZiRZsH",
+            "__conditionId": "bb281001-8535-463a-a61f-54d03b55f6e8",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           },
+           {
+            "conditionType": "trigger",
+            "conditionSubType": "trigger",
+            "conditionOperator": "==",
+            "conditionValue": "acBqfLwlyiNpGKOPlZwP",
+            "__conditionId": "685b095c-12e5-4439-8be2-9669e2a1451b",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           }
+          ]
+         }
+        ],
+        "operator": "and",
+        "showErrors": false,
+        "branchNameError": "Branch name cannot be empty!"
+       },
+       {
+        "id": "93c991bc-080d-4303-a46a-0f72f9deae45",
+        "name": "CAPI- Disqualified ",
+        "segments": [
+         {
+          "__segmentId": "56674a42-729d-45bc-adda-77cca1325847",
+          "operator": "or",
+          "conditions": [
+           {
+            "conditionType": "trigger",
+            "conditionSubType": "trigger",
+            "conditionOperator": "==",
+            "conditionValue": "eNxl66oOJcUlyDyBGFFA",
+            "__conditionId": "45981996-985b-4df2-a9fd-fbda7728cc91",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           },
+           {
+            "conditionType": "trigger",
+            "conditionSubType": "trigger",
+            "conditionOperator": "==",
+            "conditionValue": "9gfjLzOZx2FHM0DE3G8z",
+            "__conditionId": "96dc577e-30ab-4011-b7d2-7636d688c999",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           },
+           {
+            "conditionType": "trigger",
+            "conditionSubType": "trigger",
+            "conditionOperator": "==",
+            "conditionValue": "l1WezVYnAq7GanaVRH6H",
+            "__conditionId": "83390ce9-4d1f-48b8-8d94-1f57b599135b",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           }
+          ]
+         }
+        ],
+        "operator": "and",
+        "showErrors": false,
+        "branchNameError": "Branch name cannot be empty!"
+       }
+      ],
+      "operator": "and",
+      "if": true,
+      "conditionName": "Condition",
+      "version": 2,
+      "noneBranchName": "None"
+     },
+     "name": "yes",
+     "type": "if_else",
+     "cat": "conditions",
+     "next": [
+      "2ef7ca71-fa6d-426a-814e-38d3adb6975b",
+      "93c991bc-080d-4303-a46a-0f72f9deae45",
+      "f1185a3d-809f-4add-b855-4437b8957856"
+     ],
+     "comments": [],
+     "nodeType": "condition-node"
+    },
+    {
+     "id": "2ef7ca71-fa6d-426a-814e-38d3adb6975b",
+     "parent": "69837851-4ef4-436a-8dce-bf62ae590f8f",
+     "order": 1,
+     "attributes": {
+      "if": false,
+      "conditionName": "Condition",
+      "operator": "and",
+      "branches": []
+     },
+     "name": "CAPI- Qualified ",
+     "type": "if_else",
+     "cat": "conditions",
+     "next": "43d00ed1-29c3-4115-bb5a-af8343380779",
+     "sibling": [
+      "93c991bc-080d-4303-a46a-0f72f9deae45",
+      "f1185a3d-809f-4add-b855-4437b8957856"
+     ],
+     "comments": [],
+     "nodeType": "branch-yes",
+     "parentKey": "69837851-4ef4-436a-8dce-bf62ae590f8f"
+    },
+    {
+     "id": "43d00ed1-29c3-4115-bb5a-af8343380779",
+     "parent": "2ef7ca71-fa6d-426a-814e-38d3adb6975b",
+     "order": 0,
+     "attributes": {
+      "type": "facebook_conversion_api",
+      "event_type": "lead_event",
+      "access_token": "PENDING-JOSH",
+      "currency": "USD",
+      "connection_type": "INTEGRATION",
+      "customMapping": {},
+      "isCustomMappingEnabled": false,
+      "stage_name": "Qualified",
+      "pixel_id": "PENDING-JOSH"
+     },
+     "name": "Meta Conversion API",
+     "type": "facebook_conversion_api",
+     "parentKey": "2ef7ca71-fa6d-426a-814e-38d3adb6975b"
+    },
+    {
+     "id": "93c991bc-080d-4303-a46a-0f72f9deae45",
+     "parent": "69837851-4ef4-436a-8dce-bf62ae590f8f",
+     "order": 1,
+     "attributes": {
+      "if": false,
+      "conditionName": "Condition",
+      "operator": "and",
+      "branches": []
+     },
+     "name": "CAPI- Disqualified ",
+     "type": "if_else",
+     "cat": "conditions",
+     "next": "2e9311a0-ed27-4b66-9896-541f95a227de",
+     "sibling": [
+      "2ef7ca71-fa6d-426a-814e-38d3adb6975b",
+      "f1185a3d-809f-4add-b855-4437b8957856"
+     ],
+     "comments": [],
+     "nodeType": "branch-yes",
+     "parentKey": "69837851-4ef4-436a-8dce-bf62ae590f8f"
+    },
+    {
+     "id": "2e9311a0-ed27-4b66-9896-541f95a227de",
+     "parent": "93c991bc-080d-4303-a46a-0f72f9deae45",
+     "order": 0,
+     "attributes": {
+      "type": "facebook_conversion_api",
+      "event_type": "lead_event",
+      "access_token": "PENDING-JOSH",
+      "currency": "USD",
+      "connection_type": "INTEGRATION",
+      "customMapping": {},
+      "isCustomMappingEnabled": false,
+      "stage_name": "Disqualified",
+      "pixel_id": "PENDING-JOSH"
+     },
+     "name": "Meta Conversion API",
+     "type": "facebook_conversion_api",
+     "parentKey": "93c991bc-080d-4303-a46a-0f72f9deae45"
+    },
+    {
+     "id": "f1185a3d-809f-4add-b855-4437b8957856",
+     "parent": "69837851-4ef4-436a-8dce-bf62ae590f8f",
+     "order": 1,
+     "attributes": {
+      "else": true
+     },
+     "name": "None",
+     "type": "if_else",
+     "cat": "conditions",
+     "sibling": [
+      "2ef7ca71-fa6d-426a-814e-38d3adb6975b",
+      "93c991bc-080d-4303-a46a-0f72f9deae45"
+     ],
+     "comments": [],
+     "nodeType": "branch-no",
+     "parentKey": "69837851-4ef4-436a-8dce-bf62ae590f8f"
+    }
+   ]
+  }
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ },
+ "triggers": [
+  {
+   "id": "acBqfLwlyiNpGKOPlZwP",
+   "date_added": "2026-07-14T14:29:43.125Z",
+   "belongs_to": "workflow",
+   "location_id": "VoeVvlByAem9pkxb7f6a",
+   "active": false,
+   "actions": [
+    {
+     "workflow_id": "8c596df7-0e72-477d-b974-03f8f31fa41a",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "==",
+     "field": "opportunity.pipelineId",
+     "value": "KZ6u78XpKcCZPr8X5TvK",
+     "title": "In pipeline",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "opportunity.pipelineStageId",
+     "value": "b2c95e91-e751-4054-baab-b89fff3de11e",
+     "title": "Pipeline stage",
+     "type": "select"
+    }
+   ],
+   "masterType": "highlevel",
+   "name": "Virginia Beach- DQ",
+   "type": "pipeline_stage_updated",
+   "workflow_id": "8c596df7-0e72-477d-b974-03f8f31fa41a",
+   "deleted": false,
+   "date_updated": "2026-07-16T14:41:41.299Z"
+  },
+  {
+   "id": "l1WezVYnAq7GanaVRH6H",
+   "date_added": "2026-07-14T14:29:42.959Z",
+   "belongs_to": "workflow",
+   "location_id": "VoeVvlByAem9pkxb7f6a",
+   "active": false,
+   "actions": [
+    {
+     "workflow_id": "8c596df7-0e72-477d-b974-03f8f31fa41a",
+     "type": "add_to_workflow"
+    }
+   ],
+   "conditions": [
+    {
+     "operator": "==",
+     "field": "opportunity.pipelineId",
+     "value": "KZ6u78XpKcCZPr8X5TvK",
+     "title": "In pipeline",
+     "type": "select"
+    },
+    {
+     "operator": "==",
+     "field": "opportunity.pipelineStageId",
+     "value": "edb2efbb-30e4-498e-9fc4-2f280625cf18",
+     "title": "Pipeline stage",
+     "type": "select"
+    }
+   ],
+   "masterType": "highlevel",
+   "name": "Virginia Beach- Qualified",
+   "type": "pipeline_stage_updated",
+   "workflow_id": "8c596df7-0e72-477d-b974-03f8f31fa41a",
+   "deleted": false,
+   "date_updated": "2026-07-16T14:41:41.291Z"
+  }
+ ],
+ "dependentAssets": {}
+}

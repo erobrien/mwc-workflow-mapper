@@ -1,0 +1,297 @@
+{
+ "workflowData": {
+  "_id": "cf4587e2-c938-4775-b13a-56dc353f58d5",
+  "locationId": "VoeVvlByAem9pkxb7f6a",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 8,
+  "name": "7.2 Virginia Beach Stale Opportunity Watchdog",
+  "status": "draft",
+  "version": 4,
+  "dataVersion": 7,
+  "allowMultiple": true,
+  "eventStartDate": null,
+  "window": {
+   "condition": "when",
+   "start": "08:00",
+   "end": "17:00",
+   "days": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
+  },
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/VoeVvlByAem9pkxb7f6a/workflows/cf4587e2-c938-4775-b13a-56dc353f58d5/3",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "permission": 380,
+  "type": "workflow",
+  "parentId": "c9163c5a-71d8-4e45-81ad-53bfd6260b8f",
+  "meta": {
+   "stepIndexCounter": {
+    "task-notification": 1
+   }
+  },
+  "createdAt": "2026-07-15T23:30:48.209Z",
+  "updatedAt": "2026-07-17T14:46:02.142Z",
+  "deleted": false,
+  "workflowNote": {
+   "content": "",
+   "createdBy": "clone_workflow",
+   "createdByName": "clone_workflow",
+   "createdAt": "2026-07-15T23:30:48.295Z",
+   "updatedBy": "clone_workflow",
+   "updatedByName": "clone_workflow",
+   "updatedAt": "2026-07-15T23:30:48.295Z"
+  },
+  "allowMultipleOpportunity": true,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "duplicate-workflow",
+  "__v": 0,
+  "updatedBy": "MyFtShSIGksH1SAoD5Ye",
+  "id": "cf4587e2-c938-4775-b13a-56dc353f58d5",
+  "workflowData": {
+   "templates": [
+    {
+     "type": "wait",
+     "id": "43eeb834-5e8f-4e5a-85dd-b4e8e6994566",
+     "name": "Wait 2 Business Days",
+     "next": "37dd44ef-c36c-45a7-9605-db79a6a37d00",
+     "attributes": {
+      "type": "time",
+      "convertToMultipath": false,
+      "hybridActionType": "wait",
+      "isHybridAction": true,
+      "name": "Wait 2 Business Days",
+      "cat": "",
+      "transitions": [],
+      "startAfter": {
+       "when": "after",
+       "type": "days",
+       "value": 2,
+       "action_in": 8
+      },
+      "timePeriodInputMode": "standard",
+      "unitInputMode": "standard",
+      "window": {
+       "condition": "when",
+       "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+       ],
+       "start": "09:00",
+       "end": "17:00"
+      },
+      "windowCondition": {
+       "field": "",
+       "operator": "",
+       "value": ""
+      }
+     },
+     "order": 0,
+     "cat": ""
+    },
+    {
+     "type": "if_else",
+     "id": "37dd44ef-c36c-45a7-9605-db79a6a37d00",
+     "name": "Opportunity Still in 'Showed'",
+     "attributes": {
+      "currentRecipeType": "CUSTOM",
+      "branches": [
+       {
+        "name": "Opportunity in Showed Stage and Newport News Pipeline",
+        "operator": "and",
+        "segments": [
+         {
+          "operator": "and",
+          "conditions": [
+           {
+            "conditionType": "opportunities",
+            "conditionSubType": "pipelineStageId",
+            "conditionOperator": "==",
+            "conditionValue": "Showed"
+           },
+           {
+            "conditionType": "opportunities",
+            "conditionSubType": "pipelineId",
+            "conditionOperator": "==",
+            "conditionValue": "Newport News, Virginia Pipeline"
+           }
+          ]
+         }
+        ],
+        "id": "4b926ccc-b36e-4a12-b595-2857fc603197"
+       }
+      ],
+      "if": true,
+      "operator": "and",
+      "conditionName": "Opportunity Still in 'Showed'",
+      "version": 2,
+      "noneBranchName": "None"
+     },
+     "parentKey": "43eeb834-5e8f-4e5a-85dd-b4e8e6994566",
+     "nodeType": "condition-node",
+     "cat": "conditions",
+     "next": [
+      "4b926ccc-b36e-4a12-b595-2857fc603197",
+      "f746550d-e310-48ab-8d71-56b351c7de9c"
+     ],
+     "order": 1
+    },
+    {
+     "type": "if_else",
+     "id": "4b926ccc-b36e-4a12-b595-2857fc603197",
+     "name": "Yes - Still in 'Showed'",
+     "parentKey": "37dd44ef-c36c-45a7-9605-db79a6a37d00",
+     "parent": "37dd44ef-c36c-45a7-9605-db79a6a37d00",
+     "nodeType": "branch-yes",
+     "cat": "conditions",
+     "sibling": [
+      "f746550d-e310-48ab-8d71-56b351c7de9c"
+     ],
+     "attributes": {
+      "if": false,
+      "conditionName": "Condition",
+      "operator": "and",
+      "branches": []
+     },
+     "order": 2,
+     "next": "58f76d22-8d75-4790-b8a3-20d7295c40f6"
+    },
+    {
+     "id": "58f76d22-8d75-4790-b8a3-20d7295c40f6",
+     "stepIndex": 1,
+     "parent": "4b926ccc-b36e-4a12-b595-2857fc603197",
+     "order": 0,
+     "attributes": {
+      "title": "Consult showed, no disposition — {{contact.name}}",
+      "body": "<h5 style=\"line-height: 1.5;padding-left: 0px!important;\"><span style=\"font-weight: normal;\">This member's consult was marked Showed 2 business days ago and no disposition form has been submitted. Confirm the outcome with the PCC and get the form filled the opportunity is stuck at Showed until it is.</span></h5>",
+      "assignedTo": "contact.assigned_user",
+      "dueDate": {
+       "duration": 1,
+       "unit": "days",
+       "skipWeekends": false
+      },
+      "type": "task_notification",
+      "__customInputs__": {}
+     },
+     "name": "Task – Chase disposition for {{contact.name}}",
+     "type": "task-notification",
+     "next": "349a3bd0-dd2a-43a2-9e8c-0882f368c150",
+     "workflowsActionType": "INTERNAL",
+     "parentKey": "4b926ccc-b36e-4a12-b595-2857fc603197"
+    },
+    {
+     "id": "349a3bd0-dd2a-43a2-9e8c-0882f368c150",
+     "parent": "4b926ccc-b36e-4a12-b595-2857fc603197",
+     "order": 1,
+     "attributes": {
+      "type": "email",
+      "email": {
+       "isCloned": false,
+       "html": "<p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\"><span style=\"font-size: 15px; font-family: monospace; color: rgb(0, 0, 0)\">Opportunity stuck in \"Showed\" with no disposition after 2 days: {{contact.first_name}} {{contact.last_name}}. Please log the sale outcome (Sold / A&amp;D) in the pipeline.</span></p>",
+       "userType": "assign",
+       "assignedOwners": [
+        "contact_owner"
+       ],
+       "subject": "NN: Showed with no disposition — {{contact.name}}",
+       "attachments": []
+      }
+     },
+     "name": "Alert – Undispositioned consult",
+     "type": "internal_notification",
+     "next": "56ddbd3b-8a0b-4ef2-9dbb-133d49efdc12",
+     "parentKey": "58f76d22-8d75-4790-b8a3-20d7295c40f6"
+    },
+    {
+     "id": "56ddbd3b-8a0b-4ef2-9dbb-133d49efdc12",
+     "parent": "4b926ccc-b36e-4a12-b595-2857fc603197",
+     "order": 2,
+     "attributes": {
+      "tags": [
+       "stale_disposition"
+      ]
+     },
+     "name": "Add Tag",
+     "type": "add_contact_tag",
+     "parentKey": "349a3bd0-dd2a-43a2-9e8c-0882f368c150"
+    },
+    {
+     "type": "if_else",
+     "id": "f746550d-e310-48ab-8d71-56b351c7de9c",
+     "name": "None",
+     "parentKey": "37dd44ef-c36c-45a7-9605-db79a6a37d00",
+     "parent": "37dd44ef-c36c-45a7-9605-db79a6a37d00",
+     "nodeType": "branch-no",
+     "cat": "conditions",
+     "sibling": [
+      "4b926ccc-b36e-4a12-b595-2857fc603197"
+     ],
+     "attributes": {
+      "else": true
+     },
+     "order": 2
+    }
+   ]
+  }
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ },
+ "triggers": [
+  {
+   "id": "6sGVGnKfPnjNgitNGjvv",
+   "date_added": "2026-07-15T23:30:48.230Z",
+   "deleted": false,
+   "belongs_to": "workflow",
+   "location_id": "VoeVvlByAem9pkxb7f6a",
+   "actions": [
+    {
+     "workflow_id": "cf4587e2-c938-4775-b13a-56dc353f58d5",
+     "type": "add_to_workflow"
+    }
+   ],
+   "masterType": "highlevel",
+   "name": "Opportunity Moved to 'Showed' in Newport News, Virginia Pipeline",
+   "type": "pipeline_stage_updated",
+   "workflow_id": "cf4587e2-c938-4775-b13a-56dc353f58d5",
+   "schedule_config": {},
+   "conditions": [
+    {
+     "operator": "==",
+     "field": "opportunity.pipelineId",
+     "value": "KZ6u78XpKcCZPr8X5TvK",
+     "title": "In pipeline",
+     "type": "select",
+     "id": "3775def3-40eb-44e0-a63c-48585107c0a9"
+    },
+    {
+     "operator": "==",
+     "field": "opportunity.status",
+     "value": "open",
+     "title": "Status",
+     "type": "select",
+     "id": "540fda8e-efd1-41b0-8305-bfdf4a93039e"
+    },
+    {
+     "operator": "==",
+     "field": "opportunity.pipelineStageId",
+     "value": "537b4d84-d5ea-4afd-95df-690938d24d36",
+     "title": "Pipeline stage",
+     "type": "select"
+    }
+   ],
+   "date_updated": "2026-07-17T14:46:01.910Z",
+   "active": false
+  }
+ ],
+ "dependentAssets": {}
+}

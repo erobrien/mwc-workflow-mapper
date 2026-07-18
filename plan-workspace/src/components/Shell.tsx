@@ -29,6 +29,7 @@ const NAV: { group: string; accent?: string; dot?: string; items: { to: string; 
     { to: "/cody-neo", label: "Cody Neo Workflows", icon: Workflow, accent: "text-amber-600 dark:text-amber-400" },
     { to: "/cody-neo-flows", label: "Cody Neo Flow Diagrams", icon: Waypoints, accent: "text-amber-600 dark:text-amber-400" },
     { to: "/cody-neo-inventory", label: "Cody Neo Inventory", icon: Boxes, accent: "text-amber-600 dark:text-amber-400" },
+    { to: "/cody-neo-field-diff", label: "Field Diff", icon: Database, accent: "text-amber-600 dark:text-amber-400" },
   ] },
   { group: "Target", accent: "text-emerald-600 dark:text-emerald-400", dot: "bg-emerald-500", items: [
     { to: "/to-be", label: "To-Be Workflows", icon: Workflow, accent: "text-emerald-600 dark:text-emerald-400" },

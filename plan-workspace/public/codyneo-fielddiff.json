@@ -1,0 +1,297 @@
+{
+ "cody_location": "VoeVvlByAem9pkxb7f6a",
+ "neo_location": "YTi6qs4zhiW6d4a75A9f",
+ "captured": "2026-07-18",
+ "counts": {
+  "cody_contact": 100,
+  "cody_opportunity": 24,
+  "neo_contact": 100,
+  "neo_opportunity": 29
+ },
+ "added": [
+  {
+   "key": "opportunity.appt_status",
+   "name": "Appt Status",
+   "dataType": "SINGLE_OPTIONS",
+   "options": [
+    "showed",
+    "no-show",
+    "cancel",
+    "reschedule"
+   ],
+   "reason": "Outcome routing should gate on visit status per deal (showed / no-show / cancel / reschedule); contact-level status overwrites per visit."
+  },
+  {
+   "key": "opportunity.lead_source",
+   "name": "Lead Source",
+   "dataType": "TEXT",
+   "options": [],
+   "reason": "Frozen per-deal source, stamped at opportunity create by the Lead Notification workflows."
+  },
+  {
+   "key": "opportunity.outcome_processed_at",
+   "name": "Outcome Processed At",
+   "dataType": "TEXT",
+   "options": [],
+   "reason": "Idempotency stamp on the money path: conversion/Won processing checks this before firing and stamps it after, once per deal."
+  },
+  {
+   "key": "opportunity.provider",
+   "name": "Provider",
+   "dataType": "SINGLE_OPTIONS",
+   "options": [
+    "Steven Papariello, MD",
+    "Bonnie Grimes, MD",
+    "Chris Stainback, PA",
+    "Catlin Weilbacher, NP",
+    "Chansila Harris, NP",
+    "Meredith Kash, NP",
+    "Mariana Herrera, NP",
+    "Tonya Belknap-Tufaro, NP",
+    "Stacey Tadlock",
+    "Chelsea Acree",
+    "Dr. Cynthia Dorr",
+    "Jennifer Valentin"
+   ],
+   "reason": "Per-deal requirement: a member may see a different provider on a renewal than on the original sale. Options mirror the clinician roster from contact.provider_making_recommendation."
+  },
+  {
+   "key": "opportunity.referred_by",
+   "name": "Referred By",
+   "dataType": "TEXT",
+   "options": [],
+   "reason": "Referral rewards are earned per transaction; copied from the referrer name at the sold stamp."
+  }
+ ],
+ "retyped": [
+  {
+   "key": "opportunity.sale_outcome",
+   "name": "Sale Outcome",
+   "before_type": "MULTIPLE_OPTIONS",
+   "after_type": "SINGLE_OPTIONS",
+   "before_options": [
+    "Sold",
+    "A&D",
+    "MUT",
+    "MAR"
+   ],
+   "after_options": [
+    "sold",
+    "nosale",
+    "mut",
+    "mar"
+   ],
+   "note": "Recreated (GHL silently ignores dataType changes on update); field id changed."
+  }
+ ],
+ "options_changed": [
+  {
+   "key": "opportunity.medical_intake_status",
+   "name": "Medical Intake Status",
+   "dataType": "SINGLE_OPTIONS",
+   "before_options": [
+    "Not Started",
+    "Pending",
+    "Complete"
+   ],
+   "after_options": [
+    "not_started",
+    "pending",
+    "complete"
+   ]
+  },
+  {
+   "key": "opportunity.nosale_reason",
+   "name": "No-Sale Reason",
+   "dataType": "SINGLE_OPTIONS",
+   "before_options": [
+    "Cost",
+    "Partner",
+    "Timing",
+    "Trust",
+    "Other"
+   ],
+   "after_options": [
+    "cost",
+    "fear",
+    "partner",
+    "timing",
+    "decision",
+    "other"
+   ]
+  },
+  {
+   "key": "opportunity.pay_type",
+   "name": "Pay Type",
+   "dataType": "SINGLE_OPTIONS",
+   "before_options": [
+    "PIF",
+    "SF",
+    "CARE",
+    "MAG"
+   ],
+   "after_options": [
+    "pif",
+    "sf",
+    "care",
+    "mag"
+   ]
+  },
+  {
+   "key": "opportunity.product_sold_1",
+   "name": "Product Sold 1",
+   "dataType": "SINGLE_OPTIONS",
+   "before_options": [
+    "TRT",
+    "ED",
+    "Weight Loss",
+    "Peptides",
+    "Other"
+   ],
+   "after_options": [
+    "trt",
+    "ed",
+    "weight_loss",
+    "peptides",
+    "other"
+   ]
+  },
+  {
+   "key": "opportunity.product_sold_2",
+   "name": "Product Sold 2",
+   "dataType": "SINGLE_OPTIONS",
+   "before_options": [
+    "TRT",
+    "ED",
+    "Weight Loss",
+    "Peptides",
+    "Other"
+   ],
+   "after_options": [
+    "trt",
+    "ed",
+    "weight_loss",
+    "peptides",
+    "other"
+   ]
+  },
+  {
+   "key": "opportunity.sale_type",
+   "name": "Sale Type",
+   "dataType": "SINGLE_OPTIONS",
+   "before_options": [
+    "New",
+    "Renewal"
+   ],
+   "after_options": [
+    "new",
+    "renewal"
+   ]
+  }
+ ],
+ "deprecated": [
+  {
+   "key": "contact.ad_other_explanation",
+   "name": "A&D Other Explanation",
+   "dataType": "LARGE_TEXT",
+   "superseded_by": "opportunity.nosale_notes"
+  },
+  {
+   "key": "contact.ad_reason",
+   "name": "A&D Reason",
+   "dataType": "SINGLE_OPTIONS",
+   "superseded_by": "opportunity.nosale_reason"
+  },
+  {
+   "key": "contact.new_or_renewal",
+   "name": "New or Renewal",
+   "dataType": "SINGLE_OPTIONS",
+   "superseded_by": "opportunity.sale_type"
+  },
+  {
+   "key": "contact.patient_care_consultant",
+   "name": "Patient Care Consultant",
+   "dataType": "SINGLE_OPTIONS",
+   "superseded_by": "opportunity.patient_care_consultant"
+  },
+  {
+   "key": "contact.pay_type",
+   "name": "Pay Type",
+   "dataType": "SINGLE_OPTIONS",
+   "superseded_by": "opportunity.pay_type"
+  },
+  {
+   "key": "contact.price__item_2",
+   "name": " Price – Item 2",
+   "dataType": "MONETORY",
+   "superseded_by": "opportunity.price_2"
+  },
+  {
+   "key": "contact.product_sold__item_2",
+   "name": "Product Sold – Item 2",
+   "dataType": "SINGLE_OPTIONS",
+   "superseded_by": "opportunity.product_sold_2"
+  },
+  {
+   "key": "contact.provider_making_recommendation",
+   "name": "Provider Making Recommendation",
+   "dataType": "SINGLE_OPTIONS",
+   "superseded_by": "opportunity.provider"
+  },
+  {
+   "key": "contact.referred_by_ambassador",
+   "name": "Referred by Ambassador",
+   "dataType": "TEXT",
+   "superseded_by": "opportunity.referred_by"
+  },
+  {
+   "key": "contact.sale_outcome",
+   "name": "Sale Outcome",
+   "dataType": "SINGLE_OPTIONS",
+   "superseded_by": "opportunity.sale_outcome"
+  },
+  {
+   "key": "contact.sale_type",
+   "name": "Sale Type",
+   "dataType": "SINGLE_OPTIONS",
+   "superseded_by": "opportunity.sale_type"
+  },
+  {
+   "key": "contact.term_length__item_1",
+   "name": "Term Length – Item 1",
+   "dataType": "SINGLE_OPTIONS",
+   "superseded_by": "opportunity.term_1"
+  },
+  {
+   "key": "contact.term_length__item_2",
+   "name": "Term Length – Item 2",
+   "dataType": "SINGLE_OPTIONS",
+   "superseded_by": "opportunity.term_2"
+  },
+  {
+   "key": "contact.total_program_amount",
+   "name": "Total Program Amount",
+   "dataType": "MONETORY",
+   "superseded_by": "opportunity.total_program_amount"
+  },
+  {
+   "key": "contact.treatment_cost",
+   "name": " Price – Item 1",
+   "dataType": "MONETORY",
+   "superseded_by": "opportunity.price_1"
+  },
+  {
+   "key": "contact.treatment_type",
+   "name": " Product Sold - Item 1",
+   "dataType": "SINGLE_OPTIONS",
+   "superseded_by": "opportunity.product_sold_1"
+  },
+  {
+   "key": "contact.who_referred_you_referrers_name",
+   "name": "Who referred you? (Referrer's name)",
+   "dataType": "TEXT",
+   "superseded_by": "opportunity.referred_by"
+  }
+ ],
+ "removed": []
+}

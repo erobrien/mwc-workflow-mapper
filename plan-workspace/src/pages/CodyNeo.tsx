@@ -4,7 +4,7 @@ import { PageShell } from "../components/Shell";
 import { Badge, Card, CardContent, Stat, Loading } from "../components/ui";
 import { useCodyNeoDetail, type AsisWorkflow } from "../lib/asis";
 // Cody Neo: corrected copy of the Cody build — outcome data on the Opportunity.
-import { MessageSquare, Mail, Zap, GitBranch, Clock, ArrowRightLeft, Target, MapPin } from "lucide-react";
+import { MessageSquare, Mail, Zap, GitBranch, Clock, ArrowRightLeft, Target, MapPin, ExternalLink } from "lucide-react";
 
 function count(w: AsisWorkflow, ...kinds: string[]) {
   return kinds.reduce((s, k) => s + (w.step_counts[k] || 0), 0);
@@ -78,6 +78,12 @@ export default function CodyNeo() {
     <PageShell
       title="Cody Neo build — workflows"
       subtitle={`All ${c.total} workflows in the corrected copy of the Cody build (${data.location_id}), extracted live via the backend API after the field-architecture pass — per-deal data moved to the Opportunity, enum codes normalized, outcome and attribution stamps spliced into the routers and lead workflows.`}
+      actions={
+        <a href={`https://app.gohighlevel.com/v2/location/${data.location_id}/dashboard`} target="_blank" rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground hover:opacity-90">
+          <ExternalLink className="h-3.5 w-3.5" /> Open sub-account in GHL
+        </a>
+      }
     >
       <div className="grid grid-cols-2 gap-3 md:grid-cols-4 lg:grid-cols-7">
         <Stat label="Workflows" value={c.total} note={`${c.published} published · ${c.draft} draft`} />

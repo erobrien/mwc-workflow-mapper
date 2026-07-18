@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { PageShell } from "../components/Shell";
 import { Badge, Card, CardContent, Stat, Loading } from "../components/ui";
 import { useCodyDetail, type AsisWorkflow } from "../lib/asis";
-import { MessageSquare, Mail, Zap, GitBranch, Clock, ArrowRightLeft, Target, MapPin } from "lucide-react";
+import { MessageSquare, Mail, Zap, GitBranch, Clock, ArrowRightLeft, Target, MapPin, ExternalLink } from "lucide-react";
 
 function count(w: AsisWorkflow, ...kinds: string[]) {
   return kinds.reduce((s, k) => s + (w.step_counts[k] || 0), 0);
@@ -77,6 +77,12 @@ export default function Cody() {
     <PageShell
       title="Cody build — workflows"
       subtitle={`All ${c.total} workflows in the Cavenaugh Media build sub-account (${data.location_id}), extracted live via the backend API — names, statuses, triggers, the complete ordered step graph, and verbatim SMS/email copy. Same capture method and fidelity as the Current State views.`}
+      actions={
+        <a href={`https://app.gohighlevel.com/v2/location/${data.location_id}/dashboard`} target="_blank" rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground hover:opacity-90">
+          <ExternalLink className="h-3.5 w-3.5" /> Open sub-account in GHL
+        </a>
+      }
     >
       <div className="grid grid-cols-2 gap-3 md:grid-cols-4 lg:grid-cols-7">
         <Stat label="Workflows" value={c.total} note={`${c.published} published · ${c.draft} draft`} />

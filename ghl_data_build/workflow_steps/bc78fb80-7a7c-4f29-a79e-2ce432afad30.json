@@ -2221,6 +2221,20 @@
       "filterField": "WoXMFU3OgUouCZJhA9Mo",
       "value": "{{right_now.date_time}}",
       "valueFieldType": "input"
+     },
+     {
+      "__customInputs__": {},
+      "dataType": "TEXT",
+      "filterField": "lG8cZrgSAzWunzQjqyQ1",
+      "value": "{{contact.term_length__item_1}}",
+      "valueFieldType": "input"
+     },
+     {
+      "__customInputs__": {},
+      "dataType": "TEXT",
+      "filterField": "iAWalRAEJQzfJWBPQbOm",
+      "value": "{{contact.who_referred_you_referrers_name}}",
+      "valueFieldType": "input"
      }
     ]
    },

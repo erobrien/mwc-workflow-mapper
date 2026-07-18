@@ -1,0 +1,428 @@
+{
+  "spec_source": "plan-workspace @ 8a7e08b..e2c41ef",
+  "extraction_dir": "/home/user/workspace/mwc-workflow-mapper/ghl_data_build",
+  "stats": {
+    "workflows_total": 63,
+    "published": 0,
+    "draft": 63,
+    "legacy_09_other": 0,
+    "affiliate": 0,
+    "organized_00_07": 63,
+    "folders": {
+      "": 63
+    }
+  },
+  "scorecard": {
+    "WF-01": {
+      "title": "Lead Capture and Attribution",
+      "status": "built",
+      "built_by": [
+        "7.1 Newport News Attribution Stamp",
+        "7.1 Richmond Attribution Stamp",
+        "7.1 Virginia Beach Attribution Stamp",
+        "First-Touch Attribution Lock",
+        "Opportunity Attribution Update"
+      ],
+      "legacy_candidates": [],
+      "issue_count": 0,
+      "blocking_count": 0
+    },
+    "WF-02": {
+      "title": "Non-Booked Recovery",
+      "status": "built",
+      "built_by": [
+        "Newport News Non-Booked Recovery",
+        "Richmond Non-Booked Recovery",
+        "Virginia Non-Booked Recovery"
+      ],
+      "legacy_candidates": [],
+      "issue_count": 0,
+      "blocking_count": 0
+    },
+    "WF-03": {
+      "title": "Booking Confirmation and Reminders",
+      "status": "built_wrong",
+      "built_by": [
+        "Newport News Booking Confirmation",
+        "Richmond Booking Confirmation",
+        "Virginia Booking Confirmation",
+        "6.2 Newport News Renewal Reminder",
+        "6.2 Richmond Renewal Reminder",
+        "6.2 Virginia Beach Renewal Reminder"
+      ],
+      "legacy_candidates": [],
+      "issue_count": 6,
+      "blocking_count": 6
+    },
+    "WF-04": {
+      "title": "Medical Intake Chase",
+      "status": "built",
+      "built_by": [
+        "Medical Intake Reminder Chase",
+        "Medical Intake Reminder Chase",
+        "Virginia Beach - Medical Intake Reminder Chase",
+        "Intake Survey Completion"
+      ],
+      "legacy_candidates": [],
+      "issue_count": 0,
+      "blocking_count": 0
+    },
+    "WF-05": {
+      "title": "Clinic Outcome Router",
+      "status": "built_wrong",
+      "built_by": [
+        "5.1 \u2014 Newport News \u2013 PCC Disposition Router",
+        "5.1 \u2014 Richmond \u2013 PCC Disposition Router",
+        "5.1 \u2014 Virginia Beach \u2013 PCC Disposition Router"
+      ],
+      "legacy_candidates": [],
+      "issue_count": 9,
+      "blocking_count": 9
+    },
+    "WF-06": {
+      "title": "Post-Visit Won and Onboarding",
+      "status": "built",
+      "built_by": [
+        "5.2 \u2014 Newport News \u2013 Won & Onboarding",
+        "5.2 \u2014 Richmond \u2013 Won & Onboarding",
+        "5.2 \u2014 Virginia Beach \u2013 Won & Onboarding",
+        "6.3 Newport News Retention Touch",
+        "6.3 Richmond Retention Touch",
+        "6.3 Virginia Beach Retention Touch"
+      ],
+      "legacy_candidates": [],
+      "issue_count": 0,
+      "blocking_count": 0
+    },
+    "WF-07": {
+      "title": "Post-Visit No-Sale Nurture",
+      "status": "built",
+      "built_by": [
+        "5.4a\u2013e \u2014 Newport News - A&D Nurture - All Objections",
+        "5.4a\u2013e \u2014 Richmond - A&D Nurture - All Objections",
+        "5.4a\u2013e \u2014 Virginia Beach - A&D Nurture - All Objections"
+      ],
+      "legacy_candidates": [],
+      "issue_count": 0,
+      "blocking_count": 0
+    },
+    "WF-08": {
+      "title": "No-Show and Cancel Recovery",
+      "status": "built_wrong",
+      "built_by": [
+        "Newport News Cancellation Recovery",
+        "Newport News No-Show Recovery",
+        "Richmond Cancellation Recovery",
+        "Richmond No-Show Recovery",
+        "Virginia Beach Cancellation Recovery",
+        "Virginia Beach No-Show Recovery"
+      ],
+      "legacy_candidates": [],
+      "issue_count": 6,
+      "blocking_count": 6
+    },
+    "WF-09": {
+      "title": "Long-Term Nurture",
+      "status": "built",
+      "built_by": [
+        "5.5 \u2014 Newport News \u2013 Long-Term Nurture",
+        "5.5 \u2014 Richmond \u2013 Long-Term Nurture",
+        "5.5 \u2014 Virginia Beach \u2013 Long-Term Nurture"
+      ],
+      "legacy_candidates": [],
+      "issue_count": 0,
+      "blocking_count": 0
+    },
+    "WF-10": {
+      "title": "Feedback Survey",
+      "status": "built",
+      "built_by": [
+        "5.3 \u2014 Newport News \u2013 Feedback Survey",
+        "5.3 \u2014 Richmond \u2013 Feedback Survey",
+        "5.3 \u2014 Virginia Beach \u2013 Feedback Survey"
+      ],
+      "legacy_candidates": [],
+      "issue_count": 0,
+      "blocking_count": 0
+    },
+    "WF-11": {
+      "title": "Compliance and Errors",
+      "status": "missing",
+      "built_by": [],
+      "legacy_candidates": [],
+      "issue_count": 1,
+      "blocking_count": 1
+    },
+    "WF-12": {
+      "title": "Call Disposition Handler",
+      "status": "missing",
+      "built_by": [],
+      "legacy_candidates": [],
+      "issue_count": 0,
+      "blocking_count": 0
+    },
+    "WF-13": {
+      "title": "Ad-Platform Conversions",
+      "status": "missing",
+      "built_by": [],
+      "legacy_candidates": [],
+      "issue_count": 0,
+      "blocking_count": 0
+    },
+    "WF-14": {
+      "title": "Ambassador Program",
+      "status": "missing",
+      "built_by": [],
+      "legacy_candidates": [],
+      "issue_count": 0,
+      "blocking_count": 0
+    },
+    "WF-15": {
+      "title": "PCC Referral Routing",
+      "status": "missing",
+      "built_by": [],
+      "legacy_candidates": [],
+      "issue_count": 0,
+      "blocking_count": 0
+    },
+    "WF-16": {
+      "title": "Comms Edge",
+      "status": "missing",
+      "built_by": [],
+      "legacy_candidates": [],
+      "issue_count": 0,
+      "blocking_count": 0
+    }
+  },
+  "severity_counts": {
+    "blocker": 3,
+    "major": 19
+  },
+  "status_counts": {
+    "built": 7,
+    "built_wrong": 3,
+    "missing": 6
+  },
+  "findings": [
+    {
+      "check": "B-enum",
+      "severity": "blocker",
+      "wf": "WF-05",
+      "workflow": "5.1 \u2014 Newport News \u2013 PCC Disposition Router",
+      "workflow_id": "bc78fb80-7a7c-4f29-a79e-2ce432afad30",
+      "issue": "WF-05 does not gate on appt_status before routing outcome",
+      "evidence": "no appointment / appt_status condition found among 0 if/else conditions",
+      "fix": "Gate first on appt_status: showed -> outcome routing; no-show/cancel -> WF-08; reschedule -> WF-03. Only then read sale_outcome."
+    },
+    {
+      "check": "B-enum",
+      "severity": "blocker",
+      "wf": "WF-05",
+      "workflow": "5.1 \u2014 Richmond \u2013 PCC Disposition Router",
+      "workflow_id": "f09dc586-f25f-419a-b0c7-f7c013712fe3",
+      "issue": "WF-05 does not gate on appt_status before routing outcome",
+      "evidence": "no appointment / appt_status condition found among 0 if/else conditions",
+      "fix": "Gate first on appt_status: showed -> outcome routing; no-show/cancel -> WF-08; reschedule -> WF-03. Only then read sale_outcome."
+    },
+    {
+      "check": "B-enum",
+      "severity": "blocker",
+      "wf": "WF-05",
+      "workflow": "5.1 \u2014 Virginia Beach \u2013 PCC Disposition Router",
+      "workflow_id": "3f95f7b4-5488-4114-9807-e77c1345d45c",
+      "issue": "WF-05 does not gate on appt_status before routing outcome",
+      "evidence": "no appointment / appt_status condition found among 0 if/else conditions",
+      "fix": "Gate first on appt_status: showed -> outcome routing; no-show/cancel -> WF-08; reschedule -> WF-03. Only then read sale_outcome."
+    },
+    {
+      "check": "C-field",
+      "severity": "major",
+      "wf": "WF-05",
+      "workflow": "5.1 \u2014 Newport News \u2013 PCC Disposition Router",
+      "workflow_id": "bc78fb80-7a7c-4f29-a79e-2ce432afad30",
+      "issue": "No outcome_processed_at idempotency stamp in the outcome router",
+      "evidence": "token 'outcome_processed_at' not found in the step graph",
+      "fix": "Check outcome_processed_at at entry; skip re-routing and CAPI if set; stamp it after processing so edits do not double-fire."
+    },
+    {
+      "check": "C-field",
+      "severity": "major",
+      "wf": "WF-05",
+      "workflow": "5.1 \u2014 Newport News \u2013 PCC Disposition Router",
+      "workflow_id": "bc78fb80-7a7c-4f29-a79e-2ce432afad30",
+      "issue": "Won branch does not set renewal_date",
+      "evidence": "token 'renewal_date' not found in the step graph",
+      "fix": "On every Won, set renewal_date = Won date + term_1."
+    },
+    {
+      "check": "C-field",
+      "severity": "major",
+      "wf": "WF-05",
+      "workflow": "5.1 \u2014 Richmond \u2013 PCC Disposition Router",
+      "workflow_id": "f09dc586-f25f-419a-b0c7-f7c013712fe3",
+      "issue": "No outcome_processed_at idempotency stamp in the outcome router",
+      "evidence": "token 'outcome_processed_at' not found in the step graph",
+      "fix": "Check outcome_processed_at at entry; skip re-routing and CAPI if set; stamp it after processing so edits do not double-fire."
+    },
+    {
+      "check": "C-field",
+      "severity": "major",
+      "wf": "WF-05",
+      "workflow": "5.1 \u2014 Richmond \u2013 PCC Disposition Router",
+      "workflow_id": "f09dc586-f25f-419a-b0c7-f7c013712fe3",
+      "issue": "Won branch does not set renewal_date",
+      "evidence": "token 'renewal_date' not found in the step graph",
+      "fix": "On every Won, set renewal_date = Won date + term_1."
+    },
+    {
+      "check": "C-field",
+      "severity": "major",
+      "wf": "WF-05",
+      "workflow": "5.1 \u2014 Virginia Beach \u2013 PCC Disposition Router",
+      "workflow_id": "3f95f7b4-5488-4114-9807-e77c1345d45c",
+      "issue": "No outcome_processed_at idempotency stamp in the outcome router",
+      "evidence": "token 'outcome_processed_at' not found in the step graph",
+      "fix": "Check outcome_processed_at at entry; skip re-routing and CAPI if set; stamp it after processing so edits do not double-fire."
+    },
+    {
+      "check": "C-field",
+      "severity": "major",
+      "wf": "WF-05",
+      "workflow": "5.1 \u2014 Virginia Beach \u2013 PCC Disposition Router",
+      "workflow_id": "3f95f7b4-5488-4114-9807-e77c1345d45c",
+      "issue": "Won branch does not set renewal_date",
+      "evidence": "token 'renewal_date' not found in the step graph",
+      "fix": "On every Won, set renewal_date = Won date + term_1."
+    },
+    {
+      "check": "D-journey",
+      "severity": "major",
+      "wf": "WF-03",
+      "workflow": "Newport News Booking Confirmation",
+      "workflow_id": "5bb22f3f-9ee3-4309-8b5e-bfa6d02644c9",
+      "issue": "No cancel-exit path in booking/confirmation",
+      "evidence": "no cancel handling found in the step graph",
+      "fix": "Halt reminders on cancel and hand off to WF-08."
+    },
+    {
+      "check": "D-journey",
+      "severity": "major",
+      "wf": "WF-03",
+      "workflow": "Richmond Booking Confirmation",
+      "workflow_id": "38e96d86-3792-40f9-b950-a289bb42d2e6",
+      "issue": "No cancel-exit path in booking/confirmation",
+      "evidence": "no cancel handling found in the step graph",
+      "fix": "Halt reminders on cancel and hand off to WF-08."
+    },
+    {
+      "check": "D-journey",
+      "severity": "major",
+      "wf": "WF-03",
+      "workflow": "Virginia Booking Confirmation",
+      "workflow_id": "21680c0e-e8c2-469a-95a1-06ff14f2df12",
+      "issue": "No cancel-exit path in booking/confirmation",
+      "evidence": "no cancel handling found in the step graph",
+      "fix": "Halt reminders on cancel and hand off to WF-08."
+    },
+    {
+      "check": "D-journey",
+      "severity": "major",
+      "wf": "WF-03",
+      "workflow": "6.2 Newport News Renewal Reminder",
+      "workflow_id": "894b9547-a7a7-437f-b83e-c122c0b98f4f",
+      "issue": "No cancel-exit path in booking/confirmation",
+      "evidence": "no cancel handling found in the step graph",
+      "fix": "Halt reminders on cancel and hand off to WF-08."
+    },
+    {
+      "check": "D-journey",
+      "severity": "major",
+      "wf": "WF-03",
+      "workflow": "6.2 Richmond Renewal Reminder",
+      "workflow_id": "f4f724b7-4435-45cd-b07b-dd1f91b18425",
+      "issue": "No cancel-exit path in booking/confirmation",
+      "evidence": "no cancel handling found in the step graph",
+      "fix": "Halt reminders on cancel and hand off to WF-08."
+    },
+    {
+      "check": "D-journey",
+      "severity": "major",
+      "wf": "WF-03",
+      "workflow": "6.2 Virginia Beach Renewal Reminder",
+      "workflow_id": "107cc989-37fe-4729-a5d1-991d3abf3a51",
+      "issue": "No cancel-exit path in booking/confirmation",
+      "evidence": "no cancel handling found in the step graph",
+      "fix": "Halt reminders on cancel and hand off to WF-08."
+    },
+    {
+      "check": "D-journey",
+      "severity": "major",
+      "wf": "WF-08",
+      "workflow": "Newport News Cancellation Recovery",
+      "workflow_id": "d3cb36d6-3359-42a6-b812-e66bbba525a6",
+      "issue": "No early-exit when the member rebooks",
+      "evidence": "no workflow goal / remove-from-workflow / rebook trigger found",
+      "fix": "Add a goal that exits the recovery sequence the moment a new appointment is booked, and hand back to WF-03."
+    },
+    {
+      "check": "D-journey",
+      "severity": "major",
+      "wf": "WF-08",
+      "workflow": "Newport News No-Show Recovery",
+      "workflow_id": "6f07bebb-fef2-4491-abb5-ae9cb8135ba0",
+      "issue": "No early-exit when the member rebooks",
+      "evidence": "no workflow goal / remove-from-workflow / rebook trigger found",
+      "fix": "Add a goal that exits the recovery sequence the moment a new appointment is booked, and hand back to WF-03."
+    },
+    {
+      "check": "D-journey",
+      "severity": "major",
+      "wf": "WF-08",
+      "workflow": "Richmond Cancellation Recovery",
+      "workflow_id": "69a61b66-a305-4f4d-91f8-f1ba49b288e3",
+      "issue": "No early-exit when the member rebooks",
+      "evidence": "no workflow goal / remove-from-workflow / rebook trigger found",
+      "fix": "Add a goal that exits the recovery sequence the moment a new appointment is booked, and hand back to WF-03."
+    },
+    {
+      "check": "D-journey",
+      "severity": "major",
+      "wf": "WF-08",
+      "workflow": "Richmond No-Show Recovery",
+      "workflow_id": "28d65c1e-ab76-4165-b86f-14da853756a5",
+      "issue": "No early-exit when the member rebooks",
+      "evidence": "no workflow goal / remove-from-workflow / rebook trigger found",
+      "fix": "Add a goal that exits the recovery sequence the moment a new appointment is booked, and hand back to WF-03."
+    },
+    {
+      "check": "D-journey",
+      "severity": "major",
+      "wf": "WF-08",
+      "workflow": "Virginia Beach Cancellation Recovery",
+      "workflow_id": "065bbd34-04d2-4aed-a6c4-e3b5b0451480",
+      "issue": "No early-exit when the member rebooks",
+      "evidence": "no workflow goal / remove-from-workflow / rebook trigger found",
+      "fix": "Add a goal that exits the recovery sequence the moment a new appointment is booked, and hand back to WF-03."
+    },
+    {
+      "check": "D-journey",
+      "severity": "major",
+      "wf": "WF-08",
+      "workflow": "Virginia Beach No-Show Recovery",
+      "workflow_id": "2bd925bc-4203-405e-b763-bbb531f7778b",
+      "issue": "No early-exit when the member rebooks",
+      "evidence": "no workflow goal / remove-from-workflow / rebook trigger found",
+      "fix": "Add a goal that exits the recovery sequence the moment a new appointment is booked, and hand back to WF-03."
+    },
+    {
+      "check": "D-journey",
+      "severity": "major",
+      "wf": "WF-11",
+      "workflow": "(build-wide)",
+      "workflow_id": null,
+      "issue": "No DND action found in the organized build",
+      "evidence": "no dnd_contact node in folders 00-07",
+      "fix": "WF-11 must own DND/STOP; enable DND on opt-out and honor it everywhere."
+    }
+  ]
+}

@@ -2725,7 +2725,7 @@
    "folder": "05 - Sales & Disposition",
    "status": "draft",
    "updated_at": "2026-07-18",
-   "version": 3,
+   "version": 4,
    "location": "Newport News",
    "triggers": [
     {
@@ -3504,7 +3504,7 @@
    "folder": "05 - Sales & Disposition",
    "status": "draft",
    "updated_at": "2026-07-18",
-   "version": 6,
+   "version": 8,
    "location": "Richmond",
    "triggers": [
     {
@@ -4283,7 +4283,7 @@
    "folder": "05 - Sales & Disposition",
    "status": "draft",
    "updated_at": "2026-07-18",
-   "version": 3,
+   "version": 4,
    "location": "Virginia Beach",
    "triggers": [
     {

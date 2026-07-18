@@ -4,11 +4,11 @@
   "locationId": "YTi6qs4zhiW6d4a75A9f",
   "name": "5.1 — Newport News – PCC Disposition Router",
   "status": "draft",
-  "version": 3,
+  "version": 4,
   "allowMultiple": true,
   "timezone": "account",
   "removeContactFromLastStep": true,
-  "filePath": "location/YTi6qs4zhiW6d4a75A9f/workflows/bc78fb80-7a7c-4f29-a79e-2ce432afad30/3",
+  "filePath": "location/YTi6qs4zhiW6d4a75A9f/workflows/bc78fb80-7a7c-4f29-a79e-2ce432afad30/4",
   "stopOnResponse": false,
   "autoMarkAsRead": false,
   "originId": "56ca5b7e-24a2-4002-bad2-459460161dea",
@@ -21,7 +21,7 @@
   },
   "updatedBy": "snapshot",
   "createdAt": "2026-07-18T20:04:58.587Z",
-  "updatedAt": "2026-07-18T21:24:44.235Z",
+  "updatedAt": "2026-07-18T21:39:42.173Z",
   "deleted": false,
   "creationSource": "builder",
   "isTriggerBucketMigrated": true,
@@ -2276,6 +2276,20 @@
         "dataType": "TEXT",
         "filterField": "WoXMFU3OgUouCZJhA9Mo",
         "value": "{{right_now.date_time}}",
+        "valueFieldType": "input"
+       },
+       {
+        "__customInputs__": {},
+        "dataType": "TEXT",
+        "filterField": "lG8cZrgSAzWunzQjqyQ1",
+        "value": "{{contact.term_length__item_1}}",
+        "valueFieldType": "input"
+       },
+       {
+        "__customInputs__": {},
+        "dataType": "TEXT",
+        "filterField": "iAWalRAEJQzfJWBPQbOm",
+        "value": "{{contact.who_referred_you_referrers_name}}",
         "valueFieldType": "input"
        }
       ]

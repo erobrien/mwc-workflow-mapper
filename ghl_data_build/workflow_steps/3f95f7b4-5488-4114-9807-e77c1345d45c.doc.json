@@ -4,11 +4,11 @@
   "locationId": "YTi6qs4zhiW6d4a75A9f",
   "name": "5.1 — Virginia Beach – PCC Disposition Router",
   "status": "draft",
-  "version": 3,
+  "version": 4,
   "allowMultiple": true,
   "timezone": "account",
   "removeContactFromLastStep": true,
-  "filePath": "location/YTi6qs4zhiW6d4a75A9f/workflows/3f95f7b4-5488-4114-9807-e77c1345d45c/3",
+  "filePath": "location/YTi6qs4zhiW6d4a75A9f/workflows/3f95f7b4-5488-4114-9807-e77c1345d45c/4",
   "stopOnResponse": false,
   "autoMarkAsRead": false,
   "originId": "9b7f7f9a-2644-4109-a3ac-41931f3f05a3",
@@ -21,7 +21,7 @@
   },
   "updatedBy": "snapshot",
   "createdAt": "2026-07-18T20:04:59.007Z",
-  "updatedAt": "2026-07-18T21:24:43.144Z",
+  "updatedAt": "2026-07-18T21:39:41.414Z",
   "deleted": false,
   "creationSource": "builder",
   "isTriggerBucketMigrated": true,
@@ -2272,6 +2272,20 @@
         "dataType": "TEXT",
         "filterField": "WoXMFU3OgUouCZJhA9Mo",
         "value": "{{right_now.date_time}}",
+        "valueFieldType": "input"
+       },
+       {
+        "__customInputs__": {},
+        "dataType": "TEXT",
+        "filterField": "lG8cZrgSAzWunzQjqyQ1",
+        "value": "{{contact.term_length__item_1}}",
+        "valueFieldType": "input"
+       },
+       {
+        "__customInputs__": {},
+        "dataType": "TEXT",
+        "filterField": "iAWalRAEJQzfJWBPQbOm",
+        "value": "{{contact.who_referred_you_referrers_name}}",
         "valueFieldType": "input"
        }
       ]

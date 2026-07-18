@@ -1,0 +1,747 @@
+{
+ "workflowData": {
+  "_id": "894b9547-a7a7-437f-b83e-c122c0b98f4f",
+  "locationId": "YTi6qs4zhiW6d4a75A9f",
+  "name": "6.2 Newport News Renewal Reminder",
+  "status": "draft",
+  "version": 2,
+  "allowMultiple": true,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/YTi6qs4zhiW6d4a75A9f/workflows/894b9547-a7a7-437f-b83e-c122c0b98f4f/2",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "originId": "4a7a05f0-9e24-43a9-9330-dbb0ff7f153d",
+  "permission": 380,
+  "type": "workflow",
+  "meta": null,
+  "updatedBy": "snapshot",
+  "createdAt": "2026-07-18T20:05:03.185Z",
+  "updatedAt": "2026-07-18T20:05:21.467Z",
+  "deleted": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "snapshot",
+  "__v": 0,
+  "allowMultipleOpportunity": false,
+  "dataVersion": 7,
+  "eventStartDate": null,
+  "parentId": "aed9b3b5-38ed-4b2d-9734-da447a620ed1",
+  "senderAddress": null,
+  "window": {
+   "condition": "when",
+   "start": "08:00",
+   "end": "17:00",
+   "days": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
+  },
+  "workflowNote": {
+   "content": "",
+   "createdBy": "snapshot",
+   "createdByName": "snapshot",
+   "createdAt": "2026-07-18T20:05:20.972Z",
+   "updatedBy": "snapshot",
+   "updatedByName": "snapshot",
+   "updatedAt": "2026-07-18T20:05:20.972Z"
+  },
+  "id": "894b9547-a7a7-437f-b83e-c122c0b98f4f",
+  "workflowData": {
+   "templates": [
+    {
+     "id": "76c46cc7-218c-4b13-b772-af8a8ebdd659",
+     "order": 0,
+     "attributes": {
+      "currentRecipeType": "CUSTOM",
+      "branches": [
+       {
+        "id": "e4074d5e-cf1a-4cc0-ab6d-7613aa7fc0c3",
+        "name": "Check if contact is Do Not Disturb or opted out",
+        "segments": [
+         {
+          "__segmentId": "5e01c16e-b8c6-447c-88d6-88ed4275ad79",
+          "operator": "or",
+          "conditions": [
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "dnd_channels",
+            "conditionOperator": "index-of-true",
+            "conditionValue": [
+             "Call",
+             "SMS",
+             "Email",
+             "WhatsApp",
+             "FB",
+             "GMB"
+            ],
+            "__conditionId": "44390568-442f-4b48-84e3-bb4a70c2802f",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           },
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "tags",
+            "conditionOperator": "index-of-true",
+            "conditionValue": [
+             "opted_out"
+            ],
+            "__conditionId": "59c2deeb-8bb7-414c-b0dc-55ae50aa91af",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           }
+          ]
+         }
+        ],
+        "operator": "or",
+        "showErrors": false,
+        "branchNameError": "Branch name cannot be empty!"
+       }
+      ],
+      "operator": "and",
+      "if": true,
+      "conditionName": "DND/Opted-Out Branching",
+      "version": 2,
+      "noneBranchName": "None"
+     },
+     "name": "yes",
+     "type": "if_else",
+     "cat": "conditions",
+     "next": [
+      "e4074d5e-cf1a-4cc0-ab6d-7613aa7fc0c3",
+      "8dcac400-a1ac-4cc4-906a-96e7110859c2"
+     ],
+     "nodeType": "condition-node"
+    },
+    {
+     "id": "e4074d5e-cf1a-4cc0-ab6d-7613aa7fc0c3",
+     "parent": "76c46cc7-218c-4b13-b772-af8a8ebdd659",
+     "order": 1,
+     "attributes": {
+      "if": false,
+      "conditionName": "Condition",
+      "operator": "and",
+      "branches": []
+     },
+     "name": "Check if contact is Do Not Disturb or opted out",
+     "type": "if_else",
+     "cat": "conditions",
+     "sibling": [
+      "8dcac400-a1ac-4cc4-906a-96e7110859c2"
+     ],
+     "comments": [],
+     "nodeType": "branch-yes",
+     "parentKey": "76c46cc7-218c-4b13-b772-af8a8ebdd659"
+    },
+    {
+     "id": "8dcac400-a1ac-4cc4-906a-96e7110859c2",
+     "parent": "76c46cc7-218c-4b13-b772-af8a8ebdd659",
+     "order": 1,
+     "attributes": {
+      "else": true
+     },
+     "name": "None",
+     "type": "if_else",
+     "cat": "conditions",
+     "next": "15e9bca1-811d-4d64-b134-7a01be551c40",
+     "sibling": [
+      "e4074d5e-cf1a-4cc0-ab6d-7613aa7fc0c3"
+     ],
+     "comments": [],
+     "nodeType": "branch-no",
+     "parentKey": "76c46cc7-218c-4b13-b772-af8a8ebdd659"
+    },
+    {
+     "id": "15e9bca1-811d-4d64-b134-7a01be551c40",
+     "parent": "8dcac400-a1ac-4cc4-906a-96e7110859c2",
+     "order": 0,
+     "attributes": {
+      "currentRecipeType": "CUSTOM",
+      "branches": [
+       {
+        "id": "58c00f97-6198-40ab-8e9d-cdc28fd8e096",
+        "name": "Check if Term End Date is present and not empty",
+        "segments": [
+         {
+          "__segmentId": "e3e9cebb-de8a-4edc-b746-831d025c3e4f",
+          "operator": "and",
+          "conditions": [
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "GgZbBKiosmZ5VTDiYlpm",
+            "conditionOperator": "has_value",
+            "__conditionId": "e907ac9b-f10b-4d3e-a282-c686c877fd42",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           }
+          ]
+         }
+        ],
+        "operator": "and",
+        "showErrors": false,
+        "branchNameError": "Branch name cannot be empty!"
+       }
+      ],
+      "operator": "and",
+      "if": true,
+      "conditionName": "Term End Date Present Check",
+      "version": 2,
+      "noneBranchName": "None"
+     },
+     "name": "yes",
+     "type": "if_else",
+     "cat": "conditions",
+     "next": [
+      "58c00f97-6198-40ab-8e9d-cdc28fd8e096",
+      "404895ae-999c-4877-88ac-5c8ff0744c05"
+     ],
+     "nodeType": "condition-node",
+     "parentKey": "8dcac400-a1ac-4cc4-906a-96e7110859c2"
+    },
+    {
+     "id": "58c00f97-6198-40ab-8e9d-cdc28fd8e096",
+     "parent": "15e9bca1-811d-4d64-b134-7a01be551c40",
+     "order": 1,
+     "attributes": {
+      "if": false,
+      "conditionName": "Condition",
+      "operator": "and",
+      "branches": []
+     },
+     "name": "Check if Term End Date is present and not empty",
+     "type": "if_else",
+     "cat": "conditions",
+     "sibling": [
+      "404895ae-999c-4877-88ac-5c8ff0744c05"
+     ],
+     "comments": [],
+     "nodeType": "branch-yes",
+     "parentKey": "15e9bca1-811d-4d64-b134-7a01be551c40",
+     "next": "33d4de39-e729-46cf-b964-0e720d0b678d"
+    },
+    {
+     "id": "33d4de39-e729-46cf-b964-0e720d0b678d",
+     "parent": "58c00f97-6198-40ab-8e9d-cdc28fd8e096",
+     "order": 0,
+     "attributes": {
+      "type": "specific_date",
+      "convertToMultipath": false,
+      "hybridActionType": "wait",
+      "isHybridAction": true,
+      "name": "Wait Until 60 Days Before Term End Date (9am-5pm ET)",
+      "cat": "",
+      "transitions": [],
+      "specificDateInputMode": "dynamic",
+      "specificDate": "{{contact.term_end_date}}",
+      "specificTimeHour": 9,
+      "specificTimeMinute": 0,
+      "specificTimeSecond": 0,
+      "specificTimePeriod": "AM",
+      "specificDateProceed": "before",
+      "specificDateOffsetDays": 60,
+      "specificDateOffsetHours": 0,
+      "specificDateOffsetMinutes": 0,
+      "specificDatePassed": "next",
+      "specificDateStep": "",
+      "dynamicSpecificDate": "{{contact.term_end_date}}"
+     },
+     "name": "Wait Until 60 Days Before Term End Date (9am-5pm ET)",
+     "type": "wait",
+     "next": "3d621023-34c0-43e8-bf76-99ac1c106331",
+     "parentKey": "58c00f97-6198-40ab-8e9d-cdc28fd8e096",
+     "cat": ""
+    },
+    {
+     "id": "3d621023-34c0-43e8-bf76-99ac1c106331",
+     "parent": "58c00f97-6198-40ab-8e9d-cdc28fd8e096",
+     "order": 1,
+     "attributes": {
+      "body": "Hi {{contact.first_name}}, it's Men's Wellness Centers Newport News. Your current term ends {{contact.term_end_date}}. When you're ready we'll make renewing simple - reply here or call {{custom_values.newport_news__phone}}. Reply STOP to opt out.",
+      "assignedOwners": [
+       "contact_owner"
+      ],
+      "alsoNotifyContactFollowers": false,
+      "alsoNotifyOpportunityFollowers": false
+     },
+     "name": "Send 60 Day Renewal SMS",
+     "type": "sms",
+     "next": "bb51d855-3a8b-488a-a864-fb044d667c8c",
+     "parentKey": "33d4de39-e729-46cf-b964-0e720d0b678d"
+    },
+    {
+     "id": "bb51d855-3a8b-488a-a864-fb044d667c8c",
+     "parent": "58c00f97-6198-40ab-8e9d-cdc28fd8e096",
+     "order": 2,
+     "attributes": {
+      "type": "specific_date",
+      "convertToMultipath": false,
+      "hybridActionType": "wait",
+      "isHybridAction": true,
+      "name": "Wait Until 30 Days Before Term End Date (9am-5pm ET)",
+      "cat": "",
+      "transitions": [],
+      "specificDateInputMode": "dynamic",
+      "specificDate": "{{contact.term_end_date}}",
+      "specificTimeHour": 9,
+      "specificTimeMinute": 0,
+      "specificTimeSecond": 0,
+      "specificTimePeriod": "AM",
+      "specificDateProceed": "before",
+      "specificDateOffsetDays": 30,
+      "specificDateOffsetHours": 0,
+      "specificDateOffsetMinutes": 0,
+      "specificDatePassed": "next",
+      "specificDateStep": "",
+      "dynamicSpecificDate": "{{contact.term_end_date}}"
+     },
+     "name": "Wait Until 30 Days Before Term End Date (9am-5pm ET)",
+     "type": "wait",
+     "next": "c2e1d1b4-aa7b-4505-b6b4-51d4fe8f75cb",
+     "parentKey": "3d621023-34c0-43e8-bf76-99ac1c106331",
+     "cat": ""
+    },
+    {
+     "id": "c2e1d1b4-aa7b-4505-b6b4-51d4fe8f75cb",
+     "parent": "58c00f97-6198-40ab-8e9d-cdc28fd8e096",
+     "order": 3,
+     "attributes": {
+      "body": "Hi {{contact.first_name}}, your term with Men's Wellness Centers ends {{contact.term_end_date}}. Let's keep your progress going - reply here or call {{custom_values.newport_news__phone}} to set up your next term. Reply STOP to opt out.",
+      "assignedOwners": null,
+      "alsoNotifyContactFollowers": false,
+      "alsoNotifyOpportunityFollowers": false
+     },
+     "name": "Send 30 Day SMS",
+     "type": "sms",
+     "next": "b9915d6a-7b01-43dd-a3ca-ff11ef251e3e",
+     "parentKey": "bb51d855-3a8b-488a-a864-fb044d667c8c"
+    },
+    {
+     "id": "b9915d6a-7b01-43dd-a3ca-ff11ef251e3e",
+     "parent": "58c00f97-6198-40ab-8e9d-cdc28fd8e096",
+     "order": 4,
+     "attributes": {
+      "subject": "Your membership term is coming up",
+      "html": "Hi {{contact.first_name}},<br><br>Your term with Men's Wellness Centers ends {{contact.term_end_date}}.<br>We'd love to help you keep your progress going\u0014contact us to set up your next term:<br>Phone: {{custom_values.newport_news__phone}}<br>Address: {{custom_values.npn_address}}<br><br>Reply to this email or call us soon!",
+      "from_name": "",
+      "from_email": "",
+      "assignedOwners": null,
+      "alsoNotifyContactFollowers": false,
+      "alsoNotifyOpportunityFollowers": false
+     },
+     "name": "Send 30 Day Email",
+     "type": "email",
+     "next": "32f4131e-ebb9-4d54-b9f8-3d74c763e7ba",
+     "parentKey": "c2e1d1b4-aa7b-4505-b6b4-51d4fe8f75cb"
+    },
+    {
+     "id": "32f4131e-ebb9-4d54-b9f8-3d74c763e7ba",
+     "parent": "58c00f97-6198-40ab-8e9d-cdc28fd8e096",
+     "order": 5,
+     "attributes": {
+      "type": "specific_date",
+      "convertToMultipath": false,
+      "hybridActionType": "wait",
+      "isHybridAction": true,
+      "name": "Wait Until 14 Days Before Term End",
+      "cat": "",
+      "transitions": [],
+      "specificDateInputMode": "dynamic",
+      "specificDate": "{{contact.term_end_date}}",
+      "specificTimeHour": 9,
+      "specificTimeMinute": 0,
+      "specificTimeSecond": 0,
+      "specificTimePeriod": "AM",
+      "specificDateProceed": "before",
+      "specificDateOffsetDays": 14,
+      "specificDateOffsetHours": 0,
+      "specificDateOffsetMinutes": 0,
+      "specificDatePassed": "next",
+      "specificDateStep": "",
+      "dynamicSpecificDate": "{{contact.term_end_date}}"
+     },
+     "name": "Wait Until 14 Days Before Term End",
+     "type": "wait",
+     "next": "1e9e5b74-12f7-463e-867c-6badd84e53d1",
+     "parentKey": "b9915d6a-7b01-43dd-a3ca-ff11ef251e3e",
+     "cat": ""
+    },
+    {
+     "id": "1e9e5b74-12f7-463e-867c-6badd84e53d1",
+     "stepIndex": 1,
+     "parent": "58c00f97-6198-40ab-8e9d-cdc28fd8e096",
+     "order": 6,
+     "attributes": {
+      "title": "Call {{contact.first_name}} {{contact.last_name}} regarding renewal",
+      "body": "Follow up with {{contact.first_name}} {{contact.last_name}} about renewal since their term ends on {{contact.term_end_date}}. Set task due in 1 day.",
+      "assignedTo": "",
+      "dueDate": {
+       "duration": 14,
+       "unit": "days",
+       "skipWeekends": false
+      },
+      "type": "task_notification",
+      "__customInputs__": {}
+     },
+     "name": "Create 14-Day Task for Rep",
+     "type": "task-notification",
+     "next": "61db71b2-fd57-4808-9a8b-9bb4eda18038",
+     "workflowsActionType": "INTERNAL",
+     "parentKey": "32f4131e-ebb9-4d54-b9f8-3d74c763e7ba",
+     "incompleteData": true
+    },
+    {
+     "id": "61db71b2-fd57-4808-9a8b-9bb4eda18038",
+     "parent": "58c00f97-6198-40ab-8e9d-cdc28fd8e096",
+     "order": 7,
+     "attributes": {
+      "body": "Hi {{contact.first_name}}, quick heads-up - your term ends in about two weeks ({{contact.term_end_date}}). Want to lock in your next term? Reply or call {{custom_values.newport_news__phone}}. Reply STOP to opt out.",
+      "assignedOwners": null,
+      "alsoNotifyContactFollowers": false,
+      "alsoNotifyOpportunityFollowers": false
+     },
+     "name": "Send 14 Day Renewal SMS",
+     "type": "sms",
+     "next": "1ca9ce69-0a7f-4510-b4c3-3d30cd40af86",
+     "parentKey": "1e9e5b74-12f7-463e-867c-6badd84e53d1"
+    },
+    {
+     "id": "1ca9ce69-0a7f-4510-b4c3-3d30cd40af86",
+     "parent": "58c00f97-6198-40ab-8e9d-cdc28fd8e096",
+     "order": 8,
+     "attributes": {
+      "type": "specific_date",
+      "convertToMultipath": false,
+      "hybridActionType": "wait",
+      "isHybridAction": true,
+      "name": "Wait Until 7 Days Before Term End Date, 9am-5pm ET",
+      "cat": "",
+      "transitions": [],
+      "specificDateInputMode": "dynamic",
+      "specificDate": "{{contact.term_end_date}}",
+      "specificTimeHour": 9,
+      "specificTimeMinute": 0,
+      "specificTimeSecond": 0,
+      "specificTimePeriod": "AM",
+      "specificDateProceed": "before",
+      "specificDateOffsetDays": 7,
+      "specificDateOffsetHours": 0,
+      "specificDateOffsetMinutes": 0,
+      "specificDatePassed": "next",
+      "specificDateStep": "",
+      "dynamicSpecificDate": "{{contact.term_end_date}}"
+     },
+     "name": "Wait Until 7 Days Before Term End Date, 9am-5pm ET",
+     "type": "wait",
+     "next": "7660a76c-f273-4614-bf59-1dbc3a1d0fa3",
+     "parentKey": "61db71b2-fd57-4808-9a8b-9bb4eda18038",
+     "cat": ""
+    },
+    {
+     "id": "7660a76c-f273-4614-bf59-1dbc3a1d0fa3",
+     "parent": "58c00f97-6198-40ab-8e9d-cdc28fd8e096",
+     "order": 9,
+     "attributes": {
+      "body": "Hi {{contact.first_name}}, your term ends {{contact.term_end_date}}. Let's keep things going - reply or call {{custom_values.newport_news__phone}}. Reply STOP to opt out.",
+      "assignedOwners": null,
+      "alsoNotifyContactFollowers": false,
+      "alsoNotifyOpportunityFollowers": false
+     },
+     "name": "Send 7 Day SMS",
+     "type": "sms",
+     "next": "3c216fc4-ebd4-4052-af6f-fcc6ab5ab4bd",
+     "parentKey": "1ca9ce69-0a7f-4510-b4c3-3d30cd40af86"
+    },
+    {
+     "id": "3c216fc4-ebd4-4052-af6f-fcc6ab5ab4bd",
+     "parent": "58c00f97-6198-40ab-8e9d-cdc28fd8e096",
+     "order": 10,
+     "attributes": {
+      "type": "specific_date",
+      "convertToMultipath": false,
+      "hybridActionType": "wait",
+      "isHybridAction": true,
+      "name": "Wait Until Term End Date, 9am ET",
+      "cat": "",
+      "transitions": [],
+      "specificDateInputMode": "dynamic",
+      "specificDate": "{{contact.term_end_date}}",
+      "specificTimeHour": 9,
+      "specificTimeMinute": 0,
+      "specificTimeSecond": 0,
+      "specificTimePeriod": "AM",
+      "specificDateProceed": "on",
+      "specificDateOffsetDays": 0,
+      "specificDateOffsetHours": 0,
+      "specificDateOffsetMinutes": 0,
+      "specificDatePassed": "next",
+      "specificDateStep": "",
+      "dynamicSpecificDate": "{{contact.term_end_date}}"
+     },
+     "name": "Wait Until Term End Date, 9am ET",
+     "type": "wait",
+     "next": "3288b70e-88ae-4b16-bbf5-666bdbf674ad",
+     "parentKey": "7660a76c-f273-4614-bf59-1dbc3a1d0fa3",
+     "cat": ""
+    },
+    {
+     "id": "3288b70e-88ae-4b16-bbf5-666bdbf674ad",
+     "parent": "58c00f97-6198-40ab-8e9d-cdc28fd8e096",
+     "order": 11,
+     "attributes": {
+      "currentRecipeType": "CUSTOM",
+      "branches": [
+       {
+        "name": "Check if contact has 'renewed' tag",
+        "operator": "and",
+        "segments": [
+         {
+          "operator": "and",
+          "conditions": [
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "tags",
+            "conditionOperator": "index-of-true",
+            "conditionValue": [
+             "renewed"
+            ]
+           }
+          ]
+         }
+        ],
+        "id": "f312c73b-36c7-42e2-bfa4-7535509a5ad2"
+       }
+      ],
+      "if": true,
+      "operator": "and",
+      "conditionName": "Renewed Tag Branching at Term End",
+      "version": 2,
+      "noneBranchName": "None"
+     },
+     "name": "Renewed Tag Branching at Term End",
+     "type": "if_else",
+     "cat": "conditions",
+     "next": [
+      "f312c73b-36c7-42e2-bfa4-7535509a5ad2",
+      "879e54eb-d580-48b7-b170-56f6df120dcf"
+     ],
+     "nodeType": "condition-node",
+     "parentKey": "3c216fc4-ebd4-4052-af6f-fcc6ab5ab4bd"
+    },
+    {
+     "id": "f312c73b-36c7-42e2-bfa4-7535509a5ad2",
+     "parent": "3288b70e-88ae-4b16-bbf5-666bdbf674ad",
+     "order": 12,
+     "attributes": {
+      "if": false,
+      "conditionName": "Condition",
+      "operator": "and",
+      "branches": []
+     },
+     "name": "Check if contact has 'renewed' tag",
+     "type": "if_else",
+     "cat": "conditions",
+     "sibling": [
+      "879e54eb-d580-48b7-b170-56f6df120dcf"
+     ],
+     "comments": [],
+     "nodeType": "branch-yes",
+     "parentKey": "3288b70e-88ae-4b16-bbf5-666bdbf674ad"
+    },
+    {
+     "id": "879e54eb-d580-48b7-b170-56f6df120dcf",
+     "parent": "3288b70e-88ae-4b16-bbf5-666bdbf674ad",
+     "order": 12,
+     "attributes": {
+      "else": true
+     },
+     "name": "None",
+     "type": "if_else",
+     "cat": "conditions",
+     "next": "e4a5c694-8325-4fc7-beec-68488e845256",
+     "sibling": [
+      "f312c73b-36c7-42e2-bfa4-7535509a5ad2"
+     ],
+     "comments": [],
+     "nodeType": "branch-no",
+     "parentKey": "3288b70e-88ae-4b16-bbf5-666bdbf674ad"
+    },
+    {
+     "id": "e4a5c694-8325-4fc7-beec-68488e845256",
+     "parent": "879e54eb-d580-48b7-b170-56f6df120dcf",
+     "order": 0,
+     "attributes": {
+      "tags": [
+       "lapsed"
+      ]
+     },
+     "name": "Add Lapsed Tag",
+     "type": "add_contact_tag",
+     "next": "6bb1cc02-6792-43ae-ac9d-23e253a65121",
+     "parentKey": "879e54eb-d580-48b7-b170-56f6df120dcf"
+    },
+    {
+     "id": "6bb1cc02-6792-43ae-ac9d-23e253a65121",
+     "parent": "879e54eb-d580-48b7-b170-56f6df120dcf",
+     "order": 1,
+     "attributes": {
+      "type": "notification",
+      "notification": {
+       "title": "Member Term Ended Without Renewal",
+       "body": "Member term ended without renewal: {{contact.first_name}} {{contact.last_name}} - moving to win-back.",
+       "redirectPage": "contact",
+       "userType": "all",
+       "assignedOwners": null,
+       "alsoNotifyContactFollowers": false,
+       "alsoNotifyOpportunityFollowers": false,
+       "type": "send_notification"
+      }
+     },
+     "name": "Send Internal Notification for Lapsed Member",
+     "type": "internal_notification",
+     "parentKey": "e4a5c694-8325-4fc7-beec-68488e845256"
+    },
+    {
+     "id": "404895ae-999c-4877-88ac-5c8ff0744c05",
+     "parent": "15e9bca1-811d-4d64-b134-7a01be551c40",
+     "order": 1,
+     "attributes": {
+      "else": true
+     },
+     "name": "None",
+     "type": "if_else",
+     "cat": "conditions",
+     "sibling": [
+      "58c00f97-6198-40ab-8e9d-cdc28fd8e096"
+     ],
+     "comments": [],
+     "nodeType": "branch-no",
+     "parentKey": "15e9bca1-811d-4d64-b134-7a01be551c40"
+    }
+   ]
+  }
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ },
+ "triggers": [
+  {
+   "id": "C45OfcZfpyOXWUbxUVdc",
+   "date_added": "2026-07-18T20:05:20.800Z",
+   "date_updated": "2026-07-18T20:05:20.800Z",
+   "deleted": false,
+   "belongs_to": "workflow",
+   "location_id": "YTi6qs4zhiW6d4a75A9f",
+   "origin_id": "PXF3O9ICBIRIaHDoUzB9",
+   "active": false,
+   "workflow_id": "894b9547-a7a7-437f-b83e-c122c0b98f4f",
+   "masterType": "highlevel",
+   "name": "Contact Tag Added: disposition_sold (Location: Newport News)",
+   "type": "contact_tag",
+   "conditions": [
+    {
+     "operator": "index-of-true",
+     "field": "tagsAdded",
+     "value": "disposition_sold",
+     "title": "Tag Added",
+     "type": "select",
+     "id": "tag-added"
+    },
+    {
+     "operator": "==",
+     "field": "contact.UyLjnNDfF6KvhHaUO8Dn",
+     "value": "Newport News",
+     "title": "Location",
+     "type": "select",
+     "id": "UyLjnNDfF6KvhHaUO8Dn"
+    }
+   ],
+   "actions": [
+    {
+     "workflow_id": "894b9547-a7a7-437f-b83e-c122c0b98f4f",
+     "type": "add_to_workflow"
+    }
+   ],
+   "schedule_config": {}
+  }
+ ],
+ "dependentAssets": {}
+}

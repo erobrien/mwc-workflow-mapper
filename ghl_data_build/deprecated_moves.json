@@ -1,0 +1,90 @@
+{
+ "folder_id": "woxSaLOocQfHq2ii1hrd",
+ "moved": [
+  {
+   "fieldKey": "contact.ad_other_explanation",
+   "id": "StDSsNH93cL8yESdPoyc",
+   "ok": true
+  },
+  {
+   "fieldKey": "contact.ad_reason",
+   "id": "DkyfqwDvPRk9FaQEm3XJ",
+   "ok": true
+  },
+  {
+   "fieldKey": "contact.new_or_renewal",
+   "id": "MhDFHdWTxIdE1K9ZVR9E",
+   "ok": true
+  },
+  {
+   "fieldKey": "contact.sale_type",
+   "id": "wpgWW8OmtZMJmJeTMkCs",
+   "ok": true
+  },
+  {
+   "fieldKey": "contact.sale_outcome",
+   "id": "SLjDBd6YkOKT9c1gZKK1",
+   "ok": true
+  },
+  {
+   "fieldKey": "contact.patient_care_consultant",
+   "id": "IkVjXYsHIB8lzxoevubn",
+   "ok": true
+  },
+  {
+   "fieldKey": "contact.provider_making_recommendation",
+   "id": "yRZUTiwwedhfG3xoopFb",
+   "ok": true
+  },
+  {
+   "fieldKey": "contact.pay_type",
+   "id": "FO5Z7mCLp28uMfR3q189",
+   "ok": true
+  },
+  {
+   "fieldKey": "contact.price__item_2",
+   "id": "uHCo77HsJ5TX9CjYVA6L",
+   "ok": true
+  },
+  {
+   "fieldKey": "contact.product_sold__item_2",
+   "id": "7hpOBO9MRhonjJOZXPPp",
+   "ok": true
+  },
+  {
+   "fieldKey": "contact.term_length__item_1",
+   "id": "CUpTUdS5c3flyi2975r7",
+   "ok": true
+  },
+  {
+   "fieldKey": "contact.term_length__item_2",
+   "id": "EcrUK6XSqfj8tAjKaoqk",
+   "ok": true
+  },
+  {
+   "fieldKey": "contact.total_program_amount",
+   "id": "zvciDjkzyWiTqSyZr9Ck",
+   "ok": true
+  },
+  {
+   "fieldKey": "contact.treatment_cost",
+   "id": "K5GPwWijheN8NxUdQDuk",
+   "ok": true
+  },
+  {
+   "fieldKey": "contact.treatment_type",
+   "id": "iJMy9mhYFJdrXgHmmi7J",
+   "ok": true
+  },
+  {
+   "fieldKey": "contact.who_referred_you_referrers_name",
+   "id": "niBmTpLjzNGwZUNCbZNh",
+   "ok": true
+  },
+  {
+   "fieldKey": "contact.referred_by_ambassador",
+   "id": "HiQXZvtrB6UO1RAwx6uV",
+   "ok": true
+  }
+ ]
+}

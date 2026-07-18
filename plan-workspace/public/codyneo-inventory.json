@@ -1,0 +1,1376 @@
+{
+ "location_id": "YTi6qs4zhiW6d4a75A9f",
+ "fields": [
+  {
+   "name": "Renewal Date",
+   "key": "contact.renewal_date",
+   "dataType": "DATE",
+   "model": "contact",
+   "group": "8gLEuAv8YyJEIqRv2jH1"
+  },
+  {
+   "name": "Location",
+   "key": "opportunity.location",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "opportunity",
+   "group": "2VDYRz9p5LJibiBORdpV"
+  },
+  {
+   "name": "Referrer's Email Address",
+   "key": "contact.referrers_email_address",
+   "dataType": "TEXT",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "Consent Method",
+   "key": "contact.consent_method",
+   "dataType": "TEXT",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "Preferred Location",
+   "key": "contact.preferred_location",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "Service interested in?",
+   "key": "contact.service_interested_in",
+   "dataType": "RADIO",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "Occupation",
+   "key": "contact.occupation",
+   "dataType": "TEXT",
+   "model": "contact",
+   "group": "yqEuYKEfdnDYVQuysqLx"
+  },
+  {
+   "name": "Cancellation Reason",
+   "key": "contact.cancellation_reason",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "Appt Status",
+   "key": "opportunity.appt_status",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "opportunity",
+   "group": "CqqL4o2DhkHh7FQ2eFu2"
+  },
+  {
+   "name": "Referrals & Returning",
+   "key": "contact.referrals__returning",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "Survey — Open Feedback",
+   "key": "contact.survey__open_feedback",
+   "dataType": "LARGE_TEXT",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "Original Ad ID",
+   "key": "contact.original_ad_id",
+   "dataType": "TEXT",
+   "model": "contact",
+   "group": "4MMePCHsWrnWiWNnA8s8"
+  },
+  {
+   "name": "Emergency Contact Phone",
+   "key": "contact.emergency_contact_phone",
+   "dataType": "TEXT",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "Richmond Stations",
+   "key": "contact.richmond_stations",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "How Long Has This Been Going On?",
+   "key": "contact.how_long_experiencing",
+   "dataType": "RADIO",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "Product Sold – Item 2",
+   "key": "contact.product_sold__item_2",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "contact",
+   "group": "woxSaLOocQfHq2ii1hrd"
+  },
+  {
+   "name": "UTM Source",
+   "key": "opportunity.utm_source",
+   "dataType": "TEXT",
+   "model": "opportunity",
+   "group": "2VDYRz9p5LJibiBORdpV"
+  },
+  {
+   "name": "Current medications (include name, dose, and how often you take them)",
+   "key": "contact.current_medications_include_name_dose_and_how_often_you_take_them",
+   "dataType": "LARGE_TEXT",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "Original Lead Date",
+   "key": "contact.original_lead_date",
+   "dataType": "DATE",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "Emergency Contact Name",
+   "key": "contact.emergency_contact_name",
+   "dataType": "TEXT",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "How would you rate your interaction with our staff?",
+   "key": "contact.how_would_you_rate_your_interaction_with_our_staff",
+   "dataType": "RADIO",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "Have you ever used testosterone or other hormone therapy?",
+   "key": "contact.contactsingle_dropdown_17827_8d1_copy_qrg_copy_dtk_copy",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "Communication Preference",
+   "key": "contact.communication_preference",
+   "dataType": "MULTIPLE_OPTIONS",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "UTM Campaign",
+   "key": "opportunity.utm_campaign",
+   "dataType": "TEXT",
+   "model": "opportunity",
+   "group": "2VDYRz9p5LJibiBORdpV"
+  },
+  {
+   "name": "Term Length – Item 1",
+   "key": "contact.term_length__item_1",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "contact",
+   "group": "woxSaLOocQfHq2ii1hrd"
+  },
+  {
+   "name": "Price 1",
+   "key": "opportunity.price_1",
+   "dataType": "MONETORY",
+   "model": "opportunity",
+   "group": "CpItYK73Nucw1NuZ0Rcb"
+  },
+  {
+   "name": "Consent – IP Address",
+   "key": "contact.consent__ip_address",
+   "dataType": "TEXT",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "Status",
+   "key": "contact.status",
+   "dataType": "TEXT",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "A&D Reason",
+   "key": "contact.ad_reason",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "contact",
+   "group": "woxSaLOocQfHq2ii1hrd"
+  },
+  {
+   "name": "Have you ever used testosterone or other hormone therapy?",
+   "key": "contact.have_you_ever_used_testosterone_or_other_hormone_therapy",
+   "dataType": "RADIO",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "Lead Source",
+   "key": "opportunity.lead_source",
+   "dataType": "TEXT",
+   "model": "opportunity",
+   "group": "CqqL4o2DhkHh7FQ2eFu2"
+  },
+  {
+   "name": "Term Length – Item 2",
+   "key": "contact.term_length__item_2",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "contact",
+   "group": "woxSaLOocQfHq2ii1hrd"
+  },
+  {
+   "name": "Date",
+   "key": "contact.date",
+   "dataType": "DATE",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "Primary Concern",
+   "key": "contact.primary_concern",
+   "dataType": "RADIO",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "Sale Outcome",
+   "key": "opportunity.sale_outcome",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "opportunity",
+   "group": "CqqL4o2DhkHh7FQ2eFu2"
+  },
+  {
+   "name": "Pay Type",
+   "key": "contact.pay_type",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "contact",
+   "group": "woxSaLOocQfHq2ii1hrd"
+  },
+  {
+   "name": "Term End Date",
+   "key": "contact.term_end_date",
+   "dataType": "DATE",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "Do you currently smoke or use tobacco products?",
+   "key": "contact.contactsingle_dropdown_17827_8d1_copy",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "Consent Source",
+   "key": "contact.consent_source",
+   "dataType": "TEXT",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "Original Source",
+   "key": "contact.original_source",
+   "dataType": "TEXT",
+   "model": "contact",
+   "group": "4MMePCHsWrnWiWNnA8s8"
+  },
+  {
+   "name": "Referred by Ambassador",
+   "key": "contact.referred_by_ambassador",
+   "dataType": "TEXT",
+   "model": "contact",
+   "group": "woxSaLOocQfHq2ii1hrd"
+  },
+  {
+   "name": "No-Sale Notes",
+   "key": "opportunity.nosale_notes",
+   "dataType": "TEXT",
+   "model": "opportunity",
+   "group": "CqqL4o2DhkHh7FQ2eFu2"
+  },
+  {
+   "name": "Sexual",
+   "key": "contact.checkbox_2lpu_mgj_copy_i6c_copy",
+   "dataType": "CHECKBOX",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "Do you consume alcohol?",
+   "key": "contact.contactsingle_dropdown_17827_8d1_copy_qrg_copy",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "What's the main reason you booked today?",
+   "key": "contact.whats_the_main_reason_you_booked_today",
+   "dataType": "RADIO",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "Patient Care Consultant",
+   "key": "contact.patient_care_consultant",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "contact",
+   "group": "woxSaLOocQfHq2ii1hrd"
+  },
+  {
+   "name": "If yes, please describe (optional)",
+   "key": "contact.if_yes_please_describe_optional",
+   "dataType": "LARGE_TEXT",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": " Price – Item 1",
+   "key": "contact.treatment_cost",
+   "dataType": "MONETORY",
+   "model": "contact",
+   "group": "woxSaLOocQfHq2ii1hrd"
+  },
+  {
+   "name": "If yes, please provide brief details (optional)",
+   "key": "contact.if_yes_please_provide_brief_details_optional",
+   "dataType": "LARGE_TEXT",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "Preferred Appointment Time",
+   "key": "contact.preferred_appointment_time",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "FBCLID",
+   "key": "opportunity.fbclid",
+   "dataType": "TEXT",
+   "model": "opportunity",
+   "group": "2VDYRz9p5LJibiBORdpV"
+  },
+  {
+   "name": "IP Address",
+   "key": "contact.ip_address",
+   "dataType": "TEXT",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "CONTACT DISPOSITION",
+   "key": "contact.call_disposition",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "I confirm the information I provided is accurate to the best of my knowledge.",
+   "key": "contact.i_confirm_the_information_i_provided_is_accurate_to_the_best_of_my_knowledge",
+   "dataType": "CHECKBOX",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "chatbot_intent",
+   "key": "contact.chatbot_intent",
+   "dataType": "LARGE_TEXT",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "New or Renewal",
+   "key": "contact.new_or_renewal",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "contact",
+   "group": "woxSaLOocQfHq2ii1hrd"
+  },
+  {
+   "name": "Last disposition / Channel",
+   "key": "contact.contact_disposition__channel",
+   "dataType": "TEXT",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "Past Surgery",
+   "key": "contact.past_surgery",
+   "dataType": "LARGE_TEXT",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "Ambassador Slug",
+   "key": "contact.ambassador_slug",
+   "dataType": "TEXT",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "Original Campaign",
+   "key": "contact.original_campaign",
+   "dataType": "TEXT",
+   "model": "contact",
+   "group": "4MMePCHsWrnWiWNnA8s8"
+  },
+  {
+   "name": "Last Disposition Date",
+   "key": "contact.last_call_date",
+   "dataType": "DATE",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "Physical",
+   "key": "contact.physical",
+   "dataType": "CHECKBOX",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "Product Sold 1",
+   "key": "opportunity.product_sold_1",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "opportunity",
+   "group": "CpItYK73Nucw1NuZ0Rcb"
+  },
+  {
+   "name": "Provider",
+   "key": "opportunity.provider",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "opportunity",
+   "group": "CqqL4o2DhkHh7FQ2eFu2"
+  },
+  {
+   "name": "Sale Outcome",
+   "key": "contact.sale_outcome",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "contact",
+   "group": "woxSaLOocQfHq2ii1hrd"
+  },
+  {
+   "name": "A&D Other Explanation",
+   "key": "contact.ad_other_explanation",
+   "dataType": "LARGE_TEXT",
+   "model": "contact",
+   "group": "woxSaLOocQfHq2ii1hrd"
+  },
+  {
+   "name": "Tried other treatments?",
+   "key": "contact.tried_other_treatments",
+   "dataType": "RADIO",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "Social Media",
+   "key": "contact.social_media",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "SMS Opt-In Date",
+   "key": "contact.sms_optin_date",
+   "dataType": "DATE",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "I understand that my care may be provided in person and, when clinically appropriate, via telemedicine.",
+   "key": "contact.contacti_confirm_the_information_i_provided_is_accurate_to_the_best_of_my_knowledge_dmq_copy_h35_copy",
+   "dataType": "CHECKBOX",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "Location",
+   "key": "contact.location",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "contact",
+   "group": "8gLEuAv8YyJEIqRv2jH1"
+  },
+  {
+   "name": "DOB",
+   "key": "contact.dob",
+   "dataType": "TEXT",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "May we contact them about your care",
+   "key": "contact.may_we_contact_them_about_your_care",
+   "dataType": "RADIO",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "Outcome Processed At",
+   "key": "opportunity.outcome_processed_at",
+   "dataType": "TEXT",
+   "model": "opportunity",
+   "group": "CqqL4o2DhkHh7FQ2eFu2"
+  },
+  {
+   "name": "Price 2",
+   "key": "opportunity.price_2",
+   "dataType": "MONETORY",
+   "model": "opportunity",
+   "group": "CpItYK73Nucw1NuZ0Rcb"
+  },
+  {
+   "name": "Preferred Appointment Date",
+   "key": "contact.preferred_appointment_date",
+   "dataType": "DATE",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "SMS Consent Status",
+   "key": "contact.sms_double_optin",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "\n\n\n\n\n\n\n\nDo you have any known allergies (medications, foods, latex, or environmental)?",
+   "key": "contact.contactcurrent_medications_include_name_dose_and_how_often_you_take_them_f3y_copy",
+   "dataType": "LARGE_TEXT",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "Consultation Fee",
+   "key": "contact.consultation_fee",
+   "dataType": "MONETORY",
+   "model": "contact",
+   "group": "8gLEuAv8YyJEIqRv2jH1"
+  },
+  {
+   "name": "Discount",
+   "key": "opportunity.discount",
+   "dataType": "MONETORY",
+   "model": "opportunity",
+   "group": "CpItYK73Nucw1NuZ0Rcb"
+  },
+  {
+   "name": "Would you recommend us to a friend or family member?",
+   "key": "contact.would_you_recommend_us_to_a_friend_or_family_member",
+   "dataType": "RADIO",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "SMS Opt-In Source",
+   "key": "contact.sms_optin_source",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "Do you drink alcohol?",
+   "key": "contact.do_you_drink_alcohol",
+   "dataType": "RADIO",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "Psychologic",
+   "key": "contact.checkbox_2lpu_mgj_copy",
+   "dataType": "CHECKBOX",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "Primary Care Provider Name",
+   "key": "contact.primary_care_provider_name",
+   "dataType": "TEXT",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "Which Location Are You Interested In?",
+   "key": "contact.fwhich_location_are_you_interested_in",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "EMR Visit ID",
+   "key": "opportunity.emr_visit_id",
+   "dataType": "TEXT",
+   "model": "opportunity",
+   "group": "2VDYRz9p5LJibiBORdpV"
+  },
+  {
+   "name": "How long have these symptoms been present?",
+   "key": "contact.how_long_have_these_symptoms_been_present",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "Product Sold 2",
+   "key": "opportunity.product_sold_2",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "opportunity",
+   "group": "CpItYK73Nucw1NuZ0Rcb"
+  },
+  {
+   "name": "UTM Medium",
+   "key": "opportunity.utm_medium",
+   "dataType": "TEXT",
+   "model": "opportunity",
+   "group": "2VDYRz9p5LJibiBORdpV"
+  },
+  {
+   "name": "May we contact your primary care provider regarding your care?",
+   "key": "contact.single_dropdown_17827",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "Patient Advisor",
+   "key": "contact.patient_advisor",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "Term 2",
+   "key": "opportunity.term_2",
+   "dataType": "TEXT",
+   "model": "opportunity",
+   "group": "CpItYK73Nucw1NuZ0Rcb"
+  },
+  {
+   "name": "How would you rate your overall experience today?",
+   "key": "contact.how_would_you_rate_your_overall_experience_today",
+   "dataType": "RADIO",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "Consent Time",
+   "key": "contact.consent_time",
+   "dataType": "TEXT",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "Have you ever been diagnosed with any of the following? (Check all that apply)",
+   "key": "contact.have_you_ever_been_diagnosed_with_any_of_the_following_check_all_that_apply",
+   "dataType": "CHECKBOX",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "Money Down",
+   "key": "opportunity.money_down",
+   "dataType": "MONETORY",
+   "model": "opportunity",
+   "group": "CpItYK73Nucw1NuZ0Rcb"
+  },
+  {
+   "name": "Referred By",
+   "key": "opportunity.referred_by",
+   "dataType": "TEXT",
+   "model": "opportunity",
+   "group": "CqqL4o2DhkHh7FQ2eFu2"
+  },
+  {
+   "name": "GCLID",
+   "key": "opportunity.gclid",
+   "dataType": "TEXT",
+   "model": "opportunity",
+   "group": "2VDYRz9p5LJibiBORdpV"
+  },
+  {
+   "name": " Product Sold - Item 1",
+   "key": "contact.treatment_type",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "contact",
+   "group": "woxSaLOocQfHq2ii1hrd"
+  },
+  {
+   "name": "No-Sale Reason",
+   "key": "opportunity.nosale_reason",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "opportunity",
+   "group": "CqqL4o2DhkHh7FQ2eFu2"
+  },
+  {
+   "name": "I acknowledge that I have received and understand the Notice of Privacy Practices.\n\n",
+   "key": "contact.contactcontacti_confirm_the_information_i_provided_is_accurate_to_the_best_of_my_knowledge_dmq_copy_h35_copy_fqk_copy",
+   "dataType": "CHECKBOX",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "Total Program Amount",
+   "key": "opportunity.total_program_amount",
+   "dataType": "MONETORY",
+   "model": "opportunity",
+   "group": "CpItYK73Nucw1NuZ0Rcb"
+  },
+  {
+   "name": "Term 1",
+   "key": "opportunity.term_1",
+   "dataType": "TEXT",
+   "model": "opportunity",
+   "group": "CpItYK73Nucw1NuZ0Rcb"
+  },
+  {
+   "name": "Relationship",
+   "key": "contact.relationship",
+   "dataType": "TEXT",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "Pay Type",
+   "key": "opportunity.pay_type",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "opportunity",
+   "group": "CpItYK73Nucw1NuZ0Rcb"
+  },
+  {
+   "name": "Who referred you? (Referrer's name)",
+   "key": "contact.who_referred_you_referrers_name",
+   "dataType": "TEXT",
+   "model": "contact",
+   "group": "woxSaLOocQfHq2ii1hrd"
+  },
+  {
+   "name": "Do you smoke or use tobacco?",
+   "key": "contact.do_you_smoke_or_use_tobacco",
+   "dataType": "RADIO",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "Print & Local",
+   "key": "contact.print__local",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "Clinic Name",
+   "key": "contact.clinic_name",
+   "dataType": "TEXT",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "Saturday Date EOW",
+   "key": "contact.saturday_date_eow",
+   "dataType": "DATE",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "Name as Signature",
+   "key": "contact.name_as_signature",
+   "dataType": "TEXT",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "Patient Care Consultant",
+   "key": "opportunity.patient_care_consultant",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "opportunity",
+   "group": "CqqL4o2DhkHh7FQ2eFu2"
+  },
+  {
+   "name": "Preferred Appointment Location",
+   "key": "contact.preferred_appointment_location",
+   "dataType": "TEXT",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "Consent Date",
+   "key": "contact.consent_date",
+   "dataType": "DATE",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "Remaining Balance",
+   "key": "opportunity.remaining_balance",
+   "dataType": "MONETORY",
+   "model": "opportunity",
+   "group": "CpItYK73Nucw1NuZ0Rcb"
+  },
+  {
+   "name": "Norfolk / Virginia Beach Stations",
+   "key": "contact.norfolk__virginia_beach_stations",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "_atid",
+   "key": "contact.atclid",
+   "dataType": "TEXT",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": " Price – Item 2",
+   "key": "contact.price__item_2",
+   "dataType": "MONETORY",
+   "model": "contact",
+   "group": "woxSaLOocQfHq2ii1hrd"
+  },
+  {
+   "name": "How did you hear about Men’s Wellness Centers?\n",
+   "key": "contact.how_did_you_hear_about_mens_wellness_centers",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "Medical Intake Status",
+   "key": "opportunity.medical_intake_status",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "opportunity",
+   "group": "CqqL4o2DhkHh7FQ2eFu2"
+  },
+  {
+   "name": "I authorize Men’s Wellness Centers and its licensed medical providers to evaluate, diagnose, and treat me, including laboratory testing when medically appropriate.",
+   "key": "contact.contacti_confirm_the_information_i_provided_is_accurate_to_the_best_of_my_knowledge_dmq_copy",
+   "dataType": "CHECKBOX",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "Sale Type",
+   "key": "contact.sale_type",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "contact",
+   "group": "woxSaLOocQfHq2ii1hrd"
+  },
+  {
+   "name": "Sale Type",
+   "key": "opportunity.sale_type",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "opportunity",
+   "group": "CqqL4o2DhkHh7FQ2eFu2"
+  },
+  {
+   "name": "Provider Making Recommendation",
+   "key": "contact.provider_making_recommendation",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "contact",
+   "group": "woxSaLOocQfHq2ii1hrd"
+  },
+  {
+   "name": "chatbot_session_id",
+   "key": "contact.chatbot_session_id",
+   "dataType": "TEXT",
+   "model": "contact",
+   "group": "r9XcAMXfUN3mBOY0nsYF"
+  },
+  {
+   "name": "Please Specify",
+   "key": "contact.please_specify",
+   "dataType": "TEXT",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "What is the primary reason for today’s visit?\n\n\n",
+   "key": "contact.what_is_the_primary_reason_for_todays_visit",
+   "dataType": "SINGLE_OPTIONS",
+   "model": "contact",
+   "group": "b1uoLdcugebY274yanbY"
+  },
+  {
+   "name": "Total Program Amount",
+   "key": "contact.total_program_amount",
+   "dataType": "MONETORY",
+   "model": "contact",
+   "group": "woxSaLOocQfHq2ii1hrd"
+  }
+ ],
+ "tags": [
+  "ambassador",
+  "ambassador-applicant",
+  "ambassador-referral",
+  "appt_booked",
+  "appt_confirmed",
+  "at_risk",
+  "attempted_rebook",
+  "attended",
+  "attribution_stamped",
+  "auto_noshow_unconfirmed",
+  "awaiting-yes-reply",
+  "bad-contact",
+  "book_react_app",
+  "booked_same_day",
+  "booked_self_service",
+  "booking-live",
+  "canceled_appointment",
+  "carrier_unsubscribed",
+  "carrier_unsubscribed",
+  "disposition: mar-pending",
+  "disposition_sold",
+  "e2e-test",
+  "extend_3mo",
+  "feedback_send",
+  "field",
+  "follow-up",
+  "form_submitted_tracked",
+  "funnel_abandon_p1",
+  "funnel_abandon_p2",
+  "funnel_appointment_confirmed",
+  "funnel_booked_by_staff",
+  "funnel_canceled",
+  "funnel_consultation_booked",
+  "funnel_declined",
+  "funnel_entry_book_a_consultation",
+  "funnel_entry_book_appointment",
+  "funnel_entry_consultation_page",
+  "funnel_entry_contact_us",
+  "funnel_entry_erectile_dysfunction",
+  "funnel_entry_home_page",
+  "funnel_entry_hormone_therapy",
+  "funnel_entry_how_it_works",
+  "funnel_entry_information_request",
+  "funnel_entry_locations",
+  "funnel_entry_low_testosterone",
+  "funnel_entry_newport_news",
+  "funnel_entry_npn",
+  "funnel_entry_richmond",
+  "funnel_entry_richmond_va",
+  "funnel_entry_rva_consultation",
+  "funnel_entry_testosterone_replacement_therapy_virginia",
+  "funnel_entry_thank_you_newport_news",
+  "funnel_entry_thank_you_richmond",
+  "funnel_entry_thank_you_virginia_beach",
+  "funnel_entry_vab",
+  "funnel_entry_vba_consultation",
+  "funnel_entry_virginia_beach",
+  "funnel_follow_up_needed",
+  "funnel_no_show",
+  "funnel_nurture_engaged",
+  "funnel_nurture_started",
+  "funnel_path_assisted_call",
+  "funnel_path_automated_booking",
+  "funnel_purchased",
+  "funnel_qualified",
+  "funnel_rebooked",
+  "funnel_started",
+  "funnel_warm_lead",
+  "gclid:cj0kcqjw9zlsbhccarisaehgkgnkr8_xvb0ynxfwxmirhb0wrmbypfvwkuvqgwe1dgb2l8nxlu6cfamaar9uealw_wcb",
+  "gclid:cj0kcqjw9zlsbhccarisaehgkgnnd1r2rqu1yaoebdw7snsp82zw9tp6wz0kr4hfqzzirtyj2yhov4waalziealw_wcb",
+  "gclid:cj0kcqjw9zlsbhccarisaehgkgpxlzfhoaqe-gzij6jbc9h6-il3cfuxfng6clkdo7ejespusde2fg4aamy0ealw_wcb",
+  "gclid:cj0kcqjwjipsbhccarisabgyk7t4dkg3tn6izhv_kqw199iiurgbowarigcftnefubapikh7aw0ne2gaanmwealw_wcb",
+  "gclid:cj0kcqjwjipsbhccarisabgyk7tuvdmpbdkeihwfhgp1kczh_xvblywu0vgqxtyftkydlclogsdnasyaahlzealw_wcb",
+  "gclid:cj0kcqjwjipsbhccarisabgyk7twm6tfe26spegf8bv4ng-wcruoyeog2rwmzzhtavxgs9epl53riiwaavzyealw_wcb",
+  "gclid:cj0kcqjwjipsbhccarisabgyk7u5jyhsp1z0p1opjk-sctqg_nuhapiizi8xa51re8ab_vu2mns2ofoaarsbealw_wcb",
+  "gclid:cj0kcqjwjipsbhccarisabgyk7u8nt5wlsrxgfyq2b55i6ug_wk2r9yqk4pqfczvuemzvcnwtryxr-kaagikealw_wcb",
+  "gclid:cj0kcqjwjipsbhccarisabgyk7vbzn82thzzxymdlojf0ryafqtuhk_isfwnzmjech5ga4xjowfxqxqaauasealw_wcb",
+  "gclid:cj0kcqjwjipsbhccarisabgyk7vtjesel_v3ed0otbyrjv2x_vjc2ho6hgpaai_q2jlrlhbjfc42mj0aandlealw_wcb",
+  "gclid:cj0kcqjwo_prbhdnarisaecvalumjoqks_icbkozg73x56trs1hlea3f_whatwtexv0xqt6h4hakv7yaav57ealw_wcb",
+  "gclid:cj0kcqjwr4jsbhcsarisaox1e-im9a60dfkk-tzvmscwqxqazdlg9odhk1yu2g7e8ws6x0fzufynvauaako-ealw_wcb",
+  "gclid:cj0kcqjwr4jsbhcsarisaox1e-izi91mcrxyxrxxasiviytsm9urvbrhjelfg71kazmp8g9xpxme2e8aapsnealw_wcb",
+  "gclid:cj0kcqjwr4jsbhcsarisaox1e-jnmnj0se3ro6euncoqppyyjsbq3wr350psdl-fvghv_hel2aogjfeaaja8ealw_wcb",
+  "gclid:cj0kcqjwr4jsbhcsarisaox1e-l-wgx7rjcgeah7kgmmpzvpiits4ftursjrxrys7am38x5bv-yozhgaagbnealw_wcb",
+  "gclid:cj0kcqjwr4jsbhcsarisaox1e-lhg2g8eazuaz42f1yoqlezjpn9pxgwh4-vhxjadb5qrxo3sw4qcr8aasxnealw_wcb",
+  "gclid:cj0kcqjwrs7rbhduarisaivfbd13mtpbbkxnudzgnvxuzccdnaqck6f8mpnbxnfv3vmievdo8ltzioyaaqxiealw_wcb",
+  "gclid:cj0kcqjwrs7rbhduarisaivfbd1oxwg-ai-2ecc6tg0wji2ejuk7k3oe-doyxnqtekznp_mdwgchelkaanptealw_wcb",
+  "gclid:cj0kcqjwrs7rbhduarisaivfbd1yhpmwr_l917uw9wbpeptmixckbsxlhygmkilnmirxleapamawikoaakl5ealw_wcb",
+  "gclid:cjwkcajw0dprbhapeiwae5vttmlhy3pontpzohiyie9bq2st2llw8ycxvgyytwnldvnqanqohc9unxoc390qavd_bwe",
+  "gclid:cjwkcajw0dprbhapeiwae5vttuomjetnmz8ycwi4tcbv2dulasls17lhw8jlhqlnudgtkljys-gyybocsvgqavd_bwe",
+  "gclid:cjwkcajw0dprbhapeiwae5vttvez9gyxgx_f8rei7kldjy3eomqirbblfwj2iq0_rvfqa8qzlhe2ibocvvkqavd_bwe",
+  "gclid:cjwkcajw0dprbhapeiwae5vttvrp6sqhnpbos8p7msev0_1o9bxl6znszwwxq5xj5drvfp19kgojvboc9sgqavd_bwe",
+  "gclid:cjwkcajw0o3sbhbveiwah28-jbr8tapm27lfmzzkxpygtp-ahcflr3pmo93ekexvsahxcyohf_zjxhocfj0qavd_bwe",
+  "gclid:cjwkcajw0o3sbhbveiwah28-jewp047nodcnsnrljj1thhmohyd2awktqh_akn4f31sg3pccocgpbhocn8mqavd_bwe",
+  "gclid:cjwkcajw0o3sbhbveiwah28-jf8ahrmhxqx9vy0nbbmz8v0k4dbn925fs8eqlal6kcncbsjlfvrpwroclgmqavd_bwe",
+  "gclid:cjwkcajw0o3sbhbveiwah28-jtm5ouoguqy0wwk2ohincbhmelpbvrqys6xhde98iyzubnkk8z2-nxocmwqqavd_bwe",
+  "gclid:cjwkcajw0o3sbhbveiwah28-jvomigkgb_zyxxu9mljjwa0-g-v2p_geeqpnrix6rgbxtatwzueuthocjeuqavd_bwe",
+  "gclid:cjwkcajw0o3sbhbveiwah28-jvxbkyrawpjc-9gpt7ifps6yduxjct5hlg_ozx8u43_jrmsxdmceaxockzuqavd_bwe",
+  "gclid:cjwkcajw0o3sbhbveiwah28-jvxoi-o0o6o66wlqoppgkxmgqhwxrjrpxobgkyvwknpijxaopk3uphocc6kqavd_bwe",
+  "gclid:cjwkcajw0o3sbhbveiwah28-jvyg-2r2-rxtgj4mas-2jbo9bsuuscnmasawgpba4mtfsst3jlvp8rocijqqavd_bwe",
+  "gclid:cjwkcajw3ejrbhadeiwadkqpn7t53b6lob2veb5e5qw_fk5vu8unn8potm2mt4schuubev4k1lgpnxoclciqavd_bwe",
+  "gclid:cjwkcajw3ejrbhadeiwadkqpn_n1ilptae6j8mmrtlzyw6tkf-ri_lxe5qed3m-lstqkwckcgkkmebocdyeqavd_bwe",
+  "gclid:cjwkcajw6f3rbhapeiwamacqwyjbexkbwnhj8jliphd0gnifxasx4vo4a7isaaoerrnkwbba1cw1krocnsaqavd_bwe",
+  "gclid:cjwkcajw9njrbhateiwa_p2j8fou2ap_uqzle-p6ivcaiwjut-j7htw_7x1nr8mmy7k1cizjxuhhxbocpaeqavd_bwe",
+  "gclid:cjwkcajw9njrbhateiwa_p2j8xjemdthcw4dm0btgu5huaso7jh-nhvfrc-0lusgajw-qmn14svs7hocl6iqavd_bwe",
+  "gclid:cjwkcajwgajsbhbeeiwasicju0ltmb82dai518bighguuoqanmbnzh2nwfjxg_o43m6mruvuw9ohwboc9osqavd_bwe",
+  "gclid:cjwkcajwgajsbhbeeiwasicju0zwsfkrecvn_acpmdmfyp-fglo2x-f8-8_ie_8dbgepu7v3lxddlboco8kqavd_bwe",
+  "gclid:cjwkcajwgajsbhbeeiwasicju4fu4bn4j42kkneh3h3g5xdxr74slhqnbouniol7tqu3jckr-mr2ihocckaqavd_bwe",
+  "gclid:cjwkcajwgajsbhbeeiwasicju5dd4yuuuqha4566el72nr_rl7zp6y07gtyoonxq9drcprhze5gf-bocclkqavd_bwe",
+  "gclid:cjwkcajwgajsbhbeeiwasicju8kuxvtpvdy8m2i3_4jgrvoib9hd5b8y0k7xro1b31l1nsqmg_nslrocnwgqavd_bwe",
+  "gclid:cjwkcajwgo7rbhbkeiwaznp85h4sc1vrtnhdys-m8sbv2c1zycwyatk6pqhsjzn91cur5vuk1behwxocmuaqavd_bwe",
+  "grid",
+  "high priority",
+  "intake-complete",
+  "journey-npn",
+  "journey-richmond",
+  "journey-vbh",
+  "lapsed",
+  "loc_newport",
+  "loc_richmond",
+  "loc_vabeach",
+  "location-richmond",
+  "location:newport-news",
+  "location:richmond",
+  "location:richmond, va",
+  "location:virginia beach, va",
+  "location:virginia-beach",
+  "location_npn",
+  "location_richmond",
+  "location_rva",
+  "location_vabeach",
+  "location_vba",
+  "location_virtual",
+  "minimal",
+  "mut",
+  "mwc-live-test",
+  "name via lookup",
+  "negative_review",
+  "newport appt",
+  "newport_beach_booked",
+  "newsletter",
+  "next-lander",
+  "no buy- objection fear",
+  "no_show_final",
+  "no_show_initial",
+  "no_show_lost",
+  "noshow",
+  "npn-lead",
+  "nurture:longterm-eligible",
+  "objection",
+  "objection_cost",
+  "objection_fear",
+  "objection_partner",
+  "objection_time-to-think",
+  "objection_timing",
+  "optout:sms",
+  "paid_click",
+  "paid_social",
+  "partial-lead",
+  "passive_review",
+  "patient",
+  "patient/sold",
+  "patient_sold",
+  "payment_cash",
+  "payment_insurance",
+  "payment_membership",
+  "pcc-acree",
+  "pcc-belknap",
+  "pcc-bell",
+  "pcc-bott",
+  "pcc-fowler",
+  "pcc-harris",
+  "pcc-maxwell",
+  "pcc-meidinger",
+  "pcc-miller",
+  "pcc-portmess",
+  "pcc-powell",
+  "pcc-rayburn",
+  "pcc-referral",
+  "pcc-reyes",
+  "pcc-roberts",
+  "pcc-stainback",
+  "pcc-waddell",
+  "phase2",
+  "plan-purchased",
+  "positive_review",
+  "push_0424_npn",
+  "push_0424_richmond",
+  "push_0424_vabeach",
+  "quiz_body_composition:moderate",
+  "quiz_bracket:minimal",
+  "quiz_bracket:moderate",
+  "quiz_circulation:moderate",
+  "quiz_digestive:moderate",
+  "quiz_energy_mood:moderate",
+  "quiz_pain_headaches:mild",
+  "quiz_score:23",
+  "quiz_score:3",
+  "quiz_sexual_health:mild",
+  "quiz_skin_hair:moderate",
+  "quiz_state:wa",
+  "quiz_v2",
+  "rebooked_consult",
+  "reeng_apr28_cancelled",
+  "reeng_apr28_nobook",
+  "reeng_apr28_noshow",
+  "reeng_apr28_soft",
+  "reeng_apr29_a1",
+  "reeng_apr29_a2",
+  "reeng_apr29_adv_ashley",
+  "reeng_apr29_adv_chris",
+  "reeng_apr29_adv_ryan",
+  "reeng_apr29_aggressive",
+  "reeng_apr29_b",
+  "reeng_apr29_moderate",
+  "reengage_falsenoshow_2026-04-22",
+  "reengagement_0424_noshow_priority",
+  "reengagement_0424_priority",
+  "reengagement_0424_satmon",
+  "referral_10%off",
+  "referral_freemonth",
+  "referral_invalid",
+  "referral_qualified",
+  "referral_received",
+  "referral_sent",
+  "referralbonus_rewarded",
+  "referred",
+  "referrer",
+  "reply",
+  "retention",
+  "retention_active",
+  "retention_future_cycle",
+  "retention_long_term",
+  "retention_lost",
+  "retention_onboarded",
+  "retention_renewal_completed",
+  "retention_renewal_opportunity",
+  "retention_renewal_scheduled",
+  "review requested",
+  "rich-lead",
+  "richmond appt",
+  "richmond, va",
+  "richmond_beach_booked",
+  "send-review-test",
+  "source lead- google ads",
+  "source- other",
+  "source- website",
+  "source-google",
+  "source-in-center-qr",
+  "source-meta",
+  "source:wp-form",
+  "source_direct",
+  "source_fb",
+  "source_google",
+  "source_organic",
+  "speed_to_lead",
+  "stage",
+  "stage_consultation_completed",
+  "stage_consultation_scheduled",
+  "stage_converted",
+  "stage_follow_up",
+  "stage_lost_lead",
+  "stage_not_qualified",
+  "stage_not_ready",
+  "stage_procedure_booked",
+  "stage_qualified_consultation",
+  "stale_disposition",
+  "status-sold",
+  "status:partial",
+  "status_nurture_longterm",
+  "status_sold",
+  "system_avoid_duplicate_contact",
+  "system_dnc",
+  "system_exclude_from_nurture",
+  "system_landline",
+  "system_moved_to_no_show",
+  "system_moved_to_retention",
+  "system_mut",
+  "system_opportunity_created",
+  "term_extended",
+  "term_extended",
+  "test-booking",
+  "typeform",
+  "typeform submitted",
+  "virginia-lead",
+  "warm lead"
+ ],
+ "pipelines": [
+  {
+   "name": "Newport News, Virginia Pipeline",
+   "stages": [
+    "New Lead",
+    "Appointment Booked",
+    "Confirmed",
+    "Rescheduled",
+    "Cancelled",
+    "Showed",
+    "No-Show",
+    "Not Sold",
+    "Sold"
+   ]
+  },
+  {
+   "name": "Sales - Lead to Close",
+   "stages": [
+    "New Lead",
+    "Engaged",
+    "Booked",
+    "Confirmed",
+    "Showed",
+    "Won"
+   ]
+  },
+  {
+   "name": "Richmond, Virginia Pipeline",
+   "stages": [
+    "New Lead",
+    "Appointment Booked",
+    "Confirmed",
+    "Rescheduled",
+    "Cancelled",
+    "Showed",
+    "No-Show",
+    "Not Sold",
+    "Sold"
+   ]
+  },
+  {
+   "name": "Virginia Beach, VA Pipeline",
+   "stages": [
+    "New Lead",
+    "Appointment Booked",
+    "Confirmed",
+    "Rescheduled",
+    "Cancelled",
+    "Showed",
+    "No-Show",
+    "Not Sold",
+    "Sold"
+   ]
+  },
+  {
+   "name": "Referrals",
+   "stages": [
+    "Submitted",
+    "Qualified",
+    "Booked",
+    "Showed",
+    "Rewarded"
+   ]
+  },
+  {
+   "name": "Retention and Renewals",
+   "stages": [
+    "Onboarding",
+    "Active",
+    "Renewal Due",
+    "Renewed"
+   ]
+  },
+  {
+   "name": "Attribution Tracking",
+   "stages": [
+    "Google Ads",
+    "Meta Ads- Facebook",
+    "Meta Ads- Instagram",
+    "Organic site traffic",
+    "Google Business Profile- Newport News",
+    "Google Business Profile- Richmond",
+    "Google Business Profile- Virginia Beach",
+    "Member referrals",
+    "Ambassadors"
+   ]
+  }
+ ],
+ "custom_values": [
+  {
+   "name": "intake_url",
+   "key": "{{ custom_values.intake_url }}"
+  },
+  {
+   "name": "npn_address",
+   "key": "{{ custom_values.npn_address }}"
+  },
+  {
+   "name": "referral_link",
+   "key": "{{ custom_values.referral_link }}"
+  },
+  {
+   "name": "booking_url",
+   "key": "{{ custom_values.booking_url }}"
+  },
+  {
+   "name": "richmond_phone",
+   "key": "{{ custom_values.richmond_phone }}"
+  },
+  {
+   "name": "vab_phone",
+   "key": "{{ custom_values.vab_phone }}"
+  },
+  {
+   "name": "npn_phone",
+   "key": "{{ custom_values.npn_phone }}"
+  },
+  {
+   "name": "review_link",
+   "key": "{{ custom_values.review_link }}"
+  },
+  {
+   "name": "richmond_address",
+   "key": "{{ custom_values.richmond_address }}"
+  },
+  {
+   "name": "vab_address",
+   "key": "{{ custom_values.vab_address }}"
+  },
+  {
+   "name": "Richmond - Phone",
+   "key": "{{ custom_values.richmond__phone }}"
+  },
+  {
+   "name": "Richmond - Estimated Revenue Per Appointment",
+   "key": "{{ custom_values.richmond__estimated_revenue_per_appointment }}"
+  },
+  {
+   "name": "Richmond - Booking Link",
+   "key": "{{ custom_values.richmond__booking_link }}"
+  },
+  {
+   "name": "Newport News - Estimated Revenue Per Appointment",
+   "key": "{{ custom_values.newport_news__estimated_revenue_per_appointment }}"
+  },
+  {
+   "name": "Newport News - Booking Link",
+   "key": "{{ custom_values.newport_news__booking_link }}"
+  },
+  {
+   "name": "Newport News - Phone",
+   "key": "{{ custom_values.newport_news__phone }}"
+  },
+  {
+   "name": "Virginia Beach - Booking Link",
+   "key": "{{ custom_values.virginia_beach__booking_link }}"
+  },
+  {
+   "name": "Virginia Beach - Estimated Revenue Per Appointment",
+   "key": "{{ custom_values.virginia_beach__estimated_revenue_per_appointment }}"
+  },
+  {
+   "name": "Virginia Beach - Phone",
+   "key": "{{ custom_values.virginia_beach__phone }}"
+  }
+ ],
+ "calendars": [
+  {
+   "name": "Newport News Consults",
+   "id": "PqOQKlcpEGkn1u5AtOmh"
+  },
+  {
+   "name": "Virginia Beach Consults",
+   "id": "joD3vNxwGq3G0QuqOlBM"
+  },
+  {
+   "name": "Richmond Consults",
+   "id": "jyYP6WhZqOl1HnbOcOfs"
+  }
+ ],
+ "forms": []
+}

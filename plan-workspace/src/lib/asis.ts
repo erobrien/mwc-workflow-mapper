@@ -100,3 +100,7 @@ export const useAsisDetail = () => useJson<AsisDetail>("/asis-detail.json");
 // Cody (Cavenaugh Media) build sub-account — same schemas, different capture.
 export const useCodyFlows = () => useJson<AsisFlows>("/cody-flows.json");
 export const useCodyDetail = () => useJson<AsisDetail>("/cody-detail.json");
+
+// Cody Neo — corrected copy of the Cody build (opportunity-owned outcome fields).
+export const useCodyNeoFlows = () => useJson<AsisFlows>("/codyneo-flows.json");
+export const useCodyNeoDetail = () => useJson<AsisDetail>("/codyneo-detail.json");

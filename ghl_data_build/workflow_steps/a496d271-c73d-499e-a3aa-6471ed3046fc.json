@@ -1,0 +1,15 @@
+{
+ "templates": [
+  {
+   "type": "add_contact_tag",
+   "id": "d54b019c-882b-4785-ab7d-4c60a1963a15",
+   "name": "Add intake-complete tag",
+   "attributes": {
+    "tags": [
+     "intake-complete"
+    ]
+   },
+   "order": 0
+  }
+ ]
+}

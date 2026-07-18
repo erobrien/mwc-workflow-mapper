@@ -1,0 +1,585 @@
+{
+ "workflowData": {
+  "_id": "8f61ccdf-d4c4-4b49-9aa7-a56bf3baded7",
+  "locationId": "YTi6qs4zhiW6d4a75A9f",
+  "name": "5.2 — Virginia Beach – Won & Onboarding",
+  "status": "draft",
+  "version": 2,
+  "allowMultiple": false,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/YTi6qs4zhiW6d4a75A9f/workflows/8f61ccdf-d4c4-4b49-9aa7-a56bf3baded7/2",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "originId": "d4bec717-d3e1-4f6d-94ed-d961ead8468e",
+  "permission": 380,
+  "type": "workflow",
+  "meta": null,
+  "updatedBy": "snapshot",
+  "createdAt": "2026-07-18T20:04:59.617Z",
+  "updatedAt": "2026-07-18T20:05:21.423Z",
+  "deleted": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "snapshot",
+  "__v": 0,
+  "allowMultipleOpportunity": false,
+  "dataVersion": 7,
+  "eventStartDate": null,
+  "parentId": "96edf89b-5792-4552-a476-6cc62ee98b41",
+  "senderAddress": null,
+  "window": {
+   "condition": "when",
+   "start": "08:00",
+   "end": "17:00",
+   "days": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
+  },
+  "workflowNote": {
+   "content": "",
+   "createdBy": "snapshot",
+   "createdByName": "snapshot",
+   "createdAt": "2026-07-18T20:05:20.880Z",
+   "updatedBy": "snapshot",
+   "updatedByName": "snapshot",
+   "updatedAt": "2026-07-18T20:05:20.880Z"
+  },
+  "id": "8f61ccdf-d4c4-4b49-9aa7-a56bf3baded7",
+  "workflowData": {
+   "templates": [
+    {
+     "type": "if_else",
+     "id": "29ef735a-a780-4d6a-8037-eac1fb68cc7d",
+     "name": "yes",
+     "attributes": {
+      "currentRecipeType": "CUSTOM",
+      "branches": [
+       {
+        "id": "d55257dc-a342-4d69-8e9e-4322e1270498",
+        "name": "Blocked – internal only",
+        "segments": [
+         {
+          "__segmentId": "3393f1fc-4084-442b-afba-76e424a6119a",
+          "operator": "or",
+          "conditions": [
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "tags",
+            "conditionOperator": "index-of-true",
+            "conditionValue": [
+             "mut"
+            ],
+            "__conditionId": "2e9d5bfb-be0e-4adf-8f36-47fd512bd3ce",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           },
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "YBjkXCcpD9ai6KwIERTl",
+            "conditionOperator": "==",
+            "conditionValue": "Confirmed",
+            "__conditionId": "c67e5f09-0be9-439b-bddc-98d119250ba3",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           },
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "tags",
+            "conditionOperator": "index-of-true",
+            "conditionValue": [
+             "optout:sms"
+            ],
+            "__conditionId": "c1e82a7e-8142-4aa4-b439-5d8ba5cdf670",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           }
+          ]
+         }
+        ],
+        "operator": "and",
+        "showErrors": false,
+        "branchNameError": "Branch name cannot be empty!"
+       }
+      ],
+      "operator": "and",
+      "if": true,
+      "conditionName": "Gate – blocked contacts",
+      "version": 2,
+      "noneBranchName": "Clean – full welcome sequence"
+     },
+     "nodeType": "condition-node",
+     "cat": "conditions",
+     "next": [
+      "d55257dc-a342-4d69-8e9e-4322e1270498",
+      "c7b38843-307e-405f-99a6-c359bbe9966a"
+     ],
+     "order": 0
+    },
+    {
+     "type": "if_else",
+     "id": "d55257dc-a342-4d69-8e9e-4322e1270498",
+     "name": "Blocked – internal only",
+     "parentKey": "29ef735a-a780-4d6a-8037-eac1fb68cc7d",
+     "parent": "29ef735a-a780-4d6a-8037-eac1fb68cc7d",
+     "nodeType": "branch-yes",
+     "cat": "conditions",
+     "sibling": [
+      "c7b38843-307e-405f-99a6-c359bbe9966a"
+     ],
+     "attributes": {
+      "if": false,
+      "conditionName": "Condition",
+      "operator": "and",
+      "branches": []
+     },
+     "order": 1,
+     "next": "7f6adc53-562f-4672-b011-1071f78855db"
+    },
+    {
+     "id": "7f6adc53-562f-4672-b011-1071f78855db",
+     "parent": "d55257dc-a342-4d69-8e9e-4322e1270498",
+     "order": 0,
+     "attributes": {
+      "pipeline_id": "5y7jwSU4PWi8gYdYoxFv",
+      "pipeline_stage_id": "3f456e09-adb2-475e-8748-b97697adb863",
+      "opportunity_name": "{{contact.name}}",
+      "monetary_value": "",
+      "status": "open",
+      "fields": [],
+      "type": "create_opportunity",
+      "allow_backward": true,
+      "opportunity_source": ""
+     },
+     "name": "Create Retention Opp – Onboarding (blocked path)",
+     "type": "create_opportunity",
+     "next": "ac0248b6-6913-4dbd-ba99-38b10a6dff51",
+     "parentKey": "d55257dc-a342-4d69-8e9e-4322e1270498"
+    },
+    {
+     "id": "ac0248b6-6913-4dbd-ba99-38b10a6dff51",
+     "parent": "d55257dc-a342-4d69-8e9e-4322e1270498",
+     "order": 1,
+     "attributes": {
+      "type": "notification",
+      "notification": {
+       "title": "⚠ New member {{contact.name}} — CANNOT receive texts, call to onboard (NN)",
+       "body": "This member is suppressed from automated messaging (DND/opt-out/MUT). All onboarding must happen by phone.",
+       "redirectPage": "contact",
+       "userType": "all",
+       "assignedOwners": null,
+       "alsoNotifyContactFollowers": false,
+       "alsoNotifyOpportunityFollowers": false,
+       "type": "send_notification"
+      }
+     },
+     "name": "Notify Virginia Beach Team",
+     "type": "internal_notification",
+     "next": "1fd9b034-57e6-4e08-963e-0426fddc476d",
+     "parentKey": "7f6adc53-562f-4672-b011-1071f78855db"
+    },
+    {
+     "id": "1fd9b034-57e6-4e08-963e-0426fddc476d",
+     "parent": "d55257dc-a342-4d69-8e9e-4322e1270498",
+     "order": 2,
+     "attributes": {
+      "type": "time",
+      "convertToMultipath": false,
+      "hybridActionType": "wait",
+      "isHybridAction": true,
+      "name": "Wait 30 Day",
+      "cat": "",
+      "transitions": [],
+      "startAfter": {
+       "when": "after",
+       "type": "days",
+       "value": 30
+      },
+      "timePeriodInputMode": "standard",
+      "unitInputMode": "standard"
+     },
+     "name": "Wait 30 Day",
+     "type": "wait",
+     "cat": "",
+     "next": "4fe472a3-bc56-4d0a-8520-5f60841c119b",
+     "parentKey": "ac0248b6-6913-4dbd-ba99-38b10a6dff51"
+    },
+    {
+     "id": "4fe472a3-bc56-4d0a-8520-5f60841c119b",
+     "parent": "d55257dc-a342-4d69-8e9e-4322e1270498",
+     "order": 3,
+     "attributes": {
+      "allowBackward": false,
+      "type": "internal_update_opportunity",
+      "__customInputs__": {},
+      "__customInputFields__": []
+     },
+     "name": "Update Retention Opp – Active",
+     "type": "internal_update_opportunity",
+     "workflowsActionType": "INTERNAL",
+     "parentKey": "1fd9b034-57e6-4e08-963e-0426fddc476d"
+    },
+    {
+     "type": "if_else",
+     "id": "c7b38843-307e-405f-99a6-c359bbe9966a",
+     "name": "Clean – full welcome sequence",
+     "next": "f902ac03-285e-4bd3-98de-13900e352980",
+     "parentKey": "29ef735a-a780-4d6a-8037-eac1fb68cc7d",
+     "parent": "29ef735a-a780-4d6a-8037-eac1fb68cc7d",
+     "nodeType": "branch-no",
+     "cat": "conditions",
+     "sibling": [
+      "d55257dc-a342-4d69-8e9e-4322e1270498"
+     ],
+     "attributes": {
+      "else": true
+     },
+     "order": 1
+    },
+    {
+     "id": "f902ac03-285e-4bd3-98de-13900e352980",
+     "parent": "c7b38843-307e-405f-99a6-c359bbe9966a",
+     "order": 0,
+     "attributes": {
+      "body": "Welcome to Men's Wellness Centers, {{contact.first_name}} your membership is officially active\n\nYour home center: {{custom_values.newport_news__address}} Hours: {{custom_values.newport_news__hours}} \n\nQuestions anytime: just reply here or call (757) 806-6263. \n\nWe're glad you're with us.\nReply STOP to opt out.",
+      "assignedOwners": [
+       "contact_owner"
+      ],
+      "alsoNotifyContactFollowers": false,
+      "alsoNotifyOpportunityFollowers": false,
+      "attachments": []
+     },
+     "name": "Send Welcome SMS",
+     "type": "sms",
+     "next": "24c65d89-fd06-4a54-af58-45f940fafbbf",
+     "parentKey": "c7b38843-307e-405f-99a6-c359bbe9966a"
+    },
+    {
+     "id": "24c65d89-fd06-4a54-af58-45f940fafbbf",
+     "parent": "c7b38843-307e-405f-99a6-c359bbe9966a",
+     "order": 1,
+     "attributes": {
+      "type": "time",
+      "convertToMultipath": false,
+      "hybridActionType": "wait",
+      "isHybridAction": true,
+      "name": "Wait 1 Day",
+      "cat": "action",
+      "transitions": [],
+      "startAfter": {
+       "when": "after",
+       "type": "days",
+       "value": 1
+      },
+      "timePeriodInputMode": "standard",
+      "unitInputMode": "standard"
+     },
+     "name": "Wait 1 Day",
+     "type": "wait",
+     "next": "ce21bc3f-3389-4cfb-88b2-58d8f01317eb",
+     "parentKey": "f902ac03-285e-4bd3-98de-13900e352980"
+    },
+    {
+     "id": "ce21bc3f-3389-4cfb-88b2-58d8f01317eb",
+     "parent": "c7b38843-307e-405f-99a6-c359bbe9966a",
+     "order": 2,
+     "attributes": {
+      "subject": "Your first visit at Men's Wellness Centers, what to know",
+      "html": "<p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\">Hi {{contact.first_name}}, Welcome again, here's everything you need for a smooth first visit. <br><br>WHERE Men's Wellness Centers – Newport News {{custom_values.newport_news__address}} Free parking is available on-site. WHEN YOU ARRIVE Come in about 10 minutes early. <br><br>Check in at the front desk the team will already have you on the schedule.<br><br>WHAT TO BRING <br>- A photo ID <br>- Your current medication list, if any <br>- Any questions you've been holding onto visits are unhurried on purpose WHO YOU'LL MEET Your Patient Care Consultant will walk you through your membership and your schedule going forward, and the clinical team takes it from there. <br><br>Need to adjust anything before then? <br>Reply to this email or call us at (757) 806-6263. <br><br>See you soon, <br>The Men's Wellness Centers Team – Newport News</p>",
+      "from_name": "",
+      "from_email": "",
+      "assignedOwners": null,
+      "alsoNotifyContactFollowers": false,
+      "alsoNotifyOpportunityFollowers": false,
+      "fieldDefaults": {},
+      "htmlDefaults": {},
+      "trackingOptions": {
+       "hasTrackingLinks": false,
+       "hasUtmTracking": false,
+       "hasTags": false,
+       "sourceId": "9a502d0e-1ad7-4b14-b941-f8fc76d4f8f1:ce21bc3f-3389-4cfb-88b2-58d8f01317eb"
+      },
+      "conditions": [],
+      "attachments": []
+     },
+     "name": "Send Logistics Email",
+     "type": "email",
+     "next": "3dceed3b-338b-40f3-b8f1-354f1eceb110",
+     "parentKey": "24c65d89-fd06-4a54-af58-45f940fafbbf"
+    },
+    {
+     "type": "create_opportunity",
+     "id": "3dceed3b-338b-40f3-b8f1-354f1eceb110",
+     "name": "Create Retention Opp – Onboarding",
+     "next": "c100b196-a80e-456a-b2a2-8a8ffec606cd",
+     "attributes": {
+      "pipeline_id": "5y7jwSU4PWi8gYdYoxFv",
+      "pipeline_stage_id": "3f456e09-adb2-475e-8748-b97697adb863",
+      "opportunity_name": "{{contact.name}}",
+      "monetary_value": "",
+      "status": "open",
+      "fields": [],
+      "type": "create_opportunity",
+      "allow_backward": false,
+      "opportunity_source": "",
+      "allow_multiple": true
+     },
+     "parentKey": "ce21bc3f-3389-4cfb-88b2-58d8f01317eb",
+     "parent": "c7b38843-307e-405f-99a6-c359bbe9966a",
+     "order": 3
+    },
+    {
+     "type": "internal_notification",
+     "id": "c100b196-a80e-456a-b2a2-8a8ffec606cd",
+     "name": "Notify Virginia Beach Team",
+     "next": "2aa4bfe1-a309-47f0-915a-d0acba0e7c98",
+     "attributes": {
+      "type": "notification",
+      "notification": {
+       "title": "NN Onboarding started: {{contact.name}}",
+       "body": "{{contact.name}} closed as Sold at Richmond and entered onboarding. PCC: {{contact.patient_care_consultant}} Phone: {{contact.phone}} Retention opportunity created at Onboarding — moves to Active automatically at day 30. Welcome SMS and first-visit email are sending automatically. Nothing required unless they reply.",
+       "redirectPage": "contact",
+       "userType": "all",
+       "assignedOwners": null,
+       "alsoNotifyContactFollowers": false,
+       "alsoNotifyOpportunityFollowers": false,
+       "type": "send_notification"
+      }
+     },
+     "parentKey": "3dceed3b-338b-40f3-b8f1-354f1eceb110",
+     "parent": "c7b38843-307e-405f-99a6-c359bbe9966a",
+     "order": 4
+    },
+    {
+     "type": "wait",
+     "id": "2aa4bfe1-a309-47f0-915a-d0acba0e7c98",
+     "name": "Wait 3 Days",
+     "next": "7a0f7f8c-8060-484e-a121-f64acccef6c2",
+     "attributes": {
+      "type": "time",
+      "convertToMultipath": false,
+      "hybridActionType": "wait",
+      "isHybridAction": true,
+      "name": "Wait 3 Days",
+      "cat": "action",
+      "transitions": [],
+      "startAfter": {
+       "when": "after",
+       "type": "days",
+       "value": 3
+      },
+      "timePeriodInputMode": "standard",
+      "unitInputMode": "standard"
+     },
+     "parentKey": "c100b196-a80e-456a-b2a2-8a8ffec606cd",
+     "parent": "c7b38843-307e-405f-99a6-c359bbe9966a",
+     "order": 5
+    },
+    {
+     "type": "add_to_workflow",
+     "id": "7a0f7f8c-8060-484e-a121-f64acccef6c2",
+     "name": "Add to Feedback Survey Workflow",
+     "next": "35f8c52c-3ef8-4e5e-a210-d1a13092d996",
+     "attributes": {
+      "input_trigger_params": false,
+      "type": "add_to_workflow",
+      "workflow_id": "61d931ac-efea-43a7-97ee-074ca16df585"
+     },
+     "parentKey": "2aa4bfe1-a309-47f0-915a-d0acba0e7c98",
+     "parent": "c7b38843-307e-405f-99a6-c359bbe9966a",
+     "order": 6
+    },
+    {
+     "type": "wait",
+     "id": "35f8c52c-3ef8-4e5e-a210-d1a13092d996",
+     "name": "Wait 14 Days",
+     "next": "95e692c9-09a3-4140-9463-e30e548271c0",
+     "attributes": {
+      "type": "time",
+      "convertToMultipath": false,
+      "hybridActionType": "wait",
+      "isHybridAction": true,
+      "name": "Wait 14 Days",
+      "cat": "action",
+      "transitions": [],
+      "startAfter": {
+       "when": "after",
+       "type": "days",
+       "value": 14
+      },
+      "timePeriodInputMode": "standard",
+      "unitInputMode": "standard"
+     },
+     "parentKey": "7a0f7f8c-8060-484e-a121-f64acccef6c2",
+     "parent": "c7b38843-307e-405f-99a6-c359bbe9966a",
+     "order": 7
+    },
+    {
+     "type": "wait",
+     "id": "95e692c9-09a3-4140-9463-e30e548271c0",
+     "name": "Wait 13 Days Before Opportunity Update",
+     "next": "4298b3d1-9f83-4214-b87e-e08dd0ba970d",
+     "attributes": {
+      "type": "time",
+      "convertToMultipath": false,
+      "hybridActionType": "wait",
+      "isHybridAction": true,
+      "name": "Wait 13 Days Before Opportunity Update",
+      "cat": "action",
+      "transitions": [],
+      "startAfter": {
+       "when": "after",
+       "type": "days",
+       "value": 13
+      },
+      "timePeriodInputMode": "standard",
+      "unitInputMode": "standard"
+     },
+     "parentKey": "35f8c52c-3ef8-4e5e-a210-d1a13092d996",
+     "parent": "c7b38843-307e-405f-99a6-c359bbe9966a",
+     "order": 8
+    },
+    {
+     "type": "internal_update_opportunity",
+     "id": "4298b3d1-9f83-4214-b87e-e08dd0ba970d",
+     "name": "Update Retention Opp – Active",
+     "attributes": {
+      "allowBackward": false,
+      "type": "internal_update_opportunity",
+      "__customInputs__": {},
+      "__customInputFields__": []
+     },
+     "parentKey": "95e692c9-09a3-4140-9463-e30e548271c0",
+     "parent": "c7b38843-307e-405f-99a6-c359bbe9966a",
+     "workflowsActionType": "INTERNAL",
+     "order": 9
+    }
+   ]
+  }
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ },
+ "triggers": [
+  {
+   "id": "17U83f1RVv7SOzoLXIj1",
+   "date_added": "2026-07-18T20:05:20.712Z",
+   "date_updated": "2026-07-18T20:05:20.712Z",
+   "deleted": false,
+   "belongs_to": "workflow",
+   "location_id": "YTi6qs4zhiW6d4a75A9f",
+   "origin_id": "CUtJnG5yoGA5KngNBwyp",
+   "active": false,
+   "workflow_id": "8f61ccdf-d4c4-4b49-9aa7-a56bf3baded7",
+   "masterType": "highlevel",
+   "name": "Disposition Sold Tag Added",
+   "type": "contact_tag",
+   "conditions": [
+    {
+     "operator": "index-of-true",
+     "field": "tagsAdded",
+     "value": "disposition_sold",
+     "title": "Tag Added",
+     "type": "select",
+     "id": "tag-added"
+    },
+    {
+     "operator": "==",
+     "field": "contact.UyLjnNDfF6KvhHaUO8Dn",
+     "value": "Virginia Beach",
+     "title": "Location",
+     "type": "select",
+     "id": "UyLjnNDfF6KvhHaUO8Dn"
+    }
+   ],
+   "actions": [
+    {
+     "workflow_id": "8f61ccdf-d4c4-4b49-9aa7-a56bf3baded7",
+     "type": "add_to_workflow"
+    }
+   ],
+   "schedule_config": {}
+  }
+ ],
+ "dependentAssets": {}
+}

@@ -1,0 +1,380 @@
+[
+ {
+  "id": "f8f61c58-1309-4bb5-96a2-966db2f8e270",
+  "name": "Newport News Lead Notification",
+  "status": "draft",
+  "folder": "01 - Lead Capture & Nurture"
+ },
+ {
+  "id": "f4e36c5c-bed6-4eea-a12b-143f19333bef",
+  "name": "Newport News Non-Booked Recovery",
+  "status": "draft",
+  "folder": "01 - Lead Capture & Nurture"
+ },
+ {
+  "id": "48fd4ffc-f067-4da1-8777-9065c4ad48a6",
+  "name": "Richmond Lead Notification",
+  "status": "draft",
+  "folder": "01 - Lead Capture & Nurture"
+ },
+ {
+  "id": "d9ac1ca5-8372-4dfc-bdf5-2a2b6a8cab40",
+  "name": "Richmond Non-Booked Recovery",
+  "status": "draft",
+  "folder": "01 - Lead Capture & Nurture"
+ },
+ {
+  "id": "ba24747e-5ef4-494d-ba65-91db0de5ac29",
+  "name": "Virginia Lead Notification",
+  "status": "draft",
+  "folder": "01 - Lead Capture & Nurture"
+ },
+ {
+  "id": "1c3d0523-d549-47cd-a4c2-83f37883e062",
+  "name": "Virginia Non-Booked Recovery",
+  "status": "draft",
+  "folder": "01 - Lead Capture & Nurture"
+ },
+ {
+  "id": "5bb22f3f-9ee3-4309-8b5e-bfa6d02644c9",
+  "name": "Newport News Booking Confirmation",
+  "status": "draft",
+  "folder": "02 - Booking & Confirmation"
+ },
+ {
+  "id": "38e96d86-3792-40f9-b950-a289bb42d2e6",
+  "name": "Richmond Booking Confirmation",
+  "status": "draft",
+  "folder": "02 - Booking & Confirmation"
+ },
+ {
+  "id": "21680c0e-e8c2-469a-95a1-06ff14f2df12",
+  "name": "Virginia Booking Confirmation",
+  "status": "draft",
+  "folder": "02 - Booking & Confirmation"
+ },
+ {
+  "id": "7e6186d7-7c30-48eb-aa7d-947ce6b93f15",
+  "name": "Medical Intake Reminder Chase",
+  "status": "draft",
+  "folder": "03 - Intake"
+ },
+ {
+  "id": "a9c5e9cd-c6da-494c-844f-be6b504829b9",
+  "name": "Medical Intake Reminder Chase",
+  "status": "draft",
+  "folder": "03 - Intake"
+ },
+ {
+  "id": "ee76fcea-4156-4f6b-9daa-cde95eefd570",
+  "name": "Virginia Beach - Medical Intake Reminder Chase",
+  "status": "draft",
+  "folder": "03 - Intake"
+ },
+ {
+  "id": "d3cb36d6-3359-42a6-b812-e66bbba525a6",
+  "name": "Newport News Cancellation Recovery",
+  "status": "draft",
+  "folder": "04 - Reschedule / Cancel / No-Show"
+ },
+ {
+  "id": "6f07bebb-fef2-4491-abb5-ae9cb8135ba0",
+  "name": "Newport News No-Show Recovery",
+  "status": "draft",
+  "folder": "04 - Reschedule / Cancel / No-Show"
+ },
+ {
+  "id": "69a61b66-a305-4f4d-91f8-f1ba49b288e3",
+  "name": "Richmond Cancellation Recovery",
+  "status": "draft",
+  "folder": "04 - Reschedule / Cancel / No-Show"
+ },
+ {
+  "id": "28d65c1e-ab76-4165-b86f-14da853756a5",
+  "name": "Richmond No-Show Recovery",
+  "status": "draft",
+  "folder": "04 - Reschedule / Cancel / No-Show"
+ },
+ {
+  "id": "065bbd34-04d2-4aed-a6c4-e3b5b0451480",
+  "name": "Virginia Beach Cancellation Recovery",
+  "status": "draft",
+  "folder": "04 - Reschedule / Cancel / No-Show"
+ },
+ {
+  "id": "2bd925bc-4203-405e-b763-bbb531f7778b",
+  "name": "Virginia Beach No-Show Recovery",
+  "status": "draft",
+  "folder": "04 - Reschedule / Cancel / No-Show"
+ },
+ {
+  "id": "bc78fb80-7a7c-4f29-a79e-2ce432afad30",
+  "name": "5.1 — Newport News – PCC Disposition Router",
+  "status": "draft",
+  "folder": "05 - Sales & Disposition"
+ },
+ {
+  "id": "f09dc586-f25f-419a-b0c7-f7c013712fe3",
+  "name": "5.1 — Richmond – PCC Disposition Router",
+  "status": "draft",
+  "folder": "05 - Sales & Disposition"
+ },
+ {
+  "id": "3f95f7b4-5488-4114-9807-e77c1345d45c",
+  "name": "5.1 — Virginia Beach – PCC Disposition Router",
+  "status": "draft",
+  "folder": "05 - Sales & Disposition"
+ },
+ {
+  "id": "23b90983-14d8-47d8-8f8f-6a65032f9de5",
+  "name": "5.2 — Newport News – Won & Onboarding",
+  "status": "draft",
+  "folder": "05 - Sales & Disposition"
+ },
+ {
+  "id": "cfe54298-e03e-4c59-a1c8-eace77720fa4",
+  "name": "5.2 — Richmond – Won & Onboarding",
+  "status": "draft",
+  "folder": "05 - Sales & Disposition"
+ },
+ {
+  "id": "8f61ccdf-d4c4-4b49-9aa7-a56bf3baded7",
+  "name": "5.2 — Virginia Beach – Won & Onboarding",
+  "status": "draft",
+  "folder": "05 - Sales & Disposition"
+ },
+ {
+  "id": "61d931ac-efea-43a7-97ee-074ca16df585",
+  "name": "5.3 — Newport News – Feedback Survey",
+  "status": "draft",
+  "folder": "05 - Sales & Disposition"
+ },
+ {
+  "id": "068fb10f-5b07-4807-932e-3646e7300e52",
+  "name": "5.3 — Richmond – Feedback Survey",
+  "status": "draft",
+  "folder": "05 - Sales & Disposition"
+ },
+ {
+  "id": "1300cc56-ffb2-4118-bbf9-5faf60af4b60",
+  "name": "5.3 — Virginia Beach – Feedback Survey",
+  "status": "draft",
+  "folder": "05 - Sales & Disposition"
+ },
+ {
+  "id": "65022c6c-2d8f-43f9-9676-aa5c9b520cc6",
+  "name": "5.4a–e — Newport News - A&D Nurture - All Objections",
+  "status": "draft",
+  "folder": "05 - Sales & Disposition"
+ },
+ {
+  "id": "c1b63f51-7a4d-4219-ae37-c09a785c2ac6",
+  "name": "5.4a–e — Richmond - A&D Nurture - All Objections",
+  "status": "draft",
+  "folder": "05 - Sales & Disposition"
+ },
+ {
+  "id": "202fb467-32e0-4374-931d-b0842c119bfb",
+  "name": "5.4a–e — Virginia Beach - A&D Nurture - All Objections",
+  "status": "draft",
+  "folder": "05 - Sales & Disposition"
+ },
+ {
+  "id": "b86f1720-6bf7-48de-a547-7c586b93f0e5",
+  "name": "5.5 — Newport News – Long-Term Nurture",
+  "status": "draft",
+  "folder": "05 - Sales & Disposition"
+ },
+ {
+  "id": "55761857-c11a-4cea-9bfd-31d75e93df39",
+  "name": "5.5 — Richmond – Long-Term Nurture",
+  "status": "draft",
+  "folder": "05 - Sales & Disposition"
+ },
+ {
+  "id": "81b52161-940a-4731-84a5-a84e474b3a3f",
+  "name": "5.5 — Virginia Beach – Long-Term Nurture",
+  "status": "draft",
+  "folder": "05 - Sales & Disposition"
+ },
+ {
+  "id": "ab197a37-525b-49ca-9b10-4341ccef70c0",
+  "name": "5.6 — Newport News – Term Extension (+3 Months)",
+  "status": "draft",
+  "folder": "05 - Sales & Disposition"
+ },
+ {
+  "id": "50bb7b70-1b1f-4607-b12b-08ae42241314",
+  "name": "5.6 — Richmond – Term Extension (+3 Months)",
+  "status": "draft",
+  "folder": "05 - Sales & Disposition"
+ },
+ {
+  "id": "9744e1fe-3b11-47da-886c-46c8e1c5c9f2",
+  "name": "5.6 — Virginia Beach – Term Extension (+3 Months)",
+  "status": "draft",
+  "folder": "05 - Sales & Disposition"
+ },
+ {
+  "id": "c4493a40-4b43-4bf2-8d66-56d832484973",
+  "name": "6.1 Newport News Lapsed Win-Back",
+  "status": "draft",
+  "folder": "06 - Retention & Renewals"
+ },
+ {
+  "id": "5a3c17e2-276d-4df5-8a50-d37c9fc077a9",
+  "name": "6.1 Richmond Lapsed Win-Back",
+  "status": "draft",
+  "folder": "06 - Retention & Renewals"
+ },
+ {
+  "id": "0fd1af8a-1301-4e6e-aeeb-1f86c96375b9",
+  "name": "6.1 Virginia Beach Lapsed Win-Back",
+  "status": "draft",
+  "folder": "06 - Retention & Renewals"
+ },
+ {
+  "id": "894b9547-a7a7-437f-b83e-c122c0b98f4f",
+  "name": "6.2 Newport News Renewal Reminder",
+  "status": "draft",
+  "folder": "06 - Retention & Renewals"
+ },
+ {
+  "id": "f4f724b7-4435-45cd-b07b-dd1f91b18425",
+  "name": "6.2 Richmond Renewal Reminder",
+  "status": "draft",
+  "folder": "06 - Retention & Renewals"
+ },
+ {
+  "id": "107cc989-37fe-4729-a5d1-991d3abf3a51",
+  "name": "6.2 Virginia Beach Renewal Reminder",
+  "status": "draft",
+  "folder": "06 - Retention & Renewals"
+ },
+ {
+  "id": "dc116bdb-6cd1-49cb-8d46-38c992ff42cc",
+  "name": "6.3 Newport News Retention Touch",
+  "status": "draft",
+  "folder": "06 - Retention & Renewals"
+ },
+ {
+  "id": "52c69682-7b1f-4e43-a3db-7c3cc4a5da10",
+  "name": "6.3 Richmond Retention Touch",
+  "status": "draft",
+  "folder": "06 - Retention & Renewals"
+ },
+ {
+  "id": "ca60db7a-2070-46c2-88ad-7ad993867368",
+  "name": "6.3 Virginia Beach Retention Touch",
+  "status": "draft",
+  "folder": "06 - Retention & Renewals"
+ },
+ {
+  "id": "05272005-da06-4c83-8570-1db5f538538d",
+  "name": "6.4 Newport News Term Extension",
+  "status": "draft",
+  "folder": "06 - Retention & Renewals"
+ },
+ {
+  "id": "120134e1-606c-4d45-92b9-9544e13a9371",
+  "name": "6.4 Richmond Term Extension",
+  "status": "draft",
+  "folder": "06 - Retention & Renewals"
+ },
+ {
+  "id": "8a87532a-7cfd-4ab7-88a9-7f14e26e842e",
+  "name": "6.4 Virginia Beach Term Extension",
+  "status": "draft",
+  "folder": "06 - Retention & Renewals"
+ },
+ {
+  "id": "4da4c2d6-cc0f-4604-b0ac-d15a6a4b69e6",
+  "name": "7.1 Newport News Attribution Stamp",
+  "status": "draft",
+  "folder": "07 - System & Utilities"
+ },
+ {
+  "id": "755512b7-5355-45b0-88e1-8ec2e6b37f49",
+  "name": "7.2 Newport News Stale Opportunity Watchdog",
+  "status": "draft",
+  "folder": "07 - System & Utilities"
+ },
+ {
+  "id": "2651f0b5-be7e-4a58-94c3-e0cd7a2ea412",
+  "name": "Newport- WF-13 - Ad Platform Conversions",
+  "status": "draft",
+  "folder": "07 - System & Utilities"
+ },
+ {
+  "id": "3849469f-ee08-4399-a0ff-949ea888a4d1",
+  "name": "7.1 Richmond Attribution Stamp",
+  "status": "draft",
+  "folder": "07 - Systems & Utilities"
+ },
+ {
+  "id": "28e0eeaf-df23-4589-88d7-1ef4324ea0fd",
+  "name": "7.1 Virginia Beach Attribution Stamp",
+  "status": "draft",
+  "folder": "07 - Systems & Utilities"
+ },
+ {
+  "id": "d291f14f-c23a-4189-82b3-1e5c34bec0a8",
+  "name": "7.2 Richmond Stale Opportunity Watchdog",
+  "status": "draft",
+  "folder": "07 - Systems & Utilities"
+ },
+ {
+  "id": "8daf1bd2-a58d-46e4-81a4-6234380d58bd",
+  "name": "7.2 Virginia Beach Stale Opportunity Watchdog",
+  "status": "draft",
+  "folder": "07 - Systems & Utilities"
+ },
+ {
+  "id": "b1b69cfb-e805-449d-a04a-c71eb4109c65",
+  "name": "Richmond- WF-13 - Ad Platform Conversions",
+  "status": "draft",
+  "folder": "07 - Systems & Utilities"
+ },
+ {
+  "id": "e7e42db3-58bd-435c-a810-d125614d5aaa",
+  "name": "Virginia - WF-13 - Ad Platform Conversions",
+  "status": "draft",
+  "folder": "07 - Systems & Utilities"
+ },
+ {
+  "id": "30ad1741-8d4f-44cc-9253-5102a21111a1",
+  "name": "Bad Contact Handler",
+  "status": "draft",
+  "folder": "Global"
+ },
+ {
+  "id": "3d67552e-f303-4c14-a867-5ab5b41aa048",
+  "name": "First-Touch Attribution Lock",
+  "status": "draft",
+  "folder": "Global"
+ },
+ {
+  "id": "20c693b4-d0d3-40af-869b-d6179ea44f84",
+  "name": "Global Consent Sync",
+  "status": "draft",
+  "folder": "Global"
+ },
+ {
+  "id": "503f6f2e-460e-4691-a15a-4d9f99e44a21",
+  "name": "Global Opt-Out Handler",
+  "status": "draft",
+  "folder": "Global"
+ },
+ {
+  "id": "a496d271-c73d-499e-a3aa-6471ed3046fc",
+  "name": "Intake Survey Completion",
+  "status": "draft",
+  "folder": "Global"
+ },
+ {
+  "id": "1495c045-0211-450a-9923-055cc413b2cd",
+  "name": "Opportunity Attribution Update",
+  "status": "draft",
+  "folder": "Global"
+ }
+]

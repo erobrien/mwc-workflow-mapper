@@ -1,0 +1,599 @@
+{
+ "workflowData": {
+  "_id": "0fd1af8a-1301-4e6e-aeeb-1f86c96375b9",
+  "locationId": "YTi6qs4zhiW6d4a75A9f",
+  "name": "6.1 Virginia Beach Lapsed Win-Back",
+  "status": "draft",
+  "version": 2,
+  "allowMultiple": true,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/YTi6qs4zhiW6d4a75A9f/workflows/0fd1af8a-1301-4e6e-aeeb-1f86c96375b9/2",
+  "stopOnResponse": true,
+  "autoMarkAsRead": false,
+  "originId": "7ebeaf66-58dc-409d-9260-8e17e6adbb69",
+  "permission": 380,
+  "type": "workflow",
+  "meta": null,
+  "updatedBy": "snapshot",
+  "createdAt": "2026-07-18T20:05:02.969Z",
+  "updatedAt": "2026-07-18T20:05:21.409Z",
+  "deleted": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "snapshot",
+  "__v": 0,
+  "allowMultipleOpportunity": false,
+  "dataVersion": 7,
+  "eventStartDate": null,
+  "parentId": "a0f037a0-e653-4f99-8e22-b5ea313be0e1",
+  "senderAddress": null,
+  "window": {
+   "condition": "when",
+   "start": "08:00",
+   "end": "17:00",
+   "days": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
+  },
+  "workflowNote": {
+   "content": "",
+   "createdBy": "snapshot",
+   "createdByName": "snapshot",
+   "createdAt": "2026-07-18T20:05:20.970Z",
+   "updatedBy": "snapshot",
+   "updatedByName": "snapshot",
+   "updatedAt": "2026-07-18T20:05:20.970Z"
+  },
+  "id": "0fd1af8a-1301-4e6e-aeeb-1f86c96375b9",
+  "workflowData": {
+   "templates": [
+    {
+     "type": "if_else",
+     "id": "f2c546bb-c69d-4b27-b037-0f55d302ad50",
+     "name": "Gate Blocked Contacts",
+     "attributes": {
+      "currentRecipeType": "CUSTOM",
+      "branches": [
+       {
+        "name": "Check DND active or opted_out tag",
+        "operator": "or",
+        "segments": [
+         {
+          "operator": "or",
+          "conditions": [
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "dnd_channels",
+            "conditionOperator": "index-of-true",
+            "conditionValue": [
+             "Call",
+             "SMS",
+             "Email",
+             "WhatsApp",
+             "FB",
+             "GMB"
+            ]
+           },
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "tags",
+            "conditionOperator": "index-of-true",
+            "conditionValue": [
+             "opted_out"
+            ]
+           }
+          ]
+         }
+        ],
+        "id": "59ade293-369f-457e-a848-0de642031281"
+       }
+      ],
+      "if": true,
+      "operator": "and",
+      "conditionName": "Gate Blocked Contacts",
+      "version": 2,
+      "noneBranchName": "None"
+     },
+     "nodeType": "condition-node",
+     "cat": "conditions",
+     "next": [
+      "59ade293-369f-457e-a848-0de642031281",
+      "293085bb-6587-4b97-9c84-14ae4301b6ef"
+     ],
+     "order": 0
+    },
+    {
+     "type": "if_else",
+     "id": "59ade293-369f-457e-a848-0de642031281",
+     "name": "Blocked Contact Path",
+     "parentKey": "f2c546bb-c69d-4b27-b037-0f55d302ad50",
+     "parent": "f2c546bb-c69d-4b27-b037-0f55d302ad50",
+     "nodeType": "branch-yes",
+     "cat": "conditions",
+     "sibling": [
+      "293085bb-6587-4b97-9c84-14ae4301b6ef"
+     ],
+     "attributes": {
+      "if": false,
+      "conditionName": "Condition",
+      "operator": "and",
+      "branches": []
+     },
+     "order": 1
+    },
+    {
+     "type": "if_else",
+     "id": "293085bb-6587-4b97-9c84-14ae4301b6ef",
+     "name": "None",
+     "next": "cb23893c-acd3-43c9-9395-b7fbc8d37a92",
+     "parentKey": "f2c546bb-c69d-4b27-b037-0f55d302ad50",
+     "parent": "f2c546bb-c69d-4b27-b037-0f55d302ad50",
+     "nodeType": "branch-no",
+     "cat": "conditions",
+     "sibling": [
+      "59ade293-369f-457e-a848-0de642031281"
+     ],
+     "attributes": {
+      "else": true
+     },
+     "order": 1
+    },
+    {
+     "id": "cb23893c-acd3-43c9-9395-b7fbc8d37a92",
+     "parent": "293085bb-6587-4b97-9c84-14ae4301b6ef",
+     "order": 0,
+     "attributes": {
+      "body": "Hi {{contact.first_name}}, it's Men's Wellness Centers Virginia Beach. Your membership recently wrapped up and we'd genuinely love to have you back. Want to pick up where you left off? Reply here or call {{custom_values.newport_news__phone}}. Reply STOP to opt out.",
+      "attachments": []
+     },
+     "name": "SMS",
+     "type": "sms",
+     "next": "e04ff751-7abc-42d4-8c2b-5a4f482f151c",
+     "parentKey": "293085bb-6587-4b97-9c84-14ae4301b6ef"
+    },
+    {
+     "id": "e04ff751-7abc-42d4-8c2b-5a4f482f151c",
+     "parentKey": "cb23893c-acd3-43c9-9395-b7fbc8d37a92",
+     "parent": "293085bb-6587-4b97-9c84-14ae4301b6ef",
+     "type": "wait",
+     "name": "Wait",
+     "attributes": {
+      "type": "time",
+      "startAfter": {
+       "type": "days",
+       "value": 2,
+       "when": "after"
+      },
+      "name": "Wait",
+      "cat": "",
+      "timePeriodInputMode": "standard",
+      "unitInputMode": "standard",
+      "isHybridAction": true,
+      "hybridActionType": "wait",
+      "convertToMultipath": false,
+      "transitions": []
+     },
+     "order": 1,
+     "cat": "",
+     "next": "d1a04540-5ba2-4310-85ba-a9febe3020dd"
+    },
+    {
+     "id": "d1a04540-5ba2-4310-85ba-a9febe3020dd",
+     "parent": "293085bb-6587-4b97-9c84-14ae4301b6ef",
+     "order": 2,
+     "attributes": {
+      "fieldDefaults": {},
+      "trackingOptions": {
+       "hasTrackingLinks": false,
+       "hasUtmTracking": false,
+       "hasTags": false,
+       "sourceId": "7ebeaf66-58dc-409d-9260-8e17e6adbb69:d1a04540-5ba2-4310-85ba-a9febe3020dd"
+      },
+      "conditions": [],
+      "html": "<p style=\"margin:0px;font-family:verdana,geneva,sans-serif;font-size:16px; padding-left: 0px!important;margin: 0px;font-family: verdana,geneva,sans-serif;font-size: 16px;\"><span style=\"font-size: 16px; font-family: Verdana, sans-serif; color: rgb(0, 0, 0)\">Hi {{contact.first_name}},<br><br>We hope you’ve been well! We’d love to see you again at Men's Wellness Centers </span><strong><span style=\"font-size: 14px; font-family: 'Inter var', ui-sans-serif, system-ui, -apple-system, system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; color: rgb(16, 24, 40)\">Virginia Beach</span></strong><span style=\"font-size: 16px; font-family: Verdana, sans-serif; color: rgb(0, 0, 0)\"> and help you continue your progress. You can restart your membership at any time — just give us a call at {{custom_values.newport_news__phone}}, visit us at {{custom_values.npn_address}}, or book online here: {{custom_values.newport_news__booking_link}}. We look forward to welcoming you back!<br><br>Best,<br>The Men's Wellness Centers Team</span></p>",
+      "subject": "We'd love to welcome you back",
+      "attachments": [],
+      "htmlDefaults": {}
+     },
+     "name": "Email",
+     "type": "email",
+     "next": "02299ea5-79ba-40b6-b4ab-ea1c2530ef55",
+     "parentKey": "e04ff751-7abc-42d4-8c2b-5a4f482f151c"
+    },
+    {
+     "type": "wait",
+     "id": "02299ea5-79ba-40b6-b4ab-ea1c2530ef55",
+     "name": "Wait 3 More Days (9am-5pm ET)",
+     "next": "38736b4c-8f4a-4b63-b7a4-ad6b1b1390e4",
+     "attributes": {
+      "type": "time",
+      "convertToMultipath": false,
+      "hybridActionType": "wait",
+      "isHybridAction": true,
+      "name": "Wait 3 More Days (9am-5pm ET)",
+      "cat": "action",
+      "transitions": [],
+      "startAfter": {
+       "when": "after",
+       "type": "days",
+       "value": 3
+      },
+      "window": {
+       "condition": "when",
+       "start": "09:00",
+       "end": "17:00",
+       "days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+       ]
+      },
+      "timePeriodInputMode": "standard",
+      "unitInputMode": "standard"
+     },
+     "parentKey": "d1a04540-5ba2-4310-85ba-a9febe3020dd",
+     "parent": "293085bb-6587-4b97-9c84-14ae4301b6ef",
+     "order": 3
+    },
+    {
+     "type": "sms",
+     "id": "38736b4c-8f4a-4b63-b7a4-ad6b1b1390e4",
+     "name": "SMS Day 5 - Door Still Open",
+     "next": "20f6e395-3484-4c31-9563-d64159492278",
+     "attributes": {
+      "body": "Hi {{contact.first_name}}, the door's still open at Men's Wellness Centers whenever you're ready to restart. Reply or call {{custom_values.newport_news__phone}} and we'll make it easy. Reply STOP to opt out.",
+      "assignedOwners": [
+       "contact_owner"
+      ],
+      "alsoNotifyContactFollowers": false,
+      "alsoNotifyOpportunityFollowers": false
+     },
+     "parentKey": "02299ea5-79ba-40b6-b4ab-ea1c2530ef55",
+     "parent": "293085bb-6587-4b97-9c84-14ae4301b6ef",
+     "order": 4
+    },
+    {
+     "type": "wait",
+     "id": "20f6e395-3484-4c31-9563-d64159492278",
+     "name": "Wait 5 More Days (9am-5pm ET)",
+     "next": "af4d3998-7b71-4889-ae29-6b5fffb6a1f9",
+     "attributes": {
+      "type": "time",
+      "convertToMultipath": false,
+      "hybridActionType": "wait",
+      "isHybridAction": true,
+      "name": "Wait 5 More Days (9am-5pm ET)",
+      "cat": "action",
+      "transitions": [],
+      "startAfter": {
+       "when": "after",
+       "type": "days",
+       "value": 5
+      },
+      "window": {
+       "condition": "when",
+       "start": "09:00",
+       "end": "17:00",
+       "days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+       ]
+      },
+      "timePeriodInputMode": "standard",
+      "unitInputMode": "standard"
+     },
+     "parentKey": "38736b4c-8f4a-4b63-b7a4-ad6b1b1390e4",
+     "parent": "293085bb-6587-4b97-9c84-14ae4301b6ef",
+     "order": 5
+    },
+    {
+     "type": "task-notification",
+     "id": "af4d3998-7b71-4889-ae29-6b5fffb6a1f9",
+     "name": "Win-back Call Assignment",
+     "next": "3e29f852-2fb3-4b7b-a831-e33058ea11ba",
+     "attributes": {
+      "title": "Win-back Call for {{contact.first_name}} {{contact.last_name}}",
+      "body": "Please personally call lapsed member {{contact.first_name}} {{contact.last_name}} for a win-back outreach.",
+      "assignedTo": "",
+      "dueDate": {
+       "duration": 1,
+       "unit": "days",
+       "skipWeekends": false
+      },
+      "type": "task_notification",
+      "__customInputs__": {}
+     },
+     "parentKey": "20f6e395-3484-4c31-9563-d64159492278",
+     "parent": "293085bb-6587-4b97-9c84-14ae4301b6ef",
+     "workflowsActionType": "INTERNAL",
+     "order": 6,
+     "stepIndex": 1,
+     "incompleteData": true
+    },
+    {
+     "type": "sms",
+     "id": "3e29f852-2fb3-4b7b-a831-e33058ea11ba",
+     "name": "SMS Day 10 - Checking In",
+     "next": "5cf71f18-92d0-4c16-b7cf-a318f5307ca1",
+     "attributes": {
+      "body": "Hi {{contact.first_name}}, checking in from Men's Wellness Centers - we'd love to help you get back on track. Reply here or call {{custom_values.newport_news__phone}}. Reply STOP to opt out.",
+      "assignedOwners": [
+       "contact_owner"
+      ],
+      "alsoNotifyContactFollowers": false,
+      "alsoNotifyOpportunityFollowers": false
+     },
+     "parentKey": "af4d3998-7b71-4889-ae29-6b5fffb6a1f9",
+     "parent": "293085bb-6587-4b97-9c84-14ae4301b6ef",
+     "order": 7
+    },
+    {
+     "type": "wait",
+     "id": "5cf71f18-92d0-4c16-b7cf-a318f5307ca1",
+     "name": "Wait 11 More Days (9am-5pm ET)",
+     "next": "23e6f33a-3c2f-497f-aaf7-409455070e72",
+     "attributes": {
+      "type": "time",
+      "convertToMultipath": false,
+      "hybridActionType": "wait",
+      "isHybridAction": true,
+      "name": "Wait 11 More Days (9am-5pm ET)",
+      "cat": "action",
+      "transitions": [],
+      "startAfter": {
+       "when": "after",
+       "type": "days",
+       "value": 11
+      },
+      "timePeriodInputMode": "standard",
+      "unitInputMode": "standard"
+     },
+     "parentKey": "3e29f852-2fb3-4b7b-a831-e33058ea11ba",
+     "parent": "293085bb-6587-4b97-9c84-14ae4301b6ef",
+     "order": 8
+    },
+    {
+     "type": "sms",
+     "id": "23e6f33a-3c2f-497f-aaf7-409455070e72",
+     "name": "SMS Day 21 - Last Note",
+     "next": "19b90d7d-ffbd-40c1-afca-a55b20a893b9",
+     "attributes": {
+      "body": "Hi {{contact.first_name}}, last note from us for now - if you'd like to return to Men's Wellness Centers, we're here anytime at {{custom_values.newport_news__phone}}. Reply STOP to opt out.",
+      "assignedOwners": [
+       "contact_owner"
+      ],
+      "alsoNotifyContactFollowers": false,
+      "alsoNotifyOpportunityFollowers": false
+     },
+     "parentKey": "5cf71f18-92d0-4c16-b7cf-a318f5307ca1",
+     "parent": "293085bb-6587-4b97-9c84-14ae4301b6ef",
+     "order": 9
+    },
+    {
+     "type": "wait",
+     "id": "19b90d7d-ffbd-40c1-afca-a55b20a893b9",
+     "name": "Wait 3 More Days (9am-5pm ET)",
+     "next": "75fee711-6efc-44da-91d5-0c6bbf164cbb",
+     "attributes": {
+      "type": "time",
+      "convertToMultipath": false,
+      "hybridActionType": "wait",
+      "isHybridAction": true,
+      "name": "Wait 3 More Days (9am-5pm ET)",
+      "cat": "action",
+      "transitions": [],
+      "startAfter": {
+       "when": "after",
+       "type": "days",
+       "value": 3
+      },
+      "window": {
+       "condition": "when",
+       "start": "09:00",
+       "end": "17:00",
+       "days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+       ]
+      },
+      "timePeriodInputMode": "standard",
+      "unitInputMode": "standard"
+     },
+     "parentKey": "23e6f33a-3c2f-497f-aaf7-409455070e72",
+     "parent": "293085bb-6587-4b97-9c84-14ae4301b6ef",
+     "order": 10
+    },
+    {
+     "type": "if_else",
+     "id": "75fee711-6efc-44da-91d5-0c6bbf164cbb",
+     "name": "If Tag is 'disposition_sold' or 'renewed'",
+     "attributes": {
+      "currentRecipeType": "CUSTOM",
+      "branches": [
+       {
+        "name": "Tags contain disposition_sold or renewed",
+        "operator": "and",
+        "segments": [
+         {
+          "operator": "or",
+          "conditions": [
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "tags",
+            "conditionOperator": "index-of-true",
+            "conditionValue": [
+             "disposition_sold"
+            ]
+           },
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "tags",
+            "conditionOperator": "index-of-true",
+            "conditionValue": [
+             "renewed"
+            ]
+           }
+          ]
+         }
+        ],
+        "id": "a9f4244b-f12c-4507-abb8-990c7cdaf654"
+       }
+      ],
+      "if": true,
+      "operator": "and",
+      "conditionName": "If Tag is 'disposition_sold' or 'renewed'",
+      "version": 2,
+      "noneBranchName": "None"
+     },
+     "parentKey": "19b90d7d-ffbd-40c1-afca-a55b20a893b9",
+     "parent": "293085bb-6587-4b97-9c84-14ae4301b6ef",
+     "nodeType": "condition-node",
+     "cat": "conditions",
+     "next": [
+      "a9f4244b-f12c-4507-abb8-990c7cdaf654",
+      "20d2e50c-dbff-4077-b95e-1234ee62f054"
+     ],
+     "order": 11
+    },
+    {
+     "type": "if_else",
+     "id": "a9f4244b-f12c-4507-abb8-990c7cdaf654",
+     "name": "Contact has 'disposition_sold' or 'renewed' tag",
+     "parentKey": "75fee711-6efc-44da-91d5-0c6bbf164cbb",
+     "parent": "75fee711-6efc-44da-91d5-0c6bbf164cbb",
+     "nodeType": "branch-yes",
+     "cat": "conditions",
+     "sibling": [
+      "20d2e50c-dbff-4077-b95e-1234ee62f054"
+     ],
+     "attributes": {
+      "if": false,
+      "conditionName": "Condition",
+      "operator": "and",
+      "branches": []
+     },
+     "order": 12
+    },
+    {
+     "type": "if_else",
+     "id": "20d2e50c-dbff-4077-b95e-1234ee62f054",
+     "name": "None",
+     "next": "32723c92-6570-44f0-8f2d-d4ffbe7983c6",
+     "parentKey": "75fee711-6efc-44da-91d5-0c6bbf164cbb",
+     "parent": "75fee711-6efc-44da-91d5-0c6bbf164cbb",
+     "nodeType": "branch-no",
+     "cat": "conditions",
+     "sibling": [
+      "a9f4244b-f12c-4507-abb8-990c7cdaf654"
+     ],
+     "attributes": {
+      "else": true
+     },
+     "order": 12
+    },
+    {
+     "type": "add_contact_tag",
+     "id": "32723c92-6570-44f0-8f2d-d4ffbe7983c6",
+     "name": "Add 'long_term_nurture' Tag",
+     "next": "539c9990-c781-4d67-bd2b-43a3912a3fc3",
+     "attributes": {
+      "tags": [
+       "nurture:longterm-eligible"
+      ]
+     },
+     "parentKey": "20d2e50c-dbff-4077-b95e-1234ee62f054",
+     "parent": "20d2e50c-dbff-4077-b95e-1234ee62f054",
+     "order": 0
+    },
+    {
+     "type": "internal_notification",
+     "id": "539c9990-c781-4d67-bd2b-43a3912a3fc3",
+     "name": "Send Internal Notification",
+     "attributes": {
+      "type": "notification",
+      "notification": {
+       "title": "Contact Tagged for Long-Term Nurture",
+       "body": "Unengaged contact added to long-term nurture: {{contact.first_name}} {{contact.last_name}}.",
+       "redirectPage": "contact",
+       "userType": "assign",
+       "assignedOwners": [
+        "contact_owner"
+       ],
+       "alsoNotifyContactFollowers": false,
+       "alsoNotifyOpportunityFollowers": false,
+       "type": "send_notification"
+      }
+     },
+     "parentKey": "32723c92-6570-44f0-8f2d-d4ffbe7983c6",
+     "parent": "20d2e50c-dbff-4077-b95e-1234ee62f054",
+     "order": 1
+    }
+   ]
+  }
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ },
+ "triggers": [
+  {
+   "id": "b2BYn9GHPMOALtEq803V",
+   "date_added": "2026-07-18T20:05:20.778Z",
+   "date_updated": "2026-07-18T20:05:20.778Z",
+   "deleted": false,
+   "belongs_to": "workflow",
+   "location_id": "YTi6qs4zhiW6d4a75A9f",
+   "origin_id": "sGFpniH2cQJO17tThZJZ",
+   "active": false,
+   "workflow_id": "0fd1af8a-1301-4e6e-aeeb-1f86c96375b9",
+   "masterType": "highlevel",
+   "name": "Lapsed Member Tag Added at Virginia Beach",
+   "type": "contact_tag",
+   "conditions": [
+    {
+     "operator": "index-of-true",
+     "field": "tagsAdded",
+     "value": "lapsed",
+     "title": "Tag Added",
+     "type": "select",
+     "id": "tag-added"
+    },
+    {
+     "operator": "==",
+     "field": "contact.UyLjnNDfF6KvhHaUO8Dn",
+     "value": "Virginia Beach",
+     "title": "Location",
+     "type": "select",
+     "id": "UyLjnNDfF6KvhHaUO8Dn"
+    }
+   ],
+   "actions": [
+    {
+     "workflow_id": "0fd1af8a-1301-4e6e-aeeb-1f86c96375b9",
+     "type": "add_to_workflow"
+    }
+   ],
+   "schedule_config": {}
+  }
+ ],
+ "dependentAssets": {}
+}

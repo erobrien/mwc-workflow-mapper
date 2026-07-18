@@ -1,0 +1,158 @@
+{
+ "templates": [
+  {
+   "type": "internal_create_opportunity",
+   "id": "103a6bdc-99f2-4887-a106-a073f7b51948",
+   "name": "Create Opportunity in Virginia Beach Pipeline",
+   "next": "b0e6fe04-1fd5-402f-877e-bdb726bded80",
+   "attributes": {
+    "pipelineId": "KKT4ODPjDcgcv7OYbcSN",
+    "__customInputFields__": [
+     {
+      "__customInputs__": {},
+      "dataType": "SINGLE_OPTIONS",
+      "filterField": "pipelineStageId",
+      "value": "ee096e92-77bb-4c3f-b5fc-59144ae985f7",
+      "valueFieldType": "select"
+     }
+    ],
+    "type": "internal_create_opportunity",
+    "__customInputs__": {}
+   },
+   "workflowsActionType": "INTERNAL",
+   "order": 0
+  },
+  {
+   "type": "internal_update_opportunity",
+   "id": "8d74162d-cd38-4038-a755-d49b3a6e49ef",
+   "name": "Set Opportunity Location Field to Virginia Beach",
+   "next": "f13f8713-35e6-4e03-8b1a-191826789f92",
+   "attributes": {
+    "allowBackward": false,
+    "__customInputFields__": [
+     {
+      "__customInputs__": {},
+      "dataType": "SINGLE_OPTIONS",
+      "filterField": "custom_fields.1MmZkcm9vsp0yxJvyA4S",
+      "value": "Virginia Beach",
+      "valueFieldType": "select"
+     }
+    ],
+    "type": "internal_update_opportunity",
+    "__customInputs__": {}
+   },
+   "parentKey": "103a6bdc-99f2-4887-a106-a073f7b51948",
+   "workflowsActionType": "INTERNAL",
+   "order": 1
+  },
+  {
+   "type": "add_contact_tag",
+   "id": "f13f8713-35e6-4e03-8b1a-191826789f92",
+   "name": "Tag Contact as Virginia Beach",
+   "next": "062cf421-8ec1-46be-ae81-076ea56e9b26",
+   "attributes": {
+    "tags": [
+     "virginia-lead"
+    ]
+   },
+   "parentKey": "8d74162d-cd38-4038-a755-d49b3a6e49ef",
+   "order": 2
+  },
+  {
+   "type": "sms",
+   "id": "062cf421-8ec1-46be-ae81-076ea56e9b26",
+   "name": "Send Virginia Beach Lead SMS",
+   "next": "c2da7725-5df9-4186-804d-df79f3fcaeeb",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, thanks for reaching out to Men's Wellness Centers - Virginia Beach. Book your consult here: {{custom_values.richmond__booking_link}}. Reply STOP to opt out.",
+    "assignedOwners": [
+     "contact_owner"
+    ],
+    "alsoNotifyContactFollowers": false,
+    "alsoNotifyOpportunityFollowers": false,
+    "attachments": []
+   },
+   "parentKey": "f13f8713-35e6-4e03-8b1a-191826789f92",
+   "order": 3
+  },
+  {
+   "type": "internal_notification",
+   "id": "c2da7725-5df9-4186-804d-df79f3fcaeeb",
+   "name": "Notify Team of New Richmond Lead",
+   "attributes": {
+    "type": "notification",
+    "notification": {
+     "title": "New Richmond Lead",
+     "body": "A new lead has been captured for Richmond.\nCheck the contact and opportunity details.",
+     "redirectPage": "contact",
+     "userType": "assign",
+     "assignedOwners": [
+      "contact_owner"
+     ],
+     "alsoNotifyContactFollowers": false,
+     "alsoNotifyOpportunityFollowers": false,
+     "type": "send_notification"
+    }
+   },
+   "parentKey": "062cf421-8ec1-46be-ae81-076ea56e9b26",
+   "order": 4
+  },
+  {
+   "id": "b0e6fe04-1fd5-402f-877e-bdb726bded80",
+   "order": 0,
+   "name": "Opp: stamp attribution at create (frozen)",
+   "type": "internal_update_opportunity",
+   "workflowsActionType": "INTERNAL",
+   "attributes": {
+    "allowBackward": true,
+    "type": "internal_update_opportunity",
+    "__customInputs__": {},
+    "__customInputFields__": [
+     {
+      "__customInputs__": {},
+      "dataType": "TEXT",
+      "filterField": "EbNCM03ezhFQSCFs7Is8",
+      "value": "{{contact.attributionSource.sessionSource}}",
+      "valueFieldType": "input"
+     },
+     {
+      "__customInputs__": {},
+      "dataType": "TEXT",
+      "filterField": "7oahfAuuSaBq76JfKoiJ",
+      "value": "{{contact.attributionSource.utmSource}}",
+      "valueFieldType": "input"
+     },
+     {
+      "__customInputs__": {},
+      "dataType": "TEXT",
+      "filterField": "dgjKeITqHaxBvPUA9gJY",
+      "value": "{{contact.attributionSource.utmMedium}}",
+      "valueFieldType": "input"
+     },
+     {
+      "__customInputs__": {},
+      "dataType": "TEXT",
+      "filterField": "C0Y1d3vIinecWMZCDh3j",
+      "value": "{{contact.attributionSource.campaign}}",
+      "valueFieldType": "input"
+     },
+     {
+      "__customInputs__": {},
+      "dataType": "TEXT",
+      "filterField": "iGeHeJeXmHEn43v3Y9K9",
+      "value": "{{contact.attributionSource.gclid}}",
+      "valueFieldType": "input"
+     },
+     {
+      "__customInputs__": {},
+      "dataType": "TEXT",
+      "filterField": "KseXPBZO6P5Abn4uQNiy",
+      "value": "{{contact.attributionSource.fbclid}}",
+      "valueFieldType": "input"
+     }
+    ]
+   },
+   "next": "8d74162d-cd38-4038-a755-d49b3a6e49ef"
+  }
+ ]
+}

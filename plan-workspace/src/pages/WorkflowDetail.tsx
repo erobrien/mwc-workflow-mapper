@@ -173,13 +173,23 @@ function StepList({ steps }: { steps: AsisStep[] }) {
   );
 }
 
-export default function WorkflowDetail({ dataset = "asis" }: { dataset?: "asis" | "cody" }) {
+const DATASETS = {
+  asis: { detail: "/asis-detail.json", flows: "/asis-flows.json", back: "/as-is", label: "As-is workflows",
+          subtitle: "As-is workflow · complete step graph captured verbatim from the live GHL API · no brand-voice rewrite" },
+  cody: { detail: "/cody-detail.json", flows: "/cody-flows.json", back: "/cody", label: "Cody build workflows",
+          subtitle: "Cody build workflow · complete step graph captured verbatim from the live GHL API · no rewrite" },
+  codyneo: { detail: "/codyneo-detail.json", flows: "/codyneo-flows.json", back: "/cody-neo", label: "Cody Neo workflows",
+          subtitle: "Cody Neo workflow · corrected copy · outcome and attribution stamps write to the Opportunity" },
+} as const;
+
+export default function WorkflowDetail({ dataset = "asis" }: { dataset?: keyof typeof DATASETS }) {
   const { id } = useParams<{ id: string }>();
-  const cody = dataset === "cody";
-  const { data, isLoading } = useJson<AsisDetail>(cody ? "/cody-detail.json" : "/asis-detail.json");
-  const { data: flowsData } = useJson<AsisFlows>(cody ? "/cody-flows.json" : "/asis-flows.json");
-  const backTo = cody ? "/cody" : "/as-is";
-  const backLabel = cody ? "Cody build workflows" : "As-is workflows";
+  const ds = DATASETS[dataset];
+  const cody = dataset !== "asis";
+  const { data, isLoading } = useJson<AsisDetail>(ds.detail);
+  const { data: flowsData } = useJson<AsisFlows>(ds.flows);
+  const backTo = ds.back;
+  const backLabel = ds.label;
   const wf: AsisWorkflow | undefined = useMemo(() => data?.workflows.find((w) => w.id === id), [data, id]);
   const flow = useMemo(() => flowsData?.flows.find((f) => f.id === id), [flowsData, id]);
 
@@ -195,9 +205,7 @@ export default function WorkflowDetail({ dataset = "asis" }: { dataset?: "asis" 
   return (
     <PageShell
       title={wf.name}
-      subtitle={cody
-        ? "Cody build workflow · complete step graph captured verbatim from the live GHL API · no rewrite"
-        : "As-is workflow · complete step graph captured verbatim from the live GHL API · no brand-voice rewrite"}
+      subtitle={ds.subtitle}
       actions={
         <div className="flex items-center gap-2">
           <Link to={backTo} className="inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-sm hover:bg-muted">

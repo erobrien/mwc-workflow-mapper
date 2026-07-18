@@ -21,3 +21,8 @@ export interface CodyIndexEntry { id: string; name: string; status: string; fold
 
 export const useCodyInventory = () => useJson<CodyInventory>("/cody-inventory.json");
 export const useCodyIndex = () => useJson<CodyIndexEntry[]>("/cody-index.json");
+
+// Cody Neo — corrected copy (sub-account YTi6qs4zhiW6d4a75A9f)
+export const CODYNEO_LOCATION_ID = "YTi6qs4zhiW6d4a75A9f";
+export const useCodyNeoInventory = () => useJson<CodyInventory>("/codyneo-inventory.json");
+export const useCodyNeoIndex = () => useJson<CodyIndexEntry[]>("/codyneo-index.json");

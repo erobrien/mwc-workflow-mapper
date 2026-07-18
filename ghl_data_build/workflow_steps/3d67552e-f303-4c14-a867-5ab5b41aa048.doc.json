@@ -1,0 +1,168 @@
+{
+ "workflowData": {
+  "_id": "3d67552e-f303-4c14-a867-5ab5b41aa048",
+  "locationId": "YTi6qs4zhiW6d4a75A9f",
+  "name": "First-Touch Attribution Lock",
+  "status": "draft",
+  "version": 2,
+  "allowMultiple": false,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/YTi6qs4zhiW6d4a75A9f/workflows/3d67552e-f303-4c14-a867-5ab5b41aa048/2",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "originId": "d1aabd6b-83e2-4785-b17d-dda809baa275",
+  "permission": 380,
+  "type": "workflow",
+  "meta": null,
+  "updatedBy": "snapshot",
+  "createdAt": "2026-07-18T20:05:06.656Z",
+  "updatedAt": "2026-07-18T20:05:22.578Z",
+  "deleted": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "snapshot",
+  "__v": 0,
+  "allowMultipleOpportunity": false,
+  "dataVersion": 7,
+  "eventStartDate": null,
+  "parentId": "7c7dbaa1-3432-4326-8721-0329c10b14f1",
+  "senderAddress": null,
+  "window": {
+   "condition": "when",
+   "start": "08:00",
+   "end": "17:00",
+   "days": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
+  },
+  "workflowNote": {
+   "content": "",
+   "createdBy": "snapshot",
+   "createdByName": "snapshot",
+   "createdAt": "2026-07-18T20:05:22.168Z",
+   "updatedBy": "snapshot",
+   "updatedByName": "snapshot",
+   "updatedAt": "2026-07-18T20:05:22.168Z"
+  },
+  "id": "3d67552e-f303-4c14-a867-5ab5b41aa048",
+  "workflowData": {
+   "templates": [
+    {
+     "type": "update_contact_field",
+     "id": "a139cbd9-a238-48e7-8678-924cb05a301a",
+     "name": "Set Original Source",
+     "next": "5db85ec7-8c4f-4bf3-8878-866b3a5fbb34",
+     "attributes": {
+      "type": "update_contact_field",
+      "actionType": "update_field_data",
+      "fields": [
+       {
+        "field": "HXTKQvlR9WqdpZTntyuX",
+        "value": "{{contact.attributionSource.sessionSource}}",
+        "title": "Original Source",
+        "type": "string",
+        "date": ""
+       }
+      ]
+     },
+     "order": 0
+    },
+    {
+     "type": "update_contact_field",
+     "id": "5db85ec7-8c4f-4bf3-8878-866b3a5fbb34",
+     "name": "Set Original Campaign",
+     "next": "6630e18e-c873-4cba-9b0c-741459725683",
+     "attributes": {
+      "type": "update_contact_field",
+      "actionType": "update_field_data",
+      "fields": [
+       {
+        "field": "HXTKQvlR9WqdpZTntyuX",
+        "value": "{{contact.attributionSource.utmCampaign}}",
+        "title": "Original Source",
+        "type": "string",
+        "date": ""
+       }
+      ]
+     },
+     "parentKey": "a139cbd9-a238-48e7-8678-924cb05a301a",
+     "order": 1
+    },
+    {
+     "type": "update_contact_field",
+     "id": "6630e18e-c873-4cba-9b0c-741459725683",
+     "name": "Set Original Ad ID",
+     "next": "c8a7ecec-9bc1-4e5c-bc74-bad2c4569f83",
+     "attributes": {
+      "type": "update_contact_field",
+      "actionType": "update_field_data",
+      "fields": [
+       {
+        "field": "63uzRxTlXha4HRDck3j2",
+        "value": "{{contact.original_ad_id}}",
+        "title": "Original Ad ID",
+        "type": "string",
+        "date": ""
+       }
+      ]
+     },
+     "parentKey": "5db85ec7-8c4f-4bf3-8878-866b3a5fbb34",
+     "order": 2
+    },
+    {
+     "type": "update_contact_field",
+     "id": "c8a7ecec-9bc1-4e5c-bc74-bad2c4569f83",
+     "name": "Set Original Lead Date",
+     "attributes": {
+      "type": "update_contact_field",
+      "actionType": "update_field_data",
+      "fields": [
+       {
+        "field": "9KVr4bsuu14SNji1dtWr",
+        "value": "{{right_now}}",
+        "title": "Original Lead Date",
+        "type": "date",
+        "date": "customDate"
+       }
+      ]
+     },
+     "parentKey": "6630e18e-c873-4cba-9b0c-741459725683",
+     "order": 3
+    }
+   ]
+  }
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ },
+ "triggers": [
+  {
+   "id": "d5G11OAQwqBwpbnOls5v",
+   "date_added": "2026-07-18T20:05:22.062Z",
+   "date_updated": "2026-07-18T20:05:22.062Z",
+   "deleted": false,
+   "belongs_to": "workflow",
+   "location_id": "YTi6qs4zhiW6d4a75A9f",
+   "origin_id": "K9MJq9QvDLNSooRfZaQa",
+   "active": false,
+   "workflow_id": "3d67552e-f303-4c14-a867-5ab5b41aa048",
+   "masterType": "highlevel",
+   "name": "Contact Created Trigger",
+   "type": "contact_created",
+   "conditions": [],
+   "actions": [
+    {
+     "workflow_id": "3d67552e-f303-4c14-a867-5ab5b41aa048",
+     "type": "add_to_workflow"
+    }
+   ]
+  }
+ ],
+ "dependentAssets": {}
+}

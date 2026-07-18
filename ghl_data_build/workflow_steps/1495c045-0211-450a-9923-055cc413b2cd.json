@@ -1,0 +1,71 @@
+{
+ "templates": [
+  {
+   "type": "internal_update_opportunity",
+   "id": "1af226b7-14b2-4c71-ae6c-1ed7daf8cf55",
+   "name": "Update Opportunity UTM Source Field",
+   "next": "20c7f48a-4565-478c-b9dd-8ab8e44e6c47",
+   "attributes": {
+    "allowBackward": false,
+    "type": "internal_update_opportunity",
+    "__customInputFields__": [
+     {
+      "__customInputs__": {},
+      "dataType": "TEXT",
+      "filterField": "custom_fields.7oahfAuuSaBq76JfKoiJ",
+      "value": "{{contact.attributionSource.sessionSource}}",
+      "valueFieldType": "string"
+     }
+    ],
+    "__customInputs__": {}
+   },
+   "workflowsActionType": "INTERNAL",
+   "order": 0
+  },
+  {
+   "type": "internal_update_opportunity",
+   "id": "20c7f48a-4565-478c-b9dd-8ab8e44e6c47",
+   "name": "Update Opportunity GCLID Field",
+   "next": "15740a35-f05e-474a-b274-7b865becdb6c",
+   "attributes": {
+    "allowBackward": false,
+    "type": "internal_update_opportunity",
+    "__customInputFields__": [
+     {
+      "__customInputs__": {},
+      "dataType": "TEXT",
+      "filterField": "custom_fields.iGeHeJeXmHEn43v3Y9K9",
+      "value": "{{contact.attributionSource.gclid}}",
+      "valueFieldType": "string"
+     }
+    ],
+    "__customInputs__": {}
+   },
+   "parentKey": "1af226b7-14b2-4c71-ae6c-1ed7daf8cf55",
+   "workflowsActionType": "INTERNAL",
+   "order": 1
+  },
+  {
+   "type": "internal_update_opportunity",
+   "id": "15740a35-f05e-474a-b274-7b865becdb6c",
+   "name": "Update Opportunity FBCLID Field",
+   "attributes": {
+    "allowBackward": false,
+    "type": "internal_update_opportunity",
+    "__customInputFields__": [
+     {
+      "__customInputs__": {},
+      "dataType": "TEXT",
+      "filterField": "custom_fields.KseXPBZO6P5Abn4uQNiy",
+      "value": "{{contact.attributionSource.fbclid}}",
+      "valueFieldType": "string"
+     }
+    ],
+    "__customInputs__": {}
+   },
+   "parentKey": "20c7f48a-4565-478c-b9dd-8ab8e44e6c47",
+   "workflowsActionType": "INTERNAL",
+   "order": 2
+  }
+ ]
+}

@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Search as SearchIcon, ExternalLink, CornerDownLeft } from "lucide-react";
 import { useData } from "../lib/data";
-import { useCodyIndex, CODY_LOCATION_ID } from "../lib/cody";
+import { useCodyIndex, CODY_LOCATION_ID, useCodyNeoIndex, CODYNEO_LOCATION_ID } from "../lib/cody";
 import { ghlWorkflow, ghlPipelines, ghlFields } from "../lib/ghl";
 import { cn } from "./ui";
 
@@ -11,6 +11,7 @@ interface Hit { type: string; label: string; to: string; ghl?: string; sub?: str
 const TONE: Record<string, string> = {
   Workflow: "text-red-700 dark:text-red-400",
   "Cody workflow": "text-sky-700 dark:text-sky-400",
+  "Cody Neo workflow": "text-amber-700 dark:text-amber-400",
   "Target workflow": "text-emerald-700 dark:text-emerald-400",
   Pipeline: "text-emerald-700 dark:text-emerald-400",
   Field: "text-amber-700 dark:text-amber-400",
@@ -21,6 +22,7 @@ const TONE: Record<string, string> = {
 export function GlobalSearch() {
   const { data } = useData();
   const { data: codyIndex } = useCodyIndex();
+  const { data: codyNeoIndex } = useCodyNeoIndex();
   const nav = useNavigate();
   const [q, setQ] = useState("");
   const [open, setOpen] = useState(false);
@@ -34,13 +36,14 @@ export function GlobalSearch() {
     const h: Hit[] = [];
     for (const w of data.as_is_workflows) h.push({ type: "Workflow", label: w.name, to: `/workflow/${w.id}`, ghl: ghlWorkflow(loc, w.id), sub: w.status, tone: TONE.Workflow });
     for (const w of codyIndex ?? []) h.push({ type: "Cody workflow", label: w.name, to: `/cody/workflow/${w.id}`, ghl: ghlWorkflow(CODY_LOCATION_ID, w.id), sub: `${w.status} · ${w.folder}`, tone: TONE["Cody workflow"] });
+    for (const w of codyNeoIndex ?? []) h.push({ type: "Cody Neo workflow", label: w.name, to: `/cody-neo/workflow/${w.id}`, ghl: ghlWorkflow(CODYNEO_LOCATION_ID, w.id), sub: `${w.status} · ${w.folder}`, tone: TONE["Cody Neo workflow"] });
     for (const w of data.tobe_workflows) h.push({ type: "Target workflow", label: `${w.n}. ${w.name}`, to: "/to-be/workflows", sub: w.absorbs, tone: TONE["Target workflow"] });
     for (const p of data.pipelines) h.push({ type: "Pipeline", label: p.name, to: "/to-be/pipelines", ghl: ghlPipelines(loc), sub: p.role, tone: TONE.Pipeline });
     for (const f of data.fields) h.push({ type: "Field", label: f.name, to: "/inventory", ghl: ghlFields(loc), sub: `${f.model} · ${f.key}`, tone: TONE.Field });
     for (const d of data.decisions) h.push({ type: "Decision", label: d.decision, to: "/decisions", sub: d.status, tone: TONE.Decision });
     for (const r of data.risks) h.push({ type: "Risk", label: r.area, to: "/risks", sub: r.sev, tone: TONE.Risk });
     return h;
-  }, [data, codyIndex, loc]);
+  }, [data, codyIndex, codyNeoIndex, loc]);
 
   const results = useMemo(() => {
     const t = q.trim().toLowerCase();

@@ -1,0 +1,611 @@
+{
+ "templates": [
+  {
+   "type": "find_opportunity",
+   "id": "cda3e170-34cc-4eb6-a6e8-07c20d5e130a",
+   "name": "Find Open Opportunity in Newport News, Virginia Pipeline",
+   "attributes": {
+    "transitions": [
+     {
+      "id": "c77cfef1-805d-471a-8215-1538e539655a",
+      "fields": {},
+      "conditionType": "user-defined",
+      "meta": {
+       "__branchKey__": "open_opportunity_found"
+      }
+     },
+     {
+      "id": "45bb6311-40b3-4983-81e5-20fa7d1c117e"
+     }
+    ],
+    "type": "find_opportunity",
+    "name": "Find Open Opportunity in Newport News, Virginia Pipeline",
+    "__name__": "Find Open Opportunity in Newport News, Virginia Pipeline",
+    "convertToMultipath": true,
+    "cat": "multi-path",
+    "sorting": "latest"
+   },
+   "cat": "multi-path",
+   "convertToMultipath": true,
+   "next": [
+    "c77cfef1-805d-471a-8215-1538e539655a",
+    "45bb6311-40b3-4983-81e5-20fa7d1c117e"
+   ],
+   "workflowsActionType": "INTERNAL",
+   "order": 0
+  },
+  {
+   "id": "c77cfef1-805d-471a-8215-1538e539655a",
+   "name": "Open Opportunity Found",
+   "type": "transition",
+   "attributes": {},
+   "parentKey": "cda3e170-34cc-4eb6-a6e8-07c20d5e130a",
+   "parent": "cda3e170-34cc-4eb6-a6e8-07c20d5e130a",
+   "cat": "transition",
+   "order": 1,
+   "next": "12ae89c1-1a4a-4775-b9f4-017b9a26a71e"
+  },
+  {
+   "id": "12ae89c1-1a4a-4775-b9f4-017b9a26a71e",
+   "parent": "c77cfef1-805d-471a-8215-1538e539655a",
+   "order": 0,
+   "attributes": {
+    "allowBackward": true
+   },
+   "name": "Move Opportunity to Cancelled Stage",
+   "type": "internal_update_opportunity",
+   "next": "9c4c9d9a-08fa-4b5f-b5c6-daed9f9f6e96",
+   "workflowsActionType": "INTERNAL",
+   "parentKey": "c77cfef1-805d-471a-8215-1538e539655a"
+  },
+  {
+   "id": "9c4c9d9a-08fa-4b5f-b5c6-daed9f9f6e96",
+   "stepIndex": 1,
+   "parent": "c77cfef1-805d-471a-8215-1538e539655a",
+   "order": 1,
+   "attributes": {
+    "title": "Immediate Call Required: Same-Day Cancellation for {{contact.name}}",
+    "body": "Please contact {{contact.name}} immediately regarding their same-day cancellation. Confirm their status and discuss next steps as soon as possible.",
+    "assignedTo": "contact.assigned_user",
+    "dueDate": {
+     "duration": 0,
+     "unit": "days",
+     "skipWeekends": false
+    },
+    "type": "task_notification",
+    "__customInputs__": {}
+   },
+   "name": "Create High-Priority Task to Call Patient",
+   "type": "task-notification",
+   "next": "4b7b55b7-ebd8-429f-ba65-ee260bd22218",
+   "workflowsActionType": "INTERNAL",
+   "parentKey": "12ae89c1-1a4a-4775-b9f4-017b9a26a71e"
+  },
+  {
+   "id": "4b7b55b7-ebd8-429f-ba65-ee260bd22218",
+   "parent": "c77cfef1-805d-471a-8215-1538e539655a",
+   "order": 2,
+   "attributes": {
+    "body": "Sorry you had to cancel, {{contact.first_name}}. Mind sharing what came up? And whenever you're ready, rebook here: {{custom_values.newport_news__booking_link}}. Reply STOP to opt out.",
+    "assignedOwners": [
+     "contact_owner"
+    ],
+    "alsoNotifyContactFollowers": false,
+    "alsoNotifyOpportunityFollowers": false,
+    "attachments": []
+   },
+   "name": "Send Same-Day Cancellation SMS",
+   "type": "sms",
+   "next": "9128ce95-7315-4659-8d26-2a82707c2f7c",
+   "parentKey": "9c4c9d9a-08fa-4b5f-b5c6-daed9f9f6e96"
+  },
+  {
+   "id": "9128ce95-7315-4659-8d26-2a82707c2f7c",
+   "parent": "c77cfef1-805d-471a-8215-1538e539655a",
+   "order": 3,
+   "attributes": {
+    "op": "or",
+    "segments": [
+     {
+      "op": "or",
+      "conditions": [
+       {
+        "goal_condition": "appointment_status",
+        "extras": {
+         "calendarId": "PqOQKlcpEGkn1u5AtOmh",
+         "statuses": [
+          "confirmed"
+         ],
+         "calendarOptions": [
+          {
+           "id": "PqOQKlcpEGkn1u5AtOmh",
+           "availabilities": [],
+           "addServiceActiveStep": "Complete",
+           "allowBookingAfter": 1,
+           "allowBookingAfterUnit": "days",
+           "allowBookingForUnit": "days",
+           "allowCancellation": true,
+           "allowReschedule": true,
+           "appoinmentPerDay": "",
+           "appoinmentPerSlot": 6,
+           "autoConfirm": true,
+           "calendarCoverImage": "https://msgsndr-private.storage.googleapis.com/calendar-widget-logo/a374bc51-adfa-444b-b5d0-d82b2cca0a13.png",
+           "calendarType": "class_booking",
+           "cancellationPreference": {
+            "expiryTimeUnit": "mins",
+            "expiryTime": null
+           },
+           "codeBlock": "",
+           "consentLabel": "I confirm that I want to receive content from this company using any contact information I provide.",
+           "createdBy": {
+            "userId": "9SxqV2FFXAGhjkSFYaYi",
+            "channel": "APP",
+            "source": "WEB_USER",
+            "timestamp": "2026-07-08T06:07:40.000Z",
+            "traceId": "74b6ed01-46ed-4e4d-abbe-19f942eec88c"
+           },
+           "dateAdded": "2026-07-08T06:07:40.000Z",
+           "deleted": false,
+           "description": "<p style=\"margin:0px;color:#10182899; margin: 0px;color: #10182899;\">Free men's health consultation at our Newport News center on Diligence Drive. Includes physician evaluation and same-day on-site lab work. Most visits are complete in about 60 minutes.</p>",
+           "enableConsentCheck": true,
+           "enableChargeGuests": false,
+           "enableGuests": false,
+           "enableMandatoryGuestType": false,
+           "enableOfficeHours": true,
+           "enableRecurring": false,
+           "enableSameUserAssignment": false,
+           "enableSameUserAssignmentForReschedule": false,
+           "enableStaffSelection": false,
+           "eventColor": "#039BE5",
+           "eventTitle": "Men's Wellness Centers Consultation - {{contact.name}}",
+           "eventType": "RoundRobin_OptimizeForAvailability",
+           "formId": "",
+           "formSubmitRedirectUrl": "",
+           "formSubmitThanksMessage": "Thank you for your appointment request. We will contact you shortly to confirm your request. Please call our office at {{contactMethod}} if you have any questions.",
+           "formSubmitType": "ThankYouMessage",
+           "googleInvitationEmails": true,
+           "guestType": "collect_detail",
+           "isSystemGenerated": false,
+           "isActive": true,
+           "isLivePaymentMode": false,
+           "linkedCalendars": {
+            "clio": {},
+            "drchrono": {},
+            "google": {},
+            "calendly": {}
+           },
+           "locationId": "VoeVvlByAem9pkxb7f6a",
+           "locationConfigurations": [],
+           "lookBusyConfig": {
+            "enabled": false,
+            "lookBusyPercentage": 0
+           },
+           "name": "Newport News Consults",
+           "notes": "Phone:- {{contact.phone}}\nEmail:- {{contact.email}}\n\nNeed to make a change to this event?\nReschedule:-\n{{reschedule_link}}\n\nCancel:-\n{{cancellation_link}}",
+           "openHours": {},
+           "order": 9999,
+           "pixelId": "",
+           "preBufferUnit": "mins",
+           "recurring": {
+            "count": 1,
+            "bookingOption": "skip",
+            "bookingOverlapDefaultStatus": "",
+            "interval": null,
+            "freq": "DAILY",
+            "monthDays": [],
+            "weekDays": []
+           },
+           "reschedulePreference": {
+            "expiryTimeUnit": "mins",
+            "expiryTime": null
+           },
+           "reserveService": false,
+           "shouldAssignContactToTeamMember": true,
+           "shouldSendCustomForm": false,
+           "shouldSkipAssigningContactForExisting": false,
+           "showSeatsPerSlot": true,
+           "slotBufferUnit": "mins",
+           "slotDuration": 60,
+           "slotDurationUnit": "hours",
+           "slotInterval": 30,
+           "slotIntervalUnit": "mins",
+           "stickyContact": false,
+           "stripe": {},
+           "teamMembers": [
+            {
+             "priority": 0.5,
+             "selected": true,
+             "userId": "aIb6qhsMGHNXlTEzbeEV",
+             "isZoomAdded": "false",
+             "isPrimary": true,
+             "locationConfigurations": [
+              {
+               "location": "827 Diligence Drive, Suite 206, Newport News, VA 23606",
+               "position": 0,
+               "kind": "custom",
+               "meetingId": "custom_0"
+              }
+             ],
+             "meetingLocation": "827 Diligence Drive, Suite 206, Newport News, VA 23606"
+            }
+           ],
+           "version": 2,
+           "widgetConfig": {
+            "primarySettings": {
+             "primaryColor": "#178af6ff",
+             "backgroundColor": "#ffffff",
+             "buttonText": "Schedule Meeting",
+             "showCalendarTitle": true,
+             "showCalendarDescription": true,
+             "showCalendarDetails": true
+            },
+            "default": true,
+            "pageOrder": [
+             {
+              "kind": "calendar",
+              "position": 0
+             },
+             {
+              "kind": "form",
+              "position": 1
+             }
+            ]
+           },
+           "widgetLogo": {
+            "shape": "square",
+            "url": "https://assets.cdn.filesafe.space/VoeVvlByAem9pkxb7f6a/media/6a4de967a97402b00b9873e1.webp"
+           },
+           "widgetSlug": "newport-news-consults",
+           "widgetType": "default",
+           "appointmentPerSlot": 6,
+           "appointmentPerDay": "",
+           "lastUpdatedBy": {
+            "userId": "9SxqV2FFXAGhjkSFYaYi",
+            "channel": "APP",
+            "source": "WEB_USER",
+            "timestamp": "2026-07-08T06:18:59.834Z",
+            "traceId": "76919225-c08a-483b-8410-c217893ce749"
+           },
+           "dateUpdated": "2026-07-08T06:18:59.846Z",
+           "providerId": "u4qdQczVQxf684HH4vcf",
+           "groupId": "u4qdQczVQxf684HH4vcf",
+           "label": "Newport News Consults",
+           "value": "PqOQKlcpEGkn1u5AtOmh"
+          },
+          {
+           "id": "joD3vNxwGq3G0QuqOlBM",
+           "availabilities": [],
+           "addServiceActiveStep": "Complete",
+           "allowBookingAfter": 1,
+           "allowBookingAfterUnit": "days",
+           "allowBookingForUnit": "days",
+           "allowCancellation": true,
+           "allowReschedule": true,
+           "appoinmentPerDay": "",
+           "appoinmentPerSlot": 6,
+           "autoConfirm": true,
+           "calendarCoverImage": "https://msgsndr-private.storage.googleapis.com/calendar-widget-logo/a374bc51-adfa-444b-b5d0-d82b2cca0a13.png",
+           "calendarType": "class_booking",
+           "cancellationPreference": {
+            "expiryTimeUnit": "mins",
+            "expiryTime": null
+           },
+           "codeBlock": "",
+           "consentLabel": "I confirm that I want to receive content from this company using any contact information I provide.",
+           "createdBy": {
+            "userId": "9SxqV2FFXAGhjkSFYaYi",
+            "channel": "APP",
+            "source": "WEB_USER",
+            "timestamp": "2026-07-08T06:10:24.000Z",
+            "traceId": "a4992bdd-f9fe-4058-a075-7e426b1f1119"
+           },
+           "dateAdded": "2026-07-08T06:10:24.000Z",
+           "deleted": false,
+           "description": "<p style=\"margin:0px;color:#10182899; margin: 0px;color: #10182899;\">Free men's health consultation at our Virginia Beach center on First Colonial Road. Includes physician evaluation and same-day on-site lab work. Most visits are complete in about 60 minutes.</p>",
+           "enableConsentCheck": true,
+           "enableChargeGuests": false,
+           "enableGuests": false,
+           "enableMandatoryGuestType": false,
+           "enableOfficeHours": true,
+           "enableRecurring": false,
+           "enableSameUserAssignment": false,
+           "enableSameUserAssignmentForReschedule": false,
+           "enableStaffSelection": false,
+           "eventColor": "#039BE5",
+           "eventTitle": "Men's Wellness Centers Consultation - {{contact.name}}",
+           "eventType": "RoundRobin_OptimizeForAvailability",
+           "formId": "",
+           "formSubmitRedirectUrl": "",
+           "formSubmitThanksMessage": "Thank you for your appointment request. We will contact you shortly to confirm your request. Please call our office at {{contactMethod}} if you have any questions.",
+           "formSubmitType": "ThankYouMessage",
+           "googleInvitationEmails": true,
+           "guestType": "collect_detail",
+           "isSystemGenerated": false,
+           "isActive": true,
+           "isLivePaymentMode": false,
+           "linkedCalendars": {
+            "clio": {},
+            "drchrono": {},
+            "google": {},
+            "calendly": {}
+           },
+           "locationId": "VoeVvlByAem9pkxb7f6a",
+           "locationConfigurations": [],
+           "lookBusyConfig": {
+            "enabled": false,
+            "lookBusyPercentage": 0
+           },
+           "name": "Virginia Beach Consults",
+           "notes": "Phone:- {{contact.phone}}\nEmail:- {{contact.email}}\n\nNeed to make a change to this event?\nReschedule:-\n{{reschedule_link}}\n\nCancel:-\n{{cancellation_link}}",
+           "openHours": {},
+           "order": 9999,
+           "pixelId": "",
+           "preBufferUnit": "mins",
+           "recurring": {
+            "count": 1,
+            "bookingOption": "skip",
+            "bookingOverlapDefaultStatus": "",
+            "interval": null,
+            "freq": "DAILY",
+            "monthDays": [],
+            "weekDays": []
+           },
+           "reschedulePreference": {
+            "expiryTimeUnit": "mins",
+            "expiryTime": null
+           },
+           "reserveService": false,
+           "shouldAssignContactToTeamMember": true,
+           "shouldSendCustomForm": false,
+           "shouldSkipAssigningContactForExisting": false,
+           "showSeatsPerSlot": true,
+           "slotBufferUnit": "mins",
+           "slotDuration": 60,
+           "slotDurationUnit": "hours",
+           "slotInterval": 30,
+           "slotIntervalUnit": "mins",
+           "stickyContact": false,
+           "stripe": {},
+           "teamMembers": [
+            {
+             "priority": 0.5,
+             "selected": true,
+             "userId": "aIb6qhsMGHNXlTEzbeEV",
+             "isZoomAdded": "false",
+             "isPrimary": true,
+             "locationConfigurations": [
+              {
+               "location": "996 First Colonial Road, Virginia Beach, VA 23454",
+               "position": 0,
+               "kind": "custom",
+               "meetingId": "custom_0"
+              }
+             ],
+             "meetingLocation": "996 First Colonial Road, Virginia Beach, VA 23454"
+            }
+           ],
+           "version": 2,
+           "widgetConfig": {
+            "primarySettings": {
+             "primaryColor": "#178af6ff",
+             "backgroundColor": "#ffffff",
+             "buttonText": "Schedule Meeting",
+             "showCalendarTitle": true,
+             "showCalendarDescription": true,
+             "showCalendarDetails": true
+            },
+            "default": true,
+            "pageOrder": [
+             {
+              "kind": "calendar",
+              "position": 0
+             },
+             {
+              "kind": "form",
+              "position": 1
+             }
+            ]
+           },
+           "widgetLogo": {
+            "shape": "square",
+            "url": "https://assets.cdn.filesafe.space/VoeVvlByAem9pkxb7f6a/media/6a4de967a97402b00b9873e1.webp"
+           },
+           "widgetSlug": "virginia-beach-consults",
+           "widgetType": "default",
+           "appointmentPerSlot": 6,
+           "appointmentPerDay": "",
+           "lastUpdatedBy": {
+            "userId": "9SxqV2FFXAGhjkSFYaYi",
+            "channel": "APP",
+            "source": "WEB_USER",
+            "timestamp": "2026-07-08T06:18:59.836Z",
+            "traceId": "76919225-c08a-483b-8410-c217893ce749"
+           },
+           "dateUpdated": "2026-07-08T06:18:59.850Z",
+           "providerId": "u4qdQczVQxf684HH4vcf",
+           "groupId": "u4qdQczVQxf684HH4vcf",
+           "label": "Virginia Beach Consults",
+           "value": "joD3vNxwGq3G0QuqOlBM"
+          },
+          {
+           "id": "jyYP6WhZqOl1HnbOcOfs",
+           "availabilities": [],
+           "addServiceActiveStep": "Complete",
+           "allowBookingAfter": 1,
+           "allowBookingAfterUnit": "days",
+           "allowBookingForUnit": "days",
+           "allowCancellation": true,
+           "allowReschedule": true,
+           "appoinmentPerDay": "",
+           "appoinmentPerSlot": 6,
+           "autoConfirm": true,
+           "calendarCoverImage": "https://msgsndr-private.storage.googleapis.com/calendar-widget-logo/a374bc51-adfa-444b-b5d0-d82b2cca0a13.png",
+           "calendarType": "class_booking",
+           "cancellationPreference": {
+            "expiryTimeUnit": "mins",
+            "expiryTime": null
+           },
+           "codeBlock": "",
+           "consentLabel": "I confirm that I want to receive content from this company using any contact information I provide.",
+           "createdBy": {
+            "userId": "9SxqV2FFXAGhjkSFYaYi",
+            "channel": "APP",
+            "source": "WEB_USER",
+            "timestamp": "2026-07-08T06:07:08.000Z",
+            "traceId": "e256ca64-8a28-460b-a47a-1b8af67bbe55"
+           },
+           "dateAdded": "2026-07-08T06:07:08.000Z",
+           "deleted": false,
+           "description": "<p style=\"margin:0px;color:#10182899\">Free men's health consultation at our Richmond center in Glen Allen. Includes physician evaluation and same-day on-site lab work. Most visits are complete in about 60 minutes.</p>",
+           "enableConsentCheck": true,
+           "enableChargeGuests": false,
+           "enableGuests": false,
+           "enableMandatoryGuestType": false,
+           "enableOfficeHours": true,
+           "enableRecurring": false,
+           "enableSameUserAssignment": false,
+           "enableSameUserAssignmentForReschedule": false,
+           "enableStaffSelection": false,
+           "eventColor": "#039BE5",
+           "eventTitle": "Men's Wellness Centers Consultation - {{contact.name}}",
+           "eventType": "RoundRobin_OptimizeForAvailability",
+           "formId": "",
+           "formSubmitRedirectUrl": "",
+           "formSubmitThanksMessage": "Thank you for your appointment request. We will contact you shortly to confirm your request. Please call our office at {{contactMethod}} if you have any questions.",
+           "formSubmitType": "ThankYouMessage",
+           "googleInvitationEmails": true,
+           "guestType": "collect_detail",
+           "isSystemGenerated": false,
+           "isActive": true,
+           "isLivePaymentMode": false,
+           "linkedCalendars": {
+            "clio": {},
+            "drchrono": {},
+            "google": {},
+            "calendly": {}
+           },
+           "locationId": "VoeVvlByAem9pkxb7f6a",
+           "locationConfigurations": [],
+           "lookBusyConfig": {
+            "enabled": false,
+            "lookBusyPercentage": 0
+           },
+           "name": "Richmond Consults",
+           "notes": "Phone:- {{contact.phone}}\nEmail:- {{contact.email}}\n\nNeed to make a change to this event?\nReschedule:-\n{{reschedule_link}}\n\nCancel:-\n{{cancellation_link}}",
+           "openHours": {},
+           "order": 9999,
+           "pixelId": "",
+           "preBufferUnit": "mins",
+           "recurring": {
+            "count": 1,
+            "bookingOption": "skip",
+            "bookingOverlapDefaultStatus": "",
+            "interval": null,
+            "freq": "DAILY",
+            "monthDays": [],
+            "weekDays": []
+           },
+           "reschedulePreference": {
+            "expiryTimeUnit": "mins",
+            "expiryTime": null
+           },
+           "reserveService": false,
+           "shouldAssignContactToTeamMember": true,
+           "shouldSendCustomForm": false,
+           "shouldSkipAssigningContactForExisting": false,
+           "showSeatsPerSlot": true,
+           "slotBufferUnit": "mins",
+           "slotDuration": 60,
+           "slotDurationUnit": "hours",
+           "slotInterval": 30,
+           "slotIntervalUnit": "mins",
+           "stickyContact": false,
+           "stripe": {},
+           "teamMembers": [
+            {
+             "priority": 0.5,
+             "selected": true,
+             "userId": "aIb6qhsMGHNXlTEzbeEV",
+             "isZoomAdded": "false",
+             "isPrimary": true,
+             "locationConfigurations": [
+              {
+               "location": "4050 Innslake Drive, Suite 360, Glen Allen, VA 23060",
+               "position": 0,
+               "kind": "custom",
+               "meetingId": "custom_0"
+              }
+             ],
+             "meetingLocation": "4050 Innslake Drive, Suite 360, Glen Allen, VA 23060"
+            }
+           ],
+           "version": 2,
+           "widgetConfig": {
+            "primarySettings": {
+             "primaryColor": "#178af6ff",
+             "backgroundColor": "#ffffff",
+             "buttonText": "Schedule Meeting",
+             "showCalendarTitle": true,
+             "showCalendarDescription": true,
+             "showCalendarDetails": true
+            },
+            "default": true,
+            "pageOrder": [
+             {
+              "kind": "calendar",
+              "position": 0
+             },
+             {
+              "kind": "form",
+              "position": 1
+             }
+            ]
+           },
+           "widgetLogo": {
+            "shape": "square",
+            "url": ""
+           },
+           "widgetSlug": "richmond-consults",
+           "widgetType": "default",
+           "appointmentPerSlot": 6,
+           "appointmentPerDay": "",
+           "lastUpdatedBy": {
+            "userId": "9SxqV2FFXAGhjkSFYaYi",
+            "channel": "APP",
+            "source": "WEB_USER",
+            "timestamp": "2026-07-08T06:18:59.839Z",
+            "traceId": "76919225-c08a-483b-8410-c217893ce749"
+           },
+           "dateUpdated": "2026-07-08T06:18:59.850Z",
+           "providerId": "u4qdQczVQxf684HH4vcf",
+           "groupId": "u4qdQczVQxf684HH4vcf",
+           "label": "Richmond Consults",
+           "value": "jyYP6WhZqOl1HnbOcOfs"
+          }
+         ],
+         "isLoading": false
+        },
+        "id": "c9e4d1d2-75d0-4116-932c-69ba115961bd"
+       }
+      ]
+     }
+    ],
+    "type": "workflow_goal",
+    "action": "exit"
+   },
+   "name": "Goal",
+   "type": "workflow_goal",
+   "parentKey": "4b7b55b7-ebd8-429f-ba65-ee260bd22218"
+  },
+  {
+   "id": "45bb6311-40b3-4983-81e5-20fa7d1c117e",
+   "name": "No Open Opportunity Found",
+   "type": "transition",
+   "attributes": {},
+   "parentKey": "cda3e170-34cc-4eb6-a6e8-07c20d5e130a",
+   "parent": "cda3e170-34cc-4eb6-a6e8-07c20d5e130a",
+   "cat": "transition",
+   "order": 1
+  }
+ ]
+}

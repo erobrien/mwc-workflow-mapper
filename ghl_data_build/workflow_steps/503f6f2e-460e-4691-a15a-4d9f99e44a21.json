@@ -1,0 +1,27 @@
+{
+ "templates": [
+  {
+   "type": "add_contact_tag",
+   "id": "c9e82d52-eeb8-440e-bc50-dbb75c68c7cc",
+   "name": "Tag Contact as Opted-Out",
+   "next": "25f6d43e-2db2-4852-b209-74706048c2e1",
+   "attributes": {
+    "tags": [
+     "opted-out"
+    ]
+   },
+   "order": 0
+  },
+  {
+   "type": "dnd_contact",
+   "id": "25f6d43e-2db2-4852-b209-74706048c2e1",
+   "name": "Set Contact DND for All Channels",
+   "attributes": {
+    "dnd_contact": "enable",
+    "specific_channels": null
+   },
+   "parentKey": "c9e82d52-eeb8-440e-bc50-dbb75c68c7cc",
+   "order": 1
+  }
+ ]
+}

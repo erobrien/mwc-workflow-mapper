@@ -1,0 +1,774 @@
+{
+ "workflowData": {
+  "_id": "61d931ac-efea-43a7-97ee-074ca16df585",
+  "locationId": "YTi6qs4zhiW6d4a75A9f",
+  "name": "5.3 — Newport News – Feedback Survey",
+  "status": "draft",
+  "version": 2,
+  "allowMultiple": true,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/YTi6qs4zhiW6d4a75A9f/workflows/61d931ac-efea-43a7-97ee-074ca16df585/2",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "originId": "8e52e5b4-f070-4904-81bc-618d04d65b45",
+  "permission": 380,
+  "type": "workflow",
+  "meta": null,
+  "updatedBy": "snapshot",
+  "createdAt": "2026-07-18T20:04:59.845Z",
+  "updatedAt": "2026-07-18T20:05:21.418Z",
+  "deleted": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "snapshot",
+  "__v": 0,
+  "allowMultipleOpportunity": false,
+  "dataVersion": 7,
+  "eventStartDate": null,
+  "parentId": "7cfaadd6-d59f-4e9f-b8d5-0a1efabd96d0",
+  "senderAddress": null,
+  "window": {
+   "condition": "when",
+   "start": "08:00",
+   "end": "17:00",
+   "days": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
+  },
+  "workflowNote": {
+   "content": "",
+   "createdBy": "snapshot",
+   "createdByName": "snapshot",
+   "createdAt": "2026-07-18T20:05:20.986Z",
+   "updatedBy": "snapshot",
+   "updatedByName": "snapshot",
+   "updatedAt": "2026-07-18T20:05:20.986Z"
+  },
+  "id": "61d931ac-efea-43a7-97ee-074ca16df585",
+  "workflowData": {
+   "templates": [
+    {
+     "id": "544a3c16-86e8-402c-8739-c8857ed3de4c",
+     "order": 0,
+     "attributes": {
+      "currentRecipeType": "CUSTOM",
+      "branches": [
+       {
+        "id": "ddffa4c6-1082-40a3-8904-be2731206676",
+        "name": "Blocked – internal only",
+        "segments": [
+         {
+          "__segmentId": "60487f87-3a43-489f-bfa6-5d010fa42aae",
+          "operator": "or",
+          "conditions": [
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "tags",
+            "conditionOperator": "index-of-true",
+            "conditionValue": [
+             "mut"
+            ],
+            "__conditionId": "ad30b35d-1e22-44ab-83a1-0e8a2e82c44d",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           },
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "tags",
+            "conditionOperator": "index-of-true",
+            "conditionValue": [
+             "optout:sms"
+            ],
+            "__conditionId": "c187f6d7-afab-43f2-8116-ed4d676f0f0b",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           },
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "YBjkXCcpD9ai6KwIERTl",
+            "conditionOperator": "==",
+            "conditionValue": "Confirmed",
+            "__conditionId": "eb916965-3b7f-4c31-a2e3-04146258d15c",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           }
+          ]
+         }
+        ],
+        "operator": "or",
+        "showErrors": false,
+        "branchNameError": "Branch name cannot be empty!"
+       }
+      ],
+      "operator": "and",
+      "if": true,
+      "conditionName": "Gate – blocked contacts",
+      "version": 2,
+      "noneBranchName": "Clean – send survey"
+     },
+     "name": "yes",
+     "type": "if_else",
+     "cat": "conditions",
+     "next": [
+      "ddffa4c6-1082-40a3-8904-be2731206676",
+      "31ce8734-67f9-4d07-a8c1-d97716ab3995"
+     ],
+     "comments": [],
+     "nodeType": "condition-node"
+    },
+    {
+     "id": "ddffa4c6-1082-40a3-8904-be2731206676",
+     "parent": "544a3c16-86e8-402c-8739-c8857ed3de4c",
+     "order": 1,
+     "attributes": {
+      "if": false,
+      "conditionName": "Condition",
+      "operator": "and",
+      "branches": []
+     },
+     "name": "Blocked – internal only",
+     "type": "if_else",
+     "cat": "conditions",
+     "sibling": [
+      "31ce8734-67f9-4d07-a8c1-d97716ab3995"
+     ],
+     "comments": [],
+     "nodeType": "branch-yes",
+     "parentKey": "544a3c16-86e8-402c-8739-c8857ed3de4c"
+    },
+    {
+     "id": "31ce8734-67f9-4d07-a8c1-d97716ab3995",
+     "parent": "544a3c16-86e8-402c-8739-c8857ed3de4c",
+     "order": 1,
+     "attributes": {
+      "else": true
+     },
+     "name": "Clean – send survey",
+     "type": "if_else",
+     "cat": "conditions",
+     "sibling": [
+      "ddffa4c6-1082-40a3-8904-be2731206676"
+     ],
+     "comments": [],
+     "nodeType": "branch-no",
+     "parentKey": "544a3c16-86e8-402c-8739-c8857ed3de4c",
+     "next": "9f6c1c0f-a106-4937-8983-dec38e9b543f"
+    },
+    {
+     "id": "9f6c1c0f-a106-4937-8983-dec38e9b543f",
+     "parent": "31ce8734-67f9-4d07-a8c1-d97716ab3995",
+     "order": 0,
+     "attributes": {
+      "body": "Hi! Please help us improve by completing a quick feedback survey: [SURVEY-LINK]",
+      "assignedOwners": null,
+      "alsoNotifyContactFollowers": false,
+      "alsoNotifyOpportunityFollowers": false,
+      "attachments": []
+     },
+     "name": "Send Survey SMS",
+     "type": "sms",
+     "next": "057df926-9eaa-4812-806b-11314d3845e4",
+     "parentKey": "31ce8734-67f9-4d07-a8c1-d97716ab3995"
+    },
+    {
+     "id": "057df926-9eaa-4812-806b-11314d3845e4",
+     "parentKey": "9f6c1c0f-a106-4937-8983-dec38e9b543f",
+     "parent": "31ce8734-67f9-4d07-a8c1-d97716ab3995",
+     "type": "wait",
+     "name": "wait",
+     "attributes": {
+      "transitions": [
+       {
+        "condition": "primary",
+        "conditionType": "user-defined",
+        "isPrimaryBranch": true,
+        "name": "wait",
+        "attributes": {
+         "type": "wait_condition",
+         "description": "What will happen when specified conditions are met"
+        },
+        "id": "8a1d629b-49be-409d-84e0-c72b2452a7e2"
+       },
+       {
+        "condition": "timeout",
+        "conditionType": "user-defined",
+        "isPrimaryBranch": false,
+        "name": "timeout",
+        "attributes": {
+         "type": "wait_timeout",
+         "description": "What will happen after 3 days"
+        },
+        "id": "60b01c09-2017-4247-aa8f-e08f233e75f1"
+       }
+      ],
+      "type": "condition",
+      "name": "Wait For Survey Submission Or Timeout",
+      "__name__": "Wait For Survey Submission Or Timeout",
+      "convertToMultipath": true,
+      "cat": "multi-path",
+      "hybridActionType": "wait",
+      "isHybridAction": true,
+      "condition": {
+       "currentRecipeType": "CUSTOM",
+       "branches": [
+        {
+         "id": "01d2d207-08ee-4c88-bffb-d8a28b6b4591",
+         "name": "Branch",
+         "segments": [
+          {
+           "__segmentId": "8694195b-1481-4f79-be6d-85ba40019669",
+           "operator": "and",
+           "conditions": [
+            {
+             "conditionType": "contact_detail",
+             "conditionSubType": "5RtCXjPexDPEMBIHMwEX",
+             "conditionOperator": "has_value",
+             "__conditionId": "b8960b46-1d87-4d2d-bcca-b4b0a43ee7d4",
+             "ifElseNodeId": "",
+             "__customFieldType__": "standard",
+             "isWait": true,
+             "nestedDropdownTypes": [
+              "inboundWebhookRequest",
+              "sheet",
+              "datetime_formatter",
+              "custom_webhook",
+              "array_functions",
+              "ivr_gather",
+              "ivr_connect_call",
+              "custom_code",
+              "ai_agent",
+              "task-notification"
+             ],
+             "allowIsOperatorTypes": [
+              "contact_reply",
+              "inboundWebhookRequest",
+              "custom_webhook",
+              "custom_code",
+              "ai_agent",
+              "contact_detail",
+              "array_functions",
+              "appointment",
+              "service_booking",
+              "rental_booking"
+             ]
+            }
+           ]
+          }
+         ],
+         "operator": "and",
+         "showErrors": false,
+         "branchNameError": "Branch name cannot be empty!"
+        }
+       ],
+       "operator": "or",
+       "if": true,
+       "conditionName": "Condition",
+       "version": 2,
+       "noneBranchName": "None"
+      },
+      "startAfter": {
+       "when": "after",
+       "type": "days",
+       "value": 3
+      },
+      "timePeriodInputMode": "standard",
+      "unitInputMode": "standard"
+     },
+     "order": 1,
+     "cat": "multi-path",
+     "next": [
+      "8a1d629b-49be-409d-84e0-c72b2452a7e2",
+      "60b01c09-2017-4247-aa8f-e08f233e75f1"
+     ]
+    },
+    {
+     "id": "8a1d629b-49be-409d-84e0-c72b2452a7e2",
+     "parentKey": "057df926-9eaa-4812-806b-11314d3845e4",
+     "parent": "057df926-9eaa-4812-806b-11314d3845e4",
+     "type": "transition",
+     "name": "wait",
+     "attributes": {
+      "type": "wait_condition",
+      "description": "What will happen when specified conditions are met"
+     },
+     "order": 2,
+     "cat": "transition",
+     "next": "763e9876-57a8-48d8-9496-73ed30f70052"
+    },
+    {
+     "id": "763e9876-57a8-48d8-9496-73ed30f70052",
+     "parent": "8a1d629b-49be-409d-84e0-c72b2452a7e2",
+     "order": 0,
+     "attributes": {
+      "currentRecipeType": "CUSTOM",
+      "branches": [
+       {
+        "id": "15f9c1b1-660d-43cd-9d45-dc8eecabd024",
+        "name": "Survey Submitted Recently with Positive Feedback",
+        "segments": [
+         {
+          "__segmentId": "9fb7a8e9-a696-47ab-9fa3-f3d64fdcf21f",
+          "operator": "or",
+          "conditions": [
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "gg5hCF7w81cz38fZZg8t",
+            "conditionOperator": "==",
+            "conditionValue": "Excellent",
+            "__conditionId": "8fae0006-5ddc-42fd-90a5-79de51021b5e",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           },
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "gg5hCF7w81cz38fZZg8t",
+            "conditionOperator": "==",
+            "conditionValue": "Good",
+            "__conditionId": "82c8af2a-4ff5-413d-86d2-4ae87f7ac19f",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           }
+          ]
+         }
+        ],
+        "operator": "and",
+        "showErrors": false,
+        "branchNameError": "Branch name cannot be empty!"
+       },
+       {
+        "id": "6249d52e-8a1c-493a-a6a8-9ec2cce358e4",
+        "name": "Survey Submitted Within 3 Days and Negative Feedback",
+        "segments": [
+         {
+          "__segmentId": "39e0ba17-278a-42fd-9ccd-cd6ea03099e0",
+          "operator": "or",
+          "conditions": [
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "gg5hCF7w81cz38fZZg8t",
+            "conditionOperator": "==",
+            "conditionValue": "Okay",
+            "__conditionId": "1314b55a-b818-4579-b4ae-0ef23a1c4345",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           },
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "gg5hCF7w81cz38fZZg8t",
+            "conditionOperator": "==",
+            "conditionValue": "Disappointing",
+            "__conditionId": "c11eb646-5fc1-4021-9c8b-75a2267c452d",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           },
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "gg5hCF7w81cz38fZZg8t",
+            "conditionOperator": "==",
+            "conditionValue": "Bad",
+            "__conditionId": "5b6d30bc-9444-453f-ad91-eab20862bc78",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false,
+            "nestedDropdownTypes": [
+             "inboundWebhookRequest",
+             "sheet",
+             "datetime_formatter",
+             "custom_webhook",
+             "array_functions",
+             "ivr_gather",
+             "ivr_connect_call",
+             "custom_code",
+             "ai_agent",
+             "task-notification"
+            ],
+            "allowIsOperatorTypes": [
+             "contact_reply",
+             "inboundWebhookRequest",
+             "custom_webhook",
+             "custom_code",
+             "ai_agent",
+             "contact_detail",
+             "array_functions",
+             "appointment",
+             "service_booking",
+             "rental_booking"
+            ]
+           }
+          ]
+         }
+        ],
+        "operator": "and",
+        "showErrors": false,
+        "branchNameError": "Branch name cannot be empty!"
+       }
+      ],
+      "operator": "and",
+      "if": true,
+      "conditionName": "Survey Submitted Branch",
+      "version": 2,
+      "noneBranchName": "None"
+     },
+     "name": "yes",
+     "type": "if_else",
+     "cat": "conditions",
+     "next": [
+      "15f9c1b1-660d-43cd-9d45-dc8eecabd024",
+      "6249d52e-8a1c-493a-a6a8-9ec2cce358e4",
+      "ea345b76-5ce3-4b65-a736-f3b0ff26b5b2"
+     ],
+     "nodeType": "condition-node",
+     "parentKey": "8a1d629b-49be-409d-84e0-c72b2452a7e2"
+    },
+    {
+     "id": "15f9c1b1-660d-43cd-9d45-dc8eecabd024",
+     "parent": "763e9876-57a8-48d8-9496-73ed30f70052",
+     "order": 1,
+     "attributes": {
+      "if": false,
+      "conditionName": "Condition",
+      "operator": "and",
+      "branches": []
+     },
+     "name": "Survey Submitted Recently with Positive Feedback",
+     "type": "if_else",
+     "cat": "conditions",
+     "next": "7d2be112-5703-4457-9bac-04463207ad95",
+     "sibling": [
+      "6249d52e-8a1c-493a-a6a8-9ec2cce358e4",
+      "ea345b76-5ce3-4b65-a736-f3b0ff26b5b2"
+     ],
+     "comments": [],
+     "nodeType": "branch-yes",
+     "parentKey": "763e9876-57a8-48d8-9496-73ed30f70052"
+    },
+    {
+     "id": "7d2be112-5703-4457-9bac-04463207ad95",
+     "parent": "15f9c1b1-660d-43cd-9d45-dc8eecabd024",
+     "order": 0,
+     "attributes": {
+      "body": "That means a lot, {{contact.first_name}}.\n\nIf you have one more minute, a public review helps other men find us: {{survey link or review_link custom value}} \n\nThank you for being part of Men's Wellness Centers.",
+      "attachments": []
+     },
+     "name": "SMS – Review request",
+     "type": "sms",
+     "parentKey": "15f9c1b1-660d-43cd-9d45-dc8eecabd024"
+    },
+    {
+     "id": "6249d52e-8a1c-493a-a6a8-9ec2cce358e4",
+     "parent": "763e9876-57a8-48d8-9496-73ed30f70052",
+     "order": 1,
+     "attributes": {
+      "if": false,
+      "conditionName": "Condition",
+      "operator": "and",
+      "branches": []
+     },
+     "name": "Survey Submitted Within 3 Days and Negative Feedback",
+     "type": "if_else",
+     "cat": "conditions",
+     "next": "077bb7b3-ad68-4f97-86a6-25cfdb6c0f0a",
+     "sibling": [
+      "15f9c1b1-660d-43cd-9d45-dc8eecabd024",
+      "ea345b76-5ce3-4b65-a736-f3b0ff26b5b2"
+     ],
+     "comments": [],
+     "nodeType": "branch-yes",
+     "parentKey": "763e9876-57a8-48d8-9496-73ed30f70052"
+    },
+    {
+     "id": "077bb7b3-ad68-4f97-86a6-25cfdb6c0f0a",
+     "parent": "6249d52e-8a1c-493a-a6a8-9ec2cce358e4",
+     "order": 0,
+     "attributes": {
+      "type": "notification",
+      "notification": {
+       "type": "send_notification",
+       "body": "{{contact.name}} rated their visit \"{{contact.feedback_rating}}\" on the post-appointment survey. \n\nPhone: {{contact.phone}} \nVisit date: {{appointment.start_time}} \nPCC: {{contact.patient_care_consultant}}\nDO NOW: reach out personally within 24 hours a call, not a text. \n\nFind out what went wrong and whether it's fixable before their next visit. \n\nDo NOT send this member a review request. \n\nThat's already suppressed on this path, but flag if you see one come from anywhere else.",
+       "title": "⚠ Negative feedback — {{contact.name}} (NN)",
+       "redirectPage": "contact",
+       "userType": "assign",
+       "assignedOwners": [
+        "contact_owner"
+       ]
+      }
+     },
+     "name": "Alert – negative feedback",
+     "type": "internal_notification",
+     "parentKey": "6249d52e-8a1c-493a-a6a8-9ec2cce358e4"
+    },
+    {
+     "id": "ea345b76-5ce3-4b65-a736-f3b0ff26b5b2",
+     "parent": "763e9876-57a8-48d8-9496-73ed30f70052",
+     "order": 1,
+     "attributes": {
+      "else": true
+     },
+     "name": "None",
+     "type": "if_else",
+     "cat": "conditions",
+     "sibling": [
+      "15f9c1b1-660d-43cd-9d45-dc8eecabd024",
+      "6249d52e-8a1c-493a-a6a8-9ec2cce358e4"
+     ],
+     "comments": [],
+     "nodeType": "branch-no",
+     "parentKey": "763e9876-57a8-48d8-9496-73ed30f70052"
+    },
+    {
+     "id": "60b01c09-2017-4247-aa8f-e08f233e75f1",
+     "parentKey": "057df926-9eaa-4812-806b-11314d3845e4",
+     "parent": "057df926-9eaa-4812-806b-11314d3845e4",
+     "type": "transition",
+     "name": "timeout",
+     "attributes": {
+      "type": "wait_timeout",
+      "description": "What will happen after 3 days"
+     },
+     "order": 2,
+     "cat": "transition",
+     "next": "a1bcd2de-3566-4b0c-b71a-10a47b0d6b36"
+    },
+    {
+     "id": "a1bcd2de-3566-4b0c-b71a-10a47b0d6b36",
+     "parent": "60b01c09-2017-4247-aa8f-e08f233e75f1",
+     "order": 0,
+     "attributes": {
+      "body": "Quick nudge, {{contact.first_name}}, when you get a minute, we'd love your feedback on your recent visit: {{survey link}} No pressure, just want to keep improving. Reply STOP to opt out.",
+      "attachments": [],
+      "urlAttachments": []
+     },
+     "name": "SMS – Gentle re-ask",
+     "type": "sms",
+     "parentKey": "60b01c09-2017-4247-aa8f-e08f233e75f1"
+    }
+   ]
+  }
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ },
+ "triggers": [
+  {
+   "id": "yfKTVgIPlT1J9RrHSp0y",
+   "date_added": "2026-07-18T20:05:20.887Z",
+   "date_updated": "2026-07-18T20:05:20.887Z",
+   "deleted": false,
+   "belongs_to": "workflow",
+   "location_id": "YTi6qs4zhiW6d4a75A9f",
+   "origin_id": "6caESNguIgdVK0f5Vjgk",
+   "active": false,
+   "workflow_id": "61d931ac-efea-43a7-97ee-074ca16df585",
+   "masterType": "highlevel",
+   "name": "Contact Tag",
+   "type": "contact_tag",
+   "conditions": [
+    {
+     "operator": "index-of-true",
+     "field": "tagsAdded",
+     "value": "feedback_send",
+     "title": "Tag added",
+     "type": "select",
+     "id": "tag-added"
+    },
+    {
+     "operator": "==",
+     "field": "contact.UyLjnNDfF6KvhHaUO8Dn",
+     "value": "Newport News",
+     "title": "Location",
+     "type": "select",
+     "id": "UyLjnNDfF6KvhHaUO8Dn"
+    }
+   ],
+   "actions": [
+    {
+     "workflow_id": "61d931ac-efea-43a7-97ee-074ca16df585",
+     "type": "add_to_workflow"
+    }
+   ],
+   "schedule_config": {}
+  }
+ ],
+ "dependentAssets": {}
+}

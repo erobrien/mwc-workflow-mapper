@@ -1,0 +1,109 @@
+{
+ "workflowData": {
+  "_id": "a496d271-c73d-499e-a3aa-6471ed3046fc",
+  "locationId": "YTi6qs4zhiW6d4a75A9f",
+  "name": "Intake Survey Completion",
+  "status": "draft",
+  "version": 2,
+  "allowMultiple": true,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/YTi6qs4zhiW6d4a75A9f/workflows/a496d271-c73d-499e-a3aa-6471ed3046fc/2",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "originId": "79a2ad54-48cd-463e-8a18-0e7eb1e92625",
+  "permission": 380,
+  "type": "workflow",
+  "meta": null,
+  "updatedBy": "snapshot",
+  "createdAt": "2026-07-18T20:05:07.229Z",
+  "updatedAt": "2026-07-18T20:05:22.590Z",
+  "deleted": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "snapshot",
+  "__v": 0,
+  "allowMultipleOpportunity": false,
+  "dataVersion": 7,
+  "eventStartDate": null,
+  "parentId": "7c7dbaa1-3432-4326-8721-0329c10b14f1",
+  "senderAddress": null,
+  "window": {
+   "condition": "when",
+   "start": "08:00",
+   "end": "17:00",
+   "days": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
+  },
+  "workflowNote": {
+   "content": "",
+   "createdBy": "snapshot",
+   "createdByName": "snapshot",
+   "createdAt": "2026-07-18T20:05:22.175Z",
+   "updatedBy": "snapshot",
+   "updatedByName": "snapshot",
+   "updatedAt": "2026-07-18T20:05:22.175Z"
+  },
+  "id": "a496d271-c73d-499e-a3aa-6471ed3046fc",
+  "workflowData": {
+   "templates": [
+    {
+     "type": "add_contact_tag",
+     "id": "d54b019c-882b-4785-ab7d-4c60a1963a15",
+     "name": "Add intake-complete tag",
+     "attributes": {
+      "tags": [
+       "intake-complete"
+      ]
+     },
+     "order": 0
+    }
+   ]
+  }
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ },
+ "triggers": [
+  {
+   "id": "TDb8hYZQgSj9MMk9rg5i",
+   "date_added": "2026-07-18T20:05:22.068Z",
+   "date_updated": "2026-07-18T20:05:22.068Z",
+   "deleted": false,
+   "belongs_to": "workflow",
+   "location_id": "YTi6qs4zhiW6d4a75A9f",
+   "origin_id": "niM3sS72uNly22iM5t26",
+   "active": false,
+   "workflow_id": "a496d271-c73d-499e-a3aa-6471ed3046fc",
+   "masterType": "highlevel",
+   "name": "Survey Submitted: 02. Medical Intake - Onboarding",
+   "type": "survey_submission",
+   "conditions": [
+    {
+     "operator": "is-any-of",
+     "field": "survey.id",
+     "value": [
+      "d9qQZDt0gUrLt66Bax5G"
+     ],
+     "title": "Survey is",
+     "type": "string",
+     "id": "a3994333-b1b5-411f-8634-4d6aa9d75b10"
+    }
+   ],
+   "actions": [
+    {
+     "workflow_id": "a496d271-c73d-499e-a3aa-6471ed3046fc",
+     "type": "add_to_workflow"
+    }
+   ],
+   "schedule_config": {}
+  }
+ ],
+ "dependentAssets": {}
+}

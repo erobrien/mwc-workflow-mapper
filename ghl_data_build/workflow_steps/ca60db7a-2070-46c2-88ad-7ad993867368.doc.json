@@ -1,0 +1,936 @@
+{
+ "workflowData": {
+  "_id": "ca60db7a-2070-46c2-88ad-7ad993867368",
+  "locationId": "YTi6qs4zhiW6d4a75A9f",
+  "name": "6.3 Virginia Beach Retention Touch",
+  "status": "draft",
+  "version": 2,
+  "allowMultiple": false,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/YTi6qs4zhiW6d4a75A9f/workflows/ca60db7a-2070-46c2-88ad-7ad993867368/2",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "originId": "d2391c99-a18f-420c-bc33-eb8407a93282",
+  "permission": 380,
+  "type": "workflow",
+  "meta": {
+   "stepIndexCounter": {
+    "task-notification": 3
+   }
+  },
+  "updatedBy": "snapshot",
+  "createdAt": "2026-07-18T20:05:04.307Z",
+  "updatedAt": "2026-07-18T20:05:21.346Z",
+  "deleted": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "snapshot",
+  "__v": 0,
+  "allowMultipleOpportunity": false,
+  "dataVersion": 7,
+  "eventStartDate": null,
+  "parentId": "a0f037a0-e653-4f99-8e22-b5ea313be0e1",
+  "senderAddress": null,
+  "window": {
+   "condition": "when",
+   "start": "08:00",
+   "end": "17:00",
+   "days": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
+  },
+  "workflowNote": {
+   "content": "",
+   "createdBy": "snapshot",
+   "createdByName": "snapshot",
+   "createdAt": "2026-07-18T20:05:20.972Z",
+   "updatedBy": "snapshot",
+   "updatedByName": "snapshot",
+   "updatedAt": "2026-07-18T20:05:20.972Z"
+  },
+  "id": "ca60db7a-2070-46c2-88ad-7ad993867368",
+  "workflowData": {
+   "templates": [
+    {
+     "id": "7fe67358-77e0-4b51-a44b-4faf5f52041a",
+     "stepIndex": 3,
+     "order": 0,
+     "attributes": {
+      "title": "At-risk member - personal check-in call: {{contact.first_name}} {{contact.last_name}}",
+      "body": "Reconnect with {{contact.first_name}} {{contact.last_name}} to address any concerns and ensure their needs are met. This is a high-priority task for the Newport News representative. Due in 1 day.",
+      "assignedTo": "",
+      "dueDate": {
+       "duration": 1,
+       "unit": "days",
+       "skipWeekends": false
+      },
+      "type": "task_notification",
+      "__customInputs__": {}
+     },
+     "name": "Create Task: Personal Check-In Call",
+     "type": "task-notification",
+     "next": "1ebbd912-9252-466d-865a-5ec0f6c86e0c",
+     "workflowsActionType": "INTERNAL",
+     "incompleteData": true
+    },
+    {
+     "id": "1ebbd912-9252-466d-865a-5ec0f6c86e0c",
+     "order": 1,
+     "attributes": {
+      "type": "notification",
+      "email": null,
+      "sms": null,
+      "userType": "all",
+      "whatsapp": null,
+      "notification": {
+       "title": "At-Risk Member Flagged",
+       "body": "Member flagged at-risk: {{contact.first_name}} {{contact.last_name}} - rep assigned to call.",
+       "redirectPage": "contact",
+       "userType": "all",
+       "assignedOwners": null,
+       "alsoNotifyContactFollowers": false,
+       "alsoNotifyOpportunityFollowers": false
+      }
+     },
+     "name": "Internal Notification: At-Risk Flagged",
+     "type": "internal_notification",
+     "next": "035fcfb4-43b7-4584-9be0-bb17a684dfd6",
+     "parentKey": "7fe67358-77e0-4b51-a44b-4faf5f52041a"
+    },
+    {
+     "id": "035fcfb4-43b7-4584-9be0-bb17a684dfd6",
+     "order": 2,
+     "attributes": {
+      "currentRecipeType": "CUSTOM",
+      "branches": [
+       {
+        "name": "Contact is DND or has opted_out tag",
+        "operator": "or",
+        "segments": [
+         {
+          "operator": "or",
+          "conditions": [
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "dnd_channels",
+            "conditionOperator": "index-of-true",
+            "conditionValue": [
+             "Call",
+             "SMS",
+             "Email",
+             "WhatsApp",
+             "FB",
+             "GMB"
+            ]
+           },
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "tags",
+            "conditionOperator": "index-of-true",
+            "conditionValue": [
+             "opted_out"
+            ]
+           }
+          ]
+         }
+        ],
+        "id": "f7741428-194e-4aa1-9186-676415b417f6"
+       }
+      ],
+      "if": true,
+      "operator": "and",
+      "conditionName": "DND or Opted Out",
+      "version": 2,
+      "noneBranchName": "None"
+     },
+     "name": "DND or Opted Out",
+     "type": "if_else",
+     "cat": "conditions",
+     "next": [
+      "f7741428-194e-4aa1-9186-676415b417f6",
+      "2b6c653b-7871-4b01-afc2-54712e79f440"
+     ],
+     "comments": [],
+     "nodeType": "condition-node",
+     "parentKey": "1ebbd912-9252-466d-865a-5ec0f6c86e0c"
+    },
+    {
+     "id": "f7741428-194e-4aa1-9186-676415b417f6",
+     "parent": "035fcfb4-43b7-4584-9be0-bb17a684dfd6",
+     "order": 3,
+     "attributes": {
+      "if": false,
+      "conditionName": "Condition",
+      "operator": "and",
+      "branches": []
+     },
+     "name": "Contact is DND or has opted_out tag",
+     "type": "if_else",
+     "cat": "conditions",
+     "sibling": [
+      "2b6c653b-7871-4b01-afc2-54712e79f440"
+     ],
+     "comments": [],
+     "nodeType": "branch-yes",
+     "parentKey": "035fcfb4-43b7-4584-9be0-bb17a684dfd6"
+    },
+    {
+     "id": "2b6c653b-7871-4b01-afc2-54712e79f440",
+     "parent": "035fcfb4-43b7-4584-9be0-bb17a684dfd6",
+     "order": 3,
+     "attributes": {
+      "else": true
+     },
+     "name": "None",
+     "type": "if_else",
+     "cat": "conditions",
+     "next": "5ee108a8-7dec-42d9-8395-f3dbef81d983",
+     "sibling": [
+      "f7741428-194e-4aa1-9186-676415b417f6"
+     ],
+     "comments": [],
+     "nodeType": "branch-no",
+     "parentKey": "035fcfb4-43b7-4584-9be0-bb17a684dfd6"
+    },
+    {
+     "id": "5ee108a8-7dec-42d9-8395-f3dbef81d983",
+     "parent": "2b6c653b-7871-4b01-afc2-54712e79f440",
+     "order": 0,
+     "attributes": {
+      "type": "time",
+      "convertToMultipath": false,
+      "hybridActionType": "wait",
+      "isHybridAction": true,
+      "name": "Wait 1 Day (9am-5pm ET)",
+      "cat": "action",
+      "transitions": [],
+      "startAfter": {
+       "when": "after",
+       "type": "days",
+       "value": 1
+      },
+      "window": {
+       "condition": "when",
+       "start": "09:00",
+       "end": "17:00",
+       "days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+       ]
+      },
+      "timePeriodInputMode": "standard",
+      "unitInputMode": "standard"
+     },
+     "name": "Wait 1 Day (9am-5pm ET)",
+     "type": "wait",
+     "next": "cc0afd04-064e-453d-b3a5-4fd1140fa483",
+     "parentKey": "2b6c653b-7871-4b01-afc2-54712e79f440"
+    },
+    {
+     "id": "cc0afd04-064e-453d-b3a5-4fd1140fa483",
+     "parent": "2b6c653b-7871-4b01-afc2-54712e79f440",
+     "order": 1,
+     "attributes": {
+      "body": "Hi {{contact.first_name}}, it's Men's Wellness Centers Virginia Beach. Just checking in to see how things are going and whether there's anything we can do to support you. Reply here or call {{custom_values.newport_news__phone}} anytime. Reply STOP to opt out.",
+      "assignedOwners": [
+       "contact_owner"
+      ],
+      "alsoNotifyContactFollowers": false,
+      "alsoNotifyOpportunityFollowers": false,
+      "attachments": []
+     },
+     "name": "Initial SMS Check-In",
+     "type": "sms",
+     "next": "3e4ad847-364c-454f-b7aa-2dc6e4ab3dce",
+     "parentKey": "5ee108a8-7dec-42d9-8395-f3dbef81d983"
+    },
+    {
+     "id": "3e4ad847-364c-454f-b7aa-2dc6e4ab3dce",
+     "parent": "2b6c653b-7871-4b01-afc2-54712e79f440",
+     "order": 2,
+     "attributes": {
+      "type": "time",
+      "convertToMultipath": false,
+      "hybridActionType": "wait",
+      "isHybridAction": true,
+      "name": "Wait 4 Days (9am-5pm ET)",
+      "cat": "action",
+      "transitions": [],
+      "startAfter": {
+       "when": "after",
+       "type": "days",
+       "value": 4
+      },
+      "window": {
+       "condition": "when",
+       "start": "09:00",
+       "end": "17:00",
+       "days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+       ]
+      },
+      "timePeriodInputMode": "standard",
+      "unitInputMode": "standard"
+     },
+     "name": "Wait 4 Days (9am-5pm ET)",
+     "type": "wait",
+     "next": "d385aad2-7d02-43d5-bcb9-616328e48c61",
+     "parentKey": "cc0afd04-064e-453d-b3a5-4fd1140fa483"
+    },
+    {
+     "id": "d385aad2-7d02-43d5-bcb9-616328e48c61",
+     "parent": "2b6c653b-7871-4b01-afc2-54712e79f440",
+     "order": 3,
+     "attributes": {
+      "body": "Hi {{contact.first_name}}, following up from Men's Wellness Centers - we're here for you and happy to help however we can. Want to book a quick visit? {{custom_values.newport_news__booking_link}} or call {{custom_values.newport_news__phone}}. Reply STOP to opt out.",
+      "assignedOwners": [
+       "contact_owner"
+      ],
+      "alsoNotifyContactFollowers": false,
+      "alsoNotifyOpportunityFollowers": false
+     },
+     "name": "Send SMS: Follow-Up Outreach",
+     "type": "sms",
+     "next": "e4d52ba0-1642-4ec9-acc4-8a2155e0287f",
+     "parentKey": "3e4ad847-364c-454f-b7aa-2dc6e4ab3dce"
+    },
+    {
+     "id": "e4d52ba0-1642-4ec9-acc4-8a2155e0287f",
+     "parent": "2b6c653b-7871-4b01-afc2-54712e79f440",
+     "order": 4,
+     "attributes": {
+      "type": "time",
+      "convertToMultipath": false,
+      "hybridActionType": "wait",
+      "isHybridAction": true,
+      "name": "Wait 3 Days (9am-5pm ET)",
+      "cat": "action",
+      "transitions": [],
+      "startAfter": {
+       "when": "after",
+       "type": "days",
+       "value": 3
+      },
+      "window": {
+       "condition": "when",
+       "start": "09:00",
+       "end": "17:00",
+       "days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+       ]
+      },
+      "timePeriodInputMode": "standard",
+      "unitInputMode": "standard"
+     },
+     "name": "Wait 3 Days (9am-5pm ET)",
+     "type": "wait",
+     "next": "942ad0ed-1932-4abc-96f2-f899ee15d80f",
+     "parentKey": "d385aad2-7d02-43d5-bcb9-616328e48c61"
+    },
+    {
+     "id": "942ad0ed-1932-4abc-96f2-f899ee15d80f",
+     "parent": "2b6c653b-7871-4b01-afc2-54712e79f440",
+     "order": 5,
+     "attributes": {
+      "type": "notification",
+      "notification": {
+       "type": "send_notification",
+       "body": "{{contact.name}} was flagged at-risk and has completed the full check-in sequence  personal call task, two SMS touches over 8 days without booking an appointment.\n\nPhone: {{contact.phone}} PCC: {{contact.patient_care_consultant}} DO NOW: this member needs a manager-level touch. \n\nCall them personally within 24 hours the automated sequence is done and won't send anything further. The at-risk flag stays on this contact until they re-engage.",
+       "title": "n/a",
+       "userType": "assign",
+       "assignedOwners": [
+        "contact_owner"
+       ],
+       "redirectPage": "contact"
+      }
+     },
+     "name": "Alert – At-risk member needs manager attention",
+     "type": "internal_notification",
+     "next": "95f53599-fd07-4b63-8963-457207ef0bf4",
+     "parentKey": "e4d52ba0-1642-4ec9-acc4-8a2155e0287f"
+    },
+    {
+     "id": "95f53599-fd07-4b63-8963-457207ef0bf4",
+     "parent": "2b6c653b-7871-4b01-afc2-54712e79f440",
+     "order": 6,
+     "attributes": {
+      "op": "or",
+      "segments": [
+       {
+        "conditions": [
+         {
+          "goal_condition": "appointment_status",
+          "extras": {
+           "calendarId": "joD3vNxwGq3G0QuqOlBM",
+           "statuses": [
+            "new"
+           ],
+           "calendarOptions": [
+            {
+             "id": "PqOQKlcpEGkn1u5AtOmh",
+             "availabilities": [],
+             "addServiceActiveStep": "Complete",
+             "allowBookingAfter": 1,
+             "allowBookingAfterUnit": "days",
+             "allowBookingForUnit": "days",
+             "allowCancellation": true,
+             "allowReschedule": true,
+             "appoinmentPerDay": "",
+             "appoinmentPerSlot": 6,
+             "autoConfirm": true,
+             "calendarCoverImage": "https://msgsndr-private.storage.googleapis.com/calendar-widget-logo/a374bc51-adfa-444b-b5d0-d82b2cca0a13.png",
+             "calendarType": "class_booking",
+             "cancellationPreference": {
+              "expiryTimeUnit": "mins",
+              "expiryTime": null
+             },
+             "codeBlock": "",
+             "consentLabel": "I confirm that I want to receive content from this company using any contact information I provide.",
+             "createdBy": {
+              "userId": "9SxqV2FFXAGhjkSFYaYi",
+              "channel": "APP",
+              "source": "WEB_USER",
+              "timestamp": "2026-07-08T06:07:40.000Z",
+              "traceId": "74b6ed01-46ed-4e4d-abbe-19f942eec88c"
+             },
+             "dateAdded": "2026-07-08T06:07:40.000Z",
+             "deleted": false,
+             "description": "<p style=\"margin:0px;color:#10182899; margin: 0px;color: #10182899;\">Free men's health consultation at our Newport News center on Diligence Drive. Includes physician evaluation and same-day on-site lab work. Most visits are complete in about 60 minutes.</p>",
+             "enableConsentCheck": true,
+             "enableChargeGuests": false,
+             "enableGuests": false,
+             "enableMandatoryGuestType": false,
+             "enableOfficeHours": true,
+             "enableRecurring": false,
+             "enableSameUserAssignment": false,
+             "enableSameUserAssignmentForReschedule": false,
+             "enableStaffSelection": false,
+             "eventColor": "#039BE5",
+             "eventTitle": "Men's Wellness Centers Consultation - {{contact.name}}",
+             "eventType": "RoundRobin_OptimizeForAvailability",
+             "formId": "",
+             "formSubmitRedirectUrl": "",
+             "formSubmitThanksMessage": "Thank you for your appointment request. We will contact you shortly to confirm your request. Please call our office at {{contactMethod}} if you have any questions.",
+             "formSubmitType": "ThankYouMessage",
+             "googleInvitationEmails": true,
+             "guestType": "collect_detail",
+             "isSystemGenerated": false,
+             "isActive": true,
+             "isLivePaymentMode": false,
+             "linkedCalendars": {
+              "clio": {},
+              "drchrono": {},
+              "google": {},
+              "calendly": {}
+             },
+             "locationId": "VoeVvlByAem9pkxb7f6a",
+             "locationConfigurations": [],
+             "lookBusyConfig": {
+              "enabled": false,
+              "lookBusyPercentage": 0
+             },
+             "name": "Newport News Consults",
+             "notes": "Phone:- {{contact.phone}}\nEmail:- {{contact.email}}\n\nNeed to make a change to this event?\nReschedule:-\n{{reschedule_link}}\n\nCancel:-\n{{cancellation_link}}",
+             "openHours": {},
+             "order": 9999,
+             "pixelId": "",
+             "preBufferUnit": "mins",
+             "recurring": {
+              "count": 1,
+              "bookingOption": "skip",
+              "bookingOverlapDefaultStatus": "",
+              "interval": null,
+              "freq": "DAILY",
+              "monthDays": [],
+              "weekDays": []
+             },
+             "reschedulePreference": {
+              "expiryTimeUnit": "mins",
+              "expiryTime": null
+             },
+             "reserveService": false,
+             "shouldAssignContactToTeamMember": true,
+             "shouldSendCustomForm": false,
+             "shouldSkipAssigningContactForExisting": false,
+             "showSeatsPerSlot": true,
+             "slotBufferUnit": "mins",
+             "slotDuration": 60,
+             "slotDurationUnit": "hours",
+             "slotInterval": 30,
+             "slotIntervalUnit": "mins",
+             "stickyContact": false,
+             "stripe": {},
+             "teamMembers": [
+              {
+               "priority": 0.5,
+               "selected": true,
+               "userId": "aIb6qhsMGHNXlTEzbeEV",
+               "isZoomAdded": "false",
+               "isPrimary": true,
+               "locationConfigurations": [
+                {
+                 "location": "827 Diligence Drive, Suite 206, Newport News, VA 23606",
+                 "position": 0,
+                 "kind": "custom",
+                 "meetingId": "custom_0"
+                }
+               ],
+               "meetingLocation": "827 Diligence Drive, Suite 206, Newport News, VA 23606"
+              }
+             ],
+             "version": 2,
+             "widgetConfig": {
+              "primarySettings": {
+               "primaryColor": "#178af6ff",
+               "backgroundColor": "#ffffff",
+               "buttonText": "Schedule Meeting",
+               "showCalendarTitle": true,
+               "showCalendarDescription": true,
+               "showCalendarDetails": true
+              },
+              "default": true,
+              "pageOrder": [
+               {
+                "kind": "calendar",
+                "position": 0
+               },
+               {
+                "kind": "form",
+                "position": 1
+               }
+              ]
+             },
+             "widgetLogo": {
+              "shape": "square",
+              "url": "https://assets.cdn.filesafe.space/VoeVvlByAem9pkxb7f6a/media/6a4de967a97402b00b9873e1.webp"
+             },
+             "widgetSlug": "newport-news-consults",
+             "widgetType": "default",
+             "appointmentPerSlot": 6,
+             "appointmentPerDay": "",
+             "lastUpdatedBy": {
+              "userId": "9SxqV2FFXAGhjkSFYaYi",
+              "channel": "APP",
+              "source": "WEB_USER",
+              "timestamp": "2026-07-08T06:18:59.834Z",
+              "traceId": "76919225-c08a-483b-8410-c217893ce749"
+             },
+             "dateUpdated": "2026-07-08T06:18:59.846Z",
+             "providerId": "u4qdQczVQxf684HH4vcf",
+             "groupId": "u4qdQczVQxf684HH4vcf",
+             "label": "Newport News Consults",
+             "value": "PqOQKlcpEGkn1u5AtOmh"
+            },
+            {
+             "id": "joD3vNxwGq3G0QuqOlBM",
+             "availabilities": [],
+             "addServiceActiveStep": "Complete",
+             "allowBookingAfter": 1,
+             "allowBookingAfterUnit": "days",
+             "allowBookingForUnit": "days",
+             "allowCancellation": true,
+             "allowReschedule": true,
+             "appoinmentPerDay": "",
+             "appoinmentPerSlot": 6,
+             "autoConfirm": true,
+             "calendarCoverImage": "https://msgsndr-private.storage.googleapis.com/calendar-widget-logo/a374bc51-adfa-444b-b5d0-d82b2cca0a13.png",
+             "calendarType": "class_booking",
+             "cancellationPreference": {
+              "expiryTimeUnit": "mins",
+              "expiryTime": null
+             },
+             "codeBlock": "",
+             "consentLabel": "I confirm that I want to receive content from this company using any contact information I provide.",
+             "createdBy": {
+              "userId": "9SxqV2FFXAGhjkSFYaYi",
+              "channel": "APP",
+              "source": "WEB_USER",
+              "timestamp": "2026-07-08T06:10:24.000Z",
+              "traceId": "a4992bdd-f9fe-4058-a075-7e426b1f1119"
+             },
+             "dateAdded": "2026-07-08T06:10:24.000Z",
+             "deleted": false,
+             "description": "<p style=\"margin:0px;color:#10182899; margin: 0px;color: #10182899;\">Free men's health consultation at our Virginia Beach center on First Colonial Road. Includes physician evaluation and same-day on-site lab work. Most visits are complete in about 60 minutes.</p>",
+             "enableConsentCheck": true,
+             "enableChargeGuests": false,
+             "enableGuests": false,
+             "enableMandatoryGuestType": false,
+             "enableOfficeHours": true,
+             "enableRecurring": false,
+             "enableSameUserAssignment": false,
+             "enableSameUserAssignmentForReschedule": false,
+             "enableStaffSelection": false,
+             "eventColor": "#039BE5",
+             "eventTitle": "Men's Wellness Centers Consultation - {{contact.name}}",
+             "eventType": "RoundRobin_OptimizeForAvailability",
+             "formId": "",
+             "formSubmitRedirectUrl": "",
+             "formSubmitThanksMessage": "Thank you for your appointment request. We will contact you shortly to confirm your request. Please call our office at {{contactMethod}} if you have any questions.",
+             "formSubmitType": "ThankYouMessage",
+             "googleInvitationEmails": true,
+             "guestType": "collect_detail",
+             "isSystemGenerated": false,
+             "isActive": true,
+             "isLivePaymentMode": false,
+             "linkedCalendars": {
+              "clio": {},
+              "drchrono": {},
+              "google": {},
+              "calendly": {}
+             },
+             "locationId": "VoeVvlByAem9pkxb7f6a",
+             "locationConfigurations": [],
+             "lookBusyConfig": {
+              "enabled": false,
+              "lookBusyPercentage": 0
+             },
+             "name": "Virginia Beach Consults",
+             "notes": "Phone:- {{contact.phone}}\nEmail:- {{contact.email}}\n\nNeed to make a change to this event?\nReschedule:-\n{{reschedule_link}}\n\nCancel:-\n{{cancellation_link}}",
+             "openHours": {},
+             "order": 9999,
+             "pixelId": "",
+             "preBufferUnit": "mins",
+             "recurring": {
+              "count": 1,
+              "bookingOption": "skip",
+              "bookingOverlapDefaultStatus": "",
+              "interval": null,
+              "freq": "DAILY",
+              "monthDays": [],
+              "weekDays": []
+             },
+             "reschedulePreference": {
+              "expiryTimeUnit": "mins",
+              "expiryTime": null
+             },
+             "reserveService": false,
+             "shouldAssignContactToTeamMember": true,
+             "shouldSendCustomForm": false,
+             "shouldSkipAssigningContactForExisting": false,
+             "showSeatsPerSlot": true,
+             "slotBufferUnit": "mins",
+             "slotDuration": 60,
+             "slotDurationUnit": "hours",
+             "slotInterval": 30,
+             "slotIntervalUnit": "mins",
+             "stickyContact": false,
+             "stripe": {},
+             "teamMembers": [
+              {
+               "priority": 0.5,
+               "selected": true,
+               "userId": "aIb6qhsMGHNXlTEzbeEV",
+               "isZoomAdded": "false",
+               "isPrimary": true,
+               "locationConfigurations": [
+                {
+                 "location": "996 First Colonial Road, Virginia Beach, VA 23454",
+                 "position": 0,
+                 "kind": "custom",
+                 "meetingId": "custom_0"
+                }
+               ],
+               "meetingLocation": "996 First Colonial Road, Virginia Beach, VA 23454"
+              }
+             ],
+             "version": 2,
+             "widgetConfig": {
+              "primarySettings": {
+               "primaryColor": "#178af6ff",
+               "backgroundColor": "#ffffff",
+               "buttonText": "Schedule Meeting",
+               "showCalendarTitle": true,
+               "showCalendarDescription": true,
+               "showCalendarDetails": true
+              },
+              "default": true,
+              "pageOrder": [
+               {
+                "kind": "calendar",
+                "position": 0
+               },
+               {
+                "kind": "form",
+                "position": 1
+               }
+              ]
+             },
+             "widgetLogo": {
+              "shape": "square",
+              "url": "https://assets.cdn.filesafe.space/VoeVvlByAem9pkxb7f6a/media/6a4de967a97402b00b9873e1.webp"
+             },
+             "widgetSlug": "virginia-beach-consults",
+             "widgetType": "default",
+             "appointmentPerSlot": 6,
+             "appointmentPerDay": "",
+             "lastUpdatedBy": {
+              "userId": "9SxqV2FFXAGhjkSFYaYi",
+              "channel": "APP",
+              "source": "WEB_USER",
+              "timestamp": "2026-07-08T06:18:59.836Z",
+              "traceId": "76919225-c08a-483b-8410-c217893ce749"
+             },
+             "dateUpdated": "2026-07-08T06:18:59.850Z",
+             "providerId": "u4qdQczVQxf684HH4vcf",
+             "groupId": "u4qdQczVQxf684HH4vcf",
+             "label": "Virginia Beach Consults",
+             "value": "joD3vNxwGq3G0QuqOlBM"
+            },
+            {
+             "id": "jyYP6WhZqOl1HnbOcOfs",
+             "availabilities": [],
+             "addServiceActiveStep": "Complete",
+             "allowBookingAfter": 1,
+             "allowBookingAfterUnit": "days",
+             "allowBookingForUnit": "days",
+             "allowCancellation": true,
+             "allowReschedule": true,
+             "appoinmentPerDay": "",
+             "appoinmentPerSlot": 6,
+             "autoConfirm": true,
+             "calendarCoverImage": "https://msgsndr-private.storage.googleapis.com/calendar-widget-logo/a374bc51-adfa-444b-b5d0-d82b2cca0a13.png",
+             "calendarType": "class_booking",
+             "cancellationPreference": {
+              "expiryTimeUnit": "mins",
+              "expiryTime": null
+             },
+             "codeBlock": "",
+             "consentLabel": "I confirm that I want to receive content from this company using any contact information I provide.",
+             "createdBy": {
+              "userId": "9SxqV2FFXAGhjkSFYaYi",
+              "channel": "APP",
+              "source": "WEB_USER",
+              "timestamp": "2026-07-08T06:07:08.000Z",
+              "traceId": "e256ca64-8a28-460b-a47a-1b8af67bbe55"
+             },
+             "dateAdded": "2026-07-08T06:07:08.000Z",
+             "deleted": false,
+             "description": "<p style=\"margin:0px;color:#10182899\">Free men's health consultation at our Richmond center in Glen Allen. Includes physician evaluation and same-day on-site lab work. Most visits are complete in about 60 minutes.</p>",
+             "enableConsentCheck": true,
+             "enableChargeGuests": false,
+             "enableGuests": false,
+             "enableMandatoryGuestType": false,
+             "enableOfficeHours": true,
+             "enableRecurring": false,
+             "enableSameUserAssignment": false,
+             "enableSameUserAssignmentForReschedule": false,
+             "enableStaffSelection": false,
+             "eventColor": "#039BE5",
+             "eventTitle": "Men's Wellness Centers Consultation - {{contact.name}}",
+             "eventType": "RoundRobin_OptimizeForAvailability",
+             "formId": "",
+             "formSubmitRedirectUrl": "",
+             "formSubmitThanksMessage": "Thank you for your appointment request. We will contact you shortly to confirm your request. Please call our office at {{contactMethod}} if you have any questions.",
+             "formSubmitType": "ThankYouMessage",
+             "googleInvitationEmails": true,
+             "guestType": "collect_detail",
+             "isSystemGenerated": false,
+             "isActive": true,
+             "isLivePaymentMode": false,
+             "linkedCalendars": {
+              "clio": {},
+              "drchrono": {},
+              "google": {},
+              "calendly": {}
+             },
+             "locationId": "VoeVvlByAem9pkxb7f6a",
+             "locationConfigurations": [],
+             "lookBusyConfig": {
+              "enabled": false,
+              "lookBusyPercentage": 0
+             },
+             "name": "Richmond Consults",
+             "notes": "Phone:- {{contact.phone}}\nEmail:- {{contact.email}}\n\nNeed to make a change to this event?\nReschedule:-\n{{reschedule_link}}\n\nCancel:-\n{{cancellation_link}}",
+             "openHours": {},
+             "order": 9999,
+             "pixelId": "",
+             "preBufferUnit": "mins",
+             "recurring": {
+              "count": 1,
+              "bookingOption": "skip",
+              "bookingOverlapDefaultStatus": "",
+              "interval": null,
+              "freq": "DAILY",
+              "monthDays": [],
+              "weekDays": []
+             },
+             "reschedulePreference": {
+              "expiryTimeUnit": "mins",
+              "expiryTime": null
+             },
+             "reserveService": false,
+             "shouldAssignContactToTeamMember": true,
+             "shouldSendCustomForm": false,
+             "shouldSkipAssigningContactForExisting": false,
+             "showSeatsPerSlot": true,
+             "slotBufferUnit": "mins",
+             "slotDuration": 60,
+             "slotDurationUnit": "hours",
+             "slotInterval": 30,
+             "slotIntervalUnit": "mins",
+             "stickyContact": false,
+             "stripe": {},
+             "teamMembers": [
+              {
+               "priority": 0.5,
+               "selected": true,
+               "userId": "aIb6qhsMGHNXlTEzbeEV",
+               "isZoomAdded": "false",
+               "isPrimary": true,
+               "locationConfigurations": [
+                {
+                 "location": "4050 Innslake Drive, Suite 360, Glen Allen, VA 23060",
+                 "position": 0,
+                 "kind": "custom",
+                 "meetingId": "custom_0"
+                }
+               ],
+               "meetingLocation": "4050 Innslake Drive, Suite 360, Glen Allen, VA 23060"
+              }
+             ],
+             "version": 2,
+             "widgetConfig": {
+              "primarySettings": {
+               "primaryColor": "#178af6ff",
+               "backgroundColor": "#ffffff",
+               "buttonText": "Schedule Meeting",
+               "showCalendarTitle": true,
+               "showCalendarDescription": true,
+               "showCalendarDetails": true
+              },
+              "default": true,
+              "pageOrder": [
+               {
+                "kind": "calendar",
+                "position": 0
+               },
+               {
+                "kind": "form",
+                "position": 1
+               }
+              ]
+             },
+             "widgetLogo": {
+              "shape": "square",
+              "url": ""
+             },
+             "widgetSlug": "richmond-consults",
+             "widgetType": "default",
+             "appointmentPerSlot": 6,
+             "appointmentPerDay": "",
+             "lastUpdatedBy": {
+              "userId": "9SxqV2FFXAGhjkSFYaYi",
+              "channel": "APP",
+              "source": "WEB_USER",
+              "timestamp": "2026-07-08T06:18:59.839Z",
+              "traceId": "76919225-c08a-483b-8410-c217893ce749"
+             },
+             "dateUpdated": "2026-07-08T06:18:59.850Z",
+             "providerId": "u4qdQczVQxf684HH4vcf",
+             "groupId": "u4qdQczVQxf684HH4vcf",
+             "label": "Richmond Consults",
+             "value": "jyYP6WhZqOl1HnbOcOfs"
+            }
+           ],
+           "isLoading": false
+          },
+          "id": "f692393d-0791-4161-8715-7a8c26047862"
+         }
+        ],
+        "op": "or"
+       }
+      ],
+      "type": "workflow_goal",
+      "action": "exit"
+     },
+     "name": "Goal – Booked an appointment",
+     "type": "workflow_goal",
+     "next": "4706cd6f-f0e3-41e2-99e6-fdecebec2492",
+     "parentKey": "942ad0ed-1932-4abc-96f2-f899ee15d80f"
+    },
+    {
+     "id": "4706cd6f-f0e3-41e2-99e6-fdecebec2492",
+     "parent": "2b6c653b-7871-4b01-afc2-54712e79f440",
+     "order": 7,
+     "attributes": {
+      "tags": [
+       "at_risk"
+      ],
+      "type": "remove_contact_tag"
+     },
+     "name": "Remove Tag – at_risk",
+     "type": "remove_contact_tag",
+     "parentKey": "95f53599-fd07-4b63-8963-457207ef0bf4"
+    }
+   ]
+  }
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ },
+ "triggers": [
+  {
+   "id": "bhfu3AsnCsQhul6aRWCB",
+   "date_added": "2026-07-18T20:05:20.796Z",
+   "date_updated": "2026-07-18T20:05:20.796Z",
+   "deleted": false,
+   "belongs_to": "workflow",
+   "location_id": "YTi6qs4zhiW6d4a75A9f",
+   "origin_id": "yYcA65EdMkcRyp0hnzfX",
+   "active": false,
+   "workflow_id": "ca60db7a-2070-46c2-88ad-7ad993867368",
+   "masterType": "highlevel",
+   "name": "At-Risk Tag Added (Virginia Beach)",
+   "type": "contact_tag",
+   "conditions": [
+    {
+     "operator": "index-of-true",
+     "field": "tagsAdded",
+     "value": "at_risk",
+     "title": "Tag Added",
+     "type": "select",
+     "id": "tag-added"
+    },
+    {
+     "operator": "==",
+     "field": "contact.UyLjnNDfF6KvhHaUO8Dn",
+     "value": "Virginia Beach",
+     "title": "Location",
+     "type": "select",
+     "id": "UyLjnNDfF6KvhHaUO8Dn"
+    }
+   ],
+   "actions": [
+    {
+     "workflow_id": "ca60db7a-2070-46c2-88ad-7ad993867368",
+     "type": "add_to_workflow"
+    }
+   ],
+   "schedule_config": {}
+  }
+ ],
+ "dependentAssets": {}
+}

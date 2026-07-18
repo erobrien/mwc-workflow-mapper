@@ -1,0 +1,288 @@
+{
+ "workflowData": {
+  "_id": "f8f61c58-1309-4bb5-96a2-966db2f8e270",
+  "locationId": "YTi6qs4zhiW6d4a75A9f",
+  "name": "Newport News Lead Notification",
+  "status": "draft",
+  "version": 3,
+  "allowMultiple": true,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/YTi6qs4zhiW6d4a75A9f/workflows/f8f61c58-1309-4bb5-96a2-966db2f8e270/3",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "originId": "0435ec25-fba1-42af-aebf-14ff086b5af8",
+  "permission": 380,
+  "type": "workflow",
+  "meta": null,
+  "updatedBy": "snapshot",
+  "createdAt": "2026-07-18T20:05:08.221Z",
+  "updatedAt": "2026-07-18T21:25:45.789Z",
+  "deleted": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "snapshot",
+  "__v": 0,
+  "allowMultipleOpportunity": false,
+  "dataVersion": 7,
+  "eventStartDate": null,
+  "parentId": "e2de4d34-1c75-46d7-89aa-b5df6e6394db",
+  "senderAddress": null,
+  "window": {
+   "condition": "when",
+   "start": "08:00",
+   "end": "17:00",
+   "days": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
+  },
+  "workflowNote": {
+   "content": "",
+   "createdBy": "snapshot",
+   "createdByName": "snapshot",
+   "createdAt": "2026-07-18T20:05:22.192Z",
+   "updatedBy": "snapshot",
+   "updatedByName": "snapshot",
+   "updatedAt": "2026-07-18T20:05:22.192Z"
+  },
+  "id": "f8f61c58-1309-4bb5-96a2-966db2f8e270",
+  "workflowData": {
+   "templates": [
+    {
+     "type": "internal_create_opportunity",
+     "id": "103a6bdc-99f2-4887-a106-a073f7b51948",
+     "name": "Create Opportunity in Newport News Pipeline",
+     "next": "c9862c49-4f23-4568-aefe-46ead9fd8632",
+     "attributes": {
+      "pipelineId": "DJ2u7XYu4jKbLekYqSCp",
+      "__customInputFields__": [
+       {
+        "__customInputs__": {},
+        "dataType": "SINGLE_OPTIONS",
+        "filterField": "pipelineStageId",
+        "value": "9ba0834a-df75-4244-bfef-ebad09b37ea3",
+        "valueFieldType": "select"
+       }
+      ],
+      "type": "internal_create_opportunity",
+      "__customInputs__": {}
+     },
+     "workflowsActionType": "INTERNAL",
+     "order": 0
+    },
+    {
+     "type": "internal_update_opportunity",
+     "id": "8d74162d-cd38-4038-a755-d49b3a6e49ef",
+     "name": "Set Opportunity Location Field to Newport News",
+     "next": "f13f8713-35e6-4e03-8b1a-191826789f92",
+     "attributes": {
+      "allowBackward": false,
+      "__customInputFields__": [
+       {
+        "__customInputs__": {},
+        "dataType": "SINGLE_OPTIONS",
+        "filterField": "custom_fields.1MmZkcm9vsp0yxJvyA4S",
+        "value": "Newport News",
+        "valueFieldType": "select"
+       }
+      ],
+      "type": "internal_update_opportunity",
+      "__customInputs__": {}
+     },
+     "parentKey": "103a6bdc-99f2-4887-a106-a073f7b51948",
+     "workflowsActionType": "INTERNAL",
+     "order": 1
+    },
+    {
+     "type": "add_contact_tag",
+     "id": "f13f8713-35e6-4e03-8b1a-191826789f92",
+     "name": "Tag Contact as Newport News Lead",
+     "next": "062cf421-8ec1-46be-ae81-076ea56e9b26",
+     "attributes": {
+      "tags": [
+       "npn-lead"
+      ]
+     },
+     "parentKey": "8d74162d-cd38-4038-a755-d49b3a6e49ef",
+     "order": 2
+    },
+    {
+     "type": "sms",
+     "id": "062cf421-8ec1-46be-ae81-076ea56e9b26",
+     "name": "Send Newport News Lead SMS",
+     "next": "c2da7725-5df9-4186-804d-df79f3fcaeeb",
+     "attributes": {
+      "body": "Hi {{contact.first_name}}, thanks for reaching out to Men's Wellness Centers - Newport News. Book your consult here: {{custom_values.newport_news__booking_link}}. Reply STOP to opt out.",
+      "assignedOwners": [
+       "contact_owner"
+      ],
+      "alsoNotifyContactFollowers": false,
+      "alsoNotifyOpportunityFollowers": false
+     },
+     "parentKey": "f13f8713-35e6-4e03-8b1a-191826789f92",
+     "order": 3
+    },
+    {
+     "type": "internal_notification",
+     "id": "c2da7725-5df9-4186-804d-df79f3fcaeeb",
+     "name": "Notify Team of New Newport News Lead",
+     "attributes": {
+      "type": "notification",
+      "notification": {
+       "title": "New Newport News Lead",
+       "body": "A new lead has been captured for Newport News.\nCheck the contact and opportunity details.",
+       "redirectPage": "contact",
+       "userType": "all",
+       "assignedOwners": null,
+       "alsoNotifyContactFollowers": false,
+       "alsoNotifyOpportunityFollowers": false,
+       "type": "send_notification"
+      }
+     },
+     "parentKey": "062cf421-8ec1-46be-ae81-076ea56e9b26",
+     "order": 4
+    },
+    {
+     "id": "c9862c49-4f23-4568-aefe-46ead9fd8632",
+     "order": 0,
+     "name": "Opp: stamp attribution at create (frozen)",
+     "type": "internal_update_opportunity",
+     "workflowsActionType": "INTERNAL",
+     "attributes": {
+      "allowBackward": true,
+      "type": "internal_update_opportunity",
+      "__customInputs__": {},
+      "__customInputFields__": [
+       {
+        "__customInputs__": {},
+        "dataType": "TEXT",
+        "filterField": "EbNCM03ezhFQSCFs7Is8",
+        "value": "{{contact.attributionSource.sessionSource}}",
+        "valueFieldType": "input"
+       },
+       {
+        "__customInputs__": {},
+        "dataType": "TEXT",
+        "filterField": "7oahfAuuSaBq76JfKoiJ",
+        "value": "{{contact.attributionSource.utmSource}}",
+        "valueFieldType": "input"
+       },
+       {
+        "__customInputs__": {},
+        "dataType": "TEXT",
+        "filterField": "dgjKeITqHaxBvPUA9gJY",
+        "value": "{{contact.attributionSource.utmMedium}}",
+        "valueFieldType": "input"
+       },
+       {
+        "__customInputs__": {},
+        "dataType": "TEXT",
+        "filterField": "C0Y1d3vIinecWMZCDh3j",
+        "value": "{{contact.attributionSource.campaign}}",
+        "valueFieldType": "input"
+       },
+       {
+        "__customInputs__": {},
+        "dataType": "TEXT",
+        "filterField": "iGeHeJeXmHEn43v3Y9K9",
+        "value": "{{contact.attributionSource.gclid}}",
+        "valueFieldType": "input"
+       },
+       {
+        "__customInputs__": {},
+        "dataType": "TEXT",
+        "filterField": "KseXPBZO6P5Abn4uQNiy",
+        "value": "{{contact.attributionSource.fbclid}}",
+        "valueFieldType": "input"
+       }
+      ]
+     },
+     "next": "8d74162d-cd38-4038-a755-d49b3a6e49ef"
+    }
+   ]
+  }
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ },
+ "triggers": [
+  {
+   "id": "hEQcFq4nBZAzKBc906TS",
+   "date_added": "2026-07-18T20:05:22.085Z",
+   "date_updated": "2026-07-18T20:05:22.085Z",
+   "deleted": false,
+   "belongs_to": "workflow",
+   "location_id": "YTi6qs4zhiW6d4a75A9f",
+   "origin_id": "DIWuOjYaD9zY80N5XQXN",
+   "active": false,
+   "workflow_id": "f8f61c58-1309-4bb5-96a2-966db2f8e270",
+   "masterType": "highlevel",
+   "name": "Form Submitted",
+   "type": "form_submission",
+   "conditions": [
+    {
+     "operator": "is-any-of",
+     "field": "form.id",
+     "value": [
+      "gnPI3Ut7aHoBzVp8CsvH"
+     ],
+     "title": "Form is",
+     "type": "string"
+    }
+   ],
+   "actions": [
+    {
+     "workflow_id": "f8f61c58-1309-4bb5-96a2-966db2f8e270",
+     "type": "add_to_workflow"
+    }
+   ],
+   "schedule_config": {}
+  },
+  {
+   "id": "p21ZlFdhNND3ICzfZ7r0",
+   "date_added": "2026-07-18T20:05:22.078Z",
+   "date_updated": "2026-07-18T20:05:22.078Z",
+   "deleted": false,
+   "belongs_to": "workflow",
+   "location_id": "YTi6qs4zhiW6d4a75A9f",
+   "origin_id": "u3yRRcQbiW3BqjMeaPe7",
+   "active": false,
+   "workflow_id": "f8f61c58-1309-4bb5-96a2-966db2f8e270",
+   "masterType": "highlevel",
+   "name": "Form",
+   "type": "form_submission",
+   "conditions": [
+    {
+     "operator": "is-any-of",
+     "field": "form.id",
+     "value": [
+      "In6rjFseWXFcBNnLmlJn"
+     ],
+     "title": "Form is",
+     "type": "string"
+    },
+    {
+     "operator": "==",
+     "field": "contact.354dOvYytYTFRhX4jCIp",
+     "value": "Newport News, VA",
+     "title": "Preferred Location",
+     "type": "select",
+     "id": "354dOvYytYTFRhX4jCIp"
+    }
+   ],
+   "actions": [
+    {
+     "workflow_id": "f8f61c58-1309-4bb5-96a2-966db2f8e270",
+     "type": "add_to_workflow"
+    }
+   ],
+   "schedule_config": {}
+  }
+ ],
+ "dependentAssets": {}
+}

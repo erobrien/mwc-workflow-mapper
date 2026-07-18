@@ -1,0 +1,84 @@
+{
+ "templates": [
+  {
+   "id": "c313592b-b285-47be-bf48-3f956db9d24c",
+   "type": "wait",
+   "name": "Wait 1 min race buffer",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "minutes",
+     "value": 1,
+     "when": "after"
+    },
+    "name": "Wait 1 min race buffer",
+    "cat": "",
+    "timePeriodInputMode": "standard",
+    "unitInputMode": "standard",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "order": 0,
+   "cat": "",
+   "next": "6256e249-9818-46c8-8eb5-a888196ca5f3"
+  },
+  {
+   "type": "internal_update_opportunity",
+   "id": "6256e249-9818-46c8-8eb5-a888196ca5f3",
+   "name": "Update Opportunity Attribution Fields",
+   "next": "4dd30a0f-33a5-4cc3-8b8b-5d2fd71263ce",
+   "attributes": {
+    "allowBackward": false,
+    "__customInputFields__": [
+     {
+      "__customInputs__": {},
+      "dataType": "TEXT",
+      "filterField": "custom_fields.7oahfAuuSaBq76JfKoiJ",
+      "value": "{{contact.original_source}}",
+      "valueFieldType": "string"
+     },
+     {
+      "__customInputs__": {},
+      "dataType": "SINGLE_OPTIONS",
+      "filterField": "custom_fields.1MmZkcm9vsp0yxJvyA4S",
+      "value": "Newport News",
+      "valueFieldType": "select"
+     },
+     {
+      "__customInputs__": {},
+      "dataType": "TEXT",
+      "filterField": "custom_fields.iGeHeJeXmHEn43v3Y9K9",
+      "value": "{{opportunity.gclid}}",
+      "valueFieldType": "string"
+     },
+     {
+      "__customInputs__": {},
+      "dataType": "TEXT",
+      "filterField": "custom_fields.KseXPBZO6P5Abn4uQNiy",
+      "value": "{{opportunity.fbclid}}",
+      "valueFieldType": "string"
+     }
+    ],
+    "type": "internal_update_opportunity",
+    "__customInputs__": {}
+   },
+   "workflowsActionType": "INTERNAL",
+   "order": 1,
+   "parentKey": "c313592b-b285-47be-bf48-3f956db9d24c"
+  },
+  {
+   "type": "add_contact_tag",
+   "id": "4dd30a0f-33a5-4cc3-8b8b-5d2fd71263ce",
+   "name": "Add Attribution Stamped Tag",
+   "attributes": {
+    "tags": [
+     "attribution_stamped"
+    ]
+   },
+   "parentKey": "6256e249-9818-46c8-8eb5-a888196ca5f3",
+   "order": 2
+  }
+ ]
+}

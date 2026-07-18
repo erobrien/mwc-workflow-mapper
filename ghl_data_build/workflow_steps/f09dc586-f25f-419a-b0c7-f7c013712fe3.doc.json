@@ -1,0 +1,83 @@
+{
+ "workflowData": {
+  "_id": "f09dc586-f25f-419a-b0c7-f7c013712fe3",
+  "locationId": "YTi6qs4zhiW6d4a75A9f",
+  "version": 6,
+  "allowMultiple": false,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/YTi6qs4zhiW6d4a75A9f/workflows/f09dc586-f25f-419a-b0c7-f7c013712fe3/6",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "originId": "6b662a8a-fe58-40d3-ae3a-d88b7978415f",
+  "permission": 380,
+  "type": "workflow",
+  "createdAt": "2026-07-18T20:04:58.800Z",
+  "updatedAt": "2026-07-18T21:27:00.646Z",
+  "deleted": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "snapshot",
+  "__v": 0,
+  "allowMultipleOpportunity": false,
+  "dataVersion": 7,
+  "eventStartDate": null,
+  "parentId": "767e289f-f1e4-4a2a-87a4-960700f242a8",
+  "senderAddress": null,
+  "window": null,
+  "workflowNote": null,
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "name": "5.1 — Richmond – PCC Disposition Router",
+  "id": "f09dc586-f25f-419a-b0c7-f7c013712fe3",
+  "workflowData": {},
+  "status": "draft"
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ },
+ "triggers": [
+  {
+   "id": "gASiB1LhVWMgA6tVOBKE",
+   "date_added": "2026-07-18T20:05:20.688Z",
+   "deleted": false,
+   "belongs_to": "workflow",
+   "location_id": "YTi6qs4zhiW6d4a75A9f",
+   "origin_id": "O5ztFUMD9u0ipNMtZOu2",
+   "active": false,
+   "workflow_id": "f09dc586-f25f-419a-b0c7-f7c013712fe3",
+   "masterType": "highlevel",
+   "name": "Form Submitted [PCC-FORM] with Newport News Location",
+   "type": "form_submission",
+   "conditions": [
+    {
+     "operator": "is-any-of",
+     "field": "form.id",
+     "value": [
+      "AWMuRHhaxuS5b0wiIMna"
+     ],
+     "title": "Form is",
+     "type": "string",
+     "id": "ff84fe8d-9164-4dd1-b1e9-d3ebc8fb495d"
+    },
+    {
+     "operator": "==",
+     "field": "contact.UyLjnNDfF6KvhHaUO8Dn",
+     "value": "Richmond",
+     "title": "Location",
+     "type": "select",
+     "id": "UyLjnNDfF6KvhHaUO8Dn"
+    }
+   ],
+   "actions": [
+    {
+     "workflow_id": "f09dc586-f25f-419a-b0c7-f7c013712fe3",
+     "type": "add_to_workflow"
+    }
+   ],
+   "schedule_config": {},
+   "date_updated": "2026-07-18T21:18:18.075Z"
+  }
+ ],
+ "dependentAssets": {}
+}

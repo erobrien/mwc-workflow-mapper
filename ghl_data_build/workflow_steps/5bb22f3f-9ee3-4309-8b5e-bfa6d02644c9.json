@@ -1,0 +1,305 @@
+{
+ "templates": [
+  {
+   "id": "f96df3ab-b394-4acb-8be2-36836f1510b1",
+   "type": "find_opportunity",
+   "name": "Find opportunity",
+   "attributes": {
+    "sorting": "latest",
+    "type": "find_opportunity",
+    "__customInputFields__": [
+     {
+      "__customInputs__": {},
+      "filterField": "pipeline_id",
+      "value": "eq",
+      "secondValue": "DJ2u7XYu4jKbLekYqSCp"
+     },
+     {
+      "__customInputs__": {},
+      "filterField": "status",
+      "value": "eq",
+      "secondValue": "open"
+     }
+    ],
+    "__customInputs__": {},
+    "cat": "multi-path",
+    "convertToMultipath": true,
+    "transitions": [
+     {
+      "id": "000f8f1c-eba9-4473-b8a5-74a611ae284b",
+      "name": "Opportunity Found",
+      "fields": [],
+      "meta": {
+       "__branchKey__": "predefined_Opportunity Found"
+      },
+      "conditionType": "pre-defined"
+     },
+     {
+      "id": "d79c26ef-e000-4bab-bd20-e569194ccaf3",
+      "name": "Opportunity Not Found",
+      "fields": [],
+      "meta": {
+       "__branchKey__": "predefined_Opportunity Not Found"
+      },
+      "conditionType": "pre-defined"
+     }
+    ],
+    "__name__": "Find opportunity"
+   },
+   "order": 0,
+   "cat": "multi-path",
+   "workflowsActionType": "INTERNAL",
+   "next": [
+    "000f8f1c-eba9-4473-b8a5-74a611ae284b",
+    "d79c26ef-e000-4bab-bd20-e569194ccaf3"
+   ]
+  },
+  {
+   "id": "000f8f1c-eba9-4473-b8a5-74a611ae284b",
+   "parentKey": "f96df3ab-b394-4acb-8be2-36836f1510b1",
+   "parent": "f96df3ab-b394-4acb-8be2-36836f1510b1",
+   "type": "transition",
+   "name": "Opportunity Found",
+   "attributes": {},
+   "order": 1,
+   "cat": "transition",
+   "next": "806ffb2e-0d7b-4e99-bcb2-6bfc5f0deeab"
+  },
+  {
+   "type": "internal_update_opportunity",
+   "id": "806ffb2e-0d7b-4e99-bcb2-6bfc5f0deeab",
+   "name": "Move Opportunity to Booked Stage",
+   "next": "eabba8ad-51be-49f5-b17a-361116c6b1e5",
+   "attributes": {
+    "allowBackward": false,
+    "type": "internal_update_opportunity",
+    "__customInputFields__": [
+     {
+      "__customInputs__": {},
+      "dataType": "SINGLE_OPTIONS",
+      "filterField": "pipelineId",
+      "value": "DJ2u7XYu4jKbLekYqSCp",
+      "valueFieldType": "select"
+     },
+     {
+      "__customInputs__": {},
+      "dataType": "SINGLE_OPTIONS",
+      "filterField": "pipelineStageId",
+      "value": "2de27c23-7b84-4707-a96e-5160cebcbde5",
+      "valueFieldType": "select"
+     }
+    ],
+    "__customInputs__": {}
+   },
+   "workflowsActionType": "INTERNAL",
+   "order": 0,
+   "parentKey": "000f8f1c-eba9-4473-b8a5-74a611ae284b",
+   "parent": "000f8f1c-eba9-4473-b8a5-74a611ae284b"
+  },
+  {
+   "type": "sms",
+   "id": "eabba8ad-51be-49f5-b17a-361116c6b1e5",
+   "name": "Send Booking Confirmation SMS",
+   "next": "07c6e2a0-c6c6-49d9-8303-b6f7a0ca5789",
+   "attributes": {
+    "body": "You're booked, {{contact.first_name}}! \n\nYour Men's Wellness Centers - Newport News visit is {{appointment.only_start_date}} at {{appointment.only_start_time}}, {{custom_values.npn_address}}. Need to change your time? Reschedule here: {{appointment.reschedule_link}}. Questions? Call {{custom_values.newport_news__phone}}. Reply STOP to opt out.",
+    "assignedOwners": [
+     "contact_owner"
+    ],
+    "alsoNotifyContactFollowers": false,
+    "alsoNotifyOpportunityFollowers": false,
+    "attachments": []
+   },
+   "parentKey": "806ffb2e-0d7b-4e99-bcb2-6bfc5f0deeab",
+   "order": 1,
+   "parent": "000f8f1c-eba9-4473-b8a5-74a611ae284b"
+  },
+  {
+   "type": "internal_update_opportunity",
+   "id": "07c6e2a0-c6c6-49d9-8303-b6f7a0ca5789",
+   "name": "Move Opportunity to Confirmed Stage",
+   "next": "6413a12a-1954-4a71-8da8-b815b70d0b29",
+   "attributes": {
+    "allowBackward": true,
+    "type": "internal_update_opportunity",
+    "__customInputFields__": [
+     {
+      "__customInputs__": {},
+      "dataType": "SINGLE_OPTIONS",
+      "filterField": "pipelineId",
+      "value": "DJ2u7XYu4jKbLekYqSCp",
+      "valueFieldType": "select"
+     },
+     {
+      "__customInputs__": {},
+      "dataType": "SINGLE_OPTIONS",
+      "filterField": "pipelineStageId",
+      "value": "3734d2e0-4bc8-42cc-b9e7-1103db4f99b5",
+      "valueFieldType": "select"
+     }
+    ],
+    "__customInputs__": {}
+   },
+   "parentKey": "eabba8ad-51be-49f5-b17a-361116c6b1e5",
+   "workflowsActionType": "INTERNAL",
+   "order": 2,
+   "parent": "000f8f1c-eba9-4473-b8a5-74a611ae284b"
+  },
+  {
+   "id": "6413a12a-1954-4a71-8da8-b815b70d0b29",
+   "parentKey": "07c6e2a0-c6c6-49d9-8303-b6f7a0ca5789",
+   "type": "wait",
+   "name": "Wait",
+   "attributes": {
+    "type": "appointment",
+    "name": "Wait",
+    "cat": "",
+    "appointmentStartAfter": {
+     "when": "before",
+     "type": "minutes",
+     "value": 1440,
+     "distributed": {
+      "months": 0,
+      "days": 1,
+      "hours": 0,
+      "minutes": 0
+     }
+    },
+    "appointmentCondition": "skip",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "order": 3,
+   "cat": "",
+   "next": "6aa6096a-7138-489a-a56a-858b2555f7bb",
+   "parent": "000f8f1c-eba9-4473-b8a5-74a611ae284b"
+  },
+  {
+   "type": "sms",
+   "id": "6aa6096a-7138-489a-a56a-858b2555f7bb",
+   "name": "1 Day Before Appointment SMS Reminder",
+   "next": "d5d55983-d3df-4543-a4c1-da818af1cfd0",
+   "attributes": {
+    "body": "Reminder, {{contact.first_name}}: your Men's Wellness Centers - Newport News visit is tomorrow at {{appointment.only_start_time}}, {{custom_values.npn_address}}. Can't make it? Reschedule here: {{appointment.reschedule_link}}. Reply STOP to opt out.",
+    "assignedOwners": [
+     "contact_owner"
+    ],
+    "alsoNotifyContactFollowers": false,
+    "alsoNotifyOpportunityFollowers": false,
+    "attachments": []
+   },
+   "parentKey": "6413a12a-1954-4a71-8da8-b815b70d0b29",
+   "order": 4,
+   "parent": "000f8f1c-eba9-4473-b8a5-74a611ae284b"
+  },
+  {
+   "id": "d5d55983-d3df-4543-a4c1-da818af1cfd0",
+   "parentKey": "6aa6096a-7138-489a-a56a-858b2555f7bb",
+   "type": "wait",
+   "name": "Wait",
+   "attributes": {
+    "type": "appointment",
+    "name": "Wait",
+    "cat": "",
+    "appointmentStartAfter": {
+     "when": "before",
+     "type": "minutes",
+     "value": 240,
+     "distributed": {
+      "months": 0,
+      "days": 0,
+      "hours": 4,
+      "minutes": 0
+     }
+    },
+    "appointmentCondition": "skip",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "order": 5,
+   "cat": "",
+   "next": "3832c986-1744-44c6-ad17-60cdb533d8ad",
+   "parent": "000f8f1c-eba9-4473-b8a5-74a611ae284b"
+  },
+  {
+   "type": "sms",
+   "id": "3832c986-1744-44c6-ad17-60cdb533d8ad",
+   "name": "Morning of Appointment SMS Reminder",
+   "next": "83c9a7e6-519f-40d5-9a79-1bf616eca8c9",
+   "attributes": {
+    "body": "See you today, {{contact.first_name}}! Your visit is at {{appointment.only_start_time}}, {{custom_values.npn_address}}. Need to move it? {{appointment.reschedule_link}}. Questions? Call {{custom_values.newport_news__phone}}. Reply STOP to opt out.",
+    "assignedOwners": [
+     "contact_owner"
+    ],
+    "alsoNotifyContactFollowers": false,
+    "alsoNotifyOpportunityFollowers": false,
+    "attachments": []
+   },
+   "parentKey": "d5d55983-d3df-4543-a4c1-da818af1cfd0",
+   "order": 6,
+   "parent": "000f8f1c-eba9-4473-b8a5-74a611ae284b"
+  },
+  {
+   "id": "83c9a7e6-519f-40d5-9a79-1bf616eca8c9",
+   "parentKey": "3832c986-1744-44c6-ad17-60cdb533d8ad",
+   "type": "wait",
+   "name": "Wait",
+   "attributes": {
+    "type": "appointment",
+    "name": "Wait",
+    "cat": "",
+    "appointmentStartAfter": {
+     "when": "before",
+     "type": "minutes",
+     "value": 120,
+     "distributed": {
+      "months": 0,
+      "days": 0,
+      "hours": 2,
+      "minutes": 0
+     }
+    },
+    "appointmentCondition": "skip",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "order": 7,
+   "cat": "",
+   "next": "7d5fcf1b-234f-459c-8c01-b3d9dfc78fd2",
+   "parent": "000f8f1c-eba9-4473-b8a5-74a611ae284b"
+  },
+  {
+   "type": "sms",
+   "id": "7d5fcf1b-234f-459c-8c01-b3d9dfc78fd2",
+   "name": "2 Hours Before Appointment 'See You Soon' SMS",
+   "attributes": {
+    "body": "Your Men's Wellness Centers visit is in about 2 hours ({{appointment.only_start_time}}), {{custom_values.npn_address}}. Running late or need to move it? {{appointment.reschedule_link}}. Reply STOP to opt out.",
+    "assignedOwners": [
+     "contact_owner"
+    ],
+    "alsoNotifyContactFollowers": false,
+    "alsoNotifyOpportunityFollowers": false,
+    "attachments": []
+   },
+   "parentKey": "83c9a7e6-519f-40d5-9a79-1bf616eca8c9",
+   "order": 8,
+   "parent": "000f8f1c-eba9-4473-b8a5-74a611ae284b"
+  },
+  {
+   "id": "d79c26ef-e000-4bab-bd20-e569194ccaf3",
+   "parentKey": "f96df3ab-b394-4acb-8be2-36836f1510b1",
+   "parent": "f96df3ab-b394-4acb-8be2-36836f1510b1",
+   "type": "transition",
+   "name": "Opportunity Not Found",
+   "attributes": {},
+   "order": 1,
+   "cat": "transition"
+  }
+ ]
+}

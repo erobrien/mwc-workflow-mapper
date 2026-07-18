@@ -1,0 +1,183 @@
+{
+ "workflowData": {
+  "_id": "20c693b4-d0d3-40af-869b-d6179ea44f84",
+  "locationId": "YTi6qs4zhiW6d4a75A9f",
+  "name": "Global Consent Sync",
+  "status": "draft",
+  "version": 2,
+  "allowMultiple": false,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/YTi6qs4zhiW6d4a75A9f/workflows/20c693b4-d0d3-40af-869b-d6179ea44f84/2",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "originId": "3ece0c5b-7065-4393-917e-a1bfa5bdf741",
+  "permission": 380,
+  "type": "workflow",
+  "meta": null,
+  "updatedBy": "snapshot",
+  "createdAt": "2026-07-18T20:05:06.841Z",
+  "updatedAt": "2026-07-18T20:05:22.596Z",
+  "deleted": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "snapshot",
+  "__v": 0,
+  "allowMultipleOpportunity": false,
+  "dataVersion": 7,
+  "eventStartDate": null,
+  "parentId": "7c7dbaa1-3432-4326-8721-0329c10b14f1",
+  "senderAddress": null,
+  "window": {
+   "condition": "when",
+   "start": "08:00",
+   "end": "17:00",
+   "days": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
+  },
+  "workflowNote": {
+   "content": "",
+   "createdBy": "snapshot",
+   "createdByName": "snapshot",
+   "createdAt": "2026-07-18T20:05:22.166Z",
+   "updatedBy": "snapshot",
+   "updatedByName": "snapshot",
+   "updatedAt": "2026-07-18T20:05:22.166Z"
+  },
+  "id": "20c693b4-d0d3-40af-869b-d6179ea44f84",
+  "workflowData": {
+   "templates": [
+    {
+     "type": "update_contact_field",
+     "id": "6ececfe0-61e0-4c52-9914-ea8036c3af4b",
+     "name": "Update SMS Consent Status",
+     "next": "3c681a4e-0d38-40b5-bcfe-b8b5ebadc8d2",
+     "attributes": {
+      "type": "update_contact_field",
+      "actionType": "update_field_data",
+      "fields": [
+       {
+        "field": "YBjkXCcpD9ai6KwIERTl",
+        "value": "Confirmed",
+        "title": "SMS Consent Status",
+        "type": "select",
+        "date": ""
+       }
+      ]
+     },
+     "order": 0
+    },
+    {
+     "type": "update_contact_field",
+     "id": "3c681a4e-0d38-40b5-bcfe-b8b5ebadc8d2",
+     "name": "Update Consent Date",
+     "next": "ba91e027-c886-4ee0-b087-8cdb8ccf952c",
+     "attributes": {
+      "type": "update_contact_field",
+      "actionType": "update_field_data",
+      "fields": [
+       {
+        "field": "sSJHCleqCf1OZoDdf31W",
+        "value": "{{right_now}}",
+        "title": "Consent Date",
+        "type": "date",
+        "date": "customDate"
+       }
+      ]
+     },
+     "parentKey": "6ececfe0-61e0-4c52-9914-ea8036c3af4b",
+     "order": 1
+    },
+    {
+     "type": "update_contact_field",
+     "id": "ba91e027-c886-4ee0-b087-8cdb8ccf952c",
+     "name": "Update Consent Source",
+     "next": "9fad0ebc-668c-42b7-8f25-3cd0bf86a923",
+     "attributes": {
+      "type": "update_contact_field",
+      "actionType": "update_field_data",
+      "fields": [
+       {
+        "field": "HRxaTsiambvhOVIPAqtI",
+        "value": "Website form",
+        "title": "Consent Source",
+        "type": "string",
+        "date": ""
+       }
+      ]
+     },
+     "parentKey": "3c681a4e-0d38-40b5-bcfe-b8b5ebadc8d2",
+     "order": 2
+    },
+    {
+     "type": "update_contact_field",
+     "id": "9fad0ebc-668c-42b7-8f25-3cd0bf86a923",
+     "name": "Update Consent Method",
+     "attributes": {
+      "type": "update_contact_field",
+      "actionType": "update_field_data",
+      "fields": [
+       {
+        "field": "1pILBriOKBaanH3AD0N3",
+        "value": "Web form",
+        "title": "Consent Method",
+        "type": "string",
+        "date": ""
+       }
+      ]
+     },
+     "parentKey": "ba91e027-c886-4ee0-b087-8cdb8ccf952c",
+     "order": 3
+    }
+   ]
+  }
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ },
+ "triggers": [
+  {
+   "id": "cjf7EiQLC2htnbaCFRuA",
+   "date_added": "2026-07-18T20:05:22.069Z",
+   "date_updated": "2026-07-18T20:05:22.069Z",
+   "deleted": false,
+   "belongs_to": "workflow",
+   "location_id": "YTi6qs4zhiW6d4a75A9f",
+   "origin_id": "wFtGUQDWT2cQIkY4BCRD",
+   "active": false,
+   "workflow_id": "20c693b4-d0d3-40af-869b-d6179ea44f84",
+   "masterType": "highlevel",
+   "name": "MWC Lead or Intake Form Submission w/ SMS Consent",
+   "type": "form_submission",
+   "conditions": [
+    {
+     "operator": "is-any-of",
+     "field": "form.id",
+     "value": [
+      "YNQwtyGNHR1y3CLHLOHl",
+      "In6rjFseWXFcBNnLmlJn",
+      "H3fXelNi7BwqXyXDgOwp",
+      "kuxx6z5XlbgaMdXkceIA"
+     ],
+     "title": "Form is",
+     "type": "string",
+     "id": "dcc63759-2eaf-4727-8bd7-84bd8280512b"
+    }
+   ],
+   "actions": [
+    {
+     "workflow_id": "20c693b4-d0d3-40af-869b-d6179ea44f84",
+     "type": "add_to_workflow"
+    }
+   ],
+   "schedule_config": {}
+  }
+ ],
+ "dependentAssets": {}
+}

@@ -1,0 +1,152 @@
+[
+ {
+  "fieldKey": "contact.renewal_date",
+  "dataType": "DATE",
+  "name": "Renewal Date"
+ },
+ {
+  "fieldKey": "contact.referrers_email_address",
+  "dataType": "TEXT",
+  "name": "Referrer's Email Address"
+ },
+ {
+  "fieldKey": "contact.preferred_location",
+  "dataType": "SINGLE_OPTIONS",
+  "name": "Preferred Location"
+ },
+ {
+  "fieldKey": "contact.referrals__returning",
+  "dataType": "SINGLE_OPTIONS",
+  "name": "Referrals & Returning"
+ },
+ {
+  "fieldKey": "contact.product_sold__item_2",
+  "dataType": "SINGLE_OPTIONS",
+  "name": "Product Sold \u2013 Item 2"
+ },
+ {
+  "fieldKey": "contact.term_length__item_1",
+  "dataType": "SINGLE_OPTIONS",
+  "name": "Term Length \u2013 Item 1"
+ },
+ {
+  "fieldKey": "contact.ad_reason",
+  "dataType": "SINGLE_OPTIONS",
+  "name": "A&D Reason"
+ },
+ {
+  "fieldKey": "contact.term_length__item_2",
+  "dataType": "SINGLE_OPTIONS",
+  "name": "Term Length \u2013 Item 2"
+ },
+ {
+  "fieldKey": "contact.pay_type",
+  "dataType": "SINGLE_OPTIONS",
+  "name": "Pay Type"
+ },
+ {
+  "fieldKey": "contact.term_end_date",
+  "dataType": "DATE",
+  "name": "Term End Date"
+ },
+ {
+  "fieldKey": "contact.contactsingle_dropdown_17827_8d1_copy",
+  "dataType": "SINGLE_OPTIONS",
+  "name": "Do you currently smoke or use tobacco products?"
+ },
+ {
+  "fieldKey": "contact.referred_by_ambassador",
+  "dataType": "TEXT",
+  "name": "Referred by Ambassador"
+ },
+ {
+  "fieldKey": "contact.patient_care_consultant",
+  "dataType": "SINGLE_OPTIONS",
+  "name": "Patient Care Consultant"
+ },
+ {
+  "fieldKey": "contact.treatment_cost",
+  "dataType": "MONETORY",
+  "name": " Price \u2013 Item 1"
+ },
+ {
+  "fieldKey": "contact.preferred_appointment_time",
+  "dataType": "SINGLE_OPTIONS",
+  "name": "Preferred Appointment Time"
+ },
+ {
+  "fieldKey": "contact.call_disposition",
+  "dataType": "SINGLE_OPTIONS",
+  "name": "CONTACT DISPOSITION"
+ },
+ {
+  "fieldKey": "contact.new_or_renewal",
+  "dataType": "SINGLE_OPTIONS",
+  "name": "New or Renewal"
+ },
+ {
+  "fieldKey": "contact.contact_disposition__channel",
+  "dataType": "TEXT",
+  "name": "Last disposition / Channel"
+ },
+ {
+  "fieldKey": "contact.last_call_date",
+  "dataType": "DATE",
+  "name": "Last Disposition Date"
+ },
+ {
+  "fieldKey": "contact.sale_outcome",
+  "dataType": "SINGLE_OPTIONS",
+  "name": "Sale Outcome"
+ },
+ {
+  "fieldKey": "contact.ad_other_explanation",
+  "dataType": "LARGE_TEXT",
+  "name": "A&D Other Explanation"
+ },
+ {
+  "fieldKey": "contact.preferred_appointment_date",
+  "dataType": "DATE",
+  "name": "Preferred Appointment Date"
+ },
+ {
+  "fieldKey": "contact.treatment_type",
+  "dataType": "SINGLE_OPTIONS",
+  "name": " Product Sold - Item 1"
+ },
+ {
+  "fieldKey": "contact.who_referred_you_referrers_name",
+  "dataType": "TEXT",
+  "name": "Who referred you? (Referrer's name)"
+ },
+ {
+  "fieldKey": "contact.preferred_appointment_location",
+  "dataType": "TEXT",
+  "name": "Preferred Appointment Location"
+ },
+ {
+  "fieldKey": "contact.price__item_2",
+  "dataType": "MONETORY",
+  "name": " Price \u2013 Item 2"
+ },
+ {
+  "fieldKey": "contact.sale_type",
+  "dataType": "SINGLE_OPTIONS",
+  "name": "Sale Type"
+ },
+ {
+  "fieldKey": "contact.provider_making_recommendation",
+  "dataType": "SINGLE_OPTIONS",
+  "name": "Provider Making Recommendation"
+ },
+ {
+  "fieldKey": "contact.what_is_the_primary_reason_for_todays_visit",
+  "dataType": "SINGLE_OPTIONS",
+  "name": "What is the primary reason for today\u2019s visit?\n\n\n"
+ },
+ {
+  "fieldKey": "contact.total_program_amount",
+  "dataType": "MONETORY",
+  "name": "Total Program Amount"
+ }
+]

@@ -1,0 +1,153 @@
+{
+ "workflowData": {
+  "_id": "1495c045-0211-450a-9923-055cc413b2cd",
+  "locationId": "YTi6qs4zhiW6d4a75A9f",
+  "name": "Opportunity Attribution Update",
+  "status": "draft",
+  "version": 2,
+  "allowMultiple": false,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/YTi6qs4zhiW6d4a75A9f/workflows/1495c045-0211-450a-9923-055cc413b2cd/2",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "originId": "1b05a9d2-d58d-4ae7-ae90-65b9efca279f",
+  "permission": 380,
+  "type": "workflow",
+  "meta": null,
+  "updatedBy": "snapshot",
+  "createdAt": "2026-07-18T20:05:09.031Z",
+  "updatedAt": "2026-07-18T20:05:22.589Z",
+  "deleted": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "snapshot",
+  "__v": 0,
+  "allowMultipleOpportunity": false,
+  "dataVersion": 7,
+  "eventStartDate": null,
+  "parentId": "7c7dbaa1-3432-4326-8721-0329c10b14f1",
+  "senderAddress": null,
+  "window": {
+   "condition": "when",
+   "start": "08:00",
+   "end": "17:00",
+   "days": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
+  },
+  "workflowNote": {
+   "content": "",
+   "createdBy": "snapshot",
+   "createdByName": "snapshot",
+   "createdAt": "2026-07-18T20:05:22.177Z",
+   "updatedBy": "snapshot",
+   "updatedByName": "snapshot",
+   "updatedAt": "2026-07-18T20:05:22.177Z"
+  },
+  "id": "1495c045-0211-450a-9923-055cc413b2cd",
+  "workflowData": {
+   "templates": [
+    {
+     "type": "internal_update_opportunity",
+     "id": "1af226b7-14b2-4c71-ae6c-1ed7daf8cf55",
+     "name": "Update Opportunity UTM Source Field",
+     "next": "20c7f48a-4565-478c-b9dd-8ab8e44e6c47",
+     "attributes": {
+      "allowBackward": false,
+      "type": "internal_update_opportunity",
+      "__customInputFields__": [
+       {
+        "__customInputs__": {},
+        "dataType": "TEXT",
+        "filterField": "custom_fields.7oahfAuuSaBq76JfKoiJ",
+        "value": "{{contact.attributionSource.sessionSource}}",
+        "valueFieldType": "string"
+       }
+      ],
+      "__customInputs__": {}
+     },
+     "workflowsActionType": "INTERNAL",
+     "order": 0
+    },
+    {
+     "type": "internal_update_opportunity",
+     "id": "20c7f48a-4565-478c-b9dd-8ab8e44e6c47",
+     "name": "Update Opportunity GCLID Field",
+     "next": "15740a35-f05e-474a-b274-7b865becdb6c",
+     "attributes": {
+      "allowBackward": false,
+      "type": "internal_update_opportunity",
+      "__customInputFields__": [
+       {
+        "__customInputs__": {},
+        "dataType": "TEXT",
+        "filterField": "custom_fields.iGeHeJeXmHEn43v3Y9K9",
+        "value": "{{contact.attributionSource.gclid}}",
+        "valueFieldType": "string"
+       }
+      ],
+      "__customInputs__": {}
+     },
+     "parentKey": "1af226b7-14b2-4c71-ae6c-1ed7daf8cf55",
+     "workflowsActionType": "INTERNAL",
+     "order": 1
+    },
+    {
+     "type": "internal_update_opportunity",
+     "id": "15740a35-f05e-474a-b274-7b865becdb6c",
+     "name": "Update Opportunity FBCLID Field",
+     "attributes": {
+      "allowBackward": false,
+      "type": "internal_update_opportunity",
+      "__customInputFields__": [
+       {
+        "__customInputs__": {},
+        "dataType": "TEXT",
+        "filterField": "custom_fields.KseXPBZO6P5Abn4uQNiy",
+        "value": "{{contact.attributionSource.fbclid}}",
+        "valueFieldType": "string"
+       }
+      ],
+      "__customInputs__": {}
+     },
+     "parentKey": "20c7f48a-4565-478c-b9dd-8ab8e44e6c47",
+     "workflowsActionType": "INTERNAL",
+     "order": 2
+    }
+   ]
+  }
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ },
+ "triggers": [
+  {
+   "id": "8y3qBPU7hVdjPJbnBDdL",
+   "date_added": "2026-07-18T20:05:22.094Z",
+   "date_updated": "2026-07-18T20:05:22.094Z",
+   "deleted": false,
+   "belongs_to": "workflow",
+   "location_id": "YTi6qs4zhiW6d4a75A9f",
+   "origin_id": "TeurFKkjUBFYhuaz6rJ4",
+   "active": false,
+   "workflow_id": "1495c045-0211-450a-9923-055cc413b2cd",
+   "masterType": "highlevel",
+   "name": "Opportunity Created (Allow Re-Entry ON)",
+   "type": "opportunity_created",
+   "conditions": [],
+   "actions": [
+    {
+     "workflow_id": "1495c045-0211-450a-9923-055cc413b2cd",
+     "type": "add_to_workflow"
+    }
+   ]
+  }
+ ],
+ "dependentAssets": {}
+}

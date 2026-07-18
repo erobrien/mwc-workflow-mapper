@@ -1,0 +1,193 @@
+{
+ "workflowData": {
+  "_id": "9744e1fe-3b11-47da-886c-46c8e1c5c9f2",
+  "locationId": "YTi6qs4zhiW6d4a75A9f",
+  "name": "5.6 — Virginia Beach – Term Extension (+3 Months)",
+  "status": "draft",
+  "version": 2,
+  "allowMultiple": false,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/YTi6qs4zhiW6d4a75A9f/workflows/9744e1fe-3b11-47da-886c-46c8e1c5c9f2/2",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "originId": "9a81bd32-2803-4779-b65d-cd5897f2dd72",
+  "permission": 380,
+  "type": "workflow",
+  "meta": null,
+  "updatedBy": "snapshot",
+  "createdAt": "2026-07-18T20:05:02.343Z",
+  "updatedAt": "2026-07-18T20:05:21.731Z",
+  "deleted": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "snapshot",
+  "__v": 0,
+  "allowMultipleOpportunity": false,
+  "dataVersion": 7,
+  "eventStartDate": null,
+  "parentId": "96edf89b-5792-4552-a476-6cc62ee98b41",
+  "senderAddress": null,
+  "window": {
+   "condition": "when",
+   "start": "08:00",
+   "end": "17:00",
+   "days": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
+  },
+  "workflowNote": {
+   "content": "inside 06 folder add the workflow : Newport News – Renewal T-30.\n",
+   "updatedBy": "snapshot",
+   "updatedOn": "2026-07-15T19:46:00.009Z",
+   "updatedByName": "snapshot",
+   "createdBy": "snapshot",
+   "createdOn": "2026-07-15T19:45:30.713Z",
+   "createdByName": "snapshot",
+   "createdAt": "2026-07-18T20:05:20.985Z",
+   "updatedAt": "2026-07-18T20:05:20.985Z"
+  },
+  "id": "9744e1fe-3b11-47da-886c-46c8e1c5c9f2",
+  "workflowData": {
+   "templates": [
+    {
+     "type": "wait",
+     "id": "58530342-25e9-4ec0-8895-e3777121ca1b",
+     "name": "Wait 1 Minute",
+     "next": "f5690fb3-59e2-4ec4-8a92-59994d9f4c01",
+     "attributes": {
+      "type": "time",
+      "convertToMultipath": false,
+      "hybridActionType": "wait",
+      "isHybridAction": true,
+      "name": "Wait 1 Minute",
+      "cat": "action",
+      "transitions": [],
+      "startAfter": {
+       "when": "after",
+       "type": "minutes",
+       "value": 1
+      },
+      "timePeriodInputMode": "standard",
+      "unitInputMode": "standard"
+     },
+     "order": 0
+    },
+    {
+     "type": "math_operation",
+     "id": "f5690fb3-59e2-4ec4-8a92-59994d9f4c01",
+     "name": "Add 3 Months to Term End Date",
+     "next": "a48f2ec5-e2db-4e54-8f02-7e0c63343820",
+     "attributes": {
+      "selectField": "GgZbBKiosmZ5VTDiYlpm",
+      "selectFieldtype": "date",
+      "sourceCustomValueId": "",
+      "updateField": "GgZbBKiosmZ5VTDiYlpm",
+      "targetCustomValueId": "",
+      "operators": [
+       {
+        "operator": "add",
+        "__id": "8cf6f9d8-38c2-4f79-9832-916830f6dd2b",
+        "value": {
+         "days": 0,
+         "months": 3,
+         "years": 0
+        }
+       }
+      ],
+      "updateFieldType": "date"
+     },
+     "parentKey": "58530342-25e9-4ec0-8895-e3777121ca1b",
+     "order": 1,
+     "stepIndex": 1
+    },
+    {
+     "type": "internal_notification",
+     "id": "a48f2ec5-e2db-4e54-8f02-7e0c63343820",
+     "name": "Notify COO and Operations",
+     "next": "d0dd05e4-3b50-4ef9-9a31-b160cf706ec3",
+     "attributes": {
+      "type": "notification",
+      "notification": {
+       "title": "Richmond Term Extended",
+       "body": "Term extended +3 months. New Term End Date: {{contact.term_end_date}}. Reason: {{extension_reason}}. Authorized by: {{authorized_by}}. Submitted {{right_now.date}}.",
+       "redirectPage": "contact",
+       "userType": "all",
+       "assignedOwners": null,
+       "alsoNotifyContactFollowers": false,
+       "alsoNotifyOpportunityFollowers": false,
+       "type": "send_notification"
+      }
+     },
+     "parentKey": "f5690fb3-59e2-4ec4-8a92-59994d9f4c01",
+     "order": 2
+    },
+    {
+     "type": "remove_from_workflow",
+     "id": "d0dd05e4-3b50-4ef9-9a31-b160cf706ec3",
+     "name": "Remove from Virginia Beach - Renewal T-30 Workflow",
+     "attributes": {
+      "type": "remove_from_workflow",
+      "workflow_id": [
+       "9744e1fe-3b11-47da-886c-46c8e1c5c9f2"
+      ]
+     },
+     "parentKey": "a48f2ec5-e2db-4e54-8f02-7e0c63343820",
+     "order": 3
+    }
+   ]
+  }
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ },
+ "triggers": [
+  {
+   "id": "wZyS43TgHReRepTSI8Pd",
+   "date_added": "2026-07-18T20:05:20.791Z",
+   "date_updated": "2026-07-18T20:05:20.791Z",
+   "deleted": false,
+   "belongs_to": "workflow",
+   "location_id": "YTi6qs4zhiW6d4a75A9f",
+   "origin_id": "JLZ1cpHu4iLhIRvhhn7A",
+   "active": false,
+   "workflow_id": "9744e1fe-3b11-47da-886c-46c8e1c5c9f2",
+   "masterType": "highlevel",
+   "name": "Term Extension Form Submitted at Newport News",
+   "type": "form_submission",
+   "conditions": [
+    {
+     "operator": "is-any-of",
+     "field": "form.id",
+     "value": [
+      "3vvYCkHIqWGt7rhVkaWZ"
+     ],
+     "title": "Form is",
+     "type": "string",
+     "id": "2df28d6d-73a5-49f6-9e32-b11e2681d2e1"
+    },
+    {
+     "operator": "==",
+     "field": "contact.UyLjnNDfF6KvhHaUO8Dn",
+     "value": "Virginia Beach",
+     "title": "Location",
+     "type": "select",
+     "id": "UyLjnNDfF6KvhHaUO8Dn"
+    }
+   ],
+   "actions": [
+    {
+     "workflow_id": "9744e1fe-3b11-47da-886c-46c8e1c5c9f2",
+     "type": "add_to_workflow"
+    }
+   ],
+   "schedule_config": {}
+  }
+ ],
+ "dependentAssets": {}
+}

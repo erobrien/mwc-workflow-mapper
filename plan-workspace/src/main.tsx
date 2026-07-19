@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { PasswordGate } from "./components/PasswordGate";
 import "./index.css";
 import { Shell } from "./components/Shell";
 import Home from "./pages/Home";
@@ -69,6 +70,6 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <PasswordGate><RouterProvider router={router} /></PasswordGate>
   </React.StrictMode>
 );

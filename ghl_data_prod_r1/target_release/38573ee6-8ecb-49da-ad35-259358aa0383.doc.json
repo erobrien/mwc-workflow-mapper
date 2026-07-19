@@ -12,7 +12,6 @@
   "timezone": "account",
   "removeContactFromLastStep": true,
   "filePath": "location/Ghstz8eIsHWLeXek47dk/workflows/38573ee6-8ecb-49da-ad35-259358aa0383/5",
-  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FGhstz8eIsHWLeXek47dk%2Fworkflows%2F38573ee6-8ecb-49da-ad35-259358aa0383%2F5?alt=media&token=1026d4a0-b006-49f8-a919-e4bb90731d2c",
   "stopOnResponse": false,
   "autoMarkAsRead": false,
   "permission": 380,

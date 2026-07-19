@@ -1,0 +1,14 @@
+{
+ "templates": [
+  {
+   "id": "90dab2de-1728-4935-9491-1c4ff7c57414",
+   "order": 0,
+   "name": "SMS: Survey Invite",
+   "type": "sms",
+   "attributes": {
+    "body": "{{contact.first_name}}, how was your visit to Men's Wellness Centers? One quick tap: {{custom_values.survey_link}} {{ custom_values.sms_opt_out_footer }}",
+    "attachments": []
+   }
+  }
+ ]
+}

@@ -1,0 +1,176 @@
+{
+ "workflowData": {
+  "_id": "88d3c015-eb00-406f-bfa1-bba101322d6a",
+  "locationId": "Ghstz8eIsHWLeXek47dk",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 8,
+  "name": "WF-03 Booking Confirmation and Reminders",
+  "status": "draft",
+  "version": 3,
+  "dataVersion": 7,
+  "allowMultiple": false,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/Ghstz8eIsHWLeXek47dk/workflows/88d3c015-eb00-406f-bfa1-bba101322d6a/3",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FGhstz8eIsHWLeXek47dk%2Fworkflows%2F88d3c015-eb00-406f-bfa1-bba101322d6a%2F3?alt=media&token=7419f803-d194-4a3a-b3db-60b0dd5963d3",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "permission": 380,
+  "type": "workflow",
+  "parentId": "d15ca26c-3448-4063-a0e5-d4dfa617d76c",
+  "meta": null,
+  "createdAt": "2026-07-11T14:20:54.989Z",
+  "updatedAt": "2026-07-12T02:35:57.181Z",
+  "deleted": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "user",
+  "__v": 0,
+  "allowMultipleOpportunity": false,
+  "eventStartDate": null,
+  "senderAddress": null,
+  "window": null,
+  "workflowNote": null,
+  "id": "88d3c015-eb00-406f-bfa1-bba101322d6a",
+  "workflowData": {
+   "templates": [
+    {
+     "id": "9528ce6b-b2ad-4a5d-99a0-181ff84486d8",
+     "order": 0,
+     "name": "SMS: Booking Confirmation (T+0)",
+     "type": "sms",
+     "attributes": {
+      "body": "You are booked, {{contact.first_name}}. Your 60-minute in-person consultation at Men's Wellness Centers is {{appointment.start_time}}. {{ custom_values.sms_opt_out_footer }}",
+      "attachments": []
+     },
+     "next": "c2dc5066-57b6-479a-bc38-5b054ccab71a"
+    },
+    {
+     "id": "c2dc5066-57b6-479a-bc38-5b054ccab71a",
+     "order": 0,
+     "name": "Email: Booking Confirmation (T+0)",
+     "type": "email",
+     "attributes": {
+      "subject": "",
+      "html": "You are booked, {{contact.first_name}}. Your 60-minute in-person consultation at Men's Wellness Centers is {{appointment.start_time}}. {{ custom_values.sms_opt_out_footer }}",
+      "type": "email"
+     },
+     "next": "174be408-d10e-42d9-b78f-ef64f0ae3ce8"
+    },
+    {
+     "id": "174be408-d10e-42d9-b78f-ef64f0ae3ce8",
+     "order": 0,
+     "name": "Notify: Staff booking",
+     "type": "internal_notification",
+     "attributes": {
+      "type": "email",
+      "email": {
+       "userType": "custom_email",
+       "to": "consult-results@menswellnesscenters.com",
+       "from_name": "{{location.name}}",
+       "from_email": "{{location.email}}",
+       "subject": "Notify: Staff booking",
+       "body": "Instant staff notification."
+      }
+     },
+     "next": "6a4a809c-2d55-46af-b17d-533bc0086c06"
+    },
+    {
+     "id": "6a4a809c-2d55-46af-b17d-533bc0086c06",
+     "order": 0,
+     "name": "Wait: 1 hour",
+     "type": "wait",
+     "cat": "",
+     "attributes": {
+      "type": "time",
+      "startAfter": {
+       "type": "hour",
+       "value": 1,
+       "when": "after"
+      },
+      "name": "Wait",
+      "cat": "",
+      "isHybridAction": true,
+      "hybridActionType": "wait",
+      "convertToMultipath": false,
+      "transitions": []
+     },
+     "next": "97091149-533b-49b5-8c72-e622e52ca5b0"
+    },
+    {
+     "id": "97091149-533b-49b5-8c72-e622e52ca5b0",
+     "order": 0,
+     "name": "SMS: Intake Reminder (T+1h)",
+     "type": "sms",
+     "attributes": {
+      "body": "Prompt to complete intake.",
+      "attachments": []
+     },
+     "next": "8702700a-56a1-4577-a369-877ec8ebac99"
+    },
+    {
+     "id": "8702700a-56a1-4577-a369-877ec8ebac99",
+     "order": 0,
+     "name": "Email: 3-Day Prep (T-3d)",
+     "type": "email",
+     "attributes": {
+      "subject": "Email: 3-Day Prep (T-3d)",
+      "html": "<p>3 days before appointment. Use appointment-relative wait with 'if date already passed' fallback.</p>",
+      "type": "email"
+     },
+     "next": "652b6fd4-8897-4243-a669-bc0bf1c282f4"
+    },
+    {
+     "id": "652b6fd4-8897-4243-a669-bc0bf1c282f4",
+     "order": 0,
+     "name": "SMS: 1-Day Reminder (T-1d)",
+     "type": "sms",
+     "attributes": {
+      "body": "1 day before appointment.",
+      "attachments": []
+     },
+     "next": "05011b3e-20bb-4bc1-8c60-ce90a3d753ad"
+    },
+    {
+     "id": "05011b3e-20bb-4bc1-8c60-ce90a3d753ad",
+     "order": 0,
+     "name": "Email: 1-Day Prep (T-1d)",
+     "type": "email",
+     "attributes": {
+      "subject": "Email: 1-Day Prep (T-1d)",
+      "html": "<p>1 day before appointment.</p>",
+      "type": "email"
+     },
+     "next": "0b485d2c-08ab-4cfa-af41-0f733ada7394"
+    },
+    {
+     "id": "0b485d2c-08ab-4cfa-af41-0f733ada7394",
+     "order": 0,
+     "name": "SMS: Morning-Of (8 AM)",
+     "type": "sms",
+     "attributes": {
+      "body": "Good morning {{contact.first_name}}. We look forward to seeing you today at {{appointment.start_time}} for your 60-minute in-person consultation at Men's Wellness Centers.",
+      "attachments": []
+     },
+     "next": "f5f882d0-4016-4426-8d0e-e3ee7ca017a6"
+    },
+    {
+     "id": "f5f882d0-4016-4426-8d0e-e3ee7ca017a6",
+     "order": 0,
+     "name": "SMS: 2-Hour Intake Prompt (T-2h)",
+     "type": "sms",
+     "attributes": {
+      "body": "2 hours before appointment.",
+      "attachments": []
+     }
+    }
+   ]
+  }
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ },
+ "triggers": [],
+ "dependentAssets": {}
+}

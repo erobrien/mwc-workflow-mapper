@@ -1,0 +1,899 @@
+{
+ "templates": [
+  {
+   "id": "a3019b2f-40ff-4eec-a2bd-c92ef2c3d667",
+   "order": 0,
+   "type": "if_else",
+   "name": "D19: temperature tier router",
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "40e8ca0e-7731-458d-a6d6-79d329e53592",
+      "name": "HOT",
+      "segments": [
+       {
+        "__segmentId": "db30687c-d048-43a5-9170-eafa663da1e5",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "tags",
+          "conditionOperator": "is_any_of",
+          "conditionValue": [
+           "temp_hot"
+          ],
+          "__conditionId": "ad93ac0c-1344-43d7-ad1d-ce57bd814726",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": false
+     },
+     {
+      "id": "2a623d6b-4781-42b6-8618-ddf03ff1d779",
+      "name": "WARM",
+      "segments": [
+       {
+        "__segmentId": "a6287dce-13b4-45f9-9d2e-6a3c265ab663",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "tags",
+          "conditionOperator": "is_any_of",
+          "conditionValue": [
+           "temp_warm"
+          ],
+          "__conditionId": "2e2b078e-0571-4574-a459-0e674518b581",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": false
+     },
+     {
+      "id": "d3602df1-4417-4cf8-bcdb-101ea78054ea",
+      "name": "COLD",
+      "segments": [
+       {
+        "__segmentId": "799487ed-7101-4a94-9889-d52f3687bbcf",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "tags",
+          "conditionOperator": "is_any_of",
+          "conditionValue": [
+           "temp_cold"
+          ],
+          "__conditionId": "b1318f99-6b00-412d-9e0e-c8c6d2fca42c",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": false
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "D19: temperature tier router",
+    "version": 2,
+    "noneBranchName": "No matching tag (exit)"
+   }
+  },
+  {
+   "id": "a55848e5-5c23-4e73-be3c-8a52f43456f5",
+   "order": 0,
+   "type": "wait",
+   "name": "Wait 3d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 3,
+     "when": "after"
+    }
+   },
+   "parent": "40e8ca0e-7731-458d-a6d6-79d329e53592",
+   "parentKey": "40e8ca0e-7731-458d-a6d6-79d329e53592",
+   "next": "cfe4db2b-32bd-4183-9e08-510030dc2d2c"
+  },
+  {
+   "id": "cfe4db2b-32bd-4183-9e08-510030dc2d2c",
+   "order": 1,
+   "type": "sms",
+   "name": "SMS: hot touch 1 [sms_wf09_hot_t1]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, many men start with a simple consultation to understand what might be causing their symptoms. If you ever want to talk with our doctor, we can help you find a time.\n\n{{ custom_values.sms_opt_out_footer }}",
+    "attachments": []
+   },
+   "next": "272c499b-2f95-47bc-ac1b-d33ef97c3a95"
+  },
+  {
+   "id": "272c499b-2f95-47bc-ac1b-d33ef97c3a95",
+   "order": 2,
+   "type": "wait",
+   "name": "Wait 4d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 4,
+     "when": "after"
+    }
+   },
+   "next": "c67bbeeb-05b5-4075-a34e-70c611054b62"
+  },
+  {
+   "id": "c67bbeeb-05b5-4075-a34e-70c611054b62",
+   "order": 3,
+   "type": "email",
+   "name": "Email: hot touch 2 [email_wf09_hot_t2]",
+   "attributes": {
+    "subject": "A quick health check can answer a lot",
+    "html": "Hi {{contact.first_name}}, Many men notice changes in energy, focus, or overall wellness as they get older. A consultation with our physician can help identify what might be going on and what options may help. You can schedule a visit anytime here. {{contact.current_booking_url}} {{ custom_values.sms_opt_out_footer }}",
+    "type": "email"
+   },
+   "next": "0c7deb97-57ee-49d1-97a2-0d0c675bc5bb"
+  },
+  {
+   "id": "0c7deb97-57ee-49d1-97a2-0d0c675bc5bb",
+   "order": 4,
+   "type": "wait",
+   "name": "Wait 5d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 5,
+     "when": "after"
+    }
+   },
+   "next": "133c6f10-c572-445a-af21-c0d626c28488"
+  },
+  {
+   "id": "133c6f10-c572-445a-af21-c0d626c28488",
+   "order": 5,
+   "type": "sms",
+   "name": "SMS: hot touch 3 [sms_wf09_hot_t3]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}},if you ever want to come in for a consultation, our team would be happy to help you schedule a time.",
+    "attachments": []
+   },
+   "next": "e3ad1f09-38b5-4c9d-a8e6-a324fda1b0fd"
+  },
+  {
+   "id": "e3ad1f09-38b5-4c9d-a8e6-a324fda1b0fd",
+   "order": 6,
+   "type": "wait",
+   "name": "Wait 3d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 3,
+     "when": "after"
+    }
+   },
+   "next": "e7d9a96d-0191-463a-b58d-7609283d211f"
+  },
+  {
+   "id": "e7d9a96d-0191-463a-b58d-7609283d211f",
+   "order": 7,
+   "type": "sms",
+   "name": "SMS: hot touch 4 [sms_wf09_hot_t4]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, many men start with a simple consultation to understand what might be causing their symptoms. If you ever want to talk with our doctor, we can help you find a time.\n\n{{ custom_values.sms_opt_out_footer }}",
+    "attachments": []
+   },
+   "next": "4ca01f56-c831-4da1-9c39-d303513b97fd"
+  },
+  {
+   "id": "4ca01f56-c831-4da1-9c39-d303513b97fd",
+   "order": 8,
+   "type": "wait",
+   "name": "Wait 4d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 4,
+     "when": "after"
+    }
+   },
+   "next": "ed897200-fabd-4dd9-851d-78dd58cfabec"
+  },
+  {
+   "id": "ed897200-fabd-4dd9-851d-78dd58cfabec",
+   "order": 9,
+   "type": "email",
+   "name": "Email: hot touch 5 [email_wf09_hot_t5]",
+   "attributes": {
+    "subject": "A quick health check can answer a lot",
+    "html": "Hi {{contact.first_name}}, Many men notice changes in energy, focus, or overall wellness as they get older. A consultation with our physician can help identify what might be going on and what options may help. You can schedule a visit anytime here. {{contact.current_booking_url}} {{ custom_values.sms_opt_out_footer }}",
+    "type": "email"
+   },
+   "next": "850f5ff0-80cb-4ca7-b20a-ff9a79d33b21"
+  },
+  {
+   "id": "850f5ff0-80cb-4ca7-b20a-ff9a79d33b21",
+   "order": 10,
+   "type": "wait",
+   "name": "Wait 5d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 5,
+     "when": "after"
+    }
+   },
+   "next": "5a8854c8-ade5-4395-baf1-b12a9a31917c"
+  },
+  {
+   "id": "5a8854c8-ade5-4395-baf1-b12a9a31917c",
+   "order": 11,
+   "type": "sms",
+   "name": "SMS: hot touch 6 [sms_wf09_hot_t6]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}},if you ever want to come in for a consultation, our team would be happy to help you schedule a time.",
+    "attachments": []
+   },
+   "next": "d0911ce7-2187-4856-aefc-6c7dcaa517a0"
+  },
+  {
+   "id": "d0911ce7-2187-4856-aefc-6c7dcaa517a0",
+   "order": 12,
+   "type": "wait",
+   "name": "Wait 3d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 3,
+     "when": "after"
+    }
+   },
+   "next": "603d4887-882f-4f7d-a2d9-76b82e0b69a9"
+  },
+  {
+   "id": "603d4887-882f-4f7d-a2d9-76b82e0b69a9",
+   "order": 13,
+   "type": "sms",
+   "name": "SMS: hot touch 7 [sms_wf09_hot_t7]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, many men start with a simple consultation to understand what might be causing their symptoms. If you ever want to talk with our doctor, we can help you find a time.\n\n{{ custom_values.sms_opt_out_footer }}",
+    "attachments": []
+   },
+   "next": "df1ea001-54a9-40c7-b67a-1f4aa8aada8c"
+  },
+  {
+   "id": "df1ea001-54a9-40c7-b67a-1f4aa8aada8c",
+   "order": 14,
+   "type": "wait",
+   "name": "Wait 4d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 4,
+     "when": "after"
+    }
+   },
+   "next": "a47b3fb3-ed0b-431c-8259-3e3ac7bdf8f6"
+  },
+  {
+   "id": "a47b3fb3-ed0b-431c-8259-3e3ac7bdf8f6",
+   "order": 15,
+   "type": "email",
+   "name": "Email: hot touch 8 [email_wf09_hot_t8]",
+   "attributes": {
+    "subject": "A quick health check can answer a lot",
+    "html": "Hi {{contact.first_name}}, Many men notice changes in energy, focus, or overall wellness as they get older. A consultation with our physician can help identify what might be going on and what options may help. You can schedule a visit anytime here. {{contact.current_booking_url}} {{ custom_values.sms_opt_out_footer }}",
+    "type": "email"
+   },
+   "next": "3eff374f-c1cf-4b8d-9216-6677bb6b3883"
+  },
+  {
+   "id": "3eff374f-c1cf-4b8d-9216-6677bb6b3883",
+   "order": 16,
+   "type": "wait",
+   "name": "Wait 5d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 5,
+     "when": "after"
+    }
+   },
+   "next": "effed93d-a4c0-4294-bbd8-48733db5f96b"
+  },
+  {
+   "id": "effed93d-a4c0-4294-bbd8-48733db5f96b",
+   "order": 17,
+   "type": "sms",
+   "name": "SMS: hot touch 9 [sms_wf09_hot_t9]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}},if you ever want to come in for a consultation, our team would be happy to help you schedule a time.",
+    "attachments": []
+   }
+  },
+  {
+   "id": "c2ee03ae-8928-4c27-abd2-931aa06de14d",
+   "order": 0,
+   "type": "wait",
+   "name": "Wait 7d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 7,
+     "when": "after"
+    }
+   },
+   "parent": "2a623d6b-4781-42b6-8618-ddf03ff1d779",
+   "parentKey": "2a623d6b-4781-42b6-8618-ddf03ff1d779",
+   "next": "b4854f9f-7bb7-4a0e-b4ef-6402adf49f99"
+  },
+  {
+   "id": "b4854f9f-7bb7-4a0e-b4ef-6402adf49f99",
+   "order": 1,
+   "type": "email",
+   "name": "Email: warm touch 1 [email_wf09_warm_t1]",
+   "attributes": {
+    "subject": "Understanding men's health changes",
+    "html": "Hi {{contact.first_name}}, Many members visit us because they notice changes in energy, sleep, or overall wellness. Our physicians help men understand what may be happening and what options are available. Whenever you feel ready, we are here to help. {{contact.current_booking_url}} {{ custom_values.sms_opt_out_footer }}",
+    "type": "email"
+   },
+   "next": "403789e1-79c1-45a2-800d-70aa333e0764"
+  },
+  {
+   "id": "403789e1-79c1-45a2-800d-70aa333e0764",
+   "order": 2,
+   "type": "wait",
+   "name": "Wait 10d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 10,
+     "when": "after"
+    }
+   },
+   "next": "c260e98a-890c-4c7f-b69c-6251458c5f80"
+  },
+  {
+   "id": "c260e98a-890c-4c7f-b69c-6251458c5f80",
+   "order": 3,
+   "type": "sms",
+   "name": "SMS: warm touch 2 [sms_wf09_warm_t2]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, just checking in. If you ever want to speak with one of our doctors about your health, we can help you schedule a visit.\n\n{{ custom_values.sms_opt_out_footer }}",
+    "attachments": []
+   },
+   "next": "8810aa01-7b03-44f9-8f7a-2b95b59e5279"
+  },
+  {
+   "id": "8810aa01-7b03-44f9-8f7a-2b95b59e5279",
+   "order": 4,
+   "type": "wait",
+   "name": "Wait 14d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 14,
+     "when": "after"
+    }
+   },
+   "next": "09fe7ece-dc61-404c-98f3-8bb9baad0ae9"
+  },
+  {
+   "id": "09fe7ece-dc61-404c-98f3-8bb9baad0ae9",
+   "order": 5,
+   "type": "email",
+   "name": "Email: warm touch 3 [email_wf09_warm_t3]",
+   "attributes": {
+    "subject": "What other members experienced",
+    "html": "Hi {{contact.first_name}}, Many members who visit our clinic say they wish they had come in sooner just to understand what was going on with their health. If you ever want to learn more, we would be happy to see you. {{contact.current_booking_url}}",
+    "type": "email"
+   },
+   "next": "be305b6d-d314-4f61-8fab-79155bfdc134"
+  },
+  {
+   "id": "be305b6d-d314-4f61-8fab-79155bfdc134",
+   "order": 6,
+   "type": "wait",
+   "name": "Wait 14d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 14,
+     "when": "after"
+    }
+   },
+   "next": "c2a6d100-8729-432c-8f68-229ea2215e7d"
+  },
+  {
+   "id": "c2a6d100-8729-432c-8f68-229ea2215e7d",
+   "order": 7,
+   "type": "sms",
+   "name": "SMS: warm touch 4 [sms_wf09_warm_t4]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, just checking in. If you ever want to speak with one of our doctors about your health, we can help you schedule a visit.",
+    "attachments": []
+   },
+   "next": "48287657-e50d-48a1-9fce-1956bb6549ab"
+  },
+  {
+   "id": "48287657-e50d-48a1-9fce-1956bb6549ab",
+   "order": 8,
+   "type": "wait",
+   "name": "Wait 20d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 20,
+     "when": "after"
+    }
+   },
+   "next": "36fca716-1ce3-4561-ad36-20c7c57ed7fa"
+  },
+  {
+   "id": "36fca716-1ce3-4561-ad36-20c7c57ed7fa",
+   "order": 9,
+   "type": "email",
+   "name": "Email: warm touch 5 [email_wf09_warm_t5]",
+   "attributes": {
+    "subject": "Understanding men's health changes",
+    "html": "Hi {{contact.first_name}}, Many members visit us because they notice changes in energy, sleep, or overall wellness. Our physicians help men understand what may be happening and what options are available. Whenever you feel ready, we are here to help. {{contact.current_booking_url}} {{ custom_values.sms_opt_out_footer }}",
+    "type": "email"
+   },
+   "next": "69031b9f-0deb-46de-aad7-edd3031a2f3f"
+  },
+  {
+   "id": "69031b9f-0deb-46de-aad7-edd3031a2f3f",
+   "order": 10,
+   "type": "wait",
+   "name": "Wait 7d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 7,
+     "when": "after"
+    }
+   },
+   "next": "621f1ce2-39f2-471c-96d5-c52e32517fb5"
+  },
+  {
+   "id": "621f1ce2-39f2-471c-96d5-c52e32517fb5",
+   "order": 11,
+   "type": "sms",
+   "name": "SMS: warm touch 6 [sms_wf09_warm_t6]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, just checking in. If you ever want to speak with one of our doctors about your health, we can help you schedule a visit.\n\n{{ custom_values.sms_opt_out_footer }}",
+    "attachments": []
+   },
+   "next": "c7830c50-e5e3-4cea-9047-de0887940a2a"
+  },
+  {
+   "id": "c7830c50-e5e3-4cea-9047-de0887940a2a",
+   "order": 12,
+   "type": "wait",
+   "name": "Wait 10d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 10,
+     "when": "after"
+    }
+   },
+   "next": "c9c9a1e1-d5a5-48a4-aa72-6f21403453b9"
+  },
+  {
+   "id": "c9c9a1e1-d5a5-48a4-aa72-6f21403453b9",
+   "order": 13,
+   "type": "email",
+   "name": "Email: warm touch 7 [email_wf09_warm_t7]",
+   "attributes": {
+    "subject": "What other members experienced",
+    "html": "Hi {{contact.first_name}}, Many members who visit our clinic say they wish they had come in sooner just to understand what was going on with their health. If you ever want to learn more, we would be happy to see you. {{contact.current_booking_url}}",
+    "type": "email"
+   },
+   "next": "f94b5cbe-8b69-413e-8b45-5764668abd40"
+  },
+  {
+   "id": "f94b5cbe-8b69-413e-8b45-5764668abd40",
+   "order": 14,
+   "type": "wait",
+   "name": "Wait 14d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 14,
+     "when": "after"
+    }
+   },
+   "next": "d8ce739a-d9a0-42fd-9d6e-96e624e6331f"
+  },
+  {
+   "id": "d8ce739a-d9a0-42fd-9d6e-96e624e6331f",
+   "order": 15,
+   "type": "sms",
+   "name": "SMS: warm touch 8 [sms_wf09_warm_t8]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, just checking in. If you ever want to speak with one of our doctors about your health, we can help you schedule a visit.",
+    "attachments": []
+   },
+   "next": "2258a809-a764-4730-9e1e-f673715da360"
+  },
+  {
+   "id": "2258a809-a764-4730-9e1e-f673715da360",
+   "order": 16,
+   "type": "wait",
+   "name": "Wait 14d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 14,
+     "when": "after"
+    }
+   },
+   "next": "1098bfc1-e225-41c9-94ff-b7757d7ab31d"
+  },
+  {
+   "id": "1098bfc1-e225-41c9-94ff-b7757d7ab31d",
+   "order": 17,
+   "type": "email",
+   "name": "Email: warm touch 9 [email_wf09_warm_t9]",
+   "attributes": {
+    "subject": "Understanding men's health changes",
+    "html": "Hi {{contact.first_name}}, Many members visit us because they notice changes in energy, sleep, or overall wellness. Our physicians help men understand what may be happening and what options are available. Whenever you feel ready, we are here to help. {{contact.current_booking_url}} {{ custom_values.sms_opt_out_footer }}",
+    "type": "email"
+   },
+   "next": "f9be00f4-0792-4564-b9df-3e8f45e8f0be"
+  },
+  {
+   "id": "f9be00f4-0792-4564-b9df-3e8f45e8f0be",
+   "order": 18,
+   "type": "wait",
+   "name": "Wait 20d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 20,
+     "when": "after"
+    }
+   },
+   "next": "562e5982-20d1-4df0-b3a1-3788a27fa839"
+  },
+  {
+   "id": "562e5982-20d1-4df0-b3a1-3788a27fa839",
+   "order": 19,
+   "type": "sms",
+   "name": "SMS: warm touch 10 [sms_wf09_warm_t10]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, just checking in. If you ever want to speak with one of our doctors about your health, we can help you schedule a visit.\n\n{{ custom_values.sms_opt_out_footer }}",
+    "attachments": []
+   },
+   "next": "cc88c867-68a0-46ea-85a9-f125d012d7a6"
+  },
+  {
+   "id": "cc88c867-68a0-46ea-85a9-f125d012d7a6",
+   "order": 20,
+   "type": "wait",
+   "name": "Wait 7d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 7,
+     "when": "after"
+    }
+   },
+   "next": "2d5fe591-8a6f-45e8-86bd-0f2113c492d1"
+  },
+  {
+   "id": "2d5fe591-8a6f-45e8-86bd-0f2113c492d1",
+   "order": 21,
+   "type": "email",
+   "name": "Email: warm touch 11 [email_wf09_warm_t11]",
+   "attributes": {
+    "subject": "What other members experienced",
+    "html": "Hi {{contact.first_name}}, Many members who visit our clinic say they wish they had come in sooner just to understand what was going on with their health. If you ever want to learn more, we would be happy to see you. {{contact.current_booking_url}}",
+    "type": "email"
+   },
+   "next": "4a74bcbb-75ab-4869-b9d0-970a2b49102a"
+  },
+  {
+   "id": "4a74bcbb-75ab-4869-b9d0-970a2b49102a",
+   "order": 22,
+   "type": "wait",
+   "name": "Wait 10d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 10,
+     "when": "after"
+    }
+   },
+   "next": "1de0d4a9-67e1-48ee-a82b-af5ceeeb405a"
+  },
+  {
+   "id": "1de0d4a9-67e1-48ee-a82b-af5ceeeb405a",
+   "order": 23,
+   "type": "sms",
+   "name": "SMS: warm touch 12 [sms_wf09_warm_t12]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, just checking in. If you ever want to speak with one of our doctors about your health, we can help you schedule a visit.",
+    "attachments": []
+   }
+  },
+  {
+   "id": "53c2552a-4f24-442e-b076-b82a78edeced",
+   "order": 0,
+   "type": "wait",
+   "name": "Wait 30d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 30,
+     "when": "after"
+    }
+   },
+   "parent": "d3602df1-4417-4cf8-bcdb-101ea78054ea",
+   "parentKey": "d3602df1-4417-4cf8-bcdb-101ea78054ea",
+   "next": "8760f17b-1cbd-431e-8a65-c79ac5555b13"
+  },
+  {
+   "id": "8760f17b-1cbd-431e-8a65-c79ac5555b13",
+   "order": 1,
+   "type": "email",
+   "name": "Email: cold touch 1 [email_wf09_cold_t1]",
+   "attributes": {
+    "subject": "Checking in",
+    "html": "Hi {{contact.first_name}}, We have not spoken in a while, but we wanted to check in. If you ever want to understand more about your health or speak with one of our doctors, our team is here to help. {{contact.current_booking_url}} {{ custom_values.sms_opt_out_footer }}",
+    "type": "email"
+   },
+   "next": "42c5d3de-c3ed-4910-9c5e-4bcd6cacb96d"
+  },
+  {
+   "id": "42c5d3de-c3ed-4910-9c5e-4bcd6cacb96d",
+   "order": 2,
+   "type": "wait",
+   "name": "Wait 45d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 45,
+     "when": "after"
+    }
+   },
+   "next": "9565f79d-2f89-44aa-b8e9-4a4d45121444"
+  },
+  {
+   "id": "9565f79d-2f89-44aa-b8e9-4a4d45121444",
+   "order": 3,
+   "type": "sms",
+   "name": "SMS: cold touch 2 [sms_wf09_cold_t2]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, if you ever want to visit the clinic for a consultation, we would be happy to help you schedule a time.\n\n{{ custom_values.sms_opt_out_footer }}",
+    "attachments": []
+   },
+   "next": "a0a912f7-cadf-4c71-902f-2d18047f5dfe"
+  },
+  {
+   "id": "a0a912f7-cadf-4c71-902f-2d18047f5dfe",
+   "order": 4,
+   "type": "wait",
+   "name": "Wait 14d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 14,
+     "when": "after"
+    }
+   },
+   "next": "ad64ba56-b7e2-4318-8b74-329fe714c7d9"
+  },
+  {
+   "id": "ad64ba56-b7e2-4318-8b74-329fe714c7d9",
+   "order": 5,
+   "type": "email",
+   "name": "Email: cold touch 3 [email_wf09_cold_t3]",
+   "attributes": {
+    "subject": "Your health questions matter",
+    "html": "Hi {{contact.first_name}}, Whenever you feel ready to revisit the conversation about your health, our physicians are here to help. You can schedule a visit anytime. {{contact.current_booking_url}}",
+    "type": "email"
+   },
+   "next": "b7d5b764-3e5d-4b2a-b421-128f6964a41f"
+  },
+  {
+   "id": "b7d5b764-3e5d-4b2a-b421-128f6964a41f",
+   "order": 6,
+   "type": "wait",
+   "name": "Wait 30d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 30,
+     "when": "after"
+    }
+   },
+   "next": "204d0116-e61b-4560-a6d1-86e032c6859b"
+  },
+  {
+   "id": "204d0116-e61b-4560-a6d1-86e032c6859b",
+   "order": 7,
+   "type": "email",
+   "name": "Email: cold touch 4 [email_wf09_cold_t4]",
+   "attributes": {
+    "subject": "Checking in",
+    "html": "Hi {{contact.first_name}}, We have not spoken in a while, but we wanted to check in. If you ever want to understand more about your health or speak with one of our doctors, our team is here to help. {{contact.current_booking_url}} {{ custom_values.sms_opt_out_footer }}",
+    "type": "email"
+   },
+   "next": "574c2521-317a-42df-b8a4-7c106e02aea7"
+  },
+  {
+   "id": "574c2521-317a-42df-b8a4-7c106e02aea7",
+   "order": 8,
+   "type": "wait",
+   "name": "Wait 45d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 45,
+     "when": "after"
+    }
+   },
+   "next": "1dcc4aa6-c552-400a-864f-f74cbc0f74be"
+  },
+  {
+   "id": "1dcc4aa6-c552-400a-864f-f74cbc0f74be",
+   "order": 9,
+   "type": "sms",
+   "name": "SMS: cold touch 5 [sms_wf09_cold_t5]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, if you ever want to visit the clinic for a consultation, we would be happy to help you schedule a time.\n\n{{ custom_values.sms_opt_out_footer }}",
+    "attachments": []
+   },
+   "next": "55393eea-7eda-4c5c-aa0d-79aa81640ac4"
+  },
+  {
+   "id": "55393eea-7eda-4c5c-aa0d-79aa81640ac4",
+   "order": 10,
+   "type": "wait",
+   "name": "Wait 14d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 14,
+     "when": "after"
+    }
+   },
+   "next": "7face54b-6a52-49fa-b049-e72740e212ea"
+  },
+  {
+   "id": "7face54b-6a52-49fa-b049-e72740e212ea",
+   "order": 11,
+   "type": "email",
+   "name": "Email: cold touch 6 [email_wf09_cold_t6]",
+   "attributes": {
+    "subject": "Your health questions matter",
+    "html": "Hi {{contact.first_name}}, Whenever you feel ready to revisit the conversation about your health, our physicians are here to help. You can schedule a visit anytime. {{contact.current_booking_url}}",
+    "type": "email"
+   },
+   "next": "90188217-db70-4f2d-b24f-ade0bbfee9ff"
+  },
+  {
+   "id": "90188217-db70-4f2d-b24f-ade0bbfee9ff",
+   "order": 12,
+   "type": "wait",
+   "name": "Wait 30d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 30,
+     "when": "after"
+    }
+   },
+   "next": "11699f7c-6d1a-4878-92a7-2bcab5293a09"
+  },
+  {
+   "id": "11699f7c-6d1a-4878-92a7-2bcab5293a09",
+   "order": 13,
+   "type": "email",
+   "name": "Email: cold touch 7 [email_wf09_cold_t7]",
+   "attributes": {
+    "subject": "Checking in",
+    "html": "Hi {{contact.first_name}}, We have not spoken in a while, but we wanted to check in. If you ever want to understand more about your health or speak with one of our doctors, our team is here to help. {{contact.current_booking_url}} {{ custom_values.sms_opt_out_footer }}",
+    "type": "email"
+   },
+   "next": "354181aa-b95a-40b6-9957-68b89aa51637"
+  },
+  {
+   "id": "354181aa-b95a-40b6-9957-68b89aa51637",
+   "order": 14,
+   "type": "wait",
+   "name": "Wait 45d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 45,
+     "when": "after"
+    }
+   },
+   "next": "b87c6647-8d19-4719-8c41-be419473ebbc"
+  },
+  {
+   "id": "b87c6647-8d19-4719-8c41-be419473ebbc",
+   "order": 15,
+   "type": "sms",
+   "name": "SMS: cold touch 8 [sms_wf09_cold_t8]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, if you ever want to visit the clinic for a consultation, we would be happy to help you schedule a time.\n\n{{ custom_values.sms_opt_out_footer }}",
+    "attachments": []
+   },
+   "next": "4f600115-0586-4417-9503-fae80502c1c7"
+  },
+  {
+   "id": "4f600115-0586-4417-9503-fae80502c1c7",
+   "order": 16,
+   "type": "wait",
+   "name": "Wait 14d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 14,
+     "when": "after"
+    }
+   },
+   "next": "2b60303f-7a6a-41a2-b21c-d5cf72a18446"
+  },
+  {
+   "id": "2b60303f-7a6a-41a2-b21c-d5cf72a18446",
+   "order": 17,
+   "type": "email",
+   "name": "Email: cold touch 9 [email_wf09_cold_t9]",
+   "attributes": {
+    "subject": "Your health questions matter",
+    "html": "Hi {{contact.first_name}}, Whenever you feel ready to revisit the conversation about your health, our physicians are here to help. You can schedule a visit anytime. {{contact.current_booking_url}}",
+    "type": "email"
+   }
+  }
+ ]
+}

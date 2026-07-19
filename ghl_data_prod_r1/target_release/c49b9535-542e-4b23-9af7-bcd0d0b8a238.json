@@ -1,0 +1,66 @@
+{
+ "templates": [
+  {
+   "id": "eb1d349b-a096-4342-b5c6-1a7d6e388b0b",
+   "order": 0,
+   "name": "IVR: Simultaneous ring",
+   "type": "sms",
+   "attributes": {
+    "body": "[CALL TASK PLACEHOLDER] IVR: Simultaneous ring. Reply STOP to opt out.",
+    "attachments": []
+   },
+   "next": "192456fc-864c-486b-8146-f8b1061b4a71"
+  },
+  {
+   "id": "192456fc-864c-486b-8146-f8b1061b4a71",
+   "order": 0,
+   "name": "SMS: Instant Text-Back (T+0)",
+   "type": "sms",
+   "attributes": {
+    "body": "Sorry we missed your call to Men's Wellness Centers, {{contact.first_name}}. How can we help? You can book your {{ custom_values.consult_descriptor }} here: {{contact.current_booking_url}} {{ custom_values.sms_opt_out_footer }}",
+    "attachments": []
+   },
+   "next": "d461747e-c9da-4da5-a7db-5c69b7f00c3b"
+  },
+  {
+   "id": "d461747e-c9da-4da5-a7db-5c69b7f00c3b",
+   "order": 0,
+   "name": "SMS: Follow-Up (T+30m)",
+   "type": "sms",
+   "attributes": {
+    "body": "Follow-up text.",
+    "attachments": []
+   },
+   "next": "53cb4dff-3577-4b44-87bb-061967984932"
+  },
+  {
+   "id": "53cb4dff-3577-4b44-87bb-061967984932",
+   "order": 0,
+   "name": "Chat: Auto-Response",
+   "type": "sms",
+   "attributes": {
+    "body": "On chat OOO, auto-respond with the scheduling link.",
+    "attachments": []
+   },
+   "next": "9cd47565-2f52-4ced-8b5b-e01b56259b94"
+  },
+  {
+   "id": "9cd47565-2f52-4ced-8b5b-e01b56259b94",
+   "order": 0,
+   "type": "update_contact_field",
+   "name": "Attr: missed-call source stamp (D17)",
+   "attributes": {
+    "type": "update_contact_field",
+    "actionType": "update_field_data",
+    "fields": [
+     {
+      "field": "thwe93MxRDzS2SO9pxxC",
+      "value": "phone",
+      "title": "UTM Source",
+      "type": "TEXT"
+     }
+    ]
+   }
+  }
+ ]
+}

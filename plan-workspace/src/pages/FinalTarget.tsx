@@ -6,6 +6,12 @@ import { Compass, ShieldCheck, Database, Workflow as WorkflowIcon, ClipboardList
 
 interface FT {
   version: string; date: string; basis: string; principles: string[];
+  prod_reconciliation?: string;
+  target_release_findings?: {
+    date: string; summary: string; triggers: string;
+    cadence_standard: Record<string, string> & { principle: string };
+    length_and_context: string[];
+  };
   limitation_rules: { rule: string; response: string }[];
   field_model: {
     opportunity_final: { key: string; type: string; options?: string; writer: string; status: string }[];
@@ -154,6 +160,32 @@ export default function FinalTarget() {
           </table>
         </CardContent></Card>
       </section>
+
+      {data.target_release_findings && (
+        <section className="space-y-2">
+          <h2 className="text-sm font-semibold">Target Release draft audit + cadence standard ({data.target_release_findings.date})</h2>
+          <div className="rounded-md border border-l-4 border-l-red-500 bg-card p-3 text-sm text-muted-foreground">{data.target_release_findings.summary}</div>
+          <div className="rounded-md border bg-card p-3 text-sm text-muted-foreground"><b className="text-foreground">Triggers:</b> {data.target_release_findings.triggers}</div>
+          <Card><CardContent className="p-0">
+            <div className="border-b px-3 py-2 text-xs font-semibold text-muted-foreground">Cadence standard (proven live timing wins)</div>
+            <table className="w-full text-sm">
+              <tbody>
+                {Object.entries(data.target_release_findings.cadence_standard).map(([k, v]) => (
+                  <tr key={k} className="border-b align-top last:border-0">
+                    <td className="w-48 px-3 py-2 font-mono text-xs">{k}</td>
+                    <td className="px-3 py-2 text-sm text-muted-foreground">{v}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </CardContent></Card>
+          <div className="rounded-md border bg-card p-3">
+            <ul className="space-y-1.5 text-sm text-muted-foreground">
+              {data.target_release_findings.length_and_context.map((x, i) => <li key={i} className="flex gap-1.5"><span className="text-muted-foreground/60">•</span>{x}</li>)}
+            </ul>
+          </div>
+        </section>
+      )}
 
       <section className="space-y-2">
         <h2 className="text-sm font-semibold">Backlog</h2>

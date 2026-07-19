@@ -1,0 +1,29 @@
+{
+ "templates": [
+  {
+   "id": "479f070a-ed68-42cb-97b5-1542b3918272",
+   "order": 0,
+   "type": "webhook",
+   "name": "Webhook: Booked Conversion (D17: swap to native google_adword+facebook_conversion_api at go-live; event_id={{opportunity.id}})",
+   "next": "ad0234f8-91ec-4997-83a0-810c5195a8dc",
+   "attributes": {
+    "method": "POST",
+    "url": "https://mwc-admin.vercel.app/api/ghl-webhook?event=booked&event_id={{opportunity.id}}",
+    "customData": [],
+    "headers": []
+   }
+  },
+  {
+   "id": "ad0234f8-91ec-4997-83a0-810c5195a8dc",
+   "order": 1,
+   "type": "webhook",
+   "name": "Webhook: Won Conversion w/ value (D17: native actions at go-live; value from WF-17 total; event_id={{opportunity.id}})",
+   "attributes": {
+    "method": "POST",
+    "url": "https://mwc-admin.vercel.app/api/ghl-webhook?event=won&event_id={{opportunity.id}}&value={{opportunity.lead_value}}",
+    "customData": [],
+    "headers": []
+   }
+  }
+ ]
+}

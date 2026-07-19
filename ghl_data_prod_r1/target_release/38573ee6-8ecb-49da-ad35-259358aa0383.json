@@ -1,0 +1,51 @@
+{
+ "templates": [
+  {
+   "id": "77946bb6-b215-4a13-b4a7-79c3f8eab512",
+   "order": 0,
+   "type": "sms",
+   "name": "probe lead",
+   "attributes": {
+    "body": "probe. Reply STOP to opt out.",
+    "attachments": []
+   },
+   "next": "226b41a9-0370-4a58-b34a-d6d7e7386ff3"
+  },
+  {
+   "id": "226b41a9-0370-4a58-b34a-d6d7e7386ff3",
+   "order": 1,
+   "type": "math_operation",
+   "name": "PROBE date add",
+   "attributes": {
+    "selectField": "P7s4MzoabSdwf0u05vyh",
+    "selectFieldtype": "date",
+    "sourceCustomValueId": "",
+    "updateField": "eIlYPOpD28vjKTQbccxM",
+    "updateFieldType": "date",
+    "targetCustomValueId": "",
+    "operators": [
+     {
+      "operator": "add",
+      "value": "12",
+      "unit": "month",
+      "__id": "40d52c0e-44d4-47b6-b04f-f33e933a558e"
+     }
+    ],
+    "type": "math_operation"
+   },
+   "next": "e333297f-e379-4fe3-9f32-f0d8b933c2d7",
+   "parentKey": "77946bb6-b215-4a13-b4a7-79c3f8eab512"
+  },
+  {
+   "id": "e333297f-e379-4fe3-9f32-f0d8b933c2d7",
+   "order": 2,
+   "type": "sms",
+   "name": "probe close",
+   "attributes": {
+    "body": "end. Reply STOP to opt out.",
+    "attachments": []
+   },
+   "parentKey": "226b41a9-0370-4a58-b34a-d6d7e7386ff3"
+  }
+ ]
+}

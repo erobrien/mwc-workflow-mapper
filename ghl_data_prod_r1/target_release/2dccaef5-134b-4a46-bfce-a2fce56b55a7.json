@@ -1,0 +1,59 @@
+{
+ "templates": [
+  {
+   "id": "ba3601be-2b13-49ca-9672-9bb94dec1e4b",
+   "order": 0,
+   "name": "SMS: Ambassador Invitation",
+   "type": "sms",
+   "attributes": {
+    "body": "{{contact.first_name}}, know a man who could use his edge back? Refer him to Men's Wellness Centers and we will take care of you both. {{custom_values.referral_link}} {{ custom_values.sms_opt_out_footer }}",
+    "attachments": []
+   },
+   "next": "61d9757c-5cc8-4837-9f8d-9b7863232c52"
+  },
+  {
+   "id": "61d9757c-5cc8-4837-9f8d-9b7863232c52",
+   "order": 0,
+   "type": "wait",
+   "name": "Wait: 1 day",
+   "cat": "",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 1,
+     "when": "after"
+    },
+    "name": "Wait",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "next": "0b2cc9a9-afcb-4531-b31d-418d3fed9011"
+  },
+  {
+   "id": "0b2cc9a9-afcb-4531-b31d-418d3fed9011",
+   "order": 0,
+   "name": "Email: Program Welcome",
+   "type": "email",
+   "attributes": {
+    "subject": "Email: Program Welcome",
+    "html": "<p>Program welcome.</p>",
+    "type": "email"
+   },
+   "next": "22fd1a16-d872-46ee-a448-97526736d82f"
+  },
+  {
+   "id": "22fd1a16-d872-46ee-a448-97526736d82f",
+   "order": 0,
+   "name": "SMS: Reward Confirmation",
+   "type": "sms",
+   "attributes": {
+    "body": "Confirm reward. Referred contacts are always created NEW and routed through WF-15.",
+    "attachments": []
+   }
+  }
+ ]
+}

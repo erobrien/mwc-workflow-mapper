@@ -1,0 +1,103 @@
+{
+ "workflowData": {
+  "_id": "292610a8-4ac2-44bc-bfa4-9c55489d941c",
+  "locationId": "Ghstz8eIsHWLeXek47dk",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 8,
+  "name": "WF-15 PCC Referral Routing",
+  "status": "draft",
+  "version": 4,
+  "dataVersion": 7,
+  "allowMultiple": false,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/Ghstz8eIsHWLeXek47dk/workflows/292610a8-4ac2-44bc-bfa4-9c55489d941c/4",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FGhstz8eIsHWLeXek47dk%2Fworkflows%2F292610a8-4ac2-44bc-bfa4-9c55489d941c%2F4?alt=media&token=006bcf72-c77b-474f-8038-5454f99aac5a",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "permission": 380,
+  "type": "workflow",
+  "parentId": "d15ca26c-3448-4063-a0e5-d4dfa617d76c",
+  "meta": null,
+  "createdAt": "2026-07-11T14:21:13.222Z",
+  "updatedAt": "2026-07-12T02:36:03.549Z",
+  "deleted": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "user",
+  "__v": 0,
+  "allowMultipleOpportunity": false,
+  "eventStartDate": null,
+  "senderAddress": null,
+  "window": null,
+  "workflowNote": null,
+  "id": "292610a8-4ac2-44bc-bfa4-9c55489d941c",
+  "workflowData": {
+   "templates": [
+    {
+     "id": "fcc832b9-0115-497f-8c5c-81361c6efe37",
+     "order": 0,
+     "type": "create_opportunity",
+     "name": "Opp: Tracking (PCC Referrals, $500)",
+     "attributes": {
+      "fields": [],
+      "type": "create_opportunity",
+      "pipeline_id": "u5rD2kbnu2oxcvLPMNBj",
+      "pipeline_stage_id": "4bd989e3-e305-490d-bd63-5355c28a0ff3",
+      "opportunity_status": "open",
+      "opportunity_name": "{{contact.name}}",
+      "opportunity_source": "PCC Referral",
+      "monetary_value": "500"
+     },
+     "next": "aada12de-bafe-4757-b79f-3f366f2c553a"
+    },
+    {
+     "id": "aada12de-bafe-4757-b79f-3f366f2c553a",
+     "order": 0,
+     "name": "SMS: Referred-Lead Welcome",
+     "type": "sms",
+     "attributes": {
+      "body": "Hi {{contact.first_name}}, you were referred to Men's Wellness Centers. We would love to book your {{ custom_values.consult_descriptor }}. What day works? {{ custom_values.sms_opt_out_footer }}",
+      "attachments": []
+     },
+     "next": "0c79a2f7-1368-4c1f-acbe-d7901ecd7e1e"
+    },
+    {
+     "id": "0c79a2f7-1368-4c1f-acbe-d7901ecd7e1e",
+     "order": 0,
+     "name": "Email: Referred-Lead Welcome",
+     "type": "email",
+     "attributes": {
+      "subject": "",
+      "html": "Hi {{contact.first_name}}, you were referred to Men's Wellness Centers. We would love to book your {{ custom_values.consult_descriptor }}. What day works? {{ custom_values.sms_opt_out_footer }}",
+      "type": "email"
+     },
+     "next": "6bd6cee4-350c-45d4-b261-ee98c27e47fc"
+    },
+    {
+     "id": "6bd6cee4-350c-45d4-b261-ee98c27e47fc",
+     "order": 0,
+     "name": "Notify: Routing alert",
+     "type": "internal_notification",
+     "attributes": {
+      "type": "email",
+      "email": {
+       "userType": "custom_email",
+       "to": "consult-results@menswellnesscenters.com",
+       "from_name": "{{location.name}}",
+       "from_email": "{{location.email}}",
+       "subject": "Notify: Routing alert",
+       "body": "Internal routing alert."
+      }
+     }
+    }
+   ]
+  }
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ },
+ "triggers": [],
+ "dependentAssets": {}
+}

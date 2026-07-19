@@ -1,0 +1,71 @@
+{
+ "workflowData": {
+  "_id": "31d2903c-c0e1-4712-b833-3f7dea44b628",
+  "locationId": "Ghstz8eIsHWLeXek47dk",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 8,
+  "name": "WF-13 Ad-Platform Conversions",
+  "status": "draft",
+  "version": 4,
+  "dataVersion": 7,
+  "allowMultiple": false,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/Ghstz8eIsHWLeXek47dk/workflows/31d2903c-c0e1-4712-b833-3f7dea44b628/4",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FGhstz8eIsHWLeXek47dk%2Fworkflows%2F31d2903c-c0e1-4712-b833-3f7dea44b628%2F4?alt=media&token=8129526b-0f4c-4b8e-94b7-7666be682e54",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "permission": 380,
+  "type": "workflow",
+  "parentId": "d15ca26c-3448-4063-a0e5-d4dfa617d76c",
+  "meta": null,
+  "createdAt": "2026-07-11T14:22:18.594Z",
+  "updatedAt": "2026-07-12T02:37:13.817Z",
+  "deleted": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "user",
+  "__v": 0,
+  "allowMultipleOpportunity": false,
+  "eventStartDate": null,
+  "senderAddress": null,
+  "window": null,
+  "workflowNote": null,
+  "id": "31d2903c-c0e1-4712-b833-3f7dea44b628",
+  "workflowData": {
+   "templates": [
+    {
+     "id": "479f070a-ed68-42cb-97b5-1542b3918272",
+     "order": 0,
+     "type": "webhook",
+     "name": "Webhook: Booked Conversion (D17: swap to native google_adword+facebook_conversion_api at go-live; event_id={{opportunity.id}})",
+     "next": "ad0234f8-91ec-4997-83a0-810c5195a8dc",
+     "attributes": {
+      "method": "POST",
+      "url": "https://mwc-admin.vercel.app/api/ghl-webhook?event=booked&event_id={{opportunity.id}}",
+      "customData": [],
+      "headers": []
+     }
+    },
+    {
+     "id": "ad0234f8-91ec-4997-83a0-810c5195a8dc",
+     "order": 1,
+     "type": "webhook",
+     "name": "Webhook: Won Conversion w/ value (D17: native actions at go-live; value from WF-17 total; event_id={{opportunity.id}})",
+     "attributes": {
+      "method": "POST",
+      "url": "https://mwc-admin.vercel.app/api/ghl-webhook?event=won&event_id={{opportunity.id}}&value={{opportunity.lead_value}}",
+      "customData": [],
+      "headers": []
+     }
+    }
+   ]
+  }
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ },
+ "triggers": [],
+ "dependentAssets": {}
+}

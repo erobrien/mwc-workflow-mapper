@@ -1,0 +1,111 @@
+{
+ "workflowData": {
+  "_id": "535d945e-7ff6-421d-9f2d-332401acbe8f",
+  "locationId": "Ghstz8eIsHWLeXek47dk",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 8,
+  "name": "WF-11 Compliance and Errors",
+  "status": "draft",
+  "version": 4,
+  "dataVersion": 7,
+  "allowMultiple": false,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/Ghstz8eIsHWLeXek47dk/workflows/535d945e-7ff6-421d-9f2d-332401acbe8f/4",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FGhstz8eIsHWLeXek47dk%2Fworkflows%2F535d945e-7ff6-421d-9f2d-332401acbe8f%2F4?alt=media&token=0243d5bd-16f9-43f7-ac79-314bcd63a21a",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "permission": 380,
+  "type": "workflow",
+  "parentId": "d15ca26c-3448-4063-a0e5-d4dfa617d76c",
+  "meta": null,
+  "createdAt": "2026-07-11T14:22:14.559Z",
+  "updatedAt": "2026-07-11T17:15:03.091Z",
+  "deleted": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "user",
+  "__v": 0,
+  "allowMultipleOpportunity": false,
+  "eventStartDate": null,
+  "senderAddress": null,
+  "window": null,
+  "workflowNote": null,
+  "id": "535d945e-7ff6-421d-9f2d-332401acbe8f",
+  "workflowData": {
+   "templates": [
+    {
+     "id": "35787c20-0d70-4423-9cba-90ae81d59bbe",
+     "order": 0,
+     "type": "if_else",
+     "name": "If: sms_consent_status == opted_out",
+     "attributes": {
+      "currentRecipeType": "CUSTOM",
+      "operator": "and",
+      "if": true,
+      "conditionName": "Condition",
+      "version": 2,
+      "noneBranchName": "Opted-in / unknown",
+      "branches": [
+       {
+        "id": "060caf0e-8c47-4408-866e-169da0701739",
+        "name": "Opted out",
+        "operator": "and",
+        "showErrors": false,
+        "branchNameError": "Branch name cannot be empty!",
+        "segments": [
+         {
+          "__segmentId": "6dfd2f50-bd85-4f4f-a1fb-227ec1817fde",
+          "operator": "and",
+          "conditions": [
+           {
+            "conditionType": "contact_detail",
+            "conditionSubType": "664Tn9XccGQv3XZsnSc4",
+            "conditionOperator": "==",
+            "conditionValue": "opted_out",
+            "__conditionId": "27ae6189-1901-446b-bfae-895dd013f863",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     "cat": "conditions",
+     "nodeType": "condition-node",
+     "comments": [],
+     "next": [
+      "060caf0e-8c47-4408-866e-169da0701739",
+      "fbe2f677-8d48-4b19-920b-10752da440f7"
+     ]
+    },
+    {
+     "id": "488b175c-3666-4707-967c-798ef66db23d",
+     "order": 0,
+     "type": "dnd_contact",
+     "name": "Set DND (suppress SMS + Call)",
+     "attributes": {
+      "type": "dnd_contact",
+      "dnd_direction": "outbound",
+      "dnd_contact": "enable_specific",
+      "specific_channels": [
+       "SMS",
+       "Call"
+      ]
+     },
+     "parent": "060caf0e-8c47-4408-866e-169da0701739",
+     "parentKey": "060caf0e-8c47-4408-866e-169da0701739"
+    }
+   ]
+  }
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ },
+ "triggers": [],
+ "dependentAssets": {}
+}

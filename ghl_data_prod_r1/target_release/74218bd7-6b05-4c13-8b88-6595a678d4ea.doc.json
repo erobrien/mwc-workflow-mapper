@@ -1,0 +1,320 @@
+{
+ "workflowData": {
+  "_id": "74218bd7-6b05-4c13-8b88-6595a678d4ea",
+  "locationId": "Ghstz8eIsHWLeXek47dk",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 8,
+  "name": "WF-06 Post-Visit Won and Onboarding",
+  "status": "draft",
+  "version": 6,
+  "dataVersion": 7,
+  "allowMultiple": false,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/Ghstz8eIsHWLeXek47dk/workflows/74218bd7-6b05-4c13-8b88-6595a678d4ea/6",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FGhstz8eIsHWLeXek47dk%2Fworkflows%2F74218bd7-6b05-4c13-8b88-6595a678d4ea%2F6?alt=media&token=f500393a-3dd6-4926-98e8-8cbafa9ed285",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "permission": 380,
+  "type": "workflow",
+  "parentId": "d15ca26c-3448-4063-a0e5-d4dfa617d76c",
+  "meta": null,
+  "createdAt": "2026-07-11T14:21:00.375Z",
+  "updatedAt": "2026-07-12T02:35:58.878Z",
+  "deleted": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "user",
+  "__v": 0,
+  "allowMultipleOpportunity": false,
+  "eventStartDate": null,
+  "senderAddress": null,
+  "window": null,
+  "workflowNote": null,
+  "id": "74218bd7-6b05-4c13-8b88-6595a678d4ea",
+  "workflowData": {
+   "templates": [
+    {
+     "id": "29ba2b9e-5d89-41b9-bad2-50516f886041",
+     "order": 0,
+     "type": "wait",
+     "name": "Wait: 1 hour",
+     "cat": "",
+     "attributes": {
+      "type": "time",
+      "startAfter": {
+       "type": "hour",
+       "value": 1,
+       "when": "after"
+      },
+      "name": "Wait",
+      "cat": "",
+      "isHybridAction": true,
+      "hybridActionType": "wait",
+      "convertToMultipath": false,
+      "transitions": []
+     },
+     "next": "eb57a38e-7287-414c-a9a8-5079dfd2d734"
+    },
+    {
+     "id": "eb57a38e-7287-414c-a9a8-5079dfd2d734",
+     "order": 0,
+     "name": "SMS: Welcome (T+1h)",
+     "type": "sms",
+     "attributes": {
+      "body": "Welcome the new member.",
+      "attachments": []
+     },
+     "next": "f4b45b90-5847-43b7-a6b1-17c6368a825e"
+    },
+    {
+     "id": "f4b45b90-5847-43b7-a6b1-17c6368a825e",
+     "order": 0,
+     "name": "Email: Welcome and Onboarding (T+1h)",
+     "type": "email",
+     "attributes": {
+      "subject": "Email: Welcome and Onboarding (T+1h)",
+      "html": "<p>Onboarding email.</p>",
+      "type": "email"
+     },
+     "next": "b6b21985-3391-4930-a593-978beb094516"
+    },
+    {
+     "id": "b6b21985-3391-4930-a593-978beb094516",
+     "order": 0,
+     "type": "wait",
+     "name": "Wait: 3 days",
+     "cat": "",
+     "attributes": {
+      "type": "time",
+      "startAfter": {
+       "type": "days",
+       "value": 3,
+       "when": "after"
+      },
+      "name": "Wait",
+      "cat": "",
+      "isHybridAction": true,
+      "hybridActionType": "wait",
+      "convertToMultipath": false,
+      "transitions": []
+     },
+     "next": "862c3f2d-1f35-4ecf-8871-0954ad722e26"
+    },
+    {
+     "id": "862c3f2d-1f35-4ecf-8871-0954ad722e26",
+     "order": 0,
+     "name": "SMS: Check-In (T+3d)",
+     "type": "sms",
+     "attributes": {
+      "body": "Day-3 check-in.",
+      "attachments": []
+     },
+     "next": "f9cecc8b-8548-42b1-9b12-a6bd3eb37094"
+    },
+    {
+     "id": "f9cecc8b-8548-42b1-9b12-a6bd3eb37094",
+     "order": 0,
+     "type": "wait",
+     "name": "Wait: 4 days",
+     "cat": "",
+     "attributes": {
+      "type": "time",
+      "startAfter": {
+       "type": "days",
+       "value": 4,
+       "when": "after"
+      },
+      "name": "Wait",
+      "cat": "",
+      "isHybridAction": true,
+      "hybridActionType": "wait",
+      "convertToMultipath": false,
+      "transitions": []
+     },
+     "next": "0c3c9fb4-9a4d-4fe8-9c73-f859899c67ce"
+    },
+    {
+     "id": "0c3c9fb4-9a4d-4fe8-9c73-f859899c67ce",
+     "order": 0,
+     "name": "Email: Week 1 Progress (T+7d)",
+     "type": "email",
+     "attributes": {
+      "subject": "Email: Week 1 Progress (T+7d)",
+      "html": "<p>Week-1 progress.</p>",
+      "type": "email"
+     },
+     "next": "d94322bc-312a-4471-b7e2-8c1b30c82bc0"
+    },
+    {
+     "id": "d94322bc-312a-4471-b7e2-8c1b30c82bc0",
+     "order": 0,
+     "type": "wait",
+     "name": "Wait: 7 days",
+     "cat": "",
+     "attributes": {
+      "type": "time",
+      "startAfter": {
+       "type": "days",
+       "value": 7,
+       "when": "after"
+      },
+      "name": "Wait",
+      "cat": "",
+      "isHybridAction": true,
+      "hybridActionType": "wait",
+      "convertToMultipath": false,
+      "transitions": []
+     },
+     "next": "dc1af5e8-74aa-41c8-98ed-fbbbeb12d9e9"
+    },
+    {
+     "id": "dc1af5e8-74aa-41c8-98ed-fbbbeb12d9e9",
+     "order": 1,
+     "type": "if_else",
+     "name": "If: NPS on visit_feedback_score",
+     "attributes": {
+      "currentRecipeType": "CUSTOM",
+      "operator": "and",
+      "if": true,
+      "conditionName": "Condition",
+      "version": 2,
+      "noneBranchName": "Neutral / no score",
+      "branches": [
+       {
+        "id": "cd4bdc28-8044-4bd1-8849-35af93763819",
+        "name": "Promoter (>=8)",
+        "operator": "and",
+        "showErrors": false,
+        "branchNameError": "Branch name cannot be empty!",
+        "segments": [
+         {
+          "__segmentId": "7218e472-c2e4-4647-ba7d-efae57709c8f",
+          "operator": "and",
+          "conditions": [
+           {
+            "conditionType": "opportunity",
+            "conditionSubType": "pHU1CTIrEKZsVoti8GYe",
+            "conditionOperator": ">=",
+            "conditionValue": "8",
+            "__conditionId": "eb8fa305-3715-4ce5-9dc8-c48477ac5507",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "id": "2a96765d-9ea8-491b-b00d-4d04bf15f257",
+        "name": "Detractor (<=6)",
+        "operator": "and",
+        "showErrors": false,
+        "branchNameError": "Branch name cannot be empty!",
+        "segments": [
+         {
+          "__segmentId": "ba512afc-767c-4484-94ba-fd4d5645a379",
+          "operator": "and",
+          "conditions": [
+           {
+            "conditionType": "opportunity",
+            "conditionSubType": "pHU1CTIrEKZsVoti8GYe",
+            "conditionOperator": "<=",
+            "conditionValue": "6",
+            "__conditionId": "82901582-7b81-4a9f-84e2-1b2493886489",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     "cat": "conditions",
+     "nodeType": "condition-node",
+     "comments": [],
+     "next": [
+      "cd4bdc28-8044-4bd1-8849-35af93763819",
+      "2a96765d-9ea8-491b-b00d-4d04bf15f257",
+      "c90292b1-7474-4abe-a839-3410843173a5"
+     ],
+     "parentKey": "d94322bc-312a-4471-b7e2-8c1b30c82bc0"
+    },
+    {
+     "id": "dfe646c0-07c9-4c71-850e-e6081d02bdbe",
+     "order": 0,
+     "name": "SMS: Google Review Request (T+14d, conditional)",
+     "type": "sms",
+     "attributes": {
+      "body": "{{contact.first_name}}, it means a lot to hear your visit went well. Would you share a quick review of Men's Wellness Centers? {{contact.current_review_link}} {{ custom_values.sms_opt_out_footer }}",
+      "attachments": []
+     },
+     "next": "ae581821-054b-4b48-9302-affc3516b9e1",
+     "parentKey": "cd4bdc28-8044-4bd1-8849-35af93763819"
+    },
+    {
+     "id": "ae581821-054b-4b48-9302-affc3516b9e1",
+     "order": 0,
+     "type": "wait",
+     "name": "Wait: 7 days",
+     "cat": "",
+     "attributes": {
+      "type": "time",
+      "startAfter": {
+       "type": "days",
+       "value": 7,
+       "when": "after"
+      },
+      "name": "Wait",
+      "cat": "",
+      "isHybridAction": true,
+      "hybridActionType": "wait",
+      "convertToMultipath": false,
+      "transitions": []
+     },
+     "parentKey": "dfe646c0-07c9-4c71-850e-e6081d02bdbe",
+     "next": "00bb2345-2798-4fb4-a706-58f22f6655b3"
+    },
+    {
+     "id": "00bb2345-2798-4fb4-a706-58f22f6655b3",
+     "order": 0,
+     "name": "SMS: Referral Activation (T+21d)",
+     "type": "sms",
+     "attributes": {
+      "body": "Then exit to WF-14 Ambassador Program and WF-09 Renewal Reminders sub-flow.",
+      "attachments": []
+     },
+     "parentKey": "ae581821-054b-4b48-9302-affc3516b9e1"
+    },
+    {
+     "id": "2ba269ef-afb6-4c71-b08c-758cd159713a",
+     "order": 0,
+     "type": "internal_notification",
+     "name": "Notify: Negative NPS - PCC follow-up",
+     "attributes": {
+      "type": "email",
+      "email": {
+       "userType": "custom_email",
+       "to": "consult-results@menswellnesscenters.com",
+       "from_name": "{{location.name}}",
+       "from_email": "{{location.email}}",
+       "subject": "Negative NPS - PCC follow-up: {{contact.name}}",
+       "body": "Member {{contact.name}} ({{contact.phone}}) gave a visit feedback score below 7. Please follow up."
+      }
+     },
+     "parent": "2a96765d-9ea8-491b-b00d-4d04bf15f257",
+     "parentKey": "2a96765d-9ea8-491b-b00d-4d04bf15f257"
+    }
+   ]
+  }
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ },
+ "triggers": [],
+ "dependentAssets": {}
+}

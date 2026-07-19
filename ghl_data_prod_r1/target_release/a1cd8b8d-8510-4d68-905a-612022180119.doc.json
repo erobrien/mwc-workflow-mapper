@@ -1,0 +1,375 @@
+{
+ "workflowData": {
+  "_id": "a1cd8b8d-8510-4d68-905a-612022180119",
+  "locationId": "Ghstz8eIsHWLeXek47dk",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 8,
+  "name": "WF-05 Clinic Outcome Router",
+  "status": "draft",
+  "version": 7,
+  "dataVersion": 7,
+  "allowMultiple": false,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/Ghstz8eIsHWLeXek47dk/workflows/a1cd8b8d-8510-4d68-905a-612022180119/7",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FGhstz8eIsHWLeXek47dk%2Fworkflows%2Fa1cd8b8d-8510-4d68-905a-612022180119%2F7?alt=media&token=70f4dba6-1f49-402a-a7e7-93bf52400976",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "permission": 380,
+  "type": "workflow",
+  "parentId": "d15ca26c-3448-4063-a0e5-d4dfa617d76c",
+  "meta": null,
+  "createdAt": "2026-07-11T14:20:58.306Z",
+  "updatedAt": "2026-07-11T16:37:21.282Z",
+  "deleted": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "user",
+  "__v": 0,
+  "allowMultipleOpportunity": false,
+  "eventStartDate": null,
+  "senderAddress": null,
+  "window": null,
+  "workflowNote": null,
+  "id": "a1cd8b8d-8510-4d68-905a-612022180119",
+  "workflowData": {
+   "templates": [
+    {
+     "id": "3d8c976f-c619-451b-9a28-ab80392a8d8a",
+     "order": 0,
+     "type": "if_else",
+     "name": "If: appt_status gate",
+     "attributes": {
+      "currentRecipeType": "CUSTOM",
+      "branches": [
+       {
+        "id": "ae2d8319-8228-43cb-a5c0-900b63532aef",
+        "name": "Showed",
+        "segments": [
+         {
+          "__segmentId": "3eaae16d-7e10-4400-a2a1-ce247ffb249f",
+          "operator": "and",
+          "conditions": [
+           {
+            "conditionType": "opportunity",
+            "conditionSubType": "CLGsy8e96nkw9xEiUfor",
+            "conditionOperator": "==",
+            "conditionValue": "showed",
+            "__conditionId": "f184cb96-1f54-49a1-86a8-a32ba41320d1",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false
+           }
+          ]
+         }
+        ],
+        "operator": "and",
+        "showErrors": false,
+        "branchNameError": false
+       },
+       {
+        "id": "1fa184ac-bd16-45b3-b546-1e5dc7c1015c",
+        "name": "No-show or Cancel",
+        "segments": [
+         {
+          "__segmentId": "20cc518d-2355-44cb-9ea9-cda69269992d",
+          "operator": "and",
+          "conditions": [
+           {
+            "conditionType": "opportunity",
+            "conditionSubType": "CLGsy8e96nkw9xEiUfor",
+            "conditionOperator": "is_any_of",
+            "conditionValue": "no-show",
+            "__conditionId": "aed51935-ffb6-436f-8971-67262734f6b9",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false
+           }
+          ]
+         }
+        ],
+        "operator": "and",
+        "showErrors": false,
+        "branchNameError": false
+       }
+      ],
+      "operator": "and",
+      "if": true,
+      "conditionName": "appt_status gate",
+      "version": 2,
+      "noneBranchName": "Reschedule / other"
+     }
+    },
+    {
+     "id": "fe642a94-ff3b-494e-8e59-e6a7599a03ab",
+     "order": 0,
+     "type": "if_else",
+     "name": "If: sale_outcome router",
+     "parent": "ae2d8319-8228-43cb-a5c0-900b63532aef",
+     "parentKey": "ae2d8319-8228-43cb-a5c0-900b63532aef",
+     "attributes": {
+      "currentRecipeType": "CUSTOM",
+      "branches": [
+       {
+        "id": "3e6f0330-1354-426f-b6f8-df0828390c39",
+        "name": "Sold",
+        "segments": [
+         {
+          "__segmentId": "97fbdfce-64fd-4a5c-b1b4-78d497f4f83e",
+          "operator": "and",
+          "conditions": [
+           {
+            "conditionType": "opportunity",
+            "conditionSubType": "nFSS0DNxHoicCcAnPEol",
+            "conditionOperator": "==",
+            "conditionValue": "sold",
+            "__conditionId": "0e748c0b-3e32-4c8c-85d5-e23fe98a89ac",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false
+           }
+          ]
+         }
+        ],
+        "operator": "and",
+        "showErrors": false,
+        "branchNameError": false
+       },
+       {
+        "id": "16be6823-c9fb-46c1-907a-5b7b2043c8f1",
+        "name": "A&D",
+        "segments": [
+         {
+          "__segmentId": "968e0e83-6d72-418a-aedb-b567b2d5abd8",
+          "operator": "and",
+          "conditions": [
+           {
+            "conditionType": "opportunity",
+            "conditionSubType": "nFSS0DNxHoicCcAnPEol",
+            "conditionOperator": "==",
+            "conditionValue": "ad",
+            "__conditionId": "38b8a4ca-bb74-444f-b1d8-d68cf681f8b3",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false
+           }
+          ]
+         }
+        ],
+        "operator": "and",
+        "showErrors": false,
+        "branchNameError": false
+       },
+       {
+        "id": "1d4c49da-35f6-4a34-832e-0d6640196ca2",
+        "name": "MUT",
+        "segments": [
+         {
+          "__segmentId": "bb27f352-d73e-41b3-8a76-e3636f02e24e",
+          "operator": "and",
+          "conditions": [
+           {
+            "conditionType": "opportunity",
+            "conditionSubType": "nFSS0DNxHoicCcAnPEol",
+            "conditionOperator": "==",
+            "conditionValue": "mut",
+            "__conditionId": "222479e5-752e-4c65-a5aa-25e2c732bc1d",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false
+           }
+          ]
+         }
+        ],
+        "operator": "and",
+        "showErrors": false,
+        "branchNameError": false
+       },
+       {
+        "id": "f984315b-87cd-4738-93ad-7085d84245b8",
+        "name": "MAR",
+        "segments": [
+         {
+          "__segmentId": "52a47121-dcdd-417a-8e6e-3943ed04f55e",
+          "operator": "and",
+          "conditions": [
+           {
+            "conditionType": "opportunity",
+            "conditionSubType": "nFSS0DNxHoicCcAnPEol",
+            "conditionOperator": "==",
+            "conditionValue": "mar",
+            "__conditionId": "e729e3fd-b629-443b-9170-4afccca03ee6",
+            "ifElseNodeId": "",
+            "__customFieldType__": "standard",
+            "isWait": false
+           }
+          ]
+         }
+        ],
+        "operator": "and",
+        "showErrors": false,
+        "branchNameError": false
+       }
+      ],
+      "operator": "and",
+      "if": true,
+      "conditionName": "sale_outcome router",
+      "version": 2,
+      "noneBranchName": "Unrouted"
+     }
+    },
+    {
+     "id": "70db0572-5388-4ad0-8cf9-facf83df1ad2",
+     "order": 0,
+     "type": "internal_create_opportunity",
+     "name": "Opp: Set Won + renewal_date + processed stamp",
+     "parent": "3e6f0330-1354-426f-b6f8-df0828390c39",
+     "parentKey": "3e6f0330-1354-426f-b6f8-df0828390c39",
+     "attributes": {
+      "pipelineId": "Vt8cPz51C3i87moo73gQ",
+      "type": "internal_create_opportunity",
+      "__customInputFields__": [
+       {
+        "__customInputs__": {},
+        "value": "affe1f0b-8216-4af3-89fd-109a2fd47edc",
+        "filterField": "pipelineStageId",
+        "valueFieldType": "select"
+       },
+       {
+        "__customInputs__": {},
+        "value": "won",
+        "filterField": "status",
+        "valueFieldType": "select"
+       },
+       {
+        "__customInputs__": {},
+        "value": "{{opportunity.won_date}}",
+        "filterField": "custom_fields.gIhDrhaLOEkvQXZHEZ5i",
+        "valueFieldType": "select"
+       },
+       {
+        "__customInputs__": {},
+        "value": "{{right_now.middle_endian_date}}",
+        "filterField": "custom_fields.gADGIdG5mgmhiz5dkJXr",
+        "valueFieldType": "select"
+       }
+      ],
+      "__customInputs__": {}
+     },
+     "next": "6e84b33c-c161-4492-8405-49d05d17cf32"
+    },
+    {
+     "id": "6e84b33c-c161-4492-8405-49d05d17cf32",
+     "order": 1,
+     "type": "add_contact_tag",
+     "name": "Tag: outcome_sold",
+     "parent": "3e6f0330-1354-426f-b6f8-df0828390c39",
+     "parentKey": "3e6f0330-1354-426f-b6f8-df0828390c39",
+     "attributes": {
+      "tags": [
+       "outcome_sold"
+      ]
+     }
+    },
+    {
+     "id": "bac9d15b-8ad4-42c3-88a3-297b422e6c09",
+     "order": 0,
+     "type": "internal_create_opportunity",
+     "name": "Opp: Move to A&D (lost)",
+     "parent": "16be6823-c9fb-46c1-907a-5b7b2043c8f1",
+     "parentKey": "16be6823-c9fb-46c1-907a-5b7b2043c8f1",
+     "attributes": {
+      "pipelineId": "Vt8cPz51C3i87moo73gQ",
+      "type": "internal_create_opportunity",
+      "__customInputFields__": [
+       {
+        "__customInputs__": {},
+        "value": "bafccd8b-7c51-4a34-9f20-bd61eeb8577b",
+        "filterField": "pipelineStageId",
+        "valueFieldType": "select"
+       },
+       {
+        "__customInputs__": {},
+        "value": "lost",
+        "filterField": "status",
+        "valueFieldType": "select"
+       },
+       {
+        "__customInputs__": {},
+        "value": "{{right_now.middle_endian_date}}",
+        "filterField": "custom_fields.gADGIdG5mgmhiz5dkJXr",
+        "valueFieldType": "select"
+       }
+      ],
+      "__customInputs__": {}
+     }
+    },
+    {
+     "id": "783c8fcb-75f2-4e88-b5e9-21a0ccd1dc5e",
+     "order": 0,
+     "type": "internal_create_opportunity",
+     "name": "Opp: Move to MUT (lost)",
+     "parent": "1d4c49da-35f6-4a34-832e-0d6640196ca2",
+     "parentKey": "1d4c49da-35f6-4a34-832e-0d6640196ca2",
+     "attributes": {
+      "pipelineId": "Vt8cPz51C3i87moo73gQ",
+      "type": "internal_create_opportunity",
+      "__customInputFields__": [
+       {
+        "__customInputs__": {},
+        "value": "a56dc5fd-014e-492a-b855-3d62f7033a0a",
+        "filterField": "pipelineStageId",
+        "valueFieldType": "select"
+       },
+       {
+        "__customInputs__": {},
+        "value": "lost",
+        "filterField": "status",
+        "valueFieldType": "select"
+       },
+       {
+        "__customInputs__": {},
+        "value": "{{right_now.middle_endian_date}}",
+        "filterField": "custom_fields.gADGIdG5mgmhiz5dkJXr",
+        "valueFieldType": "select"
+       }
+      ],
+      "__customInputs__": {}
+     }
+    },
+    {
+     "id": "7d2e4d43-e2e9-4330-b6d7-37bb4404ee40",
+     "order": 0,
+     "type": "add_contact_tag",
+     "name": "Tag: outcome_mar (PCC task, opp stays open)",
+     "parent": "f984315b-87cd-4738-93ad-7085d84245b8",
+     "parentKey": "f984315b-87cd-4738-93ad-7085d84245b8",
+     "attributes": {
+      "tags": [
+       "outcome_mar"
+      ]
+     }
+    },
+    {
+     "id": "717cd18a-d22f-4ac9-bc99-72c271bcb6d3",
+     "order": 0,
+     "type": "add_contact_tag",
+     "name": "Tag: route to WF-08",
+     "parent": "1fa184ac-bd16-45b3-b546-1e5dc7c1015c",
+     "parentKey": "1fa184ac-bd16-45b3-b546-1e5dc7c1015c",
+     "attributes": {
+      "tags": [
+       "route_wf08"
+      ]
+     }
+    }
+   ]
+  }
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ },
+ "triggers": [],
+ "dependentAssets": {}
+}

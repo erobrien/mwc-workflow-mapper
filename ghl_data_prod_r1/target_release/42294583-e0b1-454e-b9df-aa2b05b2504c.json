@@ -1,0 +1,136 @@
+{
+ "templates": [
+  {
+   "id": "be7aecdf-2fb3-4981-ac63-a74a096ca987",
+   "order": 0,
+   "type": "wait",
+   "name": "Wait: 4 hour(s)",
+   "cat": "",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "hour",
+     "value": 4,
+     "when": "after"
+    },
+    "name": "Wait",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "next": "d7dd387f-bead-4ec2-af94-0b2887c9676a"
+  },
+  {
+   "id": "d7dd387f-bead-4ec2-af94-0b2887c9676a",
+   "order": 0,
+   "name": "SMS: Intake Chase 1 (T+4h)",
+   "type": "sms",
+   "attributes": {
+    "body": "{{contact.first_name}}, to make the most of your 60-minute in-person consultation at Men's Wellness Centers, please complete your intake form here: {{custom_values.intake_link}}. {{ custom_values.sms_opt_out_footer }}",
+    "attachments": []
+   },
+   "next": "ce1e866f-cae4-4171-9243-d687633a074b"
+  },
+  {
+   "id": "ce1e866f-cae4-4171-9243-d687633a074b",
+   "order": 0,
+   "type": "wait",
+   "name": "Wait: 8 hour(s)",
+   "cat": "",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "hour",
+     "value": 8,
+     "when": "after"
+    },
+    "name": "Wait",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "next": "d7c83cf9-b7b6-475e-907f-d40466d3bbe8"
+  },
+  {
+   "id": "d7c83cf9-b7b6-475e-907f-d40466d3bbe8",
+   "order": 0,
+   "name": "Email: Confirmation Chase (T+12h)",
+   "type": "email",
+   "attributes": {
+    "subject": "Email: Confirmation Chase (T+12h)",
+    "html": "<p>Chase email.</p>",
+    "type": "email"
+   },
+   "next": "5ce115dd-224c-4190-9bf0-ba3fd4823424"
+  },
+  {
+   "id": "5ce115dd-224c-4190-9bf0-ba3fd4823424",
+   "order": 0,
+   "type": "wait",
+   "name": "Wait: 12 hour(s)",
+   "cat": "",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "hour",
+     "value": 12,
+     "when": "after"
+    },
+    "name": "Wait",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "next": "a6363b88-3c0a-4d21-8209-42dd5d2104ec"
+  },
+  {
+   "id": "a6363b88-3c0a-4d21-8209-42dd5d2104ec",
+   "order": 0,
+   "name": "SMS: Urgency Chase 2 (T+24h)",
+   "type": "sms",
+   "attributes": {
+    "body": "Urgency chase.",
+    "attachments": []
+   },
+   "next": "f4286235-483a-4fbf-94c5-f45dd9bbf3bd"
+  },
+  {
+   "id": "f4286235-483a-4fbf-94c5-f45dd9bbf3bd",
+   "order": 0,
+   "type": "wait",
+   "name": "Wait: 12 hour(s)",
+   "cat": "",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "hour",
+     "value": 12,
+     "when": "after"
+    },
+    "name": "Wait",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "next": "9fddda82-c224-44f5-a873-8d03771bbcc8"
+  },
+  {
+   "id": "9fddda82-c224-44f5-a873-8d03771bbcc8",
+   "order": 0,
+   "name": "Call: Voicemail Drop (T+36h)",
+   "type": "sms",
+   "attributes": {
+    "body": "[CALL TASK PLACEHOLDER] Call: Voicemail Drop (T+36h). Reply STOP to opt out.",
+    "attachments": []
+   }
+  }
+ ]
+}

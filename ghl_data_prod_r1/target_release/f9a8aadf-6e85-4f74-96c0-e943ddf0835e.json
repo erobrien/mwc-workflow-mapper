@@ -1,0 +1,349 @@
+{
+ "templates": [
+  {
+   "id": "5c761602-d370-4442-9792-1951ad8916fa",
+   "order": 0,
+   "type": "update_contact_field",
+   "name": "Attr: last_* overwrite (D17, every inbound)",
+   "attributes": {
+    "type": "update_contact_field",
+    "actionType": "update_field_data",
+    "fields": [
+     {
+      "field": "uFsQVMk8RUnev9MG13RB",
+      "value": "{{right_now.middle_endian_date}}",
+      "title": "Last Touch At",
+      "type": "TEXT"
+     }
+    ]
+   },
+   "next": "bc0d2bc4-a6d5-4b6b-954b-092329f71a6c"
+  },
+  {
+   "id": "bc0d2bc4-a6d5-4b6b-954b-092329f71a6c",
+   "order": 0,
+   "type": "if_else",
+   "name": "If: first_utm_source is empty (D17 write-once gate)",
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "c1a91957-6fd4-423f-9fe8-7930905b93bd",
+      "name": "First touch empty (stamp write-once)",
+      "segments": [
+       {
+        "__segmentId": "6484dac5-30c4-408f-9354-92401cfcf325",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "iDIj3LS3i7hbCskXUT3P",
+          "conditionOperator": "is_empty",
+          "conditionValue": "",
+          "__conditionId": "cff8226c-7303-4808-8161-bc3cc28aa553",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": false
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "first-touch gate",
+    "version": 2,
+    "noneBranchName": "Already stamped (skip)"
+   }
+  },
+  {
+   "id": "7f519131-9e2e-48a6-8225-116ff57a7b87",
+   "order": 0,
+   "type": "update_contact_field",
+   "name": "Attr: first_* write-once stamp (D17)",
+   "attributes": {
+    "type": "update_contact_field",
+    "actionType": "update_field_data",
+    "fields": [
+     {
+      "field": "iDIj3LS3i7hbCskXUT3P",
+      "value": "{{contact.utm_source}}",
+      "title": "First UTM Source",
+      "type": "TEXT"
+     },
+     {
+      "field": "Za73uYVh1c9I9bNs0Go3",
+      "value": "{{contact.utm_campaign}}",
+      "title": "First UTM Campaign",
+      "type": "TEXT"
+     },
+     {
+      "field": "j1ElI2GxfgUkqIwf3u46",
+      "value": "{{contact.gclid_value}}",
+      "title": "First GCLID",
+      "type": "TEXT"
+     },
+     {
+      "field": "fC3JpX65m6X6sn8eDlxG",
+      "value": "{{contact.fbclid_value}}",
+      "title": "First FBCLID",
+      "type": "TEXT"
+     },
+     {
+      "field": "WFQ9AHA9hkmZHd5BgKJ4",
+      "value": "{{contact.source_url}}",
+      "title": "First Landing Page",
+      "type": "TEXT"
+     },
+     {
+      "field": "8AAQscUixNAmF16Z2lJu",
+      "value": "{{right_now.middle_endian_date}}",
+      "title": "First Touch At",
+      "type": "TEXT"
+     }
+    ]
+   },
+   "parent": "c1a91957-6fd4-423f-9fe8-7930905b93bd",
+   "parentKey": "c1a91957-6fd4-423f-9fe8-7930905b93bd"
+  },
+  {
+   "id": "9546d0fe-7cae-4156-81a4-5213af183d5e",
+   "order": 0,
+   "type": "internal_create_opportunity",
+   "name": "Opp: Create in New Lead + copy attribution",
+   "attributes": {
+    "pipelineId": "Vt8cPz51C3i87moo73gQ",
+    "type": "internal_create_opportunity",
+    "__customInputs__": {},
+    "__customInputFields__": [
+     {
+      "__customInputs__": {},
+      "value": "f3e612a6-958f-484b-b3b4-6de428d271ff",
+      "filterField": "pipelineStageId",
+      "valueFieldType": "select"
+     },
+     {
+      "__customInputs__": {},
+      "value": "open",
+      "filterField": "status",
+      "valueFieldType": "select"
+     },
+     {
+      "__customInputs__": {},
+      "value": "{{contact.name}}",
+      "filterField": "name",
+      "valueFieldType": "string"
+     },
+     {
+      "__customInputs__": {},
+      "value": "{{contact.gclid_value}}",
+      "filterField": "custom_fields.oembtxjOJ98g3GeMV803",
+      "valueFieldType": "string"
+     },
+     {
+      "__customInputs__": {},
+      "value": "{{contact.fbclid_value}}",
+      "filterField": "custom_fields.fwqzHdMEXCByNC1OA5JX",
+      "valueFieldType": "string"
+     },
+     {
+      "__customInputs__": {},
+      "value": "{{contact.utm_source}}",
+      "filterField": "custom_fields.jKDSQszdqKejAsmMT6Gu",
+      "valueFieldType": "string"
+     },
+     {
+      "__customInputs__": {},
+      "value": "{{contact.utm_campaign}}",
+      "filterField": "custom_fields.COJSVNf87anEngPn3wUh",
+      "valueFieldType": "string"
+     },
+     {
+      "__customInputs__": {},
+      "value": "{{contact.utm_source}}",
+      "filterField": "custom_fields.JlXqexn9eKt4dn9AOkvs",
+      "valueFieldType": "string"
+     }
+    ]
+   },
+   "next": "83483057-abe1-4992-a6ef-04ed12d4e4d4"
+  },
+  {
+   "id": "83483057-abe1-4992-a6ef-04ed12d4e4d4",
+   "order": 0,
+   "name": "Email: Welcome (instant)",
+   "type": "email",
+   "attributes": {
+    "subject": "Welcome to Men's Wellness Centers.",
+    "html": "Thanks for reaching out, {{contact.first_name}}. A Men's Wellness Centers team member will call you within one business hour to schedule your {{ custom_values.consult_descriptor }} at your local clinic. BUILD DECISION NEEDED: paste final approved welcome copy.",
+    "type": "email"
+   },
+   "next": "2fb1871d-614b-49cc-a6ab-7012865c5f4b"
+  },
+  {
+   "id": "2fb1871d-614b-49cc-a6ab-7012865c5f4b",
+   "order": 0,
+   "name": "SMS: Speed-to-Lead (T+0, quiet-hours)",
+   "type": "sms",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, this is Men's Wellness Centers. Thanks for reaching out. What is the best time today for a quick call to book your {{ custom_values.consult_descriptor }}? {{ custom_values.sms_opt_out_footer }}",
+    "attachments": []
+   },
+   "next": "0604798f-f94f-4ccb-9e93-fdce3a176954"
+  },
+  {
+   "id": "0604798f-f94f-4ccb-9e93-fdce3a176954",
+   "order": 0,
+   "name": "Wait: 2 minutes",
+   "type": "wait",
+   "cat": "",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "minutes",
+     "value": 2,
+     "when": "after"
+    },
+    "name": "Wait",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "next": "62f2a804-27d0-4ac0-8e9c-00a01c72937e"
+  },
+  {
+   "id": "62f2a804-27d0-4ac0-8e9c-00a01c72937e",
+   "order": 0,
+   "name": "Notify: Staff new lead",
+   "type": "internal_notification",
+   "attributes": {
+    "type": "email",
+    "email": {
+     "userType": "custom_email",
+     "to": "consult-results@menswellnesscenters.com",
+     "from_name": "{{location.name}}",
+     "from_email": "{{location.email}}",
+     "subject": "Notify: Staff new lead",
+     "body": "Internal notification to the setter team with lead + attribution summary."
+    }
+   },
+   "next": "8d3949a3-5306-4243-9c3a-c6b3af19a349"
+  },
+  {
+   "id": "8d3949a3-5306-4243-9c3a-c6b3af19a349",
+   "order": 0,
+   "name": "Wait: 3 minutes (to +5m from entry)",
+   "type": "wait",
+   "cat": "",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "minutes",
+     "value": 3,
+     "when": "after"
+    },
+    "name": "Wait",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "next": "77c27c23-df5b-4b48-91ac-350e14650224"
+  },
+  {
+   "id": "77c27c23-df5b-4b48-91ac-350e14650224",
+   "order": 0,
+   "name": "Wait: 24 hours",
+   "type": "wait",
+   "cat": "",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "hour",
+     "value": 24,
+     "when": "after"
+    },
+    "name": "Wait",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "next": "c9b3fb2c-e3ec-4f6d-b4aa-fec2bc49474c"
+  },
+  {
+   "id": "c9b3fb2c-e3ec-4f6d-b4aa-fec2bc49474c",
+   "order": 7,
+   "type": "if_else",
+   "name": "If: Booked within 24h? (appointment present)",
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "operator": "and",
+    "if": true,
+    "conditionName": "Condition",
+    "version": 2,
+    "noneBranchName": "Not booked",
+    "branches": [
+     {
+      "id": "3e748116-3edc-45ce-8e30-bf09e136aceb",
+      "name": "Booked",
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": "Branch name cannot be empty!",
+      "segments": [
+       {
+        "__segmentId": "bc201640-f6e9-4cd0-99ff-6b677c900ab0",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "appointment",
+          "conditionSubType": "status",
+          "conditionOperator": "is_any_of",
+          "conditionValue": [
+           "confirmed",
+           "new",
+           "showed"
+          ],
+          "__conditionId": "5d03e75d-107e-4c76-abc9-f55516a95548",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "cat": "conditions",
+   "nodeType": "condition-node",
+   "comments": [],
+   "next": [
+    "3e748116-3edc-45ce-8e30-bf09e136aceb",
+    "2f8f60ce-9805-4823-9fd1-680aa39da4a7"
+   ],
+   "parentKey": "77c27c23-df5b-4b48-91ac-350e14650224"
+  },
+  {
+   "id": "e0b272a2-0634-465a-9fef-95c67871a246",
+   "order": 0,
+   "type": "add_to_workflow",
+   "name": "-> WF-02 Non-Booked Recovery",
+   "attributes": {
+    "input_trigger_params": false,
+    "type": "add_to_workflow",
+    "workflow_id": "e8401da7-0ff2-42b9-87af-ec7609c37257"
+   },
+   "parent": "2f8f60ce-9805-4823-9fd1-680aa39da4a7",
+   "parentKey": "2f8f60ce-9805-4823-9fd1-680aa39da4a7"
+  }
+ ]
+}

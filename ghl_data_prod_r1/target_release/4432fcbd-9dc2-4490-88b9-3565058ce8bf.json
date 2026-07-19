@@ -1,0 +1,153 @@
+{
+ "templates": [
+  {
+   "id": "863addc4-1efb-4ee9-a29a-5a0400969f05",
+   "order": 0,
+   "type": "if_else",
+   "name": "If: call disposition",
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "abe739f7-74f1-437b-8ea0-125f09499c8a",
+      "name": "Connected",
+      "segments": [
+       {
+        "__segmentId": "8fc3c743-2b5d-4084-b3a7-d5a5e1e48fb8",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "opportunity",
+          "conditionSubType": "9AE5W877hgNC9CCi6vTi",
+          "conditionOperator": "==",
+          "conditionValue": "connected",
+          "__conditionId": "52014b96-ef71-4992-836e-9b95e5fec439",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": false
+     },
+     {
+      "id": "b4efbd1d-f6d4-4001-8604-de2b97df54d9",
+      "name": "No answer",
+      "segments": [
+       {
+        "__segmentId": "b042e398-9459-4ae1-8330-551dd95d8d77",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "opportunity",
+          "conditionSubType": "9AE5W877hgNC9CCi6vTi",
+          "conditionOperator": "==",
+          "conditionValue": "no_answer",
+          "__conditionId": "fb73c3b1-cc10-41b9-bace-3f3942de7983",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": false
+     },
+     {
+      "id": "c267bff3-df43-444d-802c-33a01666dd61",
+      "name": "Voicemail",
+      "segments": [
+       {
+        "__segmentId": "cca90d71-e270-4915-aa25-fefea68f3011",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "opportunity",
+          "conditionSubType": "9AE5W877hgNC9CCi6vTi",
+          "conditionOperator": "==",
+          "conditionValue": "voicemail",
+          "__conditionId": "a3bda209-4b94-40c1-a7a3-da18e26aaef8",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": false
+     },
+     {
+      "id": "c6b67165-a9d4-482a-bd63-c8fbc970d59f",
+      "name": "Bad number",
+      "segments": [
+       {
+        "__segmentId": "1de47448-88f2-4d3c-8948-63089325a5ae",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "opportunity",
+          "conditionSubType": "9AE5W877hgNC9CCi6vTi",
+          "conditionOperator": "==",
+          "conditionValue": "bad_number",
+          "__conditionId": "2ce3f6b7-4817-4615-b08b-eb051c644443",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": false
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "call disposition",
+    "version": 2,
+    "noneBranchName": "Other"
+   }
+  },
+  {
+   "id": "3323e851-b20a-4ddf-a3b6-70d0793a96b4",
+   "order": 0,
+   "type": "add_contact_tag",
+   "name": "Tag: flag bad number",
+   "parent": "c6b67165-a9d4-482a-bd63-c8fbc970d59f",
+   "parentKey": "c6b67165-a9d4-482a-bd63-c8fbc970d59f",
+   "attributes": {
+    "tags": [
+     "data_cleanup_bad_number"
+    ]
+   }
+  },
+  {
+   "id": "20133e2f-3e59-4df6-9f41-181c442382b4",
+   "order": 0,
+   "type": "update_contact_field",
+   "name": "Attr: phone lead-source stamp if blank (D17)",
+   "attributes": {
+    "type": "update_contact_field",
+    "actionType": "update_field_data",
+    "fields": [
+     {
+      "field": "thwe93MxRDzS2SO9pxxC",
+      "value": "phone",
+      "title": "UTM Source",
+      "type": "TEXT"
+     }
+    ]
+   },
+   "parent": "abe739f7-74f1-437b-8ea0-125f09499c8a",
+   "parentKey": "abe739f7-74f1-437b-8ea0-125f09499c8a"
+  }
+ ]
+}

@@ -1,0 +1,225 @@
+{
+ "templates": [
+  {
+   "id": "985e9df5-2f0f-4276-b8fd-bf27e641345d",
+   "order": 0,
+   "type": "wait",
+   "name": "Wait: 15 minutes(s)",
+   "cat": "",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "minutes",
+     "value": 15,
+     "when": "after"
+    },
+    "name": "Wait",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "next": "55007ebd-3bf3-4cef-a984-3c61f150c07d"
+  },
+  {
+   "id": "55007ebd-3bf3-4cef-a984-3c61f150c07d",
+   "order": 0,
+   "name": "SMS: Recovery 1 (T+15m)",
+   "type": "sms",
+   "attributes": {
+    "body": "{{contact.first_name}}, we missed you today at Men's Wellness Centers. Let us get you rescheduled for your 60-minute in-person consultation. What day works? {{ custom_values.sms_opt_out_footer }}",
+    "attachments": []
+   },
+   "next": "17b727aa-25de-4975-adca-b103d7247d5f"
+  },
+  {
+   "id": "17b727aa-25de-4975-adca-b103d7247d5f",
+   "order": 0,
+   "type": "wait",
+   "name": "Wait: 45 minutes(s)",
+   "cat": "",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "minutes",
+     "value": 45,
+     "when": "after"
+    },
+    "name": "Wait",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "next": "112cce70-8c87-4aaa-9107-b9c52099e946"
+  },
+  {
+   "id": "112cce70-8c87-4aaa-9107-b9c52099e946",
+   "order": 0,
+   "name": "Email: Physician Recovery (T+1h)",
+   "type": "email",
+   "attributes": {
+    "subject": "Email: Physician Recovery (T+1h)",
+    "html": "<p>Physician-led recovery.</p>",
+    "type": "email"
+   },
+   "next": "6d28b93f-68ca-4070-9440-62db73f0058d"
+  },
+  {
+   "id": "6d28b93f-68ca-4070-9440-62db73f0058d",
+   "order": 0,
+   "type": "wait",
+   "name": "Wait: 23 hour(s)",
+   "cat": "",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "hour",
+     "value": 23,
+     "when": "after"
+    },
+    "name": "Wait",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "next": "9f94a4d6-286b-4d53-ad78-add741b5cfef"
+  },
+  {
+   "id": "9f94a4d6-286b-4d53-ad78-add741b5cfef",
+   "order": 0,
+   "name": "SMS: Availability 2 (T+1d)",
+   "type": "sms",
+   "attributes": {
+    "body": "Availability.",
+    "attachments": []
+   },
+   "next": "f54038e7-7b08-498e-b114-d074ffdb1a27"
+  },
+  {
+   "id": "f54038e7-7b08-498e-b114-d074ffdb1a27",
+   "order": 0,
+   "type": "wait",
+   "name": "Wait: 2 days(s)",
+   "cat": "",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 2,
+     "when": "after"
+    },
+    "name": "Wait",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "next": "a28a3084-7665-498d-ab1d-64c58b678719"
+  },
+  {
+   "id": "a28a3084-7665-498d-ab1d-64c58b678719",
+   "order": 0,
+   "name": "Email: Benefits Pivot (T+3d)",
+   "type": "email",
+   "attributes": {
+    "subject": "Email: Benefits Pivot (T+3d)",
+    "html": "<p>Benefits pivot.</p>",
+    "type": "email"
+   },
+   "next": "a0473696-53f5-4e04-a040-17d31a8dd1f6"
+  },
+  {
+   "id": "a0473696-53f5-4e04-a040-17d31a8dd1f6",
+   "order": 0,
+   "name": "SMS: Re-Engagement 3 (T+3d)",
+   "type": "sms",
+   "attributes": {
+    "body": "Re-engagement.",
+    "attachments": []
+   },
+   "next": "83728856-5714-48a5-88af-35c4f1d4bc5f"
+  },
+  {
+   "id": "83728856-5714-48a5-88af-35c4f1d4bc5f",
+   "order": 0,
+   "type": "wait",
+   "name": "Wait: 2 days(s)",
+   "cat": "",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 2,
+     "when": "after"
+    },
+    "name": "Wait",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "next": "364bf1fa-ddcd-40bc-8edf-968b644d537d"
+  },
+  {
+   "id": "364bf1fa-ddcd-40bc-8edf-968b644d537d",
+   "order": 0,
+   "name": "SMS: Scarcity 4 (T+5d)",
+   "type": "sms",
+   "attributes": {
+    "body": "Scarcity.",
+    "attachments": []
+   },
+   "next": "1c6b10e0-0d81-4ea8-829b-eb7bc8ea7c44"
+  },
+  {
+   "id": "1c6b10e0-0d81-4ea8-829b-eb7bc8ea7c44",
+   "order": 0,
+   "type": "wait",
+   "name": "Wait: 2 days(s)",
+   "cat": "",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 2,
+     "when": "after"
+    },
+    "name": "Wait",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "next": "c72066b1-c692-4401-9c1d-03fa49187355"
+  },
+  {
+   "id": "c72066b1-c692-4401-9c1d-03fa49187355",
+   "order": 0,
+   "name": "Call: Voicemail Drop (T+7d)",
+   "type": "sms",
+   "attributes": {
+    "body": "[CALL TASK PLACEHOLDER] Call: Voicemail Drop (T+7d). Reply STOP to opt out.",
+    "attachments": []
+   },
+   "next": "495c0b37-33fc-4373-82c1-2224887d88ed"
+  },
+  {
+   "id": "495c0b37-33fc-4373-82c1-2224887d88ed",
+   "order": 0,
+   "name": "SMS: Empathetic Breakup 5 (T+7d)",
+   "type": "sms",
+   "attributes": {
+    "body": "Final.",
+    "attachments": []
+   }
+  }
+ ]
+}

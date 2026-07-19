@@ -1,0 +1,1429 @@
+{
+ "templates": [
+  {
+   "id": "cbf592dd-abf6-45cb-9ec3-5c2ecccfbbea",
+   "order": 0,
+   "type": "if_else",
+   "name": "D19: objection branch router",
+   "attributes": {
+    "currentRecipeType": "CUSTOM",
+    "branches": [
+     {
+      "id": "64de77d2-311c-441f-b5ca-5f8c9c2dd568",
+      "name": "Cost",
+      "segments": [
+       {
+        "__segmentId": "dbc49599-f239-4cc7-b7ee-abb4224cb5b8",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "tags",
+          "conditionOperator": "is_any_of",
+          "conditionValue": [
+           "objection_cost"
+          ],
+          "__conditionId": "90dbeaa3-fb82-430b-8769-806d1694df86",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": false
+     },
+     {
+      "id": "72095f68-ed67-41b6-b053-359fb6a4acbc",
+      "name": "Fear",
+      "segments": [
+       {
+        "__segmentId": "793a9b41-094c-4c51-8d19-5dfd515ae1f8",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "tags",
+          "conditionOperator": "is_any_of",
+          "conditionValue": [
+           "objection_fear"
+          ],
+          "__conditionId": "8b611467-d19e-46c1-aa87-7c41d8cd70e4",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": false
+     },
+     {
+      "id": "25a82dd4-58c4-4b38-bbf8-38c77cbac8e9",
+      "name": "Partner",
+      "segments": [
+       {
+        "__segmentId": "b5253ca0-6b64-4fed-a638-2f721ba4a01d",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "tags",
+          "conditionOperator": "is_any_of",
+          "conditionValue": [
+           "objection_partner"
+          ],
+          "__conditionId": "36cf4d5f-7fdf-459b-883c-01905b714df5",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": false
+     },
+     {
+      "id": "5a44d3b9-a95a-4b67-bbfb-a09a7513a725",
+      "name": "Timing",
+      "segments": [
+       {
+        "__segmentId": "3c0068dd-1b14-47dd-a935-03055ca17cb0",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "tags",
+          "conditionOperator": "is_any_of",
+          "conditionValue": [
+           "objection_timing"
+          ],
+          "__conditionId": "8483b74d-90b4-4772-80a4-4da2a6b3cda4",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": false
+     },
+     {
+      "id": "6068889f-d274-48dc-b477-5708e761bd3d",
+      "name": "Decision",
+      "segments": [
+       {
+        "__segmentId": "b3091c57-ac07-4864-8805-a909a2e776a1",
+        "operator": "and",
+        "conditions": [
+         {
+          "conditionType": "contact_detail",
+          "conditionSubType": "tags",
+          "conditionOperator": "is_any_of",
+          "conditionValue": [
+           "objection_decision"
+          ],
+          "__conditionId": "66acb998-cc90-4eb1-9ca7-f6579a993014",
+          "ifElseNodeId": "",
+          "__customFieldType__": "standard",
+          "isWait": false
+         }
+        ]
+       }
+      ],
+      "operator": "and",
+      "showErrors": false,
+      "branchNameError": false
+     }
+    ],
+    "operator": "and",
+    "if": true,
+    "conditionName": "D19: objection branch router",
+    "version": 2,
+    "noneBranchName": "No matching tag (exit)"
+   }
+  },
+  {
+   "id": "241aeb85-1086-4ccf-b963-dcb87d6449ab",
+   "order": 0,
+   "type": "wait",
+   "name": "Wait 1d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 1,
+     "when": "after"
+    }
+   },
+   "parent": "64de77d2-311c-441f-b5ca-5f8c9c2dd568",
+   "parentKey": "64de77d2-311c-441f-b5ca-5f8c9c2dd568",
+   "next": "5e3d6543-c957-4893-a6ad-2b9bf31bcf7f"
+  },
+  {
+   "id": "5e3d6543-c957-4893-a6ad-2b9bf31bcf7f",
+   "order": 1,
+   "type": "sms",
+   "name": "SMS: cost touch 1 [sms_wf07_cost_t1]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, many members had the same concern about cost at first. During a visit we can walk through the options available and answer any questions.",
+    "attachments": []
+   },
+   "next": "cc5aed9f-4d90-4412-b1c0-161158513ea7"
+  },
+  {
+   "id": "cc5aed9f-4d90-4412-b1c0-161158513ea7",
+   "order": 2,
+   "type": "wait",
+   "name": "Wait 2d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 2,
+     "when": "after"
+    }
+   },
+   "next": "9cb04ce5-26bd-457e-9373-fbf97448dac0"
+  },
+  {
+   "id": "9cb04ce5-26bd-457e-9373-fbf97448dac0",
+   "order": 3,
+   "type": "email",
+   "name": "Email: cost touch 2 [email_wf07_cost_t2]",
+   "attributes": {
+    "subject": "Your options at Men's Wellness Centers",
+    "html": "Hi {{contact.first_name}}, Many men tell us their biggest question after the consultation is cost. The good news is that our team can review different options and help you understand what works best for your situation. If you would like to continue the conversation, we would be happy to schedule another visit. {{contact.current_booking_url}}",
+    "type": "email"
+   },
+   "next": "4f29ffe5-f050-4be7-9097-776f1fe6f81c"
+  },
+  {
+   "id": "4f29ffe5-f050-4be7-9097-776f1fe6f81c",
+   "order": 4,
+   "type": "wait",
+   "name": "Wait 3d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 3,
+     "when": "after"
+    }
+   },
+   "next": "d4293b19-9265-41eb-ace1-350b5662a74f"
+  },
+  {
+   "id": "d4293b19-9265-41eb-ace1-350b5662a74f",
+   "order": 5,
+   "type": "sms",
+   "name": "SMS: cost touch 3 [sms_wf07_cost_t3]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, just checking in. If you would like to come back and review your options with the doctor, we can help you find a time that works.",
+    "attachments": []
+   },
+   "next": "c4d0086b-1c52-4e27-a726-9389b3ae8d8a"
+  },
+  {
+   "id": "c4d0086b-1c52-4e27-a726-9389b3ae8d8a",
+   "order": 6,
+   "type": "wait",
+   "name": "Wait 1d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 1,
+     "when": "after"
+    }
+   },
+   "next": "7dba6ef6-a8db-40e2-a499-dba9024dbfe6"
+  },
+  {
+   "id": "7dba6ef6-a8db-40e2-a499-dba9024dbfe6",
+   "order": 7,
+   "type": "sms",
+   "name": "SMS: cost touch 4 [sms_wf07_cost_t4]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, many members had the same concern about cost at first. During a visit we can walk through the options available and answer any questions.",
+    "attachments": []
+   },
+   "next": "6dd6da22-fbb9-4c9a-97b9-222d1e58b780"
+  },
+  {
+   "id": "6dd6da22-fbb9-4c9a-97b9-222d1e58b780",
+   "order": 8,
+   "type": "wait",
+   "name": "Wait 2d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 2,
+     "when": "after"
+    }
+   },
+   "next": "9e002652-7235-4e42-ab98-dde72bd85c5a"
+  },
+  {
+   "id": "9e002652-7235-4e42-ab98-dde72bd85c5a",
+   "order": 9,
+   "type": "email",
+   "name": "Email: cost touch 5 [email_wf07_cost_t5]",
+   "attributes": {
+    "subject": "Your options at Men's Wellness Centers",
+    "html": "Hi {{contact.first_name}}, Many men tell us their biggest question after the consultation is cost. The good news is that our team can review different options and help you understand what works best for your situation. If you would like to continue the conversation, we would be happy to schedule another visit. {{contact.current_booking_url}}",
+    "type": "email"
+   },
+   "next": "54c183e8-68ab-44fc-b539-0dc25a9399ff"
+  },
+  {
+   "id": "54c183e8-68ab-44fc-b539-0dc25a9399ff",
+   "order": 10,
+   "type": "wait",
+   "name": "Wait 3d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 3,
+     "when": "after"
+    }
+   },
+   "next": "1cc24bae-3ef9-4afe-833b-81c91d2f9232"
+  },
+  {
+   "id": "1cc24bae-3ef9-4afe-833b-81c91d2f9232",
+   "order": 11,
+   "type": "sms",
+   "name": "SMS: cost touch 6 [sms_wf07_cost_t6]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, just checking in. If you would like to come back and review your options with the doctor, we can help you find a time that works.",
+    "attachments": []
+   },
+   "next": "77b02968-b17d-4620-913a-fbe0677e7ca8"
+  },
+  {
+   "id": "77b02968-b17d-4620-913a-fbe0677e7ca8",
+   "order": 12,
+   "type": "wait",
+   "name": "Wait 1d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 1,
+     "when": "after"
+    }
+   },
+   "next": "d9b50402-5265-4615-9d11-32f42f0033dd"
+  },
+  {
+   "id": "d9b50402-5265-4615-9d11-32f42f0033dd",
+   "order": 13,
+   "type": "sms",
+   "name": "SMS: cost touch 7 [sms_wf07_cost_t7]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, many members had the same concern about cost at first. During a visit we can walk through the options available and answer any questions.",
+    "attachments": []
+   },
+   "next": "b9fbd20c-d1c1-4c3b-9b49-b3ff4bfe0a12"
+  },
+  {
+   "id": "b9fbd20c-d1c1-4c3b-9b49-b3ff4bfe0a12",
+   "order": 14,
+   "type": "wait",
+   "name": "Wait 2d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 2,
+     "when": "after"
+    }
+   },
+   "next": "df311be3-5d74-4605-8a31-3d8eac33f7e3"
+  },
+  {
+   "id": "df311be3-5d74-4605-8a31-3d8eac33f7e3",
+   "order": 15,
+   "type": "email",
+   "name": "Email: cost touch 8 [email_wf07_cost_t8]",
+   "attributes": {
+    "subject": "Your options at Men's Wellness Centers",
+    "html": "Hi {{contact.first_name}}, Many men tell us their biggest question after the consultation is cost. The good news is that our team can review different options and help you understand what works best for your situation. If you would like to continue the conversation, we would be happy to schedule another visit. {{contact.current_booking_url}}",
+    "type": "email"
+   },
+   "next": "f3468662-2ea9-44b0-ac51-ba31650c25f6"
+  },
+  {
+   "id": "f3468662-2ea9-44b0-ac51-ba31650c25f6",
+   "order": 16,
+   "type": "wait",
+   "name": "Wait 3d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 3,
+     "when": "after"
+    }
+   },
+   "next": "a58829de-dee5-444b-9bf7-84d248280827"
+  },
+  {
+   "id": "a58829de-dee5-444b-9bf7-84d248280827",
+   "order": 17,
+   "type": "sms",
+   "name": "SMS: cost touch 9 [sms_wf07_cost_t9]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, just checking in. If you would like to come back and review your options with the doctor, we can help you find a time that works.",
+    "attachments": []
+   }
+  },
+  {
+   "id": "b10bd220-9b5b-4072-b95b-652c5d0806dc",
+   "order": 0,
+   "type": "wait",
+   "name": "Wait 1d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 1,
+     "when": "after"
+    }
+   },
+   "parent": "72095f68-ed67-41b6-b053-359fb6a4acbc",
+   "parentKey": "72095f68-ed67-41b6-b053-359fb6a4acbc",
+   "next": "bfae7fb5-8488-41c6-909d-868cd101b871"
+  },
+  {
+   "id": "bfae7fb5-8488-41c6-909d-868cd101b871",
+   "order": 1,
+   "type": "email",
+   "name": "Email: fear touch 1 [email_wf07_fear_t1]",
+   "attributes": {
+    "subject": "Your safety is our priority",
+    "html": "Hi {{contact.first_name}}, Some members leave their first consultation with questions about safety. Our treatments are physician supervised and based on FDA approved therapies. During a visit the doctor will review your health history and answer every question you may have. If you would like to continue the conversation, we would be glad to see you again. {{contact.current_booking_url}}",
+    "type": "email"
+   },
+   "next": "23953601-df92-4a78-9038-0e119b305c31"
+  },
+  {
+   "id": "23953601-df92-4a78-9038-0e119b305c31",
+   "order": 2,
+   "type": "wait",
+   "name": "Wait 2d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 2,
+     "when": "after"
+    }
+   },
+   "next": "98254eca-1459-4be1-b3e0-1319359a028f"
+  },
+  {
+   "id": "98254eca-1459-4be1-b3e0-1319359a028f",
+   "order": 3,
+   "type": "sms",
+   "name": "SMS: fear touch 2 [sms_wf07_fear_t2]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, many members have safety questions at first. Our doctors take time to explain everything during the visit so you can make a comfortable decision.",
+    "attachments": []
+   },
+   "next": "18e2f8fb-3177-49ec-87a0-b6d8899555b7"
+  },
+  {
+   "id": "18e2f8fb-3177-49ec-87a0-b6d8899555b7",
+   "order": 4,
+   "type": "wait",
+   "name": "Wait 3d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 3,
+     "when": "after"
+    }
+   },
+   "next": "29faa9d5-79aa-43b8-becb-6bbb656472e8"
+  },
+  {
+   "id": "29faa9d5-79aa-43b8-becb-6bbb656472e8",
+   "order": 5,
+   "type": "email",
+   "name": "Email: fear touch 3 [email_wf07_fear_t3]",
+   "attributes": {
+    "subject": "Questions are always welcome",
+    "html": "Hi {{contact.first_name}}, It is completely normal to have questions before starting any treatment. Our physicians are here to explain the process, review your health history, and make sure you feel comfortable with every step. If you would like to speak with us again, you can schedule a visit here. {{contact.current_booking_url}}",
+    "type": "email"
+   },
+   "next": "1db18091-222d-438d-b78d-2271215907f4"
+  },
+  {
+   "id": "1db18091-222d-438d-b78d-2271215907f4",
+   "order": 6,
+   "type": "wait",
+   "name": "Wait 1d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 1,
+     "when": "after"
+    }
+   },
+   "next": "861e3d75-e23c-436e-a70f-3b2bfe81cd34"
+  },
+  {
+   "id": "861e3d75-e23c-436e-a70f-3b2bfe81cd34",
+   "order": 7,
+   "type": "email",
+   "name": "Email: fear touch 4 [email_wf07_fear_t4]",
+   "attributes": {
+    "subject": "Your safety is our priority",
+    "html": "Hi {{contact.first_name}}, Some members leave their first consultation with questions about safety. Our treatments are physician supervised and based on FDA approved therapies. During a visit the doctor will review your health history and answer every question you may have. If you would like to continue the conversation, we would be glad to see you again. {{contact.current_booking_url}}",
+    "type": "email"
+   },
+   "next": "cef5f4a9-e532-44c1-8c6e-84a666138fe7"
+  },
+  {
+   "id": "cef5f4a9-e532-44c1-8c6e-84a666138fe7",
+   "order": 8,
+   "type": "wait",
+   "name": "Wait 2d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 2,
+     "when": "after"
+    }
+   },
+   "next": "3ddae83c-cd03-4e46-8aa3-cca6ed736ec3"
+  },
+  {
+   "id": "3ddae83c-cd03-4e46-8aa3-cca6ed736ec3",
+   "order": 9,
+   "type": "sms",
+   "name": "SMS: fear touch 5 [sms_wf07_fear_t5]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, many members have safety questions at first. Our doctors take time to explain everything during the visit so you can make a comfortable decision.",
+    "attachments": []
+   },
+   "next": "1d2571a3-9aaf-4092-9c9e-25ddf2b12666"
+  },
+  {
+   "id": "1d2571a3-9aaf-4092-9c9e-25ddf2b12666",
+   "order": 10,
+   "type": "wait",
+   "name": "Wait 3d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 3,
+     "when": "after"
+    }
+   },
+   "next": "4525b8a1-948f-4d1d-bf1d-3c5c844f41e3"
+  },
+  {
+   "id": "4525b8a1-948f-4d1d-bf1d-3c5c844f41e3",
+   "order": 11,
+   "type": "email",
+   "name": "Email: fear touch 6 [email_wf07_fear_t6]",
+   "attributes": {
+    "subject": "Questions are always welcome",
+    "html": "Hi {{contact.first_name}}, It is completely normal to have questions before starting any treatment. Our physicians are here to explain the process, review your health history, and make sure you feel comfortable with every step. If you would like to speak with us again, you can schedule a visit here. {{contact.current_booking_url}}",
+    "type": "email"
+   },
+   "next": "72dbffe3-e475-4512-9a3f-937373d61b62"
+  },
+  {
+   "id": "72dbffe3-e475-4512-9a3f-937373d61b62",
+   "order": 12,
+   "type": "wait",
+   "name": "Wait 1d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 1,
+     "when": "after"
+    }
+   },
+   "next": "d8e4e938-feb6-4e96-8ed8-90d6e0458071"
+  },
+  {
+   "id": "d8e4e938-feb6-4e96-8ed8-90d6e0458071",
+   "order": 13,
+   "type": "email",
+   "name": "Email: fear touch 7 [email_wf07_fear_t7]",
+   "attributes": {
+    "subject": "Your safety is our priority",
+    "html": "Hi {{contact.first_name}}, Some members leave their first consultation with questions about safety. Our treatments are physician supervised and based on FDA approved therapies. During a visit the doctor will review your health history and answer every question you may have. If you would like to continue the conversation, we would be glad to see you again. {{contact.current_booking_url}}",
+    "type": "email"
+   },
+   "next": "7a8f1c44-bd24-44b7-876d-d708152870cc"
+  },
+  {
+   "id": "7a8f1c44-bd24-44b7-876d-d708152870cc",
+   "order": 14,
+   "type": "wait",
+   "name": "Wait 2d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 2,
+     "when": "after"
+    }
+   },
+   "next": "b6ae1470-cfad-4f9c-a79e-e3a474b871bc"
+  },
+  {
+   "id": "b6ae1470-cfad-4f9c-a79e-e3a474b871bc",
+   "order": 15,
+   "type": "sms",
+   "name": "SMS: fear touch 8 [sms_wf07_fear_t8]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, many members have safety questions at first. Our doctors take time to explain everything during the visit so you can make a comfortable decision.",
+    "attachments": []
+   },
+   "next": "571aa4c9-858d-43cb-aa48-e57532664d7f"
+  },
+  {
+   "id": "571aa4c9-858d-43cb-aa48-e57532664d7f",
+   "order": 16,
+   "type": "wait",
+   "name": "Wait 3d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 3,
+     "when": "after"
+    }
+   },
+   "next": "955caebb-a699-4ac4-8e2a-87fec01befca"
+  },
+  {
+   "id": "955caebb-a699-4ac4-8e2a-87fec01befca",
+   "order": 17,
+   "type": "email",
+   "name": "Email: fear touch 9 [email_wf07_fear_t9]",
+   "attributes": {
+    "subject": "Questions are always welcome",
+    "html": "Hi {{contact.first_name}}, It is completely normal to have questions before starting any treatment. Our physicians are here to explain the process, review your health history, and make sure you feel comfortable with every step. If you would like to speak with us again, you can schedule a visit here. {{contact.current_booking_url}}",
+    "type": "email"
+   }
+  },
+  {
+   "id": "f7116f1a-6875-4230-89d7-fc38753cfc31",
+   "order": 0,
+   "type": "wait",
+   "name": "Wait 1d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 1,
+     "when": "after"
+    }
+   },
+   "parent": "25a82dd4-58c4-4b38-bbf8-38c77cbac8e9",
+   "parentKey": "25a82dd4-58c4-4b38-bbf8-38c77cbac8e9",
+   "next": "4f6b665d-2d22-490a-8c7e-2048c7f032ce"
+  },
+  {
+   "id": "4f6b665d-2d22-490a-8c7e-2048c7f032ce",
+   "order": 1,
+   "type": "sms",
+   "name": "SMS: partner touch 1 [sms_wf07_partner_t1]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, it is very common for members to want to talk with their partner before making a decision. You are welcome to bring them to the clinic so both of you can ask questions.",
+    "attachments": []
+   },
+   "next": "c12c347b-c8c8-4e96-9405-c045816de745"
+  },
+  {
+   "id": "c12c347b-c8c8-4e96-9405-c045816de745",
+   "order": 2,
+   "type": "wait",
+   "name": "Wait 2d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 2,
+     "when": "after"
+    }
+   },
+   "next": "43f15f8f-6954-46b7-8da4-88c2f32bdbd8"
+  },
+  {
+   "id": "43f15f8f-6954-46b7-8da4-88c2f32bdbd8",
+   "order": 3,
+   "type": "email",
+   "name": "Email: partner touch 2 [email_wf07_partner_t2]",
+   "attributes": {
+    "subject": "You can bring your partner to the visit",
+    "html": "Hi {{contact.first_name}}, Many members choose to bring their partner to the consultation so everyone can hear the information together and ask questions. If that would help you feel more comfortable, we would be happy to schedule a visit for both of you. {{contact.current_booking_url}}",
+    "type": "email"
+   },
+   "next": "6c1636a8-9d97-4b99-a75d-dd5500bcc9c7"
+  },
+  {
+   "id": "6c1636a8-9d97-4b99-a75d-dd5500bcc9c7",
+   "order": 4,
+   "type": "wait",
+   "name": "Wait 3d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 3,
+     "when": "after"
+    }
+   },
+   "next": "6c78da77-4e79-4186-8c06-040ab456b288"
+  },
+  {
+   "id": "6c78da77-4e79-4186-8c06-040ab456b288",
+   "order": 5,
+   "type": "sms",
+   "name": "SMS: partner touch 3 [sms_wf07_partner_t3]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, if you and your partner would like to visit the clinic together, we can help you find a convenient time.",
+    "attachments": []
+   },
+   "next": "27f5b724-7608-4f0c-ba6e-06b374572c71"
+  },
+  {
+   "id": "27f5b724-7608-4f0c-ba6e-06b374572c71",
+   "order": 6,
+   "type": "wait",
+   "name": "Wait 1d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 1,
+     "when": "after"
+    }
+   },
+   "next": "a4b18179-d5f0-455e-a0b7-0fdc68399c12"
+  },
+  {
+   "id": "a4b18179-d5f0-455e-a0b7-0fdc68399c12",
+   "order": 7,
+   "type": "sms",
+   "name": "SMS: partner touch 4 [sms_wf07_partner_t4]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, it is very common for members to want to talk with their partner before making a decision. You are welcome to bring them to the clinic so both of you can ask questions.",
+    "attachments": []
+   },
+   "next": "4e774838-7dc0-4851-a5c7-fc4a0a818fd0"
+  },
+  {
+   "id": "4e774838-7dc0-4851-a5c7-fc4a0a818fd0",
+   "order": 8,
+   "type": "wait",
+   "name": "Wait 2d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 2,
+     "when": "after"
+    }
+   },
+   "next": "3ba07074-fea1-427c-b30a-86880698f471"
+  },
+  {
+   "id": "3ba07074-fea1-427c-b30a-86880698f471",
+   "order": 9,
+   "type": "email",
+   "name": "Email: partner touch 5 [email_wf07_partner_t5]",
+   "attributes": {
+    "subject": "You can bring your partner to the visit",
+    "html": "Hi {{contact.first_name}}, Many members choose to bring their partner to the consultation so everyone can hear the information together and ask questions. If that would help you feel more comfortable, we would be happy to schedule a visit for both of you. {{contact.current_booking_url}}",
+    "type": "email"
+   },
+   "next": "cd03f343-b8db-4d64-8cce-cca0d39c0741"
+  },
+  {
+   "id": "cd03f343-b8db-4d64-8cce-cca0d39c0741",
+   "order": 10,
+   "type": "wait",
+   "name": "Wait 3d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 3,
+     "when": "after"
+    }
+   },
+   "next": "fc9f7733-5683-480c-9e42-c6b263c3bb40"
+  },
+  {
+   "id": "fc9f7733-5683-480c-9e42-c6b263c3bb40",
+   "order": 11,
+   "type": "sms",
+   "name": "SMS: partner touch 6 [sms_wf07_partner_t6]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, if you and your partner would like to visit the clinic together, we can help you find a convenient time.",
+    "attachments": []
+   },
+   "next": "f5182511-dd1d-4b54-8c12-e1153cf63f5a"
+  },
+  {
+   "id": "f5182511-dd1d-4b54-8c12-e1153cf63f5a",
+   "order": 12,
+   "type": "wait",
+   "name": "Wait 1d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 1,
+     "when": "after"
+    }
+   },
+   "next": "18fde4c1-d010-43e4-99a2-bd149dae7a31"
+  },
+  {
+   "id": "18fde4c1-d010-43e4-99a2-bd149dae7a31",
+   "order": 13,
+   "type": "sms",
+   "name": "SMS: partner touch 7 [sms_wf07_partner_t7]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, it is very common for members to want to talk with their partner before making a decision. You are welcome to bring them to the clinic so both of you can ask questions.",
+    "attachments": []
+   },
+   "next": "69993957-bf99-4979-a441-ae234268c48d"
+  },
+  {
+   "id": "69993957-bf99-4979-a441-ae234268c48d",
+   "order": 14,
+   "type": "wait",
+   "name": "Wait 2d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 2,
+     "when": "after"
+    }
+   },
+   "next": "bcec9a11-1a89-4563-a7de-f23f694431a7"
+  },
+  {
+   "id": "bcec9a11-1a89-4563-a7de-f23f694431a7",
+   "order": 15,
+   "type": "email",
+   "name": "Email: partner touch 8 [email_wf07_partner_t8]",
+   "attributes": {
+    "subject": "You can bring your partner to the visit",
+    "html": "Hi {{contact.first_name}}, Many members choose to bring their partner to the consultation so everyone can hear the information together and ask questions. If that would help you feel more comfortable, we would be happy to schedule a visit for both of you. {{contact.current_booking_url}}",
+    "type": "email"
+   },
+   "next": "5adcefc6-0591-4920-9465-9517698afd2c"
+  },
+  {
+   "id": "5adcefc6-0591-4920-9465-9517698afd2c",
+   "order": 16,
+   "type": "wait",
+   "name": "Wait 3d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 3,
+     "when": "after"
+    }
+   },
+   "next": "44e2f96b-43a9-4b60-97b9-e03198f7ee06"
+  },
+  {
+   "id": "44e2f96b-43a9-4b60-97b9-e03198f7ee06",
+   "order": 17,
+   "type": "sms",
+   "name": "SMS: partner touch 9 [sms_wf07_partner_t9]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, if you and your partner would like to visit the clinic together, we can help you find a convenient time.",
+    "attachments": []
+   }
+  },
+  {
+   "id": "f9c5d083-9966-4184-a926-cf84417fdf1d",
+   "order": 0,
+   "type": "wait",
+   "name": "Wait 1d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 1,
+     "when": "after"
+    }
+   },
+   "parent": "5a44d3b9-a95a-4b67-bbfb-a09a7513a725",
+   "parentKey": "5a44d3b9-a95a-4b67-bbfb-a09a7513a725",
+   "next": "6c5166e2-100a-4904-9aff-49dc50a204c4"
+  },
+  {
+   "id": "6c5166e2-100a-4904-9aff-49dc50a204c4",
+   "order": 1,
+   "type": "email",
+   "name": "Email: timing touch 1 [email_wf07_timing_t1]",
+   "attributes": {
+    "subject": "A quick note from Men's Wellness Centers",
+    "html": "Hi {{contact.first_name}}, We understand that timing is not always right. Many men start with a simple consultation to learn what might be causing their symptoms and what options exist. Whenever you feel ready, our team will be here to help. {{contact.current_booking_url}}",
+    "type": "email"
+   },
+   "next": "17be1d44-1c9b-444e-9a51-78f0ece88d94"
+  },
+  {
+   "id": "17be1d44-1c9b-444e-9a51-78f0ece88d94",
+   "order": 2,
+   "type": "wait",
+   "name": "Wait 2d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 2,
+     "when": "after"
+    }
+   },
+   "next": "ba10114b-c93c-48c7-93f2-cc8badd3229e"
+  },
+  {
+   "id": "ba10114b-c93c-48c7-93f2-cc8badd3229e",
+   "order": 3,
+   "type": "sms",
+   "name": "SMS: timing touch 2 [sms_wf07_timing_t2]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, just checking in. If you ever want to revisit the conversation about your health, we are here whenever the timing feels right.",
+    "attachments": []
+   },
+   "next": "80645f0b-e554-479f-a147-76b811e64285"
+  },
+  {
+   "id": "80645f0b-e554-479f-a147-76b811e64285",
+   "order": 4,
+   "type": "wait",
+   "name": "Wait 3d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 3,
+     "when": "after"
+    }
+   },
+   "next": "628d8d53-ac2a-4844-8aa4-b236359f7570"
+  },
+  {
+   "id": "628d8d53-ac2a-4844-8aa4-b236359f7570",
+   "order": 5,
+   "type": "email",
+   "name": "Email: timing touch 3 [email_wf07_timing_t3]",
+   "attributes": {
+    "subject": "Whenever you are ready",
+    "html": "Hi {{contact.first_name}}, Your health does not have to be rushed. When you feel ready to take the next step, our physicians are here to help you understand what may be going on and what can be done. You can schedule a visit anytime here. {{contact.current_booking_url}}",
+    "type": "email"
+   },
+   "next": "a02c4114-2c55-4648-ae00-a200f727ceca"
+  },
+  {
+   "id": "a02c4114-2c55-4648-ae00-a200f727ceca",
+   "order": 6,
+   "type": "wait",
+   "name": "Wait 1d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 1,
+     "when": "after"
+    }
+   },
+   "next": "8bce5d0a-e426-493c-9376-7e7827f71942"
+  },
+  {
+   "id": "8bce5d0a-e426-493c-9376-7e7827f71942",
+   "order": 7,
+   "type": "email",
+   "name": "Email: timing touch 4 [email_wf07_timing_t4]",
+   "attributes": {
+    "subject": "A quick note from Men's Wellness Centers",
+    "html": "Hi {{contact.first_name}}, We understand that timing is not always right. Many men start with a simple consultation to learn what might be causing their symptoms and what options exist. Whenever you feel ready, our team will be here to help. {{contact.current_booking_url}}",
+    "type": "email"
+   },
+   "next": "23d36f97-385e-4bde-b6f8-21ca1d6016c9"
+  },
+  {
+   "id": "23d36f97-385e-4bde-b6f8-21ca1d6016c9",
+   "order": 8,
+   "type": "wait",
+   "name": "Wait 2d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 2,
+     "when": "after"
+    }
+   },
+   "next": "3b08cba5-3eb1-4bb0-b231-744d855f1b33"
+  },
+  {
+   "id": "3b08cba5-3eb1-4bb0-b231-744d855f1b33",
+   "order": 9,
+   "type": "sms",
+   "name": "SMS: timing touch 5 [sms_wf07_timing_t5]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, just checking in. If you ever want to revisit the conversation about your health, we are here whenever the timing feels right.",
+    "attachments": []
+   },
+   "next": "71d153e4-b95f-4d36-a67f-ded841c6c584"
+  },
+  {
+   "id": "71d153e4-b95f-4d36-a67f-ded841c6c584",
+   "order": 10,
+   "type": "wait",
+   "name": "Wait 3d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 3,
+     "when": "after"
+    }
+   },
+   "next": "94825143-43bd-4725-8073-4a4505a8e59a"
+  },
+  {
+   "id": "94825143-43bd-4725-8073-4a4505a8e59a",
+   "order": 11,
+   "type": "email",
+   "name": "Email: timing touch 6 [email_wf07_timing_t6]",
+   "attributes": {
+    "subject": "Whenever you are ready",
+    "html": "Hi {{contact.first_name}}, Your health does not have to be rushed. When you feel ready to take the next step, our physicians are here to help you understand what may be going on and what can be done. You can schedule a visit anytime here. {{contact.current_booking_url}}",
+    "type": "email"
+   },
+   "next": "c7b36f24-15d4-4548-8a93-522373a41284"
+  },
+  {
+   "id": "c7b36f24-15d4-4548-8a93-522373a41284",
+   "order": 12,
+   "type": "wait",
+   "name": "Wait 1d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 1,
+     "when": "after"
+    }
+   },
+   "next": "c3dc2a6b-9e2a-4cde-9d78-f2fe8359a76d"
+  },
+  {
+   "id": "c3dc2a6b-9e2a-4cde-9d78-f2fe8359a76d",
+   "order": 13,
+   "type": "email",
+   "name": "Email: timing touch 7 [email_wf07_timing_t7]",
+   "attributes": {
+    "subject": "A quick note from Men's Wellness Centers",
+    "html": "Hi {{contact.first_name}}, We understand that timing is not always right. Many men start with a simple consultation to learn what might be causing their symptoms and what options exist. Whenever you feel ready, our team will be here to help. {{contact.current_booking_url}}",
+    "type": "email"
+   },
+   "next": "b3b2d001-200f-47f9-8055-7d2c8d6515ca"
+  },
+  {
+   "id": "b3b2d001-200f-47f9-8055-7d2c8d6515ca",
+   "order": 14,
+   "type": "wait",
+   "name": "Wait 2d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 2,
+     "when": "after"
+    }
+   },
+   "next": "947a6d7f-9c77-404f-a825-6e1ffd962e84"
+  },
+  {
+   "id": "947a6d7f-9c77-404f-a825-6e1ffd962e84",
+   "order": 15,
+   "type": "sms",
+   "name": "SMS: timing touch 8 [sms_wf07_timing_t8]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, just checking in. If you ever want to revisit the conversation about your health, we are here whenever the timing feels right.",
+    "attachments": []
+   },
+   "next": "ad1cd964-b1c9-49f6-af6a-9c61b7ec55e9"
+  },
+  {
+   "id": "ad1cd964-b1c9-49f6-af6a-9c61b7ec55e9",
+   "order": 16,
+   "type": "wait",
+   "name": "Wait 3d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 3,
+     "when": "after"
+    }
+   },
+   "next": "17634960-9a81-4324-abd4-de4fe9114e83"
+  },
+  {
+   "id": "17634960-9a81-4324-abd4-de4fe9114e83",
+   "order": 17,
+   "type": "email",
+   "name": "Email: timing touch 9 [email_wf07_timing_t9]",
+   "attributes": {
+    "subject": "Whenever you are ready",
+    "html": "Hi {{contact.first_name}}, Your health does not have to be rushed. When you feel ready to take the next step, our physicians are here to help you understand what may be going on and what can be done. You can schedule a visit anytime here. {{contact.current_booking_url}}",
+    "type": "email"
+   }
+  },
+  {
+   "id": "e98a09cb-6650-4b75-b8ed-05be75f32174",
+   "order": 0,
+   "type": "wait",
+   "name": "Wait 1d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 1,
+     "when": "after"
+    }
+   },
+   "parent": "6068889f-d274-48dc-b477-5708e761bd3d",
+   "parentKey": "6068889f-d274-48dc-b477-5708e761bd3d",
+   "next": "a31b5507-af16-47cb-a24b-e87dd52ea504"
+  },
+  {
+   "id": "a31b5507-af16-47cb-a24b-e87dd52ea504",
+   "order": 1,
+   "type": "sms",
+   "name": "SMS: decision touch 1 [sms_wf07_decision_t1]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, taking time to think things over is completely normal. If you ever want to talk again or ask another question, we are here for you.",
+    "attachments": []
+   },
+   "next": "399f3097-0464-4f38-bf9c-38747f5e3e8c"
+  },
+  {
+   "id": "399f3097-0464-4f38-bf9c-38747f5e3e8c",
+   "order": 2,
+   "type": "wait",
+   "name": "Wait 2d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 2,
+     "when": "after"
+    }
+   },
+   "next": "97198866-3aaf-4f9c-96eb-4b140881af27"
+  },
+  {
+   "id": "97198866-3aaf-4f9c-96eb-4b140881af27",
+   "order": 3,
+   "type": "email",
+   "name": "Email: decision touch 2 [email_wf07_decision_t2]",
+   "attributes": {
+    "subject": "Many members felt the same way",
+    "html": "Hi {{contact.first_name}}, A lot of members tell us they needed time to think after their first visit. Many of them later said they were glad they came back to learn more and understand their options. If you ever want to continue the conversation, we would be happy to see you again. {{contact.current_booking_url}}",
+    "type": "email"
+   },
+   "next": "b9f8be82-06a1-41dc-a43e-b03849b1b102"
+  },
+  {
+   "id": "b9f8be82-06a1-41dc-a43e-b03849b1b102",
+   "order": 4,
+   "type": "wait",
+   "name": "Wait 3d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 3,
+     "when": "after"
+    }
+   },
+   "next": "3b38b766-694e-46c7-91da-0160d2962bf8"
+  },
+  {
+   "id": "3b38b766-694e-46c7-91da-0160d2962bf8",
+   "order": 5,
+   "type": "sms",
+   "name": "SMS: decision touch 3 [sms_wf07_decision_t3]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, just checking in. If you would like to revisit the discussion with the doctor, we can help you schedule another visit.",
+    "attachments": []
+   },
+   "next": "d999c700-e0fc-4d4f-9e25-d4f37b95f060"
+  },
+  {
+   "id": "d999c700-e0fc-4d4f-9e25-d4f37b95f060",
+   "order": 6,
+   "type": "wait",
+   "name": "Wait 1d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 1,
+     "when": "after"
+    }
+   },
+   "next": "e8174868-00f2-4792-8100-52e0e62a5705"
+  },
+  {
+   "id": "e8174868-00f2-4792-8100-52e0e62a5705",
+   "order": 7,
+   "type": "sms",
+   "name": "SMS: decision touch 4 [sms_wf07_decision_t4]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, whenever you feel ready to take the next step, our team is here to help.",
+    "attachments": []
+   },
+   "next": "944b247e-fab6-4475-9936-c67749575823"
+  },
+  {
+   "id": "944b247e-fab6-4475-9936-c67749575823",
+   "order": 8,
+   "type": "wait",
+   "name": "Wait 2d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 2,
+     "when": "after"
+    }
+   },
+   "next": "e10f6b2b-a130-44b4-8fd0-95b25a5227b8"
+  },
+  {
+   "id": "e10f6b2b-a130-44b4-8fd0-95b25a5227b8",
+   "order": 9,
+   "type": "sms",
+   "name": "SMS: decision touch 5 [sms_wf07_decision_t5]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, taking time to think things over is completely normal. If you ever want to talk again or ask another question, we are here for you.",
+    "attachments": []
+   },
+   "next": "c9f84091-02c4-46ad-b833-e1d13c6bec70"
+  },
+  {
+   "id": "c9f84091-02c4-46ad-b833-e1d13c6bec70",
+   "order": 10,
+   "type": "wait",
+   "name": "Wait 3d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 3,
+     "when": "after"
+    }
+   },
+   "next": "95518d81-80ab-4e1f-8cf0-d408c5c1b3f4"
+  },
+  {
+   "id": "95518d81-80ab-4e1f-8cf0-d408c5c1b3f4",
+   "order": 11,
+   "type": "email",
+   "name": "Email: decision touch 6 [email_wf07_decision_t6]",
+   "attributes": {
+    "subject": "Many members felt the same way",
+    "html": "Hi {{contact.first_name}}, A lot of members tell us they needed time to think after their first visit. Many of them later said they were glad they came back to learn more and understand their options. If you ever want to continue the conversation, we would be happy to see you again. {{contact.current_booking_url}}",
+    "type": "email"
+   },
+   "next": "267382d8-77f6-48db-a3f6-3ed499854c91"
+  },
+  {
+   "id": "267382d8-77f6-48db-a3f6-3ed499854c91",
+   "order": 12,
+   "type": "wait",
+   "name": "Wait 1d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 1,
+     "when": "after"
+    }
+   },
+   "next": "47a6d87d-a469-411d-9b47-b649f21bbe53"
+  },
+  {
+   "id": "47a6d87d-a469-411d-9b47-b649f21bbe53",
+   "order": 13,
+   "type": "sms",
+   "name": "SMS: decision touch 7 [sms_wf07_decision_t7]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, just checking in. If you would like to revisit the discussion with the doctor, we can help you schedule another visit.",
+    "attachments": []
+   },
+   "next": "aa323fce-8454-41ba-8537-fc023c99cc99"
+  },
+  {
+   "id": "aa323fce-8454-41ba-8537-fc023c99cc99",
+   "order": 14,
+   "type": "wait",
+   "name": "Wait 2d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 2,
+     "when": "after"
+    }
+   },
+   "next": "8f7466f4-4962-4bc8-9712-4204d2c836c5"
+  },
+  {
+   "id": "8f7466f4-4962-4bc8-9712-4204d2c836c5",
+   "order": 15,
+   "type": "sms",
+   "name": "SMS: decision touch 8 [sms_wf07_decision_t8]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, whenever you feel ready to take the next step, our team is here to help.",
+    "attachments": []
+   },
+   "next": "5688ee5d-de7a-4e77-a352-988fef8a249f"
+  },
+  {
+   "id": "5688ee5d-de7a-4e77-a352-988fef8a249f",
+   "order": 16,
+   "type": "wait",
+   "name": "Wait 3d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 3,
+     "when": "after"
+    }
+   },
+   "next": "7d996d3c-391c-488e-96c9-90098119da22"
+  },
+  {
+   "id": "7d996d3c-391c-488e-96c9-90098119da22",
+   "order": 17,
+   "type": "sms",
+   "name": "SMS: decision touch 9 [sms_wf07_decision_t9]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, taking time to think things over is completely normal. If you ever want to talk again or ask another question, we are here for you.",
+    "attachments": []
+   },
+   "next": "691dbce2-88ed-43f7-89ab-d56cc0ef1fb6"
+  },
+  {
+   "id": "691dbce2-88ed-43f7-89ab-d56cc0ef1fb6",
+   "order": 18,
+   "type": "wait",
+   "name": "Wait 1d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 1,
+     "when": "after"
+    }
+   },
+   "next": "6682f386-e983-4192-a4fb-315a5d55387c"
+  },
+  {
+   "id": "6682f386-e983-4192-a4fb-315a5d55387c",
+   "order": 19,
+   "type": "email",
+   "name": "Email: decision touch 10 [email_wf07_decision_t10]",
+   "attributes": {
+    "subject": "Many members felt the same way",
+    "html": "Hi {{contact.first_name}}, A lot of members tell us they needed time to think after their first visit. Many of them later said they were glad they came back to learn more and understand their options. If you ever want to continue the conversation, we would be happy to see you again. {{contact.current_booking_url}}",
+    "type": "email"
+   },
+   "next": "15e3a6f0-5dd4-4ab9-900c-ceaade01839c"
+  },
+  {
+   "id": "15e3a6f0-5dd4-4ab9-900c-ceaade01839c",
+   "order": 20,
+   "type": "wait",
+   "name": "Wait 2d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 2,
+     "when": "after"
+    }
+   },
+   "next": "25b95238-f8e6-41ec-ae65-9ea46479218f"
+  },
+  {
+   "id": "25b95238-f8e6-41ec-ae65-9ea46479218f",
+   "order": 21,
+   "type": "sms",
+   "name": "SMS: decision touch 11 [sms_wf07_decision_t11]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, just checking in. If you would like to revisit the discussion with the doctor, we can help you schedule another visit.",
+    "attachments": []
+   },
+   "next": "d7adcc11-79d3-4306-9d07-c3cc56f10973"
+  },
+  {
+   "id": "d7adcc11-79d3-4306-9d07-c3cc56f10973",
+   "order": 22,
+   "type": "wait",
+   "name": "Wait 3d",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 3,
+     "when": "after"
+    }
+   },
+   "next": "60d369ee-545f-44b2-b5a8-77b946b8bdb3"
+  },
+  {
+   "id": "60d369ee-545f-44b2-b5a8-77b946b8bdb3",
+   "order": 23,
+   "type": "sms",
+   "name": "SMS: decision touch 12 [sms_wf07_decision_t12]",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, whenever you feel ready to take the next step, our team is here to help.",
+    "attachments": []
+   }
+  }
+ ]
+}

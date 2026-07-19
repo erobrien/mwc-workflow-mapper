@@ -1,0 +1,370 @@
+{
+ "templates": [
+  {
+   "id": "5519530a-ca25-4778-bb03-d06ad99bd8ef",
+   "order": 0,
+   "type": "wait",
+   "name": "Wait: 5 minutes(s)",
+   "cat": "",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "minutes",
+     "value": 5,
+     "when": "after"
+    },
+    "name": "Wait",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "next": "5bcb39a1-673d-4724-83b2-72279ada43ad"
+  },
+  {
+   "id": "5bcb39a1-673d-4724-83b2-72279ada43ad",
+   "order": 0,
+   "name": "Call: Speed-to-Lead (T+5m)",
+   "type": "sms",
+   "attributes": {
+    "body": "[CALL TASK PLACEHOLDER] Call: Speed-to-Lead (T+5m). Reply STOP to opt out.",
+    "attachments": []
+   },
+   "next": "8a063721-cdd1-4ee2-a595-3703c85ad925"
+  },
+  {
+   "id": "8a063721-cdd1-4ee2-a595-3703c85ad925",
+   "order": 0,
+   "type": "wait",
+   "name": "Wait: 2 hour(s)",
+   "cat": "",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "hour",
+     "value": 2,
+     "when": "after"
+    },
+    "name": "Wait",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "next": "d55a0c0e-6b1c-4709-9384-1ee2ca4d86c7"
+  },
+  {
+   "id": "d55a0c0e-6b1c-4709-9384-1ee2ca4d86c7",
+   "order": 0,
+   "name": "SMS: Follow-Up 1 (T+2h)",
+   "type": "sms",
+   "attributes": {
+    "body": "Hi {{contact.first_name}}, following up from Men's Wellness Centers. Ready to book your {{ custom_values.consult_descriptor }}? Reply with a day that works. {{ custom_values.sms_opt_out_footer }}",
+    "attachments": []
+   },
+   "next": "2f4148de-6649-40b0-8cc6-5ad9555f059c"
+  },
+  {
+   "id": "2f4148de-6649-40b0-8cc6-5ad9555f059c",
+   "order": 0,
+   "type": "wait",
+   "name": "Wait: 2 hour(s)",
+   "cat": "",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "hour",
+     "value": 2,
+     "when": "after"
+    },
+    "name": "Wait",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "next": "dd72d8ce-d025-4e6e-8fec-f5c8959fb471"
+  },
+  {
+   "id": "dd72d8ce-d025-4e6e-8fec-f5c8959fb471",
+   "order": 0,
+   "name": "Email: Health Education 1 (T+4h)",
+   "type": "email",
+   "attributes": {
+    "subject": "Email: Health Education 1 (T+4h)",
+    "html": "<p>Educational email.</p>",
+    "type": "email"
+   },
+   "next": "b28d369e-c200-4f10-8b35-5cea1e0fe7eb"
+  },
+  {
+   "id": "b28d369e-c200-4f10-8b35-5cea1e0fe7eb",
+   "order": 0,
+   "type": "wait",
+   "name": "Wait: 20 hour(s)",
+   "cat": "",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "hour",
+     "value": 20,
+     "when": "after"
+    },
+    "name": "Wait",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "next": "9a846164-898a-4649-8323-29ef0be0b4fc"
+  },
+  {
+   "id": "9a846164-898a-4649-8323-29ef0be0b4fc",
+   "order": 0,
+   "name": "SMS: Re-Engagement 2 (T+1d)",
+   "type": "sms",
+   "attributes": {
+    "body": "Appointment/consult-logistics framing, no symptom detail. Quiet hours apply.",
+    "attachments": []
+   },
+   "next": "f0d0c9fd-b236-458f-8eb5-8a5a7b966209"
+  },
+  {
+   "id": "f0d0c9fd-b236-458f-8eb5-8a5a7b966209",
+   "order": 0,
+   "type": "wait",
+   "name": "Wait: 1 days(s)",
+   "cat": "",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 1,
+     "when": "after"
+    },
+    "name": "Wait",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "next": "e043579f-629f-40f5-966b-ab93d751a40f"
+  },
+  {
+   "id": "e043579f-629f-40f5-966b-ab93d751a40f",
+   "order": 0,
+   "name": "Email: Physician-Led Process 2 (T+2d)",
+   "type": "email",
+   "attributes": {
+    "subject": "Email: Physician-Led Process 2 (T+2d)",
+    "html": "<p>Physician-led process email.</p>",
+    "type": "email"
+   },
+   "next": "bd6f1a4e-220f-4bf2-83cc-9f0908f8d199"
+  },
+  {
+   "id": "bd6f1a4e-220f-4bf2-83cc-9f0908f8d199",
+   "order": 0,
+   "type": "wait",
+   "name": "Wait: 1 days(s)",
+   "cat": "",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 1,
+     "when": "after"
+    },
+    "name": "Wait",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "next": "84fc26ae-2278-41a6-992d-bbcbc7c305df"
+  },
+  {
+   "id": "84fc26ae-2278-41a6-992d-bbcbc7c305df",
+   "order": 0,
+   "name": "Call: Voicemail Drop (T+3d)",
+   "type": "sms",
+   "attributes": {
+    "body": "[CALL TASK PLACEHOLDER] Call: Voicemail Drop (T+3d). Reply STOP to opt out.",
+    "attachments": []
+   },
+   "next": "eb3c8e2c-e82c-4c6b-951a-9280caa3700c"
+  },
+  {
+   "id": "eb3c8e2c-e82c-4c6b-951a-9280caa3700c",
+   "order": 0,
+   "type": "wait",
+   "name": "Wait: 2 days(s)",
+   "cat": "",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 2,
+     "when": "after"
+    },
+    "name": "Wait",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "next": "eb6e66b4-6893-4721-90b0-32b3a0f88635"
+  },
+  {
+   "id": "eb6e66b4-6893-4721-90b0-32b3a0f88635",
+   "order": 0,
+   "name": "SMS: Availability 3 (T+5d)",
+   "type": "sms",
+   "attributes": {
+    "body": "Availability nudge.",
+    "attachments": []
+   },
+   "next": "6af6b5cf-c2d2-4dac-84e4-807a7bf2e2a8"
+  },
+  {
+   "id": "6af6b5cf-c2d2-4dac-84e4-807a7bf2e2a8",
+   "order": 0,
+   "type": "wait",
+   "name": "Wait: 2 days(s)",
+   "cat": "",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 2,
+     "when": "after"
+    },
+    "name": "Wait",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "next": "bbef2667-73c8-4f07-bb48-8f7a783df9a0"
+  },
+  {
+   "id": "bbef2667-73c8-4f07-bb48-8f7a783df9a0",
+   "order": 0,
+   "name": "Email: Testimonial 3 (T+7d)",
+   "type": "email",
+   "attributes": {
+    "subject": "Email: Testimonial 3 (T+7d)",
+    "html": "<p>Return-to-self testimonial email (written, no before/after).</p>",
+    "type": "email"
+   },
+   "next": "d3bfd55b-91f1-462c-8fab-9fb7316e77a7"
+  },
+  {
+   "id": "d3bfd55b-91f1-462c-8fab-9fb7316e77a7",
+   "order": 0,
+   "type": "wait",
+   "name": "Wait: 3 days(s)",
+   "cat": "",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 3,
+     "when": "after"
+    },
+    "name": "Wait",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "next": "0a35a214-8efe-450b-8a33-5426ba6335bf"
+  },
+  {
+   "id": "0a35a214-8efe-450b-8a33-5426ba6335bf",
+   "order": 0,
+   "name": "SMS: Re-Engagement 4 (T+10d)",
+   "type": "sms",
+   "attributes": {
+    "body": "Re-engagement.",
+    "attachments": []
+   },
+   "next": "d9ed556e-d1da-4055-aa3c-716d00f537eb"
+  },
+  {
+   "id": "d9ed556e-d1da-4055-aa3c-716d00f537eb",
+   "order": 0,
+   "type": "wait",
+   "name": "Wait: 4 days(s)",
+   "cat": "",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 4,
+     "when": "after"
+    },
+    "name": "Wait",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "next": "02ceba31-122f-47bf-bfb4-64987eb73ca7"
+  },
+  {
+   "id": "02ceba31-122f-47bf-bfb4-64987eb73ca7",
+   "order": 0,
+   "name": "Email: Urgency 4 (T+14d)",
+   "type": "email",
+   "attributes": {
+    "subject": "Email: Urgency 4 (T+14d)",
+    "html": "<p>Urgency email.</p>",
+    "type": "email"
+   },
+   "next": "85b7e272-6c22-4017-a545-9756361c1f07"
+  },
+  {
+   "id": "85b7e272-6c22-4017-a545-9756361c1f07",
+   "order": 0,
+   "type": "wait",
+   "name": "Wait: 2 days(s)",
+   "cat": "",
+   "attributes": {
+    "type": "time",
+    "startAfter": {
+     "type": "days",
+     "value": 2,
+     "when": "after"
+    },
+    "name": "Wait",
+    "cat": "",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "next": "8d526d44-b5d4-4e92-941b-9c8d58196c49"
+  },
+  {
+   "id": "8d526d44-b5d4-4e92-941b-9c8d58196c49",
+   "order": 0,
+   "name": "SMS: Empathetic Breakup 5 (T+16d)",
+   "type": "sms",
+   "attributes": {
+    "body": "{{contact.first_name}}, we will step back for now. When you are ready to book your consultation at Men's Wellness Centers, we are here. {{ custom_values.sms_opt_out_footer }}",
+    "attachments": []
+   }
+  }
+ ]
+}

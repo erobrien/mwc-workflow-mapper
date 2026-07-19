@@ -1,0 +1,93 @@
+{
+ "workflowData": {
+  "_id": "38573ee6-8ecb-49da-ad35-259358aa0383",
+  "locationId": "Ghstz8eIsHWLeXek47dk",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 8,
+  "name": "ZZ-TEST-datemath-probe (delete me)",
+  "status": "draft",
+  "version": 5,
+  "dataVersion": 7,
+  "allowMultiple": false,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/Ghstz8eIsHWLeXek47dk/workflows/38573ee6-8ecb-49da-ad35-259358aa0383/5",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FGhstz8eIsHWLeXek47dk%2Fworkflows%2F38573ee6-8ecb-49da-ad35-259358aa0383%2F5?alt=media&token=1026d4a0-b006-49f8-a919-e4bb90731d2c",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "permission": 380,
+  "type": "workflow",
+  "parentId": "d15ca26c-3448-4063-a0e5-d4dfa617d76c",
+  "meta": null,
+  "createdAt": "2026-07-11T16:15:53.233Z",
+  "updatedAt": "2026-07-11T16:16:02.150Z",
+  "deleted": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "user",
+  "__v": 0,
+  "allowMultipleOpportunity": false,
+  "eventStartDate": null,
+  "senderAddress": null,
+  "window": null,
+  "workflowNote": null,
+  "id": "38573ee6-8ecb-49da-ad35-259358aa0383",
+  "workflowData": {
+   "templates": [
+    {
+     "id": "77946bb6-b215-4a13-b4a7-79c3f8eab512",
+     "order": 0,
+     "type": "sms",
+     "name": "probe lead",
+     "attributes": {
+      "body": "probe. Reply STOP to opt out.",
+      "attachments": []
+     },
+     "next": "226b41a9-0370-4a58-b34a-d6d7e7386ff3"
+    },
+    {
+     "id": "226b41a9-0370-4a58-b34a-d6d7e7386ff3",
+     "order": 1,
+     "type": "math_operation",
+     "name": "PROBE date add",
+     "attributes": {
+      "selectField": "P7s4MzoabSdwf0u05vyh",
+      "selectFieldtype": "date",
+      "sourceCustomValueId": "",
+      "updateField": "eIlYPOpD28vjKTQbccxM",
+      "updateFieldType": "date",
+      "targetCustomValueId": "",
+      "operators": [
+       {
+        "operator": "add",
+        "value": "12",
+        "unit": "month",
+        "__id": "40d52c0e-44d4-47b6-b04f-f33e933a558e"
+       }
+      ],
+      "type": "math_operation"
+     },
+     "next": "e333297f-e379-4fe3-9f32-f0d8b933c2d7",
+     "parentKey": "77946bb6-b215-4a13-b4a7-79c3f8eab512"
+    },
+    {
+     "id": "e333297f-e379-4fe3-9f32-f0d8b933c2d7",
+     "order": 2,
+     "type": "sms",
+     "name": "probe close",
+     "attributes": {
+      "body": "end. Reply STOP to opt out.",
+      "attachments": []
+     },
+     "parentKey": "226b41a9-0370-4a58-b34a-d6d7e7386ff3"
+    }
+   ]
+  }
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ },
+ "triggers": [],
+ "dependentAssets": {}
+}

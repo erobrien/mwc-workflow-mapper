@@ -1,0 +1,56 @@
+{
+ "workflowData": {
+  "_id": "701bc7c4-ad77-4b32-9a23-fceec10cde75",
+  "locationId": "Ghstz8eIsHWLeXek47dk",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 8,
+  "name": "WF-10 Feedback Survey",
+  "status": "draft",
+  "version": 4,
+  "dataVersion": 7,
+  "allowMultiple": false,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/Ghstz8eIsHWLeXek47dk/workflows/701bc7c4-ad77-4b32-9a23-fceec10cde75/4",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FGhstz8eIsHWLeXek47dk%2Fworkflows%2F701bc7c4-ad77-4b32-9a23-fceec10cde75%2F4?alt=media&token=78253335-320b-4b4e-8894-f974261b8b82",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "permission": 380,
+  "type": "workflow",
+  "parentId": "d15ca26c-3448-4063-a0e5-d4dfa617d76c",
+  "meta": null,
+  "createdAt": "2026-07-11T14:21:08.723Z",
+  "updatedAt": "2026-07-12T02:36:01.118Z",
+  "deleted": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "user",
+  "__v": 0,
+  "allowMultipleOpportunity": false,
+  "eventStartDate": null,
+  "senderAddress": null,
+  "window": null,
+  "workflowNote": null,
+  "id": "701bc7c4-ad77-4b32-9a23-fceec10cde75",
+  "workflowData": {
+   "templates": [
+    {
+     "id": "90dab2de-1728-4935-9491-1c4ff7c57414",
+     "order": 0,
+     "name": "SMS: Survey Invite",
+     "type": "sms",
+     "attributes": {
+      "body": "{{contact.first_name}}, how was your visit to Men's Wellness Centers? One quick tap: {{custom_values.survey_link}} {{ custom_values.sms_opt_out_footer }}",
+      "attachments": []
+     }
+    }
+   ]
+  }
+ },
+ "permissionMeta": {
+  "canRead": true,
+  "canWrite": true
+ },
+ "triggers": [],
+ "dependentAssets": {}
+}

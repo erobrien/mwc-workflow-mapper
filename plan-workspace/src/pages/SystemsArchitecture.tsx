@@ -38,17 +38,17 @@ flowchart LR
   end
 
   %% ---------- Column 4: data stores ----------
-  subgraph STORES["◉  DATA STORES"]
+  subgraph STORES["◉  DATA STORES  ·  SUPABASE (SINGLE DB VENDOR)"]
     direction TB
-    subgraph SB["Supabase  ·  Booking Admin"]
+    subgraph SBAT["Supabase  ·  Attribution  (Booking Admin)"]
       direction TB
       FE[("funnel_events")]
       AR[("attribution_records")]
     end
-    subgraph NEON["Neon  ·  MWC Sales Pulse  ·  PG18"]
+    subgraph SBOPS["Supabase  ·  Operations  (Force)"]
       direction TB
-      NAPP[("appointments<br/>dispositions<br/>sync_events")]
-      NAUTH[("neon_auth<br/>sessions · orgs")]
+      SBAPP[("appointments<br/>dispositions<br/>sync_events")]
+      SBAUTH[("auth<br/>sessions · orgs")]
     end
   end
 
@@ -71,10 +71,10 @@ flowchart LR
   FE ==> SAC
   SAC == write ==> AR
   AR ==> DASH
-  CRM -. sync .-> NAPP
-  GRID ==> NAPP
-  NAPP -. writeback .-> CRM
-  NAUTH -.- GRID
+  CRM -. sync .-> SBAPP
+  GRID ==> SBAPP
+  SBAPP -. writeback .-> CRM
+  SBAUTH -.- GRID
   SAC ==> G
   SAC ==> M
   LB -. future .-> SAC
@@ -91,7 +91,7 @@ flowchart LR
   class WP,BK,CALL surf
   class CRM,WFS ghl
   class SAC,DASH,GRID apps
-  class FE,AR,NAPP,NAUTH store
+  class FE,AR,SBAPP,SBAUTH store
   class G,M ads
   class LB seam`;
 
@@ -99,12 +99,12 @@ const SB_ADMIN = [
   { t: "public.funnel_events", d: "Append-only funnel event spine written by the booking app (mwc-next) and GHL webhooks. SAC's ingest source of truth.", rows: 26 },
   { t: "public.attribution_records", d: "Resolved attribution per lead/deal: click IDs, UTMs, source resolution, join keys to GHL contact/opportunity ids.", rows: 19 },
 ];
-const NEON_TABLES = [
+const OPS_TABLES = [
   { t: "public.appointments", d: "Daily consultation grid rows synced from GHL calendars" },
   { t: "public.dispositions", d: "PCC outcome entries (the Force disposition flow)" },
   { t: "public.sync_events", d: "GHL sync bookkeeping (what was pulled/pushed when)" },
   { t: "public.users / settings / filter_presets / audit_log", d: "App users, config, saved views, change audit" },
-  { t: "neon_auth.*", d: "Better Auth: users, sessions, organizations, members, JWKS" },
+  { t: "auth.*", d: "Supabase Auth: users, sessions, organizations, members" },
 ];
 
 export default function SystemsArchitecture() {
@@ -173,12 +173,12 @@ export default function SystemsArchitecture() {
 
         <Card><CardContent className="p-4">
           <div className="flex items-center gap-2 text-sm font-semibold"><AppWindow className="h-4 w-4 text-emerald-600" /> Force — formerly Pulse</div>
-          <p className="mt-1 text-sm text-muted-foreground">The clinic operations console on Vercel: live daily consultation grid per clinic and PCC disposition entry. Syncs appointments from GHL, records outcomes, and writes dispositions back to the CRM. Auth via Neon Auth (Better Auth).</p>
+          <p className="mt-1 text-sm text-muted-foreground">The clinic operations console on Vercel: live daily consultation grid per clinic and PCC disposition entry. Syncs appointments from GHL, records outcomes, and writes dispositions back to the CRM. Auth via Supabase Auth.</p>
           <div className="mt-3 rounded-md border bg-muted/30 p-2">
-            <div className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground"><Database className="h-3.5 w-3.5" /> Neon · MWC Sales Pulse <span className="font-mono">(morning-mud-33436920, PG 18)</span></div>
+            <div className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground"><Database className="h-3.5 w-3.5" /> Supabase · Operations (target project) <span className="font-mono">(Postgres 17)</span></div>
             <table className="mt-1 w-full text-sm">
               <tbody>
-                {NEON_TABLES.map((x) => (
+                {OPS_TABLES.map((x) => (
                   <tr key={x.t} className="border-b align-top last:border-0">
                     <td className="w-56 py-1.5 pe-2 font-mono text-xs">{x.t}</td>
                     <td className="py-1.5 text-xs text-muted-foreground">{x.d}</td>
@@ -190,9 +190,9 @@ export default function SystemsArchitecture() {
         </CardContent></Card>
       </div>
 
-      <div className="rounded-md border border-l-4 border-l-amber-500 bg-card p-3 text-sm text-muted-foreground">
-        <span className="me-1 inline-flex items-center gap-1 font-semibold text-foreground"><AlertTriangle className="h-4 w-4 text-amber-600" /> Duplication to resolve:</span>
-        a second Supabase project <span className="font-mono text-xs">MWC-Pulse (urwgqwvrfmnttzebpxxz)</span> holds the same seven tables Force now keeps in Neon (appointments 67, dispositions 50, sync_events 52 rows). Neon is the selected home (created after, carries neon_auth, actively used). Confirm nothing still writes to the Supabase copy, then archive it — two writable homes for disposition data would recreate the single-writer defect at the database layer.
+      <div className="rounded-md border border-l-4 border-l-emerald-500 bg-card p-3 text-sm text-muted-foreground">
+        <span className="me-1 inline-flex items-center gap-1 font-semibold text-foreground"><AlertTriangle className="h-4 w-4 text-emerald-600" /> Consolidation decision (2026-07-19):</span>
+        Supabase is the single database vendor. The existing Neon project <span className="font-mono text-xs">MWC Sales Pulse (morning-mud-33436920)</span> is retired; Force migrates onto the existing Supabase <span className="font-mono text-xs">MWC-Pulse (urwgqwvrfmnttzebpxxz)</span> project (already carries the same seven tables). Migration steps: (1) confirm mwc-admin/Force writers point at Supabase; (2) diff Supabase vs Neon and reconcile the most recent rows; (3) cut over auth from Neon Auth to Supabase Auth; (4) delete the Neon project. Two writable homes for disposition data must not survive the cutover.
       </div>
 
       <div className="grid gap-3 md:grid-cols-3">
@@ -200,8 +200,8 @@ export default function SystemsArchitecture() {
           <div className="text-sm font-semibold">Data ownership</div>
           <ul className="mt-2 space-y-1.5 text-sm text-muted-foreground">
             <li>• <b className="text-foreground">GHL</b>: members, deals, calendars, messaging — the CRM system of record</li>
-            <li>• <b className="text-foreground">Supabase (Booking Admin)</b>: funnel events + attribution — SAC's anonymized measurement store</li>
-            <li>• <b className="text-foreground">Neon (Sales Pulse)</b>: operational grid state + dispositions — Force's working store</li>
+            <li>• <b className="text-foreground">Supabase (Attribution)</b>: funnel events + attribution — SAC's anonymized measurement store</li>
+            <li>• <b className="text-foreground">Supabase (Operations)</b>: operational grid state + dispositions — Force's working store</li>
             <li>• <b className="text-foreground">Lobbie</b> (future): clinical/EMR system of record; feeds show/renewal truth via the reserved seam</li>
           </ul>
         </CardContent></Card>
@@ -219,7 +219,7 @@ export default function SystemsArchitecture() {
           <ul className="mt-2 space-y-1.5 text-sm text-muted-foreground">
             <li>• PHI stays in GHL (HIPAA-enabled) and later Lobbie</li>
             <li>• Supabase stores anonymized events: opaque GHL ids, hashed identifiers, no condition data</li>
-            <li>• RLS enabled on all Supabase tables; Neon Auth gates Force</li>
+            <li>• RLS enabled on all Supabase tables; Supabase Auth gates Force</li>
             <li>• BAA verification for Supabase tier is an R2 gate</li>
           </ul>
         </CardContent></Card>

@@ -284,10 +284,10 @@
  ],
  "sac": {
   "name": "SAC (Server-side Attribution & Conversions)",
-  "stack": "Supabase (anonymized event store; funnel_events spine shared with mwc-next / mwc-admin) + Vercel serverless workers",
+  "stack": "Supabase (single database vendor across MWC apps): anonymized event store + Force operational store, funnel_events spine shared with mwc-next / mwc-admin; Vercel serverless workers",
   "collection": "Thin first-party script on menswellnesscenters.com (WordPress) and book.menswellnesscenters.com: captures click IDs (gclid/wbraid/gbraid/fbclid/msclkid), UTMs, fbp/fbc, consent state, and writes them to hidden GHL fields + localStorage. No third-party pixels on regulated pages. Transmission is server-side only.",
   "identity": "Spine = GHL contact_id / opportunity_id / appointment_id (opaque, non-PHI). Click IDs are the fallback join. No email/phone stored in clear; identifiers hashed (SHA-256) at ingest when consented, never stored raw.",
-  "storage": "Supabase tables: events (append-only, event_id unique), conversions_outbox (queued sends with status), reconciliation_daily. Hashing at rest, retention window (default 25 months to match ad-platform lookback + audit), minimum-necessary access roles, BAA tier verification is an R2 gate.",
+  "storage": "Two logical Supabase projects: Attribution (Booking Admin - events append-only with event_id unique, conversions_outbox, reconciliation_daily) and Operations (Force - appointments, dispositions, sync_events, auth). Hashing at rest, retention window (default 25 months), minimum-necessary access roles. BAA verification for Supabase tier is an R2 gate.",
   "junk_filter": "Events are emitted only on real object creation server-side (contact created, appointment booked, opportunity won). Pixel phantoms (the 965 Consent-page ghosts) never reach the outbox.",
   "event_contract": [
    {
@@ -353,7 +353,8 @@
    "hard_rules": "No condition/service parameters in any URL or payload. No symptom, treatment, or medication data in any event. Opaque GHL ids only. Consent state stored per contact and honored at the outbox, not at collection."
   },
   "measurement": "Reconciliation dashboard (mwc-admin): platform-reported conversions vs CRM truth set (real contacts, booked, sold) daily; signal-drop alerting when outbox failures or daily deltas exceed thresholds; monthly June-style truth-set review built from opportunities, not tags.",
-  "delivery": "Outbox pattern: queued sends, retries with backoff, dead-letter + replay job. Token custody: Meta system-user and Google developer tokens in the secret manager with a rotation runbook (one Meta token was previously exposed in a workflow)."
+  "delivery": "Outbox pattern: queued sends, retries with backoff, dead-letter + replay job. Token custody: Meta system-user and Google developer tokens in the secret manager with a rotation runbook (one Meta token was previously exposed in a workflow).",
+  "consolidation_2026_07_19": "Neon retired. Force migrates to Supabase Operations project (MWC-Pulse). Steps: point writers at Supabase, diff/reconcile most recent rows, cut auth over to Supabase Auth, delete the Neon project."
  },
  "transition": [
   {
@@ -415,6 +416,7 @@
     "Finish the six skeletal workflows (WF-10/11/12/13/15/16 mechanics per registry notes)",
     "Split WF-07 (97 nodes) and WF-09 (61 nodes) into router + child sequences",
     "SAC ingest endpoints + Supabase schema + junk filter; GHL webhook steps wired",
+    "Force migration to Supabase Operations project (retire Neon): confirm writers, reconcile rows, cut auth from Neon Auth to Supabase Auth, delete Neon project",
     "Form opportunity-binding verification; Supabase BAA verification"
    ],
    "exit": "Shadow reconciliation within 5% of CRM truth for 7 days"

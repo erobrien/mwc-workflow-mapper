@@ -1,0 +1,122 @@
+{
+ "WF-11 Compliance and Errors": {
+  "n": 12,
+  "types": [
+   "contact_tag",
+   "customer_reply",
+   "dnd_contact",
+   "form_submission",
+   "messaging_errors",
+   "validation_error"
+  ],
+  "all_inactive": false
+ },
+ "WF-13 Ad-Platform Conversions": {
+  "n": 4,
+  "types": [
+   "customer_appointment",
+   "pipeline_stage_updated"
+  ],
+  "all_inactive": false
+ },
+ "WF-15 PCC Referral Routing": {
+  "n": 1,
+  "types": [
+   "contact_created"
+  ],
+  "all_inactive": false
+ },
+ "WF-04 Medical Intake Chase": {
+  "n": 2,
+  "types": [
+   "form_submission",
+   "survey_submission"
+  ],
+  "all_inactive": false
+ },
+ "WF-08 No-Show and Cancel Recovery": {
+  "n": 3,
+  "types": [
+   "appointment"
+  ],
+  "all_inactive": false
+ },
+ "WF-14 Ambassador Program": {
+  "n": 4,
+  "types": [
+   "affiliate_campaign_enroll",
+   "contact_created",
+   "form_submission",
+   "pipeline_stage_updated"
+  ],
+  "all_inactive": false
+ },
+ "WF-01 Lead Capture and Attribution": {
+  "n": 1,
+  "types": [
+   "contact_tag"
+  ],
+  "all_inactive": true
+ },
+ "WF-02 Non-Booked Recovery": {
+  "n": 6,
+  "types": [
+   "contact_tag"
+  ],
+  "all_inactive": false
+ },
+ "WF-10 Feedback Survey": {
+  "n": 5,
+  "types": [
+   "appointment",
+   "contact_tag"
+  ],
+  "all_inactive": false
+ },
+ "WF-07 Post-Visit A&D Nurture": {
+  "n": 0,
+  "types": [],
+  "all_inactive": true
+ },
+ "WF-05 Clinic Outcome Router": {
+  "n": 7,
+  "types": [
+   "appointment",
+   "form_submission",
+   "trigger_link"
+  ],
+  "all_inactive": false
+ },
+ "WF-12 Call Disposition Handler": {
+  "n": 18,
+  "types": [
+   "call_status"
+  ],
+  "all_inactive": false
+ },
+ "WF-16 Comms Edge": {
+  "n": 1,
+  "types": [
+   "ivr_incoming_call"
+  ],
+  "all_inactive": false
+ },
+ "WF-09 Long-Term Nurture": {
+  "n": 0,
+  "types": [],
+  "all_inactive": true
+ },
+ "WF-03 Booking Confirmation and Reminders": {
+  "n": 4,
+  "types": [
+   "appointment",
+   "customer_appointment"
+  ],
+  "all_inactive": false
+ },
+ "WF-06 Post-Visit Won and Onboarding": {
+  "n": 0,
+  "types": [],
+  "all_inactive": true
+ }
+}

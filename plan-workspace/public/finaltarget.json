@@ -219,43 +219,31 @@
   "contact_deprecates": "All per-deal contact fields (sale outcome/type, products, terms, prices, PCC, provider, pay type, referral, A&D reason) park in a zz Deprecated folder at R3 cutover exactly as validated in Cody Neo; ids and form mappings stay intact during transition."
  },
  "form_tweak_r1": {
-  "summary": "Minimal change to the existing PCC Sales Form. No structural rebuild, no retraining. Fixes incorrect capture only; workflow stamps keep doing the opportunity writes in R1.",
+  "summary": "R1 is ADDITIVE-ONLY on the existing PCC Sales Form: add missing inputs, change nothing PCCs already use. Option-value flips to codes are behavior-touching (live workflows branch on today's prose values) and execute in the R3 alignment window together with the workflow condition updates.",
   "changes": [
    {
-    "item": "Sale Outcome options",
-    "from": "Sold / A&D / MUT / MAR (and free-text drift)",
-    "to": "sold / nosale / mut / mar",
-    "why": "stamps and routers branch on stable codes; A&D collides with advertising shorthand"
-   },
-   {
-    "item": "Sale Type options",
-    "from": "New / Renewal (plus duplicate new_or_renewal field)",
-    "to": "new / renewal on ONE field; retire the duplicate",
-    "why": "two writers for one fact is a defect; renewal split feeds separate ad conversion actions"
-   },
-   {
-    "item": "Pay Type options",
-    "from": "PIF / SF / CARE / MAG",
-    "to": "pif / sf / care / mag",
-    "why": "code casing consistency"
-   },
-   {
     "item": "Provider dropdown",
-    "from": "provider_making_recommendation free variance",
-    "to": "required dropdown from the clinician roster",
-    "why": "per-deal provider is a v2 requirement; renewals may see a different provider"
-   },
-   {
-    "item": "Term field",
-    "from": "term_length__item_1/2 drift",
-    "to": "single required Term for item 1",
-    "why": "drives renewal_date math; item 2+ detail moves to SAC"
+    "from": "not on form / free variance",
+    "to": "required dropdown from clinician roster (prod opportunity.provider options)",
+    "why": "per-deal provider requirement; renewals may see a different provider"
    },
    {
     "item": "Money Down",
     "from": "not consistently captured",
     "to": "explicit dollar field",
-    "why": "financing waterfall reporting; monetary fields are form-only writers"
+    "why": "monetary fields are form-only writers (GHL limitation)"
+   },
+   {
+    "item": "Term (item 1)",
+    "from": "term drift across fields",
+    "to": "one required Term input",
+    "why": "drives renewal_date math"
+   },
+   {
+    "item": "Sale Outcome / Sale Type / Pay Type / Product options",
+    "from": "prose values (Sold, A&D, New, PIF, TRT...)",
+    "to": "UNCHANGED in R1 - flips to codes happen in the R3 alignment window with the WF condition updates",
+    "why": "changing option values today would break live routing on Monday's submissions"
    }
   ],
   "verification": "After tweak: run one test disposition per outcome code and confirm the WF-05 stamps land the codes on the opportunity. R2 verifies direct opportunity-field writes from the form (opp binding), R3 flips the form to be the writer."
@@ -407,36 +395,37 @@
  "roadmap": [
   {
    "release": "R1",
-   "name": "Spec + minimal form fix",
+   "name": "Spec + additive prod work (no behavior changes)",
    "items": [
-    "Final Target section on plan-workspace (this)",
-    "PCC form minimal tweak (codes, provider, term, money_down)",
-    "Prod opportunity fields created/aligned (drafts of WF changes only)"
+    "Final Target section on plan-workspace (DONE)",
+    "Prod field reconciliation: 46 opportunity fields already exist - R1 is alignment, not creation (DONE)",
+    "Create the only missing fields: utm_medium, msclkid (DONE 2026-07-19)",
+    "Port proven triggers onto WF-01..16 drafts, all INACTIVE (DONE 2026-07-19: 68 triggers; WF-06 needs a configured Won trigger; WF-07/09 stay router-fed by design)",
+    "Cadence standard adopted from live timing (DONE - documented below)",
+    "Retime WF-02 to the proven burst; anchor WF-03 reminders to appointment time (PENDING)",
+    "PCC form ADDITIVE-only tweak: add Provider dropdown, Money Down, single Term field. NO option-value changes yet (option flips are behavior-touching and belong to the alignment window)"
    ],
-   "exit": "Spec approved; form captures codes correctly; stamps verified on test contact"
+   "exit": "All additive work verified on a test contact; zero behavior change to live flows"
   },
   {
    "release": "R2",
    "name": "Core build + SAC shadow",
    "items": [
-    "WF-01/05/06/11/12 built as drafts in prod Target Deployment folder via proven write path",
-    "SAC ingest endpoints + Supabase schema + junk filter",
-    "GHL webhook steps wired",
-    "Form opp-binding verification",
-    "Supabase BAA verification"
+    "Finish the six skeletal workflows (WF-10/11/12/13/15/16 mechanics per registry notes)",
+    "Split WF-07 (97 nodes) and WF-09 (61 nodes) into router + child sequences",
+    "SAC ingest endpoints + Supabase schema + junk filter; GHL webhook steps wired",
+    "Form opportunity-binding verification; Supabase BAA verification"
    ],
    "exit": "Shadow reconciliation within 5% of CRM truth for 7 days"
   },
   {
    "release": "R3",
-   "name": "Activation cutover",
+   "name": "Alignment window + activation cutover",
    "items": [
+    "COORDINATED WINDOW (one maintenance block): recreate sale_outcome as single-select codes; flip option lists to codes (sale_type, pay_type, product_sold_1, nosale_reason locked taxonomy, medical_intake_status); consolidate the three PCC fields to one canonical roster; dedupe appt_status vs appointment_status; recreate outcome_processed_at as ISO text; update PCC form options + every WF condition together; park deprecated opportunity fields",
     "Form writes opportunity fields directly (incl. monetary)",
-    "Meta CAPI + Google offline sends live via learning-phase sequence",
-    "GTM demotion",
-    "90-day backfill",
-    "Reconciliation dashboard + alerting in mwc-admin",
-    "Per-deal contact fields parked"
+    "Meta CAPI + Google offline sends live via learning-phase sequence; GTM demotion; 90-day backfill",
+    "Reconciliation dashboard + alerting in mwc-admin"
    ],
    "exit": "New actions primary, old demoted, no bidding regression, dashboard live"
   },
@@ -444,10 +433,10 @@
    "release": "R4",
    "name": "Full port + seams",
    "items": [
-    "Remaining WF-02/03/04/07/08/09/10/14/15/16/17 ported with nurture designs",
+    "Remaining workflow ports with nurture designs at corrected cadence",
     "Lobbie webhook seam activated",
     "Backlog: service-to-class calendar migration",
-    "Legacy workflow retirement"
+    "Legacy workflow retirement + parked contact fields retired after 30-day stable reconciliation"
    ],
    "exit": "Diff harness zero blocker/major on full registry; legacy off"
   }

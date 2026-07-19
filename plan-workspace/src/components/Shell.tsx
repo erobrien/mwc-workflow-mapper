@@ -13,6 +13,7 @@ const NAV: { group: string; accent?: string; dot?: string; items: { to: string; 
   { group: "Overview", accent: "text-primary", dot: "bg-primary", items: [
     { to: "/", label: "Workspace", icon: LayoutDashboard, accent: "text-primary" },
     { to: "/daily-log", label: "Daily Log", icon: History, accent: "text-primary" },
+    { to: "/systems", label: "Systems Architecture", icon: Boxes, accent: "text-primary" },
   ] },
   { group: "Current state", accent: "text-red-600 dark:text-red-400", dot: "bg-red-500", items: [
     { to: "/as-is", label: "As-Is Workflows", icon: Workflow, accent: "text-red-600 dark:text-red-400" },

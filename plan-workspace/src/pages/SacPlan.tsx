@@ -66,7 +66,22 @@ export default function SacPlan() {
       title="SAC — server-side attribution & conversions"
       subtitle="First-party collection, server-side transmission. SAC owns every event that leaves for Meta and Google, keyed to the new opportunity field model, HIPAA-safe by contract."
     >
-      <Card><CardContent className="p-3">
+      <Card><CardContent className="p-4">
+        <div className="mb-3 flex flex-wrap items-center gap-3 text-[11px] text-muted-foreground">
+          <span className="font-semibold uppercase tracking-wider">Edges</span>
+          <span className="inline-flex items-center gap-1.5">
+            <svg width="32" height="10" viewBox="0 0 32 10" aria-hidden><path d="M0 5h28" stroke="#475569" strokeWidth="3" fill="none"/><path d="M24 1l6 4-6 4z" fill="#475569"/></svg>
+            Live data flow
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <svg width="32" height="10" viewBox="0 0 32 10" aria-hidden><path d="M0 5h28" stroke="#475569" strokeWidth="1.5" strokeDasharray="4 3" fill="none"/><path d="M24 1l6 4-6 4z" fill="#475569"/></svg>
+            Sync / writeback
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <svg width="32" height="10" viewBox="0 0 32 10" aria-hidden><path d="M0 5h28" stroke="#78716c" strokeWidth="1.5" strokeDasharray="4 3" fill="none"/><path d="M24 1l6 4-6 4z" fill="#78716c"/></svg>
+            Future / reserved seam
+          </span>
+        </div>
         <MermaidChart src={FLOW} active zoomable />
       </CardContent></Card>
 

@@ -114,20 +114,38 @@ export default function SystemsArchitecture() {
       subtitle="How the pieces fit: GHL as CRM spine, Admin (with SAC) as the attribution and conversion layer, Force as the clinic operations console, and the databases behind each. Structures below were read live from Supabase and Neon on 2026-07-19."
     >
       <Card><CardContent className="p-4">
-        <div className="mb-2 flex items-center gap-2 text-[11px] uppercase tracking-wider text-muted-foreground">
-          <span className="inline-flex items-center gap-1"><span className="h-2 w-2 rounded-sm bg-orange-500" /> Surfaces</span>
-          <span className="text-muted-foreground/40">→</span>
-          <span className="inline-flex items-center gap-1"><span className="h-2 w-2 rounded-sm bg-blue-500" /> GHL CRM</span>
-          <span className="text-muted-foreground/40">→</span>
-          <span className="inline-flex items-center gap-1"><span className="h-2 w-2 rounded-sm bg-indigo-500" /> Apps (SAC · Force)</span>
-          <span className="text-muted-foreground/40">→</span>
-          <span className="inline-flex items-center gap-1"><span className="h-2 w-2 rounded-sm bg-emerald-500" /> Stores</span>
-          <span className="text-muted-foreground/40">→</span>
-          <span className="inline-flex items-center gap-1"><span className="h-2 w-2 rounded-sm bg-red-500" /> Ad platforms</span>
+        <div className="mb-3 flex flex-wrap items-start gap-x-6 gap-y-2 text-[11px]">
+          <div className="flex flex-wrap items-center gap-2 uppercase tracking-wider text-muted-foreground">
+            <span className="font-semibold">Zones</span>
+            <span className="inline-flex items-center gap-1"><span className="h-2 w-2 rounded-sm bg-orange-500" /> Surfaces</span>
+            <span className="text-muted-foreground/40">→</span>
+            <span className="inline-flex items-center gap-1"><span className="h-2 w-2 rounded-sm bg-blue-500" /> GHL CRM</span>
+            <span className="text-muted-foreground/40">→</span>
+            <span className="inline-flex items-center gap-1"><span className="h-2 w-2 rounded-sm bg-indigo-500" /> Apps</span>
+            <span className="text-muted-foreground/40">→</span>
+            <span className="inline-flex items-center gap-1"><span className="h-2 w-2 rounded-sm bg-emerald-500" /> Stores</span>
+            <span className="text-muted-foreground/40">→</span>
+            <span className="inline-flex items-center gap-1"><span className="h-2 w-2 rounded-sm bg-red-500" /> Ad platforms</span>
+          </div>
+          <div className="flex flex-wrap items-center gap-3 text-muted-foreground">
+            <span className="font-semibold uppercase tracking-wider">Edges</span>
+            <span className="inline-flex items-center gap-1.5">
+              <svg width="32" height="10" viewBox="0 0 32 10" aria-hidden><path d="M0 5h28" stroke="#475569" strokeWidth="3" fill="none"/><path d="M24 1l6 4-6 4z" fill="#475569"/></svg>
+              Live data flow <span className="text-muted-foreground/60">(labeled at the arrow)</span>
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <svg width="32" height="10" viewBox="0 0 32 10" aria-hidden><path d="M0 5h28" stroke="#475569" strokeWidth="1.5" strokeDasharray="4 3" fill="none"/><path d="M24 1l6 4-6 4z" fill="#475569"/></svg>
+              Sync / writeback <span className="text-muted-foreground/60">(bi-directional pair)</span>
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <svg width="32" height="10" viewBox="0 0 32 10" aria-hidden><path d="M0 5h28" stroke="#78716c" strokeWidth="1.5" strokeDasharray="4 3" fill="none"/><path d="M24 1l6 4-6 4z" fill="#78716c"/></svg>
+              Future / reserved seam <span className="text-muted-foreground/60">(Lobbie EMR, not yet wired)</span>
+            </span>
+          </div>
           <span className="ms-auto text-muted-foreground/70">Designed at 2K · use zoom controls to inspect</span>
         </div>
         <div className="overflow-x-auto">
-          <div style={{ minWidth: 1800 }}>
+          <div style={{ minWidth: 1600 }} className="w-full">
             <MermaidChart src={FLOW} active zoomable />
           </div>
         </div>

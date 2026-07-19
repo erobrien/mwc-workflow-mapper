@@ -396,52 +396,62 @@
  "roadmap": [
   {
    "release": "R1",
-   "name": "Spec + additive prod work (no behavior changes)",
+   "name": "Attribution + additive GHL work (behavior-safe)",
    "items": [
-    "Final Target section on plan-workspace (DONE)",
-    "Prod field reconciliation: 46 opportunity fields already exist - R1 is alignment, not creation (DONE)",
-    "Create the only missing fields: utm_medium, msclkid (DONE 2026-07-19)",
-    "Port proven triggers onto WF-01..16 drafts (DONE 2026-07-19: 68 triggers, filters copied verbatim from live). NOTE: the API ignores the inactive flag - triggers show Active but drafts never fire; per-trigger filter + active review is a PUBLISH GATE. WF-06 Won trigger: configure manually with the stage filter. WF-07/09 stay router-fed by design",
-    "Cadence standard adopted from live timing (DONE)",
-    "WF-02 retimed to proven burst: first call T+3m, follow-up T+20m (DONE 2026-07-19, verified on readback)",
-    "WF-03 reminders anchored to appointment time: waits until 3d / 1d / 5h / 2h before appointment (DONE 2026-07-19, verified on readback)",
-    "PCC form ADDITIVE-only tweak: add Provider dropdown, Money Down, single Term field (PENDING - form-builder API unproven; either probe with a fresh token or 5-minute manual edit against the spec below)"
+    "GHL: Final Target section on plan-workspace (DONE)",
+    "GHL: prod field reconciliation - 46 opportunity fields already exist, this is alignment not creation (DONE)",
+    "GHL: create the two missing fields utm_medium + msclkid (DONE 2026-07-19)",
+    "GHL: port proven triggers onto WF-01..16 drafts, 68 total (DONE 2026-07-19). Publish-time gate reviews filter/active per trigger. WF-06 Won trigger needs manual stage-filter config; WF-07/09 stay router-fed",
+    "GHL: cadence standard adopted from live timing (DONE)",
+    "GHL: WF-02 retimed to proven burst (T+3m, T+20m) (DONE 2026-07-19)",
+    "GHL: WF-03 reminders anchored to appointment time - 3d/1d/5h/2h before appt (DONE 2026-07-19)",
+    "GHL: PCC form ADDITIVE-only tweak - add Provider dropdown, Money Down, single Term. NO option-value changes",
+    "SAC: Supabase Attribution schema (events append-only with event_id unique, conversions_outbox with retry/dead-letter, reconciliation_daily); RLS enabled; BAA tier verification",
+    "SAC: first-party collection script live on WordPress + book.menswellnesscenters.com (click IDs, UTMs, consent, no third-party pixels on regulated pages)",
+    "SAC: ingest endpoints for booking-app server events, GHL workflow webhooks (WF-01 lead, WF-05 outcome, WF-06 won, WF-12 call), inbound-call events",
+    "SAC: junk filter (events emit only on real object creation server-side; pixel phantoms never reach the outbox), event_id + outcome_processed_at dedupe",
+    "GHL: wire webhook steps inside WF-01, WF-05, WF-06, WF-12 to emit to SAC ingest (drafts)",
+    "GTM: demote/pause false conversions (GADS-Qualify/Schedule page-load tags, premature mwc_lead); primary conversion = event-based booking only",
+    "SAC: activation outbox to Meta CAPI + Google Ads offline conversions with new vs renewal as SEPARATE conversion actions; hashed identifiers per HIPAA hybrid posture; test_event_code + Google diagnostics validation before live",
+    "SAC: durable delivery (retry queue, dead-letter, replay job); token custody (Meta system-user + Google dev token in secret manager with rotation runbook)",
+    "SAC: reconciliation dashboard (platform-reported vs CRM truth) + signal-drop alerting in mwc-admin",
+    "SAC: 90-day historical won-conversion backfill at cutover",
+    "SAC: learning-phase sequence (new actions secondary -> validate 2 weeks -> promote to primary -> demote old)"
    ],
-   "exit": "All additive work verified on a test contact; zero behavior change to live flows"
+   "exit": "All additive GHL work verified on a test contact with zero behavior change to live flows; SAC ingest, activation, and reconciliation live; new conversion actions primary with no bidding regression at $270k/month spend"
   },
   {
    "release": "R2",
-   "name": "Core build + SAC shadow",
+   "name": "Alignment window + workflow completion",
    "items": [
-    "Finish the six skeletal workflows (WF-10/11/12/13/15/16 mechanics per registry notes)",
-    "Split WF-07 (97 nodes) and WF-09 (61 nodes) into router + child sequences",
-    "SAC ingest endpoints + Supabase schema + junk filter; GHL webhook steps wired",
-    "Force migration to Supabase Operations project (retire Neon): confirm writers, reconcile rows, cut auth from Neon Auth to Supabase Auth, delete Neon project",
-    "Form opportunity-binding verification; Supabase BAA verification"
+    "COORDINATED WINDOW (one maintenance block): recreate sale_outcome as single-select codes; flip option lists to codes (sale_type, pay_type, product_sold_1, nosale_reason locked taxonomy, medical_intake_status); consolidate the three PCC fields to one canonical roster; dedupe appt_status vs appointment_status; recreate outcome_processed_at as ISO text; update PCC form options + every WF condition together; park deprecated opportunity fields",
+    "GHL: PCC form writes opportunity fields directly (incl. monetary)",
+    "GHL: finish the six skeletal workflows (WF-10 Feedback, WF-11 Compliance, WF-13 Ad-Platform bridge, WF-15 Referral, WF-16 Comms Edge; WF-12 mechanics beyond stub)",
+    "GHL: split WF-07 (97 nodes) and WF-09 (61 nodes) into router + per-objection/per-phase child sequences",
+    "Force: migrate to Supabase Operations project (retire Neon) - confirm writers, reconcile rows, cut auth from Neon Auth to Supabase Auth, delete Neon project"
    ],
-   "exit": "Shadow reconciliation within 5% of CRM truth for 7 days"
+   "exit": "Enum codes + single writers everywhere; per-deal contact fields parked; Neon retired"
   },
   {
    "release": "R3",
-   "name": "Alignment window + activation cutover",
+   "name": "Full port + Lobbie seam",
    "items": [
-    "COORDINATED WINDOW (one maintenance block): recreate sale_outcome as single-select codes; flip option lists to codes (sale_type, pay_type, product_sold_1, nosale_reason locked taxonomy, medical_intake_status); consolidate the three PCC fields to one canonical roster; dedupe appt_status vs appointment_status; recreate outcome_processed_at as ISO text; update PCC form options + every WF condition together; park deprecated opportunity fields",
-    "Form writes opportunity fields directly (incl. monetary)",
-    "Meta CAPI + Google offline sends live via learning-phase sequence; GTM demotion; 90-day backfill",
-    "Reconciliation dashboard + alerting in mwc-admin"
-   ],
-   "exit": "New actions primary, old demoted, no bidding regression, dashboard live"
-  },
-  {
-   "release": "R4",
-   "name": "Full port + seams",
-   "items": [
-    "Remaining workflow ports with nurture designs at corrected cadence",
-    "Lobbie webhook seam activated",
-    "Backlog: service-to-class calendar migration",
-    "Legacy workflow retirement + parked contact fields retired after 30-day stable reconciliation"
+    "GHL: remaining workflow ports with nurture designs at corrected cadence",
+    "SAC: Lobbie webhook seam activated (show/no-show and renewal truth from EMR)",
+    "GHL: legacy workflow retirement",
+    "Parked contact fields retired after 30-day stable reconciliation"
    ],
    "exit": "Diff harness zero blocker/major on full registry; legacy off"
+  },
+  {
+   "release": "R4 (backlog)",
+   "name": "Calendar + operational depth",
+   "items": [
+    "Service -> class calendar migration (capacity control; Lobbie needs only per-location calendars, already satisfied)",
+    "Line-item product/price detail model in SAC (replaces product_2/3 field sprawl)",
+    "Enhanced Conversions on Won events pending counsel review"
+   ],
+   "exit": "Class-based capacity live; SAC carries all line-item revenue detail"
   }
  ],
  "backlog": [

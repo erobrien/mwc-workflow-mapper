@@ -1,197 +1,197 @@
 {
  "version": "To-Be v2 (Final Target)",
  "date": "2026-07-19",
- "basis": "Existing PROD sub-account (Ghstz8eIsHWLeXek47dk) as the foundation: keep its proven mechanics and real asset ids, fix the opportunity data model, add the original Target's workflow set including the nurture designs. Cody builds are reference material only. Single GHL sub-account with per-location calendars (Lobbie 1:N confirmed; separate calendars per location are Lobbie's only topology requirement, and prod already has them).",
+ "basis": "Existing production GHL sub-account (Ghstz8eIsHWLeXek47dk) is the starting point: keep the parts that work, fix how deal data is stored on opportunities, and add the missing pieces from the original Target plan (including the nurture sequences). Cody's builds are for reference only. One GHL sub-account with a separate calendar for each clinic. Lobbie confirmed this works with their EMR: one GHL account can connect to multiple Lobbie clinics as long as each clinic has its own calendar, and we already do.",
  "principles": [
-  "One parameterized workflow per responsibility. Location is a variable (opportunity.location + Locations custom object), never a workflow clone.",
-  "One Sales pipeline (Lead to Close). Retention & Renewals, Referrals, and Instagram DM stay separate by role, not by clinic.",
-  "If a fact describes the sale it lives on the Opportunity; if it describes the member it lives on the Contact.",
-  "First-party collection, server-side transmission. No third-party pixels on regulated pages; SAC owns every send to Meta and Google.",
-  "Every field has exactly one writer. Every conversion path is idempotent (event_id + outcome_processed_at).",
-  "Build in prod as drafts; cutover is publish/unpublish, not migration."
+  "One workflow per job, with clinic as a variable (opportunity.location + a Locations custom object). Never clone a workflow just to change the clinic name.",
+  "One sales pipeline (Lead to Close). Retention & Renewals, Referrals, and Instagram DM are kept separate because they play different roles — not because the clinic is different.",
+  "Facts about the sale go on the Opportunity. Facts about the member (identity, consent, current membership) go on the Contact.",
+  "First-party data collection on our own sites; every send to Meta and Google goes out server-side from our SAC app. No third-party pixels on pages that discuss health.",
+  "Every custom field has exactly one writer. Every ad-platform conversion is de-duplicated (each event has an event_id and an outcome_processed_at timestamp).",
+  "Build changes in production as drafts. Going live means flipping a draft to published — not migrating between accounts."
  ],
  "limitation_rules": [
   {
-   "rule": "Opportunity merge fields and writes require a bound opportunity",
-   "response": "Opportunity writes only occur in workflows triggered by opportunity events or immediately after a create/update/find-opportunity step. No stamp runs on a bare contact trigger."
+   "rule": "An opportunity field can only be read or written when the workflow knows WHICH deal it's working on",
+   "response": "Every opportunity write happens right after a step that creates, updates, or finds the deal (or the workflow is triggered by an opportunity event). A stamp step never runs on a bare contact trigger."
   },
   {
-   "rule": "No trigger fires on a specific opportunity field change",
-   "response": "Workflows trigger on contact-level events (forms, tags, appointments). SAC is notified by explicit webhook steps inside WF-05/06/13, never by watching fields. renewal_date stays on the Contact for the native custom-date trigger."
+   "rule": "You cannot trigger a workflow from a specific opportunity field changing (e.g. \"when sale_outcome is set\")",
+   "response": "All triggers key off contact events (form submitted, tag added, appointment). Opportunity fields are written as OUTPUTS inside those flows. renewal_date deliberately lives on the Contact so we can use GHL's native date-based trigger."
   },
   {
-   "rule": "Monetary opportunity fields cannot be written from workflows",
-   "response": "The PCC form is the sole writer of all dollar fields. Native Opportunity Value carries net revenue for reporting and conversion values."
+   "rule": "Workflows cannot write dollar amounts to opportunity monetary fields (GHL limitation on merge tags for numeric fields)",
+   "response": "The PCC form is the only writer for every dollar field. GHL's built-in Opportunity Value carries net revenue for reporting."
   },
   {
-   "rule": "Dropdown writes must exactly match an option value",
-   "response": "Enums store lowercase codes (sold/nosale/mut/mar, new/renewal). Workflow writes are branch-static literals. Nothing is merge-copied between fields with different option sets."
+   "rule": "Dropdown writes must exactly match one of the option values",
+   "response": "Dropdowns store short codes (sold / nosale / mut / mar, new / renewal, etc.). Workflow writes use literal codes per branch, never copied from another field with different options."
   },
   {
-   "rule": "Contact fields keep the platform superpowers (form writes, field-change and date triggers)",
-   "response": "Member current-state (consent, membership_status, renewal_date, preferences) stays contact-level by design, not by accident."
+   "rule": "Contact fields have superpowers opportunity fields do not: form writes, specific field-change triggers, and native date triggers",
+   "response": "Anything that needs those triggers or that a member fills in as INPUT stays on the Contact. Per-deal OUTPUTS live on the Opportunity."
   },
   {
-   "rule": "Reads race writes inside workflows",
-   "response": "A 30-to-60-second wait sits between any field write and a branch or trigger that reads it."
+   "rule": "Reading a field right after writing it in the same workflow can race the save",
+   "response": "Insert a 30–60 second wait between any field write and a downstream branch or trigger that reads it."
   },
   {
-   "rule": "API: every workflow PUT rewrites the step file",
-   "response": "All programmatic saves send the full templates array with diff arrays and version; snapshots are taken before every write (proven playbook in the ghl-development skill)."
+   "rule": "Every PUT to the workflow endpoint rewrites the entire step file from the request payload",
+   "response": "Every programmatic save includes the full templates array with the diff lists (created/modified/deleted step ids) and the version number. Take a local snapshot before every write."
   }
  ],
  "field_model": {
   "opportunity_final": [
    {
     "key": "opportunity.sale_outcome",
-    "type": "SINGLE_OPTIONS",
+    "type": "Single-select dropdown",
     "options": "sold / nosale / mut / mar",
-    "writer": "WF-05 stamp (R1) -> PCC form (R3)",
-    "status": "ALIGN: prod is MULTIPLE_OPTIONS with Sold/A&D/MUT/MAR; recreate single-select with codes (id changes, rewire refs)"
+    "writer": "WF-05 workflow stamp in R1; PCC form in R3",
+    "status": "Fix in R2 alignment window: prod currently lets multiple values be selected. Recreate as single-select with codes. The field id will change, so every workflow condition and form reference must update in the same block."
    },
    {
     "key": "opportunity.sale_type",
-    "type": "SINGLE_OPTIONS",
+    "type": "Single-select dropdown",
     "options": "new / renewal",
     "writer": "PCC form",
-    "status": "ALIGN: options New/Renewal -> codes"
+    "status": "Fix in R2 alignment window: currently uses labels New/Renewal, flip to codes."
    },
    {
     "key": "opportunity.appt_status",
-    "type": "SINGLE_OPTIONS",
+    "type": "Single-select dropdown",
     "options": "showed / no-show / cancel / reschedule",
-    "writer": "WF-05 gate",
-    "status": "exists with codes; DEDUPE: prod also has duplicate opportunity.appointment_status - keep appt_status, deprecate the other"
+    "writer": "WF-05 gate step",
+    "status": "Exists with correct codes. Deduplicate: production has a second field named appointment_status. Keep appt_status, retire the duplicate."
    },
    {
     "key": "opportunity.patient_care_consultant",
-    "type": "SINGLE_OPTIONS",
+    "type": "Single-select dropdown",
     "options": "canonical PCC roster",
     "writer": "PCC form",
-    "status": "CONSOLIDATE: prod has THREE PCC fields (patient_care_consultant with first names, _id and _pcc with full names, different rosters) - keep one with the canonical roster"
+    "status": "Consolidate in R2: production has THREE PCC fields (patient_care_consultant with first names, patient_care_consultant_id and patient_care_consultant_pcc with full names, all with different rosters). Keep one, retire the other two, migrate the data."
    },
    {
     "key": "opportunity.provider",
-    "type": "SINGLE_OPTIONS",
+    "type": "Single-select dropdown",
     "options": "clinician roster",
     "writer": "PCC form",
-    "status": "exists in prod with full roster"
+    "status": "Already exists with the full clinician roster."
    },
    {
     "key": "opportunity.product_sold_1",
-    "type": "SINGLE_OPTIONS",
+    "type": "Single-select dropdown",
     "options": "trt / ed / weight_loss / peptides / other",
     "writer": "PCC form",
-    "status": "ALIGN: prose options -> codes; product_2/3, term_2/3, price_1..3 sprawl deprecates to SAC line items"
+    "status": "Fix in R2 alignment window: flip label options to codes. Product 2/3, term 2/3, and price 1/2/3 are deprecating — line-item detail beyond the primary product moves to SAC in Supabase."
    },
    {
     "key": "opportunity.term_1",
-    "type": "TEXT",
+    "type": "Text",
     "writer": "PCC form",
-    "status": "exists; drives contact.renewal_date at Won"
+    "status": "Exists. Drives contact.renewal_date at Won."
    },
    {
     "key": "opportunity.total_program_amount",
-    "type": "MONETORY",
-    "writer": "PCC form (sole writer)",
-    "status": "exists = gross; native Opportunity Value = net collected"
+    "type": "Currency",
+    "writer": "PCC form (only writer allowed by GHL)",
+    "status": "Exists — this is the gross program amount. GHL's built-in Opportunity Value carries net collected."
    },
    {
     "key": "opportunity.money_down",
-    "type": "MONETORY",
-    "writer": "PCC form (sole writer)",
-    "status": "exists"
+    "type": "Currency",
+    "writer": "PCC form (only writer allowed by GHL)",
+    "status": "Exists."
    },
    {
     "key": "opportunity.pay_type",
-    "type": "SINGLE_OPTIONS",
+    "type": "Single-select dropdown",
     "options": "pif / sf / care / mag",
     "writer": "PCC form",
-    "status": "ALIGN: uppercase -> lowercase codes"
+    "status": "Fix in R2 alignment window: currently uppercase, flip to lowercase codes."
    },
    {
     "key": "opportunity.nosale_reason",
-    "type": "SINGLE_OPTIONS",
+    "type": "Single-select dropdown",
     "options": "cost / fear / partner / timing / decision / other",
     "writer": "WF-05 objection branch stamp",
-    "status": "ALIGN + CONSOLIDATE: prod has nosale_reason (Cost/Partner/Timing/Trust/Other) AND ad_reason with a second taxonomy - converge on the locked five-objection codes, deprecate ad_reason/ad_reason_other"
+    "status": "Fix in R2 alignment window: production has two overlapping fields (nosale_reason with Cost/Partner/Timing/Trust/Other AND ad_reason with a different list). Converge on the five locked objection codes, retire ad_reason and ad_reason_other."
    },
    {
     "key": "opportunity.referred_by",
-    "type": "TEXT",
-    "writer": "WF-05 sold stamp",
-    "status": "exists"
+    "type": "Text",
+    "writer": "WF-05 sold-branch stamp",
+    "status": "Exists."
    },
    {
     "key": "opportunity.emr_visit_id",
-    "type": "TEXT",
-    "writer": "EMR sync (Lobbie seam)",
-    "status": "exists"
+    "type": "Text",
+    "writer": "EMR sync (the future Lobbie integration writes this)",
+    "status": "Exists."
    },
    {
     "key": "opportunity.outcome_processed_at",
-    "type": "TEXT (ISO)",
-    "writer": "WF-05/06 idempotency stamp",
-    "status": "ALIGN: prod type is DATE (day granularity) - recreate as TEXT ISO timestamp"
+    "type": "Text (ISO timestamp)",
+    "writer": "WF-05 / WF-06 idempotency stamp",
+    "status": "Fix in R2 alignment window: currently a DATE field (day-level granularity). Recreate as TEXT so we can store an ISO timestamp and safely deduplicate ad conversions."
    },
    {
     "key": "opportunity.location",
-    "type": "SINGLE_OPTIONS",
+    "type": "Single-select dropdown",
     "options": "Richmond / Virginia Beach / Newport News",
-    "writer": "WF-01 at create",
-    "status": "exists"
+    "writer": "WF-01 at opportunity create",
+    "status": "Exists."
    },
    {
     "key": "opportunity.lead_source",
-    "type": "TEXT",
-    "writer": "WF-01 at create (WF-12 for phone)",
-    "status": "exists"
+    "type": "Text",
+    "writer": "WF-01 at opportunity create; WF-12 for phone leads",
+    "status": "Exists."
    },
    {
     "key": "opportunity.utm_source / utm_medium / utm_campaign / gclid / fbclid / msclkid",
-    "type": "TEXT x6",
-    "writer": "WF-01 frozen stamp at create",
-    "status": "utm_source/campaign/gclid/fbclid existed; utm_medium + msclkid CREATED 2026-07-19; attr_first_* (first-touch) also present"
+    "type": "Text (6 separate fields)",
+    "writer": "WF-01 frozen stamp at opportunity create",
+    "status": "utm_source/campaign/gclid/fbclid existed. utm_medium and msclkid were created today. First-touch attribution (attr_first_utm_source, attr_first_utm_campaign, attr_landing_page) also exists in prod."
    },
    {
     "key": "opportunity.renewal_date",
-    "type": "DATE",
-    "writer": "n/a",
-    "status": "DEPRECATE on opportunity: contact owns renewal_date (native date trigger); prod copy retires at cutover"
+    "type": "Date",
+    "writer": "—",
+    "status": "Deprecate on the Opportunity: the Contact owns the current renewal_date (Contact date-triggers drive renewal campaigns). Move to zz Deprecated in R2."
    }
   ],
   "opportunity_deprecate": [
    {
     "key": "opportunity.appointment_status",
-    "why": "duplicate of appt_status"
+    "why": "Duplicate of appt_status."
    },
    {
     "key": "opportunity.patient_care_consultant_id / _pcc",
-    "why": "duplicate PCC fields with divergent rosters"
+    "why": "Duplicate PCC fields with different rosters."
    },
    {
     "key": "opportunity.ad_reason / ad_reason_other",
-    "why": "second objection taxonomy; nosale_reason + nosale_notes own this"
+    "why": "Second objection taxonomy. Use nosale_reason plus nosale_notes."
    },
    {
     "key": "opportunity.product_sold_2/3, term_2/3, price_1/2/3, discount, discount_type, discount_value, consultation_fee, remaining_balance",
-    "why": "line-item and quote detail; SAC/Supabase owns it, nothing in GHL branches on it"
+    "why": "Line-item and quote detail. Move to SAC in Supabase — no GHL workflow branches on any of these fields."
    },
    {
     "key": "opportunity.consult_notes",
-    "why": "free text; use opportunity Notes"
+    "why": "Free text with no automation use. Store as an Opportunity Note instead."
    },
    {
     "key": "opportunity.call_disposition",
-    "why": "contact-center state, not deal state (WF-12 owns on contact)"
+    "why": "Contact-center state, not deal state. WF-12 owns the contact-level equivalent."
    },
    {
     "key": "opportunity.visit_feedback_score",
-    "why": "latest score lives on contact for field-change trigger; history in SAC"
+    "why": "Latest score belongs on the Contact so we can use a field-change trigger; historical scores live in SAC."
    },
    {
     "key": "opportunity.renewal_date",
-    "why": "contact owns current renewal_date"
+    "why": "Contact owns current renewal_date."
    }
   ],
   "contact_keeps": [
@@ -283,61 +283,61 @@
   }
  ],
  "sac": {
-  "name": "SAC (Server-side Attribution & Conversions)",
-  "stack": "Supabase (single database vendor across MWC apps): anonymized event store + Force operational store, funnel_events spine shared with mwc-next / mwc-admin; Vercel serverless workers",
-  "collection": "Thin first-party script on menswellnesscenters.com (WordPress) and book.menswellnesscenters.com: captures click IDs (gclid/wbraid/gbraid/fbclid/msclkid), UTMs, fbp/fbc, consent state, and writes them to hidden GHL fields + localStorage. No third-party pixels on regulated pages. Transmission is server-side only.",
-  "identity": "Spine = GHL contact_id / opportunity_id / appointment_id (opaque, non-PHI). Click IDs are the fallback join. No email/phone stored in clear; identifiers hashed (SHA-256) at ingest when consented, never stored raw.",
-  "storage": "Two logical Supabase projects: Attribution (Booking Admin - events append-only with event_id unique, conversions_outbox, reconciliation_daily) and Operations (Force - appointments, dispositions, sync_events, auth). Hashing at rest, retention window (default 25 months), minimum-necessary access roles. BAA verification for Supabase tier is an R2 gate.",
-  "junk_filter": "Events are emitted only on real object creation server-side (contact created, appointment booked, opportunity won). Pixel phantoms (the 965 Consent-page ghosts) never reach the outbox.",
+  "name": "SAC — Server-side Attribution & Conversions",
+  "stack": "Supabase is the single database vendor. SAC uses two Supabase projects: an Attribution project (anonymized event store) and an Operations project (Force's clinical grid data). Serverless workers run on Vercel.",
+  "collection": "Thin first-party JavaScript on menswellnesscenters.com and book.menswellnesscenters.com captures click IDs (gclid, wbraid, gbraid, fbclid, msclkid), UTM parameters, Facebook browser identifiers (fbp/fbc), and consent state, and writes them into hidden GHL contact fields plus localStorage on page load. NO third-party ad-platform pixels load on pages that discuss health conditions. All actual sends to Meta and Google happen from SAC on the server.",
+  "identity": "Join keys are GHL contact_id, opportunity_id, and appointment_id (opaque, non-PHI ids). Click IDs are the fallback join. No email or phone is stored in clear text — if the HIPAA posture allows identifiers on an event, they are hashed (SHA-256) at ingest time; raw values are never stored.",
+  "storage": "Two logical Supabase projects. Attribution project tables: events (append-only, unique event_id), conversions_outbox (queued sends with status), reconciliation_daily. Operations project tables: appointments, dispositions, sync_events, plus Supabase Auth for Force. All tables have RLS enabled. Retention window default 25 months (matches ad-platform lookback plus audit needs), minimum-necessary access roles per table, BAA tier verification is an R1 gate.",
+  "junk_filter": "Events are only written when a real server-side object is created (contact created via the booking API, appointment booked via the booking API, opportunity won via a GHL workflow webhook). This filters out the pixel-only page-view events that previously created 965 consent-page ghost contacts — those never reach the outbox.",
   "event_contract": [
    {
     "event": "lead_created",
-    "source": "booking app / WordPress form (server) or WF-01 webhook",
+    "source": "Booking app or WordPress form (server-side) or WF-01 webhook",
     "dedupe": "contact_id",
-    "sends": "Meta Lead (proxy $230), Google Ads secondary",
-    "notes": "only after submitLead() returns a real contact"
+    "sends": "Meta Lead (proxy value $230), Google Ads secondary lead conversion",
+    "notes": "Only fires after submitLead() returns a real contact. Pixel-only page views do not qualify."
    },
    {
     "event": "booking_complete",
-    "source": "booking app server (bookAppointment resolves)",
+    "source": "Booking app server, after bookAppointment() resolves",
     "dedupe": "appointment_id (booking_id)",
-    "sends": "Meta Schedule (proxy $800), Google Ads primary booked_appointment",
-    "notes": "existing GTM contract names reused; /confirmed page load never fires it"
+    "sends": "Meta Schedule (proxy value $800), Google Ads primary booked_appointment conversion",
+    "notes": "Reuses the same GTM contract event name so the existing tags still work. The /confirmed page load never fires this."
    },
    {
     "event": "call_lead",
-    "source": "RingCentral / GHL inbound call via WF-12",
+    "source": "RingCentral or GHL inbound call event, via WF-12",
     "dedupe": "call_id",
-    "sends": "Google call conversions reconciled to CRM contacts",
-    "notes": "lead_source=phone stamped; closes the call blind spot"
+    "sends": "Google call conversions, reconciled to CRM contacts",
+    "notes": "Stamps lead_source=phone. Closes the historical Google call-conversion blind spot."
    },
    {
     "event": "appt_outcome",
-    "source": "WF-05 webhook",
+    "source": "WF-05 webhook step",
     "dedupe": "opportunity_id + outcome_processed_at",
-    "sends": "internal only (reconciliation, show-rate)",
-    "notes": "appt_status + sale_outcome codes"
+    "sends": "Internal only (reconciliation and show-rate reporting)",
+    "notes": "Carries appt_status and sale_outcome codes."
    },
    {
     "event": "opportunity_won_new",
-    "source": "WF-06 webhook",
+    "source": "WF-06 webhook step",
     "dedupe": "opportunity_id + outcome_processed_at",
-    "sends": "Google offline conversion won_new (real value), Meta MembershipWon",
-    "notes": "trains acquisition bidding"
+    "sends": "Google offline conversion won_new (real dollar value), Meta MembershipWon custom event",
+    "notes": "Trains acquisition bidding. Must be separate from renewals."
    },
    {
     "event": "opportunity_won_renewal",
-    "source": "WF-06 webhook",
+    "source": "WF-06 webhook step",
     "dedupe": "opportunity_id + outcome_processed_at",
-    "sends": "separate conversion action, excluded from acquisition optimization",
-    "notes": "renewals must not train acquisition"
+    "sends": "Google offline conversion won_renewal (separate action), Meta membership renewal (separate event)",
+    "notes": "Kept out of the acquisition bidding signal so Smart Bidding doesn't optimize toward existing members."
    },
    {
     "event": "lobbie_appt_status / lobbie_renewal",
-    "source": "RESERVED: Lobbie webhook",
+    "source": "RESERVED for the future Lobbie EMR integration",
     "dedupe": "emr_visit_id",
-    "sends": "internal until validated",
-    "notes": "seam specced now, activated post Lobbie go-live"
+    "sends": "Internal only until the integration is validated",
+    "notes": "The ingest endpoint is defined now so the integration can turn on without a code change after Lobbie go-live."
    }
   ],
   "activation": {
@@ -346,14 +346,14 @@
    "values": "Proxies until Won flows: $800 booking_complete, $230 lead. Real Opportunity Value at won_new/won_renewal."
   },
   "hipaa_decision": {
-   "question": "What identity data may leave for Meta/Google, and on which events?",
-   "option_a": "Consented identifiers: express marketing consent captured at the funnel form (pre-clinical); hashed email/phone sent on lead_created and booking_complete; Won events reuse the SAME pre-clinical identifiers plus click ID (no new clinical-context data).",
-   "option_b": "Value-only: click ID + value + event time on everything post-booking; no user identifiers ever sent after a person becomes a member. Lower match quality on offline imports, near-zero identity risk.",
-   "recommendation": "Hybrid A/B: Option A for pre-patient funnel events (lead, booking) where consent is captured at submission, Option B posture for Won events (click ID + value only). Document as the standing decision, revisit with counsel before enabling Enhanced Conversions on Won.",
-   "hard_rules": "No condition/service parameters in any URL or payload. No symptom, treatment, or medication data in any event. Opaque GHL ids only. Consent state stored per contact and honored at the outbox, not at collection."
+   "question": "What personally identifiable data may leave for Meta and Google, and on which events?",
+   "option_a": "CONSENTED IDENTIFIERS: capture express marketing consent at the funnel form (before the visit). Send hashed email/phone on lead_created and booking_complete events. Won events reuse the SAME identifiers already captured before the visit plus the click ID — no new clinical-context data is added.",
+   "option_b": "VALUE-ONLY: on every event that happens after booking, send only the click ID, the conversion value, and the event time. Never send user identifiers after a person becomes a member. Match quality on offline imports is lower, but identity risk is near zero.",
+   "recommendation": "HYBRID: use Option A for pre-visit funnel events (lead_created, booking_complete) where consent is captured at the form. Use Option B posture for Won events. Document this as the standing decision and revisit with counsel before ever enabling Google Enhanced Conversions on Won.",
+   "hard_rules": "No condition, service, or medication data appears in any URL or event payload. All GHL ids referenced in payloads are opaque. Consent state is stored per contact and enforced at the outbox, not at the collection step."
   },
-  "measurement": "Reconciliation dashboard (mwc-admin): platform-reported conversions vs CRM truth set (real contacts, booked, sold) daily; signal-drop alerting when outbox failures or daily deltas exceed thresholds; monthly June-style truth-set review built from opportunities, not tags.",
-  "delivery": "Outbox pattern: queued sends, retries with backoff, dead-letter + replay job. Token custody: Meta system-user and Google developer tokens in the secret manager with a rotation runbook (one Meta token was previously exposed in a workflow).",
+  "measurement": "Daily reconciliation dashboard in mwc-admin compares platform-reported conversions vs the CRM truth set (real contacts, real booked appointments, real won opportunities). Signal-drop alerts fire when outbox failures or daily deltas exceed thresholds. Monthly truth-set review is built from opportunities, not tags.",
+  "delivery": "Outbox pattern: sends are queued, retried with exponential backoff, moved to a dead-letter queue after N failures, and can be replayed on demand. Credentials (Meta system-user token, Google developer token) live in a secret manager with a documented rotation runbook.",
   "consolidation_2026_07_19": "Neon retired. Force migrates to Supabase Operations project (MWC-Pulse). Steps: point writers at Supabase, diff/reconcile most recent rows, cut auth over to Supabase Auth, delete the Neon project."
  },
  "transition": [
@@ -455,27 +455,27 @@
   }
  ],
  "backlog": [
-  "Service -> class calendar migration (capacity control; Lobbie needs only per-location calendars, already satisfied)",
-  "Retire parked contact fields after 30-day stable reconciliation",
-  "Enhanced Conversions on Won events pending counsel review",
-  "Line-item product/price detail model in SAC (replaces product_2/3 field sprawl)"
+  "Migrate GHL calendars from service-based to class-based (capacity control). Lobbie only requires per-location calendars, which prod already has, so this is not blocking any integration.",
+  "Retire the parked contact fields after 30 days of stable reconciliation.",
+  "Enable Google Enhanced Conversions on Won events — pending legal counsel review.",
+  "Move the line-item product and price detail model into SAC in Supabase, replacing the retired product_2/3, term_2/3, price_1/2/3 fields."
  ],
- "prod_reconciliation": "Reconciled against live prod 2026-07-19 09:15 PT: prod already has 46 opportunity fields (incl. provider, appt_status, money_down, emr_visit_id, outcome_processed_at, referred_by, gclid/fbclid, attr_first_*) and the Locations custom object. utm_medium and msclkid were created today. What remains is ALIGNMENT (enums to codes, duplicate consolidation), not creation.",
+ "prod_reconciliation": "Compared against the live production sub-account on 2026-07-19: 46 opportunity fields already exist (including provider, appt_status, money_down, emr_visit_id, outcome_processed_at, referred_by, gclid/fbclid, and first-touch attribution) plus the Locations custom object. utm_medium and msclkid were the only two missing — created today. What's left is CLEANUP (aligning dropdown option values to codes, removing duplicate fields), not new field creation.",
  "alignment_window": {
-  "summary": "These changes alter live behavior and must land TOGETHER in one maintenance window with the PCC form option updates and the WF-05 condition updates (new submissions instantly carry new codes; old workflows branch on old prose). Additive work is already done; nothing here executes without an explicit window.",
+  "summary": "The changes below alter live workflow behavior and MUST land together in one maintenance window (R2), at the same time as the corresponding PCC form option changes and the workflow condition updates. Landing any one of them alone would break routing for the next submission. All ADDITIVE work (new fields, webhook steps on drafts, SAC ingest) already shipped in R1 without any behavior change.",
   "items": [
-   "Recreate sale_outcome as SINGLE_OPTIONS with codes; rewire every workflow condition and the form",
-   "Flip option lists to codes: sale_type, pay_type, product_sold_1, nosale_reason (locked taxonomy), medical_intake_status",
-   "Consolidate PCC to one field, one canonical roster; migrate form + bonus workflow reads",
-   "Dedupe appt_status vs appointment_status",
-   "Recreate outcome_processed_at as TEXT ISO",
-   "Park deprecated opportunity fields in a zz Deprecated folder (nothing deleted)"
+   "Recreate sale_outcome as a single-select dropdown with codes. The field id changes, so every workflow condition and form reference updates in the same block.",
+   "Change the option values to codes on: sale_type, pay_type, product_sold_1, nosale_reason (locked five-objection list), medical_intake_status.",
+   "Consolidate the three PCC fields down to one field, one canonical PCC roster. Migrate data from the retired fields, update the form and the bonus workflow.",
+   "Delete the duplicate appointment_status field; keep appt_status.",
+   "Recreate outcome_processed_at as a Text field storing an ISO timestamp (currently a Date field, which only stores days).",
+   "Park deprecated opportunity fields in a zz Deprecated folder (nothing is deleted)."
   ]
  },
  "target_release_findings": {
   "date": "2026-07-19",
-  "summary": "Audit of the -Target Release drafts in prod (WF-01..16, built Jul 11) against Cody's three criticisms plus a completeness check. Verdict: triggers criticism is fully valid (15 of 16 have none), cadence criticism is valid for early-funnel speed (draft waits hours where the proven live system moves in minutes), and 'too long' applies to exactly two workflows - while six others have the opposite problem (skeletal, missing their mechanics).",
-  "triggers": "Only WF-01 has a trigger. WF-02..16 have zero - they can never fire. Fix is mechanical: trigger specs exist in the To-Be docs and the trigger write endpoint (POST /workflow/{loc}/trigger, active:false) is proven.",
+  "summary": "Audit of the -Target Release draft workflows in production (WF-01..16, built 2026-07-11). Result: 15 of 16 workflows have no trigger set — mechanical to fix and now DONE (68 triggers ported 2026-07-19). The early-funnel cadence in the drafts was too slow versus the live workflows the drafts are replacing — the cadence standard below adopts the proven live timing. Two workflows are large enough to split into a router plus child sequences; six workflows are skeletal and need their designed mechanics ported in.",
+  "triggers": "Fixed: 68 triggers ported from the live workflows they replace, filters copied verbatim, all workflows still draft. Note: the GHL API ignores the inactive flag when creating triggers, so triggers show as 'Active' in the UI even on draft workflows. Drafts never fire regardless, so this is safe — but per-trigger active/filter review is a formal step of the publish gate.",
   "cadence_standard": {
    "principle": "Adopt the PROVEN live cadence for early funnel; day-scale only after the first 48 hours. Quiet hours 8am-9pm contact time on every step; first SMS of each sequence carries STOP.",
    "speed_to_lead": "First SMS within 3 minutes of lead creation (live 02. NON BOOKED NEWLEADS proves 3-min first touch). Draft WF-01 (2-3 min) is fine; keep.",

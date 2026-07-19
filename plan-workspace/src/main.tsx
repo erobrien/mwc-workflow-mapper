@@ -25,6 +25,8 @@ import CodyNeo from "./pages/CodyNeo";
 import CodyNeoFlows from "./pages/CodyNeoFlows";
 import CodyNeoInventory from "./pages/CodyNeoInventory";
 import CodyNeoFieldDiff from "./pages/CodyNeoFieldDiff";
+import FinalTarget from "./pages/FinalTarget";
+import SacPlan from "./pages/SacPlan";
 import CustomFields from "./pages/CustomFields";
 import DailyLog from "./pages/DailyLog";
 
@@ -46,6 +48,8 @@ const router = createBrowserRouter([
   { path: "/cody-neo-inventory", element: wrap(<CodyNeoInventory />) },
   { path: "/cody-neo-field-diff", element: wrap(<CodyNeoFieldDiff />) },
   { path: "/cody-neo/workflow/:id", element: wrap(<WorkflowDetail dataset="codyneo" />) },
+  { path: "/final-target", element: wrap(<FinalTarget />) },
+  { path: "/final-target-sac", element: wrap(<SacPlan />) },
   { path: "/to-be", element: wrap(<ToBe />) },
   { path: "/to-be/wf/:n", element: wrap(<ToBeWorkflow />) },
   { path: "/to-be/:tab", element: wrap(<ToBe />) },

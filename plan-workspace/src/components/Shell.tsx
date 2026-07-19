@@ -3,13 +3,13 @@ import { NavLink } from "react-router-dom";
 import {
   LayoutDashboard, Boxes, Workflow, Network,
   Gavel, ShieldAlert, Moon, Sun, Menu, SearchCheck, ClipboardList, Tag,
-  Database, Waypoints, Route, History,
+  Database, Waypoints, Route, History, ChevronRight, ChevronDown,
 } from "lucide-react";
 import { cn, useTheme } from "./ui";
 import { useState } from "react";
 import { GlobalSearch } from "./Search";
 
-const NAV: { group: string; accent?: string; dot?: string; items: { to: string; label: string; icon: any; accent?: string }[] }[] = [
+const NAV: { group: string; accent?: string; dot?: string; collapsible?: boolean; items: { to: string; label: string; icon: any; accent?: string }[] }[] = [
   { group: "Overview", accent: "text-primary", dot: "bg-primary", items: [
     { to: "/", label: "Workspace", icon: LayoutDashboard, accent: "text-primary" },
     { to: "/daily-log", label: "Daily Log", icon: History, accent: "text-primary" },
@@ -20,17 +20,6 @@ const NAV: { group: string; accent?: string; dot?: string; items: { to: string; 
     { to: "/asis-diagrams", label: "As-Is Flow Diagrams", icon: Waypoints, accent: "text-red-600 dark:text-red-400" },
     { to: "/asis-flows", label: "As-Is Workflow Flows", icon: Route, accent: "text-red-600 dark:text-red-400" },
     { to: "/inventory", label: "Field Inventory", icon: Boxes, accent: "text-red-600 dark:text-red-400" },
-  ] },
-  { group: "Cody build", accent: "text-sky-600 dark:text-sky-400", dot: "bg-sky-500", items: [
-    { to: "/cody", label: "Cody Workflows", icon: Workflow, accent: "text-sky-600 dark:text-sky-400" },
-    { to: "/cody-flows", label: "Cody Flow Diagrams", icon: Waypoints, accent: "text-sky-600 dark:text-sky-400" },
-    { to: "/cody-inventory", label: "Cody Inventory", icon: Boxes, accent: "text-sky-600 dark:text-sky-400" },
-  ] },
-  { group: "Cody Neo build", accent: "text-amber-600 dark:text-amber-400", dot: "bg-amber-500", items: [
-    { to: "/cody-neo", label: "Cody Neo Workflows", icon: Workflow, accent: "text-amber-600 dark:text-amber-400" },
-    { to: "/cody-neo-flows", label: "Cody Neo Flow Diagrams", icon: Waypoints, accent: "text-amber-600 dark:text-amber-400" },
-    { to: "/cody-neo-inventory", label: "Cody Neo Inventory", icon: Boxes, accent: "text-amber-600 dark:text-amber-400" },
-    { to: "/cody-neo-field-diff", label: "Field Diff", icon: Database, accent: "text-amber-600 dark:text-amber-400" },
   ] },
   { group: "Final Target v2", accent: "text-indigo-600 dark:text-indigo-400", dot: "bg-indigo-500", items: [
     { to: "/final-target", label: "Final Target Plan", icon: Workflow, accent: "text-indigo-600 dark:text-indigo-400" },
@@ -49,9 +38,19 @@ const NAV: { group: string; accent?: string; dot?: string; items: { to: string; 
     { to: "/decisions", label: "Decisions", icon: Gavel, accent: "text-violet-600 dark:text-violet-400" },
     { to: "/risks", label: "Risk Register", icon: ShieldAlert, accent: "text-violet-600 dark:text-violet-400" },
   ] },
+  { group: "Cody Archive", accent: "text-muted-foreground", dot: "bg-muted-foreground/50", collapsible: true, items: [
+    { to: "/cody", label: "Cody Workflows", icon: Workflow, accent: "text-muted-foreground" },
+    { to: "/cody-flows", label: "Cody Flow Diagrams", icon: Waypoints, accent: "text-muted-foreground" },
+    { to: "/cody-inventory", label: "Cody Inventory", icon: Boxes, accent: "text-muted-foreground" },
+    { to: "/cody-neo", label: "Cody Neo Workflows", icon: Workflow, accent: "text-muted-foreground" },
+    { to: "/cody-neo-flows", label: "Cody Neo Flow Diagrams", icon: Waypoints, accent: "text-muted-foreground" },
+    { to: "/cody-neo-inventory", label: "Cody Neo Inventory", icon: Boxes, accent: "text-muted-foreground" },
+    { to: "/cody-neo-field-diff", label: "Field Diff", icon: Database, accent: "text-muted-foreground" },
+  ] },
 ];
 
 function Sidebar({ onNav }: { onNav?: () => void }) {
+  const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({});
   return (
     <nav className="flex h-full flex-col gap-5 p-3">
       <div className="px-2 pt-1">
@@ -59,12 +58,22 @@ function Sidebar({ onNav }: { onNav?: () => void }) {
         <div className="truncate font-mono text-[10px] text-muted-foreground">Ghstz8eIsHWLeXek47dk</div>
       </div>
       <div className="flex flex-col gap-4 overflow-y-auto">
-        {NAV.map((g) => (
+        {NAV.map((g) => {
+          const collapsed = g.collapsible && !openGroups[g.group];
+          return (
           <div key={g.group}>
-            <div className="mb-1 flex items-center gap-1.5 px-2 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-              <span className={cn("h-1.5 w-1.5 rounded-full", g.dot)} />{g.group}
-            </div>
-            <div className="flex flex-col gap-0.5">
+            {g.collapsible ? (
+              <button onClick={() => setOpenGroups((s) => ({ ...s, [g.group]: !s[g.group] }))}
+                className="mb-1 flex w-full items-center gap-1.5 rounded px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground hover:bg-muted/60">
+                <span className={cn("h-1.5 w-1.5 rounded-full", g.dot)} />{g.group}
+                {collapsed ? <ChevronRight className="ms-auto h-3 w-3" /> : <ChevronDown className="ms-auto h-3 w-3" />}
+              </button>
+            ) : (
+              <div className="mb-1 flex items-center gap-1.5 px-2 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                <span className={cn("h-1.5 w-1.5 rounded-full", g.dot)} />{g.group}
+              </div>
+            )}
+            <div className={cn("flex flex-col gap-0.5", collapsed && "hidden")}>
               {g.items.map((it) => (
                 <NavLink key={it.to} to={it.to} end={it.to === "/"} onClick={onNav}
                   className={({ isActive }) => cn(
@@ -78,7 +87,7 @@ function Sidebar({ onNav }: { onNav?: () => void }) {
               ))}
             </div>
           </div>
-        ))}
+        ); })}
       </div>
     </nav>
   );

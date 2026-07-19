@@ -31,10 +31,11 @@ let uid = 0;
  * (e.g. the accordion is open). Re-renders on theme change. Errors fall back to a
  * readable <pre> instead of blanking the page.
  */
-export function MermaidChart({ src, active }: { src: string; active: boolean }) {
+export function MermaidChart({ src, active, zoomable = false }: { src: string; active: boolean; zoomable?: boolean }) {
   const { dark } = useTheme();
   const [svg, setSvg] = useState("");
   const [err, setErr] = useState("");
+  const [zoom, setZoom] = useState(1);
   const idRef = useRef(`mmc-${++uid}`);
 
   useEffect(() => {
@@ -55,10 +56,34 @@ export function MermaidChart({ src, active }: { src: string; active: boolean }) 
   if (!active) return null;
   if (err) return <pre className="whitespace-pre-wrap text-xs text-red-600">{err}</pre>;
   if (!svg) return <div className="py-10 text-center text-sm text-muted-foreground">Rendering diagram…</div>;
+
+  if (!zoomable) {
+    return (
+      <div
+        className="mermaid-host overflow-x-auto [&_svg]:mx-auto [&_svg]:h-auto [&_svg]:max-w-full"
+        dangerouslySetInnerHTML={{ __html: svg }}
+      />
+    );
+  }
+
+  const step = (d: number) => setZoom((z) => Math.min(4, Math.max(1, Math.round((z + d) * 4) / 4)));
   return (
-    <div
-      className="mermaid-host overflow-x-auto [&_svg]:mx-auto [&_svg]:h-auto [&_svg]:max-w-full"
-      dangerouslySetInnerHTML={{ __html: svg }}
-    />
+    <div className="relative">
+      <div className="absolute right-2 top-2 z-10 flex items-center gap-1 rounded-md border bg-background/90 p-1 shadow-sm backdrop-blur">
+        <button onClick={() => step(-0.5)} aria-label="Zoom out"
+          className="h-7 w-7 rounded text-sm font-bold leading-none hover:bg-muted" title="Zoom out">−</button>
+        <span className="w-12 text-center font-mono text-[11px] tabular-nums text-muted-foreground">{Math.round(zoom * 100)}%</span>
+        <button onClick={() => step(0.5)} aria-label="Zoom in"
+          className="h-7 w-7 rounded text-sm font-bold leading-none hover:bg-muted" title="Zoom in">+</button>
+        <button onClick={() => setZoom(1)} aria-label="Reset zoom"
+          className="h-7 rounded px-1.5 text-[11px] hover:bg-muted" title="Fit">Fit</button>
+      </div>
+      <div className="mermaid-host overflow-auto rounded-md" style={{ maxHeight: "75vh" }}>
+        <div style={{ width: `${zoom * 100}%` }}
+          className="[&_svg]:mx-auto [&_svg]:h-auto [&_svg]:max-w-full"
+          dangerouslySetInnerHTML={{ __html: svg }}
+        />
+      </div>
+    </div>
   );
 }

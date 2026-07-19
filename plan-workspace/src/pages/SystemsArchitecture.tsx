@@ -70,7 +70,7 @@ export default function SystemsArchitecture() {
       subtitle="How the pieces fit: GHL as CRM spine, Admin (with SAC) as the attribution and conversion layer, Force as the clinic operations console, and the databases behind each. Structures below were read live from Supabase and Neon on 2026-07-19."
     >
       <Card><CardContent className="p-3">
-        <MermaidChart src={FLOW} active />
+        <MermaidChart src={FLOW} active zoomable />
       </CardContent></Card>
 
       <div className="grid gap-3 md:grid-cols-2">

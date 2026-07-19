@@ -67,7 +67,7 @@ export default function SacPlan() {
       subtitle="First-party collection, server-side transmission. SAC owns every event that leaves for Meta and Google, keyed to the new opportunity field model, HIPAA-safe by contract."
     >
       <Card><CardContent className="p-3">
-        <MermaidChart src={FLOW} active />
+        <MermaidChart src={FLOW} active zoomable />
       </CardContent></Card>
 
       <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">

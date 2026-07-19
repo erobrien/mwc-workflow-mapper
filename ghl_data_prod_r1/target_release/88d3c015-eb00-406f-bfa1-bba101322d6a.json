@@ -72,7 +72,7 @@
     "body": "Prompt to complete intake.",
     "attachments": []
    },
-   "next": "8702700a-56a1-4577-a369-877ec8ebac99"
+   "next": "783f7cc4-2a29-4898-985b-3c9feb0bafe1"
   },
   {
    "id": "8702700a-56a1-4577-a369-877ec8ebac99",
@@ -84,7 +84,7 @@
     "html": "<p>3 days before appointment. Use appointment-relative wait with 'if date already passed' fallback.</p>",
     "type": "email"
    },
-   "next": "652b6fd4-8897-4243-a669-bc0bf1c282f4"
+   "next": "c1adb29d-db42-4920-8e58-686f7c1d0426"
   },
   {
    "id": "652b6fd4-8897-4243-a669-bc0bf1c282f4",
@@ -107,7 +107,7 @@
     "html": "<p>1 day before appointment.</p>",
     "type": "email"
    },
-   "next": "0b485d2c-08ab-4cfa-af41-0f733ada7394"
+   "next": "a4305188-be45-40df-94e3-d24a0fe5b41f"
   },
   {
    "id": "0b485d2c-08ab-4cfa-af41-0f733ada7394",
@@ -118,7 +118,7 @@
     "body": "Good morning {{contact.first_name}}. We look forward to seeing you today at {{appointment.start_time}} for your 60-minute in-person consultation at Men's Wellness Centers.",
     "attachments": []
    },
-   "next": "f5f882d0-4016-4426-8d0e-e3ee7ca017a6"
+   "next": "a6583d8b-bd9a-43de-be68-d83ea3f92e01"
   },
   {
    "id": "f5f882d0-4016-4426-8d0e-e3ee7ca017a6",
@@ -129,6 +129,118 @@
     "body": "2 hours before appointment.",
     "attachments": []
    }
+  },
+  {
+   "id": "783f7cc4-2a29-4898-985b-3c9feb0bafe1",
+   "order": 0,
+   "name": "Wait: until 3 days before appt",
+   "type": "wait",
+   "attributes": {
+    "type": "appointment",
+    "name": "Wait: until 3 days before appt",
+    "cat": "",
+    "appointmentStartAfter": {
+     "when": "before",
+     "type": "minutes",
+     "value": 4320,
+     "distributed": {
+      "months": 0,
+      "days": 3,
+      "hours": 0,
+      "minutes": 0
+     }
+    },
+    "appointmentCondition": "next",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "next": "8702700a-56a1-4577-a369-877ec8ebac99"
+  },
+  {
+   "id": "c1adb29d-db42-4920-8e58-686f7c1d0426",
+   "order": 0,
+   "name": "Wait: until 1 day before appt",
+   "type": "wait",
+   "attributes": {
+    "type": "appointment",
+    "name": "Wait: until 1 day before appt",
+    "cat": "",
+    "appointmentStartAfter": {
+     "when": "before",
+     "type": "minutes",
+     "value": 1440,
+     "distributed": {
+      "months": 0,
+      "days": 1,
+      "hours": 0,
+      "minutes": 0
+     }
+    },
+    "appointmentCondition": "next",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "next": "652b6fd4-8897-4243-a669-bc0bf1c282f4"
+  },
+  {
+   "id": "a4305188-be45-40df-94e3-d24a0fe5b41f",
+   "order": 0,
+   "name": "Wait: until 5 hours before appt",
+   "type": "wait",
+   "attributes": {
+    "type": "appointment",
+    "name": "Wait: until 5 hours before appt",
+    "cat": "",
+    "appointmentStartAfter": {
+     "when": "before",
+     "type": "minutes",
+     "value": 300,
+     "distributed": {
+      "months": 0,
+      "days": 0,
+      "hours": 5,
+      "minutes": 0
+     }
+    },
+    "appointmentCondition": "next",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "next": "0b485d2c-08ab-4cfa-af41-0f733ada7394"
+  },
+  {
+   "id": "a6583d8b-bd9a-43de-be68-d83ea3f92e01",
+   "order": 0,
+   "name": "Wait: until 2 hours before appt",
+   "type": "wait",
+   "attributes": {
+    "type": "appointment",
+    "name": "Wait: until 2 hours before appt",
+    "cat": "",
+    "appointmentStartAfter": {
+     "when": "before",
+     "type": "minutes",
+     "value": 120,
+     "distributed": {
+      "months": 0,
+      "days": 0,
+      "hours": 2,
+      "minutes": 0
+     }
+    },
+    "appointmentCondition": "next",
+    "isHybridAction": true,
+    "hybridActionType": "wait",
+    "convertToMultipath": false,
+    "transitions": []
+   },
+   "next": "f5f882d0-4016-4426-8d0e-e3ee7ca017a6"
   }
  ]
 }

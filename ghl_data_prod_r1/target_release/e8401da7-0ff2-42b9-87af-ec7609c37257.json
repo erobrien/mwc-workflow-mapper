@@ -4,16 +4,16 @@
    "id": "5519530a-ca25-4778-bb03-d06ad99bd8ef",
    "order": 0,
    "type": "wait",
-   "name": "Wait: 5 minutes(s)",
+   "name": "Wait: 3 minutes",
    "cat": "",
    "attributes": {
     "type": "time",
     "startAfter": {
      "type": "minutes",
-     "value": 5,
+     "value": 3,
      "when": "after"
     },
-    "name": "Wait",
+    "name": "Wait: 3 minutes",
     "cat": "",
     "isHybridAction": true,
     "hybridActionType": "wait",
@@ -25,11 +25,12 @@
   {
    "id": "5bcb39a1-673d-4724-83b2-72279ada43ad",
    "order": 0,
-   "name": "Call: Speed-to-Lead (T+5m)",
+   "name": "Call: Speed-to-Lead (T+3m)",
    "type": "sms",
    "attributes": {
     "body": "[CALL TASK PLACEHOLDER] Call: Speed-to-Lead (T+5m). Reply STOP to opt out.",
-    "attachments": []
+    "attachments": [],
+    "name": "Call: Speed-to-Lead (T+3m)"
    },
    "next": "8a063721-cdd1-4ee2-a595-3703c85ad925"
   },
@@ -37,16 +38,16 @@
    "id": "8a063721-cdd1-4ee2-a595-3703c85ad925",
    "order": 0,
    "type": "wait",
-   "name": "Wait: 2 hour(s)",
+   "name": "Wait: 15 minutes",
    "cat": "",
    "attributes": {
     "type": "time",
     "startAfter": {
-     "type": "hour",
-     "value": 2,
+     "type": "minutes",
+     "value": 15,
      "when": "after"
     },
-    "name": "Wait",
+    "name": "Wait: 15 minutes",
     "cat": "",
     "isHybridAction": true,
     "hybridActionType": "wait",
@@ -58,11 +59,12 @@
   {
    "id": "d55a0c0e-6b1c-4709-9384-1ee2ca4d86c7",
    "order": 0,
-   "name": "SMS: Follow-Up 1 (T+2h)",
+   "name": "SMS: Follow-Up 1 (T+20m)",
    "type": "sms",
    "attributes": {
     "body": "Hi {{contact.first_name}}, following up from Men's Wellness Centers. Ready to book your {{ custom_values.consult_descriptor }}? Reply with a day that works. {{ custom_values.sms_opt_out_footer }}",
-    "attachments": []
+    "attachments": [],
+    "name": "SMS: Follow-Up 1 (T+20m)"
    },
    "next": "2f4148de-6649-40b0-8cc6-5ad9555f059c"
   },

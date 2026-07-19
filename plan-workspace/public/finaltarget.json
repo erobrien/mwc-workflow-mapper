@@ -400,10 +400,11 @@
     "Final Target section on plan-workspace (DONE)",
     "Prod field reconciliation: 46 opportunity fields already exist - R1 is alignment, not creation (DONE)",
     "Create the only missing fields: utm_medium, msclkid (DONE 2026-07-19)",
-    "Port proven triggers onto WF-01..16 drafts, all INACTIVE (DONE 2026-07-19: 68 triggers; WF-06 needs a configured Won trigger; WF-07/09 stay router-fed by design)",
-    "Cadence standard adopted from live timing (DONE - documented below)",
-    "Retime WF-02 to the proven burst; anchor WF-03 reminders to appointment time (PENDING)",
-    "PCC form ADDITIVE-only tweak: add Provider dropdown, Money Down, single Term field. NO option-value changes yet (option flips are behavior-touching and belong to the alignment window)"
+    "Port proven triggers onto WF-01..16 drafts (DONE 2026-07-19: 68 triggers, filters copied verbatim from live). NOTE: the API ignores the inactive flag - triggers show Active but drafts never fire; per-trigger filter + active review is a PUBLISH GATE. WF-06 Won trigger: configure manually with the stage filter. WF-07/09 stay router-fed by design",
+    "Cadence standard adopted from live timing (DONE)",
+    "WF-02 retimed to proven burst: first call T+3m, follow-up T+20m (DONE 2026-07-19, verified on readback)",
+    "WF-03 reminders anchored to appointment time: waits until 3d / 1d / 5h / 2h before appointment (DONE 2026-07-19, verified on readback)",
+    "PCC form ADDITIVE-only tweak: add Provider dropdown, Money Down, single Term field (PENDING - form-builder API unproven; either probe with a fresh token or 5-minute manual edit against the spec below)"
    ],
    "exit": "All additive work verified on a test contact; zero behavior change to live flows"
   },

@@ -3,53 +3,97 @@ import { Badge, Card, CardContent, Loading } from "../components/ui";
 import { MermaidChart } from "../components/MermaidChart";
 import { Database, AppWindow, AlertTriangle } from "lucide-react";
 
-const FLOW = `flowchart LR
-  subgraph SURF["Acquisition surfaces"]
-    WP["WordPress<br/>menswellnesscenters.com<br/>(organic / SEO)"]
-    BK["mwc-next booking funnel<br/>book.menswellnesscenters.com<br/>(paid)"]
-    CALL["Inbound calls<br/>RingCentral"]
+// Wide-canvas architecture: five columns of intent read left-to-right
+// (surfaces → core CRM → event/attribution + ops → stores → activation),
+// with EMR anchored as a reserved seam. Designed for a 2K display.
+const FLOW = `%%{init: {"theme":"base","flowchart":{"nodeSpacing":45,"rankSpacing":90,"padding":18,"htmlLabels":true,"curve":"basis"},"themeVariables":{"fontSize":"15px","fontFamily":"ui-sans-serif, system-ui, -apple-system","primaryColor":"#eef2ff","primaryBorderColor":"#4f46e5","primaryTextColor":"#0f172a","lineColor":"#475569","clusterBkg":"#f8fafc","clusterBorder":"#cbd5e1"}}}%%
+flowchart LR
+  %% ---------- Column 1: acquisition surfaces ----------
+  subgraph SURF["◉  ACQUISITION SURFACES"]
+    direction TB
+    WP["<b>WordPress</b><br/><span style='font-size:12px;color:#64748b'>menswellnesscenters.com<br/>organic · SEO</span>"]
+    BK["<b>mwc-next booking</b><br/><span style='font-size:12px;color:#64748b'>book.menswellnesscenters.com<br/>paid funnel</span>"]
+    CALL["<b>Inbound calls</b><br/><span style='font-size:12px;color:#64748b'>RingCentral</span>"]
   end
-  subgraph GHL["GoHighLevel (prod Ghstz8eIsHWLeXek47dk)"]
-    CRM[("Contacts · Opportunities<br/>Calendars · Pipelines")]
-    WFS["Workflows WF-01..17<br/>(Target Release drafts)"]
+
+  %% ---------- Column 2: CRM spine ----------
+  subgraph GHL["◉  GHL PROD  ·  Ghstz8eIsHWLeXek47dk"]
+    direction TB
+    CRM[("<b>Contacts · Opportunities</b><br/><span style='font-size:12px;color:#64748b'>Calendars · Pipelines</span>")]
+    WFS["<b>Workflows WF-01..17</b><br/><span style='font-size:12px;color:#64748b'>Target Release drafts</span>"]
+    CRM --- WFS
   end
-  subgraph ADMIN["MWC Admin (Vercel) — includes SAC"]
-    SAC["SAC ingest + outbox<br/>server-side conversions"]
-    DASH["Ops dashboards<br/>attribution stats · deploys · webhooks"]
+
+  %% ---------- Column 3: MWC applications ----------
+  subgraph APPS["◉  MWC APPLICATIONS"]
+    direction TB
+    subgraph ADMIN["MWC Admin  ·  includes SAC"]
+      direction TB
+      SAC["<b>SAC</b><br/><span style='font-size:12px;color:#64748b'>ingest · outbox · dedupe<br/>server-side only</span>"]
+      DASH["<b>Ops dashboards</b><br/><span style='font-size:12px;color:#64748b'>attribution · deploys · webhooks</span>"]
+    end
+    subgraph FORCE["Force  ·  formerly Pulse"]
+      GRID["<b>Daily consult grid</b><br/><span style='font-size:12px;color:#64748b'>PCC disposition entry</span>"]
+    end
   end
-  subgraph SB1["Supabase · Booking Admin"]
-    FE[("funnel_events")]
-    AR[("attribution_records")]
+
+  %% ---------- Column 4: data stores ----------
+  subgraph STORES["◉  DATA STORES"]
+    direction TB
+    subgraph SB["Supabase  ·  Booking Admin"]
+      direction TB
+      FE[("funnel_events")]
+      AR[("attribution_records")]
+    end
+    subgraph NEON["Neon  ·  MWC Sales Pulse  ·  PG18"]
+      direction TB
+      NAPP[("appointments<br/>dispositions<br/>sync_events")]
+      NAUTH[("neon_auth<br/>sessions · orgs")]
+    end
   end
-  subgraph FORCE["Force (formerly Pulse, Vercel)"]
-    GRID["Daily consultation grid<br/>PCC disposition entry"]
+
+  %% ---------- Column 5: activation ----------
+  subgraph ADS["◉  AD PLATFORMS"]
+    direction TB
+    G["<b>Google Ads</b><br/><span style='font-size:12px;color:#64748b'>offline conversions<br/>Enhanced Conversions</span>"]
+    M["<b>Meta CAPI</b><br/><span style='font-size:12px;color:#64748b'>server events</span>"]
   end
-  subgraph NEON["Neon · MWC Sales Pulse (Postgres 18)"]
-    NAPP[("appointments · dispositions<br/>sync_events · users · audit_log")]
-    NAUTH[("neon_auth schema<br/>sessions · orgs · members")]
-  end
-  subgraph ADS["Ad platforms"]
-    G["Google Ads<br/>offline conversions + EC"]
-    M["Meta CAPI"]
-  end
-  LB["Lobbie EMR<br/>(reserved seam)"]
-  WP --> BK
-  BK -- "create contact + appt" --> CRM
-  BK -- "server events" --> FE
-  CALL --> CRM
-  CRM --> WFS
-  WFS -- "webhooks (lead/outcome/won)" --> SAC
-  FE --> SAC
-  SAC --> AR
-  SAC --> G
-  SAC --> M
-  AR --> DASH
-  CRM -- "appointment sync" --> NAPP
-  GRID --> NAPP
-  NAPP -- "disposition writeback" --> CRM
-  NAUTH --- GRID
-  LB -.-> SAC
-  LB -.-> CRM`;
+
+  %% ---------- reserved seam ----------
+  LB["<b>Lobbie EMR</b><br/><span style='font-size:12px;color:#64748b'>reserved seam</span>"]
+
+  %% ---------- edges ----------
+  WP ==> BK
+  BK == "contact + appt" ==> CRM
+  BK == "server events" ==> FE
+  CALL ==> CRM
+  WFS == "webhooks<br/>lead · outcome · won" ==> SAC
+  FE ==> SAC
+  SAC == write ==> AR
+  AR ==> DASH
+  CRM -. sync .-> NAPP
+  GRID ==> NAPP
+  NAPP -. writeback .-> CRM
+  NAUTH -.- GRID
+  SAC ==> G
+  SAC ==> M
+  LB -. future .-> SAC
+  LB -. future .-> CRM
+
+  %% ---------- styling ----------
+  classDef surf fill:#fff7ed,stroke:#f97316,stroke-width:1.5px,color:#7c2d12
+  classDef ghl  fill:#eff6ff,stroke:#2563eb,stroke-width:1.5px,color:#1e3a8a
+  classDef apps fill:#eef2ff,stroke:#4f46e5,stroke-width:1.5px,color:#312e81
+  classDef store fill:#ecfdf5,stroke:#059669,stroke-width:1.5px,color:#064e3b
+  classDef ads  fill:#fef2f2,stroke:#dc2626,stroke-width:1.5px,color:#7f1d1d
+  classDef seam fill:#f5f5f4,stroke:#78716c,stroke-width:1.5px,color:#44403c,stroke-dasharray:4 3
+
+  class WP,BK,CALL surf
+  class CRM,WFS ghl
+  class SAC,DASH,GRID apps
+  class FE,AR,NAPP,NAUTH store
+  class G,M ads
+  class LB seam`;
 
 const SB_ADMIN = [
   { t: "public.funnel_events", d: "Append-only funnel event spine written by the booking app (mwc-next) and GHL webhooks. SAC's ingest source of truth.", rows: 26 },
@@ -69,8 +113,24 @@ export default function SystemsArchitecture() {
       title="Systems architecture"
       subtitle="How the pieces fit: GHL as CRM spine, Admin (with SAC) as the attribution and conversion layer, Force as the clinic operations console, and the databases behind each. Structures below were read live from Supabase and Neon on 2026-07-19."
     >
-      <Card><CardContent className="p-3">
-        <MermaidChart src={FLOW} active zoomable />
+      <Card><CardContent className="p-4">
+        <div className="mb-2 flex items-center gap-2 text-[11px] uppercase tracking-wider text-muted-foreground">
+          <span className="inline-flex items-center gap-1"><span className="h-2 w-2 rounded-sm bg-orange-500" /> Surfaces</span>
+          <span className="text-muted-foreground/40">→</span>
+          <span className="inline-flex items-center gap-1"><span className="h-2 w-2 rounded-sm bg-blue-500" /> GHL CRM</span>
+          <span className="text-muted-foreground/40">→</span>
+          <span className="inline-flex items-center gap-1"><span className="h-2 w-2 rounded-sm bg-indigo-500" /> Apps (SAC · Force)</span>
+          <span className="text-muted-foreground/40">→</span>
+          <span className="inline-flex items-center gap-1"><span className="h-2 w-2 rounded-sm bg-emerald-500" /> Stores</span>
+          <span className="text-muted-foreground/40">→</span>
+          <span className="inline-flex items-center gap-1"><span className="h-2 w-2 rounded-sm bg-red-500" /> Ad platforms</span>
+          <span className="ms-auto text-muted-foreground/70">Designed at 2K · use zoom controls to inspect</span>
+        </div>
+        <div className="overflow-x-auto">
+          <div style={{ minWidth: 1800 }}>
+            <MermaidChart src={FLOW} active zoomable />
+          </div>
+        </div>
       </CardContent></Card>
 
       <div className="grid gap-3 md:grid-cols-2">

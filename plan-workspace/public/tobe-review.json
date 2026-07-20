@@ -1,0 +1,177 @@
+{
+  "reviewed_at": "2026-07-19",
+  "method": "Adversarial design review of every To-Be surface (/to-be, /wf-diagrams, /diagrams, /pcc-form, field destinations, decisions, guardrails) against GHL platform mechanics verified first-hand on this account (API probes, write-path tests, 7/18 extraction). Every finding carries the platform fact that breaks the spec and the fix applied.",
+  "verdict": "The architecture (single-writer, idempotency, appt-status gate, frozen attribution, location-as-variable, draft-first) survives review. Four blockers were platform-mechanics gaps: the spec described behavior GHL cannot execute as drawn. All four have deterministic fixes that are now folded into the spec. The remaining findings are contract inconsistencies and undefined edge paths, all fixed or assigned.",
+  "strengths": [
+    "Single-writer field ownership with the PCC Sales Form as sole outcome writer: correct, and ahead of standard GHL practice",
+    "outcome_processed_at idempotency on the money path: correct; protects CAPI and routing from double-submits",
+    "appt_status gate ahead of outcome routing in WF-05: correct; kills the no-show-dispositioned-as-sale defect",
+    "Attribution frozen on the opportunity at create (D17): correct; wins AND losses report",
+    "16-workflow parameterized architecture, location as a variable (D13): correct; eliminates the clone sprawl that sank both the legacy account and the vendor build",
+    "Draft-first build with canary cutover and parallel run (D10): correct discipline"
+  ],
+  "findings": [
+    {
+      "id": "R1",
+      "severity": "Blocker",
+      "area": "WF-05 trigger does not exist on the platform",
+      "claim": "WF-05 diagram: 'TRIGGER: PCC Sales Form submitted'. The PCC Sales Form is an external app writing opportunity fields via the API (it must be: GHL native forms cannot write opportunity custom fields, and MONETORY-type opportunity fields cannot be written from workflow actions at all).",
+      "why": "GHL form-submitted triggers fire only for native GHL forms. There is no trigger for 'a specific opportunity custom field changed' (Opportunity Changed fires broadly and cannot filter on which custom field changed - open feature request). An API write to opportunity fields fires no form trigger. As drawn, the keystone workflow never fires.",
+      "fix": "Define the trigger contract explicitly. The form app performs writes in fixed order: (1) write ALL opportunity fields via API, (2) LAST, write contact.wf05_trigger_key = '{opportunityId}:{ISO timestamp}'. WF-05 triggers on the contact.wf05_trigger_key field change (contact fields DO support specific-field-change triggers), parses the opportunity ID, and binds context with a Find Opportunity step before any read. A 60s wait after trigger buffers the read-after-write race. This is the bound-context pattern proven on the ZZ API Write Probe workflow on 7/18.",
+      "status": "Fixed in spec"
+    },
+    {
+      "id": "R2",
+      "severity": "Blocker",
+      "area": "renewal_date has no executor",
+      "claim": "WF-05 SOLD branch: 'Set renewal_date = Won date + term_1'. Field destinations: 'renewal_date; writer: WF-05 on every Won = Won date + term_1'. term_1 stores prose ('3 mo', '42 mo').",
+      "why": "GHL workflows have no date arithmetic: math_operation is numeric-only and there is no add-months-to-date action on a date field. Even if there were, term_1 as prose cannot be parsed by an if/else chain without 8 hardcoded branches per term value. The declared writer cannot compute the value.",
+      "fix": "Move the writer. The PCC Sales Form app computes renewal_date at submit (it already holds sold date and term) and writes it in the same API call as the other outcome fields. WF-05's SOLD branch drops the set-renewal_date step. term_1/2/3 store integer months (1, 3, 6, 12, 24, 30, 36, 42); prose lives only in form labels. Single-writer table updated: renewal_date writer = PCC Sales Form.",
+      "status": "Fixed in spec"
+    },
+    {
+      "id": "R3",
+      "severity": "Blocker",
+      "area": "Renewal reminders cannot fire off an opportunity date field",
+      "claim": "WF-09 Renewal Reminders sub-flow: '30/21/14/7/day-of before opportunity.renewal_date'. Field destinations put renewal_date on the Opportunity.",
+      "why": "GHL date-based (custom date) triggers exist for CONTACT date fields only. A reminder sequence keyed to an opportunity date field has no native trigger and never fires. The 7/18 working session already resolved this (renewal_date to the contact, WF-05 as writer 'pointed at the contact field') but the spec was never updated and still contradicts the resolution.",
+      "fix": "renewal_date lives on the CONTACT (contact.renewal_date - one active program per member holds). The form app writes it (per R2) to the contact; an optional opportunity copy is archival only. WF-09's sub-flow triggers on the contact date field natively. Same class of fix applied to visit_feedback_score: WF-06's NPS branch needs a specific-field-change trigger, so WF-10 writes contact.latest_feedback_score (opportunity copy optional for deal-level reporting).",
+      "status": "Fixed in spec"
+    },
+    {
+      "id": "R4",
+      "severity": "Blocker",
+      "area": "WF-05 'Move Opp to Won stage' violates guardrail G1",
+      "claim": "Guardrail G1: 'Never workflow-move opportunities (wipes custom fields) - all migration is API-side.' WF-05 SOLD branch: 'Move Opp to Won stage' - immediately after the form wrote 20+ custom fields to that opportunity.",
+      "why": "The keystone router performs the exact operation the number-one guardrail forbids, on the highest-value record in the system, at the moment it carries the most freshly written data. Either the guardrail is wrong or the workflow is. A spec that contradicts its own first guardrail cannot be built without someone silently picking a side.",
+      "fix": "The form app sets stage = Won via the API in the same write as the outcome fields (API-side stage moves are exactly what G1 prescribes). WF-05 never moves stages; it only routes. G1 stays absolute and enforceable: 'workflows never move opportunity stages, period.' The simplest rule wins the audit. WF-05 diagram updated to remove the stage move.",
+      "status": "Fixed in spec"
+    },
+    {
+      "id": "R5",
+      "severity": "Major",
+      "area": "Enum contract split three ways (same defect class as retired finding B1)",
+      "claim": "The PCC form writes UPPERCASE codes (SOLD/AD/MUT/MAR); the WF-05 diagram branches on lowercase (sold/ad/mut/mar); the 7/18 production normalization standardized lowercase with 'nosale' replacing 'AD' entirely.",
+      "why": "GHL if/else comparisons are exact string matches and tags are case-sensitive. sale_outcome = 'SOLD' never matches a branch testing 'sold'. And 'AD' resurrects the advertising collision the nosale rename was created to kill - the WF-13 guardrail exists purely to warn about it. A naming rule beats a warning label.",
+      "fix": "One canonical enum block, lowercase codes only: sale_outcome {sold, nosale, mut, mar} | sale_type {new, renewal} | appt_status {showed, no-show, cancel, reschedule} | discount_type {pct, dollar}. Field renames: ad_reason to nosale_reason, ad_reason_other to nosale_reason_other. Tags: outcome_nosale (never 'ad'). The PCC form option values, every diagram branch, and the field-destination notes now carry identical codes. The WF-13 'AD is not advertising' guardrail becomes obsolete by construction.",
+      "status": "Fixed in spec"
+    },
+    {
+      "id": "R6",
+      "severity": "Major",
+      "area": "D5 and D14 contradict each other; Locations Custom Object dropped",
+      "claim": "D5 (locked 6/16): 'Custom objects: Rejected - no custom objects.' D14 (locked later): 'Per-clinic data lives in a Locations Custom Object (Method 1).' Both locked, mutually exclusive.",
+      "why": "Two locked decisions cannot demand opposite architectures. Owner has additionally decided the production build proceeds WITHOUT the Locations object.",
+      "fix": "D14 revised to Method 2 (contact-field matrix): WF-01 branches on location exactly once at create and stamps generic operational contact fields (current_booking_url, current_clinic_phone, current_clinic_address, current_review_link) from per-clinic constants held in the WF-01 branch arms. Templates reference ONLY current_* fields, so WF-02 through WF-16 still never know clinics exist. D5 stands account-wide: no custom objects anywhere. A later upgrade to a Locations object is a pure WF-01 swap - zero template changes.",
+      "status": "Fixed in spec"
+    },
+    {
+      "id": "R7",
+      "severity": "Major",
+      "area": "WF-01 mints duplicate opportunities on repeat form submissions",
+      "claim": "WF-01: form/webhook submit triggers 'Create Opportunity - Sales Pipeline New Lead stage' unconditionally. Allow Duplicate Opportunities is ON (required for the multi-deal model).",
+      "why": "The same lead submitting twice (page reload, second form, price page then booking page) creates two open Sales opportunities. D17 then freezes attribution onto a duplicate deal. This is a miniature of the create-heavy defect (235 creates vs 17 updates) documented against the vendor build.",
+      "fix": "Create-once/update-thereafter guard in WF-01: if an OPEN Sales-pipeline opportunity exists for the contact, update last-touch contact fields only and exit; create only when no open deal exists. A new deal for a returning member post-close is correct behavior (that is a renewal). Guard added to the WF-01 diagram ahead of the create step.",
+      "status": "Fixed in spec"
+    },
+    {
+      "id": "R8",
+      "severity": "Major",
+      "area": "WF-11 as a global send gate is not a platform mechanism",
+      "claim": "WF-11 diagram: 'Every SMS or voicemail send' flows through a consent/DND/quiet-hours check inside WF-11. Multiple workflow copies reference 'the WF-11 gate'.",
+      "why": "GHL has no middleware: one workflow cannot intercept another workflow's sends. As drawn, WF-11 implies centralized runtime enforcement that cannot exist on the platform. The real mechanism is per-workflow filters, which the spec must own honestly or coverage will silently be assumed.",
+      "fix": "WF-11 re-scoped to what it can actually do: (a) sole writer/maintainer of the canonical sms_consent_status field and DND state (STOP/DNC/bounce/MUT handling), and (b) the publish-gate rule: every messaging workflow carries its own consent + DND filter and an 8am-9pm Contact Timezone window on every send step, verified per workflow by the conformance harness before publish. Diagram redrawn as 'the pattern every workflow copies' not 'a gate every send calls'.",
+      "status": "Fixed in spec"
+    },
+    {
+      "id": "R9",
+      "severity": "Major",
+      "area": "Lead paths that never touch a form never get an opportunity",
+      "claim": "WF-01's only trigger is form submit / inbound webhook. The master diagram routes WF-16 (missed call, chat) into WF-01. D4 keeps Instagram DM in a separate pipeline.",
+      "why": "A phone lead submits no form: nothing creates the opportunity, nothing stamps attribution, and the lead is invisible to every downstream workflow and report. Same hole for chat leads that book verbally and for walk-ins. The master diagram's WF-16 to WF-01 edge has no mechanism behind it.",
+      "fix": "Entry contract table added to the spec - every lead source names its opportunity-creating owner: web forms/landers (WF-01 webhook, automatic), missed-call text-back replies (WF-16 tags source, books via link, then WF-01 webhook fires), phone-booked leads (contact-center disposition in the admin app creates the opportunity via API with lead_source=phone), IG/ManyChat (stays in DM pipeline until qualified, then routed through the same API create), walk-ins (front desk disposition, API create). All API-side creates use the same create-once guard as R7.",
+      "status": "Fixed in spec"
+    },
+    {
+      "id": "R10",
+      "severity": "Major",
+      "area": "Reschedules double-enroll WF-03",
+      "claim": "WF-03 copy documents a cancel-exit ('a cancellation halts reminders and routes to WF-08') but says nothing about reschedule. Appointment-triggered GHL workflows re-enter once per appointment regardless of the re-entry toggle.",
+      "why": "A reschedule creates a new appointment, which enrolls WF-03 a second time while the first enrollment keeps running its reminder chain against the dead slot. The member gets two full reminder sequences, one of them wrong.",
+      "fix": "WF-03 gains a reschedule-exit mirroring the cancel-exit: an early-exit goal on 'appointment rescheduled or cancelled' removes the prior enrollment; the new appointment's enrollment carries the reminders. Modified By filter (API/Customer/User/Workflow) applied on the trigger to break self-loops, per platform guidance.",
+      "status": "Fixed in spec"
+    },
+    {
+      "id": "R11",
+      "severity": "Major",
+      "area": "Renewal conversions will corrupt ad-platform reporting",
+      "claim": "WF-13 fires a Won conversion to Google and Meta for every Won. Renewal opportunities carry attribution frozen at THEIR create (usually direct/CRM-driven, no click ID) or would inherit a months-old first-touch gclid.",
+      "why": "Google rejects click IDs outside the click-through window, and a stale gclid that does land mis-credits a months-old campaign for revenue the campaign did not drive. Renewal revenue in paid-platform conversion data trains smart bidding on false signal - the same class of corruption as the 939 false wins, one layer up.",
+      "fix": "WF-13 sends Won conversions for sale_type = new ONLY. Renewals are excluded from all paid-platform conversion uploads; renewal revenue reports internally (dashboard/P&L) where it belongs. Booked conversions unchanged. event_id = opportunity ID dedup (D17) retained. WF-13 spec line and diagram updated.",
+      "status": "Fixed in spec"
+    },
+    {
+      "id": "R12",
+      "severity": "Major",
+      "area": "No-form chaser has no trigger mechanism",
+      "claim": "WF-05 side path: 'appointment day ends with NO Sales Form submitted' triggers a PCC chaser.",
+      "why": "GHL cannot trigger on the absence of an event. Nothing fires when a form is NOT submitted; as drawn the chaser never runs.",
+      "fix": "The chaser lives inside the appointment-triggered path: on appointment start, Wait until appointment end + 2h, then if/else on outcome_processed_at empty AND appt_status empty - if both empty, internal notification to the PCC, then a re-nag loop on quiet-hours-safe waits with a field-change goal that exits the moment the form write lands. Pure native mechanics, no external scheduler. The admin app's 15-minute reconciler remains the independent backstop (reconciliation, not nagging).",
+      "status": "Fixed in spec"
+    },
+    {
+      "id": "R13",
+      "severity": "Minor",
+      "area": "WF-17 breaks the 16-workflow frame",
+      "claim": "tobe_workflows lists 17 entries. kpis.target_workflows = 16. The master diagram is titled 'All 16 workflows' and omits WF-17. D11 locks canonical numbering at WF-01..WF-16.",
+      "why": "Every surface that says '16' is now wrong by one, and the price calculator is invisible on the master journey.",
+      "fix": "D11 amended to WF-01..WF-17. kpis.target_workflows = 17. Master diagram retitled and WF-17 added as a support node feeding WF-13's conversion value (D17 closed loop).",
+      "status": "Fixed in spec"
+    },
+    {
+      "id": "R14",
+      "severity": "Minor",
+      "area": "Pipeline stages with no declared writer",
+      "claim": "Sales pipeline stages Engaged and Confirmed (and Referrals stages Qualified/Booked/Showed) have no workflow, form, or app declared as their writer. G1 (as now scoped) forbids workflow stage moves entirely.",
+      "why": "A stage nothing writes is decorative, and reporting on it returns empty - the same failure mode the as-is audit documented.",
+      "fix": "Stage-writer map added: New Lead (WF-01/API create), Booked (calendar booking, API), Showed/Won/Lost (PCC form app via API, per R4). Engaged and Confirmed are deleted from the target Sales pipeline unless a writer is named before build. Referrals pipeline stages map to the referral form and PCC actions or are likewise cut.",
+      "status": "Fixed in spec"
+    },
+    {
+      "id": "R15",
+      "severity": "Minor",
+      "area": "sale_type is a manual memory test",
+      "claim": "The PCC picks New vs Renewal by hand on every disposition.",
+      "why": "Human error on a field that drives revenue split, pipeline routing, referral eligibility, and commissions ('Never mark Won without Sale Type' is already a guardrail because it matters).",
+      "fix": "The form app pre-fills sale_type from a lookup - contact has a prior Won opportunity = default renewal - with PCC override allowed. Validation blocks submit when sale_type is empty on a sold outcome.",
+      "status": "Fixed in spec"
+    },
+    {
+      "id": "R16",
+      "severity": "Minor",
+      "area": "Term values are prose",
+      "claim": "TERMS = '1 mo', '3 mo' ... '42 mo' as stored values.",
+      "why": "Prose cannot drive date math (R2) or clean reporting; '3 mo' vs '3mo' vs '3 months' drift is guaranteed across writers.",
+      "fix": "term_1/2/3 store integer months; labels render prose. Enum contract updated.",
+      "status": "Fixed in spec"
+    },
+    {
+      "id": "R17",
+      "severity": "Minor",
+      "area": "monetary_value vs collected cash",
+      "claim": "monetary_value = net collected (netTotal after referral discount) per the field-destination note; the form previously mapped total_program_amount (gross) into value.",
+      "why": "If gross lands in monetary_value, every revenue rollup overstates cash by the discount amount and the CAPI value trains bidding on money never collected.",
+      "fix": "Confirmed contract: monetary_value = net collected, written by the form app in the API call. total_program_amount stays gross on the opportunity for list-price reporting. WF-13 sends monetary_value.",
+      "status": "Fixed in spec"
+    },
+    {
+      "id": "R18",
+      "severity": "Minor",
+      "area": "Migration backfill must precede renewal automation",
+      "claim": "WF-09 renewal reminders depend on contact.renewal_date, but active members' renewal dates exist only in legacy contact fields / the disposition sheet.",
+      "why": "Cutover with an empty renewal_date means zero renewal reminders for every existing member - the highest-LTV cohort goes dark on day one.",
+      "fix": "Migration step 2 (revenue backfill) extended: compute and write contact.renewal_date for every active member from the legacy term/won data during backfill, gated by the same dry-run CSV review. Renewal sub-flow publish is blocked until backfill reconciles.",
+      "status": "Fixed in spec"
+    }
+  ]
+}

@@ -18,7 +18,9 @@ const req  = <span className="text-destructive ml-0.5">*</span>;
 const PCCS      = ["Alex Rivera", "Jamie Chen", "Morgan Lee", "Sam Taylor", "Taylor Brooks"];
 const PROVIDERS = ["Dr. Marcus Hale", "Dr. Priya Shah", "NP Dana Cole", "Dr. Evan Brooks"];
 const PRODUCTS  = ["TRT", "HRT", "GLP1", "Combo", "ICP", "ED", "B Complex"];
-const TERMS     = ["1 mo", "3 mo", "6 mo", "12 mo", "24 mo", "30 mo", "36 mo", "42 mo"];
+// R16: stored values are INTEGER MONTHS (term_1 drives renewal_date math in the form app, R2);
+// prose lives in labels only.
+const TERMS     = ["1 mo", "3 mo", "6 mo", "12 mo", "24 mo", "30 mo", "36 mo", "42 mo"]; // stored as 1|3|6|12|24|30|36|42
 
 type Product = { name: string; term: string; price: string };
 
@@ -30,20 +32,23 @@ const APPT_OPTS = [
   { value: "reschedule", label: "Reschedule", icon: CalendarClock,ring: "bg-sky-600 shadow-sky-200 dark:shadow-sky-900" },
 ];
 
+// D20 canonical enum contract: lowercase codes only. GHL if/else is exact-match and tags are
+// case-sensitive. 'AD' is RETIRED (R5) — the code is 'nosale', the field is nosale_reason,
+// the tag is outcome_nosale. This kills the ad-vs-advertising collision by construction.
 const OUTCOME_OPTS = [
-  { value: "SOLD", label: "Sold", icon: CheckCircle2, ring: "bg-emerald-600 shadow-emerald-200 dark:shadow-emerald-900" },
-  { value: "AD",   label: "A&D",  icon: XCircle,      ring: "bg-slate-600 shadow-slate-200 dark:shadow-slate-800" },
-  { value: "MUT",  label: "MUT",  icon: AlertCircle,  ring: "bg-slate-600 shadow-slate-200 dark:shadow-slate-800" },
-  { value: "MAR",  label: "MAR",  icon: Clock,        ring: "bg-amber-500 shadow-amber-200 dark:shadow-amber-900" },
+  { value: "sold",   label: "Sold",    icon: CheckCircle2, ring: "bg-emerald-600 shadow-emerald-200 dark:shadow-emerald-900" },
+  { value: "nosale", label: "No Sale", icon: XCircle,      ring: "bg-slate-600 shadow-slate-200 dark:shadow-slate-800" },
+  { value: "mut",    label: "MUT",     icon: AlertCircle,  ring: "bg-slate-600 shadow-slate-200 dark:shadow-slate-800" },
+  { value: "mar",    label: "MAR",     icon: Clock,        ring: "bg-amber-500 shadow-amber-200 dark:shadow-amber-900" },
 ];
 
-// Reason lists are outcome-specific. AD (Advise and Decline) is a sales objection;
+// Reason lists are outcome-specific. nosale (Advise and Decline) is a sales objection;
 // MUT is a clinical finding; MAR is a pending medical-approval item. They must not share a list.
-// GUARDRAIL: "AD"/"ad_reason" mean Advise and Decline, NOT advertising — never key off ad_* for WF-13 ad-platform conversion logic.
-const AD_REASONS  = ["Not Ready", "Think it Over / Sleep On It", "Cost / Price Objection", "Not Interested", "Others"];
+// R5/D20: field is nosale_reason (ad_reason retired) — the advertising collision no longer exists to warn about.
+const NOSALE_REASONS = ["Not Ready", "Think it Over / Sleep On It", "Cost / Price Objection", "Not Interested", "Others"];
 const MUT_REASONS = ["Contraindication", "Abnormal labs", "Provider decision", "Others"];
 const MAR_REASONS = ["Awaiting labs", "Awaiting provider review", "Awaiting clearance", "Others"];
-const REASONS_BY_OUTCOME: Record<string, string[]> = { AD: AD_REASONS, MUT: MUT_REASONS, MAR: MAR_REASONS };
+const REASONS_BY_OUTCOME: Record<string, string[]> = { nosale: NOSALE_REASONS, mut: MUT_REASONS, mar: MAR_REASONS };
 
 // Patient type — every consult is either a brand-new sale or a renewal of an existing program.
 // Gates referral attribution (new only), pricing context, and downstream pipeline routing (op_sale_type).
@@ -126,7 +131,7 @@ export default function SalesForm() {
   const [patientType,   setPatientType]  = useState("new");
   const [pcc,           setPcc]          = useState("Alex Rivera");
   const [provider,      setProvider]     = useState("Dr. Marcus Hale");
-  const [outcome,       setOutcome]      = useState("SOLD");
+  const [outcome,       setOutcome]      = useState("sold");
   const [closeType,     setCloseType]    = useState("same-day"); // opportunity tag: Same Day | Come-back
   const [adReason,      setAdReason]     = useState("Not Ready");
   const [products,      setProducts]     = useState<Product[]>([{ name: "TRT", term: "3 mo", price: "2999" }]);
@@ -141,7 +146,7 @@ export default function SalesForm() {
   const [noShowReason,  setNoShowReason] = useState("No call, no show");
 
   const showed = apptStatus === "showed";
-  const sold   = outcome === "SOLD";
+  const sold   = outcome === "sold";
   const isNew  = patientType === "new";
 
   // Financials
@@ -159,7 +164,7 @@ export default function SalesForm() {
   // Reset the reason to the first valid option whenever the outcome changes,
   // so a MUT never carries a leftover sales objection reason.
   useEffect(() => {
-    if (outcome !== "SOLD") setAdReason(REASONS_BY_OUTCOME[outcome][0]);
+    if (outcome !== "sold") setAdReason(REASONS_BY_OUTCOME[outcome][0]);
   }, [outcome]);
 
   const total    = parseFloat(totalAmount) || 0;
@@ -265,11 +270,11 @@ export default function SalesForm() {
             <div>
               <label className={lbl}>Result {req}</label>
               <SegCtrl opts={OUTCOME_OPTS} value={outcome} onChange={setOutcome} />
-              {outcome !== "SOLD" && (
+              {outcome !== "sold" && (
                 <p className="mt-2 text-xs text-muted-foreground">
-                  {outcome === "AD" && "AD (Advise and Decline)"}
-                  {outcome === "MUT" && "MUT (Medically Untreatable)"}
-                  {outcome === "MAR" && "MAR (Medical Approval Required)"}
+                  {outcome === "nosale" && "No Sale (Advise and Decline)"}
+                  {outcome === "mut" && "MUT (Medically Untreatable)"}
+                  {outcome === "mar" && "MAR (Medical Approval Required)"}
                 </p>
               )}
               <Hint>op_sale_outcome · SOLD | AD | MUT | MAR</Hint>
@@ -298,12 +303,12 @@ export default function SalesForm() {
             {!sold && (
               <div className="max-w-sm pt-1">
                 <label className={lbl}>
-                  {outcome === "AD" ? "A&D reason" : outcome === "MUT" ? "MUT reason" : "MAR reason"} {req}
+                  {outcome === "nosale" ? "No-sale reason" : outcome === "mut" ? "MUT reason" : "MAR reason"} {req}
                 </label>
                 <select className={inp} value={adReason} onChange={e => setAdReason(e.target.value)}>
                   {REASONS_BY_OUTCOME[outcome].map(r => <option key={r}>{r}</option>)}
                 </select>
-                <Hint>{outcome === "AD" ? "op_ad_reason" : outcome === "MUT" ? "op_mut_reason (clinical)" : "op_mar_reason (pending item)"}</Hint>
+                <Hint>{outcome === "nosale" ? "op_nosale_reason" : outcome === "mut" ? "op_mut_reason (clinical)" : "op_mar_reason (pending item)"}</Hint>
               </div>
             )}
           </Panel>

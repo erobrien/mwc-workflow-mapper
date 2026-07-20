@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import {
   LayoutDashboard, Boxes, Workflow, Network,
   Gavel, ShieldAlert, Moon, Sun, Menu, SearchCheck, ClipboardList, Tag,
-  Database, Waypoints, Route, History, ChevronRight, ChevronDown,
+  Database, Waypoints, Route, History, ChevronRight, ChevronDown, Target,
 } from "lucide-react";
 import { cn, useTheme } from "./ui";
 import { useState } from "react";
@@ -24,6 +24,9 @@ const NAV: { group: string; accent?: string; dot?: string; collapsible?: boolean
   { group: "Final Target v2", accent: "text-indigo-600 dark:text-indigo-400", dot: "bg-indigo-500", items: [
     { to: "/final-target", label: "Final Target Plan", icon: Workflow, accent: "text-indigo-600 dark:text-indigo-400" },
     { to: "/final-target-sac", label: "SAC Attribution", icon: Waypoints, accent: "text-indigo-600 dark:text-indigo-400" },
+  ] },
+  { group: "Active Plan", accent: "text-violet-600 dark:text-violet-400", dot: "bg-violet-500", items: [
+    { to: "/minimal-plan", label: "Minimal Plan", icon: Target, accent: "text-violet-600 dark:text-violet-400" },
   ] },
   { group: "Target", accent: "text-emerald-600 dark:text-emerald-400", dot: "bg-emerald-500", items: [
     { to: "/to-be", label: "To-Be Workflows", icon: Workflow, accent: "text-emerald-600 dark:text-emerald-400" },

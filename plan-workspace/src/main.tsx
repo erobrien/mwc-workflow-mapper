@@ -9,6 +9,7 @@ import AsIs from "./pages/AsIs";
 import Inventory from "./pages/Inventory";
 import ToBe from "./pages/ToBe";
 import ToBeReview from "./pages/ToBeReview";
+import MinimalPlan from "./pages/MinimalPlan";
 import ToBeWorkflow from "./pages/ToBeWorkflow";
 import Diagrams from "./pages/Diagrams";
 import Decisions from "./pages/Decisions";
@@ -56,6 +57,7 @@ const router = createBrowserRouter([
   { path: "/final-target-sac", element: wrap(<SacPlan />) },
   { path: "/to-be", element: wrap(<ToBe />) },
   { path: "/to-be-review", element: wrap(<ToBeReview />) },
+  { path: "/minimal-plan", element: wrap(<MinimalPlan />) },
   { path: "/to-be/wf/:n", element: wrap(<ToBeWorkflow />) },
   { path: "/to-be/:tab", element: wrap(<ToBe />) },
   { path: "/diagrams", element: wrap(<Diagrams />) },

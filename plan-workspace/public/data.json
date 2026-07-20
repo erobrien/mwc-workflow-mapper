@@ -3844,7 +3844,7 @@
    "n": "01",
    "name": "Lead Capture and Attribution",
    "absorbs": "01A-E + Form Internal Notification",
-   "copy": "As-is triggers; fix gclid/fbclid capture. CREATE-ONCE GUARD (R7): if an OPEN Sales opportunity already exists for the contact, update last-touch contact fields only and exit - never mint a duplicate deal. Copies attribution (utm_source, utm_campaign, gclid, fbclid, lead_source) onto the Opportunity at create, so wins and losses both carry it; first_* fields write-once (D17). LOCATION STAMP (Method 2, revised D14): branch on location exactly once at create and stamp generic operational contact fields (current_booking_url, current_clinic_phone, current_clinic_address, current_review_link); templates reference only current_* fields - no Locations Custom Object in the production build (D5 stands). ENTRY CONTRACT (R9): web forms/landers fire the webhook trigger automatically; phone-booked, chat, IG/ManyChat-qualified, and walk-in leads get their opportunity via the admin app's API create using the same create-once guard, with lead_source set per channel - every lead source has a named opportunity-creating owner. Speed-to-lead rule: the welcome email goes out instantly; a lead that arrives outside quiet hours (for example 11 PM) has its speed-to-lead SMS queued to 8 AM Contact Timezone (TCPA-safe). Quiet hours 8 AM to 9 PM Contact Timezone on all SMS sends."
+   "copy": "As-is triggers; fix gclid/fbclid capture. CREATE-ONCE GUARD (R7): if an OPEN Sales opportunity already exists for the contact, update last-touch contact fields only and exit - never mint a duplicate deal. Copies attribution (utm_source, utm_campaign, utm_medium, gclid, fbclid, lead_source) onto the Opportunity at create, so wins and losses both carry it; first_* fields write-once (D17). ATTRIBUTION IS LENS 1 of the three-lens model (D22): click/UTM captured here, self-reported at intake (lens 2), self-reported at consult (lens 3). Fires the Meta CAPI Lead event (native FB Conversions action, event_id = opportunity ID). LOCATION STAMP (Method 2, revised D14): branch on location exactly once at create and stamp generic operational contact fields (current_booking_url, current_clinic_phone, current_clinic_address, current_review_link); templates reference only current_* fields - no Locations Custom Object in the production build (D5 stands). ENTRY CONTRACT (R9): web forms/landers fire the webhook trigger automatically; phone-booked, chat, IG/ManyChat-qualified, and walk-in leads get their opportunity via the admin app's API create using the same create-once guard, with lead_source set per channel - every lead source has a named opportunity-creating owner. Speed-to-lead rule: the welcome email goes out instantly; a lead that arrives outside quiet hours (for example 11 PM) has its speed-to-lead SMS queued to 8 AM Contact Timezone (TCPA-safe). Quiet hours 8 AM to 9 PM Contact Timezone on all SMS sends."
   },
   {
    "n": "02",
@@ -3862,13 +3862,13 @@
    "n": "04",
    "name": "Medical Intake Chase",
    "absorbs": "04a. Intake Form Response",
-   "copy": "WF-04 owns all intake chasing going forward (standalone 'Intake Reminder' workflow is retired at cutover, Decision 9). R1 intake nudge cadence. Quiet hours 8 AM to 9 PM Contact Timezone."
+   "copy": "WF-04 owns all intake chasing going forward (standalone 'Intake Reminder' workflow is retired at cutover, Decision 9). R1 intake nudge cadence. SRA LENS 2 (D22): the medical intake form carries the 'How did you hear about us?' question - PORTED from the live build, where it already exists but writes a contact-only field that each renewal overwrites. Intake completion writes contact.sra_intake_source (+ _detail, _at) via the intake webhook, and WF-04 stamps the value onto the OPEN opportunity (opportunity.sra_intake_source) so the answer is frozen per deal. Intake completion also fires the Meta CAPI CompleteRegistration event (event_id = opportunity ID + ':intake') as a mid-funnel optimization signal - ported from the live build's contact-triggered send. Quiet hours 8 AM to 9 PM Contact Timezone."
   },
   {
    "n": "05",
    "name": "Clinic Outcome Router",
    "absorbs": "05. Clinic Appt Outcome",
-   "copy": "P0: remove auto-Won (Decision 10). TRIGGER CONTRACT (R1): the PCC Sales Form is an external app writing via the API (GHL native forms cannot write opportunity custom fields, and MONETORY opportunity fields cannot be written from workflows). The app writes ALL opportunity fields first, sets stage API-side, computes and writes renewal_date (Won date + term_1, integer months) to contact.renewal_date, then LAST writes contact.wf05_trigger_key = '{opportunityId}:{timestamp}'. WF-05 triggers on that contact field change, binds the deal with Find Opportunity, and waits 60s before any read (read-after-write buffer). WF-05 NEVER moves stages (G1 is absolute: stage moves are API-side only, R4) and never writes outcomes - it is a pure router. First gates on appt_status: showed routes to outcome handling; no-show or cancel routes to WF-08; reschedule routes back to WF-03. Idempotency: WF-05 checks opportunity.outcome_processed_at before running and stamps it after, so an edit or duplicate submit updates fields but never re-fires routing or the ad conversion. Outcome codes are lowercase {sold, nosale, mut, mar} (R5; 'AD' retired). On sold it branches on sale_type: new to new-patient onboarding (and signals WF-13), renewal to the Retention and Renewals lifecycle (no paid-platform conversion, R11). mar keeps the Opportunity Open and opens a PCC/provider task. NO-FORM CHASER (R12): built inside the appointment-triggered path - on appointment start, wait until appointment end + 2h, then if outcome_processed_at and appt_status are both empty, nag the PCC on a quiet-hours-safe loop with a field-change goal exit; the admin app's 15-minute reconciler is the independent backstop. Writes no outcome."
+   "copy": "P0: remove auto-Won (Decision 10). TRIGGER CONTRACT (R1): the PCC Sales Form is an external app writing via the API (GHL native forms cannot write opportunity custom fields, and MONETORY opportunity fields cannot be written from workflows). The app writes ALL opportunity fields first, sets stage API-side, computes and writes renewal_date (Won date + term_1, integer months) to contact.renewal_date, then LAST writes contact.wf05_trigger_key = '{opportunityId}:{timestamp}'. WF-05 triggers on that contact field change, binds the deal with Find Opportunity, and waits 60s before any read (read-after-write buffer). WF-05 NEVER moves stages (G1 is absolute: stage moves are API-side only, R4) and never writes outcomes - it is a pure router. First gates on appt_status: showed routes to outcome handling; no-show or cancel routes to WF-08; reschedule routes back to WF-03. Idempotency: WF-05 checks opportunity.outcome_processed_at before running and stamps it after, so an edit or duplicate submit updates fields but never re-fires routing or the ad conversion. Outcome codes are lowercase {sold, nosale, mut, mar} (R5; 'AD' retired). SRA LENS 3 (D22): the PCC form asks 'How did you hear about us?' verbally at consult close and writes opportunity.sra_consult_source (+ _detail, _at) in the same API write as the outcome fields - single writer preserved. On sold it branches on sale_type: new to new-patient onboarding (and signals WF-13), renewal to the Retention and Renewals lifecycle (no paid-platform conversion, R11). mar keeps the Opportunity Open and opens a PCC/provider task. NO-FORM CHASER (R12): built inside the appointment-triggered path - on appointment start, wait until appointment end + 2h, then if outcome_processed_at and appt_status are both empty, nag the PCC on a quiet-hours-safe loop with a field-change goal exit; the admin app's 15-minute reconciler is the independent backstop. Writes no outcome."
   },
   {
    "n": "06",
@@ -3916,7 +3916,7 @@
    "n": "13",
    "name": "Ad-Platform Conversions",
    "absorbs": "CAPI x2, Google Ads x3",
-   "copy": "Booked and Won conversions to Google and Meta - NEW sales only (R11): renewal Wons are excluded from all paid-platform uploads (their click IDs are stale or absent; uploading them trains smart bidding on false signal - renewal revenue reports internally instead). Excludes nosale outcomes by code (R5 retired the 'AD' abbreviation, which also retires the ad-vs-advertising trap). Conversion dedup: event_id = opportunity ID (D17); value = monetary_value (net collected, R17)."
+   "copy": "Ad-platform conversion sends, IN WORKFLOW (D23) - PORTED from the live build, which already fires these events but keys them off contact fields that renewals overwrite; the port re-keys every event to the opportunity. META: native Facebook Conversions workflow action (handles PII hashing) - Lead at opportunity create (WF-01 signal), CompleteRegistration at intake complete (WF-04 signal), Schedule at booking, Purchase at Won with value = monetary_value (net collected, R17). Dedup: event_id = opportunity ID (+ stage suffix), fbc built from the fbclid frozen on the deal (D17). GOOGLE: workflow webhook to the admin-app relay, which uploads offline conversions via the Google Ads API keyed to the gclid frozen on the deal (consult_booked at booking, sale_new at Won with value); Enhanced Conversions for Leads (hashed email/phone) is the fallback when no gclid exists. NEW sales only (R11): renewal Wons never upload - stale click IDs train smart bidding on false signal; renewal revenue reports internally. Excludes nosale outcomes by code (D20). SRA (D22) is REPORTING-ONLY and never uploads as a conversion source - the triangulation report compares the three lenses per deal; if click data and both SRA answers disagree, the deal flags for review instead of guessing."
   },
   {
    "n": "14",
@@ -4058,6 +4058,23 @@
      "label": "A&D Other Explanation",
      "to": "Opportunity",
      "note": "moved to Opportunity as nosale_reason_other (R5)"
+    }
+   ],
+   "adding": [
+    {
+     "key": "sra_intake_source",
+     "label": "SRA - Intake Answer",
+     "note": "lens 2 (D22): written by the intake webhook at intake completion - PORT of the live build's existing question, moved off the overwrite path by the WF-04 stamp onto the deal"
+    },
+    {
+     "key": "sra_intake_source_detail",
+     "label": "SRA - Intake Detail",
+     "note": "free text when source = referral or other; writer: intake webhook"
+    },
+    {
+     "key": "sra_intake_at",
+     "label": "SRA - Intake Timestamp",
+     "note": "writer: intake webhook"
     }
    ]
   },
@@ -4277,6 +4294,26 @@
      "label": "Lead Source",
      "from": "new",
      "note": "writer: WF-01 attribution copy at create"
+    },
+    {
+     "key": "utm_medium",
+     "label": "UTM Medium",
+     "note": "writer: WF-01 attribution copy at create (D17)"
+    },
+    {
+     "key": "sra_intake_source",
+     "label": "SRA - Intake Answer",
+     "note": "lens 2 (D22): stamped onto the open deal by WF-04 from contact.sra_intake_source at intake completion; lowercase codes {google, maps, facebook, instagram, youtube, tiktok, tv, radio, billboard, podcast, referral, review, other}"
+    },
+    {
+     "key": "sra_consult_source",
+     "label": "SRA - Consult Answer",
+     "note": "lens 3 (D22): writer PCC Sales Form app, same API write as outcomes; same code list"
+    },
+    {
+     "key": "sra_consult_source_detail",
+     "label": "SRA - Consult Detail",
+     "note": "free text when source = referral or other; writer: PCC Sales Form app"
     }
    ]
   },
@@ -4567,6 +4604,22 @@
    "status": "Locked",
    "decision": "WF-05 trigger contract and API-side stage writes",
    "choice": "The PCC Sales Form app writes all opportunity fields via API, sets stage API-side, writes contact.renewal_date, then LAST writes contact.wf05_trigger_key = '{opportunityId}:{timestamp}'. WF-05 triggers on that contact field change (specific-field-change triggers are contact-only), binds the deal via Find Opportunity, and waits 60s before reading (read-after-write buffer). Guardrail G1 becomes absolute: workflows NEVER move opportunity stages - all stage moves are API-side. Resolves R1/R2/R3/R4."
+  },
+  {
+   "n": "22",
+   "date": "2026-07-20",
+   "owner": "Eric",
+   "status": "Locked",
+   "decision": "Three-lens attribution: click + intake SRA + consult SRA, frozen per deal",
+   "choice": "PORT of live behavior, re-keyed to the deal: the live build already asks 'How did you hear about us?' at medical intake and at consultation and already sends conversions to Meta and Google in workflow - but every answer lands on a contact field, so each renewal overwrites the prior deal's attribution. Target model: LENS 1 click/UTM (WF-01 freezes utm_*, gclid, fbclid, lead_source on the opportunity at create, first_* write-once on contact); LENS 2 intake SRA (intake webhook writes contact.sra_intake_source, WF-04 stamps it onto the open deal); LENS 3 consult SRA (PCC form writes opportunity.sra_consult_source in the outcome API write). Codes lowercase per D20: {google, maps, facebook, instagram, youtube, tiktok, tv, radio, billboard, podcast, referral, review, other} + _detail free text. SRA is reporting-only: it never overwrites click fields and never uploads to ad platforms. The triangulation report compares the three lenses per deal - dark channels (podcast, TV/MNTN, referral, billboard) get credit clicks can't see, and click-vs-claimed disagreement flags deals for review."
+  },
+  {
+   "n": "23",
+   "date": "2026-07-20",
+   "owner": "Eric",
+   "status": "Locked",
+   "decision": "Conversion sends stay in workflow: Meta native CAPI action, Google via admin-app relay",
+   "choice": "Meta: GHL's native Facebook Conversions workflow action (handles PII hashing) fires Lead (opportunity create), CompleteRegistration (intake complete), Schedule (booked), Purchase (Won, value = net collected). Dedup event_id = opportunity ID + stage suffix; fbc rebuilt from the deal's frozen fbclid. Google: the Google Ads API cannot be called from a raw workflow webhook (OAuth + developer token), so WF-13 webhooks the admin-app relay, which uploads offline conversions keyed to the deal's frozen gclid, with Enhanced Conversions for Leads (hashed email/phone) as the no-gclid fallback. All Won uploads are sale_type = new only (R11). outcome_processed_at idempotency guards every send."
   }
  ],
  "risks": [
@@ -4684,7 +4737,9 @@
   "UTM governance (D17): utm_source must be one of google/meta/gbp/bing/referral/direct; utm_campaign follows {clinic}_{service}_{intent}. WF-01 tags malformed UTMs (attr_needs_review) rather than storing unvalidated values.",
   "Conversion dedup (D17): every server-side conversion event (Google/Meta) carries event_id = opportunity ID so pixel and server events dedupe.",
   "Renewal Wons never upload to Google/Meta as conversions (R11): paid-platform Won conversions are sale_type = new only; renewal revenue reports internally.",
-  "WF-01 creates an opportunity only when the contact has no OPEN Sales deal (R7 create-once guard); repeat submits update last-touch fields, never mint duplicates."
+  "WF-01 creates an opportunity only when the contact has no OPEN Sales deal (R7 create-once guard); repeat submits update last-touch fields, never mint duplicates.",
+  "SRA answers (sra_*) are reporting-only (D22): they never overwrite utm/gclid/fbclid fields and never upload to Meta or Google as conversion sources - dark-channel credit lives in the triangulation report, not in smart bidding.",
+  "Every ad-platform send carries event_id = opportunity ID (+ stage suffix) and is gated by outcome_processed_at (D23) - one deal, one event per stage, ever."
  ],
  "messages_tobe": [
   {

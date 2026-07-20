@@ -5,7 +5,7 @@ import {
   Plus, Trash2, CheckCircle2, XCircle, AlertCircle, Clock,
   UserCheck, UserX, CalendarX, CalendarClock,
   Users, Package, Calculator, Gift, FileText, CalendarDays, RefreshCw,
-  UserPlus, Repeat,
+  UserPlus, Repeat, Megaphone,
 } from "lucide-react";
 
 // ── Design tokens ─────────────────────────────────────────────────────────────
@@ -56,6 +56,22 @@ const PATIENT_OPTS = [
   { value: "new",     label: "New",     icon: UserPlus, ring: "bg-emerald-600 shadow-emerald-200 dark:shadow-emerald-900" },
   { value: "renewal", label: "Renewal", icon: Repeat,   ring: "bg-sky-600 shadow-sky-200 dark:shadow-sky-900" },
 ];
+
+// D22 self-reported attribution (SRA) - asked verbally at consult close, stored per deal on the
+// Opportunity (op_sra_consult_source). Lowercase codes per D20. The intake form asks the same
+// question earlier (contact.sra_intake_source); comparing the two lenses against click data is the
+// triangulation report. SRA is REPORTING-ONLY: it never overwrites utm/gclid and never uploads to
+// ad platforms as a conversion source.
+const SRA_SOURCES = [
+  "google", "maps", "facebook", "instagram", "youtube", "tiktok",
+  "tv", "radio", "billboard", "podcast", "referral", "review", "other",
+];
+const SRA_LABELS: Record<string, string> = {
+  google: "Google search", maps: "Google Maps", facebook: "Facebook", instagram: "Instagram",
+  youtube: "YouTube", tiktok: "TikTok", tv: "TV / streaming", radio: "Radio",
+  billboard: "Billboard / sign", podcast: "Podcast", referral: "Friend / member referral",
+  review: "Online review", other: "Other",
+};
 
 // ── Primitives ─────────────────────────────────────────────────────────────────
 
@@ -134,6 +150,7 @@ export default function SalesForm() {
   const [outcome,       setOutcome]      = useState("sold");
   const [closeType,     setCloseType]    = useState("same-day"); // opportunity tag: Same Day | Come-back
   const [adReason,      setAdReason]     = useState("Not Ready");
+  const [sraSource,     setSraSource]    = useState("google");
   const [products,      setProducts]     = useState<Product[]>([{ name: "TRT", term: "3 mo", price: "2999" }]);
   const [totalAmount,   setTotalAmount]  = useState("2999");
   const [totalManual,   setTotalManual]  = useState(false);
@@ -245,6 +262,24 @@ export default function SalesForm() {
             </div>
           </Panel>
 
+          {/* ── PANEL · SOURCE ATTRIBUTION (D22) — asked at consult, per deal ── */}
+          <Panel icon={Megaphone} label="How did they hear about us?" iconClass="text-violet-600">
+            <div>
+              <label className={lbl}>Source (ask verbally, pick closest) {req}</label>
+              <select value={sraSource} onChange={(e) => setSraSource(e.target.value)}
+                className="w-full sm:max-w-md rounded-xl border border-gray-400 dark:border-border bg-card px-3 py-3 text-sm font-semibold">
+                {SRA_SOURCES.map((v) => <option key={v} value={v}>{SRA_LABELS[v]}</option>)}
+              </select>
+              <p className="mt-2 text-xs text-muted-foreground">
+                Second attribution lens: the intake form asked this same question online
+                (contact.sra_intake_source); this is the verbal answer at consult. Both are compared
+                against click data (utm / gclid frozen on the deal at create) in the triangulation
+                report. Never overwrites click fields; never uploaded to ad platforms.
+              </p>
+              <Hint>op_sra_consult_source · lowercase codes (D20/D22) · reporting-only</Hint>
+            </div>
+          </Panel>
+
           {/* ── PANEL 2 · CONSULTATION ── */}
           <Panel icon={Users} label="Consultation">
             <Row>
@@ -277,7 +312,7 @@ export default function SalesForm() {
                   {outcome === "mar" && "MAR (Medical Approval Required)"}
                 </p>
               )}
-              <Hint>op_sale_outcome · SOLD | AD | MUT | MAR</Hint>
+              <Hint>op_sale_outcome · sold | nosale | mut | mar · lowercase codes (D20)</Hint>
             </div>
 
             {/* Close type — opportunity tags (only when sold) */}

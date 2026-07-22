@@ -10,7 +10,10 @@ import { ChevronDown, ChevronRight, ExternalLink, Maximize2 } from "lucide-react
 const FOLDER_ORDER = [
   "01. WP Lead Capture", "02. Appointments & Visit Journey",
   "03. Call Routing & Dispositions", "04. System Admin & Error Handling",
-  "Onboarding", "Vercel",
+  "AI Call (new, drafts, added 2026-07-21)", "PCC", "Vercel",
+  "Affiliate Marketing (live, outside Active Workflows)",
+  "Paid Marketing Attribution (live, outside Active Workflows)",
+  "Social Call (live, outside Active Workflows)",
 ];
 
 // Large graphs (the 202-step lead-capture flows, 100+ step post-visit) stay
@@ -92,8 +95,8 @@ export default function AsisFlows() {
 
   return (
     <PageShell
-      title="As-Is Workflow Flows"
-      subtitle="A Mermaid flowchart for every one of the 28 live Active Workflows — one diagram per workflow, generated directly from the extracted GHL step graph. Entry triggers, ordered steps, real wait durations, if/else branches with their live condition labels, gotos, labelled SMS/email, tag ops and opportunity moves, all 100% faithful to the current configuration. Large graphs render on demand."
+      title="As-Is Workflow Flows — live re-map (2026-07-22)"
+      subtitle="A Mermaid flowchart for every one of the 45 workflows in the 2026-07-22 live re-map (the Active Workflows tree plus published, live-firing workflows outside it) — one diagram per workflow, generated directly from the extracted GHL step graph. Entry triggers, ordered steps, real wait durations, if/else branches with their live condition labels, gotos, labelled SMS/email, tag ops and opportunity moves, all 100% faithful to the current configuration. Large graphs render on demand."
     >
       <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
         <Stat label="Workflows" value={flows.length} note="one diagram each" />

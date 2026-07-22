@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import {
   LayoutDashboard, Boxes, Workflow, Network,
   Gavel, ShieldAlert, Moon, Sun, Menu, SearchCheck, ClipboardList, Tag,
-  Database, Waypoints, Route, History, ChevronRight, ChevronDown, Target,
+  Database, Waypoints, Route, History, ChevronRight, ChevronDown, Target, ListChecks,
 } from "lucide-react";
 import { cn, useTheme } from "./ui";
 import { useState } from "react";
@@ -20,6 +20,7 @@ const NAV: { group: string; accent?: string; dot?: string; collapsible?: boolean
     { to: "/asis-diagrams", label: "As-Is Flow Diagrams", icon: Waypoints, accent: "text-red-600 dark:text-red-400" },
     { to: "/asis-flows", label: "As-Is Workflow Flows", icon: Route, accent: "text-red-600 dark:text-red-400" },
     { to: "/inventory", label: "Field Inventory", icon: Boxes, accent: "text-red-600 dark:text-red-400" },
+    { to: "/priority-changes", label: "Priority Changes", icon: ListChecks, accent: "text-red-600 dark:text-red-400" },
   ] },
   { group: "Final Target v2", accent: "text-indigo-600 dark:text-indigo-400", dot: "bg-indigo-500", items: [
     { to: "/final-target", label: "Final Target Plan", icon: Workflow, accent: "text-indigo-600 dark:text-indigo-400" },

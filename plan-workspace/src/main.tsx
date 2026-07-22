@@ -33,6 +33,7 @@ import SystemsArchitecture from "./pages/SystemsArchitecture";
 import SacPlan from "./pages/SacPlan";
 import CustomFields from "./pages/CustomFields";
 import DailyLog from "./pages/DailyLog";
+import PriorityChanges from "./pages/PriorityChanges";
 
 const wrap = (el: React.ReactNode) => <Shell>{el}</Shell>;
 
@@ -41,6 +42,7 @@ const router = createBrowserRouter([
   { path: "/daily-log", element: wrap(<DailyLog />) },
   { path: "/as-is", element: wrap(<AsIs />) },
   { path: "/inventory", element: wrap(<Inventory />) },
+  { path: "/priority-changes", element: wrap(<PriorityChanges />) },
   { path: "/asis-diagrams", element: wrap(<AsisDiagrams />) },
   { path: "/asis-flows", element: wrap(<AsisFlows />) },
   { path: "/cody", element: wrap(<Cody />) },

@@ -1,0 +1,109 @@
+{
+  "generated_at": "2026-07-22",
+  "method": "Sources: the 2026-07-22 live production re-map (45 workflows, backend API), the 2026-06-16 read-only account sweep, and the existing target-spec decision log. Every item cites the live workflow(s) and defect/gap id(s) it is grounded in.",
+  "summary": {
+    "total_items": 8,
+    "p0_count": 2,
+    "p1_count": 3,
+    "p2_count": 3,
+    "framing": "P0 = live revenue/reporting integrity bugs, fix this sprint, patchable without waiting for the full rebuild. P1 = structural duplication actively causing P0-class bugs; fix as part of the WF-05/06 consolidation already planned. P2 = cleanup that reduces risk and maintenance cost but is not actively corrupting data today."
+  },
+  "items": [
+    {
+      "rank": 1,
+      "priority": "P0",
+      "title": "Stop auto-Won on attendance in 05. Clinic Appt Outcome",
+      "defect_ids": ["D1"],
+      "workflows": ["05. Clinic Appt Outcome"],
+      "problem": "The 'PA reported PX SHOWED' branch ends in a create_opportunity node named \"A&D pipeline: Closed, status: WON - hide from a&D opportunity\" with opportunity_status=won and monetary_value={{contact.total_program_amount}}. This fires on attendance alone, before any PCC has recorded a sale -- confirmed still live on 2026-07-22, and already the source of the account-wide 939 false-win finding (~50% of all recorded wins).",
+      "fix": "Remove the Won-on-attendance write entirely. Attendance should only ever set appt_status=showed. Sale outcome (Won/A&D/MUT) must be written exactly once, by the PCC Sales Form via update_opportunity against the opportunity created at booking -- never a fresh create_opportunity from this workflow.",
+      "effort": "Small (single node removal + one update_opportunity wiring change). Can ship as a draft-tested patch to the live workflow without waiting for the full WF-05/06 rebuild.",
+      "risk_of_inaction": "Every day this stays live, more false $0/attendance-only wins accumulate, further corrupting revenue and conversion reporting and making the eventual backfill/reconciliation harder.",
+      "owner_hint": "GHL engineer + PCC Sales Form owner (needs the form's write-path confirmed first)."
+    },
+    {
+      "rank": 2,
+      "priority": "P0",
+      "title": "Fix the reschedule-logged-as-no-show bug in 03d",
+      "defect_ids": ["D10"],
+      "workflows": ["03d. Update Appointment Status"],
+      "problem": "The 'PA reported Px Rescheduled' branch's next step is literally named 'Update Outcome to No Show' and writes the same 'Yes' flag into the single 'Outcome' column of the 'Appt Report Raw' Google Sheet used for genuine no-shows -- a copy-pasted node, never renamed, confirmed live on 2026-07-22.",
+      "fix": "Rename the node and point it at a distinct write value (e.g. 'Rescheduled') instead of reusing the No-show write. Longer term, replace the single Yes/blank 'Outcome' column with a real enum (showed/no_show/cancelled/rescheduled).",
+      "effort": "Trivial -- one node rename plus a distinct value, no structural change, safe to patch today.",
+      "risk_of_inaction": "No-show rate is being silently inflated by reschedule volume in every report pulled from this sheet; any staffing or follow-up decision made off 'no-show rate' is working from bad data right now.",
+      "owner_hint": "GHL engineer, same-day fix."
+    },
+    {
+      "rank": 3,
+      "priority": "P1",
+      "title": "Consolidate the 3-way cancel-event race (05 / 03d / Cancelled Appointments)",
+      "defect_ids": ["D9"],
+      "workflows": ["05. Clinic Appt Outcome", "03d. Update Appointment Status", "Cancelled Appointments"],
+      "problem": "All three workflows independently trigger on Appointment Status = Cancelled with no Modified-By gating or single-writer coordination. 05 and Cancelled Appointments both create a fresh Lost opportunity in the same per-clinic pipeline/stage -- a single cancellation can mint 2+ duplicate Lost deals plus an uncoordinated sheet write.",
+      "fix": "Designate ONE cancel-handling owner (fold into the target WF-05/06 consolidation). Switch both create_opportunity calls to find_opportunity + update_opportunity against the deal created at booking. Retire 'Cancelled Appointments' entirely and remove the duplicate cancel branch inside 03d once the sheet write moves to read from the Opportunity instead.",
+      "effort": "Medium -- touches 3 live workflows and the pipeline stage-transition logic; needs a test-contact pass per clinic before publish.",
+      "risk_of_inaction": "Duplicate Lost deals inflate pipeline counts and pollute win/loss-rate math the same way the false-Won bug inflates wins -- this is the mirror-image defect on the loss side.",
+      "owner_hint": "Same engineer as the WF-05/06 consolidation; sequence together, not separately."
+    },
+    {
+      "rank": 4,
+      "priority": "P1",
+      "title": "Wire or retire the orphaned reschedule trigger on 05",
+      "defect_ids": ["D11"],
+      "workflows": ["05. Clinic Appt Outcome"],
+      "problem": "'05. Clinic Appt Outcome' declares a 'PA reported PX Rescheduled' trigger-link trigger, but zero steps in the graph reference it -- a staff-reported reschedule through that specific path does nothing today.",
+      "fix": "Either wire the branch to re-open the existing opportunity (move it back to an active stage, never close it) and notify the booking flow, or remove the dead trigger so the builder doesn't imply reschedule handling exists where it doesn't.",
+      "effort": "Small if retiring the trigger; medium if building real reschedule handling (needs a decision on what 'reschedule' should do to the opportunity and the booking-chain workflows).",
+      "risk_of_inaction": "Staff believe this path works because the trigger exists in the builder; it silently does nothing, so rescheduled members get no automated follow-through from this workflow.",
+      "owner_hint": "Pair with item 3 -- reschedule handling and cancel handling should be designed together, not patched separately."
+    },
+    {
+      "rank": 5,
+      "priority": "P1",
+      "title": "Collapse the 3-way SHOWED-form race (05 / 07 / 08)",
+      "defect_ids": ["D12"],
+      "workflows": ["05. Clinic Appt Outcome", "07. POST-VISIT - SHOWED Opportunities and For Review/Referral", "08. MUT (Medically Untreatable)"],
+      "problem": "All three workflows independently trigger on the same 'PA reported PX SHOWED' form submission, with no execution-order guarantee between them. 07 alone carries 78 opportunity-write steps -- an extreme outlier even among already-flagged offenders.",
+      "fix": "Merge into a single outcome router (the target spec's WF-05/06 already plans this): one workflow reads the form once, branches on reported outcome, and calls review/referral (07) and MUT (08) logic as sub-flows via 'Add to Workflow' rather than three top-level workflows racing on the same trigger.",
+      "effort": "Large -- this is the biggest single consolidation in the as-is estate (213 combined steps across the three) and should be sequenced as part of the planned WF-05/06 rebuild, not patched piecemeal.",
+      "risk_of_inaction": "This is very likely the single largest contributor to the account-wide duplicate/false-win volume beyond item 1 -- three uncoordinated writers on one event is a structural, not incidental, defect.",
+      "owner_hint": "Rebuild-track engineer; this is core scope of the already-planned consolidation, not a side patch."
+    },
+    {
+      "rank": 6,
+      "priority": "P2",
+      "title": "Merge 4a (softphone) and 4b (dialer) disposition workflows",
+      "defect_ids": ["D12"],
+      "workflows": ["4a. Softphone Call Disposition – Workflow", "4b. Disposition – Workflow (active)"],
+      "problem": "Both workflows encode the identical 9 call-disposition branches (Not Qualified, DNC, Hung up, Not Interested, No answer/Voicemail, Follow Up Needed, Requested appointment, Call Completed) -- once per phone channel. A disposition-to-stage rule change has to be made twice today and the two have already drifted (4a: 9 opportunity writes / 40 steps; 4b: 16 opportunity writes / 95 steps).",
+      "fix": "Consolidate into one disposition workflow parameterized by channel (softphone vs. dialer as a value on the trigger/contact), not two cloned workflows. While merging, also replace each branch's remove_opportunity + create_opportunity pair with find_opportunity + update_opportunity so disposition changes move one record through stages instead of destroying and recreating it.",
+      "effort": "Medium -- 9 branches to reconcile across two workflows, plus the remove+create -> find+update rewrite.",
+      "risk_of_inaction": "Continued drift between the two channels' disposition logic; each new disposition rule is a two-edit change with growing chance of the two falling further out of sync.",
+      "owner_hint": "GHL engineer, can run independently of the WF-05/06 consolidation track."
+    },
+    {
+      "rank": 7,
+      "priority": "P2",
+      "title": "Give the 'Appt Report Raw' sheet a real outcome enum",
+      "defect_ids": ["D10"],
+      "workflows": ["03d. Update Appointment Status"],
+      "problem": "The sheet's 'Outcome' column is a single Yes/blank flag shared across Showed / Cancelled / No-show / Rescheduled -- once item 2 is patched, the sheet will at least stop actively mislabeling reschedules, but it still can't distinguish outcomes from each other after the fact.",
+      "fix": "Replace the single boolean-ish column with a real enum value per row (showed/no_show/cancelled/rescheduled), written by the branch that actually fires. Longer term, retire the parallel Google Sheet as the outcome ledger in favor of the Opportunity (single writer) and keep the sheet read-only/export-only.",
+      "effort": "Small for the enum fix; larger if retiring the sheet as a ledger (depends on what downstream reporting still reads it).",
+      "risk_of_inaction": "Reporting built on this sheet stays structurally unable to separate no-show rate from reschedule rate even after item 2 stops the active mislabeling.",
+      "owner_hint": "Sequence right after item 2; same workflow, same reviewer."
+    },
+    {
+      "rank": 8,
+      "priority": "P2",
+      "title": "Replace remove+create with find+update on every opportunity-disposition write",
+      "defect_ids": ["D8", "D9", "D12"],
+      "workflows": ["4a. Softphone Call Disposition – Workflow", "4b. Disposition – Workflow (active)", "05. Clinic Appt Outcome", "Cancelled Appointments"],
+      "problem": "Across every disposition/outcome workflow inspected, the account-wide pattern is remove_opportunity (or a fresh create_opportunity) instead of find_opportunity + update_opportunity. This destroys the original opportunity's history (source, created date, prior notes, frozen attribution) on every disposition change instead of moving one persistent record through pipeline stages -- the opposite of the 'one record per deal' model the target spec already commits to.",
+      "fix": "Standardize on find_opportunity (guard) + update_opportunity across all four workflows. This is the same underlying fix as items 1, 3, and 6 -- listed separately here because it is the single structural principle that, if enforced as a build rule going forward, prevents the next version of this exact defect from being reintroduced in a workflow not yet audited.",
+      "effort": "Large as a full account-wide sweep; but each individual workflow fix is small once items 1/3/6 are done -- this item is really 'confirm the principle is applied everywhere', not new work on top of 1/3/6.",
+      "risk_of_inaction": "Without this as a standing build rule, the next new workflow (or the next vendor) reintroduces the same create-instead-of-update defect that caused D1/D9 in the first place.",
+      "owner_hint": "Add to the ghl-development build/review checklist as a hard rule, not just a one-time fix."
+    }
+  ]
+}

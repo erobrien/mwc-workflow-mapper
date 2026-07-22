@@ -1,6 +1,6 @@
 {
-  "crawled_at": "2026-06-16",
-  "method": "Read-only live GHL API sweep across ~25 object types + full contact field-usage scan (11,491 contacts).",
+  "crawled_at": "2026-07-22",
+  "method": "Read-only live GHL API sweep (2026-06-16) plus a full backend-API re-extraction of 45 production workflows on 2026-07-22, focused on Won/Lost and cancel/reschedule handling. Findings G11-G14 are net-new from the 2026-07-22 pass; G1-G10 remain from the earlier sweep.",
   "live_counts": {
     "contacts": 11491,
     "opportunities": 7153,
@@ -23,69 +23,123 @@
   },
   "findings": [
     {
-      "id": "G1", "severity": "Critical", "area": "Orphan Consent Log custom object",
+      "id": "G1",
+      "severity": "Critical",
+      "area": "Orphan Consent Log custom object",
       "evidence": "custom_objects.consent_log exists in production with 1 field (Recorded At) and 0 records; not referenced by any workflow. Debris from the original plan's abandoned custom-object spike. (Lead Source object was never created.)",
       "recommendation": "Delete the empty Consent Log object so the schema matches the no-custom-objects decision. Safe: zero records, zero dependencies.",
       "status": "Open"
     },
     {
-      "id": "G1b", "severity": "Critical", "area": "Opportunity revenue fields already exist but are unused",
+      "id": "G1b",
+      "severity": "Critical",
+      "area": "Opportunity revenue fields already exist but are unused",
       "evidence": "The Opportunity object already has 49 custom fields (Sale Outcome, Sale Amount, Total Program Amount, Pay Type, Patient Care Consultant, No-Sale Reason, Product/Price/Term x3, Location, EMR Visit ID, etc.) - the earlier 'zero opportunity fields' finding was wrong (the API defaults to contact-model). But they are 0% populated: even won deals ($1,500 / $5,200) have no field data, and only ~8% of opps carry a monetaryValue. Reps track sales in a manual spreadsheet, not GHL. There are also duplicate fields: Sale Amount vs Total Program Amount, Pay Type vs Payment Type, Patient Advisor vs Patient Care Consultant, Location vs Clinic Type.",
       "recommendation": "Nothing to create - the schema is ready. Pick ONE canonical field per concept, retire the duplicates, set monetaryValue = the recognized sale amount, and have reps enter outcome + amount + pay type + PCC on the Opportunity per appointment (run parallel with the spreadsheet until trusted). Then fix workflow 05 so SHOWED stops creating $0 A&D wins.",
       "status": "Ready"
     },
     {
-      "id": "G2", "severity": "Critical", "area": "TCPA / consent has no single source of truth",
+      "id": "G2",
+      "severity": "Critical",
+      "area": "TCPA / consent has no single source of truth",
       "evidence": "9 consent fields on the Contact across two parallel half-built schemas (consent_source vs consent__source, consent_date / consent_time / consent__timestamp, sms_optin_date / sms_consent_updated_at / sms_double_optin / sms_optin_source). Opt-in proof populated on ~0 contacts; the proposed Consent Log fix sits empty.",
       "recommendation": "Pick ONE consent schema, map the fragments into it, fix capture at the form/survey, and store DND/STOP authority in WF 11. Legal exposure at $1.5M/mo SMS, not just hygiene.",
       "status": "Open"
     },
     {
-      "id": "G3", "severity": "High", "area": "Empty-field cleanup (dry-run complete)",
+      "id": "G3",
+      "severity": "High",
+      "area": "Empty-field cleanup (dry-run complete)",
       "evidence": "Full scan of 11,491 contacts: 38 of 141 custom fields have 0 population. Of those, 7 are clearly safe (junk/duplicate/rejected), 10 are empty-but-critical (attribution gclid/fbclid, consent, EMR, engine chatbot_*) and must be kept, 21 need a per-field workflow check.",
       "recommendation": "Delete the 7 safe fields (see audit/field_usage.json); protect the 10 critical; triage the 21 against the workflow build. Sequence in Phase 5 cleanup unless done sooner with sign-off.",
       "status": "Ready"
     },
     {
-      "id": "G4", "severity": "High", "area": "Governance is the root cause and is unaddressed",
+      "id": "G4",
+      "severity": "High",
+      "area": "Governance is the root cause and is unaddressed",
       "evidence": "37 users (6 admins) with broad write access; no naming gate or creation control. This is why 6 months of workflow/field/tag sprawl accumulated.",
       "recommendation": "Reduce admin count, add a 'tag vs field vs object' creation rule, and stand up the weekly data-quality report as a standing gate. Fixes the cause, not just the symptom.",
       "status": "Open"
     },
     {
-      "id": "G5", "severity": "Medium", "area": "Custom Values effectively unused",
+      "id": "G5",
+      "severity": "Medium",
+      "area": "Custom Values effectively unused",
       "evidence": "Only 1 custom value exists (a junk 'test=hell'). Booking URLs, phone, footer, and hours are hardcoded across 135 workflows.",
       "recommendation": "Centralize shared constants as Custom Values so copy is edited once, not per-workflow. Removes a major source of duplicated/brittle message copy.",
       "status": "Open"
     },
     {
-      "id": "G6", "severity": "Medium", "area": "No saved message templates",
+      "id": "G6",
+      "severity": "Medium",
+      "area": "No saved message templates",
       "evidence": "0 saved SMS/email templates (snippets). All message copy lives only inside workflows.",
       "recommendation": "Preserve all copy before pausing any workflow. The message database (db/mwc.db) is the canonical external copy of every message.",
       "status": "Mitigated"
     },
     {
-      "id": "G7", "severity": "Medium", "area": "Surveys are an uncovered capture surface",
+      "id": "G7",
+      "severity": "Medium",
+      "area": "Surveys are an uncovered capture surface",
       "evidence": "4 surveys exist (Medical Intake - Onboarding, Intake EOB, Post-Appointment Feedback, Qualification Onboarding). Medical Intake is a SURVEY, not a form.",
       "recommendation": "Verify 04. Medical Intake Chase stops on the survey submission (not a form), or the chase will never terminate. Fold surveys into the consolidation scope.",
       "status": "Open"
     },
     {
-      "id": "G8", "severity": "Medium", "area": "Stale baseline",
+      "id": "G8",
+      "severity": "Medium",
+      "area": "Stale baseline",
       "evidence": "Live counts exceed the audit snapshot: 141 fields (was 135), 318 tags (was 305), 11,491 contacts, 7,153 opportunities (was 6,775). The account is actively growing.",
       "recommendation": "Re-snapshot immediately before the revenue backfill so reconciliation math uses current data.",
       "status": "Open"
     },
     {
-      "id": "G9", "severity": "Low", "area": "Uncovered surfaces (acknowledge or scope)",
+      "id": "G9",
+      "severity": "Low",
+      "area": "Uncovered surfaces (acknowledge or scope)",
       "evidence": "18 trigger links, 9 funnels/websites, 2 products are not addressed by the plan. Trigger links and funnels feed attribution and checkout.",
       "recommendation": "Explicitly mark out of scope, but note the attribution dependency so the lead-capture work accounts for them.",
       "status": "Acknowledged"
     },
     {
-      "id": "G10", "severity": "Low", "area": "Token scope gaps",
+      "id": "G10",
+      "severity": "Low",
+      "area": "Token scope gaps",
       "evidence": "The PIT token returns 401 for custom-menus and snapshots; 404/422 for some media/phone endpoints. Create+delete on custom fields IS authorized (verified).",
       "recommendation": "Broaden the PIT token's scopes if fully automated execution needs custom-menus or snapshot access.",
+      "status": "Open"
+    },
+    {
+      "id": "G11",
+      "severity": "Critical",
+      "area": "Cancel event has 3 independent writers (live, 2026-07-22)",
+      "evidence": "Direct re-extraction of '05. Clinic Appt Outcome', '03d. Update Appointment Status', and 'Cancelled Appointments' confirms all three trigger on Appointment Status = Cancelled today. Two use create_opportunity into the same per-clinic Lost pipeline/stage instead of updating the opportunity created at booking.",
+      "recommendation": "Designate ONE cancel-handling workflow (fold into 05 per the target WF-05/06 consolidation), switch to find_opportunity + update_opportunity, and retire 'Cancelled Appointments' and the duplicate cancel branch in '03d'.",
+      "status": "Open"
+    },
+    {
+      "id": "G12",
+      "severity": "High",
+      "area": "Reschedules recorded as No-Show (live, 2026-07-22)",
+      "evidence": "'03d. Update Appointment Status': the Rescheduled branch's next step is literally named 'Update Outcome to No Show' and writes into the same Outcome column used for genuine no-shows in the 'Appt Report Raw' sheet.",
+      "recommendation": "Rename the node and give it a distinct write value (e.g. 'Rescheduled'); add a real enum column to the sheet instead of a single Yes/blank flag.",
+      "status": "Open"
+    },
+    {
+      "id": "G13",
+      "severity": "Medium",
+      "area": "Orphaned reschedule trigger-link on the outcome router",
+      "evidence": "'05. Clinic Appt Outcome' declares the 'PA reported PX Rescheduled' trigger-link as a trigger, but no step in the graph references it -- confirmed via raw step-graph inspection, zero downstream nodes.",
+      "recommendation": "Wire the branch to re-open the existing opportunity (never close it) or remove the dead trigger so the builder doesn't imply reschedule handling exists where it doesn't.",
+      "status": "Open"
+    },
+    {
+      "id": "G14",
+      "severity": "High",
+      "area": "Racing/duplicate routers on shared triggers (live, 2026-07-22)",
+      "evidence": "4a (softphone) and 4b (dialer) disposition workflows encode the same 9 call-status branches twice. 05, 07 (78 opportunity-write steps), and 08 all independently fire on the same 'PA reported PX SHOWED' form submission with no ordering guarantee.",
+      "recommendation": "Merge 4a/4b into one disposition workflow parameterized by channel. Collapse 05/07/08 into a single outcome router with MUT and review/referral as internal branches or sub-flows, not top-level workflows competing for the same trigger.",
       "status": "Open"
     }
   ]

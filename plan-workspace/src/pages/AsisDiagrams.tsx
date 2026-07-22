@@ -41,8 +41,8 @@ export default function AsisDiagrams() {
 
   return (
     <PageShell
-      title="As-is workflow diagrams"
-      subtitle={`${diagrams.length} diagrams of the account as it runs today — grounded strictly in the extracted GHL data. Green = live/published, gray = draft-only, red = duplicated or broken. This is current reality, not the target design.`}
+      title="As-is workflow diagrams — live re-map (2026-07-22)"
+      subtitle={`${diagrams.length} diagrams of the account as it runs today, refreshed against the 2026-07-22 live re-extraction — grounded strictly in the extracted GHL data. Green = live/published, gray = draft-only, red = confirmed multi-writer race or duplicated/broken logic. This is current reality, not the target design.`}
     >
       <div className="space-y-8">
         {diagrams.map((d) => (

@@ -42,7 +42,7 @@ export default function Inventory() {
   return (
     <PageShell
       title="Workflow inventory"
-      subtitle={`${published} published · ${drafts} draft = ${all.length} workflows (from the captured snapshot).`}
+      subtitle={`${published} published · ${drafts} draft = ${all.length} workflows. Step/SMS/email/branch/tag/opp counts for the 45 workflows covered by the 2026-07-22 live re-map are refreshed from that pass; the remaining rows are from the earlier captured snapshot.`}
       actions={
         <a href={ghlWorkflows(data.location_id)} target="_blank" rel="noopener noreferrer"
           className="inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-sm hover:bg-muted">

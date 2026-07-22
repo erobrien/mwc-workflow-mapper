@@ -1,15 +1,71 @@
 import { useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
 import { PageShell } from "../components/Shell";
-import { Card, CardContent, Badge, Loading, cn } from "../components/ui";
-import { useJson, type AsisDetail, type AsisFlows, type AsisStep, type AsisWorkflow } from "../lib/asis";
+import { Card, CardContent, Badge, Alert, Loading, cn } from "../components/ui";
+import { useJson, type AsisDetail, type AsisFlows, type AsisStep, type AsisWorkflow, type AsisAnalysis } from "../lib/asis";
 import { MermaidChart } from "../components/MermaidChart";
 import { ghlWorkflow } from "../lib/ghl";
 import {
   ExternalLink, ArrowLeft, MessageSquare, Mail, Zap, Tag, FolderOpen, MapPin,
   Clock, GitBranch, CornerDownRight, Target, Database, Table2, Webhook, Phone,
-  StickyNote, BellOff, LogOut, Pencil, CalendarCheck, CircleDot,
+  StickyNote, BellOff, LogOut, Pencil, CalendarCheck, CircleDot, AlertTriangle,
+  ShieldAlert, Wrench, Search,
 } from "lucide-react";
+
+/* ---- engineering analysis section ------------------------------------- */
+const SEVERITY_META: Record<string, { tone: "red" | "warning" | "blue" | "muted"; label: string; icon: any }> = {
+  critical: { tone: "red", label: "Critical", icon: ShieldAlert },
+  major: { tone: "warning", label: "Major", icon: AlertTriangle },
+  minor: { tone: "blue", label: "Minor", icon: Search },
+  none: { tone: "muted", label: "Informational", icon: Search },
+};
+
+function AnalysisSection({ analysis }: { analysis: AsisAnalysis }) {
+  const sev = SEVERITY_META[analysis.severity] || SEVERITY_META.none;
+  const SevIcon = sev.icon;
+  const alertTone = analysis.severity === "critical" ? "red" : analysis.severity === "major" ? "warning" : analysis.severity === "minor" ? "blue" : "neutral";
+  return (
+    <section>
+      <div className="mb-2 flex items-center gap-1.5">
+        <h2 className="flex items-center gap-1.5 text-sm font-semibold"><SevIcon className="h-4 w-4" /> Engineering analysis</h2>
+        <Badge tone={sev.tone}>{sev.label}</Badge>
+        <span className="text-[11px] text-muted-foreground">— live re-map, 2026-07-22</span>
+      </div>
+      <div className="space-y-3">
+        <Alert tone={alertTone as any}>
+          <p>{analysis.summary}</p>
+        </Alert>
+        {analysis.findings.length > 0 && (
+          <Card>
+            <CardContent className="p-4">
+              <div className="mb-2 flex items-center gap-1.5 text-sm font-semibold">
+                <AlertTriangle className="h-4 w-4 text-amber-600 dark:text-amber-400" /> What's wrong / worth flagging
+              </div>
+              <ul className="space-y-2">
+                {analysis.findings.map((f, i) => (
+                  <li key={i} className="flex gap-2 text-sm text-foreground/90">
+                    <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-muted-foreground" />
+                    <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+        )}
+        {analysis.recommendation && (
+          <Card>
+            <CardContent className="p-4">
+              <div className="mb-1.5 flex items-center gap-1.5 text-sm font-semibold">
+                <Wrench className="h-4 w-4 text-teal-600 dark:text-teal-400" /> Improve / consolidate / refactor
+              </div>
+              <p className="text-sm text-foreground/90">{analysis.recommendation}</p>
+            </CardContent>
+          </Card>
+        )}
+      </div>
+    </section>
+  );
+}
 
 /* ---- per-kind visual treatment ---------------------------------------- */
 const KIND_META: Record<string, { icon: any; tone: string; label: string }> = {
@@ -242,6 +298,9 @@ export default function WorkflowDetail({ dataset = "asis" }: { dataset?: keyof t
           <div className="mt-1 text-xs text-muted-foreground">{wf.sms} SMS · {wf.email} email</div>
         </CardContent></Card>
       </div>
+
+      {/* Engineering analysis (added in the 2026-07-22 production re-map) */}
+      {wf.analysis && <AnalysisSection analysis={wf.analysis} />}
 
       {/* Triggers */}
       <section>

@@ -38,6 +38,13 @@ export interface AsisTrigger {
   id: string; name: string; type: string; active: boolean; conditions: string[];
 }
 
+export interface AsisAnalysis {
+  summary: string;
+  severity: "critical" | "major" | "minor" | "none";
+  findings: string[];
+  recommendation: string;
+}
+
 export interface AsisWorkflow {
   id: string; name: string; folder: string; status: string;
   updated_at: string; version?: number; location: string;
@@ -46,6 +53,7 @@ export interface AsisWorkflow {
   step_counts: Record<string, number>;
   n_steps: number; n_nodes: number;
   sms: number; email: number;
+  analysis?: AsisAnalysis;
 }
 
 export interface AsisDetail {

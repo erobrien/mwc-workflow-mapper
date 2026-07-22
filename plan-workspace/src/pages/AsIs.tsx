@@ -8,24 +8,33 @@ import { MessageSquare, Mail, Zap, GitBranch, Clock, ArrowRightLeft, Target, Map
 const FOLDER_ORDER = [
   "01. WP Lead Capture", "02. Appointments & Visit Journey",
   "03. Call Routing & Dispositions", "04. System Admin & Error Handling",
-  "Onboarding", "Vercel",
+  "AI Call (new, drafts, added 2026-07-21)", "PCC", "Vercel",
+  "Affiliate Marketing (live, outside Active Workflows)",
+  "Paid Marketing Attribution (live, outside Active Workflows)",
+  "Social Call (live, outside Active Workflows)",
 ];
 
 function count(w: AsisWorkflow, ...kinds: string[]) {
   return kinds.reduce((s, k) => s + (w.step_counts[k] || 0), 0);
 }
 
+const SEVERITY_TONE: Record<string, "red" | "warning" | "blue" | undefined> = {
+  critical: "red", major: "warning", minor: "blue",
+};
+
 function WorkflowRow({ w }: { w: AsisWorkflow }) {
   const decisions = count(w, "decision");
   const waits = count(w, "wait");
   const gotos = count(w, "goto");
   const opps = count(w, "opportunity");
+  const sevTone = w.analysis?.severity ? SEVERITY_TONE[w.analysis.severity] : undefined;
   return (
     <Link to={`/workflow/${w.id}`}
       className="flex flex-col gap-1.5 rounded-md border bg-card px-3 py-2.5 text-sm transition-colors hover:border-primary/50 hover:bg-muted/40">
       <div className="flex flex-wrap items-center gap-2">
         <span className="font-medium">{w.name}</span>
         <Badge tone={w.status === "published" ? "good" : "muted"}>{w.status}</Badge>
+        {sevTone && <Badge tone={sevTone}>{w.analysis!.severity}</Badge>}
         {w.location && <span className="inline-flex items-center gap-0.5 text-xs text-muted-foreground"><MapPin className="h-3 w-3" />{w.location}</span>}
         <span className="ms-auto text-xs tabular-nums text-muted-foreground">{w.n_steps} steps</span>
       </div>
@@ -73,13 +82,13 @@ export default function AsIs() {
 
   return (
     <PageShell
-      title="As-is workflows — Active Workflows folder"
-      subtitle={`All ${c.total} workflows under GHL's "Active Workflows" folder, extracted live via the backend API — names, statuses, triggers, the complete ordered step graph (branches, waits, gotos, tags, opportunities, sheets), and verbatim SMS/email copy, with no brand-voice rewrite. 100% accurate to the current live configuration.`}
+      title="As-is workflows — live production re-map (2026-07-22)"
+      subtitle={`${c.total} workflows re-extracted live from the production GHL sub-account on 2026-07-22 — the "Active Workflows" folder tree plus published, live-firing workflows outside it that bear on the Won/Lost and cancel/reschedule investigation. Each workflow carries its complete step graph (branches, waits, gotos, tags, opportunities, sheets) plus an added Engineering analysis section: what the workflow does, what's wrong, and how to improve, consolidate, or refactor it.`}
     >
       {/* Coverage summary */}
       <div className="grid grid-cols-2 gap-3 md:grid-cols-4 lg:grid-cols-7">
         <Stat label="Workflows" value={c.total} note={`${c.published} published · ${c.draft} draft`} />
-        <Stat label="Full step detail" value={c.with_steps} note="of 28 — complete graph" tone="good" />
+        <Stat label="Full step detail" value={c.with_steps} note={`of ${c.total} — complete graph`} tone="good" />
         <Stat label="Total steps" value={c.total_steps} note="across all workflows" />
         <Stat label="Triggers" value={c.total_triggers} tone="blue" />
         <Stat label="SMS steps" value={c.total_sms} tone="good" />
@@ -88,7 +97,7 @@ export default function AsIs() {
       </div>
 
       <div className="rounded-md border border-l-4 border-l-emerald-500 bg-card p-3 text-sm text-muted-foreground">
-        The data gap is closed. Every workflow below carries its <b className="text-foreground">complete step-level structure</b> — ordered waits, if/else branches with their real condition labels, goto links, tag operations, opportunity pipeline/stage moves, Google Sheets ops, and verbatim message bodies — resolved directly from the live GHL step graph. Coverage is <b className="text-foreground">{c.with_steps}/28 full detail</b>. The other {data.out_of_scope_count} workflows in the location sit outside the Active Workflows folder and are intentionally out of scope for the current-state cutover.
+        The data gap is closed. Every workflow below carries its <b className="text-foreground">complete step-level structure</b> — ordered waits, if/else branches with their real condition labels, goto links, tag operations, opportunity pipeline/stage moves, Google Sheets ops, and verbatim message bodies — resolved directly from the live GHL step graph on 2026-07-22. Coverage is <b className="text-foreground">{c.with_steps}/{c.total} full detail</b>. The other {data.out_of_scope_count} workflows in the location ({data.roster_total} total) sit outside this pass's scope (mostly the legacy "JJ" funnel folder, Bot Fanatics, and No-Show/Cancelled Monivan drafts) and are intentionally deferred.
       </div>
 
       {/* Filters */}

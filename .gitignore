@@ -24,3 +24,11 @@ diff-site/.vercel/
 # misc
 *.pyc
 __pycache__/
+
+# Attribution audit: raw contact/opportunity samples contain PII/PHI-adjacent
+# data (names, emails, phones, IPs) -- never commit them. Only the aggregated,
+# de-identified attribution_report.json/custom_fields_all.json/objects_all.json
+# are safe to keep.
+ghl_data/attribution/contacts_sample.json
+ghl_data/attribution/opportunities_sample.json
+ghl_data/attribution/overwrite_examples.json

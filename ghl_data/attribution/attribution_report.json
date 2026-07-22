@@ -1,0 +1,155 @@
+{
+  "generated_at": "2026-07-22",
+  "sample_size_contacts": 1500,
+  "total_contacts_in_account": 15967,
+  "sample_size_opportunities": 500,
+  "attribution_field_population": {
+    "utm_source": {
+      "count": 327,
+      "pct": 21.8
+    },
+    "utm_medium": {
+      "count": 328,
+      "pct": 21.87
+    },
+    "utm_campaign": {
+      "count": 329,
+      "pct": 21.93
+    },
+    "utm_content": {
+      "count": 328,
+      "pct": 21.87
+    },
+    "utm_term": {
+      "count": 275,
+      "pct": 18.33
+    },
+    "gclid_value": {
+      "count": 48,
+      "pct": 3.2
+    },
+    "fbclid_value": {
+      "count": 0,
+      "pct": 0.0
+    },
+    "first_utm_source": {
+      "count": 0,
+      "pct": 0.0
+    },
+    "first_utm_campaign": {
+      "count": 0,
+      "pct": 0.0
+    },
+    "first_gclid": {
+      "count": 0,
+      "pct": 0.0
+    },
+    "first_fbclid": {
+      "count": 0,
+      "pct": 0.0
+    },
+    "first_landing_page": {
+      "count": 0,
+      "pct": 0.0
+    },
+    "first_touch_at": {
+      "count": 0,
+      "pct": 0.0
+    },
+    "last_touch_at": {
+      "count": 0,
+      "pct": 0.0
+    },
+    "original_source": {
+      "count": 53,
+      "pct": 3.53
+    },
+    "original_campaign": {
+      "count": 0,
+      "pct": 0.0
+    },
+    "source_url": {
+      "count": 424,
+      "pct": 28.27
+    },
+    "last_channel": {
+      "count": 11,
+      "pct": 0.73
+    },
+    "consent_source": {
+      "count": 0,
+      "pct": 0.0
+    },
+    "contact_disposition__channel": {
+      "count": 336,
+      "pct": 22.4
+    }
+  },
+  "native_attributions_array": {
+    "contacts_with_any_attribution": 1399,
+    "pct_with_any_attribution": 93.27,
+    "contacts_with_multi_touch_attributions": 679,
+    "isFirst_flag_distribution": {
+      "true": 1349,
+      "false": 0,
+      "missing": 729
+    }
+  },
+  "source_field_distribution_top20": {
+    "None": 622,
+    "external_form": 378,
+    "Lead_Source_Meta": 153,
+    "Lead_Source_Google": 77,
+    "Lead_Source_Direct": 74,
+    "landing-page-hero": 49,
+    "home-hero": 37,
+    "hero-name-blur": 21,
+    "02. Medical Intake - Onboarding": 18,
+    "adam-quiz-positive": 17,
+    "Direct": 13,
+    "ppc-trt": 11,
+    "03. MWC\u00a0Post Appointment Feedback": 9,
+    "hero-form-blur": 9,
+    "Clinic Appt Form": 5,
+    "ppc-ed": 3,
+    "New Funnel LP Form": 1,
+    "Lead_Source_Bing": 1,
+    "Book in Newport News": 1,
+    "ppc-consultation": 1
+  },
+  "overwrite_risk": {
+    "multi_touch_contacts_in_sample": 679,
+    "diverging_first_vs_current_fields": 0,
+    "pct_of_multitouch_diverging": 0.0
+  },
+  "opportunity_level_attribution_fields_found": 0,
+  "opportunity_has_native_attributions_key": true,
+  "opportunity_sample_top_level_keys": [
+    "id",
+    "name",
+    "monetaryValue",
+    "pipelineId",
+    "pipelineStageId",
+    "pipelineStageUId",
+    "assignedTo",
+    "status",
+    "source",
+    "lastStatusChangeAt",
+    "lastStageChangeAt",
+    "createdAt",
+    "updatedAt",
+    "forecastProbability",
+    "effectiveProbability",
+    "contactId",
+    "locationId",
+    "customFields",
+    "lostReasonId",
+    "followers",
+    "relations",
+    "contact",
+    "sort",
+    "attributions"
+  ],
+  "opportunity_zero_monetary_value_in_sample": 446,
+  "opportunity_zero_monetary_value_pct": 89.2
+}

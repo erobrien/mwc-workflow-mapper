@@ -1,0 +1,277 @@
+[
+  {
+    "id": "691fbe5574510f33a97e408d",
+    "labels": {
+      "singular": "Company",
+      "plural": "Companies"
+    },
+    "description": "Contains list of all businesses, their details, and contact information.",
+    "requiredProperties": [
+      "business.name"
+    ],
+    "searchableProperties": [
+      "business.name",
+      "business.email"
+    ],
+    "primaryDisplayProperty": "business.name",
+    "key": "business",
+    "uniqueProperties": [],
+    "locationId": "Ghstz8eIsHWLeXek47dk",
+    "updatedAt": "2025-11-21T01:20:21.575Z",
+    "createdAt": "2025-11-21T01:20:21.575Z",
+    "icon": {
+      "class": "cuida:building-outline",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"2\" stroke=\"currentColor\" aria-hidden=\"true\" class=\"w-5 h-5 transition-transform duration-400 transform ease-in  translate-y-0\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M13 11h4.8c1.12 0 1.68 0 2.108.218a2 2 0 01.874.874C21 12.52 21 13.08 21 14.2V21m-8 0V6.2c0-1.12 0-1.68-.218-2.108a2 2 0 00-.874-.874C11.48 3 10.92 3 9.8 3H6.2c-1.12 0-1.68 0-2.108.218a2 2 0 00-.874.874C3 4.52 3 5.08 3 6.2V21m19 0H2M6.5 7h3m-3 4h3m-3 4h3\"></path></svg>"
+    },
+    "type": "SYSTEM_DEFINED"
+  },
+  {
+    "id": "691fbe5574510f80697e408c",
+    "labels": {
+      "singular": "Opportunity",
+      "plural": "Opportunities"
+    },
+    "description": "Contains list of all deals, their stages, statuses and pipeline progress.",
+    "requiredProperties": [
+      "opportunity.name"
+    ],
+    "searchableProperties": [
+      "opportunity.name",
+      "opportunity.contactPhone",
+      "opportunity.contactEmail",
+      "opportunity.businessName",
+      "opportunity.tags",
+      "opportunity.contactName"
+    ],
+    "primaryDisplayProperty": "opportunity.name",
+    "key": "opportunity",
+    "uniqueProperties": [],
+    "locationId": "Ghstz8eIsHWLeXek47dk",
+    "updatedAt": "2025-11-21T01:20:21.568Z",
+    "createdAt": "2025-11-21T01:20:21.568Z",
+    "icon": {
+      "class": "opportunity-custom-icon",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"  width=\"16px\"  height=\"16px\" viewBox=\"0 0 16 16\" version=\"1.1\"> <path d=\"M 6.132812 8.074219 L 6.796875 8.140625 L 6.796875 8.136719 Z M 6 9.371094 L 5.339844 9.304688 L 5.335938 9.3125 L 5.335938 9.320312 Z M 6.222656 9.734375 L 6.363281 9.082031 L 6.359375 9.082031 Z M 6.851562 9.855469 L 7.515625 9.820312 L 7.488281 9.273438 L 6.945312 9.195312 Z M 7.007812 12.910156 L 6.339844 12.945312 Z M 8.992188 12.910156 L 9.660156 12.945312 Z M 9.148438 9.855469 L 9.054688 9.195312 L 8.511719 9.273438 L 8.484375 9.820312 Z M 9.777344 9.734375 L 9.640625 9.082031 L 9.632812 9.085938 L 9.625 9.085938 Z M 10 9.371094 L 10.664062 9.320312 L 10.664062 9.3125 L 10.660156 9.304688 Z M 9.867188 8.074219 L 10.53125 8.007812 L 10.53125 7.996094 L 10.527344 7.988281 Z M 14 6.132812 C 14 6.5 14.296875 6.800781 14.667969 6.800781 C 15.035156 6.800781 15.332031 6.5 15.332031 6.132812 Z M 14.667969 4 L 15.332031 4 C 15.332031 3.632812 15.035156 3.332031 14.667969 3.332031 Z M 12.535156 3.332031 C 12.164062 3.332031 11.867188 3.632812 11.867188 4 C 11.867188 4.367188 12.164062 4.667969 12.535156 4.667969 Z M 11.527344 6.195312 C 11.269531 6.457031 11.269531 6.878906 11.527344 7.136719 C 11.789062 7.398438 12.210938 7.398438 12.472656 7.136719 Z M 2 9.867188 C 2 9.5 1.703125 9.199219 1.332031 9.199219 C 0.964844 9.199219 0.667969 9.5 0.667969 9.867188 Z M 1.332031 12 L 0.667969 12 C 0.667969 12.175781 0.738281 12.347656 0.863281 12.472656 C 0.988281 12.597656 1.15625 12.667969 1.332031 12.667969 Z M 3.464844 12.667969 C 3.835938 12.667969 4.132812 12.367188 4.132812 12 C 4.132812 11.632812 3.835938 11.332031 3.464844 11.332031 Z M 4.472656 9.804688 C 4.730469 9.542969 4.730469 9.121094 4.472656 8.863281 C 4.210938 8.601562 3.789062 8.601562 3.527344 8.863281 Z M 12.535156 11.332031 C 12.164062 11.332031 11.867188 11.632812 11.867188 12 C 11.867188 12.367188 12.164062 12.667969 12.535156 12.667969 Z M 14.667969 12 L 14.667969 12.667969 C 15.035156 12.667969 15.332031 12.367188 15.332031 12 Z M 15.332031 9.867188 C 15.332031 9.5 15.035156 9.199219 14.667969 9.199219 C 14.296875 9.199219 14 9.5 14 9.867188 Z M 12.472656 8.863281 C 12.210938 8.601562 11.789062 8.601562 11.527344 8.863281 C 11.269531 9.121094 11.269531 9.542969 11.527344 9.804688 Z M 3.464844 4.667969 C 3.835938 4.667969 4.132812 4.367188 4.132812 4 C 4.132812 3.632812 3.835938 3.332031 3.464844 3.332031 Z M 1.332031 4 L 1.332031 3.332031 C 0.964844 3.332031 0.667969 3.632812 0.667969 4 Z M 0.667969 6.132812 C 0.667969 6.5 0.964844 6.800781 1.332031 6.800781 C 1.703125 6.800781 2 6.5 2 6.132812 Z M 3.527344 7.136719 C 3.789062 7.398438 4.210938 7.398438 4.472656 7.136719 C 4.730469 6.878906 4.730469 6.457031 4.472656 6.195312 Z M 8.46875 6 L 7.503906 6 L 7.503906 7.332031 L 8.46875 7.332031 Z M 7.503906 6 C 6.382812 6 5.574219 6.941406 5.46875 8.007812 L 6.796875 8.136719 C 6.847656 7.601562 7.210938 7.332031 7.503906 7.332031 Z M 5.46875 8.007812 L 5.339844 9.304688 L 6.664062 9.4375 L 6.796875 8.140625 Z M 5.335938 9.320312 C 5.308594 9.6875 5.496094 10.265625 6.085938 10.386719 L 6.359375 9.082031 C 6.511719 9.113281 6.59375 9.210938 6.628906 9.265625 C 6.660156 9.320312 6.667969 9.375 6.664062 9.425781 Z M 6.082031 10.386719 C 6.285156 10.429688 6.519531 10.480469 6.753906 10.515625 L 6.945312 9.195312 C 6.765625 9.171875 6.578125 9.128906 6.363281 9.082031 Z M 6.183594 9.890625 L 6.339844 12.945312 L 7.671875 12.875 L 7.515625 9.820312 Z M 6.339844 12.945312 C 6.371094 13.460938 6.761719 14 7.398438 14 L 7.398438 12.667969 C 7.496094 12.667969 7.574219 12.710938 7.617188 12.757812 C 7.660156 12.804688 7.671875 12.847656 7.671875 12.875 Z M 7.398438 14 L 8.601562 14 L 8.601562 12.667969 L 7.398438 12.667969 Z M 8.601562 14 C 9.238281 14 9.628906 13.460938 9.660156 12.945312 L 8.328125 12.875 C 8.328125 12.847656 8.339844 12.804688 8.382812 12.757812 C 8.425781 12.710938 8.503906 12.667969 8.601562 12.667969 Z M 9.660156 12.945312 L 9.816406 9.890625 L 8.484375 9.820312 L 8.328125 12.875 Z M 9.246094 10.515625 C 9.480469 10.480469 9.71875 10.433594 9.925781 10.386719 L 9.625 9.085938 C 9.441406 9.128906 9.238281 9.171875 9.054688 9.195312 Z M 9.914062 10.386719 C 10.503906 10.265625 10.691406 9.6875 10.664062 9.320312 L 9.335938 9.425781 C 9.332031 9.375 9.339844 9.320312 9.371094 9.265625 C 9.40625 9.210938 9.488281 9.113281 9.640625 9.082031 Z M 10.660156 9.304688 L 10.53125 8.007812 L 9.203125 8.140625 L 9.335938 9.4375 Z M 10.527344 7.988281 C 10.394531 6.941406 9.589844 6 8.46875 6 L 8.46875 7.332031 C 8.761719 7.332031 9.132812 7.601562 9.207031 8.160156 Z M 8.667969 4 C 8.667969 4.367188 8.367188 4.667969 8 4.667969 L 8 6 C 9.105469 6 10 5.105469 10 4 Z M 8 4.667969 C 7.632812 4.667969 7.332031 4.367188 7.332031 4 L 6 4 C 6 5.105469 6.894531 6 8 6 Z M 7.332031 4 C 7.332031 3.632812 7.632812 3.332031 8 3.332031 L 8 2 C 6.894531 2 6 2.894531 6 4 Z M 8 3.332031 C 8.367188 3.332031 8.667969 3.632812 8.667969 4 L 10 4 C 10 2.894531 9.105469 2 8 2 Z M 15.332031 6.132812 L 15.332031 4 L 14 4 L 14 6.132812 Z M 14.667969 3.332031 L 12.535156 3.332031 L 12.535156 4.667969 L 14.667969 4.667969 Z M 12.472656 7.136719 L 15.136719 4.472656 L 14.195312 3.527344 L 11.527344 6.195312 Z M 0.667969 9.867188 L 0.667969 12 L 2 12 L 2 9.867188 Z M 1.332031 12.667969 L 3.464844 12.667969 L 3.464844 11.332031 L 1.332031 11.332031 Z M 3.527344 8.863281 L 0.863281 11.527344 L 1.804688 12.472656 L 4.472656 9.804688 Z M 12.535156 12.667969 L 14.667969 12.667969 L 14.667969 11.332031 L 12.535156 11.332031 Z M 15.332031 12 L 15.332031 9.867188 L 14 9.867188 L 14 12 Z M 11.527344 9.804688 L 14.195312 12.472656 L 15.136719 11.527344 L 12.472656 8.863281 Z M 3.464844 3.332031 L 1.332031 3.332031 L 1.332031 4.667969 L 3.464844 4.667969 Z M 0.667969 4 L 0.667969 6.132812 L 2 6.132812 L 2 4 Z M 4.472656 6.195312 L 1.804688 3.527344 L 0.863281 4.472656 L 3.527344 7.136719 Z M 4.472656 6.195312 \"/></svg>"
+    },
+    "type": "SYSTEM_DEFINED",
+    "addRecordConfiguration": [
+      {
+        "groupKey": "opportunity.contact_id",
+        "order": 0,
+        "isGroupField": true,
+        "required": true,
+        "isEditable": false
+      },
+      {
+        "key": "opportunity.name",
+        "order": 1,
+        "isGroupField": false,
+        "required": true,
+        "isEditable": false
+      },
+      {
+        "key": "opportunity.pipeline_id",
+        "order": 2,
+        "isGroupField": false,
+        "required": true,
+        "isEditable": false
+      },
+      {
+        "key": "opportunity.pipeline_stage_id",
+        "order": 3,
+        "isGroupField": false,
+        "required": true,
+        "isEditable": false
+      },
+      {
+        "groupKey": "opportunity.primary_email",
+        "order": 4,
+        "isGroupField": true,
+        "required": false,
+        "isEditable": true
+      },
+      {
+        "groupKey": "opportunity.primary_phone",
+        "order": 5,
+        "isGroupField": true,
+        "required": false,
+        "isEditable": true
+      },
+      {
+        "groupKey": "opportunity.company_name",
+        "order": 6,
+        "isGroupField": true,
+        "required": false,
+        "isEditable": true
+      },
+      {
+        "key": "opportunity.status",
+        "order": 7,
+        "isGroupField": false,
+        "required": false,
+        "isEditable": true
+      },
+      {
+        "key": "opportunity.monetary_value",
+        "order": 8,
+        "isGroupField": false,
+        "required": false,
+        "isEditable": true
+      },
+      {
+        "key": "opportunity.assigned_to",
+        "order": 9,
+        "isGroupField": false,
+        "required": false,
+        "isEditable": true
+      },
+      {
+        "key": "opportunity.source",
+        "order": 10,
+        "isGroupField": false,
+        "required": false,
+        "isEditable": true
+      },
+      {
+        "key": "opportunity.lost_reason",
+        "order": 11,
+        "isGroupField": false,
+        "required": false,
+        "isEditable": true
+      },
+      {
+        "groupKey": "opportunity.tags",
+        "order": 12,
+        "isGroupField": true,
+        "required": false,
+        "isEditable": true
+      },
+      {
+        "groupKey": "opportunity.followers",
+        "order": 13,
+        "isGroupField": true,
+        "required": false,
+        "isEditable": true
+      }
+    ]
+  },
+  {
+    "id": "691fbe5574510f05937e408b",
+    "labels": {
+      "singular": "Contact",
+      "plural": "Contacts"
+    },
+    "description": "Contains list of all leads, their details, and specifications.",
+    "requiredProperties": [
+      "contact.email"
+    ],
+    "searchableProperties": [
+      "contact.name",
+      "contact.email",
+      "contact.businessName",
+      "contact.tags",
+      "contact.phone"
+    ],
+    "primaryDisplayProperty": "contact.email",
+    "key": "contact",
+    "uniqueProperties": [],
+    "locationId": "Ghstz8eIsHWLeXek47dk",
+    "updatedAt": "2026-04-19T03:02:16.822Z",
+    "createdAt": "2025-11-21T01:20:21.560Z",
+    "icon": {
+      "class": "ph:address-book-bold",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\" viewBox=\"0 0 256 256\"><path fill=\"currentColor\" d=\"M208 20H64a20 20 0 0 0-20 20v20H32a12 12 0 0 0 0 24h12v32H32a12 12 0 0 0 0 24h12v32H32a12 12 0 0 0 0 24h12v20a20 20 0 0 0 20 20h144a20 20 0 0 0 20-20V40a20 20 0 0 0-20-20m-4 192H68V44h136Zm-103.2-40.63a48 48 0 0 1 70.4 0a12 12 0 0 0 17.6-16.32a72 72 0 0 0-19.21-14.68a44 44 0 1 0-67.19 0a72.1 72.1 0 0 0-19.2 14.68a12 12 0 0 0 17.6 16.32M116 112a20 20 0 1 1 20 20a20 20 0 0 1-20-20\"/></svg>"
+    },
+    "type": "SYSTEM_DEFINED",
+    "addRecordConfiguration": [
+      {
+        "key": "contact.first_name",
+        "order": 1,
+        "isGroupField": false,
+        "required": true,
+        "isEditable": false
+      },
+      {
+        "key": "contact.last_name",
+        "order": 2,
+        "isGroupField": false,
+        "required": false,
+        "isEditable": true
+      },
+      {
+        "key": "contact.email",
+        "order": 3,
+        "isGroupField": false,
+        "required": false,
+        "isEditable": true
+      },
+      {
+        "key": "contact.phone",
+        "order": 4,
+        "isGroupField": false,
+        "required": true,
+        "isEditable": true
+      },
+      {
+        "key": "contact.type",
+        "order": 5,
+        "isGroupField": false,
+        "required": false,
+        "isEditable": true
+      },
+      {
+        "key": "contact.timezone",
+        "order": 6,
+        "isGroupField": false,
+        "required": false,
+        "isEditable": true
+      },
+      {
+        "order": 7,
+        "isGroupField": true,
+        "groupKey": "dnd",
+        "required": false,
+        "isEditable": true
+      },
+      {
+        "key": "contact.last_channel",
+        "order": 8,
+        "isGroupField": false,
+        "required": true,
+        "isEditable": true
+      },
+      {
+        "key": "contact.preferred_location",
+        "order": 9,
+        "isGroupField": false,
+        "required": true,
+        "isEditable": true
+      }
+    ]
+  },
+  {
+    "id": "6a5246dbf8eef796a12cb45c",
+    "labels": {
+      "singular": "Location",
+      "plural": "Locations"
+    },
+    "description": "MWC clinic locations. One record per clinic. Source of truth for per-clinic data (Decision 14).",
+    "requiredProperties": [
+      "custom_objects.locations.name"
+    ],
+    "searchableProperties": [
+      "custom_objects.locations.name"
+    ],
+    "primaryDisplayProperty": "custom_objects.locations.name",
+    "key": "custom_objects.locations",
+    "uniqueProperties": [],
+    "locationId": "Ghstz8eIsHWLeXek47dk",
+    "updatedAt": "2026-07-11T13:36:27.969Z",
+    "createdAt": "2026-07-11T13:36:27.969Z",
+    "icon": {
+      "class": "iconoir:cube",
+      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\" viewBox=\"0 0 16 16\"><path fill=\"currentColor\" d=\"M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5L8 5.961L14.154 3.5zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464z\"/></svg>"
+    },
+    "type": "USER_DEFINED"
+  }
+]

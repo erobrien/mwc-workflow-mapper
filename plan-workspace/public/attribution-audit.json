@@ -1,0 +1,87 @@
+{
+  "generated_at": "2026-07-22",
+  "method": "Live GHL production sweep via the backend REST API (PIT token, location Ghstz8eIsHWLeXek47dk): a 1,500-contact sample (of 15,967 total), a 500-opportunity sample, the full 126-field custom field schema, and the live custom-object registry. Cross-referenced against the 45-workflow live re-map from the 2026-07-22 pass to check which workflow, if any, writes each attribution field.",
+  "headline": "Two disconnected attribution systems exist side by side. GHL's own native attributions[] array already auto-captures rich, accurate first/last-touch data (gclid, fbclid, fbc, fbp, gaClientId, UTMs, referrer, page URL) on 93% of contacts. The hand-built custom-field layer that reports and ad-platform uploads actually read from is separately broken: fbclid_value is 0% populated even on the 166 contacts (11.1% of the sample) where the native array has a real Facebook click ID, and gclid_value is 0% populated on all 69 contacts where the native array has a real Google click ID. The documented 'first-touch' field set (first_utm_source, first_gclid, first_fbclid, first_touch_at, first_landing_page) is 0% populated across the entire sample -- that layer was designed but never wired up. And 89.2% of Opportunities still carry $0 Monetary Value, so even where attribution exists, it has nothing to attach revenue to.",
+  "custom_fields": {
+    "total_on_contact": 126,
+    "total_on_opportunity": 0,
+    "attribution_related_on_contact": 29,
+    "note": "Zero custom fields of any kind exist on the Opportunity object today. Every attribution-related field GHL engineering built lives on Contact, which is overwritten on every new touch/visit -- the opposite of the 'Opportunity as attribution ledger' target design."
+  },
+  "click_id_schema_gap": {
+    "designed": ["gclid", "wbraid", "gbraid", "msclkid", "ttclid", "li_fat_id", "fbclid"],
+    "implemented_as_custom_field": ["gclid_value", "fbclid_value"],
+    "missing_entirely": ["wbraid", "gbraid (custom field)", "msclkid", "ttclid", "li_fat_id", "attr_how_heard resolver field"],
+    "note": "The native attributions[] array DOES capture gbraid automatically (confirmed live) even though no gbraid custom field exists to persist it -- so the raw signal exists but is dropped on the floor before it reaches any custom field, report, or ad-platform export."
+  },
+  "population_rates": [
+    { "field": "utm_source", "count": 327, "pct": 21.8, "layer": "custom_field" },
+    { "field": "utm_medium", "count": 328, "pct": 21.9, "layer": "custom_field" },
+    { "field": "utm_campaign", "count": 329, "pct": 21.9, "layer": "custom_field" },
+    { "field": "utm_content", "count": 328, "pct": 21.9, "layer": "custom_field" },
+    { "field": "utm_term", "count": 275, "pct": 18.3, "layer": "custom_field" },
+    { "field": "gclid_value", "count": 48, "pct": 3.2, "layer": "custom_field" },
+    { "field": "fbclid_value", "count": 0, "pct": 0.0, "layer": "custom_field" },
+    { "field": "first_utm_source", "count": 0, "pct": 0.0, "layer": "custom_field (designed, unwired)" },
+    { "field": "first_utm_campaign", "count": 0, "pct": 0.0, "layer": "custom_field (designed, unwired)" },
+    { "field": "first_gclid", "count": 0, "pct": 0.0, "layer": "custom_field (designed, unwired)" },
+    { "field": "first_fbclid", "count": 0, "pct": 0.0, "layer": "custom_field (designed, unwired)" },
+    { "field": "first_landing_page", "count": 0, "pct": 0.0, "layer": "custom_field (designed, unwired)" },
+    { "field": "first_touch_at", "count": 0, "pct": 0.0, "layer": "custom_field (designed, unwired)" },
+    { "field": "last_touch_at", "count": 0, "pct": 0.0, "layer": "custom_field (designed, unwired)" },
+    { "field": "original_source", "count": 53, "pct": 3.5, "layer": "custom_field" },
+    { "field": "original_campaign", "count": 0, "pct": 0.0, "layer": "custom_field" },
+    { "field": "source_url", "count": 424, "pct": 28.3, "layer": "custom_field" },
+    { "field": "last_channel", "count": 11, "pct": 0.7, "layer": "custom_field" },
+    { "field": "consent_source", "count": 0, "pct": 0.0, "layer": "custom_field" },
+    { "field": "contact_disposition__channel", "count": 336, "pct": 22.4, "layer": "custom_field" },
+    { "field": "attributions[] (any entry)", "count": 1399, "pct": 93.27, "layer": "native_ghl" },
+    { "field": "attributions[].utmGclid (real gclid)", "count": 69, "pct": 4.6, "layer": "native_ghl" },
+    { "field": "attributions[].utmFbclid (real fbclid)", "count": 166, "pct": 11.1, "layer": "native_ghl" },
+    { "field": "attributions[].utmSource (real value)", "count": 248, "pct": 16.5, "layer": "native_ghl" },
+    { "field": "attributions[].fbc (Meta click cookie)", "count": 17, "pct": 1.1, "layer": "native_ghl, no custom field exists" },
+    { "field": "attributions[].fbp (Meta browser cookie)", "count": 55, "pct": 3.7, "layer": "native_ghl, no custom field exists" },
+    { "field": "attributions[].gaClientId (GA4 client id)", "count": 54, "pct": 3.6, "layer": "native_ghl, no custom field exists" }
+  ],
+  "mapping_failure_proof": {
+    "title": "Direct proof: the custom-field capture layer is disconnected from GHL's own native capture",
+    "rows": [
+      {
+        "cohort": "Contacts where native attributions[] has a REAL Facebook click ID (utmFbclid)",
+        "n": 166,
+        "custom_field_also_populated": 0,
+        "custom_field_missing": 166,
+        "pct_missing": 100.0
+      },
+      {
+        "cohort": "Contacts where native attributions[] has a REAL Google click ID (utmGclid)",
+        "n": 69,
+        "custom_field_also_populated": 0,
+        "custom_field_missing": 69,
+        "pct_missing": 100.0
+      }
+    ],
+    "interpretation": "100% of contacts with a verified click ID sitting in GHL's own attributions[] array have an EMPTY gclid_value/fbclid_value custom field. This is not a partial-capture problem -- whatever populates gclid_value/fbclid_value today runs entirely independently of GHL's native attribution capture (most likely a website-side write on form submit that parses the URL directly), and the two pipelines have zero verified overlap in this sample. No workflow in the 2026-07-22 live re-map of all 45 active workflows writes to either field -- the write path, wherever it is, is outside the audited workflow layer."
+  },
+  "contact_to_opportunity_handoff": {
+    "title": "Attribution is dropped at the Contact to Opportunity handoff",
+    "opportunities_sampled": 500,
+    "opportunities_with_any_attributions_entry": 477,
+    "pct_with_any_attributions_entry": 95.4,
+    "opportunities_with_real_utm_in_attributions": 0,
+    "pct_with_real_utm_in_attributions": 0.0,
+    "interpretation": "95.4% of Opportunities DO carry a native attributions[] entry, but it is created at Opportunity-creation time by a workflow ('CRM Workflows' / 'Manual' medium) and does not carry forward the Contact's real first-touch marketing attribution. The Opportunity attribution entry and the Contact attribution entries are two separate records with no verified link -- the paid-media journey that produced the lead is not present on the deal that reports revenue against it.",
+    "zero_dollar_opportunities": { "count": 446, "of_sample": 500, "pct": 89.2 }
+  },
+  "overwrite_risk": {
+    "title": "Multi-touch overwrite risk cannot be assessed because the comparison fields are empty, not because there is no overwrite risk",
+    "multi_touch_contacts_in_sample": 679,
+    "pct_of_sample_multi_touch": 45.3,
+    "diverging_first_vs_current_fields_measured": 0,
+    "why_zero_is_not_good_news": "0 divergence was measured between first_utm_source/utm_source and first_gclid/gclid_value on the 679 multi-touch contacts, but this is an artifact of first_utm_source and first_gclid being 0% populated account-wide (see population_rates) -- there is no live first-touch value to diverge FROM. The real overwrite exposure lives inside the native attributions[] array itself: 45.3% of the sample has 2+ attribution entries, and only the isFirst=true entry (91% of stamped entries) is reliably marked; there is no equivalent, reliably-populated isLast/current marker feeding the custom fields that reports actually read. Any report built off utm_source/gclid_value today is reading whichever touch last wrote the field, not a governed first-touch or last-touch value."
+  },
+  "custom_objects": {
+    "found": ["business (system)", "opportunity (system)", "contact (system)", "custom_objects.locations (user-defined, created 2026-07-11)"],
+    "lead_source_object_status": "Not found as a live custom object in the current registry. Earlier account notes describe an empty lead_source custom object; it either predates this object registry, was removed, or was renamed -- it is not the custom_objects.locations object, which is the per-clinic constants object built for Method 1 of the multi-location pattern (booking URL/phone/address), unrelated to attribution."
+  }
+}

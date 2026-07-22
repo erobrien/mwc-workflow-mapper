@@ -141,6 +141,38 @@
       "evidence": "4a (softphone) and 4b (dialer) disposition workflows encode the same 9 call-status branches twice. 05, 07 (78 opportunity-write steps), and 08 all independently fire on the same 'PA reported PX SHOWED' form submission with no ordering guarantee.",
       "recommendation": "Merge 4a/4b into one disposition workflow parameterized by channel. Collapse 05/07/08 into a single outcome router with MUT and review/referral as internal branches or sub-flows, not top-level workflows competing for the same trigger.",
       "status": "Open"
+    },
+    {
+      "id": "G15",
+      "severity": "Critical",
+      "area": "Click-ID capture layer disconnected from native GHL attribution (live, 2026-07-22)",
+      "evidence": "Live sample of 1,500 contacts: 100% (166/166) of contacts with a real Facebook click ID in GHL native attributions[] have an EMPTY fbclid_value custom field; 100% (69/69) of contacts with a real Google click ID have an EMPTY gclid_value custom field. No workflow in the 45-workflow live re-map writes to either field.",
+      "recommendation": "Replace the disconnected custom-field capture with a workflow/webhook step that reads utmGclid/utmFbclid/gbraid/fbc/fbp directly from the native attributions[] array at contact-create and stamps them onto custom fields (or better, read attributions[] directly at export time and retire the redundant custom fields).",
+      "status": "Open"
+    },
+    {
+      "id": "G16",
+      "severity": "Critical",
+      "area": "Attribution dropped at the Contact-to-Opportunity handoff (live, 2026-07-22)",
+      "evidence": "500-opportunity live sample: 95.4% have a native attributions[] stub, but 0% of those carry real UTM data -- the stub is a Manual/CRM Workflows entry created at opportunity-creation, not the contact real first-touch attribution.",
+      "recommendation": "When an Opportunity is created, copy the contact real first-touch attributions[] entry onto the Opportunity (or write it into Opportunity custom fields once they exist) instead of letting the workflow default stub stand in for it.",
+      "status": "Open"
+    },
+    {
+      "id": "G17",
+      "severity": "High",
+      "area": "Designed first-touch field layer is 0% wired up (live, 2026-07-22)",
+      "evidence": "first_utm_source, first_utm_campaign, first_gclid, first_fbclid, first_landing_page, first_touch_at, last_touch_at are all 0% populated across a 1,500-contact live sample despite existing as fields.",
+      "recommendation": "Either wire a workflow/webhook step to populate these on first contact-create from the native attributions[] isFirst=true entry, or remove the fields to stop implying first-touch governance exists.",
+      "status": "Open"
+    },
+    {
+      "id": "G18",
+      "severity": "Medium",
+      "area": "Click-ID schema gap vs target design (live, 2026-07-22)",
+      "evidence": "wbraid, msclkid, ttclid, li_fat_id, and a gbraid custom field do not exist anywhere in the 126-field live schema, even though the native attributions[] array already captures gbraid automatically today.",
+      "recommendation": "Add the missing click-ID custom fields (or, better, stop persisting click IDs as custom fields entirely and read them from attributions[] at export time) before scaling Microsoft Ads, TikTok, or LinkedIn spend that depend on msclkid/ttclid/li_fat_id.",
+      "status": "Open"
     }
   ]
 }

@@ -34,6 +34,7 @@ import SacPlan from "./pages/SacPlan";
 import CustomFields from "./pages/CustomFields";
 import DailyLog from "./pages/DailyLog";
 import PriorityChanges from "./pages/PriorityChanges";
+import AttributionAudit from "./pages/AttributionAudit";
 
 const wrap = (el: React.ReactNode) => <Shell>{el}</Shell>;
 
@@ -43,6 +44,7 @@ const router = createBrowserRouter([
   { path: "/as-is", element: wrap(<AsIs />) },
   { path: "/inventory", element: wrap(<Inventory />) },
   { path: "/priority-changes", element: wrap(<PriorityChanges />) },
+  { path: "/attribution-audit", element: wrap(<AttributionAudit />) },
   { path: "/asis-diagrams", element: wrap(<AsisDiagrams />) },
   { path: "/asis-flows", element: wrap(<AsisFlows />) },
   { path: "/cody", element: wrap(<Cody />) },

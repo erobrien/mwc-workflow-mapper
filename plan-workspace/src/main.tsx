@@ -35,6 +35,7 @@ import CustomFields from "./pages/CustomFields";
 import DailyLog from "./pages/DailyLog";
 import PriorityChanges from "./pages/PriorityChanges";
 import AttributionAudit from "./pages/AttributionAudit";
+import LifecyclePlaybook from "./pages/LifecyclePlaybook";
 
 const wrap = (el: React.ReactNode) => <Shell>{el}</Shell>;
 
@@ -45,6 +46,7 @@ const router = createBrowserRouter([
   { path: "/inventory", element: wrap(<Inventory />) },
   { path: "/priority-changes", element: wrap(<PriorityChanges />) },
   { path: "/attribution-audit", element: wrap(<AttributionAudit />) },
+  { path: "/lifecycle-playbook", element: wrap(<LifecyclePlaybook />) },
   { path: "/asis-diagrams", element: wrap(<AsisDiagrams />) },
   { path: "/asis-flows", element: wrap(<AsisFlows />) },
   { path: "/cody", element: wrap(<Cody />) },

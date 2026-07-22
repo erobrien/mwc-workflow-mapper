@@ -2,9 +2,9 @@
   "generated_at": "2026-07-22",
   "method": "Sources: the 2026-07-22 live production re-map (45 workflows, backend API), the 2026-06-16 read-only account sweep, and the existing target-spec decision log. Every item cites the live workflow(s) and defect/gap id(s) it is grounded in.",
   "summary": {
-    "total_items": 10,
+    "total_items": 11,
     "p0_count": 3,
-    "p1_count": 4,
+    "p1_count": 5,
     "p2_count": 3,
     "framing": "P0 = live revenue/reporting integrity bugs, fix this sprint, patchable without waiting for the full rebuild. P1 = structural duplication actively causing P0-class bugs; fix as part of the WF-05/06 consolidation already planned. P2 = cleanup that reduces risk and maintenance cost but is not actively corrupting data today."
   },
@@ -182,6 +182,25 @@
       "effort": "Medium -- one additional read+write step in the booking workflow, but needs the click-ID fix (item 9) done first or it will just carry forward the same empty data.",
       "risk_of_inaction": "Revenue-to-channel attribution stays structurally impossible even after fixing capture, because the deal that carries Monetary Value has no attribution trail back to the ad spend that produced it.",
       "owner_hint": "Sequence directly after item 9."
+    },
+    {
+      "rank": 11,
+      "priority": "P1",
+      "title": "Build the missing A&D nurture workflow and wire the dead no-show nurture workflow",
+      "defect_ids": [
+        "lifecycle-playbook"
+      ],
+      "workflows": [
+        "4a. Softphone Call Disposition \u2013 Workflow",
+        "4b. Disposition \u2013 Workflow (active)",
+        "05. Clinic Appt Outcome",
+        "Nurture: Missed Clinic Appointment"
+      ],
+      "problem": "Live 2026-07-22 lifecycle review: there is no A&D (Advise and Decline) nurture workflow anywhere in the 45 live workflows, despite A&D being disposition-tagged in 6+ branch locations across 4a/4b/05/06. Separately, the only no-show/missed-appointment nurture workflow that exists (Nurture: Missed Clinic Appointment) has ZERO triggers configured and can never fire -- both stages are recovered today only through ad-hoc manual SMS blasts run outside GHL, which have documented failures (a stale-snapshot bug texted 3 already-booked contacts; a 2026-07-18 send reached 334 contacts with 0 bookings).",
+      "fix": "Build one new workflow triggered on Opportunity Status Changed -> A&D, branching by the specific no-sale reason already captured in the disposition switch, using the proven advisory-toned angle (\"what info would change your mind\") instead of a hard sell. Separately, wire the existing dead Nurture: Missed Clinic Appointment workflow to the native Appointment Status = No-show/Cancelled trigger (Modified By: Customer) and fix its 'free' copy violation before activating it.",
+      "effort": "Medium -- the A&D workflow is new build; the no-show workflow just needs a trigger and a copy fix, both low-risk since it currently does nothing.",
+      "risk_of_inaction": "Every A&D and no-show member today is only recovered if and when a manual SMS batch happens to include them -- there is no guaranteed cadence, and the manual process has already caused real incidents (already-booked contacts re-texted, high opt-out sends with zero bookings).",
+      "owner_hint": "Sequence after the P0 Won/Lost fixes (items 1-2) since this workflow will read the same disposition/outcome fields those items are cleaning up."
     }
   ]
 }

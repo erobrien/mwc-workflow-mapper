@@ -1,0 +1,128 @@
+{
+  "generated_at": "2026-07-22",
+  "method": "Live re-map of the 45 active/live-firing GHL workflows (2026-07-22), cross-referenced against the GHL platform best-practices checklist (quiet hours, STOP compliance, single-writer, re-entry, Modified-By gating) and the mwc-brand-cro-compliance rules (no 'free', STOP in first message, no telehealth framing). Also cross-referenced against prior manual-campaign session notes (mwc-reactivation-no-show-campaigns) documenting how no-book/no-show/A&D recovery is actually being run today.",
+  "headline": "Of the 5 requested lifecycle stages, 3 have a live, triggered GHL workflow (Onboarding, No-Book Chase, Medical Intake Chase) and 2 do not (No-Show Nurture and A&D Nurture both rely on manual one-off SMS blasts run outside any workflow, and the one workflow that exists for missed appointments has zero triggers wired -- it never fires). Where workflows do exist, they violate multiple hard rules: 'free' appears live in patient-facing SMS/email, most multi-message sequences omit the required STOP disclosure, and no sequence re-checks for a fresh booking immediately before sending (the exact bug that hit 3 already-booked contacts in a June recovery blast).",
+  "stages": [
+    {
+      "key": "onboarding",
+      "title": "Initial Onboarding (lead capture -> first contact)",
+      "status": "live_but_flawed",
+      "live_workflows": ["01A. Home Form and Source with Click ID", "01B. Richmond Form and Source with Click ID", "01C. VA Beach Form and Source with Click ID", "01D. NPN Form and Source with Click ID", "01E. Consultation Form and Source with Click ID", "02. NON BOOKED NEWLEADS"],
+      "what_happens_today": "5 near-identical per-location/per-page workflows fire on inbound webhook, create/update the contact, branch on click-ID/UTM to tag lead source, then hand off to '02. NON BOOKED NEWLEADS' -- a 6-touch SMS+email drip (Day 0 instant SMS, Day 1, Day 2, Final) for anyone who filled a form but hasn't booked.",
+      "problems": [
+        "5 cloned workflows (01A-01E) instead of one parameterized workflow -- the DRY violation flagged in the attribution audit; the click-ID branching in these workflows still results in gclid_value/fbclid_value being 0% populated (G15).",
+        "Zero STOP language anywhere in 02's 6-message sequence -- a hard compliance rule violation on every touch of the very first automated sequence a lead receives.",
+        "No A2P/TCPA opt-in disclosure checkpoint visible in the step graph before the first SMS fires."
+      ],
+      "recommended_channel_and_timing": [
+        { "when": "T+0 (instant, same session)", "channel": "SMS", "what": "Speed-to-lead SMS within 60 seconds of form submit, with STOP disclosure in this first message. Confirmed same-day booking link." },
+        { "when": "T+0 to T+2 min", "channel": "Email", "what": "Parallel confirmation email (deliverability backstop for the ~35% of leads with SMS issues/landlines)." },
+        { "when": "T+1 day", "channel": "SMS + Email", "what": "First nudge if still not booked -- keep short, no 'free', frame as 60-minute in-person consult." },
+        { "when": "T+2 days", "channel": "SMS + Email", "what": "Second nudge with urgency framing (limited same-week slots), still no discount language." },
+        { "when": "T+4 to T+5 days (final)", "channel": "SMS", "what": "Final direct nudge, then hand off to the No-Book Chase stage rather than silently dying." }
+      ]
+    },
+    {
+      "key": "no_book_chase",
+      "title": "No-Book Chase (booked-intent lead who hasn't confirmed/shown)",
+      "status": "live_but_flawed",
+      "live_workflows": ["03b. Unconfirmed Appointment – Confirmation Required", "03c. Unconfirmed Reply Handler", "3a. Auto Confirm", "02. Lead Form NoBook 5m AI Call SMS (draft, not live)"],
+      "what_happens_today": "03b is a 199-step, 63-decision confirmation-chase workflow spanning 2 days before the appointment through the appointment time itself, with staged SMS/email reminders at T-2d, T-1d, T-10h, 8AM day-of, and T-15min. 03c catches replies and offers a reschedule link. A new draft workflow (02. Lead Form NoBook 5m AI Call SMS, created 2026-07-21) adds an AI-call-then-SMS-fallback pattern at T+5min for brand-new no-book leads, but it is still a draft with zero triggers wired -- not live.",
+      "problems": [
+        "03b is oversized (199 steps/63 decisions) and carries 13 opportunity writes + 8 appointment-status writes that likely overlap with the outcome-writer sprawl documented in the Priority Changes page (item 5) -- confirmation-chase logic and outcome-writing are tangled together in one workflow.",
+        "The promising new AI-call+SMS-fallback pattern (correct STOP language, correct 5-minute speed-to-lead timing) exists only as an untriggered draft -- the fastest, most modern touch in the whole account is sitting unused.",
+        "No live re-check of booking status immediately before a chase message sends -- the exact stale-snapshot bug documented in the manual reactivation notes (3 already-booked contacts hit by a stale-audience send) is a workflow-level risk too, not just a manual-campaign risk."
+      ],
+      "recommended_channel_and_timing": [
+        { "when": "T+5 min (brand-new no-book lead)", "channel": "AI voice call, then SMS fallback if no answer", "what": "Publish the existing draft (02. Lead Form NoBook 5m AI Call SMS) -- it already has the right shape and the right compliance language, it just needs a trigger." },
+        { "when": "T-2 days before a tentative slot", "channel": "SMS + Email", "what": "Confirmation request with a one-tap confirm link, location-specific." },
+        { "when": "T-1 day", "channel": "SMS", "what": "Second confirmation request if unconfirmed; branch to reschedule flow on any reply." },
+        { "when": "T-10 hours / 8AM day-of", "channel": "SMS", "what": "Day-of logistics reminder only (time, address, what to bring) -- no sales language, per HIPAA-safe SMS content rules." },
+        { "when": "T-15 min", "channel": "SMS", "what": "Final \"we're expecting you\" nudge." }
+      ]
+    },
+    {
+      "key": "medical_intake_chase",
+      "title": "Medical Intake Chase (booked but intake form incomplete)",
+      "status": "live_but_thin",
+      "live_workflows": ["04a. Intake Form Response", "Intake Reminder"],
+      "what_happens_today": "Intake Reminder is a 3-touch SMS-only sequence (T+36h, then two more at fixed times same evening) reminding the member to complete intake before their visit, sent from 'Chris' at Men's Wellness Centers. 04a is a thin 6-step router for the form-response event itself.",
+      "problems": [
+        "SMS-only -- no email backstop, unlike the booking-confirmation sequence which uses both channels. Intake completion is directly tied to show-rate and appointment efficiency, so this stage is arguably as important as booking confirmation but gets a thinner sequence.",
+        "All 3 touches are same-channel, same-day-clustered (36h then twice more same evening) -- no escalation path if the member never completes intake by the morning of the visit (no day-of nudge, no staff-alert task if intake is still incomplete 2 hours before appointment)."
+      ],
+      "recommended_channel_and_timing": [
+        { "when": "T+36h after booking (unchanged, already correct)", "channel": "SMS", "what": "First intake reminder with direct link." },
+        { "when": "Evening before appointment (if still incomplete)", "channel": "SMS + Email", "what": "Add an email backstop here, not just SMS -- matches the booking-confirmation pattern." },
+        { "when": "Morning of appointment, if still incomplete", "channel": "SMS + internal staff task", "what": "New: a same-day nudge to the member AND an Internal Notification action to the front desk so staff can have the member complete intake on arrival instead of delaying the visit." }
+      ]
+    },
+    {
+      "key": "no_show_nurture",
+      "title": "No-Show Nurture (missed or cancelled appointment)",
+      "status": "gap_workflow_exists_but_dead",
+      "live_workflows": ["Nurture: Missed Clinic Appointment (published, but 0 triggers -- never fires)"],
+      "what_happens_today": "The only dedicated no-show/missed-appointment nurture workflow in the account has ZERO triggers configured -- it is published but structurally unreachable. What actually recovers no-shows today is a series of manual, one-off SMS/MMS blasts run by Eric outside of GHL workflows: audience pulled via ad-hoc scripts, sends executed by hand, no standing automation. Documented outcomes include a 2026-07-18 send (334 of 358 sent, 0 bookings, mostly opt-outs) and a 2026-06-03 send that mistakenly texted 3 already-booked contacts due to a stale audience snapshot.",
+      "problems": [
+        "The dead workflow's own copy violates the 'no free' hard rule ('Men's Wellness Centers. Free visit.') -- so even if it were wired up today, it would ship non-compliant copy immediately.",
+        "No live pre-send booking re-check exists in the manual process, which has already caused a real incident (3 contacts already booked got a no-show recovery text).",
+        "No standing cadence: recovery only happens when Eric manually runs a script, so there is no guaranteed T+1h / T+1d / T+3d touch after every no-show -- some no-shows get recovered fast, others may get no touch until the next ad-hoc batch.",
+        "'Reply YES' as a CTA (used in at least one past send) reads as a yes/no question and measurably drove opt-out replies instead of bookings, per the June 16 send notes -- this pattern risks repeating in ungoverned manual sends.",
+        "Older cohorts (15-45 day no-books) get repeat broad-offer sends that generate opt-outs and zero bookings (confirmed 2026-07-18) -- the manual process has no automatic recency-based suppression the way a workflow would enforce structurally."
+      ],
+      "recommended_channel_and_timing": [
+        { "when": "T+1 hour after no-show/cancel", "channel": "SMS", "what": "Immediate, warm, single-CTA rebook link (\"Tap here to grab a new time\") -- not a Y/N question. Live booking re-check before send (find/update, not a stale snapshot)." },
+        { "when": "T+1 day", "channel": "Email", "what": "Slightly longer note explaining what they missed and reinforcing the 60-minute in-person value prop, no discount language." },
+        { "when": "T+3 days", "channel": "SMS", "what": "Second, different-angle nudge (e.g., limited-availability framing) -- exit immediately on any reply or rebook." },
+        { "when": "T+7 days (if still no rebook)", "channel": "Email", "what": "Hand off into a longer-cycle nurture rather than repeating the same offer -- matches the existing 'Nurture: Missed Clinic Appointment' copy's later touches (1-week, 1-month, 6-month), which are reasonable IF the workflow is actually wired to fire." },
+        { "when": "Structural fix", "channel": "n/a", "what": "Wire the existing 'Nurture: Missed Clinic Appointment' workflow to the native Appointment Status = No-show/Cancelled trigger (Modified By: Customer, to avoid re-racing with the cancel-event fan-out already flagged in Priority Changes item 3), fix the 'free' copy violation, and retire the ad-hoc manual-script process once the workflow is proven live for 2 clean weeks." }
+      ]
+    },
+    {
+      "key": "ad_nurture",
+      "title": "A&D Nurture (Advise & Decline / consulted, did not buy)",
+      "status": "gap_no_workflow_exists",
+      "live_workflows": [],
+      "what_happens_today": "There is no A&D-specific nurture workflow anywhere in the 45 live-remapped workflows. A&D outcomes are written to the pipeline (as Lost/A&D opportunities, see 4a/4b/05/06's disposition branches), but nothing automated follows up afterward. The only documented A&D recovery activity is manual: an advisory-reframed message angle (asking what information would have changed their decision, rather than sales language) used in ad-hoc SFC/Google-Ads-outage recovery sends, run outside GHL.",
+      "problems": [
+        "This is the single largest missing automation in the account relative to the other 4 stages -- every other stage has at least a nominally-live workflow; A&D has none.",
+        "A&D is disposition-tagged in at least 6 different branch locations across 4a, 4b, 05, and 06 (the 'Not Ready / Think it Over / Cost Objection / Not Interested / Not Qualified / Others' 6-way switch repeated per clinic) with no single downstream nurture consuming any of those tags.",
+        "The manually-run advisory reframe (asking what info would change their mind) is the right instinct -- A&D members respond better to advisory framing than a hard sell -- but it only reaches whoever is in the next manual batch, not every A&D member on a guaranteed cadence."
+      ],
+      "recommended_channel_and_timing": [
+        { "when": "T+1 day after A&D disposition", "channel": "Email", "what": "Advisory-toned note (not a sales pitch): \"What questions came up that we didn't answer?\" -- matches the proven manual angle, now guaranteed for every A&D member instead of ad-hoc." },
+        { "when": "T+1 week", "channel": "SMS", "what": "Short, low-pressure check-in offering a follow-up call with the physician, not a booking link." },
+        { "when": "T+3 to T+4 weeks", "channel": "Email", "what": "Educational content addressing the most common objection categories (cost/price, not-ready, spouse/decision-maker) tailored by which A&D sub-reason was logged." },
+        { "when": "T+90 days", "channel": "Email + SMS", "what": "Longer-cycle re-engagement: \"still thinking about it?\" -- lower frequency than the 30-day cycle, consistent with A&D members needing more time than no-shows." },
+        { "when": "Structural fix", "channel": "n/a", "what": "Build one new workflow triggered on Opportunity Status Changed -> A&D (or the equivalent tag), branching by the specific no-sale reason already captured in the disposition switch, so the existing 6-way reason data finally gets used instead of just sitting on the opportunity." }
+      ]
+    }
+  ],
+  "missing_chases": [
+    {
+      "title": "Reply-routing for manual reactivation sends",
+      "gap": "Members who reply YES/interested to a manual SMS blast have no automated routing into booking -- documented as an open need since at least 2026-06-16. Every manual send risks losing warm replies to a human checking a phone inbox.",
+      "recommendation": "Build a lightweight Trigger Link or keyword-reply workflow (any inbound reply containing booking intent) that auto-tags and routes to the booking flow, independent of which manual campaign triggered the reply."
+    },
+    {
+      "title": "Pre-send live booking re-check",
+      "gap": "Both the manual no-show/no-book process (confirmed incident: 3 already-booked contacts texted) and, potentially, any future automated version of it lack a live re-check of appointment status immediately before send.",
+      "recommendation": "Any nurture/recovery send -- manual script or workflow -- must re-query current appointment status right before sending, not rely on an audience snapshot built earlier."
+    },
+    {
+      "title": "Delinquent/billing nurture",
+      "gap": "SFC maintains a separate 'MWC Delinquent' spreadsheet outside GHL entirely -- no GHL workflow handles payment-delinquency follow-up for members already on a payment plan.",
+      "recommendation": "Once the financing/payment integration matures, add a delinquency-stage nurture (parallel to A&D, not a replacement) so past-due members get a consistent SMS/email cadence instead of manual spreadsheet tracking."
+    },
+    {
+      "title": "Long-term retention / renewal nurture",
+      "gap": "Confirmed in the As-Is Flow Diagrams 'retention' diagram: none of the 45 live workflows is a retention, renewal, or long-term (cold/warm/hot) nurture flow for members who complete treatment.",
+      "recommendation": "Add a renewal-cycle workflow keyed off the term length captured at Won (per the revenue-refactor's renewal_date field) so members are proactively re-engaged before their plan lapses, instead of only being reactive to a missed payment or a new no-show."
+    },
+    {
+      "title": "Referral/ambassador follow-through",
+      "gap": "Ambassador/referral workflows exist (Affiliate Marketing folder) but sit entirely outside the Active Workflows tree and are not connected to the A&D or no-show nurture stages -- a member who declines today could still be a referral source tomorrow, but nothing bridges that.",
+      "recommendation": "Add a referral-ask touch inside the A&D and post-Won nurture cadences (e.g., the T+90-day A&D touch) rather than only asking happy, paying members."
+    }
+  ]
+}

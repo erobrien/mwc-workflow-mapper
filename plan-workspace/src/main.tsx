@@ -36,6 +36,7 @@ import DailyLog from "./pages/DailyLog";
 import PriorityChanges from "./pages/PriorityChanges";
 import AttributionAudit from "./pages/AttributionAudit";
 import LifecyclePlaybook from "./pages/LifecyclePlaybook";
+import CallConnect from "./pages/CallConnect";
 
 const wrap = (el: React.ReactNode) => <Shell>{el}</Shell>;
 
@@ -47,6 +48,7 @@ const router = createBrowserRouter([
   { path: "/priority-changes", element: wrap(<PriorityChanges />) },
   { path: "/attribution-audit", element: wrap(<AttributionAudit />) },
   { path: "/lifecycle-playbook", element: wrap(<LifecyclePlaybook />) },
+  { path: "/call-connect", element: wrap(<CallConnect />) },
   { path: "/asis-diagrams", element: wrap(<AsisDiagrams />) },
   { path: "/asis-flows", element: wrap(<AsisFlows />) },
   { path: "/cody", element: wrap(<Cody />) },

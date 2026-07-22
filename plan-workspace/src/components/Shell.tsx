@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import {
   LayoutDashboard, Boxes, Workflow, Network,
   Gavel, ShieldAlert, Moon, Sun, Menu, SearchCheck, ClipboardList, Tag,
-  Database, Waypoints, Route, History, ChevronRight, ChevronDown, Target, ListChecks, Radar, MessagesSquare,
+  Database, Waypoints, Route, History, ChevronRight, ChevronDown, Target, ListChecks, Radar, MessagesSquare, PhoneForwarded,
 } from "lucide-react";
 import { cn, useTheme } from "./ui";
 import { useState } from "react";
@@ -23,6 +23,7 @@ const NAV: { group: string; accent?: string; dot?: string; collapsible?: boolean
     { to: "/priority-changes", label: "Priority Changes", icon: ListChecks, accent: "text-red-600 dark:text-red-400" },
     { to: "/attribution-audit", label: "Attribution Audit", icon: Radar, accent: "text-red-600 dark:text-red-400" },
     { to: "/lifecycle-playbook", label: "Lifecycle Playbook", icon: MessagesSquare, accent: "text-red-600 dark:text-red-400" },
+    { to: "/call-connect", label: "Call Connect (SDR Routing)", icon: PhoneForwarded, accent: "text-red-600 dark:text-red-400" },
   ] },
   { group: "Final Target v2", accent: "text-indigo-600 dark:text-indigo-400", dot: "bg-indigo-500", items: [
     { to: "/final-target", label: "Final Target Plan", icon: Workflow, accent: "text-indigo-600 dark:text-indigo-400" },

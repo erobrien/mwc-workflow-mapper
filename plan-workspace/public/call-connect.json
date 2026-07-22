@@ -1,0 +1,89 @@
+{
+  "generated_at": "2026-07-22",
+  "method": "Native GoHighLevel platform research (Call Connect feature docs, multi-ring phone number docs, round-robin Assign to User action) applied to the existing '02. Lead Form NoBook 5m AI Call SMS' draft workflow (id c70c6933-a744-4201-b41b-bf4d46df3b50) from the 2026-07-22 live re-map.",
+  "headline": "GHL already has a native feature built for exactly this: Call Connect. A workflow Call step rings a staff member (or a shared number), plays a whisper message, and on any keypress immediately bridges an outbound call to the lead -- that IS the 'ring staff, then convert to outbound' pattern. Paired with the native round-robin Assign to User action, this becomes a real SDR queue without any custom telephony build. Recommendation: round-robin Assign to User, then Call Connect, with the existing AI-call/SMS fallback kept as the safety net when no rep answers.",
+  "mechanics": {
+    "title": "How Call Connect works end to end",
+    "steps": [
+      { "n": 1, "what": "Workflow reaches the Call step", "detail": "A call is placed to the assigned user's phone, or to the sub-account's business phone number if no user is assigned." },
+      { "n": 2, "what": "Whisper message plays", "detail": "The rep hears a short message before being connected -- lead source, lead name via merge fields, and the literal phrase 'press any key to connect' (required wording)." },
+      { "n": 3, "what": "Rep presses any key", "detail": "GHL immediately places the outbound call to the lead's phone number and bridges both lines -- functionally the inbound-then-outbound conversion." },
+      { "n": 4, "what": "If the rep does not answer", "detail": "The workflow continues to its next step -- this is the fallback branch point where the existing AI-call/SMS sequence should sit." },
+      { "n": 5, "what": "If the rep answers but never presses a key", "detail": "The whisper message repeats up to 3 times, then GHL automatically places the call to the lead anyway." }
+    ],
+    "prerequisite": "Call Connect must be explicitly enabled per phone number: Settings -> Phone Numbers -> (3-dot menu) -> Edit Configuration -> toggle 'Enable Call Connect Feature'."
+  },
+  "options": [
+    {
+      "name": "Round-robin Assign to User, then Call Connect",
+      "recommended": true,
+      "how_it_works": "An Assign to User action (round-robin mode across the SDR list) runs first, distributing the lead to one specific rep. The Call step then rings that assigned user's phone directly.",
+      "pros": [
+        "Fair, automatic load-balancing across the SDR team with zero manual queue management.",
+        "One rep owns the lead end to end -- clear accountability for follow-through after the call.",
+        "Matches GHL's own documented 'Fast Five' recipe -- no custom build, just two stock actions in sequence.",
+        "Assignment persists on the contact/opportunity record for reporting (who called whom)."
+      ],
+      "cons": [
+        "If the assigned rep is unavailable (lunch, on another call), the lead waits for that one ring cycle before falling through to the fallback branch -- no automatic retry to a second rep in the same pass.",
+        "Requires the SDR team roster to be kept current in the round-robin assignment pool."
+      ]
+    },
+    {
+      "name": "Multi-ring shared number, then Call Connect",
+      "recommended": false,
+      "how_it_works": "The SDR team's shared line is configured as a multi-ring number (up to 10 users ring simultaneously, first to answer wins). The Call step points at that shared business number instead of an assigned user.",
+      "pros": [
+        "Fastest possible pickup -- whichever rep is free answers immediately, no single-rep bottleneck.",
+        "Simple to set up: one phone-number configuration change, no workflow assignment logic needed."
+      ],
+      "cons": [
+        "No built-in ownership -- whoever happens to answer gets the lead, which can concentrate volume on the fastest responder rather than balancing the team.",
+        "Weaker reporting: harder to attribute call outcomes to a specific rep without an extra manual disposition step.",
+        "Every free rep's phone rings for every no-book lead, which can be disruptive if volume is high."
+      ]
+    },
+    {
+      "name": "Literal inbound-ring-group then separate outbound leg (custom build)",
+      "recommended": false,
+      "how_it_works": "The idea as originally proposed: place a true inbound call into a ring group, then once a rep answers, originate a brand new outbound call leg to the lead and bridge it manually.",
+      "pros": [
+        "Conceptually clean 1:1 match to a traditional call-center ring-group-to-outbound pattern."
+      ],
+      "cons": [
+        "Not how GHL's native Call action works -- it does not expose a raw 'ring group then originate new outbound leg' primitive; Call Connect already collapses this into one whispered call + keypress bridge.",
+        "Would require a custom telephony integration (e.g., a separate IVR/PBX or a third-party call-routing API) outside GHL to replicate literally, adding cost and a new system to maintain for no behavioral gain over Call Connect."
+      ]
+    }
+  ],
+  "recommended_build": {
+    "title": "Recommended build: slot round-robin Call Connect in front of the existing draft",
+    "target_workflow": "02. Lead Form NoBook 5m AI Call SMS",
+    "target_workflow_id": "c70c6933-a744-4201-b41b-bf4d46df3b50",
+    "target_workflow_status": "draft -- zero triggers wired today",
+    "current_shape": "Tag wf:no-book-5m -> Add task -> Update cf_cc_call_result -> Send Fallback SMS -> tag/field bookkeeping -> Wait 5 min -> Wait 3 min -> a few unresolved decision branches. The 'AI call' step itself is a placeholder in the current draft.",
+    "proposed_steps": [
+      { "order": 1, "action": "Trigger", "detail": "Form Submitted (no-book) OR Contact Tag Added: source_no_book -- wire this now; this is the only missing piece keeping the workflow from ever firing." },
+      { "order": 2, "action": "Tag: add wf:no-book-5m", "detail": "Unchanged from the current draft." },
+      { "order": 3, "action": "Assign to User (round-robin)", "detail": "New step. Round-robin across the live SDR list. This replaces/precedes the current 'Add task' step -- keep the task creation too, as a CRM record of the attempt." },
+      { "order": 4, "action": "Call (Call Connect)", "detail": "New step. Rings the just-assigned rep's phone. Whisper message: \"New 5-minute no-book lead, {{contact.first_name}}, from {{contact.attributionSource}}. Press any key to connect.\" Requires Call Connect enabled on the number used." },
+      { "order": 5, "action": "If/Else: did the rep answer + press a key?", "detail": "New branch. GHL's Call step naturally falls through to the next workflow step if unanswered -- use that fall-through as the 'no answer' path rather than a manual condition check." },
+      { "order": "5a", "action": "Answered branch -> End (or a short delay then a task to log outcome)", "detail": "Update cf_cc_call_result to 'Connected - Live Rep', exit the workflow -- the rep is now on the phone with the lead." },
+      { "order": "5b", "action": "No-answer branch -> existing AI-call/SMS fallback", "detail": "Keep the current draft's steps exactly as built: AI call attempt, then Send Fallback SMS with the wait timers already in place (Wait 5 min, Wait 3 min) and the existing tag bookkeeping (wf:pending-ai-call, wf:sms-fallback-sent)." }
+    ],
+    "fields_and_tags_reused": ["cf_cc_call_result", "cf_cc_call_attempted_at", "wf:no-book-5m", "wf:pending-ai-call", "wf:sms-fallback-sent"],
+    "compliance_notes": [
+      "The existing 'Send Fallback SMS' step already includes 'Reply STOP to opt out.' -- keep this exact language, it is the only STOP-compliant message in the current draft and should not be lost when the workflow is extended.",
+      "The whisper message is internal (rep-only, never heard by the lead) so it is not subject to the same compliance language as member-facing SMS/email, but should still avoid PHI per the account's HIPAA-safe SMS content rule in case it is ever logged or transcribed.",
+      "Quiet hours (8am-9pm contact timezone) should gate the Call step exactly as they gate every other SMS/call step in the account -- do not let the round-robin Call Connect step fire outside that window; route straight to the SMS fallback instead."
+    ],
+    "rollout_plan": [
+      "1. Enable Call Connect on the phone number this workflow will use (Settings -> Phone Numbers -> Edit Configuration).",
+      "2. Add the Assign to User (round-robin) step with the current SDR roster.",
+      "3. Add the Call (Call Connect) step with the whisper message above.",
+      "4. Add the If/Else fall-through wiring so unanswered calls continue into the existing AI-call/SMS steps unchanged.",
+      "5. Test with 2 phones (rep + lead) per GHL's own testing guidance before publishing.",
+      "6. Wire the trigger and publish as a draft-tested workflow, per the account's build-extract-diff verification loop -- nothing publishes without explicit approval."
+    ]
+  }
+}

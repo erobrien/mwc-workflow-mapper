@@ -38,6 +38,8 @@ import AttributionAudit from "./pages/AttributionAudit";
 import LifecyclePlaybook from "./pages/LifecyclePlaybook";
 import CallConnect from "./pages/CallConnect";
 
+import ToBe2bv2 from "./pages/ToBe2bv2";
+
 const wrap = (el: React.ReactNode) => <Shell>{el}</Shell>;
 
 const router = createBrowserRouter([
@@ -63,6 +65,7 @@ const router = createBrowserRouter([
   { path: "/systems", element: wrap(<SystemsArchitecture />) },
   { path: "/final-target", element: wrap(<FinalTarget />) },
   { path: "/final-target-sac", element: wrap(<SacPlan />) },
+  { path: "/to-be-2bv2", element: wrap(<ToBe2bv2 />) },
   { path: "/to-be", element: wrap(<ToBe />) },
   { path: "/to-be-review", element: wrap(<ToBeReview />) },
   { path: "/minimal-plan", element: wrap(<MinimalPlan />) },

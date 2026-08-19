@@ -1,0 +1,194 @@
+{
+  "generated_at": "2026-08-18",
+  "location_id": "zHKH8aRDdNq47oYmdsN1",
+  "source": "ghl-automation-builder reverse-engineered internal API",
+  "workflows": [
+    {
+      "n": "01",
+      "name": "Lead Capture & Attribution",
+      "id": "9cd36a48-fd25-42a0-a01f-7589e4421ab5",
+      "status": "published",
+      "version": 10,
+      "steps": 3,
+      "step_types": ["custom_code", "add_contact_tag", "add_to_workflow"],
+      "absorbs": "Inbound lead capture + attribution stamping",
+      "copy": "Receives webhook, validates, stamps attribution, resolves location, tags new_lead, hands to WF-02"
+    },
+    {
+      "n": "02",
+      "name": "Unbooked Lead Nurture",
+      "id": "b2b8a6b1-899c-4c60-9b83-743c4720bad2",
+      "status": "published",
+      "version": 10,
+      "steps": 5,
+      "step_types": ["wait", "sms", "email", "add_contact_tag"],
+      "absorbs": "Non-booked lead recovery",
+      "copy": "5m wait → SMS nurture → 24h wait → email nurture → tag nurture_active"
+    },
+    {
+      "n": "03",
+      "name": "Appointment Lifecycle",
+      "id": "53867cdd-049d-4a02-9b88-febe5c490c7e",
+      "status": "published",
+      "version": 10,
+      "steps": 5,
+      "step_types": ["sms", "add_contact_tag", "internal_notification", "custom_code", "add_to_workflow"],
+      "absorbs": "Appointment confirmation + reminders + showed handoff",
+      "copy": "Confirm SMS → tag appt_confirmed → notify team → emit outcome → hand to WF-07"
+    },
+    {
+      "n": "04",
+      "name": "Intake Capture & Reminder",
+      "id": "4e5370c8-9e97-4a58-9adc-7709ba79ada8",
+      "status": "published",
+      "version": 10,
+      "steps": 4,
+      "step_types": ["custom_code", "wait", "add_contact_tag"],
+      "absorbs": "Medical intake form chasing",
+      "copy": "Custom intake handler → wait → chase → tag intake_complete"
+    },
+    {
+      "n": "05",
+      "name": "Clinic Outcome Router",
+      "id": "3bb3e77c-34be-4e0e-bd3d-7b91f42f388e",
+      "status": "published",
+      "version": 10,
+      "steps": 2,
+      "step_types": ["custom_code", "add_contact_tag"],
+      "absorbs": "Post-visit outcome routing (sold, A&D, MUT, no-show)",
+      "copy": "Outcome capture → route to appropriate pipeline/stage"
+    },
+    {
+      "n": "06",
+      "name": "Price Calculator",
+      "id": "f2176f72-9056-408e-a43d-b88edcb26e7c",
+      "status": "published",
+      "version": 10,
+      "steps": 2,
+      "step_types": ["custom_code", "update_contact_field"],
+      "absorbs": "Treatment pricing estimation",
+      "copy": "Calculate price → update contact field"
+    },
+    {
+      "n": "07",
+      "name": "Post-Visit Showed / Referral Kickoff",
+      "id": "21a41790-41ee-4670-90d8-c75abfe90825",
+      "status": "published",
+      "version": 10,
+      "steps": 4,
+      "step_types": ["add_contact_tag", "wait", "email"],
+      "absorbs": "Showed visit follow-up + referral program kickoff",
+      "copy": "Tag showed → wait → email referral ask → tag referral_sent"
+    },
+    {
+      "n": "08",
+      "name": "Medically Untreatable (MUT)",
+      "id": "fefda750-9543-4888-8b4d-9452b656b957",
+      "status": "published",
+      "version": 10,
+      "steps": 4,
+      "step_types": ["remove_from_workflow", "add_contact_tag", "internal_notification", "update_contact_field"],
+      "absorbs": "MUT patient handling",
+      "copy": "Remove from active workflows → tag MUT → notify team → update field"
+    },
+    {
+      "n": "09",
+      "name": "Cancelled Appointment Recovery",
+      "id": "7a75a494-3d52-4d59-af6e-4355132c296e",
+      "status": "published",
+      "version": 10,
+      "steps": 4,
+      "step_types": ["add_contact_tag", "wait", "sms"],
+      "absorbs": "Cancelled appointment rebooking",
+      "copy": "Tag cancelled → wait 60m → SMS rebook → tag rebook_active"
+    },
+    {
+      "n": "10",
+      "name": "No-Show Nurture",
+      "id": "02911480-cc87-49f0-aa2d-db0b17d8985e",
+      "status": "published",
+      "version": 10,
+      "steps": 4,
+      "step_types": ["add_contact_tag", "wait", "sms"],
+      "absorbs": "No-show re-engagement",
+      "copy": "Tag no-show → wait → SMS reschedule → tag re-engaged"
+    },
+    {
+      "n": "11",
+      "name": "DNC / Wrong Number / Suppression",
+      "id": "132bed34-2f57-4b0f-b8bf-d6f144138c3e",
+      "status": "published",
+      "version": 10,
+      "steps": 4,
+      "step_types": ["remove_from_workflow", "update_contact_field", "add_contact_tag", "sms"],
+      "absorbs": "Compliance: DNC, wrong number, STOP handling",
+      "copy": "Remove from workflows → update DND → tag suppress → SMS opt-back"
+    },
+    {
+      "n": "12",
+      "name": "After-Appointment Feedback",
+      "id": "17a3fb4b-1d0d-4063-956b-d99188fc5091",
+      "status": "published",
+      "version": 10,
+      "steps": 3,
+      "step_types": ["wait", "email", "add_contact_tag"],
+      "absorbs": "Post-visit feedback survey",
+      "copy": "Wait → email feedback request → tag feedback_sent"
+    },
+    {
+      "n": "13",
+      "name": "Ambassador / Affiliate",
+      "id": "351deb62-0a4b-4e62-ac6e-1fc7c81018ab",
+      "status": "published",
+      "version": 10,
+      "steps": 2,
+      "step_types": ["custom_code", "internal_notification"],
+      "absorbs": "Ambassador program tracking",
+      "copy": "Custom ambassador logic → notify team"
+    },
+    {
+      "n": "14",
+      "name": "Notification & Webhook Fan-Out",
+      "id": "e4d9ba92-45cc-4c6f-bdc7-7e7c20910a0c",
+      "status": "published",
+      "version": 10,
+      "steps": 2,
+      "step_types": ["internal_notification", "custom_code"],
+      "absorbs": "Internal notifications + webhook dispatch",
+      "copy": "Notify team → webhook fan-out"
+    },
+    {
+      "n": "15",
+      "name": "Call Disposition / IVR",
+      "id": "138954b1-b8a4-4ee3-a456-0391eee1c5e4",
+      "status": "published",
+      "version": 10,
+      "steps": 2,
+      "step_types": ["custom_code", "add_contact_tag"],
+      "absorbs": "IVR routing + call disposition tagging",
+      "copy": "IVR handler → tag disposition"
+    },
+    {
+      "n": "16",
+      "name": "Instagram DM Inbound (ManyChat)",
+      "id": "e5f58c83-8842-4666-a6b9-4ebd4f880146",
+      "status": "published",
+      "version": 10,
+      "steps": 3,
+      "step_types": ["custom_code", "add_contact_tag"],
+      "absorbs": "ManyChat Instagram DM integration",
+      "copy": "ManyChat webhook → tag IG lead → route"
+    },
+    {
+      "n": "17",
+      "name": "Direct Online Booking Fast Path",
+      "id": "42e711fe-97b8-4f79-9420-5d41cb2a0ddb",
+      "status": "published",
+      "version": 10,
+      "steps": 4,
+      "step_types": ["custom_code", "remove_contact_tag", "add_to_workflow", "add_contact_tag"],
+      "absorbs": "Direct booking bypass funnel",
+      "copy": "Booking handler → remove prospect tags → add to patient workflow → tag booked"
+    }
+  ]
+}

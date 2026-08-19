@@ -33,6 +33,7 @@ const NAV: { group: string; accent?: string; dot?: string; collapsible?: boolean
     { to: "/minimal-plan", label: "Minimal Plan", icon: Target, accent: "text-violet-600 dark:text-violet-400" },
   ] },
   { group: "Target", accent: "text-emerald-600 dark:text-emerald-400", dot: "bg-emerald-500", items: [
+    { to: "/to-be-2bv2", label: "To-Be 2bv2 (Live Export)", icon: Network, accent: "text-emerald-600 dark:text-emerald-400" },
     { to: "/to-be", label: "To-Be Workflows", icon: Workflow, accent: "text-emerald-600 dark:text-emerald-400" },
     { to: "/to-be-review", label: "Design Review", icon: SearchCheck, accent: "text-emerald-600 dark:text-emerald-400" },
     { to: "/wf-diagrams", label: "WF Flow Diagrams", icon: Waypoints, accent: "text-emerald-600 dark:text-emerald-400" },

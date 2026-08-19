@@ -1,0 +1,79 @@
+{
+  "_id": "351deb62-0a4b-4e62-ac6e-1fc7c81018ab",
+  "locationId": "zHKH8aRDdNq47oYmdsN1",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 9,
+  "name": "WF-13 Ambassador / Affiliate",
+  "version": 11,
+  "dataVersion": 7,
+  "allowMultiple": false,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/zHKH8aRDdNq47oYmdsN1/workflows/351deb62-0a4b-4e62-ac6e-1fc7c81018ab/11",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FzHKH8aRDdNq47oYmdsN1%2Fworkflows%2F351deb62-0a4b-4e62-ac6e-1fc7c81018ab%2F11?alt=media&token=82a51ecb-40de-4d84-905f-b657152cb4da",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "permission": 380,
+  "type": "workflow",
+  "createdAt": "2026-08-14T00:07:28.907Z",
+  "updatedAt": "2026-08-18T16:32:39.207Z",
+  "deleted": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "user",
+  "__v": 0,
+  "allowMultipleOpportunity": false,
+  "eventStartDate": null,
+  "window": null,
+  "workflowNote": null,
+  "triggersFilePath": "location/zHKH8aRDdNq47oYmdsN1/workflow-triggers/351deb62-0a4b-4e62-ac6e-1fc7c81018ab/11",
+  "meta": {
+    "stepIndexCounter": {
+      "custom_code": 1
+    }
+  },
+  "status": "published",
+  "updatedBy": "3FOo2Q1P6ghfsPDVm6j1",
+  "id": "351deb62-0a4b-4e62-ac6e-1fc7c81018ab",
+  "workflowData": {
+    "templates": [
+      {
+        "id": "ab41d1d1-d4a0-41b6-a3d9-d3a9e7a157d0",
+        "type": "custom_code",
+        "name": "enroll/attribute/convert/reward event + branch",
+        "attributes": {
+          "code": "// enroll/attribute/convert/reward event + branch\nconst url = \"https://chvthkqmwxrskkegwkuo.supabase.co/functions/v1/ambassador\";\nconst payload = {\n  ghl_contact_id: \"{{contact.id}}\", ghl_opportunity_id: \"{{opportunity.id}}\",\n  ghl_appointment_id: \"{{appointment.id}}\", pipeline_id: \"{{opportunity.pipeline_id}}\",\n  new_pipeline_stage_id: \"{{opportunity.stage_id}}\", appointment_status: \"{{appointment.status}}\",\n  monetary_value: Number(\"{{opportunity.monetary_value}}\") || 0, source: \"{{contact.source}}\"\n};\nlet lastErr;\nfor (let attempt = 1; attempt <= 3; attempt++) {\n  try {\n    const res = await fetch(url, { method: \"POST\", headers: {\"Content-Type\":\"application/json\"}, body: JSON.stringify(payload) });\n    if (res.ok) return { success: true, attempt, status: res.status };\n    lastErr = \"HTTP \" + res.status + \": \" + (await res.text());\n  } catch (e) { lastErr = (e && e.message) ? e.message : String(e); }\n}\nreturn { success: false, error: lastErr };",
+          "language": "javascript",
+          "timeout": 30,
+          "inputData": {},
+          "output": {
+            "success": false,
+            "error": "fetch is not defined"
+          }
+        },
+        "order": 0,
+        "next": "b91b94d6-4b6e-4962-afeb-acf5fb319114",
+        "stepIndex": 1
+      },
+      {
+        "id": "b91b94d6-4b6e-4962-afeb-acf5fb319114",
+        "type": "internal_notification",
+        "name": "Route patient / notify",
+        "attributes": {
+          "type": "email",
+          "email": {
+            "subject": "Ambassador event",
+            "html": "<p>Ambassador event routed for {{contact.first_name}}</p>",
+            "userType": "assigned"
+          }
+        },
+        "order": 1,
+        "parentKey": "ab41d1d1-d4a0-41b6-a3d9-d3a9e7a157d0"
+      }
+    ]
+  },
+  "permissionMeta": {
+    "canRead": true,
+    "canWrite": true
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "_id": "17a3fb4b-1d0d-4063-956b-d99188fc5091",
+  "locationId": "zHKH8aRDdNq47oYmdsN1",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 9,
+  "name": "WF-12 After-Appointment Feedback",
+  "version": 9,
+  "dataVersion": 7,
+  "allowMultiple": false,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/zHKH8aRDdNq47oYmdsN1/workflows/17a3fb4b-1d0d-4063-956b-d99188fc5091/9",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FzHKH8aRDdNq47oYmdsN1%2Fworkflows%2F17a3fb4b-1d0d-4063-956b-d99188fc5091%2F9?alt=media&token=a3f6abb4-3999-4bb2-8aef-9c92a03f9124",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "permission": 380,
+  "type": "workflow",
+  "createdAt": "2026-08-14T00:07:26.492Z",
+  "updatedAt": "2026-08-18T16:32:28.757Z",
+  "deleted": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "user",
+  "__v": 0,
+  "allowMultipleOpportunity": false,
+  "eventStartDate": null,
+  "window": null,
+  "workflowNote": null,
+  "triggersFilePath": "location/zHKH8aRDdNq47oYmdsN1/workflow-triggers/17a3fb4b-1d0d-4063-956b-d99188fc5091/8",
+  "status": "published",
+  "updatedBy": "3FOo2Q1P6ghfsPDVm6j1",
+  "id": "17a3fb4b-1d0d-4063-956b-d99188fc5091",
+  "workflowData": {
+    "templates": [
+      {
+        "id": "8c525956-e118-4e7d-b4b1-4c8237fd14d2",
+        "type": "wait",
+        "name": "Wait 3h after showed",
+        "attributes": {
+          "type": "time",
+          "startAfter": {
+            "type": "minutes",
+            "value": 180,
+            "when": "after"
+          },
+          "isHybridAction": true,
+          "hybridActionType": "wait"
+        },
+        "order": 0,
+        "next": "d0732e90-7c5f-4e56-8681-93d8f6bcf701"
+      },
+      {
+        "id": "d0732e90-7c5f-4e56-8681-93d8f6bcf701",
+        "type": "email",
+        "name": "Send survey",
+        "attributes": {
+          "subject": "Your feedback matters, {{contact.first_name}}",
+          "html": "<p>Hi {{contact.first_name}},</p><p>How was your appointment? Reply with a quick rating.</p>",
+          "trackOpens": true,
+          "trackClicks": true
+        },
+        "order": 1,
+        "next": "4d519b03-4a18-4b19-b031-0cc4c04942ab",
+        "parentKey": "8c525956-e118-4e7d-b4b1-4c8237fd14d2"
+      },
+      {
+        "id": "4d519b03-4a18-4b19-b031-0cc4c04942ab",
+        "type": "add_contact_tag",
+        "name": "Tag feedback_sent",
+        "attributes": {
+          "tags": [
+            "feedback_sent"
+          ]
+        },
+        "order": 2,
+        "parentKey": "d0732e90-7c5f-4e56-8681-93d8f6bcf701"
+      }
+    ]
+  },
+  "permissionMeta": {
+    "canRead": true,
+    "canWrite": true
+  }
+}

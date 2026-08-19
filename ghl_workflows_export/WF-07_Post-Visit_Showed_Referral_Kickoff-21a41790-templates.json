@@ -1,0 +1,60 @@
+{
+  "templates": [
+    {
+      "id": "25060fbd-1879-454a-8968-67edc2f58b29",
+      "type": "add_contact_tag",
+      "name": "Mark showed tag",
+      "attributes": {
+        "tags": [
+          "showed"
+        ]
+      },
+      "order": 0,
+      "next": "b49f2769-3a27-4d56-b4e6-f6036198f3ae"
+    },
+    {
+      "id": "b49f2769-3a27-4d56-b4e6-f6036198f3ae",
+      "type": "wait",
+      "name": "Wait 2h",
+      "attributes": {
+        "type": "time",
+        "startAfter": {
+          "type": "minutes",
+          "value": 120,
+          "when": "after"
+        },
+        "isHybridAction": true,
+        "hybridActionType": "wait"
+      },
+      "order": 1,
+      "next": "843065ab-5228-43fd-b521-f820d7ebfabb",
+      "parentKey": "25060fbd-1879-454a-8968-67edc2f58b29"
+    },
+    {
+      "id": "843065ab-5228-43fd-b521-f820d7ebfabb",
+      "type": "email",
+      "name": "Referral ask",
+      "attributes": {
+        "subject": "How was your visit, {{contact.first_name}}?",
+        "html": "<p>Hi {{contact.first_name}},</p><p>Thanks for coming in. Would you refer a friend? Here's your referral link.</p>",
+        "trackOpens": true,
+        "trackClicks": true
+      },
+      "order": 2,
+      "next": "39b680b1-97c1-441f-b5d3-189aba1bbb15",
+      "parentKey": "b49f2769-3a27-4d56-b4e6-f6036198f3ae"
+    },
+    {
+      "id": "39b680b1-97c1-441f-b5d3-189aba1bbb15",
+      "type": "add_contact_tag",
+      "name": "Queue review request",
+      "attributes": {
+        "tags": [
+          "review_requested"
+        ]
+      },
+      "order": 3,
+      "parentKey": "843065ab-5228-43fd-b521-f820d7ebfabb"
+    }
+  ]
+}

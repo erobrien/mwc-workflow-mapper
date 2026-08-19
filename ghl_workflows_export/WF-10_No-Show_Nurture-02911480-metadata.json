@@ -1,0 +1,95 @@
+{
+  "_id": "02911480-cc87-49f0-aa2d-db0b17d8985e",
+  "locationId": "zHKH8aRDdNq47oYmdsN1",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 9,
+  "name": "WF-10 No-Show Nurture",
+  "version": 8,
+  "dataVersion": 7,
+  "allowMultiple": false,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/zHKH8aRDdNq47oYmdsN1/workflows/02911480-cc87-49f0-aa2d-db0b17d8985e/8",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FzHKH8aRDdNq47oYmdsN1%2Fworkflows%2F02911480-cc87-49f0-aa2d-db0b17d8985e%2F8?alt=media&token=00850b2e-63d9-4a06-96df-60aa0b865d42",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "permission": 380,
+  "type": "workflow",
+  "createdAt": "2026-08-14T00:07:20.937Z",
+  "updatedAt": "2026-08-18T16:31:48.515Z",
+  "deleted": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "user",
+  "__v": 0,
+  "allowMultipleOpportunity": false,
+  "eventStartDate": null,
+  "window": null,
+  "workflowNote": null,
+  "triggersFilePath": "location/zHKH8aRDdNq47oYmdsN1/workflow-triggers/02911480-cc87-49f0-aa2d-db0b17d8985e/8",
+  "status": "published",
+  "updatedBy": "3FOo2Q1P6ghfsPDVm6j1",
+  "id": "02911480-cc87-49f0-aa2d-db0b17d8985e",
+  "workflowData": {
+    "templates": [
+      {
+        "id": "2db57b94-a2d8-457a-8451-90d37dcb62ce",
+        "type": "add_contact_tag",
+        "name": "Tag no_show",
+        "attributes": {
+          "tags": [
+            "no_show"
+          ]
+        },
+        "order": 0,
+        "next": "dfd3b910-4e64-4bae-b7f1-acca9ef2571a"
+      },
+      {
+        "id": "dfd3b910-4e64-4bae-b7f1-acca9ef2571a",
+        "type": "wait",
+        "name": "Wait 30m",
+        "attributes": {
+          "type": "time",
+          "startAfter": {
+            "type": "minutes",
+            "value": 30,
+            "when": "after"
+          },
+          "isHybridAction": true,
+          "hybridActionType": "wait"
+        },
+        "order": 1,
+        "next": "403f6314-25f6-4a93-b057-b4167d253154",
+        "parentKey": "2db57b94-a2d8-457a-8451-90d37dcb62ce"
+      },
+      {
+        "id": "403f6314-25f6-4a93-b057-b4167d253154",
+        "type": "sms",
+        "name": "Reschedule SMS",
+        "attributes": {
+          "body": "Hi {{contact.first_name}}, we missed you today at {{location.name}}. Reply RESCHEDULE and we'll find you a new slot.",
+          "testMode": false
+        },
+        "order": 2,
+        "next": "0093ae55-42ed-4aef-aade-065b7cea8667",
+        "parentKey": "dfd3b910-4e64-4bae-b7f1-acca9ef2571a"
+      },
+      {
+        "id": "0093ae55-42ed-4aef-aade-065b7cea8667",
+        "type": "add_contact_tag",
+        "name": "Tag reschedule_active",
+        "attributes": {
+          "tags": [
+            "reschedule_active"
+          ]
+        },
+        "order": 3,
+        "parentKey": "403f6314-25f6-4a93-b057-b4167d253154"
+      }
+    ]
+  },
+  "permissionMeta": {
+    "canRead": true,
+    "canWrite": true
+  }
+}

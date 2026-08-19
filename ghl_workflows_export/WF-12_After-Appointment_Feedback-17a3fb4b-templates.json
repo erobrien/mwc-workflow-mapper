@@ -1,0 +1,47 @@
+{
+  "templates": [
+    {
+      "id": "8c525956-e118-4e7d-b4b1-4c8237fd14d2",
+      "type": "wait",
+      "name": "Wait 3h after showed",
+      "attributes": {
+        "type": "time",
+        "startAfter": {
+          "type": "minutes",
+          "value": 180,
+          "when": "after"
+        },
+        "isHybridAction": true,
+        "hybridActionType": "wait"
+      },
+      "order": 0,
+      "next": "d0732e90-7c5f-4e56-8681-93d8f6bcf701"
+    },
+    {
+      "id": "d0732e90-7c5f-4e56-8681-93d8f6bcf701",
+      "type": "email",
+      "name": "Send survey",
+      "attributes": {
+        "subject": "Your feedback matters, {{contact.first_name}}",
+        "html": "<p>Hi {{contact.first_name}},</p><p>How was your appointment? Reply with a quick rating.</p>",
+        "trackOpens": true,
+        "trackClicks": true
+      },
+      "order": 1,
+      "next": "4d519b03-4a18-4b19-b031-0cc4c04942ab",
+      "parentKey": "8c525956-e118-4e7d-b4b1-4c8237fd14d2"
+    },
+    {
+      "id": "4d519b03-4a18-4b19-b031-0cc4c04942ab",
+      "type": "add_contact_tag",
+      "name": "Tag feedback_sent",
+      "attributes": {
+        "tags": [
+          "feedback_sent"
+        ]
+      },
+      "order": 2,
+      "parentKey": "d0732e90-7c5f-4e56-8681-93d8f6bcf701"
+    }
+  ]
+}

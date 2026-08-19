@@ -1,0 +1,97 @@
+{
+  "_id": "21a41790-41ee-4670-90d8-c75abfe90825",
+  "locationId": "zHKH8aRDdNq47oYmdsN1",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 9,
+  "name": "WF-07 Post-Visit Showed / Referral Kickoff",
+  "version": 9,
+  "dataVersion": 7,
+  "allowMultiple": false,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/zHKH8aRDdNq47oYmdsN1/workflows/21a41790-41ee-4670-90d8-c75abfe90825/9",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FzHKH8aRDdNq47oYmdsN1%2Fworkflows%2F21a41790-41ee-4670-90d8-c75abfe90825%2F9?alt=media&token=87ab4e98-e7e6-4abd-bada-cb4220fe74ef",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "permission": 380,
+  "type": "workflow",
+  "createdAt": "2026-08-14T00:07:09.478Z",
+  "updatedAt": "2026-08-18T16:30:26.258Z",
+  "deleted": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "user",
+  "__v": 0,
+  "allowMultipleOpportunity": false,
+  "eventStartDate": null,
+  "window": null,
+  "workflowNote": null,
+  "triggersFilePath": "location/zHKH8aRDdNq47oYmdsN1/workflow-triggers/21a41790-41ee-4670-90d8-c75abfe90825/9",
+  "status": "published",
+  "updatedBy": "3FOo2Q1P6ghfsPDVm6j1",
+  "id": "21a41790-41ee-4670-90d8-c75abfe90825",
+  "workflowData": {
+    "templates": [
+      {
+        "id": "25060fbd-1879-454a-8968-67edc2f58b29",
+        "type": "add_contact_tag",
+        "name": "Mark showed tag",
+        "attributes": {
+          "tags": [
+            "showed"
+          ]
+        },
+        "order": 0,
+        "next": "b49f2769-3a27-4d56-b4e6-f6036198f3ae"
+      },
+      {
+        "id": "b49f2769-3a27-4d56-b4e6-f6036198f3ae",
+        "type": "wait",
+        "name": "Wait 2h",
+        "attributes": {
+          "type": "time",
+          "startAfter": {
+            "type": "minutes",
+            "value": 120,
+            "when": "after"
+          },
+          "isHybridAction": true,
+          "hybridActionType": "wait"
+        },
+        "order": 1,
+        "next": "843065ab-5228-43fd-b521-f820d7ebfabb",
+        "parentKey": "25060fbd-1879-454a-8968-67edc2f58b29"
+      },
+      {
+        "id": "843065ab-5228-43fd-b521-f820d7ebfabb",
+        "type": "email",
+        "name": "Referral ask",
+        "attributes": {
+          "subject": "How was your visit, {{contact.first_name}}?",
+          "html": "<p>Hi {{contact.first_name}},</p><p>Thanks for coming in. Would you refer a friend? Here's your referral link.</p>",
+          "trackOpens": true,
+          "trackClicks": true
+        },
+        "order": 2,
+        "next": "39b680b1-97c1-441f-b5d3-189aba1bbb15",
+        "parentKey": "b49f2769-3a27-4d56-b4e6-f6036198f3ae"
+      },
+      {
+        "id": "39b680b1-97c1-441f-b5d3-189aba1bbb15",
+        "type": "add_contact_tag",
+        "name": "Queue review request",
+        "attributes": {
+          "tags": [
+            "review_requested"
+          ]
+        },
+        "order": 3,
+        "parentKey": "843065ab-5228-43fd-b521-f820d7ebfabb"
+      }
+    ]
+  },
+  "permissionMeta": {
+    "canRead": true,
+    "canWrite": true
+  }
+}

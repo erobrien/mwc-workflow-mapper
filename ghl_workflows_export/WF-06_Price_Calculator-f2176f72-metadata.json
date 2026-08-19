@@ -1,0 +1,75 @@
+{
+  "_id": "f2176f72-9056-408e-a43d-b88edcb26e7c",
+  "locationId": "zHKH8aRDdNq47oYmdsN1",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 9,
+  "name": "WF-06 Price Calculator",
+  "version": 7,
+  "dataVersion": 7,
+  "allowMultiple": false,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/zHKH8aRDdNq47oYmdsN1/workflows/f2176f72-9056-408e-a43d-b88edcb26e7c/7",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FzHKH8aRDdNq47oYmdsN1%2Fworkflows%2Ff2176f72-9056-408e-a43d-b88edcb26e7c%2F7?alt=media&token=c5aac9cf-2705-4048-90b3-9d7599f21f67",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "permission": 380,
+  "type": "workflow",
+  "createdAt": "2026-08-14T00:07:06.577Z",
+  "updatedAt": "2026-08-18T16:30:14.035Z",
+  "deleted": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "user",
+  "__v": 0,
+  "allowMultipleOpportunity": false,
+  "eventStartDate": null,
+  "window": null,
+  "workflowNote": null,
+  "triggersFilePath": "location/zHKH8aRDdNq47oYmdsN1/workflow-triggers/f2176f72-9056-408e-a43d-b88edcb26e7c/7",
+  "meta": {
+    "stepIndexCounter": {
+      "custom_code": 1
+    }
+  },
+  "status": "published",
+  "updatedBy": "3FOo2Q1P6ghfsPDVm6j1",
+  "id": "f2176f72-9056-408e-a43d-b88edcb26e7c",
+  "workflowData": {
+    "templates": [
+      {
+        "id": "af8ba3c6-2558-422e-b1a4-4da650ecff2e",
+        "type": "custom_code",
+        "name": "Compute estimate",
+        "attributes": {
+          "code": "// Compute estimate from contact pricing inputs\nconst mins = Number(\"{{contact.pricing_minutes}}\") || 0;\nconst rate = 1; // placeholder rate card\nreturn { estimate: mins * rate };",
+          "language": "javascript",
+          "timeout": 30,
+          "inputData": {},
+          "output": {
+            "estimate": 0
+          }
+        },
+        "order": 0,
+        "next": "a76d50e8-6f44-4fb9-b741-e633772425a1",
+        "stepIndex": 1
+      },
+      {
+        "id": "a76d50e8-6f44-4fb9-b741-e633772425a1",
+        "type": "update_contact_field",
+        "name": "Stamp pricing output",
+        "attributes": {
+          "fieldKey": "contact.price_estimate",
+          "fieldValue": "{{custom.estimate}}",
+          "appendValue": false
+        },
+        "order": 1,
+        "parentKey": "af8ba3c6-2558-422e-b1a4-4da650ecff2e"
+      }
+    ]
+  },
+  "permissionMeta": {
+    "canRead": true,
+    "canWrite": true
+  }
+}

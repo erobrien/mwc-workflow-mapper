@@ -1,0 +1,89 @@
+{
+  "_id": "132bed34-2f57-4b0f-b8bf-d6f144138c3e",
+  "locationId": "zHKH8aRDdNq47oYmdsN1",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 9,
+  "name": "WF-11 DNC / Wrong Number / Suppression",
+  "version": 8,
+  "dataVersion": 7,
+  "allowMultiple": false,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/zHKH8aRDdNq47oYmdsN1/workflows/132bed34-2f57-4b0f-b8bf-d6f144138c3e/8",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FzHKH8aRDdNq47oYmdsN1%2Fworkflows%2F132bed34-2f57-4b0f-b8bf-d6f144138c3e%2F8?alt=media&token=383c2380-2f67-49e5-bda0-875667d0d72c",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "permission": 380,
+  "type": "workflow",
+  "createdAt": "2026-08-14T00:07:23.637Z",
+  "updatedAt": "2026-08-18T16:32:08.690Z",
+  "deleted": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "user",
+  "__v": 0,
+  "allowMultipleOpportunity": false,
+  "eventStartDate": null,
+  "window": null,
+  "workflowNote": null,
+  "triggersFilePath": "location/zHKH8aRDdNq47oYmdsN1/workflow-triggers/132bed34-2f57-4b0f-b8bf-d6f144138c3e/7",
+  "status": "published",
+  "updatedBy": "3FOo2Q1P6ghfsPDVm6j1",
+  "id": "132bed34-2f57-4b0f-b8bf-d6f144138c3e",
+  "workflowData": {
+    "templates": [
+      {
+        "id": "a4f59c02-56b0-45c1-838f-5aef441bddfb",
+        "type": "remove_from_workflow",
+        "name": "Remove from nurture",
+        "attributes": {
+          "allWorkflows": true,
+          "includeCurrent": false
+        },
+        "order": 0,
+        "next": "7ae45edb-8c3d-4bde-9029-9669a7e4fecd"
+      },
+      {
+        "id": "7ae45edb-8c3d-4bde-9029-9669a7e4fecd",
+        "type": "update_contact_field",
+        "name": "Set DNC",
+        "attributes": {
+          "fieldKey": "contact.dnd",
+          "fieldValue": "true",
+          "appendValue": false
+        },
+        "order": 1,
+        "next": "d7faf001-c558-4cb8-a2a6-ec6463df02e7",
+        "parentKey": "a4f59c02-56b0-45c1-838f-5aef441bddfb"
+      },
+      {
+        "id": "d7faf001-c558-4cb8-a2a6-ec6463df02e7",
+        "type": "add_contact_tag",
+        "name": "Tag dnc",
+        "attributes": {
+          "tags": [
+            "dnc"
+          ]
+        },
+        "order": 2,
+        "next": "49cf5224-9a87-4979-9be0-512d8923db19",
+        "parentKey": "7ae45edb-8c3d-4bde-9029-9669a7e4fecd"
+      },
+      {
+        "id": "49cf5224-9a87-4979-9be0-512d8923db19",
+        "type": "sms",
+        "name": "OOO auto-reply",
+        "attributes": {
+          "body": "Hi {{contact.first_name}}, you've been unsubscribed from messages. Reply START to opt back in.",
+          "testMode": false
+        },
+        "order": 3,
+        "parentKey": "d7faf001-c558-4cb8-a2a6-ec6463df02e7"
+      }
+    ]
+  },
+  "permissionMeta": {
+    "canRead": true,
+    "canWrite": true
+  }
+}

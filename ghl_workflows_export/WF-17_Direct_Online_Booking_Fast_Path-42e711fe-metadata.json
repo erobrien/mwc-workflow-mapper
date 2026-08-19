@@ -1,0 +1,104 @@
+{
+  "_id": "42e711fe-97b8-4f79-9420-5d41cb2a0ddb",
+  "locationId": "zHKH8aRDdNq47oYmdsN1",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 9,
+  "name": "WF-17 Direct Online Booking Fast Path",
+  "version": 11,
+  "dataVersion": 7,
+  "allowMultiple": false,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/zHKH8aRDdNq47oYmdsN1/workflows/42e711fe-97b8-4f79-9420-5d41cb2a0ddb/10",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FzHKH8aRDdNq47oYmdsN1%2Fworkflows%2F42e711fe-97b8-4f79-9420-5d41cb2a0ddb%2F10?alt=media&token=827fec28-1714-4b9e-b160-5a219a8f747f",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "permission": 380,
+  "type": "workflow",
+  "createdAt": "2026-08-14T00:07:38.770Z",
+  "updatedAt": "2026-08-18T16:50:53.842Z",
+  "deleted": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "user",
+  "__v": 0,
+  "allowMultipleOpportunity": false,
+  "eventStartDate": null,
+  "window": null,
+  "workflowNote": null,
+  "triggersFilePath": "location/zHKH8aRDdNq47oYmdsN1/workflow-triggers/42e711fe-97b8-4f79-9420-5d41cb2a0ddb/11",
+  "meta": {
+    "stepIndexCounter": {
+      "custom_code": 1
+    }
+  },
+  "status": "published",
+  "updatedBy": "3FOo2Q1P6ghfsPDVm6j1",
+  "id": "42e711fe-97b8-4f79-9420-5d41cb2a0ddb",
+  "workflowData": {
+    "templates": [
+      {
+        "id": "82a70c98-22f7-47b7-b939-e3eaf082dc72",
+        "type": "custom_code",
+        "name": "booking-complete -> skip nurture + create appt",
+        "attributes": {
+          "code": "// booking-complete -> skip nurture + create appt\nconst url = \"https://chvthkqmwxrskkegwkuo.supabase.co/functions/v1/booking-fast-path\";\nconst payload = {\n  ghl_contact_id: \"{{contact.id}}\", ghl_opportunity_id: \"{{opportunity.id}}\",\n  ghl_appointment_id: \"{{appointment.id}}\", pipeline_id: \"{{opportunity.pipeline_id}}\",\n  new_pipeline_stage_id: \"{{opportunity.stage_id}}\", appointment_status: \"{{appointment.status}}\",\n  monetary_value: Number(\"{{opportunity.monetary_value}}\") || 0, source: \"{{contact.source}}\"\n};\nlet lastErr;\nfor (let attempt = 1; attempt <= 3; attempt++) {\n  try {\n    const res = await fetch(url, { method: \"POST\", headers: {\"Content-Type\":\"application/json\"}, body: JSON.stringify(payload) });\n    if (res.ok) return { success: true, attempt, status: res.status };\n    lastErr = \"HTTP \" + res.status + \": \" + (await res.text());\n  } catch (e) { lastErr = (e && e.message) ? e.message : String(e); }\n}\nreturn { success: false, error: lastErr };",
+          "language": "javascript",
+          "timeout": 30,
+          "inputData": {},
+          "output": {
+            "success": false,
+            "error": "fetch is not defined"
+          }
+        },
+        "order": 0,
+        "next": "5a64c57d-d2c9-444d-a64b-f26b3a4a1d08",
+        "stepIndex": 1
+      },
+      {
+        "id": "5a64c57d-d2c9-444d-a64b-f26b3a4a1d08",
+        "type": "remove_contact_tag",
+        "name": "Skip nurture (remove new_lead)",
+        "attributes": {
+          "tags": [
+            "new_lead"
+          ]
+        },
+        "order": 1,
+        "next": "752f470c-61c9-484b-84c3-479930c31a8d",
+        "parentKey": "82a70c98-22f7-47b7-b939-e3eaf082dc72"
+      },
+      {
+        "id": "752f470c-61c9-484b-84c3-479930c31a8d",
+        "type": "add_to_workflow",
+        "name": "Hand to WF-03 Appointment Lifecycle",
+        "attributes": {
+          "workflowId": "53867cdd-049d-4a02-9b88-febe5c490c7e",
+          "allowMultiple": false,
+          "input_trigger_params": true,
+          "type": "add_to_workflow",
+          "workflow_id": "53867cdd-049d-4a02-9b88-febe5c490c7e"
+        },
+        "order": 2,
+        "next": "2e0791bb-2f51-4b66-9e79-b76dcac46fed",
+        "parentKey": "5a64c57d-d2c9-444d-a64b-f26b3a4a1d08"
+      },
+      {
+        "id": "2e0791bb-2f51-4b66-9e79-b76dcac46fed",
+        "type": "add_contact_tag",
+        "name": "Tag direct_booking",
+        "attributes": {
+          "tags": [
+            "direct_booking"
+          ]
+        },
+        "order": 3,
+        "parentKey": "752f470c-61c9-484b-84c3-479930c31a8d"
+      }
+    ]
+  },
+  "permissionMeta": {
+    "canRead": true,
+    "canWrite": true
+  }
+}

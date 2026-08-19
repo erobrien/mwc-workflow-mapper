@@ -1,0 +1,68 @@
+{
+  "_id": "e4d9ba92-45cc-4c6f-bdc7-7e7c20910a0c",
+  "locationId": "zHKH8aRDdNq47oYmdsN1",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 9,
+  "name": "WF-14 Notification & Webhook Fan-Out",
+  "version": 6,
+  "dataVersion": 7,
+  "allowMultiple": false,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/zHKH8aRDdNq47oYmdsN1/workflows/e4d9ba92-45cc-4c6f-bdc7-7e7c20910a0c/6",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FzHKH8aRDdNq47oYmdsN1%2Fworkflows%2Fe4d9ba92-45cc-4c6f-bdc7-7e7c20910a0c%2F6?alt=media&token=97da3657-7924-4fc9-abc9-183cec1f8aa6",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "permission": 380,
+  "type": "workflow",
+  "createdAt": "2026-08-14T00:07:31.296Z",
+  "updatedAt": "2026-08-18T16:32:49.225Z",
+  "deleted": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "user",
+  "__v": 0,
+  "allowMultipleOpportunity": false,
+  "eventStartDate": null,
+  "window": null,
+  "workflowNote": null,
+  "triggersFilePath": "location/zHKH8aRDdNq47oYmdsN1/workflow-triggers/e4d9ba92-45cc-4c6f-bdc7-7e7c20910a0c/6",
+  "status": "published",
+  "updatedBy": "3FOo2Q1P6ghfsPDVm6j1",
+  "id": "e4d9ba92-45cc-4c6f-bdc7-7e7c20910a0c",
+  "workflowData": {
+    "templates": [
+      {
+        "id": "efe1f6da-e158-4d59-8909-8b73476d9f09",
+        "type": "internal_notification",
+        "name": "Route to human",
+        "attributes": {
+          "type": "email",
+          "email": {
+            "subject": "Notify: {{contact.first_name}}",
+            "html": "<p>Notification fan-out for {{contact.first_name}} {{contact.last_name}} ({{contact.source}}).</p>",
+            "userType": "assigned"
+          }
+        },
+        "order": 0,
+        "next": "03ad101e-5407-414e-badf-c445b79d76c8"
+      },
+      {
+        "id": "03ad101e-5407-414e-badf-c445b79d76c8",
+        "type": "custom_code",
+        "name": "PCC referral + bounce webhook",
+        "attributes": {
+          "code": "// Webhook fan-out to PCC referral + bounce handling\nconst url = \"https://chvthkqmwxrskkegwkuo.supabase.co/functions/v1/notify-fanout\";\nconst res = await fetch(url, { method: \"POST\", headers: {\"Content-Type\":\"application/json\"}, body: JSON.stringify({ contact_id: \"{{contact.id}}\", tag: \"{{trigger.tag}}\" }) });\nreturn { ok: res.ok };",
+          "language": "javascript",
+          "timeout": 30
+        },
+        "order": 1,
+        "parentKey": "efe1f6da-e158-4d59-8909-8b73476d9f09"
+      }
+    ]
+  },
+  "permissionMeta": {
+    "canRead": true,
+    "canWrite": true
+  }
+}

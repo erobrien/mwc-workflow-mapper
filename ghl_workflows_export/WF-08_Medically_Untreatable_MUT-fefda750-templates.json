@@ -1,0 +1,56 @@
+{
+  "templates": [
+    {
+      "id": "dc8f23af-0f09-41c5-997a-cd964c8c82cb",
+      "type": "remove_from_workflow",
+      "name": "Remove from all nurture",
+      "attributes": {
+        "allWorkflows": true,
+        "includeCurrent": false
+      },
+      "order": 0,
+      "next": "c7fb76aa-485f-4bd4-bd66-8e033ecb46ea"
+    },
+    {
+      "id": "c7fb76aa-485f-4bd4-bd66-8e033ecb46ea",
+      "type": "add_contact_tag",
+      "name": "Tag mut",
+      "attributes": {
+        "tags": [
+          "mut"
+        ]
+      },
+      "order": 1,
+      "next": "1077cac5-2e17-4564-9bfe-4e0045543b0f",
+      "parentKey": "dc8f23af-0f09-41c5-997a-cd964c8c82cb"
+    },
+    {
+      "id": "1077cac5-2e17-4564-9bfe-4e0045543b0f",
+      "type": "internal_notification",
+      "name": "Notify team",
+      "attributes": {
+        "type": "email",
+        "email": {
+          "subject": "MUT contact",
+          "html": "<p>{{contact.first_name}} marked medically untreatable.</p>",
+          "userType": "assigned"
+        }
+      },
+      "order": 2,
+      "next": "8d6734d8-0c0c-43d0-ae22-ac5b8fe56b1e",
+      "parentKey": "c7fb76aa-485f-4bd4-bd66-8e033ecb46ea"
+    },
+    {
+      "id": "8d6734d8-0c0c-43d0-ae22-ac5b8fe56b1e",
+      "type": "update_contact_field",
+      "name": "Close out",
+      "attributes": {
+        "fieldKey": "contact.lifecycle_stage",
+        "fieldValue": "closed_mut",
+        "appendValue": false
+      },
+      "order": 3,
+      "parentKey": "1077cac5-2e17-4564-9bfe-4e0045543b0f"
+    }
+  ]
+}

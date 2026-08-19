@@ -1,0 +1,58 @@
+{
+  "templates": [
+    {
+      "id": "8bda85dd-ae31-4528-aa60-98593f3e4fec",
+      "type": "add_contact_tag",
+      "name": "Tag cancelled",
+      "attributes": {
+        "tags": [
+          "cancelled"
+        ]
+      },
+      "order": 0,
+      "next": "732fc733-5268-4363-bef3-2d0a861ae45b"
+    },
+    {
+      "id": "732fc733-5268-4363-bef3-2d0a861ae45b",
+      "type": "wait",
+      "name": "Wait 60m",
+      "attributes": {
+        "type": "time",
+        "startAfter": {
+          "type": "minutes",
+          "value": 60,
+          "when": "after"
+        },
+        "isHybridAction": true,
+        "hybridActionType": "wait"
+      },
+      "order": 1,
+      "next": "2e9fff77-32bc-44b2-9e96-efb03fdfd6bb",
+      "parentKey": "8bda85dd-ae31-4528-aa60-98593f3e4fec"
+    },
+    {
+      "id": "2e9fff77-32bc-44b2-9e96-efb03fdfd6bb",
+      "type": "sms",
+      "name": "Rebook SMS",
+      "attributes": {
+        "body": "Hi {{contact.first_name}}, we saw you had to cancel. Want to grab a new time? Reply REBOOK.",
+        "testMode": false
+      },
+      "order": 2,
+      "next": "088cdc3d-99a2-40ef-b409-e986921a39e7",
+      "parentKey": "732fc733-5268-4363-bef3-2d0a861ae45b"
+    },
+    {
+      "id": "088cdc3d-99a2-40ef-b409-e986921a39e7",
+      "type": "add_contact_tag",
+      "name": "Tag rebook_active",
+      "attributes": {
+        "tags": [
+          "rebook_active"
+        ]
+      },
+      "order": 3,
+      "parentKey": "2e9fff77-32bc-44b2-9e96-efb03fdfd6bb"
+    }
+  ]
+}

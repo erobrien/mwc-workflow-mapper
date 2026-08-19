@@ -1,0 +1,58 @@
+{
+  "templates": [
+    {
+      "id": "2db57b94-a2d8-457a-8451-90d37dcb62ce",
+      "type": "add_contact_tag",
+      "name": "Tag no_show",
+      "attributes": {
+        "tags": [
+          "no_show"
+        ]
+      },
+      "order": 0,
+      "next": "dfd3b910-4e64-4bae-b7f1-acca9ef2571a"
+    },
+    {
+      "id": "dfd3b910-4e64-4bae-b7f1-acca9ef2571a",
+      "type": "wait",
+      "name": "Wait 30m",
+      "attributes": {
+        "type": "time",
+        "startAfter": {
+          "type": "minutes",
+          "value": 30,
+          "when": "after"
+        },
+        "isHybridAction": true,
+        "hybridActionType": "wait"
+      },
+      "order": 1,
+      "next": "403f6314-25f6-4a93-b057-b4167d253154",
+      "parentKey": "2db57b94-a2d8-457a-8451-90d37dcb62ce"
+    },
+    {
+      "id": "403f6314-25f6-4a93-b057-b4167d253154",
+      "type": "sms",
+      "name": "Reschedule SMS",
+      "attributes": {
+        "body": "Hi {{contact.first_name}}, we missed you today at {{location.name}}. Reply RESCHEDULE and we'll find you a new slot.",
+        "testMode": false
+      },
+      "order": 2,
+      "next": "0093ae55-42ed-4aef-aade-065b7cea8667",
+      "parentKey": "dfd3b910-4e64-4bae-b7f1-acca9ef2571a"
+    },
+    {
+      "id": "0093ae55-42ed-4aef-aade-065b7cea8667",
+      "type": "add_contact_tag",
+      "name": "Tag reschedule_active",
+      "attributes": {
+        "tags": [
+          "reschedule_active"
+        ]
+      },
+      "order": 3,
+      "parentKey": "403f6314-25f6-4a93-b057-b4167d253154"
+    }
+  ]
+}

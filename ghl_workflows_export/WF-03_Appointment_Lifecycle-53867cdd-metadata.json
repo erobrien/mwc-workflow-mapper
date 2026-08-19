@@ -1,0 +1,119 @@
+{
+  "_id": "53867cdd-049d-4a02-9b88-febe5c490c7e",
+  "locationId": "zHKH8aRDdNq47oYmdsN1",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 9,
+  "name": "WF-03 Appointment Lifecycle",
+  "version": 10,
+  "dataVersion": 7,
+  "allowMultiple": false,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/zHKH8aRDdNq47oYmdsN1/workflows/53867cdd-049d-4a02-9b88-febe5c490c7e/10",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FzHKH8aRDdNq47oYmdsN1%2Fworkflows%2F53867cdd-049d-4a02-9b88-febe5c490c7e%2F10?alt=media&token=77295b6f-5454-4b47-819d-51884e4b826e",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "permission": 380,
+  "type": "workflow",
+  "createdAt": "2026-08-14T00:07:01.345Z",
+  "updatedAt": "2026-08-18T16:29:33.904Z",
+  "deleted": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "user",
+  "__v": 0,
+  "allowMultipleOpportunity": false,
+  "eventStartDate": null,
+  "window": null,
+  "workflowNote": null,
+  "triggersFilePath": "location/zHKH8aRDdNq47oYmdsN1/workflow-triggers/53867cdd-049d-4a02-9b88-febe5c490c7e/9",
+  "meta": {
+    "stepIndexCounter": {
+      "custom_code": 1
+    }
+  },
+  "status": "published",
+  "updatedBy": "3FOo2Q1P6ghfsPDVm6j1",
+  "id": "53867cdd-049d-4a02-9b88-febe5c490c7e",
+  "workflowData": {
+    "templates": [
+      {
+        "id": "e2484f6f-40c5-4f34-9667-b078802128e0",
+        "type": "sms",
+        "name": "Confirm SMS",
+        "attributes": {
+          "body": "Hi {{contact.first_name}}, confirming your appointment at {{location.name}}. Reply C to confirm.",
+          "testMode": false
+        },
+        "order": 0,
+        "next": "ee1d7af5-88db-4d7d-8a07-9cf494b08def"
+      },
+      {
+        "id": "ee1d7af5-88db-4d7d-8a07-9cf494b08def",
+        "type": "add_contact_tag",
+        "name": "Tag appt_confirmed",
+        "attributes": {
+          "tags": [
+            "appt_confirmed"
+          ]
+        },
+        "order": 1,
+        "next": "e1126b20-f772-49a1-a875-03016d951de5",
+        "parentKey": "e2484f6f-40c5-4f34-9667-b078802128e0"
+      },
+      {
+        "id": "e1126b20-f772-49a1-a875-03016d951de5",
+        "type": "internal_notification",
+        "name": "Notify team",
+        "attributes": {
+          "type": "email",
+          "email": {
+            "subject": "Appointment booked",
+            "html": "<p>{{contact.first_name}} {{contact.last_name}} booked at {{location.name}}.</p>",
+            "userType": "assigned"
+          }
+        },
+        "order": 2,
+        "next": "f8552ff2-8260-4b72-b070-b7722ba61b61",
+        "parentKey": "ee1d7af5-88db-4d7d-8a07-9cf494b08def"
+      },
+      {
+        "id": "f8552ff2-8260-4b72-b070-b7722ba61b61",
+        "type": "custom_code",
+        "name": "Emit showed/won -> outcome-capture fn (SOLE signal wire)",
+        "attributes": {
+          "code": "// Emit showed/won -> outcome-capture fn (SOLE signal wire)\nconst url = \"https://chvthkqmwxrskkegwkuo.supabase.co/functions/v1/outcome-capture\";\nconst payload = {\n  ghl_contact_id: \"{{contact.id}}\", ghl_opportunity_id: \"{{opportunity.id}}\",\n  ghl_appointment_id: \"{{appointment.id}}\", pipeline_id: \"{{opportunity.pipeline_id}}\",\n  new_pipeline_stage_id: \"{{opportunity.stage_id}}\", appointment_status: \"{{appointment.status}}\",\n  monetary_value: Number(\"{{opportunity.monetary_value}}\") || 0, source: \"{{contact.source}}\"\n};\nlet lastErr;\nfor (let attempt = 1; attempt <= 3; attempt++) {\n  try {\n    const res = await fetch(url, { method: \"POST\", headers: {\"Content-Type\":\"application/json\"}, body: JSON.stringify(payload) });\n    if (res.ok) return { success: true, attempt, status: res.status };\n    lastErr = \"HTTP \" + res.status + \": \" + (await res.text());\n  } catch (e) { lastErr = (e && e.message) ? e.message : String(e); }\n}\nreturn { success: false, error: lastErr };",
+          "language": "javascript",
+          "timeout": 30,
+          "inputData": {},
+          "output": {
+            "success": false,
+            "error": "fetch is not defined"
+          }
+        },
+        "order": 3,
+        "next": "9466fab7-94c6-44a4-bae2-e99892be97be",
+        "parentKey": "e1126b20-f772-49a1-a875-03016d951de5",
+        "stepIndex": 1
+      },
+      {
+        "id": "9466fab7-94c6-44a4-bae2-e99892be97be",
+        "type": "add_to_workflow",
+        "name": "Hand showed to WF-07",
+        "attributes": {
+          "workflowId": "21a41790-41ee-4670-90d8-c75abfe90825",
+          "allowMultiple": false,
+          "input_trigger_params": true,
+          "type": "add_to_workflow",
+          "workflow_id": "21a41790-41ee-4670-90d8-c75abfe90825"
+        },
+        "order": 4,
+        "parentKey": "f8552ff2-8260-4b72-b070-b7722ba61b61"
+      }
+    ]
+  },
+  "permissionMeta": {
+    "canRead": true,
+    "canWrite": true
+  }
+}

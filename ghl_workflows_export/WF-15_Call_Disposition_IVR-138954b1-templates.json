@@ -1,0 +1,28 @@
+{
+  "templates": [
+    {
+      "id": "c976684e-8d1e-4079-a5a5-2500da8a8111",
+      "type": "custom_code",
+      "name": "Call disposition + IVR fan-out + write call outcome",
+      "attributes": {
+        "code": "// Call disposition + IVR fan-out + write call outcome\nconst url = \"https://chvthkqmwxrskkegwkuo.supabase.co/functions/v1/call-disposition\";\nconst payload = {\n  ghl_contact_id: \"{{contact.id}}\", ghl_opportunity_id: \"{{opportunity.id}}\",\n  ghl_appointment_id: \"{{appointment.id}}\", pipeline_id: \"{{opportunity.pipeline_id}}\",\n  new_pipeline_stage_id: \"{{opportunity.stage_id}}\", appointment_status: \"{{appointment.status}}\",\n  monetary_value: Number(\"{{opportunity.monetary_value}}\") || 0, source: \"{{contact.source}}\"\n};\nlet lastErr;\nfor (let attempt = 1; attempt <= 3; attempt++) {\n  try {\n    const res = await fetch(url, { method: \"POST\", headers: {\"Content-Type\":\"application/json\"}, body: JSON.stringify(payload) });\n    if (res.ok) return { success: true, attempt, status: res.status };\n    lastErr = \"HTTP \" + res.status + \": \" + (await res.text());\n  } catch (e) { lastErr = (e && e.message) ? e.message : String(e); }\n}\nreturn { success: false, error: lastErr };",
+        "language": "javascript",
+        "timeout": 30
+      },
+      "order": 0,
+      "next": "a0ef726e-f117-4f85-ac95-c2f0df0f57dd"
+    },
+    {
+      "id": "a0ef726e-f117-4f85-ac95-c2f0df0f57dd",
+      "type": "add_contact_tag",
+      "name": "Tag call_*",
+      "attributes": {
+        "tags": [
+          "call_outcome_recorded"
+        ]
+      },
+      "order": 1,
+      "parentKey": "c976684e-8d1e-4079-a5a5-2500da8a8111"
+    }
+  ]
+}

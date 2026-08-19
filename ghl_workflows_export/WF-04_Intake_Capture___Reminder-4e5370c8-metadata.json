@@ -1,0 +1,113 @@
+{
+  "_id": "4e5370c8-9e97-4a58-9adc-7709ba79ada8",
+  "locationId": "zHKH8aRDdNq47oYmdsN1",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 9,
+  "name": "WF-04 Intake Capture & Reminder",
+  "version": 9,
+  "dataVersion": 7,
+  "allowMultiple": false,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/zHKH8aRDdNq47oYmdsN1/workflows/4e5370c8-9e97-4a58-9adc-7709ba79ada8/9",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FzHKH8aRDdNq47oYmdsN1%2Fworkflows%2F4e5370c8-9e97-4a58-9adc-7709ba79ada8%2F9?alt=media&token=cacf7bcd-e5fc-48ad-b023-af05f3a8b806",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "permission": 380,
+  "type": "workflow",
+  "createdAt": "2026-08-14T00:07:04.285Z",
+  "updatedAt": "2026-08-18T16:29:44.003Z",
+  "deleted": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "user",
+  "__v": 0,
+  "allowMultipleOpportunity": false,
+  "eventStartDate": null,
+  "window": null,
+  "workflowNote": null,
+  "meta": {
+    "stepIndexCounter": {
+      "custom_code": 2
+    }
+  },
+  "status": "published",
+  "triggersFilePath": "location/zHKH8aRDdNq47oYmdsN1/workflow-triggers/4e5370c8-9e97-4a58-9adc-7709ba79ada8/9",
+  "updatedBy": "3FOo2Q1P6ghfsPDVm6j1",
+  "id": "4e5370c8-9e97-4a58-9adc-7709ba79ada8",
+  "workflowData": {
+    "templates": [
+      {
+        "id": "f8838806-a6bd-48a4-8181-477578657f3b",
+        "type": "custom_code",
+        "name": "Capture intake response",
+        "attributes": {
+          "code": "// Capture intake response\nconst url = \"https://chvthkqmwxrskkegwkuo.supabase.co/functions/v1/intake-capture\";\nconst payload = {\n  ghl_contact_id: \"{{contact.id}}\", ghl_opportunity_id: \"{{opportunity.id}}\",\n  ghl_appointment_id: \"{{appointment.id}}\", pipeline_id: \"{{opportunity.pipeline_id}}\",\n  new_pipeline_stage_id: \"{{opportunity.stage_id}}\", appointment_status: \"{{appointment.status}}\",\n  monetary_value: Number(\"{{opportunity.monetary_value}}\") || 0, source: \"{{contact.source}}\"\n};\nlet lastErr;\nfor (let attempt = 1; attempt <= 3; attempt++) {\n  try {\n    const res = await fetch(url, { method: \"POST\", headers: {\"Content-Type\":\"application/json\"}, body: JSON.stringify(payload) });\n    if (res.ok) return { success: true, attempt, status: res.status };\n    lastErr = \"HTTP \" + res.status + \": \" + (await res.text());\n  } catch (e) { lastErr = (e && e.message) ? e.message : String(e); }\n}\nreturn { success: false, error: lastErr };",
+          "language": "javascript",
+          "timeout": 30,
+          "inputData": {},
+          "output": {
+            "success": false,
+            "error": "fetch is not defined"
+          }
+        },
+        "order": 0,
+        "next": "43ef5efd-3b81-4f81-88bd-08ab13981839",
+        "stepIndex": 1
+      },
+      {
+        "id": "43ef5efd-3b81-4f81-88bd-08ab13981839",
+        "type": "wait",
+        "name": "Wait 2h before appt chase",
+        "attributes": {
+          "type": "time",
+          "startAfter": {
+            "type": "minutes",
+            "value": 120,
+            "when": "after"
+          },
+          "isHybridAction": true,
+          "hybridActionType": "wait"
+        },
+        "order": 1,
+        "next": "7129799e-2e74-4d98-b6ba-81a6d4d91830",
+        "parentKey": "f8838806-a6bd-48a4-8181-477578657f3b"
+      },
+      {
+        "id": "7129799e-2e74-4d98-b6ba-81a6d4d91830",
+        "type": "custom_code",
+        "name": "Chase incomplete intake",
+        "attributes": {
+          "code": "// Chase incomplete intake\nconst url = \"https://chvthkqmwxrskkegwkuo.supabase.co/functions/v1/intake-capture\";\nconst payload = {\n  ghl_contact_id: \"{{contact.id}}\", ghl_opportunity_id: \"{{opportunity.id}}\",\n  ghl_appointment_id: \"{{appointment.id}}\", pipeline_id: \"{{opportunity.pipeline_id}}\",\n  new_pipeline_stage_id: \"{{opportunity.stage_id}}\", appointment_status: \"{{appointment.status}}\",\n  monetary_value: Number(\"{{opportunity.monetary_value}}\") || 0, source: \"{{contact.source}}\"\n};\nlet lastErr;\nfor (let attempt = 1; attempt <= 3; attempt++) {\n  try {\n    const res = await fetch(url, { method: \"POST\", headers: {\"Content-Type\":\"application/json\"}, body: JSON.stringify(payload) });\n    if (res.ok) return { success: true, attempt, status: res.status };\n    lastErr = \"HTTP \" + res.status + \": \" + (await res.text());\n  } catch (e) { lastErr = (e && e.message) ? e.message : String(e); }\n}\nreturn { success: false, error: lastErr };",
+          "language": "javascript",
+          "timeout": 30,
+          "inputData": {},
+          "output": {
+            "success": false,
+            "error": "fetch is not defined"
+          }
+        },
+        "order": 2,
+        "next": "2e257c82-fb42-4d9b-86f7-504f6a4e46f9",
+        "parentKey": "43ef5efd-3b81-4f81-88bd-08ab13981839",
+        "stepIndex": 2
+      },
+      {
+        "id": "2e257c82-fb42-4d9b-86f7-504f6a4e46f9",
+        "type": "add_contact_tag",
+        "name": "Tag intake_complete",
+        "attributes": {
+          "tags": [
+            "intake_complete"
+          ]
+        },
+        "order": 3,
+        "parentKey": "7129799e-2e74-4d98-b6ba-81a6d4d91830"
+      }
+    ]
+  },
+  "permissionMeta": {
+    "canRead": true,
+    "canWrite": true
+  }
+}

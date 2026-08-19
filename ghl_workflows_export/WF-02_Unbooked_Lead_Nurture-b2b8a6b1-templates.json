@@ -1,0 +1,77 @@
+{
+  "templates": [
+    {
+      "id": "6d6ec7fb-05a0-429b-89b4-5e35f5bac7fd",
+      "type": "wait",
+      "name": "Wait 5m",
+      "attributes": {
+        "type": "time",
+        "startAfter": {
+          "type": "minutes",
+          "value": 5,
+          "when": "after"
+        },
+        "isHybridAction": true,
+        "hybridActionType": "wait"
+      },
+      "order": 0,
+      "next": "c1d2f8ce-4c48-41b0-9948-96ee9c55ee57"
+    },
+    {
+      "id": "c1d2f8ce-4c48-41b0-9948-96ee9c55ee57",
+      "type": "sms",
+      "name": "Nurture SMS 1",
+      "attributes": {
+        "body": "Hi {{contact.first_name}}, this is {{location.name}}. Want to lock in your 60-minute consult? Reply BOOK and we'll get you scheduled.",
+        "testMode": false
+      },
+      "order": 1,
+      "next": "6a90cef8-c126-4124-b0aa-7cdab1ad2565",
+      "parentKey": "6d6ec7fb-05a0-429b-89b4-5e35f5bac7fd"
+    },
+    {
+      "id": "6a90cef8-c126-4124-b0aa-7cdab1ad2565",
+      "type": "wait",
+      "name": "Wait 24h",
+      "attributes": {
+        "type": "time",
+        "startAfter": {
+          "type": "minutes",
+          "value": 1440,
+          "when": "after"
+        },
+        "isHybridAction": true,
+        "hybridActionType": "wait"
+      },
+      "order": 2,
+      "next": "2deb1d77-e4a0-482e-b7db-4904cddfa60e",
+      "parentKey": "c1d2f8ce-4c48-41b0-9948-96ee9c55ee57"
+    },
+    {
+      "id": "2deb1d77-e4a0-482e-b7db-4904cddfa60e",
+      "type": "email",
+      "name": "Nurture Email 1",
+      "attributes": {
+        "subject": "Still thinking it over, {{contact.first_name}}?",
+        "html": "<p>Hi {{contact.first_name}},</p><p>Your consult at {{location.name}} is still open. Book a time that works for you.</p>",
+        "trackOpens": true,
+        "trackClicks": true
+      },
+      "order": 3,
+      "next": "691e6bc8-77d0-497b-903a-8eeb60063003",
+      "parentKey": "6a90cef8-c126-4124-b0aa-7cdab1ad2565"
+    },
+    {
+      "id": "691e6bc8-77d0-497b-903a-8eeb60063003",
+      "type": "add_contact_tag",
+      "name": "Tag nurture_active",
+      "attributes": {
+        "tags": [
+          "nurture_active"
+        ]
+      },
+      "order": 4,
+      "parentKey": "2deb1d77-e4a0-482e-b7db-4904cddfa60e"
+    }
+  ]
+}

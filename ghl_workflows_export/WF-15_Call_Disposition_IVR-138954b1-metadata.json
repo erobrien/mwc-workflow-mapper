@@ -1,0 +1,65 @@
+{
+  "_id": "138954b1-b8a4-4ee3-a456-0391eee1c5e4",
+  "locationId": "zHKH8aRDdNq47oYmdsN1",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 9,
+  "name": "WF-15 Call Disposition / IVR",
+  "version": 10,
+  "dataVersion": 7,
+  "allowMultiple": false,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/zHKH8aRDdNq47oYmdsN1/workflows/138954b1-b8a4-4ee3-a456-0391eee1c5e4/10",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FzHKH8aRDdNq47oYmdsN1%2Fworkflows%2F138954b1-b8a4-4ee3-a456-0391eee1c5e4%2F10?alt=media&token=b7f4a85b-6d51-4c73-aa31-4e6b0328326d",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "permission": 380,
+  "type": "workflow",
+  "createdAt": "2026-08-14T00:07:33.884Z",
+  "updatedAt": "2026-08-18T16:33:02.053Z",
+  "deleted": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "user",
+  "__v": 0,
+  "allowMultipleOpportunity": false,
+  "eventStartDate": null,
+  "window": null,
+  "workflowNote": null,
+  "triggersFilePath": "location/zHKH8aRDdNq47oYmdsN1/workflow-triggers/138954b1-b8a4-4ee3-a456-0391eee1c5e4/10",
+  "status": "published",
+  "updatedBy": "3FOo2Q1P6ghfsPDVm6j1",
+  "id": "138954b1-b8a4-4ee3-a456-0391eee1c5e4",
+  "workflowData": {
+    "templates": [
+      {
+        "id": "c976684e-8d1e-4079-a5a5-2500da8a8111",
+        "type": "custom_code",
+        "name": "Call disposition + IVR fan-out + write call outcome",
+        "attributes": {
+          "code": "// Call disposition + IVR fan-out + write call outcome\nconst url = \"https://chvthkqmwxrskkegwkuo.supabase.co/functions/v1/call-disposition\";\nconst payload = {\n  ghl_contact_id: \"{{contact.id}}\", ghl_opportunity_id: \"{{opportunity.id}}\",\n  ghl_appointment_id: \"{{appointment.id}}\", pipeline_id: \"{{opportunity.pipeline_id}}\",\n  new_pipeline_stage_id: \"{{opportunity.stage_id}}\", appointment_status: \"{{appointment.status}}\",\n  monetary_value: Number(\"{{opportunity.monetary_value}}\") || 0, source: \"{{contact.source}}\"\n};\nlet lastErr;\nfor (let attempt = 1; attempt <= 3; attempt++) {\n  try {\n    const res = await fetch(url, { method: \"POST\", headers: {\"Content-Type\":\"application/json\"}, body: JSON.stringify(payload) });\n    if (res.ok) return { success: true, attempt, status: res.status };\n    lastErr = \"HTTP \" + res.status + \": \" + (await res.text());\n  } catch (e) { lastErr = (e && e.message) ? e.message : String(e); }\n}\nreturn { success: false, error: lastErr };",
+          "language": "javascript",
+          "timeout": 30
+        },
+        "order": 0,
+        "next": "a0ef726e-f117-4f85-ac95-c2f0df0f57dd"
+      },
+      {
+        "id": "a0ef726e-f117-4f85-ac95-c2f0df0f57dd",
+        "type": "add_contact_tag",
+        "name": "Tag call_*",
+        "attributes": {
+          "tags": [
+            "call_outcome_recorded"
+          ]
+        },
+        "order": 1,
+        "parentKey": "c976684e-8d1e-4079-a5a5-2500da8a8111"
+      }
+    ]
+  },
+  "permissionMeta": {
+    "canRead": true,
+    "canWrite": true
+  }
+}

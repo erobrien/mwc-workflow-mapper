@@ -1,0 +1,93 @@
+{
+  "_id": "fefda750-9543-4888-8b4d-9452b656b957",
+  "locationId": "zHKH8aRDdNq47oYmdsN1",
+  "companyId": "xkONhHmk6IiSEOV55iEa",
+  "companyAge": 9,
+  "name": "WF-08 Medically Untreatable (MUT)",
+  "version": 10,
+  "dataVersion": 7,
+  "allowMultiple": false,
+  "timezone": "account",
+  "removeContactFromLastStep": true,
+  "filePath": "location/zHKH8aRDdNq47oYmdsN1/workflows/fefda750-9543-4888-8b4d-9452b656b957/10",
+  "fileUrl": "https://firebasestorage.googleapis.com/v0/b/automation-workflows-production/o/location%2FzHKH8aRDdNq47oYmdsN1%2Fworkflows%2Ffefda750-9543-4888-8b4d-9452b656b957%2F10?alt=media&token=a4f21833-17bb-4bb9-ae96-b466161c8ab9",
+  "stopOnResponse": false,
+  "autoMarkAsRead": false,
+  "permission": 380,
+  "type": "workflow",
+  "createdAt": "2026-08-14T00:07:12.379Z",
+  "updatedAt": "2026-08-18T16:30:46.160Z",
+  "deleted": false,
+  "creationSource": "builder",
+  "isTriggerBucketMigrated": true,
+  "originType": "user",
+  "__v": 0,
+  "allowMultipleOpportunity": false,
+  "eventStartDate": null,
+  "window": null,
+  "workflowNote": null,
+  "triggersFilePath": "location/zHKH8aRDdNq47oYmdsN1/workflow-triggers/fefda750-9543-4888-8b4d-9452b656b957/9",
+  "status": "published",
+  "updatedBy": "3FOo2Q1P6ghfsPDVm6j1",
+  "id": "fefda750-9543-4888-8b4d-9452b656b957",
+  "workflowData": {
+    "templates": [
+      {
+        "id": "dc8f23af-0f09-41c5-997a-cd964c8c82cb",
+        "type": "remove_from_workflow",
+        "name": "Remove from all nurture",
+        "attributes": {
+          "allWorkflows": true,
+          "includeCurrent": false
+        },
+        "order": 0,
+        "next": "c7fb76aa-485f-4bd4-bd66-8e033ecb46ea"
+      },
+      {
+        "id": "c7fb76aa-485f-4bd4-bd66-8e033ecb46ea",
+        "type": "add_contact_tag",
+        "name": "Tag mut",
+        "attributes": {
+          "tags": [
+            "mut"
+          ]
+        },
+        "order": 1,
+        "next": "1077cac5-2e17-4564-9bfe-4e0045543b0f",
+        "parentKey": "dc8f23af-0f09-41c5-997a-cd964c8c82cb"
+      },
+      {
+        "id": "1077cac5-2e17-4564-9bfe-4e0045543b0f",
+        "type": "internal_notification",
+        "name": "Notify team",
+        "attributes": {
+          "type": "email",
+          "email": {
+            "subject": "MUT contact",
+            "html": "<p>{{contact.first_name}} marked medically untreatable.</p>",
+            "userType": "assigned"
+          }
+        },
+        "order": 2,
+        "next": "8d6734d8-0c0c-43d0-ae22-ac5b8fe56b1e",
+        "parentKey": "c7fb76aa-485f-4bd4-bd66-8e033ecb46ea"
+      },
+      {
+        "id": "8d6734d8-0c0c-43d0-ae22-ac5b8fe56b1e",
+        "type": "update_contact_field",
+        "name": "Close out",
+        "attributes": {
+          "fieldKey": "contact.lifecycle_stage",
+          "fieldValue": "closed_mut",
+          "appendValue": false
+        },
+        "order": 3,
+        "parentKey": "1077cac5-2e17-4564-9bfe-4e0045543b0f"
+      }
+    ]
+  },
+  "permissionMeta": {
+    "canRead": true,
+    "canWrite": true
+  }
+}

@@ -9,6 +9,22 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <script>
+      // First-paint theme: default LIGHT. Storage key bumped to theme-v2 so
+      // stale theme=dark from an older build cannot force dark on load. Runs
+      // before React so there is no flash between HTML default and app state.
+      (function () {
+        try {
+          var v = localStorage.getItem('theme-v2');
+          var dark = v === 'dark';
+          var root = document.documentElement;
+          root.classList.toggle('dark', dark);
+          root.classList.toggle('light', !dark);
+        } catch (_) {
+          document.documentElement.classList.add('light');
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

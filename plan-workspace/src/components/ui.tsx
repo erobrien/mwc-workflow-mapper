@@ -86,18 +86,26 @@ export function Alert({ tone = "neutral", title, children }: { tone?: Tone; titl
   );
 }
 
-/* ---------- Theme ---------- */
+/* ---------- Theme ----------
+   Storage key was bumped to `theme-v2` on the boardroom-restyle deploy so
+   that leftover `theme=dark` values from an earlier build do not keep
+   returning visitors on the dark skin. New key defaults to light; the
+   toggle still persists. First paint is handled by the inline script in
+   index.html so there is no flash of dark. */
+const THEME_KEY = "theme-v2";
 export function useTheme() {
   const [dark, setDark] = useState(() => {
-    const s = localStorage.getItem("theme");
-    if (s) return s === "dark";
+    try {
+      const s = localStorage.getItem(THEME_KEY);
+      if (s) return s === "dark";
+    } catch { /* ignore */ }
     return false; // default light
   });
   useEffect(() => {
     const root = document.documentElement;
     root.classList.toggle("dark", dark);
     root.classList.toggle("light", !dark);
-    localStorage.setItem("theme", dark ? "dark" : "light");
+    try { localStorage.setItem(THEME_KEY, dark ? "dark" : "light"); } catch { /* ignore */ }
   }, [dark]);
   return { dark, toggle: () => setDark((d) => !d) };
 }

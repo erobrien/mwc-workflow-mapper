@@ -17,14 +17,14 @@ interface WFDetail {
   dropped_from_v2?: boolean;
 }
 
-// WF-01 to WF-17 canonical numbering. WF-13 (ad-platform CAPI + Google) was
-// dropped from the v2 spec; we do not renumber 14-17. The prior scheme
-// (message-library + per-clinic clones) is retired for traceability only.
+/* WF-01 to WF-17 canonical numbering. WF-13 (ad-platform CAPI + Google) is
+   dropped from v2; WF-14..17 keep their numbers. Left column is the retired
+   prior scheme, for traceability only. */
 const NUMBERING_CROSSWALK: { old: string; canonical: string; note: string; dropped?: boolean }[] = [
   { old: "01 Lead Capture", canonical: "WF-01 Lead Capture and Attribution", note: "trigger locked to Contact Created + tag next-lander; Method 2 clinic stamps here only" },
-  { old: "02 Non-Booked Recovery", canonical: "WF-02 Non-Booked Recovery", note: "burst SMS + native template EML | WF-02 | Non-booked 24h; marketing quiet hours apply" },
-  { old: "03 Booking Confirmation + 05 Appointment Reminders", canonical: "WF-03 Booking Confirmation and Reminders", note: "reminders merged in; appointment-relative T-3d/T-1d/T-5h/T-2h; transactional" },
-  { old: "04 Confirmation Chase", canonical: "WF-04 Medical Intake Chase", note: "SMS at +4h and +20h; uses current_booking_url until a dedicated intake URL field exists" },
+  { old: "02 Non-Booked Recovery", canonical: "WF-02 Non-Booked Recovery", note: "burst SMS + template EML | WF-02 | Non-booked 24h; marketing quiet hours apply" },
+  { old: "03 Booking Confirmation + 05 Appointment Reminders", canonical: "WF-03 Booking Confirmation and Reminders", note: "reminders merged in; T-3d/T-1d/T-5h/T-2h; transactional" },
+  { old: "04 Confirmation Chase", canonical: "WF-04 Medical Intake Chase", note: "SMS at +4h and +20h; uses current_booking_url until a dedicated intake URL exists" },
   { old: "07 Appointment Outcome (auto-Won)", canonical: "WF-05 Clinic Outcome Router", note: "inbound webhook from Force; routes on sale_outcome_v2; workflows never move stages" },
   { old: "07 Post-Visit Sold", canonical: "WF-06 Post-Visit Won and Onboarding", note: "SOLD + new only; sole writer of v2_status_active; hands to WF-10 at T+14 and WF-14 at T+21" },
   { old: "08 A&D (Advised and Declined)", canonical: "WF-07 A&D Post-Visit No-Sale Nurture", note: "sale_outcome_v2 = AD; never fires Meta pixel or CAPI" },
@@ -33,23 +33,14 @@ const NUMBERING_CROSSWALK: { old: string; canonical: string; note: string; dropp
   { old: "z Post-Visit Survey", canonical: "WF-10 Feedback Survey", note: "sole writer of contact.latest_feedback_score; marketing quiet hours" },
   { old: "scattered consent / DND steps", canonical: "WF-11 Compliance and Errors", note: "STOP inbound + MUT front-gate so MUT does not receive STOP-confirm" },
   { old: "z Call Disposition", canonical: "WF-12 Call Disposition Handler", note: "single graph keyed on channel; native update-in-place, no remove+create" },
-  { old: "CAPI outbound webhook", canonical: "WF-13 Ad-Platform Conversions", note: "Dropped from v2. Ad-platform CAPI + Google conversions are not part of the v2 shipping scope. WF-14 through WF-17 keep their numbers.", dropped: true },
+  { old: "CAPI outbound webhook", canonical: "WF-13 Ad-Platform Conversions", note: "Dropped from v2. Curve owns ad-platform conversions. WF-14 to WF-17 keep their numbers.", dropped: true },
   { old: "12 Review and Referral (referral part)", canonical: "WF-14 Ambassador Program", note: "referred contact created new, never merged; live tag ambassador-referral" },
   { old: "PCC / Ambassador referral clones", canonical: "WF-15 PCC Referral Routing", note: "utm_source=pcc_qr; live tag pcc-referral; re-enters WF-01" },
   { old: "11 Missed Call Text-Back", canonical: "WF-16 Comms Edge", note: "IVR +18663444955 + two chat widgets; no Sales opp created here" },
   { old: "06. Price Calculator", canonical: "WF-17 Price Calculator (PCC Tool)", note: "internal math only; never writes opportunity.monetaryValue" },
 ];
 
-// Workflow numbers hidden from the /to-be card grid. Kept in tobe-detail.json
-// so the generator does not break, but never surfaced as a live workflow.
 const DROPPED_FROM_V2 = new Set<string>(["13"]);
-
-const OBJECT_TONE: Record<string, "good" | "blue" | "warning" | "muted"> = {
-  Contact: "blue",
-  Opportunity: "good",
-  "External EMR": "warning",
-  Retire: "muted",
-};
 
 function DestCard({ d }: { d: FieldDestination }) {
   const short = d.target.split(" ")[0];
@@ -57,24 +48,24 @@ function DestCard({ d }: { d: FieldDestination }) {
     <Card>
       <CardContent className="p-4">
         <div className="mb-1 flex flex-wrap items-center gap-2">
-          <Badge tone={OBJECT_TONE[d.target] ?? "muted"}>{d.target}</Badge>
+          <Badge tone="neutral">{d.target}</Badge>
           <span className="text-xs text-muted-foreground">{d.card}</span>
         </div>
         <div className="mb-2 text-sm font-medium">{d.role}</div>
         <p className="mb-3 text-xs text-muted-foreground">{d.examples}</p>
         {d.removing && d.removing.length > 0 && (
           <div className="mb-2">
-            <div className="mb-1 text-[11px] font-semibold uppercase tracking-wider text-red-700 dark:text-red-400">Removing from Contact ({d.removing.length})</div>
+            <div className="mb-1 text-[11px] font-bold uppercase tracking-wider text-foreground/70">Removing from Contact ({d.removing.length})</div>
             <div className="flex flex-wrap gap-1">
-              {d.removing.map((r) => <span key={r.key} className="rounded border px-1.5 py-0.5 text-[11px] text-muted-foreground">{r.label} → {r.to}</span>)}
+              {d.removing.map((r) => <span key={r.key} className="rounded-sm border border-border px-1.5 py-0.5 text-[11px] text-foreground/80">{r.label} → {r.to}</span>)}
             </div>
           </div>
         )}
         {d.adding && d.adding.length > 0 && (
           <div>
-            <div className="mb-1 text-[11px] font-semibold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">Adding to {short} ({d.adding.length})</div>
+            <div className="mb-1 text-[11px] font-bold uppercase tracking-wider text-foreground/70">Adding to {short} ({d.adding.length})</div>
             <div className="flex flex-wrap gap-1">
-              {d.adding.map((a) => <span key={a.key} className="rounded border px-1.5 py-0.5 text-[11px] text-muted-foreground">{a.label}{a.note ? ` · ${a.note}` : ""}</span>)}
+              {d.adding.map((a) => <span key={a.key} className="rounded-sm border border-border px-1.5 py-0.5 text-[11px] text-foreground/80">{a.label}{a.note ? ` · ${a.note}` : ""}</span>)}
             </div>
           </div>
         )}
@@ -88,32 +79,29 @@ function LockedRulesCard() {
     <Card>
       <CardContent className="p-4">
         <div className="mb-2 flex items-center gap-2">
-          <Lock className="h-4 w-4 text-primary" />
-          <div className="text-sm font-semibold">Locked v2 spec (do not contradict)</div>
+          <Lock className="h-4 w-4 text-accent" />
+          <div className="text-sm font-bold text-foreground">Locked v2 spec</div>
         </div>
         <ul className="grid gap-1.5 text-xs text-foreground/90 sm:grid-cols-2">
-          <li>Native GHL only. No <code className="rounded bg-muted px-1">custom_code</code>, no new SAC / Supabase backends.</li>
-          <li>Clinics: <code className="rounded bg-muted px-1">richmond</code> · <code className="rounded bg-muted px-1">virginia-beach</code> · <code className="rounded bg-muted px-1">newport-news</code>. Method 2 stamps in WF-01 only. Scales to 5+ later; do not invent clinic names.</li>
-          <li>WF-01 enroll = Contact Created + tag <code className="rounded bg-muted px-1">next-lander</code> only. <code className="rounded bg-muted px-1">wordpress-form</code> is an inner branch; empty source defaults to next-lander.</li>
-          <li>WP CID bridge stays: WPCode snippet 11461, Gravity Form 1, <code className="rounded bg-muted px-1">book.menswellnesscenters.com/api/handoff/wordpress</code>. Do not change.</li>
-          <li>New tags are <code className="rounded bg-muted px-1">v2_*</code>. Do not rename live tags <code className="rounded bg-muted px-1">next-lander</code>, <code className="rounded bg-muted px-1">LOC_TAGS</code>, <code className="rounded bg-muted px-1">sms-consent</code>, <code className="rounded bg-muted px-1">funnel_entry_*</code>, <code className="rounded bg-muted px-1">location_*</code>.</li>
-          <li>Force is the sole writer of dollars, <code className="rounded bg-muted px-1">sale_outcome</code> (SOLD | AD | MUT | MAR), <code className="rounded bg-muted px-1">sale_type</code>, and <code className="rounded bg-muted px-1">appt_status</code>.</li>
-          <li>Workflows <b>never move Sales stages</b> (New Lead → Booked → Showed → Won). WF-05 routes only. MAR does not fire WF-05.</li>
-          <li>Transactional SMS has <b>no</b> Time Window (WF-01, WF-03, WF-04, WF-06, WF-07, WF-08, WF-11). Recovery / marketing (WF-02, WF-10) uses 8:00-21:00 contact TZ, 7 days. First SMS in each sequence carries Reply STOP to opt out.</li>
+          <li>Native GHL only. No custom code, no new SAC or Supabase backends.</li>
+          <li>Clinics: <code className="rounded bg-muted px-1">richmond</code>, <code className="rounded bg-muted px-1">virginia-beach</code>, <code className="rounded bg-muted px-1">newport-news</code>. Method 2 stamps in WF-01 only. Do not invent clinic names.</li>
+          <li>WF-01 enroll = Contact Created + tag <code className="rounded bg-muted px-1">next-lander</code>. <code className="rounded bg-muted px-1">wordpress-form</code> is an inner branch. Empty source defaults to next-lander.</li>
+          <li>WP CID bridge stays: WPCode snippet 11461, Gravity Form 1, <code className="rounded bg-muted px-1">book.menswellnesscenters.com/api/handoff/wordpress</code>.</li>
+          <li>New tags are <code className="rounded bg-muted px-1">v2_*</code>. Do not rename <code className="rounded bg-muted px-1">next-lander</code>, <code className="rounded bg-muted px-1">LOC_TAGS</code>, <code className="rounded bg-muted px-1">sms-consent</code>, <code className="rounded bg-muted px-1">funnel_entry_*</code>, <code className="rounded bg-muted px-1">location_*</code>.</li>
+          <li>Force is the sole writer of dollars, <code className="rounded bg-muted px-1">sale_outcome</code> (SOLD, AD, MUT, MAR), <code className="rounded bg-muted px-1">sale_type</code>, and <code className="rounded bg-muted px-1">appt_status</code>.</li>
+          <li>Workflows never move Sales stages. WF-05 routes only. MAR never fires WF-05.</li>
+          <li>Transactional SMS has no Time Window (WF-01, 03, 04, 06, 07, 08, 11). Recovery and marketing (WF-02, 10) use 8am to 9pm contact TZ. First SMS in each sequence carries Reply STOP.</li>
         </ul>
         <div className="mt-2 text-[11px] text-muted-foreground">
-          Drafts live on staging <code className="rounded bg-muted px-1">zHKH8aRDdNq47oYmdsN1</code>, folder
-          {" "}<code className="rounded bg-muted px-1">6039c39d-f82d-4518-998c-749fb1ae57d1</code>. Production
-          {" "}<code className="rounded bg-muted px-1">Ghstz8eIsHWLeXek47dk</code> is read-only. Nothing publishes until Eric says publish.
+          Drafts on staging <code className="rounded bg-muted px-1">zHKH8aRDdNq47oYmdsN1</code>, folder <code className="rounded bg-muted px-1">6039c39d-f82d-4518-998c-749fb1ae57d1</code>. Production <code className="rounded bg-muted px-1">Ghstz8eIsHWLeXek47dk</code> is read-only. Nothing publishes until Eric says publish.
         </div>
       </CardContent>
     </Card>
   );
 }
 
-/* ---- Chip helpers -----------------------------------------------------------
-   All chip values come from /tobe-detail.json (built by build_tobe_v2_detail.py
-   from /workspace/to-be/wf-*.json). Nothing here invents a workflow count. */
+/* Chip helpers. All chip values come from /tobe-detail.json (built by
+   build_tobe_v2_detail.py from /workspace/to-be/wf-*.json). */
 
 function countByAction(steps: WFStep[] | undefined, action: string, namePrefix: string): number {
   if (!steps) return 0;
@@ -125,43 +113,40 @@ function shortTrigger(t: string | undefined): string | null {
   return t.split(" (")[0].trim();
 }
 
-// Boil the long quiet_hours copy down to a scannable chip.
-function quietHoursChip(q: string | undefined): { label: string; tone: "good" | "warning" | "muted" | "blue" } | null {
+function quietHoursChip(q: string | undefined): { label: string; tone: "good" | "warning" | "muted" | "neutral" } | null {
   if (!q) return null;
   const s = q.toLowerCase();
   if (s.startsWith("n/a") || s.includes("no sms")) return { label: "Quiet: n/a", tone: "muted" };
-  if (s.startsWith("none")) return { label: "No quiet hours (transactional)", tone: "good" };
+  if (s.startsWith("none")) return { label: "Transactional", tone: "good" };
   if (s.includes("08:00-21:00") || s.includes("8:00-21:00") || s.includes("8am") || s.includes("8am-9pm")) {
-    return { label: "8am–9pm quiet hours", tone: "warning" };
+    return { label: "8am to 9pm quiet hours", tone: "neutral" };
   }
-  return { label: "Quiet hours set", tone: "blue" };
+  return { label: "Quiet hours set", tone: "neutral" };
 }
 
-// settings.status looks like "Draft v10 on staging shell abc123. Unpublished."
-// or "Draft v4 unpublished." — pull out the short "Draft vN" prefix.
 function draftChip(status: string | undefined): string | null {
   if (!status) return null;
   const m = status.match(/^(Draft v\d+)/i);
   return m ? m[1] : null;
 }
 
-interface ChipTone { label: string; tone: "good" | "warning" | "red" | "blue" | "muted" | "purple" | "accent"; }
+interface ChipTone { label: string; tone: "good" | "warning" | "red" | "neutral" | "muted" | "accent"; }
 
 function chipsFor(d: WFDetail | undefined): ChipTone[] {
   if (!d) return [];
   const chips: ChipTone[] = [];
   const trig = shortTrigger(d.trigger?.type);
-  if (trig) chips.push({ label: trig, tone: "blue" });
+  if (trig) chips.push({ label: trig, tone: "neutral" });
   const steps = d.steps ?? [];
   const sms = countByAction(steps, "Send SMS", "SMS");
   const email = countByAction(steps, "Send Email", "EMAIL");
   chips.push({ label: `${sms} SMS`, tone: sms > 0 ? "good" : "muted" });
-  chips.push({ label: `${email} email`, tone: email > 0 ? "purple" : "muted" });
+  chips.push({ label: `${email} email`, tone: "muted" });
   chips.push({ label: `${steps.length} steps`, tone: "muted" });
   const qh = quietHoursChip(d.settings?.quiet_hours);
   if (qh) chips.push(qh);
   const draft = draftChip(d.settings?.status);
-  if (draft) chips.push({ label: draft, tone: "accent" });
+  if (draft) chips.push({ label: draft, tone: "muted" });
   return chips;
 }
 
@@ -177,20 +162,18 @@ function WorkflowTiles({
     <div className="grid gap-3 md:grid-cols-2">
       {visible.map((w) => {
         const d = detail[w.n];
-        // Prefer the source-of-truth name from tobe-detail.json (which the
-        // generator reads from to-be/wf-NN.json) so we never diverge from spec.
         const name = d?.name ?? w.name;
         const chips = chipsFor(d);
         return (
           <Link key={w.n} to={`/to-be/wf/${w.n}`} className="group block">
-            <Card className="h-full transition-colors group-hover:border-accent group-hover:bg-muted/40">
+            <Card className="card-lift h-full">
               <CardContent className="p-4">
                 <div className="mb-1.5 flex items-center justify-between gap-2">
                   <div className="flex items-baseline gap-2">
-                    <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-muted-foreground">WF-{w.n}</span>
+                    <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-foreground/60">WF-{w.n}</span>
                     <span className="text-base font-bold text-foreground">{name}</span>
                   </div>
-                  <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-accent" />
+                  <ChevronRight className="h-4 w-4 shrink-0 text-foreground/50 transition-transform group-hover:translate-x-0.5 group-hover:text-accent" />
                 </div>
                 {w.copy && <p className="mb-3 line-clamp-3 text-sm text-foreground/85">{w.copy}</p>}
                 {chips.length > 0 && (
@@ -200,9 +183,6 @@ function WorkflowTiles({
                     ))}
                   </div>
                 )}
-                <div className="mt-2 text-[11px] font-semibold uppercase tracking-wider text-accent opacity-0 transition-opacity group-hover:opacity-100">
-                  Open build guide →
-                </div>
               </CardContent>
             </Card>
           </Link>
@@ -220,16 +200,13 @@ export default function ToBe() {
   }, []);
   if (isLoading || !data) return <Loading />;
 
-  // Cards / counts are driven by data.json tobe_workflows (regenerated from
-  // to-be/wf-*.json by build_tobe_v2_detail.py), filtered against the same
-  // DROPPED_FROM_V2 set. Do not maintain a third hand-authored list.
   const liveWorkflows = data.tobe_workflows.filter((w) => !DROPPED_FROM_V2.has(w.n));
   const liveCount = liveWorkflows.length;
 
   return (
     <PageShell
-      title="To-be: the locked v2 spec"
-      subtitle={`MWC GHL v2 rebuild. ${liveCount} single-purpose workflows (WF-01 to WF-12, WF-14 to WF-17; WF-13 dropped), authored as staged drafts in staging location zHKH8aRDdNq47oYmdsN1, folder 6039c39d-f82d-4518-998c-749fb1ae57d1. Native GHL only. Force writes outcomes. Nothing publishes until Eric says publish.`}
+      title="Target · locked v2 spec"
+      subtitle={`${liveCount} single-purpose workflows (WF-01 to WF-17; WF-13 dropped). Native GHL. Drafts on staging. Force writes outcomes. Nothing publishes until Eric says publish.`}
     >
       <RoutedTabs base="/to-be" tabs={[
         { value: "workflows", label: `Workflows (${liveCount})` },
@@ -241,18 +218,18 @@ export default function ToBe() {
           <Card><CardContent className="p-4">
             <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
               <div>
-                <div className="text-sm font-semibold">Canonical numbering (WF-01 to WF-17, WF-13 dropped)</div>
-                <p className="text-xs text-muted-foreground">The workflow list is the canonical scheme. The left column records the retired prior numbering (old message-library and location-clone scheme) for traceability only. WF-13 (ad-platform CAPI + Google) is dropped from v2; WF-14–17 keep their numbers. Historical clinic codes va_beach and npn are dropped; slugs are richmond | virginia-beach | newport-news.</p>
+                <div className="text-sm font-bold text-foreground">Canonical numbering</div>
+                <p className="text-xs text-muted-foreground">WF-01 to WF-17. WF-13 dropped. Left column is the retired prior scheme, for traceability only.</p>
               </div>
-              <Link to="/wf-diagrams" className="inline-flex items-center gap-1 rounded border px-2 py-1 text-xs font-medium text-primary hover:bg-muted">
-                See to-be workflow diagrams
+              <Link to="/wf-diagrams" className="inline-flex items-center gap-1 rounded-sm border-2 border-border bg-card px-2 py-1 text-xs font-semibold text-foreground hover:bg-muted">
+                Flow diagrams
               </Link>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full border-collapse text-left text-xs">
                 <thead>
                   <tr className="border-b-2 border-border text-[10px] uppercase tracking-wider text-muted-foreground">
-                    <th className="py-1.5 pe-3 font-semibold">Prior numbering (retired)</th>
+                    <th className="py-1.5 pe-3 font-semibold">Prior (retired)</th>
                     <th className="py-1.5 pe-3 font-semibold">Canonical</th>
                     <th className="py-1.5 font-semibold">Note</th>
                   </tr>
@@ -263,7 +240,7 @@ export default function ToBe() {
                       <td className="py-1.5 pe-3 font-mono text-muted-foreground">{row.old}</td>
                       <td className="py-1.5 pe-3 font-mono">
                         {row.dropped ? <span className="line-through">{row.canonical}</span> : row.canonical}
-                        {row.dropped && <Badge tone="red" className="ms-2">Dropped from v2</Badge>}
+                        {row.dropped && <Badge tone="red" className="ms-2">Dropped</Badge>}
                       </td>
                       <td className="py-1.5 text-muted-foreground">{row.note}</td>
                     </tr>
@@ -281,7 +258,7 @@ export default function ToBe() {
               <div className="mb-1 flex items-center justify-between gap-2">
                 <span className="font-semibold">{p.name}</span>
                 <a href={ghlPipelines(data.location_id)} target="_blank" rel="noopener noreferrer"
-                  title="Open pipelines in GHL" className="inline-flex items-center gap-1 rounded border px-2 py-0.5 text-[11px] text-muted-foreground hover:bg-muted hover:text-foreground">
+                  title="Open pipelines in GHL" className="inline-flex items-center gap-1 rounded-sm border border-border px-2 py-0.5 text-[11px] text-foreground/70 hover:bg-muted hover:text-foreground">
                   <ExternalLink className="h-3 w-3" /> GHL
                 </a>
               </div>
@@ -307,7 +284,7 @@ export default function ToBe() {
 
         <RoutedTabPanel value="data-model" className="space-y-4">
           <Card><CardContent className="p-4 text-sm leading-relaxed text-foreground/90">
-            <b>Four destinations, each owning its own data.</b> The Contact holds identity and durable profile, plus GHL-native consent state. The Opportunity owns the sale outcome and money. Medical records stay in the external EMR (GHL keeps only <code>emr_patient_id</code> on the Contact and <code>emr_visit_id</code> on the Opportunity; the appointment date lives on the appointment, not an opp field). Never-used fields retire. <b>No custom objects</b>. <b>Attribution owner = Curve</b> (post-MWC acquisition of Curve Compliance): WF-01 does <i>not</i> copy gclid / fbc / fbp / wbraid / gbraid / UTM onto the Opportunity. GHL keeps only coarse ops source (<code>next-lander</code> vs <code>wordpress-form</code>) plus clinic slug; the rest lives in Curve. Consent is GHL-native DND/STOP plus the Compliance workflow (WF-11). Force is the sole writer of <code>sale_outcome</code>, <code>sale_type</code>, <code>appt_status</code>, and dollars.
+            <b>Four destinations, each owning its own data.</b> Contact holds identity, durable profile, and GHL-native consent. Opportunity owns sale outcome and money. Medical records stay in the external EMR (GHL keeps only <code className="rounded bg-muted px-1">emr_patient_id</code> on Contact and <code className="rounded bg-muted px-1">emr_visit_id</code> on Opportunity). Never-used fields retire. No custom objects. <b>Attribution owner is Curve.</b> WF-01 does not copy gclid, fbc, fbp, wbraid, gbraid, or UTM onto the Opportunity. GHL keeps only coarse ops source (<code className="rounded bg-muted px-1">next-lander</code> vs <code className="rounded bg-muted px-1">wordpress-form</code>) plus clinic slug. Force is the sole writer of <code className="rounded bg-muted px-1">sale_outcome</code>, <code className="rounded bg-muted px-1">sale_type</code>, <code className="rounded bg-muted px-1">appt_status</code>, and dollars.
           </CardContent></Card>
           <div className="grid gap-3 md:grid-cols-2">
             {data.field_destinations.map((d, i) => <DestCard key={i} d={d} />)}

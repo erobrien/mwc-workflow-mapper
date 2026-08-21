@@ -32,10 +32,10 @@ interface Diagram { key: string; title: string; caption: string; src: string; }
 
 /* Shared-diagram footnotes so the reader knows when a graph covers >1 workflow. */
 const DIAGRAM_SHARED: Record<string, string> = {
-  preappt: "Shared diagram: covers WF-03 and WF-04 together (the pre-appointment sequence).",
+  preappt: "Shared diagram: covers WF-03 and WF-04 together (pre-appointment sequence).",
   "wf07-08": "Shared diagram: covers WF-07 (A&D Nurture) and WF-08 (No-Show and Cancel Recovery).",
   retention: "Shared diagram: covers WF-09 (Long-Term Nurture + Renewal sub-flow) and WF-10 (Feedback Survey).",
-  support: "Shared diagram: covers the support cluster (WF-11, WF-14, WF-15, WF-16). WF-13 is dropped from v2 (Curve owns conversions).",
+  support: "Shared diagram: covers the support cluster (WF-11, WF-14, WF-15, WF-16). WF-13 is dropped from v2.",
 };
 
 /* Workflows dropped from v2. Kept in tobe-detail.json for generator compatibility. */
@@ -65,10 +65,10 @@ function actionKind(a: string, name?: string): ActionKind {
   return "STEP";
 }
 
-const KIND_TONE: Record<ActionKind, "good" | "purple" | "blue" | "muted" | "warning" | "accent" | "neutral" | "red"> = {
-  SMS: "good", EMAIL: "purple", WAIT: "muted", IF: "warning", PATH: "neutral",
-  UPDATE: "blue", CREATE: "accent", TAG: "blue", "ADD-TO-WF": "accent",
-  REMOVE: "red", "FIND-OPP": "warning", TRIGGER: "accent", STEP: "muted",
+const KIND_TONE: Record<ActionKind, "good" | "neutral" | "muted" | "red" | "warning"> = {
+  SMS: "good", EMAIL: "neutral", WAIT: "muted", IF: "warning", PATH: "neutral",
+  UPDATE: "neutral", CREATE: "good", TAG: "neutral", "ADD-TO-WF": "good",
+  REMOVE: "red", "FIND-OPP": "warning", TRIGGER: "good", STEP: "muted",
 };
 
 /* ---------- Chip helpers (mirror /to-be card chips exactly) ----------------- */
@@ -82,15 +82,15 @@ function shortTrigger(t: string | undefined): string | null {
   return t.split(" (")[0].trim();
 }
 
-function quietHoursChip(q: string | undefined): { label: string; tone: "good" | "warning" | "muted" | "blue" } | null {
+function quietHoursChip(q: string | undefined): { label: string; tone: "good" | "warning" | "muted" | "neutral" } | null {
   if (!q) return null;
   const s = q.toLowerCase();
   if (s.startsWith("n/a") || s.includes("no sms")) return { label: "Quiet: n/a", tone: "muted" };
-  if (s.startsWith("none")) return { label: "No quiet hours (transactional)", tone: "good" };
+  if (s.startsWith("none")) return { label: "Transactional", tone: "good" };
   if (s.includes("08:00-21:00") || s.includes("8:00-21:00") || s.includes("8am")) {
-    return { label: "8am–9pm quiet hours", tone: "warning" };
+    return { label: "8am to 9pm quiet hours", tone: "neutral" };
   }
-  return { label: "Quiet hours set", tone: "blue" };
+  return { label: "Quiet hours set", tone: "neutral" };
 }
 
 function draftChip(status: string | undefined): string | null {
@@ -109,9 +109,9 @@ function BuildDecision({ text }: { text: string }) {
         p.startsWith("BUILD DECISION NEEDED") ? (
           <span
             key={i}
-            className="mx-0.5 inline-flex items-center gap-1 rounded bg-amber-100 px-1.5 py-0.5 text-[11px] font-medium text-amber-900 dark:bg-amber-950 dark:text-amber-300"
+            className="mx-0.5 inline-flex items-center gap-1 rounded-sm border border-accent bg-accent/10 px-1.5 py-0.5 text-[11px] font-semibold text-foreground"
           >
-            <AlertTriangle className="h-3 w-3" /> {p}
+            <AlertTriangle className="h-3 w-3 text-accent" /> {p}
           </span>
         ) : (
           <span key={i}>{p}</span>
@@ -215,19 +215,19 @@ export default function ToBeWorkflow() {
   // Chip strip (identical language to the /to-be card grid). Must run
   // before any early return to satisfy the rules of hooks.
   const chips = useMemo(() => {
-    const list: { label: string; tone: "good" | "warning" | "red" | "blue" | "muted" | "purple" | "accent" | "neutral" }[] = [];
+    const list: { label: string; tone: "good" | "warning" | "red" | "muted" | "neutral" }[] = [];
     if (!d) return list;
     const trig = shortTrigger(d.trigger?.type);
-    if (trig) list.push({ label: trig, tone: "blue" });
+    if (trig) list.push({ label: trig, tone: "neutral" });
     const sms = countKind(d.steps, "SMS");
     const email = countKind(d.steps, "EMAIL");
     list.push({ label: `${sms} SMS`, tone: sms > 0 ? "good" : "muted" });
-    list.push({ label: `${email} email`, tone: email > 0 ? "purple" : "muted" });
+    list.push({ label: `${email} email`, tone: "muted" });
     list.push({ label: `${d.steps.length} steps`, tone: "muted" });
     const qh = quietHoursChip(d.settings?.quiet_hours);
     if (qh) list.push(qh);
     const draft = draftChip(d.settings?.status);
-    if (draft) list.push({ label: draft, tone: "accent" });
+    if (draft) list.push({ label: draft, tone: "muted" });
     return list;
   }, [d]);
 
@@ -237,7 +237,7 @@ export default function ToBeWorkflow() {
   if (n && DROPPED_FROM_V2.has(n)) {
     return (
       <PageShell
-        title={`WF-${n} — dropped from v2`}
+        title={`WF-${n} · dropped from v2`}
         subtitle="This workflow is not part of the v2 shipping scope. WF-14 through WF-17 keep their numbers."
         actions={
           <Link
@@ -472,7 +472,7 @@ export default function ToBeWorkflow() {
           </Card>
         </section>
 
-        {/* --- Location / variables — one short callout + collapsed "why" --- */}
+        {/* --- Location / variables: one short callout + collapsed "why" --- */}
         {d.variables && (
           <section>
             <SectionTitle title="Location and variables" />
@@ -492,8 +492,8 @@ export default function ToBeWorkflow() {
                   {d.variables.location_variable.replace(/^opportunity\.location\s*/, "")}
                 </div>
                 {d.variables.collision_warning && (
-                  <div className="rounded-sm border-l-4 border-red-500 bg-red-50/70 p-2 text-[12px] text-red-900 dark:bg-red-950/40 dark:text-red-200">
-                    <div className="mb-0.5 flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider">
+                  <div className="rounded-sm border-2 border-destructive bg-card p-2 text-[12px] text-foreground/90">
+                    <div className="mb-0.5 flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-destructive">
                       <AlertTriangle className="h-3 w-3" /> Custom Value collision risk
                     </div>
                     {d.variables.collision_warning}
@@ -514,7 +514,7 @@ export default function ToBeWorkflow() {
                     )}
                     {d.variables.custom_values && d.variables.custom_values.length > 0 && (
                       <div>
-                        <div className="mb-1 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                        <div className="mb-1 text-[10px] font-bold uppercase tracking-wider text-foreground/70">
                           Custom values: safe vs collision
                         </div>
                         <ul className="space-y-1 text-[12px] text-foreground/85">
@@ -557,7 +557,7 @@ export default function ToBeWorkflow() {
                 </div>
                 <div className="min-w-0 sm:col-span-2">
                   <dt className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Status</dt>
-                  <dd className="font-medium text-amber-700 dark:text-amber-400">{d.settings.status}</dd>
+                  <dd className="font-semibold text-foreground">{d.settings.status}</dd>
                 </div>
               </dl>
 

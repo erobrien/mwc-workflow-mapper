@@ -3,61 +3,59 @@
 @tailwind utilities;
 
 /* -----------------------------------------------------------------
-   MWC GHL Refactor Workspace — boardroom palette.
-   Light: near-black text on near-white, midnight-navy primary, single
-     amber/gold accent, high-contrast borders.
-   Dark:  near-white text on midnight-navy/charcoal, same amber accent.
-   No pastels, no gradients, no glass. All borders 1.5–2px solid.
+   MWC brand palette.
+   Navy   #0B1029  hsl(230 58% 10%)   type + backdrop (dark)
+   Cream  #F5F3F0  hsl(36 20% 95%)    paper (light) + type (dark)
+   Orange #E8670A  hsl(25 92% 47%)    period accent only: primary
+                                       actions, chips that mean go,
+                                       small marks. Not sprayed.
+   Light default. Dark inverts to navy backdrop + cream type; orange
+   accent stays the same. No teal, no gradient, no glass.
 ------------------------------------------------------------------ */
 :root {
-  /* base surfaces */
-  --background: 0 0% 100%;        /* near-white */
-  --foreground: 222 47% 7%;       /* near-black */
+  --background: 36 20% 95%;        /* cream paper */
+  --foreground: 230 58% 10%;       /* navy type */
   --card: 0 0% 100%;
-  --card-foreground: 222 47% 7%;
+  --card-foreground: 230 58% 10%;
 
-  /* midnight navy primary */
-  --primary: 222 60% 15%;         /* midnight navy */
-  --primary-foreground: 0 0% 100%;
+  --primary: 230 58% 10%;          /* navy */
+  --primary-foreground: 36 20% 95%;
 
-  /* single gold/amber accent */
-  --accent: 38 92% 42%;           /* deep amber gold */
+  --accent: 25 92% 47%;            /* orange */
   --accent-foreground: 0 0% 100%;
 
-  /* neutrals */
-  --muted: 220 14% 94%;
-  --muted-foreground: 220 12% 26%;    /* darkened for AAA body text */
+  --muted: 36 15% 90%;              /* darker cream */
+  --muted-foreground: 230 25% 30%;  /* navy-tinted, AA on cream */
 
-  --destructive: 0 72% 38%;
+  --destructive: 0 60% 38%;
   --destructive-foreground: 0 0% 100%;
 
-  /* strong 2px borders — no whispers */
-  --border: 222 30% 20%;              /* charcoal outline */
-  --input: 222 30% 20%;
-  --ring: 38 92% 42%;
+  --border: 230 25% 78%;            /* navy-tinted, crisp on cream */
+  --input: 230 25% 60%;
+  --ring: 25 92% 47%;               /* orange focus ring */
 }
 
 .dark {
-  --background: 222 40% 8%;           /* midnight navy backdrop */
-  --foreground: 0 0% 98%;              /* near-white text */
-  --card: 222 36% 12%;                 /* charcoal card */
-  --card-foreground: 0 0% 98%;
+  --background: 230 58% 10%;        /* navy backdrop */
+  --foreground: 36 20% 95%;          /* cream type */
+  --card: 230 50% 13%;               /* lift off backdrop */
+  --card-foreground: 36 20% 95%;
 
-  --primary: 38 92% 55%;               /* amber becomes primary in dark */
-  --primary-foreground: 222 40% 8%;
+  --primary: 25 92% 47%;             /* orange leads in dark */
+  --primary-foreground: 230 58% 10%;
 
-  --accent: 38 92% 55%;
-  --accent-foreground: 222 40% 8%;
+  --accent: 25 92% 47%;
+  --accent-foreground: 230 58% 10%;
 
-  --muted: 222 24% 18%;
-  --muted-foreground: 220 14% 82%;     /* light gray, high contrast */
+  --muted: 230 40% 18%;
+  --muted-foreground: 36 15% 78%;    /* cream-tinted, AA on navy */
 
-  --destructive: 0 72% 55%;
+  --destructive: 0 65% 55%;
   --destructive-foreground: 0 0% 100%;
 
-  --border: 220 14% 72%;               /* light charcoal border in dark */
-  --input: 220 14% 72%;
-  --ring: 38 92% 55%;
+  --border: 36 15% 40%;              /* cream-tinted, visible on navy */
+  --input: 36 15% 55%;
+  --ring: 25 92% 47%;
 }
 
 * { border-color: hsl(var(--border)); }
@@ -69,13 +67,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* No decorative gradients — boardroom, not SaaS. */
-
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-thumb { background: hsl(var(--border)); border-radius: 2px; }
 ::-webkit-scrollbar-track { background: hsl(var(--muted)); }
 
-/* Ensure Mermaid diagrams sit inside a solid 2px frame. */
 .mermaid-host {
   padding: 12px;
   border: 2px solid hsl(var(--border));
@@ -83,14 +78,21 @@ body {
   background: hsl(var(--card));
 }
 
-/* Force muted-foreground body text to stay high-contrast for readability;
-   secondary text is still muted but never washed out on paper printouts. */
 .text-muted-foreground {
   color: hsl(var(--muted-foreground));
 }
 
-/* Ring-accented focus, always visible. */
+/* Orange focus ring, always visible. */
 :focus-visible {
   outline: 2px solid hsl(var(--ring));
   outline-offset: 2px;
+}
+
+/* One authored motion moment: cards lift on hover, no glow. */
+.card-lift {
+  transition: transform 120ms ease-out, border-color 120ms ease-out;
+}
+.card-lift:hover {
+  transform: translateY(-1px);
+  border-color: hsl(var(--foreground) / 0.55);
 }

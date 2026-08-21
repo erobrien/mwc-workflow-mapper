@@ -10,92 +10,109 @@ import { useState } from "react";
 import { GlobalSearch } from "./Search";
 import { BUILD_TIME_LABEL, BUILD_COMMIT } from "../lib/build-info";
 
-const NAV: { group: string; accent?: string; dot?: string; collapsible?: boolean; items: { to: string; label: string; icon: any; accent?: string }[] }[] = [
-  { group: "Overview", accent: "text-primary", dot: "bg-primary", items: [
-    { to: "/", label: "Workspace", icon: LayoutDashboard, accent: "text-primary" },
-    { to: "/daily-log", label: "Daily Log", icon: History, accent: "text-primary" },
-    { to: "/systems", label: "Systems Architecture", icon: Boxes, accent: "text-primary" },
+/* Nav is intentionally narrow.
+   - Overview: Home
+   - Target (locked v2): the live spec Eric uses (To-Be + Force)
+   - Everything else is archive/reference, collapsed by default. */
+type NavItem = { to: string; label: string; icon: any };
+type NavGroup = { group: string; collapsible?: boolean; defaultOpen?: boolean; items: NavItem[] };
+
+const NAV: NavGroup[] = [
+  { group: "Overview", items: [
+    { to: "/", label: "Home", icon: LayoutDashboard },
   ] },
-  { group: "Current state", accent: "text-red-600 dark:text-red-400", dot: "bg-red-500", items: [
-    { to: "/as-is", label: "As-Is Workflows", icon: Workflow, accent: "text-red-600 dark:text-red-400" },
-    { to: "/asis-diagrams", label: "As-Is Flow Diagrams", icon: Waypoints, accent: "text-red-600 dark:text-red-400" },
-    { to: "/asis-flows", label: "As-Is Workflow Flows", icon: Route, accent: "text-red-600 dark:text-red-400" },
-    { to: "/inventory", label: "Field Inventory", icon: Boxes, accent: "text-red-600 dark:text-red-400" },
-    { to: "/priority-changes", label: "Priority Changes", icon: ListChecks, accent: "text-red-600 dark:text-red-400" },
-    { to: "/attribution-audit", label: "Attribution Audit", icon: Radar, accent: "text-red-600 dark:text-red-400" },
-    { to: "/lifecycle-playbook", label: "Lifecycle Playbook", icon: MessagesSquare, accent: "text-red-600 dark:text-red-400" },
-    { to: "/call-connect", label: "Call Connect (SDR Routing)", icon: PhoneForwarded, accent: "text-red-600 dark:text-red-400" },
+  { group: "Target (locked v2)", defaultOpen: true, items: [
+    { to: "/to-be", label: "To-Be Workflows", icon: Workflow },
+    { to: "/force", label: "Force", icon: Zap },
+    { to: "/wf-diagrams", label: "Flow Diagrams", icon: Waypoints },
+    { to: "/diagrams", label: "Architecture", icon: Network },
+    { to: "/pcc-form", label: "PCC Sales Form", icon: ClipboardList },
   ] },
-  { group: "Target (locked v2)", accent: "text-emerald-600 dark:text-emerald-400", dot: "bg-emerald-500", items: [
-    { to: "/to-be", label: "To-Be Workflows", icon: Workflow, accent: "text-emerald-600 dark:text-emerald-400" },
-    { to: "/force", label: "Force (consult writer)", icon: Zap, accent: "text-emerald-600 dark:text-emerald-400" },
-    { to: "/to-be-2bv2", label: "To-Be 2bv2 (Live Export)", icon: Network, accent: "text-emerald-600 dark:text-emerald-400" },
-    { to: "/to-be-review", label: "Design Review", icon: SearchCheck, accent: "text-emerald-600 dark:text-emerald-400" },
-    { to: "/wf-diagrams", label: "WF Flow Diagrams", icon: Waypoints, accent: "text-emerald-600 dark:text-emerald-400" },
-    { to: "/diagrams", label: "Architecture", icon: Network, accent: "text-emerald-600 dark:text-emerald-400" },
-    { to: "/pcc-form", label: "PCC Sales Form", icon: ClipboardList, accent: "text-emerald-600 dark:text-emerald-400" },
+  { group: "Current state", collapsible: true, items: [
+    { to: "/as-is", label: "As-Is Workflows", icon: Workflow },
+    { to: "/asis-diagrams", label: "As-Is Flow Diagrams", icon: Waypoints },
+    { to: "/asis-flows", label: "As-Is Workflow Flows", icon: Route },
+    { to: "/inventory", label: "Field Inventory", icon: Boxes },
+    { to: "/priority-changes", label: "Priority Changes", icon: ListChecks },
+    { to: "/attribution-audit", label: "Attribution Audit", icon: Radar },
+    { to: "/lifecycle-playbook", label: "Lifecycle Playbook", icon: MessagesSquare },
+    { to: "/call-connect", label: "Call Connect", icon: PhoneForwarded },
   ] },
-  { group: "Archive · dropped plans", accent: "text-muted-foreground", dot: "bg-muted-foreground/50", collapsible: true, items: [
-    { to: "/final-target", label: "Final Target Plan (dropped)", icon: Workflow, accent: "text-muted-foreground" },
-    { to: "/final-target-sac", label: "SAC Attribution (dropped)", icon: Waypoints, accent: "text-muted-foreground" },
-    { to: "/minimal-plan", label: "Minimal Plan (dropped)", icon: Target, accent: "text-muted-foreground" },
+  { group: "Governance", collapsible: true, items: [
+    { to: "/gaps", label: "Audit Gaps", icon: SearchCheck },
+    { to: "/tags", label: "Tag Library", icon: Tag },
+    { to: "/custom-fields", label: "Custom Fields", icon: Database },
+    { to: "/decisions", label: "Decisions", icon: Gavel },
+    { to: "/risks", label: "Risk Register", icon: ShieldAlert },
+    { to: "/systems", label: "Systems Architecture", icon: Boxes },
+    { to: "/daily-log", label: "Daily Log", icon: History },
+    { to: "/to-be-review", label: "Design Review", icon: SearchCheck },
   ] },
-  { group: "Governance", accent: "text-violet-600 dark:text-violet-400", dot: "bg-violet-500", items: [
-    { to: "/gaps", label: "Audit Gaps", icon: SearchCheck, accent: "text-violet-600 dark:text-violet-400" },
-    { to: "/tags", label: "Tag Library", icon: Tag, accent: "text-violet-600 dark:text-violet-400" },
-    { to: "/custom-fields", label: "Custom Fields", icon: Database, accent: "text-violet-600 dark:text-violet-400" },
-    { to: "/decisions", label: "Decisions", icon: Gavel, accent: "text-violet-600 dark:text-violet-400" },
-    { to: "/risks", label: "Risk Register", icon: ShieldAlert, accent: "text-violet-600 dark:text-violet-400" },
+  { group: "Archive · dropped plans", collapsible: true, items: [
+    { to: "/final-target", label: "Final Target Plan (dropped)", icon: Workflow },
+    { to: "/final-target-sac", label: "SAC Attribution (dropped)", icon: Waypoints },
+    { to: "/minimal-plan", label: "Minimal Plan (dropped)", icon: Target },
+    { to: "/to-be-2bv2", label: "2bv2 Live Export (archive)", icon: Network },
   ] },
-  { group: "Cody Archive", accent: "text-muted-foreground", dot: "bg-muted-foreground/50", collapsible: true, items: [
-    { to: "/cody", label: "Cody Workflows", icon: Workflow, accent: "text-muted-foreground" },
-    { to: "/cody-flows", label: "Cody Flow Diagrams", icon: Waypoints, accent: "text-muted-foreground" },
-    { to: "/cody-inventory", label: "Cody Inventory", icon: Boxes, accent: "text-muted-foreground" },
-    { to: "/cody-neo", label: "Cody Neo Workflows", icon: Workflow, accent: "text-muted-foreground" },
-    { to: "/cody-neo-flows", label: "Cody Neo Flow Diagrams", icon: Waypoints, accent: "text-muted-foreground" },
-    { to: "/cody-neo-inventory", label: "Cody Neo Inventory", icon: Boxes, accent: "text-muted-foreground" },
-    { to: "/cody-neo-field-diff", label: "Field Diff", icon: Database, accent: "text-muted-foreground" },
+  { group: "Cody Archive", collapsible: true, items: [
+    { to: "/cody", label: "Cody Workflows", icon: Workflow },
+    { to: "/cody-flows", label: "Cody Flow Diagrams", icon: Waypoints },
+    { to: "/cody-inventory", label: "Cody Inventory", icon: Boxes },
+    { to: "/cody-neo", label: "Cody Neo Workflows", icon: Workflow },
+    { to: "/cody-neo-flows", label: "Cody Neo Flow Diagrams", icon: Waypoints },
+    { to: "/cody-neo-inventory", label: "Cody Neo Inventory", icon: Boxes },
+    { to: "/cody-neo-field-diff", label: "Field Diff", icon: Database },
   ] },
 ];
 
 function Sidebar({ onNav }: { onNav?: () => void }) {
-  const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({});
+  const [openGroups, setOpenGroups] = useState<Record<string, boolean>>(
+    () => Object.fromEntries(NAV.filter((g) => g.defaultOpen).map((g) => [g.group, true])),
+  );
   return (
-    <nav className="flex h-full flex-col gap-5 p-3">
+    <nav className="flex h-full flex-col gap-4 p-3">
       <div className="px-2 pt-1">
         <div className="flex items-center gap-2 text-sm font-bold text-foreground">
-          <span className="flex h-7 w-7 items-center justify-center rounded-sm border-2 border-border bg-primary text-primary-foreground">
+          <span className="flex h-7 w-7 items-center justify-center rounded-sm border-2 border-foreground bg-primary text-primary-foreground">
             <Network className="h-3.5 w-3.5" />
           </span>
           MWC GHL Refactor
         </div>
-        <div className="truncate font-mono text-[10px] font-semibold text-foreground/70">Ghstz8eIsHWLeXek47dk</div>
+        <div className="mt-0.5 truncate font-mono text-[10px] font-semibold text-foreground/70">Ghstz8eIsHWLeXek47dk</div>
       </div>
-      <div className="flex flex-col gap-4 overflow-y-auto">
+      <div className="flex flex-col gap-3 overflow-y-auto">
         {NAV.map((g) => {
           const collapsed = g.collapsible && !openGroups[g.group];
           return (
           <div key={g.group}>
             {g.collapsible ? (
-              <button onClick={() => setOpenGroups((s) => ({ ...s, [g.group]: !s[g.group] }))}
-                className="mb-1 flex w-full items-center gap-1.5 rounded-sm border-b border-border/60 px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-foreground/80 hover:bg-muted">
-                <span className={cn("h-2 w-2 rounded-sm", g.dot)} />{g.group}
+              <button
+                onClick={() => setOpenGroups((s) => ({ ...s, [g.group]: !s[g.group] }))}
+                className="mb-1 flex w-full items-center gap-1.5 rounded-sm border-b border-border px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-foreground/70 hover:bg-muted"
+              >
+                <span>{g.group}</span>
                 {collapsed ? <ChevronRight className="ms-auto h-3 w-3" /> : <ChevronDown className="ms-auto h-3 w-3" />}
               </button>
             ) : (
-              <div className="mb-1 flex items-center gap-1.5 border-b border-border/60 px-2 pb-1 text-[10px] font-bold uppercase tracking-wider text-foreground/80">
-                <span className={cn("h-2 w-2 rounded-sm", g.dot)} />{g.group}
+              <div className="mb-1 flex items-center gap-1.5 border-b border-border px-2 pb-1 text-[10px] font-bold uppercase tracking-wider text-foreground/70">
+                <span>{g.group}</span>
               </div>
             )}
             <div className={cn("flex flex-col gap-0.5", collapsed && "hidden")}>
               {g.items.map((it) => (
-                <NavLink key={it.to} to={it.to} end={it.to === "/"} onClick={onNav}
+                <NavLink
+                  key={it.to}
+                  to={it.to}
+                  end={it.to === "/"}
+                  onClick={onNav}
                   className={({ isActive }) => cn(
-                    "flex items-center gap-2 rounded-sm border-l-[3px] px-2 py-1.5 text-sm transition-colors",
+                    "flex items-center gap-2 rounded-sm px-2 py-1.5 text-sm transition-colors",
                     isActive
-                      ? "border-accent bg-muted font-bold text-foreground"
-                      : "border-transparent font-medium text-foreground/80 hover:border-border hover:bg-muted hover:text-foreground")}>
-                  <it.icon className={cn("h-4 w-4 shrink-0", it.accent)} />
+                      ? "bg-muted font-bold text-foreground ring-1 ring-inset ring-accent"
+                      : "font-medium text-foreground/80 hover:bg-muted hover:text-foreground",
+                  )}
+                >
+                  <it.icon className="h-4 w-4 shrink-0 text-foreground/70" />
                   <span className="truncate">{it.label}</span>
                 </NavLink>
               ))}
@@ -139,7 +156,7 @@ export function LastUpdated({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-sm border-2 border-border bg-muted/60 px-2 py-1 text-[11px] font-semibold uppercase tracking-wider text-foreground",
+        "inline-flex items-center gap-1.5 rounded-sm border border-border bg-muted/60 px-2 py-1 text-[11px] font-semibold uppercase tracking-wider text-foreground",
         className,
       )}
       title={BUILD_COMMIT ? `Build commit ${BUILD_COMMIT}` : undefined}
@@ -160,7 +177,7 @@ export function PageShell({ title, subtitle, actions, children }: { title: strin
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-start justify-between gap-3 border-b-2 border-border pb-4">
-        <div className="border-l-4 border-accent pl-3">
+        <div>
           <h1 className="text-xl font-bold tracking-tight text-foreground">{title}</h1>
           {subtitle && <p className="mt-1 max-w-3xl text-sm text-foreground/80">{subtitle}</p>}
           <div className="mt-2"><LastUpdated /></div>

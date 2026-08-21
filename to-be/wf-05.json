@@ -1,13 +1,11 @@
 {
   "id": "wf-05",
   "name": "Outcome Router",
-  "job": "Central router for sale_outcome and appt_status force writes. Reads the opportunity, tags v2_outcome_*, and routes to the correct downstream workflow. Never stage-moves and never fires on MAR.",
+  "job": "Central router. Reads opportunity.sale_outcome_v2 and appt_status from Force webhook writes and routes to the correct downstream workflow. Never stage-moves and never fires on MAR. Still ADD-TO-WF WF-13 on SOLD + sale_type=new (recorded truth in GHL; site cards hide WF-13).",
   "trigger": {
     "type": "Inbound webhook",
-    "filters": [
-      "url = GHL_WF05_WEBHOOK_URL"
-    ],
-    "notes": "Sole webhook-driven router. Payload includes contact_id, sale_outcome, sale_type, appt_status, ad_reason."
+    "filters": ["url = GHL_WF05_WEBHOOK_URL"],
+    "notes": "Trigger id ryJLJ1McWWOHlAvBRsI3. GHL shell name is null. Webhook URL is UI-only; paste it into Force config as GHL_WF05_WEBHOOK_URL. Payload includes contact_id, sale_outcome, sale_type, appt_status, ad_reason."
   },
   "named_steps": [
     {
@@ -16,98 +14,248 @@
       "does_not_write": []
     },
     {
-      "name": "WAIT: 60 seconds (opp settle)",
-      "comment": "Allows the upstream force-write to land on the opportunity before FIND-OPP.",
+      "name": "WAIT: 60s so opp writes settle",
+      "comment": "Allows the upstream Force write to land on the opportunity before FIND-OPP reads it.",
       "writes": []
     },
     {
       "name": "FIND-OPP: Latest open opp for contact",
       "comment": "Native find opp. Must not create a new opp here. Must not read monetaryValue for logic.",
-      "does_not_write": [
-        "opportunity"
-      ]
+      "does_not_write": ["opportunity"]
     },
     {
-      "name": "IF-ELSE: Drop payload when sale_outcome=MAR",
-      "comment": "MAR never enters WF-05. Guard branch exits the workflow.",
-      "does_not_write": []
+      "name": "IF: appt_status = no-show",
+      "comment": "Route no-show first, before outcome routing.",
+      "does_not_write": ["appt_status"]
     },
     {
-      "name": "IF-ELSE: Branch on sale_outcome (SOLD | AD | MUT)",
-      "comment": "Routes downstream. Must not write dollars. Must not move opp stages.",
-      "does_not_write": [
-        "opportunity.pipelineStageId",
-        "opportunity.monetaryValue"
-      ]
-    },
-    {
-      "name": "ADD-TAG: v2_outcome_sold (SOLD branch)",
-      "comment": "Tags outcome only. Must not stage-move.",
-      "writes": [
-        "v2_outcome_sold"
-      ]
-    },
-    {
-      "name": "ADD-TAG: v2_outcome_ad (AD branch)",
-      "comment": "Tags outcome only.",
-      "writes": [
-        "v2_outcome_ad"
-      ]
-    },
-    {
-      "name": "ADD-TAG: v2_outcome_mut (MUT branch)",
-      "comment": "Tags outcome only.",
-      "writes": [
-        "v2_outcome_mut"
-      ]
-    },
-    {
-      "name": "IF-ELSE: SOLD sub-branch on sale_type (new | renewal)",
-      "comment": "SOLD splits into onboarding vs renewal-nurture.",
-      "does_not_write": []
-    },
-    {
-      "name": "ADD-TO-WF: Route SOLD new to WF-06 Onboarding",
-      "comment": "Onboarding owns membership_status writes; must not set it here.",
+      "name": "PATH: no-show",
+      "comment": "True branch of the no-show guard.",
       "writes": []
     },
     {
-      "name": "ADD-TO-WF: Route SOLD renewal to WF-09 Nurture",
-      "comment": "Renewal-nurture path. WF-09 owns renewal_date trigger.",
+      "name": "ADD-TO-WF: Route no-show to WF-08",
+      "comment": "ADD-TO-WF WF-08 d35d04ac-0042-4e33-95dd-9253b2847bdf.",
       "writes": []
     },
     {
-      "name": "ADD-TO-WF: Route AD to WF-07 A&D",
-      "comment": "A&D branch handling.",
+      "name": "PATH: not no-show",
+      "comment": "False branch fall-through; next appt_status IF still evaluates.",
       "writes": []
     },
     {
-      "name": "ADD-TO-WF: Route MUT to WF-11 Compliance",
-      "comment": "Compliance path.",
+      "name": "IF: appt_status = cancel",
+      "comment": "Cancel also routes to WF-08.",
+      "does_not_write": ["appt_status"]
+    },
+    {
+      "name": "PATH: cancel",
+      "comment": "True branch of the cancel guard.",
       "writes": []
     },
     {
-      "name": "IF-ELSE: Branch on appt_status (no-show | cancel | reschedule)",
-      "comment": "appt_status routing. Reschedule must never be treated as no-show.",
-      "does_not_write": [
-        "appt_status"
-      ]
+      "name": "ADD-TO-WF: Route cancel to WF-08",
+      "comment": "ADD-TO-WF WF-08 d35d04ac-0042-4e33-95dd-9253b2847bdf.",
+      "writes": []
     },
     {
-      "name": "ADD-TO-WF: Route no-show or cancel to WF-08",
-      "comment": "Only no-show and cancel enter WF-08; reschedule does not.",
+      "name": "PATH: not cancel",
+      "comment": "False branch fall-through.",
+      "writes": []
+    },
+    {
+      "name": "IF: appt_status = reschedule",
+      "comment": "Reschedule re-enters reminders via WF-03. Must never be treated as no-show.",
+      "does_not_write": ["appt_status"]
+    },
+    {
+      "name": "PATH: reschedule",
+      "comment": "True branch of the reschedule guard.",
       "writes": []
     },
     {
       "name": "ADD-TO-WF: Route reschedule to WF-03 Reminders",
-      "comment": "Reschedule re-enters reminders. Must not write appt_status=no-show.",
+      "comment": "ADD-TO-WF WF-03 ec08cae5-3d1f-48bd-9a0d-444626d9a150.",
       "writes": []
+    },
+    {
+      "name": "PATH: not reschedule",
+      "comment": "False branch fall-through; outcome routing begins.",
+      "writes": []
+    },
+    {
+      "name": "IF: sale_outcome_v2 = MAR (head guard)",
+      "comment": "MAR payloads never enter outcome routing. Guard branch exits the workflow.",
+      "does_not_write": []
+    },
+    {
+      "name": "PATH: MAR (exit)",
+      "comment": "Drop path. MAR contacts do not enroll in any downstream WF.",
+      "writes": []
+    },
+    {
+      "name": "PATH: not MAR",
+      "comment": "False branch fall-through into outcome routing.",
+      "writes": []
+    },
+    {
+      "name": "IF: sale_outcome_v2 = SOLD",
+      "comment": "Routes downstream. Must not write dollars. Must not move opp stages.",
+      "does_not_write": ["opportunity.pipelineStageId", "opportunity.monetaryValue"]
+    },
+    {
+      "name": "PATH: SOLD",
+      "comment": "True branch. Tag and sub-branch on sale_type.",
+      "writes": []
+    },
+    {
+      "name": "ADD-TAG: v2_outcome_sold (SOLD branch)",
+      "comment": "Tags outcome only. Must not stage-move.",
+      "writes": ["v2_outcome_sold"]
+    },
+    {
+      "name": "IF: sale_type = new",
+      "comment": "SOLD splits into onboarding (new) vs renewal-nurture.",
+      "does_not_write": []
+    },
+    {
+      "name": "PATH: new",
+      "comment": "True branch: SOLD + new.",
+      "writes": []
+    },
+    {
+      "name": "ADD-TO-WF: Route SOLD new to WF-06 Onboarding",
+      "comment": "ADD-TO-WF WF-06 5d036b8a-4336-47c8-9ebe-77f3439bc95c. Onboarding owns membership_status writes; must not set it here.",
+      "writes": []
+    },
+    {
+      "name": "ADD-TO-WF: Route SOLD new to WF-13 (GHL current)",
+      "comment": "ADD-TO-WF WF-13 9513a9c7-69c5-4f1c-9193-b371ab8d8253. Recorded truth in GHL: the router still enrolls WF-13 on SOLD + new. The v2 site card grid hides WF-13 (dropped_from_v2), but the router node exists in the shell.",
+      "writes": []
+    },
+    {
+      "name": "PATH: not new (renewal)",
+      "comment": "False branch: SOLD + renewal / unset.",
+      "writes": []
+    },
+    {
+      "name": "ADD-TO-WF: Route SOLD renewal to WF-09 Nurture",
+      "comment": "ADD-TO-WF WF-09 cbc14e90-4507-42cd-afcc-f7410d7f4554. WF-09 owns renewal_date trigger.",
+      "writes": []
+    },
+    {
+      "name": "PATH: not SOLD",
+      "comment": "False branch fall-through; next outcome IF still evaluates.",
+      "writes": []
+    },
+    {
+      "name": "IF: sale_outcome_v2 = AD",
+      "comment": "A&D routing.",
+      "does_not_write": []
+    },
+    {
+      "name": "PATH: AD",
+      "comment": "True branch.",
+      "writes": []
+    },
+    {
+      "name": "ADD-TAG: v2_outcome_ad (AD branch)",
+      "comment": "Tags outcome only.",
+      "writes": ["v2_outcome_ad"]
+    },
+    {
+      "name": "ADD-TO-WF: Route AD to WF-07 A&D",
+      "comment": "ADD-TO-WF WF-07 01ca0908-36cf-456c-aa1d-04c999e0a598.",
+      "writes": []
+    },
+    {
+      "name": "PATH: not AD",
+      "comment": "False branch fall-through.",
+      "writes": []
+    },
+    {
+      "name": "IF: sale_outcome_v2 = MUT",
+      "comment": "MUT routing; WF-11 has a MUT front-gate that suppresses the STOP-confirm path for MUT.",
+      "does_not_write": []
+    },
+    {
+      "name": "PATH: MUT",
+      "comment": "True branch.",
+      "writes": []
+    },
+    {
+      "name": "ADD-TAG: v2_outcome_mut (MUT branch)",
+      "comment": "Tags outcome only.",
+      "writes": ["v2_outcome_mut"]
+    },
+    {
+      "name": "ADD-TO-WF: Route MUT to WF-11 Compliance",
+      "comment": "ADD-TO-WF WF-11 9aab45f8-6f5b-467a-9f05-6981446c48f2. WF-11 front-gate on sale_outcome_v2=MUT prevents the STOP-confirm SMS and the opted_out write.",
+      "writes": []
+    },
+    {
+      "name": "PATH: not MUT",
+      "comment": "False branch fall-through.",
+      "writes": []
+    },
+    {
+      "name": "IF: sale_outcome_v2 = MAR (tail drop guard)",
+      "comment": "Redundant tail guard so a MAR payload that slipped past the head guard still drops without enrolling downstream WFs.",
+      "does_not_write": []
+    },
+    {
+      "name": "PATH: MAR (drop)",
+      "comment": "Tail drop.",
+      "writes": []
+    },
+    {
+      "name": "PATH: outcome unmatched",
+      "comment": "Fall-through for outcome values not in {SOLD, AD, MUT, MAR}. Router does not enroll a downstream WF.",
+      "writes": []
+    },
+    {
+      "name": "ADD-TAG: v2_router_dropped (audit)",
+      "comment": "Audit tag on unmatched outcomes. Not authored yet; recorded here as router truth.",
+      "writes": ["v2_router_dropped"]
+    },
+    {
+      "name": "IF: sale_type = renewal (audit branch)",
+      "comment": "Router-side renewal audit.",
+      "does_not_write": []
+    },
+    {
+      "name": "PATH: renewal",
+      "comment": "True branch.",
+      "writes": []
+    },
+    {
+      "name": "ADD-TAG: v2_sale_renewal (audit)",
+      "comment": "Audit tag for renewal transactions.",
+      "writes": ["v2_sale_renewal"]
+    },
+    {
+      "name": "PATH: not renewal",
+      "comment": "False branch fall-through.",
+      "writes": []
+    },
+    {
+      "name": "WAIT: 1s router settle",
+      "comment": "Final settle before audit tag.",
+      "writes": []
+    },
+    {
+      "name": "ADD-TAG: v2_router_seen (audit)",
+      "comment": "Audit tag on every WF-05 completion (Force write handled).",
+      "writes": ["v2_router_seen"]
     }
   ],
   "tags_new": [
     "v2_outcome_sold",
     "v2_outcome_ad",
-    "v2_outcome_mut"
+    "v2_outcome_mut",
+    "v2_router_dropped",
+    "v2_sale_renewal",
+    "v2_router_seen"
   ],
   "live_tags_readonly": [
     "next-lander",

@@ -3,7 +3,7 @@
   "workflows": {
     "01": {
       "name": "Lead Capture",
-      "job": "Enroll new next-lander contacts, create one Sales opportunity, stamp location and current clinic, and hand off to the non-booked burst.",
+      "job": "Enroll new next-lander contacts, guard against duplicate Sales opps (create-once), stamp Method 2 clinic context, send the welcome email + STOP SMS, and hand unbooked to WF-02 after 24h.",
       "purpose": "First touch. Enrolls new next-lander contacts, create-once opens one Sales opportunity, stamps Method 2 clinic context, sends the welcome email and welcome SMS, then hands to WF-02 after 24 hours.",
       "diagram_key": "wf01",
       "trigger": {
@@ -25,75 +25,231 @@
       "steps": [
         {
           "order": 1,
-          "action": "Trigger",
-          "name": "TRIGGER: Contact Created (tag next-lander only)",
-          "config": "Sole enroll. Must not add a source filter. Must not rename next-lander."
+          "action": "Wait",
+          "name": "WAIT: 10s so upsert fields are visible",
+          "config": "Short settle so /api/qualify + /api/handoff/wordpress upserts land on the contact before FIND-OPP reads them."
         },
         {
           "order": 2,
-          "action": "If/Else",
-          "name": "IF-ELSE: Guard against duplicate Sales opp (create-once)",
-          "config": "Native check for an existing open opp in Sales Lead to Close before create. Must not move stages."
+          "action": "If",
+          "name": "IF: Open Sales opp already exists? (create-once)",
+          "config": "Native find-opp guard against a second open opp on staging Sales pipe ASnpfhu1hpSHUv0IFLc7. Must not move stages, must not read monetaryValue for logic."
         },
         {
           "order": 3,
-          "action": "Create Opportunity",
-          "name": "CREATE-OPP: New Lead in Sales Lead to Close (create-once)",
-          "config": "Pipeline Vt8cPz51C3i87moo73gQ, stage New Lead. Allow Duplicate is ON but this branch only fires when no open opp exists. Must not set monetaryValue."
+          "action": "Update",
+          "name": "UPDATE: last-touch only (open opp exists)",
+          "config": "Found branch. Refresh last-touch fields on the existing open opp; do not create a duplicate."
         },
         {
           "order": 4,
-          "action": "Update Contact Field",
-          "name": "SET-FIELD: Stamp location_* (from mapped source)",
-          "config": "Writes location_* fields for the contact. Must not rename existing live location_* tags."
+          "action": "Path",
+          "name": "PATH: no open Sales opp",
+          "config": "False branch of the create-once guard. Downstream CREATE-OPP fires only from this path."
         },
         {
           "order": 5,
-          "action": "Update Contact Field",
-          "name": "SET-FIELD: Stamp current_clinic_* Method 2 (WF-01 only)",
-          "config": "Sole writer of current_clinic_slug and current_clinic_* fields. Slugs limited to richmond, virginia-beach, newport-news."
+          "action": "Create",
+          "name": "CREATE: Sales New Lead (Lead to Close)",
+          "config": "Only reached when no open Sales opp exists. Staging Sales pipe ASnpfhu1hpSHUv0IFLc7, stage New Lead 31a81ba6-10c4-4033-8401-4e864ec9495c. Allow Duplicate Opportunities is ON but this branch is gated by the create-once guard. Must not set monetaryValue."
         },
         {
           "order": 6,
-          "action": "If/Else",
-          "name": "IF-ELSE: Branch on source wordpress-form (inner branch only)",
-          "config": "Inner branch to route WP-origin contacts. Must not create a Sales opp here; qualify already upserted the contact via /api/qualify."
+          "action": "If",
+          "name": "IF: location = richmond",
+          "config": "First slug arm of the Method 2 stamp block; reads contact.current_clinic_slug."
         },
         {
           "order": 7,
-          "action": "Add Contact Tag",
-          "name": "ADD-TAG: v2_source_wp (inner wordpress-form branch)",
-          "config": "New v2 tag only. Must not touch legacy source tags."
+          "action": "Path",
+          "name": "PATH: richmond",
+          "config": "True branch of the richmond guard. Downstream stamps run only from here."
         },
         {
           "order": 8,
-          "action": "Send Email",
-          "name": "EMAIL: Welcome (native template)",
-          "config": "Sends EML | WF-01 | Welcome. Copy uses members not patients, clinic not office, no-cost not free, no em-dashes, no guy."
+          "action": "Path",
+          "name": "PATH: not richmond",
+          "config": "False branch fall-through; next slug IF still evaluates."
         },
         {
           "order": 9,
-          "action": "Send SMS",
-          "name": "SMS: Welcome with STOP opt-out (first SMS)",
-          "config": "Inline body. First SMS to any contact carries STOP opt-out. Honors quiet hours 8am-9pm contact TZ."
+          "action": "Update",
+          "name": "UPDATE: Stamp current_clinic_address (richmond)",
+          "config": "Method 2 address stamp for richmond. Field a2v4CqA8zXaZ0iu901f6. Value: 4050 Innslake Drive Suite 360 Richmond VA 23060."
         },
         {
           "order": 10,
-          "action": "Add Contact Tag",
-          "name": "ADD-TAG: v2_enrolled_wf01 (audit)",
-          "config": "Audit tag for WF-01 enroll. Must not rename next-lander."
+          "action": "Update",
+          "name": "UPDATE: Stamp current_clinic_phone (richmond)",
+          "config": "Method 2 phone stamp for richmond. Field k7ci7d1rnExhAVtEE768. Value: (804) 346-4636."
         },
         {
           "order": 11,
-          "action": "Wait",
-          "name": "WAIT: 24 hours (quiet-hours aware)",
-          "config": "Native wait step. Must not skip quiet hours."
+          "action": "Update",
+          "name": "UPDATE: Stamp current_booking_url (richmond)",
+          "config": "Method 2 booking URL stamp for richmond. Field W74Kznhixhaq5sJWbk4r. Value: https://book.menswellnesscenters.com/richmond."
         },
         {
           "order": 12,
-          "action": "Add To Workflow",
-          "name": "ADD-TO-WF: Route to WF-02 Non-booked",
-          "config": "Hand-off to non-booked burst. Must not filter by funnel_entry_* here; WF-02 enforces the exclusion."
+          "action": "If",
+          "name": "IF: location = virginia-beach",
+          "config": "Second slug arm of the Method 2 stamp block; reads contact.current_clinic_slug."
+        },
+        {
+          "order": 13,
+          "action": "Path",
+          "name": "PATH: virginia-beach",
+          "config": "True branch of the virginia-beach guard."
+        },
+        {
+          "order": 14,
+          "action": "Path",
+          "name": "PATH: not virginia-beach",
+          "config": "False branch fall-through; next slug IF still evaluates."
+        },
+        {
+          "order": 15,
+          "action": "Update",
+          "name": "UPDATE: Stamp current_clinic_address (virginia-beach)",
+          "config": "Method 2 address stamp for virginia-beach. Field a2v4CqA8zXaZ0iu901f6. Value: 996 First Colonial Road."
+        },
+        {
+          "order": 16,
+          "action": "Update",
+          "name": "UPDATE: Stamp current_clinic_phone (virginia-beach)",
+          "config": "Method 2 phone stamp for virginia-beach. Field k7ci7d1rnExhAVtEE768. Value: (757) 612-4428."
+        },
+        {
+          "order": 17,
+          "action": "Update",
+          "name": "UPDATE: Stamp current_booking_url (virginia-beach)",
+          "config": "Method 2 booking URL stamp for virginia-beach. Field W74Kznhixhaq5sJWbk4r. Value: https://book.menswellnesscenters.com/virginia-beach."
+        },
+        {
+          "order": 18,
+          "action": "If",
+          "name": "IF: location = newport-news",
+          "config": "Third slug arm of the Method 2 stamp block; reads contact.current_clinic_slug."
+        },
+        {
+          "order": 19,
+          "action": "Path",
+          "name": "PATH: newport-news",
+          "config": "True branch of the newport-news guard."
+        },
+        {
+          "order": 20,
+          "action": "Path",
+          "name": "PATH: location unmatched (no stamp)",
+          "config": "False branch fall-through for a slug outside {richmond, virginia-beach, newport-news}. Nothing stamps."
+        },
+        {
+          "order": 21,
+          "action": "Update",
+          "name": "UPDATE: Stamp current_clinic_address (newport-news)",
+          "config": "Method 2 address stamp for newport-news. Field a2v4CqA8zXaZ0iu901f6. Value: 827 Diligence Drive Suite 206."
+        },
+        {
+          "order": 22,
+          "action": "Update",
+          "name": "UPDATE: Stamp current_clinic_phone (newport-news)",
+          "config": "Method 2 phone stamp for newport-news. Field k7ci7d1rnExhAVtEE768. Value: (757) 806-6263."
+        },
+        {
+          "order": 23,
+          "action": "Update",
+          "name": "UPDATE: Stamp current_booking_url (newport-news)",
+          "config": "Method 2 booking URL stamp for newport-news. Field W74Kznhixhaq5sJWbk4r. Value: https://book.menswellnesscenters.com/newport-news."
+        },
+        {
+          "order": 24,
+          "action": "If",
+          "name": "IF: inbound slug = richmond",
+          "config": "Copy the inbound clinic slug onto opportunity.location XbaJOEsDwgxMtudnj5IG so the Sales opp carries the display label. Must not touch opportunity.monetaryValue."
+        },
+        {
+          "order": 25,
+          "action": "Update",
+          "name": "UPDATE: opportunity.location from slug (richmond)",
+          "config": "Writes opportunity.location = Richmond (display label)."
+        },
+        {
+          "order": 26,
+          "action": "Path",
+          "name": "PATH: not slug richmond",
+          "config": "False branch fall-through for the richmond slug guard."
+        },
+        {
+          "order": 27,
+          "action": "If",
+          "name": "IF: inbound slug = virginia-beach",
+          "config": "Copy inbound slug to opportunity.location display label for virginia-beach."
+        },
+        {
+          "order": 28,
+          "action": "Update",
+          "name": "UPDATE: opportunity.location from slug (virginia-beach)",
+          "config": "Writes opportunity.location = Virginia Beach (display label)."
+        },
+        {
+          "order": 29,
+          "action": "Path",
+          "name": "PATH: not slug virginia-beach",
+          "config": "False branch fall-through for the virginia-beach slug guard."
+        },
+        {
+          "order": 30,
+          "action": "If",
+          "name": "IF: inbound slug = newport-news",
+          "config": "Copy inbound slug to opportunity.location display label for newport-news."
+        },
+        {
+          "order": 31,
+          "action": "Update",
+          "name": "UPDATE: opportunity.location from slug (newport-news)",
+          "config": "Writes opportunity.location = Newport News (display label)."
+        },
+        {
+          "order": 32,
+          "action": "Update",
+          "name": "UPDATE: Stamp current_review_link (richmond)",
+          "config": "Method 2 review-link stamp for richmond. Field 5WQWnA1nuMn0SWwTLxKR. Uses the live Google Maps CID 2277296049943963626."
+        },
+        {
+          "order": 33,
+          "action": "Update",
+          "name": "UPDATE: Stamp current_review_link (virginia-beach)",
+          "config": "Method 2 review-link stamp for virginia-beach. Field 5WQWnA1nuMn0SWwTLxKR. Uses the live Google Maps CID 5476441419759027703."
+        },
+        {
+          "order": 34,
+          "action": "Update",
+          "name": "UPDATE: Stamp current_review_link (newport-news)",
+          "config": "Method 2 review-link stamp for newport-news. Field 5WQWnA1nuMn0SWwTLxKR. Uses the live Google Maps CID 605398627804676801."
+        },
+        {
+          "order": 35,
+          "action": "Send Email",
+          "name": "EMAIL: Welcome after first capture (WF-01)",
+          "config": "Sends native template EML | WF-01 | Welcome (j7C8MVs6cAIuH5zPUjzH). Copy respects the locked rules (members not patients, clinic not office, no-cost not free, no em-dashes, no guy)."
+        },
+        {
+          "order": 36,
+          "action": "Send SMS",
+          "name": "SMS: Speed-to-lead first touch + STOP (WF-01)",
+          "config": "Inline SMS. First SMS in any sequence carries Reply STOP to opt out. Transactional; send window None."
+        },
+        {
+          "order": 37,
+          "action": "Wait",
+          "name": "WAIT: 24h then hand unbooked to WF-02",
+          "config": "GHL unit is singular hour, not hours. Transactional; not quiet-hours aware."
+        },
+        {
+          "order": 38,
+          "action": "Add",
+          "name": "ADD: Enroll WF-02 (unbooked 24h)",
+          "config": "ADD-TO-WF WF-02 5f973b3c-0375-4fc0-ace2-e13d1a1976b9. WF-02 enforces its own funnel_entry_* exclusion; do not filter here."
         }
       ],
       "messages": [
@@ -113,7 +269,7 @@
         "allow_reentry": "No. Create-once via FIND-OPP guard on the staging Sales pipe.",
         "stop_on_response": "Yes. Inbound STOP routes into WF-11 Compliance.",
         "reentry_caveat": "Ambassador and PCC referral contacts re-enter WF-01 as new next-lander contacts (never merged).",
-        "status": "Draft v10 on staging shell 869782c6-00d6-4349-ab6e-4e0f2a98bd04. Unpublished."
+        "status": "Draft v12 on staging shell 869782c6-00d6-4349-ab6e-4e0f2a98bd04. Restored from v10 on 2026-08-21 PT after a stub overwrite. Unpublished."
       },
       "test": [
         "Create a test contact with tag next-lander. Confirm exactly one open Sales opp on staging pipe ASnpfhu1hpSHUv0IFLc7 with stage New Lead.",
@@ -144,7 +300,7 @@
     },
     "02": {
       "name": "Non-booked Recovery",
-      "job": "Follow-up burst for contacts that finished WF-01 but did not book. Excludes funnel_entry_* origins. Re-checks booking and routes stragglers to WF-09.",
+      "job": "Non-booked recovery burst for contacts that finished WF-01 but did not book. Enrolled only via ADD-TO-WF from WF-01. Marketing / recovery: 08:00-21:00 contact TZ.",
       "purpose": "Non-booked recovery burst for contacts that finished WF-01 but did not book. Marketing / recovery: quiet hours apply.",
       "diagram_key": "wf02",
       "trigger": {
@@ -162,99 +318,75 @@
       "steps": [
         {
           "order": 1,
-          "action": "Trigger",
-          "name": "TRIGGER: Added by WF-01 (not funnel_entry_*)",
-          "config": "Sole enroll path for WF-02. Must not enroll funnel_entry_* origins."
+          "action": "Send SMS",
+          "name": "SMS: Non-booked +3m first touch + STOP (WF-02)",
+          "config": "Inline SMS. First SMS in the recovery burst carries Reply STOP to opt out. Send window 08:00-21:00 contact TZ (marketing)."
         },
         {
           "order": 2,
-          "action": "If/Else",
-          "name": "IF-ELSE: Skip if already booked (v2_status_booked)",
-          "config": "Reads v2_status_booked and calendar-booked contact fields. Must not clear the booked tag."
+          "action": "Wait",
+          "name": "WAIT: +3m before nudge 2",
+          "config": "Marketing send-window aware; 08:00-21:00 contact TZ."
         },
         {
           "order": 3,
           "action": "Wait",
-          "name": "WAIT: +3 minutes (quiet-hours aware)",
-          "config": "Short opening delay for burst step 1."
+          "name": "WAIT: +1m spacing",
+          "config": "Short spacing before nudge 2."
         },
         {
           "order": 4,
           "action": "Send SMS",
-          "name": "SMS: Non-booked nudge 1 (3m)",
-          "config": "Inline SMS. Honors quiet hours 8am-9pm contact TZ."
+          "name": "SMS: Non-booked +1m nudge (WF-02)",
+          "config": "Inline SMS. Members not patients, clinic not office."
         },
         {
           "order": 5,
           "action": "Wait",
-          "name": "WAIT: +1 minute",
-          "config": "Short spacing before email."
+          "name": "WAIT: +5m before nudge 3",
+          "config": "Send-window aware spacing."
         },
         {
           "order": 6,
-          "action": "Send Email",
-          "name": "EMAIL: Non-booked nudge 1 (native template)",
-          "config": "Sends EML | WF-02 | Nudge 1."
+          "action": "Send SMS",
+          "name": "SMS: Non-booked +5m nudge (WF-02)",
+          "config": "Inline SMS."
         },
         {
           "order": 7,
           "action": "Wait",
-          "name": "WAIT: +5 minutes",
-          "config": "Spacing before next SMS."
+          "name": "WAIT: +15m before nudge 4",
+          "config": "Send-window aware spacing."
         },
         {
           "order": 8,
           "action": "Send SMS",
-          "name": "SMS: Non-booked nudge 2 (5m)",
-          "config": "Inline SMS. Members not patients, clinic not office."
-        },
-        {
-          "order": 9,
-          "action": "Wait",
-          "name": "WAIT: +15 minutes",
-          "config": "Spacing before follow-up email."
-        },
-        {
-          "order": 10,
-          "action": "Send Email",
-          "name": "EMAIL: Non-booked nudge 2 (native template)",
-          "config": "Sends EML | WF-02 | Nudge 2."
-        },
-        {
-          "order": 11,
-          "action": "Wait",
-          "name": "WAIT: +24 hours (quiet-hours aware)",
-          "config": "Longer wait between morning outreach steps."
-        },
-        {
-          "order": 12,
-          "action": "Send SMS",
-          "name": "SMS: Non-booked nudge 3 (24h)",
+          "name": "SMS: Non-booked +15m nudge (WF-02)",
           "config": "Inline SMS."
         },
         {
-          "order": 13,
-          "action": "Wait",
-          "name": "WAIT: +36 hours",
-          "config": "Final delay before last email."
-        },
-        {
-          "order": 14,
+          "order": 9,
           "action": "Send Email",
-          "name": "EMAIL: Non-booked nudge 4 (native template)",
-          "config": "Sends EML | WF-02 | Nudge 4."
+          "name": "EMAIL: Non-booked 24h (WF-02)",
+          "config": "Sends native template EML | WF-02 | Non-booked 24h (bPj39XTcKv2HylGKEUdG)."
         },
         {
-          "order": 15,
-          "action": "If/Else",
-          "name": "IF-ELSE: Re-check booking (v2_status_booked)",
-          "config": "Reads booked state after burst. Must not force appt_status."
+          "order": 10,
+          "action": "Wait",
+          "name": "WAIT: +12h to reach 36h mark",
+          "config": "Bridges from the 24h email to the 36h SMS."
         },
         {
-          "order": 16,
+          "order": 11,
+          "action": "Send SMS",
+          "name": "SMS: Non-booked +36h final (WF-02)",
+          "config": "Inline SMS. Final touch before nurture hand-off."
+        },
+        {
+          "order": 12,
           "action": "Add To Workflow",
-          "name": "ADD-TO-WF: Route unbooked to WF-09 Nurture",
-          "config": "Hand-off to nurture. Must not touch renewal_date; only WF-09 owns that trigger."
+          "name": "ADD-TO-WF: Enroll WF-09 (long-tail nurture)",
+          "config": "ADD-TO-WF WF-09 cbc14e90-4507-42cd-afcc-f7410d7f4554. Must not touch renewal_date; only WF-09 owns that trigger."
         }
       ],
       "messages": [
@@ -274,7 +406,7 @@
         "allow_reentry": "No. One pass per WF-01 enroll.",
         "stop_on_response": "Yes. Inbound STOP routes into WF-11 Compliance.",
         "reentry_caveat": "Contacts who book are dropped from WF-02 by WF-03's REMOVE-FROM-WF step.",
-        "status": "Draft v4 on staging shell 5f973b3c-0375-4fc0-ace2-e13d1a1976b9. Unpublished."
+        "status": "Draft v9 on staging shell 5f973b3c-0375-4fc0-ace2-e13d1a1976b9. Restored from v4 on 2026-08-21 PT after a stub overwrite. Unpublished."
       },
       "test": [
         "Enroll a test contact via WF-01 and confirm the SMS burst fires only inside 08:00-21:00 contact TZ.",
@@ -288,7 +420,7 @@
     },
     "03": {
       "name": "Booking Confirmation + Reminders",
-      "job": "Confirm and remind booked appointments across the three consult calendars. Never marks a reschedule as no-show.",
+      "job": "Confirm and remind booked appointments across the three consult calendars. Drops the contact from WF-02 recovery on entry and hands to WF-04 intake chase 1h after confirm.",
       "purpose": "Confirm the appointment and send appointment-relative reminders across the three consult calendars. Transactional; no quiet hours.",
       "diagram_key": "preappt",
       "trigger": {
@@ -308,87 +440,93 @@
       "steps": [
         {
           "order": 1,
-          "action": "Trigger",
-          "name": "TRIGGER: Appointment Booked (3 consult calendars)",
-          "config": "Sole booking trigger. Must not enroll from any other calendar."
+          "action": "Remove From Workflow",
+          "name": "REMOVE-FROM-WF: Drop from WF-02 Non-booked",
+          "config": "Stops any in-flight recovery burst. Must not clear v2_status_booked (booking state is factual)."
         },
         {
           "order": 2,
           "action": "Add Contact Tag",
           "name": "ADD-TAG: v2_status_booked",
-          "config": "New v2 booked tag. Must not remove or rename live booking tags."
+          "config": "New v2 booked tag NR1KZuPH1xzWOuu0pHd4. Must not remove or rename live booking tags."
         },
         {
           "order": 3,
           "action": "Send Email",
-          "name": "EMAIL: Confirmation (native template)",
-          "config": "Sends EML | WF-03 | Confirmation."
+          "name": "EMAIL: Confirm appointment (WF-03)",
+          "config": "Sends native template EML | WF-03 | Confirm appointment (GUs77konNdAGFS0EFZS2)."
         },
         {
           "order": 4,
           "action": "Send SMS",
-          "name": "SMS: Confirmation (inline)",
-          "config": "Inline confirmation SMS. Honors quiet hours 8am-9pm contact TZ."
+          "name": "SMS: Confirm appointment (WF-03)",
+          "config": "Inline SMS. First SMS in this sequence carries Reply STOP to opt out. Transactional; send window None."
         },
         {
           "order": 5,
           "action": "Wait",
-          "name": "WAIT: Until T-3 days before appointment",
-          "config": "Native appointment-relative wait."
+          "name": "WAIT: 1h before intake hand-off",
+          "config": "Short settle between confirm cadence and intake chase."
         },
         {
           "order": 6,
-          "action": "Send SMS",
-          "name": "SMS: Reminder T-3 days (inline)",
-          "config": "Members not patients, clinic not office."
+          "action": "Add To Workflow",
+          "name": "ADD-TO-WF: Enroll WF-04 Intake chase",
+          "config": "ADD-TO-WF WF-04 4854e1cf-492d-4da8-ba23-5c14a4d04229."
         },
         {
           "order": 7,
           "action": "Wait",
-          "name": "WAIT: Until T-1 day before appointment",
-          "config": "Native appointment-relative wait."
+          "name": "WAIT: Until T-3d before appointment",
+          "config": "Appointment-relative wait. type=appointment, appointmentStartAfter.when=before, appointmentStartAfter.type=minutes (4320), distributed unit days, appointmentCondition=skip."
         },
         {
           "order": 8,
           "action": "Send Email",
-          "name": "EMAIL: Reminder T-1 day (native template)",
-          "config": "Sends EML | WF-03 | Reminder T-1."
+          "name": "EMAIL: Reminder T-3d (WF-03)",
+          "config": "Sends native template EML | WF-03 | T-3d reminder (QcpX2V3OarwL5jKN6OFE) before the T-3d SMS."
         },
         {
           "order": 9,
-          "action": "Wait",
-          "name": "WAIT: Until T-5 hours before appointment",
-          "config": "Same-day heads-up."
+          "action": "Send SMS",
+          "name": "SMS: Reminder T-3d (WF-03)",
+          "config": "Inline SMS. Bodies reference contact.current_clinic_address, contact.current_clinic_phone, and contact.current_booking_url only. Do not use {{location.name}}."
         },
         {
           "order": 10,
-          "action": "Send SMS",
-          "name": "SMS: Reminder T-5 hours (inline)",
-          "config": "Same-day SMS. Honors quiet hours."
+          "action": "Wait",
+          "name": "WAIT: Until T-1d before appointment",
+          "config": "Appointment-relative wait. Minutes=1440, distributed unit days, appointmentCondition=skip."
         },
         {
           "order": 11,
-          "action": "Wait",
-          "name": "WAIT: Until T-2 hours before appointment",
-          "config": "Final heads-up."
+          "action": "Send SMS",
+          "name": "SMS: Reminder T-1d (WF-03)",
+          "config": "Inline SMS reminder."
         },
         {
           "order": 12,
-          "action": "Send SMS",
-          "name": "SMS: Reminder T-2 hours (inline)",
-          "config": "Final SMS reminder."
+          "action": "Wait",
+          "name": "WAIT: Until T-5h before appointment",
+          "config": "Appointment-relative wait. Minutes=300, distributed unit hours, appointmentCondition=skip."
         },
         {
           "order": 13,
-          "action": "If/Else",
-          "name": "IF-ELSE: Skip no-show branch when appt_status=reschedule",
-          "config": "Reschedule must never be marked as no-show. Guard before any no-show write."
+          "action": "Send SMS",
+          "name": "SMS: Reminder T-5h (WF-03)",
+          "config": "Inline SMS reminder."
         },
         {
           "order": 14,
-          "action": "Add To Workflow",
-          "name": "ADD-TO-WF: Route to WF-04 Intake chase",
-          "config": "Hand-off to intake chase after confirmation cadence completes."
+          "action": "Wait",
+          "name": "WAIT: Until T-2h before appointment",
+          "config": "Appointment-relative wait. Minutes=120, distributed unit hours, appointmentCondition=skip."
+        },
+        {
+          "order": 15,
+          "action": "Send SMS",
+          "name": "SMS: Reminder T-2h (WF-03)",
+          "config": "Inline SMS reminder (final heads-up)."
         }
       ],
       "messages": [
@@ -427,7 +565,7 @@
     },
     "04": {
       "name": "Intake Chase",
-      "job": "Chase the intake survey for booked contacts. Exits as soon as the survey is submitted.",
+      "job": "Chase the medical intake survey for booked contacts. SMS-only (+4h, +20h). Enrolled by WF-03 hand-off; no other trigger.",
       "purpose": "Chase the medical intake survey after a booking. Exits on submit.",
       "diagram_key": "preappt",
       "trigger": {
@@ -445,63 +583,27 @@
       "steps": [
         {
           "order": 1,
-          "action": "Trigger",
-          "name": "TRIGGER: Added by WF-03 (v2_status_booked)",
-          "config": "Only enrolled by WF-03. Must not enroll direct form fills."
+          "action": "Wait",
+          "name": "WAIT: +4h before first intake SMS",
+          "config": "Transactional; not quiet-hours aware."
         },
         {
           "order": 2,
-          "action": "If/Else",
-          "name": "IF-ELSE: Exit on survey submitted (v2_intake_done)",
-          "config": "Reads survey-submitted state. Must exit immediately on submit."
+          "action": "Send SMS",
+          "name": "SMS: Intake chase +4h + STOP (WF-04)",
+          "config": "Inline SMS. First SMS in this sequence carries Reply STOP to opt out. Uses {{contact.current_booking_url}} as the manage / complete-intake link."
         },
         {
           "order": 3,
-          "action": "Send Email",
-          "name": "EMAIL: Intake ask 1 (native template)",
-          "config": "Sends EML | WF-04 | Intake ask 1."
+          "action": "Wait",
+          "name": "WAIT: +20h before final intake SMS",
+          "config": "Bridges to the 24h-total mark."
         },
         {
           "order": 4,
-          "action": "Wait",
-          "name": "WAIT: +6 hours (quiet-hours aware)",
-          "config": "Space before SMS nudge."
-        },
-        {
-          "order": 5,
           "action": "Send SMS",
-          "name": "SMS: Intake nudge 1 (inline)",
-          "config": "Inline SMS. Honors quiet hours."
-        },
-        {
-          "order": 6,
-          "action": "Wait",
-          "name": "WAIT: +18 hours",
-          "config": "Overnight-safe wait before next ask."
-        },
-        {
-          "order": 7,
-          "action": "Send Email",
-          "name": "EMAIL: Intake ask 2 (native template)",
-          "config": "Sends EML | WF-04 | Intake ask 2."
-        },
-        {
-          "order": 8,
-          "action": "Wait",
-          "name": "WAIT: +12 hours",
-          "config": "Space before final SMS."
-        },
-        {
-          "order": 9,
-          "action": "Send SMS",
-          "name": "SMS: Intake final nudge (inline)",
-          "config": "Final SMS. Members not patients."
-        },
-        {
-          "order": 10,
-          "action": "Add Contact Tag",
-          "name": "ADD-TAG: v2_intake_chased (audit)",
-          "config": "Audit tag only. Must not signal completion; only submission clears WF-04."
+          "name": "SMS: Intake chase +20h (WF-04)",
+          "config": "Inline SMS. Final nudge before the workflow completes."
         }
       ],
       "messages": [
@@ -533,7 +635,7 @@
     },
     "05": {
       "name": "Outcome Router",
-      "job": "Central router for sale_outcome and appt_status force writes. Reads the opportunity, tags v2_outcome_*, and routes to the correct downstream workflow. Never stage-moves and never fires on MAR.",
+      "job": "Central router. Reads opportunity.sale_outcome_v2 and appt_status from Force webhook writes and routes to the correct downstream workflow. Never stage-moves and never fires on MAR. Still ADD-TO-WF WF-13 on SOLD + sale_type=new (recorded truth in GHL; site cards hide WF-13).",
       "purpose": "Central router for Force outcome writes. Reads opportunity.sale_outcome_v2 and routes downstream. Workflows never move Sales stages here.",
       "diagram_key": "wf05",
       "trigger": {
@@ -547,7 +649,8 @@
       "prerequisites": [
         "Force is the only writer of sale_outcome (SOLD | AD | MUT | MAR), sale_type (new | renewal), and appt_status (showed | no-show | cancel | reschedule).",
         "opportunity.sale_outcome_v2 is the routing field. Legacy contact.sale_outcome labels are not used.",
-        "WF-05 never moves Sales stages (New Lead to Booked to Showed to Won). Force moves stages."
+        "WF-05 never moves Sales stages (New Lead to Booked to Showed to Won). Force moves stages.",
+        "GHL router still ADD-TO-WF WF-13 on SOLD + new. Site cards hide WF-13 (dropped_from_v2) but the router node exists in the shell."
       ],
       "steps": [
         {
@@ -559,8 +662,8 @@
         {
           "order": 2,
           "action": "Wait",
-          "name": "WAIT: 60 seconds (opp settle)",
-          "config": "Allows the upstream force-write to land on the opportunity before FIND-OPP."
+          "name": "WAIT: 60s so opp writes settle",
+          "config": "Allows the upstream Force write to land on the opportunity before FIND-OPP reads it."
         },
         {
           "order": 3,
@@ -570,81 +673,273 @@
         },
         {
           "order": 4,
-          "action": "If/Else",
-          "name": "IF-ELSE: Drop payload when sale_outcome=MAR",
-          "config": "MAR never enters WF-05. Guard branch exits the workflow."
+          "action": "If",
+          "name": "IF: appt_status = no-show",
+          "config": "Route no-show first, before outcome routing."
         },
         {
           "order": 5,
-          "action": "If/Else",
-          "name": "IF-ELSE: Branch on sale_outcome (SOLD | AD | MUT)",
-          "config": "Routes downstream. Must not write dollars. Must not move opp stages."
+          "action": "Path",
+          "name": "PATH: no-show",
+          "config": "True branch of the no-show guard."
         },
         {
           "order": 6,
+          "action": "Add To Workflow",
+          "name": "ADD-TO-WF: Route no-show to WF-08",
+          "config": "ADD-TO-WF WF-08 d35d04ac-0042-4e33-95dd-9253b2847bdf."
+        },
+        {
+          "order": 7,
+          "action": "Path",
+          "name": "PATH: not no-show",
+          "config": "False branch fall-through; next appt_status IF still evaluates."
+        },
+        {
+          "order": 8,
+          "action": "If",
+          "name": "IF: appt_status = cancel",
+          "config": "Cancel also routes to WF-08."
+        },
+        {
+          "order": 9,
+          "action": "Path",
+          "name": "PATH: cancel",
+          "config": "True branch of the cancel guard."
+        },
+        {
+          "order": 10,
+          "action": "Add To Workflow",
+          "name": "ADD-TO-WF: Route cancel to WF-08",
+          "config": "ADD-TO-WF WF-08 d35d04ac-0042-4e33-95dd-9253b2847bdf."
+        },
+        {
+          "order": 11,
+          "action": "Path",
+          "name": "PATH: not cancel",
+          "config": "False branch fall-through."
+        },
+        {
+          "order": 12,
+          "action": "If",
+          "name": "IF: appt_status = reschedule",
+          "config": "Reschedule re-enters reminders via WF-03. Must never be treated as no-show."
+        },
+        {
+          "order": 13,
+          "action": "Path",
+          "name": "PATH: reschedule",
+          "config": "True branch of the reschedule guard."
+        },
+        {
+          "order": 14,
+          "action": "Add To Workflow",
+          "name": "ADD-TO-WF: Route reschedule to WF-03 Reminders",
+          "config": "ADD-TO-WF WF-03 ec08cae5-3d1f-48bd-9a0d-444626d9a150."
+        },
+        {
+          "order": 15,
+          "action": "Path",
+          "name": "PATH: not reschedule",
+          "config": "False branch fall-through; outcome routing begins."
+        },
+        {
+          "order": 16,
+          "action": "If",
+          "name": "IF: sale_outcome_v2 = MAR (head guard)",
+          "config": "MAR payloads never enter outcome routing. Guard branch exits the workflow."
+        },
+        {
+          "order": 17,
+          "action": "Path",
+          "name": "PATH: MAR (exit)",
+          "config": "Drop path. MAR contacts do not enroll in any downstream WF."
+        },
+        {
+          "order": 18,
+          "action": "Path",
+          "name": "PATH: not MAR",
+          "config": "False branch fall-through into outcome routing."
+        },
+        {
+          "order": 19,
+          "action": "If",
+          "name": "IF: sale_outcome_v2 = SOLD",
+          "config": "Routes downstream. Must not write dollars. Must not move opp stages."
+        },
+        {
+          "order": 20,
+          "action": "Path",
+          "name": "PATH: SOLD",
+          "config": "True branch. Tag and sub-branch on sale_type."
+        },
+        {
+          "order": 21,
           "action": "Add Contact Tag",
           "name": "ADD-TAG: v2_outcome_sold (SOLD branch)",
           "config": "Tags outcome only. Must not stage-move."
         },
         {
-          "order": 7,
+          "order": 22,
+          "action": "If",
+          "name": "IF: sale_type = new",
+          "config": "SOLD splits into onboarding (new) vs renewal-nurture."
+        },
+        {
+          "order": 23,
+          "action": "Path",
+          "name": "PATH: new",
+          "config": "True branch: SOLD + new."
+        },
+        {
+          "order": 24,
+          "action": "Add To Workflow",
+          "name": "ADD-TO-WF: Route SOLD new to WF-06 Onboarding",
+          "config": "ADD-TO-WF WF-06 5d036b8a-4336-47c8-9ebe-77f3439bc95c. Onboarding owns membership_status writes; must not set it here."
+        },
+        {
+          "order": 25,
+          "action": "Add To Workflow",
+          "name": "ADD-TO-WF: Route SOLD new to WF-13 (GHL current)",
+          "config": "ADD-TO-WF WF-13 9513a9c7-69c5-4f1c-9193-b371ab8d8253. Recorded truth in GHL: the router still enrolls WF-13 on SOLD + new. The v2 site card grid hides WF-13 (dropped_from_v2), but the router node exists in the shell."
+        },
+        {
+          "order": 26,
+          "action": "Path",
+          "name": "PATH: not new (renewal)",
+          "config": "False branch: SOLD + renewal / unset."
+        },
+        {
+          "order": 27,
+          "action": "Add To Workflow",
+          "name": "ADD-TO-WF: Route SOLD renewal to WF-09 Nurture",
+          "config": "ADD-TO-WF WF-09 cbc14e90-4507-42cd-afcc-f7410d7f4554. WF-09 owns renewal_date trigger."
+        },
+        {
+          "order": 28,
+          "action": "Path",
+          "name": "PATH: not SOLD",
+          "config": "False branch fall-through; next outcome IF still evaluates."
+        },
+        {
+          "order": 29,
+          "action": "If",
+          "name": "IF: sale_outcome_v2 = AD",
+          "config": "A&D routing."
+        },
+        {
+          "order": 30,
+          "action": "Path",
+          "name": "PATH: AD",
+          "config": "True branch."
+        },
+        {
+          "order": 31,
           "action": "Add Contact Tag",
           "name": "ADD-TAG: v2_outcome_ad (AD branch)",
           "config": "Tags outcome only."
         },
         {
-          "order": 8,
+          "order": 32,
+          "action": "Add To Workflow",
+          "name": "ADD-TO-WF: Route AD to WF-07 A&D",
+          "config": "ADD-TO-WF WF-07 01ca0908-36cf-456c-aa1d-04c999e0a598."
+        },
+        {
+          "order": 33,
+          "action": "Path",
+          "name": "PATH: not AD",
+          "config": "False branch fall-through."
+        },
+        {
+          "order": 34,
+          "action": "If",
+          "name": "IF: sale_outcome_v2 = MUT",
+          "config": "MUT routing; WF-11 has a MUT front-gate that suppresses the STOP-confirm path for MUT."
+        },
+        {
+          "order": 35,
+          "action": "Path",
+          "name": "PATH: MUT",
+          "config": "True branch."
+        },
+        {
+          "order": 36,
           "action": "Add Contact Tag",
           "name": "ADD-TAG: v2_outcome_mut (MUT branch)",
           "config": "Tags outcome only."
         },
         {
-          "order": 9,
-          "action": "If/Else",
-          "name": "IF-ELSE: SOLD sub-branch on sale_type (new | renewal)",
-          "config": "SOLD splits into onboarding vs renewal-nurture."
-        },
-        {
-          "order": 10,
-          "action": "Add To Workflow",
-          "name": "ADD-TO-WF: Route SOLD new to WF-06 Onboarding",
-          "config": "Onboarding owns membership_status writes; must not set it here."
-        },
-        {
-          "order": 11,
-          "action": "Add To Workflow",
-          "name": "ADD-TO-WF: Route SOLD renewal to WF-09 Nurture",
-          "config": "Renewal-nurture path. WF-09 owns renewal_date trigger."
-        },
-        {
-          "order": 12,
-          "action": "Add To Workflow",
-          "name": "ADD-TO-WF: Route AD to WF-07 A&D",
-          "config": "A&D branch handling."
-        },
-        {
-          "order": 13,
+          "order": 37,
           "action": "Add To Workflow",
           "name": "ADD-TO-WF: Route MUT to WF-11 Compliance",
-          "config": "Compliance path."
+          "config": "ADD-TO-WF WF-11 9aab45f8-6f5b-467a-9f05-6981446c48f2. WF-11 front-gate on sale_outcome_v2=MUT prevents the STOP-confirm SMS and the opted_out write."
         },
         {
-          "order": 14,
-          "action": "If/Else",
-          "name": "IF-ELSE: Branch on appt_status (no-show | cancel | reschedule)",
-          "config": "appt_status routing. Reschedule must never be treated as no-show."
+          "order": 38,
+          "action": "Path",
+          "name": "PATH: not MUT",
+          "config": "False branch fall-through."
         },
         {
-          "order": 15,
-          "action": "Add To Workflow",
-          "name": "ADD-TO-WF: Route no-show or cancel to WF-08",
-          "config": "Only no-show and cancel enter WF-08; reschedule does not."
+          "order": 39,
+          "action": "If",
+          "name": "IF: sale_outcome_v2 = MAR (tail drop guard)",
+          "config": "Redundant tail guard so a MAR payload that slipped past the head guard still drops without enrolling downstream WFs."
         },
         {
-          "order": 16,
-          "action": "Add To Workflow",
-          "name": "ADD-TO-WF: Route reschedule to WF-03 Reminders",
-          "config": "Reschedule re-enters reminders. Must not write appt_status=no-show."
+          "order": 40,
+          "action": "Path",
+          "name": "PATH: MAR (drop)",
+          "config": "Tail drop."
+        },
+        {
+          "order": 41,
+          "action": "Path",
+          "name": "PATH: outcome unmatched",
+          "config": "Fall-through for outcome values not in {SOLD, AD, MUT, MAR}. Router does not enroll a downstream WF."
+        },
+        {
+          "order": 42,
+          "action": "Add Contact Tag",
+          "name": "ADD-TAG: v2_router_dropped (audit)",
+          "config": "Audit tag on unmatched outcomes. Not authored yet; recorded here as router truth."
+        },
+        {
+          "order": 43,
+          "action": "If",
+          "name": "IF: sale_type = renewal (audit branch)",
+          "config": "Router-side renewal audit."
+        },
+        {
+          "order": 44,
+          "action": "Path",
+          "name": "PATH: renewal",
+          "config": "True branch."
+        },
+        {
+          "order": 45,
+          "action": "Add Contact Tag",
+          "name": "ADD-TAG: v2_sale_renewal (audit)",
+          "config": "Audit tag for renewal transactions."
+        },
+        {
+          "order": 46,
+          "action": "Path",
+          "name": "PATH: not renewal",
+          "config": "False branch fall-through."
+        },
+        {
+          "order": 47,
+          "action": "Wait",
+          "name": "WAIT: 1s router settle",
+          "config": "Final settle before audit tag."
+        },
+        {
+          "order": 48,
+          "action": "Add Contact Tag",
+          "name": "ADD-TAG: v2_router_seen (audit)",
+          "config": "Audit tag on every WF-05 completion (Force write handled)."
         }
       ],
       "messages": [
@@ -662,7 +957,7 @@
         "status": "Draft v5 on staging shell 45a0f21e-244c-4d66-8ee1-232567662624. Unpublished."
       },
       "test": [
-        "Send test webhooks for each sale_outcome value. Confirm SOLD+new adds to WF-06; SOLD renewal adds to WF-09; AD adds to WF-07; MUT adds to WF-11; MAR drops.",
+        "Send test webhooks for each sale_outcome value. Confirm SOLD+new adds to WF-06 AND WF-13 (GHL router truth); SOLD renewal adds to WF-09; AD adds to WF-07; MUT adds to WF-11; MAR drops.",
         "Send appt_status=reschedule and confirm the router sends it to WF-03 (not WF-08).",
         "Confirm no workflow moves opp stages."
       ],
@@ -676,7 +971,7 @@
     },
     "06": {
       "name": "Onboarding",
-      "job": "Onboard SOLD new members. Sole writer of membership_status active and v2_status_active. Schedules WF-10 feedback and WF-14 ambassador at T+14 and T+21.",
+      "job": "Onboard SOLD new members. Tags v2_status_active, sends the welcome SMS after SOLD, holds the 3d/7d/14d/21d check-in waits, and forks to WF-10 at T+14 and WF-14 at T+21.",
       "purpose": "Onboard SOLD new members. Sole writer of contact.membership_status and tag v2_status_active. Schedules WF-10 feedback and WF-14 ambassador.",
       "diagram_key": "wf06",
       "trigger": {
@@ -694,69 +989,51 @@
       "steps": [
         {
           "order": 1,
-          "action": "Trigger",
-          "name": "TRIGGER: Added by WF-05 (SOLD + sale_type=new)",
-          "config": "Sole enroll. Must not fire on renewals or on MAR."
+          "action": "Add Contact Tag",
+          "name": "ADD-TAG: v2_status_active",
+          "config": "New v2 active tag P5yoBUi86hQs0Br5CIqI. Must not remove legacy status tags."
         },
         {
           "order": 2,
-          "action": "Update Contact Field",
-          "name": "SET-FIELD: membership_status = active",
-          "config": "Sole writer of membership_status in the to-be. Must not touch pipeline stages."
+          "action": "Send SMS",
+          "name": "SMS: Welcome after SOLD + STOP (WF-06)",
+          "config": "Inline SMS. References {{contact.current_clinic_address}} and {{contact.current_clinic_phone}}. First SMS in this sequence carries Reply STOP to opt out. Transactional; send window None."
         },
         {
           "order": 3,
-          "action": "Add Contact Tag",
-          "name": "ADD-TAG: v2_status_active",
-          "config": "New v2 active tag. Must not remove legacy status tags."
+          "action": "Wait",
+          "name": "WAIT: 3d check-in fork",
+          "config": "Week-one waypoint (check-in copy not authored yet)."
         },
         {
           "order": 4,
-          "action": "Send Email",
-          "name": "EMAIL: Onboarding welcome (native template)",
-          "config": "Sends EML | WF-06 | Onboarding welcome."
+          "action": "Wait",
+          "name": "WAIT: 7d check-in fork",
+          "config": "Week-one waypoint (check-in copy not authored yet)."
         },
         {
           "order": 5,
-          "action": "Send SMS",
-          "name": "SMS: Onboarding welcome (inline)",
-          "config": "Inline SMS. Honors quiet hours 8am-9pm contact TZ."
+          "action": "Wait",
+          "name": "WAIT: 14d before WF-10 fork",
+          "config": "Bridges to the feedback ask fork."
         },
         {
           "order": 6,
-          "action": "Wait",
-          "name": "WAIT: T+7 days from enroll",
-          "config": "Week-one check-in wait."
+          "action": "Add To Workflow",
+          "name": "ADD-TO-WF: Enroll WF-10 Feedback at T+14",
+          "config": "ADD-TO-WF WF-10 37b1202a-5397-4e08-92da-bb638c862a2a. WF-10 owns contact.latest_feedback_score."
         },
         {
           "order": 7,
-          "action": "Send Email",
-          "name": "EMAIL: Week-one check-in (native template)",
-          "config": "Sends EML | WF-06 | Week-one check-in."
+          "action": "Wait",
+          "name": "WAIT: 21d before WF-14 fork",
+          "config": "Bridges to the ambassador fork."
         },
         {
           "order": 8,
-          "action": "Wait",
-          "name": "WAIT: T+14 days from enroll",
-          "config": "Feedback fork."
-        },
-        {
-          "order": 9,
           "action": "Add To Workflow",
-          "name": "ADD-TO-WF: Route to WF-10 Feedback at T+14",
-          "config": "WF-10 owns contact.latest_feedback_score. Must not write feedback fields here."
-        },
-        {
-          "order": 10,
-          "action": "Wait",
-          "name": "WAIT: T+21 days from enroll",
-          "config": "Ambassador fork."
-        },
-        {
-          "order": 11,
-          "action": "Add To Workflow",
-          "name": "ADD-TO-WF: Route to WF-14 Ambassador at T+21",
-          "config": "Ambassador referral fork. Must not create Sales opps here."
+          "name": "ADD-TO-WF: Enroll WF-14 Ambassador at T+21",
+          "config": "ADD-TO-WF WF-14 6b090c34-cc66-43bf-8939-2868a6b8436b. Must not create Sales opps here."
         }
       ],
       "messages": [
@@ -785,7 +1062,7 @@
     },
     "07": {
       "name": "A&D",
-      "job": "Handle sale_outcome=AD contacts. Branches on ad_reason and tags v2_objection_*. No Meta pixel or CAPI fires here.",
+      "job": "Handle sale_outcome=AD (Advise and Decline). Tags v2_outcome_ad, sends the first logistics SMS, waits 35d, then hands to WF-09 long-tail nurture. No Meta pixel or CAPI fires here.",
       "purpose": "Handle sale_outcome=AD (Advise and Decline). Tag v2_outcome_ad, send the first logistics SMS, wait 35 days, hand to WF-09.",
       "diagram_key": "wf07-08",
       "trigger": {
@@ -802,57 +1079,27 @@
       "steps": [
         {
           "order": 1,
-          "action": "Trigger",
-          "name": "TRIGGER: Added by WF-05 (sale_outcome=AD)",
-          "config": "Sole enroll. Must not fire pixel or CAPI here."
+          "action": "Add Contact Tag",
+          "name": "ADD-TAG: v2_outcome_ad",
+          "config": "Tags outcome only. Must not fire pixel or CAPI here."
         },
         {
           "order": 2,
-          "action": "If/Else",
-          "name": "IF-ELSE: Branch on ad_reason (price | timing | fit | other)",
-          "config": "Reads opportunity.ad_reason. Must not fabricate a reason if unset."
+          "action": "Send SMS",
+          "name": "SMS: After AD first touch + STOP (WF-07)",
+          "config": "Inline SMS. First SMS in this sequence carries Reply STOP to opt out. Transactional; send window None."
         },
         {
           "order": 3,
-          "action": "Add Contact Tag",
-          "name": "ADD-TAG: v2_objection_price (price branch)",
-          "config": "New v2 objection tag."
+          "action": "Wait",
+          "name": "WAIT: 35d before nurture hand-off",
+          "config": "Long delay before long-tail nurture picks up."
         },
         {
           "order": 4,
-          "action": "Add Contact Tag",
-          "name": "ADD-TAG: v2_objection_timing (timing branch)",
-          "config": "New v2 objection tag."
-        },
-        {
-          "order": 5,
-          "action": "Add Contact Tag",
-          "name": "ADD-TAG: v2_objection_fit (fit branch)",
-          "config": "New v2 objection tag."
-        },
-        {
-          "order": 6,
-          "action": "Add Contact Tag",
-          "name": "ADD-TAG: v2_objection_other (other branch)",
-          "config": "New v2 objection tag for unmapped ad_reason values."
-        },
-        {
-          "order": 7,
-          "action": "Send Email",
-          "name": "EMAIL: A&D follow-up (native template)",
-          "config": "Sends EML | WF-07 | A&D follow-up."
-        },
-        {
-          "order": 8,
-          "action": "Wait",
-          "name": "WAIT: +7 days (quiet-hours aware)",
-          "config": "Space before nurture handoff."
-        },
-        {
-          "order": 9,
           "action": "Add To Workflow",
-          "name": "ADD-TO-WF: Route to WF-09 Nurture",
-          "config": "A&D contacts nurture. Must not create Sales opps here."
+          "name": "ADD-TO-WF: Enroll WF-09 Nurture",
+          "config": "ADD-TO-WF WF-09 cbc14e90-4507-42cd-afcc-f7410d7f4554. Must not create Sales opps here."
         }
       ],
       "messages": [
@@ -880,7 +1127,7 @@
     },
     "08": {
       "name": "No-show / Cancel",
-      "job": "Handle appt_status=no-show and appt_status=cancel only. Reschedule never enters. Drops the contact from WF-03 and re-checks booking.",
+      "job": "Handle appt_status=no-show and appt_status=cancel only. Reschedule never enters. Drops the contact from WF-03, splits the status tag, sends the rebook SMS burst, then hands to WF-09.",
       "purpose": "Handle no-show and cancel. Reschedule never enters. Drops the contact from WF-03 reminders and tries to rebook.",
       "diagram_key": "wf07-08",
       "trigger": {
@@ -893,68 +1140,56 @@
       },
       "prerequisites": [
         "WF-03 remove-from-workflow guard is in place; no reminders should fire once WF-08 starts.",
-        "Note: v2_status_noshow vs v2_status_cancelled tag split is not authored yet; the current graph is a single lane covering both statuses."
+        "v2_status_noshow vs v2_status_cancelled tag split now lives on the shell (v4). Both statuses share a single rebook cadence."
       ],
       "steps": [
         {
           "order": 1,
-          "action": "Trigger",
-          "name": "TRIGGER: Added by WF-05 (appt_status no-show or cancel)",
-          "config": "Sole enroll. Reschedule must never route here."
+          "action": "Remove From Workflow",
+          "name": "REMOVE-FROM-WF: Drop from WF-03 Reminders",
+          "config": "REMOVE-FROM-WF WF-03 ec08cae5-3d1f-48bd-9a0d-444626d9a150. Stops any in-flight reminder cadence. Must not remove v2_status_booked (booking state is factual)."
         },
         {
           "order": 2,
-          "action": "Remove From Workflow",
-          "name": "REMOVE-FROM-WF: Drop from WF-03 Reminders",
-          "config": "Stops any in-flight reminder cadence. Must not remove v2_status_booked (booking state is factual)."
+          "action": "If",
+          "name": "IF: appt_status = no-show",
+          "config": "Splits the status tag path. Must not tag no-show if source was reschedule (WF-05 already excluded reschedule)."
         },
         {
           "order": 3,
-          "action": "If/Else",
-          "name": "IF-ELSE: Branch on appt_status (no-show | cancel)",
-          "config": "Split copy paths. Must not tag no-show if source was reschedule."
+          "action": "Add Contact Tag",
+          "name": "ADD-TAG: v2_status_noshow (no-show branch)",
+          "config": "New v2 tag. Must not remove live booking tags."
         },
         {
           "order": 4,
           "action": "Add Contact Tag",
-          "name": "ADD-TAG: v2_appt_no_show (no-show branch)",
-          "config": "New v2 tag. Must not remove live booking tags."
+          "name": "ADD-TAG: v2_status_cancelled (cancel branch)",
+          "config": "New v2 tag. Fires on the false branch (appt_status=cancel)."
         },
         {
           "order": 5,
-          "action": "Add Contact Tag",
-          "name": "ADD-TAG: v2_appt_cancel (cancel branch)",
-          "config": "New v2 tag."
+          "action": "Send SMS",
+          "name": "SMS: Rebook after miss + STOP (WF-08)",
+          "config": "Inline SMS. First SMS in this sequence carries Reply STOP to opt out. Transactional; send window None."
         },
         {
           "order": 6,
-          "action": "Send SMS",
-          "name": "SMS: Recovery outreach (inline)",
-          "config": "Inline SMS. Honors quiet hours 8am-9pm contact TZ."
+          "action": "Wait",
+          "name": "WAIT: 7d before final rebook nudge",
+          "config": "One-week spacing."
         },
         {
           "order": 7,
-          "action": "Send Email",
-          "name": "EMAIL: Recovery follow-up (native template)",
-          "config": "Sends EML | WF-08 | Recovery."
+          "action": "Send SMS",
+          "name": "SMS: Rebook +7d (WF-08)",
+          "config": "Inline SMS. Final rebook nudge before nurture hand-off."
         },
         {
           "order": 8,
-          "action": "Wait",
-          "name": "WAIT: +48 hours (quiet-hours aware)",
-          "config": "Space before re-check."
-        },
-        {
-          "order": 9,
-          "action": "If/Else",
-          "name": "IF-ELSE: Re-check booking (v2_status_booked)",
-          "config": "If they booked again, exit without further nudge."
-        },
-        {
-          "order": 10,
           "action": "Add To Workflow",
-          "name": "ADD-TO-WF: Route unbooked to WF-09 Nurture",
-          "config": "Long-tail nurture. Must not create Sales opps here."
+          "name": "ADD-TO-WF: Enroll WF-09 Nurture",
+          "config": "ADD-TO-WF WF-09 cbc14e90-4507-42cd-afcc-f7410d7f4554. Must not create Sales opps here."
         }
       ],
       "messages": [
@@ -969,7 +1204,7 @@
         "allow_reentry": "Yes on the next miss.",
         "stop_on_response": "Yes.",
         "reentry_caveat": "If the contact books again mid-recovery, WF-08 exits without further nudge.",
-        "status": "Draft v3 on staging shell d35d04ac-0042-4e33-95dd-9253b2847bdf. Unpublished."
+        "status": "Draft v4 on staging shell d35d04ac-0042-4e33-95dd-9253b2847bdf. Unpublished."
       },
       "test": [
         "Send appt_status=no-show and confirm WF-03 removes the contact and WF-08 sends both SMS.",

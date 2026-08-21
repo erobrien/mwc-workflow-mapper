@@ -86,7 +86,7 @@ WF_META: dict[str, dict] = {
             "allow_reentry": "No. Create-once via FIND-OPP guard on the staging Sales pipe.",
             "stop_on_response": "Yes. Inbound STOP routes into WF-11 Compliance.",
             "reentry_caveat": "Ambassador and PCC referral contacts re-enter WF-01 as new next-lander contacts (never merged).",
-            "status": "Draft v10 on staging shell 869782c6-00d6-4349-ab6e-4e0f2a98bd04. Unpublished.",
+            "status": "Draft v12 on staging shell 869782c6-00d6-4349-ab6e-4e0f2a98bd04. Restored from v10 on 2026-08-21 PT after a stub overwrite. Unpublished.",
         },
         "test": [
             "Create a test contact with tag next-lander. Confirm exactly one open Sales opp on staging pipe ASnpfhu1hpSHUv0IFLc7 with stage New Lead.",
@@ -151,7 +151,7 @@ WF_META: dict[str, dict] = {
             "allow_reentry": "No. One pass per WF-01 enroll.",
             "stop_on_response": "Yes. Inbound STOP routes into WF-11 Compliance.",
             "reentry_caveat": "Contacts who book are dropped from WF-02 by WF-03's REMOVE-FROM-WF step.",
-            "status": "Draft v4 on staging shell 5f973b3c-0375-4fc0-ace2-e13d1a1976b9. Unpublished.",
+            "status": "Draft v9 on staging shell 5f973b3c-0375-4fc0-ace2-e13d1a1976b9. Restored from v4 on 2026-08-21 PT after a stub overwrite. Unpublished.",
         },
         "test": [
             "Enroll a test contact via WF-01 and confirm the SMS burst fires only inside 08:00-21:00 contact TZ.",
@@ -271,6 +271,7 @@ WF_META: dict[str, dict] = {
             "Force is the only writer of sale_outcome (SOLD | AD | MUT | MAR), sale_type (new | renewal), and appt_status (showed | no-show | cancel | reschedule).",
             "opportunity.sale_outcome_v2 is the routing field. Legacy contact.sale_outcome labels are not used.",
             "WF-05 never moves Sales stages (New Lead to Booked to Showed to Won). Force moves stages.",
+            "GHL router still ADD-TO-WF WF-13 on SOLD + new. Site cards hide WF-13 (dropped_from_v2) but the router node exists in the shell.",
         ],
         "messages": [{"step": "n/a", "channel": "n/a", "body": "System workflow. No SMS or email."}],
         "settings": {
@@ -281,7 +282,7 @@ WF_META: dict[str, dict] = {
             "status": "Draft v5 on staging shell 45a0f21e-244c-4d66-8ee1-232567662624. Unpublished.",
         },
         "test": [
-            "Send test webhooks for each sale_outcome value. Confirm SOLD+new adds to WF-06; SOLD renewal adds to WF-09; AD adds to WF-07; MUT adds to WF-11; MAR drops.",
+            "Send test webhooks for each sale_outcome value. Confirm SOLD+new adds to WF-06 AND WF-13 (GHL router truth); SOLD renewal adds to WF-09; AD adds to WF-07; MUT adds to WF-11; MAR drops.",
             "Send appt_status=reschedule and confirm the router sends it to WF-03 (not WF-08).",
             "Confirm no workflow moves opp stages.",
         ],
@@ -373,7 +374,7 @@ WF_META: dict[str, dict] = {
         },
         "prerequisites": [
             "WF-03 remove-from-workflow guard is in place; no reminders should fire once WF-08 starts.",
-            "Note: v2_status_noshow vs v2_status_cancelled tag split is not authored yet; the current graph is a single lane covering both statuses.",
+            "v2_status_noshow vs v2_status_cancelled tag split now lives on the shell (v4). Both statuses share a single rebook cadence.",
         ],
         "messages": [
             {
@@ -387,7 +388,7 @@ WF_META: dict[str, dict] = {
             "allow_reentry": "Yes on the next miss.",
             "stop_on_response": "Yes.",
             "reentry_caveat": "If the contact books again mid-recovery, WF-08 exits without further nudge.",
-            "status": "Draft v3 on staging shell d35d04ac-0042-4e33-95dd-9253b2847bdf. Unpublished.",
+            "status": "Draft v4 on staging shell d35d04ac-0042-4e33-95dd-9253b2847bdf. Unpublished.",
         },
         "test": [
             "Send appt_status=no-show and confirm WF-03 removes the contact and WF-08 sends both SMS.",
@@ -741,13 +742,15 @@ TOBE_COPY: dict[str, str] = {
         "Method 2 stamps the four current_clinic_* fields for the correct slug "
         "(richmond, virginia-beach, newport-news), sends the welcome email (native template "
         "j7C8MVs6cAIuH5zPUjzH) and welcome SMS with Reply STOP, then hands to WF-02 "
-        "after WAIT 24 hour. Transactional; no quiet hours. Draft v10 unpublished."
+        "after WAIT 24 hour. Transactional; no quiet hours. Draft v12 unpublished "
+        "(restored from v10 on 2026-08-21 PT after a stub overwrite)."
     ),
     "02": (
         "Non-booked recovery. Enrolled only via ADD-TO-WF from WF-01. Burst is "
         "SMS +3m / +1m / +5m / +15m, EMAIL EML | WF-02 | Non-booked 24h "
         "(bPj39XTcKv2HylGKEUdG), SMS +36h, then ADD-TO-WF WF-09. Marketing / recovery: "
-        "08:00-21:00 contact TZ, 7 days. Draft v4 unpublished."
+        "08:00-21:00 contact TZ, 7 days. Draft v9 unpublished (restored from v4 on "
+        "2026-08-21 PT after a stub overwrite)."
     ),
     "03": (
         "Booking confirmation and reminders. Trigger is Appointment Booked on the three "
@@ -764,11 +767,11 @@ TOBE_COPY: dict[str, str] = {
     ),
     "05": (
         "Outcome router. Inbound webhook from Force (trigger ryJLJ1McWWOHlAvBRsI3; URL is "
-        "UI-only, paste into Force GHL_WF05_WEBHOOK_URL). Reads opportunity.sale_outcome_v2 "
-        "and routes: SOLD + new -> WF-06; SOLD renewal -> WF-09; AD -> WF-07; "
+        "UI-only, paste into Force GHL_WF05_WEBHOOK_URL). GHL shell name is null. Reads "
+        "opportunity.sale_outcome_v2 and routes: SOLD + new -> WF-06 and still WF-13 "
+        "(GHL router truth; site cards hide WF-13); SOLD renewal -> WF-09; AD -> WF-07; "
         "MUT -> WF-11; MAR drops. appt_status routes first: no-show / cancel -> WF-08, "
-        "reschedule -> WF-03. Workflows never move Sales stages. Ad-platform CAPI / "
-        "Google (old WF-13) is dropped from v2. Draft v5 unpublished."
+        "reschedule -> WF-03. Workflows never move Sales stages. Draft v5 unpublished."
     ),
     "06": (
         "Post-visit Won and onboarding for SOLD + sale_type=new only. Tags v2_status_active "
@@ -784,9 +787,10 @@ TOBE_COPY: dict[str, str] = {
     ),
     "08": (
         "No-show and cancel recovery. Reschedule never enters here. REMOVE-FROM-WF WF-03 -> "
-        "SMS Rebook after miss (STOP) -> WAIT 7d -> SMS Rebook +7d -> ADD-TO-WF WF-09. The "
-        "v2_status_noshow vs v2_status_cancelled tag split is not authored yet. Transactional; "
-        "no quiet hours. Draft v3 unpublished."
+        "IF appt_status = no-show -> v2_status_noshow (no-show) or v2_status_cancelled "
+        "(cancel) -> SMS Rebook after miss (STOP) -> WAIT 7d -> SMS Rebook +7d -> "
+        "ADD-TO-WF WF-09. Both statuses still share a single rebook cadence. Transactional; "
+        "no quiet hours. Draft v4 unpublished."
     ),
     "09": (
         "Long-term nurture and the renewal sub-flow. renewal_date custom-field trigger is "

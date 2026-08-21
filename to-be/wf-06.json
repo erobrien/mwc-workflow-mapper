@@ -1,72 +1,55 @@
 {
   "id": "wf-06",
   "name": "Onboarding",
-  "job": "Onboard SOLD new members. Sole writer of membership_status active and v2_status_active. Schedules WF-10 feedback and WF-14 ambassador at T+14 and T+21.",
+  "job": "Onboard SOLD new members. Tags v2_status_active, sends the welcome SMS after SOLD, holds the 3d/7d/14d/21d check-in waits, and forks to WF-10 at T+14 and WF-14 at T+21.",
   "trigger": {
     "type": "Added from WF-05",
-    "filters": ["sale_outcome=SOLD", "sale_type=new"]
+    "filters": ["sale_outcome_v2 = SOLD", "sale_type = new"],
+    "notes": "Sole enroll path is ADD-TO-WF from WF-05. Renewals never enter WF-06 (they go to WF-09). Check-in copy between the 3d/7d/14d/21d waits is not authored yet."
   },
   "named_steps": [
     {
-      "name": "TRIGGER: Added by WF-05 (SOLD + sale_type=new)",
-      "comment": "Sole enroll. Must not fire on renewals or on MAR.",
-      "does_not_write": []
-    },
-    {
-      "name": "SET-FIELD: membership_status = active",
-      "comment": "Sole writer of membership_status in the to-be. Must not touch pipeline stages.",
-      "writes": ["contact.membership_status"],
-      "does_not_write": ["opportunity.pipelineStageId"]
-    },
-    {
       "name": "ADD-TAG: v2_status_active",
-      "comment": "New v2 active tag. Must not remove legacy status tags.",
+      "comment": "New v2 active tag P5yoBUi86hQs0Br5CIqI. Must not remove legacy status tags.",
       "writes": ["v2_status_active"]
     },
     {
-      "name": "EMAIL: Onboarding welcome (native template)",
-      "comment": "Sends EML | WF-06 | Onboarding welcome.",
-      "writes": ["email_send"]
-    },
-    {
-      "name": "SMS: Onboarding welcome (inline)",
-      "comment": "Inline SMS. Honors quiet hours 8am-9pm contact TZ.",
+      "name": "SMS: Welcome after SOLD + STOP (WF-06)",
+      "comment": "Inline SMS. References {{contact.current_clinic_address}} and {{contact.current_clinic_phone}}. First SMS in this sequence carries Reply STOP to opt out. Transactional; send window None.",
       "writes": ["sms_send"]
     },
     {
-      "name": "WAIT: T+7 days from enroll",
-      "comment": "Week-one check-in wait.",
+      "name": "WAIT: 3d check-in fork",
+      "comment": "Week-one waypoint (check-in copy not authored yet).",
       "writes": []
     },
     {
-      "name": "EMAIL: Week-one check-in (native template)",
-      "comment": "Sends EML | WF-06 | Week-one check-in.",
-      "writes": ["email_send"]
-    },
-    {
-      "name": "WAIT: T+14 days from enroll",
-      "comment": "Feedback fork.",
+      "name": "WAIT: 7d check-in fork",
+      "comment": "Week-one waypoint (check-in copy not authored yet).",
       "writes": []
     },
     {
-      "name": "ADD-TO-WF: Route to WF-10 Feedback at T+14",
-      "comment": "WF-10 owns contact.latest_feedback_score. Must not write feedback fields here.",
+      "name": "WAIT: 14d before WF-10 fork",
+      "comment": "Bridges to the feedback ask fork.",
       "writes": []
     },
     {
-      "name": "WAIT: T+21 days from enroll",
-      "comment": "Ambassador fork.",
+      "name": "ADD-TO-WF: Enroll WF-10 Feedback at T+14",
+      "comment": "ADD-TO-WF WF-10 37b1202a-5397-4e08-92da-bb638c862a2a. WF-10 owns contact.latest_feedback_score.",
       "writes": []
     },
     {
-      "name": "ADD-TO-WF: Route to WF-14 Ambassador at T+21",
-      "comment": "Ambassador referral fork. Must not create Sales opps here.",
+      "name": "WAIT: 21d before WF-14 fork",
+      "comment": "Bridges to the ambassador fork.",
+      "writes": []
+    },
+    {
+      "name": "ADD-TO-WF: Enroll WF-14 Ambassador at T+21",
+      "comment": "ADD-TO-WF WF-14 6b090c34-cc66-43bf-8939-2868a6b8436b. Must not create Sales opps here.",
       "writes": []
     }
   ],
-  "tags_new": [
-    "v2_status_active"
-  ],
+  "tags_new": ["v2_status_active"],
   "live_tags_readonly": [
     "next-lander",
     "sms-consent"

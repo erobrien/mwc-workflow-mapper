@@ -1,106 +1,94 @@
 {
   "id": "wf-03",
   "name": "Booking Confirmation + Reminders",
-  "job": "Confirm and remind booked appointments across the three consult calendars. Never marks a reschedule as no-show.",
+  "job": "Confirm and remind booked appointments across the three consult calendars. Drops the contact from WF-02 recovery on entry and hands to WF-04 intake chase 1h after confirm.",
   "trigger": {
     "type": "Appointment Booked",
     "filters": [
-      "calendar 1Cfy5JnO2A4ggiZlMVvX",
-      "calendar 4xmnBGMWJ6TVUKcAPpPb",
-      "calendar lBaRbjUpEmesxEloFBME"
-    ]
+      "calendar 1Cfy5JnO2A4ggiZlMVvX (richmond)",
+      "calendar 4xmnBGMWJ6TVUKcAPpPb (virginia-beach)",
+      "calendar lBaRbjUpEmesxEloFBME (newport-news)"
+    ],
+    "notes": "Three appointment triggers, one per consult calendar. Reschedule re-arms reminders via the same triggers."
   },
   "named_steps": [
     {
-      "name": "TRIGGER: Appointment Booked (3 consult calendars)",
-      "comment": "Sole booking trigger. Must not enroll from any other calendar.",
-      "does_not_write": []
+      "name": "REMOVE-FROM-WF: Drop from WF-02 Non-booked",
+      "comment": "Stops any in-flight recovery burst. Must not clear v2_status_booked (booking state is factual).",
+      "writes": []
     },
     {
       "name": "ADD-TAG: v2_status_booked",
-      "comment": "New v2 booked tag. Must not remove or rename live booking tags.",
-      "writes": [
-        "v2_status_booked"
-      ]
+      "comment": "New v2 booked tag NR1KZuPH1xzWOuu0pHd4. Must not remove or rename live booking tags.",
+      "writes": ["v2_status_booked"]
     },
     {
-      "name": "EMAIL: Confirmation (native template)",
-      "comment": "Sends EML | WF-03 | Confirmation.",
-      "writes": [
-        "email_send"
-      ]
+      "name": "EMAIL: Confirm appointment (WF-03)",
+      "comment": "Sends native template EML | WF-03 | Confirm appointment (GUs77konNdAGFS0EFZS2).",
+      "writes": ["email_send"]
     },
     {
-      "name": "SMS: Confirmation (inline)",
-      "comment": "Inline confirmation SMS. Honors quiet hours 8am-9pm contact TZ.",
-      "writes": [
-        "sms_send"
-      ]
+      "name": "SMS: Confirm appointment (WF-03)",
+      "comment": "Inline SMS. First SMS in this sequence carries Reply STOP to opt out. Transactional; send window None.",
+      "writes": ["sms_send"]
     },
     {
-      "name": "WAIT: Until T-3 days before appointment",
-      "comment": "Native appointment-relative wait.",
+      "name": "WAIT: 1h before intake hand-off",
+      "comment": "Short settle between confirm cadence and intake chase.",
       "writes": []
     },
     {
-      "name": "SMS: Reminder T-3 days (inline)",
-      "comment": "Members not patients, clinic not office.",
-      "writes": [
-        "sms_send"
-      ]
-    },
-    {
-      "name": "WAIT: Until T-1 day before appointment",
-      "comment": "Native appointment-relative wait.",
+      "name": "ADD-TO-WF: Enroll WF-04 Intake chase",
+      "comment": "ADD-TO-WF WF-04 4854e1cf-492d-4da8-ba23-5c14a4d04229.",
       "writes": []
     },
     {
-      "name": "EMAIL: Reminder T-1 day (native template)",
-      "comment": "Sends EML | WF-03 | Reminder T-1.",
-      "writes": [
-        "email_send"
-      ]
-    },
-    {
-      "name": "WAIT: Until T-5 hours before appointment",
-      "comment": "Same-day heads-up.",
+      "name": "WAIT: Until T-3d before appointment",
+      "comment": "Appointment-relative wait. type=appointment, appointmentStartAfter.when=before, appointmentStartAfter.type=minutes (4320), distributed unit days, appointmentCondition=skip.",
       "writes": []
     },
     {
-      "name": "SMS: Reminder T-5 hours (inline)",
-      "comment": "Same-day SMS. Honors quiet hours.",
-      "writes": [
-        "sms_send"
-      ]
+      "name": "EMAIL: Reminder T-3d (WF-03)",
+      "comment": "Sends native template EML | WF-03 | T-3d reminder (QcpX2V3OarwL5jKN6OFE) before the T-3d SMS.",
+      "writes": ["email_send"]
     },
     {
-      "name": "WAIT: Until T-2 hours before appointment",
-      "comment": "Final heads-up.",
+      "name": "SMS: Reminder T-3d (WF-03)",
+      "comment": "Inline SMS. Bodies reference contact.current_clinic_address, contact.current_clinic_phone, and contact.current_booking_url only. Do not use {{location.name}}.",
+      "writes": ["sms_send"]
+    },
+    {
+      "name": "WAIT: Until T-1d before appointment",
+      "comment": "Appointment-relative wait. Minutes=1440, distributed unit days, appointmentCondition=skip.",
       "writes": []
     },
     {
-      "name": "SMS: Reminder T-2 hours (inline)",
-      "comment": "Final SMS reminder.",
-      "writes": [
-        "sms_send"
-      ]
+      "name": "SMS: Reminder T-1d (WF-03)",
+      "comment": "Inline SMS reminder.",
+      "writes": ["sms_send"]
     },
     {
-      "name": "IF-ELSE: Skip no-show branch when appt_status=reschedule",
-      "comment": "Reschedule must never be marked as no-show. Guard before any no-show write.",
-      "does_not_write": [
-        "appt_status"
-      ]
-    },
-    {
-      "name": "ADD-TO-WF: Route to WF-04 Intake chase",
-      "comment": "Hand-off to intake chase after confirmation cadence completes.",
+      "name": "WAIT: Until T-5h before appointment",
+      "comment": "Appointment-relative wait. Minutes=300, distributed unit hours, appointmentCondition=skip.",
       "writes": []
+    },
+    {
+      "name": "SMS: Reminder T-5h (WF-03)",
+      "comment": "Inline SMS reminder.",
+      "writes": ["sms_send"]
+    },
+    {
+      "name": "WAIT: Until T-2h before appointment",
+      "comment": "Appointment-relative wait. Minutes=120, distributed unit hours, appointmentCondition=skip.",
+      "writes": []
+    },
+    {
+      "name": "SMS: Reminder T-2h (WF-03)",
+      "comment": "Inline SMS reminder (final heads-up).",
+      "writes": ["sms_send"]
     }
   ],
-  "tags_new": [
-    "v2_status_booked"
-  ],
+  "tags_new": ["v2_status_booked"],
   "live_tags_readonly": [
     "next-lander",
     "sms-consent"

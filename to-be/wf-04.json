@@ -1,79 +1,35 @@
 {
   "id": "wf-04",
   "name": "Intake Chase",
-  "job": "Chase the intake survey for booked contacts. Exits as soon as the survey is submitted.",
+  "job": "Chase the medical intake survey for booked contacts. SMS-only (+4h, +20h). Enrolled by WF-03 hand-off; no other trigger.",
   "trigger": {
     "type": "Added from WF-03",
-    "filters": [
-      "v2_status_booked"
-    ]
+    "filters": ["v2_status_booked"],
+    "notes": "Sole enroll path is ADD-TO-WF from WF-03. There is no dedicated intake URL contact field yet; SMS bodies reference contact.current_booking_url as the manage / complete-intake link."
   },
   "named_steps": [
     {
-      "name": "TRIGGER: Added by WF-03 (v2_status_booked)",
-      "comment": "Only enrolled by WF-03. Must not enroll direct form fills.",
-      "does_not_write": []
-    },
-    {
-      "name": "IF-ELSE: Exit on survey submitted (v2_intake_done)",
-      "comment": "Reads survey-submitted state. Must exit immediately on submit.",
-      "does_not_write": []
-    },
-    {
-      "name": "EMAIL: Intake ask 1 (native template)",
-      "comment": "Sends EML | WF-04 | Intake ask 1.",
-      "writes": [
-        "email_send"
-      ]
-    },
-    {
-      "name": "WAIT: +6 hours (quiet-hours aware)",
-      "comment": "Space before SMS nudge.",
+      "name": "WAIT: +4h before first intake SMS",
+      "comment": "Transactional; not quiet-hours aware.",
       "writes": []
     },
     {
-      "name": "SMS: Intake nudge 1 (inline)",
-      "comment": "Inline SMS. Honors quiet hours.",
-      "writes": [
-        "sms_send"
-      ]
+      "name": "SMS: Intake chase +4h + STOP (WF-04)",
+      "comment": "Inline SMS. First SMS in this sequence carries Reply STOP to opt out. Uses {{contact.current_booking_url}} as the manage / complete-intake link.",
+      "writes": ["sms_send"]
     },
     {
-      "name": "WAIT: +18 hours",
-      "comment": "Overnight-safe wait before next ask.",
+      "name": "WAIT: +20h before final intake SMS",
+      "comment": "Bridges to the 24h-total mark.",
       "writes": []
     },
     {
-      "name": "EMAIL: Intake ask 2 (native template)",
-      "comment": "Sends EML | WF-04 | Intake ask 2.",
-      "writes": [
-        "email_send"
-      ]
-    },
-    {
-      "name": "WAIT: +12 hours",
-      "comment": "Space before final SMS.",
-      "writes": []
-    },
-    {
-      "name": "SMS: Intake final nudge (inline)",
-      "comment": "Final SMS. Members not patients.",
-      "writes": [
-        "sms_send"
-      ]
-    },
-    {
-      "name": "ADD-TAG: v2_intake_chased (audit)",
-      "comment": "Audit tag only. Must not signal completion; only submission clears WF-04.",
-      "writes": [
-        "v2_intake_chased"
-      ]
+      "name": "SMS: Intake chase +20h (WF-04)",
+      "comment": "Inline SMS. Final nudge before the workflow completes.",
+      "writes": ["sms_send"]
     }
   ],
-  "tags_new": [
-    "v2_intake_chased",
-    "v2_intake_done"
-  ],
+  "tags_new": [],
   "live_tags_readonly": [
     "next-lander",
     "sms-consent"

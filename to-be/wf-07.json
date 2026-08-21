@@ -1,64 +1,35 @@
 {
   "id": "wf-07",
   "name": "A&D",
-  "job": "Handle sale_outcome=AD contacts. Branches on ad_reason and tags v2_objection_*. No Meta pixel or CAPI fires here.",
+  "job": "Handle sale_outcome=AD (Advise and Decline). Tags v2_outcome_ad, sends the first logistics SMS, waits 35d, then hands to WF-09 long-tail nurture. No Meta pixel or CAPI fires here.",
   "trigger": {
     "type": "Added from WF-05",
-    "filters": ["sale_outcome=AD"]
+    "filters": ["sale_outcome_v2 = AD"],
+    "notes": "Sole enroll path is ADD-TO-WF from WF-05. Objection branch copy (v2_objection_price/timing/fit/other) is spec-only; the on-shell graph is a single lane."
   },
   "named_steps": [
     {
-      "name": "TRIGGER: Added by WF-05 (sale_outcome=AD)",
-      "comment": "Sole enroll. Must not fire pixel or CAPI here.",
-      "does_not_write": []
+      "name": "ADD-TAG: v2_outcome_ad",
+      "comment": "Tags outcome only. Must not fire pixel or CAPI here.",
+      "writes": ["v2_outcome_ad"]
     },
     {
-      "name": "IF-ELSE: Branch on ad_reason (price | timing | fit | other)",
-      "comment": "Reads opportunity.ad_reason. Must not fabricate a reason if unset.",
-      "does_not_write": []
+      "name": "SMS: After AD first touch + STOP (WF-07)",
+      "comment": "Inline SMS. First SMS in this sequence carries Reply STOP to opt out. Transactional; send window None.",
+      "writes": ["sms_send"]
     },
     {
-      "name": "ADD-TAG: v2_objection_price (price branch)",
-      "comment": "New v2 objection tag.",
-      "writes": ["v2_objection_price"]
-    },
-    {
-      "name": "ADD-TAG: v2_objection_timing (timing branch)",
-      "comment": "New v2 objection tag.",
-      "writes": ["v2_objection_timing"]
-    },
-    {
-      "name": "ADD-TAG: v2_objection_fit (fit branch)",
-      "comment": "New v2 objection tag.",
-      "writes": ["v2_objection_fit"]
-    },
-    {
-      "name": "ADD-TAG: v2_objection_other (other branch)",
-      "comment": "New v2 objection tag for unmapped ad_reason values.",
-      "writes": ["v2_objection_other"]
-    },
-    {
-      "name": "EMAIL: A&D follow-up (native template)",
-      "comment": "Sends EML | WF-07 | A&D follow-up.",
-      "writes": ["email_send"]
-    },
-    {
-      "name": "WAIT: +7 days (quiet-hours aware)",
-      "comment": "Space before nurture handoff.",
+      "name": "WAIT: 35d before nurture hand-off",
+      "comment": "Long delay before long-tail nurture picks up.",
       "writes": []
     },
     {
-      "name": "ADD-TO-WF: Route to WF-09 Nurture",
-      "comment": "A&D contacts nurture. Must not create Sales opps here.",
+      "name": "ADD-TO-WF: Enroll WF-09 Nurture",
+      "comment": "ADD-TO-WF WF-09 cbc14e90-4507-42cd-afcc-f7410d7f4554. Must not create Sales opps here.",
       "writes": []
     }
   ],
-  "tags_new": [
-    "v2_objection_price",
-    "v2_objection_timing",
-    "v2_objection_fit",
-    "v2_objection_other"
-  ],
+  "tags_new": ["v2_outcome_ad"],
   "live_tags_readonly": [
     "next-lander",
     "sms-consent"

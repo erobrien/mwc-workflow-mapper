@@ -1,79 +1,206 @@
 {
   "id": "wf-01",
   "name": "Lead Capture",
-  "job": "Enroll new next-lander contacts, create one Sales opportunity, stamp location and current clinic, and hand off to the non-booked burst.",
+  "job": "Enroll new next-lander contacts, guard against duplicate Sales opps (create-once), stamp Method 2 clinic context, send the welcome email + STOP SMS, and hand unbooked to WF-02 after 24h.",
   "trigger": {
     "type": "Contact Created",
     "filters": ["has tag next-lander"],
-    "notes": "No source filter on the trigger. WordPress handoff runs /api/handoff/wordpress then /api/qualify upsert; source wordpress-form is an inner branch only, never a trigger filter."
+    "notes": "Sole enroll: Contact Created + Has Tag next-lander (EA2hrrIHTrlFvEEt6RzH). No source filter. Empty source defaults to next-lander; wordpress-form is only an inner branch elsewhere, never a trigger filter."
   },
   "named_steps": [
     {
-      "name": "TRIGGER: Contact Created (tag next-lander only)",
-      "comment": "Sole enroll. Must not add a source filter. Must not rename next-lander.",
-      "does_not_write": ["next-lander"]
+      "name": "WAIT: 10s so upsert fields are visible",
+      "comment": "Short settle so /api/qualify + /api/handoff/wordpress upserts land on the contact before FIND-OPP reads them.",
+      "writes": []
     },
     {
-      "name": "IF-ELSE: Guard against duplicate Sales opp (create-once)",
-      "comment": "Native check for an existing open opp in Sales Lead to Close before create. Must not move stages.",
+      "name": "IF: Open Sales opp already exists? (create-once)",
+      "comment": "Native find-opp guard against a second open opp on staging Sales pipe ASnpfhu1hpSHUv0IFLc7. Must not move stages, must not read monetaryValue for logic.",
       "does_not_write": ["opportunity.pipelineStageId", "opportunity.monetaryValue"]
     },
     {
-      "name": "CREATE-OPP: New Lead in Sales Lead to Close (create-once)",
-      "comment": "Pipeline Vt8cPz51C3i87moo73gQ, stage New Lead. Allow Duplicate is ON but this branch only fires when no open opp exists. Must not set monetaryValue.",
+      "name": "UPDATE: last-touch only (open opp exists)",
+      "comment": "Found branch. Refresh last-touch fields on the existing open opp; do not create a duplicate.",
+      "does_not_write": ["opportunity.monetaryValue", "opportunity.pipelineStageId"]
+    },
+    {
+      "name": "PATH: no open Sales opp",
+      "comment": "False branch of the create-once guard. Downstream CREATE-OPP fires only from this path.",
+      "writes": []
+    },
+    {
+      "name": "CREATE: Sales New Lead (Lead to Close)",
+      "comment": "Only reached when no open Sales opp exists. Staging Sales pipe ASnpfhu1hpSHUv0IFLc7, stage New Lead 31a81ba6-10c4-4033-8401-4e864ec9495c. Allow Duplicate Opportunities is ON but this branch is gated by the create-once guard. Must not set monetaryValue.",
       "writes": ["opportunity"],
       "does_not_write": ["opportunity.monetaryValue"]
     },
     {
-      "name": "SET-FIELD: Stamp location_* (from mapped source)",
-      "comment": "Writes location_* fields for the contact. Must not rename existing live location_* tags.",
-      "writes": ["contact.location_*"]
+      "name": "IF: location = richmond",
+      "comment": "First slug arm of the Method 2 stamp block; reads contact.current_clinic_slug.",
+      "does_not_write": []
     },
     {
-      "name": "SET-FIELD: Stamp current_clinic_* Method 2 (WF-01 only)",
-      "comment": "Sole writer of current_clinic_slug and current_clinic_* fields. Slugs limited to richmond, virginia-beach, newport-news.",
-      "writes": ["contact.current_clinic_slug", "contact.current_clinic_name", "contact.current_clinic_phone"]
+      "name": "PATH: richmond",
+      "comment": "True branch of the richmond guard. Downstream stamps run only from here.",
+      "writes": []
     },
     {
-      "name": "IF-ELSE: Branch on source wordpress-form (inner branch only)",
-      "comment": "Inner branch to route WP-origin contacts. Must not create a Sales opp here; qualify already upserted the contact via /api/qualify.",
-      "does_not_write": ["opportunity"]
+      "name": "PATH: not richmond",
+      "comment": "False branch fall-through; next slug IF still evaluates.",
+      "writes": []
     },
     {
-      "name": "ADD-TAG: v2_source_wp (inner wordpress-form branch)",
-      "comment": "New v2 tag only. Must not touch legacy source tags.",
-      "writes": ["v2_source_wp"]
+      "name": "UPDATE: Stamp current_clinic_address (richmond)",
+      "comment": "Method 2 address stamp for richmond. Field a2v4CqA8zXaZ0iu901f6. Value: 4050 Innslake Drive Suite 360 Richmond VA 23060.",
+      "writes": ["contact.current_clinic_address"]
     },
     {
-      "name": "EMAIL: Welcome (native template)",
-      "comment": "Sends EML | WF-01 | Welcome. Copy uses members not patients, clinic not office, no-cost not free, no em-dashes, no guy.",
+      "name": "UPDATE: Stamp current_clinic_phone (richmond)",
+      "comment": "Method 2 phone stamp for richmond. Field k7ci7d1rnExhAVtEE768. Value: (804) 346-4636.",
+      "writes": ["contact.current_clinic_phone"]
+    },
+    {
+      "name": "UPDATE: Stamp current_booking_url (richmond)",
+      "comment": "Method 2 booking URL stamp for richmond. Field W74Kznhixhaq5sJWbk4r. Value: https://book.menswellnesscenters.com/richmond.",
+      "writes": ["contact.current_booking_url"]
+    },
+    {
+      "name": "IF: location = virginia-beach",
+      "comment": "Second slug arm of the Method 2 stamp block; reads contact.current_clinic_slug.",
+      "does_not_write": []
+    },
+    {
+      "name": "PATH: virginia-beach",
+      "comment": "True branch of the virginia-beach guard.",
+      "writes": []
+    },
+    {
+      "name": "PATH: not virginia-beach",
+      "comment": "False branch fall-through; next slug IF still evaluates.",
+      "writes": []
+    },
+    {
+      "name": "UPDATE: Stamp current_clinic_address (virginia-beach)",
+      "comment": "Method 2 address stamp for virginia-beach. Field a2v4CqA8zXaZ0iu901f6. Value: 996 First Colonial Road.",
+      "writes": ["contact.current_clinic_address"]
+    },
+    {
+      "name": "UPDATE: Stamp current_clinic_phone (virginia-beach)",
+      "comment": "Method 2 phone stamp for virginia-beach. Field k7ci7d1rnExhAVtEE768. Value: (757) 612-4428.",
+      "writes": ["contact.current_clinic_phone"]
+    },
+    {
+      "name": "UPDATE: Stamp current_booking_url (virginia-beach)",
+      "comment": "Method 2 booking URL stamp for virginia-beach. Field W74Kznhixhaq5sJWbk4r. Value: https://book.menswellnesscenters.com/virginia-beach.",
+      "writes": ["contact.current_booking_url"]
+    },
+    {
+      "name": "IF: location = newport-news",
+      "comment": "Third slug arm of the Method 2 stamp block; reads contact.current_clinic_slug.",
+      "does_not_write": []
+    },
+    {
+      "name": "PATH: newport-news",
+      "comment": "True branch of the newport-news guard.",
+      "writes": []
+    },
+    {
+      "name": "PATH: location unmatched (no stamp)",
+      "comment": "False branch fall-through for a slug outside {richmond, virginia-beach, newport-news}. Nothing stamps.",
+      "writes": []
+    },
+    {
+      "name": "UPDATE: Stamp current_clinic_address (newport-news)",
+      "comment": "Method 2 address stamp for newport-news. Field a2v4CqA8zXaZ0iu901f6. Value: 827 Diligence Drive Suite 206.",
+      "writes": ["contact.current_clinic_address"]
+    },
+    {
+      "name": "UPDATE: Stamp current_clinic_phone (newport-news)",
+      "comment": "Method 2 phone stamp for newport-news. Field k7ci7d1rnExhAVtEE768. Value: (757) 806-6263.",
+      "writes": ["contact.current_clinic_phone"]
+    },
+    {
+      "name": "UPDATE: Stamp current_booking_url (newport-news)",
+      "comment": "Method 2 booking URL stamp for newport-news. Field W74Kznhixhaq5sJWbk4r. Value: https://book.menswellnesscenters.com/newport-news.",
+      "writes": ["contact.current_booking_url"]
+    },
+    {
+      "name": "IF: inbound slug = richmond",
+      "comment": "Copy the inbound clinic slug onto opportunity.location XbaJOEsDwgxMtudnj5IG so the Sales opp carries the display label. Must not touch opportunity.monetaryValue.",
+      "does_not_write": ["opportunity.monetaryValue"]
+    },
+    {
+      "name": "UPDATE: opportunity.location from slug (richmond)",
+      "comment": "Writes opportunity.location = Richmond (display label).",
+      "writes": ["opportunity.location"]
+    },
+    {
+      "name": "PATH: not slug richmond",
+      "comment": "False branch fall-through for the richmond slug guard.",
+      "writes": []
+    },
+    {
+      "name": "IF: inbound slug = virginia-beach",
+      "comment": "Copy inbound slug to opportunity.location display label for virginia-beach.",
+      "does_not_write": ["opportunity.monetaryValue"]
+    },
+    {
+      "name": "UPDATE: opportunity.location from slug (virginia-beach)",
+      "comment": "Writes opportunity.location = Virginia Beach (display label).",
+      "writes": ["opportunity.location"]
+    },
+    {
+      "name": "PATH: not slug virginia-beach",
+      "comment": "False branch fall-through for the virginia-beach slug guard.",
+      "writes": []
+    },
+    {
+      "name": "IF: inbound slug = newport-news",
+      "comment": "Copy inbound slug to opportunity.location display label for newport-news.",
+      "does_not_write": ["opportunity.monetaryValue"]
+    },
+    {
+      "name": "UPDATE: opportunity.location from slug (newport-news)",
+      "comment": "Writes opportunity.location = Newport News (display label).",
+      "writes": ["opportunity.location"]
+    },
+    {
+      "name": "UPDATE: Stamp current_review_link (richmond)",
+      "comment": "Method 2 review-link stamp for richmond. Field 5WQWnA1nuMn0SWwTLxKR. Uses the live Google Maps CID 2277296049943963626.",
+      "writes": ["contact.current_review_link"]
+    },
+    {
+      "name": "UPDATE: Stamp current_review_link (virginia-beach)",
+      "comment": "Method 2 review-link stamp for virginia-beach. Field 5WQWnA1nuMn0SWwTLxKR. Uses the live Google Maps CID 5476441419759027703.",
+      "writes": ["contact.current_review_link"]
+    },
+    {
+      "name": "UPDATE: Stamp current_review_link (newport-news)",
+      "comment": "Method 2 review-link stamp for newport-news. Field 5WQWnA1nuMn0SWwTLxKR. Uses the live Google Maps CID 605398627804676801.",
+      "writes": ["contact.current_review_link"]
+    },
+    {
+      "name": "EMAIL: Welcome after first capture (WF-01)",
+      "comment": "Sends native template EML | WF-01 | Welcome (j7C8MVs6cAIuH5zPUjzH). Copy respects the locked rules (members not patients, clinic not office, no-cost not free, no em-dashes, no guy).",
       "writes": ["email_send"]
     },
     {
-      "name": "SMS: Welcome with STOP opt-out (first SMS)",
-      "comment": "Inline body. First SMS to any contact carries STOP opt-out. Honors quiet hours 8am-9pm contact TZ.",
+      "name": "SMS: Speed-to-lead first touch + STOP (WF-01)",
+      "comment": "Inline SMS. First SMS in any sequence carries Reply STOP to opt out. Transactional; send window None.",
       "writes": ["sms_send"]
     },
     {
-      "name": "ADD-TAG: v2_enrolled_wf01 (audit)",
-      "comment": "Audit tag for WF-01 enroll. Must not rename next-lander.",
-      "writes": ["v2_enrolled_wf01"]
-    },
-    {
-      "name": "WAIT: 24 hours (quiet-hours aware)",
-      "comment": "Native wait step. Must not skip quiet hours.",
+      "name": "WAIT: 24h then hand unbooked to WF-02",
+      "comment": "GHL unit is singular hour, not hours. Transactional; not quiet-hours aware.",
       "writes": []
     },
     {
-      "name": "ADD-TO-WF: Route to WF-02 Non-booked",
-      "comment": "Hand-off to non-booked burst. Must not filter by funnel_entry_* here; WF-02 enforces the exclusion.",
+      "name": "ADD: Enroll WF-02 (unbooked 24h)",
+      "comment": "ADD-TO-WF WF-02 5f973b3c-0375-4fc0-ace2-e13d1a1976b9. WF-02 enforces its own funnel_entry_* exclusion; do not filter here.",
       "writes": []
     }
   ],
-  "tags_new": [
-    "v2_source_wp",
-    "v2_enrolled_wf01"
-  ],
+  "tags_new": [],
   "live_tags_readonly": [
     "next-lander",
     "location_*",

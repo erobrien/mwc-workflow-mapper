@@ -226,7 +226,6 @@ def master_flow(workflows: dict) -> str:
             "    FORCE([Force writes outcomes to opp<br/>sale_outcome_v2, sale_type, dollars<br/>trigger ryJLJ1McWWOHlAvBRsI3]) --> WF05",
             "    WF05{{WF-05 Outcome router<br/>reads opportunity.sale_outcome_v2<br/>never moves stages}}",
             "    WF05 -->|SOLD + new| WF06",
-            "    WF05 -->|SOLD + new| WF13",
             "    WF05 -->|SOLD + renewal| WF09",
             "    WF05 -->|AD Advise+Decline| WF07",
             "    WF05 -->|MUT| WF11",
@@ -246,9 +245,7 @@ def master_flow(workflows: dict) -> str:
             "    WF11[WF-11 Compliance and errors<br/>STOP inbound, sole DND writer<br/>MUT front-gate exit]",
             "    WF12[WF-12 Call disposition handler<br/>tag v2_source_phone<br/>native update-in-place]",
             "    WF12 -.-> WF05",
-            "    WF13[WF-13 Ad conversions<br/>SOLD + new only<br/>Sales pipeline Booked/Won]",
-            "    WF17[WF-17 Price calculator<br/>writes contact.price_calc_result]",
-            "    WF17 -.-> WF13",
+            "    WF17[WF-17 Price calculator<br/>writes contact.price_calc_result<br/>never writes opp.monetaryValue]",
             "",
             "    NOTE[[Locked v2 spec · clinics: richmond / virginia-beach / newport-news<br/>Force is the single writer of outcomes · workflows never move stages<br/>transactional SMS = no quiet hours · marketing SMS = 08:00-21:00 contact TZ]]",
             "",
@@ -263,7 +260,6 @@ def master_flow(workflows: dict) -> str:
             "    style WF08 fill:#7f1d1d,color:#fff,stroke:#0f172a,stroke-width:2px",
             "    style WF11 fill:#4c1d95,color:#fff,stroke:#0f172a,stroke-width:2px",
             "    style WF12 fill:#065f46,color:#fff,stroke:#0f172a,stroke-width:2px",
-            "    style WF13 fill:#0f766e,color:#fff,stroke:#0f172a,stroke-width:2px",
             "    style WF14 fill:#1e293b,color:#fff,stroke:#0f172a,stroke-width:2px",
             "    style WF15 fill:#1e293b,color:#fff,stroke:#0f172a,stroke-width:2px",
             "    style WF16 fill:#1e293b,color:#fff,stroke:#0f172a,stroke-width:2px",
@@ -350,13 +346,14 @@ TITLES = {
         ),
     ),
     "support": (
-        "WF-11 / WF-13 / WF-14 / WF-15 / WF-16 — Support cluster",
+        "WF-11 / WF-14 / WF-15 / WF-16 — Support cluster (WF-13 dropped from v2)",
         (
             "Support and signal workflows. WF-11 is the STOP handler and sole "
-            "writer of DND / sms_consent_status. WF-13 fires ad-platform "
-            "conversions for SOLD + new only. WF-14 (ambassador), WF-15 (PCC "
-            "referral routing), and WF-16 (comms edge) all route new contacts back "
-            "into WF-01 rather than creating opportunities themselves."
+            "writer of DND / sms_consent_status. WF-14 (ambassador), WF-15 (PCC "
+            "referral routing), and WF-16 (comms edge) all stamp next-lander and "
+            "route new contacts back into WF-01 rather than creating opportunities "
+            "themselves. WF-13 (ad-platform conversions) is dropped from v2; Curve "
+            "owns conversions."
         ),
     ),
     "wf12": (
@@ -390,7 +387,7 @@ KEY_TO_WFS: dict[str, list[str]] = {
     "wf06": ["06"],
     "wf07-08": ["07", "08"],
     "retention": ["09", "10"],
-    "support": ["11", "13", "14", "15", "16"],
+    "support": ["11", "14", "15", "16"],
     "wf12": ["12"],
     "wf17": ["17"],
 }

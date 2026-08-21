@@ -35,7 +35,7 @@ const DIAGRAM_SHARED: Record<string, string> = {
   preappt: "Shared diagram: covers WF-03 and WF-04 together (the pre-appointment sequence).",
   "wf07-08": "Shared diagram: covers WF-07 (A&D Nurture) and WF-08 (No-Show and Cancel Recovery).",
   retention: "Shared diagram: covers WF-09 (Long-Term Nurture + Renewal sub-flow) and WF-10 (Feedback Survey).",
-  support: "Shared diagram: covers the support cluster: WF-11, WF-14, WF-15, WF-16 (WF-13 dropped from v2).",
+  support: "Shared diagram: covers the support cluster (WF-11, WF-14, WF-15, WF-16). WF-13 is dropped from v2 (Curve owns conversions).",
 };
 
 /* Workflows dropped from v2. Kept in tobe-detail.json for generator compatibility. */

@@ -1,66 +1,60 @@
 {
   "id": "wf-16",
   "name": "Comms Edge",
-  "job": "Handles inbound IVR calls to +18663444955 and the two chat widgets. Does not create Sales opportunities.",
+  "job": "Inbound IVR +18663444955 and the two chat widgets. Short missed-call SMS, transactional, no quiet hours. NEVER creates a Sales opportunity.",
   "trigger": {
     "type": "Inbound Call / Chat",
     "filters": [
       "phone = +18663444955",
       "chat widget 69337243d355bdcd9c27675e",
       "chat widget 6952a8536682120c2b2656b9"
-    ]
+    ],
+    "notes": "Transactional; no quiet hours. New contacts route to WF-01 (stamp next-lander) so WF-01 owns the Sales opp create-once."
   },
   "named_steps": [
     {
       "name": "TRIGGER: IVR +18663444955 or chat widget inbound",
       "comment": "Sole entry for IVR + chat. Must not create a Sales opportunity here.",
-      "does_not_write": [
-        "opportunity"
-      ]
+      "does_not_write": ["opportunity"]
     },
     {
-      "name": "IF-ELSE: Branch on channel (IVR | chat)",
-      "comment": "Splits IVR vs chat paths for tagging and copy.",
+      "name": "IF-ELSE: Branch on channel (IVR missed-call | chat)",
+      "comment": "Splits IVR missed-call vs chat paths for tagging and copy.",
       "does_not_write": []
     },
     {
       "name": "ADD-TAG: v2_source_ivr (IVR branch)",
       "comment": "New v2 source tag for IVR.",
-      "writes": [
-        "v2_source_ivr"
-      ]
+      "writes": ["v2_source_ivr"]
     },
     {
       "name": "ADD-TAG: v2_source_chat (chat branch)",
       "comment": "New v2 source tag for chat widgets.",
-      "writes": [
-        "v2_source_chat"
-      ]
+      "writes": ["v2_source_chat"]
     },
     {
-      "name": "SMS: IVR callback ack (inline, IVR branch)",
-      "comment": "Inline SMS. Honors quiet hours 8am-9pm contact TZ.",
-      "writes": [
-        "sms_send"
-      ]
+      "name": "SMS: Missed-call ack (inline, IVR branch, first in this sequence)",
+      "comment": "Short missed-call SMS. First SMS in this sequence carries Reply STOP to opt out. Transactional; no quiet hours.",
+      "writes": ["sms_send"]
     },
     {
       "name": "EMAIL: Chat follow-up (native template, chat branch)",
       "comment": "Sends EML | WF-16 | Chat follow-up.",
-      "writes": [
-        "email_send"
-      ]
+      "writes": ["email_send"]
     },
     {
       "name": "IF-ELSE: New contact vs existing contact",
-      "comment": "Existing contacts stay on their current opp. New contacts route to WF-01 to enroll properly.",
-      "does_not_write": [
-        "opportunity"
-      ]
+      "comment": "Existing contacts stay on their current opp. New contacts route to WF-01.",
+      "does_not_write": ["opportunity"]
     },
     {
-      "name": "ADD-TO-WF: New contact re-enters WF-01",
-      "comment": "New contacts route to WF-01 for create-once Sales opp. Must not create Sales opps here.",
+      "name": "ADD-TAG: next-lander (new contact only, so WF-01 enrolls)",
+      "comment": "Live tag next-lander is required by the WF-01 trigger. Do not rename next-lander.",
+      "writes": ["next-lander"]
+    },
+    {
+      "name": "ADD-TO-WF: New contact re-enters WF-01 (create-once owner)",
+      "comment": "WF-01 owns the create-once Sales opp. Never create a Sales opp here.",
       "writes": []
     }
   ],

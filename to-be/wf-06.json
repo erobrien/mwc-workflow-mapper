@@ -1,11 +1,11 @@
 {
   "id": "wf-06",
   "name": "Onboarding",
-  "job": "Onboard SOLD new members. Tags v2_status_active, sends the welcome SMS after SOLD, holds the 3d/7d/14d/21d check-in waits, and forks to WF-10 at T+14 and WF-14 at T+21.",
+  "job": "Onboard SOLD new members. Tags v2_status_active, sends welcome SMS after SOLD, short 3d and 7d check-in SMS (logistics only), then forks to WF-10 at T+14 and WF-14 at T+21.",
   "trigger": {
     "type": "Added from WF-05",
     "filters": ["sale_outcome_v2 = SOLD", "sale_type = new"],
-    "notes": "Sole enroll path is ADD-TO-WF from WF-05. Renewals never enter WF-06 (they go to WF-09). Check-in copy between the 3d/7d/14d/21d waits is not authored yet."
+    "notes": "Sole enroll path is ADD-TO-WF from WF-05. Renewals never enter WF-06 (they go to WF-09). Check-in SMS between waits are logistics only (no symptom / treatment talk)."
   },
   "named_steps": [
     {
@@ -15,18 +15,28 @@
     },
     {
       "name": "SMS: Welcome after SOLD + STOP (WF-06)",
-      "comment": "Inline SMS. References {{contact.current_clinic_address}} and {{contact.current_clinic_phone}}. First SMS in this sequence carries Reply STOP to opt out. Transactional; send window None.",
+      "comment": "Inline SMS. References {{contact.current_clinic_address}} and {{contact.current_clinic_phone}}. First SMS in this sequence carries Reply STOP to opt out. Transactional; no quiet hours.",
       "writes": ["sms_send"]
     },
     {
-      "name": "WAIT: 3d check-in fork",
-      "comment": "Week-one waypoint (check-in copy not authored yet).",
+      "name": "WAIT: 3d before check-in 1",
+      "comment": "Week-one waypoint before the first check-in SMS.",
       "writes": []
     },
     {
-      "name": "WAIT: 7d check-in fork",
-      "comment": "Week-one waypoint (check-in copy not authored yet).",
+      "name": "SMS: 3d check-in (inline, logistics only)",
+      "comment": "Short inline SMS. Logistics only (no symptom / treatment talk). STOP already carried on the welcome SMS; not repeated here.",
+      "writes": ["sms_send"]
+    },
+    {
+      "name": "WAIT: 7d before check-in 2",
+      "comment": "Week-one waypoint before the second check-in SMS.",
       "writes": []
+    },
+    {
+      "name": "SMS: 7d check-in (inline, logistics only)",
+      "comment": "Short inline SMS. Logistics only (no symptom / treatment talk).",
+      "writes": ["sms_send"]
     },
     {
       "name": "WAIT: 14d before WF-10 fork",

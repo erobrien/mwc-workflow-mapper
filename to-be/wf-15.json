@@ -1,47 +1,44 @@
 {
   "id": "wf-15",
   "name": "PCC Referral",
-  "job": "PCC QR referral flow. Enrolls on utm_source=pcc_qr and adds the live pcc-referral tag, then re-enters WF-01.",
+  "job": "PCC QR referral routing. Enrolls on utm_source=pcc_qr, stamps live tag pcc-referral and next-lander so WF-01 owns create-once for the Sales opp.",
   "trigger": {
     "type": "Contact Created",
     "filters": [
       "utm_source = pcc_qr"
-    ]
+    ],
+    "notes": "Do not create the Sales opp here. Stamp next-lander so the WF-01 trigger (Contact Created + next-lander) enrolls the contact."
   },
   "named_steps": [
     {
-      "name": "TRIGGER: Contact Created (utm_source=pcc_qr)",
-      "comment": "Sole enroll. Must not fire on other utm_source values.",
+      "name": "TRIGGER: Contact Created (utm_source = pcc_qr)",
+      "comment": "Sole enroll. Do not fire on other utm_source values.",
       "does_not_write": []
     },
     {
       "name": "ADD-TAG: pcc-referral (live tag)",
-      "comment": "Live tag. Must not rename pcc-referral.",
-      "writes": [
-        "pcc-referral"
-      ]
+      "comment": "Live tag. Do not rename pcc-referral.",
+      "writes": ["pcc-referral"]
     },
     {
       "name": "ADD-TAG: v2_ref_pcc (audit)",
-      "comment": "New v2 audit tag.",
-      "writes": [
-        "v2_ref_pcc"
-      ]
+      "comment": "New v2 audit tag for the PCC channel.",
+      "writes": ["v2_ref_pcc"]
     },
     {
       "name": "SET-FIELD: contact.referral_channel = pcc_qr",
-      "comment": "Native field write. Must not touch location_* fields (WF-01 owns).",
-      "writes": [
-        "contact.referral_channel"
-      ],
-      "does_not_write": [
-        "contact.location_*",
-        "contact.current_clinic_slug"
-      ]
+      "comment": "Native field write. Do not touch location_* fields (WF-01 owns Method 2 stamps).",
+      "writes": ["contact.referral_channel"],
+      "does_not_write": ["contact.location_*", "contact.current_clinic_slug"]
     },
     {
-      "name": "ADD-TO-WF: Re-enter WF-01 Lead Capture",
-      "comment": "Contact then goes through normal Lead Capture. Must not create a Sales opp here.",
+      "name": "ADD-TAG: next-lander (so WF-01 trigger enrolls)",
+      "comment": "Live tag next-lander is required by the WF-01 trigger (Contact Created + next-lander). Do not rename next-lander.",
+      "writes": ["next-lander"]
+    },
+    {
+      "name": "ADD-TO-WF: Re-enter WF-01 Lead Capture (create-once owner)",
+      "comment": "WF-01 owns the Sales opp create-once. Do not create a Sales opp here.",
       "writes": []
     }
   ],

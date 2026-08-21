@@ -1,10 +1,12 @@
 {
   "id": "wf-04",
-  "name": "Intake chase",
+  "name": "Intake Chase",
   "job": "Chase the intake survey for booked contacts. Exits as soon as the survey is submitted.",
   "trigger": {
     "type": "Added from WF-03",
-    "filters": ["v2_status_booked"]
+    "filters": [
+      "v2_status_booked"
+    ]
   },
   "named_steps": [
     {
@@ -20,7 +22,9 @@
     {
       "name": "EMAIL: Intake ask 1 (native template)",
       "comment": "Sends EML | WF-04 | Intake ask 1.",
-      "writes": ["email_send"]
+      "writes": [
+        "email_send"
+      ]
     },
     {
       "name": "WAIT: +6 hours (quiet-hours aware)",
@@ -30,7 +34,9 @@
     {
       "name": "SMS: Intake nudge 1 (inline)",
       "comment": "Inline SMS. Honors quiet hours.",
-      "writes": ["sms_send"]
+      "writes": [
+        "sms_send"
+      ]
     },
     {
       "name": "WAIT: +18 hours",
@@ -40,7 +46,9 @@
     {
       "name": "EMAIL: Intake ask 2 (native template)",
       "comment": "Sends EML | WF-04 | Intake ask 2.",
-      "writes": ["email_send"]
+      "writes": [
+        "email_send"
+      ]
     },
     {
       "name": "WAIT: +12 hours",
@@ -50,12 +58,16 @@
     {
       "name": "SMS: Intake final nudge (inline)",
       "comment": "Final SMS. Members not patients.",
-      "writes": ["sms_send"]
+      "writes": [
+        "sms_send"
+      ]
     },
     {
       "name": "ADD-TAG: v2_intake_chased (audit)",
       "comment": "Audit tag only. Must not signal completion; only submission clears WF-04.",
-      "writes": ["v2_intake_chased"]
+      "writes": [
+        "v2_intake_chased"
+      ]
     }
   ],
   "tags_new": [

@@ -281,11 +281,11 @@ WF_META: dict[str, dict] = {
             "status": "Draft v5 on staging shell 45a0f21e-244c-4d66-8ee1-232567662624. Unpublished.",
         },
         "test": [
-            "Send test webhooks for each sale_outcome value. Confirm SOLD+new adds to WF-06 AND WF-13; SOLD renewal adds to WF-09; AD adds to WF-07; MUT adds to WF-11; MAR drops.",
+            "Send test webhooks for each sale_outcome value. Confirm SOLD+new adds to WF-06; SOLD renewal adds to WF-09; AD adds to WF-07; MUT adds to WF-11; MAR drops.",
             "Send appt_status=reschedule and confirm the router sends it to WF-03 (not WF-08).",
             "Confirm no workflow moves opp stages.",
         ],
-        "depends_on": ["WF-06", "WF-07", "WF-08", "WF-09", "WF-11", "WF-13"],
+        "depends_on": ["WF-06", "WF-07", "WF-08", "WF-09", "WF-11"],
     },
     "06": {
         "purpose": (
@@ -721,9 +721,15 @@ WF_META: dict[str, dict] = {
             "Change price-calc component fields on a test contact and confirm contact.price_calc_result is computed and v2_price_calc lands.",
             "Confirm opportunity.monetaryValue is untouched.",
         ],
-        "depends_on": ["WF-13 (later, once ad platforms consume revenue)"],
+        "depends_on": [],
     },
 }
+
+
+# Workflows dropped from the v2 spec but retained in tobe-detail.json for
+# generator compatibility. These are hidden from the /to-be card grid and
+# rendered as a "dropped from v2" page on /to-be/wf/<n>.
+DROPPED_FROM_V2: set[str] = {"13"}
 
 
 # ---- data.json tobe_workflows[].copy (2-3 sentence summary per WF) -----------
@@ -759,9 +765,10 @@ TOBE_COPY: dict[str, str] = {
     "05": (
         "Outcome router. Inbound webhook from Force (trigger ryJLJ1McWWOHlAvBRsI3; URL is "
         "UI-only, paste into Force GHL_WF05_WEBHOOK_URL). Reads opportunity.sale_outcome_v2 "
-        "and routes: SOLD + new -> WF-06 AND WF-13; SOLD renewal -> WF-09; AD -> WF-07; "
+        "and routes: SOLD + new -> WF-06; SOLD renewal -> WF-09; AD -> WF-07; "
         "MUT -> WF-11; MAR drops. appt_status routes first: no-show / cancel -> WF-08, "
-        "reschedule -> WF-03. Workflows never move Sales stages. Draft v5 unpublished."
+        "reschedule -> WF-03. Workflows never move Sales stages. Ad-platform CAPI / "
+        "Google (old WF-13) is dropped from v2. Draft v5 unpublished."
     ),
     "06": (
         "Post-visit Won and onboarding for SOLD + sale_type=new only. Tags v2_status_active "
@@ -806,13 +813,9 @@ TOBE_COPY: dict[str, str] = {
         "remove-and-recreate the contact or opp. Per-disposition copy is not authored yet. "
         "Draft v2 unpublished."
     ),
-    "13": (
-        "Ad-platform conversions. Fires on Sales pipeline Booked and Won with "
-        "sale_type=new only; excludes clinic pipes jRqb0pvexu04zSACPXmd, "
-        "9AZEt2Sw6Zv0nnJJmkE0, rspsjkBMNYGldN3R71ji. Tags v2_conv_won_new "
-        "(fUVvRU2P4aQl1VKA7muT). Native Meta CAPI and Google Ads conversion nodes are not "
-        "authored yet. Draft v2 unpublished."
-    ),
+    # WF-13 (Ad-platform conversions / Native CAPI + Google) was dropped from
+    # the v2 spec. The wf-13.json file is retained so the generator does not
+    # break, but no card / summary is surfaced for it in the UI.
     "14": (
         "Ambassador program. Referred contact is created as a new contact (never merged) "
         "and re-enters WF-01. Live tag ambassador-referral. Enrolled at T+21 from WF-06 or "
@@ -833,8 +836,7 @@ TOBE_COPY: dict[str, str] = {
         "Internal price calculator for consult copy. Reads price-calc component fields, "
         "computes contact.price_calc_result via a math_operation node, and tags "
         "v2_price_calc. Never writes opportunity.monetaryValue and never moves stages. "
-        "Feeds WF-13's future Won-with-revenue conversion. 1-step named shell. Draft v2 "
-        "unpublished."
+        "1-step named shell. Draft v2 unpublished."
     ),
 }
 
@@ -883,6 +885,8 @@ def build_detail() -> dict:
         spec = load_wf(n)
         steps = [step_from_named(i + 1, s) for i, s in enumerate(spec["named_steps"])]
         entry = {
+            "name": spec.get("name", f"WF-{n}"),
+            "job": spec.get("job", ""),
             "purpose": meta["purpose"],
             "diagram_key": meta["diagram_key"],
             "trigger": meta["trigger"],
@@ -893,14 +897,18 @@ def build_detail() -> dict:
             "test": meta["test"],
             "depends_on": meta["depends_on"],
         }
+        if n in DROPPED_FROM_V2:
+            entry["dropped_from_v2"] = True
         if "variables" in meta:
             entry["variables"] = meta["variables"]
         workflows[n] = entry
     return {
         "_note": (
-            "Locked v2 spec. Rebuilt by plan-workspace/build_tobe_v2_detail.py "
-            "from /workspace/to-be/wf-*.json. Do not hand-edit; re-run the script. "
-            "Nothing in this file publishes or contacts GHL."
+            "Locked v2 spec. Rebuilt by build_tobe_v2_detail.py from "
+            "/workspace/to-be/wf-*.json. Do not hand-edit; re-run the script. "
+            "Nothing in this file publishes or contacts GHL. Entries with "
+            "dropped_from_v2=true are retained for generator compatibility but "
+            "are hidden from the /to-be card grid."
         ),
         "workflows": workflows,
     }
@@ -910,12 +918,17 @@ def patch_data_json(path: Path) -> None:
     data = json.loads(path.read_text())
     by_n = {w["n"]: w for w in data.get("tobe_workflows", [])}
     for n, copy in TOBE_COPY.items():
+        spec_name = load_wf(n).get("name", f"WF-{n}")
         if n not in by_n:
-            by_n[n] = {"n": n, "name": load_wf(n).get("name", f"WF-{n}"), "copy": copy}
+            by_n[n] = {"n": n, "name": spec_name, "copy": copy}
         else:
             by_n[n]["copy"] = copy
-            # Refresh name from the source of truth if it changed.
-            by_n[n]["name"] = load_wf(n).get("name", by_n[n]["name"])
+            # Refresh name from the source of truth (to-be/wf-NN.json).
+            by_n[n]["name"] = spec_name
+    # Drop workflows removed from the v2 spec (kept in tobe-detail.json for
+    # generator compatibility, but never surfaced as a card).
+    for n in DROPPED_FROM_V2:
+        by_n.pop(n, None)
     data["tobe_workflows"] = [by_n[k] for k in sorted(by_n.keys())]
     path.write_text(json.dumps(data, indent=2) + "\n")
 

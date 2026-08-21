@@ -1,10 +1,12 @@
 {
   "id": "wf-05",
-  "name": "Outcome router",
+  "name": "Outcome Router",
   "job": "Central router for sale_outcome and appt_status force writes. Reads the opportunity, tags v2_outcome_*, and routes to the correct downstream workflow. Never stage-moves and never fires on MAR.",
   "trigger": {
     "type": "Inbound webhook",
-    "filters": ["url = GHL_WF05_WEBHOOK_URL"],
+    "filters": [
+      "url = GHL_WF05_WEBHOOK_URL"
+    ],
     "notes": "Sole webhook-driven router. Payload includes contact_id, sale_outcome, sale_type, appt_status, ad_reason."
   },
   "named_steps": [
@@ -21,7 +23,9 @@
     {
       "name": "FIND-OPP: Latest open opp for contact",
       "comment": "Native find opp. Must not create a new opp here. Must not read monetaryValue for logic.",
-      "does_not_write": ["opportunity"]
+      "does_not_write": [
+        "opportunity"
+      ]
     },
     {
       "name": "IF-ELSE: Drop payload when sale_outcome=MAR",
@@ -31,22 +35,31 @@
     {
       "name": "IF-ELSE: Branch on sale_outcome (SOLD | AD | MUT)",
       "comment": "Routes downstream. Must not write dollars. Must not move opp stages.",
-      "does_not_write": ["opportunity.pipelineStageId", "opportunity.monetaryValue"]
+      "does_not_write": [
+        "opportunity.pipelineStageId",
+        "opportunity.monetaryValue"
+      ]
     },
     {
       "name": "ADD-TAG: v2_outcome_sold (SOLD branch)",
       "comment": "Tags outcome only. Must not stage-move.",
-      "writes": ["v2_outcome_sold"]
+      "writes": [
+        "v2_outcome_sold"
+      ]
     },
     {
       "name": "ADD-TAG: v2_outcome_ad (AD branch)",
       "comment": "Tags outcome only.",
-      "writes": ["v2_outcome_ad"]
+      "writes": [
+        "v2_outcome_ad"
+      ]
     },
     {
       "name": "ADD-TAG: v2_outcome_mut (MUT branch)",
       "comment": "Tags outcome only.",
-      "writes": ["v2_outcome_mut"]
+      "writes": [
+        "v2_outcome_mut"
+      ]
     },
     {
       "name": "IF-ELSE: SOLD sub-branch on sale_type (new | renewal)",
@@ -76,7 +89,9 @@
     {
       "name": "IF-ELSE: Branch on appt_status (no-show | cancel | reschedule)",
       "comment": "appt_status routing. Reschedule must never be treated as no-show.",
-      "does_not_write": ["appt_status"]
+      "does_not_write": [
+        "appt_status"
+      ]
     },
     {
       "name": "ADD-TO-WF: Route no-show or cancel to WF-08",

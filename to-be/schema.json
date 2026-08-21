@@ -2,7 +2,8 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://mwcforme.dev/mwc-workflow-mapper/to-be/schema.json",
   "title": "MWC GHL to-be workflow file",
-  "description": "One workflow spec that extract-diff will later turn into an unpublished GHL draft in the staging location. Native GHL only; no custom_code, no new Supabase.",
+  "description": "One workflow spec that extract-diff will later turn into an unpublished GHL draft in the staging location. Native GHL only; no custom_code, no new Supabase. The Force (consult writer) contract is NOT a workflow and lives in to-be/force.json governed by to-be/force.schema.json.",
+  "$comment": "Force (mwcforce) is a first-class writer contract, not a workflow, so it does not use this schema. See to-be/force.json + to-be/force.schema.json. Native GHL workflows still validate here (wf-01..wf-17); Force UPDATES the Sales opportunity via the public GHL API and then POSTs GHL_WF05_WEBHOOK_URL so native WF-05 routes.",
   "type": "object",
   "additionalProperties": false,
   "required": [

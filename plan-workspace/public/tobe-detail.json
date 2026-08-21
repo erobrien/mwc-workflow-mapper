@@ -635,7 +635,7 @@
     },
     "05": {
       "name": "Outcome Router",
-      "job": "Central router. Reads opportunity.sale_outcome_v2 and appt_status from Force webhook writes and routes to the correct downstream workflow. Never stage-moves and never fires on MAR. Still ADD-TO-WF WF-13 on SOLD + sale_type=new (recorded truth in GHL; site cards hide WF-13).",
+      "job": "Central router. Reads opportunity.sale_outcome_v2 and appt_status from Force writes (see to-be/force.json) and routes to the correct downstream workflow. WF-05 never writes any Force field, never creates an opportunity, and never moves opportunity stages. Never fires on MAR. Still ADD-TO-WF WF-13 on SOLD + sale_type=new (recorded truth in GHL; site cards hide WF-13).",
       "purpose": "Central router for Force outcome writes. Reads opportunity.sale_outcome_v2 and routes downstream. Workflows never move Sales stages here.",
       "diagram_key": "wf05",
       "trigger": {
@@ -657,7 +657,7 @@
           "order": 1,
           "action": "Trigger",
           "name": "TRIGGER: Inbound webhook GHL_WF05_WEBHOOK_URL",
-          "config": "Force writes enter here only. Must not accept payloads with sale_outcome=MAR (guarded below)."
+          "config": "Force writes enter here only (see to-be/force.json). WF-05 never writes Force fields (sale_outcome, sale_type, appt_status, monetaryValue, pay_type, ad_reason), never creates an opp, and never moves stages. Must not accept payloads with sale_outcome=MAR (guarded below)."
         },
         {
           "order": 2,
@@ -669,7 +669,7 @@
           "order": 3,
           "action": "Find Opportunity",
           "name": "FIND-OPP: Latest open opp for contact",
-          "config": "Native find opp. Must not create a new opp here. Must not read monetaryValue for logic."
+          "config": "Native find opp. Must not create a new opp here (WF-01 create-once is the sole creator). Must not read monetaryValue for logic and must not write any Force field."
         },
         {
           "order": 4,

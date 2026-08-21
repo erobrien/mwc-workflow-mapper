@@ -22,10 +22,30 @@ Nothing in this folder publishes, calls the GHL API, or edits production.
   Sales opportunity.
 - Clinic slugs: `richmond | virginia-beach | newport-news`. Method 2
   `current_clinic_*` fields are stamped in **WF-01 only**.
-- Force writes: `sale_outcome ∈ {SOLD, AD, MUT, MAR}`,
-  `sale_type ∈ {new, renewal}`, `appt_status ∈ {showed, no-show, cancel,
-  reschedule}`. WF-05 routes only. Workflows never move opportunity stages.
-  `MAR` does not fire WF-05.
+- Force writer contract (see `to-be/force.json` + `to-be/force.schema.json`).
+  Force is the consult app that UPDATES an existing Sales opportunity via
+  the public GHL API and then POSTs `GHL_WF05_WEBHOOK_URL` so native
+  WF-05 routes. Force is not a GHL workflow and not a `custom_code`
+  action. Force never creates a contact, appointment, or opportunity.
+  - Force is the sole writer of `sale_outcome ∈ {SOLD, AD, MUT, MAR}`,
+    `sale_type ∈ {new, renewal}`, `appt_status ∈ {showed, no-show, cancel,
+    reschedule}`, `opportunity.monetaryValue` and line items (product,
+    term, price), `pay_type ∈ {PIF, SF, CARE, MAG, Other}`, `ad_reason`
+    (when AD), `referred_by`, `consult_notes`, how-heard, PCC id,
+    provider, `outcome_processed_at` (idempotency stamp — required
+    before any conversion-adjacent write), `renewal_date` (when SOLD),
+    and the Sales pipeline stages on Sales Lead to Close only
+    (`New Lead → Booked → Showed → Won`). Workflows never move stages.
+  - Force must not write: contact identity, `current_clinic_*`,
+    DND / `sms_consent_status`, `membership_status`, `v2_*` tags
+    (workflows tag), `next-lander` / live tags, `location_*` tags, and
+    marketing attribution (source / UTM / click IDs). Attribution is
+    being redesigned around Curve Compliance (curvecompliance.com)
+    after the MWC acquisition; the writer / field shape is TBD (Curve)
+    and this SPEC intentionally leaves a hole. WF-01 does not (yet)
+    claim ownership of attribution copy.
+  - `GHL_WF05_WEBHOOK_URL` is UI-only on the WF-05 draft; do not invent
+    it. `MAR` does not fire WF-05.
 - Emails use native templates named `EML | WF-NN | Purpose`. SMS bodies are
   inline in the workflow.
 - Every step is named `TYPE: Purpose (qualifier)` and carries a one-line
@@ -50,9 +70,16 @@ Nothing in this folder publishes, calls the GHL API, or edits production.
 to-be/
   SPEC.md              this file
   schema.json          JSON schema for one wf-NN.json
+  force.schema.json    JSON schema for the Force writer contract
+  force.json           the Force writer contract (one instance)
   README.md            how extract-diff consumes this folder
   wf-01.json ...       one file per workflow (WF-01 through WF-17)
 ```
+
+`force.json` is a first-class writer contract, not a workflow. It does
+not use `schema.json`. Anything WF-05 depends on Force to have written
+lives in `force.json`, and the `does_not_write` list in `force.json` is
+the single-writer boundary on the Opportunity.
 
 ## Workflow-file shape
 

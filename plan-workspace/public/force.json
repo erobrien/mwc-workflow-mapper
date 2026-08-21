@@ -1,0 +1,246 @@
+{
+  "id": "force",
+  "name": "Force (consult writer)",
+  "job": "Update an existing Sales opportunity with the consult outcome, dollars, line items, appointment status, and Sales stage, then POST GHL_WF05_WEBHOOK_URL so native WF-05 routes downstream.",
+  "role": "Force (mwcforce) is the PCC consult app. It is not a GHL workflow and not a custom_code action. Force UPDATES an existing GHL Sales opportunity via the public GHL API and then fires the WF-05 inbound webhook so native GHL takes over routing. Force never creates a contact, an appointment, or an opportunity. WF-01 create-once is the only opportunity creator. Native GHL stays the law of the messaging / routing graph.",
+  "canonical_slugs": ["richmond", "virginia-beach", "newport-news"],
+  "writes": [
+    {
+      "field": "opportunity.sale_outcome",
+      "on": "opportunity",
+      "purpose": "Consult disposition SOLD | AD | MUT | MAR. Sole writer."
+    },
+    {
+      "field": "opportunity.sale_type",
+      "on": "opportunity",
+      "purpose": "new | renewal on the deal. Sole writer."
+    },
+    {
+      "field": "opportunity.appt_status",
+      "on": "opportunity",
+      "purpose": "showed | no-show | cancel | reschedule. Sole writer."
+    },
+    {
+      "field": "opportunity.monetaryValue",
+      "on": "opportunity",
+      "purpose": "Native GHL money field. Sole writer. Dollars live on the opp, never on the contact."
+    },
+    {
+      "field": "opportunity.line_items[].product",
+      "on": "opportunity.line_item",
+      "purpose": "Line item product. Sole writer."
+    },
+    {
+      "field": "opportunity.line_items[].term",
+      "on": "opportunity.line_item",
+      "purpose": "Line item term. Sole writer."
+    },
+    {
+      "field": "opportunity.line_items[].price",
+      "on": "opportunity.line_item",
+      "purpose": "Line item price. Sole writer."
+    },
+    {
+      "field": "opportunity.pay_type",
+      "on": "opportunity",
+      "purpose": "PIF | SF | CARE | MAG | Other. Sole writer."
+    },
+    {
+      "field": "opportunity.ad_reason",
+      "on": "opportunity",
+      "purpose": "Reason enum captured when sale_outcome=AD. Sole writer.",
+      "gated_by": "only when sale_outcome=AD"
+    },
+    {
+      "field": "opportunity.referred_by",
+      "on": "opportunity",
+      "purpose": "Who referred this consult. Sole writer."
+    },
+    {
+      "field": "contact.consult_notes",
+      "on": "contact",
+      "purpose": "Free-text consult notes captured in the consult app. Sole writer."
+    },
+    {
+      "field": "contact.how_heard",
+      "on": "contact",
+      "purpose": "How-heard attribute captured in the consult app. Not to be confused with marketing attribution (owner TBD, see does_not_write). Sole writer of this specific consult-app field."
+    },
+    {
+      "field": "opportunity.pcc_id",
+      "on": "opportunity",
+      "purpose": "Which PCC ran the consult. Sole writer."
+    },
+    {
+      "field": "opportunity.provider",
+      "on": "opportunity",
+      "purpose": "Which provider ran the consult. Sole writer."
+    },
+    {
+      "field": "opportunity.outcome_processed_at",
+      "on": "opportunity",
+      "purpose": "Idempotency stamp. Required before any conversion-adjacent write. Sole writer."
+    },
+    {
+      "field": "opportunity.renewal_date",
+      "on": "opportunity",
+      "purpose": "Renewal date on SOLD deals. Sole writer.",
+      "gated_by": "only when sale_outcome=SOLD"
+    },
+    {
+      "field": "opportunity.pipelineStageId",
+      "on": "opportunity",
+      "purpose": "Sales Lead to Close stage transitions: New Lead \u2192 Booked \u2192 Showed \u2192 Won. Force is the sole stage-mover; workflows never move stages."
+    }
+  ],
+  "does_not_write": [
+    {
+      "field": "contact identity (name, email, phone, address, DOB)",
+      "owner": "GHL / integrations / manual PCC edits on the Contact record",
+      "reason": "Force is a consult writer, not a CRM. It never overwrites identity."
+    },
+    {
+      "field": "opportunity (create)",
+      "owner": "WF-01 (native)",
+      "reason": "WF-01 create-once is the only opportunity creator. Force UPDATE only."
+    },
+    {
+      "field": "contact (create)",
+      "owner": "GHL forms / /api/qualify / /api/handoff/wordpress",
+      "reason": "Force never creates contacts."
+    },
+    {
+      "field": "appointment (create / edit)",
+      "owner": "native GHL calendars",
+      "reason": "Force never creates or edits appointments; it reads appt_status only."
+    },
+    {
+      "field": "contact.current_clinic_address",
+      "owner": "WF-01 (Method 2 stamp)",
+      "reason": "Method 2 clinic context is stamped by WF-01 only."
+    },
+    {
+      "field": "contact.current_clinic_phone",
+      "owner": "WF-01 (Method 2 stamp)",
+      "reason": "Method 2 clinic context is stamped by WF-01 only."
+    },
+    {
+      "field": "contact.current_booking_url",
+      "owner": "WF-01 (Method 2 stamp)",
+      "reason": "Method 2 clinic context is stamped by WF-01 only."
+    },
+    {
+      "field": "contact.current_review_link",
+      "owner": "WF-01 (Method 2 stamp)",
+      "reason": "Method 2 clinic context is stamped by WF-01 only."
+    },
+    {
+      "field": "contact.current_clinic_*",
+      "owner": "WF-01 (Method 2 stamp)",
+      "reason": "Family guard covering the Method 2 stamp block."
+    },
+    {
+      "field": "contact.dnd / opportunity.dnd",
+      "owner": "WF-11 (Compliance)",
+      "reason": "WF-11 is the sole DND writer."
+    },
+    {
+      "field": "contact.sms_consent_status",
+      "owner": "WF-11 (Compliance)",
+      "reason": "WF-11 is the sole sms_consent_status writer."
+    },
+    {
+      "field": "contact.membership_status",
+      "owner": "WF-06 (Onboarding)",
+      "reason": "WF-06 is the sole membership_status writer on SOLD + new."
+    },
+    {
+      "field": "v2_* tags",
+      "owner": "native GHL workflows (WF-05, WF-06, WF-07, WF-08, WF-11, WF-12, WF-17)",
+      "reason": "Workflows tag; Force does not."
+    },
+    {
+      "field": "next-lander",
+      "owner": "WordPress / /api/qualify (live tag)",
+      "reason": "Live tag; never rename or write from Force."
+    },
+    {
+      "field": "location_* tags",
+      "owner": "existing GHL install (live tags)",
+      "reason": "Live tags; never rename or write from Force."
+    },
+    {
+      "field": "opportunity.source",
+      "owner": "Curve (TBD)",
+      "reason": "Attribution is being redesigned around Curve Compliance (curvecompliance.com) after the MWC acquisition. Force must not write attribution. Owner and field shape are intentionally left as a hole in this contract."
+    },
+    {
+      "field": "opportunity.utm_* (utm_source, utm_medium, utm_campaign, utm_content, utm_term)",
+      "owner": "Curve (TBD)",
+      "reason": "Attribution redesign hole. Do not invent Curve field names here."
+    },
+    {
+      "field": "opportunity click IDs (fbc, fbp, gclid, wbraid, gbraid, msclkid, ttclid)",
+      "owner": "Curve (TBD)",
+      "reason": "Attribution redesign hole. Do not invent Curve field names here."
+    },
+    {
+      "field": "contact.utm_* / contact click IDs",
+      "owner": "Curve (TBD)",
+      "reason": "Attribution redesign hole. Force never writes attribution on the contact either."
+    },
+    {
+      "field": "opportunity.location",
+      "owner": "WF-01 (display label from slug)",
+      "reason": "WF-01 copies the display label from the slug. Force does not overwrite location."
+    }
+  ],
+  "enums": {
+    "sale_outcome": ["SOLD", "AD", "MUT", "MAR"],
+    "sale_type": ["new", "renewal"],
+    "appt_status": ["showed", "no-show", "cancel", "reschedule"],
+    "pay_type": ["PIF", "SF", "CARE", "MAG", "Other"],
+    "sales_pipeline_stages": ["New Lead", "Booked", "Showed", "Won"],
+    "ad_reason": [
+      "price",
+      "timing",
+      "fit",
+      "medical",
+      "spouse",
+      "thinking",
+      "other"
+    ]
+  },
+  "fires": [
+    {
+      "target": "WF-05",
+      "when": ["SOLD", "AD", "MUT"],
+      "method": "POST",
+      "url_env": "GHL_WF05_WEBHOOK_URL",
+      "notes": "The WF-05 inbound-webhook URL is UI-only on the WF-05 draft (trigger id ryJLJ1McWWOHlAvBRsI3). Paste it into Force config as GHL_WF05_WEBHOOK_URL; do not invent it and it is not returned by the JWT GET. MAR does not fire. Force POSTs only after opportunity.outcome_processed_at is stamped so retries are idempotent. Payload carries contact_id, sale_outcome, sale_type, appt_status, ad_reason."
+    }
+  ],
+  "native_ghl_rule": {
+    "statement": "Native GHL is the law. Force is a writer on the Sales opportunity via the public GHL API; nothing routes, tags, or messages outside native GHL workflows.",
+    "must_not": [
+      "No custom_code actions anywhere in the graph.",
+      "No new Supabase tables or Islam-style server functions.",
+      "Force must never create a contact, appointment, or opportunity.",
+      "Force must never write marketing attribution (source / UTM / click IDs). Attribution is being redesigned around Curve Compliance; owner is TBD.",
+      "Force must never rename or remove live tags (next-lander, LOC_TAGS, sms-consent, engine tags, funnel_entry_*, location_*).",
+      "Force must never move opportunity stages on any pipeline other than Sales Lead to Close.",
+      "Nothing in this repo publishes. Drafts only. Production is read-only."
+    ]
+  },
+  "status": {
+    "live_with_canonical_slugs": false,
+    "publishes": false,
+    "notes": "Force is not yet live with the canonical clinic slugs. mwc-force / mwc-admin still carry the historical slug set; the cut-over to richmond | virginia-beach | newport-news is pending. Do not invent additional clinic slugs (the two unnamed clinics are not named here)."
+  },
+  "notes": [
+    "Attribution redesign: after the MWC acquisition of Curve Compliance (curvecompliance.com), the marketing-attribution model on the Opportunity is being reworked. This contract intentionally leaves attribution as a hole. Force does not write attribution. WF-01 does not (yet) claim ownership of attribution copy either; the writer is TBD (Curve).",
+    "This contract lives beside the per-workflow specs. schema.json still governs wf-*.json; force.schema.json governs this file only.",
+    "Extract-diff and the planning site render this file. Nothing here publishes.",
+    "Related SPEC sections: single-writer table in SPEC.md, WF-05 inbound webhook comments in wf-05.json, WF-17 never-writes-monetaryValue in wf-17.json."
+  ]
+}

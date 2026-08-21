@@ -937,6 +937,19 @@ def patch_data_json(path: Path) -> None:
     path.write_text(json.dumps(data, indent=2) + "\n")
 
 
+def sync_force_contract() -> None:
+    """Copy to-be/force.json into plan-workspace/public/ so the Force page
+    can fetch it at build/runtime. The Force writer contract is source of
+    truth in to-be/force.json; the public copy is a mirror only.
+    """
+    src = TOBE / "force.json"
+    if not src.exists():
+        return
+    dest = PW_PUBLIC / "force.json"
+    dest.write_text(src.read_text())
+    print(f"synced {dest.relative_to(REPO_ROOT)} from to-be/force.json")
+
+
 def main() -> None:
     detail = build_detail()
     out_detail = PW_PUBLIC / "tobe-detail.json"
@@ -945,6 +958,7 @@ def main() -> None:
     data_path = PW_PUBLIC / "data.json"
     patch_data_json(data_path)
     print(f"patched {data_path.relative_to(REPO_ROOT)} tobe_workflows[].copy")
+    sync_force_contract()
 
 
 if __name__ == "__main__":

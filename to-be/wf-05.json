@@ -1,7 +1,7 @@
 {
   "id": "wf-05",
   "name": "Outcome Router",
-  "job": "Central router. Reads opportunity.sale_outcome_v2 and appt_status from Force webhook writes and routes to the correct downstream workflow. Never stage-moves and never fires on MAR. Still ADD-TO-WF WF-13 on SOLD + sale_type=new (recorded truth in GHL; site cards hide WF-13).",
+  "job": "Central router. Reads opportunity.sale_outcome_v2 and appt_status from Force writes (see to-be/force.json) and routes to the correct downstream workflow. WF-05 never writes any Force field, never creates an opportunity, and never moves opportunity stages. Never fires on MAR. Still ADD-TO-WF WF-13 on SOLD + sale_type=new (recorded truth in GHL; site cards hide WF-13).",
   "trigger": {
     "type": "Inbound webhook",
     "filters": ["url = GHL_WF05_WEBHOOK_URL"],
@@ -10,8 +10,16 @@
   "named_steps": [
     {
       "name": "TRIGGER: Inbound webhook GHL_WF05_WEBHOOK_URL",
-      "comment": "Force writes enter here only. Must not accept payloads with sale_outcome=MAR (guarded below).",
-      "does_not_write": []
+      "comment": "Force writes enter here only (see to-be/force.json). WF-05 never writes Force fields (sale_outcome, sale_type, appt_status, monetaryValue, pay_type, ad_reason), never creates an opp, and never moves stages. Must not accept payloads with sale_outcome=MAR (guarded below).",
+      "does_not_write": [
+        "opportunity.sale_outcome",
+        "opportunity.sale_type",
+        "opportunity.appt_status",
+        "opportunity.monetaryValue",
+        "opportunity.pipelineStageId",
+        "opportunity.pay_type",
+        "opportunity.ad_reason"
+      ]
     },
     {
       "name": "WAIT: 60s so opp writes settle",
@@ -20,7 +28,7 @@
     },
     {
       "name": "FIND-OPP: Latest open opp for contact",
-      "comment": "Native find opp. Must not create a new opp here. Must not read monetaryValue for logic.",
+      "comment": "Native find opp. Must not create a new opp here (WF-01 create-once is the sole creator). Must not read monetaryValue for logic and must not write any Force field.",
       "does_not_write": ["opportunity"]
     },
     {

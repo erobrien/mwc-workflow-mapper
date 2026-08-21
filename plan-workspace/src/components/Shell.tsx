@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import {
   LayoutDashboard, Boxes, Workflow, Network,
   Gavel, ShieldAlert, Moon, Sun, Menu, SearchCheck, ClipboardList, Tag,
-  Database, Waypoints, Route, History, ChevronRight, ChevronDown, Target, ListChecks, Radar, MessagesSquare, PhoneForwarded, Clock,
+  Database, Waypoints, Route, History, ChevronRight, ChevronDown, Target, ListChecks, Radar, MessagesSquare, PhoneForwarded, Clock, Zap,
 } from "lucide-react";
 import { cn, useTheme } from "./ui";
 import { useState } from "react";
@@ -28,6 +28,7 @@ const NAV: { group: string; accent?: string; dot?: string; collapsible?: boolean
   ] },
   { group: "Target (locked v2)", accent: "text-emerald-600 dark:text-emerald-400", dot: "bg-emerald-500", items: [
     { to: "/to-be", label: "To-Be Workflows", icon: Workflow, accent: "text-emerald-600 dark:text-emerald-400" },
+    { to: "/force", label: "Force (consult writer)", icon: Zap, accent: "text-emerald-600 dark:text-emerald-400" },
     { to: "/to-be-2bv2", label: "To-Be 2bv2 (Live Export)", icon: Network, accent: "text-emerald-600 dark:text-emerald-400" },
     { to: "/to-be-review", label: "Design Review", icon: SearchCheck, accent: "text-emerald-600 dark:text-emerald-400" },
     { to: "/wf-diagrams", label: "WF Flow Diagrams", icon: Waypoints, accent: "text-emerald-600 dark:text-emerald-400" },

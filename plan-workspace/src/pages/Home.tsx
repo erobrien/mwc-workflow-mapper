@@ -52,6 +52,13 @@ export default function Home() {
       {/* The two problems */}
       <section>
         <h2 className="mb-3 text-base font-semibold">The two problems this fixes</h2>
+        <p className="mb-3 text-xs text-foreground/80">
+          Fix path: (a) <Link to="/force" className="font-semibold text-primary hover:underline">Force (consult writer)</Link> becomes the sole writer of{" "}
+          <code className="rounded bg-muted px-1 text-[11px]">sale_outcome</code>,{" "}
+          <code className="rounded bg-muted px-1 text-[11px]">opportunity.monetaryValue</code>, and Sales stages on the Opportunity; (b) marketing attribution is being redesigned around{" "}
+          <a href="https://curvecompliance.com" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary hover:underline">Curve Compliance</a>{" "}
+          (curvecompliance.com) after the MWC acquisition &mdash; owner and field shape TBD, and no attribution writer is locked in this repo yet.
+        </p>
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
           <div className="rounded-md border border-l-4 border-l-destructive bg-card p-5">
             <div className="mb-2 flex items-center gap-2.5">

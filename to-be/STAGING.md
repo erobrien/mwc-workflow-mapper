@@ -73,13 +73,14 @@ GHL router truth: WF-05 v5 still ADD-TO-WF WF-13 on SOLD + new.
 
 - Three Method 2 stamp arms. Values are taken from the live location
   pages; booking URLs use `book.menswellnesscenters.com/{slug}`; review
-  links use Google Maps CIDs from the live listings.
+  link stamps are opaque per-clinic review URLs (the workflow just
+  stamps the string, no map integration).
 
-  | Slug | Address | Phone | Booking URL | Review CID |
+  | Slug | Address | Phone | Booking URL | Review link ref |
   | --- | --- | --- | --- | --- |
-  | `richmond` | `4050 Innslake Drive Suite 360 Richmond VA 23060` | `(804) 346-4636` | `https://book.menswellnesscenters.com/richmond` | `2277296049943963626` |
-  | `virginia-beach` | `996 First Colonial Road` | `(757) 612-4428` | `https://book.menswellnesscenters.com/virginia-beach` | `5476441419759027703` |
-  | `newport-news` | `827 Diligence Drive Suite 206` | `(757) 806-6263` | `https://book.menswellnesscenters.com/newport-news` | `605398627804676801` |
+  | `richmond` | `4050 Innslake Drive Suite 360 Richmond VA 23060` | `(804) 346-4636` | `https://book.menswellnesscenters.com/richmond` | `richmond listing review URL (2277296049943963626)` |
+  | `virginia-beach` | `996 First Colonial Road` | `(757) 612-4428` | `https://book.menswellnesscenters.com/virginia-beach` | `virginia-beach listing review URL (5476441419759027703)` |
+  | `newport-news` | `827 Diligence Drive Suite 206` | `(757) 806-6263` | `https://book.menswellnesscenters.com/newport-news` | `newport-news listing review URL (605398627804676801)` |
 
 - After the stamp arms, on the create path only, the draft now sends:
   - `EMAIL: Welcome after first capture (WF-01)` using native template

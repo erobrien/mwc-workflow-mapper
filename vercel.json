@@ -1,0 +1,8 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "npm --prefix plan-workspace ci",
+  "buildCommand": "npm --prefix plan-workspace run build",
+  "outputDirectory": "plan-workspace/dist",
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}

@@ -4007,27 +4007,27 @@
     },
     {
       "n": "02",
-      "name": "Non-booked",
+      "name": "Non-booked Recovery",
       "absorbs": "02. NON BOOKED NEWLEADS",
       "copy": "Non-booked recovery. Enrolled only via ADD-TO-WF from WF-01. Burst is SMS +3m / +1m / +5m / +15m, EMAIL EML | WF-02 | Non-booked 24h (bPj39XTcKv2HylGKEUdG), SMS +36h, then ADD-TO-WF WF-09. Marketing / recovery: 08:00-21:00 contact TZ, 7 days. Draft v4 unpublished."
     },
     {
       "n": "03",
-      "name": "Reminders",
+      "name": "Booking Confirmation + Reminders",
       "absorbs": "03, 3a, 03b, 03c, 03d (merged)",
       "copy": "Booking confirmation and reminders. Trigger is Appointment Booked on the three consult calendars (richmond 1Cfy5JnO2A4ggiZlMVvX, virginia-beach 4xmnBGMWJ6TVUKcAPpPb, newport-news lBaRbjUpEmesxEloFBME). Tags v2_status_booked, sends confirm email (GUs77konNdAGFS0EFZS2) + confirm SMS, T-3d email (QcpX2V3OarwL5jKN6OFE) + T-3d SMS, and appointment-relative reminders T-1d / T-5h / T-2h with appointmentCondition=skip. Transactional; no quiet hours. Draft v7 unpublished."
     },
     {
       "n": "04",
-      "name": "Intake chase",
+      "name": "Intake Chase",
       "absorbs": "04a. Intake Form Response",
       "copy": "Medical intake chase after confirm. SMS at +4h (STOP) and +20h. Exits on survey submit. No dedicated intake URL field yet; both SMS use contact.current_booking_url as the manage / complete-intake link. Transactional; no quiet hours. Draft v3 unpublished."
     },
     {
       "n": "05",
-      "name": "Outcome router",
+      "name": "Outcome Router",
       "absorbs": "05. Clinic Appt Outcome",
-      "copy": "Outcome router. Inbound webhook from Force (trigger ryJLJ1McWWOHlAvBRsI3; URL is UI-only, paste into Force GHL_WF05_WEBHOOK_URL). Reads opportunity.sale_outcome_v2 and routes: SOLD + new -> WF-06 AND WF-13; SOLD renewal -> WF-09; AD -> WF-07; MUT -> WF-11; MAR drops. appt_status routes first: no-show / cancel -> WF-08, reschedule -> WF-03. Workflows never move Sales stages. Draft v5 unpublished."
+      "copy": "Outcome router. Inbound webhook from Force (trigger ryJLJ1McWWOHlAvBRsI3; URL is UI-only, paste into Force GHL_WF05_WEBHOOK_URL). Reads opportunity.sale_outcome_v2 and routes: SOLD + new -> WF-06; SOLD renewal -> WF-09; AD -> WF-07; MUT -> WF-11; MAR drops. appt_status routes first: no-show / cancel -> WF-08, reschedule -> WF-03. Workflows never move Sales stages. Ad-platform CAPI / Google (old WF-13) is dropped from v2. Draft v5 unpublished."
     },
     {
       "n": "06",
@@ -4043,7 +4043,7 @@
     },
     {
       "n": "08",
-      "name": "No-show / cancel",
+      "name": "No-show / Cancel",
       "absorbs": "Cancelled Appts, Nurture: Missed",
       "copy": "No-show and cancel recovery. Reschedule never enters here. REMOVE-FROM-WF WF-03 -> SMS Rebook after miss (STOP) -> WAIT 7d -> SMS Rebook +7d -> ADD-TO-WF WF-09. The v2_status_noshow vs v2_status_cancelled tag split is not authored yet. Transactional; no quiet hours. Draft v3 unpublished."
     },
@@ -4067,15 +4067,9 @@
     },
     {
       "n": "12",
-      "name": "Call disposition",
+      "name": "Call Disposition",
       "absorbs": "4a, 4b, Contact Center Tag Assign",
       "copy": "Call disposition handler. Single graph keyed on channel (not clinic). Tags v2_source_phone (HuqiCRyopgdHESALDnKN). Native update-in-place; never remove-and-recreate the contact or opp. Per-disposition copy is not authored yet. Draft v2 unpublished."
-    },
-    {
-      "n": "13",
-      "name": "Native CAPI / Google",
-      "absorbs": "CAPI x2, Google Ads x3",
-      "copy": "Ad-platform conversions. Fires on Sales pipeline Booked and Won with sale_type=new only; excludes clinic pipes jRqb0pvexu04zSACPXmd, 9AZEt2Sw6Zv0nnJJmkE0, rspsjkBMNYGldN3R71ji. Tags v2_conv_won_new (fUVvRU2P4aQl1VKA7muT). Native Meta CAPI and Google Ads conversion nodes are not authored yet. Draft v2 unpublished."
     },
     {
       "n": "14",
@@ -4085,21 +4079,21 @@
     },
     {
       "n": "15",
-      "name": "PCC referral",
+      "name": "PCC Referral",
       "absorbs": "PCC Referral Lead Routing",
       "copy": "PCC referral routing. Fires on Contact Created with utm_source=pcc_qr, adds live tag pcc-referral, and re-enters WF-01 as a next-lander. 1-step named shell. Draft v2 unpublished."
     },
     {
       "n": "16",
-      "name": "IVR + chat widgets",
+      "name": "Comms Edge",
       "absorbs": "1. IVR - simultaneous, Chat OOO, Missed Call Text-Back",
       "copy": "Comms edge for inbound IVR +18663444955 and the two chat widgets (69337243d355bdcd9c27675e, 6952a8536682120c2b2656b9). Never creates a Sales opportunity; new contacts route to WF-01. 1-step named shell. Draft v2 unpublished."
     },
     {
       "n": "17",
-      "name": "Price calc",
+      "name": "Price Calculator",
       "absorbs": "06. Price Calculator (live, ported as-is)",
-      "copy": "Internal price calculator for consult copy. Reads price-calc component fields, computes contact.price_calc_result via a math_operation node, and tags v2_price_calc. Never writes opportunity.monetaryValue and never moves stages. Feeds WF-13's future Won-with-revenue conversion. 1-step named shell. Draft v2 unpublished."
+      "copy": "Internal price calculator for consult copy. Reads price-calc component fields, computes contact.price_calc_result via a math_operation node, and tags v2_price_calc. Never writes opportunity.monetaryValue and never moves stages. 1-step named shell. Draft v2 unpublished."
     }
   ],
   "pipelines": [

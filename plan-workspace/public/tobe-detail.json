@@ -1,7 +1,9 @@
 {
-  "_note": "Locked v2 spec. Rebuilt by plan-workspace/build_tobe_v2_detail.py from /workspace/to-be/wf-*.json. Do not hand-edit; re-run the script. Nothing in this file publishes or contacts GHL.",
+  "_note": "Locked v2 spec. Rebuilt by build_tobe_v2_detail.py from /workspace/to-be/wf-*.json. Do not hand-edit; re-run the script. Nothing in this file publishes or contacts GHL. Entries with dropped_from_v2=true are retained for generator compatibility but are hidden from the /to-be card grid.",
   "workflows": {
     "01": {
+      "name": "Lead Capture",
+      "job": "Enroll new next-lander contacts, create one Sales opportunity, stamp location and current clinic, and hand off to the non-booked burst.",
       "purpose": "First touch. Enrolls new next-lander contacts, create-once opens one Sales opportunity, stamps Method 2 clinic context, sends the welcome email and welcome SMS, then hands to WF-02 after 24 hours.",
       "diagram_key": "wf01",
       "trigger": {
@@ -141,6 +143,8 @@
       }
     },
     "02": {
+      "name": "Non-booked Recovery",
+      "job": "Follow-up burst for contacts that finished WF-01 but did not book. Excludes funnel_entry_* origins. Re-checks booking and routes stragglers to WF-09.",
       "purpose": "Non-booked recovery burst for contacts that finished WF-01 but did not book. Marketing / recovery: quiet hours apply.",
       "diagram_key": "wf02",
       "trigger": {
@@ -283,6 +287,8 @@
       ]
     },
     "03": {
+      "name": "Booking Confirmation + Reminders",
+      "job": "Confirm and remind booked appointments across the three consult calendars. Never marks a reschedule as no-show.",
       "purpose": "Confirm the appointment and send appointment-relative reminders across the three consult calendars. Transactional; no quiet hours.",
       "diagram_key": "preappt",
       "trigger": {
@@ -420,6 +426,8 @@
       ]
     },
     "04": {
+      "name": "Intake Chase",
+      "job": "Chase the intake survey for booked contacts. Exits as soon as the survey is submitted.",
       "purpose": "Chase the medical intake survey after a booking. Exits on submit.",
       "diagram_key": "preappt",
       "trigger": {
@@ -524,6 +532,8 @@
       ]
     },
     "05": {
+      "name": "Outcome Router",
+      "job": "Central router for sale_outcome and appt_status force writes. Reads the opportunity, tags v2_outcome_*, and routes to the correct downstream workflow. Never stage-moves and never fires on MAR.",
       "purpose": "Central router for Force outcome writes. Reads opportunity.sale_outcome_v2 and routes downstream. Workflows never move Sales stages here.",
       "diagram_key": "wf05",
       "trigger": {
@@ -652,7 +662,7 @@
         "status": "Draft v5 on staging shell 45a0f21e-244c-4d66-8ee1-232567662624. Unpublished."
       },
       "test": [
-        "Send test webhooks for each sale_outcome value. Confirm SOLD+new adds to WF-06 AND WF-13; SOLD renewal adds to WF-09; AD adds to WF-07; MUT adds to WF-11; MAR drops.",
+        "Send test webhooks for each sale_outcome value. Confirm SOLD+new adds to WF-06; SOLD renewal adds to WF-09; AD adds to WF-07; MUT adds to WF-11; MAR drops.",
         "Send appt_status=reschedule and confirm the router sends it to WF-03 (not WF-08).",
         "Confirm no workflow moves opp stages."
       ],
@@ -661,11 +671,12 @@
         "WF-07",
         "WF-08",
         "WF-09",
-        "WF-11",
-        "WF-13"
+        "WF-11"
       ]
     },
     "06": {
+      "name": "Onboarding",
+      "job": "Onboard SOLD new members. Sole writer of membership_status active and v2_status_active. Schedules WF-10 feedback and WF-14 ambassador at T+14 and T+21.",
       "purpose": "Onboard SOLD new members. Sole writer of contact.membership_status and tag v2_status_active. Schedules WF-10 feedback and WF-14 ambassador.",
       "diagram_key": "wf06",
       "trigger": {
@@ -773,6 +784,8 @@
       ]
     },
     "07": {
+      "name": "A&D",
+      "job": "Handle sale_outcome=AD contacts. Branches on ad_reason and tags v2_objection_*. No Meta pixel or CAPI fires here.",
       "purpose": "Handle sale_outcome=AD (Advise and Decline). Tag v2_outcome_ad, send the first logistics SMS, wait 35 days, hand to WF-09.",
       "diagram_key": "wf07-08",
       "trigger": {
@@ -866,6 +879,8 @@
       ]
     },
     "08": {
+      "name": "No-show / Cancel",
+      "job": "Handle appt_status=no-show and appt_status=cancel only. Reschedule never enters. Drops the contact from WF-03 and re-checks booking.",
       "purpose": "Handle no-show and cancel. Reschedule never enters. Drops the contact from WF-03 reminders and tries to rebook.",
       "diagram_key": "wf07-08",
       "trigger": {
@@ -968,6 +983,8 @@
       ]
     },
     "09": {
+      "name": "Nurture",
+      "job": "Long-tail nurture. Also owns the renewal_date contact-field trigger. The renewal sub-flow is blocked until backfill is complete.",
       "purpose": "Long-tail nurture. Also owns the renewal_date contact-field sub-flow, which is blocked at the trigger until backfill lands.",
       "diagram_key": "retention",
       "trigger": {
@@ -1070,6 +1087,8 @@
       ]
     },
     "10": {
+      "name": "Feedback",
+      "job": "Ask for member feedback and store the score on contact.latest_feedback_score only. No other field writes.",
       "purpose": "Ask for member feedback and store the score on contact.latest_feedback_score. Sole writer of that field.",
       "diagram_key": "retention",
       "trigger": {
@@ -1161,6 +1180,8 @@
       ]
     },
     "11": {
+      "name": "Compliance",
+      "job": "Sole writer of sms_consent_status and DND state. Owns v2_status_dnd, v2_email_bounced, v2_bad_number. Not a middleware.",
       "purpose": "Compliance and errors. Sole writer of DND and contact.sms_consent_status. STOP inbound plus a MUT front-gate so MUT routing does not get treated like a STOP.",
       "diagram_key": "support",
       "trigger": {
@@ -1249,6 +1270,8 @@
       ]
     },
     "12": {
+      "name": "Call Disposition",
+      "job": "Single call-disposition graph, keyed on channel not clinic. Tags v2_source_phone. No remove-and-recreate pattern.",
       "purpose": "Single call-disposition graph. Keyed on channel, not clinic. Tags v2_source_phone. Never remove-and-recreate a contact or opp.",
       "diagram_key": "wf12",
       "trigger": {
@@ -1334,6 +1357,8 @@
       ]
     },
     "13": {
+      "name": "Native CAPI / Google",
+      "job": "Fire native Meta CAPI and Google conversion events on Sales pipeline Booked and Won, sale_type=new only. Does not fire on the clinic pipelines.",
       "purpose": "Fire native Meta CAPI and Google Ads conversion events on Sales pipeline Booked and Won, sale_type=new only. Not the clinic pipes.",
       "diagram_key": "support",
       "trigger": {
@@ -1408,9 +1433,12 @@
       ],
       "depends_on": [
         "WF-05"
-      ]
+      ],
+      "dropped_from_v2": true
     },
     "14": {
+      "name": "Ambassador",
+      "job": "Ambassador referral flow. Referred person is created as a new contact and is never merged with the referrer. Re-enters WF-01. Uses the live ambassador-referral tag.",
       "purpose": "Ambassador referral. The referred contact is created as a new contact (never merged) and re-enters WF-01. Live tag ambassador-referral.",
       "diagram_key": "support",
       "trigger": {
@@ -1492,6 +1520,8 @@
       ]
     },
     "15": {
+      "name": "PCC Referral",
+      "job": "PCC QR referral flow. Enrolls on utm_source=pcc_qr and adds the live pcc-referral tag, then re-enters WF-01.",
       "purpose": "PCC QR referral. utm_source=pcc_qr contacts get the live tag pcc-referral and re-enter WF-01 as new next-lander leads.",
       "diagram_key": "support",
       "trigger": {
@@ -1558,6 +1588,8 @@
       ]
     },
     "16": {
+      "name": "Comms Edge",
+      "job": "Handles inbound IVR calls to +18663444955 and the two chat widgets. Does not create Sales opportunities.",
       "purpose": "Comms edge. Inbound IVR +18663444955 and the two chat widgets. No Sales opportunity is created here.",
       "diagram_key": "support",
       "trigger": {
@@ -1644,6 +1676,8 @@
       ]
     },
     "17": {
+      "name": "Price Calculator",
+      "job": "Internal price math for downstream copy. Never writes opportunity.monetaryValue. Tags v2_price_calc when done. This is WF-17, not a WF-06 variant.",
       "purpose": "Internal price calculator for consult copy. Never writes opportunity.monetaryValue. Tags v2_price_calc when done.",
       "diagram_key": "wf17",
       "trigger": {
@@ -1708,9 +1742,7 @@
         "Change price-calc component fields on a test contact and confirm contact.price_calc_result is computed and v2_price_calc lands.",
         "Confirm opportunity.monetaryValue is untouched."
       ],
-      "depends_on": [
-        "WF-13 (later, once ad platforms consume revenue)"
-      ]
+      "depends_on": []
     }
   }
 }

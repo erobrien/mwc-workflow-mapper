@@ -4003,13 +4003,13 @@
       "n": "01",
       "name": "Lead Capture",
       "absorbs": "01A-E + Form Internal Notification",
-      "copy": "First touch. Enrolls Contact Created + tag next-lander only; no source filter. Create-once opens a Sales opportunity on staging pipe ASnpfhu1hpSHUv0IFLc7, Method 2 stamps the four current_clinic_* fields for the correct slug (richmond, virginia-beach, newport-news), sends the welcome email (native template j7C8MVs6cAIuH5zPUjzH) and welcome SMS with Reply STOP, then hands to WF-02 after WAIT 24 hour. Transactional; no quiet hours. Draft v10 unpublished."
+      "copy": "First touch. Enrolls Contact Created + tag next-lander only; no source filter. Create-once opens a Sales opportunity on staging pipe ASnpfhu1hpSHUv0IFLc7, Method 2 stamps the four current_clinic_* fields for the correct slug (richmond, virginia-beach, newport-news), sends the welcome email (native template j7C8MVs6cAIuH5zPUjzH) and welcome SMS with Reply STOP, then hands to WF-02 after WAIT 24 hour. Transactional; no quiet hours. Draft v12 unpublished (restored from v10 on 2026-08-21 PT after a stub overwrite)."
     },
     {
       "n": "02",
       "name": "Non-booked Recovery",
       "absorbs": "02. NON BOOKED NEWLEADS",
-      "copy": "Non-booked recovery. Enrolled only via ADD-TO-WF from WF-01. Burst is SMS +3m / +1m / +5m / +15m, EMAIL EML | WF-02 | Non-booked 24h (bPj39XTcKv2HylGKEUdG), SMS +36h, then ADD-TO-WF WF-09. Marketing / recovery: 08:00-21:00 contact TZ, 7 days. Draft v4 unpublished."
+      "copy": "Non-booked recovery. Enrolled only via ADD-TO-WF from WF-01. Burst is SMS +3m / +1m / +5m / +15m, EMAIL EML | WF-02 | Non-booked 24h (bPj39XTcKv2HylGKEUdG), SMS +36h, then ADD-TO-WF WF-09. Marketing / recovery: 08:00-21:00 contact TZ, 7 days. Draft v9 unpublished (restored from v4 on 2026-08-21 PT after a stub overwrite)."
     },
     {
       "n": "03",
@@ -4027,7 +4027,7 @@
       "n": "05",
       "name": "Outcome Router",
       "absorbs": "05. Clinic Appt Outcome",
-      "copy": "Outcome router. Inbound webhook from Force (trigger ryJLJ1McWWOHlAvBRsI3; URL is UI-only, paste into Force GHL_WF05_WEBHOOK_URL). Reads opportunity.sale_outcome_v2 and routes: SOLD + new -> WF-06; SOLD renewal -> WF-09; AD -> WF-07; MUT -> WF-11; MAR drops. appt_status routes first: no-show / cancel -> WF-08, reschedule -> WF-03. Workflows never move Sales stages. Ad-platform CAPI / Google (old WF-13) is dropped from v2. Draft v5 unpublished."
+      "copy": "Outcome router. Inbound webhook from Force (trigger ryJLJ1McWWOHlAvBRsI3; URL is UI-only, paste into Force GHL_WF05_WEBHOOK_URL). GHL shell name is null. Reads opportunity.sale_outcome_v2 and routes: SOLD + new -> WF-06 and still WF-13 (GHL router truth; site cards hide WF-13); SOLD renewal -> WF-09; AD -> WF-07; MUT -> WF-11; MAR drops. appt_status routes first: no-show / cancel -> WF-08, reschedule -> WF-03. Workflows never move Sales stages. Draft v5 unpublished."
     },
     {
       "n": "06",
@@ -4045,7 +4045,7 @@
       "n": "08",
       "name": "No-show / Cancel",
       "absorbs": "Cancelled Appts, Nurture: Missed",
-      "copy": "No-show and cancel recovery. Reschedule never enters here. REMOVE-FROM-WF WF-03 -> SMS Rebook after miss (STOP) -> WAIT 7d -> SMS Rebook +7d -> ADD-TO-WF WF-09. The v2_status_noshow vs v2_status_cancelled tag split is not authored yet. Transactional; no quiet hours. Draft v3 unpublished."
+      "copy": "No-show and cancel recovery. Reschedule never enters here. REMOVE-FROM-WF WF-03 -> IF appt_status = no-show -> v2_status_noshow (no-show) or v2_status_cancelled (cancel) -> SMS Rebook after miss (STOP) -> WAIT 7d -> SMS Rebook +7d -> ADD-TO-WF WF-09. Both statuses still share a single rebook cadence. Transactional; no quiet hours. Draft v4 unpublished."
     },
     {
       "n": "09",

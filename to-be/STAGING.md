@@ -1,8 +1,16 @@
 # to-be/STAGING.md - unpublished staging drafts
 
-Snapshot 2026-08-20 PT of the staging drafts that correspond to
+Snapshot 2026-08-21 PT of the staging drafts that correspond to
 `to-be/wf-01.json` through `to-be/wf-17.json`. All 17 workflows are
-`status: draft`. Published in this folder: none.
+`status: draft` (unpublished). Published in this folder: none.
+
+WF-01 and WF-02 were **restored** on 2026-08-21 PT after a stub
+overwrite blew away their graphs: WF-01 was rebuilt from v10 into
+v12 (38 named steps, 1 SMS, 1 email) and WF-02 was rebuilt from v4
+into v9 (12 named steps, 5 SMS, 1 email). Both restores landed as
+unpublished drafts. Nothing has been published as part of this
+restore. Do not confuse the WF-13 hide on the site cards with the
+GHL router truth: WF-05 v5 still ADD-TO-WF WF-13 on SOLD + new.
 
 ## Location
 
@@ -27,14 +35,14 @@ Snapshot 2026-08-20 PT of the staging drafts that correspond to
 
 | Spec file | Staging draft name | Staging draft ID | Draft version | Summary |
 | --- | --- | --- | --- | --- |
-| `wf-01.json` | WF-01 Lead Capture and Attribution | `869782c6-00d6-4349-ab6e-4e0f2a98bd04` | v10 | trigger + find/create-once + slug stamps + welcome email + STOP SMS + 24h + WF-02; window=None (transactional) |
-| `wf-02.json` | WF-02 Non-Booked Recovery | `5f973b3c-0375-4fc0-ace2-e13d1a1976b9` | v4 | SMS +3m/+1m/+5m/+15m + EML | WF-02 | Non-booked 24h + SMS 36h; ADD-TO-WF WF-09; window 08:00-21:00 contact TZ |
-| `wf-03.json` | WF-03 Booking Confirmation and Reminders | `ec08cae5-3d1f-48bd-9a0d-444626d9a150` | v7 | 3 appointment triggers + tag v2_status_booked + confirm email + confirm SMS + appointment-relative reminders T-3d (EMAIL + SMS) / T-1d / T-5h / T-2h; window=None (transactional) |
-| `wf-04.json` | WF-04 Medical Intake Chase | `4854e1cf-492d-4da8-ba23-5c14a4d04229` | v3 | wait 4h + SMS Intake +4h (STOP) + wait 20h + SMS Intake +20h; window=None (transactional) |
-| `wf-05.json` | WF-05 Clinic Outcome Router | `45a0f21e-244c-4d66-8ee1-232567662624` | v5 | inbound_webhook + sale_outcome_v2 router; SOLD new also ADD-TO-WF WF-13 |
-| `wf-06.json` | WF-06 Post-Visit Won and Onboarding | `5d036b8a-4336-47c8-9ebe-77f3439bc95c` | v3 | tag v2_status_active + SMS Welcome after SOLD (STOP) + 3d/7d/14d/21d check-in forks (still empty); window=None (transactional) |
-| `wf-07.json` | WF-07 A&D / Post-Visit No-Sale Nurture | `01ca0908-36cf-456c-aa1d-04c999e0a598` | v3 | tag v2_outcome_ad + SMS After AD first touch + 35d + ADD-TO-WF WF-09; window=None (transactional) |
-| `wf-08.json` | WF-08 No-Show and Cancel Recovery | `d35d04ac-0042-4e33-95dd-9253b2847bdf` | v3 | REMOVE-FROM-WF WF-03 + SMS Rebook after miss + 7d + SMS Rebook +7d + ADD-TO-WF WF-09; window=None (transactional) |
+| `wf-01.json` | WF-01 Lead Capture and Attribution | `869782c6-00d6-4349-ab6e-4e0f2a98bd04` | v12 (restored from v10) | 38 steps / 1 SMS / 1 email. Create-once Sales + Method 2 stamps for richmond / virginia-beach / newport-news + welcome email (j7C8MVs6cAIuH5zPUjzH) + STOP SMS + WAIT 24h + ADD-TO-WF WF-02. Trigger: Contact Created + tag next-lander only. window=None (transactional) |
+| `wf-02.json` | WF-02 Non-Booked Recovery | `5f973b3c-0375-4fc0-ace2-e13d1a1976b9` | v9 (restored from v4) | 12 steps / 5 SMS / 1 email. SMS burst at +3m / +1m / +5m / +15m + EML \| WF-02 \| Non-booked 24h (bPj39XTcKv2HylGKEUdG) + SMS +36h + ADD-TO-WF WF-09. window 08:00-21:00 contact TZ |
+| `wf-03.json` | WF-03 Booking Confirmation and Reminders | `ec08cae5-3d1f-48bd-9a0d-444626d9a150` | v7 | 15 steps / 5 SMS / 2 emails. 3 appointment triggers + REMOVE-FROM-WF WF-02 + tag v2_status_booked + confirm email + confirm SMS + WAIT 1h + ADD-TO-WF WF-04 + appointment-relative T-3d (EMAIL + SMS) / T-1d / T-5h / T-2h. window=None (transactional) |
+| `wf-04.json` | WF-04 Medical Intake Chase | `4854e1cf-492d-4da8-ba23-5c14a4d04229` | v3 | 4 steps / 2 SMS / 0 email. WAIT 4h + SMS Intake +4h (STOP) + WAIT 20h + SMS Intake +20h. window=None (transactional) |
+| `wf-05.json` | WF-05 Clinic Outcome Router | `45a0f21e-244c-4d66-8ee1-232567662624` | v5 | 48 steps / 0 SMS / 0 email. GHL shell name is null. inbound_webhook (ryJLJ1McWWOHlAvBRsI3) + appt_status router (no-show / cancel → WF-08; reschedule → WF-03) + sale_outcome_v2 router (SOLD + new → WF-06 **and** WF-13 [still fires in GHL]; SOLD renewal → WF-09; AD → WF-07; MUT → WF-11; MAR drops). Site cards hide WF-13 (dropped_from_v2); GHL router still enrolls WF-13. |
+| `wf-06.json` | WF-06 Post-Visit Won and Onboarding | `5d036b8a-4336-47c8-9ebe-77f3439bc95c` | v3 | 8 steps / 1 SMS / 0 email. Tag v2_status_active + SMS Welcome after SOLD (STOP) + 3d/7d/14d waits + ADD-TO-WF WF-10 at T+14 + 21d wait + ADD-TO-WF WF-14 at T+21. Check-in copy between the 3d/7d/14d/21d waits is not authored yet. window=None (transactional) |
+| `wf-07.json` | WF-07 A&D / Post-Visit No-Sale Nurture | `01ca0908-36cf-456c-aa1d-04c999e0a598` | v3 | 4 steps / 1 SMS / 0 email. Tag v2_outcome_ad + SMS After AD first touch (STOP) + WAIT 35d + ADD-TO-WF WF-09. window=None (transactional) |
+| `wf-08.json` | WF-08 No-Show and Cancel Recovery | `d35d04ac-0042-4e33-95dd-9253b2847bdf` | v4 | 8 steps / 2 SMS / 0 email. REMOVE-FROM-WF WF-03 + IF appt_status=no-show → v2_status_noshow else v2_status_cancelled + SMS Rebook after miss (STOP) + WAIT 7d + SMS Rebook +7d + ADD-TO-WF WF-09. window=None (transactional) |
 | `wf-09.json` | WF-09 Long-Term Nurture | `cbc14e90-4507-42cd-afcc-f7410d7f4554` | v2 | wait 120d |
 | `wf-10.json` | WF-10 Feedback Survey | `37b1202a-5397-4e08-92da-bb638c862a2a` | v3 | SMS Feedback invite + EML | WF-10 | Feedback invite + WAIT 3d + SMS nudge; window 08:00-21:00 contact TZ (marketing) |
 | `wf-11.json` | WF-11 Compliance and Errors | `9aab45f8-6f5b-467a-9f05-6981446c48f2` | v4 | IF sale_outcome_v2=MUT front-gate (true=MUT suppress only; false=STOP path); dnd_contact inbound (STOP) + REMOVE all + DND disable outbound + tag v2_status_dnd + sms_consent_status=opted_out + SMS STOP confirm; window=None (transactional) |
@@ -45,7 +53,7 @@ Snapshot 2026-08-20 PT of the staging drafts that correspond to
 | `wf-16.json` | WF-16 Comms Edge | `e68037b4-a8a2-427e-ba1c-8741ea615a3f` | v2 | 1-step named shell |
 | `wf-17.json` | WF-17 Price Calculator | `e5fbb7f4-7fe6-4adf-8bf3-957c395a8495` | v2 | 1-step named shell |
 
-## WF-01 (draft v10)
+## WF-01 (draft v12; restored from v10 on 2026-08-21 PT)
 
 - Trigger `TRX0iF7txst2FcmA2odq`: `contact_created` + Has Tag
   `next-lander`. GHL stores `trigger.active=true`; the fire-stop is the
@@ -74,12 +82,22 @@ Snapshot 2026-08-20 PT of the staging drafts that correspond to
   | `newport-news` | `827 Diligence Drive Suite 206` | `(757) 806-6263` | `https://book.menswellnesscenters.com/newport-news` | `605398627804676801` |
 
 - After the stamp arms, on the create path only, the draft now sends:
-  - `EMAIL` welcome using native template
+  - `EMAIL: Welcome after first capture (WF-01)` using native template
     `j7C8MVs6cAIuH5zPUjzH` (`EML | WF-01 | Welcome`).
-  - `SMS` welcome (inline) that carries the `STOP` opt-out.
+  - `SMS: Speed-to-lead first touch + STOP (WF-01)` (inline) that
+    carries the `STOP` opt-out.
   - Send window: `None` (transactional; no quiet hours).
-- Then `WAIT 24 hour` (GHL unit is singular `hour`, not `hours`) ->
-  `ADD-TO-WF` WF-02 `5f973b3c-0375-4fc0-ace2-e13d1a1976b9`.
+- Then `WAIT: 24h then hand unbooked to WF-02` (GHL unit is singular
+  `hour`, not `hours`) -> `ADD: Enroll WF-02 (unbooked 24h)`
+  `5f973b3c-0375-4fc0-ace2-e13d1a1976b9`.
+- v12 total: 38 named steps, 1 SMS, 1 email. Trigger is Contact
+  Created + Has Tag `next-lander` only. GHL stores
+  `trigger.active=true`; the fire-stop is `status=draft`.
+- Restore note: v11 was overwritten as a 2-step stub. v12 rebuilds
+  the graph from the v10 snapshot with the Method 2 stamp arms
+  (address, phone, booking_url, review_link) for all three slugs,
+  the `opportunity.location` slug-to-label writes, and the create-once
+  Sales guard. Do not publish.
 
 Method 2 contact field IDs on staging (unchanged from the prior
 snapshot):
@@ -95,16 +113,19 @@ Tag `next-lander` on staging: `EA2hrrIHTrlFvEEt6RzH`. Do not rename.
 Opportunity field `opportunity.location XbaJOEsDwgxMtudnj5IG` display
 labels stay unchanged while 2bv2 is published.
 
-## WF-02 (draft v4)
+## WF-02 (draft v9; restored from v4 on 2026-08-21 PT)
 
 - No trigger on the shell. Enrollment is `ADD-TO-WF` from WF-01 only.
-- Graph: `SMS +3m` (inline) -> `WAIT 3m` -> `WAIT 1m` -> `SMS +1m`
-  (inline) -> `WAIT 5m` -> `SMS +5m` (inline) -> `WAIT 15m` ->
-  `SMS +15m` (inline) -> `EMAIL` using native template
+- Graph: `SMS +3m` (inline; STOP) -> `WAIT 3m` -> `WAIT 1m` ->
+  `SMS +1m` (inline) -> `WAIT 5m` -> `SMS +5m` (inline) ->
+  `WAIT 15m` -> `SMS +15m` (inline) -> `EMAIL` using native template
   `bPj39XTcKv2HylGKEUdG` (`EML | WF-02 | Non-booked 24h`) ->
   `WAIT 12h` -> `SMS 36h` (inline) -> `ADD-TO-WF` WF-09
   `cbc14e90-4507-42cd-afcc-f7410d7f4554`.
+- v9 total: 12 named steps, 5 SMS, 1 email.
 - Send window: `08:00-21:00` contact timezone (marketing / recovery).
+- Restore note: v5-v8 were overwritten as a stub. v9 rebuilds the
+  burst from the v4 snapshot. Do not publish.
 
 ## WF-03 (draft v7)
 
@@ -213,14 +234,18 @@ labels stay unchanged while 2bv2 is published.
 - Send window: `None` (transactional; no quiet hours). Nothing
   published.
 
-## WF-08 (draft v3)
+## WF-08 (draft v4)
 
 - Graph: `REMOVE-FROM-WF` WF-03
-  `ec08cae5-3d1f-48bd-9a0d-444626d9a150` -> `SMS Rebook after miss`
-  (inline; carries `STOP` opt-out) -> `WAIT 7d` -> `SMS Rebook +7d`
-  (inline) -> `ADD-TO-WF` WF-09 `cbc14e90-4507-42cd-afcc-f7410d7f4554`.
-- No `v2_appt_no_show` / `v2_appt_cancel` tag split authored yet;
-  the graph is a single lane covering both `appt_status` values.
+  `ec08cae5-3d1f-48bd-9a0d-444626d9a150` ->
+  `IF appt_status = no-show` -> `ADD-TAG v2_status_noshow`
+  (no-show branch) / `ADD-TAG v2_status_cancelled` (cancel branch) ->
+  `SMS Rebook after miss` (inline; carries `STOP` opt-out) ->
+  `WAIT 7d` -> `SMS Rebook +7d` (inline) -> `ADD-TO-WF` WF-09
+  `cbc14e90-4507-42cd-afcc-f7410d7f4554`.
+- v4 total: 8 named steps, 2 SMS, 0 email.
+- The no-show / cancelled tag split now lives on the shell. Both
+  `appt_status` values still funnel into the same rebook cadence.
 - Send window: `None` (transactional; no quiet hours). Nothing
   published.
 
@@ -292,8 +317,8 @@ appears in parentheses; some tags exist for future use only):
 - `v2_outcome_sold` (WF-05)
 - `v2_outcome_ad` (WF-05)
 - `v2_outcome_mut` (WF-05)
-- `v2_status_noshow` (WF-05 / WF-08 target)
-- `v2_status_cancelled` (WF-05 / WF-08 target)
+- `v2_status_noshow` (WF-08 no-show branch; WF-05 tail-audit target)
+- `v2_status_cancelled` (WF-08 cancel branch; WF-05 tail-audit target)
 - `v2_status_dnd` (WF-11)
 - `v2_email_bounced` (WF-11)
 - `v2_bad_number` (WF-11 / WF-12)

@@ -15,7 +15,14 @@ import json
 import re
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
+_HERE = Path(__file__).resolve().parent
+# Support the two historic install paths: repo root, or plan-workspace/.
+if (_HERE / "to-be").is_dir():
+    REPO_ROOT = _HERE
+elif (_HERE.parent / "to-be").is_dir():
+    REPO_ROOT = _HERE.parent
+else:  # last-ditch — original layout expected sibling to plan-workspace/
+    REPO_ROOT = _HERE.parents[1]
 TOBE = REPO_ROOT / "to-be"
 PW_PUBLIC = REPO_ROOT / "plan-workspace" / "public"
 

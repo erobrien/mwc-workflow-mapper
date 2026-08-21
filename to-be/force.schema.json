@@ -169,8 +169,8 @@
         "properties": {
           "target": {
             "type": "string",
-            "enum": ["WF-05"],
-            "description": "Downstream native workflow that Force pokes via webhook."
+            "enum": ["WF-05", "Curve"],
+            "description": "Downstream system that Force pokes via webhook. WF-05 is the native GHL inbound-webhook router. Curve is the conversion-events endpoint at curvecompliance.com."
           },
           "when": {
             "type": "array",
@@ -180,7 +180,7 @@
               "type": "string",
               "enum": ["SOLD", "AD", "MUT"]
             },
-            "description": "The sale_outcome values that fire the webhook. MAR does not fire."
+            "description": "The sale_outcome values that fire the webhook. MAR does not fire. Force fires WF-05 on SOLD | AD | MUT and fires Curve on SOLD only (the SOLD conversion event)."
           },
           "method": {
             "type": "string",
@@ -189,15 +189,125 @@
           },
           "url_env": {
             "type": "string",
-            "description": "Environment variable name in Force config that carries the WF-05 inbound-webhook URL. The URL itself is UI-only on the WF-05 draft; do not invent it."
+            "description": "Environment variable name in Force config that carries the endpoint URL. The URL itself is not stored in this repo; do not invent it (WF-05 URL is UI-only on the draft; Curve URL is provided by Curve at cutover)."
+          },
+          "event": {
+            "type": "string",
+            "enum": ["lead", "booked", "SOLD"],
+            "description": "Optional. Used only for Curve entries; names the locked conversion event this fire represents."
           },
           "notes": {
             "type": "string",
-            "description": "Free-form notes on the webhook contract (payload shape, idempotency stamp, retries)."
+            "description": "Free-form notes on the webhook contract (idempotency stamp, retries, payload ownership). Do not invent Curve payload / field names in this repo."
           }
         }
       },
-      "description": "Native routing hand-offs Force triggers after it writes."
+      "description": "Hand-offs Force triggers after it writes. Native WF-05 routing and the Curve SOLD conversion event."
+    },
+    "conversion_events": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["owner", "events", "ghl_role"],
+      "properties": {
+        "owner": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Owning system for conversion events (Curve Compliance)."
+        },
+        "events": {
+          "type": "array",
+          "minItems": 3,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["event", "writer", "on"],
+            "properties": {
+              "event": {
+                "type": "string",
+                "enum": ["lead", "booked", "SOLD"],
+                "description": "Locked event set."
+              },
+              "writer": {
+                "type": "string",
+                "enum": ["booking app", "Force"],
+                "description": "System that POSTs the event to Curve. GHL workflows never POST to Curve."
+              },
+              "on": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Trigger point for this event (for example \"contact create (WF-01 path)\", \"appointment created\", \"consult SOLD (Force + dollars)\")."
+              },
+              "notes": {
+                "type": "string",
+                "description": "Optional per-event notes."
+              }
+            }
+          }
+        },
+        "ghl_role": {
+          "type": "string",
+          "minLength": 1,
+          "description": "One-line statement of what GHL does and does not do here. GHL workflows do not POST to Curve and do not fire CAPI. WF-13 stays dropped."
+        }
+      },
+      "description": "Locked Curve conversion-events contract. Native GHL is not in this path."
+    },
+    "cutover_sequence": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["step", "system", "note"],
+        "properties": {
+          "step": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Ordered step number."
+          },
+          "system": {
+            "type": "string",
+            "minLength": 1,
+            "description": "System going live at this step (for example \"Curve Compliance (curvecompliance.com)\" or \"New GHL folder\")."
+          },
+          "when": {
+            "type": "string",
+            "description": "Free-form target timing (for example \"target next week\", \"after Curve is live\"). Do not encode absolute dates that need re-editing."
+          },
+          "note": {
+            "type": "string",
+            "minLength": 1,
+            "description": "One-line lock note for this step."
+          }
+        }
+      },
+      "description": "Cutover order. Curve goes first; the new GHL folder publishes after Curve is live. This repo never publishes."
+    },
+    "ghl_source_scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "keeps": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 },
+          "description": "Coarse ops signals GHL still tracks (for example \"next-lander vs wordpress-form\", \"clinic slug\")."
+        },
+        "drops_to_curve": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 },
+          "description": "Attribution facets that live in Curve, not in GHL (for example UTM, gclid, fbc, fbp, wbraid, gbraid)."
+        },
+        "note": {
+          "type": "string",
+          "description": "Free-form scope note."
+        }
+      },
+      "description": "Scope split between GHL (coarse ops source) and Curve (attribution)."
     },
     "native_ghl_rule": {
       "type": "object",

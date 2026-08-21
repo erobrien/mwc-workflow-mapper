@@ -170,29 +170,34 @@
       "reason": "Live tags; never rename or write from Force."
     },
     {
-      "field": "opportunity.source",
-      "owner": "Curve (TBD)",
-      "reason": "Attribution is being redesigned around Curve Compliance (curvecompliance.com) after the MWC acquisition. Force must not write attribution. Owner and field shape are intentionally left as a hole in this contract."
+      "field": "opportunity.source (fine-grained)",
+      "owner": "Curve Compliance",
+      "reason": "Attribution ownership is locked to Curve Compliance (curvecompliance.com). GHL keeps only coarse ops source (next-lander vs wordpress-form) plus the clinic slug. Force must not write fine-grained attribution."
     },
     {
       "field": "opportunity.utm_* (utm_source, utm_medium, utm_campaign, utm_content, utm_term)",
-      "owner": "Curve (TBD)",
-      "reason": "Attribution redesign hole. Do not invent Curve field names here."
+      "owner": "Curve Compliance",
+      "reason": "Attribution lives in Curve. Do not copy UTM onto the Opportunity. Do not invent Curve field names here."
     },
     {
       "field": "opportunity click IDs (fbc, fbp, gclid, wbraid, gbraid, msclkid, ttclid)",
-      "owner": "Curve (TBD)",
-      "reason": "Attribution redesign hole. Do not invent Curve field names here."
+      "owner": "Curve Compliance",
+      "reason": "Attribution lives in Curve. Do not copy click IDs onto the Opportunity. Do not invent Curve field names here."
     },
     {
       "field": "contact.utm_* / contact click IDs",
-      "owner": "Curve (TBD)",
-      "reason": "Attribution redesign hole. Force never writes attribution on the contact either."
+      "owner": "Curve Compliance",
+      "reason": "Attribution lives in Curve. Force never writes attribution on the contact either."
     },
     {
       "field": "opportunity.location",
       "owner": "WF-01 (display label from slug)",
       "reason": "WF-01 copies the display label from the slug. Force does not overwrite location."
+    },
+    {
+      "field": "Curve conversion events (lead, booked, SOLD)",
+      "owner": "booking app (lead, booked) + Force (SOLD)",
+      "reason": "GHL workflows do NOT POST to Curve and do NOT fire CAPI. WF-13 stays dropped. Force is the SOLD writer to Curve; the booking app writes lead + booked. See conversion_events."
     }
   ],
   "enums": {
@@ -218,15 +223,74 @@
       "method": "POST",
       "url_env": "GHL_WF05_WEBHOOK_URL",
       "notes": "The WF-05 inbound-webhook URL is UI-only on the WF-05 draft (trigger id ryJLJ1McWWOHlAvBRsI3). Paste it into Force config as GHL_WF05_WEBHOOK_URL; do not invent it and it is not returned by the JWT GET. MAR does not fire. Force POSTs only after opportunity.outcome_processed_at is stamped so retries are idempotent. Payload carries contact_id, sale_outcome, sale_type, appt_status, ad_reason."
+    },
+    {
+      "target": "Curve",
+      "when": ["SOLD"],
+      "method": "POST",
+      "url_env": "CURVE_CONVERSION_URL",
+      "event": "SOLD",
+      "notes": "Locked SOLD conversion event to Curve Compliance. Fires alongside the WF-05 hand-off; both are gated on opportunity.outcome_processed_at so retries are idempotent. Endpoint URL and payload shape are provided by Curve at cutover; do not invent Curve field names or a click-ID scheme in this repo. GHL workflows do NOT POST to Curve and do NOT fire CAPI."
     }
   ],
+  "conversion_events": {
+    "owner": "Curve Compliance",
+    "events": [
+      {
+        "event": "lead",
+        "writer": "booking app",
+        "on": "contact create (WF-01 path)",
+        "notes": "Fired by the booking app when a new lead is created on the WF-01 path. Not fired from GHL."
+      },
+      {
+        "event": "booked",
+        "writer": "booking app",
+        "on": "appointment created",
+        "notes": "Fired by the booking app on appointment creation. Not fired from GHL."
+      },
+      {
+        "event": "SOLD",
+        "writer": "Force",
+        "on": "consult SOLD (Force + dollars)",
+        "notes": "Fired by Force alongside the GHL_WF05_WEBHOOK_URL hand-off, only after opportunity.outcome_processed_at is stamped."
+      }
+    ],
+    "ghl_role": "GHL workflows do NOT POST to Curve and do NOT fire CAPI. WF-13 stays dropped. GHL only keeps coarse ops source (next-lander vs wordpress-form) plus the clinic slug."
+  },
+  "cutover_sequence": [
+    {
+      "step": 1,
+      "system": "Curve Compliance (curvecompliance.com)",
+      "when": "target next week",
+      "note": "Curve goes live first. The booking app starts firing lead + booked to Curve; Force starts firing SOLD to Curve. GHL is not publishing at this step."
+    },
+    {
+      "step": 2,
+      "system": "New GHL folder (drafts in staging zHKH8aRDdNq47oYmdsN1, folder 6039c39d-f82d-4518-998c-749fb1ae57d1)",
+      "when": "after Curve is live",
+      "note": "Publish the new GHL folder only after Curve is live. This PR is NOT a GHL publish. Nothing in this repo publishes."
+    }
+  ],
+  "ghl_source_scope": {
+    "keeps": [
+      "coarse ops source (next-lander vs wordpress-form)",
+      "clinic slug (richmond | virginia-beach | newport-news)"
+    ],
+    "drops_to_curve": [
+      "UTM (utm_source, utm_medium, utm_campaign, utm_content, utm_term)",
+      "click IDs (fbc, fbp, gclid, wbraid, gbraid, msclkid, ttclid)",
+      "fine-grained lead source and touch history"
+    ],
+    "note": "GHL is left with coarse ops signals only. Attribution ownership is Curve. Do not copy attribution onto the Opportunity from any GHL workflow."
+  },
   "native_ghl_rule": {
     "statement": "Native GHL is the law. Force is a writer on the Sales opportunity via the public GHL API; nothing routes, tags, or messages outside native GHL workflows.",
     "must_not": [
       "No custom_code actions anywhere in the graph.",
       "No new Supabase tables or Islam-style server functions.",
       "Force must never create a contact, appointment, or opportunity.",
-      "Force must never write marketing attribution (source / UTM / click IDs). Attribution is being redesigned around Curve Compliance; owner is TBD.",
+      "Force must never write marketing attribution (source / UTM / click IDs) onto the Opportunity or Contact. Attribution ownership is locked to Curve Compliance.",
+      "GHL workflows must never POST to Curve and must never fire CAPI. WF-13 stays dropped.",
       "Force must never rename or remove live tags (next-lander, LOC_TAGS, sms-consent, engine tags, funnel_entry_*, location_*).",
       "Force must never move opportunity stages on any pipeline other than Sales Lead to Close.",
       "Nothing in this repo publishes. Drafts only. Production is read-only."
@@ -238,7 +302,10 @@
     "notes": "Force is not yet live with the canonical clinic slugs. mwc-force / mwc-admin still carry the historical slug set; the cut-over to richmond | virginia-beach | newport-news is pending. Do not invent additional clinic slugs (the two unnamed clinics are not named here)."
   },
   "notes": [
-    "Attribution redesign: after the MWC acquisition of Curve Compliance (curvecompliance.com), the marketing-attribution model on the Opportunity is being reworked. This contract intentionally leaves attribution as a hole. Force does not write attribution. WF-01 does not (yet) claim ownership of attribution copy either; the writer is TBD (Curve).",
+    "Attribution ownership is locked to Curve Compliance (curvecompliance.com) after the MWC acquisition. Force does not write attribution. WF-01 does not copy UTM / gclid / fbc / fbp / wbraid / gbraid onto the Opportunity. Do not invent Curve field names or payloads in this repo.",
+    "Cutover order (see cutover_sequence): (1) Curve goes live first, target next week; (2) publish the new GHL folder only after Curve is live. This PR is NOT a GHL publish.",
+    "Curve conversion events are locked (see conversion_events): lead + booked are POSTed by the booking app; SOLD is POSTed by Force alongside GHL_WF05_WEBHOOK_URL. GHL workflows never POST to Curve and never fire CAPI. WF-13 stays dropped.",
+    "GHL keeps only coarse ops source: next-lander vs wordpress-form plus the clinic slug (see ghl_source_scope).",
     "This contract lives beside the per-workflow specs. schema.json still governs wf-*.json; force.schema.json governs this file only.",
     "Extract-diff and the planning site render this file. Nothing here publishes.",
     "Related SPEC sections: single-writer table in SPEC.md, WF-05 inbound webhook comments in wf-05.json, WF-17 never-writes-monetaryValue in wf-17.json."

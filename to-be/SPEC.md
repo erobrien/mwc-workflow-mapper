@@ -39,13 +39,29 @@ Nothing in this folder publishes, calls the GHL API, or edits production.
   - Force must not write: contact identity, `current_clinic_*`,
     DND / `sms_consent_status`, `membership_status`, `v2_*` tags
     (workflows tag), `next-lander` / live tags, `location_*` tags, and
-    marketing attribution (source / UTM / click IDs). Attribution is
-    being redesigned around Curve Compliance (curvecompliance.com)
-    after the MWC acquisition; the writer / field shape is TBD (Curve)
-    and this SPEC intentionally leaves a hole. WF-01 does not (yet)
-    claim ownership of attribution copy.
+    marketing attribution (source / UTM / click IDs). Attribution
+    ownership is locked to Curve Compliance (curvecompliance.com)
+    after the MWC acquisition. Do not copy `gclid` / `fbc` / `fbp` /
+    `wbraid` / `gbraid` / UTM onto the Opportunity from any GHL
+    workflow. Do not invent Curve field names or payloads in this
+    repo.
   - `GHL_WF05_WEBHOOK_URL` is UI-only on the WF-05 draft; do not invent
     it. `MAR` does not fire WF-05.
+- **Curve conversion events (locked).** Owner: Curve Compliance. Event
+  set: `lead` (contact create, WF-01 path) and `booked` (appointment
+  created) are POSTed by the booking app; `SOLD` (Force + dollars) is
+  POSTed by Force alongside `GHL_WF05_WEBHOOK_URL`. GHL workflows do
+  NOT POST to Curve and do NOT fire CAPI. **WF-13 stays dropped.**
+- **GHL source scope.** GHL keeps only coarse ops source (`next-lander`
+  vs `wordpress-form`) plus the clinic slug
+  (`richmond | virginia-beach | newport-news`). Fine-grained
+  attribution (UTM, click IDs, touch history) lives in Curve.
+- **Cutover sequence (locked, ordered).**
+  1. Curve Compliance (curvecompliance.com) goes live first — target
+     next week. The booking app starts firing `lead` + `booked`;
+     Force starts firing `SOLD`.
+  2. Publish the new GHL folder only **after** Curve is live. This
+     repo never publishes; the current PR is not a GHL publish.
 - Emails use native templates named `EML | WF-NN | Purpose`. SMS bodies are
   inline in the workflow.
 - Every step is named `TYPE: Purpose (qualifier)` and carries a one-line

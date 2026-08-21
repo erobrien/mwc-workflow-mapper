@@ -10,7 +10,7 @@
   "named_steps": [
     {
       "name": "TRIGGER: Inbound webhook GHL_WF05_WEBHOOK_URL",
-      "comment": "Force writes enter here only (see to-be/force.json). WF-05 never writes Force fields (sale_outcome, sale_type, appt_status, monetaryValue, pay_type, ad_reason), never creates an opp, and never moves stages. Must not accept payloads with sale_outcome=MAR (guarded below).",
+      "comment": "Force writes enter here only (see to-be/force.json). WF-05 never writes Force fields (sale_outcome, sale_type, appt_status, monetaryValue, pay_type, ad_reason), never creates an opp, and never moves stages. WF-05 also never POSTs to Curve and never fires CAPI (Curve conversion events lead + booked come from the booking app; SOLD comes from Force). WF-13 stays dropped. Must not accept payloads with sale_outcome=MAR (guarded below).",
       "does_not_write": [
         "opportunity.sale_outcome",
         "opportunity.sale_type",

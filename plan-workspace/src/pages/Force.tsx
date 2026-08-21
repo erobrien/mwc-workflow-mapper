@@ -2,11 +2,14 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { PageShell } from "../components/Shell";
 import { Card, CardContent, Badge, Loading } from "../components/ui";
-import { ArrowLeft, ShieldCheck, Ban, Webhook, Lock, Zap } from "lucide-react";
+import { ArrowLeft, ShieldCheck, Ban, Webhook, Lock, Zap, ListOrdered, Radar } from "lucide-react";
 
 interface WriteRow { field: string; on: "opportunity" | "opportunity.line_item" | "contact"; purpose: string; gated_by?: string; }
 interface NoWriteRow { field: string; owner: string; reason: string; }
-interface FireRow { target: "WF-05"; when: ("SOLD" | "AD" | "MUT")[]; method: "POST"; url_env?: string; notes?: string; }
+interface FireRow { target: "WF-05" | "Curve"; when: ("SOLD" | "AD" | "MUT")[]; method: "POST"; url_env?: string; event?: "lead" | "booked" | "SOLD"; notes?: string; }
+interface ConversionEvent { event: "lead" | "booked" | "SOLD"; writer: "booking app" | "Force"; on: string; notes?: string; }
+interface CutoverStep { step: number; system: string; when?: string; note: string; }
+interface SourceScope { keeps?: string[]; drops_to_curve?: string[]; note?: string; }
 interface ForceContract {
   id: "force";
   name: string;
@@ -24,6 +27,9 @@ interface ForceContract {
     ad_reason?: string[];
   };
   fires: FireRow[];
+  conversion_events?: { owner: string; events: ConversionEvent[]; ghl_role: string };
+  cutover_sequence?: CutoverStep[];
+  ghl_source_scope?: SourceScope;
   native_ghl_rule: { statement: string; must_not: string[] };
   status?: { live_with_canonical_slugs?: boolean; publishes?: boolean; notes?: string };
   notes?: string[];
@@ -119,6 +125,100 @@ export default function ForcePage() {
           </CardContent>
         </Card>
 
+        {/* Cutover sequence */}
+        {c.cutover_sequence && c.cutover_sequence.length > 0 && (
+          <Card>
+            <CardContent className="p-4 space-y-3">
+              <div className="flex items-center gap-2">
+                <ListOrdered className="h-4 w-4 text-primary" />
+                <div className="text-sm font-semibold">Cutover sequence (locked)</div>
+                <Badge tone="warning" className="ms-auto">This PR is NOT a GHL publish</Badge>
+              </div>
+              <ol className="space-y-2">
+                {c.cutover_sequence.map((s) => (
+                  <li key={s.step} className="flex gap-3 rounded-sm border-2 border-border bg-card p-3">
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
+                      {s.step}
+                    </span>
+                    <div className="min-w-0">
+                      <div className="flex flex-wrap items-baseline gap-2">
+                        <span className="font-semibold text-foreground">{s.system}</span>
+                        {s.when && <Badge tone="accent">{s.when}</Badge>}
+                      </div>
+                      <p className="mt-1 text-xs text-foreground/85">{s.note}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Curve conversion events */}
+        {c.conversion_events && (
+          <Card>
+            <CardContent className="p-4 space-y-3">
+              <div className="flex items-center gap-2">
+                <Radar className="h-4 w-4 text-primary" />
+                <div className="text-sm font-semibold">Conversion events</div>
+                <Badge tone="warning" className="ms-auto">owner: {c.conversion_events.owner}</Badge>
+              </div>
+              <div className="grid gap-2 md:grid-cols-3">
+                {c.conversion_events.events.map((e) => (
+                  <div key={e.event} className="rounded-sm border-2 border-border bg-card p-3">
+                    <div className="mb-1 flex flex-wrap items-center gap-1.5">
+                      <Badge tone="good">{e.event}</Badge>
+                      <Badge tone={e.writer === "Force" ? "accent" : "blue"} className="ms-auto">{e.writer}</Badge>
+                    </div>
+                    <p className="text-xs text-foreground/85"><b>Fires on:</b> {e.on}</p>
+                    {e.notes && <p className="mt-1 text-[11px] text-muted-foreground">{e.notes}</p>}
+                  </div>
+                ))}
+              </div>
+              <div className="rounded-sm border-l-4 border-destructive bg-red-50/60 p-3 text-xs text-red-900 dark:bg-red-950/40 dark:text-red-200">
+                <b>GHL role:</b> {c.conversion_events.ghl_role}
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* GHL source scope */}
+        {c.ghl_source_scope && (
+          <Card>
+            <CardContent className="p-4 space-y-3">
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="h-4 w-4 text-emerald-600" />
+                <div className="text-sm font-semibold">GHL source scope</div>
+              </div>
+              <div className="grid gap-3 md:grid-cols-2">
+                {c.ghl_source_scope.keeps && (
+                  <div className="rounded-sm border-2 border-border bg-card p-3">
+                    <div className="mb-1 text-[10px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
+                      GHL keeps (coarse ops)
+                    </div>
+                    <ul className="grid list-disc gap-1 ps-5 text-xs text-foreground/85">
+                      {c.ghl_source_scope.keeps.map((k) => <li key={k}>{k}</li>)}
+                    </ul>
+                  </div>
+                )}
+                {c.ghl_source_scope.drops_to_curve && (
+                  <div className="rounded-sm border-2 border-border bg-card p-3">
+                    <div className="mb-1 text-[10px] font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400">
+                      Lives in Curve, not GHL
+                    </div>
+                    <ul className="grid list-disc gap-1 ps-5 text-xs text-foreground/85">
+                      {c.ghl_source_scope.drops_to_curve.map((k) => <li key={k}>{k}</li>)}
+                    </ul>
+                  </div>
+                )}
+              </div>
+              {c.ghl_source_scope.note && (
+                <p className="text-[11px] text-muted-foreground">{c.ghl_source_scope.note}</p>
+              )}
+            </CardContent>
+          </Card>
+        )}
+
         {/* Enums */}
         <Card>
           <CardContent className="p-4 space-y-3">
@@ -211,14 +311,18 @@ export default function ForcePage() {
               })}
             </div>
             <div className="rounded-sm border-l-4 border-amber-500 bg-amber-50/60 p-3 text-xs text-amber-900 dark:bg-amber-950/40 dark:text-amber-200">
-              <b>Attribution redesign hole.</b> After the MWC acquisition of{" "}
+              <b>Attribution owner = Curve.</b> After the MWC acquisition of{" "}
               <a href="https://curvecompliance.com" target="_blank" rel="noopener noreferrer" className="underline hover:no-underline">
                 Curve Compliance (curvecompliance.com)
               </a>
-              , the marketing-attribution model on the Opportunity is being reworked.
-              Owner and field shape are intentionally left as a hole. Force must not write
-              attribution. WF-01 does not (yet) claim ownership either. Do not invent
-              Curve field names in this repo.
+              , attribution ownership is locked to Curve. Do NOT copy{" "}
+              <code className="rounded bg-amber-100 px-1 py-0.5 text-[11px] text-amber-900 dark:bg-amber-950 dark:text-amber-200">gclid</code>{" "}/{" "}
+              <code className="rounded bg-amber-100 px-1 py-0.5 text-[11px] text-amber-900 dark:bg-amber-950 dark:text-amber-200">fbc</code>{" "}/{" "}
+              <code className="rounded bg-amber-100 px-1 py-0.5 text-[11px] text-amber-900 dark:bg-amber-950 dark:text-amber-200">fbp</code>{" "}/{" "}
+              <code className="rounded bg-amber-100 px-1 py-0.5 text-[11px] text-amber-900 dark:bg-amber-950 dark:text-amber-200">wbraid</code>{" "}/{" "}
+              <code className="rounded bg-amber-100 px-1 py-0.5 text-[11px] text-amber-900 dark:bg-amber-950 dark:text-amber-200">gbraid</code>{" "}/ UTM onto the Opportunity from any GHL workflow. GHL keeps only coarse ops
+              source (next-lander vs wordpress-form) + clinic slug. Do not invent Curve
+              field names or payloads in this repo.
             </div>
           </CardContent>
         </Card>
@@ -231,26 +335,36 @@ export default function ForcePage() {
               <div className="text-sm font-semibold">After Force writes: native routing</div>
             </div>
             <div className="grid gap-3 md:grid-cols-2">
-              {c.fires.map((f, i) => (
-                <div key={i} className="rounded-sm border-2 border-border bg-card p-3">
-                  <div className="mb-1 flex flex-wrap items-center gap-1.5">
-                    <Badge tone="good">{f.method}</Badge>
-                    <span className="text-sm font-semibold">→ {f.target}</span>
-                    <span className="ms-auto flex flex-wrap gap-1">
-                      {f.when.map((w) => (
-                        <Badge key={w} tone="accent">{w}</Badge>
-                      ))}
-                    </span>
-                  </div>
-                  {f.url_env && (
-                    <div className="mb-1 text-[11px] text-muted-foreground">
-                      URL env: <code className="rounded bg-muted px-1 py-0.5 text-[11px]">{f.url_env}</code>{" "}
-                      <span className="text-[10px]">(UI-only; paste from the WF-05 draft)</span>
+              {c.fires.map((f, i) => {
+                const isCurve = f.target === "Curve";
+                const urlNote = isCurve
+                  ? "provided by Curve at cutover"
+                  : "UI-only; paste from the WF-05 draft";
+                return (
+                  <div
+                    key={i}
+                    className={`rounded-sm border-2 p-3 ${isCurve ? "border-amber-400 bg-amber-50/40 dark:border-amber-500/50 dark:bg-amber-950/20" : "border-border bg-card"}`}
+                  >
+                    <div className="mb-1 flex flex-wrap items-center gap-1.5">
+                      <Badge tone="good">{f.method}</Badge>
+                      <span className="text-sm font-semibold">→ {f.target}</span>
+                      {f.event && <Badge tone="purple">event: {f.event}</Badge>}
+                      <span className="ms-auto flex flex-wrap gap-1">
+                        {f.when.map((w) => (
+                          <Badge key={w} tone="accent">{w}</Badge>
+                        ))}
+                      </span>
                     </div>
-                  )}
-                  {f.notes && <p className="text-xs text-foreground/85">{f.notes}</p>}
-                </div>
-              ))}
+                    {f.url_env && (
+                      <div className="mb-1 text-[11px] text-muted-foreground">
+                        URL env: <code className="rounded bg-muted px-1 py-0.5 text-[11px]">{f.url_env}</code>{" "}
+                        <span className="text-[10px]">({urlNote})</span>
+                      </div>
+                    )}
+                    {f.notes && <p className="text-xs text-foreground/85">{f.notes}</p>}
+                  </div>
+                );
+              })}
             </div>
           </CardContent>
         </Card>

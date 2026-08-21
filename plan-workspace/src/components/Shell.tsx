@@ -3,11 +3,12 @@ import { NavLink } from "react-router-dom";
 import {
   LayoutDashboard, Boxes, Workflow, Network,
   Gavel, ShieldAlert, Moon, Sun, Menu, SearchCheck, ClipboardList, Tag,
-  Database, Waypoints, Route, History, ChevronRight, ChevronDown, Target, ListChecks, Radar, MessagesSquare, PhoneForwarded,
+  Database, Waypoints, Route, History, ChevronRight, ChevronDown, Target, ListChecks, Radar, MessagesSquare, PhoneForwarded, Clock,
 } from "lucide-react";
 import { cn, useTheme } from "./ui";
 import { useState } from "react";
 import { GlobalSearch } from "./Search";
+import { BUILD_TIME_LABEL, BUILD_COMMIT } from "../lib/build-info";
 
 const NAV: { group: string; accent?: string; dot?: string; collapsible?: boolean; items: { to: string; label: string; icon: any; accent?: string }[] }[] = [
   { group: "Overview", accent: "text-primary", dot: "bg-primary", items: [
@@ -61,8 +62,13 @@ function Sidebar({ onNav }: { onNav?: () => void }) {
   return (
     <nav className="flex h-full flex-col gap-5 p-3">
       <div className="px-2 pt-1">
-        <div className="flex items-center gap-2 text-sm font-bold"><span className="flex h-6 w-6 items-center justify-center rounded-md bg-primary text-primary-foreground"><Network className="h-3.5 w-3.5" /></span> MWC GHL Refactor</div>
-        <div className="truncate font-mono text-[10px] text-muted-foreground">Ghstz8eIsHWLeXek47dk</div>
+        <div className="flex items-center gap-2 text-sm font-bold text-foreground">
+          <span className="flex h-7 w-7 items-center justify-center rounded-sm border-2 border-border bg-primary text-primary-foreground">
+            <Network className="h-3.5 w-3.5" />
+          </span>
+          MWC GHL Refactor
+        </div>
+        <div className="truncate font-mono text-[10px] font-semibold text-foreground/70">Ghstz8eIsHWLeXek47dk</div>
       </div>
       <div className="flex flex-col gap-4 overflow-y-auto">
         {NAV.map((g) => {
@@ -71,23 +77,23 @@ function Sidebar({ onNav }: { onNav?: () => void }) {
           <div key={g.group}>
             {g.collapsible ? (
               <button onClick={() => setOpenGroups((s) => ({ ...s, [g.group]: !s[g.group] }))}
-                className="mb-1 flex w-full items-center gap-1.5 rounded px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground hover:bg-muted/60">
-                <span className={cn("h-1.5 w-1.5 rounded-full", g.dot)} />{g.group}
+                className="mb-1 flex w-full items-center gap-1.5 rounded-sm border-b border-border/60 px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-foreground/80 hover:bg-muted">
+                <span className={cn("h-2 w-2 rounded-sm", g.dot)} />{g.group}
                 {collapsed ? <ChevronRight className="ms-auto h-3 w-3" /> : <ChevronDown className="ms-auto h-3 w-3" />}
               </button>
             ) : (
-              <div className="mb-1 flex items-center gap-1.5 px-2 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-                <span className={cn("h-1.5 w-1.5 rounded-full", g.dot)} />{g.group}
+              <div className="mb-1 flex items-center gap-1.5 border-b border-border/60 px-2 pb-1 text-[10px] font-bold uppercase tracking-wider text-foreground/80">
+                <span className={cn("h-2 w-2 rounded-sm", g.dot)} />{g.group}
               </div>
             )}
             <div className={cn("flex flex-col gap-0.5", collapsed && "hidden")}>
               {g.items.map((it) => (
                 <NavLink key={it.to} to={it.to} end={it.to === "/"} onClick={onNav}
                   className={({ isActive }) => cn(
-                    "flex items-center gap-2 rounded-md border-l-2 px-2 py-1.5 text-sm transition-colors",
+                    "flex items-center gap-2 rounded-sm border-l-[3px] px-2 py-1.5 text-sm transition-colors",
                     isActive
-                      ? "border-current bg-muted font-semibold text-foreground"
-                      : "border-transparent text-muted-foreground hover:bg-muted/60 hover:text-foreground")}>
+                      ? "border-accent bg-muted font-bold text-foreground"
+                      : "border-transparent font-medium text-foreground/80 hover:border-border hover:bg-muted hover:text-foreground")}>
                   <it.icon className={cn("h-4 w-4 shrink-0", it.accent)} />
                   <span className="truncate">{it.label}</span>
                 </NavLink>
@@ -105,19 +111,19 @@ export function Shell({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="flex min-h-screen">
-      <aside className="hidden w-60 shrink-0 border-r border-primary/10 bg-gradient-to-b from-primary/[0.04] to-transparent bg-card md:block"><Sidebar /></aside>
+      <aside className="hidden w-64 shrink-0 border-r-2 border-border bg-card md:block"><Sidebar /></aside>
       {open && (
         <div className="fixed inset-0 z-40 md:hidden">
-          <div className="absolute inset-0 bg-black/40" onClick={() => setOpen(false)} />
-          <aside className="absolute left-0 top-0 h-full w-60 border-r bg-card"><Sidebar onNav={() => setOpen(false)} /></aside>
+          <div className="absolute inset-0 bg-black/60" onClick={() => setOpen(false)} />
+          <aside className="absolute left-0 top-0 h-full w-64 border-r-2 border-border bg-card"><Sidebar onNav={() => setOpen(false)} /></aside>
         </div>
       )}
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="sticky top-0 z-30 flex h-12 items-center gap-2 border-b bg-background/80 px-4 backdrop-blur">
-          <button className="md:hidden" onClick={() => setOpen(true)} aria-label="Menu"><Menu className="h-5 w-5" /></button>
+        <header className="sticky top-0 z-30 flex h-14 items-center gap-3 border-b-2 border-border bg-background px-4">
+          <button className="rounded-sm border-2 border-border p-1 md:hidden" onClick={() => setOpen(true)} aria-label="Menu"><Menu className="h-5 w-5" /></button>
           <div className="flex-1"><GlobalSearch /></div>
           <div>
-            <button onClick={toggle} aria-label="Toggle theme" className="rounded-md border p-1.5 hover:bg-muted">
+            <button onClick={toggle} aria-label="Toggle theme" className="rounded-sm border-2 border-border bg-card p-1.5 text-foreground hover:bg-muted">
               {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </button>
           </div>
@@ -128,13 +134,35 @@ export function Shell({ children }: { children: ReactNode }) {
   );
 }
 
+export function LastUpdated({ className }: { className?: string }) {
+  return (
+    <div
+      className={cn(
+        "inline-flex items-center gap-1.5 rounded-sm border-2 border-border bg-muted/60 px-2 py-1 text-[11px] font-semibold uppercase tracking-wider text-foreground",
+        className,
+      )}
+      title={BUILD_COMMIT ? `Build commit ${BUILD_COMMIT}` : undefined}
+    >
+      <Clock className="h-3 w-3" aria-hidden />
+      <span className="text-muted-foreground">Last updated</span>
+      <span className="normal-case tracking-normal">{BUILD_TIME_LABEL}</span>
+      {BUILD_COMMIT && (
+        <span className="ms-1 font-mono text-[10px] font-normal normal-case text-muted-foreground">
+          · {BUILD_COMMIT}
+        </span>
+      )}
+    </div>
+  );
+}
+
 export function PageShell({ title, subtitle, actions, children }: { title: string; subtitle?: string; actions?: ReactNode; children: ReactNode }) {
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap items-start justify-between gap-3 border-b pb-4">
-        <div className="border-l-4 border-primary pl-3">
-          <h1 className="text-xl font-bold tracking-tight">{title}</h1>
-          {subtitle && <p className="mt-1 max-w-3xl text-sm text-muted-foreground">{subtitle}</p>}
+      <div className="flex flex-wrap items-start justify-between gap-3 border-b-2 border-border pb-4">
+        <div className="border-l-4 border-accent pl-3">
+          <h1 className="text-xl font-bold tracking-tight text-foreground">{title}</h1>
+          {subtitle && <p className="mt-1 max-w-3xl text-sm text-foreground/80">{subtitle}</p>}
+          <div className="mt-2"><LastUpdated /></div>
         </div>
         {actions && <div className="flex items-center gap-2">{actions}</div>}
       </div>

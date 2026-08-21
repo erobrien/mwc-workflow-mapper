@@ -6,7 +6,7 @@ export function cn(...parts: (string | false | null | undefined)[]) {
 
 /* ---------- Card ---------- */
 export function Card({ className, children }: { className?: string; children: ReactNode }) {
-  return <div className={cn("rounded-lg border bg-card text-card-foreground", className)}>{children}</div>;
+  return <div className={cn("rounded-sm border-2 border-border bg-card text-card-foreground shadow-none", className)}>{children}</div>;
 }
 export function CardContent({ className, children }: { className?: string; children: ReactNode }) {
   return <div className={cn("p-4", className)}>{children}</div>;
@@ -42,11 +42,13 @@ export function Tabs({ tabs, initial, children }: { tabs: { value: string; label
   return (
     <TabsCtx.Provider value={{ value, set }}>
       <div className="space-y-4">
-        <div className="inline-flex flex-wrap gap-1 rounded-lg border bg-muted/40 p-1">
+        <div className="inline-flex flex-wrap gap-1 rounded-sm border-2 border-border bg-muted p-1">
           {tabs.map((t) => (
             <button key={t.value} onClick={() => set(t.value)}
-              className={cn("rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
-                value === t.value ? "bg-card text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground")}>
+              className={cn("rounded-sm px-3 py-1.5 text-sm font-semibold transition-colors",
+                value === t.value
+                  ? "border-2 border-accent bg-card text-foreground"
+                  : "border-2 border-transparent text-foreground/70 hover:text-foreground")}>
               {t.label}
             </button>
           ))}
@@ -64,21 +66,21 @@ export function TabPanel({ value, className, children }: { value: string; classN
 
 /* ---------- Table ---------- */
 export function Table({ children }: { children: ReactNode }) {
-  return <div className="w-full overflow-x-auto"><table className="w-full text-sm">{children}</table></div>;
+  return <div className="w-full overflow-x-auto rounded-sm border-2 border-border"><table className="w-full text-sm">{children}</table></div>;
 }
 export function TH({ className, children }: { className?: string; children: ReactNode }) {
-  return <th className={cn("border-b px-3 py-2 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground", className)}>{children}</th>;
+  return <th className={cn("border-b-2 border-border bg-muted px-3 py-2 text-left text-xs font-bold uppercase tracking-wider text-foreground", className)}>{children}</th>;
 }
 export function TD({ className, children }: { className?: string; children: ReactNode }) {
-  return <td className={cn("border-b px-3 py-2 align-top", className)}>{children}</td>;
+  return <td className={cn("border-b border-border px-3 py-2 align-top text-foreground", className)}>{children}</td>;
 }
 
 /* ---------- Alert ---------- */
 export function Alert({ tone = "neutral", title, children }: { tone?: Tone; title?: ReactNode; children?: ReactNode }) {
-  const border = tone === "red" ? "border-l-destructive" : tone === "warning" ? "border-l-amber-500" : tone === "good" ? "border-l-emerald-500" : "border-l-primary";
+  const border = tone === "red" ? "border-l-destructive" : tone === "warning" ? "border-l-amber-600" : tone === "good" ? "border-l-emerald-700" : "border-l-accent";
   return (
-    <div className={cn("rounded-md border border-l-4 bg-card p-4", border)}>
-      {title && <div className="mb-1 font-semibold">{title}</div>}
+    <div className={cn("rounded-sm border-2 border-border border-l-[6px] bg-card p-4", border)}>
+      {title && <div className="mb-1 font-bold text-foreground">{title}</div>}
       {children && <div className="text-sm text-foreground/90">{children}</div>}
     </div>
   );
@@ -118,11 +120,11 @@ export function Stat({ label, value, note, tone = "neutral" }: { label: string; 
   const a = STAT_ACCENT[tone] ?? STAT_ACCENT.neutral;
   return (
     <Card className="relative overflow-hidden">
-      <span className={cn("absolute inset-y-0 left-0 w-1", a.bar)} />
+      <span className={cn("absolute inset-y-0 left-0 w-1.5", a.bar)} />
       <CardContent className="p-4 pl-5">
-        <div className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">{label}</div>
+        <div className="text-[10px] font-bold uppercase tracking-wider text-foreground/70">{label}</div>
         <div className={cn("mt-1 text-2xl font-bold", a.value)}>{value}</div>
-        {note && <div className={cn("mt-1 text-xs", tone === "red" ? "text-destructive" : tone === "good" ? "text-emerald-600 dark:text-emerald-400" : tone === "warning" ? "text-amber-600 dark:text-amber-400" : "text-muted-foreground")}>{note}</div>}
+        {note && <div className={cn("mt-1 text-xs font-medium", tone === "red" ? "text-destructive" : tone === "good" ? "text-emerald-700 dark:text-emerald-400" : tone === "warning" ? "text-amber-700 dark:text-amber-400" : "text-foreground/70")}>{note}</div>}
       </CardContent>
     </Card>
   );

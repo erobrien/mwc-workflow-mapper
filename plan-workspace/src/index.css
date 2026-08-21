@@ -2,40 +2,62 @@
 @tailwind components;
 @tailwind utilities;
 
+/* -----------------------------------------------------------------
+   MWC GHL Refactor Workspace — boardroom palette.
+   Light: near-black text on near-white, midnight-navy primary, single
+     amber/gold accent, high-contrast borders.
+   Dark:  near-white text on midnight-navy/charcoal, same amber accent.
+   No pastels, no gradients, no glass. All borders 1.5–2px solid.
+------------------------------------------------------------------ */
 :root {
-  --background: 220 33% 98%;
-  --foreground: 222 47% 11%;
+  /* base surfaces */
+  --background: 0 0% 100%;        /* near-white */
+  --foreground: 222 47% 7%;       /* near-black */
   --card: 0 0% 100%;
-  --card-foreground: 222 47% 11%;
-  --primary: 222 72% 32%;
+  --card-foreground: 222 47% 7%;
+
+  /* midnight navy primary */
+  --primary: 222 60% 15%;         /* midnight navy */
   --primary-foreground: 0 0% 100%;
-  --accent: 22 92% 47%;
+
+  /* single gold/amber accent */
+  --accent: 38 92% 42%;           /* deep amber gold */
   --accent-foreground: 0 0% 100%;
-  --muted: 220 20% 94%;
-  --muted-foreground: 220 14% 38%;
-  --destructive: 0 72% 45%;
+
+  /* neutrals */
+  --muted: 220 14% 94%;
+  --muted-foreground: 220 12% 26%;    /* darkened for AAA body text */
+
+  --destructive: 0 72% 38%;
   --destructive-foreground: 0 0% 100%;
-  --border: 220 16% 86%;
-  --input: 220 16% 86%;
-  --ring: 22 92% 47%;
+
+  /* strong 2px borders — no whispers */
+  --border: 222 30% 20%;              /* charcoal outline */
+  --input: 222 30% 20%;
+  --ring: 38 92% 42%;
 }
 
 .dark {
-  --background: 222 32% 7%;
-  --foreground: 210 25% 94%;
-  --card: 222 28% 11%;
-  --card-foreground: 210 25% 94%;
-  --primary: 210 80% 66%;
-  --primary-foreground: 222 32% 7%;
-  --accent: 22 95% 58%;
-  --accent-foreground: 222 32% 7%;
-  --muted: 222 20% 16%;
-  --muted-foreground: 215 18% 66%;
-  --destructive: 0 68% 58%;
+  --background: 222 40% 8%;           /* midnight navy backdrop */
+  --foreground: 0 0% 98%;              /* near-white text */
+  --card: 222 36% 12%;                 /* charcoal card */
+  --card-foreground: 0 0% 98%;
+
+  --primary: 38 92% 55%;               /* amber becomes primary in dark */
+  --primary-foreground: 222 40% 8%;
+
+  --accent: 38 92% 55%;
+  --accent-foreground: 222 40% 8%;
+
+  --muted: 222 24% 18%;
+  --muted-foreground: 220 14% 82%;     /* light gray, high contrast */
+
+  --destructive: 0 72% 55%;
   --destructive-foreground: 0 0% 100%;
-  --border: 222 18% 22%;
-  --input: 222 18% 22%;
-  --ring: 22 95% 58%;
+
+  --border: 220 14% 72%;               /* light charcoal border in dark */
+  --input: 220 14% 72%;
+  --ring: 38 92% 55%;
 }
 
 * { border-color: hsl(var(--border)); }
@@ -43,12 +65,32 @@
 body {
   background: hsl(var(--background));
   color: hsl(var(--foreground));
-  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-family: Inter, "Helvetica Neue", Arial, ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
-/* subtle tinted page backdrop for depth */
-.dark body { background-image: radial-gradient(1200px 600px at 100% -10%, hsl(222 40% 14% / 0.6), transparent 60%); background-attachment: fixed; }
+/* No decorative gradients — boardroom, not SaaS. */
 
 ::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-thumb { background: hsl(var(--border)); border-radius: 5px; }
+::-webkit-scrollbar-thumb { background: hsl(var(--border)); border-radius: 2px; }
+::-webkit-scrollbar-track { background: hsl(var(--muted)); }
+
+/* Ensure Mermaid diagrams sit inside a solid 2px frame. */
+.mermaid-host {
+  padding: 12px;
+  border: 2px solid hsl(var(--border));
+  border-radius: 4px;
+  background: hsl(var(--card));
+}
+
+/* Force muted-foreground body text to stay high-contrast for readability;
+   secondary text is still muted but never washed out on paper printouts. */
+.text-muted-foreground {
+  color: hsl(var(--muted-foreground));
+}
+
+/* Ring-accented focus, always visible. */
+:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}

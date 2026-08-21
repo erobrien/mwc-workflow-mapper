@@ -66,8 +66,8 @@ export function GlobalSearch() {
 
   return (
     <div ref={boxRef} className="relative w-full max-w-md">
-      <div className="flex items-center gap-2 rounded-md border bg-background px-2.5 py-1.5">
-        <SearchIcon className="h-4 w-4 text-muted-foreground" />
+      <div className="flex items-center gap-2 rounded-sm border-2 border-border bg-background px-2.5 py-1.5">
+        <SearchIcon className="h-4 w-4 text-foreground/70" />
         <input ref={inputRef} value={q} onFocusCapture={() => setOpen(true)} onChange={(e) => { setQ(e.target.value); setOpen(true); }}
           onKeyDown={(e) => {
             if (e.key === "ArrowDown") { e.preventDefault(); setActive((a) => Math.min(a + 1, results.length - 1)); }
@@ -75,11 +75,11 @@ export function GlobalSearch() {
             if (e.key === "Enter" && results[active]) go(results[active]);
           }}
           placeholder="Search workflows, fields, decisions…"
-          className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground" />
-        <kbd className="hidden rounded border px-1.5 text-[10px] text-muted-foreground sm:inline">⌘K</kbd>
+          className="w-full bg-transparent text-sm text-foreground outline-none placeholder:text-foreground/60" />
+        <kbd className="hidden rounded-sm border-2 border-border bg-muted px-1.5 text-[10px] font-semibold text-foreground sm:inline">⌘K</kbd>
       </div>
       {open && q.trim() && (
-        <div className="absolute left-0 right-0 top-full z-50 mt-1 max-h-[420px] overflow-auto rounded-md border bg-card shadow-lg">
+        <div className="absolute left-0 right-0 top-full z-50 mt-1 max-h-[420px] overflow-auto rounded-sm border-2 border-border bg-card shadow-lg">
           {results.length === 0 && <div className="px-3 py-4 text-sm text-muted-foreground">No matches for “{q}”.</div>}
           {results.map((h, i) => (
             <div key={i} onMouseEnter={() => setActive(i)} onClick={() => go(h)}

@@ -1,22 +1,28 @@
 {
   "id": "wf-02",
-  "name": "Non-booked",
+  "name": "Non-booked Recovery",
   "job": "Follow-up burst for contacts that finished WF-01 but did not book. Excludes funnel_entry_* origins. Re-checks booking and routes stragglers to WF-09.",
   "trigger": {
     "type": "Added from WF-01",
-    "filters": ["not funnel_entry_*"],
+    "filters": [
+      "not funnel_entry_*"
+    ],
     "notes": "Never enrolled directly by a form. Enrolled only via ADD-TO-WF from WF-01."
   },
   "named_steps": [
     {
       "name": "TRIGGER: Added by WF-01 (not funnel_entry_*)",
       "comment": "Sole enroll path for WF-02. Must not enroll funnel_entry_* origins.",
-      "does_not_write": ["funnel_entry_*"]
+      "does_not_write": [
+        "funnel_entry_*"
+      ]
     },
     {
       "name": "IF-ELSE: Skip if already booked (v2_status_booked)",
       "comment": "Reads v2_status_booked and calendar-booked contact fields. Must not clear the booked tag.",
-      "does_not_write": ["v2_status_booked"]
+      "does_not_write": [
+        "v2_status_booked"
+      ]
     },
     {
       "name": "WAIT: +3 minutes (quiet-hours aware)",
@@ -26,7 +32,9 @@
     {
       "name": "SMS: Non-booked nudge 1 (3m)",
       "comment": "Inline SMS. Honors quiet hours 8am-9pm contact TZ.",
-      "writes": ["sms_send"]
+      "writes": [
+        "sms_send"
+      ]
     },
     {
       "name": "WAIT: +1 minute",
@@ -36,7 +44,9 @@
     {
       "name": "EMAIL: Non-booked nudge 1 (native template)",
       "comment": "Sends EML | WF-02 | Nudge 1.",
-      "writes": ["email_send"]
+      "writes": [
+        "email_send"
+      ]
     },
     {
       "name": "WAIT: +5 minutes",
@@ -46,7 +56,9 @@
     {
       "name": "SMS: Non-booked nudge 2 (5m)",
       "comment": "Inline SMS. Members not patients, clinic not office.",
-      "writes": ["sms_send"]
+      "writes": [
+        "sms_send"
+      ]
     },
     {
       "name": "WAIT: +15 minutes",
@@ -56,7 +68,9 @@
     {
       "name": "EMAIL: Non-booked nudge 2 (native template)",
       "comment": "Sends EML | WF-02 | Nudge 2.",
-      "writes": ["email_send"]
+      "writes": [
+        "email_send"
+      ]
     },
     {
       "name": "WAIT: +24 hours (quiet-hours aware)",
@@ -66,7 +80,9 @@
     {
       "name": "SMS: Non-booked nudge 3 (24h)",
       "comment": "Inline SMS.",
-      "writes": ["sms_send"]
+      "writes": [
+        "sms_send"
+      ]
     },
     {
       "name": "WAIT: +36 hours",
@@ -76,12 +92,16 @@
     {
       "name": "EMAIL: Non-booked nudge 4 (native template)",
       "comment": "Sends EML | WF-02 | Nudge 4.",
-      "writes": ["email_send"]
+      "writes": [
+        "email_send"
+      ]
     },
     {
       "name": "IF-ELSE: Re-check booking (v2_status_booked)",
       "comment": "Reads booked state after burst. Must not force appt_status.",
-      "does_not_write": ["appt_status"]
+      "does_not_write": [
+        "appt_status"
+      ]
     },
     {
       "name": "ADD-TO-WF: Route unbooked to WF-09 Nurture",

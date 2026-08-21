@@ -1,16 +1,20 @@
 {
   "id": "wf-08",
-  "name": "No-show / cancel",
+  "name": "No-show / Cancel",
   "job": "Handle appt_status=no-show and appt_status=cancel only. Reschedule never enters. Drops the contact from WF-03 and re-checks booking.",
   "trigger": {
     "type": "Added from WF-05",
-    "filters": ["appt_status in (no-show, cancel)"]
+    "filters": [
+      "appt_status in (no-show, cancel)"
+    ]
   },
   "named_steps": [
     {
       "name": "TRIGGER: Added by WF-05 (appt_status no-show or cancel)",
       "comment": "Sole enroll. Reschedule must never route here.",
-      "does_not_write": ["appt_status"]
+      "does_not_write": [
+        "appt_status"
+      ]
     },
     {
       "name": "REMOVE-FROM-WF: Drop from WF-03 Reminders",
@@ -25,22 +29,30 @@
     {
       "name": "ADD-TAG: v2_appt_no_show (no-show branch)",
       "comment": "New v2 tag. Must not remove live booking tags.",
-      "writes": ["v2_appt_no_show"]
+      "writes": [
+        "v2_appt_no_show"
+      ]
     },
     {
       "name": "ADD-TAG: v2_appt_cancel (cancel branch)",
       "comment": "New v2 tag.",
-      "writes": ["v2_appt_cancel"]
+      "writes": [
+        "v2_appt_cancel"
+      ]
     },
     {
       "name": "SMS: Recovery outreach (inline)",
       "comment": "Inline SMS. Honors quiet hours 8am-9pm contact TZ.",
-      "writes": ["sms_send"]
+      "writes": [
+        "sms_send"
+      ]
     },
     {
       "name": "EMAIL: Recovery follow-up (native template)",
       "comment": "Sends EML | WF-08 | Recovery.",
-      "writes": ["email_send"]
+      "writes": [
+        "email_send"
+      ]
     },
     {
       "name": "WAIT: +48 hours (quiet-hours aware)",

@@ -1,6 +1,6 @@
 {
   "id": "wf-16",
-  "name": "IVR + chat widgets",
+  "name": "Comms Edge",
   "job": "Handles inbound IVR calls to +18663444955 and the two chat widgets. Does not create Sales opportunities.",
   "trigger": {
     "type": "Inbound Call / Chat",
@@ -14,7 +14,9 @@
     {
       "name": "TRIGGER: IVR +18663444955 or chat widget inbound",
       "comment": "Sole entry for IVR + chat. Must not create a Sales opportunity here.",
-      "does_not_write": ["opportunity"]
+      "does_not_write": [
+        "opportunity"
+      ]
     },
     {
       "name": "IF-ELSE: Branch on channel (IVR | chat)",
@@ -24,27 +26,37 @@
     {
       "name": "ADD-TAG: v2_source_ivr (IVR branch)",
       "comment": "New v2 source tag for IVR.",
-      "writes": ["v2_source_ivr"]
+      "writes": [
+        "v2_source_ivr"
+      ]
     },
     {
       "name": "ADD-TAG: v2_source_chat (chat branch)",
       "comment": "New v2 source tag for chat widgets.",
-      "writes": ["v2_source_chat"]
+      "writes": [
+        "v2_source_chat"
+      ]
     },
     {
       "name": "SMS: IVR callback ack (inline, IVR branch)",
       "comment": "Inline SMS. Honors quiet hours 8am-9pm contact TZ.",
-      "writes": ["sms_send"]
+      "writes": [
+        "sms_send"
+      ]
     },
     {
       "name": "EMAIL: Chat follow-up (native template, chat branch)",
       "comment": "Sends EML | WF-16 | Chat follow-up.",
-      "writes": ["email_send"]
+      "writes": [
+        "email_send"
+      ]
     },
     {
       "name": "IF-ELSE: New contact vs existing contact",
       "comment": "Existing contacts stay on their current opp. New contacts route to WF-01 to enroll properly.",
-      "does_not_write": ["opportunity"]
+      "does_not_write": [
+        "opportunity"
+      ]
     },
     {
       "name": "ADD-TO-WF: New contact re-enters WF-01",

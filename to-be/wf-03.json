@@ -1,6 +1,6 @@
 {
   "id": "wf-03",
-  "name": "Reminders",
+  "name": "Booking Confirmation + Reminders",
   "job": "Confirm and remind booked appointments across the three consult calendars. Never marks a reschedule as no-show.",
   "trigger": {
     "type": "Appointment Booked",
@@ -19,17 +19,23 @@
     {
       "name": "ADD-TAG: v2_status_booked",
       "comment": "New v2 booked tag. Must not remove or rename live booking tags.",
-      "writes": ["v2_status_booked"]
+      "writes": [
+        "v2_status_booked"
+      ]
     },
     {
       "name": "EMAIL: Confirmation (native template)",
       "comment": "Sends EML | WF-03 | Confirmation.",
-      "writes": ["email_send"]
+      "writes": [
+        "email_send"
+      ]
     },
     {
       "name": "SMS: Confirmation (inline)",
       "comment": "Inline confirmation SMS. Honors quiet hours 8am-9pm contact TZ.",
-      "writes": ["sms_send"]
+      "writes": [
+        "sms_send"
+      ]
     },
     {
       "name": "WAIT: Until T-3 days before appointment",
@@ -39,7 +45,9 @@
     {
       "name": "SMS: Reminder T-3 days (inline)",
       "comment": "Members not patients, clinic not office.",
-      "writes": ["sms_send"]
+      "writes": [
+        "sms_send"
+      ]
     },
     {
       "name": "WAIT: Until T-1 day before appointment",
@@ -49,7 +57,9 @@
     {
       "name": "EMAIL: Reminder T-1 day (native template)",
       "comment": "Sends EML | WF-03 | Reminder T-1.",
-      "writes": ["email_send"]
+      "writes": [
+        "email_send"
+      ]
     },
     {
       "name": "WAIT: Until T-5 hours before appointment",
@@ -59,7 +69,9 @@
     {
       "name": "SMS: Reminder T-5 hours (inline)",
       "comment": "Same-day SMS. Honors quiet hours.",
-      "writes": ["sms_send"]
+      "writes": [
+        "sms_send"
+      ]
     },
     {
       "name": "WAIT: Until T-2 hours before appointment",
@@ -69,12 +81,16 @@
     {
       "name": "SMS: Reminder T-2 hours (inline)",
       "comment": "Final SMS reminder.",
-      "writes": ["sms_send"]
+      "writes": [
+        "sms_send"
+      ]
     },
     {
       "name": "IF-ELSE: Skip no-show branch when appt_status=reschedule",
       "comment": "Reschedule must never be marked as no-show. Guard before any no-show write.",
-      "does_not_write": ["appt_status"]
+      "does_not_write": [
+        "appt_status"
+      ]
     },
     {
       "name": "ADD-TO-WF: Route to WF-04 Intake chase",

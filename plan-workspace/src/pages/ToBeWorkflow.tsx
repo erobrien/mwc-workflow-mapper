@@ -23,8 +23,12 @@ const DIAGRAM_SHARED: Record<string, string> = {
   preappt: "This diagram covers WF-03 and WF-04 together (the pre-appointment sequence).",
   "wf07-08": "This diagram covers WF-07 (A&D Nurture) and WF-08 (No-Show and Cancel Recovery).",
   retention: "This diagram covers WF-09 (Long-Term Nurture and Renewal sub-flow) and WF-10 (Feedback Survey).",
-  support: "This diagram covers the support cluster: WF-11, WF-13, WF-14, WF-15, WF-16.",
+  support: "This diagram covers the support cluster: WF-11, WF-14, WF-15, WF-16 (WF-13 dropped from v2).",
 };
+
+// Workflows dropped from the v2 spec. Kept in tobe-detail.json for generator
+// compatibility, but never rendered as a live workflow page.
+const DROPPED_FROM_V2 = new Set<string>(["13"]);
 
 function BuildDecision({ text }: { text: string }) {
   const parts = text.split(/(BUILD DECISION NEEDED[^.]*\.?)/g);
@@ -88,6 +92,39 @@ export default function ToBeWorkflow() {
   }, [d, diagrams, dark]);
 
   if (isLoading || !data || !detail) return <Loading />;
+
+  if (n && DROPPED_FROM_V2.has(n)) {
+    return (
+      <PageShell
+        title={`WF-${n} — dropped from v2`}
+        subtitle="This workflow is not part of the v2 shipping scope. WF-14 through WF-17 keep their numbers."
+        actions={
+          <Link to="/to-be" className="inline-flex items-center gap-1 rounded border px-2 py-1 text-xs font-medium text-primary hover:bg-muted">
+            <ArrowLeft className="h-3.5 w-3.5" /> All workflows
+          </Link>
+        }
+      >
+        <Card><CardContent className="p-4 space-y-3 text-sm text-foreground/90">
+          <p>
+            <b>WF-{n} (Ad-platform CAPI + Google Ads conversions)</b> was dropped from the
+            locked v2 spec. Ad-platform conversion firing is not part of the v2 GHL native
+            rebuild. The upstream router (WF-05) no longer routes SOLD + new to WF-{n};
+            it just hands SOLD + new to WF-06 Onboarding. WF-14 through WF-17 keep their
+            existing numbers on purpose so downstream references stay stable.
+          </p>
+          <p className="text-muted-foreground">
+            The <code className="rounded bg-muted px-1">to-be/wf-{n}.json</code> file is
+            retained in the repo so <code className="rounded bg-muted px-1">build_tobe_v2_detail.py</code>
+            can keep regenerating <code className="rounded bg-muted px-1">tobe-detail.json</code>,
+            but this URL is intentionally not a live workflow build guide.
+          </p>
+          <div>
+            <Link to="/to-be" className="text-sm font-semibold text-primary hover:underline">← Back to the 16 live workflows</Link>
+          </div>
+        </CardContent></Card>
+      </PageShell>
+    );
+  }
 
   const wf = data.tobe_workflows.find((w) => w.n === n);
   if (!wf || !d) {

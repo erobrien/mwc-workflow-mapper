@@ -6,26 +6,50 @@ export function cn(...parts: (string | false | null | undefined)[]) {
 
 /* ---------- Card ---------- */
 export function Card({ className, children }: { className?: string; children: ReactNode }) {
-  return <div className={cn("rounded-sm border-2 border-border bg-card text-card-foreground shadow-none", className)}>{children}</div>;
+  return (
+    <div
+      className={cn(
+        "rounded-sm border-2 border-border bg-card text-card-foreground shadow-none",
+        className,
+      )}
+    >
+      {children}
+    </div>
+  );
 }
 export function CardContent({ className, children }: { className?: string; children: ReactNode }) {
   return <div className={cn("p-4", className)}>{children}</div>;
 }
 
-/* ---------- Badge / pill ---------- */
+/* ---------- Badge / pill ----------
+   Palette is MWC: navy on cream (neutral), orange (go), destructive.
+   Legacy tone names (blue, purple, warning) map back to the neutral
+   navy chip so we do not paint the site rainbow. Orange stays the
+   period accent used only for "go" chips and small marks. */
 type Tone = "neutral" | "good" | "warning" | "red" | "blue" | "muted" | "accent" | "purple";
+const NEUTRAL = "bg-transparent text-foreground ring-1 ring-inset ring-border";
+const NEUTRAL_SOLID = "bg-muted text-foreground ring-1 ring-inset ring-border";
+const ORANGE = "bg-accent text-accent-foreground ring-1 ring-inset ring-accent";
+const INVERSE =
+  "bg-primary text-primary-foreground ring-1 ring-inset ring-primary dark:bg-accent dark:text-accent-foreground dark:ring-accent";
+const DESTRUCTIVE = "bg-destructive text-destructive-foreground ring-1 ring-inset ring-destructive";
+
 const TONES: Record<Tone, string> = {
-  neutral: "bg-slate-200 text-slate-800 ring-1 ring-inset ring-slate-300 dark:bg-slate-800 dark:text-slate-200 dark:ring-slate-700",
-  good: "bg-emerald-100 text-emerald-900 ring-1 ring-inset ring-emerald-300 dark:bg-emerald-500/15 dark:text-emerald-300 dark:ring-emerald-500/30",
-  warning: "bg-amber-100 text-amber-900 ring-1 ring-inset ring-amber-300 dark:bg-amber-500/15 dark:text-amber-300 dark:ring-amber-500/30",
-  red: "bg-red-100 text-red-900 ring-1 ring-inset ring-red-300 dark:bg-red-500/15 dark:text-red-300 dark:ring-red-500/30",
-  blue: "bg-sky-100 text-sky-900 ring-1 ring-inset ring-sky-300 dark:bg-sky-500/15 dark:text-sky-300 dark:ring-sky-500/30",
-  purple: "bg-violet-100 text-violet-900 ring-1 ring-inset ring-violet-300 dark:bg-violet-500/15 dark:text-violet-300 dark:ring-violet-500/30",
-  accent: "bg-orange-100 text-orange-900 ring-1 ring-inset ring-orange-300 dark:bg-orange-500/15 dark:text-orange-300 dark:ring-orange-500/30",
-  muted: "bg-muted text-muted-foreground ring-1 ring-inset ring-border",
+  neutral: NEUTRAL,
+  good: ORANGE,
+  accent: ORANGE,
+  warning: INVERSE,
+  red: DESTRUCTIVE,
+  blue: NEUTRAL,
+  purple: NEUTRAL,
+  muted: NEUTRAL_SOLID,
 };
 export function Badge({ tone = "neutral", className, children }: { tone?: Tone; className?: string; children: ReactNode }) {
-  return <span className={cn("inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium", TONES[tone], className)}>{children}</span>;
+  return (
+    <span className={cn("inline-flex items-center rounded-sm px-2 py-0.5 text-xs font-semibold", TONES[tone], className)}>
+      {children}
+    </span>
+  );
 }
 export function toneFor(status: string): Tone {
   const s = status.toLowerCase();
@@ -77,9 +101,12 @@ export function TD({ className, children }: { className?: string; children: Reac
 
 /* ---------- Alert ---------- */
 export function Alert({ tone = "neutral", title, children }: { tone?: Tone; title?: ReactNode; children?: ReactNode }) {
-  const border = tone === "red" ? "border-l-destructive" : tone === "warning" ? "border-l-amber-600" : tone === "good" ? "border-l-emerald-700" : "border-l-accent";
+  const accent =
+    tone === "red" ? "border-l-destructive"
+    : tone === "good" || tone === "accent" || tone === "warning" ? "border-l-accent"
+    : "border-l-foreground/40";
   return (
-    <div className={cn("rounded-sm border-2 border-border border-l-[6px] bg-card p-4", border)}>
+    <div className={cn("rounded-sm border-2 border-border border-l-[4px] bg-card p-4", accent)}>
       {title && <div className="mb-1 font-bold text-foreground">{title}</div>}
       {children && <div className="text-sm text-foreground/90">{children}</div>}
     </div>
@@ -87,11 +114,9 @@ export function Alert({ tone = "neutral", title, children }: { tone?: Tone; titl
 }
 
 /* ---------- Theme ----------
-   Storage key was bumped to `theme-v2` on the boardroom-restyle deploy so
-   that leftover `theme=dark` values from an earlier build do not keep
-   returning visitors on the dark skin. New key defaults to light; the
-   toggle still persists. First paint is handled by the inline script in
-   index.html so there is no flash of dark. */
+   Storage key is `theme-v2`. Light is the default (paper). Toggle
+   persists. First paint is handled by the inline script in
+   index.html so there is no flash. */
 const THEME_KEY = "theme-v2";
 export function useTheme() {
   const [dark, setDark] = useState(() => {
@@ -99,7 +124,7 @@ export function useTheme() {
       const s = localStorage.getItem(THEME_KEY);
       if (s) return s === "dark";
     } catch { /* ignore */ }
-    return false; // default light
+    return false;
   });
   useEffect(() => {
     const root = document.documentElement;
@@ -112,27 +137,19 @@ export function useTheme() {
 
 /* ---------- Loading / error ---------- */
 export function Loading() {
-  return <div className="flex h-64 items-center justify-center text-muted-foreground">Loading data.json…</div>;
+  return <div className="flex h-64 items-center justify-center text-muted-foreground">Loading…</div>;
 }
-const STAT_ACCENT: Record<string, { bar: string; value: string }> = {
-  neutral: { bar: "bg-primary", value: "text-foreground" },
-  good: { bar: "bg-emerald-500", value: "text-emerald-600 dark:text-emerald-400" },
-  warning: { bar: "bg-amber-500", value: "text-amber-600 dark:text-amber-400" },
-  red: { bar: "bg-red-500", value: "text-red-600 dark:text-red-400" },
-  blue: { bar: "bg-sky-500", value: "text-sky-600 dark:text-sky-400" },
-  accent: { bar: "bg-orange-500", value: "text-orange-600 dark:text-orange-400" },
-  purple: { bar: "bg-violet-500", value: "text-violet-600 dark:text-violet-400" },
-  muted: { bar: "bg-border", value: "text-foreground" },
-};
+
+/* Stat: navy value + orange rule when it means "go". No hero-metric template. */
 export function Stat({ label, value, note, tone = "neutral" }: { label: string; value: ReactNode; note?: string; tone?: Tone }) {
-  const a = STAT_ACCENT[tone] ?? STAT_ACCENT.neutral;
+  const rule = tone === "good" || tone === "accent" ? "bg-accent" : tone === "red" ? "bg-destructive" : "bg-foreground/60";
   return (
-    <Card className="relative overflow-hidden">
-      <span className={cn("absolute inset-y-0 left-0 w-1.5", a.bar)} />
-      <CardContent className="p-4 pl-5">
+    <Card>
+      <CardContent className="relative overflow-hidden p-4">
+        <span className={cn("absolute inset-x-0 top-0 h-[3px]", rule)} />
         <div className="text-[10px] font-bold uppercase tracking-wider text-foreground/70">{label}</div>
-        <div className={cn("mt-1 text-2xl font-bold", a.value)}>{value}</div>
-        {note && <div className={cn("mt-1 text-xs font-medium", tone === "red" ? "text-destructive" : tone === "good" ? "text-emerald-700 dark:text-emerald-400" : tone === "warning" ? "text-amber-700 dark:text-amber-400" : "text-foreground/70")}>{note}</div>}
+        <div className="mt-1 text-2xl font-bold text-foreground">{value}</div>
+        {note && <div className="mt-1 text-xs font-medium text-foreground/70">{note}</div>}
       </CardContent>
     </Card>
   );

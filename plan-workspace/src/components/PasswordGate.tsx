@@ -2,7 +2,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { Lock } from "lucide-react";
 import { LastUpdated } from "./Shell";
 
-// Shared client-side lock. No expiry (persisted to localStorage). Client-only —
+// Shared client-side lock. No expiry (persisted to localStorage). Client-only:
 // treat this as a friction gate for the shared plan, not a security boundary.
 const KEY = "mwc-plan-unlocked";
 const PASSWORD = "0607";

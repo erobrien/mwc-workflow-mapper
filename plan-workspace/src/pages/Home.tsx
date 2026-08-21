@@ -1,203 +1,204 @@
 import { Link } from "react-router-dom";
 import { PageShell } from "../components/Shell";
-import { Card, CardContent, Table, TH, TD, Badge, Loading, cn, toneFor } from "../components/ui";
-import { useData } from "../lib/data";
-import { FileText, ArrowRight, ShieldCheck, AlertTriangle, ListChecks } from "lucide-react";
+import { Card, CardContent, Badge } from "../components/ui";
+import { ArrowRight, Lock, Zap, Workflow, Radar } from "lucide-react";
 
-function Mini({ label, value, delta, note, problem }: { label: string; value: React.ReactNode; delta?: string; note?: string; problem?: boolean }) {
+/* Home is the operate-mode landing.
+   Two problems, the lock (Force + Curve + one WF per job), and the
+   cutover ladder, visible without scrolling past a manifesto. No
+   invented numbers. Everything else lives one click deep. */
+
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className={cn("rounded-md border bg-card px-3.5 py-3", problem && "border-l-[3px] border-l-destructive")}>
-      <div className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">{label}</div>
-      <div className={cn("mt-1 text-xl font-semibold tabular-nums", problem && "text-destructive")}>
-        {value}{delta && <span className="ms-1.5 text-sm font-medium text-emerald-600">{delta}</span>}
-      </div>
-      {note && <p className="mt-0.5 text-[11px] text-muted-foreground">{note}</p>}
-    </div>
+    <section className="space-y-3">
+      <h2 className="text-sm font-bold uppercase tracking-wider text-foreground/70">{title}</h2>
+      {children}
+    </section>
   );
 }
-function Tile({ icon: Icon, label, value, note, tone }: { icon: any; label: string; value: string; note: string; tone: "good" | "warning" | "neutral" }) {
+
+function ProblemCard({ n, title, body }: { n: number; title: string; body: React.ReactNode }) {
   return (
-    <div className="flex items-start gap-3 rounded-md border p-3.5">
-      <Icon className={cn("h-5 w-5 shrink-0", tone === "good" ? "text-emerald-600" : tone === "warning" ? "text-amber-600" : "text-muted-foreground")} />
-      <div>
-        <div className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">{label}</div>
-        <div className="font-semibold">{value}</div>
-        <div className="text-xs text-muted-foreground">{note}</div>
-      </div>
-    </div>
+    <Card className="card-lift">
+      <CardContent className="p-4">
+        <div className="mb-2 flex items-center gap-2">
+          <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-sm bg-accent text-xs font-bold text-accent-foreground">{n}</span>
+          <h3 className="font-bold leading-tight text-foreground">{title}</h3>
+        </div>
+        <p className="text-sm leading-relaxed text-foreground/90">{body}</p>
+      </CardContent>
+    </Card>
+  );
+}
+
+function LockCard({ icon: Icon, title, body }: { icon: any; title: string; body: React.ReactNode }) {
+  return (
+    <Card className="card-lift">
+      <CardContent className="p-4">
+        <div className="mb-1 flex items-center gap-2">
+          <Icon className="h-4 w-4 text-accent" aria-hidden />
+          <div className="text-sm font-bold text-foreground">{title}</div>
+        </div>
+        <p className="text-sm leading-relaxed text-foreground/85">{body}</p>
+      </CardContent>
+    </Card>
   );
 }
 
 export default function Home() {
-  const { data, isLoading, error } = useData();
-  if (isLoading) return <Loading />;
-  if (error || !data) return <div className="p-8 text-destructive">Failed to load data.json</div>;
-  const k = data.kpis;
-  const fmt = (n: number) => n.toLocaleString();
-  const open = data.decisions.filter((d) => d.status === "Open").length;
-  const locked = data.decisions.filter((d) => d.status === "Locked").length;
-  const crit = data.defects.filter((d) => d.severity === "Critical").slice(0, 4);
-
   return (
     <PageShell
-      title="Project workspace"
-      subtitle="A specification of the MWC GoHighLevel sub-account: what exists today (current state) and what we want it to become (target). Current state is captured live from the GHL API; every workflow deep-links into its builder. Search anything with ⌘K."
+      title="MWC GHL Refactor · locked v2 spec"
+      subtitle="Native GHL v2 rebuild. Force writes outcomes and dollars. Curve owns attribution. 16 single-purpose workflows, drafts unpublished. This site is the spec; it is not a publish."
       actions={
         <>
-          <Link to="/as-is" className="inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-sm hover:bg-muted"><FileText className="h-3.5 w-3.5" /> Current state</Link>
-          <Link to="/to-be" className="inline-flex items-center gap-1.5 rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground hover:opacity-90">Target <ArrowRight className="h-3.5 w-3.5" /></Link>
+          <Link
+            to="/to-be"
+            className="inline-flex items-center gap-1.5 rounded-sm border-2 border-border bg-card px-3 py-1.5 text-sm font-semibold text-foreground hover:bg-muted"
+          >
+            <Workflow className="h-3.5 w-3.5" /> Target
+          </Link>
+          <Link
+            to="/force"
+            className="inline-flex items-center gap-1.5 rounded-sm border-2 border-accent bg-accent px-3 py-1.5 text-sm font-semibold text-accent-foreground hover:opacity-90"
+          >
+            Force <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
         </>
       }
     >
-      {/* The two problems */}
-      <section>
-        <h2 className="mb-3 text-base font-semibold">The two problems this fixes</h2>
-        <p className="mb-3 text-xs text-foreground/80">
-          Fix path: (a) <Link to="/force" className="font-semibold text-primary hover:underline">Force (consult writer)</Link> becomes the sole writer of{" "}
-          <code className="rounded bg-muted px-1 text-[11px]">sale_outcome</code>,{" "}
-          <code className="rounded bg-muted px-1 text-[11px]">opportunity.monetaryValue</code>, and Sales stages on the Opportunity; (b) attribution owner is locked to{" "}
-          <a href="https://curvecompliance.com" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary hover:underline">Curve Compliance</a>{" "}
-          (curvecompliance.com). GHL keeps only coarse ops source (<code className="rounded bg-muted px-1 text-[11px]">next-lander</code> vs <code className="rounded bg-muted px-1 text-[11px]">wordpress-form</code>) + clinic slug; no GHL workflow copies gclid / fbc / fbp / wbraid / UTM onto the Opportunity.
-        </p>
-        <div className="mb-3 rounded-md border border-l-4 border-l-amber-500 bg-amber-50/60 p-3 text-xs text-amber-900 dark:bg-amber-950/40 dark:text-amber-200">
-          <div className="font-semibold">Cutover sequence (locked, this PR is NOT a GHL publish)</div>
-          <ol className="mt-1 list-decimal space-y-0.5 ps-5">
-            <li><b>Curve Compliance goes live first</b> — target next week. Booking app fires <code className="rounded bg-amber-100 px-1 py-0.5 text-[11px] text-amber-900 dark:bg-amber-950 dark:text-amber-200">lead</code> + <code className="rounded bg-amber-100 px-1 py-0.5 text-[11px] text-amber-900 dark:bg-amber-950 dark:text-amber-200">booked</code>; Force fires <code className="rounded bg-amber-100 px-1 py-0.5 text-[11px] text-amber-900 dark:bg-amber-950 dark:text-amber-200">SOLD</code> alongside <code className="rounded bg-amber-100 px-1 py-0.5 text-[11px] text-amber-900 dark:bg-amber-950 dark:text-amber-200">GHL_WF05_WEBHOOK_URL</code>. GHL workflows do NOT POST to Curve and do NOT fire CAPI; WF-13 stays dropped.</li>
-            <li><b>Publish the new GHL folder</b> only after Curve is live. Drafts only until then. See the <Link to="/force" className="font-semibold underline hover:no-underline">Force contract</Link>.</li>
-          </ol>
-        </div>
+      <Section title="The two problems this fixes">
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-          <div className="rounded-md border border-l-4 border-l-destructive bg-card p-5">
-            <div className="mb-2 flex items-center gap-2.5">
-              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-destructive text-sm font-semibold text-destructive-foreground">1</span>
-              <h3 className="font-semibold leading-tight">Deals are dispositioned on the contact, not the opportunity</h3>
-            </div>
-            <p className="text-sm leading-relaxed text-foreground/90">
-              PCCs record the sale outcome and amount on the <b>contact</b> (or a workflow does), so every new consultation <b>overwrites the last</b> and the <b>opportunity</b> — the only record GHL recognizes revenue on — stays empty. Revenue can't be reported per deal, per location, or per rep.
-            </p>
-            <div className="mt-3 inline-flex rounded-md bg-red-50 px-2.5 py-1 text-xs font-medium text-red-700 dark:bg-red-950 dark:text-red-300">Only ~9% of opportunities carry a dollar value</div>
-          </div>
-          <div className="rounded-md border border-l-4 border-l-destructive bg-card p-5">
-            <div className="mb-2 flex items-center gap-2.5">
-              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-destructive text-sm font-semibold text-destructive-foreground">2</span>
-              <h3 className="font-semibold leading-tight">Marketing attribution isn't carried through to win/loss</h3>
-            </div>
-            <p className="text-sm leading-relaxed text-foreground/90">
-              The lead source, UTM, and click IDs that drove each deal are never <b>carried onto the opportunity at win or loss</b> — so you can't connect <b>ad spend to Won revenue</b>, or see which campaigns produce sales versus no-shows and no-sales. What attribution exists sits on the contact and overwrites with each new touch.
-            </p>
-            <div className="mt-3 inline-flex rounded-md bg-red-50 px-2.5 py-1 text-xs font-medium text-red-700 dark:bg-red-950 dark:text-red-300">Click IDs captured on 0 of {fmt(k.contacts_scanned)} scanned ({fmt(k.contacts_total)} total)</div>
-          </div>
-        </div>
-      </section>
-
-      {/* Problem statement */}
-      <section className="rounded-md border bg-card p-5">
-        <div className="mb-3 flex flex-wrap items-baseline justify-between gap-3">
-          <h2 className="text-base font-semibold">Problem statement</h2>
-          <span className="font-mono text-[10.5px] uppercase tracking-wider text-muted-foreground">How we got here · What's broken · Target model</span>
-        </div>
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
-          <div>
-            <div className="mb-1.5 font-mono text-[10.5px] uppercase tracking-wider text-red-700 dark:text-red-400">How we got here</div>
-            <p className="text-sm leading-relaxed text-foreground/90">
-              <b>Multiple vendors have worked on this GHL sub-account over time</b>, each adding workflows, forms, and custom fields to whatever object was convenient. There was no central data model, no naming convention, no ownership boundary between marketing, sales, and clinical data. The result: <b>135 custom fields, all on the Contact</b>, including UTM/click-IDs that overwrite per touch and sale outcome + price + product data that overwrites per deal. The structural mistake was treating the Contact as a dumping ground for everything attached to a person, instead of attaching marketing data to its touch and sales data to its deal.
-            </p>
-          </div>
-          <div>
-            <div className="mb-1.5 font-mono text-[10.5px] uppercase tracking-wider text-red-700 dark:text-red-400">What's broken</div>
-            <p className="text-sm leading-relaxed text-foreground/90">
-              Revenue reporting requires each sale to be tied to a specific deal record, not to a person. Right now sale data lives on the Contact, so every new consultation overwrites the last. Workflow 05 creates a fake Won opportunity in the A&D pipeline every time someone attends a consultation, producing <b>939 false wins, ~50% of all recorded wins account-wide</b>. Click IDs are missing on <b>0 of {fmt(k.contacts_scanned)} scanned contacts</b> ({fmt(k.contacts_total)} total); TCPA consent is stored on <b>0 of {fmt(k.contacts_scanned)}</b>. The data we'd use to fix reporting is wrong at the source.
-            </p>
-          </div>
-          <div>
-            <div className="mb-1.5 font-mono text-[10.5px] uppercase tracking-wider text-emerald-700 dark:text-emerald-400">Target model</div>
-            <p className="text-sm leading-relaxed text-foreground/90">
-              The target puts each datum on the object that owns it: the <b>Opportunity</b> owns the sale outcome and dollar value (one record per deal, so nothing overwrites), and carries a copy of the attribution that drove it so revenue rolls up per sale, per location, and per rep. The <b>Contact</b> holds identity, durable profile, and consent. Clinical records stay in the external EMR. All three clinics run on <b>one sub-account with location as a variable</b> (Decision 13): workflows are built once and parameterized by <code className="rounded bg-muted px-1 text-[12px]">opportunity.location</code>, never cloned per clinic. See the <Link to="/to-be" className="text-primary hover:underline">Target</Link> spec for the full field model, the consolidated workflows, and the pipeline design.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Status tiles */}
-      <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
-        <Tile icon={ShieldCheck} label="Decisions" value={`${locked} of ${locked + open} locked`} note={open === 0 ? "All decisions resolved" : `${open} still open`} tone={open === 0 ? "good" : "warning"} />
-        <Tile icon={AlertTriangle} label="Critical findings" value={`${crit.length} Critical / ${data.defects.length} total`} note="All evidence-backed by API capture" tone="warning" />
-        <Tile icon={ListChecks} label="Target scope" value={`${k.workflows_published} → ${k.target_workflows} workflows`} note={`Pipelines ${k.pipelines_now} → ${k.pipelines_target}`} tone="neutral" />
-      </div>
-
-      {/* Scope */}
-      <section>
-        <h2 className="mb-3 text-base font-semibold">Scope of refactor</h2>
-        <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-4">
-          <Mini label="Workflows" value={k.workflows_published} delta={`→ ${k.target_workflows}`} note="Active workflows (drafts archived)" />
-          <Mini label="Pipelines" value={k.pipelines_now} delta={`→ ${k.pipelines_target}`} note="Sales + Retention + Referrals + Instagram" />
-          <Mini label="Custom fields" value={k.fields_total} note={`${k.fields_on_contact} contact · ${k.fields_on_opportunity_now} opp`} />
-          <Mini label="Total steps" value={fmt(k.steps_published_total)} note="across 38 published workflows" />
-          <Mini
-            label="New vs Renewal"
-            value={k.renewal_rate == null ? "— / —" : `${100 - (k.renewal_rate ?? 0)}% / ${k.renewal_rate}%`}
-            note="revenue split, pending opportunity scan (Decision 7)"
+          <ProblemCard
+            n={1}
+            title="Deals are dispositioned on the contact, not the opportunity"
+            body={
+              <>
+                Sale outcome and price land on the contact, so every new consult overwrites the last and the opportunity stays empty. Revenue cannot roll up per deal, clinic, or rep.
+              </>
+            }
+          />
+          <ProblemCard
+            n={2}
+            title="Attribution is never carried to win or loss"
+            body={
+              <>
+                Ad source, UTM, and click IDs live on the contact and overwrite per touch. Nothing ties spend to won revenue. Curve owns that closed loop, not GHL.
+              </>
+            }
           />
         </div>
-      </section>
+      </Section>
 
-      {/* Problems quantified */}
-      <section>
-        <h2 className="mb-3 text-base font-semibold">Problems quantified</h2>
-        <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-5">
-          <Mini label="False wins" value={k.ad_false_wins} note="A and D auto-Won, ~50% of all wins" problem />
-          <Mini label="Wins w/ $0 value" value={`${k.wins_with_zero_value_pct}%`} note="across sampled won deals" problem />
-          <Mini label="GHL payment txns" value={k.ghl_payment_transactions} note="revenue recorded on the Opportunity" problem />
-          <Mini label="Click IDs captured" value={`${k.click_ids_captured} / ${fmt(k.contacts_scanned)}`} note={`scanned sample of ${fmt(k.contacts_total)} total; attribution broken at collection`} problem />
-          <Mini label="TCPA consent stored" value={`${k.tcpa_consent_stored} / ${fmt(k.contacts_scanned)}`} note={`scanned sample of ${fmt(k.contacts_total)} total; no proof of opt-in`} problem />
+      <Section title="The lock">
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+          <LockCard
+            icon={Zap}
+            title="Force writes outcomes"
+            body={
+              <>
+                <Link to="/force" className="font-semibold text-foreground underline decoration-accent decoration-2 underline-offset-2 hover:decoration-foreground">Force</Link> is the sole writer of{" "}
+                <code className="rounded bg-muted px-1 text-[11px]">sale_outcome</code>,{" "}
+                <code className="rounded bg-muted px-1 text-[11px]">sale_type</code>,{" "}
+                <code className="rounded bg-muted px-1 text-[11px]">appt_status</code>, and dollars on the opportunity. Workflows never move Sales stages.
+              </>
+            }
+          />
+          <LockCard
+            icon={Radar}
+            title="Curve owns attribution"
+            body={
+              <>
+                Attribution owner is{" "}
+                <a href="https://curvecompliance.com" target="_blank" rel="noopener noreferrer" className="font-semibold text-foreground underline decoration-accent decoration-2 underline-offset-2 hover:decoration-foreground">Curve</a>. GHL keeps only coarse ops source (<code className="rounded bg-muted px-1 text-[11px]">next-lander</code> vs <code className="rounded bg-muted px-1 text-[11px]">wordpress-form</code>) and clinic slug. No GHL workflow POSTs to Curve; no CAPI fires from GHL.
+              </>
+            }
+          />
+          <LockCard
+            icon={Workflow}
+            title="One workflow per job"
+            body={
+              <>
+                16 live workflows (WF-01 to WF-17; WF-13 dropped). Native GHL only. Drafts live on staging; nothing publishes until Curve is live, then GHL.
+              </>
+            }
+          />
         </div>
-      </section>
+      </Section>
 
-      {/* Critical findings */}
-      <Card>
-        <CardContent>
-          <div className="mb-3 flex items-baseline justify-between">
-            <div><div className="font-semibold">Critical findings</div><div className="text-xs text-muted-foreground">Confirmed by API capture</div></div>
-            <Link to="/as-is" className="text-xs text-muted-foreground hover:text-foreground">All defects →</Link>
-          </div>
-          <div className="space-y-2">
-            {crit.map((d) => (
-              <div key={d.id} className="rounded-md border bg-card p-3.5">
-                <div className="mb-1.5 flex flex-wrap items-baseline gap-2.5">
-                  <span className="font-mono text-xs font-semibold text-muted-foreground">{d.id}</span>
-                  <span className="font-semibold">{d.title}</span>
-                  <span className="ms-auto"><Badge tone={toneFor(d.severity)}>{d.severity}</Badge></span>
+      <Section title="Cutover sequence">
+        <Card>
+          <CardContent className="p-4">
+            <ol className="space-y-2">
+              <li className="flex gap-3 rounded-sm border-2 border-border bg-card p-3">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-sm bg-accent text-xs font-bold text-accent-foreground">1</span>
+                <div className="min-w-0">
+                  <div className="flex flex-wrap items-baseline gap-2">
+                    <span className="font-semibold text-foreground">Curve goes live first</span>
+                    <Badge tone="good">next week</Badge>
+                  </div>
+                  <p className="mt-1 text-xs text-foreground/85">
+                    Booking app fires <code className="rounded bg-muted px-1 text-[11px]">lead</code> and <code className="rounded bg-muted px-1 text-[11px]">booked</code>. Force fires <code className="rounded bg-muted px-1 text-[11px]">SOLD</code>. GHL workflows do not POST to Curve.
+                  </p>
                 </div>
-                <p className="text-sm leading-relaxed">{d.impact}</p>
-                <p className="mt-1.5 text-xs text-muted-foreground"><span className="font-medium text-foreground">Evidence:</span> {d.evidence}</p>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+              </li>
+              <li className="flex gap-3 rounded-sm border-2 border-border bg-card p-3">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-sm bg-foreground text-xs font-bold text-background">2</span>
+                <div className="min-w-0">
+                  <div className="flex flex-wrap items-baseline gap-2">
+                    <span className="font-semibold text-foreground">Publish new GHL folder</span>
+                    <Badge tone="neutral">after Curve</Badge>
+                  </div>
+                  <p className="mt-1 text-xs text-foreground/85">
+                    Drafts stay unpublished until step 1 is verified. See the{" "}
+                    <Link to="/force" className="font-semibold underline decoration-accent decoration-2 underline-offset-2 hover:decoration-foreground">Force contract</Link>.
+                  </p>
+                </div>
+              </li>
+            </ol>
+          </CardContent>
+        </Card>
+      </Section>
 
-      {/* Decisions */}
-      <Card>
-        <CardContent>
-          <div className="mb-3 flex items-baseline justify-between">
-            <div><div className="font-semibold">Decisions</div><div className="text-xs text-muted-foreground">Locked 2026-06-16 · {open} still open</div></div>
-            <Link to="/decisions" className="text-xs text-muted-foreground hover:text-foreground">Decision log →</Link>
-          </div>
-          <Table>
-            <thead><tr><TH className="w-12">#</TH><TH>Decision</TH><TH>Choice</TH><TH className="w-24">Status</TH></tr></thead>
-            <tbody>
-              {data.decisions.map((d) => (
-                <tr key={d.n} className={d.status === "Open" ? "bg-amber-50/40 dark:bg-amber-950/20" : ""}>
-                  <TD className="font-mono text-xs font-semibold">{d.n}</TD>
-                  <TD className="font-medium">{d.decision}</TD>
-                  <TD className="text-sm">{d.choice}</TD>
-                  <TD><Badge tone={toneFor(d.status)}>{d.status}</Badge></TD>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        </CardContent>
-      </Card>
+      <Section title="Where to go">
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+          <Link to="/to-be" className="group block">
+            <Card className="card-lift h-full">
+              <CardContent className="p-4">
+                <div className="mb-1 flex items-center gap-2">
+                  <Workflow className="h-4 w-4 text-foreground/70" />
+                  <span className="text-base font-bold text-foreground">Target · locked v2</span>
+                  <ArrowRight className="ms-auto h-4 w-4 text-foreground/60 transition-transform group-hover:translate-x-0.5" />
+                </div>
+                <p className="text-sm text-foreground/85">
+                  16 workflows, one job each. Cards to build guides. Diagrams first.
+                </p>
+              </CardContent>
+            </Card>
+          </Link>
+          <Link to="/force" className="group block">
+            <Card className="card-lift h-full">
+              <CardContent className="p-4">
+                <div className="mb-1 flex items-center gap-2">
+                  <Zap className="h-4 w-4 text-accent" />
+                  <span className="text-base font-bold text-foreground">Force · consult writer</span>
+                  <ArrowRight className="ms-auto h-4 w-4 text-foreground/60 transition-transform group-hover:translate-x-0.5" />
+                </div>
+                <p className="text-sm text-foreground/85">
+                  Writes, no-writes, cutover ladder, conversion events.
+                </p>
+              </CardContent>
+            </Card>
+          </Link>
+        </div>
+      </Section>
+
+      <div className="rounded-sm border-2 border-border bg-muted/40 p-3 text-xs text-foreground/85">
+        <span className="inline-flex items-center gap-1.5 font-semibold text-foreground">
+          <Lock className="h-3.5 w-3.5 text-accent" /> Native GHL only.
+        </span>{" "}
+        No custom code, no new backends. Clinics: <code className="rounded bg-card px-1 text-[11px]">richmond</code>, <code className="rounded bg-card px-1 text-[11px]">virginia-beach</code>, <code className="rounded bg-card px-1 text-[11px]">newport-news</code>. Address is a string. No maps. Members not patients.
+      </div>
     </PageShell>
   );
 }

@@ -16,11 +16,11 @@ export function RoutedTabs({ base, tabs, children }: {
   return (
     <Ctx.Provider value={active}>
       <div className="space-y-4">
-        <div className="inline-flex flex-wrap gap-1 rounded-lg border bg-muted/40 p-1">
+        <div className="inline-flex flex-wrap gap-1 rounded-sm border-2 border-border bg-muted p-1">
           {tabs.map((t) => (
             <NavLink key={t.value} to={`${base}/${t.value}`}
-              className={cn("rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
-                active === t.value ? "bg-card text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground")}>
+              className={cn("rounded-sm border-2 px-3 py-1.5 text-sm font-semibold transition-colors",
+                active === t.value ? "border-accent bg-card text-foreground" : "border-transparent text-foreground/70 hover:text-foreground")}>
               {t.label}
             </NavLink>
           ))}

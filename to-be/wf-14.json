@@ -1,17 +1,22 @@
 {
   "id": "wf-14",
   "name": "Ambassador",
-  "job": "Ambassador referral flow. Referred person is created as a new contact and is never merged with the referrer. Re-enters WF-01. Uses the live ambassador-referral tag.",
+  "job": "Ambassador referral. T+21 fork from WF-06. Referred contact is NEW, never merged. Uses live tag ambassador-referral. Referred contact re-enters WF-01 (which owns the create-once opp).",
   "trigger": {
     "type": "Added from WF-06",
     "filters": ["T+21 from onboarding"],
-    "notes": "Also triggered on inbound ambassador form submission via Contact Created."
+    "notes": "Marketing window 08:00-21:00 contact TZ. Referred contact is NEW; never merged with the referrer. Live tag ambassador-referral is not renamed."
   },
   "named_steps": [
     {
       "name": "TRIGGER: Added by WF-06 at T+21 (ambassador ask)",
-      "comment": "Asks the member to refer someone. Must not write to the referrer's opportunity.",
+      "comment": "Asks the member to refer someone. Must not touch the referrer's opportunity.",
       "does_not_write": ["opportunity"]
+    },
+    {
+      "name": "SMS: Ambassador invite (inline, first in this sequence)",
+      "comment": "Inline SMS to the referring member. First SMS in this sequence carries Reply STOP to opt out. Members not patients. Marketing window 08:00-21:00 contact TZ.",
+      "writes": ["sms_send"]
     },
     {
       "name": "EMAIL: Ambassador invite (native template)",
@@ -19,20 +24,14 @@
       "writes": ["email_send"]
     },
     {
-      "name": "SMS: Ambassador invite (inline)",
-      "comment": "Inline SMS. Members not patients.",
-      "writes": ["sms_send"]
-    },
-    {
       "name": "IF-ELSE: On ambassador form submitted (referred contact created)",
-      "comment": "Reads the ambassador form submission. Referred contact is created via the form; must not merge with the referrer.",
+      "comment": "Referred contact is created via the ambassador form; must never merge with the referrer.",
       "does_not_write": []
     },
     {
       "name": "ADD-TAG: ambassador-referral (live tag on referred contact)",
-      "comment": "Live tag. Must not rename ambassador-referral.",
-      "writes": ["ambassador-referral"],
-      "does_not_write": ["next-lander"]
+      "comment": "Live tag. Do not rename ambassador-referral.",
+      "writes": ["ambassador-referral"]
     },
     {
       "name": "ADD-TAG: v2_ref_ambassador (referred contact audit)",
@@ -40,8 +39,13 @@
       "writes": ["v2_ref_ambassador"]
     },
     {
-      "name": "ADD-TO-WF: Re-enter WF-01 for referred contact",
-      "comment": "Referred contact enters the normal Lead Capture flow. Must not create a Sales opp here; WF-01 owns create-once.",
+      "name": "ADD-TAG: next-lander (referred contact, so WF-01 enrolls)",
+      "comment": "Live tag next-lander is required by the WF-01 trigger (Contact Created + next-lander). WF-01 owns create-once for the Sales opp. Do not rename next-lander.",
+      "writes": ["next-lander"]
+    },
+    {
+      "name": "ADD-TO-WF: Referred contact enters WF-01 Lead Capture",
+      "comment": "Referred contact goes through normal Lead Capture. WF-01 owns create-once; do not create a Sales opp here.",
       "writes": []
     }
   ],

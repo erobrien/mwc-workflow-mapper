@@ -1,66 +1,52 @@
 {
   "id": "wf-12",
   "name": "Call Disposition",
-  "job": "Single call-disposition graph, keyed on channel not clinic. Tags v2_source_phone. No remove-and-recreate pattern.",
+  "job": "Single call-disposition graph keyed on channel (not clinic). Native update-in-place; never remove-and-recreate. No Sales opp create. No attribution write.",
   "trigger": {
     "type": "Call Status changed",
-    "filters": [
-      "channel = phone"
-    ],
-    "notes": "One graph total; do not fork per clinic."
+    "filters": ["channel = phone"],
+    "notes": "One graph total; do not fork per clinic. Transactional; no quiet hours. Curve owns attribution; do not write utm/gclid/fbc/fbp anywhere here."
   },
   "named_steps": [
     {
       "name": "TRIGGER: Call Status changed (channel=phone)",
-      "comment": "Sole call-dispo entry. Must not fork per clinic slug.",
+      "comment": "Sole call-dispo entry. Do not fork per clinic slug.",
       "does_not_write": []
     },
     {
       "name": "ADD-TAG: v2_source_phone",
-      "comment": "New v2 phone-source tag.",
-      "writes": [
-        "v2_source_phone"
-      ]
+      "comment": "New v2 phone-source tag on any call event.",
+      "writes": ["v2_source_phone"]
     },
     {
-      "name": "IF-ELSE: Branch on call disposition (connected | voicemail | missed | wrong-number)",
-      "comment": "Single graph. Must not remove and recreate the contact or opp; native update in place.",
-      "does_not_write": [
-        "contact",
-        "opportunity"
-      ]
+      "name": "SET-FIELD: contact.last_call_disposition (native update-in-place)",
+      "comment": "Native field update. Never delete-and-recreate the contact or opp. No Sales opp create.",
+      "writes": ["contact.last_call_disposition"],
+      "does_not_write": ["opportunity"]
     },
     {
-      "name": "SET-FIELD: contact.last_call_disposition",
-      "comment": "Native update in place. Must not delete-and-recreate.",
-      "writes": [
-        "contact.last_call_disposition"
-      ]
+      "name": "IF-ELSE: Branch on call outcome (connected | voicemail | missed | wrong-number)",
+      "comment": "Single graph. Curve owns attribution; must not write utm/gclid/fbc/fbp.",
+      "does_not_write": ["contact.gclid", "contact.fbc", "contact.fbp", "opportunity"]
     },
     {
-      "name": "SMS: Voicemail follow-up (inline, voicemail branch)",
-      "comment": "Inline SMS. Honors quiet hours 8am-9pm contact TZ.",
-      "writes": [
-        "sms_send"
-      ]
+      "name": "SMS: Voicemail follow-up (inline, voicemail branch, first in this sequence)",
+      "comment": "Inline SMS. First SMS in this sequence carries Reply STOP to opt out. Transactional; no quiet hours.",
+      "writes": ["sms_send"]
     },
     {
-      "name": "SMS: Missed follow-up (inline, missed branch)",
-      "comment": "Inline SMS.",
-      "writes": [
-        "sms_send"
-      ]
+      "name": "SMS: Missed follow-up (inline, missed branch, first in this sequence)",
+      "comment": "Inline SMS. First SMS in this sequence carries Reply STOP to opt out. Transactional; no quiet hours.",
+      "writes": ["sms_send"]
     },
     {
       "name": "ADD-TAG: v2_bad_number (wrong-number branch)",
-      "comment": "Delegates to compliance semantics; WF-11 still owns the field-level write.",
-      "writes": [
-        "v2_bad_number"
-      ]
+      "comment": "Signals compliance semantics; WF-11 still owns the field-level write.",
+      "writes": ["v2_bad_number"]
     },
     {
       "name": "ADD-TO-WF: Route wrong-number to WF-11 Compliance",
-      "comment": "Compliance owns the DND and bad-number field writes.",
+      "comment": "WF-11 owns DND and bad-number field writes.",
       "writes": []
     }
   ],

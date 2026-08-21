@@ -255,23 +255,24 @@ WF_META: dict[str, dict] = {
     },
     "05": {
         "purpose": (
-            "Central router for Force outcome writes. Reads opportunity.sale_outcome_v2 "
-            "and routes downstream. Workflows never move Sales stages here."
+            "Central router. Reads opportunity.sale_outcome_v2 and appt_status "
+            "from Force. Routes downstream. Never moves Sales stages. WF-13 "
+            "dropped from v2 (Curve owns conversions); SOLD + new goes to WF-06 only."
         ),
         "diagram_key": "wf05",
         "trigger": {
             "type": "Inbound webhook (Force writes)",
             "filters": [
                 "Force posts sale_outcome, sale_type, appt_status, ad_reason to GHL_WF05_WEBHOOK_URL",
-                "MAR payloads are dropped at the top of the graph and never fire downstream",
+                "MAR payloads drop at the head guard and never fire downstream",
             ],
-            "target": "Trigger id ryJLJ1McWWOHlAvBRsI3. The webhook URL is UI-only; copy it from the WF-05 draft in staging and paste it into Force config as GHL_WF05_WEBHOOK_URL. The JWT GET does not return this URL.",
+            "target": "Trigger id ryJLJ1McWWOHlAvBRsI3. Webhook URL is UI-only; copy from the WF-05 draft in staging into Force config as GHL_WF05_WEBHOOK_URL. The JWT GET does not return this URL.",
         },
         "prerequisites": [
-            "Force is the only writer of sale_outcome (SOLD | AD | MUT | MAR), sale_type (new | renewal), and appt_status (showed | no-show | cancel | reschedule).",
+            "Force is the sole writer of sale_outcome (SOLD | AD | MUT | MAR), sale_type (new | renewal), appt_status (showed | no-show | cancel | reschedule).",
             "opportunity.sale_outcome_v2 is the routing field. Legacy contact.sale_outcome labels are not used.",
-            "WF-05 never moves Sales stages (New Lead to Booked to Showed to Won). Force moves stages.",
-            "GHL router still ADD-TO-WF WF-13 on SOLD + new. Site cards hide WF-13 (dropped_from_v2) but the router node exists in the shell.",
+            "WF-05 never moves Sales stages (New Lead → Booked → Showed → Won). Force moves stages.",
+            "WF-13 stays dropped from the v2 spec. SOLD + new routes to WF-06 only. Live GHL shell not rewritten in this PR (no GHL writes).",
         ],
         "messages": [{"step": "n/a", "channel": "n/a", "body": "System workflow. No SMS or email."}],
         "settings": {
@@ -279,10 +280,10 @@ WF_META: dict[str, dict] = {
             "allow_reentry": "Yes; every Force write re-enters the router.",
             "stop_on_response": "n/a (no outbound SMS).",
             "reentry_caveat": "MAR always drops; every other outcome routes once.",
-            "status": "Draft v5 on staging shell 45a0f21e-244c-4d66-8ee1-232567662624. Unpublished.",
+            "status": "Draft v6 on staging shell 45a0f21e-244c-4d66-8ee1-232567662624. Unpublished. WF-13 route removed from the spec (2026-08-21 PT); live GHL shell unchanged.",
         },
         "test": [
-            "Send test webhooks for each sale_outcome value. Confirm SOLD+new adds to WF-06 AND WF-13 (GHL router truth); SOLD renewal adds to WF-09; AD adds to WF-07; MUT adds to WF-11; MAR drops.",
+            "Send test webhooks for each sale_outcome value. SOLD + new adds to WF-06 only (WF-13 dropped). SOLD + renewal adds to WF-09. AD adds to WF-07. MUT adds to WF-11. MAR drops.",
             "Send appt_status=reschedule and confirm the router sends it to WF-03 (not WF-08).",
             "Confirm no workflow moves opp stages.",
         ],
@@ -290,8 +291,8 @@ WF_META: dict[str, dict] = {
     },
     "06": {
         "purpose": (
-            "Onboard SOLD new members. Sole writer of contact.membership_status "
-            "and tag v2_status_active. Schedules WF-10 feedback and WF-14 ambassador."
+            "Onboard SOLD + sale_type=new members. Tag v2_status_active, welcome "
+            "SMS, short 3d and 7d check-in SMS, then fork to WF-10 at T+14 and WF-14 at T+21."
         ),
         "diagram_key": "wf06",
         "trigger": {
@@ -302,31 +303,43 @@ WF_META: dict[str, dict] = {
         "prerequisites": [
             "v2 tag v2_status_active exists on staging (P5yoBUi86hQs0Br5CIqI).",
             "WF-10 and WF-14 are ready to receive the T+14 and T+21 forks.",
+            "Renewals never enter WF-06 (they route to WF-09 via WF-05).",
         ],
         "messages": [
             {
-                "step": "SMS welcome after SOLD",
+                "step": "SMS welcome after SOLD (first in sequence)",
                 "channel": "SMS",
-                "body": "Inline SMS. References contact.current_clinic_address and contact.current_clinic_phone. First SMS carries Reply STOP to opt out.",
+                "body": "Inline SMS. References {{contact.current_clinic_address}} and {{contact.current_clinic_phone}}. First SMS in this sequence carries Reply STOP to opt out.",
+            },
+            {
+                "step": "SMS 3d check-in (logistics only)",
+                "channel": "SMS",
+                "body": "Short inline SMS. Logistics only (no symptom / treatment talk). Members not patients.",
+            },
+            {
+                "step": "SMS 7d check-in (logistics only)",
+                "channel": "SMS",
+                "body": "Short inline SMS. Logistics only (no symptom / treatment talk).",
             },
         ],
         "settings": {
             "quiet_hours": QUIET_TRANSACTIONAL,
             "allow_reentry": "No. One onboarding per SOLD new event.",
-            "stop_on_response": "Yes.",
+            "stop_on_response": "Yes (WF-11 owns DND).",
             "reentry_caveat": "Renewals never enter WF-06 (they go to WF-09).",
-            "status": "Draft v3 on staging shell 5d036b8a-4336-47c8-9ebe-77f3439bc95c. Check-in copy between the 3d/7d/14d/21d waits is not authored yet.",
+            "status": "Draft v4 on staging shell 5d036b8a-4336-47c8-9ebe-77f3439bc95c. 3d + 7d check-in SMS added (2026-08-21 PT). Unpublished.",
         },
         "test": [
-            "Send a SOLD+new Force webhook and confirm v2_status_active + welcome SMS + WF-10 at T+14 + WF-14 at T+21.",
-            "Send a SOLD+renewal webhook and confirm WF-06 is not entered.",
+            "Send a SOLD + new Force webhook and confirm v2_status_active tag + welcome SMS + 3d check-in SMS + 7d check-in SMS + WF-10 at T+14 + WF-14 at T+21.",
+            "Send a SOLD + renewal webhook and confirm WF-06 is not entered.",
+            "Confirm check-in SMS bodies stay logistics-only (no symptom / treatment talk).",
         ],
         "depends_on": ["WF-05", "WF-10", "WF-14"],
     },
     "07": {
         "purpose": (
-            "Handle sale_outcome=AD (Advise and Decline). Tag v2_outcome_ad, "
-            "send the first logistics SMS, wait 35 days, hand to WF-09."
+            "sale_outcome_v2 = AD. Tag v2_outcome_ad, one AD SMS, wait 35d, "
+            "hand to WF-09. Never fires Meta pixel or CAPI (Curve owns conversions)."
         ),
         "diagram_key": "wf07-08",
         "trigger": {
@@ -336,25 +349,26 @@ WF_META: dict[str, dict] = {
         },
         "prerequisites": [
             "v2_outcome_ad tag exists on staging.",
-            "Objection-branch copy (v2_objection_price/timing/fit/other) is spec-only for now; the on-shell graph is a single lane.",
+            "Objection branches (price / timing / fit / other) stay out of this graph until they already exist in GHL. Do not invent branches.",
         ],
         "messages": [
             {
-                "step": "SMS After AD first touch",
+                "step": "SMS After AD first touch (first in sequence)",
                 "channel": "SMS",
-                "body": "Inline SMS. First SMS carries Reply STOP to opt out.",
+                "body": "Inline SMS. First SMS in this sequence carries Reply STOP to opt out. Members not patients. Transactional; no quiet hours.",
             },
         ],
         "settings": {
             "quiet_hours": QUIET_TRANSACTIONAL,
-            "allow_reentry": "No.",
-            "stop_on_response": "Yes.",
-            "reentry_caveat": "AD never fires the Meta pixel or CAPI.",
+            "allow_reentry": "No. One AD pass per event.",
+            "stop_on_response": "Yes (WF-11 owns DND).",
+            "reentry_caveat": "AD never fires the Meta pixel or CAPI. Curve owns conversions.",
             "status": "Draft v3 on staging shell 01ca0908-36cf-456c-aa1d-04c999e0a598. Unpublished.",
         },
         "test": [
             "Send AD via Force and confirm the tag lands and the SMS fires.",
             "Confirm hand-off to WF-09 after 35d.",
+            "Confirm no pixel and no CAPI fire from this workflow.",
         ],
         "depends_on": ["WF-05", "WF-09"],
     },
@@ -399,46 +413,63 @@ WF_META: dict[str, dict] = {
     },
     "09": {
         "purpose": (
-            "Long-tail nurture. Also owns the renewal_date contact-field "
-            "sub-flow, which is blocked at the trigger until backfill lands."
+            "Long-tail nurture for cold contacts handed off from WF-02, WF-07, "
+            "WF-08. Renewal_date sub-flow is GATED until backfill. No opps, no dollars."
         ),
         "diagram_key": "retention",
         "trigger": {
-            "type": "Contact renewal_date changed (sub-flow, gated) OR Added by WF-02/07/08/06",
+            "type": "Added by WF-02 / WF-07 / WF-08 (renewal_date sub-flow gated)",
             "filters": [
                 "Renewal sub-flow gated until backfill_ready is true",
                 "Other entries via ADD-TO-WF only",
             ],
-            "target": "Contact custom-field trigger on renewal_date + hand-offs from upstream WFs.",
+            "target": "Renewal_date custom-field trigger stays blocked until backfill. Long-tail entrants arrive via ADD-TO-WF from upstream WFs.",
         },
         "prerequisites": [
             "renewal_date backfill is not done yet; keep the renewal sub-flow gated.",
-            "The on-shell graph is a single WAIT 120d right now. Nurture bodies come next.",
+            "Native email templates EML | WF-09 | Nurture 1, EML | WF-09 | Nurture 2, EML | WF-09 | Renewal window.",
+            "v2 tag v2_nurtured exists on staging.",
         ],
         "messages": [
             {
-                "step": "Nurture bodies",
-                "channel": "n/a",
-                "body": "SMS and email bodies are not authored yet. The shell is a 120-day wait.",
-            }
+                "step": "EMAIL Nurture 1",
+                "channel": "Email",
+                "body": "Native template EML | WF-09 | Nurture 1. Marketing window 08:00-21:00 contact TZ.",
+            },
+            {
+                "step": "EMAIL Nurture 2 (+14d)",
+                "channel": "Email",
+                "body": "Native template EML | WF-09 | Nurture 2. Marketing window 08:00-21:00 contact TZ.",
+            },
+            {
+                "step": "SMS Nurture check-in (+30d, first in sequence)",
+                "channel": "SMS",
+                "body": "Short inline SMS. First SMS in this sequence carries Reply STOP to opt out. Members not patients. Marketing window 08:00-21:00 contact TZ.",
+            },
+            {
+                "step": "EMAIL Renewal window (GATED)",
+                "channel": "Email",
+                "body": "Native template EML | WF-09 | Renewal window. Only fires when backfill_ready is true. Renewal sub-flow stays blocked until backfill.",
+            },
         ],
         "settings": {
             "quiet_hours": QUIET_MARKETING,
-            "allow_reentry": "Yes.",
-            "stop_on_response": "Yes.",
-            "reentry_caveat": "The renewal sub-flow will exit if backfill_ready is false.",
-            "status": "Draft v2 on staging shell cbc14e90-4507-42cd-afcc-f7410d7f4554. Unpublished.",
+            "allow_reentry": "Yes on each upstream hand-off.",
+            "stop_on_response": "Yes (WF-11 owns DND).",
+            "reentry_caveat": "Renewal sub-flow exits when backfill_ready is false. WF-09 never creates opps and never writes dollars.",
+            "status": "Draft v3 on staging shell cbc14e90-4507-42cd-afcc-f7410d7f4554. Unpublished. Renewal_date trigger stays GATED until backfill lands.",
         },
         "test": [
-            "Set renewal_date on a test contact and confirm the sub-flow trigger fires but exits on backfill guard.",
-            "Confirm long-tail entries from WF-02, WF-07, WF-08 land in WF-09.",
+            "Enroll via WF-02 / WF-07 / WF-08 and confirm the +14d and +30d cadence fires inside 08:00-21:00 contact TZ.",
+            "Set renewal_date on a test contact and confirm the sub-flow trigger fires but exits at the backfill guard.",
+            "Confirm v2_nurtured lands and no Sales opp is created.",
         ],
         "depends_on": ["WF-02", "WF-06", "WF-07", "WF-08"],
     },
     "10": {
         "purpose": (
-            "Ask for member feedback and store the score on "
-            "contact.latest_feedback_score. Sole writer of that field."
+            "Feedback survey at T+14 from WF-06. Sole writer of "
+            "contact.latest_feedback_score. Uses {{contact.current_review_link}} as an opaque string; no Google Maps."
         ),
         "diagram_key": "retention",
         "trigger": {
@@ -447,109 +478,121 @@ WF_META: dict[str, dict] = {
             "target": "WF-06 hand-off only.",
         },
         "prerequisites": [
-            "Native email template BFhyqVQXEYVasm4hJWvE: EML | WF-10 | Feedback invite.",
+            "Native email template EML | WF-10 | Feedback invite (BFhyqVQXEYVasm4hJWvE).",
             "contact.latest_feedback_score exists.",
-            "contact.current_review_link is populated (WF-01 stamp).",
+            "contact.current_review_link is populated (WF-01 stamp). Treat as opaque string; no Google Maps.",
         ],
         "messages": [
             {
-                "step": "SMS Feedback invite",
+                "step": "SMS Feedback invite (first in sequence)",
                 "channel": "SMS",
-                "body": "Inline SMS. References contact.current_review_link. First SMS carries Reply STOP to opt out.",
+                "body": "Inline SMS. References {{contact.current_review_link}} as a string. First SMS in this sequence carries Reply STOP to opt out. Members not patients. Marketing window 08:00-21:00 contact TZ.",
             },
             {
                 "step": "EMAIL Feedback invite",
                 "channel": "Email",
-                "body": "Native template EML | WF-10 | Feedback invite (BFhyqVQXEYVasm4hJWvE). Also references contact.current_review_link.",
+                "body": "Native template EML | WF-10 | Feedback invite (BFhyqVQXEYVasm4hJWvE). References {{contact.current_review_link}}.",
             },
             {
                 "step": "SMS Feedback nudge (+3d)",
                 "channel": "SMS",
-                "body": "Inline SMS.",
+                "body": "Short inline SMS. Marketing window 08:00-21:00 contact TZ.",
             },
         ],
         "settings": {
             "quiet_hours": QUIET_MARKETING,
             "allow_reentry": "No. One feedback ask per onboarding.",
             "stop_on_response": "Yes. Exits on survey submit as well.",
-            "reentry_caveat": "Only WF-10 writes contact.latest_feedback_score.",
+            "reentry_caveat": "Only WF-10 writes contact.latest_feedback_score. Never touches opp.",
             "status": "Draft v3 on staging shell 37b1202a-5397-4e08-92da-bb638c862a2a. Unpublished.",
         },
         "test": [
             "Enroll via WF-06 T+14 and confirm invite SMS + email fire only inside 08:00-21:00 contact TZ.",
             "Submit the survey and confirm the score writes and the workflow exits.",
+            "Confirm the review link renders as a plain string; no Google Maps embed anywhere.",
         ],
         "depends_on": ["WF-06"],
     },
     "11": {
         "purpose": (
-            "Compliance and errors. Sole writer of DND and "
-            "contact.sms_consent_status. STOP inbound plus a MUT front-gate "
-            "so MUT routing does not get treated like a STOP."
+            "Compliance and errors. Sole writer of DND and contact.sms_consent_status. "
+            "MUT front-gate at the top so MUT contacts never hit the STOP path. Not middleware."
         ),
         "diagram_key": "support",
         "trigger": {
-            "type": "dnd_contact inbound (STOP) + Added by WF-05 (MUT)",
+            "type": "dnd_contact inbound (STOP) OR Added by WF-05 (MUT)",
             "filters": [
                 "Inbound SMS STOP fires the dnd_contact trigger",
-                "WF-05 MUT branch adds contacts here too",
+                "WF-05 MUT branch also adds contacts here",
             ],
             "target": "Trigger id gpdYb7c2Dkkt3tYJnClP. targetActionId points at the MUT front-gate IF-ELSE.",
         },
         "prerequisites": [
             "v2 tags v2_status_dnd, v2_email_bounced, v2_bad_number.",
             "contact.sms_consent_status is writable.",
-            "MUT front-gate lives at the top so MUT contacts do not receive the STOP confirm or the opted_out write.",
+            "MUT front-gate lives at the top so MUT contacts skip DND, skip opted_out, and never receive the STOP confirm SMS.",
         ],
         "messages": [
             {
-                "step": "SMS STOP confirm (false branch only)",
+                "step": "SMS STOP confirm (non-MUT branch only, first in sequence)",
                 "channel": "SMS",
-                "body": "Inline confirm that the contact is opted out. Not sent to MUT contacts (front-gate true branch).",
+                "body": "Inline confirm that the contact is opted out. First SMS in this sequence carries Reply STOP to opt out. Never sent to MUT contacts (front-gate exits above). Transactional; no quiet hours.",
             }
         ],
         "settings": {
             "quiet_hours": QUIET_TRANSACTIONAL,
             "allow_reentry": "Yes on repeat STOP.",
             "stop_on_response": "n/a (this is the STOP handler).",
-            "reentry_caveat": "MUT contacts hit WAIT 1s only. No DND, no opted_out, no STOP confirm.",
-            "status": "Draft v4 on staging shell 9aab45f8-6f5b-467a-9f05-6981446c48f2. Unpublished.",
+            "reentry_caveat": "MUT contacts hit WAIT 1s and exit. No DND, no opted_out, no STOP-confirm SMS for MUT.",
+            "status": "Draft v5 on staging shell 9aab45f8-6f5b-467a-9f05-6981446c48f2. MUT front-gate + STOP path both authored in named_steps (2026-08-21 PT). Unpublished.",
         },
         "test": [
-            "Send inbound STOP and confirm DND flips, tags land, and STOP-confirm SMS fires.",
-            "Route a MUT contact via WF-05 and confirm the front-gate suppresses the STOP path.",
+            "Send inbound STOP and confirm DND flips, v2_status_dnd tag lands, sms_consent_status = opted_out, and the STOP-confirm SMS fires.",
+            "Route a MUT contact via WF-05 and confirm the front-gate exits cleanly (no DND, no opted_out, no STOP confirm).",
+            "Confirm WF-11 is the only workflow that writes DND or sms_consent_status.",
         ],
         "depends_on": ["WF-05"],
     },
     "12": {
         "purpose": (
-            "Single call-disposition graph. Keyed on channel, not clinic. "
-            "Tags v2_source_phone. Never remove-and-recreate a contact or opp."
+            "Single call-disposition graph keyed on channel (not clinic). Tag "
+            "v2_source_phone, native update-in-place. No Sales opp create. Curve owns attribution."
         ),
         "diagram_key": "wf12",
         "trigger": {
             "type": "Call Status changed (channel = phone)",
             "filters": ["Sole call-dispo entry; do not fork per clinic slug"],
-            "target": "Native call-status trigger only.",
+            "target": "Native Call Status changed trigger only. One graph total.",
         },
-        "prerequisites": ["v2 tag v2_source_phone exists on staging (HuqiCRyopgdHESALDnKN)."],
+        "prerequisites": [
+            "v2 tag v2_source_phone exists on staging (HuqiCRyopgdHESALDnKN).",
+            "contact.last_call_disposition is writable via native update-in-place.",
+            "Curve owns attribution; do not write utm / gclid / fbc / fbp on the contact or opp.",
+        ],
         "messages": [
             {
-                "step": "Per-disposition SMS",
-                "channel": "n/a",
-                "body": "Per-disposition copy is not authored yet. The on-shell graph tags v2_source_phone only.",
-            }
+                "step": "SMS Voicemail follow-up (voicemail branch, first in sequence)",
+                "channel": "SMS",
+                "body": "Short inline SMS. First SMS in this sequence carries Reply STOP to opt out. Members not patients. Transactional; no quiet hours.",
+            },
+            {
+                "step": "SMS Missed follow-up (missed branch, first in sequence)",
+                "channel": "SMS",
+                "body": "Short inline SMS. First SMS in this sequence carries Reply STOP to opt out. Transactional; no quiet hours.",
+            },
         ],
         "settings": {
             "quiet_hours": QUIET_TRANSACTIONAL,
-            "allow_reentry": "Yes on each call.",
-            "stop_on_response": "Yes.",
-            "reentry_caveat": "Native update-in-place. Never delete-and-recreate the contact.",
-            "status": "Draft v2 on staging shell fa1c829c-5c6b-459a-81b9-19b737691a2c. Unpublished.",
+            "allow_reentry": "Yes on each call event.",
+            "stop_on_response": "Yes (WF-11 owns DND).",
+            "reentry_caveat": "Native update-in-place; never delete-and-recreate the contact or opp. Wrong-number branch routes to WF-11.",
+            "status": "Draft v3 on staging shell fa1c829c-5c6b-459a-81b9-19b737691a2c. Branches on connected / voicemail / missed / wrong-number authored (2026-08-21 PT). Unpublished.",
         },
         "test": [
-            "Change call status on a test contact and confirm the tag lands.",
-            "Wrong-number branch routes into WF-11 Compliance.",
+            "Change call status to voicemail and confirm v2_source_phone lands, contact.last_call_disposition updates in place, and the voicemail SMS fires.",
+            "Change call status to missed and confirm the missed SMS fires.",
+            "Route a wrong-number call and confirm v2_bad_number lands and WF-11 Compliance is enrolled.",
+            "Confirm no Sales opp is created and no utm / gclid / fbc / fbp writes happen.",
         ],
         "depends_on": ["WF-11"],
     },
@@ -589,76 +632,86 @@ WF_META: dict[str, dict] = {
     },
     "14": {
         "purpose": (
-            "Ambassador referral. The referred contact is created as a new "
-            "contact (never merged) and re-enters WF-01. Live tag ambassador-referral."
+            "Ambassador referral. T+21 fork from WF-06. Referred contact is NEW, "
+            "never merged. Live tag ambassador-referral. Referred contact re-enters WF-01 (create-once owner)."
         ),
         "diagram_key": "support",
         "trigger": {
-            "type": "Added by WF-06 at T+21 (also inbound ambassador form)",
+            "type": "Added by WF-06 at T+21",
             "filters": [
-                "Enrolled from WF-06 T+21 or via Contact Created on the ambassador form",
+                "Enrolled from WF-06 T+21",
+                "Referred contact created via ambassador form",
             ],
-            "target": "WF-06 hand-off primary; form-created contact for the referred contact path.",
+            "target": "WF-06 hand-off for the referrer path. Ambassador form creates the referred contact; it is stamped with next-lander and enrolled in WF-01.",
         },
         "prerequisites": [
             "Live tag ambassador-referral exists in the account. Do not rename.",
             "Ambassador form is live.",
+            "Native email template EML | WF-14 | Ambassador invite.",
+            "v2 tag v2_ref_ambassador exists.",
         ],
         "messages": [
             {
-                "step": "Ambassador invite and referred welcome",
-                "channel": "n/a",
-                "body": "Full step bodies are not authored yet. The on-shell graph is a 1-step named shell.",
-            }
+                "step": "SMS Ambassador invite (referrer, first in sequence)",
+                "channel": "SMS",
+                "body": "Inline SMS to the referring member. First SMS in this sequence carries Reply STOP to opt out. Members not patients. Marketing window 08:00-21:00 contact TZ.",
+            },
+            {
+                "step": "EMAIL Ambassador invite (referrer)",
+                "channel": "Email",
+                "body": "Native template EML | WF-14 | Ambassador invite.",
+            },
         ],
         "settings": {
             "quiet_hours": QUIET_MARKETING,
-            "allow_reentry": "Yes. The referrer can invite multiple people; each referred contact is created fresh.",
-            "stop_on_response": "Yes.",
-            "reentry_caveat": "Referred contact must never merge with the referrer.",
-            "status": "Draft v2 on staging shell 6b090c34-cc66-43bf-8939-2868a6b8436b. Unpublished.",
+            "allow_reentry": "Yes. The referrer can invite multiple members; each referred contact is created fresh.",
+            "stop_on_response": "Yes (WF-11 owns DND).",
+            "reentry_caveat": "Referred contact must never merge with the referrer. Referred contact is stamped next-lander so WF-01 create-once fires the Sales opp.",
+            "status": "Draft v3 on staging shell 6b090c34-cc66-43bf-8939-2868a6b8436b. Named steps + invite copy authored (2026-08-21 PT). Unpublished.",
         },
         "test": [
-            "Invite via the ambassador form and confirm the referred contact enters WF-01 as a next-lander.",
-            "Confirm the referrer opp is not touched.",
+            "Trigger the T+21 ADD-TO-WF from WF-06 and confirm the SMS + email invite fire inside 08:00-21:00 contact TZ.",
+            "Submit the ambassador form as a NEW contact and confirm ambassador-referral + v2_ref_ambassador + next-lander tags land and WF-01 enrolls the referred contact.",
+            "Confirm the referrer's opp is not touched and no merge happens.",
         ],
         "depends_on": ["WF-01", "WF-06"],
     },
     "15": {
         "purpose": (
-            "PCC QR referral. utm_source=pcc_qr contacts get the live tag "
-            "pcc-referral and re-enter WF-01 as new next-lander leads."
+            "PCC QR referral routing. Enrolls on Contact Created + utm_source=pcc_qr. "
+            "Stamps live tag pcc-referral and next-lander so WF-01 owns create-once for the Sales opp."
         ),
         "diagram_key": "support",
         "trigger": {
             "type": "Contact Created (utm_source = pcc_qr)",
             "filters": ["utm_source = pcc_qr"],
-            "target": "Native Contact Created trigger with the utm_source filter.",
+            "target": "Native Contact Created trigger with the utm_source=pcc_qr filter.",
         },
-        "prerequisites": ["Live tag pcc-referral. Do not rename."],
-        "messages": [
-            {
-                "step": "PCC referral onboarding",
-                "channel": "n/a",
-                "body": "Full step bodies are not authored yet. The on-shell graph is a 1-step named shell.",
-            }
+        "prerequisites": [
+            "Live tag pcc-referral exists in the account. Do not rename.",
+            "v2 tag v2_ref_pcc exists.",
+            "contact.referral_channel is writable.",
+            "Live tag next-lander exists (required by the WF-01 trigger). Do not rename next-lander.",
         ],
+        "messages": [{"step": "n/a", "channel": "n/a", "body": "Routing-only workflow. No customer-facing SMS or email; the referred contact then enters WF-01 for welcome copy."}],
         "settings": {
             "quiet_hours": QUIET_INTERNAL,
             "allow_reentry": "No. One PCC-referral tag per contact.",
-            "stop_on_response": "n/a.",
-            "reentry_caveat": "Referred contact enters WF-01 for the create-once Sales opp.",
-            "status": "Draft v2 on staging shell 158edd25-594d-4506-b021-c8acb7943969. Unpublished.",
+            "stop_on_response": "n/a (no outbound SMS in this workflow; WF-11 owns DND).",
+            "reentry_caveat": "Referred contact enters WF-01 for the create-once Sales opp. WF-15 never creates a Sales opp.",
+            "status": "Draft v3 on staging shell 158edd25-594d-4506-b021-c8acb7943969. Adds next-lander stamp so WF-01 enrolls (2026-08-21 PT). Unpublished.",
         },
         "test": [
-            "Create a contact with utm_source=pcc_qr and confirm the tag lands and WF-01 receives the contact.",
+            "Create a contact with utm_source=pcc_qr and confirm pcc-referral + v2_ref_pcc + next-lander tags land, contact.referral_channel = pcc_qr, and WF-01 enrolls the contact.",
+            "Confirm no Sales opp is created inside WF-15; the opp is created by WF-01 create-once.",
+            "Confirm contact.location_* and contact.current_clinic_slug are not touched (WF-01 owns Method 2 stamps).",
         ],
         "depends_on": ["WF-01"],
     },
     "16": {
         "purpose": (
             "Comms edge. Inbound IVR +18663444955 and the two chat widgets. "
-            "No Sales opportunity is created here."
+            "Short missed-call SMS, transactional, no quiet hours. NEVER creates a Sales opportunity."
         ),
         "diagram_key": "support",
         "trigger": {
@@ -671,31 +724,41 @@ WF_META: dict[str, dict] = {
             "target": "Native inbound trigger for the three channels.",
         },
         "prerequisites": [
-            "v2 source tags v2_source_ivr and v2_source_chat will be added when copy lands.",
+            "v2 source tags v2_source_ivr and v2_source_chat exist.",
+            "Native email template EML | WF-16 | Chat follow-up.",
+            "Live tag next-lander exists (required by the WF-01 trigger). Do not rename next-lander.",
         ],
         "messages": [
             {
-                "step": "IVR/chat acknowledgement",
-                "channel": "n/a",
-                "body": "Full step bodies are not authored yet. The on-shell graph is a 1-step named shell.",
-            }
+                "step": "SMS Missed-call ack (IVR branch, first in sequence)",
+                "channel": "SMS",
+                "body": "Short inline SMS on missed IVR call. First SMS in this sequence carries Reply STOP to opt out. Members not patients. Transactional; no quiet hours.",
+            },
+            {
+                "step": "EMAIL Chat follow-up (chat branch)",
+                "channel": "Email",
+                "body": "Native template EML | WF-16 | Chat follow-up.",
+            },
         ],
         "settings": {
             "quiet_hours": QUIET_TRANSACTIONAL,
             "allow_reentry": "Yes on each inbound.",
-            "stop_on_response": "Yes.",
-            "reentry_caveat": "Must not create a Sales opportunity here; new contacts route to WF-01.",
-            "status": "Draft v2 on staging shell e68037b4-a8a2-427e-ba1c-8741ea615a3f. Unpublished.",
+            "stop_on_response": "Yes (WF-11 owns DND).",
+            "reentry_caveat": "Must not create a Sales opportunity here; new contacts get next-lander stamped and route to WF-01 (create-once owner).",
+            "status": "Draft v3 on staging shell e68037b4-a8a2-427e-ba1c-8741ea615a3f. Missed-call SMS + chat email authored (2026-08-21 PT). Unpublished.",
         },
         "test": [
-            "Simulate an IVR call and a chat submission and confirm the tag lands and new contacts enter WF-01.",
+            "Simulate a missed IVR call and confirm v2_source_ivr lands and the missed-call SMS fires.",
+            "Submit a chat widget message and confirm v2_source_chat lands and the chat follow-up email fires.",
+            "Confirm new contacts pick up next-lander and enter WF-01; existing contacts stay on their current opp.",
+            "Confirm WF-16 never creates a Sales opp.",
         ],
         "depends_on": ["WF-01"],
     },
     "17": {
         "purpose": (
-            "Internal price calculator for consult copy. Never writes "
-            "opportunity.monetaryValue. Tags v2_price_calc when done."
+            "Internal price math for downstream consult copy. Force owns dollars. "
+            "MUST NOT write opportunity.monetaryValue. Tags v2_price_calc when done."
         ),
         "diagram_key": "wf17",
         "trigger": {
@@ -704,23 +767,25 @@ WF_META: dict[str, dict] = {
                 "Fires when any of the price-calc component fields change",
                 "Never fires customer-facing outreach directly",
             ],
-            "target": "Native custom-field trigger.",
+            "target": "Native custom-field trigger. Internal-only calculator.",
         },
         "prerequisites": [
-            "Price-calc component fields exist; a math_operation node computes the total to contact.price_calc_result.",
-            "Must not write opportunity.monetaryValue and must not move Sales stages.",
+            "Price-calc component fields exist; contact.price_calc_inputs and contact.price_calc_result are writable.",
+            "Force is the sole writer of opportunity.monetaryValue; WF-17 never touches it.",
+            "v2 tag v2_price_calc exists.",
         ],
-        "messages": [{"step": "n/a", "channel": "n/a", "body": "Internal-only calculator. No SMS or email."}],
+        "messages": [{"step": "n/a", "channel": "n/a", "body": "Internal-only calculator. No customer-facing SMS or email."}],
         "settings": {
             "quiet_hours": QUIET_INTERNAL,
             "allow_reentry": "Yes on each input change.",
-            "stop_on_response": "n/a.",
-            "reentry_caveat": "Do not write opportunity.monetaryValue anywhere.",
-            "status": "Draft v2 on staging shell e5fbb7f4-7fe6-4adf-8bf3-957c395a8495. Unpublished.",
+            "stop_on_response": "n/a (no outbound SMS).",
+            "reentry_caveat": "Must not write opportunity.monetaryValue and must not move Sales stages. Force owns dollars.",
+            "status": "Draft v3 on staging shell e5fbb7f4-7fe6-4adf-8bf3-957c395a8495. Branch on pay_type authored (2026-08-21 PT). Unpublished.",
         },
         "test": [
-            "Change price-calc component fields on a test contact and confirm contact.price_calc_result is computed and v2_price_calc lands.",
-            "Confirm opportunity.monetaryValue is untouched.",
+            "Change a price-calc input on a test contact and confirm contact.price_calc_inputs stages, contact.price_calc_result computes, and v2_price_calc lands.",
+            "Confirm opportunity.monetaryValue is untouched under every pay_type branch (PIF | SF | CARE | MAG | Other).",
+            "Confirm no customer-facing SMS or email fires from WF-17.",
         ],
         "depends_on": [],
     },
@@ -767,23 +832,21 @@ TOBE_COPY: dict[str, str] = {
     ),
     "05": (
         "Outcome router. Inbound webhook from Force (trigger ryJLJ1McWWOHlAvBRsI3; URL is "
-        "UI-only, paste into Force GHL_WF05_WEBHOOK_URL). GHL shell name is null. Reads "
-        "opportunity.sale_outcome_v2 and routes: SOLD + new -> WF-06 and still WF-13 "
-        "(GHL router truth; site cards hide WF-13); SOLD renewal -> WF-09; AD -> WF-07; "
-        "MUT -> WF-11; MAR drops. appt_status routes first: no-show / cancel -> WF-08, "
-        "reschedule -> WF-03. Workflows never move Sales stages. Draft v5 unpublished."
+        "UI-only, paste into Force GHL_WF05_WEBHOOK_URL). Reads opportunity.sale_outcome_v2 "
+        "and routes: SOLD + new → WF-06; SOLD renewal → WF-09; AD → WF-07; MUT → WF-11; MAR "
+        "drops. appt_status routes first: no-show / cancel → WF-08, reschedule → WF-03. "
+        "WF-13 dropped from v2 (Curve owns conversions). Workflows never move Sales stages. "
+        "Draft v6 unpublished; live GHL shell unchanged."
     ),
     "06": (
-        "Post-visit Won and onboarding for SOLD + sale_type=new only. Tags v2_status_active "
-        "(P5yoBUi86hQs0Br5CIqI), sends welcome SMS after SOLD, then 3d / 7d / 14d / 21d waits "
-        "forking to WF-10 at T+14 and WF-14 at T+21. Check-in copy between the waits is not "
-        "authored yet. Transactional; no quiet hours. Draft v3 unpublished."
+        "Onboard SOLD + sale_type=new members. Tags v2_status_active, welcome SMS with STOP, "
+        "short 3d and 7d check-in SMS (logistics only), then forks to WF-10 at T+14 and WF-14 "
+        "at T+21. Transactional; no quiet hours. Draft v4 unpublished."
     ),
     "07": (
-        "A&D nurture (sale_outcome_v2 = AD, Advise and Decline). Tags v2_outcome_ad, sends "
-        "one first-touch SMS with STOP, waits 35d, then ADD-TO-WF WF-09. Objection branch "
-        "copy is spec-only. AD never fires the Meta pixel or CAPI. Transactional; no quiet "
-        "hours. Draft v3 unpublished."
+        "A&D nurture (sale_outcome_v2 = AD). Tags v2_outcome_ad, one AD SMS with STOP, waits "
+        "35d, hands to WF-09. Never fires Meta pixel or CAPI (Curve owns conversions). "
+        "Transactional; no quiet hours. Draft v3 unpublished."
     ),
     "08": (
         "No-show and cancel recovery. Reschedule never enters here. REMOVE-FROM-WF WF-03 -> "
@@ -793,54 +856,56 @@ TOBE_COPY: dict[str, str] = {
         "no quiet hours. Draft v4 unpublished."
     ),
     "09": (
-        "Long-term nurture and the renewal sub-flow. renewal_date custom-field trigger is "
-        "blocked until backfill is complete. On-shell graph is a single 120d wait; nurture "
-        "and renewal bodies come next. Marketing / recovery: 08:00-21:00 contact TZ. "
-        "Draft v2 unpublished."
+        "Long-tail nurture for cold contacts handed off from WF-02, WF-07, WF-08. Email +14d "
+        "then email +30d then short SMS check-in with STOP. Renewal_date sub-flow stays GATED "
+        "until backfill. Tags v2_nurtured. No opps. No dollars. Marketing 08:00-21:00 contact "
+        "TZ. Draft v3 unpublished."
     ),
     "10": (
-        "Feedback survey at T+14 from WF-06 onboarding. SMS invite + EMAIL EML | WF-10 | "
-        "Feedback invite (BFhyqVQXEYVasm4hJWvE) referencing contact.current_review_link, then "
-        "WAIT 3d and an SMS nudge. Sole writer of contact.latest_feedback_score. Marketing: "
-        "08:00-21:00 contact TZ. Draft v3 unpublished."
+        "Feedback survey at T+14 from WF-06. SMS invite with STOP + email EML | WF-10 | "
+        "Feedback invite, then WAIT 3d and an SMS nudge. Uses {{contact.current_review_link}} "
+        "as a plain string (no Google Maps). Sole writer of contact.latest_feedback_score. "
+        "Marketing 08:00-21:00 contact TZ. Draft v3 unpublished."
     ),
     "11": (
-        "Compliance and errors. Trigger gpdYb7c2Dkkt3tYJnClP dnd_contact (STOP inbound). "
-        "MUT front-gate at the top: MUT branch WAIT 1s and exit (no DND, no opted_out, no "
-        "STOP confirm). STOP branch REMOVE-FROM-WF all, SET-DND, tag v2_status_dnd, set "
-        "sms_consent_status=opted_out, and send an inline STOP-confirm SMS. Sole writer of "
-        "DND and sms_consent_status. Transactional; no quiet hours. Draft v4 unpublished."
+        "Compliance and errors. MUT front-gate at the top: MUT contacts WAIT 1s and exit "
+        "(no DND, no opted_out, no STOP confirm). STOP path: REMOVE-FROM-WF outreach, SET-DND, "
+        "set sms_consent_status=opted_out, tag v2_status_dnd, send inline STOP-confirm SMS. "
+        "Bounce and bad-number branches tag v2_email_bounced / v2_bad_number. Sole writer of "
+        "DND and sms_consent_status. Not middleware. Transactional; no quiet hours. Draft v5 unpublished."
     ),
     "12": (
         "Call disposition handler. Single graph keyed on channel (not clinic). Tags "
-        "v2_source_phone (HuqiCRyopgdHESALDnKN). Native update-in-place; never "
-        "remove-and-recreate the contact or opp. Per-disposition copy is not authored yet. "
-        "Draft v2 unpublished."
+        "v2_source_phone. Native update-in-place; never remove-and-recreate the contact or opp. "
+        "Branches on connected / voicemail / missed / wrong-number. Voicemail and missed each "
+        "send a short SMS with STOP; wrong-number tags v2_bad_number and routes to WF-11. "
+        "No Sales opp create. Curve owns attribution. Draft v3 unpublished."
     ),
     # WF-13 (Ad-platform conversions / Native CAPI + Google) was dropped from
     # the v2 spec. The wf-13.json file is retained so the generator does not
     # break, but no card / summary is surfaced for it in the UI.
     "14": (
-        "Ambassador program. Referred contact is created as a new contact (never merged) "
-        "and re-enters WF-01. Live tag ambassador-referral. Enrolled at T+21 from WF-06 or "
-        "via the ambassador form. Full step bodies are not authored yet; 1-step shell. "
-        "Draft v2 unpublished."
+        "Ambassador program. T+21 fork from WF-06. Referrer gets a short invite SMS with STOP "
+        "and email EML | WF-14 | Ambassador invite. Referred contact is NEW (never merged), "
+        "gets live tag ambassador-referral + v2_ref_ambassador + next-lander, and enters WF-01 "
+        "(WF-01 owns create-once). Marketing 08:00-21:00 contact TZ. Draft v3 unpublished."
     ),
     "15": (
-        "PCC referral routing. Fires on Contact Created with utm_source=pcc_qr, adds live "
-        "tag pcc-referral, and re-enters WF-01 as a next-lander. 1-step named shell. Draft "
-        "v2 unpublished."
+        "PCC referral routing. Fires on Contact Created with utm_source=pcc_qr. Stamps live "
+        "tag pcc-referral + v2_ref_pcc + next-lander and re-enters WF-01 (WF-01 owns create-once "
+        "for the Sales opp). Draft v3 unpublished."
     ),
     "16": (
-        "Comms edge for inbound IVR +18663444955 and the two chat widgets "
-        "(69337243d355bdcd9c27675e, 6952a8536682120c2b2656b9). Never creates a Sales "
-        "opportunity; new contacts route to WF-01. 1-step named shell. Draft v2 unpublished."
+        "Comms edge for inbound IVR +18663444955 and the two chat widgets. Short missed-call "
+        "SMS with STOP on the IVR branch; email EML | WF-16 | Chat follow-up on the chat "
+        "branch. Never creates a Sales opportunity; new contacts pick up next-lander and route "
+        "to WF-01. Transactional; no quiet hours. Draft v3 unpublished."
     ),
     "17": (
         "Internal price calculator for consult copy. Reads price-calc component fields, "
-        "computes contact.price_calc_result via a math_operation node, and tags "
-        "v2_price_calc. Never writes opportunity.monetaryValue and never moves stages. "
-        "1-step named shell. Draft v2 unpublished."
+        "branches on pay_type (PIF | SF | CARE | MAG | Other), and writes contact.price_calc_result. "
+        "Tags v2_price_calc. NEVER writes opportunity.monetaryValue; Force owns dollars. Never "
+        "moves stages. No customer-facing SMS or email. Draft v3 unpublished."
     ),
 }
 

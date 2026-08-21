@@ -1,7 +1,7 @@
 {
   "id": "wf-05",
   "name": "Outcome Router",
-  "job": "Central router. Reads opportunity.sale_outcome_v2 and appt_status from Force writes (see to-be/force.json) and routes to the correct downstream workflow. WF-05 never writes any Force field, never creates an opportunity, and never moves opportunity stages. Never fires on MAR. Still ADD-TO-WF WF-13 on SOLD + sale_type=new (recorded truth in GHL; site cards hide WF-13).",
+  "job": "Central router. Reads opportunity.sale_outcome_v2 and appt_status from Force writes (see to-be/force.json) and routes to the correct downstream workflow. WF-05 never writes any Force field, never creates an opportunity, and never moves opportunity stages. Never fires on MAR. WF-13 is dropped from the v2 spec (Curve owns conversions); SOLD + new routes to WF-06 only. The live GHL shell is not rewritten in this PR (no GHL writes).",
   "trigger": {
     "type": "Inbound webhook",
     "filters": ["url = GHL_WF05_WEBHOOK_URL"],
@@ -10,7 +10,7 @@
   "named_steps": [
     {
       "name": "TRIGGER: Inbound webhook GHL_WF05_WEBHOOK_URL",
-      "comment": "Force writes enter here only (see to-be/force.json). WF-05 never writes Force fields (sale_outcome, sale_type, appt_status, monetaryValue, pay_type, ad_reason), never creates an opp, and never moves stages. WF-05 also never POSTs to Curve and never fires CAPI (Curve conversion events lead + booked come from the booking app; SOLD comes from Force). WF-13 stays dropped. Must not accept payloads with sale_outcome=MAR (guarded below).",
+      "comment": "Force writes enter here only (see to-be/force.json). WF-05 never writes Force fields (sale_outcome, sale_type, appt_status, monetaryValue, pay_type, ad_reason), never creates an opp, and never moves stages. WF-05 also never POSTs to Curve and never fires CAPI (Curve owns conversions end-to-end). WF-13 stays dropped from the v2 spec; SOLD + new routes to WF-06 only. Must not accept payloads with sale_outcome=MAR (guarded below).",
       "does_not_write": [
         "opportunity.sale_outcome",
         "opportunity.sale_type",
@@ -133,12 +133,7 @@
     },
     {
       "name": "ADD-TO-WF: Route SOLD new to WF-06 Onboarding",
-      "comment": "ADD-TO-WF WF-06 5d036b8a-4336-47c8-9ebe-77f3439bc95c. Onboarding owns membership_status writes; must not set it here.",
-      "writes": []
-    },
-    {
-      "name": "ADD-TO-WF: Route SOLD new to WF-13 (GHL current)",
-      "comment": "ADD-TO-WF WF-13 9513a9c7-69c5-4f1c-9193-b371ab8d8253. Recorded truth in GHL: the router still enrolls WF-13 on SOLD + new. The v2 site card grid hides WF-13 (dropped_from_v2), but the router node exists in the shell.",
+      "comment": "ADD-TO-WF WF-06 5d036b8a-4336-47c8-9ebe-77f3439bc95c. WF-06 owns membership_status writes; must not set it here. WF-13 stays dropped from v2 (Curve owns conversions); do not add a WF-13 route to the live shell.",
       "writes": []
     },
     {

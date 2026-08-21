@@ -1,40 +1,46 @@
 {
   "id": "wf-10",
   "name": "Feedback",
-  "job": "Ask for member feedback and store the score on contact.latest_feedback_score only. No other field writes.",
+  "job": "Ask members for feedback at T+14 from WF-06. Sole writer of contact.latest_feedback_score.",
   "trigger": {
     "type": "Added from WF-06",
-    "filters": ["T+14 from onboarding"]
+    "filters": ["T+14 from onboarding"],
+    "notes": "Marketing window 08:00-21:00 contact TZ. Uses {{contact.current_review_link}} as an opaque string. No Google Maps."
   },
   "named_steps": [
     {
       "name": "TRIGGER: Added by WF-06 at T+14",
-      "comment": "Sole enroll. Must not fire off other workflows.",
+      "comment": "Sole enroll path. No other trigger.",
       "does_not_write": []
     },
     {
-      "name": "EMAIL: Feedback ask (native template)",
-      "comment": "Sends EML | WF-10 | Feedback ask.",
+      "name": "SMS: Feedback invite (inline, first in this sequence)",
+      "comment": "Inline SMS. First SMS in this sequence carries Reply STOP to opt out. Uses {{contact.current_review_link}} as a string. Marketing window 08:00-21:00 contact TZ.",
+      "writes": ["sms_send"]
+    },
+    {
+      "name": "EMAIL: Feedback invite (native template)",
+      "comment": "Sends EML | WF-10 | Feedback invite. References {{contact.current_review_link}}.",
       "writes": ["email_send"]
     },
     {
-      "name": "WAIT: +24 hours (quiet-hours aware)",
-      "comment": "Space before SMS nudge.",
+      "name": "WAIT: +3 days (marketing window)",
+      "comment": "Space before the nudge, marketing window aware.",
       "writes": []
     },
     {
       "name": "SMS: Feedback nudge (inline)",
-      "comment": "Inline SMS. Members not patients.",
+      "comment": "Inline SMS. Members not patients. Marketing window 08:00-21:00 contact TZ.",
       "writes": ["sms_send"]
     },
     {
       "name": "IF-ELSE: Wait for survey submit",
-      "comment": "Reads survey submission event. Must not fabricate a score.",
+      "comment": "Exits on submit. Must not fabricate a score.",
       "does_not_write": ["contact.latest_feedback_score"]
     },
     {
       "name": "SET-FIELD: contact.latest_feedback_score (sole writer)",
-      "comment": "The only field this workflow writes. Must not write any other contact or opportunity field.",
+      "comment": "Only field this workflow writes. No other contact / opp writes.",
       "writes": ["contact.latest_feedback_score"],
       "does_not_write": ["contact.membership_status", "opportunity.pipelineStageId", "opportunity.monetaryValue"]
     },

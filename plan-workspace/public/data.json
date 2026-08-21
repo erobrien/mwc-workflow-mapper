@@ -4027,19 +4027,19 @@
       "n": "05",
       "name": "Outcome Router",
       "absorbs": "05. Clinic Appt Outcome",
-      "copy": "Outcome router. Inbound webhook from Force (trigger ryJLJ1McWWOHlAvBRsI3; URL is UI-only, paste into Force GHL_WF05_WEBHOOK_URL). GHL shell name is null. Reads opportunity.sale_outcome_v2 and routes: SOLD + new -> WF-06 and still WF-13 (GHL router truth; site cards hide WF-13); SOLD renewal -> WF-09; AD -> WF-07; MUT -> WF-11; MAR drops. appt_status routes first: no-show / cancel -> WF-08, reschedule -> WF-03. Workflows never move Sales stages. Draft v5 unpublished."
+      "copy": "Outcome router. Inbound webhook from Force (trigger ryJLJ1McWWOHlAvBRsI3; URL is UI-only, paste into Force GHL_WF05_WEBHOOK_URL). Reads opportunity.sale_outcome_v2 and routes: SOLD + new \u2192 WF-06; SOLD renewal \u2192 WF-09; AD \u2192 WF-07; MUT \u2192 WF-11; MAR drops. appt_status routes first: no-show / cancel \u2192 WF-08, reschedule \u2192 WF-03. WF-13 dropped from v2 (Curve owns conversions). Workflows never move Sales stages. Draft v6 unpublished; live GHL shell unchanged."
     },
     {
       "n": "06",
       "name": "Onboarding",
       "absorbs": "07. POST-VISIT SHOWED + Feedback (partial)",
-      "copy": "Post-visit Won and onboarding for SOLD + sale_type=new only. Tags v2_status_active (P5yoBUi86hQs0Br5CIqI), sends welcome SMS after SOLD, then 3d / 7d / 14d / 21d waits forking to WF-10 at T+14 and WF-14 at T+21. Check-in copy between the waits is not authored yet. Transactional; no quiet hours. Draft v3 unpublished."
+      "copy": "Onboard SOLD + sale_type=new members. Tags v2_status_active, welcome SMS with STOP, short 3d and 7d check-in SMS (logistics only), then forks to WF-10 at T+14 and WF-14 at T+21. Transactional; no quiet hours. Draft v4 unpublished."
     },
     {
       "n": "07",
       "name": "A&D",
       "absorbs": "WIP A&D drafts",
-      "copy": "A&D nurture (sale_outcome_v2 = AD, Advise and Decline). Tags v2_outcome_ad, sends one first-touch SMS with STOP, waits 35d, then ADD-TO-WF WF-09. Objection branch copy is spec-only. AD never fires the Meta pixel or CAPI. Transactional; no quiet hours. Draft v3 unpublished."
+      "copy": "A&D nurture (sale_outcome_v2 = AD). Tags v2_outcome_ad, one AD SMS with STOP, waits 35d, hands to WF-09. Never fires Meta pixel or CAPI (Curve owns conversions). Transactional; no quiet hours. Draft v3 unpublished."
     },
     {
       "n": "08",
@@ -4051,49 +4051,49 @@
       "n": "09",
       "name": "Nurture",
       "absorbs": "(net-new)",
-      "copy": "Long-term nurture and the renewal sub-flow. renewal_date custom-field trigger is blocked until backfill is complete. On-shell graph is a single 120d wait; nurture and renewal bodies come next. Marketing / recovery: 08:00-21:00 contact TZ. Draft v2 unpublished."
+      "copy": "Long-tail nurture for cold contacts handed off from WF-02, WF-07, WF-08. Email +14d then email +30d then short SMS check-in with STOP. Renewal_date sub-flow stays GATED until backfill. Tags v2_nurtured. No opps. No dollars. Marketing 08:00-21:00 contact TZ. Draft v3 unpublished."
     },
     {
       "n": "10",
       "name": "Feedback",
       "absorbs": "After Appointment Feedback",
-      "copy": "Feedback survey at T+14 from WF-06 onboarding. SMS invite + EMAIL EML | WF-10 | Feedback invite (BFhyqVQXEYVasm4hJWvE) referencing contact.current_review_link, then WAIT 3d and an SMS nudge. Sole writer of contact.latest_feedback_score. Marketing: 08:00-21:00 contact TZ. Draft v3 unpublished."
+      "copy": "Feedback survey at T+14 from WF-06. SMS invite with STOP + email EML | WF-10 | Feedback invite, then WAIT 3d and an SMS nudge. Uses {{contact.current_review_link}} as a plain string (no Google Maps). Sole writer of contact.latest_feedback_score. Marketing 08:00-21:00 contact TZ. Draft v3 unpublished."
     },
     {
       "n": "11",
       "name": "Compliance",
       "absorbs": "2. DNC, 3. Bounce, 08. MUT",
-      "copy": "Compliance and errors. Trigger gpdYb7c2Dkkt3tYJnClP dnd_contact (STOP inbound). MUT front-gate at the top: MUT branch WAIT 1s and exit (no DND, no opted_out, no STOP confirm). STOP branch REMOVE-FROM-WF all, SET-DND, tag v2_status_dnd, set sms_consent_status=opted_out, and send an inline STOP-confirm SMS. Sole writer of DND and sms_consent_status. Transactional; no quiet hours. Draft v4 unpublished."
+      "copy": "Compliance and errors. MUT front-gate at the top: MUT contacts WAIT 1s and exit (no DND, no opted_out, no STOP confirm). STOP path: REMOVE-FROM-WF outreach, SET-DND, set sms_consent_status=opted_out, tag v2_status_dnd, send inline STOP-confirm SMS. Bounce and bad-number branches tag v2_email_bounced / v2_bad_number. Sole writer of DND and sms_consent_status. Not middleware. Transactional; no quiet hours. Draft v5 unpublished."
     },
     {
       "n": "12",
       "name": "Call Disposition",
       "absorbs": "4a, 4b, Contact Center Tag Assign",
-      "copy": "Call disposition handler. Single graph keyed on channel (not clinic). Tags v2_source_phone (HuqiCRyopgdHESALDnKN). Native update-in-place; never remove-and-recreate the contact or opp. Per-disposition copy is not authored yet. Draft v2 unpublished."
+      "copy": "Call disposition handler. Single graph keyed on channel (not clinic). Tags v2_source_phone. Native update-in-place; never remove-and-recreate the contact or opp. Branches on connected / voicemail / missed / wrong-number. Voicemail and missed each send a short SMS with STOP; wrong-number tags v2_bad_number and routes to WF-11. No Sales opp create. Curve owns attribution. Draft v3 unpublished."
     },
     {
       "n": "14",
       "name": "Ambassador",
       "absorbs": "4 ambassador WFs",
-      "copy": "Ambassador program. Referred contact is created as a new contact (never merged) and re-enters WF-01. Live tag ambassador-referral. Enrolled at T+21 from WF-06 or via the ambassador form. Full step bodies are not authored yet; 1-step shell. Draft v2 unpublished."
+      "copy": "Ambassador program. T+21 fork from WF-06. Referrer gets a short invite SMS with STOP and email EML | WF-14 | Ambassador invite. Referred contact is NEW (never merged), gets live tag ambassador-referral + v2_ref_ambassador + next-lander, and enters WF-01 (WF-01 owns create-once). Marketing 08:00-21:00 contact TZ. Draft v3 unpublished."
     },
     {
       "n": "15",
       "name": "PCC Referral",
       "absorbs": "PCC Referral Lead Routing",
-      "copy": "PCC referral routing. Fires on Contact Created with utm_source=pcc_qr, adds live tag pcc-referral, and re-enters WF-01 as a next-lander. 1-step named shell. Draft v2 unpublished."
+      "copy": "PCC referral routing. Fires on Contact Created with utm_source=pcc_qr. Stamps live tag pcc-referral + v2_ref_pcc + next-lander and re-enters WF-01 (WF-01 owns create-once for the Sales opp). Draft v3 unpublished."
     },
     {
       "n": "16",
       "name": "Comms Edge",
       "absorbs": "1. IVR - simultaneous, Chat OOO, Missed Call Text-Back",
-      "copy": "Comms edge for inbound IVR +18663444955 and the two chat widgets (69337243d355bdcd9c27675e, 6952a8536682120c2b2656b9). Never creates a Sales opportunity; new contacts route to WF-01. 1-step named shell. Draft v2 unpublished."
+      "copy": "Comms edge for inbound IVR +18663444955 and the two chat widgets. Short missed-call SMS with STOP on the IVR branch; email EML | WF-16 | Chat follow-up on the chat branch. Never creates a Sales opportunity; new contacts pick up next-lander and route to WF-01. Transactional; no quiet hours. Draft v3 unpublished."
     },
     {
       "n": "17",
       "name": "Price Calculator",
       "absorbs": "06. Price Calculator (live, ported as-is)",
-      "copy": "Internal price calculator for consult copy. Reads price-calc component fields, computes contact.price_calc_result via a math_operation node, and tags v2_price_calc. Never writes opportunity.monetaryValue and never moves stages. 1-step named shell. Draft v2 unpublished."
+      "copy": "Internal price calculator for consult copy. Reads price-calc component fields, branches on pay_type (PIF | SF | CARE | MAG | Other), and writes contact.price_calc_result. Tags v2_price_calc. NEVER writes opportunity.monetaryValue; Force owns dollars. Never moves stages. No customer-facing SMS or email. Draft v3 unpublished."
     }
   ],
   "pipelines": [

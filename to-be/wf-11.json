@@ -1,37 +1,58 @@
 {
   "id": "wf-11",
   "name": "Compliance",
-  "job": "Sole writer of sms_consent_status and DND state. Owns v2_status_dnd, v2_email_bounced, v2_bad_number. Not a middleware.",
+  "job": "Sole writer of DND and contact.sms_consent_status. MUT front-gate at the top so MUT contacts never hit the STOP path. Not middleware.",
   "trigger": {
-    "type": "Contact Field changed",
+    "type": "dnd_contact inbound (STOP) OR Added from WF-05 (MUT)",
     "filters": ["field = sms_consent_status OR DND state OR email_bounced OR bad_number"],
-    "notes": "Also enrolled via ADD-TO-WF from WF-05 MUT branch."
+    "notes": "Transactional; no quiet hours. STOP must never be applied to MUT contacts. WF-11 is the only writer of sms_consent_status and DND."
   },
   "named_steps": [
     {
-      "name": "TRIGGER: Compliance state changed (consent | DND | bounce | bad number)",
-      "comment": "Sole compliance writer. Must not proxy for another workflow (not middleware).",
+      "name": "TRIGGER: STOP inbound (dnd_contact) OR MUT hand-off from WF-05",
+      "comment": "Sole compliance writer. Not middleware for any other workflow.",
       "does_not_write": []
     },
     {
-      "name": "IF-ELSE: Branch on compliance signal",
-      "comment": "Splits into consent, DND, email bounce, bad number lanes.",
+      "name": "IF-ELSE: MUT front-gate (sale_outcome_v2 = MUT?)",
+      "comment": "MUT branch exits without DND, without opted_out, without STOP-confirm SMS. STOP is never applied to MUT.",
+      "does_not_write": ["contact.dnd", "contact.sms_consent_status"]
+    },
+    {
+      "name": "PATH: MUT (exit clean)",
+      "comment": "MUT contacts hit WAIT 1s and exit. No compliance write, no STOP-confirm.",
+      "writes": []
+    },
+    {
+      "name": "PATH: not MUT (STOP / compliance branch)",
+      "comment": "Non-MUT contacts continue into the compliance graph.",
+      "writes": []
+    },
+    {
+      "name": "IF-ELSE: Branch on compliance signal (STOP | bounce | bad-number)",
+      "comment": "Splits into DND, email-bounce, and bad-number lanes.",
       "does_not_write": []
     },
     {
-      "name": "SET-FIELD: sms_consent_status (sole writer)",
+      "name": "SET-DND: All channels (STOP branch, sole writer)",
+      "comment": "Only WF-11 writes DND. Transactional; no quiet hours.",
+      "writes": ["contact.dnd"]
+    },
+    {
+      "name": "SET-FIELD: sms_consent_status = opted_out (STOP branch, sole writer)",
       "comment": "Only WF-11 writes sms_consent_status.",
       "writes": ["contact.sms_consent_status"]
     },
     {
-      "name": "SET-FIELD: DND channels (sole writer)",
-      "comment": "Only WF-11 writes DND. Must not toggle DND from any other workflow.",
-      "writes": ["contact.dnd"]
+      "name": "ADD-TAG: v2_status_dnd (STOP branch)",
+      "comment": "New v2 DND tag. Must not remove the live sms-consent tag.",
+      "writes": ["v2_status_dnd"],
+      "does_not_write": ["sms-consent"]
     },
     {
-      "name": "ADD-TAG: v2_status_dnd (DND branch)",
-      "comment": "New v2 DND tag. Must not remove sms-consent live tag.",
-      "writes": ["v2_status_dnd"]
+      "name": "SMS: STOP confirm (inline, non-MUT only)",
+      "comment": "Inline confirm the contact is opted out. Not sent to MUT contacts (front-gate exits above).",
+      "writes": ["sms_send"]
     },
     {
       "name": "ADD-TAG: v2_email_bounced (bounce branch)",
@@ -44,8 +65,8 @@
       "writes": ["v2_bad_number"]
     },
     {
-      "name": "REMOVE-FROM-WF: Drop from outreach WFs (WF-02, WF-03, WF-04, WF-08, WF-09)",
-      "comment": "Stops in-flight outreach when compliance flips. Must not remove from WF-05 (routing must still process).",
+      "name": "REMOVE-FROM-WF: Drop from outreach WFs (WF-02, WF-04, WF-08, WF-09, WF-10)",
+      "comment": "Stops in-flight outreach when compliance flips. Never removes from WF-05 (routing still processes).",
       "writes": []
     }
   ],

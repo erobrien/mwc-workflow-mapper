@@ -1,0 +1,54 @@
+{
+  "id": "wf-13",
+  "name": "Native CAPI / Google",
+  "job": "Fire native Meta CAPI and Google conversion events on Sales pipeline Booked and Won, sale_type=new only. Does not fire on the clinic pipelines.",
+  "trigger": {
+    "type": "Opportunity Stage changed",
+    "filters": [
+      "pipeline = Sales Lead to Close (Vt8cPz51C3i87moo73gQ)",
+      "stage in (Booked, Won)",
+      "sale_type = new"
+    ],
+    "notes": "Excludes clinic pipelines jRqb0pvexu04zSACPXmd, 9AZEt2Sw6Zv0nnJJmkE0, rspsjkBMNYGldN3R71ji."
+  },
+  "named_steps": [
+    {
+      "name": "TRIGGER: Sales pipeline Booked or Won (sale_type=new)",
+      "comment": "Sole conversion trigger. Must not fire on clinic pipelines. Must not fire on renewals.",
+      "does_not_write": []
+    },
+    {
+      "name": "IF-ELSE: Guard sale_type=new and pipeline=Sales Lead to Close",
+      "comment": "Belt-and-suspenders guard so a mis-tagged opp cannot fire conversions.",
+      "does_not_write": ["opportunity.pipelineStageId", "opportunity.monetaryValue"]
+    },
+    {
+      "name": "WEBHOOK: Native Meta CAPI Lead (Booked branch)",
+      "comment": "Native GHL Meta CAPI action. Must not include monetaryValue in payload beyond native mapping.",
+      "writes": ["capi_meta_event"]
+    },
+    {
+      "name": "WEBHOOK: Native Meta CAPI Purchase (Won branch)",
+      "comment": "Native GHL Meta CAPI action for Won.",
+      "writes": ["capi_meta_event"]
+    },
+    {
+      "name": "WEBHOOK: Native Google Ads conversion (Won branch)",
+      "comment": "Native Google Ads conversion action.",
+      "writes": ["google_ads_conversion"]
+    },
+    {
+      "name": "ADD-TAG: v2_conv_won_new (Won branch)",
+      "comment": "Audit tag for Won + new only.",
+      "writes": ["v2_conv_won_new"]
+    }
+  ],
+  "tags_new": [
+    "v2_conv_won_new"
+  ],
+  "live_tags_readonly": [
+    "next-lander",
+    "sms-consent",
+    "location_*"
+  ]
+}

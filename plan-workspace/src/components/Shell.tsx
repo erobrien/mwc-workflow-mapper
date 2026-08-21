@@ -25,20 +25,18 @@ const NAV: { group: string; accent?: string; dot?: string; collapsible?: boolean
     { to: "/lifecycle-playbook", label: "Lifecycle Playbook", icon: MessagesSquare, accent: "text-red-600 dark:text-red-400" },
     { to: "/call-connect", label: "Call Connect (SDR Routing)", icon: PhoneForwarded, accent: "text-red-600 dark:text-red-400" },
   ] },
-  { group: "Final Target v2", accent: "text-indigo-600 dark:text-indigo-400", dot: "bg-indigo-500", items: [
-    { to: "/final-target", label: "Final Target Plan", icon: Workflow, accent: "text-indigo-600 dark:text-indigo-400" },
-    { to: "/final-target-sac", label: "SAC Attribution", icon: Waypoints, accent: "text-indigo-600 dark:text-indigo-400" },
-  ] },
-  { group: "Active Plan", accent: "text-violet-600 dark:text-violet-400", dot: "bg-violet-500", items: [
-    { to: "/minimal-plan", label: "Minimal Plan", icon: Target, accent: "text-violet-600 dark:text-violet-400" },
-  ] },
-  { group: "Target", accent: "text-emerald-600 dark:text-emerald-400", dot: "bg-emerald-500", items: [
-    { to: "/to-be-2bv2", label: "To-Be 2bv2 (Live Export)", icon: Network, accent: "text-emerald-600 dark:text-emerald-400" },
+  { group: "Target (locked v2)", accent: "text-emerald-600 dark:text-emerald-400", dot: "bg-emerald-500", items: [
     { to: "/to-be", label: "To-Be Workflows", icon: Workflow, accent: "text-emerald-600 dark:text-emerald-400" },
+    { to: "/to-be-2bv2", label: "To-Be 2bv2 (Live Export)", icon: Network, accent: "text-emerald-600 dark:text-emerald-400" },
     { to: "/to-be-review", label: "Design Review", icon: SearchCheck, accent: "text-emerald-600 dark:text-emerald-400" },
     { to: "/wf-diagrams", label: "WF Flow Diagrams", icon: Waypoints, accent: "text-emerald-600 dark:text-emerald-400" },
     { to: "/diagrams", label: "Architecture", icon: Network, accent: "text-emerald-600 dark:text-emerald-400" },
     { to: "/pcc-form", label: "PCC Sales Form", icon: ClipboardList, accent: "text-emerald-600 dark:text-emerald-400" },
+  ] },
+  { group: "Archive · dropped plans", accent: "text-muted-foreground", dot: "bg-muted-foreground/50", collapsible: true, items: [
+    { to: "/final-target", label: "Final Target Plan (dropped)", icon: Workflow, accent: "text-muted-foreground" },
+    { to: "/final-target-sac", label: "SAC Attribution (dropped)", icon: Waypoints, accent: "text-muted-foreground" },
+    { to: "/minimal-plan", label: "Minimal Plan (dropped)", icon: Target, accent: "text-muted-foreground" },
   ] },
   { group: "Governance", accent: "text-violet-600 dark:text-violet-400", dot: "bg-violet-500", items: [
     { to: "/gaps", label: "Audit Gaps", icon: SearchCheck, accent: "text-violet-600 dark:text-violet-400" },

@@ -1,0 +1,69 @@
+{
+  "id": "wf-08",
+  "name": "No-show / cancel",
+  "job": "Handle appt_status=no-show and appt_status=cancel only. Reschedule never enters. Drops the contact from WF-03 and re-checks booking.",
+  "trigger": {
+    "type": "Added from WF-05",
+    "filters": ["appt_status in (no-show, cancel)"]
+  },
+  "named_steps": [
+    {
+      "name": "TRIGGER: Added by WF-05 (appt_status no-show or cancel)",
+      "comment": "Sole enroll. Reschedule must never route here.",
+      "does_not_write": ["appt_status"]
+    },
+    {
+      "name": "REMOVE-FROM-WF: Drop from WF-03 Reminders",
+      "comment": "Stops any in-flight reminder cadence. Must not remove v2_status_booked (booking state is factual).",
+      "writes": []
+    },
+    {
+      "name": "IF-ELSE: Branch on appt_status (no-show | cancel)",
+      "comment": "Split copy paths. Must not tag no-show if source was reschedule.",
+      "does_not_write": []
+    },
+    {
+      "name": "ADD-TAG: v2_appt_no_show (no-show branch)",
+      "comment": "New v2 tag. Must not remove live booking tags.",
+      "writes": ["v2_appt_no_show"]
+    },
+    {
+      "name": "ADD-TAG: v2_appt_cancel (cancel branch)",
+      "comment": "New v2 tag.",
+      "writes": ["v2_appt_cancel"]
+    },
+    {
+      "name": "SMS: Recovery outreach (inline)",
+      "comment": "Inline SMS. Honors quiet hours 8am-9pm contact TZ.",
+      "writes": ["sms_send"]
+    },
+    {
+      "name": "EMAIL: Recovery follow-up (native template)",
+      "comment": "Sends EML | WF-08 | Recovery.",
+      "writes": ["email_send"]
+    },
+    {
+      "name": "WAIT: +48 hours (quiet-hours aware)",
+      "comment": "Space before re-check.",
+      "writes": []
+    },
+    {
+      "name": "IF-ELSE: Re-check booking (v2_status_booked)",
+      "comment": "If they booked again, exit without further nudge.",
+      "does_not_write": []
+    },
+    {
+      "name": "ADD-TO-WF: Route unbooked to WF-09 Nurture",
+      "comment": "Long-tail nurture. Must not create Sales opps here.",
+      "writes": []
+    }
+  ],
+  "tags_new": [
+    "v2_appt_no_show",
+    "v2_appt_cancel"
+  ],
+  "live_tags_readonly": [
+    "next-lander",
+    "sms-consent"
+  ]
+}

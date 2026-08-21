@@ -1,2052 +1,1716 @@
 {
-  "_note": "SOP build guides for the 16 to-be workflows. Grounded in data.json copy, wf-diagrams.json src, and the enum contract. 'BUILD DECISION NEEDED' marks values the spec does not yet fix. Regenerate with scripts/build_tobe_detail.py.",
+  "_note": "Locked v2 spec. Rebuilt by plan-workspace/build_tobe_v2_detail.py from /workspace/to-be/wf-*.json. Do not hand-edit; re-run the script. Nothing in this file publishes or contacts GHL.",
   "workflows": {
     "01": {
-      "purpose": "First touch. Capture every lead, stamp attribution onto the Opportunity at create, and run speed-to-lead outreach.",
+      "purpose": "First touch. Enrolls new next-lander contacts, create-once opens one Sales opportunity, stamps Method 2 clinic context, sends the welcome email and welcome SMS, then hands to WF-02 after 24 hours.",
       "diagram_key": "wf01",
       "trigger": {
-        "type": "Form Submitted (and/or Inbound Webhook for paid funnels)",
+        "type": "Contact Created + Has Tag next-lander",
         "filters": [
-          "Form is any of the MWC lead-capture forms",
-          "or Inbound Webhook from the funnel with gclid/fbclid/UTM in the payload"
+          "Contact has tag next-lander (staging tag id EA2hrrIHTrlFvEEt6RzH)",
+          "No source filter on the trigger; wordpress-form is an inner branch only",
+          "Empty source defaults to next-lander"
         ],
-        "target": "The live MWC lead forms. BUILD DECISION NEEDED: confirm the exact form ids / webhook to listen on."
+        "target": "Any Contact Created event that carries the next-lander tag. WordPress leads land via WPCode snippet 11461 + Gravity Form 1 posting to https://book.menswellnesscenters.com/api/handoff/wordpress then /api/qualify upserts the contact. The WP CID bridge is not changed."
       },
       "prerequisites": [
-        "Contact fields: gclid_value, fbclid_value, utm_source, utm_campaign, utm_medium, utm_content, utm_term, lead_source, lead_source_detail (Wave 0 creates these)",
-        "Wave 0 ADDENDUM (Decision 14): Locations Custom Object with 3 records (Richmond, Virginia Beach, Newport News) + generic operational contact fields current_clinic_address, current_clinic_phone, current_booking_url",
-        "Opportunity pipeline Sales - Lead to Close (id Vt8cPz51C3i87moo73gQ), New Lead stage",
-        "Opportunity attribution fields (utm_*, gclid, fbclid, lead_source) to receive the copy at create",
-        "D17 attribution fields exist (12 contact first_*/last_* + 5 frozen opportunity attr fields) -- see Decisions page"
+        "Live tag next-lander (staging id EA2hrrIHTrlFvEEt6RzH); do not rename.",
+        "Method 2 contact fields exist: current_clinic_address (a2v4CqA8zXaZ0iu901f6), current_clinic_phone (k7ci7d1rnExhAVtEE768), current_booking_url (W74Kznhixhaq5sJWbk4r), current_review_link (5WQWnA1nuMn0SWwTLxKR).",
+        "Staging Sales pipe ASnpfhu1hpSHUv0IFLc7 with New Lead stage 31a81ba6-10c4-4033-8401-4e864ec9495c. Production pipe Vt8cPz51C3i87moo73gQ is not on staging.",
+        "Native email template j7C8MVs6cAIuH5zPUjzH: EML | WF-01 | Welcome.",
+        "Allow Duplicate Opportunities = ON. WF-01 still create-once guards against a second open Sales opp."
       ],
       "steps": [
         {
           "order": 1,
-          "action": "Update Contact Field",
-          "name": "Fields: Two-touch attribution capture (D17)",
-          "config": "Write inbound gclid/fbclid/utm_source/utm_campaign/landing_page to BOTH field sets per Decision 17: last_* fields overwrite on every inbound; first_* fields write ONLY IF EMPTY (use an If/Else 'first_utm_source is empty' gate so first-touch is write-once). Stamp first_touch_at/last_touch_at with {{right_now.middle_endian_date}}. UTM governance: if utm_source is not one of google/meta/gbp/bing/referral/direct, add tag attr_needs_review instead of silently storing."
+          "action": "Trigger",
+          "name": "TRIGGER: Contact Created (tag next-lander only)",
+          "config": "Sole enroll. Must not add a source filter. Must not rename next-lander."
         },
         {
           "order": 2,
-          "action": "Update Contact Field",
-          "name": "Fields: Set lead source",
-          "config": "Set contact.lead_source and contact.lead_source_detail. Confirm whether native contact.source is used instead (per as-is reference workflow)."
+          "action": "If/Else",
+          "name": "IF-ELSE: Guard against duplicate Sales opp (create-once)",
+          "config": "Native check for an existing open opp in Sales Lead to Close before create. Must not move stages."
         },
         {
           "order": 3,
-          "action": "Create/Update Opportunity",
-          "name": "Opp: Create in New Lead",
-          "config": "Create Opportunity in Sales - Lead to Close (id Vt8cPz51C3i87moo73gQ), stage New Lead. Copy attribution onto the Opp at create: utm_source, utm_campaign, gclid, fbclid, lead_source. This is the single moment attribution lands on the Opp, so wins AND losses carry it. D17 FREEZE RULE: copy first_*/last_* attribution + gclid/fbclid/landing_page from contact onto the opportunity fields at CREATE, exactly once; no workflow may update opportunity attribution fields afterward."
+          "action": "Create Opportunity",
+          "name": "CREATE-OPP: New Lead in Sales Lead to Close (create-once)",
+          "config": "Pipeline Vt8cPz51C3i87moo73gQ, stage New Lead. Allow Duplicate is ON but this branch only fires when no open opp exists. Must not set monetaryValue."
         },
         {
           "order": 4,
-          "action": "Send Email",
-          "name": "Email: Welcome (instant)",
-          "config": "Send immediately. Exempt from quiet hours (email, not SMS). Fires even at night."
+          "action": "Update Contact Field",
+          "name": "SET-FIELD: Stamp location_* (from mapped source)",
+          "config": "Writes location_* fields for the contact. Must not rename existing live location_* tags."
         },
         {
           "order": 5,
-          "action": "Send SMS",
-          "name": "SMS: Speed-to-Lead (T+0, quiet-hours)",
-          "config": "Send instantly if inside 8a-9p contact TZ; if outside, the quiet-hours window queues it to 8:00 AM contact TZ (TCPA-safe)."
+          "action": "Update Contact Field",
+          "name": "SET-FIELD: Stamp current_clinic_* Method 2 (WF-01 only)",
+          "config": "Sole writer of current_clinic_slug and current_clinic_* fields. Slugs limited to richmond, virginia-beach, newport-news."
         },
         {
           "order": 6,
-          "action": "Wait",
-          "name": "Wait: 2 minutes",
-          "config": "Wait 2 minutes."
+          "action": "If/Else",
+          "name": "IF-ELSE: Branch on source wordpress-form (inner branch only)",
+          "config": "Inner branch to route WP-origin contacts. Must not create a Sales opp here; qualify already upserted the contact via /api/qualify."
         },
         {
           "order": 7,
-          "action": "Internal Notification",
-          "name": "Notify: Staff new lead",
-          "config": "Internal notification to the setter team with lead + attribution summary."
+          "action": "Add Contact Tag",
+          "name": "ADD-TAG: v2_source_wp (inner wordpress-form branch)",
+          "config": "New v2 tag only. Must not touch legacy source tags."
         },
         {
           "order": 8,
-          "action": "Wait",
-          "name": "Wait: 5 minutes from entry",
-          "config": "Wait until 5 minutes after entry."
+          "action": "Send Email",
+          "name": "EMAIL: Welcome (native template)",
+          "config": "Sends EML | WF-01 | Welcome. Copy uses members not patients, clinic not office, no-cost not free, no em-dashes, no guy."
         },
         {
           "order": 9,
-          "action": "Assign User / Manual Call",
-          "name": "Call: Speed-to-Lead (T+5)",
-          "config": "Create a call task / auto-call to the setter team."
+          "action": "Send SMS",
+          "name": "SMS: Welcome with STOP opt-out (first SMS)",
+          "config": "Inline body. First SMS to any contact carries STOP opt-out. Honors quiet hours 8am-9pm contact TZ."
         },
         {
           "order": 10,
-          "action": "Wait",
-          "name": "Wait: 24 hours",
-          "config": "Wait 24 hours from entry to evaluate booking."
+          "action": "Add Contact Tag",
+          "name": "ADD-TAG: v2_enrolled_wf01 (audit)",
+          "config": "Audit tag for WF-01 enroll. Must not rename next-lander."
         },
         {
           "order": 11,
-          "action": "If/Else",
-          "name": "If: Appointment booked within 24h?",
-          "config": "Branch on whether an appointment now exists for the contact.",
-          "branches": [
-            {
-              "label": "Yes - booked",
-              "condition": "Appointment exists",
-              "path": "Exit to WF-03 Booking Confirmation and Reminders"
-            },
-            {
-              "label": "No - not booked",
-              "condition": "No appointment",
-              "path": "Exit to WF-02 Non-Booked Recovery"
-            }
-          ]
+          "action": "Wait",
+          "name": "WAIT: 24 hours (quiet-hours aware)",
+          "config": "Native wait step. Must not skip quiet hours."
+        },
+        {
+          "order": 12,
+          "action": "Add To Workflow",
+          "name": "ADD-TO-WF: Route to WF-02 Non-booked",
+          "config": "Hand-off to non-booked burst. Must not filter by funnel_entry_* here; WF-02 enforces the exclusion."
         }
       ],
       "messages": [
         {
-          "step": "Email: Welcome",
+          "step": "Step: EMAIL welcome",
           "channel": "Email",
-          "body": "Subject: Welcome to Men's Wellness Centers. Body: Thanks for reaching out, {{contact.first_name}}. A Men's Wellness Centers team member will call you within one business hour to schedule your no-cost 60-minute in-person consultation at your local clinic. BUILD DECISION NEEDED: paste final approved welcome copy."
+          "body": "Native template EML | WF-01 | Welcome (j7C8MVs6cAIuH5zPUjzH). Copy respects the locked rules (members not patients, clinic not office, no-cost not free, no em-dashes)."
         },
         {
-          "step": "SMS: Speed-to-Lead",
+          "step": "Step: SMS welcome (create path only)",
           "channel": "SMS",
-          "body": "Hi {{contact.first_name}}, this is Men's Wellness Centers. Thanks for reaching out. What is the best time today for a quick call to book your no-cost 60-minute in-person consultation? Reply STOP to opt out."
+          "body": "Inline SMS. First SMS in the sequence carries Reply STOP to opt out. Transactional; no Time Window."
         }
       ],
       "settings": {
-        "quiet_hours": "Time Window 8:00 AM to 9:00 PM, Contact Timezone, all 7 days. Set under Workflow Settings, not per action.",
-        "allow_reentry": "No. A contact should run lead-capture once per lead. Re-entry would double-create opportunities.",
-        "stop_on_response": "Optional on the SMS nurture portion; not on the create/attribution steps.",
-        "reentry_caveat": "Fallback reconcile (form submissions vs opportunities every 15 min) catches any submission that did not create an Opportunity.",
-        "status": "Draft. Do not publish without sign-off."
+        "quiet_hours": "None. Transactional SMS sends immediately (no quiet hours).",
+        "allow_reentry": "No. Create-once via FIND-OPP guard on the staging Sales pipe.",
+        "stop_on_response": "Yes. Inbound STOP routes into WF-11 Compliance.",
+        "reentry_caveat": "Ambassador and PCC referral contacts re-enter WF-01 as new next-lander contacts (never merged).",
+        "status": "Draft v10 on staging shell 869782c6-00d6-4349-ab6e-4e0f2a98bd04. Unpublished."
       },
       "test": [
-        "Create a test contact via each lead form with fake gclid/UTM params in the URL.",
-        "Verify the Opportunity is created in New Lead with attribution copied onto the Opp (not just the contact).",
-        "Verify welcome email fires instantly and SMS respects quiet hours (submit a late-night test to confirm the SMS queues to 8 AM).",
-        "Leave it unbooked 24h and confirm exit to WF-02; book within 24h and confirm exit to WF-03."
+        "Create a test contact with tag next-lander. Confirm exactly one open Sales opp on staging pipe ASnpfhu1hpSHUv0IFLc7 with stage New Lead.",
+        "Confirm current_clinic_* fields are stamped from the correct slug (richmond, virginia-beach, or newport-news).",
+        "Confirm welcome email and SMS fire on the create path only. Duplicate enroll into WF-01 must not create a second opp.",
+        "Confirm WF-02 receives the contact after WAIT 24 hour."
       ],
       "depends_on": [
-        "Sales - Lead to Close (id Vt8cPz51C3i87moo73gQ)",
-        "Contact + Opportunity attribution fields (Wave 0)",
-        "WF-02 and WF-03 to receive exits"
+        "WF-02 (hand-off after 24h)",
+        "WF-11 (STOP inbound)"
       ],
       "variables": {
-        "principle": "Build ONE workflow, not one per clinic. Location is a static variable set once at object creation (WF-01 branches on opportunity.location and stamps the clinic-specific fields). Every downstream step reads merge fields, so the same workflow serves Richmond, Virginia Beach, and Newport News. Never hardcode a clinic name, address, phone, or booking URL into a message or action; never clone a workflow just to change words. Branch per location only when BEHAVIOR differs (a different calendar or routing), never when only the copy differs.",
-        "location_variable": "opportunity.location (static: richmond | va_beach | npn | telehealth). Set once by WF-01 at create. This is the single source of clinic identity; downstream workflows read it, they do not re-derive it.",
-        "collision_warning": "CRITICAL: a standard GHL Custom Value is account-wide. It applies universally across the whole sub-account, so it CANNOT hold per-clinic data. If one location writes a Custom Value it changes for every location (a data collision). Custom Values are only safe for values that are identical brand-wide (brand name, main brand domain, compliance links). Per-clinic values must NEVER live in a Custom Value.",
+        "principle": "Clinic slug is the single variable. Slug values are richmond, virginia-beach, and newport-news. Method 2 stamps four generic fields on the Contact so downstream templates never branch on clinic.",
+        "location_variable": "opportunity.location XbaJOEsDwgxMtudnj5IG holds the display label (Richmond, Virginia Beach, Newport News); do not rewrite these options while 2bv2 is published.",
+        "collision_warning": "Do not touch the historical location_* tags or LOC_TAGS. New tags are v2_*.",
         "methods": [
           {
-            "name": "Method 1 - Locations Custom Object (LOCKED: Decision 14)",
-            "detail": "The chosen pattern. A 'Locations' Custom Object with one record per clinic (fields: Location Email, Location Phone, Booking Link, Address, Review Link). Each Contact is associated with its Location at capture, and WF-01 stamps the associated Location's values into generic operational contact fields (current_clinic_address, current_clinic_phone, current_booking_url) exactly once at creation. Because email/SMS builders cannot loop Custom Object variables natively, that stamp step is the bridge; every template reads ONLY the generic fields, so downstream workflows never know clinics exist. Wave 0 addendum: the object + 3 records + generic fields must be created (Wave 0 ran before Decision 14)."
-          },
-          {
-            "name": "Method 2 - Contact field matrix (REJECTED)",
-            "detail": "Prefixed per-clinic fields plus tag-routed If/Else copying into generic fields. Rejected by Decision 14 because the clinic values end up embedded inside workflow branch configs, which buries data in steps (the defect this project removes) and makes every clinic-data change a workflow edit."
-          },
-          {
-            "name": "Method 3 - Smart URL strategy (ADOPTED for links)",
-            "detail": "Layered on per Decision 14 for booking/review links on the Vercel funnel pages: one base Custom Value plus the contact's location as a URL parameter, for example {{custom_values.base_booking_url}}?branch={{contact.location_preference}}. The landing page reads ?branch= and renders the correct clinic calendar. Links only; in-message address/phone comes from the generic fields."
+            "name": "Method 2 stamp arms (this workflow)",
+            "detail": "One IF-ELSE branch on contact.current_clinic_slug writes current_clinic_address, current_clinic_phone, current_booking_url, and current_review_link once. WF-01 is the only workflow that writes these fields."
           }
         ],
         "custom_values": [
-          "Safe as account-wide Custom Values ({{custom_values.name}}): brand name, main brand booking domain, compliance links, brand-level review/survey/intake links. These are identical for every contact and every clinic.",
-          "NOT safe as Custom Values (per-clinic, would collide): clinic address, clinic direct phone, per-clinic booking/calendar URL, location email. Deliver these via Method 1 or 2: copy the clinic's value into a generic operational Contact field with an Update Contact Field step before the send, then reference that generic field.",
-          "Merge-field syntax: contact fields {{contact.field_key}}, opportunity fields {{opportunity.field_key}}, account constants {{custom_values.name}}, appointment {{appointment.start_time}}. Operational pattern: templates read a generic field like {{contact.current_location_booking_link}} that the workflow fills per clinic, never a hardcoded clinic value."
+          "GHL_WF05_WEBHOOK_URL (Force config; not stamped from any workflow)",
+          "Booking URL pattern: https://book.menswellnesscenters.com/{slug}",
+          "Review links use Google Maps CIDs from the live listings"
         ]
       }
     },
     "02": {
-      "purpose": "Recover leads that never booked: a 10-touch sequence over 16 days, exit instantly on booking.",
+      "purpose": "Non-booked recovery burst for contacts that finished WF-01 but did not book. Marketing / recovery: quiet hours apply.",
       "diagram_key": "wf02",
       "trigger": {
-        "type": "Contact Tag or workflow hand-off from WF-01",
+        "type": "Added by WF-01 (no direct trigger on the shell)",
         "filters": [
-          "Entered when WF-01 finds no booking 24h after the lead"
+          "Enrolled via ADD-TO-WF from WF-01 after WAIT 24 hour",
+          "Not funnel_entry_* origins (WF-02 enforces its own exclusion)"
         ],
-        "target": "Hand-off from WF-01 (no separate GHL trigger needed if WF-01 adds to this workflow)."
+        "target": "WF-01 hand-off only. There is no form trigger; contacts arrive via ADD-TO-WF."
       },
       "prerequisites": [
-        "WF-01 built and handing off",
-        "WF-09 built to receive the 16-day exit",
-        "SMS consent + DND gate (WF-11)"
+        "WF-01 is live (draft) and hands off correctly.",
+        "Native email template bPj39XTcKv2HylGKEUdG: EML | WF-02 | Non-booked 24h."
       ],
       "steps": [
         {
           "order": 1,
-          "action": "Manual Call",
-          "name": "Call: Speed-to-Lead (T+5m)",
-          "config": "Call task, 5 minutes from no-book entry."
+          "action": "Trigger",
+          "name": "TRIGGER: Added by WF-01 (not funnel_entry_*)",
+          "config": "Sole enroll path for WF-02. Must not enroll funnel_entry_* origins."
         },
         {
           "order": 2,
-          "action": "Wait",
-          "name": "Wait: 2 hours",
-          "config": "Then SMS 1."
+          "action": "If/Else",
+          "name": "IF-ELSE: Skip if already booked (v2_status_booked)",
+          "config": "Reads v2_status_booked and calendar-booked contact fields. Must not clear the booked tag."
         },
         {
           "order": 3,
-          "action": "Send SMS",
-          "name": "SMS: Follow-Up 1 (T+2h)",
-          "config": "Follow-up. Quiet hours apply."
+          "action": "Wait",
+          "name": "WAIT: +3 minutes (quiet-hours aware)",
+          "config": "Short opening delay for burst step 1."
         },
         {
           "order": 4,
-          "action": "Wait",
-          "name": "Wait: to +4h",
-          "config": "Then Email 1."
+          "action": "Send SMS",
+          "name": "SMS: Non-booked nudge 1 (3m)",
+          "config": "Inline SMS. Honors quiet hours 8am-9pm contact TZ."
         },
         {
           "order": 5,
-          "action": "Send Email",
-          "name": "Email: Health Education 1 (T+4h)",
-          "config": "Educational email."
+          "action": "Wait",
+          "name": "WAIT: +1 minute",
+          "config": "Short spacing before email."
         },
         {
           "order": 6,
-          "action": "Send SMS",
-          "name": "SMS: Re-Engagement 2 (T+1d)",
-          "config": "Appointment/consult-logistics framing, no symptom detail. Quiet hours apply."
+          "action": "Send Email",
+          "name": "EMAIL: Non-booked nudge 1 (native template)",
+          "config": "Sends EML | WF-02 | Nudge 1."
         },
         {
           "order": 7,
-          "action": "Send Email",
-          "name": "Email: Physician-Led Process 2 (T+2d)",
-          "config": "Physician-led process email."
+          "action": "Wait",
+          "name": "WAIT: +5 minutes",
+          "config": "Spacing before next SMS."
         },
         {
           "order": 8,
-          "action": "Manual Call",
-          "name": "Call: Voicemail Drop (T+3d)",
-          "config": "Ringless voicemail."
+          "action": "Send SMS",
+          "name": "SMS: Non-booked nudge 2 (5m)",
+          "config": "Inline SMS. Members not patients, clinic not office."
         },
         {
           "order": 9,
-          "action": "Send SMS",
-          "name": "SMS: Availability 3 (T+5d)",
-          "config": "Availability nudge."
+          "action": "Wait",
+          "name": "WAIT: +15 minutes",
+          "config": "Spacing before follow-up email."
         },
         {
           "order": 10,
           "action": "Send Email",
-          "name": "Email: Testimonial 3 (T+7d)",
-          "config": "Return-to-self testimonial email (written, no before/after)."
+          "name": "EMAIL: Non-booked nudge 2 (native template)",
+          "config": "Sends EML | WF-02 | Nudge 2."
         },
         {
           "order": 11,
-          "action": "Send SMS",
-          "name": "SMS: Re-Engagement 4 (T+10d)",
-          "config": "Re-engagement."
+          "action": "Wait",
+          "name": "WAIT: +24 hours (quiet-hours aware)",
+          "config": "Longer wait between morning outreach steps."
         },
         {
           "order": 12,
-          "action": "Send Email",
-          "name": "Email: Urgency 4 (T+14d)",
-          "config": "Urgency email."
+          "action": "Send SMS",
+          "name": "SMS: Non-booked nudge 3 (24h)",
+          "config": "Inline SMS."
         },
         {
           "order": 13,
-          "action": "Send SMS",
-          "name": "SMS: Empathetic Breakup 5 (T+16d)",
-          "config": "Final message."
+          "action": "Wait",
+          "name": "WAIT: +36 hours",
+          "config": "Final delay before last email."
         },
         {
           "order": 14,
-          "action": "Go To",
-          "name": "Exit: to WF-09",
-          "config": "After 16 days hand off to WF-09 Long-Term Nurture."
+          "action": "Send Email",
+          "name": "EMAIL: Non-booked nudge 4 (native template)",
+          "config": "Sends EML | WF-02 | Nudge 4."
+        },
+        {
+          "order": 15,
+          "action": "If/Else",
+          "name": "IF-ELSE: Re-check booking (v2_status_booked)",
+          "config": "Reads booked state after burst. Must not force appt_status."
+        },
+        {
+          "order": 16,
+          "action": "Add To Workflow",
+          "name": "ADD-TO-WF: Route unbooked to WF-09 Nurture",
+          "config": "Hand-off to nurture. Must not touch renewal_date; only WF-09 owns that trigger."
         }
       ],
       "messages": [
         {
-          "step": "SMS: Follow-Up 1",
+          "step": "SMS at +3m, +1m, +5m, +15m, and +36h",
           "channel": "SMS",
-          "body": "Hi {{contact.first_name}}, following up from Men's Wellness Centers. Ready to book your no-cost 60-minute in-person consultation? Reply with a day that works. Reply STOP to opt out."
+          "body": "Inline SMS. First SMS carries Reply STOP to opt out."
         },
         {
-          "step": "SMS: Empathetic Breakup 5",
-          "channel": "SMS",
-          "body": "{{contact.first_name}}, we will step back for now. When you are ready to book your consultation at Men's Wellness Centers, we are here. Reply STOP to opt out."
+          "step": "EMAIL at 24h",
+          "channel": "Email",
+          "body": "Native template EML | WF-02 | Non-booked 24h (bPj39XTcKv2HylGKEUdG)."
         }
       ],
       "settings": {
-        "quiet_hours": "Time Window 8:00 AM to 9:00 PM, Contact Timezone, all 7 days. Set under Workflow Settings, not per action.",
-        "allow_reentry": "No while active; the sequence is one pass per lead.",
-        "stop_on_response": "Yes - a reply should pause automated sends for setter handling.",
-        "reentry_caveat": "Booking at any point triggers the early exit below.",
-        "status": "Draft. Do not publish without sign-off."
+        "quiet_hours": "08:00-21:00 contact timezone, 7 days. Marketing / recovery only.",
+        "allow_reentry": "No. One pass per WF-01 enroll.",
+        "stop_on_response": "Yes. Inbound STOP routes into WF-11 Compliance.",
+        "reentry_caveat": "Contacts who book are dropped from WF-02 by WF-03's REMOVE-FROM-WF step.",
+        "status": "Draft v4 on staging shell 5f973b3c-0375-4fc0-ace2-e13d1a1976b9. Unpublished."
       },
       "test": [
-        "Enter a test contact from WF-01 with no booking.",
-        "Verify each touch fires on schedule and inside quiet hours.",
-        "Book mid-sequence and confirm immediate exit to WF-03.",
-        "Let it run 16 days and confirm hand-off to WF-09."
+        "Enroll a test contact via WF-01 and confirm the SMS burst fires only inside 08:00-21:00 contact TZ.",
+        "Book an appointment mid-burst and confirm WF-03 removes the contact from WF-02.",
+        "Confirm hand-off to WF-09 after the final SMS."
       ],
       "depends_on": [
-        "WF-01 (entry)",
-        "WF-03 (early exit on booking)",
-        "WF-09 (16-day exit)",
-        "WF-11 consent gate"
-      ],
-      "variables": {
-        "principle": "Build ONE workflow, not one per clinic. Location is a static variable set once at object creation (WF-01 branches on opportunity.location and stamps the clinic-specific fields). Every downstream step reads merge fields, so the same workflow serves Richmond, Virginia Beach, and Newport News. Never hardcode a clinic name, address, phone, or booking URL into a message or action; never clone a workflow just to change words. Branch per location only when BEHAVIOR differs (a different calendar or routing), never when only the copy differs.",
-        "location_variable": "opportunity.location (static: richmond | va_beach | npn | telehealth). Set once by WF-01 at create. This is the single source of clinic identity; downstream workflows read it, they do not re-derive it.",
-        "collision_warning": "CRITICAL: a standard GHL Custom Value is account-wide. It applies universally across the whole sub-account, so it CANNOT hold per-clinic data. If one location writes a Custom Value it changes for every location (a data collision). Custom Values are only safe for values that are identical brand-wide (brand name, main brand domain, compliance links). Per-clinic values must NEVER live in a Custom Value.",
-        "methods": [
-          {
-            "name": "Method 1 - Locations Custom Object (LOCKED: Decision 14)",
-            "detail": "The chosen pattern. A 'Locations' Custom Object with one record per clinic (fields: Location Email, Location Phone, Booking Link, Address, Review Link). Each Contact is associated with its Location at capture, and WF-01 stamps the associated Location's values into generic operational contact fields (current_clinic_address, current_clinic_phone, current_booking_url) exactly once at creation. Because email/SMS builders cannot loop Custom Object variables natively, that stamp step is the bridge; every template reads ONLY the generic fields, so downstream workflows never know clinics exist. Wave 0 addendum: the object + 3 records + generic fields must be created (Wave 0 ran before Decision 14)."
-          },
-          {
-            "name": "Method 2 - Contact field matrix (REJECTED)",
-            "detail": "Prefixed per-clinic fields plus tag-routed If/Else copying into generic fields. Rejected by Decision 14 because the clinic values end up embedded inside workflow branch configs, which buries data in steps (the defect this project removes) and makes every clinic-data change a workflow edit."
-          },
-          {
-            "name": "Method 3 - Smart URL strategy (ADOPTED for links)",
-            "detail": "Layered on per Decision 14 for booking/review links on the Vercel funnel pages: one base Custom Value plus the contact's location as a URL parameter, for example {{custom_values.base_booking_url}}?branch={{contact.location_preference}}. The landing page reads ?branch= and renders the correct clinic calendar. Links only; in-message address/phone comes from the generic fields."
-          }
-        ],
-        "custom_values": [
-          "Safe as account-wide Custom Values ({{custom_values.name}}): brand name, main brand booking domain, compliance links, brand-level review/survey/intake links. These are identical for every contact and every clinic.",
-          "NOT safe as Custom Values (per-clinic, would collide): clinic address, clinic direct phone, per-clinic booking/calendar URL, location email. Deliver these via Method 1 or 2: copy the clinic's value into a generic operational Contact field with an Update Contact Field step before the send, then reference that generic field.",
-          "Merge-field syntax: contact fields {{contact.field_key}}, opportunity fields {{opportunity.field_key}}, account constants {{custom_values.name}}, appointment {{appointment.start_time}}. Operational pattern: templates read a generic field like {{contact.current_location_booking_link}} that the workflow fills per clinic, never a hardcoded clinic value."
-        ]
-      }
+        "WF-01",
+        "WF-09"
+      ]
     },
     "03": {
-      "purpose": "Confirm the booking and run all pre-appointment reminders on the new class calendars.",
+      "purpose": "Confirm the appointment and send appointment-relative reminders across the three consult calendars. Transactional; no quiet hours.",
       "diagram_key": "preappt",
       "trigger": {
-        "type": "Appointment (Customer booked appointment) on the class calendars",
+        "type": "Appointment Booked on one of the three consult calendars",
         "filters": [
-          "Calendar is one of the 3 per-clinic class calendars"
+          "Calendar 1Cfy5JnO2A4ggiZlMVvX (richmond)",
+          "Calendar 4xmnBGMWJ6TVUKcAPpPb (virginia-beach)",
+          "Calendar lBaRbjUpEmesxEloFBME (newport-news)",
+          "appt_status != reschedule at trigger time (reschedule never enters as no-show)"
         ],
-        "target": "BUILD DECISION NEEDED: the 3 new per-clinic class calendar ids (Richmond, Virginia Beach, Newport News), created in Wave 0. 60-min slots, 60-min interval, 6 seats per slot, 'Show seats per slot' OFF (Decision 12)."
+        "target": "Native Appointment Booked trigger on the three clinic calendars."
       },
       "prerequisites": [
-        "3 class calendars created (Decision 12)",
-        "Intake form",
-        "WF-08 built for cancel routing",
-        "WF-05 fires on appointment day"
+        "New v2 tag v2_status_booked exists on staging (NR1KZuPH1xzWOuu0pHd4).",
+        "Native email templates GUs77konNdAGFS0EFZS2 (EML | WF-03 | Confirm appointment) and QcpX2V3OarwL5jKN6OFE (EML | WF-03 | T-3d reminder)."
       ],
       "steps": [
         {
           "order": 1,
-          "action": "Send SMS",
-          "name": "SMS: Booking Confirmation (T+0)",
-          "config": "Instant on booking."
+          "action": "Trigger",
+          "name": "TRIGGER: Appointment Booked (3 consult calendars)",
+          "config": "Sole booking trigger. Must not enroll from any other calendar."
         },
         {
           "order": 2,
-          "action": "Send Email",
-          "name": "Email: Booking Confirmation (T+0)",
-          "config": "Instant on booking."
+          "action": "Add Contact Tag",
+          "name": "ADD-TAG: v2_status_booked",
+          "config": "New v2 booked tag. Must not remove or rename live booking tags."
         },
         {
           "order": 3,
-          "action": "Internal Notification",
-          "name": "Notify: Staff booking",
-          "config": "Instant staff notification."
+          "action": "Send Email",
+          "name": "EMAIL: Confirmation (native template)",
+          "config": "Sends EML | WF-03 | Confirmation."
         },
         {
           "order": 4,
-          "action": "Wait",
-          "name": "Wait: 1 hour",
-          "config": "Then intake reminder."
+          "action": "Send SMS",
+          "name": "SMS: Confirmation (inline)",
+          "config": "Inline confirmation SMS. Honors quiet hours 8am-9pm contact TZ."
         },
         {
           "order": 5,
-          "action": "Send SMS",
-          "name": "SMS: Intake Reminder (T+1h)",
-          "config": "Prompt to complete intake."
+          "action": "Wait",
+          "name": "WAIT: Until T-3 days before appointment",
+          "config": "Native appointment-relative wait."
         },
         {
           "order": 6,
-          "action": "If/Else",
-          "name": "If: Intake completed?",
-          "config": "Branch on intake form completion.",
-          "branches": [
-            {
-              "label": "Yes",
-              "condition": "Intake complete",
-              "path": "Skip chase, go to Reminders block"
-            },
-            {
-              "label": "No",
-              "condition": "Intake not complete",
-              "path": "Run intake chase (WF-04 owns chasing; see WF-04)"
-            }
-          ]
+          "action": "Send SMS",
+          "name": "SMS: Reminder T-3 days (inline)",
+          "config": "Members not patients, clinic not office."
         },
         {
           "order": 7,
-          "action": "Send Email",
-          "name": "Email: 3-Day Prep (T-3d)",
-          "config": "3 days before appointment. Use appointment-relative wait with 'if date already passed' fallback."
+          "action": "Wait",
+          "name": "WAIT: Until T-1 day before appointment",
+          "config": "Native appointment-relative wait."
         },
         {
           "order": 8,
-          "action": "Send SMS",
-          "name": "SMS: 1-Day Reminder (T-1d)",
-          "config": "1 day before appointment."
+          "action": "Send Email",
+          "name": "EMAIL: Reminder T-1 day (native template)",
+          "config": "Sends EML | WF-03 | Reminder T-1."
         },
         {
           "order": 9,
-          "action": "Send Email",
-          "name": "Email: 1-Day Prep (T-1d)",
-          "config": "1 day before appointment."
+          "action": "Wait",
+          "name": "WAIT: Until T-5 hours before appointment",
+          "config": "Same-day heads-up."
         },
         {
           "order": 10,
           "action": "Send SMS",
-          "name": "SMS: Morning-Of (8 AM)",
-          "config": "8 AM on the day of the appointment."
+          "name": "SMS: Reminder T-5 hours (inline)",
+          "config": "Same-day SMS. Honors quiet hours."
         },
         {
           "order": 11,
-          "action": "Send SMS",
-          "name": "SMS: 2-Hour Intake Prompt (T-2h)",
-          "config": "2 hours before appointment."
+          "action": "Wait",
+          "name": "WAIT: Until T-2 hours before appointment",
+          "config": "Final heads-up."
         },
         {
           "order": 12,
-          "action": "Go To",
-          "name": "Exit: appointment day",
-          "config": "On appointment day WF-05 fires from the PCC Sales Form. A cancellation at any point halts reminders and routes to WF-08."
+          "action": "Send SMS",
+          "name": "SMS: Reminder T-2 hours (inline)",
+          "config": "Final SMS reminder."
         },
         {
           "order": 13,
-          "action": "Multi-action",
-          "name": "Port: Auto-confirm + recovery exit (live 3a)",
-          "config": "On booking: update_appointment_status=confirmed (when auto-confirm rules met), remove_from_workflow [WF-02 Non-Booked Recovery], remove stale recovery opportunity if one exists in No-Show/Cancel limbo. Node shapes in build_ids live_node_shapes_port_pass."
+          "action": "If/Else",
+          "name": "IF-ELSE: Skip no-show branch when appt_status=reschedule",
+          "config": "Reschedule must never be marked as no-show. Guard before any no-show write."
         },
         {
           "order": 14,
-          "action": "Reply trigger branch",
-          "name": "Port: Reply-based confirm handler (live 03c)",
-          "config": "Inbound SMS reply parsing on unconfirmed appointments: C/CONFIRM -> update_appointment_status=confirmed + remove from confirmation chase; R -> reschedule path. Port the 03c pattern as a WF-03 reply branch, not a separate workflow."
+          "action": "Add To Workflow",
+          "name": "ADD-TO-WF: Route to WF-04 Intake chase",
+          "config": "Hand-off to intake chase after confirmation cadence completes."
         }
       ],
       "messages": [
         {
-          "step": "SMS: Booking Confirmation",
-          "channel": "SMS",
-          "body": "You are booked, {{contact.first_name}}. Your 60-minute in-person consultation at Men's Wellness Centers is {{appointment.start_time}}. Reply STOP to opt out."
+          "step": "Confirm email + SMS",
+          "channel": "Email",
+          "body": "Native template EML | WF-03 | Confirm appointment (GUs77konNdAGFS0EFZS2), followed by an inline confirm SMS."
         },
         {
-          "step": "SMS: Morning-Of",
+          "step": "T-3d reminder",
+          "channel": "Email",
+          "body": "Native template EML | WF-03 | T-3d reminder (QcpX2V3OarwL5jKN6OFE), then an inline T-3d SMS."
+        },
+        {
+          "step": "T-1d / T-5h / T-2h reminders",
           "channel": "SMS",
-          "body": "Good morning {{contact.first_name}}. We look forward to seeing you today at {{appointment.start_time}} for your 60-minute in-person consultation at Men's Wellness Centers."
+          "body": "Inline SMS at each waypoint. Bodies reference contact.current_clinic_address, contact.current_clinic_phone, and contact.current_booking_url only. Do not use {{location.name}}."
         }
       ],
       "settings": {
-        "quiet_hours": "Time Window 8:00 AM to 9:00 PM, Contact Timezone, all 7 days. Set under Workflow Settings, not per action.",
-        "allow_reentry": "One run per appointment. Note the appointment/status re-entry caveat: appointment-triggered workflows re-enter once per appointment regardless of the toggle.",
-        "stop_on_response": "Reminders can pause on reply for staff handling.",
-        "reentry_caveat": "Appointment-relative waits must use the 'if date already passed' fallback so a same-day booking does not skip all reminders unexpectedly.",
-        "status": "Draft. Do not publish without sign-off."
+        "quiet_hours": "None. Transactional SMS sends immediately (no quiet hours).",
+        "allow_reentry": "Yes. Each new appointment re-enters this workflow; reschedule re-arms reminders.",
+        "stop_on_response": "Yes.",
+        "reentry_caveat": "REMOVE-FROM-WF WF-02 fires on entry so recovery does not overlap.",
+        "status": "Draft v7 on staging shell ec08cae5-3d1f-48bd-9a0d-444626d9a150. Unpublished."
       },
       "test": [
-        "Book a test appointment on each class calendar.",
-        "Confirm instant confirmation SMS + email + staff notification.",
-        "Verify T-3d/T-1d/morning/T-2h reminders fire relative to the appointment.",
-        "Cancel a test appointment and confirm reminders halt and it routes to WF-08."
+        "Book an appointment on each of the three calendars and confirm the appointment-relative waits render at T-3d, T-1d, T-5h, T-2h with appointmentCondition=skip.",
+        "Reschedule an appointment and confirm the new appointment carries reminders and the old enrollment exits via the rescheduled goal.",
+        "Confirm the T-3d email fires before the T-3d SMS."
       ],
       "depends_on": [
-        "3 class calendars (Decision 12)",
-        "Intake form",
-        "WF-04 (intake chase)",
-        "WF-05 (appointment day)",
-        "WF-08 (cancel routing)"
-      ],
-      "variables": {
-        "principle": "Build ONE workflow, not one per clinic. Location is a static variable set once at object creation (WF-01 branches on opportunity.location and stamps the clinic-specific fields). Every downstream step reads merge fields, so the same workflow serves Richmond, Virginia Beach, and Newport News. Never hardcode a clinic name, address, phone, or booking URL into a message or action; never clone a workflow just to change words. Branch per location only when BEHAVIOR differs (a different calendar or routing), never when only the copy differs.",
-        "location_variable": "opportunity.location (static: richmond | va_beach | npn | telehealth). Set once by WF-01 at create. This is the single source of clinic identity; downstream workflows read it, they do not re-derive it.",
-        "collision_warning": "CRITICAL: a standard GHL Custom Value is account-wide. It applies universally across the whole sub-account, so it CANNOT hold per-clinic data. If one location writes a Custom Value it changes for every location (a data collision). Custom Values are only safe for values that are identical brand-wide (brand name, main brand domain, compliance links). Per-clinic values must NEVER live in a Custom Value.",
-        "methods": [
-          {
-            "name": "Method 1 - Locations Custom Object (LOCKED: Decision 14)",
-            "detail": "The chosen pattern. A 'Locations' Custom Object with one record per clinic (fields: Location Email, Location Phone, Booking Link, Address, Review Link). Each Contact is associated with its Location at capture, and WF-01 stamps the associated Location's values into generic operational contact fields (current_clinic_address, current_clinic_phone, current_booking_url) exactly once at creation. Because email/SMS builders cannot loop Custom Object variables natively, that stamp step is the bridge; every template reads ONLY the generic fields, so downstream workflows never know clinics exist. Wave 0 addendum: the object + 3 records + generic fields must be created (Wave 0 ran before Decision 14)."
-          },
-          {
-            "name": "Method 2 - Contact field matrix (REJECTED)",
-            "detail": "Prefixed per-clinic fields plus tag-routed If/Else copying into generic fields. Rejected by Decision 14 because the clinic values end up embedded inside workflow branch configs, which buries data in steps (the defect this project removes) and makes every clinic-data change a workflow edit."
-          },
-          {
-            "name": "Method 3 - Smart URL strategy (ADOPTED for links)",
-            "detail": "Layered on per Decision 14 for booking/review links on the Vercel funnel pages: one base Custom Value plus the contact's location as a URL parameter, for example {{custom_values.base_booking_url}}?branch={{contact.location_preference}}. The landing page reads ?branch= and renders the correct clinic calendar. Links only; in-message address/phone comes from the generic fields."
-          }
-        ],
-        "custom_values": [
-          "Safe as account-wide Custom Values ({{custom_values.name}}): brand name, main brand booking domain, compliance links, brand-level review/survey/intake links. These are identical for every contact and every clinic.",
-          "NOT safe as Custom Values (per-clinic, would collide): clinic address, clinic direct phone, per-clinic booking/calendar URL, location email. Deliver these via Method 1 or 2: copy the clinic's value into a generic operational Contact field with an Update Contact Field step before the send, then reference that generic field.",
-          "Merge-field syntax: contact fields {{contact.field_key}}, opportunity fields {{opportunity.field_key}}, account constants {{custom_values.name}}, appointment {{appointment.start_time}}. Operational pattern: templates read a generic field like {{contact.current_location_booking_link}} that the workflow fills per clinic, never a hardcoded clinic value."
-        ]
-      }
+        "WF-02 (removes)",
+        "WF-04 (hand-off 1h after confirm)"
+      ]
     },
     "04": {
-      "purpose": "Own all medical intake chasing for booked members who have not completed intake.",
+      "purpose": "Chase the medical intake survey after a booking. Exits on submit.",
       "diagram_key": "preappt",
       "trigger": {
-        "type": "Runs inside the WF-03 pre-appointment sequence (intake-not-complete branch)",
+        "type": "Added by WF-03 (no direct trigger on the shell)",
         "filters": [
-          "Intake form not completed after the T+1h reminder"
+          "Enrolled after the confirm cadence completes (1h after confirm)",
+          "v2_status_booked present"
         ],
-        "target": "Hand-off from WF-03's intake gate."
+        "target": "WF-03 hand-off only."
       },
       "prerequisites": [
-        "WF-03 built",
-        "Intake form",
-        "SMS consent + DND gate (WF-11)"
+        "Intake survey is live in the account.",
+        "Note: a dedicated intake URL contact field does not exist yet; WF-04 SMS bodies use contact.current_booking_url as the manage / complete-intake link."
       ],
       "steps": [
         {
           "order": 1,
-          "action": "Send SMS",
-          "name": "SMS: Intake Chase 1 (T+4h)",
-          "config": "First chase."
+          "action": "Trigger",
+          "name": "TRIGGER: Added by WF-03 (v2_status_booked)",
+          "config": "Only enrolled by WF-03. Must not enroll direct form fills."
         },
         {
           "order": 2,
+          "action": "If/Else",
+          "name": "IF-ELSE: Exit on survey submitted (v2_intake_done)",
+          "config": "Reads survey-submitted state. Must exit immediately on submit."
+        },
+        {
+          "order": 3,
           "action": "Send Email",
-          "name": "Email: Confirmation Chase (T+12h)",
-          "config": "Chase email."
-        },
-        {
-          "order": 3,
-          "action": "Send SMS",
-          "name": "SMS: Urgency Chase 2 (T+24h)",
-          "config": "Urgency chase."
+          "name": "EMAIL: Intake ask 1 (native template)",
+          "config": "Sends EML | WF-04 | Intake ask 1."
         },
         {
           "order": 4,
-          "action": "Manual Call",
-          "name": "Call: Voicemail Drop (T+36h)",
-          "config": "Voicemail if still incomplete."
-        },
-        {
-          "order": 5,
-          "action": "Go To",
-          "name": "Exit: to reminders",
-          "config": "Return to the WF-03 reminder block. Standalone 'Intake Reminder' workflow is retired at cutover (Decision 9)."
-        }
-      ],
-      "messages": [
-        {
-          "step": "SMS: Intake Chase 1",
-          "channel": "SMS",
-          "body": "{{contact.first_name}}, to make the most of your 60-minute in-person consultation at Men's Wellness Centers, please complete your intake form here: {{custom_values.intake_link}}. Reply STOP to opt out."
-        }
-      ],
-      "settings": {
-        "quiet_hours": "Time Window 8:00 AM to 9:00 PM, Contact Timezone, all 7 days. Set under Workflow Settings, not per action.",
-        "allow_reentry": "One pass per appointment.",
-        "stop_on_response": "Pause on completion (intake done exits the chase).",
-        "reentry_caveat": "Exits as soon as intake is completed.",
-        "status": "Draft. Do not publish without sign-off."
-      },
-      "test": [
-        "Book a test appointment and leave intake incomplete.",
-        "Confirm chase cadence fires.",
-        "Complete intake mid-chase and confirm exit."
-      ],
-      "depends_on": [
-        "WF-03",
-        "Intake form",
-        "WF-11 consent gate"
-      ],
-      "variables": {
-        "principle": "Build ONE workflow, not one per clinic. Location is a static variable set once at object creation (WF-01 branches on opportunity.location and stamps the clinic-specific fields). Every downstream step reads merge fields, so the same workflow serves Richmond, Virginia Beach, and Newport News. Never hardcode a clinic name, address, phone, or booking URL into a message or action; never clone a workflow just to change words. Branch per location only when BEHAVIOR differs (a different calendar or routing), never when only the copy differs.",
-        "location_variable": "opportunity.location (static: richmond | va_beach | npn | telehealth). Set once by WF-01 at create. This is the single source of clinic identity; downstream workflows read it, they do not re-derive it.",
-        "collision_warning": "CRITICAL: a standard GHL Custom Value is account-wide. It applies universally across the whole sub-account, so it CANNOT hold per-clinic data. If one location writes a Custom Value it changes for every location (a data collision). Custom Values are only safe for values that are identical brand-wide (brand name, main brand domain, compliance links). Per-clinic values must NEVER live in a Custom Value.",
-        "methods": [
-          {
-            "name": "Method 1 - Locations Custom Object (LOCKED: Decision 14)",
-            "detail": "The chosen pattern. A 'Locations' Custom Object with one record per clinic (fields: Location Email, Location Phone, Booking Link, Address, Review Link). Each Contact is associated with its Location at capture, and WF-01 stamps the associated Location's values into generic operational contact fields (current_clinic_address, current_clinic_phone, current_booking_url) exactly once at creation. Because email/SMS builders cannot loop Custom Object variables natively, that stamp step is the bridge; every template reads ONLY the generic fields, so downstream workflows never know clinics exist. Wave 0 addendum: the object + 3 records + generic fields must be created (Wave 0 ran before Decision 14)."
-          },
-          {
-            "name": "Method 2 - Contact field matrix (REJECTED)",
-            "detail": "Prefixed per-clinic fields plus tag-routed If/Else copying into generic fields. Rejected by Decision 14 because the clinic values end up embedded inside workflow branch configs, which buries data in steps (the defect this project removes) and makes every clinic-data change a workflow edit."
-          },
-          {
-            "name": "Method 3 - Smart URL strategy (ADOPTED for links)",
-            "detail": "Layered on per Decision 14 for booking/review links on the Vercel funnel pages: one base Custom Value plus the contact's location as a URL parameter, for example {{custom_values.base_booking_url}}?branch={{contact.location_preference}}. The landing page reads ?branch= and renders the correct clinic calendar. Links only; in-message address/phone comes from the generic fields."
-          }
-        ],
-        "custom_values": [
-          "Safe as account-wide Custom Values ({{custom_values.name}}): brand name, main brand booking domain, compliance links, brand-level review/survey/intake links. These are identical for every contact and every clinic.",
-          "NOT safe as Custom Values (per-clinic, would collide): clinic address, clinic direct phone, per-clinic booking/calendar URL, location email. Deliver these via Method 1 or 2: copy the clinic's value into a generic operational Contact field with an Update Contact Field step before the send, then reference that generic field.",
-          "Merge-field syntax: contact fields {{contact.field_key}}, opportunity fields {{opportunity.field_key}}, account constants {{custom_values.name}}, appointment {{appointment.start_time}}. Operational pattern: templates read a generic field like {{contact.current_location_booking_link}} that the workflow fills per clinic, never a hardcoded clinic value."
-        ]
-      }
-    },
-    "05": {
-      "purpose": "THE KEYSTONE. Route on the outcome the PCC Sales Form wrote. WF-05 never writes outcomes.",
-      "diagram_key": "wf05",
-      "trigger": {
-        "type": "Opportunity or Contact update from the PCC Sales Form submission",
-        "filters": [
-          "Fires when the PCC Sales Form is submitted (it is the sole writer of sale_outcome, sale_type, appt_status, value)"
-        ],
-        "target": "The PCC Sales Form / the Opportunity record the PCC edits."
-      },
-      "prerequisites": [
-        "PCC Sales Form live and writing sale_outcome (sold|ad|mut|mar), sale_type (new|renewal), appt_status (showed|no-show|cancel|reschedule), value, term_1",
-        "Opportunity fields renewal_date, outcome_processed_at",
-        "Sales - Lead to Close (id Vt8cPz51C3i87moo73gQ) with Won / A&D / MUT stages",
-        "WF-06, WF-07, WF-08, WF-09, WF-13 built to receive exits"
-      ],
-      "steps": [
-        {
-          "order": 1,
-          "action": "If/Else",
-          "name": "If: appt_status gate",
-          "config": "Read opportunity.appt_status FIRST.",
-          "branches": [
-            {
-              "label": "no-show or cancel",
-              "condition": "appt_status = no-show OR appt_status = cancel",
-              "path": "Exit to WF-08 No-Show and Cancel Recovery"
-            },
-            {
-              "label": "reschedule",
-              "condition": "appt_status = reschedule",
-              "path": "Exit to WF-03 Booking Confirmation and Reminders"
-            },
-            {
-              "label": "showed",
-              "condition": "appt_status = showed",
-              "path": "Continue to idempotency check"
-            }
-          ]
-        },
-        {
-          "order": 2,
-          "action": "If/Else",
-          "name": "If: outcome_processed_at set?",
-          "config": "Idempotency guard.",
-          "branches": [
-            {
-              "label": "Yes",
-              "condition": "opportunity.outcome_processed_at is not empty",
-              "path": "Update fields only. No re-route, no CAPI. End."
-            },
-            {
-              "label": "No",
-              "condition": "outcome_processed_at empty",
-              "path": "Continue to outcome router"
-            }
-          ]
-        },
-        {
-          "order": 3,
-          "action": "If/Else",
-          "name": "If: sale_outcome router",
-          "config": "Read opportunity.sale_outcome (written by the form).",
-          "branches": [
-            {
-              "label": "sold",
-              "condition": "sale_outcome = sold",
-              "path": "Sold branch (step 4)"
-            },
-            {
-              "label": "ad",
-              "condition": "sale_outcome = ad (A&D, Advise and Decline)",
-              "path": "Move Opp to Lost, ad_reason already on Opp, stamp outcome_processed_at, tag ad + outcome_ad, exit to WF-07"
-            },
-            {
-              "label": "mut",
-              "condition": "sale_outcome = mut",
-              "path": "Move Opp to Lost - MUT, stamp outcome_processed_at, tag mut + outcome_mut, suppress future automation via WF-11"
-            },
-            {
-              "label": "mar",
-              "condition": "sale_outcome = mar",
-              "path": "Keep Opp Open, open a PCC/provider task, tag outcome_mar. On approval the form is resubmitted with a final outcome and WF-05 re-runs."
-            }
-          ]
-        },
-        {
-          "order": 4,
-          "action": "Create/Update Opportunity",
-          "name": "Opp: Set Won",
-          "config": "Sold branch: Move Opp to Won. monetary_value = net collected. Require sale_type (new|renewal) from the form. Set renewal_date = Won date + term_1. Stamp outcome_processed_at. Tag sold + outcome_sold."
-        },
-        {
-          "order": 5,
           "action": "Wait",
-          "name": "Wait: 60 seconds",
-          "config": "Let value commit before the ad conversion reads it (read-after-write race)."
+          "name": "WAIT: +6 hours (quiet-hours aware)",
+          "config": "Space before SMS nudge."
+        },
+        {
+          "order": 5,
+          "action": "Send SMS",
+          "name": "SMS: Intake nudge 1 (inline)",
+          "config": "Inline SMS. Honors quiet hours."
         },
         {
           "order": 6,
-          "action": "Webhook",
-          "name": "Webhook: Signal WF-13 once",
-          "config": "Signal WF-13 Ad Conversions once (Booked + Won) to Google and Meta. Guarded by outcome_processed_at so it fires once per opportunity."
+          "action": "Wait",
+          "name": "WAIT: +18 hours",
+          "config": "Overnight-safe wait before next ask."
         },
         {
           "order": 7,
-          "action": "If/Else",
-          "name": "If: sale_type branch",
-          "config": "Branch on sale_type.",
-          "branches": [
-            {
-              "label": "new",
-              "condition": "sale_type = new",
-              "path": "Exit to WF-06 Post-Visit Won and Onboarding"
-            },
-            {
-              "label": "renewal",
-              "condition": "sale_type = renewal",
-              "path": "Exit to WF-09 Renewal Reminders sub-flow"
-            }
-          ]
+          "action": "Send Email",
+          "name": "EMAIL: Intake ask 2 (native template)",
+          "config": "Sends EML | WF-04 | Intake ask 2."
         },
         {
           "order": 8,
-          "action": "Find Opportunity (multipath)",
-          "name": "Port: find_opportunity guard (before outcome writes)",
-          "config": "Use find_opportunity (sorting: latest, multipath Opportunity Found / Not Found) before outcome writes so updates target the correct opportunity instead of assuming trigger context. Live shape from 'After Appointment Feedback Survey Send'."
+          "action": "Wait",
+          "name": "WAIT: +12 hours",
+          "config": "Space before final SMS."
+        },
+        {
+          "order": 9,
+          "action": "Send SMS",
+          "name": "SMS: Intake final nudge (inline)",
+          "config": "Final SMS. Members not patients."
+        },
+        {
+          "order": 10,
+          "action": "Add Contact Tag",
+          "name": "ADD-TAG: v2_intake_chased (audit)",
+          "config": "Audit tag only. Must not signal completion; only submission clears WF-04."
+        }
+      ],
+      "messages": [
+        {
+          "step": "SMS Intake chase +4h",
+          "channel": "SMS",
+          "body": "Inline SMS. First SMS in the sequence carries Reply STOP to opt out."
+        },
+        {
+          "step": "SMS Intake chase +20h",
+          "channel": "SMS",
+          "body": "Inline SMS."
+        }
+      ],
+      "settings": {
+        "quiet_hours": "None. Transactional SMS sends immediately (no quiet hours).",
+        "allow_reentry": "No. One pass per booking.",
+        "stop_on_response": "Yes. Exits immediately on survey submit as well.",
+        "reentry_caveat": "Reschedule re-enters via WF-03 and re-arms this chase.",
+        "status": "Draft v3 on staging shell 4854e1cf-492d-4da8-ba23-5c14a4d04229. Unpublished."
+      },
+      "test": [
+        "Enroll a test contact via WF-03 and confirm both SMS fire.",
+        "Submit the intake survey mid-chase and confirm the workflow exits."
+      ],
+      "depends_on": [
+        "WF-03"
+      ]
+    },
+    "05": {
+      "purpose": "Central router for Force outcome writes. Reads opportunity.sale_outcome_v2 and routes downstream. Workflows never move Sales stages here.",
+      "diagram_key": "wf05",
+      "trigger": {
+        "type": "Inbound webhook (Force writes)",
+        "filters": [
+          "Force posts sale_outcome, sale_type, appt_status, ad_reason to GHL_WF05_WEBHOOK_URL",
+          "MAR payloads are dropped at the top of the graph and never fire downstream"
+        ],
+        "target": "Trigger id ryJLJ1McWWOHlAvBRsI3. The webhook URL is UI-only; copy it from the WF-05 draft in staging and paste it into Force config as GHL_WF05_WEBHOOK_URL. The JWT GET does not return this URL."
+      },
+      "prerequisites": [
+        "Force is the only writer of sale_outcome (SOLD | AD | MUT | MAR), sale_type (new | renewal), and appt_status (showed | no-show | cancel | reschedule).",
+        "opportunity.sale_outcome_v2 is the routing field. Legacy contact.sale_outcome labels are not used.",
+        "WF-05 never moves Sales stages (New Lead to Booked to Showed to Won). Force moves stages."
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "action": "Trigger",
+          "name": "TRIGGER: Inbound webhook GHL_WF05_WEBHOOK_URL",
+          "config": "Force writes enter here only. Must not accept payloads with sale_outcome=MAR (guarded below)."
+        },
+        {
+          "order": 2,
+          "action": "Wait",
+          "name": "WAIT: 60 seconds (opp settle)",
+          "config": "Allows the upstream force-write to land on the opportunity before FIND-OPP."
+        },
+        {
+          "order": 3,
+          "action": "Find Opportunity",
+          "name": "FIND-OPP: Latest open opp for contact",
+          "config": "Native find opp. Must not create a new opp here. Must not read monetaryValue for logic."
+        },
+        {
+          "order": 4,
+          "action": "If/Else",
+          "name": "IF-ELSE: Drop payload when sale_outcome=MAR",
+          "config": "MAR never enters WF-05. Guard branch exits the workflow."
+        },
+        {
+          "order": 5,
+          "action": "If/Else",
+          "name": "IF-ELSE: Branch on sale_outcome (SOLD | AD | MUT)",
+          "config": "Routes downstream. Must not write dollars. Must not move opp stages."
+        },
+        {
+          "order": 6,
+          "action": "Add Contact Tag",
+          "name": "ADD-TAG: v2_outcome_sold (SOLD branch)",
+          "config": "Tags outcome only. Must not stage-move."
+        },
+        {
+          "order": 7,
+          "action": "Add Contact Tag",
+          "name": "ADD-TAG: v2_outcome_ad (AD branch)",
+          "config": "Tags outcome only."
+        },
+        {
+          "order": 8,
+          "action": "Add Contact Tag",
+          "name": "ADD-TAG: v2_outcome_mut (MUT branch)",
+          "config": "Tags outcome only."
+        },
+        {
+          "order": 9,
+          "action": "If/Else",
+          "name": "IF-ELSE: SOLD sub-branch on sale_type (new | renewal)",
+          "config": "SOLD splits into onboarding vs renewal-nurture."
+        },
+        {
+          "order": 10,
+          "action": "Add To Workflow",
+          "name": "ADD-TO-WF: Route SOLD new to WF-06 Onboarding",
+          "config": "Onboarding owns membership_status writes; must not set it here."
+        },
+        {
+          "order": 11,
+          "action": "Add To Workflow",
+          "name": "ADD-TO-WF: Route SOLD renewal to WF-09 Nurture",
+          "config": "Renewal-nurture path. WF-09 owns renewal_date trigger."
+        },
+        {
+          "order": 12,
+          "action": "Add To Workflow",
+          "name": "ADD-TO-WF: Route AD to WF-07 A&D",
+          "config": "A&D branch handling."
+        },
+        {
+          "order": 13,
+          "action": "Add To Workflow",
+          "name": "ADD-TO-WF: Route MUT to WF-11 Compliance",
+          "config": "Compliance path."
+        },
+        {
+          "order": 14,
+          "action": "If/Else",
+          "name": "IF-ELSE: Branch on appt_status (no-show | cancel | reschedule)",
+          "config": "appt_status routing. Reschedule must never be treated as no-show."
+        },
+        {
+          "order": 15,
+          "action": "Add To Workflow",
+          "name": "ADD-TO-WF: Route no-show or cancel to WF-08",
+          "config": "Only no-show and cancel enter WF-08; reschedule does not."
+        },
+        {
+          "order": 16,
+          "action": "Add To Workflow",
+          "name": "ADD-TO-WF: Route reschedule to WF-03 Reminders",
+          "config": "Reschedule re-enters reminders. Must not write appt_status=no-show."
         }
       ],
       "messages": [
         {
           "step": "n/a",
           "channel": "n/a",
-          "body": "WF-05 sends no member messages. It only routes. A 'no form by end of appointment day' chaser nags the PCC internally and writes no outcome."
+          "body": "System workflow. No SMS or email."
         }
       ],
       "settings": {
-        "quiet_hours": "Not a messaging workflow.",
-        "allow_reentry": "Yes - must re-run on form resubmission (MAR approval path), but the outcome_processed_at stamp prevents duplicate routing/CAPI.",
-        "stop_on_response": "n/a",
-        "reentry_caveat": "An edit or duplicate submit updates fields but never re-fires routing or the ad conversion (idempotency).",
-        "status": "Draft. Do not publish without sign-off. This is the P0 fix: remove auto-Won (Decision 10)."
+        "quiet_hours": "None. Transactional SMS sends immediately (no quiet hours).",
+        "allow_reentry": "Yes; every Force write re-enters the router.",
+        "stop_on_response": "n/a (no outbound SMS).",
+        "reentry_caveat": "MAR always drops; every other outcome routes once.",
+        "status": "Draft v5 on staging shell 45a0f21e-244c-4d66-8ee1-232567662624. Unpublished."
       },
       "test": [
-        "Submit the PCC form as showed+sold+new: confirm Won, renewal_date set, tag sold, CAPI fires once, exit to WF-06.",
-        "Submit as no-show: confirm routes to WF-08, no outcome written.",
-        "Resubmit the same sold form: confirm fields update but no second CAPI (outcome_processed_at held).",
-        "Submit as mar: confirm Opp stays Open and a PCC task opens."
+        "Send test webhooks for each sale_outcome value. Confirm SOLD+new adds to WF-06 AND WF-13; SOLD renewal adds to WF-09; AD adds to WF-07; MUT adds to WF-11; MAR drops.",
+        "Send appt_status=reschedule and confirm the router sends it to WF-03 (not WF-08).",
+        "Confirm no workflow moves opp stages."
       ],
       "depends_on": [
-        "PCC Sales Form (sole writer)",
-        "WF-13 (CAPI)",
-        "WF-06/07/08/09 (exits)",
-        "Opportunity fields renewal_date + outcome_processed_at"
-      ],
-      "variables": {
-        "principle": "Build ONE workflow, not one per clinic. Location is a static variable set once at object creation (WF-01 branches on opportunity.location and stamps the clinic-specific fields). Every downstream step reads merge fields, so the same workflow serves Richmond, Virginia Beach, and Newport News. Never hardcode a clinic name, address, phone, or booking URL into a message or action; never clone a workflow just to change words. Branch per location only when BEHAVIOR differs (a different calendar or routing), never when only the copy differs.",
-        "location_variable": "opportunity.location (static: richmond | va_beach | npn | telehealth). Set once by WF-01 at create. This is the single source of clinic identity; downstream workflows read it, they do not re-derive it.",
-        "collision_warning": "CRITICAL: a standard GHL Custom Value is account-wide. It applies universally across the whole sub-account, so it CANNOT hold per-clinic data. If one location writes a Custom Value it changes for every location (a data collision). Custom Values are only safe for values that are identical brand-wide (brand name, main brand domain, compliance links). Per-clinic values must NEVER live in a Custom Value.",
-        "methods": [
-          {
-            "name": "Method 1 - Locations Custom Object (LOCKED: Decision 14)",
-            "detail": "The chosen pattern. A 'Locations' Custom Object with one record per clinic (fields: Location Email, Location Phone, Booking Link, Address, Review Link). Each Contact is associated with its Location at capture, and WF-01 stamps the associated Location's values into generic operational contact fields (current_clinic_address, current_clinic_phone, current_booking_url) exactly once at creation. Because email/SMS builders cannot loop Custom Object variables natively, that stamp step is the bridge; every template reads ONLY the generic fields, so downstream workflows never know clinics exist. Wave 0 addendum: the object + 3 records + generic fields must be created (Wave 0 ran before Decision 14)."
-          },
-          {
-            "name": "Method 2 - Contact field matrix (REJECTED)",
-            "detail": "Prefixed per-clinic fields plus tag-routed If/Else copying into generic fields. Rejected by Decision 14 because the clinic values end up embedded inside workflow branch configs, which buries data in steps (the defect this project removes) and makes every clinic-data change a workflow edit."
-          },
-          {
-            "name": "Method 3 - Smart URL strategy (ADOPTED for links)",
-            "detail": "Layered on per Decision 14 for booking/review links on the Vercel funnel pages: one base Custom Value plus the contact's location as a URL parameter, for example {{custom_values.base_booking_url}}?branch={{contact.location_preference}}. The landing page reads ?branch= and renders the correct clinic calendar. Links only; in-message address/phone comes from the generic fields."
-          }
-        ],
-        "custom_values": [
-          "Safe as account-wide Custom Values ({{custom_values.name}}): brand name, main brand booking domain, compliance links, brand-level review/survey/intake links. These are identical for every contact and every clinic.",
-          "NOT safe as Custom Values (per-clinic, would collide): clinic address, clinic direct phone, per-clinic booking/calendar URL, location email. Deliver these via Method 1 or 2: copy the clinic's value into a generic operational Contact field with an Update Contact Field step before the send, then reference that generic field.",
-          "Merge-field syntax: contact fields {{contact.field_key}}, opportunity fields {{opportunity.field_key}}, account constants {{custom_values.name}}, appointment {{appointment.start_time}}. Operational pattern: templates read a generic field like {{contact.current_location_booking_link}} that the workflow fills per clinic, never a hardcoded clinic value."
-        ]
-      }
+        "WF-06",
+        "WF-07",
+        "WF-08",
+        "WF-09",
+        "WF-11",
+        "WF-13"
+      ]
     },
     "06": {
-      "purpose": "New-patient post-visit onboarding, NPS survey, conditional review request, negative-NPS alert.",
+      "purpose": "Onboard SOLD new members. Sole writer of contact.membership_status and tag v2_status_active. Schedules WF-10 feedback and WF-14 ambassador.",
       "diagram_key": "wf06",
       "trigger": {
-        "type": "Opportunity Status Changed to Won (from WF-05 sold + new path)",
+        "type": "Added by WF-05 (SOLD + sale_type=new)",
         "filters": [
-          "Opportunity Won",
-          "sale_type = new",
-          "renewal_date already set by WF-05"
+          "sale_outcome_v2 = SOLD",
+          "sale_type = new"
         ],
-        "target": "Sales - Lead to Close (id Vt8cPz51C3i87moo73gQ) Won stage."
+        "target": "WF-05 hand-off only."
       },
       "prerequisites": [
-        "WF-05 built",
-        "WF-10 feedback survey",
-        "opportunity.visit_feedback_score field",
-        "WF-12 for negative-NPS alert",
-        "WF-14 + WF-09 exits"
+        "v2 tag v2_status_active exists on staging (P5yoBUi86hQs0Br5CIqI).",
+        "WF-10 and WF-14 are ready to receive the T+14 and T+21 forks."
       ],
       "steps": [
         {
           "order": 1,
-          "action": "Send SMS",
-          "name": "SMS: Welcome (T+1h)",
-          "config": "Welcome the new member."
+          "action": "Trigger",
+          "name": "TRIGGER: Added by WF-05 (SOLD + sale_type=new)",
+          "config": "Sole enroll. Must not fire on renewals or on MAR."
         },
         {
           "order": 2,
-          "action": "Send Email",
-          "name": "Email: Welcome and Onboarding (T+1h)",
-          "config": "Onboarding email."
+          "action": "Update Contact Field",
+          "name": "SET-FIELD: membership_status = active",
+          "config": "Sole writer of membership_status in the to-be. Must not touch pipeline stages."
         },
         {
           "order": 3,
-          "action": "Send SMS",
-          "name": "SMS: Check-In (T+3d)",
-          "config": "Day-3 check-in."
+          "action": "Add Contact Tag",
+          "name": "ADD-TAG: v2_status_active",
+          "config": "New v2 active tag. Must not remove legacy status tags."
         },
         {
           "order": 4,
           "action": "Send Email",
-          "name": "Email: Week 1 Progress (T+7d)",
-          "config": "Week-1 progress."
+          "name": "EMAIL: Onboarding welcome (native template)",
+          "config": "Sends EML | WF-06 | Onboarding welcome."
         },
         {
           "order": 5,
-          "action": "Go To",
-          "name": "Trigger: WF-10 Survey (T+14d)",
-          "config": "Trigger WF-10 Feedback Survey at 14 days."
+          "action": "Send SMS",
+          "name": "SMS: Onboarding welcome (inline)",
+          "config": "Inline SMS. Honors quiet hours 8am-9pm contact TZ."
         },
         {
           "order": 6,
-          "action": "If/Else",
-          "name": "If: NPS branch",
-          "config": "Read opportunity.visit_feedback_score (written by WF-10).",
-          "branches": [
-            {
-              "label": "8 or above",
-              "condition": "visit_feedback_score >= 8",
-              "path": "Google review request (step 7)"
-            },
-            {
-              "label": "Below 7",
-              "condition": "visit_feedback_score < 7",
-              "path": "Internal negative-NPS alert, WF-12 notified, PCC follows up manually"
-            }
-          ]
+          "action": "Wait",
+          "name": "WAIT: T+7 days from enroll",
+          "config": "Week-one check-in wait."
         },
         {
           "order": 7,
-          "action": "Send SMS",
-          "name": "SMS: Google Review Request (T+14d, conditional)",
-          "config": "Only on NPS 8+."
+          "action": "Send Email",
+          "name": "EMAIL: Week-one check-in (native template)",
+          "config": "Sends EML | WF-06 | Week-one check-in."
         },
         {
           "order": 8,
-          "action": "Send SMS",
-          "name": "SMS: Referral Activation (T+21d)",
-          "config": "Then exit to WF-14 Ambassador Program and WF-09 Renewal Reminders sub-flow."
+          "action": "Wait",
+          "name": "WAIT: T+14 days from enroll",
+          "config": "Feedback fork."
         },
         {
           "order": 9,
-          "action": "Find Opportunity (multipath)",
-          "name": "Port: find_opportunity guard (before NPS branch)",
-          "config": "Use find_opportunity (sorting: latest, multipath Opportunity Found / Not Found) before NPS branch so updates target the correct opportunity instead of assuming trigger context. Live shape from 'After Appointment Feedback Survey Send'."
+          "action": "Add To Workflow",
+          "name": "ADD-TO-WF: Route to WF-10 Feedback at T+14",
+          "config": "WF-10 owns contact.latest_feedback_score. Must not write feedback fields here."
+        },
+        {
+          "order": 10,
+          "action": "Wait",
+          "name": "WAIT: T+21 days from enroll",
+          "config": "Ambassador fork."
+        },
+        {
+          "order": 11,
+          "action": "Add To Workflow",
+          "name": "ADD-TO-WF: Route to WF-14 Ambassador at T+21",
+          "config": "Ambassador referral fork. Must not create Sales opps here."
         }
       ],
       "messages": [
         {
-          "step": "SMS: Google Review Request",
+          "step": "SMS welcome after SOLD",
           "channel": "SMS",
-          "body": "{{contact.first_name}}, it means a lot to hear your visit went well. Would you share a quick review of Men's Wellness Centers? {{custom_values.review_link}} Reply STOP to opt out."
+          "body": "Inline SMS. References contact.current_clinic_address and contact.current_clinic_phone. First SMS carries Reply STOP to opt out."
         }
       ],
       "settings": {
-        "quiet_hours": "Time Window 8:00 AM to 9:00 PM, Contact Timezone, all 7 days. Set under Workflow Settings, not per action.",
-        "allow_reentry": "One onboarding pass per Won opportunity.",
+        "quiet_hours": "None. Transactional SMS sends immediately (no quiet hours).",
+        "allow_reentry": "No. One onboarding per SOLD new event.",
         "stop_on_response": "Yes.",
-        "reentry_caveat": "New path only; renewals route to WF-09 instead. WF-05 owns renewal_date, WF-06 does not set it.",
-        "status": "Draft. Do not publish without sign-off."
+        "reentry_caveat": "Renewals never enter WF-06 (they go to WF-09).",
+        "status": "Draft v3 on staging shell 5d036b8a-4336-47c8-9ebe-77f3439bc95c. Check-in copy between the 3d/7d/14d/21d waits is not authored yet."
       },
       "test": [
-        "Win a test opportunity (new): confirm onboarding cadence.",
-        "Set visit_feedback_score >= 8: confirm review request fires.",
-        "Set score < 7: confirm negative-NPS internal alert and no review request."
+        "Send a SOLD+new Force webhook and confirm v2_status_active + welcome SMS + WF-10 at T+14 + WF-14 at T+21.",
+        "Send a SOLD+renewal webhook and confirm WF-06 is not entered."
       ],
       "depends_on": [
         "WF-05",
         "WF-10",
-        "WF-12",
-        "WF-14",
-        "WF-09",
-        "opportunity.visit_feedback_score"
-      ],
-      "variables": {
-        "principle": "Build ONE workflow, not one per clinic. Location is a static variable set once at object creation (WF-01 branches on opportunity.location and stamps the clinic-specific fields). Every downstream step reads merge fields, so the same workflow serves Richmond, Virginia Beach, and Newport News. Never hardcode a clinic name, address, phone, or booking URL into a message or action; never clone a workflow just to change words. Branch per location only when BEHAVIOR differs (a different calendar or routing), never when only the copy differs.",
-        "location_variable": "opportunity.location (static: richmond | va_beach | npn | telehealth). Set once by WF-01 at create. This is the single source of clinic identity; downstream workflows read it, they do not re-derive it.",
-        "collision_warning": "CRITICAL: a standard GHL Custom Value is account-wide. It applies universally across the whole sub-account, so it CANNOT hold per-clinic data. If one location writes a Custom Value it changes for every location (a data collision). Custom Values are only safe for values that are identical brand-wide (brand name, main brand domain, compliance links). Per-clinic values must NEVER live in a Custom Value.",
-        "methods": [
-          {
-            "name": "Method 1 - Locations Custom Object (LOCKED: Decision 14)",
-            "detail": "The chosen pattern. A 'Locations' Custom Object with one record per clinic (fields: Location Email, Location Phone, Booking Link, Address, Review Link). Each Contact is associated with its Location at capture, and WF-01 stamps the associated Location's values into generic operational contact fields (current_clinic_address, current_clinic_phone, current_booking_url) exactly once at creation. Because email/SMS builders cannot loop Custom Object variables natively, that stamp step is the bridge; every template reads ONLY the generic fields, so downstream workflows never know clinics exist. Wave 0 addendum: the object + 3 records + generic fields must be created (Wave 0 ran before Decision 14)."
-          },
-          {
-            "name": "Method 2 - Contact field matrix (REJECTED)",
-            "detail": "Prefixed per-clinic fields plus tag-routed If/Else copying into generic fields. Rejected by Decision 14 because the clinic values end up embedded inside workflow branch configs, which buries data in steps (the defect this project removes) and makes every clinic-data change a workflow edit."
-          },
-          {
-            "name": "Method 3 - Smart URL strategy (ADOPTED for links)",
-            "detail": "Layered on per Decision 14 for booking/review links on the Vercel funnel pages: one base Custom Value plus the contact's location as a URL parameter, for example {{custom_values.base_booking_url}}?branch={{contact.location_preference}}. The landing page reads ?branch= and renders the correct clinic calendar. Links only; in-message address/phone comes from the generic fields."
-          }
-        ],
-        "custom_values": [
-          "Safe as account-wide Custom Values ({{custom_values.name}}): brand name, main brand booking domain, compliance links, brand-level review/survey/intake links. These are identical for every contact and every clinic.",
-          "NOT safe as Custom Values (per-clinic, would collide): clinic address, clinic direct phone, per-clinic booking/calendar URL, location email. Deliver these via Method 1 or 2: copy the clinic's value into a generic operational Contact field with an Update Contact Field step before the send, then reference that generic field.",
-          "Merge-field syntax: contact fields {{contact.field_key}}, opportunity fields {{opportunity.field_key}}, account constants {{custom_values.name}}, appointment {{appointment.start_time}}. Operational pattern: templates read a generic field like {{contact.current_location_booking_link}} that the workflow fills per clinic, never a hardcoded clinic value."
-        ]
-      }
+        "WF-14"
+      ]
     },
     "07": {
-      "purpose": "A&D (Advise and Decline) objection-handling nurture, 11 touches over 35 days. D19: five objection branches (cost/fear/partner/timing/decision) using the JJ taxonomy and cadence.",
+      "purpose": "Handle sale_outcome=AD (Advise and Decline). Tag v2_outcome_ad, send the first logistics SMS, wait 35 days, hand to WF-09.",
       "diagram_key": "wf07-08",
       "trigger": {
-        "type": "Hand-off from WF-05 (sale_outcome = ad)",
+        "type": "Added by WF-05 (AD)",
         "filters": [
-          "Opportunity moved to Lost with ad_reason set"
+          "sale_outcome_v2 = AD"
         ],
-        "target": "WF-05 ad branch."
+        "target": "WF-05 hand-off only."
       },
       "prerequisites": [
-        "WF-05 built",
-        "ad_reason field on Opportunity",
-        "WF-09 exit",
-        "WF-11 consent gate"
+        "v2_outcome_ad tag exists on staging.",
+        "Objection-branch copy (v2_objection_price/timing/fit/other) is spec-only for now; the on-shell graph is a single lane."
       ],
       "steps": [
         {
           "order": 1,
-          "action": "Send SMS",
-          "name": "SMS: No-Pressure 1 (T+2h)",
-          "config": "Open with no pressure."
+          "action": "Trigger",
+          "name": "TRIGGER: Added by WF-05 (sale_outcome=AD)",
+          "config": "Sole enroll. Must not fire pixel or CAPI here."
         },
         {
           "order": 2,
-          "action": "Send Email",
-          "name": "Email: Objection Handling (T+1d)",
-          "config": "Targets the declared ad_reason."
+          "action": "If/Else",
+          "name": "IF-ELSE: Branch on ad_reason (price | timing | fit | other)",
+          "config": "Reads opportunity.ad_reason. Must not fabricate a reason if unset."
         },
         {
           "order": 3,
-          "action": "Send SMS",
-          "name": "SMS: Labs on File 2 (T+3d)",
-          "config": "Labs on file."
+          "action": "Add Contact Tag",
+          "name": "ADD-TAG: v2_objection_price (price branch)",
+          "config": "New v2 objection tag."
         },
         {
           "order": 4,
-          "action": "Send Email",
-          "name": "Email: Testimonial (T+7d)",
-          "config": "Written testimonial."
+          "action": "Add Contact Tag",
+          "name": "ADD-TAG: v2_objection_timing (timing branch)",
+          "config": "New v2 objection tag."
         },
         {
           "order": 5,
-          "action": "Send SMS",
-          "name": "SMS: Encouragement 3 (T+14d)",
-          "config": "Encouragement."
+          "action": "Add Contact Tag",
+          "name": "ADD-TAG: v2_objection_fit (fit branch)",
+          "config": "New v2 objection tag."
         },
         {
           "order": 6,
-          "action": "Send Email",
-          "name": "Email: Labs Expiring (T+21d)",
-          "config": "Labs expiring."
+          "action": "Add Contact Tag",
+          "name": "ADD-TAG: v2_objection_other (other branch)",
+          "config": "New v2 objection tag for unmapped ad_reason values."
         },
         {
           "order": 7,
-          "action": "Send SMS",
-          "name": "SMS: Final Reminder 4 (T+30d)",
-          "config": "Final reminder."
+          "action": "Send Email",
+          "name": "EMAIL: A&D follow-up (native template)",
+          "config": "Sends EML | WF-07 | A&D follow-up."
         },
         {
           "order": 8,
-          "action": "Send SMS",
-          "name": "SMS: Empathetic Breakup 5 (T+35d)",
-          "config": "Then exit to WF-09."
+          "action": "Wait",
+          "name": "WAIT: +7 days (quiet-hours aware)",
+          "config": "Space before nurture handoff."
         },
         {
           "order": 9,
-          "action": "If/Else on objection tag",
-          "name": "D19: objection branch router",
-          "config": "Branch on which objection_* tag fired the entry: cost/fear/partner/timing/decision. Each branch runs the JJ cadence (wait 1d -> SMS t1 -> wait 2d -> SMS t2 -> wait 3d -> Email t3, cycle x3, 9 touches). Message bodies = templates sms/email_wf07_<objection>_tN (brand-transformed JJ copy). ONE booked-exit gate at each cycle start (appointment-booked check), location-agnostic. No opportunity creation mid-nurture."
+          "action": "Add To Workflow",
+          "name": "ADD-TO-WF: Route to WF-09 Nurture",
+          "config": "A&D contacts nurture. Must not create Sales opps here."
         }
       ],
       "messages": [
         {
-          "step": "SMS: No-Pressure 1",
+          "step": "SMS After AD first touch",
           "channel": "SMS",
-          "body": "{{contact.first_name}}, no pressure at all. If any questions came up after your consultation at Men's Wellness Centers, I am here to help. Reply STOP to opt out."
+          "body": "Inline SMS. First SMS carries Reply STOP to opt out."
         }
       ],
       "settings": {
-        "quiet_hours": "Time Window 8:00 AM to 9:00 PM, Contact Timezone, all 7 days. Set under Workflow Settings, not per action.",
-        "allow_reentry": "One pass per A&D outcome.",
+        "quiet_hours": "None. Transactional SMS sends immediately (no quiet hours).",
+        "allow_reentry": "No.",
         "stop_on_response": "Yes.",
-        "reentry_caveat": "ad_reason drives the objection targeting; it is already on the Opp from the form.",
-        "status": "Draft. Do not publish without sign-off."
+        "reentry_caveat": "AD never fires the Meta pixel or CAPI.",
+        "status": "Draft v3 on staging shell 01ca0908-36cf-456c-aa1d-04c999e0a598. Unpublished."
       },
       "test": [
-        "Set a test opportunity to sale_outcome=ad via the form.",
-        "Confirm the 11-touch cadence over 35 days and exit to WF-09."
+        "Send AD via Force and confirm the tag lands and the SMS fires.",
+        "Confirm hand-off to WF-09 after 35d."
       ],
       "depends_on": [
         "WF-05",
-        "ad_reason field",
-        "WF-09",
-        "WF-11"
-      ],
-      "variables": {
-        "principle": "Build ONE workflow, not one per clinic. Location is a static variable set once at object creation (WF-01 branches on opportunity.location and stamps the clinic-specific fields). Every downstream step reads merge fields, so the same workflow serves Richmond, Virginia Beach, and Newport News. Never hardcode a clinic name, address, phone, or booking URL into a message or action; never clone a workflow just to change words. Branch per location only when BEHAVIOR differs (a different calendar or routing), never when only the copy differs.",
-        "location_variable": "opportunity.location (static: richmond | va_beach | npn | telehealth). Set once by WF-01 at create. This is the single source of clinic identity; downstream workflows read it, they do not re-derive it.",
-        "collision_warning": "CRITICAL: a standard GHL Custom Value is account-wide. It applies universally across the whole sub-account, so it CANNOT hold per-clinic data. If one location writes a Custom Value it changes for every location (a data collision). Custom Values are only safe for values that are identical brand-wide (brand name, main brand domain, compliance links). Per-clinic values must NEVER live in a Custom Value.",
-        "methods": [
-          {
-            "name": "Method 1 - Locations Custom Object (LOCKED: Decision 14)",
-            "detail": "The chosen pattern. A 'Locations' Custom Object with one record per clinic (fields: Location Email, Location Phone, Booking Link, Address, Review Link). Each Contact is associated with its Location at capture, and WF-01 stamps the associated Location's values into generic operational contact fields (current_clinic_address, current_clinic_phone, current_booking_url) exactly once at creation. Because email/SMS builders cannot loop Custom Object variables natively, that stamp step is the bridge; every template reads ONLY the generic fields, so downstream workflows never know clinics exist. Wave 0 addendum: the object + 3 records + generic fields must be created (Wave 0 ran before Decision 14)."
-          },
-          {
-            "name": "Method 2 - Contact field matrix (REJECTED)",
-            "detail": "Prefixed per-clinic fields plus tag-routed If/Else copying into generic fields. Rejected by Decision 14 because the clinic values end up embedded inside workflow branch configs, which buries data in steps (the defect this project removes) and makes every clinic-data change a workflow edit."
-          },
-          {
-            "name": "Method 3 - Smart URL strategy (ADOPTED for links)",
-            "detail": "Layered on per Decision 14 for booking/review links on the Vercel funnel pages: one base Custom Value plus the contact's location as a URL parameter, for example {{custom_values.base_booking_url}}?branch={{contact.location_preference}}. The landing page reads ?branch= and renders the correct clinic calendar. Links only; in-message address/phone comes from the generic fields."
-          }
-        ],
-        "custom_values": [
-          "Safe as account-wide Custom Values ({{custom_values.name}}): brand name, main brand booking domain, compliance links, brand-level review/survey/intake links. These are identical for every contact and every clinic.",
-          "NOT safe as Custom Values (per-clinic, would collide): clinic address, clinic direct phone, per-clinic booking/calendar URL, location email. Deliver these via Method 1 or 2: copy the clinic's value into a generic operational Contact field with an Update Contact Field step before the send, then reference that generic field.",
-          "Merge-field syntax: contact fields {{contact.field_key}}, opportunity fields {{opportunity.field_key}}, account constants {{custom_values.name}}, appointment {{appointment.start_time}}. Operational pattern: templates read a generic field like {{contact.current_location_booking_link}} that the workflow fills per clinic, never a hardcoded clinic value."
-        ]
-      }
+        "WF-09"
+      ]
     },
     "08": {
-      "purpose": "No-show and cancel recovery, 8 touches over 7 days, exit instantly on rebook.",
+      "purpose": "Handle no-show and cancel. Reschedule never enters. Drops the contact from WF-03 reminders and tries to rebook.",
       "diagram_key": "wf07-08",
       "trigger": {
-        "type": "Hand-off from WF-05 (no-show/cancel) or WF-03 (cancellation)",
+        "type": "Added by WF-05 (appt_status no-show or cancel)",
         "filters": [
-          "appt_status = no-show OR cancel",
-          "or WF-03 cancellation"
+          "appt_status in (no-show, cancel)",
+          "appt_status = reschedule NEVER routes here"
         ],
-        "target": "WF-05 appt_status branch / WF-03 cancel route."
+        "target": "WF-05 hand-off only."
       },
       "prerequisites": [
-        "WF-05 and WF-03 built",
-        "WF-03 to receive rebook exit",
-        "WF-09 exit",
-        "WF-11 consent gate"
+        "WF-03 remove-from-workflow guard is in place; no reminders should fire once WF-08 starts.",
+        "Note: v2_status_noshow vs v2_status_cancelled tag split is not authored yet; the current graph is a single lane covering both statuses."
       ],
       "steps": [
         {
           "order": 1,
-          "action": "Send SMS",
-          "name": "SMS: Recovery 1 (T+15m)",
-          "config": "Fast recovery."
+          "action": "Trigger",
+          "name": "TRIGGER: Added by WF-05 (appt_status no-show or cancel)",
+          "config": "Sole enroll. Reschedule must never route here."
         },
         {
           "order": 2,
-          "action": "Send Email",
-          "name": "Email: Physician Recovery (T+1h)",
-          "config": "Physician-led recovery."
+          "action": "Remove From Workflow",
+          "name": "REMOVE-FROM-WF: Drop from WF-03 Reminders",
+          "config": "Stops any in-flight reminder cadence. Must not remove v2_status_booked (booking state is factual)."
         },
         {
           "order": 3,
-          "action": "Send SMS",
-          "name": "SMS: Availability 2 (T+1d)",
-          "config": "Availability."
+          "action": "If/Else",
+          "name": "IF-ELSE: Branch on appt_status (no-show | cancel)",
+          "config": "Split copy paths. Must not tag no-show if source was reschedule."
         },
         {
           "order": 4,
-          "action": "Send Email",
-          "name": "Email: Benefits Pivot (T+3d)",
-          "config": "Benefits pivot."
+          "action": "Add Contact Tag",
+          "name": "ADD-TAG: v2_appt_no_show (no-show branch)",
+          "config": "New v2 tag. Must not remove live booking tags."
         },
         {
           "order": 5,
-          "action": "Send SMS",
-          "name": "SMS: Re-Engagement 3 (T+3d)",
-          "config": "Re-engagement."
+          "action": "Add Contact Tag",
+          "name": "ADD-TAG: v2_appt_cancel (cancel branch)",
+          "config": "New v2 tag."
         },
         {
           "order": 6,
           "action": "Send SMS",
-          "name": "SMS: Scarcity 4 (T+5d)",
-          "config": "Scarcity."
+          "name": "SMS: Recovery outreach (inline)",
+          "config": "Inline SMS. Honors quiet hours 8am-9pm contact TZ."
         },
         {
           "order": 7,
-          "action": "Manual Call",
-          "name": "Call: Voicemail Drop (T+7d)",
-          "config": "Voicemail."
+          "action": "Send Email",
+          "name": "EMAIL: Recovery follow-up (native template)",
+          "config": "Sends EML | WF-08 | Recovery."
         },
         {
           "order": 8,
-          "action": "Send SMS",
-          "name": "SMS: Empathetic Breakup 5 (T+7d)",
-          "config": "Final."
+          "action": "Wait",
+          "name": "WAIT: +48 hours (quiet-hours aware)",
+          "config": "Space before re-check."
         },
         {
           "order": 9,
           "action": "If/Else",
-          "name": "If: Re-booked?",
-          "config": "Early-exit check present at every step.",
-          "branches": [
-            {
-              "label": "Yes - re-booked",
-              "condition": "New appointment exists",
-              "path": "Immediate exit to WF-03"
-            },
-            {
-              "label": "No",
-              "condition": "No re-booking after 7 days",
-              "path": "Exit to WF-09"
-            }
-          ]
+          "name": "IF-ELSE: Re-check booking (v2_status_booked)",
+          "config": "If they booked again, exit without further nudge."
         },
         {
           "order": 10,
-          "action": "Multi-action",
-          "name": "Port: booking-chain cleanup on cancel (live Cancelled Appointments)",
-          "config": "On cancel: remove_from_workflow [WF-03 booking/reminder chains] + write opportunity to Cancelled stage (ONE parameterized write -- the live version does this with 3 per-location clones; ours branches on nothing). Prevents cancelled members from receiving reminder SMS."
+          "action": "Add To Workflow",
+          "name": "ADD-TO-WF: Route unbooked to WF-09 Nurture",
+          "config": "Long-tail nurture. Must not create Sales opps here."
         }
       ],
       "messages": [
         {
-          "step": "SMS: Recovery 1",
+          "step": "SMS Rebook after miss and SMS Rebook +7d",
           "channel": "SMS",
-          "body": "{{contact.first_name}}, we missed you today at Men's Wellness Centers. Let us get you rescheduled for your 60-minute in-person consultation. What day works? Reply STOP to opt out."
+          "body": "Inline SMS. First SMS carries Reply STOP to opt out."
         }
       ],
       "settings": {
-        "quiet_hours": "Time Window 8:00 AM to 9:00 PM, Contact Timezone, all 7 days. Set under Workflow Settings, not per action.",
-        "allow_reentry": "One pass per no-show/cancel.",
+        "quiet_hours": "None. Transactional SMS sends immediately (no quiet hours).",
+        "allow_reentry": "Yes on the next miss.",
         "stop_on_response": "Yes.",
-        "reentry_caveat": "Rebook early-exit must be checked at every step (goal/condition), not just at the end.",
-        "status": "Draft. Do not publish without sign-off."
+        "reentry_caveat": "If the contact books again mid-recovery, WF-08 exits without further nudge.",
+        "status": "Draft v3 on staging shell d35d04ac-0042-4e33-95dd-9253b2847bdf. Unpublished."
       },
       "test": [
-        "Flag a test contact no-show via the form.",
-        "Confirm the 8-touch cadence.",
-        "Re-book mid-sequence and confirm immediate exit to WF-03.",
-        "No rebook after 7 days confirms exit to WF-09."
+        "Send appt_status=no-show and confirm WF-03 removes the contact and WF-08 sends both SMS.",
+        "Send appt_status=reschedule and confirm WF-08 is NOT entered (it goes to WF-03).",
+        "Confirm hand-off to WF-09 after 7d if still unbooked."
       ],
       "depends_on": [
         "WF-05",
         "WF-03",
-        "WF-09",
-        "WF-11"
-      ],
-      "variables": {
-        "principle": "Build ONE workflow, not one per clinic. Location is a static variable set once at object creation (WF-01 branches on opportunity.location and stamps the clinic-specific fields). Every downstream step reads merge fields, so the same workflow serves Richmond, Virginia Beach, and Newport News. Never hardcode a clinic name, address, phone, or booking URL into a message or action; never clone a workflow just to change words. Branch per location only when BEHAVIOR differs (a different calendar or routing), never when only the copy differs.",
-        "location_variable": "opportunity.location (static: richmond | va_beach | npn | telehealth). Set once by WF-01 at create. This is the single source of clinic identity; downstream workflows read it, they do not re-derive it.",
-        "collision_warning": "CRITICAL: a standard GHL Custom Value is account-wide. It applies universally across the whole sub-account, so it CANNOT hold per-clinic data. If one location writes a Custom Value it changes for every location (a data collision). Custom Values are only safe for values that are identical brand-wide (brand name, main brand domain, compliance links). Per-clinic values must NEVER live in a Custom Value.",
-        "methods": [
-          {
-            "name": "Method 1 - Locations Custom Object (LOCKED: Decision 14)",
-            "detail": "The chosen pattern. A 'Locations' Custom Object with one record per clinic (fields: Location Email, Location Phone, Booking Link, Address, Review Link). Each Contact is associated with its Location at capture, and WF-01 stamps the associated Location's values into generic operational contact fields (current_clinic_address, current_clinic_phone, current_booking_url) exactly once at creation. Because email/SMS builders cannot loop Custom Object variables natively, that stamp step is the bridge; every template reads ONLY the generic fields, so downstream workflows never know clinics exist. Wave 0 addendum: the object + 3 records + generic fields must be created (Wave 0 ran before Decision 14)."
-          },
-          {
-            "name": "Method 2 - Contact field matrix (REJECTED)",
-            "detail": "Prefixed per-clinic fields plus tag-routed If/Else copying into generic fields. Rejected by Decision 14 because the clinic values end up embedded inside workflow branch configs, which buries data in steps (the defect this project removes) and makes every clinic-data change a workflow edit."
-          },
-          {
-            "name": "Method 3 - Smart URL strategy (ADOPTED for links)",
-            "detail": "Layered on per Decision 14 for booking/review links on the Vercel funnel pages: one base Custom Value plus the contact's location as a URL parameter, for example {{custom_values.base_booking_url}}?branch={{contact.location_preference}}. The landing page reads ?branch= and renders the correct clinic calendar. Links only; in-message address/phone comes from the generic fields."
-          }
-        ],
-        "custom_values": [
-          "Safe as account-wide Custom Values ({{custom_values.name}}): brand name, main brand booking domain, compliance links, brand-level review/survey/intake links. These are identical for every contact and every clinic.",
-          "NOT safe as Custom Values (per-clinic, would collide): clinic address, clinic direct phone, per-clinic booking/calendar URL, location email. Deliver these via Method 1 or 2: copy the clinic's value into a generic operational Contact field with an Update Contact Field step before the send, then reference that generic field.",
-          "Merge-field syntax: contact fields {{contact.field_key}}, opportunity fields {{opportunity.field_key}}, account constants {{custom_values.name}}, appointment {{appointment.start_time}}. Operational pattern: templates read a generic field like {{contact.current_location_booking_link}} that the workflow fills per clinic, never a hardcoded clinic value."
-        ]
-      }
+        "WF-09"
+      ]
     },
     "09": {
-      "purpose": "Long-term nurture (7 touches / 120 days) plus a Renewal Reminders sub-flow for won members. D19: HOT/WARM/COLD temperature tiers replace the single undifferentiated nurture.",
+      "purpose": "Long-tail nurture. Also owns the renewal_date contact-field sub-flow, which is blocked at the trigger until backfill lands.",
       "diagram_key": "retention",
       "trigger": {
-        "type": "Hand-off from WF-02/07/08 (main) and WF-05/06 renewal path (sub-flow)",
+        "type": "Contact renewal_date changed (sub-flow, gated) OR Added by WF-02/07/08/06",
         "filters": [
-          "Main: A&D, no-show, or lapsed",
-          "Renewal sub-flow: won member approaching opportunity.renewal_date"
+          "Renewal sub-flow gated until backfill_ready is true",
+          "Other entries via ADD-TO-WF only"
         ],
-        "target": "opportunity.renewal_date drives the renewal sub-flow timing."
+        "target": "Contact custom-field trigger on renewal_date + hand-offs from upstream WFs."
       },
       "prerequisites": [
-        "opportunity.renewal_date set by WF-05",
-        "WF-02/07/08 hand-offs",
-        "WF-11 consent gate"
+        "renewal_date backfill is not done yet; keep the renewal sub-flow gated.",
+        "The on-shell graph is a single WAIT 120d right now. Nurture bodies come next."
       ],
       "steps": [
         {
           "order": 1,
-          "action": "Send Email",
-          "name": "Email: Energy as Medical Issue (T+30d)",
-          "config": "Main nurture."
+          "action": "Trigger",
+          "name": "TRIGGER: Contact renewal_date changed (blocked until backfill)",
+          "config": "Renewal sub-flow blocked at the trigger until backfill lands. Must not enroll on partial data."
         },
         {
           "order": 2,
-          "action": "Send SMS",
-          "name": "SMS: CTA (T+45d)",
-          "config": "CTA."
+          "action": "If/Else",
+          "name": "IF-ELSE: Route by entry source (nurture vs renewal)",
+          "config": "Reads which upstream WF added the contact. Must not create opps here."
         },
         {
           "order": 3,
           "action": "Send Email",
-          "name": "Email: Sleep and Performance (T+60d)",
-          "config": "Education."
+          "name": "EMAIL: Nurture 1 (native template)",
+          "config": "Sends EML | WF-09 | Nurture 1."
         },
         {
           "order": 4,
-          "action": "Send SMS",
-          "name": "SMS: Seasonal Scarcity (T+75d)",
-          "config": "Seasonal."
+          "action": "Wait",
+          "name": "WAIT: +14 days",
+          "config": "Long cadence."
         },
         {
           "order": 5,
           "action": "Send Email",
-          "name": "Email: Medical Authority (T+90d)",
-          "config": "Authority."
+          "name": "EMAIL: Nurture 2 (native template)",
+          "config": "Sends EML | WF-09 | Nurture 2."
         },
         {
           "order": 6,
-          "action": "Send SMS",
-          "name": "SMS: Return to Self (T+105d)",
-          "config": "Re-engage."
+          "action": "Wait",
+          "name": "WAIT: +30 days",
+          "config": "Long cadence."
         },
         {
           "order": 7,
-          "action": "Send Email",
-          "name": "Email: Re-Engage Breakup (T+120d)",
-          "config": "Final main-nurture touch."
+          "action": "Send SMS",
+          "name": "SMS: Nurture check-in (inline)",
+          "config": "Inline SMS. Honors quiet hours 8am-9pm contact TZ."
         },
         {
           "order": 8,
           "action": "If/Else",
-          "name": "Sub-flow: Renewal Reminders",
-          "config": "For won members: Email 30-day notice, SMS 21-day, Email 14-day, SMS 7-day, SMS expiry-day before renewal_date. If not renewed, Email lapsed (+3d), SMS final (+7d), churn-risk internal alert, then exit to main nurture.",
-          "branches": [
-            {
-              "label": "Renewed",
-              "condition": "New renewal opportunity opened",
-              "path": "Retention pipeline - renewed"
-            },
-            {
-              "label": "Not renewed",
-              "condition": "No renewal by expiry",
-              "path": "Lapsed sequence then back to Long-Term Nurture"
-            }
-          ]
+          "name": "IF-ELSE: Renewal sub-flow guard (backfill_ready)",
+          "config": "Exits the renewal sub-flow when backfill is not ready. Must not send renewal-specific copy on partial data."
         },
         {
           "order": 9,
-          "action": "If/Else on temperature tag",
-          "name": "D19: temperature tier router",
-          "config": "Branch on temp_hot/temp_warm/temp_cold (set by setters at disposition via WF-12). HOT: 3d/4d/5d cycles (near-buyers). WARM: 7d/10d/14d/14d/20d (patient mid-funnel). COLD: 30d/45d/14d cycles (low-pressure long tail). Message bodies = templates sms/email_wf09_<tier>_tN. Booked-exit gate per cycle. Renewal sub-flow (renewal_date-keyed) remains a separate WF-09 branch."
+          "action": "Send Email",
+          "name": "EMAIL: Renewal window (native template, gated)",
+          "config": "Sends EML | WF-09 | Renewal window. Only fires when backfill_ready is true."
+        },
+        {
+          "order": 10,
+          "action": "Add Contact Tag",
+          "name": "ADD-TAG: v2_nurtured (audit)",
+          "config": "Audit tag only."
         }
       ],
       "messages": [
         {
-          "step": "SMS: 7-Day Urgency (renewal)",
-          "channel": "SMS",
-          "body": "{{contact.first_name}}, your Men's Wellness Centers program renews in 7 days. Reply here to confirm and we will take care of the rest. Reply STOP to opt out."
+          "step": "Nurture bodies",
+          "channel": "n/a",
+          "body": "SMS and email bodies are not authored yet. The shell is a 120-day wait."
         }
       ],
       "settings": {
-        "quiet_hours": "Time Window 8:00 AM to 9:00 PM, Contact Timezone, all 7 days. Set under Workflow Settings, not per action.",
-        "allow_reentry": "Contacts can re-enter long-term nurture across lifecycle stages.",
+        "quiet_hours": "08:00-21:00 contact timezone, 7 days. Marketing / recovery only.",
+        "allow_reentry": "Yes.",
         "stop_on_response": "Yes.",
-        "reentry_caveat": "Renewal sub-flow keys off opportunity.renewal_date; ensure it is set (WF-05) before a won member reaches it.",
-        "status": "Draft. Do not publish without sign-off."
+        "reentry_caveat": "The renewal sub-flow will exit if backfill_ready is false.",
+        "status": "Draft v2 on staging shell cbc14e90-4507-42cd-afcc-f7410d7f4554. Unpublished."
       },
       "test": [
-        "Enter a test contact from WF-08.",
-        "Confirm 120-day cadence.",
-        "For a won member, set renewal_date near-term and confirm the renewal reminder ladder fires."
+        "Set renewal_date on a test contact and confirm the sub-flow trigger fires but exits on backfill guard.",
+        "Confirm long-tail entries from WF-02, WF-07, WF-08 land in WF-09."
       ],
       "depends_on": [
-        "WF-05 (renewal_date)",
-        "WF-02/07/08 hand-offs",
-        "WF-11"
-      ],
-      "variables": {
-        "principle": "Build ONE workflow, not one per clinic. Location is a static variable set once at object creation (WF-01 branches on opportunity.location and stamps the clinic-specific fields). Every downstream step reads merge fields, so the same workflow serves Richmond, Virginia Beach, and Newport News. Never hardcode a clinic name, address, phone, or booking URL into a message or action; never clone a workflow just to change words. Branch per location only when BEHAVIOR differs (a different calendar or routing), never when only the copy differs.",
-        "location_variable": "opportunity.location (static: richmond | va_beach | npn | telehealth). Set once by WF-01 at create. This is the single source of clinic identity; downstream workflows read it, they do not re-derive it.",
-        "collision_warning": "CRITICAL: a standard GHL Custom Value is account-wide. It applies universally across the whole sub-account, so it CANNOT hold per-clinic data. If one location writes a Custom Value it changes for every location (a data collision). Custom Values are only safe for values that are identical brand-wide (brand name, main brand domain, compliance links). Per-clinic values must NEVER live in a Custom Value.",
-        "methods": [
-          {
-            "name": "Method 1 - Locations Custom Object (LOCKED: Decision 14)",
-            "detail": "The chosen pattern. A 'Locations' Custom Object with one record per clinic (fields: Location Email, Location Phone, Booking Link, Address, Review Link). Each Contact is associated with its Location at capture, and WF-01 stamps the associated Location's values into generic operational contact fields (current_clinic_address, current_clinic_phone, current_booking_url) exactly once at creation. Because email/SMS builders cannot loop Custom Object variables natively, that stamp step is the bridge; every template reads ONLY the generic fields, so downstream workflows never know clinics exist. Wave 0 addendum: the object + 3 records + generic fields must be created (Wave 0 ran before Decision 14)."
-          },
-          {
-            "name": "Method 2 - Contact field matrix (REJECTED)",
-            "detail": "Prefixed per-clinic fields plus tag-routed If/Else copying into generic fields. Rejected by Decision 14 because the clinic values end up embedded inside workflow branch configs, which buries data in steps (the defect this project removes) and makes every clinic-data change a workflow edit."
-          },
-          {
-            "name": "Method 3 - Smart URL strategy (ADOPTED for links)",
-            "detail": "Layered on per Decision 14 for booking/review links on the Vercel funnel pages: one base Custom Value plus the contact's location as a URL parameter, for example {{custom_values.base_booking_url}}?branch={{contact.location_preference}}. The landing page reads ?branch= and renders the correct clinic calendar. Links only; in-message address/phone comes from the generic fields."
-          }
-        ],
-        "custom_values": [
-          "Safe as account-wide Custom Values ({{custom_values.name}}): brand name, main brand booking domain, compliance links, brand-level review/survey/intake links. These are identical for every contact and every clinic.",
-          "NOT safe as Custom Values (per-clinic, would collide): clinic address, clinic direct phone, per-clinic booking/calendar URL, location email. Deliver these via Method 1 or 2: copy the clinic's value into a generic operational Contact field with an Update Contact Field step before the send, then reference that generic field.",
-          "Merge-field syntax: contact fields {{contact.field_key}}, opportunity fields {{opportunity.field_key}}, account constants {{custom_values.name}}, appointment {{appointment.start_time}}. Operational pattern: templates read a generic field like {{contact.current_location_booking_link}} that the workflow fills per clinic, never a hardcoded clinic value."
-        ]
-      }
+        "WF-02",
+        "WF-06",
+        "WF-07",
+        "WF-08"
+      ]
     },
     "10": {
-      "purpose": "Feedback survey. Writes opportunity.visit_feedback_score that drives the WF-06 NPS branch.",
+      "purpose": "Ask for member feedback and store the score on contact.latest_feedback_score. Sole writer of that field.",
       "diagram_key": "retention",
       "trigger": {
-        "type": "Triggered by WF-06 at T+14d (survey send) and Survey Submitted (writes score)",
+        "type": "Added by WF-06 at T+14",
         "filters": [
-          "Survey submission event"
+          "Enrolled from WF-06 onboarding fork"
         ],
-        "target": "The feedback survey / form."
+        "target": "WF-06 hand-off only."
       },
       "prerequisites": [
-        "opportunity.visit_feedback_score field",
-        "WF-06 built",
-        "survey form",
-        "WF-11 consent gate"
+        "Native email template BFhyqVQXEYVasm4hJWvE: EML | WF-10 | Feedback invite.",
+        "contact.latest_feedback_score exists.",
+        "contact.current_review_link is populated (WF-01 stamp)."
       ],
       "steps": [
         {
           "order": 1,
-          "action": "Send SMS",
-          "name": "SMS: Survey Invite",
-          "config": "Invite to the survey (keep good as-is bodies)."
-        },
-        {
-          "order": 2,
-          "action": "Update Contact Field",
-          "name": "Opp: Write visit_feedback_score",
-          "config": "On submission write opportunity.visit_feedback_score for the WF-06 NPS branch."
-        },
-        {
-          "order": 3,
-          "action": "Find Opportunity (multipath)",
-          "name": "Port: find_opportunity guard (before survey-sent stamp)",
-          "config": "Use find_opportunity (sorting: latest, multipath Opportunity Found / Not Found) before survey-sent stamp so updates target the correct opportunity instead of assuming trigger context. Live shape from 'After Appointment Feedback Survey Send'."
-        },
-        {
-          "order": 4,
-          "action": "Multi-action",
-          "name": "Port: survey send mechanics (live After Appt Feedback)",
-          "config": "find_opportunity (latest) -> internal_update_opportunity stamps survey_sent_at -> SMS survey link (sms_wf10 template). This is the complete missing WF-10 mechanic; live workflow proves every node."
-        }
-      ],
-      "messages": [
-        {
-          "step": "SMS: Survey Invite",
-          "channel": "SMS",
-          "body": "{{contact.first_name}}, how was your visit to Men's Wellness Centers? One quick tap: {{custom_values.survey_link}} Reply STOP to opt out."
-        }
-      ],
-      "settings": {
-        "quiet_hours": "8a-9p contact TZ, all sends filter on sms_consent_status + native DND (WF-11 gate).",
-        "allow_reentry": "One survey per visit.",
-        "stop_on_response": "Yes.",
-        "reentry_caveat": "Score must be written to the Opportunity, not the Contact, so WF-06 can read it.",
-        "status": "Draft. Do not publish without sign-off."
-      },
-      "test": [
-        "Trigger from WF-06.",
-        "Submit the survey and confirm visit_feedback_score lands on the Opportunity.",
-        "Confirm WF-06 branches correctly on the written score."
-      ],
-      "depends_on": [
-        "WF-06",
-        "survey form",
-        "opportunity.visit_feedback_score",
-        "WF-11"
-      ],
-      "variables": {
-        "principle": "Build ONE workflow, not one per clinic. Location is a static variable set once at object creation (WF-01 branches on opportunity.location and stamps the clinic-specific fields). Every downstream step reads merge fields, so the same workflow serves Richmond, Virginia Beach, and Newport News. Never hardcode a clinic name, address, phone, or booking URL into a message or action; never clone a workflow just to change words. Branch per location only when BEHAVIOR differs (a different calendar or routing), never when only the copy differs.",
-        "location_variable": "opportunity.location (static: richmond | va_beach | npn | telehealth). Set once by WF-01 at create. This is the single source of clinic identity; downstream workflows read it, they do not re-derive it.",
-        "collision_warning": "CRITICAL: a standard GHL Custom Value is account-wide. It applies universally across the whole sub-account, so it CANNOT hold per-clinic data. If one location writes a Custom Value it changes for every location (a data collision). Custom Values are only safe for values that are identical brand-wide (brand name, main brand domain, compliance links). Per-clinic values must NEVER live in a Custom Value.",
-        "methods": [
-          {
-            "name": "Method 1 - Locations Custom Object (LOCKED: Decision 14)",
-            "detail": "The chosen pattern. A 'Locations' Custom Object with one record per clinic (fields: Location Email, Location Phone, Booking Link, Address, Review Link). Each Contact is associated with its Location at capture, and WF-01 stamps the associated Location's values into generic operational contact fields (current_clinic_address, current_clinic_phone, current_booking_url) exactly once at creation. Because email/SMS builders cannot loop Custom Object variables natively, that stamp step is the bridge; every template reads ONLY the generic fields, so downstream workflows never know clinics exist. Wave 0 addendum: the object + 3 records + generic fields must be created (Wave 0 ran before Decision 14)."
-          },
-          {
-            "name": "Method 2 - Contact field matrix (REJECTED)",
-            "detail": "Prefixed per-clinic fields plus tag-routed If/Else copying into generic fields. Rejected by Decision 14 because the clinic values end up embedded inside workflow branch configs, which buries data in steps (the defect this project removes) and makes every clinic-data change a workflow edit."
-          },
-          {
-            "name": "Method 3 - Smart URL strategy (ADOPTED for links)",
-            "detail": "Layered on per Decision 14 for booking/review links on the Vercel funnel pages: one base Custom Value plus the contact's location as a URL parameter, for example {{custom_values.base_booking_url}}?branch={{contact.location_preference}}. The landing page reads ?branch= and renders the correct clinic calendar. Links only; in-message address/phone comes from the generic fields."
-          }
-        ],
-        "custom_values": [
-          "Safe as account-wide Custom Values ({{custom_values.name}}): brand name, main brand booking domain, compliance links, brand-level review/survey/intake links. These are identical for every contact and every clinic.",
-          "NOT safe as Custom Values (per-clinic, would collide): clinic address, clinic direct phone, per-clinic booking/calendar URL, location email. Deliver these via Method 1 or 2: copy the clinic's value into a generic operational Contact field with an Update Contact Field step before the send, then reference that generic field.",
-          "Merge-field syntax: contact fields {{contact.field_key}}, opportunity fields {{opportunity.field_key}}, account constants {{custom_values.name}}, appointment {{appointment.start_time}}. Operational pattern: templates read a generic field like {{contact.current_location_booking_link}} that the workflow fills per clinic, never a hardcoded clinic value."
-        ]
-      }
-    },
-    "11": {
-      "purpose": "The single DND and consent authority. Every send checks it. Also handles bounces and MUT suppression.",
-      "diagram_key": "support",
-      "trigger": {
-        "type": "Consulted by every messaging workflow; plus event triggers for DNC, Email Bounce, MUT",
-        "filters": [
-          "sms_consent_status = opted_in AND not DND AND inside 8a-9p contact TZ"
-        ],
-        "target": "canonical sms_consent_status field + native DND."
-      },
-      "prerequisites": [
-        "sms_consent_status field (canonical)",
-        "native DND",
-        "audit trail / Google Sheet for bounces"
-      ],
-      "steps": [
-        {
-          "order": 1,
-          "action": "If/Else",
-          "name": "If: Send gate",
-          "config": "For every SMS/voicemail send: allow only if sms_consent_status = opted_in AND not DND AND inside 8a-9p contact TZ; otherwise hold.",
-          "branches": [
-            {
-              "label": "Pass",
-              "condition": "consent + not DND + in window",
-              "path": "Allow send"
-            },
-            {
-              "label": "Hold",
-              "condition": "any check fails",
-              "path": "Do not send"
-            }
-          ]
-        },
-        {
-          "order": 2,
-          "action": "Update Contact Field",
-          "name": "DNC: Set DND + halt",
-          "config": "On DNC flag: set DND on the contact and halt all automation."
-        },
-        {
-          "order": 3,
-          "action": "Update Contact Field",
-          "name": "Bounce: Remove from email",
-          "config": "On email bounce: remove from email sends and log to the audit trail."
-        },
-        {
-          "order": 4,
-          "action": "Update Contact Field",
-          "name": "MUT: Suppress automation",
-          "config": "On MUT outcome: suppress all future automation for the contact."
-        },
-        {
-          "order": 5,
-          "action": "Bounce trigger branch",
-          "name": "Port: email bounce handler (live 3. Email Bounce)",
-          "config": "On email bounce: dnd_contact (Email channel only) + tag email_bounced + internal notification. Port as a WF-11 branch."
-        },
-        {
-          "order": 6,
-          "action": "Error trigger branches",
-          "name": "Port: DNC/wrong-number/error hygiene (live 2. DNC)",
-          "config": "Port the live error-hygiene trigger set at go-live: invalid-number -> dnd Call+SMS + tag bad_number; opt-out keyword set beyond STOP (remove/unsubscribe/wrong person) -> dnd SMS; SMS delivery errors -> notify. 10 trigger patterns exist live; consolidate to 3-4 canonical ones."
-        }
-      ],
-      "messages": [
-        {
-          "step": "n/a",
-          "channel": "n/a",
-          "body": "WF-11 sends nothing. It gates and suppresses. Assume-consent for the 11,077 total historical contacts is an accepted risk (Decision 8)."
-        }
-      ],
-      "settings": {
-        "quiet_hours": "This workflow enforces quiet hours for all others.",
-        "allow_reentry": "n/a (gate).",
-        "stop_on_response": "n/a",
-        "reentry_caveat": "Every other messaging workflow must filter on this gate rather than re-implementing consent logic.",
-        "status": "Draft. Do not publish without sign-off."
-      },
-      "test": [
-        "Set a test contact to DND and confirm no sends go out.",
-        "Flag a bounce and confirm email removal + audit log.",
-        "Set MUT and confirm all automation suppresses."
-      ],
-      "depends_on": [
-        "sms_consent_status field",
-        "native DND",
-        "audit trail"
-      ],
-      "variables": {
-        "principle": "Build ONE workflow, not one per clinic. Location is a static variable set once at object creation (WF-01 branches on opportunity.location and stamps the clinic-specific fields). Every downstream step reads merge fields, so the same workflow serves Richmond, Virginia Beach, and Newport News. Never hardcode a clinic name, address, phone, or booking URL into a message or action; never clone a workflow just to change words. Branch per location only when BEHAVIOR differs (a different calendar or routing), never when only the copy differs.",
-        "location_variable": "opportunity.location (static: richmond | va_beach | npn | telehealth). Set once by WF-01 at create. This is the single source of clinic identity; downstream workflows read it, they do not re-derive it.",
-        "collision_warning": "CRITICAL: a standard GHL Custom Value is account-wide. It applies universally across the whole sub-account, so it CANNOT hold per-clinic data. If one location writes a Custom Value it changes for every location (a data collision). Custom Values are only safe for values that are identical brand-wide (brand name, main brand domain, compliance links). Per-clinic values must NEVER live in a Custom Value.",
-        "methods": [
-          {
-            "name": "Method 1 - Locations Custom Object (LOCKED: Decision 14)",
-            "detail": "The chosen pattern. A 'Locations' Custom Object with one record per clinic (fields: Location Email, Location Phone, Booking Link, Address, Review Link). Each Contact is associated with its Location at capture, and WF-01 stamps the associated Location's values into generic operational contact fields (current_clinic_address, current_clinic_phone, current_booking_url) exactly once at creation. Because email/SMS builders cannot loop Custom Object variables natively, that stamp step is the bridge; every template reads ONLY the generic fields, so downstream workflows never know clinics exist. Wave 0 addendum: the object + 3 records + generic fields must be created (Wave 0 ran before Decision 14)."
-          },
-          {
-            "name": "Method 2 - Contact field matrix (REJECTED)",
-            "detail": "Prefixed per-clinic fields plus tag-routed If/Else copying into generic fields. Rejected by Decision 14 because the clinic values end up embedded inside workflow branch configs, which buries data in steps (the defect this project removes) and makes every clinic-data change a workflow edit."
-          },
-          {
-            "name": "Method 3 - Smart URL strategy (ADOPTED for links)",
-            "detail": "Layered on per Decision 14 for booking/review links on the Vercel funnel pages: one base Custom Value plus the contact's location as a URL parameter, for example {{custom_values.base_booking_url}}?branch={{contact.location_preference}}. The landing page reads ?branch= and renders the correct clinic calendar. Links only; in-message address/phone comes from the generic fields."
-          }
-        ],
-        "custom_values": [
-          "Safe as account-wide Custom Values ({{custom_values.name}}): brand name, main brand booking domain, compliance links, brand-level review/survey/intake links. These are identical for every contact and every clinic.",
-          "NOT safe as Custom Values (per-clinic, would collide): clinic address, clinic direct phone, per-clinic booking/calendar URL, location email. Deliver these via Method 1 or 2: copy the clinic's value into a generic operational Contact field with an Update Contact Field step before the send, then reference that generic field.",
-          "Merge-field syntax: contact fields {{contact.field_key}}, opportunity fields {{opportunity.field_key}}, account constants {{custom_values.name}}, appointment {{appointment.start_time}}. Operational pattern: templates read a generic field like {{contact.current_location_booking_link}} that the workflow fills per clinic, never a hardcoded clinic value."
-        ]
-      }
-    },
-    "12": {
-      "purpose": "Handle call dispositions; write opportunity.call_disposition; route negative-NPS follow-ups. Never writes sale fields.",
-      "diagram_key": "wf12",
-      "trigger": {
-        "type": "Call ends on softphone / disposition workflow fires",
-        "filters": [
-          "Inbound/outbound call disposition event"
-        ],
-        "target": "softphone integration / disposition tags."
-      },
-      "prerequisites": [
-        "opportunity.call_disposition field",
-        "patient_care_consultant_id (written only by the PCC Sales Form)",
-        "WF-06 negative-NPS flag",
-        "Channel-level tracking numbers provisioned (Google Ads / GBP / site / other) so dialed number maps to channel (D17)"
-      ],
-      "steps": [
-        {
-          "order": 1,
-          "action": "If/Else",
-          "name": "If: Call disposition",
-          "config": "Branch on the disposition.",
-          "branches": [
-            {
-              "label": "Connected",
-              "condition": "disposition = connected",
-              "path": "Write call_disposition = connected, read patient_care_consultant_id"
-            },
-            {
-              "label": "No answer",
-              "condition": "disposition = no_answer",
-              "path": "Write call_disposition = no_answer"
-            },
-            {
-              "label": "Voicemail",
-              "condition": "disposition = voicemail",
-              "path": "Write call_disposition = voicemail"
-            },
-            {
-              "label": "Bad number",
-              "condition": "disposition = bad_number",
-              "path": "Write call_disposition = bad_number, flag for data cleanup"
-            }
-          ]
-        },
-        {
-          "order": 2,
-          "action": "If/Else",
-          "name": "If: Negative-NPS follow-up?",
-          "config": "Flagged by WF-06?",
-          "branches": [
-            {
-              "label": "Yes",
-              "condition": "negative-NPS flagged",
-              "path": "Assign task to owning PCC for a manual follow-up call"
-            },
-            {
-              "label": "No",
-              "condition": "not flagged",
-              "path": "Disposition recorded, end"
-            }
-          ]
-        },
-        {
-          "order": 3,
-          "action": "Update Contact/Opportunity Field",
-          "name": "Attr: stamp phone lead source (D17)",
-          "config": "On call disposition, if the contact has no first_utm_source, set first_utm_source=phone and last_utm_source=phone, and stamp the dialed tracking number into last_landing_page (or a dedicated dialed_number field). Ensures called-in leads are not attribution-blank."
-        }
-      ],
-      "messages": [
-        {
-          "step": "n/a",
-          "channel": "n/a",
-          "body": "WF-12 never writes sale_outcome, sale_type, or value. That is the PCC Sales Form only (H5 single-writer guardrail). It only reads patient_care_consultant_id."
-        }
-      ],
-      "settings": {
-        "quiet_hours": "n/a (internal).",
-        "allow_reentry": "Yes, once per call.",
-        "stop_on_response": "n/a",
-        "reentry_caveat": "Reads but never writes the PCC id; do not let it write sale fields.",
-        "status": "Draft. Do not publish without sign-off."
-      },
-      "test": [
-        "Fire each disposition and confirm call_disposition writes correctly.",
-        "Flag a negative-NPS from WF-06 and confirm a PCC task is created.",
-        "Confirm no sale fields are ever written by this workflow."
-      ],
-      "depends_on": [
-        "opportunity.call_disposition",
-        "patient_care_consultant_id (form-owned)",
-        "WF-06"
-      ],
-      "variables": {
-        "principle": "Build ONE workflow, not one per clinic. Location is a static variable set once at object creation (WF-01 branches on opportunity.location and stamps the clinic-specific fields). Every downstream step reads merge fields, so the same workflow serves Richmond, Virginia Beach, and Newport News. Never hardcode a clinic name, address, phone, or booking URL into a message or action; never clone a workflow just to change words. Branch per location only when BEHAVIOR differs (a different calendar or routing), never when only the copy differs.",
-        "location_variable": "opportunity.location (static: richmond | va_beach | npn | telehealth). Set once by WF-01 at create. This is the single source of clinic identity; downstream workflows read it, they do not re-derive it.",
-        "collision_warning": "CRITICAL: a standard GHL Custom Value is account-wide. It applies universally across the whole sub-account, so it CANNOT hold per-clinic data. If one location writes a Custom Value it changes for every location (a data collision). Custom Values are only safe for values that are identical brand-wide (brand name, main brand domain, compliance links). Per-clinic values must NEVER live in a Custom Value.",
-        "methods": [
-          {
-            "name": "Method 1 - Locations Custom Object (LOCKED: Decision 14)",
-            "detail": "The chosen pattern. A 'Locations' Custom Object with one record per clinic (fields: Location Email, Location Phone, Booking Link, Address, Review Link). Each Contact is associated with its Location at capture, and WF-01 stamps the associated Location's values into generic operational contact fields (current_clinic_address, current_clinic_phone, current_booking_url) exactly once at creation. Because email/SMS builders cannot loop Custom Object variables natively, that stamp step is the bridge; every template reads ONLY the generic fields, so downstream workflows never know clinics exist. Wave 0 addendum: the object + 3 records + generic fields must be created (Wave 0 ran before Decision 14)."
-          },
-          {
-            "name": "Method 2 - Contact field matrix (REJECTED)",
-            "detail": "Prefixed per-clinic fields plus tag-routed If/Else copying into generic fields. Rejected by Decision 14 because the clinic values end up embedded inside workflow branch configs, which buries data in steps (the defect this project removes) and makes every clinic-data change a workflow edit."
-          },
-          {
-            "name": "Method 3 - Smart URL strategy (ADOPTED for links)",
-            "detail": "Layered on per Decision 14 for booking/review links on the Vercel funnel pages: one base Custom Value plus the contact's location as a URL parameter, for example {{custom_values.base_booking_url}}?branch={{contact.location_preference}}. The landing page reads ?branch= and renders the correct clinic calendar. Links only; in-message address/phone comes from the generic fields."
-          }
-        ],
-        "custom_values": [
-          "Safe as account-wide Custom Values ({{custom_values.name}}): brand name, main brand booking domain, compliance links, brand-level review/survey/intake links. These are identical for every contact and every clinic.",
-          "NOT safe as Custom Values (per-clinic, would collide): clinic address, clinic direct phone, per-clinic booking/calendar URL, location email. Deliver these via Method 1 or 2: copy the clinic's value into a generic operational Contact field with an Update Contact Field step before the send, then reference that generic field.",
-          "Merge-field syntax: contact fields {{contact.field_key}}, opportunity fields {{opportunity.field_key}}, account constants {{custom_values.name}}, appointment {{appointment.start_time}}. Operational pattern: templates read a generic field like {{contact.current_location_booking_link}} that the workflow fills per clinic, never a hardcoded clinic value."
-        ]
-      }
-    },
-    "13": {
-      "purpose": "Fire Booked and Won conversions to Google and Meta. Exclude A&D. Do not key off ad_* fields. D17: closed-loop value feedback enables value-based bidding (optimize for men who buy, not form-fills).",
-      "diagram_key": "support",
-      "trigger": {
-        "type": "Opportunity Booked event and Opportunity Won event (signaled by WF-05)",
-        "filters": [
-          "Booked",
-          "Won",
-          "EXCLUDE sale_outcome = ad"
-        ],
-        "target": "Google Ads + Meta CAPI endpoints."
-      },
-      "prerequisites": [
-        "CAPI/Google Ads conversion endpoints configured",
-        "WF-05 signals Won once",
-        "WF-13 fires once per opportunity",
-        "Native facebook_conversion_api + google_adword conversion actions (exist in account per local-session scan)",
-        "Frozen opportunity attribution fields populated by WF-01 (D17)"
-      ],
-      "steps": [
-        {
-          "order": 1,
-          "action": "Native Conversion (Google)",
-          "name": "Conv: Showed event (D17)",
-          "config": "Fire on appt_status=showed. Higher-volume optimization signal; lets campaigns be judged on show rate weeks before revenue. Payload includes gclid (frozen opp field) + event_id=opportunity ID."
-        },
-        {
-          "order": 2,
-          "action": "Native Conversion (Google + Meta)",
-          "name": "Conv: Won with revenue value (D17)",
-          "config": "Fire once per opportunity on Won (gate on outcome_processed_at). Send actual revenue value; SEPARATE conversion actions for sale_type=new vs renewal. gclid/fbclid from FROZEN opportunity fields; event_id=opportunity ID for pixel/server dedup. If click is outside the 90-day window (renewals), use enhanced conversions (hashed email/phone) instead of click ID."
-        }
-      ],
-      "messages": [
-        {
-          "step": "n/a",
-          "channel": "n/a",
-          "body": "GUARDRAIL: sale_outcome's AD value and the ad_reason field are named for 'Advise and Decline', NOT advertising. Do not key conversion logic off ad_* fields or tags, or lost consultations will be reported as fake conversions to Meta and Google."
-        }
-      ],
-      "settings": {
-        "quiet_hours": "n/a",
-        "allow_reentry": "Once per opportunity per event.",
-        "stop_on_response": "n/a",
-        "reentry_caveat": "Fire once per opportunity; the WF-05 idempotency stamp prevents duplicate Won conversions.",
-        "status": "Draft. Do not publish without sign-off."
-      },
-      "test": [
-        "Book a test opportunity and confirm one Booked conversion.",
-        "Win it and confirm one Won conversion.",
-        "Set A&D and confirm NO conversion fires.",
-        "Resubmit the form and confirm no duplicate Won conversion."
-      ],
-      "depends_on": [
-        "WF-05 (signal)",
-        "CAPI endpoints",
-        "outcome_processed_at guard"
-      ],
-      "variables": {
-        "principle": "Build ONE workflow, not one per clinic. Location is a static variable set once at object creation (WF-01 branches on opportunity.location and stamps the clinic-specific fields). Every downstream step reads merge fields, so the same workflow serves Richmond, Virginia Beach, and Newport News. Never hardcode a clinic name, address, phone, or booking URL into a message or action; never clone a workflow just to change words. Branch per location only when BEHAVIOR differs (a different calendar or routing), never when only the copy differs.",
-        "location_variable": "opportunity.location (static: richmond | va_beach | npn | telehealth). Set once by WF-01 at create. This is the single source of clinic identity; downstream workflows read it, they do not re-derive it.",
-        "collision_warning": "CRITICAL: a standard GHL Custom Value is account-wide. It applies universally across the whole sub-account, so it CANNOT hold per-clinic data. If one location writes a Custom Value it changes for every location (a data collision). Custom Values are only safe for values that are identical brand-wide (brand name, main brand domain, compliance links). Per-clinic values must NEVER live in a Custom Value.",
-        "methods": [
-          {
-            "name": "Method 1 - Locations Custom Object (LOCKED: Decision 14)",
-            "detail": "The chosen pattern. A 'Locations' Custom Object with one record per clinic (fields: Location Email, Location Phone, Booking Link, Address, Review Link). Each Contact is associated with its Location at capture, and WF-01 stamps the associated Location's values into generic operational contact fields (current_clinic_address, current_clinic_phone, current_booking_url) exactly once at creation. Because email/SMS builders cannot loop Custom Object variables natively, that stamp step is the bridge; every template reads ONLY the generic fields, so downstream workflows never know clinics exist. Wave 0 addendum: the object + 3 records + generic fields must be created (Wave 0 ran before Decision 14)."
-          },
-          {
-            "name": "Method 2 - Contact field matrix (REJECTED)",
-            "detail": "Prefixed per-clinic fields plus tag-routed If/Else copying into generic fields. Rejected by Decision 14 because the clinic values end up embedded inside workflow branch configs, which buries data in steps (the defect this project removes) and makes every clinic-data change a workflow edit."
-          },
-          {
-            "name": "Method 3 - Smart URL strategy (ADOPTED for links)",
-            "detail": "Layered on per Decision 14 for booking/review links on the Vercel funnel pages: one base Custom Value plus the contact's location as a URL parameter, for example {{custom_values.base_booking_url}}?branch={{contact.location_preference}}. The landing page reads ?branch= and renders the correct clinic calendar. Links only; in-message address/phone comes from the generic fields."
-          }
-        ],
-        "custom_values": [
-          "Safe as account-wide Custom Values ({{custom_values.name}}): brand name, main brand booking domain, compliance links, brand-level review/survey/intake links. These are identical for every contact and every clinic.",
-          "NOT safe as Custom Values (per-clinic, would collide): clinic address, clinic direct phone, per-clinic booking/calendar URL, location email. Deliver these via Method 1 or 2: copy the clinic's value into a generic operational Contact field with an Update Contact Field step before the send, then reference that generic field.",
-          "Merge-field syntax: contact fields {{contact.field_key}}, opportunity fields {{opportunity.field_key}}, account constants {{custom_values.name}}, appointment {{appointment.start_time}}. Operational pattern: templates read a generic field like {{contact.current_location_booking_link}} that the workflow fills per clinic, never a hardcoded clinic value."
-        ]
-      }
-    },
-    "14": {
-      "purpose": "Post-sale ambassador activation: invitation, welcome, reward confirmation. Referrals go through WF-15.",
-      "diagram_key": "support",
-      "trigger": {
-        "type": "Hand-off from WF-06 (referral activation step)",
-        "filters": [
-          "Won new member reaching the referral activation step"
-        ],
-        "target": "WF-06 exit."
-      },
-      "prerequisites": [
-        "WF-06 built",
-        "WF-15 for referral routing",
-        "WF-11 consent gate"
-      ],
-      "steps": [
-        {
-          "order": 1,
-          "action": "Send SMS",
-          "name": "SMS: Ambassador Invitation",
-          "config": "Invite the member."
+          "action": "Trigger",
+          "name": "TRIGGER: Added by WF-06 at T+14",
+          "config": "Sole enroll. Must not fire off other workflows."
         },
         {
           "order": 2,
           "action": "Send Email",
-          "name": "Email: Program Welcome",
-          "config": "Program welcome."
+          "name": "EMAIL: Feedback ask (native template)",
+          "config": "Sends EML | WF-10 | Feedback ask."
         },
         {
           "order": 3,
-          "action": "Send SMS",
-          "name": "SMS: Reward Confirmation",
-          "config": "Confirm reward. Referred contacts are always created NEW and routed through WF-15."
-        }
-      ],
-      "messages": [
-        {
-          "step": "SMS: Ambassador Invitation",
-          "channel": "SMS",
-          "body": "{{contact.first_name}}, know a man who could use his edge back? Refer him to Men's Wellness Centers and we will take care of you both. {{custom_values.referral_link}} Reply STOP to opt out."
-        }
-      ],
-      "settings": {
-        "quiet_hours": "8a-9p contact TZ, filters on sms_consent_status + native DND (WF-11 gate).",
-        "allow_reentry": "One activation per won member.",
-        "stop_on_response": "Yes.",
-        "reentry_caveat": "Referred contacts must be created as NEW contacts, never merged, and routed to WF-15.",
-        "status": "Draft. Do not publish without sign-off."
-      },
-      "test": [
-        "Reach the referral step from WF-06.",
-        "Confirm invitation, welcome, reward cadence.",
-        "Submit a referral and confirm it creates a NEW contact into WF-15."
-      ],
-      "depends_on": [
-        "WF-06",
-        "WF-15",
-        "WF-11"
-      ],
-      "variables": {
-        "principle": "Build ONE workflow, not one per clinic. Location is a static variable set once at object creation (WF-01 branches on opportunity.location and stamps the clinic-specific fields). Every downstream step reads merge fields, so the same workflow serves Richmond, Virginia Beach, and Newport News. Never hardcode a clinic name, address, phone, or booking URL into a message or action; never clone a workflow just to change words. Branch per location only when BEHAVIOR differs (a different calendar or routing), never when only the copy differs.",
-        "location_variable": "opportunity.location (static: richmond | va_beach | npn | telehealth). Set once by WF-01 at create. This is the single source of clinic identity; downstream workflows read it, they do not re-derive it.",
-        "collision_warning": "CRITICAL: a standard GHL Custom Value is account-wide. It applies universally across the whole sub-account, so it CANNOT hold per-clinic data. If one location writes a Custom Value it changes for every location (a data collision). Custom Values are only safe for values that are identical brand-wide (brand name, main brand domain, compliance links). Per-clinic values must NEVER live in a Custom Value.",
-        "methods": [
-          {
-            "name": "Method 1 - Locations Custom Object (LOCKED: Decision 14)",
-            "detail": "The chosen pattern. A 'Locations' Custom Object with one record per clinic (fields: Location Email, Location Phone, Booking Link, Address, Review Link). Each Contact is associated with its Location at capture, and WF-01 stamps the associated Location's values into generic operational contact fields (current_clinic_address, current_clinic_phone, current_booking_url) exactly once at creation. Because email/SMS builders cannot loop Custom Object variables natively, that stamp step is the bridge; every template reads ONLY the generic fields, so downstream workflows never know clinics exist. Wave 0 addendum: the object + 3 records + generic fields must be created (Wave 0 ran before Decision 14)."
-          },
-          {
-            "name": "Method 2 - Contact field matrix (REJECTED)",
-            "detail": "Prefixed per-clinic fields plus tag-routed If/Else copying into generic fields. Rejected by Decision 14 because the clinic values end up embedded inside workflow branch configs, which buries data in steps (the defect this project removes) and makes every clinic-data change a workflow edit."
-          },
-          {
-            "name": "Method 3 - Smart URL strategy (ADOPTED for links)",
-            "detail": "Layered on per Decision 14 for booking/review links on the Vercel funnel pages: one base Custom Value plus the contact's location as a URL parameter, for example {{custom_values.base_booking_url}}?branch={{contact.location_preference}}. The landing page reads ?branch= and renders the correct clinic calendar. Links only; in-message address/phone comes from the generic fields."
-          }
-        ],
-        "custom_values": [
-          "Safe as account-wide Custom Values ({{custom_values.name}}): brand name, main brand booking domain, compliance links, brand-level review/survey/intake links. These are identical for every contact and every clinic.",
-          "NOT safe as Custom Values (per-clinic, would collide): clinic address, clinic direct phone, per-clinic booking/calendar URL, location email. Deliver these via Method 1 or 2: copy the clinic's value into a generic operational Contact field with an Update Contact Field step before the send, then reference that generic field.",
-          "Merge-field syntax: contact fields {{contact.field_key}}, opportunity fields {{opportunity.field_key}}, account constants {{custom_values.name}}, appointment {{appointment.start_time}}. Operational pattern: templates read a generic field like {{contact.current_location_booking_link}} that the workflow fills per clinic, never a hardcoded clinic value."
-        ]
-      }
-    },
-    "15": {
-      "purpose": "Route PCC-submitted referrals into the tracking-only Referrals pipeline; referred contact goes back to WF-01.",
-      "diagram_key": "support",
-      "trigger": {
-        "type": "Referral form / PCC referral submission",
-        "filters": [
-          "PCC-submitted referral"
-        ],
-        "target": "Referrals pipeline, Submitted stage."
-      },
-      "prerequisites": [
-        "Referrals pipeline (tracking-only, no monetary value)",
-        "WF-01 to receive the referred contact",
-        "WF-11 consent gate"
-      ],
-      "steps": [
-        {
-          "order": 1,
-          "action": "Create/Update Opportunity",
-          "name": "Opp: Referrals Submitted",
-          "config": "Create a tracking opportunity in the Referrals pipeline, Submitted stage. NO monetary value (revenue lives on the Sales opportunity)."
-        },
-        {
-          "order": 2,
-          "action": "Send SMS",
-          "name": "SMS: Referred-Lead Welcome",
-          "config": "Welcome the referred lead."
-        },
-        {
-          "order": 3,
-          "action": "Send Email",
-          "name": "Email: Referred-Lead Welcome",
-          "config": "Welcome email."
+          "action": "Wait",
+          "name": "WAIT: +24 hours (quiet-hours aware)",
+          "config": "Space before SMS nudge."
         },
         {
           "order": 4,
-          "action": "Internal Notification",
-          "name": "Notify: Routing alert",
-          "config": "Internal routing alert."
+          "action": "Send SMS",
+          "name": "SMS: Feedback nudge (inline)",
+          "config": "Inline SMS. Members not patients."
         },
         {
           "order": 5,
-          "action": "Go To",
-          "name": "Route: to WF-01",
-          "config": "The referred contact is created NEW and routed back to WF-01; its Sales opportunity carries all revenue."
-        }
-      ],
-      "messages": [
-        {
-          "step": "SMS: Referred-Lead Welcome",
-          "channel": "SMS",
-          "body": "Hi {{contact.first_name}}, you were referred to Men's Wellness Centers. We would love to book your no-cost 60-minute in-person consultation. What day works? Reply STOP to opt out."
-        }
-      ],
-      "settings": {
-        "quiet_hours": "8a-9p contact TZ, filters on sms_consent_status + native DND (WF-11 gate).",
-        "allow_reentry": "One per referral.",
-        "stop_on_response": "Yes.",
-        "reentry_caveat": "Referrals pipeline is tracking-only; never attach revenue to it.",
-        "status": "Draft. Do not publish without sign-off."
-      },
-      "test": [
-        "Submit a PCC referral.",
-        "Confirm a tracking opportunity in Referrals/Submitted with no monetary value.",
-        "Confirm the referred contact enters WF-01 as a NEW contact."
-      ],
-      "depends_on": [
-        "Referrals pipeline",
-        "WF-01",
-        "WF-11"
-      ],
-      "variables": {
-        "principle": "Build ONE workflow, not one per clinic. Location is a static variable set once at object creation (WF-01 branches on opportunity.location and stamps the clinic-specific fields). Every downstream step reads merge fields, so the same workflow serves Richmond, Virginia Beach, and Newport News. Never hardcode a clinic name, address, phone, or booking URL into a message or action; never clone a workflow just to change words. Branch per location only when BEHAVIOR differs (a different calendar or routing), never when only the copy differs.",
-        "location_variable": "opportunity.location (static: richmond | va_beach | npn | telehealth). Set once by WF-01 at create. This is the single source of clinic identity; downstream workflows read it, they do not re-derive it.",
-        "collision_warning": "CRITICAL: a standard GHL Custom Value is account-wide. It applies universally across the whole sub-account, so it CANNOT hold per-clinic data. If one location writes a Custom Value it changes for every location (a data collision). Custom Values are only safe for values that are identical brand-wide (brand name, main brand domain, compliance links). Per-clinic values must NEVER live in a Custom Value.",
-        "methods": [
-          {
-            "name": "Method 1 - Locations Custom Object (LOCKED: Decision 14)",
-            "detail": "The chosen pattern. A 'Locations' Custom Object with one record per clinic (fields: Location Email, Location Phone, Booking Link, Address, Review Link). Each Contact is associated with its Location at capture, and WF-01 stamps the associated Location's values into generic operational contact fields (current_clinic_address, current_clinic_phone, current_booking_url) exactly once at creation. Because email/SMS builders cannot loop Custom Object variables natively, that stamp step is the bridge; every template reads ONLY the generic fields, so downstream workflows never know clinics exist. Wave 0 addendum: the object + 3 records + generic fields must be created (Wave 0 ran before Decision 14)."
-          },
-          {
-            "name": "Method 2 - Contact field matrix (REJECTED)",
-            "detail": "Prefixed per-clinic fields plus tag-routed If/Else copying into generic fields. Rejected by Decision 14 because the clinic values end up embedded inside workflow branch configs, which buries data in steps (the defect this project removes) and makes every clinic-data change a workflow edit."
-          },
-          {
-            "name": "Method 3 - Smart URL strategy (ADOPTED for links)",
-            "detail": "Layered on per Decision 14 for booking/review links on the Vercel funnel pages: one base Custom Value plus the contact's location as a URL parameter, for example {{custom_values.base_booking_url}}?branch={{contact.location_preference}}. The landing page reads ?branch= and renders the correct clinic calendar. Links only; in-message address/phone comes from the generic fields."
-          }
-        ],
-        "custom_values": [
-          "Safe as account-wide Custom Values ({{custom_values.name}}): brand name, main brand booking domain, compliance links, brand-level review/survey/intake links. These are identical for every contact and every clinic.",
-          "NOT safe as Custom Values (per-clinic, would collide): clinic address, clinic direct phone, per-clinic booking/calendar URL, location email. Deliver these via Method 1 or 2: copy the clinic's value into a generic operational Contact field with an Update Contact Field step before the send, then reference that generic field.",
-          "Merge-field syntax: contact fields {{contact.field_key}}, opportunity fields {{opportunity.field_key}}, account constants {{custom_values.name}}, appointment {{appointment.start_time}}. Operational pattern: templates read a generic field like {{contact.current_location_booking_link}} that the workflow fills per clinic, never a hardcoded clinic value."
-        ]
-      }
-    },
-    "16": {
-      "purpose": "Missed-call text-back plus a simultaneous-ring IVR path and chat out-of-office auto-response.",
-      "diagram_key": "support",
-      "trigger": {
-        "type": "Inbound Call and Chat OOO",
-        "filters": [
-          "Inbound call",
-          "Chat received out of office"
-        ],
-        "target": "phone number(s) + chat widget."
-      },
-      "prerequisites": [
-        "Phone numbers per clinic",
-        "chat widget",
-        "scheduling link custom value",
-        "WF-11 consent gate"
-      ],
-      "steps": [
-        {
-          "order": 1,
-          "action": "Manual Call",
-          "name": "IVR: Simultaneous ring",
-          "config": "Ring all locations at once (absorbs '1. IVR - simultaneous')."
-        },
-        {
-          "order": 2,
           "action": "If/Else",
-          "name": "If: Answered?",
-          "config": "Branch on answer.",
-          "branches": [
-            {
-              "label": "Yes",
-              "condition": "call answered",
-              "path": "Handled live, end"
-            },
-            {
-              "label": "No - missed",
-              "condition": "call missed",
-              "path": "Instant text-back (step 3)"
-            }
-          ]
-        },
-        {
-          "order": 3,
-          "action": "Send SMS",
-          "name": "SMS: Instant Text-Back (T+0)",
-          "config": "Immediate text-back on a missed call."
-        },
-        {
-          "order": 4,
-          "action": "Send SMS",
-          "name": "SMS: Follow-Up (T+30m)",
-          "config": "Follow-up text."
-        },
-        {
-          "order": 5,
-          "action": "Send SMS",
-          "name": "Chat: Auto-Response",
-          "config": "On chat OOO, auto-respond with the scheduling link."
+          "name": "IF-ELSE: Wait for survey submit",
+          "config": "Reads survey submission event. Must not fabricate a score."
         },
         {
           "order": 6,
           "action": "Update Contact Field",
-          "name": "Attr: missed-call source stamp (D17)",
-          "config": "On missed call, apply the same phone-source stamping as WF-12: first_utm_source=phone if empty, last_utm_source=phone, dialed tracking number captured. Number-pool DNI upgrade path documented in Decision 17."
+          "name": "SET-FIELD: contact.latest_feedback_score (sole writer)",
+          "config": "The only field this workflow writes. Must not write any other contact or opportunity field."
         },
         {
           "order": 7,
-          "action": "IVR nodes",
-          "name": "Port: IVR tree (live 1. IVR - simultaneous)",
-          "config": "ivr_say greeting -> ivr_gather (press 1 new consult / 2 existing / 3 billing) -> ivr_connect_call (simultaneous ring to clinic user list, record-from-answer) -> ivr_collect_voicemail fallback. All 4 node shapes captured in build_ids."
-        },
-        {
-          "order": 8,
-          "action": "If/Else on quarter_hour + day_week",
-          "name": "Port: business-hours gate + chat-widget OOO (live Chat Widget OOO)",
-          "config": "The live workflow proves a NATIVE business-hours condition: if_else on quarter_hour >= open AND quarter_hour <= close AND day_week in Mon-Fri. Port as WF-16's hours gate for missed-call/chat-widget auto-replies (within hours: instant text-back; outside: OOO message with booking link). Also covers chat-widget inquiries, which the 16-workflow set previously did not handle at all."
+          "action": "Add Contact Tag",
+          "name": "ADD-TAG: v2_feedback_captured (audit)",
+          "config": "Audit tag only."
         }
       ],
       "messages": [
         {
-          "step": "SMS: Instant Text-Back",
+          "step": "SMS Feedback invite",
           "channel": "SMS",
-          "body": "Sorry we missed your call to Men's Wellness Centers, {{contact.first_name}}. How can we help? You can book your no-cost 60-minute in-person consultation here: {{custom_values.booking_link}} Reply STOP to opt out."
+          "body": "Inline SMS. References contact.current_review_link. First SMS carries Reply STOP to opt out."
+        },
+        {
+          "step": "EMAIL Feedback invite",
+          "channel": "Email",
+          "body": "Native template EML | WF-10 | Feedback invite (BFhyqVQXEYVasm4hJWvE). Also references contact.current_review_link."
+        },
+        {
+          "step": "SMS Feedback nudge (+3d)",
+          "channel": "SMS",
+          "body": "Inline SMS."
         }
       ],
       "settings": {
-        "quiet_hours": "8a-9p contact TZ on outbound sends (WF-11 gate).",
-        "allow_reentry": "Per inbound event.",
-        "stop_on_response": "Yes.",
-        "reentry_caveat": "IVR simultaneous-ring is the intended path (absorbs the legacy IVR workflow).",
-        "status": "Draft. Do not publish without sign-off."
+        "quiet_hours": "08:00-21:00 contact timezone, 7 days. Marketing / recovery only.",
+        "allow_reentry": "No. One feedback ask per onboarding.",
+        "stop_on_response": "Yes. Exits on survey submit as well.",
+        "reentry_caveat": "Only WF-10 writes contact.latest_feedback_score.",
+        "status": "Draft v3 on staging shell 37b1202a-5397-4e08-92da-bb638c862a2a. Unpublished."
       },
       "test": [
-        "Place a test call and miss it; confirm instant text-back + 30-min follow-up.",
-        "Confirm simultaneous ring across locations.",
-        "Trigger chat OOO and confirm the auto-response with scheduling link."
+        "Enroll via WF-06 T+14 and confirm invite SMS + email fire only inside 08:00-21:00 contact TZ.",
+        "Submit the survey and confirm the score writes and the workflow exits."
       ],
       "depends_on": [
-        "Clinic phone numbers",
-        "chat widget",
-        "booking link custom value",
-        "WF-11"
-      ],
-      "variables": {
-        "principle": "Build ONE workflow, not one per clinic. Location is a static variable set once at object creation (WF-01 branches on opportunity.location and stamps the clinic-specific fields). Every downstream step reads merge fields, so the same workflow serves Richmond, Virginia Beach, and Newport News. Never hardcode a clinic name, address, phone, or booking URL into a message or action; never clone a workflow just to change words. Branch per location only when BEHAVIOR differs (a different calendar or routing), never when only the copy differs.",
-        "location_variable": "opportunity.location (static: richmond | va_beach | npn | telehealth). Set once by WF-01 at create. This is the single source of clinic identity; downstream workflows read it, they do not re-derive it.",
-        "collision_warning": "CRITICAL: a standard GHL Custom Value is account-wide. It applies universally across the whole sub-account, so it CANNOT hold per-clinic data. If one location writes a Custom Value it changes for every location (a data collision). Custom Values are only safe for values that are identical brand-wide (brand name, main brand domain, compliance links). Per-clinic values must NEVER live in a Custom Value.",
-        "methods": [
-          {
-            "name": "Method 1 - Locations Custom Object (LOCKED: Decision 14)",
-            "detail": "The chosen pattern. A 'Locations' Custom Object with one record per clinic (fields: Location Email, Location Phone, Booking Link, Address, Review Link). Each Contact is associated with its Location at capture, and WF-01 stamps the associated Location's values into generic operational contact fields (current_clinic_address, current_clinic_phone, current_booking_url) exactly once at creation. Because email/SMS builders cannot loop Custom Object variables natively, that stamp step is the bridge; every template reads ONLY the generic fields, so downstream workflows never know clinics exist. Wave 0 addendum: the object + 3 records + generic fields must be created (Wave 0 ran before Decision 14)."
-          },
-          {
-            "name": "Method 2 - Contact field matrix (REJECTED)",
-            "detail": "Prefixed per-clinic fields plus tag-routed If/Else copying into generic fields. Rejected by Decision 14 because the clinic values end up embedded inside workflow branch configs, which buries data in steps (the defect this project removes) and makes every clinic-data change a workflow edit."
-          },
-          {
-            "name": "Method 3 - Smart URL strategy (ADOPTED for links)",
-            "detail": "Layered on per Decision 14 for booking/review links on the Vercel funnel pages: one base Custom Value plus the contact's location as a URL parameter, for example {{custom_values.base_booking_url}}?branch={{contact.location_preference}}. The landing page reads ?branch= and renders the correct clinic calendar. Links only; in-message address/phone comes from the generic fields."
-          }
-        ],
-        "custom_values": [
-          "Safe as account-wide Custom Values ({{custom_values.name}}): brand name, main brand booking domain, compliance links, brand-level review/survey/intake links. These are identical for every contact and every clinic.",
-          "NOT safe as Custom Values (per-clinic, would collide): clinic address, clinic direct phone, per-clinic booking/calendar URL, location email. Deliver these via Method 1 or 2: copy the clinic's value into a generic operational Contact field with an Update Contact Field step before the send, then reference that generic field.",
-          "Merge-field syntax: contact fields {{contact.field_key}}, opportunity fields {{opportunity.field_key}}, account constants {{custom_values.name}}, appointment {{appointment.start_time}}. Operational pattern: templates read a generic field like {{contact.current_location_booking_link}} that the workflow fills per clinic, never a hardcoded clinic value."
-        ]
-      }
+        "WF-06"
+      ]
     },
-    "17": {
-      "purpose": "PCC consult pricing tool (ported from live 06. Price Calculator). During the consult, PCC selects program options on the contact/opportunity; math_operation nodes compute the package total into a total-price field and log a structured note. Feeds the monetary value that WF-13's Won-with-revenue conversion sends to ad platforms (D17).",
-      "diagram_key": "wf17",
-      "trigger": "Contact tag price_calc OR PCC form submission (defer until go-live pass, like all triggers)",
+    "11": {
+      "purpose": "Compliance and errors. Sole writer of DND and contact.sms_consent_status. STOP inbound plus a MUT front-gate so MUT routing does not get treated like a STOP.",
+      "diagram_key": "support",
+      "trigger": {
+        "type": "dnd_contact inbound (STOP) + Added by WF-05 (MUT)",
+        "filters": [
+          "Inbound SMS STOP fires the dnd_contact trigger",
+          "WF-05 MUT branch adds contacts here too"
+        ],
+        "target": "Trigger id gpdYb7c2Dkkt3tYJnClP. targetActionId points at the MUT front-gate IF-ELSE."
+      },
       "prerequisites": [
-        "Price component fields exist (live: z0nsXjBpmFXGdZGfzHAI, rGf0p5eaxAWTM9y5KaAE -> total cxUGCjBinbuh0spb4LQS -- audit and map to canonical names)",
-        "math_operation node (numerical) proven live"
+        "v2 tags v2_status_dnd, v2_email_bounced, v2_bad_number.",
+        "contact.sms_consent_status is writable.",
+        "MUT front-gate lives at the top so MUT contacts do not receive the STOP confirm or the opted_out write."
       ],
       "steps": [
         {
           "order": 1,
-          "action": "If/Else",
-          "name": "Gate: which program selected",
-          "config": "Branch on program selection field (live gate: cClk7ad4PHxiake2lChS)"
+          "action": "Trigger",
+          "name": "TRIGGER: Compliance state changed (consent | DND | bounce | bad number)",
+          "config": "Sole compliance writer. Must not proxy for another workflow (not middleware)."
         },
         {
           "order": 2,
-          "action": "Math Operation",
-          "name": "Compute: package total",
-          "config": "math_operation numerical: selectField (component price) -> operators [add ...] -> updateField (total). Live shape in build_ids live_node_shapes_port_pass."
+          "action": "If/Else",
+          "name": "IF-ELSE: Branch on compliance signal",
+          "config": "Splits into consent, DND, email bounce, bad number lanes."
         },
         {
           "order": 3,
-          "action": "Add Note",
-          "name": "Note: structured price quote",
-          "config": "Write the computed quote as a structured contact note for the PCC record"
+          "action": "Update Contact Field",
+          "name": "SET-FIELD: sms_consent_status (sole writer)",
+          "config": "Only WF-11 writes sms_consent_status."
+        },
+        {
+          "order": 4,
+          "action": "Update Contact Field",
+          "name": "SET-FIELD: DND channels (sole writer)",
+          "config": "Only WF-11 writes DND. Must not toggle DND from any other workflow."
+        },
+        {
+          "order": 5,
+          "action": "Add Contact Tag",
+          "name": "ADD-TAG: v2_status_dnd (DND branch)",
+          "config": "New v2 DND tag. Must not remove sms-consent live tag."
+        },
+        {
+          "order": 6,
+          "action": "Add Contact Tag",
+          "name": "ADD-TAG: v2_email_bounced (bounce branch)",
+          "config": "New v2 bounce tag."
+        },
+        {
+          "order": 7,
+          "action": "Add Contact Tag",
+          "name": "ADD-TAG: v2_bad_number (bad-number branch)",
+          "config": "New v2 bad-number tag."
+        },
+        {
+          "order": 8,
+          "action": "Remove From Workflow",
+          "name": "REMOVE-FROM-WF: Drop from outreach WFs (WF-02, WF-03, WF-04, WF-08, WF-09)",
+          "config": "Stops in-flight outreach when compliance flips. Must not remove from WF-05 (routing must still process)."
         }
       ],
-      "messages": [],
-      "settings": {
-        "quiet_hours": "n/a (internal tool)"
-      },
-      "test": "Set component fields on a test contact, run, verify total field arithmetic and note content",
-      "depends_on": [
-        "WF-13 (consumes total as Won revenue value)"
+      "messages": [
+        {
+          "step": "SMS STOP confirm (false branch only)",
+          "channel": "SMS",
+          "body": "Inline confirm that the contact is opted out. Not sent to MUT contacts (front-gate true branch)."
+        }
       ],
-      "variables": []
+      "settings": {
+        "quiet_hours": "None. Transactional SMS sends immediately (no quiet hours).",
+        "allow_reentry": "Yes on repeat STOP.",
+        "stop_on_response": "n/a (this is the STOP handler).",
+        "reentry_caveat": "MUT contacts hit WAIT 1s only. No DND, no opted_out, no STOP confirm.",
+        "status": "Draft v4 on staging shell 9aab45f8-6f5b-467a-9f05-6981446c48f2. Unpublished."
+      },
+      "test": [
+        "Send inbound STOP and confirm DND flips, tags land, and STOP-confirm SMS fires.",
+        "Route a MUT contact via WF-05 and confirm the front-gate suppresses the STOP path."
+      ],
+      "depends_on": [
+        "WF-05"
+      ]
+    },
+    "12": {
+      "purpose": "Single call-disposition graph. Keyed on channel, not clinic. Tags v2_source_phone. Never remove-and-recreate a contact or opp.",
+      "diagram_key": "wf12",
+      "trigger": {
+        "type": "Call Status changed (channel = phone)",
+        "filters": [
+          "Sole call-dispo entry; do not fork per clinic slug"
+        ],
+        "target": "Native call-status trigger only."
+      },
+      "prerequisites": [
+        "v2 tag v2_source_phone exists on staging (HuqiCRyopgdHESALDnKN)."
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "action": "Trigger",
+          "name": "TRIGGER: Call Status changed (channel=phone)",
+          "config": "Sole call-dispo entry. Must not fork per clinic slug."
+        },
+        {
+          "order": 2,
+          "action": "Add Contact Tag",
+          "name": "ADD-TAG: v2_source_phone",
+          "config": "New v2 phone-source tag."
+        },
+        {
+          "order": 3,
+          "action": "If/Else",
+          "name": "IF-ELSE: Branch on call disposition (connected | voicemail | missed | wrong-number)",
+          "config": "Single graph. Must not remove and recreate the contact or opp; native update in place."
+        },
+        {
+          "order": 4,
+          "action": "Update Contact Field",
+          "name": "SET-FIELD: contact.last_call_disposition",
+          "config": "Native update in place. Must not delete-and-recreate."
+        },
+        {
+          "order": 5,
+          "action": "Send SMS",
+          "name": "SMS: Voicemail follow-up (inline, voicemail branch)",
+          "config": "Inline SMS. Honors quiet hours 8am-9pm contact TZ."
+        },
+        {
+          "order": 6,
+          "action": "Send SMS",
+          "name": "SMS: Missed follow-up (inline, missed branch)",
+          "config": "Inline SMS."
+        },
+        {
+          "order": 7,
+          "action": "Add Contact Tag",
+          "name": "ADD-TAG: v2_bad_number (wrong-number branch)",
+          "config": "Delegates to compliance semantics; WF-11 still owns the field-level write."
+        },
+        {
+          "order": 8,
+          "action": "Add To Workflow",
+          "name": "ADD-TO-WF: Route wrong-number to WF-11 Compliance",
+          "config": "Compliance owns the DND and bad-number field writes."
+        }
+      ],
+      "messages": [
+        {
+          "step": "Per-disposition SMS",
+          "channel": "n/a",
+          "body": "Per-disposition copy is not authored yet. The on-shell graph tags v2_source_phone only."
+        }
+      ],
+      "settings": {
+        "quiet_hours": "None. Transactional SMS sends immediately (no quiet hours).",
+        "allow_reentry": "Yes on each call.",
+        "stop_on_response": "Yes.",
+        "reentry_caveat": "Native update-in-place. Never delete-and-recreate the contact.",
+        "status": "Draft v2 on staging shell fa1c829c-5c6b-459a-81b9-19b737691a2c. Unpublished."
+      },
+      "test": [
+        "Change call status on a test contact and confirm the tag lands.",
+        "Wrong-number branch routes into WF-11 Compliance."
+      ],
+      "depends_on": [
+        "WF-11"
+      ]
+    },
+    "13": {
+      "purpose": "Fire native Meta CAPI and Google Ads conversion events on Sales pipeline Booked and Won, sale_type=new only. Not the clinic pipes.",
+      "diagram_key": "support",
+      "trigger": {
+        "type": "Opportunity Stage changed on Sales Lead to Close",
+        "filters": [
+          "Pipeline is Sales Lead to Close (Vt8cPz51C3i87moo73gQ in prod; ASnpfhu1hpSHUv0IFLc7 in staging)",
+          "Stage in (Booked, Won)",
+          "sale_type = new",
+          "Excludes clinic pipes jRqb0pvexu04zSACPXmd, 9AZEt2Sw6Zv0nnJJmkE0, rspsjkBMNYGldN3R71ji"
+        ],
+        "target": "Also enrolled via ADD-TO-WF from WF-05 when SOLD + sale_type=new."
+      },
+      "prerequisites": [
+        "v2 tag v2_conv_won_new exists on staging (fUVvRU2P4aQl1VKA7muT).",
+        "Native Meta CAPI and Google Ads conversion actions are configured in the account (nodes are not authored yet on the shell)."
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "action": "Trigger",
+          "name": "TRIGGER: Sales pipeline Booked or Won (sale_type=new)",
+          "config": "Sole conversion trigger. Must not fire on clinic pipelines. Must not fire on renewals."
+        },
+        {
+          "order": 2,
+          "action": "If/Else",
+          "name": "IF-ELSE: Guard sale_type=new and pipeline=Sales Lead to Close",
+          "config": "Belt-and-suspenders guard so a mis-tagged opp cannot fire conversions."
+        },
+        {
+          "order": 3,
+          "action": "Webhook",
+          "name": "WEBHOOK: Native Meta CAPI Lead (Booked branch)",
+          "config": "Native GHL Meta CAPI action. Must not include monetaryValue in payload beyond native mapping."
+        },
+        {
+          "order": 4,
+          "action": "Webhook",
+          "name": "WEBHOOK: Native Meta CAPI Purchase (Won branch)",
+          "config": "Native GHL Meta CAPI action for Won."
+        },
+        {
+          "order": 5,
+          "action": "Webhook",
+          "name": "WEBHOOK: Native Google Ads conversion (Won branch)",
+          "config": "Native Google Ads conversion action."
+        },
+        {
+          "order": 6,
+          "action": "Add Contact Tag",
+          "name": "ADD-TAG: v2_conv_won_new (Won branch)",
+          "config": "Audit tag for Won + new only."
+        }
+      ],
+      "messages": [
+        {
+          "step": "n/a",
+          "channel": "n/a",
+          "body": "System workflow. No SMS or email."
+        }
+      ],
+      "settings": {
+        "quiet_hours": "n/a (internal / system, no SMS).",
+        "allow_reentry": "No. Fire once per opportunity.",
+        "stop_on_response": "n/a.",
+        "reentry_caveat": "Never fire on the clinic pipelines.",
+        "status": "Draft v2 on staging shell 9513a9c7-69c5-4f1c-9193-b371ab8d8253. CAPI and Google Ads conversion nodes are not authored yet."
+      },
+      "test": [
+        "Move a Sales opp to Booked and to Won with sale_type=new. Confirm the tag lands and the (future) CAPI + Google conversion events fire once.",
+        "Move a clinic-pipe opp and confirm nothing fires."
+      ],
+      "depends_on": [
+        "WF-05"
+      ]
+    },
+    "14": {
+      "purpose": "Ambassador referral. The referred contact is created as a new contact (never merged) and re-enters WF-01. Live tag ambassador-referral.",
+      "diagram_key": "support",
+      "trigger": {
+        "type": "Added by WF-06 at T+21 (also inbound ambassador form)",
+        "filters": [
+          "Enrolled from WF-06 T+21 or via Contact Created on the ambassador form"
+        ],
+        "target": "WF-06 hand-off primary; form-created contact for the referred contact path."
+      },
+      "prerequisites": [
+        "Live tag ambassador-referral exists in the account. Do not rename.",
+        "Ambassador form is live."
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "action": "Trigger",
+          "name": "TRIGGER: Added by WF-06 at T+21 (ambassador ask)",
+          "config": "Asks the member to refer someone. Must not write to the referrer's opportunity."
+        },
+        {
+          "order": 2,
+          "action": "Send Email",
+          "name": "EMAIL: Ambassador invite (native template)",
+          "config": "Sends EML | WF-14 | Ambassador invite."
+        },
+        {
+          "order": 3,
+          "action": "Send SMS",
+          "name": "SMS: Ambassador invite (inline)",
+          "config": "Inline SMS. Members not patients."
+        },
+        {
+          "order": 4,
+          "action": "If/Else",
+          "name": "IF-ELSE: On ambassador form submitted (referred contact created)",
+          "config": "Reads the ambassador form submission. Referred contact is created via the form; must not merge with the referrer."
+        },
+        {
+          "order": 5,
+          "action": "Add Contact Tag",
+          "name": "ADD-TAG: ambassador-referral (live tag on referred contact)",
+          "config": "Live tag. Must not rename ambassador-referral."
+        },
+        {
+          "order": 6,
+          "action": "Add Contact Tag",
+          "name": "ADD-TAG: v2_ref_ambassador (referred contact audit)",
+          "config": "New v2 audit tag on the referred contact."
+        },
+        {
+          "order": 7,
+          "action": "Add To Workflow",
+          "name": "ADD-TO-WF: Re-enter WF-01 for referred contact",
+          "config": "Referred contact enters the normal Lead Capture flow. Must not create a Sales opp here; WF-01 owns create-once."
+        }
+      ],
+      "messages": [
+        {
+          "step": "Ambassador invite and referred welcome",
+          "channel": "n/a",
+          "body": "Full step bodies are not authored yet. The on-shell graph is a 1-step named shell."
+        }
+      ],
+      "settings": {
+        "quiet_hours": "08:00-21:00 contact timezone, 7 days. Marketing / recovery only.",
+        "allow_reentry": "Yes. The referrer can invite multiple people; each referred contact is created fresh.",
+        "stop_on_response": "Yes.",
+        "reentry_caveat": "Referred contact must never merge with the referrer.",
+        "status": "Draft v2 on staging shell 6b090c34-cc66-43bf-8939-2868a6b8436b. Unpublished."
+      },
+      "test": [
+        "Invite via the ambassador form and confirm the referred contact enters WF-01 as a next-lander.",
+        "Confirm the referrer opp is not touched."
+      ],
+      "depends_on": [
+        "WF-01",
+        "WF-06"
+      ]
+    },
+    "15": {
+      "purpose": "PCC QR referral. utm_source=pcc_qr contacts get the live tag pcc-referral and re-enter WF-01 as new next-lander leads.",
+      "diagram_key": "support",
+      "trigger": {
+        "type": "Contact Created (utm_source = pcc_qr)",
+        "filters": [
+          "utm_source = pcc_qr"
+        ],
+        "target": "Native Contact Created trigger with the utm_source filter."
+      },
+      "prerequisites": [
+        "Live tag pcc-referral. Do not rename."
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "action": "Trigger",
+          "name": "TRIGGER: Contact Created (utm_source=pcc_qr)",
+          "config": "Sole enroll. Must not fire on other utm_source values."
+        },
+        {
+          "order": 2,
+          "action": "Add Contact Tag",
+          "name": "ADD-TAG: pcc-referral (live tag)",
+          "config": "Live tag. Must not rename pcc-referral."
+        },
+        {
+          "order": 3,
+          "action": "Add Contact Tag",
+          "name": "ADD-TAG: v2_ref_pcc (audit)",
+          "config": "New v2 audit tag."
+        },
+        {
+          "order": 4,
+          "action": "Update Contact Field",
+          "name": "SET-FIELD: contact.referral_channel = pcc_qr",
+          "config": "Native field write. Must not touch location_* fields (WF-01 owns)."
+        },
+        {
+          "order": 5,
+          "action": "Add To Workflow",
+          "name": "ADD-TO-WF: Re-enter WF-01 Lead Capture",
+          "config": "Contact then goes through normal Lead Capture. Must not create a Sales opp here."
+        }
+      ],
+      "messages": [
+        {
+          "step": "PCC referral onboarding",
+          "channel": "n/a",
+          "body": "Full step bodies are not authored yet. The on-shell graph is a 1-step named shell."
+        }
+      ],
+      "settings": {
+        "quiet_hours": "n/a (internal / system, no SMS).",
+        "allow_reentry": "No. One PCC-referral tag per contact.",
+        "stop_on_response": "n/a.",
+        "reentry_caveat": "Referred contact enters WF-01 for the create-once Sales opp.",
+        "status": "Draft v2 on staging shell 158edd25-594d-4506-b021-c8acb7943969. Unpublished."
+      },
+      "test": [
+        "Create a contact with utm_source=pcc_qr and confirm the tag lands and WF-01 receives the contact."
+      ],
+      "depends_on": [
+        "WF-01"
+      ]
+    },
+    "16": {
+      "purpose": "Comms edge. Inbound IVR +18663444955 and the two chat widgets. No Sales opportunity is created here.",
+      "diagram_key": "support",
+      "trigger": {
+        "type": "Inbound Call / Chat",
+        "filters": [
+          "Phone number +18663444955 (IVR)",
+          "Chat widget 69337243d355bdcd9c27675e",
+          "Chat widget 6952a8536682120c2b2656b9"
+        ],
+        "target": "Native inbound trigger for the three channels."
+      },
+      "prerequisites": [
+        "v2 source tags v2_source_ivr and v2_source_chat will be added when copy lands."
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "action": "Trigger",
+          "name": "TRIGGER: IVR +18663444955 or chat widget inbound",
+          "config": "Sole entry for IVR + chat. Must not create a Sales opportunity here."
+        },
+        {
+          "order": 2,
+          "action": "If/Else",
+          "name": "IF-ELSE: Branch on channel (IVR | chat)",
+          "config": "Splits IVR vs chat paths for tagging and copy."
+        },
+        {
+          "order": 3,
+          "action": "Add Contact Tag",
+          "name": "ADD-TAG: v2_source_ivr (IVR branch)",
+          "config": "New v2 source tag for IVR."
+        },
+        {
+          "order": 4,
+          "action": "Add Contact Tag",
+          "name": "ADD-TAG: v2_source_chat (chat branch)",
+          "config": "New v2 source tag for chat widgets."
+        },
+        {
+          "order": 5,
+          "action": "Send SMS",
+          "name": "SMS: IVR callback ack (inline, IVR branch)",
+          "config": "Inline SMS. Honors quiet hours 8am-9pm contact TZ."
+        },
+        {
+          "order": 6,
+          "action": "Send Email",
+          "name": "EMAIL: Chat follow-up (native template, chat branch)",
+          "config": "Sends EML | WF-16 | Chat follow-up."
+        },
+        {
+          "order": 7,
+          "action": "If/Else",
+          "name": "IF-ELSE: New contact vs existing contact",
+          "config": "Existing contacts stay on their current opp. New contacts route to WF-01 to enroll properly."
+        },
+        {
+          "order": 8,
+          "action": "Add To Workflow",
+          "name": "ADD-TO-WF: New contact re-enters WF-01",
+          "config": "New contacts route to WF-01 for create-once Sales opp. Must not create Sales opps here."
+        }
+      ],
+      "messages": [
+        {
+          "step": "IVR/chat acknowledgement",
+          "channel": "n/a",
+          "body": "Full step bodies are not authored yet. The on-shell graph is a 1-step named shell."
+        }
+      ],
+      "settings": {
+        "quiet_hours": "None. Transactional SMS sends immediately (no quiet hours).",
+        "allow_reentry": "Yes on each inbound.",
+        "stop_on_response": "Yes.",
+        "reentry_caveat": "Must not create a Sales opportunity here; new contacts route to WF-01.",
+        "status": "Draft v2 on staging shell e68037b4-a8a2-427e-ba1c-8741ea615a3f. Unpublished."
+      },
+      "test": [
+        "Simulate an IVR call and a chat submission and confirm the tag lands and new contacts enter WF-01."
+      ],
+      "depends_on": [
+        "WF-01"
+      ]
+    },
+    "17": {
+      "purpose": "Internal price calculator for consult copy. Never writes opportunity.monetaryValue. Tags v2_price_calc when done.",
+      "diagram_key": "wf17",
+      "trigger": {
+        "type": "Contact Field changed on price-calc inputs",
+        "filters": [
+          "Fires when any of the price-calc component fields change",
+          "Never fires customer-facing outreach directly"
+        ],
+        "target": "Native custom-field trigger."
+      },
+      "prerequisites": [
+        "Price-calc component fields exist; a math_operation node computes the total to contact.price_calc_result.",
+        "Must not write opportunity.monetaryValue and must not move Sales stages."
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "action": "Trigger",
+          "name": "TRIGGER: Price-calc input changed",
+          "config": "Sole entry. Must not fire customer outreach here."
+        },
+        {
+          "order": 2,
+          "action": "Update Contact Field",
+          "name": "SET-FIELD: contact.price_calc_inputs (native math staging)",
+          "config": "Stores calculator inputs. Must not write to opportunity.monetaryValue."
+        },
+        {
+          "order": 3,
+          "action": "If/Else",
+          "name": "IF-ELSE: Branch on pay_type (PIF | SF | CARE | MAG | Other)",
+          "config": "Reads pay_type only. Must not write pay_type."
+        },
+        {
+          "order": 4,
+          "action": "Update Contact Field",
+          "name": "SET-FIELD: contact.price_calc_result (internal only)",
+          "config": "Stores computed price copy. Must not write opportunity.monetaryValue or move stages."
+        },
+        {
+          "order": 5,
+          "action": "Add Contact Tag",
+          "name": "ADD-TAG: v2_price_calc (audit)",
+          "config": "New v2 tag marking calc-complete. Must not remove any live tag."
+        }
+      ],
+      "messages": [
+        {
+          "step": "n/a",
+          "channel": "n/a",
+          "body": "Internal-only calculator. No SMS or email."
+        }
+      ],
+      "settings": {
+        "quiet_hours": "n/a (internal / system, no SMS).",
+        "allow_reentry": "Yes on each input change.",
+        "stop_on_response": "n/a.",
+        "reentry_caveat": "Do not write opportunity.monetaryValue anywhere.",
+        "status": "Draft v2 on staging shell e5fbb7f4-7fe6-4adf-8bf3-957c395a8495. Unpublished."
+      },
+      "test": [
+        "Change price-calc component fields on a test contact and confirm contact.price_calc_result is computed and v2_price_calc lands.",
+        "Confirm opportunity.monetaryValue is untouched."
+      ],
+      "depends_on": [
+        "WF-13 (later, once ad platforms consume revenue)"
+      ]
     }
   }
 }

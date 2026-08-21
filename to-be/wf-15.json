@@ -1,0 +1,45 @@
+{
+  "id": "wf-15",
+  "name": "PCC referral",
+  "job": "PCC QR referral flow. Enrolls on utm_source=pcc_qr and adds the live pcc-referral tag, then re-enters WF-01.",
+  "trigger": {
+    "type": "Contact Created",
+    "filters": ["utm_source = pcc_qr"]
+  },
+  "named_steps": [
+    {
+      "name": "TRIGGER: Contact Created (utm_source=pcc_qr)",
+      "comment": "Sole enroll. Must not fire on other utm_source values.",
+      "does_not_write": []
+    },
+    {
+      "name": "ADD-TAG: pcc-referral (live tag)",
+      "comment": "Live tag. Must not rename pcc-referral.",
+      "writes": ["pcc-referral"]
+    },
+    {
+      "name": "ADD-TAG: v2_ref_pcc (audit)",
+      "comment": "New v2 audit tag.",
+      "writes": ["v2_ref_pcc"]
+    },
+    {
+      "name": "SET-FIELD: contact.referral_channel = pcc_qr",
+      "comment": "Native field write. Must not touch location_* fields (WF-01 owns).",
+      "writes": ["contact.referral_channel"],
+      "does_not_write": ["contact.location_*", "contact.current_clinic_slug"]
+    },
+    {
+      "name": "ADD-TO-WF: Re-enter WF-01 Lead Capture",
+      "comment": "Contact then goes through normal Lead Capture. Must not create a Sales opp here.",
+      "writes": []
+    }
+  ],
+  "tags_new": [
+    "v2_ref_pcc"
+  ],
+  "live_tags_readonly": [
+    "pcc-referral",
+    "next-lander",
+    "sms-consent"
+  ]
+}

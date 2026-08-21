@@ -1,0 +1,61 @@
+{
+  "id": "wf-11",
+  "name": "Compliance",
+  "job": "Sole writer of sms_consent_status and DND state. Owns v2_status_dnd, v2_email_bounced, v2_bad_number. Not a middleware.",
+  "trigger": {
+    "type": "Contact Field changed",
+    "filters": ["field = sms_consent_status OR DND state OR email_bounced OR bad_number"],
+    "notes": "Also enrolled via ADD-TO-WF from WF-05 MUT branch."
+  },
+  "named_steps": [
+    {
+      "name": "TRIGGER: Compliance state changed (consent | DND | bounce | bad number)",
+      "comment": "Sole compliance writer. Must not proxy for another workflow (not middleware).",
+      "does_not_write": []
+    },
+    {
+      "name": "IF-ELSE: Branch on compliance signal",
+      "comment": "Splits into consent, DND, email bounce, bad number lanes.",
+      "does_not_write": []
+    },
+    {
+      "name": "SET-FIELD: sms_consent_status (sole writer)",
+      "comment": "Only WF-11 writes sms_consent_status.",
+      "writes": ["contact.sms_consent_status"]
+    },
+    {
+      "name": "SET-FIELD: DND channels (sole writer)",
+      "comment": "Only WF-11 writes DND. Must not toggle DND from any other workflow.",
+      "writes": ["contact.dnd"]
+    },
+    {
+      "name": "ADD-TAG: v2_status_dnd (DND branch)",
+      "comment": "New v2 DND tag. Must not remove sms-consent live tag.",
+      "writes": ["v2_status_dnd"]
+    },
+    {
+      "name": "ADD-TAG: v2_email_bounced (bounce branch)",
+      "comment": "New v2 bounce tag.",
+      "writes": ["v2_email_bounced"]
+    },
+    {
+      "name": "ADD-TAG: v2_bad_number (bad-number branch)",
+      "comment": "New v2 bad-number tag.",
+      "writes": ["v2_bad_number"]
+    },
+    {
+      "name": "REMOVE-FROM-WF: Drop from outreach WFs (WF-02, WF-03, WF-04, WF-08, WF-09)",
+      "comment": "Stops in-flight outreach when compliance flips. Must not remove from WF-05 (routing must still process).",
+      "writes": []
+    }
+  ],
+  "tags_new": [
+    "v2_status_dnd",
+    "v2_email_bounced",
+    "v2_bad_number"
+  ],
+  "live_tags_readonly": [
+    "sms-consent",
+    "next-lander"
+  ]
+}

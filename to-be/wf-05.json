@@ -1,0 +1,101 @@
+{
+  "id": "wf-05",
+  "name": "Outcome router",
+  "job": "Central router for sale_outcome and appt_status force writes. Reads the opportunity, tags v2_outcome_*, and routes to the correct downstream workflow. Never stage-moves and never fires on MAR.",
+  "trigger": {
+    "type": "Inbound webhook",
+    "filters": ["url = GHL_WF05_WEBHOOK_URL"],
+    "notes": "Sole webhook-driven router. Payload includes contact_id, sale_outcome, sale_type, appt_status, ad_reason."
+  },
+  "named_steps": [
+    {
+      "name": "TRIGGER: Inbound webhook GHL_WF05_WEBHOOK_URL",
+      "comment": "Force writes enter here only. Must not accept payloads with sale_outcome=MAR (guarded below).",
+      "does_not_write": []
+    },
+    {
+      "name": "WAIT: 60 seconds (opp settle)",
+      "comment": "Allows the upstream force-write to land on the opportunity before FIND-OPP.",
+      "writes": []
+    },
+    {
+      "name": "FIND-OPP: Latest open opp for contact",
+      "comment": "Native find opp. Must not create a new opp here. Must not read monetaryValue for logic.",
+      "does_not_write": ["opportunity"]
+    },
+    {
+      "name": "IF-ELSE: Drop payload when sale_outcome=MAR",
+      "comment": "MAR never enters WF-05. Guard branch exits the workflow.",
+      "does_not_write": []
+    },
+    {
+      "name": "IF-ELSE: Branch on sale_outcome (SOLD | AD | MUT)",
+      "comment": "Routes downstream. Must not write dollars. Must not move opp stages.",
+      "does_not_write": ["opportunity.pipelineStageId", "opportunity.monetaryValue"]
+    },
+    {
+      "name": "ADD-TAG: v2_outcome_sold (SOLD branch)",
+      "comment": "Tags outcome only. Must not stage-move.",
+      "writes": ["v2_outcome_sold"]
+    },
+    {
+      "name": "ADD-TAG: v2_outcome_ad (AD branch)",
+      "comment": "Tags outcome only.",
+      "writes": ["v2_outcome_ad"]
+    },
+    {
+      "name": "ADD-TAG: v2_outcome_mut (MUT branch)",
+      "comment": "Tags outcome only.",
+      "writes": ["v2_outcome_mut"]
+    },
+    {
+      "name": "IF-ELSE: SOLD sub-branch on sale_type (new | renewal)",
+      "comment": "SOLD splits into onboarding vs renewal-nurture.",
+      "does_not_write": []
+    },
+    {
+      "name": "ADD-TO-WF: Route SOLD new to WF-06 Onboarding",
+      "comment": "Onboarding owns membership_status writes; must not set it here.",
+      "writes": []
+    },
+    {
+      "name": "ADD-TO-WF: Route SOLD renewal to WF-09 Nurture",
+      "comment": "Renewal-nurture path. WF-09 owns renewal_date trigger.",
+      "writes": []
+    },
+    {
+      "name": "ADD-TO-WF: Route AD to WF-07 A&D",
+      "comment": "A&D branch handling.",
+      "writes": []
+    },
+    {
+      "name": "ADD-TO-WF: Route MUT to WF-11 Compliance",
+      "comment": "Compliance path.",
+      "writes": []
+    },
+    {
+      "name": "IF-ELSE: Branch on appt_status (no-show | cancel | reschedule)",
+      "comment": "appt_status routing. Reschedule must never be treated as no-show.",
+      "does_not_write": ["appt_status"]
+    },
+    {
+      "name": "ADD-TO-WF: Route no-show or cancel to WF-08",
+      "comment": "Only no-show and cancel enter WF-08; reschedule does not.",
+      "writes": []
+    },
+    {
+      "name": "ADD-TO-WF: Route reschedule to WF-03 Reminders",
+      "comment": "Reschedule re-enters reminders. Must not write appt_status=no-show.",
+      "writes": []
+    }
+  ],
+  "tags_new": [
+    "v2_outcome_sold",
+    "v2_outcome_ad",
+    "v2_outcome_mut"
+  ],
+  "live_tags_readonly": [
+    "next-lander",
+    "sms-consent"
+  ]
+}

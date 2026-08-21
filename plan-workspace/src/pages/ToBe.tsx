@@ -4,29 +4,32 @@ import { Card, CardContent, Badge, Loading } from "../components/ui";
 import { RoutedTabs, RoutedTabPanel } from "../components/RoutedTabs";
 import { useData, type FieldDestination } from "../lib/data";
 import { ghlPipelines } from "../lib/ghl";
-import { ExternalLink, ChevronRight } from "lucide-react";
+import { ExternalLink, ChevronRight, Lock } from "lucide-react";
 import { useEffect, useState } from "react";
 
 interface WFDetailLite { trigger?: { type: string }; steps?: unknown[]; }
 
 
+// WF-01 to WF-17 canonical numbering. The prior scheme (message-library + per-clinic clones) is
+// retired for traceability only.
 const NUMBERING_CROSSWALK: { old: string; canonical: string; note: string }[] = [
-  { old: "01 Lead Capture", canonical: "WF-01 Lead Capture and Attribution", note: "unchanged; copies attribution to the Opp at create" },
-  { old: "02 Non-Booked Recovery", canonical: "WF-02 Non-Booked Recovery", note: "unchanged" },
-  { old: "03 Booking Confirmation + 05 Appointment Reminders", canonical: "WF-03 Booking Confirmation and Reminders", note: "reminders (05) merged in; R1 cadence" },
-  { old: "04 Confirmation Chase", canonical: "WF-04 Medical Intake Chase", note: "renamed; owns all intake chasing" },
-  { old: "07 Appointment Outcome (auto-Won)", canonical: "WF-05 Clinic Outcome Router", note: "rebuilt as a router; PCC Sales Form is sole writer" },
-  { old: "07 Post-Visit Sold", canonical: "WF-06 Post-Visit Won and Onboarding", note: "renumbered; no longer sets renewal_date" },
-  { old: "08 A&D (Advised and Declined)", canonical: "WF-07 A&D Nurture", note: "renumbered; outcome code is AD (kept as A&D, not renamed to nosale)" },
-  { old: "06 No-Show Recovery", canonical: "WF-08 No-Show and Cancel Recovery", note: "renumbered; adds cancel and rebook early-exit" },
-  { old: "09 Renewal Reminders + 10 Long-Term Nurture", canonical: "WF-09 Long-Term Nurture (+ Renewal sub-flow)", note: "merged; renewal is now a labeled sub-flow" },
-  { old: "z Post-Visit Survey", canonical: "WF-10 Feedback Survey", note: "formalized; writes visit_feedback_score" },
-  { old: "scattered consent / DND steps", canonical: "WF-11 Compliance and Errors", note: "new single DND and quiet-hours authority" },
-  { old: "z Call Disposition", canonical: "WF-12 Call Disposition Handler", note: "formalized; reads the form-owned PCC id" },
-  { old: "CAPI outbound webhook", canonical: "WF-13 Ad Platform Conversions", note: "formalized; fires once per opportunity" },
-  { old: "12 Review and Referral (referral part)", canonical: "WF-14 Ambassador Program", note: "split by purpose from the review part" },
-  { old: "PCC / Ambassador referral clones", canonical: "WF-15 PCC Referral Routing", note: "consolidated; tracking-only pipeline" },
-  { old: "11 Missed Call Text-Back", canonical: "WF-16 Comms Edge", note: "renumbered" },
+  { old: "01 Lead Capture", canonical: "WF-01 Lead Capture and Attribution", note: "trigger locked to Contact Created + tag next-lander; Method 2 clinic stamps here only" },
+  { old: "02 Non-Booked Recovery", canonical: "WF-02 Non-Booked Recovery", note: "burst SMS + native template EML | WF-02 | Non-booked 24h; marketing quiet hours apply" },
+  { old: "03 Booking Confirmation + 05 Appointment Reminders", canonical: "WF-03 Booking Confirmation and Reminders", note: "reminders merged in; appointment-relative T-3d/T-1d/T-5h/T-2h; transactional" },
+  { old: "04 Confirmation Chase", canonical: "WF-04 Medical Intake Chase", note: "SMS at +4h and +20h; uses current_booking_url until a dedicated intake URL field exists" },
+  { old: "07 Appointment Outcome (auto-Won)", canonical: "WF-05 Clinic Outcome Router", note: "inbound webhook from Force; routes on sale_outcome_v2; workflows never move stages" },
+  { old: "07 Post-Visit Sold", canonical: "WF-06 Post-Visit Won and Onboarding", note: "SOLD + new only; sole writer of v2_status_active; hands to WF-10 at T+14 and WF-14 at T+21" },
+  { old: "08 A&D (Advised and Declined)", canonical: "WF-07 A&D Post-Visit No-Sale Nurture", note: "sale_outcome_v2 = AD; never fires Meta pixel or CAPI" },
+  { old: "06 No-Show Recovery", canonical: "WF-08 No-Show and Cancel Recovery", note: "reschedule never enters; REMOVE-FROM-WF WF-03 on entry" },
+  { old: "09 Renewal Reminders + 10 Long-Term Nurture", canonical: "WF-09 Long-Term Nurture (+ Renewal sub-flow)", note: "renewal sub-flow gated until backfill" },
+  { old: "z Post-Visit Survey", canonical: "WF-10 Feedback Survey", note: "sole writer of contact.latest_feedback_score; marketing quiet hours" },
+  { old: "scattered consent / DND steps", canonical: "WF-11 Compliance and Errors", note: "STOP inbound + MUT front-gate so MUT does not receive STOP-confirm" },
+  { old: "z Call Disposition", canonical: "WF-12 Call Disposition Handler", note: "single graph keyed on channel; native update-in-place, no remove+create" },
+  { old: "CAPI outbound webhook", canonical: "WF-13 Ad-Platform Conversions", note: "Sales pipe Booked + Won, sale_type=new only; never fires on clinic pipes" },
+  { old: "12 Review and Referral (referral part)", canonical: "WF-14 Ambassador Program", note: "referred contact created new, never merged; live tag ambassador-referral" },
+  { old: "PCC / Ambassador referral clones", canonical: "WF-15 PCC Referral Routing", note: "utm_source=pcc_qr; live tag pcc-referral; re-enters WF-01" },
+  { old: "11 Missed Call Text-Back", canonical: "WF-16 Comms Edge", note: "IVR +18663444955 + two chat widgets; no Sales opp created here" },
+  { old: "06. Price Calculator", canonical: "WF-17 Price Calculator (PCC Tool)", note: "internal math only; never writes opportunity.monetaryValue" },
 ];
 
 const OBJECT_TONE: Record<string, "good" | "blue" | "warning" | "muted"> = {
@@ -68,6 +71,34 @@ function DestCard({ d }: { d: FieldDestination }) {
   );
 }
 
+function LockedRulesCard() {
+  return (
+    <Card>
+      <CardContent className="p-4">
+        <div className="mb-2 flex items-center gap-2">
+          <Lock className="h-4 w-4 text-primary" />
+          <div className="text-sm font-semibold">Locked v2 spec (do not contradict)</div>
+        </div>
+        <ul className="grid gap-1.5 text-xs text-foreground/90 sm:grid-cols-2">
+          <li>Native GHL only. No <code className="rounded bg-muted px-1">custom_code</code>, no new SAC / Supabase backends.</li>
+          <li>Clinics: <code className="rounded bg-muted px-1">richmond</code> · <code className="rounded bg-muted px-1">virginia-beach</code> · <code className="rounded bg-muted px-1">newport-news</code>. Method 2 stamps in WF-01 only. Scales to 5+ later; do not invent clinic names.</li>
+          <li>WF-01 enroll = Contact Created + tag <code className="rounded bg-muted px-1">next-lander</code> only. <code className="rounded bg-muted px-1">wordpress-form</code> is an inner branch; empty source defaults to next-lander.</li>
+          <li>WP CID bridge stays: WPCode snippet 11461, Gravity Form 1, <code className="rounded bg-muted px-1">book.menswellnesscenters.com/api/handoff/wordpress</code>. Do not change.</li>
+          <li>New tags are <code className="rounded bg-muted px-1">v2_*</code>. Do not rename live tags <code className="rounded bg-muted px-1">next-lander</code>, <code className="rounded bg-muted px-1">LOC_TAGS</code>, <code className="rounded bg-muted px-1">sms-consent</code>, <code className="rounded bg-muted px-1">funnel_entry_*</code>, <code className="rounded bg-muted px-1">location_*</code>.</li>
+          <li>Force is the sole writer of dollars, <code className="rounded bg-muted px-1">sale_outcome</code> (SOLD | AD | MUT | MAR), <code className="rounded bg-muted px-1">sale_type</code>, and <code className="rounded bg-muted px-1">appt_status</code>.</li>
+          <li>Workflows <b>never move Sales stages</b> (New Lead → Booked → Showed → Won). WF-05 routes only. MAR does not fire WF-05.</li>
+          <li>Transactional SMS has <b>no</b> Time Window (WF-01, WF-03, WF-04, WF-06, WF-07, WF-08, WF-11). Recovery / marketing (WF-02, WF-10) uses 8:00-21:00 contact TZ, 7 days. First SMS in each sequence carries Reply STOP to opt out.</li>
+        </ul>
+        <div className="mt-2 text-[11px] text-muted-foreground">
+          Drafts live on staging <code className="rounded bg-muted px-1">zHKH8aRDdNq47oYmdsN1</code>, folder
+          {" "}<code className="rounded bg-muted px-1">6039c39d-f82d-4518-998c-749fb1ae57d1</code>. Production
+          {" "}<code className="rounded bg-muted px-1">Ghstz8eIsHWLeXek47dk</code> is read-only. Nothing publishes until Eric says publish.
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
 function WorkflowTiles({ workflows }: { workflows: { n: string; name: string; absorbs?: string; copy?: string }[] }) {
   const [detail, setDetail] = useState<Record<string, WFDetailLite>>({});
   useEffect(() => {
@@ -91,7 +122,7 @@ function WorkflowTiles({ workflows }: { workflows: { n: string; name: string; ab
                 {w.copy && <p className="mb-2 line-clamp-3 text-sm text-foreground/90">{w.copy}</p>}
                 <div className="flex flex-wrap items-center gap-1.5">
                   {d?.trigger?.type && <Badge tone="blue">{d.trigger.type.split(" (")[0]}</Badge>}
-                  {d?.steps && <Badge tone="muted">{d.steps.length} build steps</Badge>}
+                  {d?.steps && <Badge tone="muted">{d.steps.length} named steps</Badge>}
                   <span className="text-[11px] font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">Open build guide</span>
                 </div>
               </CardContent>
@@ -109,8 +140,8 @@ export default function ToBe() {
 
   return (
     <PageShell
-      title="To-be: the rebuild target"
-      subtitle={`Tear down ${data.as_is_workflows.length} workflows into ${data.tobe_workflows.length} single-purpose owners and 18 pipelines into ${data.pipelines.length}, with a field model that puts each datum on the object that owns it.`}
+      title="To-be: the locked v2 spec"
+      subtitle={`MWC GHL v2 rebuild. ${data.tobe_workflows.length} single-purpose workflows (WF-01 to WF-17), authored as staged drafts in staging location zHKH8aRDdNq47oYmdsN1, folder 6039c39d-f82d-4518-998c-749fb1ae57d1. Native GHL only. Force writes outcomes. Nothing publishes until Eric says publish.`}
     >
       <RoutedTabs base="/to-be" tabs={[
         { value: "workflows", label: `Workflows (${data.tobe_workflows.length})` },
@@ -118,11 +149,12 @@ export default function ToBe() {
         { value: "data-model", label: "Data model" },
       ]}>
         <RoutedTabPanel value="workflows" className="space-y-3">
+          <LockedRulesCard />
           <Card><CardContent className="p-4">
             <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
               <div>
-                <div className="text-sm font-semibold">Canonical numbering (WF-01 to WF-16)</div>
-                <p className="text-xs text-muted-foreground">The workflow list and master diagram are the canonical scheme. Every diagram is renumbered to match. The left column maps the retired prior numbering (the old message-library and location-clone scheme) and is shown for traceability only. Step-by-step flows for all 16 owners are on the diagrams page.</p>
+                <div className="text-sm font-semibold">Canonical numbering (WF-01 to WF-17)</div>
+                <p className="text-xs text-muted-foreground">The workflow list is the canonical scheme. The left column records the retired prior numbering (old message-library and location-clone scheme) for traceability only. Historical clinic codes va_beach and npn are dropped; slugs are richmond | virginia-beach | newport-news.</p>
               </div>
               <Link to="/wf-diagrams" className="inline-flex items-center gap-1 rounded border px-2 py-1 text-xs font-medium text-primary hover:bg-muted">
                 See to-be workflow diagrams
@@ -184,7 +216,7 @@ export default function ToBe() {
 
         <RoutedTabPanel value="data-model" className="space-y-4">
           <Card><CardContent className="p-4 text-sm leading-relaxed text-foreground/90">
-            <b>Four destinations, each owning its own data.</b> The Contact holds identity and durable profile — including the lead's attribution and consent state. The Opportunity owns the sale outcome and money as one canonical set of 35 custom fields, and carries a copy of the attribution that WF-01 writes at create so both wins and losses roll up per sale. Medical records stay in the external EMR (GHL keeps only <code>emr_patient_id</code> on the Contact and <code>emr_visit_id</code> on the Opportunity; the appointment date lives on the appointment, not an opp field). Never-used fields retire. <b>No custom objects</b> — attribution is fields + <code>source_*</code> tags, and consent is GHL-native DND/STOP plus the Compliance workflow. The canonical enum contract (<code>sale_outcome</code>, <code>sale_type</code>, <code>appt_status</code>) and the identical 35-field list are published on the <Link to="/pcc-form" className="text-primary underline">PCC Sales Form</Link> page.
+            <b>Four destinations, each owning its own data.</b> The Contact holds identity and durable profile, including attribution and consent state. The Opportunity owns the sale outcome and money, and carries a copy of the attribution that WF-01 writes at create so both wins and losses roll up per sale. Medical records stay in the external EMR (GHL keeps only <code>emr_patient_id</code> on the Contact and <code>emr_visit_id</code> on the Opportunity; the appointment date lives on the appointment, not an opp field). Never-used fields retire. <b>No custom objects</b>. Attribution is fields plus <code>source_*</code> tags, and consent is GHL-native DND/STOP plus the Compliance workflow (WF-11). Force is the sole writer of <code>sale_outcome</code>, <code>sale_type</code>, <code>appt_status</code>, and dollars.
           </CardContent></Card>
           <div className="grid gap-3 md:grid-cols-2">
             {data.field_destinations.map((d, i) => <DestCard key={i} d={d} />)}

@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { PasswordGate } from "./components/PasswordGate";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 import "./index.css";
 import { Shell } from "./components/Shell";
 import Home from "./pages/Home";
@@ -68,6 +67,7 @@ const router = createBrowserRouter([
   { path: "/final-target-sac", element: wrap(<SacPlan />) },
   { path: "/to-be-2bv2", element: wrap(<ToBe2bv2 />) },
   { path: "/to-be", element: wrap(<ToBe />) },
+  { path: "/to-be/workflows", element: <Navigate to="/to-be" replace /> },
   { path: "/force", element: wrap(<ForcePage />) },
   { path: "/to-be-review", element: wrap(<ToBeReview />) },
   { path: "/minimal-plan", element: wrap(<MinimalPlan />) },
@@ -87,6 +87,6 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <PasswordGate><RouterProvider router={router} /></PasswordGate>
+    <RouterProvider router={router} />
   </React.StrictMode>
 );

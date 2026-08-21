@@ -52,6 +52,20 @@ export default function Home() {
       {/* The two problems */}
       <section>
         <h2 className="mb-3 text-base font-semibold">The two problems this fixes</h2>
+        <p className="mb-3 text-xs text-foreground/80">
+          Fix path: (a) <Link to="/force" className="font-semibold text-primary hover:underline">Force (consult writer)</Link> becomes the sole writer of{" "}
+          <code className="rounded bg-muted px-1 text-[11px]">sale_outcome</code>,{" "}
+          <code className="rounded bg-muted px-1 text-[11px]">opportunity.monetaryValue</code>, and Sales stages on the Opportunity; (b) attribution owner is locked to{" "}
+          <a href="https://curvecompliance.com" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary hover:underline">Curve Compliance</a>{" "}
+          (curvecompliance.com). GHL keeps only coarse ops source (<code className="rounded bg-muted px-1 text-[11px]">next-lander</code> vs <code className="rounded bg-muted px-1 text-[11px]">wordpress-form</code>) + clinic slug; no GHL workflow copies gclid / fbc / fbp / wbraid / UTM onto the Opportunity.
+        </p>
+        <div className="mb-3 rounded-md border border-l-4 border-l-amber-500 bg-amber-50/60 p-3 text-xs text-amber-900 dark:bg-amber-950/40 dark:text-amber-200">
+          <div className="font-semibold">Cutover sequence (locked, this PR is NOT a GHL publish)</div>
+          <ol className="mt-1 list-decimal space-y-0.5 ps-5">
+            <li><b>Curve Compliance goes live first</b> — target next week. Booking app fires <code className="rounded bg-amber-100 px-1 py-0.5 text-[11px] text-amber-900 dark:bg-amber-950 dark:text-amber-200">lead</code> + <code className="rounded bg-amber-100 px-1 py-0.5 text-[11px] text-amber-900 dark:bg-amber-950 dark:text-amber-200">booked</code>; Force fires <code className="rounded bg-amber-100 px-1 py-0.5 text-[11px] text-amber-900 dark:bg-amber-950 dark:text-amber-200">SOLD</code> alongside <code className="rounded bg-amber-100 px-1 py-0.5 text-[11px] text-amber-900 dark:bg-amber-950 dark:text-amber-200">GHL_WF05_WEBHOOK_URL</code>. GHL workflows do NOT POST to Curve and do NOT fire CAPI; WF-13 stays dropped.</li>
+            <li><b>Publish the new GHL folder</b> only after Curve is live. Drafts only until then. See the <Link to="/force" className="font-semibold underline hover:no-underline">Force contract</Link>.</li>
+          </ol>
+        </div>
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
           <div className="rounded-md border border-l-4 border-l-destructive bg-card p-5">
             <div className="mb-2 flex items-center gap-2.5">

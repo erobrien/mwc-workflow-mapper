@@ -1,0 +1,357 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mwcforme.dev/mwc-workflow-mapper/to-be/force.schema.json",
+  "title": "MWC Force writer contract",
+  "description": "First-class contract for the Force (mwcforce) consult app. Force is NOT a GHL workflow and NOT a custom_code action. Force UPDATES an existing Sales opportunity via the public GHL API, then POSTs GHL_WF05_WEBHOOK_URL so native WF-05 routes. Force never creates a contact, appointment, or opportunity. Native GHL stays the law of the messaging graph. This spec lives beside the per-workflow specs in /to-be and is enumerable by extract-diff and the planning site. Nothing here publishes.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "name",
+    "job",
+    "writes",
+    "does_not_write",
+    "enums",
+    "fires",
+    "native_ghl_rule"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "const": "force",
+      "description": "Stable id. There is exactly one Force writer contract."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Human-readable name (for example \"Force (consult writer)\")."
+    },
+    "job": {
+      "type": "string",
+      "minLength": 1,
+      "description": "One-line purpose statement."
+    },
+    "role": {
+      "type": "string",
+      "description": "Free-form description of what Force is and is not (consult app, not a workflow, not custom_code, updates existing opp via public API)."
+    },
+    "canonical_slugs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["richmond", "virginia-beach", "newport-news"]
+      },
+      "uniqueItems": true,
+      "description": "The three canonical clinic slugs Force will adopt when mwc-force / mwc-admin cut over. Do not invent additional clinics."
+    },
+    "writes": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["field", "on", "purpose"],
+        "properties": {
+          "field": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Field slug Force is the sole writer of on the target object."
+          },
+          "on": {
+            "type": "string",
+            "enum": ["opportunity", "opportunity.line_item", "contact"],
+            "description": "Which object this field lives on. Force writes on the Opportunity by default; a small set of consult-notes / how-heard / referred-by / PCC / provider fields live on the Contact today and are noted explicitly."
+          },
+          "purpose": {
+            "type": "string",
+            "minLength": 1,
+            "description": "One-line reason Force writes this field."
+          },
+          "gated_by": {
+            "type": "string",
+            "description": "Optional gating condition (for example \"only when sale_outcome=SOLD\" or \"only when sale_outcome=AD\")."
+          }
+        }
+      },
+      "description": "Fields Force is the sole writer of. Everything else on the opp must not be written by Force."
+    },
+    "does_not_write": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["field", "owner", "reason"],
+        "properties": {
+          "field": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Field slug or field family Force must never write."
+          },
+          "owner": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Who does write this field (for example \"native GHL workflow\", \"WF-01\", \"WF-06\", \"WF-11\", \"Curve (TBD)\", or \"nobody yet\")."
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Why Force is not the writer here."
+          }
+        }
+      },
+      "description": "Explicit non-writes. Everything Force must leave alone."
+    },
+    "enums": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sale_outcome", "sale_type", "appt_status", "pay_type", "sales_pipeline_stages"],
+      "properties": {
+        "sale_outcome": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": { "type": "string", "enum": ["SOLD", "AD", "MUT", "MAR"] },
+          "description": "SOLD, AD (Advise & Decline), MUT (must-follow-up), MAR (marketing / disqualified). Only Force writes this."
+        },
+        "sale_type": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": { "type": "string", "enum": ["new", "renewal"] }
+        },
+        "appt_status": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": { "type": "string", "enum": ["showed", "no-show", "cancel", "reschedule"] }
+        },
+        "pay_type": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "uniqueItems": true,
+          "items": { "type": "string", "enum": ["PIF", "SF", "CARE", "MAG", "Other"] }
+        },
+        "sales_pipeline_stages": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {
+            "type": "string",
+            "enum": ["New Lead", "Booked", "Showed", "Won"]
+          },
+          "description": "The only stages Force may move an opportunity through. Force is the sole stage-mover on Sales Lead to Close. Workflows never move stages."
+        },
+        "ad_reason": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 },
+          "description": "Required set for the ad_reason enumeration when sale_outcome=AD. Values are consult-app specific (Force owns the vocabulary)."
+        }
+      },
+      "description": "All enumerations Force writes. Any drift here is a contract violation."
+    },
+    "fires": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["target", "when", "method"],
+        "properties": {
+          "target": {
+            "type": "string",
+            "enum": ["WF-05", "Curve"],
+            "description": "Downstream system that Force pokes via webhook. WF-05 is the native GHL inbound-webhook router. Curve is the conversion-events endpoint at curvecompliance.com."
+          },
+          "when": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "enum": ["SOLD", "AD", "MUT"]
+            },
+            "description": "The sale_outcome values that fire the webhook. MAR does not fire. Force fires WF-05 on SOLD | AD | MUT and fires Curve on SOLD only (the SOLD conversion event)."
+          },
+          "method": {
+            "type": "string",
+            "enum": ["POST"],
+            "description": "HTTP method."
+          },
+          "url_env": {
+            "type": "string",
+            "description": "Environment variable name in Force config that carries the endpoint URL. The URL itself is not stored in this repo; do not invent it (WF-05 URL is UI-only on the draft; Curve URL is provided by Curve at cutover)."
+          },
+          "event": {
+            "type": "string",
+            "enum": ["lead", "booked", "SOLD"],
+            "description": "Optional. Used only for Curve entries; names the locked conversion event this fire represents."
+          },
+          "notes": {
+            "type": "string",
+            "description": "Free-form notes on the webhook contract (idempotency stamp, retries, payload ownership). Do not invent Curve payload / field names in this repo."
+          }
+        }
+      },
+      "description": "Hand-offs Force triggers after it writes. Native WF-05 routing and the Curve SOLD conversion event."
+    },
+    "conversion_events": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["owner", "events", "ghl_role"],
+      "properties": {
+        "owner": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Owning system for conversion events (Curve Compliance)."
+        },
+        "events": {
+          "type": "array",
+          "minItems": 3,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["event", "writer", "on"],
+            "properties": {
+              "event": {
+                "type": "string",
+                "enum": ["lead", "booked", "SOLD"],
+                "description": "Locked event set."
+              },
+              "writer": {
+                "type": "string",
+                "enum": ["booking app", "Force"],
+                "description": "System that POSTs the event to Curve. GHL workflows never POST to Curve."
+              },
+              "on": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Trigger point for this event (for example \"contact create (WF-01 path)\", \"appointment created\", \"consult SOLD (Force + dollars)\")."
+              },
+              "notes": {
+                "type": "string",
+                "description": "Optional per-event notes."
+              }
+            }
+          }
+        },
+        "ghl_role": {
+          "type": "string",
+          "minLength": 1,
+          "description": "One-line statement of what GHL does and does not do here. GHL workflows do not POST to Curve and do not fire CAPI. WF-13 stays dropped."
+        }
+      },
+      "description": "Locked Curve conversion-events contract. Native GHL is not in this path."
+    },
+    "cutover_sequence": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["step", "system", "note"],
+        "properties": {
+          "step": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Ordered step number."
+          },
+          "system": {
+            "type": "string",
+            "minLength": 1,
+            "description": "System going live at this step (for example \"Curve Compliance (curvecompliance.com)\" or \"New GHL folder\")."
+          },
+          "when": {
+            "type": "string",
+            "description": "Free-form target timing (for example \"target next week\", \"after Curve is live\"). Do not encode absolute dates that need re-editing."
+          },
+          "note": {
+            "type": "string",
+            "minLength": 1,
+            "description": "One-line lock note for this step."
+          }
+        }
+      },
+      "description": "Cutover order. Curve goes first; the new GHL folder publishes after Curve is live. This repo never publishes."
+    },
+    "ghl_source_scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "keeps": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 },
+          "description": "Coarse ops signals GHL still tracks (for example \"next-lander vs wordpress-form\", \"clinic slug\")."
+        },
+        "drops_to_curve": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 },
+          "description": "Attribution facets that live in Curve, not in GHL (for example UTM, gclid, fbc, fbp, wbraid, gbraid)."
+        },
+        "note": {
+          "type": "string",
+          "description": "Free-form scope note."
+        }
+      },
+      "description": "Scope split between GHL (coarse ops source) and Curve (attribution)."
+    },
+    "native_ghl_rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["statement", "must_not"],
+      "properties": {
+        "statement": {
+          "type": "string",
+          "minLength": 1,
+          "description": "One-line statement of the native-GHL-only rule."
+        },
+        "must_not": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 },
+          "description": "Bullet list of what Force must not do (no custom_code, no new Supabase, no contact/appointment/opportunity creation, no attribution writes, no publish)."
+        }
+      },
+      "description": "The law that stays: native GHL only, Force never creates identity objects, and Force never publishes."
+    },
+    "status": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "live_with_canonical_slugs": {
+          "type": "boolean",
+          "description": "True once mwc-force / mwc-admin adopt richmond | virginia-beach | newport-news end-to-end. Today: false."
+        },
+        "publishes": {
+          "type": "boolean",
+          "enum": [false],
+          "description": "Nothing in this repo publishes. Locked to false."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Free-form status notes."
+        }
+      }
+    },
+    "notes": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "description": "Free-form notes: attribution redesign hole, Curve Compliance ownership TBD, references to related SPEC sections."
+    }
+  }
+}

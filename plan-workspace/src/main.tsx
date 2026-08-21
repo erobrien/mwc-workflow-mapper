@@ -39,6 +39,7 @@ import LifecyclePlaybook from "./pages/LifecyclePlaybook";
 import CallConnect from "./pages/CallConnect";
 
 import ToBe2bv2 from "./pages/ToBe2bv2";
+import ForcePage from "./pages/Force";
 
 const wrap = (el: React.ReactNode) => <Shell>{el}</Shell>;
 
@@ -67,6 +68,7 @@ const router = createBrowserRouter([
   { path: "/final-target-sac", element: wrap(<SacPlan />) },
   { path: "/to-be-2bv2", element: wrap(<ToBe2bv2 />) },
   { path: "/to-be", element: wrap(<ToBe />) },
+  { path: "/force", element: wrap(<ForcePage />) },
   { path: "/to-be-review", element: wrap(<ToBeReview />) },
   { path: "/minimal-plan", element: wrap(<MinimalPlan />) },
   { path: "/to-be/wf/:n", element: wrap(<ToBeWorkflow />) },

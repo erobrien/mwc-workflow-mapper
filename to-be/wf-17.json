@@ -1,0 +1,46 @@
+{
+  "id": "wf-17",
+  "name": "Price calc",
+  "job": "Internal price math for downstream copy. Never writes opportunity.monetaryValue. Tags v2_price_calc when done. This is WF-17, not a WF-06 variant.",
+  "trigger": {
+    "type": "Contact Field changed",
+    "filters": ["field ∈ price-calc inputs"],
+    "notes": "Internal-only calculator; never fires customer-facing outreach directly."
+  },
+  "named_steps": [
+    {
+      "name": "TRIGGER: Price-calc input changed",
+      "comment": "Sole entry. Must not fire customer outreach here.",
+      "does_not_write": []
+    },
+    {
+      "name": "SET-FIELD: contact.price_calc_inputs (native math staging)",
+      "comment": "Stores calculator inputs. Must not write to opportunity.monetaryValue.",
+      "writes": ["contact.price_calc_inputs"],
+      "does_not_write": ["opportunity.monetaryValue"]
+    },
+    {
+      "name": "IF-ELSE: Branch on pay_type (PIF | SF | CARE | MAG | Other)",
+      "comment": "Reads pay_type only. Must not write pay_type.",
+      "does_not_write": ["contact.pay_type", "opportunity.pay_type"]
+    },
+    {
+      "name": "SET-FIELD: contact.price_calc_result (internal only)",
+      "comment": "Stores computed price copy. Must not write opportunity.monetaryValue or move stages.",
+      "writes": ["contact.price_calc_result"],
+      "does_not_write": ["opportunity.monetaryValue", "opportunity.pipelineStageId"]
+    },
+    {
+      "name": "ADD-TAG: v2_price_calc (audit)",
+      "comment": "New v2 tag marking calc-complete. Must not remove any live tag.",
+      "writes": ["v2_price_calc"]
+    }
+  ],
+  "tags_new": [
+    "v2_price_calc"
+  ],
+  "live_tags_readonly": [
+    "next-lander",
+    "sms-consent"
+  ]
+}

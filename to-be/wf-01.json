@@ -1,0 +1,84 @@
+{
+  "id": "wf-01",
+  "name": "Lead Capture",
+  "job": "Enroll new next-lander contacts, create one Sales opportunity, stamp location and current clinic, and hand off to the non-booked burst.",
+  "trigger": {
+    "type": "Contact Created",
+    "filters": ["has tag next-lander"],
+    "notes": "No source filter on the trigger. WordPress handoff runs /api/handoff/wordpress then /api/qualify upsert; source wordpress-form is an inner branch only, never a trigger filter."
+  },
+  "named_steps": [
+    {
+      "name": "TRIGGER: Contact Created (tag next-lander only)",
+      "comment": "Sole enroll. Must not add a source filter. Must not rename next-lander.",
+      "does_not_write": ["next-lander"]
+    },
+    {
+      "name": "IF-ELSE: Guard against duplicate Sales opp (create-once)",
+      "comment": "Native check for an existing open opp in Sales Lead to Close before create. Must not move stages.",
+      "does_not_write": ["opportunity.pipelineStageId", "opportunity.monetaryValue"]
+    },
+    {
+      "name": "CREATE-OPP: New Lead in Sales Lead to Close (create-once)",
+      "comment": "Pipeline Vt8cPz51C3i87moo73gQ, stage New Lead. Allow Duplicate is ON but this branch only fires when no open opp exists. Must not set monetaryValue.",
+      "writes": ["opportunity"],
+      "does_not_write": ["opportunity.monetaryValue"]
+    },
+    {
+      "name": "SET-FIELD: Stamp location_* (from mapped source)",
+      "comment": "Writes location_* fields for the contact. Must not rename existing live location_* tags.",
+      "writes": ["contact.location_*"]
+    },
+    {
+      "name": "SET-FIELD: Stamp current_clinic_* Method 2 (WF-01 only)",
+      "comment": "Sole writer of current_clinic_slug and current_clinic_* fields. Slugs limited to richmond, virginia-beach, newport-news.",
+      "writes": ["contact.current_clinic_slug", "contact.current_clinic_name", "contact.current_clinic_phone"]
+    },
+    {
+      "name": "IF-ELSE: Branch on source wordpress-form (inner branch only)",
+      "comment": "Inner branch to route WP-origin contacts. Must not create a Sales opp here; qualify already upserted the contact via /api/qualify.",
+      "does_not_write": ["opportunity"]
+    },
+    {
+      "name": "ADD-TAG: v2_source_wp (inner wordpress-form branch)",
+      "comment": "New v2 tag only. Must not touch legacy source tags.",
+      "writes": ["v2_source_wp"]
+    },
+    {
+      "name": "EMAIL: Welcome (native template)",
+      "comment": "Sends EML | WF-01 | Welcome. Copy uses members not patients, clinic not office, no-cost not free, no em-dashes, no guy.",
+      "writes": ["email_send"]
+    },
+    {
+      "name": "SMS: Welcome with STOP opt-out (first SMS)",
+      "comment": "Inline body. First SMS to any contact carries STOP opt-out. Honors quiet hours 8am-9pm contact TZ.",
+      "writes": ["sms_send"]
+    },
+    {
+      "name": "ADD-TAG: v2_enrolled_wf01 (audit)",
+      "comment": "Audit tag for WF-01 enroll. Must not rename next-lander.",
+      "writes": ["v2_enrolled_wf01"]
+    },
+    {
+      "name": "WAIT: 24 hours (quiet-hours aware)",
+      "comment": "Native wait step. Must not skip quiet hours.",
+      "writes": []
+    },
+    {
+      "name": "ADD-TO-WF: Route to WF-02 Non-booked",
+      "comment": "Hand-off to non-booked burst. Must not filter by funnel_entry_* here; WF-02 enforces the exclusion.",
+      "writes": []
+    }
+  ],
+  "tags_new": [
+    "v2_source_wp",
+    "v2_enrolled_wf01"
+  ],
+  "live_tags_readonly": [
+    "next-lander",
+    "location_*",
+    "LOC_TAGS",
+    "sms-consent",
+    "funnel_entry_*"
+  ]
+}

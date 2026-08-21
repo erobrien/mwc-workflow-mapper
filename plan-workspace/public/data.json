@@ -4001,105 +4001,105 @@
   "tobe_workflows": [
     {
       "n": "01",
-      "name": "Lead Capture and Attribution",
+      "name": "Lead Capture",
       "absorbs": "01A-E + Form Internal Notification",
-      "copy": "As-is triggers; fix gclid/fbclid capture. CREATE-ONCE GUARD (R7): if an OPEN Sales opportunity already exists for the contact, update last-touch contact fields only and exit - never mint a duplicate deal. Copies attribution (utm_source, utm_campaign, utm_medium, gclid, fbclid, lead_source) onto the Opportunity at create, so wins and losses both carry it; first_* fields write-once (D17). ATTRIBUTION IS LENS 1 of the three-lens model (D22): click/UTM captured here, self-reported at intake (lens 2), self-reported at consult (lens 3). Fires the Meta CAPI Lead event (native FB Conversions action, event_id = opportunity ID). LOCATION STAMP (Method 2, revised D14): branch on location exactly once at create and stamp generic operational contact fields (current_booking_url, current_clinic_phone, current_clinic_address, current_review_link); templates reference only current_* fields - no Locations Custom Object in the production build (D5 stands). ENTRY CONTRACT (R9): web forms/landers fire the webhook trigger automatically; phone-booked, chat, IG/ManyChat-qualified, and walk-in leads get their opportunity via the admin app's API create using the same create-once guard, with lead_source set per channel - every lead source has a named opportunity-creating owner. Speed-to-lead rule: the welcome email goes out instantly; a lead that arrives outside quiet hours (for example 11 PM) has its speed-to-lead SMS queued to 8 AM Contact Timezone (TCPA-safe). Quiet hours 8 AM to 9 PM Contact Timezone on all SMS sends."
+      "copy": "First touch. Enrolls Contact Created + tag next-lander only; no source filter. Create-once opens a Sales opportunity on staging pipe ASnpfhu1hpSHUv0IFLc7, Method 2 stamps the four current_clinic_* fields for the correct slug (richmond, virginia-beach, newport-news), sends the welcome email (native template j7C8MVs6cAIuH5zPUjzH) and welcome SMS with Reply STOP, then hands to WF-02 after WAIT 24 hour. Transactional; no quiet hours. Draft v10 unpublished."
     },
     {
       "n": "02",
-      "name": "Non-Booked Recovery",
+      "name": "Non-booked",
       "absorbs": "02. NON BOOKED NEWLEADS",
-      "copy": "10-touch non-booked recovery (5 SMS, 4 email, 1 voicemail over 16 days). Exits immediately if the lead books (to WF-03); after 16 days hands off to WF-09. Quiet hours 8 AM to 9 PM Contact Timezone."
+      "copy": "Non-booked recovery. Enrolled only via ADD-TO-WF from WF-01. Burst is SMS +3m / +1m / +5m / +15m, EMAIL EML | WF-02 | Non-booked 24h (bPj39XTcKv2HylGKEUdG), SMS +36h, then ADD-TO-WF WF-09. Marketing / recovery: 08:00-21:00 contact TZ, 7 days. Draft v4 unpublished."
     },
     {
       "n": "03",
-      "name": "Booking Confirmation and Reminders",
+      "name": "Reminders",
       "absorbs": "03, 3a, 03b, 03c, 03d (merged)",
-      "copy": "Absorbs booking confirmation and all reminder sends. Booking runs on the new capacity-controlled class calendars, not the standard service calendars (Decision 12): one calendar per clinic (Richmond, Virginia Beach, Newport News), 60-minute slots on a 60-minute interval, 6 seats per slot, 'Show seats per slot' OFF. WF-03 triggers off the per-clinic class calendar IDs, wired at build time. R1 reminder cadence (T-3d / T-1d / morning-of / T-2h) plus a telehealth branch. A cancellation halts reminders and routes to WF-08; a RESCHEDULE likewise early-exits the prior enrollment (R10) - appointment-triggered workflows re-enter once per appointment, so the new appointment's enrollment carries the reminders and the old one exits via the rescheduled/cancelled goal. Modified By filter on the trigger breaks self-loops. Appointment-relative waits use an 'if date already passed' fallback. Quiet hours 8 AM to 9 PM Contact Timezone."
+      "copy": "Booking confirmation and reminders. Trigger is Appointment Booked on the three consult calendars (richmond 1Cfy5JnO2A4ggiZlMVvX, virginia-beach 4xmnBGMWJ6TVUKcAPpPb, newport-news lBaRbjUpEmesxEloFBME). Tags v2_status_booked, sends confirm email (GUs77konNdAGFS0EFZS2) + confirm SMS, T-3d email (QcpX2V3OarwL5jKN6OFE) + T-3d SMS, and appointment-relative reminders T-1d / T-5h / T-2h with appointmentCondition=skip. Transactional; no quiet hours. Draft v7 unpublished."
     },
     {
       "n": "04",
-      "name": "Medical Intake Chase",
+      "name": "Intake chase",
       "absorbs": "04a. Intake Form Response",
-      "copy": "WF-04 owns all intake chasing going forward (standalone 'Intake Reminder' workflow is retired at cutover, Decision 9). R1 intake nudge cadence. SRA LENS 2 (D22): the medical intake form carries the 'How did you hear about us?' question - PORTED from the live build, where it already exists but writes a contact-only field that each renewal overwrites. Intake completion writes contact.sra_intake_source (+ _detail, _at) via the intake webhook, and WF-04 stamps the value onto the OPEN opportunity (opportunity.sra_intake_source) so the answer is frozen per deal. Intake completion also fires the Meta CAPI CompleteRegistration event (event_id = opportunity ID + ':intake') as a mid-funnel optimization signal - ported from the live build's contact-triggered send. Quiet hours 8 AM to 9 PM Contact Timezone."
+      "copy": "Medical intake chase after confirm. SMS at +4h (STOP) and +20h. Exits on survey submit. No dedicated intake URL field yet; both SMS use contact.current_booking_url as the manage / complete-intake link. Transactional; no quiet hours. Draft v3 unpublished."
     },
     {
       "n": "05",
-      "name": "Clinic Outcome Router",
+      "name": "Outcome router",
       "absorbs": "05. Clinic Appt Outcome",
-      "copy": "P0: remove auto-Won (Decision 10). TRIGGER CONTRACT (R1): the PCC Sales Form is an external app writing via the API (GHL native forms cannot write opportunity custom fields, and MONETORY opportunity fields cannot be written from workflows). The app writes ALL opportunity fields first, sets stage API-side, computes and writes renewal_date (Won date + term_1, integer months) to contact.renewal_date, then LAST writes contact.wf05_trigger_key = '{opportunityId}:{timestamp}'. WF-05 triggers on that contact field change, binds the deal with Find Opportunity, and waits 60s before any read (read-after-write buffer). WF-05 NEVER moves stages (G1 is absolute: stage moves are API-side only, R4) and never writes outcomes - it is a pure router. First gates on appt_status: showed routes to outcome handling; no-show or cancel routes to WF-08; reschedule routes back to WF-03. Idempotency: WF-05 checks opportunity.outcome_processed_at before running and stamps it after, so an edit or duplicate submit updates fields but never re-fires routing or the ad conversion. Outcome codes are lowercase {sold, nosale, mut, mar} (R5; 'AD' retired). SRA LENS 3 (D22): the PCC form asks 'How did you hear about us?' verbally at consult close and writes opportunity.sra_consult_source (+ _detail, _at) in the same API write as the outcome fields - single writer preserved. On sold it branches on sale_type: new to new-patient onboarding (and signals WF-13), renewal to the Retention and Renewals lifecycle (no paid-platform conversion, R11). mar keeps the Opportunity Open and opens a PCC/provider task. NO-FORM CHASER (R12): built inside the appointment-triggered path - on appointment start, wait until appointment end + 2h, then if outcome_processed_at and appt_status are both empty, nag the PCC on a quiet-hours-safe loop with a field-change goal exit; the admin app's 15-minute reconciler is the independent backstop. Writes no outcome."
+      "copy": "Outcome router. Inbound webhook from Force (trigger ryJLJ1McWWOHlAvBRsI3; URL is UI-only, paste into Force GHL_WF05_WEBHOOK_URL). Reads opportunity.sale_outcome_v2 and routes: SOLD + new -> WF-06 AND WF-13; SOLD renewal -> WF-09; AD -> WF-07; MUT -> WF-11; MAR drops. appt_status routes first: no-show / cancel -> WF-08, reschedule -> WF-03. Workflows never move Sales stages. Draft v5 unpublished."
     },
     {
       "n": "06",
-      "name": "Post-Visit Won and Onboarding",
+      "name": "Onboarding",
       "absorbs": "07. POST-VISIT SHOWED + Feedback (partial)",
-      "copy": "Post-visit onboarding sequence: welcome, week-1 progress, NPS survey at 14 days, conditional Google review request, and a negative-NPS internal alert. NEW-patient path; renewals route to the Retention and Renewals lifecycle instead. Survey submission writes contact.latest_feedback_score (R3: the NPS branch needs a specific-field-change trigger, which only contact fields support; an opportunity copy is optional for deal-level reporting). The PCC Sales Form app owns renewal_date (R2); WF-06 never sets it. Quiet hours 8 AM to 9 PM Contact Timezone."
+      "copy": "Post-visit Won and onboarding for SOLD + sale_type=new only. Tags v2_status_active (P5yoBUi86hQs0Br5CIqI), sends welcome SMS after SOLD, then 3d / 7d / 14d / 21d waits forking to WF-10 at T+14 and WF-14 at T+21. Check-in copy between the waits is not authored yet. Transactional; no quiet hours. Draft v3 unpublished."
     },
     {
       "n": "07",
-      "name": "Post-Visit No-Sale Nurture",
+      "name": "A&D",
       "absorbs": "WIP A&D drafts",
-      "copy": "11-touch no-sale (Advise and Decline) objection-handling sequence over 35 days, targeting the declared nosale_reason (R5: ad_reason renamed; outcome code 'nosale', tag outcome_nosale - the 'ad' abbreviation is retired everywhere). Quiet hours 8 AM to 9 PM Contact Timezone."
+      "copy": "A&D nurture (sale_outcome_v2 = AD, Advise and Decline). Tags v2_outcome_ad, sends one first-touch SMS with STOP, waits 35d, then ADD-TO-WF WF-09. Objection branch copy is spec-only. AD never fires the Meta pixel or CAPI. Transactional; no quiet hours. Draft v3 unpublished."
     },
     {
       "n": "08",
-      "name": "No-Show and Cancel Recovery",
+      "name": "No-show / cancel",
       "absorbs": "Cancelled Appts, Nurture: Missed",
-      "copy": "8-touch no-show and cancel recovery over 7 days. Exits immediately at any point if the member re-books (to WF-03); after 7 days with no re-engagement hands off to WF-09. Quiet hours 8 AM to 9 PM Contact Timezone."
+      "copy": "No-show and cancel recovery. Reschedule never enters here. REMOVE-FROM-WF WF-03 -> SMS Rebook after miss (STOP) -> WAIT 7d -> SMS Rebook +7d -> ADD-TO-WF WF-09. The v2_status_noshow vs v2_status_cancelled tag split is not authored yet. Transactional; no quiet hours. Draft v3 unpublished."
     },
     {
       "n": "09",
-      "name": "Long-Term Nurture",
+      "name": "Nurture",
       "absorbs": "(net-new)",
-      "copy": "Long-Term Nurture main sequence (7 touches over 120 days) plus an explicitly labeled Renewal Reminders sub-flow (30 / 21 / 14 / 7 / day-of before contact.renewal_date - R3: GHL date-based triggers exist for CONTACT date fields only, so the trigger copy lives on the contact; the opportunity copy is archival). Renewal reminders publish is BLOCKED until the migration backfill writes contact.renewal_date for every active member (R18). Quiet hours 8 AM to 9 PM Contact Timezone."
+      "copy": "Long-term nurture and the renewal sub-flow. renewal_date custom-field trigger is blocked until backfill is complete. On-shell graph is a single 120d wait; nurture and renewal bodies come next. Marketing / recovery: 08:00-21:00 contact TZ. Draft v2 unpublished."
     },
     {
       "n": "10",
-      "name": "Feedback Survey",
+      "name": "Feedback",
       "absorbs": "After Appointment Feedback",
-      "copy": "Feedback survey. Keep as-is bodies where good; survey submission writes contact.latest_feedback_score for the WF-06 NPS branch (R3). All sends filter on sms_consent_status + native DND and run inside quiet hours 8 AM to 9 PM Contact Timezone (WF-11 pattern)."
+      "copy": "Feedback survey at T+14 from WF-06 onboarding. SMS invite + EMAIL EML | WF-10 | Feedback invite (BFhyqVQXEYVasm4hJWvE) referencing contact.current_review_link, then WAIT 3d and an SMS nudge. Sole writer of contact.latest_feedback_score. Marketing: 08:00-21:00 contact TZ. Draft v3 unpublished."
     },
     {
       "n": "11",
-      "name": "Compliance and Errors",
+      "name": "Compliance",
       "absorbs": "2. DNC, 3. Bounce, 08. MUT",
-      "copy": "Consent and DND AUTHORITY, not a runtime gate (R8): GHL has no middleware, so WF-11 cannot intercept other workflows' sends. WF-11 is (a) the sole writer/maintainer of the canonical sms_consent_status field and DND state (STOP, DNC, bounce, MUT suppression), and (b) the publish-gate rule: every messaging workflow carries its own consent + DND filter and an 8 AM to 9 PM Contact Timezone window on every send step, verified per workflow by the conformance harness before publish. Assume-consent for the 11,077 historical contacts is an accepted risk (Decision 8)."
+      "copy": "Compliance and errors. Trigger gpdYb7c2Dkkt3tYJnClP dnd_contact (STOP inbound). MUT front-gate at the top: MUT branch WAIT 1s and exit (no DND, no opted_out, no STOP confirm). STOP branch REMOVE-FROM-WF all, SET-DND, tag v2_status_dnd, set sms_consent_status=opted_out, and send an inline STOP-confirm SMS. Sole writer of DND and sms_consent_status. Transactional; no quiet hours. Draft v4 unpublished."
     },
     {
       "n": "12",
-      "name": "Call Disposition Handler",
+      "name": "Call disposition",
       "absorbs": "4a, 4b, Contact Center Tag Assign",
-      "copy": "Handles call dispositions from softphone and disposition workflows; writes opportunity.call_disposition and reads patient_care_consultant_id (the PCC Sales Form is the sole writer of that field). Routes negative-NPS follow-ups. See the dedicated WF-12 diagram."
+      "copy": "Call disposition handler. Single graph keyed on channel (not clinic). Tags v2_source_phone (HuqiCRyopgdHESALDnKN). Native update-in-place; never remove-and-recreate the contact or opp. Per-disposition copy is not authored yet. Draft v2 unpublished."
     },
     {
       "n": "13",
-      "name": "Ad-Platform Conversions",
+      "name": "Native CAPI / Google",
       "absorbs": "CAPI x2, Google Ads x3",
-      "copy": "Ad-platform conversion sends, IN WORKFLOW (D23) - PORTED from the live build, which already fires these events but keys them off contact fields that renewals overwrite; the port re-keys every event to the opportunity. META: native Facebook Conversions workflow action (handles PII hashing) - Lead at opportunity create (WF-01 signal), CompleteRegistration at intake complete (WF-04 signal), Schedule at booking, Purchase at Won with value = monetary_value (net collected, R17). Dedup: event_id = opportunity ID (+ stage suffix), fbc built from the fbclid frozen on the deal (D17). GOOGLE: workflow webhook to the admin-app relay, which uploads offline conversions via the Google Ads API keyed to the gclid frozen on the deal (consult_booked at booking, sale_new at Won with value); Enhanced Conversions for Leads (hashed email/phone) is the fallback when no gclid exists. NEW sales only (R11): renewal Wons never upload - stale click IDs train smart bidding on false signal; renewal revenue reports internally. Excludes nosale outcomes by code (D20). SRA (D22) is REPORTING-ONLY and never uploads as a conversion source - the triangulation report compares the three lenses per deal; if click data and both SRA answers disagree, the deal flags for review instead of guessing."
+      "copy": "Ad-platform conversions. Fires on Sales pipeline Booked and Won with sale_type=new only; excludes clinic pipes jRqb0pvexu04zSACPXmd, 9AZEt2Sw6Zv0nnJJmkE0, rspsjkBMNYGldN3R71ji. Tags v2_conv_won_new (fUVvRU2P4aQl1VKA7muT). Native Meta CAPI and Google Ads conversion nodes are not authored yet. Draft v2 unpublished."
     },
     {
       "n": "14",
-      "name": "Ambassador Program",
+      "name": "Ambassador",
       "absorbs": "4 ambassador WFs",
-      "copy": "Post-sale ambassador activation: invitation, program welcome, and reward confirmation. Referred contacts are always created as NEW contacts and routed through WF-15. All sends filter on sms_consent_status + native DND and run inside quiet hours 8 AM to 9 PM Contact Timezone (WF-11 gate)."
+      "copy": "Ambassador program. Referred contact is created as a new contact (never merged) and re-enters WF-01. Live tag ambassador-referral. Enrolled at T+21 from WF-06 or via the ambassador form. Full step bodies are not authored yet; 1-step shell. Draft v2 unpublished."
     },
     {
       "n": "15",
-      "name": "PCC Referral Routing",
+      "name": "PCC referral",
       "absorbs": "PCC Referral Lead Routing",
-      "copy": "Routes PCC-submitted referrals into the Referrals pipeline (Submitted stage) with a referred-lead welcome (SMS + email) and an internal routing alert. The Referrals pipeline is tracking-only (no monetary value); the referred contact is created NEW and routed back to WF-01, and its Sales opportunity carries all revenue. All sends filter on sms_consent_status + native DND and run inside quiet hours 8 AM to 9 PM Contact Timezone (WF-11 gate)."
+      "copy": "PCC referral routing. Fires on Contact Created with utm_source=pcc_qr, adds live tag pcc-referral, and re-enters WF-01 as a next-lander. 1-step named shell. Draft v2 unpublished."
     },
     {
       "n": "16",
-      "name": "Comms Edge",
+      "name": "IVR + chat widgets",
       "absorbs": "1. IVR - simultaneous, Chat OOO, Missed Call Text-Back",
-      "copy": "Missed-call text-back plus an explicit simultaneous-ring IVR path (absorbs '1. IVR - simultaneous'). Quiet hours 8 AM to 9 PM Contact Timezone on outbound sends."
+      "copy": "Comms edge for inbound IVR +18663444955 and the two chat widgets (69337243d355bdcd9c27675e, 6952a8536682120c2b2656b9). Never creates a Sales opportunity; new contacts route to WF-01. 1-step named shell. Draft v2 unpublished."
     },
     {
       "n": "17",
-      "name": "Price Calculator (PCC Tool)",
+      "name": "Price calc",
       "absorbs": "06. Price Calculator (live, ported as-is)",
-      "copy": "Internal PCC consult tool: computes package total from selected program components via math_operation, logs structured quote note. Feeds Won revenue value to WF-13 conversions (D17). No member messaging; no quiet-hours concerns. Trigger deferred like all others. Canonical set is WF-01..WF-17 (D11 amended, R13)."
+      "copy": "Internal price calculator for consult copy. Reads price-calc component fields, computes contact.price_calc_result via a math_operation node, and tags v2_price_calc. Never writes opportunity.monetaryValue and never moves stages. Feeds WF-13's future Won-with-revenue conversion. 1-step named shell. Draft v2 unpublished."
     }
   ],
   "pipelines": [

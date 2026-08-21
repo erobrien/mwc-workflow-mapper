@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mwcforme.dev/mwc-workflow-mapper/to-be/schema.json",
+  "title": "MWC GHL to-be workflow file",
+  "description": "One workflow spec that extract-diff will later turn into an unpublished GHL draft in the staging location. Native GHL only; no custom_code, no new Supabase.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "name",
+    "job",
+    "trigger",
+    "named_steps",
+    "tags_new",
+    "live_tags_readonly"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^wf-(0[1-9]|1[0-7])$",
+      "description": "Stable id wf-01..wf-17."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Human-readable workflow name."
+    },
+    "job": {
+      "type": "string",
+      "minLength": 1,
+      "description": "One-line purpose statement."
+    },
+    "trigger": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Native GHL trigger type."
+        },
+        "filters": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "description": "Human-readable trigger filters."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Free-form notes about the trigger (blockers, dependencies)."
+        }
+      }
+    },
+    "named_steps": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Ordered list of named steps. Each step is TYPE: Purpose (qualifier) plus a one-line comment.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "comment"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^[A-Z][A-Z0-9\\-]*:\\s.+$",
+            "description": "TYPE: Purpose (qualifier). TYPE is upper-case, colon, space, then human text."
+          },
+          "comment": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Why the step exists and what it must not write."
+          },
+          "writes": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 },
+            "description": "Optional explicit list of fields/tags this step writes."
+          },
+          "does_not_write": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 },
+            "description": "Optional explicit list of fields/tags this step must not write."
+          }
+        }
+      }
+    },
+    "tags_new": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^v2_[a-z0-9_]+$"
+      },
+      "description": "New v2_* tags this workflow is allowed to write."
+    },
+    "live_tags_readonly": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "description": "Live tags the workflow may read or branch on but must never rename or remove."
+    }
+  }
+}

@@ -215,7 +215,7 @@ export default function ToBeWorkflow() {
                     {s.branches.map((b, i) => (
                       <div key={i} className="rounded border-s-2 border-primary/40 bg-muted/40 py-1.5 ps-3 text-sm">
                         <span className="font-medium">{b.label}</span>
-                        <span className="text-muted-foreground"> — if {b.condition} → {b.path}</span>
+                        <span className="text-muted-foreground"> · if {b.condition} → {b.path}</span>
                       </div>
                     ))}
                   </div>
@@ -248,7 +248,7 @@ export default function ToBeWorkflow() {
 
         <Section title="Writes and reads">
           <Card><CardContent className="p-4 text-sm text-muted-foreground">
-            See the step configs above for exact field writes. WF-05 is the only outcome router and the PCC Sales Form is the sole writer of sale_outcome, sale_type, and value (single-writer guardrail).
+            See the step configs above for exact field writes. WF-05 is the only outcome router and Force is the sole writer of sale_outcome, sale_type, appt_status, and dollars (single-writer guardrail). Workflows never move Sales stages.
           </CardContent></Card>
         </Section>
 

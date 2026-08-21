@@ -1,0 +1,69 @@
+{
+  "id": "wf-09",
+  "name": "Nurture",
+  "job": "Long-tail nurture. Also owns the renewal_date contact-field trigger. The renewal sub-flow is blocked until backfill is complete.",
+  "trigger": {
+    "type": "Contact Field changed",
+    "filters": ["field = renewal_date"],
+    "notes": "Sub-flow blocked until renewal_date backfill is complete. Other entrants arrive via ADD-TO-WF from WF-02, WF-07, and WF-08."
+  },
+  "named_steps": [
+    {
+      "name": "TRIGGER: Contact renewal_date changed (blocked until backfill)",
+      "comment": "Renewal sub-flow blocked at the trigger until backfill lands. Must not enroll on partial data.",
+      "does_not_write": []
+    },
+    {
+      "name": "IF-ELSE: Route by entry source (nurture vs renewal)",
+      "comment": "Reads which upstream WF added the contact. Must not create opps here.",
+      "does_not_write": ["opportunity"]
+    },
+    {
+      "name": "EMAIL: Nurture 1 (native template)",
+      "comment": "Sends EML | WF-09 | Nurture 1.",
+      "writes": ["email_send"]
+    },
+    {
+      "name": "WAIT: +14 days",
+      "comment": "Long cadence.",
+      "writes": []
+    },
+    {
+      "name": "EMAIL: Nurture 2 (native template)",
+      "comment": "Sends EML | WF-09 | Nurture 2.",
+      "writes": ["email_send"]
+    },
+    {
+      "name": "WAIT: +30 days",
+      "comment": "Long cadence.",
+      "writes": []
+    },
+    {
+      "name": "SMS: Nurture check-in (inline)",
+      "comment": "Inline SMS. Honors quiet hours 8am-9pm contact TZ.",
+      "writes": ["sms_send"]
+    },
+    {
+      "name": "IF-ELSE: Renewal sub-flow guard (backfill_ready)",
+      "comment": "Exits the renewal sub-flow when backfill is not ready. Must not send renewal-specific copy on partial data.",
+      "does_not_write": []
+    },
+    {
+      "name": "EMAIL: Renewal window (native template, gated)",
+      "comment": "Sends EML | WF-09 | Renewal window. Only fires when backfill_ready is true.",
+      "writes": ["email_send"]
+    },
+    {
+      "name": "ADD-TAG: v2_nurtured (audit)",
+      "comment": "Audit tag only.",
+      "writes": ["v2_nurtured"]
+    }
+  ],
+  "tags_new": [
+    "v2_nurtured"
+  ],
+  "live_tags_readonly": [
+    "next-lander",
+    "sms-consent"
+  ]
+}

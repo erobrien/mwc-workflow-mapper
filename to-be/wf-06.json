@@ -1,0 +1,74 @@
+{
+  "id": "wf-06",
+  "name": "Onboarding",
+  "job": "Onboard SOLD new members. Sole writer of membership_status active and v2_status_active. Schedules WF-10 feedback and WF-14 ambassador at T+14 and T+21.",
+  "trigger": {
+    "type": "Added from WF-05",
+    "filters": ["sale_outcome=SOLD", "sale_type=new"]
+  },
+  "named_steps": [
+    {
+      "name": "TRIGGER: Added by WF-05 (SOLD + sale_type=new)",
+      "comment": "Sole enroll. Must not fire on renewals or on MAR.",
+      "does_not_write": []
+    },
+    {
+      "name": "SET-FIELD: membership_status = active",
+      "comment": "Sole writer of membership_status in the to-be. Must not touch pipeline stages.",
+      "writes": ["contact.membership_status"],
+      "does_not_write": ["opportunity.pipelineStageId"]
+    },
+    {
+      "name": "ADD-TAG: v2_status_active",
+      "comment": "New v2 active tag. Must not remove legacy status tags.",
+      "writes": ["v2_status_active"]
+    },
+    {
+      "name": "EMAIL: Onboarding welcome (native template)",
+      "comment": "Sends EML | WF-06 | Onboarding welcome.",
+      "writes": ["email_send"]
+    },
+    {
+      "name": "SMS: Onboarding welcome (inline)",
+      "comment": "Inline SMS. Honors quiet hours 8am-9pm contact TZ.",
+      "writes": ["sms_send"]
+    },
+    {
+      "name": "WAIT: T+7 days from enroll",
+      "comment": "Week-one check-in wait.",
+      "writes": []
+    },
+    {
+      "name": "EMAIL: Week-one check-in (native template)",
+      "comment": "Sends EML | WF-06 | Week-one check-in.",
+      "writes": ["email_send"]
+    },
+    {
+      "name": "WAIT: T+14 days from enroll",
+      "comment": "Feedback fork.",
+      "writes": []
+    },
+    {
+      "name": "ADD-TO-WF: Route to WF-10 Feedback at T+14",
+      "comment": "WF-10 owns contact.latest_feedback_score. Must not write feedback fields here.",
+      "writes": []
+    },
+    {
+      "name": "WAIT: T+21 days from enroll",
+      "comment": "Ambassador fork.",
+      "writes": []
+    },
+    {
+      "name": "ADD-TO-WF: Route to WF-14 Ambassador at T+21",
+      "comment": "Ambassador referral fork. Must not create Sales opps here.",
+      "writes": []
+    }
+  ],
+  "tags_new": [
+    "v2_status_active"
+  ],
+  "live_tags_readonly": [
+    "next-lander",
+    "sms-consent"
+  ]
+}

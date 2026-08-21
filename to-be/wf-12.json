@@ -1,0 +1,60 @@
+{
+  "id": "wf-12",
+  "name": "Call disposition",
+  "job": "Single call-disposition graph, keyed on channel not clinic. Tags v2_source_phone. No remove-and-recreate pattern.",
+  "trigger": {
+    "type": "Call Status changed",
+    "filters": ["channel = phone"],
+    "notes": "One graph total; do not fork per clinic."
+  },
+  "named_steps": [
+    {
+      "name": "TRIGGER: Call Status changed (channel=phone)",
+      "comment": "Sole call-dispo entry. Must not fork per clinic slug.",
+      "does_not_write": []
+    },
+    {
+      "name": "ADD-TAG: v2_source_phone",
+      "comment": "New v2 phone-source tag.",
+      "writes": ["v2_source_phone"]
+    },
+    {
+      "name": "IF-ELSE: Branch on call disposition (connected | voicemail | missed | wrong-number)",
+      "comment": "Single graph. Must not remove and recreate the contact or opp; native update in place.",
+      "does_not_write": ["contact", "opportunity"]
+    },
+    {
+      "name": "SET-FIELD: contact.last_call_disposition",
+      "comment": "Native update in place. Must not delete-and-recreate.",
+      "writes": ["contact.last_call_disposition"]
+    },
+    {
+      "name": "SMS: Voicemail follow-up (inline, voicemail branch)",
+      "comment": "Inline SMS. Honors quiet hours 8am-9pm contact TZ.",
+      "writes": ["sms_send"]
+    },
+    {
+      "name": "SMS: Missed follow-up (inline, missed branch)",
+      "comment": "Inline SMS.",
+      "writes": ["sms_send"]
+    },
+    {
+      "name": "ADD-TAG: v2_bad_number (wrong-number branch)",
+      "comment": "Delegates to compliance semantics; WF-11 still owns the field-level write.",
+      "writes": ["v2_bad_number"]
+    },
+    {
+      "name": "ADD-TO-WF: Route wrong-number to WF-11 Compliance",
+      "comment": "Compliance owns the DND and bad-number field writes.",
+      "writes": []
+    }
+  ],
+  "tags_new": [
+    "v2_source_phone",
+    "v2_bad_number"
+  ],
+  "live_tags_readonly": [
+    "next-lander",
+    "sms-consent"
+  ]
+}

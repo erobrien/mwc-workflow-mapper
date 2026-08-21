@@ -1,0 +1,56 @@
+{
+  "id": "wf-14",
+  "name": "Ambassador",
+  "job": "Ambassador referral flow. Referred person is created as a new contact and is never merged with the referrer. Re-enters WF-01. Uses the live ambassador-referral tag.",
+  "trigger": {
+    "type": "Added from WF-06",
+    "filters": ["T+21 from onboarding"],
+    "notes": "Also triggered on inbound ambassador form submission via Contact Created."
+  },
+  "named_steps": [
+    {
+      "name": "TRIGGER: Added by WF-06 at T+21 (ambassador ask)",
+      "comment": "Asks the member to refer someone. Must not write to the referrer's opportunity.",
+      "does_not_write": ["opportunity"]
+    },
+    {
+      "name": "EMAIL: Ambassador invite (native template)",
+      "comment": "Sends EML | WF-14 | Ambassador invite.",
+      "writes": ["email_send"]
+    },
+    {
+      "name": "SMS: Ambassador invite (inline)",
+      "comment": "Inline SMS. Members not patients.",
+      "writes": ["sms_send"]
+    },
+    {
+      "name": "IF-ELSE: On ambassador form submitted (referred contact created)",
+      "comment": "Reads the ambassador form submission. Referred contact is created via the form; must not merge with the referrer.",
+      "does_not_write": []
+    },
+    {
+      "name": "ADD-TAG: ambassador-referral (live tag on referred contact)",
+      "comment": "Live tag. Must not rename ambassador-referral.",
+      "writes": ["ambassador-referral"],
+      "does_not_write": ["next-lander"]
+    },
+    {
+      "name": "ADD-TAG: v2_ref_ambassador (referred contact audit)",
+      "comment": "New v2 audit tag on the referred contact.",
+      "writes": ["v2_ref_ambassador"]
+    },
+    {
+      "name": "ADD-TO-WF: Re-enter WF-01 for referred contact",
+      "comment": "Referred contact enters the normal Lead Capture flow. Must not create a Sales opp here; WF-01 owns create-once.",
+      "writes": []
+    }
+  ],
+  "tags_new": [
+    "v2_ref_ambassador"
+  ],
+  "live_tags_readonly": [
+    "ambassador-referral",
+    "next-lander",
+    "sms-consent"
+  ]
+}

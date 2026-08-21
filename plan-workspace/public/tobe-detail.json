@@ -213,19 +213,19 @@
           "order": 32,
           "action": "Update",
           "name": "UPDATE: Stamp current_review_link (richmond)",
-          "config": "Method 2 review-link stamp for richmond. Field 5WQWnA1nuMn0SWwTLxKR. Uses the live Google Maps CID 2277296049943963626."
+          "config": "Method 2 review-link stamp for richmond. Field 5WQWnA1nuMn0SWwTLxKR. Live richmond listing review URL, opaque string; workflow just stamps it."
         },
         {
           "order": 33,
           "action": "Update",
           "name": "UPDATE: Stamp current_review_link (virginia-beach)",
-          "config": "Method 2 review-link stamp for virginia-beach. Field 5WQWnA1nuMn0SWwTLxKR. Uses the live Google Maps CID 5476441419759027703."
+          "config": "Method 2 review-link stamp for virginia-beach. Field 5WQWnA1nuMn0SWwTLxKR. Live virginia-beach listing review URL, opaque string; workflow just stamps it."
         },
         {
           "order": 34,
           "action": "Update",
           "name": "UPDATE: Stamp current_review_link (newport-news)",
-          "config": "Method 2 review-link stamp for newport-news. Field 5WQWnA1nuMn0SWwTLxKR. Uses the live Google Maps CID 605398627804676801."
+          "config": "Method 2 review-link stamp for newport-news. Field 5WQWnA1nuMn0SWwTLxKR. Live newport-news listing review URL, opaque string; workflow just stamps it."
         },
         {
           "order": 35,
@@ -294,7 +294,7 @@
         "custom_values": [
           "GHL_WF05_WEBHOOK_URL (Force config; not stamped from any workflow)",
           "Booking URL pattern: https://book.menswellnesscenters.com/{slug}",
-          "Review links use Google Maps CIDs from the live listings"
+          "Review link stamps use the live per-clinic listing URLs (opaque strings; the workflow just stamps the string)."
         ]
       }
     },

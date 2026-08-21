@@ -112,7 +112,7 @@ WF_META: dict[str, dict] = {
             "custom_values": [
                 "GHL_WF05_WEBHOOK_URL (Force config; not stamped from any workflow)",
                 "Booking URL pattern: https://book.menswellnesscenters.com/{slug}",
-                "Review links use Google Maps CIDs from the live listings",
+                "Review link stamps use the live per-clinic listing URLs (opaque strings; the workflow just stamps the string).",
             ],
         },
     },

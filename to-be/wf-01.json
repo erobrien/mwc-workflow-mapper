@@ -166,17 +166,17 @@
     },
     {
       "name": "UPDATE: Stamp current_review_link (richmond)",
-      "comment": "Method 2 review-link stamp for richmond. Field 5WQWnA1nuMn0SWwTLxKR. Uses the live Google Maps CID 2277296049943963626.",
+      "comment": "Method 2 review-link stamp for richmond. Field 5WQWnA1nuMn0SWwTLxKR. Live richmond listing review URL, opaque string; workflow just stamps it.",
       "writes": ["contact.current_review_link"]
     },
     {
       "name": "UPDATE: Stamp current_review_link (virginia-beach)",
-      "comment": "Method 2 review-link stamp for virginia-beach. Field 5WQWnA1nuMn0SWwTLxKR. Uses the live Google Maps CID 5476441419759027703.",
+      "comment": "Method 2 review-link stamp for virginia-beach. Field 5WQWnA1nuMn0SWwTLxKR. Live virginia-beach listing review URL, opaque string; workflow just stamps it.",
       "writes": ["contact.current_review_link"]
     },
     {
       "name": "UPDATE: Stamp current_review_link (newport-news)",
-      "comment": "Method 2 review-link stamp for newport-news. Field 5WQWnA1nuMn0SWwTLxKR. Uses the live Google Maps CID 605398627804676801.",
+      "comment": "Method 2 review-link stamp for newport-news. Field 5WQWnA1nuMn0SWwTLxKR. Live newport-news listing review URL, opaque string; workflow just stamps it.",
       "writes": ["contact.current_review_link"]
     },
     {
